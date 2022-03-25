@@ -105,6 +105,7 @@ BODY <ISystemuserput>:
   [Manager <String>]: Relation with another systemuser to identify the last as a manager.
   [MfaConfigured <Boolean?>]:
   [MfaExclusion <Boolean?>]:
+  [MfaExclusionDays <Int32?>]:
   [MfaExclusionUntil <DateTime?>]:
   [Middlename <String>]:
   [Password <String>]:
@@ -381,6 +382,13 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [System.Management.Automation.SwitchParameter]
     # .
     ${MfaExclusion},
+
+    [Parameter(ParameterSetName='SetExpanded')]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
+    [JumpCloud.SDK.V1.Category('Body')]
+    [System.Int32]
+    # .
+    ${MfaExclusionDays},
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]

@@ -7,49 +7,49 @@ $OutputFilePath = $PSScriptRoot + '/SwaggerSpecs'
 # OperationId to Function name mapping - https://github.com/Azure/autorest.powershell/blob/a530bd721c9326a4356fba15638fee236722aca9/powershell/autorest-configuration.md
 $TransformConfig = [Ordered]@{
     'JumpCloud.SDK.DirectoryInsights' = [PSCustomObject]@{
-        PublicUrl                = "https://docs.jumpcloud.com/api/insights/directory/1.0/index.yaml"
+        PublicUrl          = "https://docs.jumpcloud.com/api/insights/directory/1.0/index.yaml"
         FindAndReplace     = [Ordered]@{
-            '"name":"\w+Body","in":"body"'                                                                                                                                                      = '"name":"body","in":"body"' # Across our APIs the standard is using "body" for the name of the body
+            '"name":"\w+Body","in":"body"'                                                                                                                                                  = '"name":"body","in":"body"' # Across our APIs the standard is using "body" for the name of the body
             '"search_after":{"description":"Specific query to search after, see x-\* response headers for next values","type":"array","items":{"type":"object"},"x-go-name":"SearchAfter"}' = '"search_after":{"description":"Specific query to search after, see x-* response headers for next values","type":"array","items":{"type":"string"},"x-go-name":"SearchAfter"}';
         };
         OperationIdMapping = [Ordered]@{
-            'directoryInsights_eventsCountPost'          = 'EventCount_Get';
-            'directoryInsights_eventsDistinctPost'       = 'EventDistinct_Get';
-            'directoryInsights_eventsIntervalPost'       = 'EventInterval_Get';
-            'directoryInsights_eventsPost'               = 'Event_Get';
+            'directoryInsights_eventsCountPost'    = 'EventCount_Get';
+            'directoryInsights_eventsDistinctPost' = 'EventDistinct_Get';
+            'directoryInsights_eventsIntervalPost' = 'EventInterval_Get';
+            'directoryInsights_eventsPost'         = 'Event_Get';
             # 'directoryInsights_commandResultsReportsGet' = 'EventCommandResultReport_Get';
             # 'directoryInsights_policyResultsReportsGet'  = 'EventPolicyResultReport_Get';
             # 'directoryInsights_deviceHealthReportGet'    = 'EventDeviceHealthReport_Get';
         };
-        ExcludedList       = @('/reports/command_results', '/reports/policy_results', '/reports/device_health');
+        ExcludedList       = @();
     }
     'JumpCloud.SDK.V1'                = [PSCustomObject]@{
-        PublicUrl                = "https://docs.jumpcloud.com/api/1.0/index.yaml"
+        PublicUrl          = "https://docs.jumpcloud.com/api/1.0/index.yaml"
         FindAndReplace     = [Ordered]@{
             # Path Issues
-            '"#\/definitions\/system"'                                                           = '"#/definitions/JcSystem"'; # error CS0426: The type name 'ComponentModel' does not exist in the type 'System'
-            '"system":{"properties"'                                                             = '"JcSystem":{"properties"'; # error CS0426: The type name 'ComponentModel' does not exist in the type 'System'
-            '"title":"System"'                                                                   = '"title":"JcSystem"'; # error CS0426: The type name 'ComponentModel' does not exist in the type 'System'
+            '"#\/definitions\/system"'                                                                                                                                            = '"#/definitions/JcSystem"'; # error CS0426: The type name 'ComponentModel' does not exist in the type 'System'
+            '"system":{"properties"'                                                                                                                                              = '"JcSystem":{"properties"'; # error CS0426: The type name 'ComponentModel' does not exist in the type 'System'
+            '"title":"System"'                                                                                                                                                    = '"title":"JcSystem"'; # error CS0426: The type name 'ComponentModel' does not exist in the type 'System'
             # V1 Issues
             '"enrollmentType":{"enum":\["unknown","automated device","device","user"\],"type":"string"},"internal":{"properties":{"deviceId":{"type":"string"}},"type":"object"}' = '' # error CS0262: Partial declarations of 'IJcSystemMdmInternal' have conflicting accessibility modifiers; error CS0535: 'JcSystemMdm' does not implement interface member 'IJcSystemMdmInternal.DeviceId'
-            '"basePath":"\/api"'                                                                 = '"basePath":"/api/"'; # The extra slash at the end is needed to properly build the url.
-            '"type":"null"'                                                                      = '"type":"string"'; # A type of null is not valid.
-            '{"description":"This is an optional flag that can be enabled on the DELETE call.*?","in":"query","name":"cascade_manager".*?"}'                                        = ''; # TODO: Add this back in eventually - fix to remove the cascade manager param from delete user (autorest thinks multiple matching 'break' parameters are declared in the delete function)
-            '"produces":\["application\/json","text\/plain"\]'                                   = '';
-            '"responses":{"200":{"description":"OK","schema":{"type":"string"}}'                 = '"responses":{"200":{"description":""}';
-            '{"in":"body","name":"body","schema":{"additionalProperties":true,"type":"object"}}' = ''; # Remove bodies that don't have parameters
+            '"basePath":"\/api"'                                                                                                                                                  = '"basePath":"/api/"'; # The extra slash at the end is needed to properly build the url.
+            '"type":"null"'                                                                                                                                                       = '"type":"string"'; # A type of null is not valid.
+            '{"description":"This is an optional flag that can be enabled on the DELETE call.*?","in":"query","name":"cascade_manager".*?"}'                                      = ''; # TODO: Add this back in eventually - fix to remove the cascade manager param from delete user (autorest thinks multiple matching 'break' parameters are declared in the delete function)
+            '"produces":\["application\/json","text\/plain"\]'                                                                                                                    = '';
+            '"responses":{"200":{"description":"OK","schema":{"type":"string"}}'                                                                                                  = '"responses":{"200":{"description":""}';
+            '{"in":"body","name":"body","schema":{"additionalProperties":true,"type":"object"}}'                                                                                  = ''; # Remove bodies that don't have parameters
             # Custom Tweaks
-            '{"\$ref":"#\/parameters\/trait:systemContextAuth:Authorization"}'                   = ''; # We don't want to support authentication through system context via the SDK
-            '{"\$ref":"#\/parameters\/trait:systemContextAuth:Date"}'                            = ''; # We don't want to support authentication through system context via the SDK
-            '{"\$ref":"#\/parameters\/trait:requestHeaders:Content-Type"}'                       = ''; # This will be passed in later through the Module.cs file.
-            '{"\$ref":"#\/parameters\/trait:requestHeaders:Accept"}'                             = ''; # This will be passed in later through the Module.cs file.
-            '{"\$ref":"#\/parameters\/trait:multiTenantRequestHeaders:x-org-id"}'                = ''; # Along with the ApiKey this will be passed in later through the Module.cs file.
-            '{"in":"header","name":"Content-Type","type":"string"}'                              = ''; # This will be passed in later through the Module.cs file.
-            '{"in":"header","name":"Accept","type":"string"}'                                    = ''; # This will be passed in later through the Module.cs file.
-            '{"in":"header","name":"x-org-id","type":"string"}'                                  = ''; # This will be passed in later through the Module.cs file.
-            ',,'                                                                                 = ',';
-            '\[,'                                                                                = '[';
-            ',]'                                                                                 = ']';
+            '{"\$ref":"#\/parameters\/trait:systemContextAuth:Authorization"}'                                                                                                    = ''; # We don't want to support authentication through system context via the SDK
+            '{"\$ref":"#\/parameters\/trait:systemContextAuth:Date"}'                                                                                                             = ''; # We don't want to support authentication through system context via the SDK
+            '{"\$ref":"#\/parameters\/trait:requestHeaders:Content-Type"}'                                                                                                        = ''; # This will be passed in later through the Module.cs file.
+            '{"\$ref":"#\/parameters\/trait:requestHeaders:Accept"}'                                                                                                              = ''; # This will be passed in later through the Module.cs file.
+            '{"\$ref":"#\/parameters\/trait:multiTenantRequestHeaders:x-org-id"}'                                                                                                 = ''; # Along with the ApiKey this will be passed in later through the Module.cs file.
+            '{"in":"header","name":"Content-Type","type":"string"}'                                                                                                               = ''; # This will be passed in later through the Module.cs file.
+            '{"in":"header","name":"Accept","type":"string"}'                                                                                                                     = ''; # This will be passed in later through the Module.cs file.
+            '{"in":"header","name":"x-org-id","type":"string"}'                                                                                                                   = ''; # This will be passed in later through the Module.cs file.
+            ',,'                                                                                                                                                                  = ',';
+            '\[,'                                                                                                                                                                 = '[';
+            ',]'                                                                                                                                                                  = ']';
         };
         OperationIdMapping = [Ordered]@{
             'application_templates_get'      = 'ApplicationTemplate_Get';
@@ -104,7 +104,7 @@ $TransformConfig = [Ordered]@{
         ExcludedList       = @('/failedcommands', '/pendingcommands', '/search/commands', '/systemusers/{id}/mfasync'); # Excluding for now until we can resolve in SA-2316
     }
     'JumpCloud.SDK.V2'                = [PSCustomObject]@{
-        PublicUrl                = "https://docs.jumpcloud.com/api/2.0/index.yaml"
+        PublicUrl          = "https://docs.jumpcloud.com/api/2.0/index.yaml"
         FindAndReplace     = [Ordered]@{
             # V2 Issues
             '"basePath":"\/api\/v2"'                                                              = '"basePath":"/api/v2/"'; # The extra slash at the end is needed to properly build the url.
@@ -134,10 +134,10 @@ $TransformConfig = [Ordered]@{
             'activedirectories_get'                             = 'ActiveDirectory_Get';
             'activedirectories_list'                            = 'ActiveDirectory_List';
             'activedirectories_post'                            = 'ActiveDirectory_Create';
-            # 'administratorOrganizations_createByAdministrator'  = 'AdministratorOrganization_Create';
-            # 'administratorOrganizations_listByAdministrator'    = 'AdministratorOrganizations_List';
-            # 'administratorOrganizations_listByOrganization'     = 'AdministratorOrganizationLinks_List';
-            # 'administratorOrganizations_removeByAdministrator'  = 'AdministratorOrganization_Delete';
+            'administratorOrganizations_createByAdministrator'  = 'AdministratorOrganization_Create';
+            'administratorOrganizations_listByAdministrator'    = 'AdministratorOrganizations_List';
+            'administratorOrganizations_listByOrganization'     = 'AdministratorOrganizationLinks_List';
+            'administratorOrganizations_removeByAdministrator'  = 'AdministratorOrganization_Delete';
             'applemdms_delete'                                  = 'AppleMDM_Delete';
             'applemdms_deletedevice'                            = 'AppleMDMDevice_Delete'
             'applemdms_devicesClearActivationLock'              = 'AppleMDMDeviceActivationLock_Clear';
@@ -158,6 +158,13 @@ $TransformConfig = [Ordered]@{
             'authnpolicies_list'                                = 'AuthenticationPolicy_List';
             'authnpolicies_patch'                               = 'AuthenticationPolicy_Update';
             'authnpolicies_post'                                = 'AuthenticationPolicy_Create';
+            # 'autotask_deleteConfiguration'                      = 'AutotaskConfiguration_Delete'
+            # 'autotask_getConfiguration'                         = 'AutotaskConfiguration_Get'
+            # 'autotask_updateConfiguration'                      = 'AutotaskConfiguration_Update'
+            # 'autotask_retrieveCompanyTypes'                     = 'Autotask_CompanyTypes_Get'
+            # 'autotask_retrieveSettings'                         = 'AutotaskSettings_Get'
+            # 'autotask_patchSettings'                            = 'AutotaskSettings_Update'
+            # 'autotask_createConfiguration'                      = 'AutotaskConfiguration_Create'
             'bulk_usersCreate'                                  = 'BulkUsers_Create';
             'bulk_usersCreateResults'                           = 'BulkUsersResult_Get';
             'bulk_userStatesCreate'                             = 'BulkUserState_Create';
@@ -165,6 +172,18 @@ $TransformConfig = [Ordered]@{
             'bulk_userStatesGetNextScheduled'                   = 'NextScheduledBulkUserState_Get';
             'bulk_userStatesList'                               = 'BulkUserStates_List';
             'bulk_usersUpdate'                                  = 'BulkUsers_Update';
+            # 'connectwise_retrieveSettings'                      = 'ConnectwiseSettings_Get'
+            # 'connectwise_patchSettings'                         = 'ConnectwiseSetttings_Set'
+            # 'connectwise_deleteConfiguration'                   = 'ConnectwiseConfiguration_Delete'
+            # 'connectwise_getConfiguration'                  = 'ConnectwiseConfiguration_Get'
+            # 'connectwise_createConfiguration'                   = 'ConnectwiseConfiguration_Create'
+            # 'connectwise_updateConfiguration'                   = 'ConnectwiseConfiguration_Set'
+            # 'connectwise_retrieveAgreements'                    = 'ConnectwiseConfiguration_Delete'
+            # 'connectwise_retrieveAdditions'                 = 'ConnectwiseAdditions_Get'
+            # 'connectwise_retrieveCompanies'                 = 'ConnectwiseCompanies_Get'
+            # 'connectwise_retrieveCompanyTypes'                  = 'ConnectwiseCompanyTypes_Get'
+            # 'connectwise_retrieveMappings'                  = 'ConnectwiseMappings_Get'
+            # 'connectwise_patchMappings'                 = 'ConnectwiseMappings_Set'
             'customEmails_create'                               = 'CustomEmailConfiguration_Create';
             'customEmails_destroy'                              = 'CustomEmailConfiguration_Delete';
             'customEmails_getTemplates'                         = 'CustomEmailTemplates_List';
@@ -317,10 +336,12 @@ $TransformConfig = [Ordered]@{
             'policystatuses_systemsList'                        = 'SystemPolicyStatus_List';
             'policytemplates_get'                               = 'PolicyTemplate_Get';
             'policytemplates_list'                              = 'PolicyTemplate_List';
-            # 'providers_listAdministrators'                      = 'ProviderAdministrator_List';
-            # 'providers_listOrganizations'                       = 'ProviderOrganizations_List';
-            # 'providers_postAdmins'                              = 'ProviderAdministrator_Create';
-            # 'providers_removeAdministrator'                     = 'ProviderAdministrator_Delete';
+            'providers_listAdministrators'                      = 'ProviderAdministrator_List';
+            'providers_listOrganizations'                       = 'ProviderOrganizations_List';
+            'providers_postAdmins'                              = 'ProviderAdministrator_Create';
+            'providers_removeAdministrator'                     = 'ProviderAdministrator_Delete';
+            'providers_retrieveInvoices'                        = 'ProvidersInvoices_Get'
+            # 'providers_retrieveIntegrations'                    = 'ProvidersIntegrations_Get'
             'pushEndpoints_delete'                              = 'UserPushEndpoint_Delete';
             'pushEndpoints_get'                                 = 'UserPushEndpoint_Get';
             'pushEndpoints_list'                                = 'UserPushEndpoints_List';
@@ -404,7 +425,33 @@ $TransformConfig = [Ordered]@{
             'workdays_put'                                      = 'Workday_Set';
             'workdays_workers'                                  = 'WorkdayWorker_Get';
         };
-        ExcludedList       = @('/applications/{application_id}', '/applications/{application_id}/import/users', '/providers/{provider_id}/integrations', '/providers/{provider_id}/integrations/connectwise', '/integrations/connectwise/{UUID}', '/integrations/connectwise/{UUID}/agreements', '/integrations/connectwise/{UUID}/agreements/{agreement_ID}/additions', '/integrations/connectwise/{UUID}/companies', '/integrations/connectwise/{UUID}/companytypes', '/integrations/connectwise/{UUID}/mappings', '/providers/{provider_id}/administrators', '/providers/{provider_id}/administrators/{id}', '/providers/{provider_id}/organizations', '/administrators/{id}/organizationlinks', '/administrators/{administrator_id}/organizationlinks/{id}', '/organizations/{id}/administratorlinks') #, '/applications/{application_id}/logo', '/logos/{id}')
+        ExcludedList       = @(
+            '/applications/{application_id}',
+            '/applications/{application_id}/import/users',
+            '/providers/{provider_id}/integrations',
+            '/providers/{provider_id}/integrations/connectwise',
+            '/integrations/connectwise/{UUID}',
+            '/integrations/connectwise/{UUID}/settings',
+            '/integrations/connectwise/{UUID}/agreements',
+            '/integrations/connectwise/{UUID}/agreements/{agreement_ID}/additions',
+            '/integrations/connectwise/{UUID}/companies',
+            '/integrations/connectwise/{UUID}/companytypes',
+            '/integrations/connectwise/{UUID}/mappings',
+            # '/providers/{provider_id}/administrators',
+            # '/providers/{provider_id}/administrators/{id}',
+            # '/providers/{provider_id}/organizations',
+            # '/administrators/{id}/organizationlinks',
+            # '/administrators/{administrator_id}/organizationlinks/{id}',
+            # '/organizations/{id}/administratorlinks',
+            '/integrations/autotask/{UUID}',
+            '/integrations/autotask/{UUID}/settings',
+            '/integrations/autotask/{UUID}/companytypes',
+            '/integrations/autotask/{UUID}/companies',
+            '/integrations/autotask/{UUID}/contracts',
+            '/integrations/autotask/{UUID}/contracts/fields',
+            '/integrations/autotask/{UUID}/contracts/services',
+            '/integrations/autotask/{UUID}/mappings',
+            '/providers/{provider_id}/integrations/autotask')
     }
 }
 Function Get-SwaggerItem

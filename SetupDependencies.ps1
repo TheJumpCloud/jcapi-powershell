@@ -24,3 +24,5 @@ If ($env:CI -eq $false)
 }
 # Install NPM Dependencies from packages.json
 npm install
+
+Import-Module ($PSScriptRoot + '/Tools/New-SdkChangelog.ps1')

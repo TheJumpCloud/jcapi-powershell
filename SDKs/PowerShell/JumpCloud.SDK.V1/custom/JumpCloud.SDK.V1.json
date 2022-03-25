@@ -24,6 +24,9 @@
         "_id": {
           "type": "string"
         },
+        "active": {
+          "type": "boolean"
+        },
         "beta": {
           "type": "boolean"
         },
@@ -479,6 +482,9 @@
       "properties": {
         "_id": {
           "type": "string"
+        },
+        "active": {
+          "type": "boolean"
         },
         "beta": {
           "type": "boolean"
@@ -1282,6 +1288,10 @@
         "exclusion": {
           "type": "boolean"
         },
+        "exclusionDays": {
+          "minimum": 1,
+          "type": "integer"
+        },
         "exclusionUntil": {
           "format": "date-time",
           "type": "string"
@@ -1323,6 +1333,9 @@
     "organization": {
       "properties": {
         "_id": {
+          "type": "string"
+        },
+        "accountsReceivable": {
           "type": "string"
         },
         "created": {
@@ -1761,6 +1774,32 @@
         "name": {
           "type": "string"
         },
+        "newSystemUserStateDefaults": {
+          "properties": {
+            "applicationImport": {
+              "enum": [
+                "ACTIVATED",
+                "STAGED"
+              ],
+              "type": "string"
+            },
+            "csvImport": {
+              "enum": [
+                "ACTIVATED",
+                "STAGED"
+              ],
+              "type": "string"
+            },
+            "manualEntry": {
+              "enum": [
+                "ACTIVATED",
+                "STAGED"
+              ],
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
         "passwordCompliance": {
           "enum": [
             "custom",
@@ -1977,6 +2016,32 @@
         },
         "name": {
           "type": "string"
+        },
+        "newSystemUserStateDefaults": {
+          "properties": {
+            "applicationImport": {
+              "enum": [
+                "ACTIVATED",
+                "STAGED"
+              ],
+              "type": "string"
+            },
+            "csvImport": {
+              "enum": [
+                "ACTIVATED",
+                "STAGED"
+              ],
+              "type": "string"
+            },
+            "manualEntry": {
+              "enum": [
+                "ACTIVATED",
+                "STAGED"
+              ],
+              "type": "string"
+            }
+          },
+          "type": "object"
         },
         "passwordCompliance": {
           "enum": [
@@ -3076,6 +3141,14 @@
         "samba_service_user": {
           "type": "boolean"
         },
+        "state": {
+          "enum": [
+            "STAGED",
+            "ACTIVATED",
+            "SUSPENDED"
+          ],
+          "type": "string"
+        },
         "sudo": {
           "type": "boolean"
         },
@@ -3359,6 +3432,7 @@
         },
         "state": {
           "enum": [
+            "STAGED",
             "ACTIVATED",
             "SUSPENDED"
           ],
@@ -3672,15 +3746,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request GET \\\n  --url 'https://console.jumpcloud.com/api/application-templates/%7Bid%7D?fields=SOME_STRING_VALUE&limit=SOME_INTEGER_VALUE&skip=SOME_INTEGER_VALUE&sort=The%20comma%20separated%20fields%20used%20to%20sort%20the%20collection.%20Default%20sort%20is%20ascending%2C%20prefix%20with%20-%20to%20sort%20descending.&filter=SOME_STRING_VALUE' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE'"
+            "source": "curl --request GET \\\n  --url 'https://console.jumpcloud.com/api/application-templates/{id}?fields=SOME_STRING_VALUE&limit=SOME_INTEGER_VALUE&skip=SOME_INTEGER_VALUE&sort=The%20comma%20separated%20fields%20used%20to%20sort%20the%20collection.%20Default%20sort%20is%20ascending%2C%20prefix%20with%20-%20to%20sort%20descending.&filter=SOME_STRING_VALUE' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/application-templates/%7Bid%7D\"\n\nquerystring = {\"fields\":\"SOME_STRING_VALUE\",\"limit\":\"SOME_INTEGER_VALUE\",\"skip\":\"SOME_INTEGER_VALUE\",\"sort\":\"The comma separated fields used to sort the collection. Default sort is ascending, prefix with - to sort descending.\",\"filter\":\"SOME_STRING_VALUE\"}\n\nheaders = {\"x-api-key\": \"REPLACE_KEY_VALUE\"}\n\nresponse = requests.request(\"GET\", url, headers=headers, params=querystring)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/application-templates/{id}\"\n\nquerystring = {\"fields\":\"SOME_STRING_VALUE\",\"limit\":\"SOME_INTEGER_VALUE\",\"skip\":\"SOME_INTEGER_VALUE\",\"sort\":\"The comma separated fields used to sort the collection. Default sort is ascending, prefix with - to sort descending.\",\"filter\":\"SOME_STRING_VALUE\"}\n\nheaders = {\"x-api-key\": \"REPLACE_KEY_VALUE\"}\n\nresponse = requests.request(\"GET\", url, headers=headers, params=querystring)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/application-templates/%7Bid%7D?fields=SOME_STRING_VALUE&limit=SOME_INTEGER_VALUE&skip=SOME_INTEGER_VALUE&sort=The%20comma%20separated%20fields%20used%20to%20sort%20the%20collection.%20Default%20sort%20is%20ascending%2C%20prefix%20with%20-%20to%20sort%20descending.&filter=SOME_STRING_VALUE' -Method GET -Headers $headers"
+            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/application-templates/{id}?fields=SOME_STRING_VALUE&limit=SOME_INTEGER_VALUE&skip=SOME_INTEGER_VALUE&sort=The%20comma%20separated%20fields%20used%20to%20sort%20the%20collection.%20Default%20sort%20is%20ascending%2C%20prefix%20with%20-%20to%20sort%20descending.&filter=SOME_STRING_VALUE' -Method GET -Headers $headers"
           }
         ]
       },
@@ -3785,15 +3859,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request POST \\\n  --url https://console.jumpcloud.com/api/applications \\\n  --header 'Accept: SOME_STRING_VALUE' \\\n  --header 'Content-Type: SOME_STRING_VALUE' \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --header 'x-org-id: SOME_STRING_VALUE' \\\n  --data '{\"_id\":\"string\",\"beta\":true,\"color\":\"\",\"config\":{\"acsUrl\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"constantAttributes\":{\"label\":\"string\",\"mutable\":true,\"options\":null,\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":null,\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":[{\"name\":\"string\",\"readOnly\":true,\"required\":true,\"value\":\"string\",\"visible\":true}],\"visible\":true},\"databaseAttributes\":{\"position\":0},\"idpCertificate\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"idpEntityId\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"idpPrivateKey\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"spEntityId\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true}},\"created\":\"string\",\"databaseAttributes\":[{}],\"description\":\"string\",\"displayLabel\":\"string\",\"displayName\":\"string\",\"learnMore\":\"string\",\"logo\":{\"color\":\"\",\"url\":\"string\"},\"name\":\"string\",\"organization\":\"string\",\"sso\":{\"beta\":true,\"idpCertExpirationAt\":\"2019-08-24T14:15:22Z\",\"jit\":true,\"type\":\"string\"},\"ssoUrl\":\"string\"}'"
+            "source": "curl --request POST \\\n  --url https://console.jumpcloud.com/api/applications \\\n  --header 'Accept: SOME_STRING_VALUE' \\\n  --header 'Content-Type: SOME_STRING_VALUE' \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --header 'x-org-id: SOME_STRING_VALUE' \\\n  --data '{\"_id\":\"string\",\"active\":true,\"beta\":true,\"color\":\"\",\"config\":{\"acsUrl\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"constantAttributes\":{\"label\":\"string\",\"mutable\":true,\"options\":null,\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":null,\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":[{\"name\":\"string\",\"readOnly\":true,\"required\":true,\"value\":\"string\",\"visible\":true}],\"visible\":true},\"databaseAttributes\":{\"position\":0},\"idpCertificate\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"idpEntityId\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"idpPrivateKey\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"spEntityId\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true}},\"created\":\"string\",\"databaseAttributes\":[{}],\"description\":\"string\",\"displayLabel\":\"string\",\"displayName\":\"string\",\"learnMore\":\"string\",\"logo\":{\"color\":\"\",\"url\":\"string\"},\"name\":\"string\",\"organization\":\"string\",\"sso\":{\"beta\":true,\"idpCertExpirationAt\":\"2019-08-24T14:15:22Z\",\"jit\":true,\"type\":\"string\"},\"ssoUrl\":\"string\"}'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/applications\"\n\npayload = {\n    \"_id\": \"string\",\n    \"beta\": True,\n    \"color\": \"\",\n    \"config\": {\n        \"acsUrl\": {\n            \"label\": \"string\",\n            \"options\": \"string\",\n            \"position\": 0,\n            \"readOnly\": True,\n            \"required\": True,\n            \"toggle\": \"string\",\n            \"tooltip\": {\n                \"template\": \"string\",\n                \"variables\": {\n                    \"icon\": \"string\",\n                    \"message\": \"string\"\n                }\n            },\n            \"type\": \"string\",\n            \"value\": \"string\",\n            \"visible\": True\n        },\n        \"constantAttributes\": {\n            \"label\": \"string\",\n            \"mutable\": True,\n            \"options\": None,\n            \"position\": 0,\n            \"readOnly\": True,\n            \"required\": True,\n            \"toggle\": None,\n            \"tooltip\": {\n                \"template\": \"string\",\n                \"variables\": {\n                    \"icon\": \"string\",\n                    \"message\": \"string\"\n                }\n            },\n            \"type\": \"string\",\n            \"value\": [\n                {\n                    \"name\": \"string\",\n                    \"readOnly\": True,\n                    \"required\": True,\n                    \"value\": \"string\",\n                    \"visible\": True\n                }\n            ],\n            \"visible\": True\n        },\n        \"databaseAttributes\": {\"position\": 0},\n        \"idpCertificate\": {\n            \"label\": \"string\",\n            \"options\": \"string\",\n            \"position\": 0,\n            \"readOnly\": True,\n            \"required\": True,\n            \"toggle\": \"string\",\n            \"tooltip\": {\n                \"template\": \"string\",\n                \"variables\": {\n                    \"icon\": \"string\",\n                    \"message\": \"string\"\n                }\n            },\n            \"type\": \"string\",\n            \"value\": \"string\",\n            \"visible\": True\n        },\n        \"idpEntityId\": {\n            \"label\": \"string\",\n            \"options\": \"string\",\n            \"position\": 0,\n            \"readOnly\": True,\n            \"required\": True,\n            \"toggle\": \"string\",\n            \"tooltip\": {\n                \"template\": \"string\",\n                \"variables\": {\n                    \"icon\": \"string\",\n                    \"message\": \"string\"\n                }\n            },\n            \"type\": \"string\",\n            \"value\": \"string\",\n            \"visible\": True\n        },\n        \"idpPrivateKey\": {\n            \"label\": \"string\",\n            \"options\": \"string\",\n            \"position\": 0,\n            \"readOnly\": True,\n            \"required\": True,\n            \"toggle\": \"string\",\n            \"tooltip\": {\n                \"template\": \"string\",\n                \"variables\": {\n                    \"icon\": \"string\",\n                    \"message\": \"string\"\n                }\n            },\n            \"type\": \"string\",\n            \"value\": \"string\",\n            \"visible\": True\n        },\n        \"spEntityId\": {\n            \"label\": \"string\",\n            \"options\": \"string\",\n            \"position\": 0,\n            \"readOnly\": True,\n            \"required\": True,\n            \"toggle\": \"string\",\n            \"tooltip\": {\n                \"template\": \"string\",\n                \"variables\": {\n                    \"icon\": \"string\",\n                    \"message\": \"string\"\n                }\n            },\n            \"type\": \"string\",\n            \"value\": \"string\",\n            \"visible\": True\n        }\n    },\n    \"created\": \"string\",\n    \"databaseAttributes\": [{}],\n    \"description\": \"string\",\n    \"displayLabel\": \"string\",\n    \"displayName\": \"string\",\n    \"learnMore\": \"string\",\n    \"logo\": {\n        \"color\": \"\",\n        \"url\": \"string\"\n    },\n    \"name\": \"string\",\n    \"organization\": \"string\",\n    \"sso\": {\n        \"beta\": True,\n        \"idpCertExpirationAt\": \"2019-08-24T14:15:22Z\",\n        \"jit\": True,\n        \"type\": \"string\"\n    },\n    \"ssoUrl\": \"string\"\n}\nheaders = {\n    \"Content-Type\": \"SOME_STRING_VALUE\",\n    \"Accept\": \"SOME_STRING_VALUE\",\n    \"x-org-id\": \"SOME_STRING_VALUE\",\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/applications\"\n\npayload = {\n    \"_id\": \"string\",\n    \"active\": True,\n    \"beta\": True,\n    \"color\": \"\",\n    \"config\": {\n        \"acsUrl\": {\n            \"label\": \"string\",\n            \"options\": \"string\",\n            \"position\": 0,\n            \"readOnly\": True,\n            \"required\": True,\n            \"toggle\": \"string\",\n            \"tooltip\": {\n                \"template\": \"string\",\n                \"variables\": {\n                    \"icon\": \"string\",\n                    \"message\": \"string\"\n                }\n            },\n            \"type\": \"string\",\n            \"value\": \"string\",\n            \"visible\": True\n        },\n        \"constantAttributes\": {\n            \"label\": \"string\",\n            \"mutable\": True,\n            \"options\": None,\n            \"position\": 0,\n            \"readOnly\": True,\n            \"required\": True,\n            \"toggle\": None,\n            \"tooltip\": {\n                \"template\": \"string\",\n                \"variables\": {\n                    \"icon\": \"string\",\n                    \"message\": \"string\"\n                }\n            },\n            \"type\": \"string\",\n            \"value\": [\n                {\n                    \"name\": \"string\",\n                    \"readOnly\": True,\n                    \"required\": True,\n                    \"value\": \"string\",\n                    \"visible\": True\n                }\n            ],\n            \"visible\": True\n        },\n        \"databaseAttributes\": {\"position\": 0},\n        \"idpCertificate\": {\n            \"label\": \"string\",\n            \"options\": \"string\",\n            \"position\": 0,\n            \"readOnly\": True,\n            \"required\": True,\n            \"toggle\": \"string\",\n            \"tooltip\": {\n                \"template\": \"string\",\n                \"variables\": {\n                    \"icon\": \"string\",\n                    \"message\": \"string\"\n                }\n            },\n            \"type\": \"string\",\n            \"value\": \"string\",\n            \"visible\": True\n        },\n        \"idpEntityId\": {\n            \"label\": \"string\",\n            \"options\": \"string\",\n            \"position\": 0,\n            \"readOnly\": True,\n            \"required\": True,\n            \"toggle\": \"string\",\n            \"tooltip\": {\n                \"template\": \"string\",\n                \"variables\": {\n                    \"icon\": \"string\",\n                    \"message\": \"string\"\n                }\n            },\n            \"type\": \"string\",\n            \"value\": \"string\",\n            \"visible\": True\n        },\n        \"idpPrivateKey\": {\n            \"label\": \"string\",\n            \"options\": \"string\",\n            \"position\": 0,\n            \"readOnly\": True,\n            \"required\": True,\n            \"toggle\": \"string\",\n            \"tooltip\": {\n                \"template\": \"string\",\n                \"variables\": {\n                    \"icon\": \"string\",\n                    \"message\": \"string\"\n                }\n            },\n            \"type\": \"string\",\n            \"value\": \"string\",\n            \"visible\": True\n        },\n        \"spEntityId\": {\n            \"label\": \"string\",\n            \"options\": \"string\",\n            \"position\": 0,\n            \"readOnly\": True,\n            \"required\": True,\n            \"toggle\": \"string\",\n            \"tooltip\": {\n                \"template\": \"string\",\n                \"variables\": {\n                    \"icon\": \"string\",\n                    \"message\": \"string\"\n                }\n            },\n            \"type\": \"string\",\n            \"value\": \"string\",\n            \"visible\": True\n        }\n    },\n    \"created\": \"string\",\n    \"databaseAttributes\": [{}],\n    \"description\": \"string\",\n    \"displayLabel\": \"string\",\n    \"displayName\": \"string\",\n    \"learnMore\": \"string\",\n    \"logo\": {\n        \"color\": \"\",\n        \"url\": \"string\"\n    },\n    \"name\": \"string\",\n    \"organization\": \"string\",\n    \"sso\": {\n        \"beta\": True,\n        \"idpCertExpirationAt\": \"2019-08-24T14:15:22Z\",\n        \"jit\": True,\n        \"type\": \"string\"\n    },\n    \"ssoUrl\": \"string\"\n}\nheaders = {\n    \"Content-Type\": \"SOME_STRING_VALUE\",\n    \"Accept\": \"SOME_STRING_VALUE\",\n    \"x-org-id\": \"SOME_STRING_VALUE\",\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"Content-Type\", \"SOME_STRING_VALUE\")\n$headers.Add(\"Accept\", \"SOME_STRING_VALUE\")\n$headers.Add(\"x-org-id\", \"SOME_STRING_VALUE\")\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/applications' -Method POST -Headers $headers -ContentType 'SOME_STRING_VALUE' -Body '{\"_id\":\"string\",\"beta\":true,\"color\":\"\",\"config\":{\"acsUrl\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"constantAttributes\":{\"label\":\"string\",\"mutable\":true,\"options\":null,\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":null,\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":[{\"name\":\"string\",\"readOnly\":true,\"required\":true,\"value\":\"string\",\"visible\":true}],\"visible\":true},\"databaseAttributes\":{\"position\":0},\"idpCertificate\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"idpEntityId\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"idpPrivateKey\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"spEntityId\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true}},\"created\":\"string\",\"databaseAttributes\":[{}],\"description\":\"string\",\"displayLabel\":\"string\",\"displayName\":\"string\",\"learnMore\":\"string\",\"logo\":{\"color\":\"\",\"url\":\"string\"},\"name\":\"string\",\"organization\":\"string\",\"sso\":{\"beta\":true,\"idpCertExpirationAt\":\"2019-08-24T14:15:22Z\",\"jit\":true,\"type\":\"string\"},\"ssoUrl\":\"string\"}'"
+            "source": "$headers=@{}\n$headers.Add(\"Content-Type\", \"SOME_STRING_VALUE\")\n$headers.Add(\"Accept\", \"SOME_STRING_VALUE\")\n$headers.Add(\"x-org-id\", \"SOME_STRING_VALUE\")\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/applications' -Method POST -Headers $headers -ContentType 'SOME_STRING_VALUE' -Body '{\"_id\":\"string\",\"active\":true,\"beta\":true,\"color\":\"\",\"config\":{\"acsUrl\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"constantAttributes\":{\"label\":\"string\",\"mutable\":true,\"options\":null,\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":null,\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":[{\"name\":\"string\",\"readOnly\":true,\"required\":true,\"value\":\"string\",\"visible\":true}],\"visible\":true},\"databaseAttributes\":{\"position\":0},\"idpCertificate\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"idpEntityId\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"idpPrivateKey\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"spEntityId\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true}},\"created\":\"string\",\"databaseAttributes\":[{}],\"description\":\"string\",\"displayLabel\":\"string\",\"displayName\":\"string\",\"learnMore\":\"string\",\"logo\":{\"color\":\"\",\"url\":\"string\"},\"name\":\"string\",\"organization\":\"string\",\"sso\":{\"beta\":true,\"idpCertExpirationAt\":\"2019-08-24T14:15:22Z\",\"jit\":true,\"type\":\"string\"},\"ssoUrl\":\"string\"}'"
           }
         ]
       }
@@ -3820,15 +3894,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request DELETE \\\n  --url https://console.jumpcloud.com/api/applications/%7Bid%7D \\\n  --header 'Accept: SOME_STRING_VALUE' \\\n  --header 'Content-Type: SOME_STRING_VALUE' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --header 'x-org-id: SOME_STRING_VALUE'"
+            "source": "curl --request DELETE \\\n  --url https://console.jumpcloud.com/api/applications/{id} \\\n  --header 'Accept: SOME_STRING_VALUE' \\\n  --header 'Content-Type: SOME_STRING_VALUE' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --header 'x-org-id: SOME_STRING_VALUE'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/applications/%7Bid%7D\"\n\nheaders = {\n    \"Content-Type\": \"SOME_STRING_VALUE\",\n    \"Accept\": \"SOME_STRING_VALUE\",\n    \"x-org-id\": \"SOME_STRING_VALUE\",\n    \"x-api-key\": \"REPLACE_KEY_VALUE\"\n}\n\nresponse = requests.request(\"DELETE\", url, headers=headers)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/applications/{id}\"\n\nheaders = {\n    \"Content-Type\": \"SOME_STRING_VALUE\",\n    \"Accept\": \"SOME_STRING_VALUE\",\n    \"x-org-id\": \"SOME_STRING_VALUE\",\n    \"x-api-key\": \"REPLACE_KEY_VALUE\"\n}\n\nresponse = requests.request(\"DELETE\", url, headers=headers)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"Content-Type\", \"SOME_STRING_VALUE\")\n$headers.Add(\"Accept\", \"SOME_STRING_VALUE\")\n$headers.Add(\"x-org-id\", \"SOME_STRING_VALUE\")\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/applications/%7Bid%7D' -Method DELETE -Headers $headers"
+            "source": "$headers=@{}\n$headers.Add(\"Content-Type\", \"SOME_STRING_VALUE\")\n$headers.Add(\"Accept\", \"SOME_STRING_VALUE\")\n$headers.Add(\"x-org-id\", \"SOME_STRING_VALUE\")\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/applications/{id}' -Method DELETE -Headers $headers"
           }
         ]
       },
@@ -3853,15 +3927,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request GET \\\n  --url https://console.jumpcloud.com/api/applications/%7Bid%7D \\\n  --header 'Accept: SOME_STRING_VALUE' \\\n  --header 'Content-Type: SOME_STRING_VALUE' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --header 'x-org-id: SOME_STRING_VALUE'"
+            "source": "curl --request GET \\\n  --url https://console.jumpcloud.com/api/applications/{id} \\\n  --header 'Accept: SOME_STRING_VALUE' \\\n  --header 'Content-Type: SOME_STRING_VALUE' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --header 'x-org-id: SOME_STRING_VALUE'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/applications/%7Bid%7D\"\n\nheaders = {\n    \"Content-Type\": \"SOME_STRING_VALUE\",\n    \"Accept\": \"SOME_STRING_VALUE\",\n    \"x-org-id\": \"SOME_STRING_VALUE\",\n    \"x-api-key\": \"REPLACE_KEY_VALUE\"\n}\n\nresponse = requests.request(\"GET\", url, headers=headers)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/applications/{id}\"\n\nheaders = {\n    \"Content-Type\": \"SOME_STRING_VALUE\",\n    \"Accept\": \"SOME_STRING_VALUE\",\n    \"x-org-id\": \"SOME_STRING_VALUE\",\n    \"x-api-key\": \"REPLACE_KEY_VALUE\"\n}\n\nresponse = requests.request(\"GET\", url, headers=headers)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"Content-Type\", \"SOME_STRING_VALUE\")\n$headers.Add(\"Accept\", \"SOME_STRING_VALUE\")\n$headers.Add(\"x-org-id\", \"SOME_STRING_VALUE\")\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/applications/%7Bid%7D' -Method GET -Headers $headers"
+            "source": "$headers=@{}\n$headers.Add(\"Content-Type\", \"SOME_STRING_VALUE\")\n$headers.Add(\"Accept\", \"SOME_STRING_VALUE\")\n$headers.Add(\"x-org-id\", \"SOME_STRING_VALUE\")\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/applications/{id}' -Method GET -Headers $headers"
           }
         ]
       },
@@ -3902,15 +3976,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request PUT \\\n  --url https://console.jumpcloud.com/api/applications/%7Bid%7D \\\n  --header 'Accept: SOME_STRING_VALUE' \\\n  --header 'Content-Type: SOME_STRING_VALUE' \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --header 'x-org-id: SOME_STRING_VALUE' \\\n  --data '{\"_id\":\"string\",\"beta\":true,\"color\":\"\",\"config\":{\"acsUrl\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"constantAttributes\":{\"label\":\"string\",\"mutable\":true,\"options\":null,\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":null,\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":[{\"name\":\"string\",\"readOnly\":true,\"required\":true,\"value\":\"string\",\"visible\":true}],\"visible\":true},\"databaseAttributes\":{\"position\":0},\"idpCertificate\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"idpEntityId\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"idpPrivateKey\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"spEntityId\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true}},\"created\":\"string\",\"databaseAttributes\":[{}],\"description\":\"string\",\"displayLabel\":\"string\",\"displayName\":\"string\",\"learnMore\":\"string\",\"logo\":{\"color\":\"\",\"url\":\"string\"},\"name\":\"string\",\"organization\":\"string\",\"sso\":{\"beta\":true,\"idpCertExpirationAt\":\"2019-08-24T14:15:22Z\",\"jit\":true,\"type\":\"string\"},\"ssoUrl\":\"string\"}'"
+            "source": "curl --request PUT \\\n  --url https://console.jumpcloud.com/api/applications/{id} \\\n  --header 'Accept: SOME_STRING_VALUE' \\\n  --header 'Content-Type: SOME_STRING_VALUE' \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --header 'x-org-id: SOME_STRING_VALUE' \\\n  --data '{\"_id\":\"string\",\"active\":true,\"beta\":true,\"color\":\"\",\"config\":{\"acsUrl\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"constantAttributes\":{\"label\":\"string\",\"mutable\":true,\"options\":null,\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":null,\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":[{\"name\":\"string\",\"readOnly\":true,\"required\":true,\"value\":\"string\",\"visible\":true}],\"visible\":true},\"databaseAttributes\":{\"position\":0},\"idpCertificate\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"idpEntityId\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"idpPrivateKey\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"spEntityId\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true}},\"created\":\"string\",\"databaseAttributes\":[{}],\"description\":\"string\",\"displayLabel\":\"string\",\"displayName\":\"string\",\"learnMore\":\"string\",\"logo\":{\"color\":\"\",\"url\":\"string\"},\"name\":\"string\",\"organization\":\"string\",\"sso\":{\"beta\":true,\"idpCertExpirationAt\":\"2019-08-24T14:15:22Z\",\"jit\":true,\"type\":\"string\"},\"ssoUrl\":\"string\"}'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/applications/%7Bid%7D\"\n\npayload = {\n    \"_id\": \"string\",\n    \"beta\": True,\n    \"color\": \"\",\n    \"config\": {\n        \"acsUrl\": {\n            \"label\": \"string\",\n            \"options\": \"string\",\n            \"position\": 0,\n            \"readOnly\": True,\n            \"required\": True,\n            \"toggle\": \"string\",\n            \"tooltip\": {\n                \"template\": \"string\",\n                \"variables\": {\n                    \"icon\": \"string\",\n                    \"message\": \"string\"\n                }\n            },\n            \"type\": \"string\",\n            \"value\": \"string\",\n            \"visible\": True\n        },\n        \"constantAttributes\": {\n            \"label\": \"string\",\n            \"mutable\": True,\n            \"options\": None,\n            \"position\": 0,\n            \"readOnly\": True,\n            \"required\": True,\n            \"toggle\": None,\n            \"tooltip\": {\n                \"template\": \"string\",\n                \"variables\": {\n                    \"icon\": \"string\",\n                    \"message\": \"string\"\n                }\n            },\n            \"type\": \"string\",\n            \"value\": [\n                {\n                    \"name\": \"string\",\n                    \"readOnly\": True,\n                    \"required\": True,\n                    \"value\": \"string\",\n                    \"visible\": True\n                }\n            ],\n            \"visible\": True\n        },\n        \"databaseAttributes\": {\"position\": 0},\n        \"idpCertificate\": {\n            \"label\": \"string\",\n            \"options\": \"string\",\n            \"position\": 0,\n            \"readOnly\": True,\n            \"required\": True,\n            \"toggle\": \"string\",\n            \"tooltip\": {\n                \"template\": \"string\",\n                \"variables\": {\n                    \"icon\": \"string\",\n                    \"message\": \"string\"\n                }\n            },\n            \"type\": \"string\",\n            \"value\": \"string\",\n            \"visible\": True\n        },\n        \"idpEntityId\": {\n            \"label\": \"string\",\n            \"options\": \"string\",\n            \"position\": 0,\n            \"readOnly\": True,\n            \"required\": True,\n            \"toggle\": \"string\",\n            \"tooltip\": {\n                \"template\": \"string\",\n                \"variables\": {\n                    \"icon\": \"string\",\n                    \"message\": \"string\"\n                }\n            },\n            \"type\": \"string\",\n            \"value\": \"string\",\n            \"visible\": True\n        },\n        \"idpPrivateKey\": {\n            \"label\": \"string\",\n            \"options\": \"string\",\n            \"position\": 0,\n            \"readOnly\": True,\n            \"required\": True,\n            \"toggle\": \"string\",\n            \"tooltip\": {\n                \"template\": \"string\",\n                \"variables\": {\n                    \"icon\": \"string\",\n                    \"message\": \"string\"\n                }\n            },\n            \"type\": \"string\",\n            \"value\": \"string\",\n            \"visible\": True\n        },\n        \"spEntityId\": {\n            \"label\": \"string\",\n            \"options\": \"string\",\n            \"position\": 0,\n            \"readOnly\": True,\n            \"required\": True,\n            \"toggle\": \"string\",\n            \"tooltip\": {\n                \"template\": \"string\",\n                \"variables\": {\n                    \"icon\": \"string\",\n                    \"message\": \"string\"\n                }\n            },\n            \"type\": \"string\",\n            \"value\": \"string\",\n            \"visible\": True\n        }\n    },\n    \"created\": \"string\",\n    \"databaseAttributes\": [{}],\n    \"description\": \"string\",\n    \"displayLabel\": \"string\",\n    \"displayName\": \"string\",\n    \"learnMore\": \"string\",\n    \"logo\": {\n        \"color\": \"\",\n        \"url\": \"string\"\n    },\n    \"name\": \"string\",\n    \"organization\": \"string\",\n    \"sso\": {\n        \"beta\": True,\n        \"idpCertExpirationAt\": \"2019-08-24T14:15:22Z\",\n        \"jit\": True,\n        \"type\": \"string\"\n    },\n    \"ssoUrl\": \"string\"\n}\nheaders = {\n    \"Content-Type\": \"SOME_STRING_VALUE\",\n    \"Accept\": \"SOME_STRING_VALUE\",\n    \"x-org-id\": \"SOME_STRING_VALUE\",\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"PUT\", url, json=payload, headers=headers)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/applications/{id}\"\n\npayload = {\n    \"_id\": \"string\",\n    \"active\": True,\n    \"beta\": True,\n    \"color\": \"\",\n    \"config\": {\n        \"acsUrl\": {\n            \"label\": \"string\",\n            \"options\": \"string\",\n            \"position\": 0,\n            \"readOnly\": True,\n            \"required\": True,\n            \"toggle\": \"string\",\n            \"tooltip\": {\n                \"template\": \"string\",\n                \"variables\": {\n                    \"icon\": \"string\",\n                    \"message\": \"string\"\n                }\n            },\n            \"type\": \"string\",\n            \"value\": \"string\",\n            \"visible\": True\n        },\n        \"constantAttributes\": {\n            \"label\": \"string\",\n            \"mutable\": True,\n            \"options\": None,\n            \"position\": 0,\n            \"readOnly\": True,\n            \"required\": True,\n            \"toggle\": None,\n            \"tooltip\": {\n                \"template\": \"string\",\n                \"variables\": {\n                    \"icon\": \"string\",\n                    \"message\": \"string\"\n                }\n            },\n            \"type\": \"string\",\n            \"value\": [\n                {\n                    \"name\": \"string\",\n                    \"readOnly\": True,\n                    \"required\": True,\n                    \"value\": \"string\",\n                    \"visible\": True\n                }\n            ],\n            \"visible\": True\n        },\n        \"databaseAttributes\": {\"position\": 0},\n        \"idpCertificate\": {\n            \"label\": \"string\",\n            \"options\": \"string\",\n            \"position\": 0,\n            \"readOnly\": True,\n            \"required\": True,\n            \"toggle\": \"string\",\n            \"tooltip\": {\n                \"template\": \"string\",\n                \"variables\": {\n                    \"icon\": \"string\",\n                    \"message\": \"string\"\n                }\n            },\n            \"type\": \"string\",\n            \"value\": \"string\",\n            \"visible\": True\n        },\n        \"idpEntityId\": {\n            \"label\": \"string\",\n            \"options\": \"string\",\n            \"position\": 0,\n            \"readOnly\": True,\n            \"required\": True,\n            \"toggle\": \"string\",\n            \"tooltip\": {\n                \"template\": \"string\",\n                \"variables\": {\n                    \"icon\": \"string\",\n                    \"message\": \"string\"\n                }\n            },\n            \"type\": \"string\",\n            \"value\": \"string\",\n            \"visible\": True\n        },\n        \"idpPrivateKey\": {\n            \"label\": \"string\",\n            \"options\": \"string\",\n            \"position\": 0,\n            \"readOnly\": True,\n            \"required\": True,\n            \"toggle\": \"string\",\n            \"tooltip\": {\n                \"template\": \"string\",\n                \"variables\": {\n                    \"icon\": \"string\",\n                    \"message\": \"string\"\n                }\n            },\n            \"type\": \"string\",\n            \"value\": \"string\",\n            \"visible\": True\n        },\n        \"spEntityId\": {\n            \"label\": \"string\",\n            \"options\": \"string\",\n            \"position\": 0,\n            \"readOnly\": True,\n            \"required\": True,\n            \"toggle\": \"string\",\n            \"tooltip\": {\n                \"template\": \"string\",\n                \"variables\": {\n                    \"icon\": \"string\",\n                    \"message\": \"string\"\n                }\n            },\n            \"type\": \"string\",\n            \"value\": \"string\",\n            \"visible\": True\n        }\n    },\n    \"created\": \"string\",\n    \"databaseAttributes\": [{}],\n    \"description\": \"string\",\n    \"displayLabel\": \"string\",\n    \"displayName\": \"string\",\n    \"learnMore\": \"string\",\n    \"logo\": {\n        \"color\": \"\",\n        \"url\": \"string\"\n    },\n    \"name\": \"string\",\n    \"organization\": \"string\",\n    \"sso\": {\n        \"beta\": True,\n        \"idpCertExpirationAt\": \"2019-08-24T14:15:22Z\",\n        \"jit\": True,\n        \"type\": \"string\"\n    },\n    \"ssoUrl\": \"string\"\n}\nheaders = {\n    \"Content-Type\": \"SOME_STRING_VALUE\",\n    \"Accept\": \"SOME_STRING_VALUE\",\n    \"x-org-id\": \"SOME_STRING_VALUE\",\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"PUT\", url, json=payload, headers=headers)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"Content-Type\", \"SOME_STRING_VALUE\")\n$headers.Add(\"Accept\", \"SOME_STRING_VALUE\")\n$headers.Add(\"x-org-id\", \"SOME_STRING_VALUE\")\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/applications/%7Bid%7D' -Method PUT -Headers $headers -ContentType 'SOME_STRING_VALUE' -Body '{\"_id\":\"string\",\"beta\":true,\"color\":\"\",\"config\":{\"acsUrl\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"constantAttributes\":{\"label\":\"string\",\"mutable\":true,\"options\":null,\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":null,\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":[{\"name\":\"string\",\"readOnly\":true,\"required\":true,\"value\":\"string\",\"visible\":true}],\"visible\":true},\"databaseAttributes\":{\"position\":0},\"idpCertificate\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"idpEntityId\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"idpPrivateKey\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"spEntityId\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true}},\"created\":\"string\",\"databaseAttributes\":[{}],\"description\":\"string\",\"displayLabel\":\"string\",\"displayName\":\"string\",\"learnMore\":\"string\",\"logo\":{\"color\":\"\",\"url\":\"string\"},\"name\":\"string\",\"organization\":\"string\",\"sso\":{\"beta\":true,\"idpCertExpirationAt\":\"2019-08-24T14:15:22Z\",\"jit\":true,\"type\":\"string\"},\"ssoUrl\":\"string\"}'"
+            "source": "$headers=@{}\n$headers.Add(\"Content-Type\", \"SOME_STRING_VALUE\")\n$headers.Add(\"Accept\", \"SOME_STRING_VALUE\")\n$headers.Add(\"x-org-id\", \"SOME_STRING_VALUE\")\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/applications/{id}' -Method PUT -Headers $headers -ContentType 'SOME_STRING_VALUE' -Body '{\"_id\":\"string\",\"active\":true,\"beta\":true,\"color\":\"\",\"config\":{\"acsUrl\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"constantAttributes\":{\"label\":\"string\",\"mutable\":true,\"options\":null,\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":null,\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":[{\"name\":\"string\",\"readOnly\":true,\"required\":true,\"value\":\"string\",\"visible\":true}],\"visible\":true},\"databaseAttributes\":{\"position\":0},\"idpCertificate\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"idpEntityId\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"idpPrivateKey\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"spEntityId\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true}},\"created\":\"string\",\"databaseAttributes\":[{}],\"description\":\"string\",\"displayLabel\":\"string\",\"displayName\":\"string\",\"learnMore\":\"string\",\"logo\":{\"color\":\"\",\"url\":\"string\"},\"name\":\"string\",\"organization\":\"string\",\"sso\":{\"beta\":true,\"idpCertExpirationAt\":\"2019-08-24T14:15:22Z\",\"jit\":true,\"type\":\"string\"},\"ssoUrl\":\"string\"}'"
           }
         ]
       }
@@ -3945,15 +4019,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request POST \\\n  --url https://console.jumpcloud.com/api/command/trigger/%7Btriggername%7D \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --data '{}'"
+            "source": "curl --request POST \\\n  --url https://console.jumpcloud.com/api/command/trigger/{triggername} \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --data '{}'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/command/trigger/%7Btriggername%7D\"\n\npayload = {}\nheaders = {\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/command/trigger/{triggername}\"\n\npayload = {}\nheaders = {\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/command/trigger/%7Btriggername%7D' -Method POST -Headers $headers -ContentType 'application/json' -Body '{}'"
+            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/command/trigger/{triggername}' -Method POST -Headers $headers -ContentType 'application/json' -Body '{}'"
           }
         ]
       }
@@ -4031,15 +4105,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request DELETE \\\n  --url https://console.jumpcloud.com/api/commandresults/%7Bid%7D \\\n  --header 'x-api-key: REPLACE_KEY_VALUE'"
+            "source": "curl --request DELETE \\\n  --url https://console.jumpcloud.com/api/commandresults/{id} \\\n  --header 'x-api-key: REPLACE_KEY_VALUE'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/commandresults/%7Bid%7D\"\n\nheaders = {\"x-api-key\": \"REPLACE_KEY_VALUE\"}\n\nresponse = requests.request(\"DELETE\", url, headers=headers)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/commandresults/{id}\"\n\nheaders = {\"x-api-key\": \"REPLACE_KEY_VALUE\"}\n\nresponse = requests.request(\"DELETE\", url, headers=headers)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/commandresults/%7Bid%7D' -Method DELETE -Headers $headers"
+            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/commandresults/{id}' -Method DELETE -Headers $headers"
           }
         ]
       },
@@ -4071,15 +4145,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request GET \\\n  --url 'https://console.jumpcloud.com/api/commandresults/%7Bid%7D?fields=&filter=SOME_STRING_VALUE' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE'"
+            "source": "curl --request GET \\\n  --url 'https://console.jumpcloud.com/api/commandresults/{id}?fields=&filter=SOME_STRING_VALUE' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/commandresults/%7Bid%7D\"\n\nquerystring = {\"fields\":\"\",\"filter\":\"SOME_STRING_VALUE\"}\n\nheaders = {\"x-api-key\": \"REPLACE_KEY_VALUE\"}\n\nresponse = requests.request(\"GET\", url, headers=headers, params=querystring)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/commandresults/{id}\"\n\nquerystring = {\"fields\":\"\",\"filter\":\"SOME_STRING_VALUE\"}\n\nheaders = {\"x-api-key\": \"REPLACE_KEY_VALUE\"}\n\nresponse = requests.request(\"GET\", url, headers=headers, params=querystring)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/commandresults/%7Bid%7D?fields=&filter=SOME_STRING_VALUE' -Method GET -Headers $headers"
+            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/commandresults/{id}?fields=&filter=SOME_STRING_VALUE' -Method GET -Headers $headers"
           }
         ]
       },
@@ -4206,15 +4280,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request DELETE \\\n  --url https://console.jumpcloud.com/api/commands/%7Bid%7D \\\n  --header 'x-api-key: REPLACE_KEY_VALUE'"
+            "source": "curl --request DELETE \\\n  --url https://console.jumpcloud.com/api/commands/{id} \\\n  --header 'x-api-key: REPLACE_KEY_VALUE'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/commands/%7Bid%7D\"\n\nheaders = {\"x-api-key\": \"REPLACE_KEY_VALUE\"}\n\nresponse = requests.request(\"DELETE\", url, headers=headers)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/commands/{id}\"\n\nheaders = {\"x-api-key\": \"REPLACE_KEY_VALUE\"}\n\nresponse = requests.request(\"DELETE\", url, headers=headers)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/commands/%7Bid%7D' -Method DELETE -Headers $headers"
+            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/commands/{id}' -Method DELETE -Headers $headers"
           }
         ]
       },
@@ -4243,15 +4317,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request GET \\\n  --url 'https://console.jumpcloud.com/api/commands/%7Bid%7D?fields=' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE'"
+            "source": "curl --request GET \\\n  --url 'https://console.jumpcloud.com/api/commands/{id}?fields=' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/commands/%7Bid%7D\"\n\nquerystring = {\"fields\":\"\"}\n\nheaders = {\"x-api-key\": \"REPLACE_KEY_VALUE\"}\n\nresponse = requests.request(\"GET\", url, headers=headers, params=querystring)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/commands/{id}\"\n\nquerystring = {\"fields\":\"\"}\n\nheaders = {\"x-api-key\": \"REPLACE_KEY_VALUE\"}\n\nresponse = requests.request(\"GET\", url, headers=headers, params=querystring)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/commands/%7Bid%7D?fields=' -Method GET -Headers $headers"
+            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/commands/{id}?fields=' -Method GET -Headers $headers"
           }
         ]
       },
@@ -4292,15 +4366,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request PUT \\\n  --url https://console.jumpcloud.com/api/commands/%7Bid%7D \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --data '{\"command\":\"string\",\"commandRunners\":[\"string\"],\"commandType\":\"linux\",\"files\":[\"string\"],\"launchType\":\"string\",\"listensTo\":\"string\",\"name\":\"string\",\"organization\":\"string\",\"schedule\":\"string\",\"scheduleRepeatType\":\"string\",\"shell\":\"string\",\"sudo\":true,\"systems\":[\"string\"],\"timeout\":\"string\",\"trigger\":\"string\",\"user\":\"string\"}'"
+            "source": "curl --request PUT \\\n  --url https://console.jumpcloud.com/api/commands/{id} \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --data '{\"command\":\"string\",\"commandRunners\":[\"string\"],\"commandType\":\"linux\",\"files\":[\"string\"],\"launchType\":\"string\",\"listensTo\":\"string\",\"name\":\"string\",\"organization\":\"string\",\"schedule\":\"string\",\"scheduleRepeatType\":\"string\",\"shell\":\"string\",\"sudo\":true,\"systems\":[\"string\"],\"timeout\":\"string\",\"trigger\":\"string\",\"user\":\"string\"}'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/commands/%7Bid%7D\"\n\npayload = {\n    \"command\": \"string\",\n    \"commandRunners\": [\"string\"],\n    \"commandType\": \"linux\",\n    \"files\": [\"string\"],\n    \"launchType\": \"string\",\n    \"listensTo\": \"string\",\n    \"name\": \"string\",\n    \"organization\": \"string\",\n    \"schedule\": \"string\",\n    \"scheduleRepeatType\": \"string\",\n    \"shell\": \"string\",\n    \"sudo\": True,\n    \"systems\": [\"string\"],\n    \"timeout\": \"string\",\n    \"trigger\": \"string\",\n    \"user\": \"string\"\n}\nheaders = {\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"PUT\", url, json=payload, headers=headers)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/commands/{id}\"\n\npayload = {\n    \"command\": \"string\",\n    \"commandRunners\": [\"string\"],\n    \"commandType\": \"linux\",\n    \"files\": [\"string\"],\n    \"launchType\": \"string\",\n    \"listensTo\": \"string\",\n    \"name\": \"string\",\n    \"organization\": \"string\",\n    \"schedule\": \"string\",\n    \"scheduleRepeatType\": \"string\",\n    \"shell\": \"string\",\n    \"sudo\": True,\n    \"systems\": [\"string\"],\n    \"timeout\": \"string\",\n    \"trigger\": \"string\",\n    \"user\": \"string\"\n}\nheaders = {\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"PUT\", url, json=payload, headers=headers)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/commands/%7Bid%7D' -Method PUT -Headers $headers -ContentType 'application/json' -Body '{\"command\":\"string\",\"commandRunners\":[\"string\"],\"commandType\":\"linux\",\"files\":[\"string\"],\"launchType\":\"string\",\"listensTo\":\"string\",\"name\":\"string\",\"organization\":\"string\",\"schedule\":\"string\",\"scheduleRepeatType\":\"string\",\"shell\":\"string\",\"sudo\":true,\"systems\":[\"string\"],\"timeout\":\"string\",\"trigger\":\"string\",\"user\":\"string\"}'"
+            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/commands/{id}' -Method PUT -Headers $headers -ContentType 'application/json' -Body '{\"command\":\"string\",\"commandRunners\":[\"string\"],\"commandType\":\"linux\",\"files\":[\"string\"],\"launchType\":\"string\",\"listensTo\":\"string\",\"name\":\"string\",\"organization\":\"string\",\"schedule\":\"string\",\"scheduleRepeatType\":\"string\",\"shell\":\"string\",\"sudo\":true,\"systems\":[\"string\"],\"timeout\":\"string\",\"trigger\":\"string\",\"user\":\"string\"}'"
           }
         ]
       }
@@ -4329,15 +4403,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request GET \\\n  --url https://console.jumpcloud.com/api/commands/%7Bid%7D/results \\\n  --header 'x-api-key: REPLACE_KEY_VALUE'"
+            "source": "curl --request GET \\\n  --url https://console.jumpcloud.com/api/commands/{id}/results \\\n  --header 'x-api-key: REPLACE_KEY_VALUE'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/commands/%7Bid%7D/results\"\n\nheaders = {\"x-api-key\": \"REPLACE_KEY_VALUE\"}\n\nresponse = requests.request(\"GET\", url, headers=headers)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/commands/{id}/results\"\n\nheaders = {\"x-api-key\": \"REPLACE_KEY_VALUE\"}\n\nresponse = requests.request(\"GET\", url, headers=headers)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/commands/%7Bid%7D/results' -Method GET -Headers $headers"
+            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/commands/{id}/results' -Method GET -Headers $headers"
           }
         ]
       },
@@ -4382,15 +4456,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request GET \\\n  --url 'https://console.jumpcloud.com/api/files/command/%7Bid%7D?fields=&limit=10&skip=0' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE'"
+            "source": "curl --request GET \\\n  --url 'https://console.jumpcloud.com/api/files/command/{id}?fields=&limit=10&skip=0' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/files/command/%7Bid%7D\"\n\nquerystring = {\"fields\":\"\",\"limit\":\"10\",\"skip\":\"0\"}\n\nheaders = {\"x-api-key\": \"REPLACE_KEY_VALUE\"}\n\nresponse = requests.request(\"GET\", url, headers=headers, params=querystring)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/files/command/{id}\"\n\nquerystring = {\"fields\":\"\",\"limit\":\"10\",\"skip\":\"0\"}\n\nheaders = {\"x-api-key\": \"REPLACE_KEY_VALUE\"}\n\nresponse = requests.request(\"GET\", url, headers=headers, params=querystring)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/files/command/%7Bid%7D?fields=&limit=10&skip=0' -Method GET -Headers $headers"
+            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/files/command/{id}?fields=&limit=10&skip=0' -Method GET -Headers $headers"
           }
         ]
       },
@@ -4486,15 +4560,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request GET \\\n  --url 'https://console.jumpcloud.com/api/organizations/%7Bid%7D?fields=&filter=SOME_STRING_VALUE' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE'"
+            "source": "curl --request GET \\\n  --url 'https://console.jumpcloud.com/api/organizations/{id}?fields=&filter=SOME_STRING_VALUE' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/organizations/%7Bid%7D\"\n\nquerystring = {\"fields\":\"\",\"filter\":\"SOME_STRING_VALUE\"}\n\nheaders = {\"x-api-key\": \"REPLACE_KEY_VALUE\"}\n\nresponse = requests.request(\"GET\", url, headers=headers, params=querystring)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/organizations/{id}\"\n\nquerystring = {\"fields\":\"\",\"filter\":\"SOME_STRING_VALUE\"}\n\nheaders = {\"x-api-key\": \"REPLACE_KEY_VALUE\"}\n\nresponse = requests.request(\"GET\", url, headers=headers, params=querystring)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/organizations/%7Bid%7D?fields=&filter=SOME_STRING_VALUE' -Method GET -Headers $headers"
+            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/organizations/{id}?fields=&filter=SOME_STRING_VALUE' -Method GET -Headers $headers"
           }
         ]
       },
@@ -4540,15 +4614,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request PUT \\\n  --url https://console.jumpcloud.com/api/organizations/%7Bid%7D \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --data '{\"settings\":{\"contactEmail\":\"string\",\"contactName\":\"string\",\"deviceIdentificationEnabled\":true,\"disableGoogleLogin\":true,\"disableLdap\":true,\"disableUM\":true,\"duplicateLDAPGroups\":true,\"emailDisclaimer\":\"string\",\"enableManagedUID\":true,\"features\":{\"directoryInsights\":{\"enabled\":true},\"directoryInsightsPremium\":{\"createdAt\":\"string\",\"enabled\":true,\"updatedAt\":\"string\"},\"systemInsights\":{\"createdAt\":\"string\",\"enableNewDarwin\":true,\"enableNewLinux\":true,\"enableNewWindows\":true,\"enabled\":true,\"updatedAt\":\"string\"}},\"growthData\":{},\"logo\":\"string\",\"name\":\"string\",\"passwordCompliance\":\"custom\",\"passwordPolicy\":{\"allowUsernameSubstring\":true,\"daysAfterExpirationToSelfRecover\":0,\"daysBeforeExpirationToForceReset\":1,\"effectiveDate\":\"string\",\"enableDaysAfterExpirationToSelfRecover\":true,\"enableDaysBeforeExpirationToForceReset\":true,\"enableLockoutTimeInSeconds\":true,\"enableMaxHistory\":true,\"enableMaxLoginAttempts\":true,\"enableMinChangePeriodInDays\":true,\"enableMinLength\":true,\"enablePasswordExpirationInDays\":true,\"gracePeriodDate\":\"string\",\"lockoutTimeInSeconds\":0,\"maxHistory\":1,\"maxLoginAttempts\":1,\"minChangePeriodInDays\":0,\"minLength\":0,\"needsLowercase\":true,\"needsNumeric\":true,\"needsSymbolic\":true,\"needsUppercase\":true,\"passwordExpirationInDays\":1},\"showIntro\":true,\"systemUserPasswordExpirationInDays\":0,\"systemUsersCanEdit\":true,\"trustedAppConfig\":{\"trustedApps\":[{\"name\":\"Application 1\",\"path\":\"/someuser/Applications/application1.app\",\"teamid\":\"FakeTeamID\"}]},\"userPortal\":{\"idleSessionDurationMinutes\":1}}}'"
+            "source": "curl --request PUT \\\n  --url https://console.jumpcloud.com/api/organizations/{id} \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --data '{\"settings\":{\"contactEmail\":\"string\",\"contactName\":\"string\",\"deviceIdentificationEnabled\":true,\"disableGoogleLogin\":true,\"disableLdap\":true,\"disableUM\":true,\"duplicateLDAPGroups\":true,\"emailDisclaimer\":\"string\",\"enableManagedUID\":true,\"features\":{\"directoryInsights\":{\"enabled\":true},\"directoryInsightsPremium\":{\"createdAt\":\"string\",\"enabled\":true,\"updatedAt\":\"string\"},\"systemInsights\":{\"createdAt\":\"string\",\"enableNewDarwin\":true,\"enableNewLinux\":true,\"enableNewWindows\":true,\"enabled\":true,\"updatedAt\":\"string\"}},\"growthData\":{},\"logo\":\"string\",\"name\":\"string\",\"newSystemUserStateDefaults\":{\"applicationImport\":\"ACTIVATED\",\"csvImport\":\"ACTIVATED\",\"manualEntry\":\"ACTIVATED\"},\"passwordCompliance\":\"custom\",\"passwordPolicy\":{\"allowUsernameSubstring\":true,\"daysAfterExpirationToSelfRecover\":0,\"daysBeforeExpirationToForceReset\":1,\"effectiveDate\":\"string\",\"enableDaysAfterExpirationToSelfRecover\":true,\"enableDaysBeforeExpirationToForceReset\":true,\"enableLockoutTimeInSeconds\":true,\"enableMaxHistory\":true,\"enableMaxLoginAttempts\":true,\"enableMinChangePeriodInDays\":true,\"enableMinLength\":true,\"enablePasswordExpirationInDays\":true,\"gracePeriodDate\":\"string\",\"lockoutTimeInSeconds\":0,\"maxHistory\":1,\"maxLoginAttempts\":1,\"minChangePeriodInDays\":0,\"minLength\":0,\"needsLowercase\":true,\"needsNumeric\":true,\"needsSymbolic\":true,\"needsUppercase\":true,\"passwordExpirationInDays\":1},\"showIntro\":true,\"systemUserPasswordExpirationInDays\":0,\"systemUsersCanEdit\":true,\"trustedAppConfig\":{\"trustedApps\":[{\"name\":\"Application 1\",\"path\":\"/someuser/Applications/application1.app\",\"teamid\":\"FakeTeamID\"}]},\"userPortal\":{\"idleSessionDurationMinutes\":1}}}'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/organizations/%7Bid%7D\"\n\npayload = {\"settings\": {\n        \"contactEmail\": \"string\",\n        \"contactName\": \"string\",\n        \"deviceIdentificationEnabled\": True,\n        \"disableGoogleLogin\": True,\n        \"disableLdap\": True,\n        \"disableUM\": True,\n        \"duplicateLDAPGroups\": True,\n        \"emailDisclaimer\": \"string\",\n        \"enableManagedUID\": True,\n        \"features\": {\n            \"directoryInsights\": {\"enabled\": True},\n            \"directoryInsightsPremium\": {\n                \"createdAt\": \"string\",\n                \"enabled\": True,\n                \"updatedAt\": \"string\"\n            },\n            \"systemInsights\": {\n                \"createdAt\": \"string\",\n                \"enableNewDarwin\": True,\n                \"enableNewLinux\": True,\n                \"enableNewWindows\": True,\n                \"enabled\": True,\n                \"updatedAt\": \"string\"\n            }\n        },\n        \"growthData\": {},\n        \"logo\": \"string\",\n        \"name\": \"string\",\n        \"passwordCompliance\": \"custom\",\n        \"passwordPolicy\": {\n            \"allowUsernameSubstring\": True,\n            \"daysAfterExpirationToSelfRecover\": 0,\n            \"daysBeforeExpirationToForceReset\": 1,\n            \"effectiveDate\": \"string\",\n            \"enableDaysAfterExpirationToSelfRecover\": True,\n            \"enableDaysBeforeExpirationToForceReset\": True,\n            \"enableLockoutTimeInSeconds\": True,\n            \"enableMaxHistory\": True,\n            \"enableMaxLoginAttempts\": True,\n            \"enableMinChangePeriodInDays\": True,\n            \"enableMinLength\": True,\n            \"enablePasswordExpirationInDays\": True,\n            \"gracePeriodDate\": \"string\",\n            \"lockoutTimeInSeconds\": 0,\n            \"maxHistory\": 1,\n            \"maxLoginAttempts\": 1,\n            \"minChangePeriodInDays\": 0,\n            \"minLength\": 0,\n            \"needsLowercase\": True,\n            \"needsNumeric\": True,\n            \"needsSymbolic\": True,\n            \"needsUppercase\": True,\n            \"passwordExpirationInDays\": 1\n        },\n        \"showIntro\": True,\n        \"systemUserPasswordExpirationInDays\": 0,\n        \"systemUsersCanEdit\": True,\n        \"trustedAppConfig\": {\"trustedApps\": [\n                {\n                    \"name\": \"Application 1\",\n                    \"path\": \"/someuser/Applications/application1.app\",\n                    \"teamid\": \"FakeTeamID\"\n                }\n            ]},\n        \"userPortal\": {\"idleSessionDurationMinutes\": 1}\n    }}\nheaders = {\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"PUT\", url, json=payload, headers=headers)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/organizations/{id}\"\n\npayload = {\"settings\": {\n        \"contactEmail\": \"string\",\n        \"contactName\": \"string\",\n        \"deviceIdentificationEnabled\": True,\n        \"disableGoogleLogin\": True,\n        \"disableLdap\": True,\n        \"disableUM\": True,\n        \"duplicateLDAPGroups\": True,\n        \"emailDisclaimer\": \"string\",\n        \"enableManagedUID\": True,\n        \"features\": {\n            \"directoryInsights\": {\"enabled\": True},\n            \"directoryInsightsPremium\": {\n                \"createdAt\": \"string\",\n                \"enabled\": True,\n                \"updatedAt\": \"string\"\n            },\n            \"systemInsights\": {\n                \"createdAt\": \"string\",\n                \"enableNewDarwin\": True,\n                \"enableNewLinux\": True,\n                \"enableNewWindows\": True,\n                \"enabled\": True,\n                \"updatedAt\": \"string\"\n            }\n        },\n        \"growthData\": {},\n        \"logo\": \"string\",\n        \"name\": \"string\",\n        \"newSystemUserStateDefaults\": {\n            \"applicationImport\": \"ACTIVATED\",\n            \"csvImport\": \"ACTIVATED\",\n            \"manualEntry\": \"ACTIVATED\"\n        },\n        \"passwordCompliance\": \"custom\",\n        \"passwordPolicy\": {\n            \"allowUsernameSubstring\": True,\n            \"daysAfterExpirationToSelfRecover\": 0,\n            \"daysBeforeExpirationToForceReset\": 1,\n            \"effectiveDate\": \"string\",\n            \"enableDaysAfterExpirationToSelfRecover\": True,\n            \"enableDaysBeforeExpirationToForceReset\": True,\n            \"enableLockoutTimeInSeconds\": True,\n            \"enableMaxHistory\": True,\n            \"enableMaxLoginAttempts\": True,\n            \"enableMinChangePeriodInDays\": True,\n            \"enableMinLength\": True,\n            \"enablePasswordExpirationInDays\": True,\n            \"gracePeriodDate\": \"string\",\n            \"lockoutTimeInSeconds\": 0,\n            \"maxHistory\": 1,\n            \"maxLoginAttempts\": 1,\n            \"minChangePeriodInDays\": 0,\n            \"minLength\": 0,\n            \"needsLowercase\": True,\n            \"needsNumeric\": True,\n            \"needsSymbolic\": True,\n            \"needsUppercase\": True,\n            \"passwordExpirationInDays\": 1\n        },\n        \"showIntro\": True,\n        \"systemUserPasswordExpirationInDays\": 0,\n        \"systemUsersCanEdit\": True,\n        \"trustedAppConfig\": {\"trustedApps\": [\n                {\n                    \"name\": \"Application 1\",\n                    \"path\": \"/someuser/Applications/application1.app\",\n                    \"teamid\": \"FakeTeamID\"\n                }\n            ]},\n        \"userPortal\": {\"idleSessionDurationMinutes\": 1}\n    }}\nheaders = {\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"PUT\", url, json=payload, headers=headers)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/organizations/%7Bid%7D' -Method PUT -Headers $headers -ContentType 'application/json' -Body '{\"settings\":{\"contactEmail\":\"string\",\"contactName\":\"string\",\"deviceIdentificationEnabled\":true,\"disableGoogleLogin\":true,\"disableLdap\":true,\"disableUM\":true,\"duplicateLDAPGroups\":true,\"emailDisclaimer\":\"string\",\"enableManagedUID\":true,\"features\":{\"directoryInsights\":{\"enabled\":true},\"directoryInsightsPremium\":{\"createdAt\":\"string\",\"enabled\":true,\"updatedAt\":\"string\"},\"systemInsights\":{\"createdAt\":\"string\",\"enableNewDarwin\":true,\"enableNewLinux\":true,\"enableNewWindows\":true,\"enabled\":true,\"updatedAt\":\"string\"}},\"growthData\":{},\"logo\":\"string\",\"name\":\"string\",\"passwordCompliance\":\"custom\",\"passwordPolicy\":{\"allowUsernameSubstring\":true,\"daysAfterExpirationToSelfRecover\":0,\"daysBeforeExpirationToForceReset\":1,\"effectiveDate\":\"string\",\"enableDaysAfterExpirationToSelfRecover\":true,\"enableDaysBeforeExpirationToForceReset\":true,\"enableLockoutTimeInSeconds\":true,\"enableMaxHistory\":true,\"enableMaxLoginAttempts\":true,\"enableMinChangePeriodInDays\":true,\"enableMinLength\":true,\"enablePasswordExpirationInDays\":true,\"gracePeriodDate\":\"string\",\"lockoutTimeInSeconds\":0,\"maxHistory\":1,\"maxLoginAttempts\":1,\"minChangePeriodInDays\":0,\"minLength\":0,\"needsLowercase\":true,\"needsNumeric\":true,\"needsSymbolic\":true,\"needsUppercase\":true,\"passwordExpirationInDays\":1},\"showIntro\":true,\"systemUserPasswordExpirationInDays\":0,\"systemUsersCanEdit\":true,\"trustedAppConfig\":{\"trustedApps\":[{\"name\":\"Application 1\",\"path\":\"/someuser/Applications/application1.app\",\"teamid\":\"FakeTeamID\"}]},\"userPortal\":{\"idleSessionDurationMinutes\":1}}}'"
+            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/organizations/{id}' -Method PUT -Headers $headers -ContentType 'application/json' -Body '{\"settings\":{\"contactEmail\":\"string\",\"contactName\":\"string\",\"deviceIdentificationEnabled\":true,\"disableGoogleLogin\":true,\"disableLdap\":true,\"disableUM\":true,\"duplicateLDAPGroups\":true,\"emailDisclaimer\":\"string\",\"enableManagedUID\":true,\"features\":{\"directoryInsights\":{\"enabled\":true},\"directoryInsightsPremium\":{\"createdAt\":\"string\",\"enabled\":true,\"updatedAt\":\"string\"},\"systemInsights\":{\"createdAt\":\"string\",\"enableNewDarwin\":true,\"enableNewLinux\":true,\"enableNewWindows\":true,\"enabled\":true,\"updatedAt\":\"string\"}},\"growthData\":{},\"logo\":\"string\",\"name\":\"string\",\"newSystemUserStateDefaults\":{\"applicationImport\":\"ACTIVATED\",\"csvImport\":\"ACTIVATED\",\"manualEntry\":\"ACTIVATED\"},\"passwordCompliance\":\"custom\",\"passwordPolicy\":{\"allowUsernameSubstring\":true,\"daysAfterExpirationToSelfRecover\":0,\"daysBeforeExpirationToForceReset\":1,\"effectiveDate\":\"string\",\"enableDaysAfterExpirationToSelfRecover\":true,\"enableDaysBeforeExpirationToForceReset\":true,\"enableLockoutTimeInSeconds\":true,\"enableMaxHistory\":true,\"enableMaxLoginAttempts\":true,\"enableMinChangePeriodInDays\":true,\"enableMinLength\":true,\"enablePasswordExpirationInDays\":true,\"gracePeriodDate\":\"string\",\"lockoutTimeInSeconds\":0,\"maxHistory\":1,\"maxLoginAttempts\":1,\"minChangePeriodInDays\":0,\"minLength\":0,\"needsLowercase\":true,\"needsNumeric\":true,\"needsSymbolic\":true,\"needsUppercase\":true,\"passwordExpirationInDays\":1},\"showIntro\":true,\"systemUserPasswordExpirationInDays\":0,\"systemUsersCanEdit\":true,\"trustedAppConfig\":{\"trustedApps\":[{\"name\":\"Application 1\",\"path\":\"/someuser/Applications/application1.app\",\"teamid\":\"FakeTeamID\"}]},\"userPortal\":{\"idleSessionDurationMinutes\":1}}}'"
           }
         ]
       }
@@ -4667,15 +4741,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request DELETE \\\n  --url https://console.jumpcloud.com/api/radiusservers/%7Bid%7D \\\n  --header 'x-api-key: REPLACE_KEY_VALUE'"
+            "source": "curl --request DELETE \\\n  --url https://console.jumpcloud.com/api/radiusservers/{id} \\\n  --header 'x-api-key: REPLACE_KEY_VALUE'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/radiusservers/%7Bid%7D\"\n\nheaders = {\"x-api-key\": \"REPLACE_KEY_VALUE\"}\n\nresponse = requests.request(\"DELETE\", url, headers=headers)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/radiusservers/{id}\"\n\nheaders = {\"x-api-key\": \"REPLACE_KEY_VALUE\"}\n\nresponse = requests.request(\"DELETE\", url, headers=headers)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/radiusservers/%7Bid%7D' -Method DELETE -Headers $headers"
+            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/radiusservers/{id}' -Method DELETE -Headers $headers"
           }
         ]
       },
@@ -4700,15 +4774,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request GET \\\n  --url https://console.jumpcloud.com/api/radiusservers/%7Bid%7D \\\n  --header 'x-api-key: REPLACE_KEY_VALUE'"
+            "source": "curl --request GET \\\n  --url https://console.jumpcloud.com/api/radiusservers/{id} \\\n  --header 'x-api-key: REPLACE_KEY_VALUE'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/radiusservers/%7Bid%7D\"\n\nheaders = {\"x-api-key\": \"REPLACE_KEY_VALUE\"}\n\nresponse = requests.request(\"GET\", url, headers=headers)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/radiusservers/{id}\"\n\nheaders = {\"x-api-key\": \"REPLACE_KEY_VALUE\"}\n\nresponse = requests.request(\"GET\", url, headers=headers)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/radiusservers/%7Bid%7D' -Method GET -Headers $headers"
+            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/radiusservers/{id}' -Method GET -Headers $headers"
           }
         ]
       },
@@ -4788,15 +4862,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request PUT \\\n  --url https://console.jumpcloud.com/api/radiusservers/%7Bid%7D \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --data '{\"name\":\"test radius\",\"networkSourceIp\":\"0.0.0.0\",\"sharedSecret\":\"secretradiuspassword\",\"tagsNames\":[\"tag1\"]}'"
+            "source": "curl --request PUT \\\n  --url https://console.jumpcloud.com/api/radiusservers/{id} \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --data '{\"name\":\"test radius\",\"networkSourceIp\":\"0.0.0.0\",\"sharedSecret\":\"secretradiuspassword\",\"tagsNames\":[\"tag1\"]}'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/radiusservers/%7Bid%7D\"\n\npayload = {\n    \"name\": \"test radius\",\n    \"networkSourceIp\": \"0.0.0.0\",\n    \"sharedSecret\": \"secretradiuspassword\",\n    \"tagsNames\": [\"tag1\"]\n}\nheaders = {\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"PUT\", url, json=payload, headers=headers)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/radiusservers/{id}\"\n\npayload = {\n    \"name\": \"test radius\",\n    \"networkSourceIp\": \"0.0.0.0\",\n    \"sharedSecret\": \"secretradiuspassword\",\n    \"tagsNames\": [\"tag1\"]\n}\nheaders = {\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"PUT\", url, json=payload, headers=headers)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/radiusservers/%7Bid%7D' -Method PUT -Headers $headers -ContentType 'application/json' -Body '{\"name\":\"test radius\",\"networkSourceIp\":\"0.0.0.0\",\"sharedSecret\":\"secretradiuspassword\",\"tagsNames\":[\"tag1\"]}'"
+            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/radiusservers/{id}' -Method PUT -Headers $headers -ContentType 'application/json' -Body '{\"name\":\"test radius\",\"networkSourceIp\":\"0.0.0.0\",\"sharedSecret\":\"secretradiuspassword\",\"tagsNames\":[\"tag1\"]}'"
           }
         ]
       }
@@ -5051,15 +5125,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request DELETE \\\n  --url https://console.jumpcloud.com/api/systems/%7Bid%7D \\\n  --header 'x-api-key: REPLACE_KEY_VALUE'"
+            "source": "curl --request DELETE \\\n  --url https://console.jumpcloud.com/api/systems/{id} \\\n  --header 'x-api-key: REPLACE_KEY_VALUE'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/systems/%7Bid%7D\"\n\nheaders = {\"x-api-key\": \"REPLACE_KEY_VALUE\"}\n\nresponse = requests.request(\"DELETE\", url, headers=headers)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/systems/{id}\"\n\nheaders = {\"x-api-key\": \"REPLACE_KEY_VALUE\"}\n\nresponse = requests.request(\"DELETE\", url, headers=headers)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/systems/%7Bid%7D' -Method DELETE -Headers $headers"
+            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/systems/{id}' -Method DELETE -Headers $headers"
           }
         ]
       },
@@ -5091,15 +5165,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request GET \\\n  --url 'https://console.jumpcloud.com/api/systems/%7Bid%7D?fields=&filter=SOME_STRING_VALUE' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE'"
+            "source": "curl --request GET \\\n  --url 'https://console.jumpcloud.com/api/systems/{id}?fields=&filter=SOME_STRING_VALUE' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/systems/%7Bid%7D\"\n\nquerystring = {\"fields\":\"\",\"filter\":\"SOME_STRING_VALUE\"}\n\nheaders = {\"x-api-key\": \"REPLACE_KEY_VALUE\"}\n\nresponse = requests.request(\"GET\", url, headers=headers, params=querystring)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/systems/{id}\"\n\nquerystring = {\"fields\":\"\",\"filter\":\"SOME_STRING_VALUE\"}\n\nheaders = {\"x-api-key\": \"REPLACE_KEY_VALUE\"}\n\nresponse = requests.request(\"GET\", url, headers=headers, params=querystring)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/systems/%7Bid%7D?fields=&filter=SOME_STRING_VALUE' -Method GET -Headers $headers"
+            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/systems/{id}?fields=&filter=SOME_STRING_VALUE' -Method GET -Headers $headers"
           }
         ]
       },
@@ -5140,15 +5214,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request PUT \\\n  --url https://console.jumpcloud.com/api/systems/%7Bid%7D \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --data '{\"agentBoundMessages\":[{\"cmd\":\"string\"}],\"allowMultiFactorAuthentication\":true,\"allowPublicKeyAuthentication\":true,\"allowSshPasswordAuthentication\":true,\"allowSshRootLogin\":true,\"displayName\":\"string\",\"tags\":[\"string\"]}'"
+            "source": "curl --request PUT \\\n  --url https://console.jumpcloud.com/api/systems/{id} \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --data '{\"agentBoundMessages\":[{\"cmd\":\"string\"}],\"allowMultiFactorAuthentication\":true,\"allowPublicKeyAuthentication\":true,\"allowSshPasswordAuthentication\":true,\"allowSshRootLogin\":true,\"displayName\":\"string\",\"tags\":[\"string\"]}'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/systems/%7Bid%7D\"\n\npayload = {\n    \"agentBoundMessages\": [{\"cmd\": \"string\"}],\n    \"allowMultiFactorAuthentication\": True,\n    \"allowPublicKeyAuthentication\": True,\n    \"allowSshPasswordAuthentication\": True,\n    \"allowSshRootLogin\": True,\n    \"displayName\": \"string\",\n    \"tags\": [\"string\"]\n}\nheaders = {\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"PUT\", url, json=payload, headers=headers)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/systems/{id}\"\n\npayload = {\n    \"agentBoundMessages\": [{\"cmd\": \"string\"}],\n    \"allowMultiFactorAuthentication\": True,\n    \"allowPublicKeyAuthentication\": True,\n    \"allowSshPasswordAuthentication\": True,\n    \"allowSshRootLogin\": True,\n    \"displayName\": \"string\",\n    \"tags\": [\"string\"]\n}\nheaders = {\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"PUT\", url, json=payload, headers=headers)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/systems/%7Bid%7D' -Method PUT -Headers $headers -ContentType 'application/json' -Body '{\"agentBoundMessages\":[{\"cmd\":\"string\"}],\"allowMultiFactorAuthentication\":true,\"allowPublicKeyAuthentication\":true,\"allowSshPasswordAuthentication\":true,\"allowSshRootLogin\":true,\"displayName\":\"string\",\"tags\":[\"string\"]}'"
+            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/systems/{id}' -Method PUT -Headers $headers -ContentType 'application/json' -Body '{\"agentBoundMessages\":[{\"cmd\":\"string\"}],\"allowMultiFactorAuthentication\":true,\"allowPublicKeyAuthentication\":true,\"allowSshPasswordAuthentication\":true,\"allowSshRootLogin\":true,\"displayName\":\"string\",\"tags\":[\"string\"]}'"
           }
         ]
       }
@@ -5180,15 +5254,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request POST \\\n  --url https://console.jumpcloud.com/api/systems/%7Bsystem_id%7D/command/builtin/erase \\\n  --header 'x-api-key: REPLACE_KEY_VALUE'"
+            "source": "curl --request POST \\\n  --url https://console.jumpcloud.com/api/systems/{system_id}/command/builtin/erase \\\n  --header 'x-api-key: REPLACE_KEY_VALUE'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/systems/%7Bsystem_id%7D/command/builtin/erase\"\n\nheaders = {\"x-api-key\": \"REPLACE_KEY_VALUE\"}\n\nresponse = requests.request(\"POST\", url, headers=headers)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/systems/{system_id}/command/builtin/erase\"\n\nheaders = {\"x-api-key\": \"REPLACE_KEY_VALUE\"}\n\nresponse = requests.request(\"POST\", url, headers=headers)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/systems/%7Bsystem_id%7D/command/builtin/erase' -Method POST -Headers $headers"
+            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/systems/{system_id}/command/builtin/erase' -Method POST -Headers $headers"
           }
         ]
       }
@@ -5220,15 +5294,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request POST \\\n  --url https://console.jumpcloud.com/api/systems/%7Bsystem_id%7D/command/builtin/lock \\\n  --header 'x-api-key: REPLACE_KEY_VALUE'"
+            "source": "curl --request POST \\\n  --url https://console.jumpcloud.com/api/systems/{system_id}/command/builtin/lock \\\n  --header 'x-api-key: REPLACE_KEY_VALUE'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/systems/%7Bsystem_id%7D/command/builtin/lock\"\n\nheaders = {\"x-api-key\": \"REPLACE_KEY_VALUE\"}\n\nresponse = requests.request(\"POST\", url, headers=headers)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/systems/{system_id}/command/builtin/lock\"\n\nheaders = {\"x-api-key\": \"REPLACE_KEY_VALUE\"}\n\nresponse = requests.request(\"POST\", url, headers=headers)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/systems/%7Bsystem_id%7D/command/builtin/lock' -Method POST -Headers $headers"
+            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/systems/{system_id}/command/builtin/lock' -Method POST -Headers $headers"
           }
         ]
       }
@@ -5260,15 +5334,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request POST \\\n  --url https://console.jumpcloud.com/api/systems/%7Bsystem_id%7D/command/builtin/restart \\\n  --header 'x-api-key: REPLACE_KEY_VALUE'"
+            "source": "curl --request POST \\\n  --url https://console.jumpcloud.com/api/systems/{system_id}/command/builtin/restart \\\n  --header 'x-api-key: REPLACE_KEY_VALUE'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/systems/%7Bsystem_id%7D/command/builtin/restart\"\n\nheaders = {\"x-api-key\": \"REPLACE_KEY_VALUE\"}\n\nresponse = requests.request(\"POST\", url, headers=headers)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/systems/{system_id}/command/builtin/restart\"\n\nheaders = {\"x-api-key\": \"REPLACE_KEY_VALUE\"}\n\nresponse = requests.request(\"POST\", url, headers=headers)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/systems/%7Bsystem_id%7D/command/builtin/restart' -Method POST -Headers $headers"
+            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/systems/{system_id}/command/builtin/restart' -Method POST -Headers $headers"
           }
         ]
       }
@@ -5300,15 +5374,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request POST \\\n  --url https://console.jumpcloud.com/api/systems/%7Bsystem_id%7D/command/builtin/shutdown \\\n  --header 'x-api-key: REPLACE_KEY_VALUE'"
+            "source": "curl --request POST \\\n  --url https://console.jumpcloud.com/api/systems/{system_id}/command/builtin/shutdown \\\n  --header 'x-api-key: REPLACE_KEY_VALUE'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/systems/%7Bsystem_id%7D/command/builtin/shutdown\"\n\nheaders = {\"x-api-key\": \"REPLACE_KEY_VALUE\"}\n\nresponse = requests.request(\"POST\", url, headers=headers)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/systems/{system_id}/command/builtin/shutdown\"\n\nheaders = {\"x-api-key\": \"REPLACE_KEY_VALUE\"}\n\nresponse = requests.request(\"POST\", url, headers=headers)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/systems/%7Bsystem_id%7D/command/builtin/shutdown' -Method POST -Headers $headers"
+            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/systems/{system_id}/command/builtin/shutdown' -Method POST -Headers $headers"
           }
         ]
       }
@@ -5411,15 +5485,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request POST \\\n  --url https://console.jumpcloud.com/api/systemusers \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --data '{\"account_locked\":true,\"activated\":true,\"addresses\":[{\"country\":\"string\",\"extendedAddress\":\"string\",\"locality\":\"string\",\"poBox\":\"string\",\"postalCode\":\"string\",\"region\":\"string\",\"streetAddress\":\"string\",\"type\":\"string\"}],\"allow_public_key\":true,\"alternateEmail\":\"string\",\"attributes\":[{\"name\":\"string\",\"value\":\"string\"}],\"company\":\"string\",\"costCenter\":\"string\",\"department\":\"string\",\"description\":\"string\",\"disableDeviceMaxLoginAttempts\":true,\"displayname\":\"string\",\"email\":\"string\",\"employeeIdentifier\":\"string\",\"employeeType\":\"string\",\"enable_managed_uid\":true,\"enable_user_portal_multifactor\":true,\"external_dn\":\"string\",\"external_password_expiration_date\":\"2019-08-24T14:15:22Z\",\"external_source_type\":\"string\",\"externally_managed\":true,\"firstname\":\"string\",\"jobTitle\":\"string\",\"lastname\":\"string\",\"ldap_binding_user\":true,\"location\":\"string\",\"managedAppleId\":\"string\",\"manager\":\"string\",\"mfa\":{\"configured\":true,\"exclusion\":true,\"exclusionUntil\":\"2019-08-24T14:15:22Z\"},\"middlename\":\"string\",\"password\":\"string\",\"password_never_expires\":true,\"passwordless_sudo\":true,\"phoneNumbers\":[{\"number\":\"string\",\"type\":\"string\"}],\"public_key\":\"string\",\"recoveryEmail\":{\"address\":\"string\"},\"relationships\":[{\"type\":\"string\",\"value\":\"string\"}],\"samba_service_user\":true,\"sudo\":true,\"suspended\":true,\"tags\":[\"string\"],\"unix_guid\":1,\"unix_uid\":1,\"username\":\"string\"}'"
+            "source": "curl --request POST \\\n  --url https://console.jumpcloud.com/api/systemusers \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --data '{\"account_locked\":true,\"activated\":true,\"addresses\":[{\"country\":\"string\",\"extendedAddress\":\"string\",\"locality\":\"string\",\"poBox\":\"string\",\"postalCode\":\"string\",\"region\":\"string\",\"streetAddress\":\"string\",\"type\":\"string\"}],\"allow_public_key\":true,\"alternateEmail\":\"string\",\"attributes\":[{\"name\":\"string\",\"value\":\"string\"}],\"company\":\"string\",\"costCenter\":\"string\",\"department\":\"string\",\"description\":\"string\",\"disableDeviceMaxLoginAttempts\":true,\"displayname\":\"string\",\"email\":\"string\",\"employeeIdentifier\":\"string\",\"employeeType\":\"string\",\"enable_managed_uid\":true,\"enable_user_portal_multifactor\":true,\"external_dn\":\"string\",\"external_password_expiration_date\":\"2019-08-24T14:15:22Z\",\"external_source_type\":\"string\",\"externally_managed\":true,\"firstname\":\"string\",\"jobTitle\":\"string\",\"lastname\":\"string\",\"ldap_binding_user\":true,\"location\":\"string\",\"managedAppleId\":\"string\",\"manager\":\"string\",\"mfa\":{\"configured\":true,\"exclusion\":true,\"exclusionDays\":1,\"exclusionUntil\":\"2019-08-24T14:15:22Z\"},\"middlename\":\"string\",\"password\":\"string\",\"password_never_expires\":true,\"passwordless_sudo\":true,\"phoneNumbers\":[{\"number\":\"string\",\"type\":\"string\"}],\"public_key\":\"string\",\"recoveryEmail\":{\"address\":\"string\"},\"relationships\":[{\"type\":\"string\",\"value\":\"string\"}],\"samba_service_user\":true,\"state\":\"STAGED\",\"sudo\":true,\"suspended\":true,\"tags\":[\"string\"],\"unix_guid\":1,\"unix_uid\":1,\"username\":\"string\"}'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/systemusers\"\n\npayload = {\n    \"account_locked\": True,\n    \"activated\": True,\n    \"addresses\": [\n        {\n            \"country\": \"string\",\n            \"extendedAddress\": \"string\",\n            \"locality\": \"string\",\n            \"poBox\": \"string\",\n            \"postalCode\": \"string\",\n            \"region\": \"string\",\n            \"streetAddress\": \"string\",\n            \"type\": \"string\"\n        }\n    ],\n    \"allow_public_key\": True,\n    \"alternateEmail\": \"string\",\n    \"attributes\": [\n        {\n            \"name\": \"string\",\n            \"value\": \"string\"\n        }\n    ],\n    \"company\": \"string\",\n    \"costCenter\": \"string\",\n    \"department\": \"string\",\n    \"description\": \"string\",\n    \"disableDeviceMaxLoginAttempts\": True,\n    \"displayname\": \"string\",\n    \"email\": \"string\",\n    \"employeeIdentifier\": \"string\",\n    \"employeeType\": \"string\",\n    \"enable_managed_uid\": True,\n    \"enable_user_portal_multifactor\": True,\n    \"external_dn\": \"string\",\n    \"external_password_expiration_date\": \"2019-08-24T14:15:22Z\",\n    \"external_source_type\": \"string\",\n    \"externally_managed\": True,\n    \"firstname\": \"string\",\n    \"jobTitle\": \"string\",\n    \"lastname\": \"string\",\n    \"ldap_binding_user\": True,\n    \"location\": \"string\",\n    \"managedAppleId\": \"string\",\n    \"manager\": \"string\",\n    \"mfa\": {\n        \"configured\": True,\n        \"exclusion\": True,\n        \"exclusionUntil\": \"2019-08-24T14:15:22Z\"\n    },\n    \"middlename\": \"string\",\n    \"password\": \"string\",\n    \"password_never_expires\": True,\n    \"passwordless_sudo\": True,\n    \"phoneNumbers\": [\n        {\n            \"number\": \"string\",\n            \"type\": \"string\"\n        }\n    ],\n    \"public_key\": \"string\",\n    \"recoveryEmail\": {\"address\": \"string\"},\n    \"relationships\": [\n        {\n            \"type\": \"string\",\n            \"value\": \"string\"\n        }\n    ],\n    \"samba_service_user\": True,\n    \"sudo\": True,\n    \"suspended\": True,\n    \"tags\": [\"string\"],\n    \"unix_guid\": 1,\n    \"unix_uid\": 1,\n    \"username\": \"string\"\n}\nheaders = {\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/systemusers\"\n\npayload = {\n    \"account_locked\": True,\n    \"activated\": True,\n    \"addresses\": [\n        {\n            \"country\": \"string\",\n            \"extendedAddress\": \"string\",\n            \"locality\": \"string\",\n            \"poBox\": \"string\",\n            \"postalCode\": \"string\",\n            \"region\": \"string\",\n            \"streetAddress\": \"string\",\n            \"type\": \"string\"\n        }\n    ],\n    \"allow_public_key\": True,\n    \"alternateEmail\": \"string\",\n    \"attributes\": [\n        {\n            \"name\": \"string\",\n            \"value\": \"string\"\n        }\n    ],\n    \"company\": \"string\",\n    \"costCenter\": \"string\",\n    \"department\": \"string\",\n    \"description\": \"string\",\n    \"disableDeviceMaxLoginAttempts\": True,\n    \"displayname\": \"string\",\n    \"email\": \"string\",\n    \"employeeIdentifier\": \"string\",\n    \"employeeType\": \"string\",\n    \"enable_managed_uid\": True,\n    \"enable_user_portal_multifactor\": True,\n    \"external_dn\": \"string\",\n    \"external_password_expiration_date\": \"2019-08-24T14:15:22Z\",\n    \"external_source_type\": \"string\",\n    \"externally_managed\": True,\n    \"firstname\": \"string\",\n    \"jobTitle\": \"string\",\n    \"lastname\": \"string\",\n    \"ldap_binding_user\": True,\n    \"location\": \"string\",\n    \"managedAppleId\": \"string\",\n    \"manager\": \"string\",\n    \"mfa\": {\n        \"configured\": True,\n        \"exclusion\": True,\n        \"exclusionDays\": 1,\n        \"exclusionUntil\": \"2019-08-24T14:15:22Z\"\n    },\n    \"middlename\": \"string\",\n    \"password\": \"string\",\n    \"password_never_expires\": True,\n    \"passwordless_sudo\": True,\n    \"phoneNumbers\": [\n        {\n            \"number\": \"string\",\n            \"type\": \"string\"\n        }\n    ],\n    \"public_key\": \"string\",\n    \"recoveryEmail\": {\"address\": \"string\"},\n    \"relationships\": [\n        {\n            \"type\": \"string\",\n            \"value\": \"string\"\n        }\n    ],\n    \"samba_service_user\": True,\n    \"state\": \"STAGED\",\n    \"sudo\": True,\n    \"suspended\": True,\n    \"tags\": [\"string\"],\n    \"unix_guid\": 1,\n    \"unix_uid\": 1,\n    \"username\": \"string\"\n}\nheaders = {\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/systemusers' -Method POST -Headers $headers -ContentType 'application/json' -Body '{\"account_locked\":true,\"activated\":true,\"addresses\":[{\"country\":\"string\",\"extendedAddress\":\"string\",\"locality\":\"string\",\"poBox\":\"string\",\"postalCode\":\"string\",\"region\":\"string\",\"streetAddress\":\"string\",\"type\":\"string\"}],\"allow_public_key\":true,\"alternateEmail\":\"string\",\"attributes\":[{\"name\":\"string\",\"value\":\"string\"}],\"company\":\"string\",\"costCenter\":\"string\",\"department\":\"string\",\"description\":\"string\",\"disableDeviceMaxLoginAttempts\":true,\"displayname\":\"string\",\"email\":\"string\",\"employeeIdentifier\":\"string\",\"employeeType\":\"string\",\"enable_managed_uid\":true,\"enable_user_portal_multifactor\":true,\"external_dn\":\"string\",\"external_password_expiration_date\":\"2019-08-24T14:15:22Z\",\"external_source_type\":\"string\",\"externally_managed\":true,\"firstname\":\"string\",\"jobTitle\":\"string\",\"lastname\":\"string\",\"ldap_binding_user\":true,\"location\":\"string\",\"managedAppleId\":\"string\",\"manager\":\"string\",\"mfa\":{\"configured\":true,\"exclusion\":true,\"exclusionUntil\":\"2019-08-24T14:15:22Z\"},\"middlename\":\"string\",\"password\":\"string\",\"password_never_expires\":true,\"passwordless_sudo\":true,\"phoneNumbers\":[{\"number\":\"string\",\"type\":\"string\"}],\"public_key\":\"string\",\"recoveryEmail\":{\"address\":\"string\"},\"relationships\":[{\"type\":\"string\",\"value\":\"string\"}],\"samba_service_user\":true,\"sudo\":true,\"suspended\":true,\"tags\":[\"string\"],\"unix_guid\":1,\"unix_uid\":1,\"username\":\"string\"}'"
+            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/systemusers' -Method POST -Headers $headers -ContentType 'application/json' -Body '{\"account_locked\":true,\"activated\":true,\"addresses\":[{\"country\":\"string\",\"extendedAddress\":\"string\",\"locality\":\"string\",\"poBox\":\"string\",\"postalCode\":\"string\",\"region\":\"string\",\"streetAddress\":\"string\",\"type\":\"string\"}],\"allow_public_key\":true,\"alternateEmail\":\"string\",\"attributes\":[{\"name\":\"string\",\"value\":\"string\"}],\"company\":\"string\",\"costCenter\":\"string\",\"department\":\"string\",\"description\":\"string\",\"disableDeviceMaxLoginAttempts\":true,\"displayname\":\"string\",\"email\":\"string\",\"employeeIdentifier\":\"string\",\"employeeType\":\"string\",\"enable_managed_uid\":true,\"enable_user_portal_multifactor\":true,\"external_dn\":\"string\",\"external_password_expiration_date\":\"2019-08-24T14:15:22Z\",\"external_source_type\":\"string\",\"externally_managed\":true,\"firstname\":\"string\",\"jobTitle\":\"string\",\"lastname\":\"string\",\"ldap_binding_user\":true,\"location\":\"string\",\"managedAppleId\":\"string\",\"manager\":\"string\",\"mfa\":{\"configured\":true,\"exclusion\":true,\"exclusionDays\":1,\"exclusionUntil\":\"2019-08-24T14:15:22Z\"},\"middlename\":\"string\",\"password\":\"string\",\"password_never_expires\":true,\"passwordless_sudo\":true,\"phoneNumbers\":[{\"number\":\"string\",\"type\":\"string\"}],\"public_key\":\"string\",\"recoveryEmail\":{\"address\":\"string\"},\"relationships\":[{\"type\":\"string\",\"value\":\"string\"}],\"samba_service_user\":true,\"state\":\"STAGED\",\"sudo\":true,\"suspended\":true,\"tags\":[\"string\"],\"unix_guid\":1,\"unix_uid\":1,\"username\":\"string\"}'"
           }
         ]
       }
@@ -5446,15 +5520,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request DELETE \\\n  --url 'https://console.jumpcloud.com/api/systemusers/%7Bid%7D?cascade_manager=SOME_STRING_VALUE' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE'"
+            "source": "curl --request DELETE \\\n  --url 'https://console.jumpcloud.com/api/systemusers/{id}?cascade_manager=SOME_STRING_VALUE' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/systemusers/%7Bid%7D\"\n\nquerystring = {\"cascade_manager\":\"SOME_STRING_VALUE\"}\n\nheaders = {\"x-api-key\": \"REPLACE_KEY_VALUE\"}\n\nresponse = requests.request(\"DELETE\", url, headers=headers, params=querystring)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/systemusers/{id}\"\n\nquerystring = {\"cascade_manager\":\"SOME_STRING_VALUE\"}\n\nheaders = {\"x-api-key\": \"REPLACE_KEY_VALUE\"}\n\nresponse = requests.request(\"DELETE\", url, headers=headers, params=querystring)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/systemusers/%7Bid%7D?cascade_manager=SOME_STRING_VALUE' -Method DELETE -Headers $headers"
+            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/systemusers/{id}?cascade_manager=SOME_STRING_VALUE' -Method DELETE -Headers $headers"
           }
         ]
       },
@@ -5486,15 +5560,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request GET \\\n  --url 'https://console.jumpcloud.com/api/systemusers/%7Bid%7D?fields=&filter=SOME_STRING_VALUE' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE'"
+            "source": "curl --request GET \\\n  --url 'https://console.jumpcloud.com/api/systemusers/{id}?fields=&filter=SOME_STRING_VALUE' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/systemusers/%7Bid%7D\"\n\nquerystring = {\"fields\":\"\",\"filter\":\"SOME_STRING_VALUE\"}\n\nheaders = {\"x-api-key\": \"REPLACE_KEY_VALUE\"}\n\nresponse = requests.request(\"GET\", url, headers=headers, params=querystring)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/systemusers/{id}\"\n\nquerystring = {\"fields\":\"\",\"filter\":\"SOME_STRING_VALUE\"}\n\nheaders = {\"x-api-key\": \"REPLACE_KEY_VALUE\"}\n\nresponse = requests.request(\"GET\", url, headers=headers, params=querystring)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/systemusers/%7Bid%7D?fields=&filter=SOME_STRING_VALUE' -Method GET -Headers $headers"
+            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/systemusers/{id}?fields=&filter=SOME_STRING_VALUE' -Method GET -Headers $headers"
           }
         ]
       },
@@ -5535,15 +5609,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request PUT \\\n  --url https://console.jumpcloud.com/api/systemusers/%7Bid%7D \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --data '{\"account_locked\":true,\"addresses\":[{\"country\":\"string\",\"extendedAddress\":\"string\",\"locality\":\"string\",\"poBox\":\"string\",\"postalCode\":\"string\",\"region\":\"string\",\"streetAddress\":\"string\",\"type\":\"string\"}],\"allow_public_key\":true,\"alternateEmail\":\"string\",\"attributes\":[{\"name\":\"string\",\"value\":\"string\"}],\"company\":\"string\",\"costCenter\":\"string\",\"department\":\"string\",\"description\":\"string\",\"disableDeviceMaxLoginAttempts\":true,\"displayname\":\"string\",\"email\":\"string\",\"employeeIdentifier\":\"string\",\"employeeType\":\"string\",\"enable_managed_uid\":true,\"enable_user_portal_multifactor\":true,\"external_dn\":\"string\",\"external_password_expiration_date\":\"string\",\"external_source_type\":\"string\",\"externally_managed\":true,\"firstname\":\"string\",\"jobTitle\":\"string\",\"lastname\":\"string\",\"ldap_binding_user\":true,\"location\":\"string\",\"managedAppleId\":\"string\",\"manager\":\"string\",\"mfa\":{\"configured\":true,\"exclusion\":true,\"exclusionUntil\":\"2019-08-24T14:15:22Z\"},\"middlename\":\"string\",\"password\":\"string\",\"password_never_expires\":true,\"phoneNumbers\":[{\"number\":\"string\",\"type\":\"string\"}],\"public_key\":\"string\",\"relationships\":[{\"type\":\"string\",\"value\":\"string\"}],\"samba_service_user\":true,\"ssh_keys\":[{\"name\":\"string\",\"public_key\":\"string\"}],\"state\":\"ACTIVATED\",\"sudo\":true,\"suspended\":true,\"tags\":[\"string\"],\"unix_guid\":1,\"unix_uid\":1,\"username\":\"string\"}'"
+            "source": "curl --request PUT \\\n  --url https://console.jumpcloud.com/api/systemusers/{id} \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --data '{\"account_locked\":true,\"addresses\":[{\"country\":\"string\",\"extendedAddress\":\"string\",\"locality\":\"string\",\"poBox\":\"string\",\"postalCode\":\"string\",\"region\":\"string\",\"streetAddress\":\"string\",\"type\":\"string\"}],\"allow_public_key\":true,\"alternateEmail\":\"string\",\"attributes\":[{\"name\":\"string\",\"value\":\"string\"}],\"company\":\"string\",\"costCenter\":\"string\",\"department\":\"string\",\"description\":\"string\",\"disableDeviceMaxLoginAttempts\":true,\"displayname\":\"string\",\"email\":\"string\",\"employeeIdentifier\":\"string\",\"employeeType\":\"string\",\"enable_managed_uid\":true,\"enable_user_portal_multifactor\":true,\"external_dn\":\"string\",\"external_password_expiration_date\":\"string\",\"external_source_type\":\"string\",\"externally_managed\":true,\"firstname\":\"string\",\"jobTitle\":\"string\",\"lastname\":\"string\",\"ldap_binding_user\":true,\"location\":\"string\",\"managedAppleId\":\"string\",\"manager\":\"string\",\"mfa\":{\"configured\":true,\"exclusion\":true,\"exclusionDays\":1,\"exclusionUntil\":\"2019-08-24T14:15:22Z\"},\"middlename\":\"string\",\"password\":\"string\",\"password_never_expires\":true,\"phoneNumbers\":[{\"number\":\"string\",\"type\":\"string\"}],\"public_key\":\"string\",\"relationships\":[{\"type\":\"string\",\"value\":\"string\"}],\"samba_service_user\":true,\"ssh_keys\":[{\"name\":\"string\",\"public_key\":\"string\"}],\"state\":\"ACTIVATED\",\"sudo\":true,\"suspended\":true,\"tags\":[\"string\"],\"unix_guid\":1,\"unix_uid\":1,\"username\":\"string\"}'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/systemusers/%7Bid%7D\"\n\npayload = {\n    \"account_locked\": True,\n    \"addresses\": [\n        {\n            \"country\": \"string\",\n            \"extendedAddress\": \"string\",\n            \"locality\": \"string\",\n            \"poBox\": \"string\",\n            \"postalCode\": \"string\",\n            \"region\": \"string\",\n            \"streetAddress\": \"string\",\n            \"type\": \"string\"\n        }\n    ],\n    \"allow_public_key\": True,\n    \"alternateEmail\": \"string\",\n    \"attributes\": [\n        {\n            \"name\": \"string\",\n            \"value\": \"string\"\n        }\n    ],\n    \"company\": \"string\",\n    \"costCenter\": \"string\",\n    \"department\": \"string\",\n    \"description\": \"string\",\n    \"disableDeviceMaxLoginAttempts\": True,\n    \"displayname\": \"string\",\n    \"email\": \"string\",\n    \"employeeIdentifier\": \"string\",\n    \"employeeType\": \"string\",\n    \"enable_managed_uid\": True,\n    \"enable_user_portal_multifactor\": True,\n    \"external_dn\": \"string\",\n    \"external_password_expiration_date\": \"string\",\n    \"external_source_type\": \"string\",\n    \"externally_managed\": True,\n    \"firstname\": \"string\",\n    \"jobTitle\": \"string\",\n    \"lastname\": \"string\",\n    \"ldap_binding_user\": True,\n    \"location\": \"string\",\n    \"managedAppleId\": \"string\",\n    \"manager\": \"string\",\n    \"mfa\": {\n        \"configured\": True,\n        \"exclusion\": True,\n        \"exclusionUntil\": \"2019-08-24T14:15:22Z\"\n    },\n    \"middlename\": \"string\",\n    \"password\": \"string\",\n    \"password_never_expires\": True,\n    \"phoneNumbers\": [\n        {\n            \"number\": \"string\",\n            \"type\": \"string\"\n        }\n    ],\n    \"public_key\": \"string\",\n    \"relationships\": [\n        {\n            \"type\": \"string\",\n            \"value\": \"string\"\n        }\n    ],\n    \"samba_service_user\": True,\n    \"ssh_keys\": [\n        {\n            \"name\": \"string\",\n            \"public_key\": \"string\"\n        }\n    ],\n    \"state\": \"ACTIVATED\",\n    \"sudo\": True,\n    \"suspended\": True,\n    \"tags\": [\"string\"],\n    \"unix_guid\": 1,\n    \"unix_uid\": 1,\n    \"username\": \"string\"\n}\nheaders = {\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"PUT\", url, json=payload, headers=headers)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/systemusers/{id}\"\n\npayload = {\n    \"account_locked\": True,\n    \"addresses\": [\n        {\n            \"country\": \"string\",\n            \"extendedAddress\": \"string\",\n            \"locality\": \"string\",\n            \"poBox\": \"string\",\n            \"postalCode\": \"string\",\n            \"region\": \"string\",\n            \"streetAddress\": \"string\",\n            \"type\": \"string\"\n        }\n    ],\n    \"allow_public_key\": True,\n    \"alternateEmail\": \"string\",\n    \"attributes\": [\n        {\n            \"name\": \"string\",\n            \"value\": \"string\"\n        }\n    ],\n    \"company\": \"string\",\n    \"costCenter\": \"string\",\n    \"department\": \"string\",\n    \"description\": \"string\",\n    \"disableDeviceMaxLoginAttempts\": True,\n    \"displayname\": \"string\",\n    \"email\": \"string\",\n    \"employeeIdentifier\": \"string\",\n    \"employeeType\": \"string\",\n    \"enable_managed_uid\": True,\n    \"enable_user_portal_multifactor\": True,\n    \"external_dn\": \"string\",\n    \"external_password_expiration_date\": \"string\",\n    \"external_source_type\": \"string\",\n    \"externally_managed\": True,\n    \"firstname\": \"string\",\n    \"jobTitle\": \"string\",\n    \"lastname\": \"string\",\n    \"ldap_binding_user\": True,\n    \"location\": \"string\",\n    \"managedAppleId\": \"string\",\n    \"manager\": \"string\",\n    \"mfa\": {\n        \"configured\": True,\n        \"exclusion\": True,\n        \"exclusionDays\": 1,\n        \"exclusionUntil\": \"2019-08-24T14:15:22Z\"\n    },\n    \"middlename\": \"string\",\n    \"password\": \"string\",\n    \"password_never_expires\": True,\n    \"phoneNumbers\": [\n        {\n            \"number\": \"string\",\n            \"type\": \"string\"\n        }\n    ],\n    \"public_key\": \"string\",\n    \"relationships\": [\n        {\n            \"type\": \"string\",\n            \"value\": \"string\"\n        }\n    ],\n    \"samba_service_user\": True,\n    \"ssh_keys\": [\n        {\n            \"name\": \"string\",\n            \"public_key\": \"string\"\n        }\n    ],\n    \"state\": \"ACTIVATED\",\n    \"sudo\": True,\n    \"suspended\": True,\n    \"tags\": [\"string\"],\n    \"unix_guid\": 1,\n    \"unix_uid\": 1,\n    \"username\": \"string\"\n}\nheaders = {\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"PUT\", url, json=payload, headers=headers)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/systemusers/%7Bid%7D' -Method PUT -Headers $headers -ContentType 'application/json' -Body '{\"account_locked\":true,\"addresses\":[{\"country\":\"string\",\"extendedAddress\":\"string\",\"locality\":\"string\",\"poBox\":\"string\",\"postalCode\":\"string\",\"region\":\"string\",\"streetAddress\":\"string\",\"type\":\"string\"}],\"allow_public_key\":true,\"alternateEmail\":\"string\",\"attributes\":[{\"name\":\"string\",\"value\":\"string\"}],\"company\":\"string\",\"costCenter\":\"string\",\"department\":\"string\",\"description\":\"string\",\"disableDeviceMaxLoginAttempts\":true,\"displayname\":\"string\",\"email\":\"string\",\"employeeIdentifier\":\"string\",\"employeeType\":\"string\",\"enable_managed_uid\":true,\"enable_user_portal_multifactor\":true,\"external_dn\":\"string\",\"external_password_expiration_date\":\"string\",\"external_source_type\":\"string\",\"externally_managed\":true,\"firstname\":\"string\",\"jobTitle\":\"string\",\"lastname\":\"string\",\"ldap_binding_user\":true,\"location\":\"string\",\"managedAppleId\":\"string\",\"manager\":\"string\",\"mfa\":{\"configured\":true,\"exclusion\":true,\"exclusionUntil\":\"2019-08-24T14:15:22Z\"},\"middlename\":\"string\",\"password\":\"string\",\"password_never_expires\":true,\"phoneNumbers\":[{\"number\":\"string\",\"type\":\"string\"}],\"public_key\":\"string\",\"relationships\":[{\"type\":\"string\",\"value\":\"string\"}],\"samba_service_user\":true,\"ssh_keys\":[{\"name\":\"string\",\"public_key\":\"string\"}],\"state\":\"ACTIVATED\",\"sudo\":true,\"suspended\":true,\"tags\":[\"string\"],\"unix_guid\":1,\"unix_uid\":1,\"username\":\"string\"}'"
+            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/systemusers/{id}' -Method PUT -Headers $headers -ContentType 'application/json' -Body '{\"account_locked\":true,\"addresses\":[{\"country\":\"string\",\"extendedAddress\":\"string\",\"locality\":\"string\",\"poBox\":\"string\",\"postalCode\":\"string\",\"region\":\"string\",\"streetAddress\":\"string\",\"type\":\"string\"}],\"allow_public_key\":true,\"alternateEmail\":\"string\",\"attributes\":[{\"name\":\"string\",\"value\":\"string\"}],\"company\":\"string\",\"costCenter\":\"string\",\"department\":\"string\",\"description\":\"string\",\"disableDeviceMaxLoginAttempts\":true,\"displayname\":\"string\",\"email\":\"string\",\"employeeIdentifier\":\"string\",\"employeeType\":\"string\",\"enable_managed_uid\":true,\"enable_user_portal_multifactor\":true,\"external_dn\":\"string\",\"external_password_expiration_date\":\"string\",\"external_source_type\":\"string\",\"externally_managed\":true,\"firstname\":\"string\",\"jobTitle\":\"string\",\"lastname\":\"string\",\"ldap_binding_user\":true,\"location\":\"string\",\"managedAppleId\":\"string\",\"manager\":\"string\",\"mfa\":{\"configured\":true,\"exclusion\":true,\"exclusionDays\":1,\"exclusionUntil\":\"2019-08-24T14:15:22Z\"},\"middlename\":\"string\",\"password\":\"string\",\"password_never_expires\":true,\"phoneNumbers\":[{\"number\":\"string\",\"type\":\"string\"}],\"public_key\":\"string\",\"relationships\":[{\"type\":\"string\",\"value\":\"string\"}],\"samba_service_user\":true,\"ssh_keys\":[{\"name\":\"string\",\"public_key\":\"string\"}],\"state\":\"ACTIVATED\",\"sudo\":true,\"suspended\":true,\"tags\":[\"string\"],\"unix_guid\":1,\"unix_uid\":1,\"username\":\"string\"}'"
           }
         ]
       }
@@ -5575,15 +5649,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request POST \\\n  --url https://console.jumpcloud.com/api/systemusers/%7Bid%7D/expire \\\n  --header 'x-api-key: REPLACE_KEY_VALUE'"
+            "source": "curl --request POST \\\n  --url https://console.jumpcloud.com/api/systemusers/{id}/expire \\\n  --header 'x-api-key: REPLACE_KEY_VALUE'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/systemusers/%7Bid%7D/expire\"\n\nheaders = {\"x-api-key\": \"REPLACE_KEY_VALUE\"}\n\nresponse = requests.request(\"POST\", url, headers=headers)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/systemusers/{id}/expire\"\n\nheaders = {\"x-api-key\": \"REPLACE_KEY_VALUE\"}\n\nresponse = requests.request(\"POST\", url, headers=headers)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/systemusers/%7Bid%7D/expire' -Method POST -Headers $headers"
+            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/systemusers/{id}/expire' -Method POST -Headers $headers"
           }
         ]
       }
@@ -5609,6 +5683,10 @@
                 "exclusion": {
                   "type": "boolean"
                 },
+                "exclusionDays": {
+                  "minimum": 1,
+                  "type": "number"
+                },
                 "exclusionUntil": {
                   "format": "date-time",
                   "type": "string"
@@ -5632,15 +5710,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request POST \\\n  --url https://console.jumpcloud.com/api/systemusers/%7Bid%7D/resetmfa \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --data '{\"exclusion\":true,\"exclusionUntil\":\"2019-08-24T14:15:22Z\"}'"
+            "source": "curl --request POST \\\n  --url https://console.jumpcloud.com/api/systemusers/{id}/resetmfa \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --data '{\"exclusion\":true,\"exclusionDays\":1,\"exclusionUntil\":\"2019-08-24T14:15:22Z\"}'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/systemusers/%7Bid%7D/resetmfa\"\n\npayload = {\n    \"exclusion\": True,\n    \"exclusionUntil\": \"2019-08-24T14:15:22Z\"\n}\nheaders = {\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/systemusers/{id}/resetmfa\"\n\npayload = {\n    \"exclusion\": True,\n    \"exclusionDays\": 1,\n    \"exclusionUntil\": \"2019-08-24T14:15:22Z\"\n}\nheaders = {\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/systemusers/%7Bid%7D/resetmfa' -Method POST -Headers $headers -ContentType 'application/json' -Body '{\"exclusion\":true,\"exclusionUntil\":\"2019-08-24T14:15:22Z\"}'"
+            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/systemusers/{id}/resetmfa' -Method POST -Headers $headers -ContentType 'application/json' -Body '{\"exclusion\":true,\"exclusionDays\":1,\"exclusionUntil\":\"2019-08-24T14:15:22Z\"}'"
           }
         ]
       }
@@ -5670,15 +5748,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request GET \\\n  --url https://console.jumpcloud.com/api/systemusers/%7Bid%7D/sshkeys \\\n  --header 'x-api-key: REPLACE_KEY_VALUE'"
+            "source": "curl --request GET \\\n  --url https://console.jumpcloud.com/api/systemusers/{id}/sshkeys \\\n  --header 'x-api-key: REPLACE_KEY_VALUE'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/systemusers/%7Bid%7D/sshkeys\"\n\nheaders = {\"x-api-key\": \"REPLACE_KEY_VALUE\"}\n\nresponse = requests.request(\"GET\", url, headers=headers)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/systemusers/{id}/sshkeys\"\n\nheaders = {\"x-api-key\": \"REPLACE_KEY_VALUE\"}\n\nresponse = requests.request(\"GET\", url, headers=headers)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/systemusers/%7Bid%7D/sshkeys' -Method GET -Headers $headers"
+            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/systemusers/{id}/sshkeys' -Method GET -Headers $headers"
           }
         ]
       },
@@ -5719,15 +5797,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request POST \\\n  --url https://console.jumpcloud.com/api/systemusers/%7Bid%7D/sshkeys \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --data '{\"name\":\"string\",\"public_key\":\"string\"}'"
+            "source": "curl --request POST \\\n  --url https://console.jumpcloud.com/api/systemusers/{id}/sshkeys \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --data '{\"name\":\"string\",\"public_key\":\"string\"}'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/systemusers/%7Bid%7D/sshkeys\"\n\npayload = {\n    \"name\": \"string\",\n    \"public_key\": \"string\"\n}\nheaders = {\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/systemusers/{id}/sshkeys\"\n\npayload = {\n    \"name\": \"string\",\n    \"public_key\": \"string\"\n}\nheaders = {\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/systemusers/%7Bid%7D/sshkeys' -Method POST -Headers $headers -ContentType 'application/json' -Body '{\"name\":\"string\",\"public_key\":\"string\"}'"
+            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/systemusers/{id}/sshkeys' -Method POST -Headers $headers -ContentType 'application/json' -Body '{\"name\":\"string\",\"public_key\":\"string\"}'"
           }
         ]
       }
@@ -5759,15 +5837,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request POST \\\n  --url https://console.jumpcloud.com/api/systemusers/%7Bid%7D/unlock \\\n  --header 'x-api-key: REPLACE_KEY_VALUE'"
+            "source": "curl --request POST \\\n  --url https://console.jumpcloud.com/api/systemusers/{id}/unlock \\\n  --header 'x-api-key: REPLACE_KEY_VALUE'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/systemusers/%7Bid%7D/unlock\"\n\nheaders = {\"x-api-key\": \"REPLACE_KEY_VALUE\"}\n\nresponse = requests.request(\"POST\", url, headers=headers)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/systemusers/{id}/unlock\"\n\nheaders = {\"x-api-key\": \"REPLACE_KEY_VALUE\"}\n\nresponse = requests.request(\"POST\", url, headers=headers)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/systemusers/%7Bid%7D/unlock' -Method POST -Headers $headers"
+            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/systemusers/{id}/unlock' -Method POST -Headers $headers"
           }
         ]
       }
@@ -5791,15 +5869,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request DELETE \\\n  --url https://console.jumpcloud.com/api/systemusers/%7Bsystemuser_id%7D/sshkeys/%7Bid%7D \\\n  --header 'x-api-key: REPLACE_KEY_VALUE'"
+            "source": "curl --request DELETE \\\n  --url https://console.jumpcloud.com/api/systemusers/{systemuser_id}/sshkeys/{id} \\\n  --header 'x-api-key: REPLACE_KEY_VALUE'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/systemusers/%7Bsystemuser_id%7D/sshkeys/%7Bid%7D\"\n\nheaders = {\"x-api-key\": \"REPLACE_KEY_VALUE\"}\n\nresponse = requests.request(\"DELETE\", url, headers=headers)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/systemusers/{systemuser_id}/sshkeys/{id}\"\n\nheaders = {\"x-api-key\": \"REPLACE_KEY_VALUE\"}\n\nresponse = requests.request(\"DELETE\", url, headers=headers)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/systemusers/%7Bsystemuser_id%7D/sshkeys/%7Bid%7D' -Method DELETE -Headers $headers"
+            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/systemusers/{systemuser_id}/sshkeys/{id}' -Method DELETE -Headers $headers"
           }
         ]
       },
