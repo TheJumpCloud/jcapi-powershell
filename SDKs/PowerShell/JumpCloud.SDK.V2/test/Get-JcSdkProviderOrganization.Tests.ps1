@@ -18,7 +18,7 @@ if(($null -eq $TestName) -or ($TestName -contains 'Get-JcSdkProviderOrganization
 
 }
 Describe 'Get-JcSdkProviderOrganization' -Tag:("MTP") {
-    It 'List' {
+    It 'List' -skip {
         { Get-JcSdkProviderOrganization -ProviderID:($env:JCProviderId) } | Should -Not -Throw
     }
 }

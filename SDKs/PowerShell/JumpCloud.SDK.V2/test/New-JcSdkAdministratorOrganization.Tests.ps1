@@ -18,7 +18,7 @@ if(($null -eq $TestName) -or ($TestName -contains 'New-JcSdkAdministratorOrganiz
 
 }
 Describe 'New-JcSdkAdministratorOrganization' -Tag:("MTP") {
-    It 'Create' {
+    It 'Create' -skip {
         { New-JcSdkAdministratorOrganization -Organization:($env:JCOrgId) -Id:(($global:PesterTestProviderAdmin).Id) } | Should -Not -Throw
     }
 

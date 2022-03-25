@@ -20,7 +20,7 @@ BeforeAll {
 
 }
 Describe 'Get-JcSdkAdministratorOrganization' -Tag:("MTP") {
-    It 'List' {
+    It 'List' -skip {
         $ProviderAdmins = Get-JCSDKProviderAdministrator - ProviderID $env:JCProviderId
         { Get-JcSdkAdministratorOrganization -Id:(($ProviderAdmins | Select-Object -First 1).Id) } | Should -Not -Throw
     }
