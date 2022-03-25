@@ -21,7 +21,10 @@ No changes
 <details>
 <summary>Functions Modified</summary>
 
+* New-JcSdkApplication.ps1
 * New-JcSdkUser.ps1
+* Reset-JcSdkUserMfa.ps1
+* Set-JcSdkApplication.ps1
 * Set-JcSdkOrganization.ps1
 * Set-JcSdkUser.ps1
 
