@@ -24,6 +24,7 @@ build-sdks: &build-sdks
       context: aws-credentials
   - Build and Test JumpCloud SDK V2:
       requires:
+        - Build and Test JumpCloud SDK DirectoryInsights
         - Build and Test JumpCloud SDK V1
       context: aws-credentials
   - Commit Changes:
@@ -34,10 +35,10 @@ build-sdks: &build-sdks
   - CodeArtifact Approval:
       type: approval
       requires:
-          - Build and Test JumpCloud SDK DirectoryInsights
-          - Build and Test JumpCloud SDK V1
-          - Build and Test JumpCloud SDK V2
-          - Commit Changes
+        - Build and Test JumpCloud SDK DirectoryInsights
+        - Build and Test JumpCloud SDK V1
+        - Build and Test JumpCloud SDK V2
+        - Commit Changes
   - Pack and Deploy To CodeArtifact:
       requires:
         - Build and Test JumpCloud SDK DirectoryInsights
@@ -59,8 +60,11 @@ build-sdks: &build-sdks
       type: approval
       requires:
         - Build and Test JumpCloud SDK DirectoryInsights
+        - Draft JumpCloud SDK DirectoryInsights GitHub Release
         - Build and Test JumpCloud SDK V1
+        - Draft JumpCloud SDK V1 GitHub Release
         - Build and Test JumpCloud SDK V2
+        - Draft JumpCloud SDK V2 GitHub Release
         - Commit Changes
         - Pack and Deploy To CodeArtifact
       filters:
@@ -70,11 +74,41 @@ build-sdks: &build-sdks
   - Pack and Deploy To PSGallery:
       requires:
         - Build and Test JumpCloud SDK DirectoryInsights
+        - Draft JumpCloud SDK DirectoryInsights GitHub Release
         - Build and Test JumpCloud SDK V1
+        - Draft JumpCloud SDK V1 GitHub Release
         - Build and Test JumpCloud SDK V2
+        - Draft JumpCloud SDK V2 GitHub Release
         - Commit Changes
         - Pack and Deploy To CodeArtifact
         - PSGallery Approval
+      filters:
+        branches:
+          only:
+            - master
+  - Draft JumpCloud SDK DirectoryInsights GitHub Release:
+      requires:
+        - Build and Test JumpCloud SDK DirectoryInsights
+        - Commit Changes
+      filters:
+        branches:
+          only:
+            - master
+  - Draft JumpCloud SDK V1 GitHub Release:
+      requires:
+        - Build and Test JumpCloud SDK DirectoryInsights
+        - Build and Test JumpCloud SDK V1
+        - Commit Changes
+      filters:
+        branches:
+          only:
+            - master
+  - Draft JumpCloud SDK V2 GitHub Release:
+      requires:
+        - Build and Test JumpCloud SDK DirectoryInsights
+        - Build and Test JumpCloud SDK V1
+        - Build and Test JumpCloud SDK V2
+        - Commit Changes
       filters:
         branches:
           only:
@@ -120,6 +154,12 @@ jobs:
           ManualModuleVersion: ''
           RunApiTransform: true
           TestModule: true
+  Draft JumpCloud SDK DirectoryInsights GitHub Release:
+    docker:
+      - image: cibuilds/github:0.13
+    steps:
+      - create-github-release-draft:
+          SDKName: JumpCloud.SDK.DirectoryInsights
   Build and Test JumpCloud SDK V1:
     executor: win/default
     steps:
@@ -129,6 +169,12 @@ jobs:
           ManualModuleVersion: ''
           RunApiTransform: true
           TestModule: true
+  Draft JumpCloud SDK V1 GitHub Release:
+    docker:
+      - image: cibuilds/github:0.13
+    steps:
+      - create-github-release-draft:
+          SDKName: JumpCloud.SDK.V1
   Build and Test JumpCloud SDK V2:
     executor: win/default
     steps:
@@ -138,12 +184,18 @@ jobs:
           ManualModuleVersion: ''
           RunApiTransform: true
           TestModule: true
+  Draft JumpCloud SDK V2 GitHub Release:
+    docker:
+      - image: cibuilds/github:0.13
+    steps:
+      - create-github-release-draft:
+          SDKName: JumpCloud.SDK.V2
   Commit Changes:
     executor: win/default
     steps:
       - add_ssh_keys:
           fingerprints:
-            - '14:78:b4:7b:f0:bb:3b:ef:a7:ba:06:49:87:50:79:e9'
+            - '77:04:3b:23:54:68:a8:d3:ee:63:6b:77:bb:a1:9d:c3'
       - checkout
       - commit:
           SDKName: JumpCloud.SDK.DirectoryInsights, JumpCloud.SDK.V1, JumpCloud.SDK.V2
@@ -249,6 +301,7 @@ commands:
           name: Uploading test results'
           path: "./support/PowerShell/JumpCloud Module/Tests/test_results/"
   setup:
+
     steps:
       - checkout
       - run:
@@ -314,6 +367,12 @@ commands:
           command: |
             $ErrorActionPreference = 'Stop'
             ./BuildAutoRest.ps1 -SDKName:('<< parameters.SDKName >>') -ManualModuleVersion:('<< parameters.ManualModuleVersion >>') -RunApiTransform:($<< parameters.RunApiTransform >>)
+      - run:
+          name: Creating/Updating Changelog For '<< parameters.SDKName >>''
+          shell: pwsh.exe
+          command: |
+           $ErrorActionPreference = 'Stop'
+           ./Tools/Build-SdkChangelog.ps1 -SDKName:('<< parameters.SDKName >>')
       - when:
           condition:
             equal: [true, << parameters.TestModule >>]
@@ -331,6 +390,30 @@ commands:
           root: .
           paths:
             - .
+  create-github-release-draft:
+    parameters:
+      SDKName:
+        description: Name of the SDK to generate
+        type: string
+    steps:
+      - attach_workspace:
+          at: .
+      - run:
+          name: "Draft Release GitHub"
+          command: |
+            # Module Version
+            MODULE_VERSION=$(grep -o "ModuleVersion = '\d\+\.\d\+\.\d\+'" ./SDKs/PowerShell/<< parameters.SDKName >>/<< parameters.SDKName>>.psd1)
+            VERSION=$(echo $MODULE_VERSION | grep -o "\d\+\.\d\+\.\d\+")
+            TITLE="<< parameters.SDKName >>-$VERSION"
+            # Get the changelog text between the latest release # and the next sequential "## SemanticVersionNumber"
+            CHANGELOG=$(cat ./<< parameters.SDKName >>.md | awk "/^## << parameters.SDKName >>-$VERSION/{ f = 1; next } /## << parameters.SDKName >>-[0-9]+.[0-9]+.[0-9]+/{ f = 0 } f")
+            BODY="$TITLE $CHANGELOG"
+            TAG="<< parameters.SDKName >>-$VERSION"
+            echo ${CIRCLE_PROJECT_USERNAME}
+            echo ${CIRCLE_PROJECT_REPONAME}
+            echo ${GITHUB_TOKEN}
+            # Post Draft Release
+            ghr -t ${GitHubAccessToken} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -n "$TITLE" -b "$BODY" -delete -draft "$TAG"
   commit:
     parameters:
       SDKName:
