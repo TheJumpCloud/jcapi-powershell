@@ -14,7 +14,7 @@ while(-not $mockingPath) {
 
 
 }
-Describe 'Get-JcSdkAppleMdmDevice' {
+Describe 'Get-JcSdkAppleMdmDevice' -Tag:("")){
     It 'List' {
         { Get-JcSdkAppleMdmDevice -AppleMdmId:($global:PesterTestAppleMdm.Id) } | Should -Not -Throw
     }

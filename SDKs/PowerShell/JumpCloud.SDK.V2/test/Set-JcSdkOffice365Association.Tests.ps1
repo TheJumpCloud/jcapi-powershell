@@ -14,7 +14,7 @@ while(-not $mockingPath) {
 
 
 }
-Describe 'Set-JcSdkOffice365Association' {
+Describe 'Set-JcSdkOffice365Association' -Tag:("")){
     It 'SetExpanded' {
         $ParameterType = (Get-Command Set-JcSdkOffice365Association).Parameters.Type.ParameterType.FullName
         (Get-Command Set-JcSdkOffice365Association).Parameters.Type.ParameterType.DeclaredFields.Where( { $_.IsPublic }).Name | ForEach-Object {

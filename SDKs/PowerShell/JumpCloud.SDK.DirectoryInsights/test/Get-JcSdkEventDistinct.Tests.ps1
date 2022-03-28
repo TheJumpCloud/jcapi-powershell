@@ -12,7 +12,7 @@ BeforeAll{
     }
     . ($mockingPath | Select-Object -First 1).FullName
 }
-Describe 'Get-JcSdkEventDistinct' {
+Describe 'Get-JcSdkEventDistinct' -Tag:("")){
     It 'GetExpanded' -skip {
         { Get-JcSdkEventDistinct -Service:('all') -StartTime:((Get-Date).AddHours(-24).ToUniversalTime()) -Field "admin_login_attempt" } | Should -Not -Throw
     }

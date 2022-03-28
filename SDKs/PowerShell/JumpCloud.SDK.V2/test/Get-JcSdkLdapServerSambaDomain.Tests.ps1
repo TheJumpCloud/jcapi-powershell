@@ -14,7 +14,7 @@ while(-not $mockingPath) {
 
 
 }
-Describe 'Get-JcSdkLdapServerSambaDomain' {
+Describe 'Get-JcSdkLdapServerSambaDomain' -Tag:("")){
     It 'List' -skip {
         { Get-JcSdkLdapServerSambaDomain -LdapserverId:($global:PesterTestLdapserver.Id) } | Should -Not -Throw
     }

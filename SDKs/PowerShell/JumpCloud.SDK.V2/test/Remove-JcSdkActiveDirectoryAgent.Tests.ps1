@@ -14,7 +14,7 @@ while(-not $mockingPath) {
 
 
 }
-Describe 'Remove-JcSdkActiveDirectoryAgent' {
+Describe 'Remove-JcSdkActiveDirectoryAgent' -Tag:("")){
     It 'Delete' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }

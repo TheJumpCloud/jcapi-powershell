@@ -14,7 +14,7 @@ while(-not $mockingPath) {
 
 
 }
-Describe 'Remove-JcSdkBulkUserState' {
+Describe 'Remove-JcSdkBulkUserState' -Tag:("")){
     It 'Delete' {
         # { throw [System.NotImplementedException] } | Should -Not -Throw
         # Create a new bulkuserstate user

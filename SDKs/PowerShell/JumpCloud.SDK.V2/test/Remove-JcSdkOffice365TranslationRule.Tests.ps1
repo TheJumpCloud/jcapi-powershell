@@ -14,7 +14,7 @@ while(-not $mockingPath) {
 
 
 }
-Describe 'Remove-JcSdkOffice365TranslationRule' {
+Describe 'Remove-JcSdkOffice365TranslationRule' -Tag:("")){
     It 'Delete' {
         { Remove-JcSdkOffice365TranslationRule -Id:($global:PesterTestOffice365TranslationRule.Id) -Office365Id:($global:PesterTestOffice365.Id) } | Should -Not -Throw
     }

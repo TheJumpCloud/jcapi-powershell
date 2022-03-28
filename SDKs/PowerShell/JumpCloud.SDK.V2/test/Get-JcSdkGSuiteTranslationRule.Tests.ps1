@@ -14,7 +14,7 @@ while(-not $mockingPath) {
 
 
 }
-Describe 'Get-JcSdkGSuiteTranslationRule' {
+Describe 'Get-JcSdkGSuiteTranslationRule' -Tag:("")){
     It 'List' {
         { Get-JcSdkGSuiteTranslationRule -GsuiteId:($global:PesterTestGsuite.Id) } | Should -Not -Throw
     }

@@ -17,7 +17,7 @@ if(($null -eq $TestName) -or ($TestName -contains 'Remove-JcSdkUserPushEndpoint'
 
 
 }
-Describe 'Remove-JcSdkUserPushEndpoint' {
+Describe 'Remove-JcSdkUserPushEndpoint' -Tag:("")){
     It 'Delete' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }

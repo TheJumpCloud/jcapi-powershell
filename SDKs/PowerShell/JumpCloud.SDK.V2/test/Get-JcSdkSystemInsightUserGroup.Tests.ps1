@@ -14,7 +14,7 @@ while(-not $mockingPath) {
 
 
 }
-Describe 'Get-JcSdkSystemInsightUserGroup' {
+Describe 'Get-JcSdkSystemInsightUserGroup' -Tag:("")){
     It 'List' {
         { Get-JcSdkSystemInsightUserGroup } | Should -Not -Throw
     }

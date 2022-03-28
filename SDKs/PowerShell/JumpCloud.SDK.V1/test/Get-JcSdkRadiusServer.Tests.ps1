@@ -13,7 +13,7 @@ BeforeAll {
     . ($mockingPath | Select-Object -First 1).FullName
 }
 
-Describe 'Get-JcSdkRadiusServer' {
+Describe 'Get-JcSdkRadiusServer' -Tag:("")){
     It 'List' {
         { Get-JcSdkRadiusServer } | Should -Not -Throw
     }

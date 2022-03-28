@@ -14,7 +14,7 @@ while(-not $mockingPath) {
 
 
 }
-Describe 'Sync-JcSdkAppleMdmDevice' {
+Describe 'Sync-JcSdkAppleMdmDevice' -Tag:("")){
     It 'Sync' -skip {
         { Sync-JcSdkAppleMdmDevice -AppleMdmId:($global:PesterTestAppleMdm.Id) } | Should -Not -Throw
     }

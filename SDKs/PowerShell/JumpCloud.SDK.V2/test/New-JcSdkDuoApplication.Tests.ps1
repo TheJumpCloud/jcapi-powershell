@@ -14,7 +14,7 @@ while(-not $mockingPath) {
 
 
 }
-Describe 'New-JcSdkDuoApplication' {
+Describe 'New-JcSdkDuoApplication' -Tag:("")){
     It 'CreateExpanded' -skip {
         $global:PesterTestDuoApplication = New-JcSdkDuoApplication @global:PesterDefDuoApplication
         $global:PesterTestDuoApplication | Should -Not -BeNullOrEmpty

@@ -13,7 +13,7 @@ BeforeAll {
     . ($mockingPath | Select-Object -First 1).FullName
 }
 
-Describe 'Lock-JcSdkSystem' {
+Describe 'Lock-JcSdkSystem' -Tag:("")){
     It 'Lock' -skip {
         { Lock-JcSdkSystem -SystemId:($global:PesterTestSystem.Id) } | Should -Not -Throw
     }

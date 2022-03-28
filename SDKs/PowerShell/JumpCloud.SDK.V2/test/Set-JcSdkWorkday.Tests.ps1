@@ -14,7 +14,7 @@ while(-not $mockingPath) {
 
 
 }
-Describe 'Set-JcSdkWorkday' {
+Describe 'Set-JcSdkWorkday' -Tag:("")){
     It 'SetExpanded' -skip {
         { Set-JcSdkWorkday -Id:($global:PesterTestWorkday.Id) } | Should -Not -Throw
     }

@@ -14,7 +14,7 @@ while(-not $mockingPath) {
 
 
 }
-Describe 'Get-JcSdkDirectory' {
+Describe 'Get-JcSdkDirectory' -Tag:("")){
     It 'List' {
         { Get-JcSdkDirectory } | Should -Not -Throw
     }

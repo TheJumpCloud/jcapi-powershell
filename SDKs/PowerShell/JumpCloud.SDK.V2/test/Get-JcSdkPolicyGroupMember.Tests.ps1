@@ -14,7 +14,7 @@ while(-not $mockingPath) {
 
 
 }
-Describe 'Get-JcSdkPolicyGroupMember' {
+Describe 'Get-JcSdkPolicyGroupMember' -Tag:("")){
     It 'Get' {
         { Get-JcSdkPolicyGroupMember -GroupId:($global:PesterTestPolicyGroup.Id) } | Should -Not -Throw
     }

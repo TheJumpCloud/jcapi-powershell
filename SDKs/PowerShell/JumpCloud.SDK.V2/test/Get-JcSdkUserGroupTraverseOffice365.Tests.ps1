@@ -14,7 +14,7 @@ while(-not $mockingPath) {
 
 
 }
-Describe 'Get-JcSdkUserGroupTraverseOffice365' {
+Describe 'Get-JcSdkUserGroupTraverseOffice365' -Tag:("")){
     It 'Get' {
         { Get-JcSdkUserGroupTraverseOffice365 -GroupId:($global:PesterTestUserGroup.Id) } | Should -Not -Throw
     }

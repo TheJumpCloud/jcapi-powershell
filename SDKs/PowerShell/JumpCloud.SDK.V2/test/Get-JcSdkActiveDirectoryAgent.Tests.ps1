@@ -14,7 +14,7 @@ while(-not $mockingPath) {
 
 
 }
-Describe 'Get-JcSdkActiveDirectoryAgent' {
+Describe 'Get-JcSdkActiveDirectoryAgent' -Tag:("")){
     It 'List' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }

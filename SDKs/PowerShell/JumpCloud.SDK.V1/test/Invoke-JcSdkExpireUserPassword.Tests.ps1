@@ -16,7 +16,7 @@ BeforeAll {
     }
 }
 
-Describe 'Invoke-JcSdkExpireUserPassword' {
+Describe 'Invoke-JcSdkExpireUserPassword' -Tag:("")){
     It 'Post' {
         $body = [JumpCloud.SDK.V1.Models.Systemuserput]@{
             Email = "PesterInvokeExpire-$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))@example.com";
