@@ -155,12 +155,14 @@ jobs:
   Test JumpCloud SDK DirectoryInsights:
     executor: win/default
     steps:
+      - setup
       - test-sdk:
           SDKName: JumpCloud.SDK.DirectoryInsights
           TestModule: true
   Test JumpCloud SDK V1:
     executor: win/default
     steps:
+      - setup
       - test-sdk:
           SDKName: JumpCloud.SDK.V1
           TestModule: true
@@ -168,6 +170,7 @@ jobs:
   Test JumpCloud SDK V1 MTP:
     executor: win/default
     steps:
+      - setup
       - test-mtp:
           SDKName: JumpCloud.SDK.V1
           TestModule: true
@@ -175,6 +178,7 @@ jobs:
   Test JumpCloud SDK V2:
     executor: win/default
     steps:
+      - setup
       - test-sdk:
           SDKName: JumpCloud.SDK.V2
           TestModule: true
@@ -182,6 +186,7 @@ jobs:
   Test JumpCloud SDK V2 MTP:
     executor: win/default
     steps:
+      - setup
       - test-mtp:
           SDKName: JumpCloud.SDK.V2
           TestModule: true
