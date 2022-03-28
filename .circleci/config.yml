@@ -366,7 +366,9 @@ commands:
       - persist_to_workspace:
           root: .
           paths:
-            - .
+            - ./SDKs/*
+            - ./Configs/*
+            - ./SwaggerSpecs/*
   test-sdk:
     parameters:
       SDKName:
@@ -403,7 +405,7 @@ commands:
             - persist_to_workspace:
                 root: .
                 paths:
-                  - .
+                  - ./SDKs/*
   test-mtp:
     parameters:
       SDKName:
@@ -440,7 +442,7 @@ commands:
             - persist_to_workspace:
                 root: .
                 paths:
-                  - .
+                  - ./SDKs/*
   commit:
     parameters:
       SDKName:
