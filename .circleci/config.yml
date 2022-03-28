@@ -366,9 +366,9 @@ commands:
       - persist_to_workspace:
           root: .
           paths:
-            - ./SDKs/*
-            - ./Configs/*
-            - ./SwaggerSpecs/*
+            - ./SDKs/PowerShell/<< parameters.SDKName >>/*
+            - ./Configs/<< parameters.SDKName >>.yaml
+            - ./SwaggerSpecs/<< parameters.SDKName >>.json
   test-sdk:
     parameters:
       SDKName:
@@ -405,7 +405,7 @@ commands:
             - persist_to_workspace:
                 root: .
                 paths:
-                  - ./SDKs/*
+                  - ./SDKs/PowerShell/<< parameters.SDKName >>/*
   test-mtp:
     parameters:
       SDKName:
@@ -442,7 +442,7 @@ commands:
             - persist_to_workspace:
                 root: .
                 paths:
-                  - ./SDKs/*
+                  - ./SDKs/PowerShell/<< parameters.SDKName >>/*
   commit:
     parameters:
       SDKName:
