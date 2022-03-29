@@ -166,6 +166,7 @@ jobs:
           SDKName: JumpCloud.SDK.V1
           TestModule: true
           IncludeTagList: '*'
+          ExcludeTagList: 'MTP'
   Test JumpCloud SDK V1 MTP:
     executor: win/default
     steps:
@@ -182,6 +183,7 @@ jobs:
           SDKName: JumpCloud.SDK.V2
           TestModule: true
           IncludeTagList: '*'
+          ExcludeTagList: 'MTP'
   Test JumpCloud SDK V2 MTP:
     executor: win/default
     steps:
