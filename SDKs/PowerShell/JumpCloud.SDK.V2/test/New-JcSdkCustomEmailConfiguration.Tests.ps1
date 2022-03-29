@@ -14,7 +14,7 @@ while(-not $mockingPath) {
 
 
 }
-Describe 'New-JcSdkCustomEmailConfiguration' {
+Describe 'New-JcSdkCustomEmailConfiguration' -Tag:(""){
     It 'CreateExpanded' {
         $global:PesterTestCustomEmailConfiguration = New-JcSdkCustomEmailConfiguration @global:PesterDefCustomEmailConfiguration
         $global:PesterTestCustomEmailConfiguration | Should -Not -BeNullOrEmpty

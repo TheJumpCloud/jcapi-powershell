@@ -14,7 +14,7 @@ while(-not $mockingPath) {
 
 
 }
-Describe 'Remove-JcSdkCustomEmailConfiguration' {
+Describe 'Remove-JcSdkCustomEmailConfiguration' -Tag:(""){
     It 'Delete' {
         { Remove-JcSdkCustomEmailConfiguration -CustomEmailType:($global:PesterTestCustomEmailConfiguration.Type) } | Should -Not -Throw
     }

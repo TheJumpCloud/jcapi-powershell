@@ -14,7 +14,7 @@ while(-not $mockingPath) {
 
 
 }
-Describe 'Remove-JcSdkSoftwareApp' {
+Describe 'Remove-JcSdkSoftwareApp' -Tag:(""){
     It 'Delete' {
         { Remove-JcSdkSoftwareApp -Id:($global:PesterTestSoftwareApp.Id) } | Should -Not -Throw
     }

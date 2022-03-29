@@ -14,7 +14,7 @@ while(-not $mockingPath) {
 
 
 }
-Describe 'Get-JcSdkBulkUserState' {
+Describe 'Get-JcSdkBulkUserState' -Tag:(""){
     It 'List' {
         # Create a new bulkuserstate user
         $username = "PesterTestBulkUserState-$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"

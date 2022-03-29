@@ -14,7 +14,7 @@ while(-not $mockingPath) {
 
 
 }
-Describe 'Lock-JcSdkAppleMdmDevice' {
+Describe 'Lock-JcSdkAppleMdmDevice' -Tag:(""){
     It 'LockExpanded' -skip {
         { Lock-JcSdkAppleMdmDevice -AppleMdmId:($global:PesterTestAppleMdm.Id) -DeviceId '<String>' -Pin '<String>' } | Should -Not -Throw
     }

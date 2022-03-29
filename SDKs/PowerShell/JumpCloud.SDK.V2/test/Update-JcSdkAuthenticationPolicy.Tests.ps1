@@ -14,7 +14,7 @@ while(-not $mockingPath) {
 
 
 }
-Describe 'Update-JcSdkAuthenticationPolicy' {
+Describe 'Update-JcSdkAuthenticationPolicy' -Tag:(""){
     It 'update' -skip {
         { Update-JcSdkAuthenticationPolicy -body:($global:PesterDefApplicationd) } | Should -Not -Throw
     }

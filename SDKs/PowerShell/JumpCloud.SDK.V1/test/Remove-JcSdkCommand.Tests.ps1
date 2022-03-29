@@ -13,7 +13,7 @@ BeforeAll {
     . ($mockingPath | Select-Object -First 1).FullName
 }
 
-Describe 'Remove-JcSdkCommand' {
+Describe 'Remove-JcSdkCommand' -Tag:(""){
     It 'Delete a single command' {
         { Remove-JcSdkCommand -Id:($global:PesterTestCommand.Id) } | Should -Not -Throw
     }

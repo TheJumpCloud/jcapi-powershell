@@ -14,7 +14,7 @@ while(-not $mockingPath) {
 
 
 }
-Describe 'Get-JcSdkCustomEmailTemplate' {
+Describe 'Get-JcSdkCustomEmailTemplate' -Tag:(""){
     It 'List' {
         { Get-JcSdkCustomEmailTemplate } | Should -Not -Throw
     }

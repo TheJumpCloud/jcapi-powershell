@@ -14,7 +14,7 @@ while(-not $mockingPath) {
 
 
 }
-Describe 'Update-JcSdkAppleMdmDeviceLockInformation' {
+Describe 'Update-JcSdkAppleMdmDeviceLockInformation' -Tag:(""){
     It 'Refresh' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }

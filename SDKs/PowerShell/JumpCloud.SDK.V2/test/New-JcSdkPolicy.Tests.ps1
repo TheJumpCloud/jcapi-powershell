@@ -14,7 +14,7 @@ while(-not $mockingPath) {
 
 
 }
-Describe 'New-JcSdkPolicy' {
+Describe 'New-JcSdkPolicy' -Tag:(""){
     It 'CreateExpanded' {
         $global:PesterTestPolicy = New-JcSdkPolicy @global:PesterDefPolicy
         $global:PesterTestPolicy | Should -Not -BeNullOrEmpty

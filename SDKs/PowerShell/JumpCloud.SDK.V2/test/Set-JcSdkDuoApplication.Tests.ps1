@@ -14,7 +14,7 @@ while(-not $mockingPath) {
 
 
 }
-Describe 'Set-JcSdkDuoApplication' {
+Describe 'Set-JcSdkDuoApplication' -Tag:(""){
     It 'SetExpanded' -skip {
         { Set-JcSdkDuoApplication -AccountId '<String>' -ApiHost '<String>' -ApplicationId:($global:PesterTestApplication.Id) -IntegrationKey '<String>' -Name:($global:PesterTestDuoApplication.Name) } | Should -Not -Throw
     }

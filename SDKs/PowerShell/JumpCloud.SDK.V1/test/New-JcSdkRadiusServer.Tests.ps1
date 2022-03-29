@@ -13,7 +13,7 @@ BeforeAll {
     . ($mockingPath | Select-Object -First 1).FullName
 }
 
-Describe 'New-JcSdkRadiusServer' {
+Describe 'New-JcSdkRadiusServer' -Tag:(""){
     It 'CreateExpanded' {
         $global:PesterTestRadiusServer = New-JcSdkRadiusServer @global:PesterDefRadiusServer
         $global:PesterTestRadiusServer | Should -Not -BeNullOrEmpty

@@ -14,7 +14,7 @@ while(-not $mockingPath) {
 
 
 }
-Describe 'Remove-JcSdkApplicationLogo' {
+Describe 'Remove-JcSdkApplicationLogo' -Tag:(""){
     It 'Delete' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }

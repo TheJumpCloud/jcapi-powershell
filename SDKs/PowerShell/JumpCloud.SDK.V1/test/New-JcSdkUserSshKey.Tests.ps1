@@ -13,7 +13,7 @@ BeforeAll {
     . ($mockingPath | Select-Object -First 1).FullName
 }
 
-Describe 'New-JcSdkUserSshKey' {
+Describe 'New-JcSdkUserSshKey' -Tag:(""){
     It 'CreateExpanded' {
         $global:PesterDefUserSshKey.Id = $global:PesterTestUser.Id
         $global:PesterTestUserSshKey = New-JcSdkUserSshKey @global:PesterDefUserSshKey

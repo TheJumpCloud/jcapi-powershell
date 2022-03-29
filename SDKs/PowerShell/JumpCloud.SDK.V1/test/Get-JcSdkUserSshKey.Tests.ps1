@@ -13,7 +13,7 @@ BeforeAll {
     . ($mockingPath | Select-Object -First 1).FullName
 }
 
-Describe 'Get-JcSdkUserSshKey' {
+Describe 'Get-JcSdkUserSshKey' -Tag:(""){
     It 'Get' {
         { Get-JcSdkUserSshKey -Id:($global:PesterTestUser.Id) } | Should -Not -Throw
     }

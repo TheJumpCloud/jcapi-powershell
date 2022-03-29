@@ -13,7 +13,7 @@ BeforeAll {
     . ($mockingPath | Select-Object -First 1).FullName
 }
 
-Describe 'Set-JcSdkRadiusServer' {
+Describe 'Set-JcSdkRadiusServer' -Tag:(""){
     It 'SetExpanded' -skip {
         { Set-JcSdkRadiusServer -Id:($global:PesterTestRadiusServer.Id) -Name:($global:PesterTestRadiusServer.Name) -NetworkSourceIP '<String>' -SharedSecret '<String>' } | Should -Not -Throw
     }

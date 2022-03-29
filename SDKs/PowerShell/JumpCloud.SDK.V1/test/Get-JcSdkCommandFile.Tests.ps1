@@ -13,7 +13,7 @@ BeforeAll {
     . ($mockingPath | Select-Object -First 1).FullName
 }
 
-Describe 'Get-JcSdkCommandFile' {
+Describe 'Get-JcSdkCommandFile' -Tag:(""){
     It 'Get' {
         $newCommand = New-JcSdkCommand @global:PesterDefCommand
         $testCommandFile = Get-JcSdkCommand | Where-Object { $_.Name -eq $NewCommand.Name } | Select-Object -First 1

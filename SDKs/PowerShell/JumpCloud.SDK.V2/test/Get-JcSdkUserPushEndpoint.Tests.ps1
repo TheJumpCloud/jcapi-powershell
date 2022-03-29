@@ -17,7 +17,7 @@ if(($null -eq $TestName) -or ($TestName -contains 'Get-JcSdkUserPushEndpoint'))
 
 
 }
-Describe 'Get-JcSdkUserPushEndpoint' {
+Describe 'Get-JcSdkUserPushEndpoint' -Tag:(""){
     It 'List' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }

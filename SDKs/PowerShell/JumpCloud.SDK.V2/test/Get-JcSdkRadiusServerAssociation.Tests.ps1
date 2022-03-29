@@ -14,7 +14,7 @@ while(-not $mockingPath) {
 
 
 }
-Describe 'Get-JcSdkRadiusServerAssociation' {
+Describe 'Get-JcSdkRadiusServerAssociation' -Tag:(""){
     It 'Get' {
         { Get-JcSdkRadiusServerAssociation -RadiusserverId:($global:PesterTestRadiusserver.Id) -Targets:('user') } | Should -Not -Throw
     }

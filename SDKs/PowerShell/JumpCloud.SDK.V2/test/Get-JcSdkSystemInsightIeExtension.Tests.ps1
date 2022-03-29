@@ -14,7 +14,7 @@ while(-not $mockingPath) {
 
 
 }
-Describe 'Get-JcSdkSystemInsightIeExtension' {
+Describe 'Get-JcSdkSystemInsightIeExtension' -Tag:(""){
     It 'List' {
         { Get-JcSdkSystemInsightIeExtension } | Should -Not -Throw
     }

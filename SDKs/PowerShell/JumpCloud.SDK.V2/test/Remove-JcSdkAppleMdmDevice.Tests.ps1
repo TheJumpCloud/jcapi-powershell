@@ -17,7 +17,7 @@ if(($null -eq $TestName) -or ($TestName -contains 'Remove-JcSdkAppleMdmDevice'))
 
 
 }
-Describe 'Remove-JcSdkAppleMdmDevice' {
+Describe 'Remove-JcSdkAppleMdmDevice' -Tag:(""){
     It 'Delete' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
