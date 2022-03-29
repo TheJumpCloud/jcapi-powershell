@@ -12,7 +12,7 @@ BeforeAll {
     }
     . ($mockingPath | Select-Object -First 1).FullName
 }
-Describe 'Get-JcSdkEventInterval' -Tag:("")){
+Describe 'Get-JcSdkEventInterval' {
     # TODO: endpoint never returns data
     It 'GetExpanded' -skip {
         { Get-JcSdkEventInterval -IntervalUnit '<String>' -Service:('all') -StartTime:((Get-Date).AddHours(-24).ToUniversalTime()) } | Should -Not -Throw

@@ -17,7 +17,7 @@ if(($null -eq $TestName) -or ($TestName -contains 'Update-JcSdkUserPushEndpoint'
 
 
 }
-Describe 'Update-JcSdkUserPushEndpoint' -Tag:("")){
+Describe 'Update-JcSdkUserPushEndpoint' {
     It 'UpdateExpanded' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }

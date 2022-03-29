@@ -14,7 +14,7 @@ while(-not $mockingPath) {
 
 
 }
-Describe 'Clear-JcSdkAppleMdmDeviceActivationLock' -Tag:("")){
+Describe 'Clear-JcSdkAppleMdmDeviceActivationLock' {
     It 'Clear' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }

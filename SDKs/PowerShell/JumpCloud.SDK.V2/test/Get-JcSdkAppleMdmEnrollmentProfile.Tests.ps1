@@ -14,7 +14,7 @@ while(-not $mockingPath) {
 
 
 }
-Describe 'Get-JcSdkAppleMdmEnrollmentProfile' -Tag:("")){
+Describe 'Get-JcSdkAppleMdmEnrollmentProfile' {
     It 'List' -skip {
         { Get-JcSdkAppleMdmEnrollmentProfile -AppleMdmId:($global:PesterTestAppleMdm.Id) } | Should -Not -Throw
     }

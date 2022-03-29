@@ -14,7 +14,7 @@ while(-not $mockingPath) {
 
 
 }
-Describe 'Remove-JcSdkWorkdayAuthorization' -Tag:("")){
+Describe 'Remove-JcSdkWorkdayAuthorization' {
     It 'Delete' -skip {
         { Remove-JcSdkWorkdayAuthorization -WorkdayId '<String>' } | Should -Not -Throw
     }

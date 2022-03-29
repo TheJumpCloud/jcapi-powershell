@@ -14,7 +14,7 @@ while(-not $mockingPath) {
 
 
 }
-Describe 'Set-JcSdkSystemAssociation' -Tag:("")){
+Describe 'Set-JcSdkSystemAssociation' {
     # TODO: Update for PolicyGroups
     #It 'SetExpanded' {
     #    $ParameterType = (Get-Command Set-JcSdkSystemAssociation).Parameters.Type.ParameterType.FullName

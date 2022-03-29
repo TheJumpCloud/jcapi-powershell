@@ -14,7 +14,7 @@ while(-not $mockingPath) {
 
 
 }
-Describe 'Remove-JcSdkLdapServerSambaDomain' -Tag:("")){
+Describe 'Remove-JcSdkLdapServerSambaDomain' {
     It 'Delete' -skip {
         { Remove-JcSdkLdapServerSambaDomain -Id:($global:PesterTestLdapServerSambaDomain.Id) -LdapserverId:($global:PesterTestLdapserver.Id) } | Should -Not -Throw
     }

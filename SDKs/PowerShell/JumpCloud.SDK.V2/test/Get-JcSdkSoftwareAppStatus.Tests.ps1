@@ -14,7 +14,7 @@ while(-not $mockingPath) {
 
 
 }
-Describe 'Get-JcSdkSoftwareAppStatus' -Tag:("")){
+Describe 'Get-JcSdkSoftwareAppStatus' {
     It 'Get' {
         { Get-JcSdkSoftwareAppStatus -SoftwareAppId:($global:PesterTestSoftwareApp.Id) } | Should -Not -Throw
     }

@@ -14,7 +14,7 @@ while(-not $mockingPath) {
 
 
 }
-Describe 'Restart-JcSdkAppleMdmDevice' -Tag:("")){
+Describe 'Restart-JcSdkAppleMdmDevice' {
     It 'Restart' -skip {
         { Restart-JcSdkAppleMdmDevice -AppleMdmId:($global:PesterTestAppleMdm.Id) -DeviceId '<String>' } | Should -Not -Throw
     }

@@ -14,7 +14,7 @@ while(-not $mockingPath) {
 
 
 }
-Describe 'New-JcSdkActiveDirectory' -Tag:("")){
+Describe 'New-JcSdkActiveDirectory' {
     It 'CreateExpanded' {
         $global:PesterTestActiveDirectory = New-JcSdkActiveDirectory @global:PesterDefActiveDirectory
         $global:PesterTestActiveDirectory | Should -Not -BeNullOrEmpty

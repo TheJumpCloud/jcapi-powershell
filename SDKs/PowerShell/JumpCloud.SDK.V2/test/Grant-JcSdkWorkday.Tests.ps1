@@ -14,7 +14,7 @@ while(-not $mockingPath) {
 
 
 }
-Describe 'Grant-JcSdkWorkday' -Tag:("")){
+Describe 'Grant-JcSdkWorkday' {
     It 'AuthorizeExpanded' -skip {
         { Grant-JcSdkWorkday -WorkdayId '<String>' [-BasicPassword '<String>'] [-BasicUsername '<String>'] [-OauthCode '<String>'] } | Should -Not -Throw
     }

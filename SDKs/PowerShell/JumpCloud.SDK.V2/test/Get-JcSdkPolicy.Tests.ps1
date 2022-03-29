@@ -14,7 +14,7 @@ while(-not $mockingPath) {
 
 
 }
-Describe 'Get-JcSdkPolicy' -Tag:("")){
+Describe 'Get-JcSdkPolicy' {
     It 'List' {
         { Get-JcSdkPolicy } | Should -Not -Throw
     }

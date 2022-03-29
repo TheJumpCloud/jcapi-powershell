@@ -14,7 +14,7 @@ while(-not $mockingPath) {
 
 
 }
-Describe 'Set-JcSdkLdapServerSambaDomain' -Tag:("")){
+Describe 'Set-JcSdkLdapServerSambaDomain' {
     It 'SetExpanded' -skip {
         { Set-JcSdkLdapServerSambaDomain -Id:($global:PesterTestLdapServerSambaDomain.Id) -LdapserverId:($global:PesterTestLdapserver.Id) -Name:($global:PesterTestLdapServerSambaDomain.Name) -Sid '<String>' } | Should -Not -Throw
     }

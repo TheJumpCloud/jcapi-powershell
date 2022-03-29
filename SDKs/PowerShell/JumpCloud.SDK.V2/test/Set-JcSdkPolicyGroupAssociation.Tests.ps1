@@ -14,7 +14,7 @@ while(-not $mockingPath) {
 
 
 }
-Describe 'Set-JcSdkPolicyGroupAssociation' -Tag:("")){
+Describe 'Set-JcSdkPolicyGroupAssociation' {
     It 'SetExpanded' -skip {
         $ParameterType = (Get-Command Set-JcSdkPolicyGroupAssociation).Parameters.Type.ParameterType.FullName
         (Get-Command Set-JcSdkPolicyGroupAssociation).Parameters.Type.ParameterType.DeclaredFields.Where( { $_.IsPublic }).Name | ForEach-Object {

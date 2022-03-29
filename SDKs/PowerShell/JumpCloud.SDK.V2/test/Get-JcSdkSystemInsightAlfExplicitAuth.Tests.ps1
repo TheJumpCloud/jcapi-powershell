@@ -14,7 +14,7 @@ while(-not $mockingPath) {
 
 
 }
-Describe 'Get-JcSdkSystemInsightAlfExplicitAuth' -Tag:("")){
+Describe 'Get-JcSdkSystemInsightAlfExplicitAuth' {
     It 'List' {
         { Get-JcSdkSystemInsightAlfExplicitAuth } | Should -Not -Throw
     }

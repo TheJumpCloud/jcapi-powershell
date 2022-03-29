@@ -13,7 +13,7 @@ BeforeAll {
     . ($mockingPath | Select-Object -First 1).FullName
 }
 
-Describe 'Set-JcSdkUser' -Tag:("")){
+Describe 'Set-JcSdkUser' {
     It 'SetExpanded' -skip {
         { Set-JcSdkUser -Id:($global:PesterTestUser.Id) } | Should -Not -Throw
     }

@@ -13,7 +13,7 @@ BeforeAll {
     . ($mockingPath | Select-Object -First 1).FullName
 }
 
-Describe 'Search-JcSdkUser' -Tag:("")){
+Describe 'Search-JcSdkUser' {
     It 'SearchExpanded' -skip {
         { Search-JcSdkUser [-Fields1 '<String>'] [-Filter1 '<Hashtable>'] [-SearchFilter '<Hashtable>'] } | Should -Not -Throw
     }

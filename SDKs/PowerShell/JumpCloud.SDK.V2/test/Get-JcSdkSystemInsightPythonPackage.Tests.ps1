@@ -14,7 +14,7 @@ while(-not $mockingPath) {
 
 
 }
-Describe 'Get-JcSdkSystemInsightPythonPackage' -Tag:("")){
+Describe 'Get-JcSdkSystemInsightPythonPackage' {
     It 'List' {
         { Get-JcSdkSystemInsightPythonPackage } | Should -Not -Throw
     }

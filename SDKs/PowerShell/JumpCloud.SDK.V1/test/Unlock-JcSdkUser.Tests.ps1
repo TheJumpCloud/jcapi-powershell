@@ -16,7 +16,7 @@ BeforeAll {
     }
 }
 
-Describe 'Unlock-JcSdkUser' -Tag:("")){
+Describe 'Unlock-JcSdkUser' {
     It 'Unlock' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }

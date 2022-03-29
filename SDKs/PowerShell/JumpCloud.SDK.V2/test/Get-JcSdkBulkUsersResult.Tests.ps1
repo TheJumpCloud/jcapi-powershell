@@ -14,7 +14,7 @@ while(-not $mockingPath) {
 
 
 }
-Describe 'Get-JcSdkBulkUsersResult' -Tag:("")){
+Describe 'Get-JcSdkBulkUsersResult' {
     It 'Get' {
         # Create a new users from bulk import
         $Body = @(

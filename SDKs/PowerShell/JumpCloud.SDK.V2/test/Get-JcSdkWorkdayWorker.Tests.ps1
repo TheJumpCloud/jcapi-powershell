@@ -14,7 +14,7 @@ while(-not $mockingPath) {
 
 
 }
-Describe 'Get-JcSdkWorkdayWorker' -Tag:("")){
+Describe 'Get-JcSdkWorkdayWorker' {
     It 'Get' -skip {
         { Get-JcSdkWorkdayWorker -WorkdayId '<String>' } | Should -Not -Throw
     }

@@ -14,7 +14,7 @@ while(-not $mockingPath) {
 
 
 }
-Describe 'Remove-JcSdkIPList' -Tag:("")){
+Describe 'Remove-JcSdkIPList' {
     It 'Delete' {
         { Remove-JcSdkIPList -Id:($global:PesterTestIPList.Id) } | Should -Not -Throw
     }

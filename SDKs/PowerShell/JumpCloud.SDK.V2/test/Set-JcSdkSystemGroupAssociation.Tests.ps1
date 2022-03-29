@@ -14,7 +14,7 @@ while(-not $mockingPath) {
 
 
 }
-Describe 'Set-JcSdkSystemGroupAssociation' -Tag:("")){
+Describe 'Set-JcSdkSystemGroupAssociation' {
     
     # TODO: Update for PolicyGroups
     #It 'SetExpanded' {

@@ -14,7 +14,7 @@ while(-not $mockingPath) {
 
 
 }
-Describe 'New-JcSdkIPList' -Tag:("")){
+Describe 'New-JcSdkIPList' {
     It 'CreateExpanded' {
         $global:PesterTestIPList = New-JcSdkIPList @global:PesterDefIPList
         $global:PesterTestIPList | Should -Not -BeNullOrEmpty

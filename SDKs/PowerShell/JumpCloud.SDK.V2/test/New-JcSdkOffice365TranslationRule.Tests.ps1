@@ -14,7 +14,7 @@ while(-not $mockingPath) {
 
 
 }
-Describe 'New-JcSdkOffice365TranslationRule' -Tag:("")){
+Describe 'New-JcSdkOffice365TranslationRule' {
     It 'CreateExpanded' {
         $global:PesterTestOffice365TranslationRule = New-JcSdkOffice365TranslationRule @global:PesterDefOffice365TranslationRule
         $global:PesterTestOffice365TranslationRule | Should -Not -BeNullOrEmpty

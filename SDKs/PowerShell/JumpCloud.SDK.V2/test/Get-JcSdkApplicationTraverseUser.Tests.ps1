@@ -14,7 +14,7 @@ while(-not $mockingPath) {
 
 
 }
-Describe 'Get-JcSdkApplicationTraverseUser' -Tag:("")){
+Describe 'Get-JcSdkApplicationTraverseUser' {
     It 'Get' {
         { Get-JcSdkApplicationTraverseUser -ApplicationId:($global:PesterTestApplication.Id) } | Should -Not -Throw
     }

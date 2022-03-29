@@ -14,7 +14,7 @@ while(-not $mockingPath) {
 
 
 }
-Describe 'Update-JcSdkBulkUser' -Tag:("")){
+Describe 'Update-JcSdkBulkUser' {
     It 'Update' -skip {
         { Update-JcSdkBulkUser -Body:($global:PesterDefUpdateBulkUser) } | Should -Not -Throw
     }

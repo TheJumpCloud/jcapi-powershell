@@ -12,7 +12,7 @@ BeforeAll{
     }
     . ($mockingPath | Select-Object -First 1).FullName
 }
-Describe 'Get-JcSdkEvent' -Tag:("" ){
+Describe 'Get-JcSdkEvent' {
     It 'GetExpanded' {
         { Get-JcSdkEvent -Service:('all') -StartTime:((Get-Date).AddHours(-24).ToUniversalTime()) } | Should -Not -Throw
     }

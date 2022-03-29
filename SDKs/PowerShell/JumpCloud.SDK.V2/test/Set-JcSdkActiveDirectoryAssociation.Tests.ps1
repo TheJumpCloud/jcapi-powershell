@@ -14,7 +14,7 @@ while(-not $mockingPath) {
 
 
 }
-Describe 'Set-JcSdkActiveDirectoryAssociation' -Tag:("")){
+Describe 'Set-JcSdkActiveDirectoryAssociation' {
     It 'SetExpanded' {
         $ParameterType = (Get-Command Set-JcSdkActiveDirectoryAssociation).Parameters.Type.ParameterType.FullName
         (Get-Command Set-JcSdkActiveDirectoryAssociation).Parameters.Type.ParameterType.DeclaredFields.Where( { $_.IsPublic }).Name | ForEach-Object {

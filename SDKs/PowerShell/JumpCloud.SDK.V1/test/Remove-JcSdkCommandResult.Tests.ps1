@@ -13,7 +13,7 @@ BeforeAll {
     . ($mockingPath | Select-Object -First 1).FullName
 }
 
-Describe 'Remove-JcSdkCommandResult' -Tag:("")){
+Describe 'Remove-JcSdkCommandResult' {
     It 'Delete' {
         { Get-JcSdkCommandResult | Where-Object { $_.Name -eq $global:PesterDefCommandName } | ForEach-Object { Remove-JcSdkCommandResult -Id $_.Id } } | Should -Not -Throw
     }

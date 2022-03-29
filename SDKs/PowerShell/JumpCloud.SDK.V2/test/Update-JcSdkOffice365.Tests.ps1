@@ -14,7 +14,7 @@ while(-not $mockingPath) {
 
 
 }
-Describe 'Update-JcSdkOffice365' -Tag:("")){
+Describe 'Update-JcSdkOffice365' {
     It 'UpdateExpanded' -skip {
         { Update-JcSdkOffice365 -Office365Id:($global:PesterTestOffice365.Id) [-Name '<String>'] [-UserLockoutAction '<String>'] [-UserPasswordExpirationAction '<String>'] } | Should -Not -Throw
     }

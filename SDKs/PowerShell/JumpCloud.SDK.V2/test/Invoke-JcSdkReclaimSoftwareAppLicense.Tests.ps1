@@ -14,7 +14,7 @@ while(-not $mockingPath) {
 
 
 }
-Describe 'Invoke-JcSdkReclaimSoftwareAppLicense' -Tag:("")){
+Describe 'Invoke-JcSdkReclaimSoftwareAppLicense' {
     It 'Reclaim' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }

@@ -14,7 +14,7 @@ while(-not $mockingPath) {
 
 
 }
-Describe 'New-JcSdkActiveDirectoryAgent' -Tag:("")){
+Describe 'New-JcSdkActiveDirectoryAgent' {
     It 'CreateExpanded' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }

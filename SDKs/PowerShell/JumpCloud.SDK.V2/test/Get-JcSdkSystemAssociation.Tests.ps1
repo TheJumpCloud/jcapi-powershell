@@ -14,7 +14,7 @@ while(-not $mockingPath) {
 
 
 }
-Describe 'Get-JcSdkSystemAssociation' -Tag:("")){
+Describe 'Get-JcSdkSystemAssociation' {
     It 'Get' {
         { Get-JcSdkSystemAssociation -SystemId:($global:PesterTestSystem.Id) -Targets:('user') } | Should -Not -Throw
     }

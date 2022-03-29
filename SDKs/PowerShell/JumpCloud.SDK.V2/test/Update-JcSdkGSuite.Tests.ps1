@@ -14,7 +14,7 @@ while(-not $mockingPath) {
 
 
 }
-Describe 'Update-JcSdkGSuite' -Tag:("")){
+Describe 'Update-JcSdkGSuite' {
     It 'UpdateExpanded' -skip {
         { Update-JcSdkGSuite -Id:($global:PesterTestGSuite.Id) [-GroupsEnabled] [-Name '<String>'] [-UserLockoutAction '<String>'] [-UserPasswordExpirationAction '<String>'] } | Should -Not -Throw
     }

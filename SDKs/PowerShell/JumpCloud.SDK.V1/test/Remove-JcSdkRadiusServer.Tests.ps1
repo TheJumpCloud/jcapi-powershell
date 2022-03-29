@@ -13,7 +13,7 @@ BeforeAll {
     . ($mockingPath | Select-Object -First 1).FullName
 }
 
-Describe 'Remove-JcSdkRadiusServer' -Tag:("")){
+Describe 'Remove-JcSdkRadiusServer' {
     It 'Delete' {
         { Remove-JcSdkRadiusServer -Id:($global:PesterTestRadiusServer.Id) } | Should -Not -Throw
     }

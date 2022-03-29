@@ -14,7 +14,7 @@ while(-not $mockingPath) {
 
 
 }
-Describe 'Remove-JcSdkActivedirectory' -Tag:("")){
+Describe 'Remove-JcSdkActivedirectory' {
     It 'Delete' {
         { Remove-JcSdkActivedirectory -Id:($global:PesterTestActivedirectory.Id) } | Should -Not -Throw
     }

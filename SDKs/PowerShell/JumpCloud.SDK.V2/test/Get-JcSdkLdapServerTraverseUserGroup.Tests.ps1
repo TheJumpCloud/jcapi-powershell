@@ -14,7 +14,7 @@ while(-not $mockingPath) {
 
 
 }
-Describe 'Get-JcSdkLdapServerTraverseUserGroup' -Tag:("")){
+Describe 'Get-JcSdkLdapServerTraverseUserGroup' {
     It 'Get' {
         { Get-JcSdkLdapServerTraverseUserGroup -LdapserverId:($global:PesterTestLdapserver.Id) } | Should -Not -Throw
     }

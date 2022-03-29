@@ -14,7 +14,7 @@ while(-not $mockingPath) {
 
 
 }
-Describe 'Get-JcSdkNextScheduledBulkUserState' -Tag:("")){
+Describe 'Get-JcSdkNextScheduledBulkUserState' {
     It 'Get' {
         # { throw [System.NotImplementedException] } | Should -Not -Throw
         # Create a new bulkuserstate user

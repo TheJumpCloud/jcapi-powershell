@@ -13,7 +13,7 @@ BeforeAll {
     . ($mockingPath | Select-Object -First 1).FullName
 }
 
-Describe 'Restart-JcSdkSystem' -Tag:("")){
+Describe 'Restart-JcSdkSystem' {
     It 'Restart' -skip {
         { Restart-JcSdkSystem -SystemId:($global:PesterTestSystem.Id) } | Should -Not -Throw
     }

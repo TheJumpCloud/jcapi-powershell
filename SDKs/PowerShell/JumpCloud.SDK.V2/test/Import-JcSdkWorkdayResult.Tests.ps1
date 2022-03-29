@@ -14,7 +14,7 @@ while(-not $mockingPath) {
 
 
 }
-Describe 'Import-JcSdkWorkdayResult' -Tag:("")){
+Describe 'Import-JcSdkWorkdayResult' {
     It 'Import' -skip {
         { Import-JcSdkWorkdayResult -Id:($global:PesterTestWorkdayResult.Id) -JobId '<String>' } | Should -Not -Throw
     }

@@ -13,7 +13,7 @@ BeforeAll {
     . ($mockingPath | Select-Object -First 1).FullName
 }
 
-Describe 'Get-JcSdkSystem' -Tag:("")){
+Describe 'Get-JcSdkSystem' {
     It 'List' {
         { Get-JcSdkSystem } | Should -Not -Throw
     }

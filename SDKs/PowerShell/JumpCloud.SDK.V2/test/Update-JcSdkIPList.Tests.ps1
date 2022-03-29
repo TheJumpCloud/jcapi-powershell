@@ -14,7 +14,7 @@ while(-not $mockingPath) {
 
 
 }
-Describe 'Update-JcSdkIPList' -Tag:("")){
+Describe 'Update-JcSdkIPList' {
     It 'UpdateExpanded' -skip {
         { Update-JcSdkIPList -Id:($global:PesterTestIPList.Id) [-Description '<String>'] [-Ips '<String[]>'] [-Name '<String>'] } | Should -Not -Throw
     }

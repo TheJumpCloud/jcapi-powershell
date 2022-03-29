@@ -14,7 +14,7 @@ while(-not $mockingPath) {
 
 
 }
-Describe 'Get-JcSdkSystemInsightKernelInfo' -Tag:("")){
+Describe 'Get-JcSdkSystemInsightKernelInfo' {
     It 'List' {
         { Get-JcSdkSystemInsightKernelInfo } | Should -Not -Throw
     }

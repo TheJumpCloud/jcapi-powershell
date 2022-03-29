@@ -14,7 +14,7 @@ while(-not $mockingPath) {
 
 
 }
-Describe 'Get-JcSdkLdapServerAssociation' -Tag:("")){
+Describe 'Get-JcSdkLdapServerAssociation' {
     It 'Get' {
         { Get-JcSdkLdapServerAssociation -LdapserverId:($global:PesterTestLdapserver.Id) -Targets:('user') } | Should -Not -Throw
     }

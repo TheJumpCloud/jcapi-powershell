@@ -14,7 +14,7 @@ while(-not $mockingPath) {
 
 
 }
-Describe 'Set-JcSdkRadiusServerAssociation' -Tag:("")){
+Describe 'Set-JcSdkRadiusServerAssociation' {
     It 'SetExpanded' {
         $ParameterType = (Get-Command Set-JcSdkRadiusServerAssociation).Parameters.Type.ParameterType.FullName
         (Get-Command Set-JcSdkRadiusServerAssociation).Parameters.Type.ParameterType.DeclaredFields.Where( { $_.IsPublic }).Name | ForEach-Object {

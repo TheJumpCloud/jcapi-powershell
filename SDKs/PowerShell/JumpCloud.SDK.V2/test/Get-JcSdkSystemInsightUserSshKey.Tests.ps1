@@ -14,7 +14,7 @@ while(-not $mockingPath) {
 
 
 }
-Describe 'Get-JcSdkSystemInsightUserSshKey' -Tag:("")){
+Describe 'Get-JcSdkSystemInsightUserSshKey' {
     It 'List' {
         { Get-JcSdkSystemInsightUserSshKey } | Should -Not -Throw
     }

@@ -16,7 +16,7 @@ BeforeAll {
     }
 }
 
-Describe 'Reset-JcSdkUserMfa' -Tag:("")){
+Describe 'Reset-JcSdkUserMfa' {
     It 'ResetExpanded' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }

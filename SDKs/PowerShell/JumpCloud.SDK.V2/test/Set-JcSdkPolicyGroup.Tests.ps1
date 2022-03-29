@@ -14,7 +14,7 @@ while(-not $mockingPath) {
 
 
 }
-Describe 'Set-JcSdkPolicyGroup' -Tag:("")){
+Describe 'Set-JcSdkPolicyGroup' {
     It 'SetExpanded' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }

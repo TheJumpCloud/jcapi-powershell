@@ -14,7 +14,7 @@ while(-not $mockingPath) {
 
 
 }
-Describe 'New-JcSdkUserGroup' -Tag:("")){
+Describe 'New-JcSdkUserGroup' {
     It 'CreateExpanded' {
         $global:PesterTestUserGroup = New-JcSdkUserGroup @global:PesterDefUserGroup
         $global:PesterTestUserGroup | Should -Not -BeNullOrEmpty

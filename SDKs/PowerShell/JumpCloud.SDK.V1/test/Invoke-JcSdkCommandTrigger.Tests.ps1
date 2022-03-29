@@ -13,7 +13,7 @@ BeforeAll {
     . ($mockingPath | Select-Object -First 1).FullName
 }
 
-Describe 'Invoke-JcSdkCommandTrigger' -Tag:("")){
+Describe 'Invoke-JcSdkCommandTrigger' {
     It 'Post' {
         { Invoke-JcSdkCommandTrigger -Triggername:($global:PesterTestCommand.trigger) } | Should -Not -Throw
     }

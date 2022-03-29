@@ -16,7 +16,7 @@ BeforeAll {
     }
 }
 
-Describe 'Remove-JcSdkUserSshKey' -Tag:("")){
+Describe 'Remove-JcSdkUserSshKey' {
     It 'Delete' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }

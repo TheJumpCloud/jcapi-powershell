@@ -15,7 +15,7 @@ BeforeAll{
     . ($mockingPath | Select-Object -First 1).FullName
 }
 
-Describe 'Clear-JcSdkSystem' -Tag:("")){
+Describe 'Clear-JcSdkSystem' {
     It 'Clear' -skip {
         { Clear-JcSdkSystem -SystemId:($global:PesterTestSystem.Id) } | Should -Not -Throw
     }

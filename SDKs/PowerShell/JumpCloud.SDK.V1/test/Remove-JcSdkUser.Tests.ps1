@@ -13,7 +13,7 @@ BeforeAll {
     . ($mockingPath | Select-Object -First 1).FullName
 }
 
-Describe 'Remove-JcSdkUser' -Tag:("")){
+Describe 'Remove-JcSdkUser' {
     It 'Delete' {
         { Remove-JcSdkUser -Id:($global:PesterTestUser.Id) } | Should -Not -Throw
     }

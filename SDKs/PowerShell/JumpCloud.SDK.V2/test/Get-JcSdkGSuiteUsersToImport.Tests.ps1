@@ -14,7 +14,7 @@ while(-not $mockingPath) {
 
 
 }
-Describe 'Get-JcSdkGSuiteUsersToImport' -Tag:("")){
+Describe 'Get-JcSdkGSuiteUsersToImport' {
     It 'List' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }

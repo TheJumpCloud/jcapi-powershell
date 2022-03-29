@@ -14,7 +14,7 @@ while(-not $mockingPath) {
 
 
 }
-Describe 'Get-JcSdkSystemInsightAppCompatShim' -Tag:("")){
+Describe 'Get-JcSdkSystemInsightAppCompatShim' {
     It 'List' {
         { Get-JcSdkSystemInsightAppCompatShim } | Should -Not -Throw
     }

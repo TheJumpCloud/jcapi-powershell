@@ -14,7 +14,7 @@ while(-not $mockingPath) {
 
 
 }
-Describe 'Get-JcSdkActiveDirectoryTraverseUser' -Tag:("")){
+Describe 'Get-JcSdkActiveDirectoryTraverseUser' {
     It 'Get' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }

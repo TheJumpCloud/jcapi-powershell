@@ -14,7 +14,7 @@ while(-not $mockingPath) {
 
 
 }
-Describe 'New-JcSdkWorkday' -Tag:("")){
+Describe 'New-JcSdkWorkday' {
     It 'CreateExpanded' -skip {
         $global:PesterTestWorkday = New-JcSdkWorkday @global:PesterDefWorkday
         $global:PesterTestWorkday | Should -Not -BeNullOrEmpty

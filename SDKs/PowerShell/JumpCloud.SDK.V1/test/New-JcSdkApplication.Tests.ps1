@@ -13,7 +13,7 @@ BeforeAll {
     . ($mockingPath | Select-Object -First 1).FullName
 }
 
-Describe 'New-JcSdkApplication' -Tag:("")){
+Describe 'New-JcSdkApplication' {
     It 'CreateExpanded' {
         { $global:PesterTestApplication = New-JcSdkApplication @global:PesterDefApplication } | Should -Not -Throw
         $global:PesterTestApplication | Should -Not -BeNullOrEmpty

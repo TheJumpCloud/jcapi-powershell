@@ -14,7 +14,7 @@ while(-not $mockingPath) {
 
 
 }
-Describe 'Remove-JcSdkPolicyGroup' -Tag:("")){
+Describe 'Remove-JcSdkPolicyGroup' {
     It 'Delete' {
         { Remove-JcSdkPolicyGroup -Id:($global:PesterTestPolicyGroup.Id) } | Should -Not -Throw
     }

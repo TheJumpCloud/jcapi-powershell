@@ -14,7 +14,7 @@ while(-not $mockingPath) {
 
 
 }
-Describe 'Set-JcSdkSystemGroup' -Tag:("")){
+Describe 'Set-JcSdkSystemGroup' {
     It 'SetExpanded' {
         { Set-JcSdkSystemGroup -Id:($global:PesterTestSystemGroup.Id) -Name:($global:PesterTestSystemGroup.Name) } | Should -Not -Throw
     }

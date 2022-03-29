@@ -14,7 +14,7 @@ while(-not $mockingPath) {
 
 
 }
-Describe 'Get-JcSdkDuoApplication' -Tag:("")){
+Describe 'Get-JcSdkDuoApplication' {
     It 'List' -skip {
         { Get-JcSdkDuoApplication -AccountId '<String>' } | Should -Not -Throw
     }

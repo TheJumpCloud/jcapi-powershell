@@ -14,7 +14,7 @@ while(-not $mockingPath) {
 
 
 }
-Describe 'Set-JcSdkPolicy' -Tag:("")){
+Describe 'Set-JcSdkPolicy' {
     It 'SetExpanded' -skip {
         { Set-JcSdkPolicy -Id:($global:PesterTestPolicy.Id) -Name:($global:PesterTestPolicy.Name) } | Should -Not -Throw
     }

@@ -13,7 +13,7 @@ BeforeAll {
     . ($mockingPath | Select-Object -First 1).FullName
 }
 
-Describe 'New-JcSdkCommand' -Tag:("")){
+Describe 'New-JcSdkCommand' {
     It 'CreateExpanded' {
         # #TODO #BUG Swagger for New-JcSdkCommand does not return an id
         $NewCommand = New-JcSdkCommand @global:PesterDefCommand
