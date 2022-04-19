@@ -101,7 +101,7 @@ $TransformConfig = [Ordered]@{
             'systemusers_resetmfa'           = 'UserMfa_Reset';
             'systemusers_unlock'             = 'User_Unlock';
         };
-        ExcludedList       = @('/failedcommands', '/pendingcommands', '/search/commands', '/systemusers/{id}/mfasync'); # Excluding for now until we can resolve in SA-2316
+        ExcludedList       = @('/failedcommands', '/pendingcommands', '/search/commands', '/systemusers/{id}/mfasync', '/systemusers/{id}/state/activate', '/users/reactivate/{id}', '/users/resettotp/{id}', '/users/{id}'); # Excluding for now until we can resolve in SA-2316
     }
     'JumpCloud.SDK.V2'                = [PSCustomObject]@{
         PublicUrl                = "https://docs.jumpcloud.com/api/2.0/index.yaml"
@@ -114,7 +114,6 @@ $TransformConfig = [Ordered]@{
             '"format":"uint32"'                                                                   = '"format":"int64"' # SI code uses uint32 which is larger than int32 . Swagger 2 doesnt have a concept of uint32 . AutoRest defaults to int32 when it sees a type of integer.
             # Custom Tweaks
             '"responses":{"201":{"description":"","schema":{"\$ref":"#\/definitions\/job-id"}}'   = '"responses":{"200":{"description":"OK","schema":{"$ref":"#/definitions/job-id"}}'; # Workaround incorrectly defined 201 response in swagger should be 200; affects New-JcSdkBulkUser
-            '"responses":{"201":{"description":"OK","schema":{"items":{"\$ref":"#\/definitions\/AdministratorOrganizationLink"}' = '"responses":{"200":{"description":"OK","schema":{"items":{"$ref":"#/definitions/AdministratorOrganizationLink"}' # Workaround incorrectly defined 201 resposne in swagger, should be 200; affects Get-JcSdkAdministratorOrganization #TODO: remove after MSP 335 is complete
             '{"\$ref":"#\/parameters\/trait:requestHeaders:Content-Type"}'                        = ''; # This will be passed in later through the Module.cs file.
             '{"\$ref":"#\/parameters\/trait:requestHeaders:Accept"}'                              = ''; # This will be passed in later through the Module.cs file.
             '{"\$ref":"#\/parameters\/trait:multiTenantRequestHeaders:x-org-id"}'                 = ''; # Along with the ApiKey this will be passed in later through the Module.cs file.
@@ -452,7 +451,8 @@ $TransformConfig = [Ordered]@{
             '/integrations/autotask/{UUID}/contracts/fields',
             '/integrations/autotask/{UUID}/contracts/services',
             '/integrations/autotask/{UUID}/mappings',
-            '/providers/{provider_id}/integrations/autotask')
+            '/providers/{provider_id}/integrations/autotask',
+            '/gsuites/{gsuite_id}/import/jumpcloudusers')
     }
 }
 Function Get-SwaggerItem
