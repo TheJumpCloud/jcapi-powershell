@@ -409,10 +409,6 @@ commands:
             - store_test_results:
                 name: Uploading test results for '<< parameters.SDKName >>'
                 path: ./SDKs/PowerShell/<< parameters.SDKName >>/test/results
-            - persist_to_workspace:
-                root: .
-                paths:
-                  - ./SDKs/PowerShell/<< parameters.SDKName >>/*
   test-mtp:
     parameters:
       SDKName:
@@ -446,10 +442,6 @@ commands:
             - store_test_results:
                 name: Uploading test results for '<< parameters.SDKName >>'
                 path: ./SDKs/PowerShell/<< parameters.SDKName >>/test/results
-            - persist_to_workspace:
-                root: .
-                paths:
-                  - ./SDKs/PowerShell/<< parameters.SDKName >>/*
   commit:
     parameters:
       SDKName:
