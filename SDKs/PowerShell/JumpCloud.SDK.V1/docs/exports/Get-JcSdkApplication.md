@@ -49,7 +49,7 @@ The endpoint retrieves an SSO / SAML Application.
 ## PARAMETERS
 
 ### -Fields
-The comma separated fields included in the returned records.
+The space separated fields included in the returned records.
 If omitted the default list of fields will be returned.
 
 ```yaml
@@ -144,7 +144,7 @@ Accept wildcard characters: False
 ```
 
 ### -Sort
-The comma separated fields used to sort the collection.
+The space separated fields used to sort the collection.
 Default sort is ascending, prefix with - to sort descending.
 
 ```yaml

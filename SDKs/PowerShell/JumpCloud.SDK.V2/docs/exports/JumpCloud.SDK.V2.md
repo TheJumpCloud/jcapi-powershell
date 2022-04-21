@@ -289,29 +289,6 @@ curl -X GET https://console.jumpcloud.com/api/v2/commands/{Command_ID}/systemgro
   -H 'x-api-key: {API_KEY}'
 ```
 
-### [Get-JcSdkConnectwiseAddition](Get-JcSdkConnectwiseAddition.md)
-Retrieves a list of ConnectWise additions for the given ConnectWise id and Agreement id.
-You must be associated to the same provider as the ConnectWise integration to use this endpoint.
-
-### [Get-JcSdkConnectwiseCompany](Get-JcSdkConnectwiseCompany.md)
-Retrieves a list of ConnectWise companies for the given ConnectWise id.
-You must be associated to the same provider as the ConnectWise integration to use this endpoint.
-
-### [Get-JcSdkConnectwiseCompanyType](Get-JcSdkConnectwiseCompanyType.md)
-Retrieves a list of user defined company types from ConnectWise for the given ConnectWise id.
-
-### [Get-JcSdkConnectwiseConfiguration](Get-JcSdkConnectwiseConfiguration.md)
-Retrieves configuration for given ConnectWise integration id.
-You must be associated to the provider the integration is tied to in order to use this api.
-
-### [Get-JcSdkConnectwiseMapping](Get-JcSdkConnectwiseMapping.md)
-Retrieves the list of mappings for this ConnectWise integration.
-You must be associated to the same provider as the ConnectWise integration to use this api.
-
-### [Get-JcSdkConnectwiseSetting](Get-JcSdkConnectwiseSetting.md)
-Retrieve the ConnectWise integration settings.
-You must be associated to the same provider as the ConnectWise integration to use this endpoint.
-
 ### [Get-JcSdkCustomEmailConfiguration](Get-JcSdkCustomEmailConfiguration.md)
 Get the custom email configuration for the specified custom email type
 
@@ -842,29 +819,9 @@ curl -X GET  https://console.jumpcloud.com/api/v2/policies/{Policy_ID}/systemgro
 This endpoint returns a list of the Administrators associated with the Provider.
 You must be associated with the provider to use this route.
 
-#### Sample Request
-```
-curl -X GET https://console.jumpcloud.com/api/v2/providers/{ProviderID}/administrators \\
-  -H 'Accept: application/json' \\
-  -H 'Content-Type: application/json' \\
-  -H 'x-api-key: {API_KEY}'
-```
-
 ### [Get-JcSdkProviderOrganization](Get-JcSdkProviderOrganization.md)
 This endpoint returns a list of the Organizations associated with the Provider.
 You must be associated with the provider to use this route.
-
-#### Sample Request
-```
-curl -X GET https://console.jumpcloud.com/api/v2/providers/{ProviderID}/organizations \\
-  -H 'Accept: application/json' \\
-  -H 'Content-Type: application/json' \\
-  -H 'x-api-key: {API_KEY}'
-```
-
-### [Get-JcSdkProvidersIntegration](Get-JcSdkProvidersIntegration.md)
-Retrieves a list of integrations this provider has configured.
-You must be associated to the provider to use this endpoint.
 
 ### [Get-JcSdkProvidersInvoice](Get-JcSdkProvidersInvoice.md)
 Retrieves a list of invoices for this provider.
@@ -2022,7 +1979,7 @@ curl -X POST https://console.jumpcloud.com/api/v2/activedirectories/{activedirec
 ```
 
 ### [New-JcSdkAdministratorOrganization](New-JcSdkAdministratorOrganization.md)
-This endpoint allows you to allow Administrator access to an Organization.
+This endpoint allows you to grant Administrator access to an Organization.
 
 ### [New-JcSdkAuthenticationPolicy](New-JcSdkAuthenticationPolicy.md)
 Create an authentication policy.
@@ -2056,26 +2013,53 @@ curl -X POST https://console.jumpcloud.com/api/v2/authn/policies \\
 
 ### [New-JcSdkBulkUser](New-JcSdkBulkUser.md)
 The endpoint allows you to create a bulk job to asynchronously create users.
-See [Create a System User](https://docs.jumpcloud.com/api/1.0/index.html#operation/systemusers_post) for full list of attributes.
+See [Create a System User](https://docs.jumpcloud.com/api/1.0/index.html#operation/systemusers_post)
+for the full list of attributes.
 
-#### Sample Request 
+#### Default User State
+The `state` of each user in the request can be explicitly passed in or
+omitted.
+If `state` is omitted, then the user will get created
+using the value returned from the
+[Get an Organization](https://docs.jumpcloud.com/api/1.0/index.html#operation/organizations_get)
+endpoint.
+The default user state for bulk created users depends on the
+`creation-source` header.
+For `creation-source:jumpcloud:bulk` the
+default state is stored in `settings.newSystemUserStateDefaults.csvImport`.
+For other `creation-source` header values, the default state is stored in
+`settings.newSystemUserStateDefaults.applicationImport`
+
+These default state values can be changed in the admin portal settings
+or by using the
+[Update an Organization](https://docs.jumpcloud.com/api/1.0/index.html#operation/organization_put)
+endpoint.
+
+#### Sample Request
+
 ```
 curl -X POST https://console.jumpcloud.com/api/v2/bulk/users \\
-  -H 'Accept: application/json' \\
-  -H 'Content-Type: application/json' \\
-  -H 'x-api-key: {API_KEY}' \\
-  -d '[
-\t{
-\t\t\"email\":\"{email}\",
-\t\t\"firstname\":\"{firstname}\",
-\t\t\"lastname\":\"{firstname}\",
-\t\t\"username\":\"{username}\",
-\t\t\"attributes\":[
-\t\t\t{\"name\":\"EmployeeID\",\"value\":\"0000\"},
-\t\t\t{\"name\":\"Custom\",\"value\":\"attribute\"}
-\t\t]
-\t}
-]
+-H 'Accept: application/json' \\
+-H 'Content-Type: application/json' \\
+-H 'x-api-key: {API_KEY}' \\
+-d '[
+  {
+    \"email\":\"{email}\",
+    \"firstname\":\"{firstname}\",
+    \"lastname\":\"{firstname}\",
+    \"username\":\"{username}\",
+    \"attributes\":[
+      {
+        \"name\":\"EmployeeID\",
+        \"value\":\"0000\"
+      },
+      {
+        \"name\":\"Custom\",
+        \"value\":\"attribute\"
+      }
+    ]
+  }
+]'
 ```
 
 ### [New-JcSdkBulkUserState](New-JcSdkBulkUserState.md)
@@ -2092,11 +2076,6 @@ curl -X POST \"https://console.jumpcloud.com/api/v2/bulk/userstates\" \\
     \"start_date\": \"2000-01-01T00:00:00.000Z\"
   }'
 ```
-
-### [New-JcSdkConnectwiseConfiguration](New-JcSdkConnectwiseConfiguration.md)
-Creates a new ConnectWise integration for the provider.
-You must be associated with the provider to use this route.
-A 422 Unprocessable Entity response means the server failed to validate with ConnectWise.
 
 ### [New-JcSdkCustomEmailConfiguration](New-JcSdkCustomEmailConfiguration.md)
 Create the custom email configuration for the specified custom email type
@@ -2229,18 +2208,6 @@ curl -X POST https://console.jumpcloud.com/api/v2/policygroups \\
 This endpoint allows you to create a provider administrator.
 You must be associated with the provider to use this route.
 You must provide either `role` or `roleName`.
-
-#### Sample Request
-```
-curl -X POST https://console.jumpcloud.com/api/v2/providers/{ProviderID}/administrators \\
-  -H 'Accept: application/json' \\
-  -H 'Content-Type: application/json' \\
-  -H 'x-api-key: {API_KEY}' \\
-  -d '{
-    \"email\": \"{ADMIN_EMAIL}\",
-    \"roleName\": \"{ROLE_NAME}\"
-  }'
-```
 
 ### [New-JcSdkSoftwareApp](New-JcSdkSoftwareApp.md)
 This endpoint allows you to create a Software Application that will be managed by JumpCloud on associated JumpCloud systems.
@@ -2386,9 +2353,6 @@ curl -X DELETE \"https://console.jumpcloud.com/api/v2/bulk/userstates/{Scheduled
   -H 'Content-Type: application/json' \\
   -H 'Accept: application/json'
 ```
-
-### [Remove-JcSdkConnectwiseConfiguration](Remove-JcSdkConnectwiseConfiguration.md)
-Removes a ConnectWise integration.
 
 ### [Remove-JcSdkCustomEmailConfiguration](Remove-JcSdkCustomEmailConfiguration.md)
 Delete the custom email configuration for the specified custom email type
@@ -2632,18 +2596,6 @@ A direct association can be a non-homogeneous relationship between 2 different o
     \"id\": \"Group_ID\"
   }'
 ```
-
-### [Set-JcSdkConnectwiseConfiguration](Set-JcSdkConnectwiseConfiguration.md)
-Update the ConnectWise integration configuration.
-A 422 Unprocessable Entity response means the server failed to validate with ConnectWise.
-
-### [Set-JcSdkConnectwiseMapping](Set-JcSdkConnectwiseMapping.md)
-Create, edit, and/or delete mappings between Jumpcloud organizations and ConnectWise companies/agreements/additions.
-You must be associated to the same provider as the ConnectWise integration to use this api.
-
-### [Set-JcSdkConnectwiseSettting](Set-JcSdkConnectwiseSettting.md)
-Create, edit, and/or delete ConnectWiseIntegration settings.
-You must be associated to the same provider as the ConnectWise integration to use this endpoint.
 
 ### [Set-JcSdkCustomEmailConfiguration](Set-JcSdkCustomEmailConfiguration.md)
 Update the custom email configuration for the specified custom email type

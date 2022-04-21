@@ -19,11 +19,11 @@ New-JcSdkApplication -Body <IApplication> [-Confirm] [-WhatIf] [<CommonParameter
 
 ### CreateExpanded
 ```
-New-JcSdkApplication -Config <IApplicationConfig> -Name <String> -SsoUrl <String> [-Beta] [-Color <String>]
- [-Created <String>] [-DatabaseAttributes <IApplicationDatabaseAttributesItem[]>] [-Description <String>]
- [-DisplayLabel <String>] [-DisplayName <String>] [-Id <String>] [-LearnMore <String>] [-LogoColor <String>]
- [-LogoUrl <String>] [-Organization <String>] [-SsoBeta] [-SsoIdpCertExpirationAt <DateTime>] [-SsoJit]
- [-SsoType <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+New-JcSdkApplication -Config <IApplicationConfig> -Name <String> -SsoUrl <String> [-Active] [-Beta]
+ [-Color <String>] [-Created <String>] [-DatabaseAttributes <IApplicationDatabaseAttributesItem[]>]
+ [-Description <String>] [-DisplayLabel <String>] [-DisplayName <String>] [-Id <String>] [-LearnMore <String>]
+ [-LogoColor <String>] [-LogoUrl <String>] [-Organization <String>] [-SsoBeta]
+ [-SsoIdpCertExpirationAt <DateTime>] [-SsoJit] [-SsoType <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -46,6 +46,21 @@ The endpoint adds a new SSO / SAML Applications.
 {{ Add output here }}
 
 ## PARAMETERS
+
+### -Active
+.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: CreateExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### -Beta
 .
@@ -483,6 +498,7 @@ BODY <IApplication>: Application
     - `[SpEntityIdVisible <Boolean?>]`: 
   - `Name <String>`: 
   - `SsoUrl <String>`: 
+  - `[Active <Boolean?>]`: 
   - `[Beta <Boolean?>]`: 
   - `[Color <String>]`: 
   - `[Created <String>]`: 

@@ -119,7 +119,6 @@ INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter
   - `[ActivedirectoryId <String>]`: 
   - `[AdministratorId <String>]`: 
   - `[AgentId <String>]`: 
-  - `[AgreementId <String>]`: 
   - `[AppleMdmId <String>]`: 
   - `[ApplicationId <String>]`: ObjectID of the Application.
   - `[CommandId <String>]`: ObjectID of the Command.
@@ -138,7 +137,6 @@ INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter
   - `[SoftwareAppId <String>]`: ObjectID of the Software App.
   - `[SystemId <String>]`: ObjectID of the System.
   - `[UserId <String>]`: ObjectID of the User.
-  - `[Uuid <String>]`: 
   - `[WorkdayId <String>]`: 
 
 ## RELATED LINKS

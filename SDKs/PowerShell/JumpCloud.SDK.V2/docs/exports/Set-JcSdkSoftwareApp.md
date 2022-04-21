@@ -231,10 +231,13 @@ BODY <ISoftwareApp>: Software Application Package
   - `[Id <String>]`: 
   - `[Settings <ISoftwareAppSettings[]>]`: 
     - `[AllowUpdateDelay <Boolean?>]`: 
+    - `[AppleVppAppConfiguration <String>]`: Text sent to configure the application.
     - `[AppleVppAssignedLicenses <Int32?>]`: 
     - `[AppleVppAvailableLicenses <Int32?>]`: 
     - `[AppleVppDetails <ISoftwareAppAppleVppDetails>]`: App details returned by iTunes API. See example. The properties in this field are out of our control and we cannot guarantee consistency, so it should be checked by the client and manage the details accordingly.
       - `[(Any) <Object>]`: This indicates any property can be added to this object.
+    - `[AppleVppIsConfigEnabled <Boolean?>]`: Denotes if configuration has been enabled for the application.
+    - `[AppleVppSupportedDeviceFamilies <String[]>]`: The supported device families for this VPP Application.
     - `[AppleVppTotalLicenses <Int32?>]`: 
     - `[AssetKind <String>]`: The manifest asset kind (ex: software).
     - `[AssetSha256Size <Int32?>]`: The incremental size to use for summing the package as it is downloaded.
@@ -255,7 +258,6 @@ INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter
   - `[ActivedirectoryId <String>]`: 
   - `[AdministratorId <String>]`: 
   - `[AgentId <String>]`: 
-  - `[AgreementId <String>]`: 
   - `[AppleMdmId <String>]`: 
   - `[ApplicationId <String>]`: ObjectID of the Application.
   - `[CommandId <String>]`: ObjectID of the Command.
@@ -274,15 +276,17 @@ INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter
   - `[SoftwareAppId <String>]`: ObjectID of the Software App.
   - `[SystemId <String>]`: ObjectID of the System.
   - `[UserId <String>]`: ObjectID of the User.
-  - `[Uuid <String>]`: 
   - `[WorkdayId <String>]`: 
 
 SETTINGS <ISoftwareAppSettings[]>: .
   - `[AllowUpdateDelay <Boolean?>]`: 
+  - `[AppleVppAppConfiguration <String>]`: Text sent to configure the application.
   - `[AppleVppAssignedLicenses <Int32?>]`: 
   - `[AppleVppAvailableLicenses <Int32?>]`: 
   - `[AppleVppDetails <ISoftwareAppAppleVppDetails>]`: App details returned by iTunes API. See example. The properties in this field are out of our control and we cannot guarantee consistency, so it should be checked by the client and manage the details accordingly.
     - `[(Any) <Object>]`: This indicates any property can be added to this object.
+  - `[AppleVppIsConfigEnabled <Boolean?>]`: Denotes if configuration has been enabled for the application.
+  - `[AppleVppSupportedDeviceFamilies <String[]>]`: The supported device families for this VPP Application.
   - `[AppleVppTotalLicenses <Int32?>]`: 
   - `[AssetKind <String>]`: The manifest asset kind (ex: software).
   - `[AssetSha256Size <Int32?>]`: The incremental size to use for summing the package as it is downloaded.

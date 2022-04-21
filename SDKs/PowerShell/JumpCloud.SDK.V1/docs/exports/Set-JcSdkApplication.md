@@ -19,8 +19,8 @@ Set-JcSdkApplication -Id <String> -Body <IApplication> [-Confirm] [-WhatIf] [<Co
 
 ### SetExpanded
 ```
-Set-JcSdkApplication -Id <String> -Config <IApplicationConfig> -Name <String> -SsoUrl <String> [-Beta]
- [-Color <String>] [-Created <String>] [-DatabaseAttributes <IApplicationDatabaseAttributesItem[]>]
+Set-JcSdkApplication -Id <String> -Config <IApplicationConfig> -Name <String> -SsoUrl <String> [-Active]
+ [-Beta] [-Color <String>] [-Created <String>] [-DatabaseAttributes <IApplicationDatabaseAttributesItem[]>]
  [-Description <String>] [-DisplayLabel <String>] [-DisplayName <String>] [-Id1 <String>]
  [-LearnMore <String>] [-LogoColor <String>] [-LogoUrl <String>] [-Organization <String>] [-SsoBeta]
  [-SsoIdpCertExpirationAt <DateTime>] [-SsoJit] [-SsoType <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
@@ -35,7 +35,7 @@ Set-JcSdkApplication -InputObject <IJumpCloudApiIdentity> -Body <IApplication> [
 ### SetViaIdentityExpanded
 ```
 Set-JcSdkApplication -InputObject <IJumpCloudApiIdentity> -Config <IApplicationConfig> -Name <String>
- -SsoUrl <String> [-Id <String>] [-Beta] [-Color <String>] [-Created <String>]
+ -SsoUrl <String> [-Id <String>] [-Active] [-Beta] [-Color <String>] [-Created <String>]
  [-DatabaseAttributes <IApplicationDatabaseAttributesItem[]>] [-Description <String>] [-DisplayLabel <String>]
  [-DisplayName <String>] [-LearnMore <String>] [-LogoColor <String>] [-LogoUrl <String>]
  [-Organization <String>] [-SsoBeta] [-SsoIdpCertExpirationAt <DateTime>] [-SsoJit] [-SsoType <String>]
@@ -62,6 +62,21 @@ The endpoint updates a SSO / SAML Application.
 {{ Add output here }}
 
 ## PARAMETERS
+
+### -Active
+.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### -Beta
 .
@@ -532,6 +547,7 @@ BODY <IApplication>: Application
     - `[SpEntityIdVisible <Boolean?>]`: 
   - `Name <String>`: 
   - `SsoUrl <String>`: 
+  - `[Active <Boolean?>]`: 
   - `[Beta <Boolean?>]`: 
   - `[Color <String>]`: 
   - `[Created <String>]`: 
