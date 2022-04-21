@@ -451,6 +451,7 @@ $TransformConfig = [Ordered]@{
             '/integrations/autotask/{UUID}/contracts/fields',
             '/integrations/autotask/{UUID}/contracts/services',
             '/integrations/autotask/{UUID}/mappings',
+            '/integrations/{integration_type}/{UUID}/errors',
             '/providers/{provider_id}/integrations/autotask',
             '/gsuites/{gsuite_id}/import/jumpcloudusers')
     }
