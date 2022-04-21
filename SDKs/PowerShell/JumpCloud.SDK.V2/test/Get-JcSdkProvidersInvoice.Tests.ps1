@@ -19,8 +19,7 @@ if(($null -eq $TestName) -or ($TestName -contains 'Get-JcSdkProvidersInvoice'))
 }
 Describe 'Get-JcSdkProvidersInvoice' -Tag:("MTP") {
     It 'Get' {
-        # Should throw as pester service account is a non-billing admin
-        { Get-JCSDKProvidersInvoice -ProviderID:($env:JCProviderId) } | Should -Throw
+        { Get-JCSDKProvidersInvoice -ProviderID:($env:JCProviderId) } | Should -Not -Throw
     }
 
     It 'GetViaIdentity' -skip {
