@@ -46,13 +46,17 @@ build-sdks: &build-sdks
       requires:
         - Test JumpCloud SDK DirectoryInsights
         - Test JumpCloud SDK V1
+        - Test JumpCloud SDK V1 MTP
         - Test JumpCloud SDK V2
+        - Test JumpCloud SDK V2 MTP
   - CodeArtifact Approval:
       type: approval
       requires:
           - Test JumpCloud SDK DirectoryInsights
           - Test JumpCloud SDK V1
+          - Test JumpCloud SDK V1 MTP
           - Test JumpCloud SDK V2
+          - Test JumpCloud SDK V2 MTP
           - Commit Changes
   - Pack and Deploy To CodeArtifact:
       requires:
@@ -76,7 +80,9 @@ build-sdks: &build-sdks
       requires:
         - Test JumpCloud SDK DirectoryInsights
         - Test JumpCloud SDK V1
+        - Test JumpCloud SDK V1 MTP
         - Test JumpCloud SDK V2
+        - Test JumpCloud SDK V2 MTP
         - Commit Changes
         - Pack and Deploy To CodeArtifact
       filters:
