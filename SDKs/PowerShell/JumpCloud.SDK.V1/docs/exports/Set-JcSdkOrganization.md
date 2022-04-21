@@ -280,6 +280,7 @@ BODY <IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema>: .
     - `[SystemInsightUpdatedAt <String>]`: 
     - `[SystemUserPasswordExpirationInDays <Int32?>]`: 
     - `[SystemUsersCanEdit <Boolean?>]`: 
+    - `[SystemUsersCap <Int32?>]`: 
     - `[TrustedAppConfigTrustedApps <ITrustedappConfigPutTrustedAppsItem[]>]`: List of authorized apps for the organization 
       - `Name <String>`: Name of the trusted application
       - `[Path <String>]`: Absolute path for the app's location in user's device
@@ -346,6 +347,7 @@ SETTINGS <IOrganizationsettingsput>: OrganizationSettingsPut
   - `[SystemInsightUpdatedAt <String>]`: 
   - `[SystemUserPasswordExpirationInDays <Int32?>]`: 
   - `[SystemUsersCanEdit <Boolean?>]`: 
+  - `[SystemUsersCap <Int32?>]`: 
   - `[TrustedAppConfigTrustedApps <ITrustedappConfigPutTrustedAppsItem[]>]`: List of authorized apps for the organization 
     - `Name <String>`: Name of the trusted application
     - `[Path <String>]`: Absolute path for the app's location in user's device

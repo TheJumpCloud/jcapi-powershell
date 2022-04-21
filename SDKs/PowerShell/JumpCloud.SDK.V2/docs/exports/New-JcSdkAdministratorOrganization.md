@@ -8,23 +8,36 @@ schema: 2.0.0
 # New-JcSdkAdministratorOrganization
 
 ## SYNOPSIS
-This endpoint allows you to allow Administrator access to an Organization.
+This endpoint allows you to grant Administrator access to an Organization.
 
 ## SYNTAX
 
-### Create (Default)
+### CreateExpanded (Default)
 ```
-New-JcSdkAdministratorOrganization -Id <String> [-Confirm] [-WhatIf] [<CommonParameters>]
+New-JcSdkAdministratorOrganization -Id <String> [-Organization <String>] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
+```
+
+### Create
+```
+New-JcSdkAdministratorOrganization -Id <String> -Body <IAdministratorOrganizationLinkReq> [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### CreateViaIdentity
 ```
-New-JcSdkAdministratorOrganization -InputObject <IJumpCloudApiIdentity> [-Confirm] [-WhatIf]
- [<CommonParameters>]
+New-JcSdkAdministratorOrganization -InputObject <IJumpCloudApiIdentity>
+ -Body <IAdministratorOrganizationLinkReq> [-Confirm] [-WhatIf] [<CommonParameters>]
+```
+
+### CreateViaIdentityExpanded
+```
+New-JcSdkAdministratorOrganization -InputObject <IJumpCloudApiIdentity> [-Organization <String>] [-Confirm]
+ [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-This endpoint allows you to allow Administrator access to an Organization.
+This endpoint allows you to grant Administrator access to an Organization.
 
 ## EXAMPLES
 
@@ -44,12 +57,28 @@ This endpoint allows you to allow Administrator access to an Organization.
 
 ## PARAMETERS
 
+### -Body
+AdministratorOrganizationLinkReq
+To construct, see NOTES section for BODY properties and create a hash table.
+
+```yaml
+Type: JumpCloud.SDK.V2.Models.IAdministratorOrganizationLinkReq
+Parameter Sets: Create, CreateViaIdentity
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
 ### -Id
 .
 
 ```yaml
 Type: System.String
-Parameter Sets: Create
+Parameter Sets: Create, CreateExpanded
 Aliases:
 
 Required: True
@@ -65,13 +94,28 @@ To construct, see NOTES section for INPUTOBJECT properties and create a hash tab
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
-Parameter Sets: CreateViaIdentity
+Parameter Sets: CreateViaIdentity, CreateViaIdentityExpanded
 Aliases:
 
 Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -Organization
+The identifier for an organization to link this administrator to.
+
+```yaml
+Type: System.String
+Parameter Sets: CreateExpanded, CreateViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -111,6 +155,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
+### JumpCloud.SDK.V2.Models.IAdministratorOrganizationLinkReq
+
 ### JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
 
 ## OUTPUTS
@@ -126,12 +172,14 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
+BODY <IAdministratorOrganizationLinkReq>: AdministratorOrganizationLinkReq
+  - `[Organization <String>]`: The identifier for an organization to link this administrator to.
+
 INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter
   - `[AccountId <String>]`: 
   - `[ActivedirectoryId <String>]`: 
   - `[AdministratorId <String>]`: 
   - `[AgentId <String>]`: 
-  - `[AgreementId <String>]`: 
   - `[AppleMdmId <String>]`: 
   - `[ApplicationId <String>]`: ObjectID of the Application.
   - `[CommandId <String>]`: ObjectID of the Command.
@@ -150,7 +198,6 @@ INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter
   - `[SoftwareAppId <String>]`: ObjectID of the Software App.
   - `[SystemId <String>]`: ObjectID of the System.
   - `[UserId <String>]`: ObjectID of the User.
-  - `[Uuid <String>]`: 
   - `[WorkdayId <String>]`: 
 
 ## RELATED LINKS

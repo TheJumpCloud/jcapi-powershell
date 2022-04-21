@@ -15,12 +15,12 @@ You must be associated to the provider to use this endpoint.
 
 ### Get (Default)
 ```
-Get-JcSdkProvidersInvoice -ProviderId <String> [<CommonParameters>]
+Get-JcSdkProvidersInvoice -ProviderId <String> [-Sort <String[]>] [<CommonParameters>]
 ```
 
 ### GetViaIdentity
 ```
-Get-JcSdkProvidersInvoice -InputObject <IJumpCloudApiIdentity> [<CommonParameters>]
+Get-JcSdkProvidersInvoice -InputObject <IJumpCloudApiIdentity> [-Sort <String[]>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -76,6 +76,22 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -Sort
+The comma separated fields used to sort the collection.
+Default sort is ascending, prefix with `-` to sort descending.
+
+```yaml
+Type: System.String[]
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
@@ -85,7 +101,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V2.Models.IProviderInvoice
+### JumpCloud.SDK.V2.Models.IProviderInvoiceResponse
 
 ## NOTES
 
@@ -101,7 +117,6 @@ INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter
   - `[ActivedirectoryId <String>]`: 
   - `[AdministratorId <String>]`: 
   - `[AgentId <String>]`: 
-  - `[AgreementId <String>]`: 
   - `[AppleMdmId <String>]`: 
   - `[ApplicationId <String>]`: ObjectID of the Application.
   - `[CommandId <String>]`: ObjectID of the Command.
@@ -120,7 +135,6 @@ INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter
   - `[SoftwareAppId <String>]`: ObjectID of the Software App.
   - `[SystemId <String>]`: ObjectID of the System.
   - `[UserId <String>]`: ObjectID of the User.
-  - `[Uuid <String>]`: 
   - `[WorkdayId <String>]`: 
 
 ## RELATED LINKS

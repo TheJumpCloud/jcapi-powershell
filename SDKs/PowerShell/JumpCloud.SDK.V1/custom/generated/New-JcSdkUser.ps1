@@ -1,37 +1,67 @@
 <#
 .Synopsis
-This endpoint allows you to create a new system user.
+\"This endpoint allows you to create a new system user.
+
+#### Default User State
+The `state` of the user can be explicitly passed in or omitted.
+If
+`state` is omitted from the request, then the user will get created
+using the value returned from the
+[Get an Organization](https://docs.jumpcloud.com/api/1.0/index.html#operation/organizations_get)
+endpoint.
+The default user state for manually created users is stored in
+`settings.newSystemUserStateDefaults.manualEntry`
+
+These default state values can be changed in the admin portal settings
+or by using the
+[Update an Organization](https://docs.jumpcloud.com/api/1.0/index.html#operation/organization_put)
+endpoint.
 
 #### Sample Request
 
 ```
 curl -X POST https://console.jumpcloud.com/api/systemusers \\
-  -H 'Accept: application/json' \\
-  -H 'Content-Type: application/json' \\
-  -H 'x-api-key: {API_KEY}' \\
-  -d '{
-\t\"username\":\"{username}\",
-\t\"email\":\"{email_address}\",
-\t\"firstname\":\"{Name}\",
-\t\"lastname\":\"{Name}\"
-}'
+-H 'Accept: application/json' \\
+-H 'Content-Type: application/json' \\
+-H 'x-api-key: {API_KEY}' \\
+-d '{
+      \"username\":\"{username}\",
+      \"email\":\"{email_address}\",
+      \"firstname\":\"{Name}\",
+      \"lastname\":\"{Name}\"
+    }'
 ```
 .Description
-This endpoint allows you to create a new system user.
+\"This endpoint allows you to create a new system user.
+
+#### Default User State
+The `state` of the user can be explicitly passed in or omitted.
+If
+`state` is omitted from the request, then the user will get created
+using the value returned from the
+[Get an Organization](https://docs.jumpcloud.com/api/1.0/index.html#operation/organizations_get)
+endpoint.
+The default user state for manually created users is stored in
+`settings.newSystemUserStateDefaults.manualEntry`
+
+These default state values can be changed in the admin portal settings
+or by using the
+[Update an Organization](https://docs.jumpcloud.com/api/1.0/index.html#operation/organization_put)
+endpoint.
 
 #### Sample Request
 
 ```
 curl -X POST https://console.jumpcloud.com/api/systemusers \\
-  -H 'Accept: application/json' \\
-  -H 'Content-Type: application/json' \\
-  -H 'x-api-key: {API_KEY}' \\
-  -d '{
-\t\"username\":\"{username}\",
-\t\"email\":\"{email_address}\",
-\t\"firstname\":\"{Name}\",
-\t\"lastname\":\"{Name}\"
-}'
+-H 'Accept: application/json' \\
+-H 'Content-Type: application/json' \\
+-H 'x-api-key: {API_KEY}' \\
+-d '{
+      \"username\":\"{username}\",
+      \"email\":\"{email_address}\",
+      \"firstname\":\"{Name}\",
+      \"lastname\":\"{Name}\"
+    }'
 ```
 .Example
 PS C:\> {{ Add code here }}

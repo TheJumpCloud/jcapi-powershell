@@ -3,34 +3,10 @@
 This endpoint allows you to create a provider administrator.
 You must be associated with the provider to use this route.
 You must provide either `role` or `roleName`.
-
-#### Sample Request
-```
-curl -X POST https://console.jumpcloud.com/api/v2/providers/{ProviderID}/administrators \\
-  -H 'Accept: application/json' \\
-  -H 'Content-Type: application/json' \\
-  -H 'x-api-key: {API_KEY}' \\
-  -d '{
-    \"email\": \"{ADMIN_EMAIL}\",
-    \"roleName\": \"{ROLE_NAME}\"
-  }'
-```
 .Description
 This endpoint allows you to create a provider administrator.
 You must be associated with the provider to use this route.
 You must provide either `role` or `roleName`.
-
-#### Sample Request
-```
-curl -X POST https://console.jumpcloud.com/api/v2/providers/{ProviderID}/administrators \\
-  -H 'Accept: application/json' \\
-  -H 'Content-Type: application/json' \\
-  -H 'x-api-key: {API_KEY}' \\
-  -d '{
-    \"email\": \"{ADMIN_EMAIL}\",
-    \"roleName\": \"{ROLE_NAME}\"
-  }'
-```
 .Example
 PS C:\> {{ Add code here }}
 
@@ -65,7 +41,6 @@ INPUTOBJECT <IJumpCloudApiIdentity>:
   [ActivedirectoryId <String>]:
   [AdministratorId <String>]:
   [AgentId <String>]:
-  [AgreementId <String>]:
   [AppleMdmId <String>]:
   [ApplicationId <String>]: ObjectID of the Application.
   [CommandId <String>]: ObjectID of the Command.
@@ -84,7 +59,6 @@ INPUTOBJECT <IJumpCloudApiIdentity>:
   [SoftwareAppId <String>]: ObjectID of the Software App.
   [SystemId <String>]: ObjectID of the System.
   [UserId <String>]: ObjectID of the User.
-  [Uuid <String>]:
   [WorkdayId <String>]:
 .Link
 https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/New-JcSdkProviderAdministrator.md
