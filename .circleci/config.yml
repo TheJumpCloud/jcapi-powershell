@@ -341,7 +341,7 @@ commands:
       - persist_to_workspace:
           root: .
           paths:
-            - ./../Documents/PowerShell/*
+            - ../Documents/PowerShell/*
   setup:
     steps:
       - checkout
