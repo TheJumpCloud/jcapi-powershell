@@ -1,6 +1,4 @@
 version: 2.1
-orbs:
-  win: circleci/windows@4.1.1
 parameters:
   workflow:
     description: The name of the workflow to run. Must match the workflow name exactly.
@@ -130,7 +128,8 @@ workflows:
       - Test JumpCloud SDK V2
 jobs:
   Build JumpCloud SDK DirectoryInsights:
-    executor: win/default
+    docker:
+      - image: cimg/base:2022.04
     steps:
       - setup
       - build-sdk:
@@ -138,7 +137,8 @@ jobs:
           ManualModuleVersion: ''
           RunApiTransform: true
   Build JumpCloud SDK V1:
-    executor: win/default
+    docker:
+      - image: cimg/base:2022.04
     steps:
       - setup
       - build-sdk:
@@ -146,7 +146,8 @@ jobs:
           ManualModuleVersion: ''
           RunApiTransform: true
   Build JumpCloud SDK V2:
-    executor: win/default
+    docker:
+      - image: cimg/base:2022.04
     steps:
       - setup
       - build-sdk:
@@ -154,7 +155,8 @@ jobs:
           ManualModuleVersion: ''
           RunApiTransform: true
   Test SDKs on Production JumpCloud PowerShell TestModule:
-    executor: win/default
+    docker:
+      - image: cimg/base:2022.04
     steps:
       - add_ssh_keys:
           fingerprints:
@@ -162,14 +164,16 @@ jobs:
       - checkout
       - pulljcmodule
   Test JumpCloud SDK DirectoryInsights:
-    executor: win/default
+    docker:
+      - image: cimg/base:2022.04
     steps:
       - setup
       - test-sdk:
           SDKName: JumpCloud.SDK.DirectoryInsights
           TestModule: true
   Test JumpCloud SDK V1:
-    executor: win/default
+    docker:
+      - image: cimg/base:2022.04
     steps:
       - setup
       - test-sdk:
@@ -178,7 +182,8 @@ jobs:
           IncludeTagList: '*'
           ExcludeTagList: 'MTP'
   Test JumpCloud SDK V1 MTP:
-    executor: win/default
+    docker:
+      - image: cimg/base:2022.04
     steps:
       - setup
       - test-mtp:
@@ -186,7 +191,8 @@ jobs:
           TestModule: true
           IncludeTagList: 'MTP'
   Test JumpCloud SDK V2:
-    executor: win/default
+    docker:
+      - image: cimg/base:2022.04
     steps:
       - setup
       - test-sdk:
@@ -195,7 +201,8 @@ jobs:
           IncludeTagList: '*'
           ExcludeTagList: 'MTP'
   Test JumpCloud SDK V2 MTP:
-    executor: win/default
+    docker:
+      - image: cimg/base:2022.04
     steps:
       - setup
       - test-mtp:
@@ -203,7 +210,8 @@ jobs:
           TestModule: true
           IncludeTagList: 'MTP'
   Commit Changes:
-    executor: win/default
+    docker:
+      - image: cimg/base:2022.04
     steps:
       - add_ssh_keys:
           fingerprints:
@@ -212,7 +220,8 @@ jobs:
       - commit:
           SDKName: JumpCloud.SDK.DirectoryInsights, JumpCloud.SDK.V1, JumpCloud.SDK.V2
   Pack and Deploy To CodeArtifact:
-    executor: win/default
+    docker:
+      - image: cimg/base:2022.04
     steps:
       - setup
       - attach_workspace:
@@ -227,7 +236,8 @@ jobs:
           SDKName: JumpCloud.SDK.V2
           source: CodeArtifact
   Pack and Deploy To PSGallery:
-    executor: win/default
+    docker:
+      - image: cimg/base:2022.04
     steps:
       - setup
       - attach_workspace:
@@ -242,11 +252,12 @@ jobs:
           SDKName: JumpCloud.SDK.V2
           source: PSGallery
   Trigger ci-nightly:
-    executor: win/default
+    docker:
+      - image: cimg/base:2022.04
     steps:
       - run:
           name: Trigger Scheduled Run
-          shell: pwsh.exe
+          shell: pwsh
           command: |
             Invoke-RestMethod -Method:("POST") -Uri:("https://circleci.com/api/v2/project/github/$env:CIRCLE_PROJECT_USERNAME/$env:CIRCLE_PROJECT_REPONAME/pipeline") -Headers:(@{"Circle-Token" = "$env:CIRCLE_TOKEN"; "content-type" = "application/json";}) -Body:('{"branch":"' + $env:CIRCLE_BRANCH + '","parameters":{"workflow": "ci-nightly", "triggered_by_scheduled_job": true}}')
 commands:
@@ -259,13 +270,13 @@ commands:
             git clone git@github.com:TheJumpCloud/support.git .\support
       - run:
           name: Setup Dependencies
-          shell: pwsh.exe
+          shell: pwsh
           command: |
             $ErrorActionPreference = 'Stop'
             ./support\PowerShell\Deploy\Setup-Dependencies.ps1 -RequiredModulesRepo:('CodeArtifact')
       - run:
           name: Add nuget sources
-          shell: pwsh.exe
+          shell: pwsh
           command: |
             Set-AWSCredential -AccessKey:($env:AWS_ACCESS_KEY_ID) -SecretKey:($env:AWS_SECRET_ACCESS_KEY)
             $CARepoEndpoint = "$(Get-CARepositoryEndpoint -Domain jumpcloud-artifacts -Region us-east-1 -Repository jumpcloud-nuget-modules -Format nuget)v3/index.json"
@@ -273,7 +284,7 @@ commands:
             dotnet nuget add source "https://www.powershellgallery.com/api/v2/package" --name PSGallery
       - run:
           name: Invoke Pester
-          shell: pwsh.exe
+          shell: pwsh
           no_output_timeout: 30m
           command: |
             $ErrorActionPreference = 'stop'
@@ -316,17 +327,34 @@ commands:
     steps:
       - checkout
       - run:
+          name: Install dotnet-sdk-6.0
+          command: sudo apt-get update && sudo apt-get install -y apt-transport-https && sudo apt-get update && sudo apt-get install -y dotnet-sdk-6.0
+      - run:
           name: Install PowerShell Core
-          command: dotnet tool install --global PowerShell --version 7.1.5
+          command: |
+            # Update the list of packages
+            sudo apt-get update
+            # Install pre-requisite packages.
+            sudo apt-get install -y wget apt-transport-https software-properties-common
+            # Download the Microsoft repository GPG keys
+            wget -q https://packages.microsoft.com/config/ubuntu/20.04/packages-microsoft-prod.deb
+            # Register the Microsoft repository GPG keys
+            sudo dpkg -i packages-microsoft-prod.deb
+            # Update the list of products
+            sudo apt-get update
+            # Enable the "universe" repositories
+            sudo add-apt-repository universe
+            # Install PowerShell
+            sudo apt-get install -y powershell
       - run:
           name: Setup Dependencies
-          shell: pwsh.exe
+          shell: pwsh
           command: |
             $ErrorActionPreference = 'Stop'
             ./SetupDependencies.ps1
       - run:
           name: Display Session Variables (For Debugging)
-          shell: pwsh.exe
+          shell: pwsh
           command: |
             Write-Host ("---------------------------------------------------------------------------------------")
             Write-Host ('Host Information') -BackgroundColor:('Green') -ForegroundColor:('Black')
@@ -346,7 +374,7 @@ commands:
             Get-Variable | Format-Table
       - run:
           name: Add nuget sources
-          shell: pwsh.exe
+          shell: pwsh
           command: |
             Set-AWSCredential -AccessKey:($env:AWS_ACCESS_KEY_ID) -SecretKey:($env:AWS_SECRET_ACCESS_KEY)
             $CARepoEndpoint = "$(Get-CARepositoryEndpoint -Domain jumpcloud-artifacts -Region us-east-1 -Repository jumpcloud-nuget-modules -Format nuget)v3/index.json"
@@ -370,7 +398,7 @@ commands:
           at: .
       - run:
           name: Building '<< parameters.SDKName >>'
-          shell: pwsh.exe
+          shell: pwsh
           command: |
             $ErrorActionPreference = 'Stop'
             ./BuildAutoRest.ps1 -SDKName:('<< parameters.SDKName >>') -ManualModuleVersion:('<< parameters.ManualModuleVersion >>') -RunApiTransform:($<< parameters.RunApiTransform >>)
@@ -406,7 +434,7 @@ commands:
           steps:
             - run:
                 name: Testing '<< parameters.SDKName >>'
-                shell: pwsh.exe
+                shell: pwsh
                 command: |
                   $ErrorActionPreference = 'Stop'
                   ./Test-Module.ps1 -JCApiKey:($env:JCApiKey) -JCOrgId:($env:JCOrgId) -JCApiKeyMTP:($env:JCApiKeyMTP) -JCProviderId:($env:JCProviderId) -ExcludeTagList:("<< parameters.ExcludeTagList >>") -IncludeTagList:("<< parameters.IncludeTagList >>") -testModulePath:("./SDKs/PowerShell/<< parameters.SDKName >>/test-module.ps1")
@@ -439,7 +467,7 @@ commands:
           steps:
             - run:
                 name: Testing MTP Functions'<< parameters.SDKName >>'
-                shell: pwsh.exe
+                shell: pwsh
                 command: |
                   $ErrorActionPreference = 'Stop'
                   ./Test-Module.ps1 -JCApiKey:($env:JCApiKey) -JCOrgId:($env:JCOrgId) -JCApiKeyMTP:($env:JCApiKeyMTP) -JCProviderId:($env:JCProviderId) -ExcludeTagList:("<< parameters.ExcludeTagList >>") -IncludeTagList:("<< parameters.IncludeTagList >>") -testModulePath:("./SDKs/PowerShell/<< parameters.SDKName >>/test-module.ps1")
@@ -457,7 +485,7 @@ commands:
       - run:
           when: on_success
           name: 'Commit PowerShell SDKs to << pipeline.git.branch >>'
-          shell: pwsh.exe
+          shell: pwsh
           command: |
             $UserEmail = If ($env:CIRCLE_PROJECT_USERNAME) { $env:CIRCLE_PROJECT_USERNAME } Else { ($env:USERNAME).Replace(' ', '') + '@FakeEmail.com' }
             $UserName = If ($env:CIRCLE_PROJECT_USERNAME) { $env:CIRCLE_PROJECT_USERNAME } Else { $env:USERNAME }
@@ -479,7 +507,7 @@ commands:
     steps:
       - run:
           name: Packing '<< parameters.SDKName >>'
-          shell: pwsh.exe
+          shell: pwsh
           command: |
             $ModuleName = '<< parameters.SDKName >>'
             $Psd1 = Import-PowerShellDataFile -Path:("./SDKs/PowerShell/$ModuleName/$ModuleName.psd1")
@@ -513,7 +541,7 @@ commands:
       - run:
           when: on_success
           name: Publishing to "<< parameters.source >>" repo
-          shell: pwsh.exe
+          shell: pwsh
           command: |
             $NupkgPath = (Get-ChildItem -Path:("./SDKs/PowerShell/<< parameters.SDKName >>/bin/nupkg/<< parameters.SDKName >>*.nupkg")).FullName
             If('<< parameters.source >>' -eq 'CodeArtifact'){dotnet nuget push $NupkgPath --source << parameters.source >>}
