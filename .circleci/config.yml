@@ -1,6 +1,6 @@
 version: 2.1
 orbs:
-  win: circleci/windows@2.2.0
+  win: circleci/windows@4.1.1
 parameters:
   workflow:
     description: The name of the workflow to run. Must match the workflow name exactly.
@@ -25,22 +25,27 @@ build-sdks: &build-sdks
   - Test JumpCloud SDK DirectoryInsights:
       requires:
         - Build JumpCloud SDK DirectoryInsights
+      context: aws-credentials
   - Test JumpCloud SDK V1:
       requires:
         - Build JumpCloud SDK V1
+      context: aws-credentials
   - Test JumpCloud SDK V1 MTP:
       requires:
         - Build JumpCloud SDK V1
+      context: aws-credentials
   - Test JumpCloud SDK V2:
       requires:
         - Build JumpCloud SDK V1
         - Build JumpCloud SDK V2
         - Test JumpCloud SDK V1
+      context: aws-credentials
   - Test JumpCloud SDK V2 MTP:
       requires:
         - Build JumpCloud SDK V1
         - Build JumpCloud SDK V2
         - Test JumpCloud SDK V1
+      context: aws-credentials
   - Commit Changes:
       requires:
         - Test JumpCloud SDK DirectoryInsights
