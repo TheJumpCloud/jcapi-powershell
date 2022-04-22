@@ -338,19 +338,16 @@ commands:
           command: |
             $ErrorActionPreference = 'Stop'
             ./SetupDependencies.ps1
-      - save_cache:
+      - persist_to_workspace:
+          root: .
           paths:
-            - "~/Documents/PowerShell/*"
-          key: cache-pwsh
+            - ../Documents/PowerShell/*
   setup:
     steps:
       - checkout
       - run:
           name: Install PowerShell Core
           command: dotnet tool install --global PowerShell --version 7.1.5
-      - restore_cache:
-          keys:
-            - cache-pwsh
       - run:
           name: Display Session Variables (For Debugging)
           shell: pwsh.exe
