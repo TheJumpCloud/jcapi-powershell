@@ -5304,13 +5304,13 @@
           "type": "string"
         },
         "last_run_time": {
-          "type": "integer"
+          "type": "string"
         },
         "name": {
           "type": "string"
         },
         "next_run_time": {
-          "type": "integer"
+          "type": "string"
         },
         "path": {
           "type": "string"
