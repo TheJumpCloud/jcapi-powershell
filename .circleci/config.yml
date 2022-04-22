@@ -328,7 +328,6 @@ commands:
           path: "./support/PowerShell/JumpCloud Module/Tests/test_results/"
   cache-pwsh:
     steps:
-      - checkout
       - run:
           name: Install PowerShell Core
           command: dotnet tool install --global PowerShell --version 7.1.5
