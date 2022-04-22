@@ -16,11 +16,18 @@ parameters:
     default: false
 # YAML Anchors
 build-sdks: &build-sdks
+  - cache-pwsh
   - Build JumpCloud SDK DirectoryInsights:
+      requires:
+        - cache-pwsh
       context: aws-credentials
   - Build JumpCloud SDK V1:
+      requires:
+        - cache-pwsh
       context: aws-credentials
   - Build JumpCloud SDK V2:
+      requires:
+        - cache-pwsh
       context: aws-credentials
   - Test JumpCloud SDK DirectoryInsights:
       requires:
@@ -132,6 +139,10 @@ workflows:
       - Test JumpCloud SDK V1
       - Test JumpCloud SDK V2
 jobs:
+  cache-pwsh:
+    executor: win/default
+    steps:
+      - cache-pwsh
   Build JumpCloud SDK DirectoryInsights:
     executor: win/default
     steps:
@@ -315,9 +326,8 @@ commands:
       - store_test_results:
           name: Uploading test results'
           path: "./support/PowerShell/JumpCloud Module/Tests/test_results/"
-  setup:
+  cache-pwsh:
     steps:
-      - checkout
       - run:
           name: Install PowerShell Core
           command: dotnet tool install --global PowerShell --version 7.1.5
@@ -327,6 +337,19 @@ commands:
           command: |
             $ErrorActionPreference = 'Stop'
             ./SetupDependencies.ps1
+      - save_cache:
+          paths:
+            - "~/Documents/PowerShell/*"
+          key: cache-pwsh
+  setup:
+    steps:
+      - checkout
+      - run:
+          name: Install PowerShell Core
+          command: dotnet tool install --global PowerShell --version 7.1.5
+      - restore_cache:
+          keys:
+            - cache-pwsh
       - run:
           name: Display Session Variables (For Debugging)
           shell: pwsh.exe
