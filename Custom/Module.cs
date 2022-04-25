@@ -73,10 +73,11 @@ namespace ModuleNameSpace
             mtpUrls.Add("/api/v2/providers");
             mtpUrls.Add("/api/v2/integrations/");
             foreach (string mtpUrl in mtpUrls){
-            // Several endpoints do not accept x-org-id as a header so remove it
-            if (request.Headers.Contains("x-org-id") && request.RequestUri.LocalPath.StartsWith(mtpUrl) == true)
-            {
-                request.Headers.Remove("x-org-id");
+                // Several endpoints do not accept x-org-id as a header so remove it
+                if (request.Headers.Contains("x-org-id") && request.RequestUri.LocalPath.StartsWith(mtpUrl) == true)
+                {
+                    request.Headers.Remove("x-org-id");
+                }
             }
             // If headers do not contain an "Accept" header add one
             if (request.Headers.Contains("Accept") == false)
