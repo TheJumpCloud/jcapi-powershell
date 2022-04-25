@@ -1,3 +1,4 @@
+BeforeAll {
 $loadEnvPath = Join-Path $PSScriptRoot 'loadEnv.ps1'
 if (-Not (Test-Path -Path $loadEnvPath)) {
     $loadEnvPath = Join-Path $PSScriptRoot '..\loadEnv.ps1'
@@ -11,7 +12,9 @@ while(-not $mockingPath) {
 }
 . ($mockingPath | Select-Object -First 1).FullName
 
-Describe 'Update-JcSdkIPList' {
+
+}
+Describe 'Update-JcSdkIPList' -Tag:(""){
     It 'UpdateExpanded' -skip {
         { Update-JcSdkIPList -Id:($global:PesterTestIPList.Id) [-Description '<String>'] [-Ips '<String[]>'] [-Name '<String>'] } | Should -Not -Throw
     }
@@ -28,3 +31,4 @@ Describe 'Update-JcSdkIPList' {
         { Update-JcSdkIPList -InputObject '<IJumpCloudApIsIdentity>' [-Description '<String>'] [-Ips '<String[]>'] [-Name '<String>'] } | Should -Not -Throw
     }
 }
+

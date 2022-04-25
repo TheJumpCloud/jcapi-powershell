@@ -1,3 +1,4 @@
+BeforeAll {
 $loadEnvPath = Join-Path $PSScriptRoot 'loadEnv.ps1'
 if (-Not (Test-Path -Path $loadEnvPath)) {
     $loadEnvPath = Join-Path $PSScriptRoot '..\loadEnv.ps1'
@@ -11,7 +12,9 @@ while(-not $mockingPath) {
 }
 . ($mockingPath | Select-Object -First 1).FullName
 
-Describe 'Set-JcSdkAppleMdm' {
+
+}
+Describe 'Set-JcSdkAppleMdm' -Tag:(""){
     It 'SetExpanded' -skip {
         { Set-JcSdkAppleMdm -Id:($global:PesterTestAppleMdm.Id) } | Should -Not -Throw
     }
@@ -28,3 +31,4 @@ Describe 'Set-JcSdkAppleMdm' {
         { Set-JcSdkAppleMdm -InputObject '<IJumpCloudApIsIdentity>' [-AppleSignedCert '<String>'] [-DefaultSystemGroupId '<String>'] [-DepEnableZeroTouchEnrollment] [-DepSetupAssistantOptions '<IDepSetupAssistantOption[]>'] [-EncryptedDepServerToken '<String>'] [-Name '<String>'] [-WelcomeScreenButton '<String>'] [-WelcomeScreenParagraph '<String>'] [-WelcomeScreenTitle '<String>'] } | Should -Not -Throw
     }
 }
+

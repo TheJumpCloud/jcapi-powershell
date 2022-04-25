@@ -1,3 +1,4 @@
+BeforeAll {
 $loadEnvPath = Join-Path $PSScriptRoot 'loadEnv.ps1'
 if (-Not (Test-Path -Path $loadEnvPath)) {
     $loadEnvPath = Join-Path $PSScriptRoot '..\loadEnv.ps1'
@@ -11,7 +12,9 @@ while(-not $mockingPath) {
 }
 . ($mockingPath | Select-Object -First 1).FullName
 
-Describe 'Get-JcSdkUserGroupTraverseApplication' {
+
+}
+Describe 'Get-JcSdkUserGroupTraverseApplication' -Tag:(""){
     It 'Get' {
         { Get-JcSdkUserGroupTraverseApplication -GroupId:($global:PesterTestUserGroup.Id) } | Should -Not -Throw
     }
@@ -20,3 +23,4 @@ Describe 'Get-JcSdkUserGroupTraverseApplication' {
         { Get-JcSdkUserGroupTraverseApplication -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }
+

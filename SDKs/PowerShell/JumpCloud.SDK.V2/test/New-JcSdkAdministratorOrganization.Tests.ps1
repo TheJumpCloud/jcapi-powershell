@@ -1,3 +1,4 @@
+BeforeAll {
 if(($null -eq $TestName) -or ($TestName -contains 'New-JcSdkAdministratorOrganization'))
 {
   $loadEnvPath = Join-Path $PSScriptRoot 'loadEnv.ps1'
@@ -14,12 +15,18 @@ if(($null -eq $TestName) -or ($TestName -contains 'New-JcSdkAdministratorOrganiz
   . ($mockingPath | Select-Object -First 1).FullName
 }
 
-Describe 'New-JcSdkAdministratorOrganization' {
+
+}
+Describe 'New-JcSdkAdministratorOrganization' -Tag:("MTP") {
     It 'Create' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { New-JcSdkAdministratorOrganization -Organization:($env:JCOrgId) -Id:(($global:PesterTestProviderAdmin).Id) } | Should -Not -Throw
     }
 
     It 'CreateViaIdentity' -skip {
+        { throw [System.NotImplementedException] } | Should -Not -Throw
+    }
+
+    It 'CreateViaIdentityExpanded' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 }

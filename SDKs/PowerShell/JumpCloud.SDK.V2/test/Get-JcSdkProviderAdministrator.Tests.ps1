@@ -1,3 +1,4 @@
+BeforeAll {
 if(($null -eq $TestName) -or ($TestName -contains 'Get-JcSdkProviderAdministrator'))
 {
   $loadEnvPath = Join-Path $PSScriptRoot 'loadEnv.ps1'
@@ -14,8 +15,11 @@ if(($null -eq $TestName) -or ($TestName -contains 'Get-JcSdkProviderAdministrato
   . ($mockingPath | Select-Object -First 1).FullName
 }
 
-Describe 'Get-JcSdkProviderAdministrator' {
+
+}
+Describe 'Get-JcSdkProviderAdministrator' -Tag:("MTP") {
     It 'List' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+        { Get-JcSdkProviderAdministrator -ProviderID:($env:JCProviderId) } | Should -Not -Throw
     }
 }
+

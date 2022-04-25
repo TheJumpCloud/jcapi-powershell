@@ -1,3 +1,4 @@
+BeforeAll {
 $loadEnvPath = Join-Path $PSScriptRoot 'loadEnv.ps1'
 if (-Not (Test-Path -Path $loadEnvPath)) {
     $loadEnvPath = Join-Path $PSScriptRoot '..\loadEnv.ps1'
@@ -11,7 +12,9 @@ while(-not $mockingPath) {
 }
 . ($mockingPath | Select-Object -First 1).FullName
 
-Describe 'Get-JcSdkRadiusServerTraverseUserGroup' {
+
+}
+Describe 'Get-JcSdkRadiusServerTraverseUserGroup' -Tag:(""){
     It 'Get' {
         { Get-JcSdkRadiusServerTraverseUserGroup -RadiusserverId:($global:PesterTestRadiusserver.Id) } | Should -Not -Throw
     }
@@ -20,3 +23,4 @@ Describe 'Get-JcSdkRadiusServerTraverseUserGroup' {
         { Get-JcSdkRadiusServerTraverseUserGroup -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }
+

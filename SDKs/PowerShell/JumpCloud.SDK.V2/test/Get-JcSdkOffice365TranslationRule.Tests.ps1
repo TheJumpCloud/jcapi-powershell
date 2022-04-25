@@ -1,3 +1,4 @@
+BeforeAll {
 $loadEnvPath = Join-Path $PSScriptRoot 'loadEnv.ps1'
 if (-Not (Test-Path -Path $loadEnvPath)) {
     $loadEnvPath = Join-Path $PSScriptRoot '..\loadEnv.ps1'
@@ -11,7 +12,9 @@ while(-not $mockingPath) {
 }
 . ($mockingPath | Select-Object -First 1).FullName
 
-Describe 'Get-JcSdkOffice365TranslationRule' {
+
+}
+Describe 'Get-JcSdkOffice365TranslationRule' -Tag:(""){
     It 'List' {
         { Get-JcSdkOffice365TranslationRule -Office365Id:($global:PesterTestOffice365.Id) } | Should -Not -Throw
     }
@@ -24,3 +27,4 @@ Describe 'Get-JcSdkOffice365TranslationRule' {
         { Get-JcSdkOffice365TranslationRule -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }
+

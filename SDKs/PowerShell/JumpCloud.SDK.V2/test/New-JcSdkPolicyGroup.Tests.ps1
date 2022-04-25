@@ -1,3 +1,4 @@
+BeforeAll {
 $loadEnvPath = Join-Path $PSScriptRoot 'loadEnv.ps1'
 if (-Not (Test-Path -Path $loadEnvPath)) {
     $loadEnvPath = Join-Path $PSScriptRoot '..\loadEnv.ps1'
@@ -11,7 +12,9 @@ while(-not $mockingPath) {
 }
 . ($mockingPath | Select-Object -First 1).FullName
 
-Describe 'New-JcSdkPolicyGroup' {
+
+}
+Describe 'New-JcSdkPolicyGroup' -Tag:(""){
     It 'NewExpanded' {
         $global:PesterTestPolicyGroup = New-JcSdkPolicyGroup @global:PesterDefPolicyGroup
         $global:PesterTestPolicyGroup | Should -Not -BeNullOrEmpty
@@ -21,3 +24,4 @@ Describe 'New-JcSdkPolicyGroup' {
         { New-JcSdkPolicyGroup -Body:($global:PesterTestPolicyGroup) } | Should -Not -Throw
     }
 }
+

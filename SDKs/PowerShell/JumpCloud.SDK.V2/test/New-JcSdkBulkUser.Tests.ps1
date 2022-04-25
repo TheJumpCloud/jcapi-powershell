@@ -1,3 +1,4 @@
+BeforeAll {
 $loadEnvPath = Join-Path $PSScriptRoot 'loadEnv.ps1'
 if (-Not (Test-Path -Path $loadEnvPath)) {
     $loadEnvPath = Join-Path $PSScriptRoot '..\loadEnv.ps1'
@@ -11,10 +12,13 @@ while(-not $mockingPath) {
 }
 . ($mockingPath | Select-Object -First 1).FullName
 
-Describe 'New-JcSdkBulkUser' {
+
+}
+Describe 'New-JcSdkBulkUser' -Tag:(""){
     It 'Create' {
         $global:PesterTestBulkUserJobId =  New-JcSdkBulkUser -Body:($global:PesterDefBulkUser) -CreationSource:('jumpcloud:bulk')
         { $global:PesterTestBulkUserJobId } | Should -Not -BeNullOrEmpty
         { Get-JcSdkUser -id $global:PesterTestBulkUserJobId.Id } | Should -Not -BeNullOrEmpty
     }
 }
+

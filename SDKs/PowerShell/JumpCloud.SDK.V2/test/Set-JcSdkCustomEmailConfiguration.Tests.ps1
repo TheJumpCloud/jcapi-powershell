@@ -1,3 +1,4 @@
+BeforeAll {
 $loadEnvPath = Join-Path $PSScriptRoot 'loadEnv.ps1'
 if (-Not (Test-Path -Path $loadEnvPath)) {
     $loadEnvPath = Join-Path $PSScriptRoot '..\loadEnv.ps1'
@@ -11,7 +12,9 @@ while(-not $mockingPath) {
 }
 . ($mockingPath | Select-Object -First 1).FullName
 
-Describe 'Set-JcSdkCustomEmailConfiguration' {
+
+}
+Describe 'Set-JcSdkCustomEmailConfiguration' -Tag:(""){
     It 'SetExpanded' {
         { Set-JcSdkCustomEmailConfiguration -CustomEmailType:($global:PesterTestCustomEmailConfiguration.Type) -Subject:($global:PesterTestCustomEmailConfiguration.Subject) -Type:($global:PesterTestCustomEmailConfiguration.Type) } | Should -Not -Throw
     }
@@ -28,3 +31,4 @@ Describe 'Set-JcSdkCustomEmailConfiguration' {
         { Set-JcSdkCustomEmailConfiguration -InputObject '<IJumpCloudApIsIdentity>' -Subject:($global:PesterTestCustomEmailConfiguration.Subject) -Type:($global:PesterTestCustomEmailConfiguration.Type) [-Body '<String>'] [-Button '<String>'] [-Header '<String>'] [-NextStepContactInfo '<String>'] [-Title '<String>'] } | Should -Not -Throw
     }
 }
+

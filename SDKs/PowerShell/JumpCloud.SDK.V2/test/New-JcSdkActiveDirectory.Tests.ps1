@@ -1,3 +1,4 @@
+BeforeAll {
 $loadEnvPath = Join-Path $PSScriptRoot 'loadEnv.ps1'
 if (-Not (Test-Path -Path $loadEnvPath)) {
     $loadEnvPath = Join-Path $PSScriptRoot '..\loadEnv.ps1'
@@ -11,7 +12,9 @@ while(-not $mockingPath) {
 }
 . ($mockingPath | Select-Object -First 1).FullName
 
-Describe 'New-JcSdkActiveDirectory' {
+
+}
+Describe 'New-JcSdkActiveDirectory' -Tag:(""){
     It 'CreateExpanded' {
         $global:PesterTestActiveDirectory = New-JcSdkActiveDirectory @global:PesterDefActiveDirectory
         $global:PesterTestActiveDirectory | Should -Not -BeNullOrEmpty
@@ -21,3 +24,4 @@ Describe 'New-JcSdkActiveDirectory' {
         { New-JcSdkActiveDirectory -Body:($global:PesterTestActiveDirectory) } | Should -Not -Throw
     }
 }
+

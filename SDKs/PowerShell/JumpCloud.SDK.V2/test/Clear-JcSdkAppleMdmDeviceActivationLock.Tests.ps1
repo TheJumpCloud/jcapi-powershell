@@ -1,3 +1,4 @@
+BeforeAll {
 $loadEnvPath = Join-Path $PSScriptRoot 'loadEnv.ps1'
 if (-Not (Test-Path -Path $loadEnvPath)) {
     $loadEnvPath = Join-Path $PSScriptRoot '..\loadEnv.ps1'
@@ -11,7 +12,9 @@ while(-not $mockingPath) {
 }
 . ($mockingPath | Select-Object -First 1).FullName
 
-Describe 'Clear-JcSdkAppleMdmDeviceActivationLock' {
+
+}
+Describe 'Clear-JcSdkAppleMdmDeviceActivationLock' -Tag:(""){
     It 'Clear' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
@@ -20,3 +23,4 @@ Describe 'Clear-JcSdkAppleMdmDeviceActivationLock' {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 }
+

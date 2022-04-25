@@ -1,3 +1,4 @@
+BeforeAll {
 $loadEnvPath = Join-Path $PSScriptRoot 'loadEnv.ps1'
 if (-Not (Test-Path -Path $loadEnvPath)) {
     $loadEnvPath = Join-Path $PSScriptRoot '..\loadEnv.ps1'
@@ -11,7 +12,9 @@ while(-not $mockingPath) {
 }
 . ($mockingPath | Select-Object -First 1).FullName
 
-Describe 'Set-JcSdkSystemAssociation' {
+
+}
+Describe 'Set-JcSdkSystemAssociation' -Tag:(""){
     # TODO: Update for PolicyGroups
     #It 'SetExpanded' {
     #    $ParameterType = (Get-Command Set-JcSdkSystemAssociation).Parameters.Type.ParameterType.FullName
@@ -37,3 +40,4 @@ Describe 'Set-JcSdkSystemAssociation' {
         { Set-JcSdkSystemAssociation -Id:($global:PesterTestUser.Id) -InputObject '<IJumpCloudApIsIdentity>' -Op:('add') -Type:('user') [-AttributeSudoEnabled] [-AttributeSudoWithoutPassword] [-Authorization '<String>'] [-Date '<String>'] } | Should -Not -Throw
     }
 }
+

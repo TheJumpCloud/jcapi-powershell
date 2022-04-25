@@ -1,3 +1,4 @@
+BeforeAll {
 $loadEnvPath = Join-Path $PSScriptRoot 'loadEnv.ps1'
 if (-Not (Test-Path -Path $loadEnvPath)) {
     $loadEnvPath = Join-Path $PSScriptRoot '..\loadEnv.ps1'
@@ -11,7 +12,9 @@ while(-not $mockingPath) {
 }
 . ($mockingPath | Select-Object -First 1).FullName
 
-Describe 'Get-JcSdkActiveDirectory' {
+
+}
+Describe 'Get-JcSdkActiveDirectory' -Tag:(""){
     It 'List' {
         { Get-JcSdkActiveDirectory } | Should -Not -Throw
     }
@@ -24,3 +27,4 @@ Describe 'Get-JcSdkActiveDirectory' {
         { Get-JcSdkActiveDirectory -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }
+
