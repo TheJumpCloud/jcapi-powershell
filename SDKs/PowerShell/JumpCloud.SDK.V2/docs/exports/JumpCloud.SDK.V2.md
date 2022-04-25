@@ -2809,16 +2809,60 @@ curl -X POST https://console.jumpcloud.com/api/v2/radiusservers/{RADIUS_ID}/asso
 
 ### [Set-JcSdkSoftwareApp](Set-JcSdkSoftwareApp.md)
 This endpoint updates a specific Software Application configuration for the organization.
-Only displayName can be changed.
+displayName can be changed alone if no settings are provided.
+If a setting is provided, it should include all its information since this endpoint will update all the settings' fields.
 
-#### Sample Request
+#### Sample Request - displayName only
 ```
  curl -X PUT https://console.jumpcloud.com/api/v2/softwareapps/{id} \\
   -H 'accept: application/json' \\
   -H 'content-type: application/json' \\
   -H 'x-api-key: {API_KEY}' \\
   -d '{
-    \"displayName\": \"Adobe Reader\"
+    \"displayName\": \"My Software App\"
+  }'
+```
+
+#### Sample Request - all attributes
+```
+ curl -X PUT https://console.jumpcloud.com/api/v2/softwareapps/{id} \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"displayName\": \"My Software App\",
+    \"settings\": [
+      {
+        \"packageId\": \"123456\",
+        \"autoUpdate\": false,
+        \"allowUpdateDelay\": false,
+        \"packageManager\": \"APPLE_VPP\",
+        \"locationObjectId\": \"123456789012123456789012\",
+        \"location\": \"123456\",
+        \"desiredState\": \"Install\",
+        \"appleVpp\": {
+          \"appConfiguration\": \"\<?xml version=\\\"1.0\\\" encoding=\\\"UTF-8\\\"?\>\<!DOCTYPE plist PUBLIC \\\"-//Apple//DTD PLIST 1.0//EN\\\" \\\"http://www.apple.com/DTDs/PropertyList-1.0.dtd\\\"\>\<plist version=\\\"1.0\\\"\>\<dict\>\<key\>MyKey\</key\>\<string\>My String\</string\>\</dict\>\</plist\>\",
+          \"assignedLicenses\": 20,
+          \"availableLicenses\": 10,
+          \"details\": {},
+          \"isConfigEnabled\": true,
+          \"supportedDeviceFamilies\": [
+            \"IPAD\",
+            \"MAC\"
+          ],
+          \"totalLicenses\": 30
+        },
+        \"packageSubtitle\": \"My package subtitle\",
+        \"packageVersion\": \"1.2.3\",
+        \"packageKind\": \"software-package\",
+        \"assetKind\": \"software\",
+        \"assetSha256Size\": 256,
+        \"assetSha256Strings\": [
+          \"a123b123c123d123\"
+        ],
+        \"description\": \"My app description\"
+      }
+    ]
   }'
 ```
 

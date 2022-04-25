@@ -186,7 +186,7 @@ BODY <ISoftwareApp>: Software Application Package
   - `[Id <String>]`: 
   - `[Settings <ISoftwareAppSettings[]>]`: 
     - `[AllowUpdateDelay <Boolean?>]`: 
-    - `[AppleVppAppConfiguration <String>]`: Text sent to configure the application.
+    - `[AppleVppAppConfiguration <String>]`: Text sent to configure the application, the text should be a valid plist.
     - `[AppleVppAssignedLicenses <Int32?>]`: 
     - `[AppleVppAvailableLicenses <Int32?>]`: 
     - `[AppleVppDetails <ISoftwareAppAppleVppDetails>]`: App details returned by iTunes API. See example. The properties in this field are out of our control and we cannot guarantee consistency, so it should be checked by the client and manage the details accordingly.
@@ -210,7 +210,7 @@ BODY <ISoftwareApp>: Software Application Package
 
 SETTINGS <ISoftwareAppSettings[]>: .
   - `[AllowUpdateDelay <Boolean?>]`: 
-  - `[AppleVppAppConfiguration <String>]`: Text sent to configure the application.
+  - `[AppleVppAppConfiguration <String>]`: Text sent to configure the application, the text should be a valid plist.
   - `[AppleVppAssignedLicenses <Int32?>]`: 
   - `[AppleVppAvailableLicenses <Int32?>]`: 
   - `[AppleVppDetails <ISoftwareAppAppleVppDetails>]`: App details returned by iTunes API. See example. The properties in this field are out of our control and we cannot guarantee consistency, so it should be checked by the client and manage the details accordingly.

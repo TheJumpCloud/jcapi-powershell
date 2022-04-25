@@ -3498,7 +3498,7 @@
       "description": "appleVpp is an optional attribute, it will only be present on apps with a 'setting' 'package_manager' type of 'APPLE_VPP'.",
       "properties": {
         "appConfiguration": {
-          "description": "Text sent to configure the application.",
+          "description": "Text sent to configure the application, the text should be a valid plist.",
           "type": "string"
         },
         "assignedLicenses": {
@@ -13851,7 +13851,7 @@
         }
       ],
       "put": {
-        "description": "This endpoint updates a specific Software Application configuration for the organization.  Only displayName can be changed.\n\n#### Sample Request\n```\n curl -X PUT https://console.jumpcloud.com/api/v2/softwareapps/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"displayName\": \"Adobe Reader\"\n  }'\n```",
+        "description": "This endpoint updates a specific Software Application configuration for the organization.\ndisplayName can be changed alone if no settings are provided.\nIf a setting is provided, it should include all its information since this endpoint will update all the settings' fields.\n\n#### Sample Request - displayName only\n```\n curl -X PUT https://console.jumpcloud.com/api/v2/softwareapps/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"displayName\": \"My Software App\"\n  }'\n```\n\n#### Sample Request - all attributes\n```\n curl -X PUT https://console.jumpcloud.com/api/v2/softwareapps/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"displayName\": \"My Software App\",\n    \"settings\": [\n      {\n        \"packageId\": \"123456\",\n        \"autoUpdate\": false,\n        \"allowUpdateDelay\": false,\n        \"packageManager\": \"APPLE_VPP\",\n        \"locationObjectId\": \"123456789012123456789012\",\n        \"location\": \"123456\",\n        \"desiredState\": \"Install\",\n        \"appleVpp\": {\n          \"appConfiguration\": \"<?xml version=\\\"1.0\\\" encoding=\\\"UTF-8\\\"?><!DOCTYPE plist PUBLIC \\\"-//Apple//DTD PLIST 1.0//EN\\\" \\\"http://www.apple.com/DTDs/PropertyList-1.0.dtd\\\"><plist version=\\\"1.0\\\"><dict><key>MyKey</key><string>My String</string></dict></plist>\",\n          \"assignedLicenses\": 20,\n          \"availableLicenses\": 10,\n          \"details\": {},\n          \"isConfigEnabled\": true,\n          \"supportedDeviceFamilies\": [\n            \"IPAD\",\n            \"MAC\"\n          ],\n          \"totalLicenses\": 30\n        },\n        \"packageSubtitle\": \"My package subtitle\",\n        \"packageVersion\": \"1.2.3\",\n        \"packageKind\": \"software-package\",\n        \"assetKind\": \"software\",\n        \"assetSha256Size\": 256,\n        \"assetSha256Strings\": [\n          \"a123b123c123d123\"\n        ],\n        \"description\": \"My app description\"\n      }\n    ]\n  }'\n```",
         "operationId": "SoftwareApp_Set",
         "parameters": [
           {
@@ -13859,12 +13859,53 @@
             "name": "body",
             "schema": {
               "$ref": "#/definitions/software-app"
+            },
+            "x-examples": {
+              "all-attributes": {
+                "displayName": "My Software App",
+                "settings": [
+                  {
+                    "allowUpdateDelay": false,
+                    "appleVpp": {
+                      "appConfiguration": "<?xml version=\"1.0\" encoding=\"UTF-8\"?><!DOCTYPE plist PUBLIC \"-//Apple//DTD PLIST 1.0//EN\" \"http://www.apple.com/DTDs/PropertyList-1.0.dtd\"><plist version=\"1.0\"><dict><key>MyKey</key><string>My String</string></dict></plist>",
+                      "assignedLicenses": 20,
+                      "availableLicenses": 10,
+                      "details": {},
+                      "isConfigEnabled": true,
+                      "supportedDeviceFamilies": [
+                        "IPAD",
+                        "MAC"
+                      ],
+                      "totalLicenses": 30
+                    },
+                    "assetKind": "software",
+                    "assetSha256Size": 256,
+                    "assetSha256Strings": [
+                      "a123b123c123d123"
+                    ],
+                    "autoUpdate": false,
+                    "description": "My app description",
+                    "desiredState": "Install",
+                    "location": "123456",
+                    "locationObjectId": "123456789012123456789012",
+                    "packageId": "123456",
+                    "packageKind": "software-package",
+                    "packageManager": "APPLE_VPP",
+                    "packageSubtitle": "My package subtitle",
+                    "packageVersion": "1.2.3"
+                  }
+                ]
+              },
+              "displayName-only": {
+                "displayName": "My Software App"
+              }
             }
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
+            "examples": {},
             "schema": {
               "$ref": "#/definitions/software-app"
             }
