@@ -1,6 +1,6 @@
 version: 2.1
 orbs:
-  win: circleci/windows@2.2.0
+  win: circleci/windows@4.1.1
 parameters:
   workflow:
     description: The name of the workflow to run. Must match the workflow name exactly.
@@ -16,42 +16,68 @@ parameters:
     default: false
 # YAML Anchors
 build-sdks: &build-sdks
-  - Build and Test JumpCloud SDK DirectoryInsights:
+  - Build JumpCloud SDK DirectoryInsights:
       context: aws-credentials
-  - Build and Test JumpCloud SDK V1:
-      requires:
-        - Build and Test JumpCloud SDK DirectoryInsights
+  - Build JumpCloud SDK V1:
       context: aws-credentials
-  - Build and Test JumpCloud SDK V2:
+  - Build JumpCloud SDK V2:
+      context: aws-credentials
+  - Test JumpCloud SDK DirectoryInsights:
       requires:
-        - Build and Test JumpCloud SDK DirectoryInsights
-        - Build and Test JumpCloud SDK V1
+        - Build JumpCloud SDK DirectoryInsights
+      context: aws-credentials
+  - Test JumpCloud SDK V1:
+      requires:
+        - Build JumpCloud SDK V1
+      context: aws-credentials
+  - Test JumpCloud SDK V1 MTP:
+      requires:
+        - Build JumpCloud SDK V1
+        - Test JumpCloud SDK V1
+      context: aws-credentials
+  - Test JumpCloud SDK V2:
+      requires:
+        - Build JumpCloud SDK V1
+        - Build JumpCloud SDK V2
+        - Test JumpCloud SDK V1
+      context: aws-credentials
+  - Test JumpCloud SDK V2 MTP:
+      requires:
+        - Build JumpCloud SDK V1
+        - Build JumpCloud SDK V2
+        - Test JumpCloud SDK V1
+        - Test JumpCloud SDK V1 MTP
+        - Test JumpCloud SDK V2
       context: aws-credentials
   - Commit Changes:
       requires:
-        - Build and Test JumpCloud SDK DirectoryInsights
-        - Build and Test JumpCloud SDK V1
-        - Build and Test JumpCloud SDK V2
+        - Test JumpCloud SDK DirectoryInsights
+        - Test JumpCloud SDK V1
+        - Test JumpCloud SDK V1 MTP
+        - Test JumpCloud SDK V2
+        - Test JumpCloud SDK V2 MTP
   - CodeArtifact Approval:
       type: approval
       requires:
-        - Build and Test JumpCloud SDK DirectoryInsights
-        - Build and Test JumpCloud SDK V1
-        - Build and Test JumpCloud SDK V2
-        - Commit Changes
+          - Test JumpCloud SDK DirectoryInsights
+          - Test JumpCloud SDK V1
+          - Test JumpCloud SDK V1 MTP
+          - Test JumpCloud SDK V2
+          - Test JumpCloud SDK V2 MTP
+          - Commit Changes
   - Pack and Deploy To CodeArtifact:
       requires:
-        - Build and Test JumpCloud SDK DirectoryInsights
-        - Build and Test JumpCloud SDK V1
-        - Build and Test JumpCloud SDK V2
+        - Test JumpCloud SDK DirectoryInsights
+        - Test JumpCloud SDK V1
+        - Test JumpCloud SDK V2
         - Commit Changes
         - CodeArtifact Approval
       context: aws-credentials
   - Test SDKs on Production JumpCloud PowerShell TestModule:
       requires:
-        - Build and Test JumpCloud SDK DirectoryInsights
-        - Build and Test JumpCloud SDK V1
-        - Build and Test JumpCloud SDK V2
+        - Test JumpCloud SDK DirectoryInsights
+        - Test JumpCloud SDK V1
+        - Test JumpCloud SDK V2
         - Commit Changes
         - CodeArtifact Approval
         - Pack and Deploy To CodeArtifact
@@ -59,12 +85,11 @@ build-sdks: &build-sdks
   - PSGallery Approval:
       type: approval
       requires:
-        - Build and Test JumpCloud SDK DirectoryInsights
-        - Draft JumpCloud SDK DirectoryInsights GitHub Release
-        - Build and Test JumpCloud SDK V1
-        - Draft JumpCloud SDK V1 GitHub Release
-        - Build and Test JumpCloud SDK V2
-        - Draft JumpCloud SDK V2 GitHub Release
+        - Test JumpCloud SDK DirectoryInsights
+        - Test JumpCloud SDK V1
+        - Test JumpCloud SDK V1 MTP
+        - Test JumpCloud SDK V2
+        - Test JumpCloud SDK V2 MTP
         - Commit Changes
         - Pack and Deploy To CodeArtifact
       filters:
@@ -73,42 +98,12 @@ build-sdks: &build-sdks
             - master
   - Pack and Deploy To PSGallery:
       requires:
-        - Build and Test JumpCloud SDK DirectoryInsights
-        - Draft JumpCloud SDK DirectoryInsights GitHub Release
-        - Build and Test JumpCloud SDK V1
-        - Draft JumpCloud SDK V1 GitHub Release
-        - Build and Test JumpCloud SDK V2
-        - Draft JumpCloud SDK V2 GitHub Release
+        - Test JumpCloud SDK DirectoryInsights
+        - Test JumpCloud SDK V1
+        - Test JumpCloud SDK V2
         - Commit Changes
         - Pack and Deploy To CodeArtifact
         - PSGallery Approval
-      filters:
-        branches:
-          only:
-            - master
-  - Draft JumpCloud SDK DirectoryInsights GitHub Release:
-      requires:
-        - Build and Test JumpCloud SDK DirectoryInsights
-        - Commit Changes
-      filters:
-        branches:
-          only:
-            - master
-  - Draft JumpCloud SDK V1 GitHub Release:
-      requires:
-        - Build and Test JumpCloud SDK DirectoryInsights
-        - Build and Test JumpCloud SDK V1
-        - Commit Changes
-      filters:
-        branches:
-          only:
-            - master
-  - Draft JumpCloud SDK V2 GitHub Release:
-      requires:
-        - Build and Test JumpCloud SDK DirectoryInsights
-        - Build and Test JumpCloud SDK V1
-        - Build and Test JumpCloud SDK V2
-        - Commit Changes
       filters:
         branches:
           only:
@@ -133,10 +128,34 @@ workflows:
     when:
       equal: [<< pipeline.parameters.workflow >>, "ci-nightly"]
     jobs:
-      - Build and Test JumpCloud SDK DirectoryInsights
-      - Build and Test JumpCloud SDK V1
-      - Build and Test JumpCloud SDK V2
+      - Test JumpCloud SDK DirectoryInsights
+      - Test JumpCloud SDK V1
+      - Test JumpCloud SDK V2
 jobs:
+  Build JumpCloud SDK DirectoryInsights:
+    executor: win/default
+    steps:
+      - setup
+      - build-sdk:
+          SDKName: JumpCloud.SDK.DirectoryInsights
+          ManualModuleVersion: ''
+          RunApiTransform: true
+  Build JumpCloud SDK V1:
+    executor: win/default
+    steps:
+      - setup
+      - build-sdk:
+          SDKName: JumpCloud.SDK.V1
+          ManualModuleVersion: ''
+          RunApiTransform: true
+  Build JumpCloud SDK V2:
+    executor: win/default
+    steps:
+      - setup
+      - build-sdk:
+          SDKName: JumpCloud.SDK.V2
+          ManualModuleVersion: ''
+          RunApiTransform: true
   Test SDKs on Production JumpCloud PowerShell TestModule:
     executor: win/default
     steps:
@@ -145,57 +164,53 @@ jobs:
             - '24:54:e1:c2:70:c6:f7:61:71:4b:c5:52:9f:20:b9:63'
       - checkout
       - pulljcmodule
-  Build and Test JumpCloud SDK DirectoryInsights:
+  Test JumpCloud SDK DirectoryInsights:
     executor: win/default
     steps:
       - setup
-      - build-test:
+      - test-sdk:
           SDKName: JumpCloud.SDK.DirectoryInsights
-          ManualModuleVersion: ''
-          RunApiTransform: true
           TestModule: true
-  Draft JumpCloud SDK DirectoryInsights GitHub Release:
-    docker:
-      - image: cibuilds/github:0.13
-    steps:
-      - create-github-release-draft:
-          SDKName: JumpCloud.SDK.DirectoryInsights
-  Build and Test JumpCloud SDK V1:
+  Test JumpCloud SDK V1:
     executor: win/default
     steps:
       - setup
-      - build-test:
+      - test-sdk:
           SDKName: JumpCloud.SDK.V1
-          ManualModuleVersion: ''
-          RunApiTransform: true
           TestModule: true
-  Draft JumpCloud SDK V1 GitHub Release:
-    docker:
-      - image: cibuilds/github:0.13
-    steps:
-      - create-github-release-draft:
-          SDKName: JumpCloud.SDK.V1
-  Build and Test JumpCloud SDK V2:
+          IncludeTagList: '*'
+          ExcludeTagList: 'MTP'
+  Test JumpCloud SDK V1 MTP:
     executor: win/default
     steps:
       - setup
-      - build-test:
-          SDKName: JumpCloud.SDK.V2
-          ManualModuleVersion: ''
-          RunApiTransform: true
+      - test-mtp:
+          SDKName: JumpCloud.SDK.V1
           TestModule: true
-  Draft JumpCloud SDK V2 GitHub Release:
-    docker:
-      - image: cibuilds/github:0.13
+          IncludeTagList: 'MTP'
+  Test JumpCloud SDK V2:
+    executor: win/default
     steps:
-      - create-github-release-draft:
+      - setup
+      - test-sdk:
           SDKName: JumpCloud.SDK.V2
+          TestModule: true
+          IncludeTagList: '*'
+          ExcludeTagList: 'MTP'
+  Test JumpCloud SDK V2 MTP:
+    executor: win/default
+    steps:
+      - setup
+      - test-mtp:
+          SDKName: JumpCloud.SDK.V2
+          TestModule: true
+          IncludeTagList: 'MTP'
   Commit Changes:
     executor: win/default
     steps:
       - add_ssh_keys:
           fingerprints:
-            - '77:04:3b:23:54:68:a8:d3:ee:63:6b:77:bb:a1:9d:c3'
+            - '14:78:b4:7b:f0:bb:3b:ef:a7:ba:06:49:87:50:79:e9'
       - checkout
       - commit:
           SDKName: JumpCloud.SDK.DirectoryInsights, JumpCloud.SDK.V1, JumpCloud.SDK.V2
@@ -336,25 +351,21 @@ commands:
           name: Add nuget sources
           shell: pwsh.exe
           command: |
-            Set-AWSCredential -AccessKey:($env:AWS_ACCESS_KEY_ID) -SecretKey:($env:AWS_SECRET_ACCESS_KEY)
-            $CARepoEndpoint = "$(Get-CARepositoryEndpoint -Domain jumpcloud-artifacts -Region us-east-1 -Repository jumpcloud-nuget-modules -Format nuget)v3/index.json"
-            dotnet nuget add source $CARepoEndpoint --name CodeArtifact --username aws --password (Get-CAAuthorizationToken -Domain:("jumpcloud-artifacts") -Region:("us-east-1")).AuthorizationToken
-            dotnet nuget add source "https://www.powershellgallery.com/api/v2/package" --name PSGallery
-  build-test:
+            # Set-AWSCredential -AccessKey:($env:AWS_ACCESS_KEY_ID) -SecretKey:($env:AWS_SECRET_ACCESS_KEY)
+            # $CARepoEndpoint = "$(Get-CARepositoryEndpoint -Domain jumpcloud-artifacts -Region us-east-1 -Repository jumpcloud-nuget-modules -Format nuget)v3/index.json"
+            # dotnet nuget add source $CARepoEndpoint --name CodeArtifact --username aws --password (Get-CAAuthorizationToken -Domain:("jumpcloud-artifacts") -Region:("us-east-1")).AuthorizationToken
+            # dotnet nuget add source "https://www.powershellgallery.com/api/v2/package" --name PSGallery
+  build-sdk:
     parameters:
       SDKName:
         description: Name of the SDK to generate
         type: string
       ManualModuleVersion:
-        description: ''
+        description: 'Manually specify the module version given the case a version should be skipped'
         type: string
         default: ''
       RunApiTransform:
-        description: ''
-        type: boolean
-        default: true
-      TestModule:
-        description: ''
+        description: 'Boolean to run or skip transforming the Swagger index.yaml file'
         type: boolean
         default: true
     steps:
@@ -366,12 +377,32 @@ commands:
           command: |
             $ErrorActionPreference = 'Stop'
             ./BuildAutoRest.ps1 -SDKName:('<< parameters.SDKName >>') -ManualModuleVersion:('<< parameters.ManualModuleVersion >>') -RunApiTransform:($<< parameters.RunApiTransform >>)
-      - run:
-          name: Creating/Updating Changelog For '<< parameters.SDKName >>''
-          shell: pwsh.exe
-          command: |
-           $ErrorActionPreference = 'Stop'
-           ./Tools/Build-SdkChangelog.ps1 -SDKName:('<< parameters.SDKName >>')
+      - persist_to_workspace:
+          root: .
+          paths:
+            - ./SDKs/PowerShell/<< parameters.SDKName >>/*
+            - ./Configs/<< parameters.SDKName >>.yaml
+            - ./SwaggerSpecs/<< parameters.SDKName >>.json
+  test-sdk:
+    parameters:
+      SDKName:
+        description: Name of the SDK to test
+        type: string
+      TestModule:
+        description: 'Boolean ro run or skip the test-module step'
+        type: boolean
+        default: true
+      ExcludeTagList:
+        description: 'Pester Tags to either run or skip during test-module'
+        type: string
+        default: 'None'
+      IncludeTagList:
+        description: 'Pester Tags to either run or skip during test-module'
+        type: string
+        default: '*'
+    steps:
+      - attach_workspace:
+          at: .
       - when:
           condition:
             equal: [true, << parameters.TestModule >>]
@@ -381,38 +412,43 @@ commands:
                 shell: pwsh.exe
                 command: |
                   $ErrorActionPreference = 'Stop'
-                  ./Test-Module.ps1 -JCApiKey:($env:JCApiKey) -JCOrgId:($env:JCOrgId) -JCApiKeyMTP:($env:JCApiKeyMTP) -JCProviderId:($env:JCProviderId) -testModulePath:("./SDKs/PowerShell/<< parameters.SDKName >>/test-module.ps1")
+                  ./Test-Module.ps1 -JCApiKey:($env:JCApiKey) -JCOrgId:($env:JCOrgId) -JCApiKeyMTP:($env:JCApiKeyMTP) -JCProviderId:($env:JCProviderId) -ExcludeTagList:("<< parameters.ExcludeTagList >>") -IncludeTagList:("<< parameters.IncludeTagList >>") -testModulePath:("./SDKs/PowerShell/<< parameters.SDKName >>/test-module.ps1")
             - store_test_results:
                 name: Uploading test results for '<< parameters.SDKName >>'
                 path: ./SDKs/PowerShell/<< parameters.SDKName >>/test/results
-      - persist_to_workspace:
-          root: .
-          paths:
-            - .
-  create-github-release-draft:
+  test-mtp:
     parameters:
       SDKName:
         description: Name of the SDK to generate
         type: string
+      TestModule:
+        description: 'Boolean ro run or skip the test-module step'
+        type: boolean
+        default: true
+      ExcludeTagList:
+        description: 'Pester Tags to either run or skip during test-module'
+        type: string
+        default: 'None'
+      IncludeTagList:
+        description: 'Pester Tags to either run or skip during test-module'
+        type: string
+        default: 'MTP'
     steps:
       - attach_workspace:
           at: .
-      - run:
-          name: "Draft Release GitHub"
-          command: |
-            # Module Version
-            MODULE_VERSION=$(grep -o "ModuleVersion = '\d\+\.\d\+\.\d\+'" ./SDKs/PowerShell/<< parameters.SDKName >>/<< parameters.SDKName>>.psd1)
-            VERSION=$(echo $MODULE_VERSION | grep -o "\d\+\.\d\+\.\d\+")
-            TITLE="<< parameters.SDKName >>-$VERSION"
-            # Get the changelog text between the latest release # and the next sequential "## SemanticVersionNumber"
-            CHANGELOG=$(cat ./<< parameters.SDKName >>.md | awk "/^## << parameters.SDKName >>-$VERSION/{ f = 1; next } /## << parameters.SDKName >>-[0-9]+.[0-9]+.[0-9]+/{ f = 0 } f")
-            BODY="$TITLE $CHANGELOG"
-            TAG="<< parameters.SDKName >>-$VERSION"
-            echo ${CIRCLE_PROJECT_USERNAME}
-            echo ${CIRCLE_PROJECT_REPONAME}
-            echo ${GITHUB_TOKEN}
-            # Post Draft Release
-            ghr -t ${GitHubAccessToken} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -n "$TITLE" -b "$BODY" -delete -draft "$TAG"
+      - when:
+          condition:
+            equal: [true, << parameters.TestModule >>]
+          steps:
+            - run:
+                name: Testing MTP Functions'<< parameters.SDKName >>'
+                shell: pwsh.exe
+                command: |
+                  $ErrorActionPreference = 'Stop'
+                  ./Test-Module.ps1 -JCApiKey:($env:JCApiKey) -JCOrgId:($env:JCOrgId) -JCApiKeyMTP:($env:JCApiKeyMTP) -JCProviderId:($env:JCProviderId) -ExcludeTagList:("<< parameters.ExcludeTagList >>") -IncludeTagList:("<< parameters.IncludeTagList >>") -testModulePath:("./SDKs/PowerShell/<< parameters.SDKName >>/test-module.ps1")
+            - store_test_results:
+                name: Uploading test results for '<< parameters.SDKName >>'
+                path: ./SDKs/PowerShell/<< parameters.SDKName >>/test/results
   commit:
     parameters:
       SDKName:
