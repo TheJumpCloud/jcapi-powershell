@@ -1,8 +1,8 @@
 <#
 .Synopsis
-This endpoint allows you to allow Administrator access to an Organization.
+This endpoint allows you to grant Administrator access to an Organization.
 .Description
-This endpoint allows you to allow Administrator access to an Organization.
+This endpoint allows you to grant Administrator access to an Organization.
 .Example
 PS C:\> {{ Add code here }}
 
@@ -13,6 +13,8 @@ PS C:\> {{ Add code here }}
 {{ Add output here }}
 
 .Inputs
+JumpCloud.SDK.V2.Models.IAdministratorOrganizationLinkReq
+.Inputs
 JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
 .Outputs
 JumpCloud.SDK.V2.Models.IAdministratorOrganizationLink
@@ -20,6 +22,9 @@ JumpCloud.SDK.V2.Models.IAdministratorOrganizationLink
 COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
+
+BODY <IAdministratorOrganizationLinkReq>:
+  [Organization <String>]: The identifier for an organization to link this administrator to.
 
 INPUTOBJECT <IJumpCloudApiIdentity>:
   [AccountId <String>]:
@@ -51,20 +56,37 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
  Function New-JcSdkAdministratorOrganization
 {
     [OutputType([JumpCloud.SDK.V2.Models.IAdministratorOrganizationLink])]
-    [CmdletBinding(DefaultParameterSetName='Create', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
+    [CmdletBinding(DefaultParameterSetName='CreateExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(ParameterSetName='Create', Mandatory)]
+    [Parameter(ParameterSetName='CreateExpanded', Mandatory)]
     [JumpCloud.SDK.V2.Category('Path')]
     [System.String]
     # .
     ${Id},
 
     [Parameter(ParameterSetName='CreateViaIdentity', Mandatory, ValueFromPipeline)]
+    [Parameter(ParameterSetName='CreateViaIdentityExpanded', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Path')]
     [JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity]
     # Identity Parameter
     # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
     ${InputObject},
+
+    [Parameter(ParameterSetName='Create', Mandatory, ValueFromPipeline)]
+    [Parameter(ParameterSetName='CreateViaIdentity', Mandatory, ValueFromPipeline)]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [JumpCloud.SDK.V2.Models.IAdministratorOrganizationLinkReq]
+    # AdministratorOrganizationLinkReq
+    # To construct, see NOTES section for BODY properties and create a hash table.
+    ${Body},
+
+    [Parameter(ParameterSetName='CreateExpanded')]
+    [Parameter(ParameterSetName='CreateViaIdentityExpanded')]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [System.String]
+    # The identifier for an organization to link this administrator to.
+    ${Organization},
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]

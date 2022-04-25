@@ -122,7 +122,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='List')]
     [JumpCloud.SDK.V1.Category('Query')]
     [System.String]
-    # The comma separated fields used to sort the collection.
+    # The space separated fields used to sort the collection.
     # Default sort is ascending, prefix with `-` to sort descending.
     ${Sort},
 
