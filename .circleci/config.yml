@@ -271,6 +271,7 @@ jobs:
     executor: win/default
     steps:
       - setup
+      - setup_nuget
       - attach_workspace:
           at: .
       - deploy-nupkg:
@@ -400,6 +401,8 @@ commands:
             Write-Host ('Imported Variables') -BackgroundColor:('Green') -ForegroundColor:('Black')
             Write-Host ("---------------------------------------------------------------------------------------")
             Get-Variable | Format-Table
+  setup_nuget:
+    steps:
       - run:
           name: Add nuget sources
           shell: pwsh.exe
