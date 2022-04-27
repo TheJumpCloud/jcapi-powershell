@@ -819,25 +819,9 @@ curl -X GET  https://console.jumpcloud.com/api/v2/policies/{Policy_ID}/systemgro
 This endpoint returns a list of the Administrators associated with the Provider.
 You must be associated with the provider to use this route.
 
-#### Sample Request
-```
-curl -X GET https://console.jumpcloud.com/api/v2/providers/{ProviderID}/administrators \\
-  -H 'Accept: application/json' \\
-  -H 'Content-Type: application/json' \\
-  -H 'x-api-key: {API_KEY}'
-```
-
 ### [Get-JcSdkProviderOrganization](Get-JcSdkProviderOrganization.md)
 This endpoint returns a list of the Organizations associated with the Provider.
 You must be associated with the provider to use this route.
-
-#### Sample Request
-```
-curl -X GET https://console.jumpcloud.com/api/v2/providers/{ProviderID}/organizations \\
-  -H 'Accept: application/json' \\
-  -H 'Content-Type: application/json' \\
-  -H 'x-api-key: {API_KEY}'
-```
 
 ### [Get-JcSdkProvidersInvoice](Get-JcSdkProvidersInvoice.md)
 Retrieves a list of invoices for this provider.
@@ -1995,7 +1979,7 @@ curl -X POST https://console.jumpcloud.com/api/v2/activedirectories/{activedirec
 ```
 
 ### [New-JcSdkAdministratorOrganization](New-JcSdkAdministratorOrganization.md)
-This endpoint allows you to allow Administrator access to an Organization.
+This endpoint allows you to grant Administrator access to an Organization.
 
 ### [New-JcSdkAuthenticationPolicy](New-JcSdkAuthenticationPolicy.md)
 Create an authentication policy.
@@ -2029,26 +2013,53 @@ curl -X POST https://console.jumpcloud.com/api/v2/authn/policies \\
 
 ### [New-JcSdkBulkUser](New-JcSdkBulkUser.md)
 The endpoint allows you to create a bulk job to asynchronously create users.
-See [Create a System User](https://docs.jumpcloud.com/api/1.0/index.html#operation/systemusers_post) for full list of attributes.
+See [Create a System User](https://docs.jumpcloud.com/api/1.0/index.html#operation/systemusers_post)
+for the full list of attributes.
 
-#### Sample Request 
+#### Default User State
+The `state` of each user in the request can be explicitly passed in or
+omitted.
+If `state` is omitted, then the user will get created
+using the value returned from the
+[Get an Organization](https://docs.jumpcloud.com/api/1.0/index.html#operation/organizations_get)
+endpoint.
+The default user state for bulk created users depends on the
+`creation-source` header.
+For `creation-source:jumpcloud:bulk` the
+default state is stored in `settings.newSystemUserStateDefaults.csvImport`.
+For other `creation-source` header values, the default state is stored in
+`settings.newSystemUserStateDefaults.applicationImport`
+
+These default state values can be changed in the admin portal settings
+or by using the
+[Update an Organization](https://docs.jumpcloud.com/api/1.0/index.html#operation/organization_put)
+endpoint.
+
+#### Sample Request
+
 ```
 curl -X POST https://console.jumpcloud.com/api/v2/bulk/users \\
-  -H 'Accept: application/json' \\
-  -H 'Content-Type: application/json' \\
-  -H 'x-api-key: {API_KEY}' \\
-  -d '[
-\t{
-\t\t\"email\":\"{email}\",
-\t\t\"firstname\":\"{firstname}\",
-\t\t\"lastname\":\"{firstname}\",
-\t\t\"username\":\"{username}\",
-\t\t\"attributes\":[
-\t\t\t{\"name\":\"EmployeeID\",\"value\":\"0000\"},
-\t\t\t{\"name\":\"Custom\",\"value\":\"attribute\"}
-\t\t]
-\t}
-]
+-H 'Accept: application/json' \\
+-H 'Content-Type: application/json' \\
+-H 'x-api-key: {API_KEY}' \\
+-d '[
+  {
+    \"email\":\"{email}\",
+    \"firstname\":\"{firstname}\",
+    \"lastname\":\"{firstname}\",
+    \"username\":\"{username}\",
+    \"attributes\":[
+      {
+        \"name\":\"EmployeeID\",
+        \"value\":\"0000\"
+      },
+      {
+        \"name\":\"Custom\",
+        \"value\":\"attribute\"
+      }
+    ]
+  }
+]'
 ```
 
 ### [New-JcSdkBulkUserState](New-JcSdkBulkUserState.md)
@@ -2197,18 +2208,6 @@ curl -X POST https://console.jumpcloud.com/api/v2/policygroups \\
 This endpoint allows you to create a provider administrator.
 You must be associated with the provider to use this route.
 You must provide either `role` or `roleName`.
-
-#### Sample Request
-```
-curl -X POST https://console.jumpcloud.com/api/v2/providers/{ProviderID}/administrators \\
-  -H 'Accept: application/json' \\
-  -H 'Content-Type: application/json' \\
-  -H 'x-api-key: {API_KEY}' \\
-  -d '{
-    \"email\": \"{ADMIN_EMAIL}\",
-    \"roleName\": \"{ROLE_NAME}\"
-  }'
-```
 
 ### [New-JcSdkSoftwareApp](New-JcSdkSoftwareApp.md)
 This endpoint allows you to create a Software Application that will be managed by JumpCloud on associated JumpCloud systems.
@@ -2810,16 +2809,60 @@ curl -X POST https://console.jumpcloud.com/api/v2/radiusservers/{RADIUS_ID}/asso
 
 ### [Set-JcSdkSoftwareApp](Set-JcSdkSoftwareApp.md)
 This endpoint updates a specific Software Application configuration for the organization.
-Only displayName can be changed.
+displayName can be changed alone if no settings are provided.
+If a setting is provided, it should include all its information since this endpoint will update all the settings' fields.
 
-#### Sample Request
+#### Sample Request - displayName only
 ```
  curl -X PUT https://console.jumpcloud.com/api/v2/softwareapps/{id} \\
   -H 'accept: application/json' \\
   -H 'content-type: application/json' \\
   -H 'x-api-key: {API_KEY}' \\
   -d '{
-    \"displayName\": \"Adobe Reader\"
+    \"displayName\": \"My Software App\"
+  }'
+```
+
+#### Sample Request - all attributes
+```
+ curl -X PUT https://console.jumpcloud.com/api/v2/softwareapps/{id} \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"displayName\": \"My Software App\",
+    \"settings\": [
+      {
+        \"packageId\": \"123456\",
+        \"autoUpdate\": false,
+        \"allowUpdateDelay\": false,
+        \"packageManager\": \"APPLE_VPP\",
+        \"locationObjectId\": \"123456789012123456789012\",
+        \"location\": \"123456\",
+        \"desiredState\": \"Install\",
+        \"appleVpp\": {
+          \"appConfiguration\": \"\<?xml version=\\\"1.0\\\" encoding=\\\"UTF-8\\\"?\>\<!DOCTYPE plist PUBLIC \\\"-//Apple//DTD PLIST 1.0//EN\\\" \\\"http://www.apple.com/DTDs/PropertyList-1.0.dtd\\\"\>\<plist version=\\\"1.0\\\"\>\<dict\>\<key\>MyKey\</key\>\<string\>My String\</string\>\</dict\>\</plist\>\",
+          \"assignedLicenses\": 20,
+          \"availableLicenses\": 10,
+          \"details\": {},
+          \"isConfigEnabled\": true,
+          \"supportedDeviceFamilies\": [
+            \"IPAD\",
+            \"MAC\"
+          ],
+          \"totalLicenses\": 30
+        },
+        \"packageSubtitle\": \"My package subtitle\",
+        \"packageVersion\": \"1.2.3\",
+        \"packageKind\": \"software-package\",
+        \"assetKind\": \"software\",
+        \"assetSha256Size\": 256,
+        \"assetSha256Strings\": [
+          \"a123b123c123d123\"
+        ],
+        \"description\": \"My app description\"
+      }
+    ]
   }'
 ```
 

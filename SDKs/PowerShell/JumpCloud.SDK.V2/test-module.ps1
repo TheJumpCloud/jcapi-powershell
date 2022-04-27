@@ -105,7 +105,7 @@ If ($moduleName -eq 'JumpCloud.SDK.V2')
 }
 #endregion Import Modules
 #region Define Objects
-If ($moduleName -eq 'JumpCloud.SDK.V1' -or $moduleName -eq 'JumpCloud.SDK.V2')
+If ($moduleName -eq 'JumpCloud.SDK.V1' -or $moduleName -eq 'JumpCloud.SDK.V2' -and "MTP" -notin $Env:IncludeTagList)
 {
     # Get a ApplicationTemplate
     $global:PesterTestApplicationTemplate = Get-JcSdkApplicationTemplate | Select-Object -First 1
@@ -192,7 +192,7 @@ If ($moduleName -eq 'JumpCloud.SDK.V1' -or $moduleName -eq 'JumpCloud.SDK.V2')
         NetworkSourceIP = [IPAddress]::Parse([String](Get-Random)).IPAddressToString
     }
 }
-If ($moduleName -eq 'JumpCloud.SDK.V2')
+If ($moduleName -eq 'JumpCloud.SDK.V2' -and "MTP" -notin $Env:IncludeTagList)
 {
     # Get the Apple MDM
     $global:PesterTestAppleMDM = Get-JcSdkAppleMdm | Select-Object -First 1
@@ -302,6 +302,20 @@ If ($moduleName -eq 'JumpCloud.SDK.V2')
         Name = "PesterTestPolicyGroup-$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
     }
 }
+If ($moduleName -eq 'JumpCloud.SDK.V1' -or $moduleName -eq 'JumpCloud.SDK.V2' -and "MTP" -in $Env:IncludeTagList)
+{
+    # Set MTP Keys & Continue to test
+    $env:JCApiKey = $env:JCApiKeyMTP
+    $env:JCOrgId = (Get-JcSdkOrganization | Select-Object -First 1).Id
+
+    $global:PesterDefProviderAdminName = "ProviderAdmin-$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
+
+    $global:PesterDefProviderAdmin = @{
+        Email     = "$($global:PesterDefProviderAdminName)@example$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ })).com";
+        Firstname = 'AdminFirst'
+        Lastname  = 'AdminLast'
+    }
+}
 #endregion Define Objects
 
 #region Run Pester Tests
@@ -351,9 +365,22 @@ $PesterTestFiles += $TestFiles | Where-Object { $_.BaseName -like "Remove-*" -an
 $PesterTestResultFolder = (Join-Path $testFolder "results")
 If (!(Test-Path -Path:($PesterTestResultFolder))) { New-Item -Path:($PesterTestResultFolder) -ItemType:('Directory') | Out-Null }
 $PesterTestResultPath = Join-Path $PesterTestResultFolder "$moduleName-TestResults.xml"
-# Print Test Coverage:
+$PesterTestCoveragePath = Join-Path $PesterTestResultFolder "$moduleName-TestCoverage.xml"
+# Print Test Coverage & Pester 5 Compatibility:
 . "$PSScriptRoot/../../../Tools/ValidateTests.ps1" -Path $testFolder
-Invoke-Pester -Script $PesterTestFiles.FullName -EnableExit -OutputFile:($PesterTestResultPath) -OutputFormat:('JUnitXml')
+# Write-Host "$($PesterTestFiles.FullName)"
+$configuration = [PesterConfiguration]::Default
+$configuration.Run.Path = $($PesterTestFiles.FullName)
+$configuration.Should.ErrorAction = 'Continue'
+$configuration.CodeCoverage.Enabled = $false
+$configuration.testresult.Enabled = $true
+$configuration.testresult.OutputFormat = 'JUnitXml'
+$configuration.Filter.Tag = $Env:IncludeTagList
+$configuration.Filter.ExcludeTag = $Env:ExcludeTagList
+$configuration.CodeCoverage.OutputPath = ($PesterTestCoveragePath)
+$configuration.testresult.OutputPath = ($PesterTestResultPath)
+# Invoke pester
+Invoke-Pester -configuration $configuration
 #endregion Run Pester Tests
 
 #region Clean Up (This section should ideally be taken care of by the "Remove-" tests)
