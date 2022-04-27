@@ -83,6 +83,9 @@ $diffDeleted
 </details>
 
 "
+    # Update the Functions Modifed
     $ReplacedContent = $ContentToEdit -replace ("#### Generated Changes:[\s\S]*", $UpdatedDiffText)
+    # Update the Release Date
+    $ReplacedContent = $ContentToEdit -replace ("Release Date:.*", "Release Date: $(Get-Date -UFormat:('%B %d, %Y'))")
     $SdkChangelog -replace ($LastChangeRegex, $ReplacedContent) | Set-Content -Path $SdkChangelogFilePath -NoNewline -Force
 }
