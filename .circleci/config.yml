@@ -445,6 +445,7 @@ commands:
             - ./SDKs/PowerShell/<< parameters.SDKName >>/*
             - ./Configs/<< parameters.SDKName >>.yaml
             - ./SwaggerSpecs/<< parameters.SDKName >>.json
+            - ./<< parameters.SDKName >>.md
   test-sdk:
     parameters:
       SDKName:
