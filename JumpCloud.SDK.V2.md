@@ -139,6 +139,7 @@ SDK generated functions that can not accept the x-org-id header strip that heade
 * New-JcSdkGSuiteTranslationRule.ps1
 * New-JcSdkLdapServerSambaDomain.ps1
 * New-JcSdkOffice365TranslationRule.ps1
+* New-JcSdkSoftwareApp.ps1
 * Remove-JcSdkActiveDirectory.ps1
 * Remove-JcSdkActiveDirectoryAgent.ps1
 * Remove-JcSdkAppleMdm.ps1

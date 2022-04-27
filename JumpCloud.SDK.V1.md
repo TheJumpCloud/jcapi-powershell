@@ -21,6 +21,9 @@ No changes
 <details>
 <summary>Functions Modified</summary>
 
+* Get-JcSdkApplication.ps1
+* Get-JcSdkApplicationTemplate.ps1
+* Get-JcSdkUser.ps1
 * New-JcSdkApplication.ps1
 * New-JcSdkUser.ps1
 * Reset-JcSdkUserMfa.ps1
