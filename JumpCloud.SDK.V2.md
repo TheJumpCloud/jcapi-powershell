@@ -1,5 +1,5 @@
 ## JumpCloud.SDK.V2-0.0.32
-Release Date: April 27, 2022
+Release Date: April 28, 2022
 #### RELEASE NOTES
 ```
 This release includes several new functions to interact with MTP functions. Documentation and parameter updates.
