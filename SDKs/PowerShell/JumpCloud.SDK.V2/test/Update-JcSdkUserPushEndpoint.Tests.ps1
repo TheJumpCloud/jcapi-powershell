@@ -1,3 +1,4 @@
+BeforeAll {
 if(($null -eq $TestName) -or ($TestName -contains 'Update-JcSdkUserPushEndpoint'))
 {
   $loadEnvPath = Join-Path $PSScriptRoot 'loadEnv.ps1'
@@ -14,7 +15,9 @@ if(($null -eq $TestName) -or ($TestName -contains 'Update-JcSdkUserPushEndpoint'
   . ($mockingPath | Select-Object -First 1).FullName
 }
 
-Describe 'Update-JcSdkUserPushEndpoint' {
+
+}
+Describe 'Update-JcSdkUserPushEndpoint' -Tag:(""){
     It 'UpdateExpanded' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
@@ -31,3 +34,4 @@ Describe 'Update-JcSdkUserPushEndpoint' {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 }
+

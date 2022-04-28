@@ -2,25 +2,9 @@
 .Synopsis
 This endpoint returns a list of the Organizations associated with the Provider.
 You must be associated with the provider to use this route.
-
-#### Sample Request
-```
-curl -X GET https://console.jumpcloud.com/api/v2/providers/{ProviderID}/organizations \\
-  -H 'Accept: application/json' \\
-  -H 'Content-Type: application/json' \\
-  -H 'x-api-key: {API_KEY}'
-```
 .Description
 This endpoint returns a list of the Organizations associated with the Provider.
 You must be associated with the provider to use this route.
-
-#### Sample Request
-```
-curl -X GET https://console.jumpcloud.com/api/v2/providers/{ProviderID}/organizations \\
-  -H 'Accept: application/json' \\
-  -H 'Content-Type: application/json' \\
-  -H 'x-api-key: {API_KEY}'
-```
 .Example
 PS C:\> {{ Add code here }}
 

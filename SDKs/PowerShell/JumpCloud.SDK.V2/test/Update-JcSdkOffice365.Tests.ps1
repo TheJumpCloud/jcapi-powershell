@@ -1,3 +1,4 @@
+BeforeAll {
 $loadEnvPath = Join-Path $PSScriptRoot 'loadEnv.ps1'
 if (-Not (Test-Path -Path $loadEnvPath)) {
     $loadEnvPath = Join-Path $PSScriptRoot '..\loadEnv.ps1'
@@ -11,7 +12,9 @@ while(-not $mockingPath) {
 }
 . ($mockingPath | Select-Object -First 1).FullName
 
-Describe 'Update-JcSdkOffice365' {
+
+}
+Describe 'Update-JcSdkOffice365' -Tag:(""){
     It 'UpdateExpanded' -skip {
         { Update-JcSdkOffice365 -Office365Id:($global:PesterTestOffice365.Id) [-Name '<String>'] [-UserLockoutAction '<String>'] [-UserPasswordExpirationAction '<String>'] } | Should -Not -Throw
     }
@@ -28,3 +31,4 @@ Describe 'Update-JcSdkOffice365' {
         { Update-JcSdkOffice365 -InputObject '<IJumpCloudApIsIdentity>' [-Name '<String>'] [-UserLockoutAction '<String>'] [-UserPasswordExpirationAction '<String>'] } | Should -Not -Throw
     }
 }
+

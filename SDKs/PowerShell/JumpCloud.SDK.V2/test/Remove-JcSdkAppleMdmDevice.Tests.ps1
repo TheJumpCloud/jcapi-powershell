@@ -1,3 +1,4 @@
+BeforeAll {
 if(($null -eq $TestName) -or ($TestName -contains 'Remove-JcSdkAppleMdmDevice'))
 {
   $loadEnvPath = Join-Path $PSScriptRoot 'loadEnv.ps1'
@@ -14,7 +15,9 @@ if(($null -eq $TestName) -or ($TestName -contains 'Remove-JcSdkAppleMdmDevice'))
   . ($mockingPath | Select-Object -First 1).FullName
 }
 
-Describe 'Remove-JcSdkAppleMdmDevice' {
+
+}
+Describe 'Remove-JcSdkAppleMdmDevice' -Tag:(""){
     It 'Delete' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
@@ -23,3 +26,4 @@ Describe 'Remove-JcSdkAppleMdmDevice' {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 }
+

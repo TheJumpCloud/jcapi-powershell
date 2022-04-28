@@ -1,3 +1,4 @@
+BeforeAll {
 $loadEnvPath = Join-Path $PSScriptRoot 'loadEnv.ps1'
 if (-Not (Test-Path -Path $loadEnvPath)) {
     $loadEnvPath = Join-Path $PSScriptRoot '..\loadEnv.ps1'
@@ -11,7 +12,9 @@ while(-not $mockingPath) {
 }
 . ($mockingPath | Select-Object -First 1).FullName
 
-Describe 'Lock-JcSdkAppleMdmDevice' {
+
+}
+Describe 'Lock-JcSdkAppleMdmDevice' -Tag:(""){
     It 'LockExpanded' -skip {
         { Lock-JcSdkAppleMdmDevice -AppleMdmId:($global:PesterTestAppleMdm.Id) -DeviceId '<String>' -Pin '<String>' } | Should -Not -Throw
     }
@@ -28,3 +31,4 @@ Describe 'Lock-JcSdkAppleMdmDevice' {
         { Lock-JcSdkAppleMdmDevice -InputObject '<IJumpCloudApIsIdentity>' -Pin '<String>' } | Should -Not -Throw
     }
 }
+

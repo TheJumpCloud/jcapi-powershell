@@ -1,3 +1,4 @@
+BeforeAll {
 $loadEnvPath = Join-Path $PSScriptRoot 'loadEnv.ps1'
 if (-Not (Test-Path -Path $loadEnvPath)) {
     $loadEnvPath = Join-Path $PSScriptRoot '..\loadEnv.ps1'
@@ -11,7 +12,9 @@ while(-not $mockingPath) {
 }
 . ($mockingPath | Select-Object -First 1).FullName
 
-Describe 'Update-JcSdkAppleMdmDeviceLockInformation' {
+
+}
+Describe 'Update-JcSdkAppleMdmDeviceLockInformation' -Tag:(""){
     It 'Refresh' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
@@ -20,3 +23,4 @@ Describe 'Update-JcSdkAppleMdmDeviceLockInformation' {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 }
+

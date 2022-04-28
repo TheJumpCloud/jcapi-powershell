@@ -12,18 +12,6 @@ This endpoint allows you to create a provider administrator.
 You must be associated with the provider to use this route.
 You must provide either `role` or `roleName`.
 
-#### Sample Request
-```
-curl -X POST https://console.jumpcloud.com/api/v2/providers/{ProviderID}/administrators \\
-  -H 'Accept: application/json' \\
-  -H 'Content-Type: application/json' \\
-  -H 'x-api-key: {API_KEY}' \\
-  -d '{
-    \"email\": \"{ADMIN_EMAIL}\",
-    \"roleName\": \"{ROLE_NAME}\"
-  }'
-```
-
 ## SYNTAX
 
 ### CreateExpanded (Default)
@@ -56,18 +44,6 @@ New-JcSdkProviderAdministrator -InputObject <IJumpCloudApiIdentity> -Email <Stri
 This endpoint allows you to create a provider administrator.
 You must be associated with the provider to use this route.
 You must provide either `role` or `roleName`.
-
-#### Sample Request
-```
-curl -X POST https://console.jumpcloud.com/api/v2/providers/{ProviderID}/administrators \\
-  -H 'Accept: application/json' \\
-  -H 'Content-Type: application/json' \\
-  -H 'x-api-key: {API_KEY}' \\
-  -d '{
-    \"email\": \"{ADMIN_EMAIL}\",
-    \"roleName\": \"{ROLE_NAME}\"
-  }'
-```
 
 ## EXAMPLES
 

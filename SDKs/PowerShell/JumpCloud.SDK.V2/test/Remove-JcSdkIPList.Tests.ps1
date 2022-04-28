@@ -1,3 +1,4 @@
+BeforeAll {
 $loadEnvPath = Join-Path $PSScriptRoot 'loadEnv.ps1'
 if (-Not (Test-Path -Path $loadEnvPath)) {
     $loadEnvPath = Join-Path $PSScriptRoot '..\loadEnv.ps1'
@@ -11,7 +12,9 @@ while(-not $mockingPath) {
 }
 . ($mockingPath | Select-Object -First 1).FullName
 
-Describe 'Remove-JcSdkIPList' {
+
+}
+Describe 'Remove-JcSdkIPList' -Tag:(""){
     It 'Delete' {
         { Remove-JcSdkIPList -Id:($global:PesterTestIPList.Id) } | Should -Not -Throw
     }
@@ -20,3 +23,4 @@ Describe 'Remove-JcSdkIPList' {
         { Remove-JcSdkIPList -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw
     }
 }
+

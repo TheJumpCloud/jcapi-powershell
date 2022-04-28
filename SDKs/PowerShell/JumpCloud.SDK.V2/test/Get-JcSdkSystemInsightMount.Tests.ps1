@@ -1,3 +1,4 @@
+BeforeAll {
 $loadEnvPath = Join-Path $PSScriptRoot 'loadEnv.ps1'
 if (-Not (Test-Path -Path $loadEnvPath)) {
     $loadEnvPath = Join-Path $PSScriptRoot '..\loadEnv.ps1'
@@ -11,8 +12,11 @@ while(-not $mockingPath) {
 }
 . ($mockingPath | Select-Object -First 1).FullName
 
-Describe 'Get-JcSdkSystemInsightMount' {
+
+}
+Describe 'Get-JcSdkSystemInsightMount' -Tag:(""){
     It 'List' {
         { Get-JcSdkSystemInsightMount } | Should -Not -Throw
     }
 }
+

@@ -1,8 +1,8 @@
 ## JumpCloud.SDK.V2-0.0.32
-Release Date: March 22, 2022
+Release Date: April 28, 2022
 #### RELEASE NOTES
 ```
-This release includes several new functions to interact with MTP functions
+This release includes several new functions to interact with MTP functions. Documentation and parameter updates.
 ```
 #### BUG FIXES:
 SDK generated functions that can not accept the x-org-id header strip that header before calling that endpoint. Previously an error was thrown on each of these functions.
@@ -139,6 +139,7 @@ SDK generated functions that can not accept the x-org-id header strip that heade
 * New-JcSdkGSuiteTranslationRule.ps1
 * New-JcSdkLdapServerSambaDomain.ps1
 * New-JcSdkOffice365TranslationRule.ps1
+* New-JcSdkSoftwareApp.ps1
 * Remove-JcSdkActiveDirectory.ps1
 * Remove-JcSdkActiveDirectoryAgent.ps1
 * Remove-JcSdkAppleMdm.ps1

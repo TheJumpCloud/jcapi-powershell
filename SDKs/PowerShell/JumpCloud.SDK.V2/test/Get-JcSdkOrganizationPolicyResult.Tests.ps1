@@ -1,3 +1,4 @@
+BeforeAll {
 $loadEnvPath = Join-Path $PSScriptRoot 'loadEnv.ps1'
 if (-Not (Test-Path -Path $loadEnvPath)) {
     $loadEnvPath = Join-Path $PSScriptRoot '..\loadEnv.ps1'
@@ -11,9 +12,11 @@ while(-not $mockingPath) {
 }
 . ($mockingPath | Select-Object -First 1).FullName
 
-Describe 'Get-JcSdkOrganizationPolicyResult' {
-    #TODO: should be fixed with TX-232
-    It 'List' -skip {
+
+}
+Describe 'Get-JcSdkOrganizationPolicyResult' -Tag:(""){
+    It 'List' {
         { Get-JcSdkOrganizationPolicyResult } | Should -Not -Throw
     }
 }
+

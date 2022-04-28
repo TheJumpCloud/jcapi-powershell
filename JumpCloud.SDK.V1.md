@@ -1,15 +1,11 @@
 ## JumpCloud.SDK.V1-0.0.28
-Release Date: March 22, 2022
+Release Date: April 28, 2022
 #### RELEASE NOTES
 ```
-{{Fill in the Release Notes}}
+Documentation and parameter updates
 ```
-#### FEATURES:
-{{Fill in the Features}}
-#### IMPROVEMENTS:
-{{Fill in the Improvements}}
 #### BUG FIXES:
-{{Fill in the Bug Fixes}}
+Search-JcSdkOrganization should not longer error & remove orgID header before running
 #### Generated Changes:
 
 <details>
@@ -21,6 +17,9 @@ No changes
 <details>
 <summary>Functions Modified</summary>
 
+* Get-JcSdkApplication.ps1
+* Get-JcSdkApplicationTemplate.ps1
+* Get-JcSdkUser.ps1
 * New-JcSdkApplication.ps1
 * New-JcSdkUser.ps1
 * Reset-JcSdkUserMfa.ps1

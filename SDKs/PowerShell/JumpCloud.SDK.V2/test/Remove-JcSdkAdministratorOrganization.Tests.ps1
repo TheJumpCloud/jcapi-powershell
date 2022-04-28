@@ -1,3 +1,4 @@
+BeforeAll {
 if(($null -eq $TestName) -or ($TestName -contains 'Remove-JcSdkAdministratorOrganization'))
 {
   $loadEnvPath = Join-Path $PSScriptRoot 'loadEnv.ps1'
@@ -14,12 +15,15 @@ if(($null -eq $TestName) -or ($TestName -contains 'Remove-JcSdkAdministratorOrga
   . ($mockingPath | Select-Object -First 1).FullName
 }
 
-Describe 'Remove-JcSdkAdministratorOrganization' {
-    It 'Delete' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+
+}
+Describe 'Remove-JcSdkAdministratorOrganization' -Tag:("MTP") {
+    It 'Delete' {
+        { Remove-JcSdkAdministratorOrganization -AdministratorId:(($global:PesterTestProviderAdmin).Id) -Id:($env:JCOrgId) } | Should -Not -Throw
     }
 
-    It 'DeleteViaIdentity' -skip {
+   It 'DeleteViaIdentity' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 }
+

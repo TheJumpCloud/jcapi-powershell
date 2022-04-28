@@ -1,3 +1,4 @@
+BeforeAll {
 $loadEnvPath = Join-Path $PSScriptRoot 'loadEnv.ps1'
 if (-Not (Test-Path -Path $loadEnvPath)) {
     $loadEnvPath = Join-Path $PSScriptRoot '..\loadEnv.ps1'
@@ -11,7 +12,9 @@ while(-not $mockingPath) {
 }
 . ($mockingPath | Select-Object -First 1).FullName
 
-Describe 'Set-JcSdkUserGroup' {
+
+}
+Describe 'Set-JcSdkUserGroup' -Tag:(""){
     It 'SetExpanded' {
         { Set-JcSdkUserGroup -Id:($global:PesterTestUserGroup.Id) -Name:($global:PesterTestUserGroup.Name) -MemberQueryFilters:($global:PesterTestUserGroup.MemberQueryFilters) } | Should -Not -Throw
     }
@@ -28,3 +31,4 @@ Describe 'Set-JcSdkUserGroup' {
         { Set-JcSdkUserGroup -InputObject '<IJumpCloudApIsIdentity>' -Name:($global:PesterTestUserGroup.Name) [-AttributeLdapGroups '<IGraphAttributeLdapGroupsItem[]>'] [-AttributePosixGroups '<IGraphAttributePosixGroupsItem[]>'] [-AttributeRadiusReply '<IGraphAttributeRadiusReplyItem[]>'] [-AttributeSambaEnabled] [-Description '<String>'] [-Email '<String>'] [-MemberQueryFilters '<IFilter[]>'] } | Should -Not -Throw
     }
 }
+
