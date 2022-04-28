@@ -2,7 +2,7 @@
 Release Date: March 22, 2022
 #### RELEASE NOTES
 ```
-This release includes several new functions to interact with MTP functions
+This release includes several new functions to interact with MTP functions. Documentation and parameter updates.
 ```
 #### BUG FIXES:
 SDK generated functions that can not accept the x-org-id header strip that header before calling that endpoint. Previously an error was thrown on each of these functions.
