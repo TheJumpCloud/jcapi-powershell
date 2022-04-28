@@ -18,7 +18,7 @@ if(($null -eq $TestName) -or ($TestName -contains 'Get-JcSdkAdministratorOrganiz
 
 }
 Describe 'Get-JcSdkAdministratorOrganizationLink' -Tag:("MTP") {
-    It 'List' -skip {
+    It 'List' {
         { Get-JcSdkAdministratorOrganizationLink -Id:((Get-JcSdkOrganization | Select-Object -First 1).Id) } | Should -Not -Throw
     }
 }

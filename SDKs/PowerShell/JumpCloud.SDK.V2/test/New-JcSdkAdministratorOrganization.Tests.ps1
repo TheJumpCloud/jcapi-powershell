@@ -18,8 +18,17 @@ if(($null -eq $TestName) -or ($TestName -contains 'New-JcSdkAdministratorOrganiz
 
 }
 Describe 'New-JcSdkAdministratorOrganization' -Tag:("MTP") {
-    It 'Create' -skip {
-        { New-JcSdkAdministratorOrganization -Organization:($env:JCOrgId) -Id:(($global:PesterTestProviderAdmin).Id) } | Should -Not -Throw
+    It 'Create' {
+        ## Admin variables:
+        $name = "ProviderAdmin-$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
+        $email = "$($name)@example$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ })).com";
+        $Firstname = 'AdminFirst'
+        $Lastname  = 'AdminLast'
+        # Create new providerAdmin for test
+        $testAdmin = New-JcsdkProviderAdministrator -Email:($email) -Firstname:($Firstname) -Lastname:($Lastname) -ProviderId:($env:JCProviderId) -BindNoOrgs
+        { New-JcSdkAdministratorOrganization -Organization:($env:JCOrgId) -Id:(($testAdmin).Id) } | Should -Not -Throw
+        # Remove providerAdmin to clean up
+        Remove-JcSdkProviderAdministrator -Id:(($testAdmin).Id) -ProviderId:($env:JCProviderId)
     }
 
     It 'CreateViaIdentity' -skip {
