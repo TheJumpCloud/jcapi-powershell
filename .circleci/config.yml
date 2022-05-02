@@ -65,6 +65,9 @@ build-sdks: &build-sdks
           - Test JumpCloud SDK V2
           - Test JumpCloud SDK V2 MTP
           - Commit Changes
+      filters:
+        branches:
+          ignore: master
   - Pack and Deploy To CodeArtifact:
       requires:
         - Test JumpCloud SDK DirectoryInsights
@@ -72,6 +75,9 @@ build-sdks: &build-sdks
         - Test JumpCloud SDK V2
         - Commit Changes
         - CodeArtifact Approval
+      filters:
+        branches:
+          ignore: master
       context: aws-credentials
   - Test SDKs on Production JumpCloud PowerShell TestModule:
       requires:
@@ -81,6 +87,9 @@ build-sdks: &build-sdks
         - Commit Changes
         - CodeArtifact Approval
         - Pack and Deploy To CodeArtifact
+      filters:
+        branches:
+          ignore: master
       context: aws-credentials
   - PSGallery Approval:
       type: approval
@@ -287,6 +296,7 @@ jobs:
     executor: win/default
     steps:
       - setup
+      - setup_nuget
       - attach_workspace:
           at: .
       - deploy-nupkg:
