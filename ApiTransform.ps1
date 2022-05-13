@@ -52,6 +52,7 @@ $TransformConfig = [Ordered]@{
             ',]'                                                                                                                                                                  = ']';
         };
         OperationIdMapping = [Ordered]@{
+            'admin_totpreset_begin'          = 'AdminUserTotp_Reset';
             'application_templates_get'      = 'ApplicationTemplate_Get';
             'application_templates_list'     = 'ApplicationTemplate_List';
             'applications_delete'            = 'Application_Delete';
@@ -78,6 +79,7 @@ $TransformConfig = [Ordered]@{
             'radius_servers_list'            = 'RadiusServer_List';
             'radius_servers_post'            = 'RadiusServer_Create';
             'radius_servers_put'             = 'RadiusServer_Set';
+            'search_commands_post'           = 'Commands_Search';
             'search_organizations_post'      = 'Organization_Search';
             'search_systems_post'            = 'System_Search';
             'search_systemusers_post'        = 'User_Search';
@@ -96,12 +98,16 @@ $TransformConfig = [Ordered]@{
             'systemusers_expire'             = 'ExpireUserPassword_POST';
             'systemusers_get'                = 'User_Get';
             'systemusers_list'               = 'User_List';
+            'systemusers_mfasync'            = 'UserMfa_Sync';
             'systemusers_post'               = 'User_Create';
             'systemusers_put'                = 'User_Set';
             'systemusers_resetmfa'           = 'UserMfa_Reset';
+            'systemusers_state_activate'     = 'UserState_Activate';
             'systemusers_unlock'             = 'User_Unlock';
+            'users_put'                      = 'AdminUser_Set';
+            'users_reactivate_get'           = 'AdminUserActivation_Reset';
         };
-        ExcludedList       = @('/search/commands', '/systemusers/{id}/mfasync', '/systemusers/{id}/state/activate', '/users/reactivate/{id}', '/users/resettotp/{id}', '/users/{id}'); # Excluding for now until we can resolve in SA-2316
+        ExcludedList       = @(); # Excluding for now until we can resolve in SA-2316
     }
     'JumpCloud.SDK.V2'                = [PSCustomObject]@{
         PublicUrl          = "https://docs.jumpcloud.com/api/2.0/index.yaml"
