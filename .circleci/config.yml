@@ -172,9 +172,14 @@ workflows:
     when:
       equal: [<< pipeline.parameters.workflow >>, "ci-nightly"]
     jobs:
+      - Build JumpCloud SDK DirectoryInsights
+      - Build JumpCloud SDK V1
+      - Build JumpCloud SDK V2
       - Test JumpCloud SDK DirectoryInsights
       - Test JumpCloud SDK V1
+      - Test JumpCloud SDK V1 MTP
       - Test JumpCloud SDK V2
+      - Test JumpCloud SDK V2 MTP
 jobs:
   Build JumpCloud SDK DirectoryInsights:
     executor: win/default
