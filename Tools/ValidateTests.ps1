@@ -1,7 +1,7 @@
 param (
-    [Parameter()]
-    [System.String]
-    $Path,
+    [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Name of the API to build an SDK for.')]
+    [ValidateSet('JumpCloud.SDK.DirectoryInsights', 'JumpCloud.SDK.V1', 'JumpCloud.SDK.V2')]
+    [ValidateNotNullOrEmpty()][System.String[]]$SDKName,
     [Parameter()]
     [System.Boolean]
     $ReplacePesterBlock,
@@ -11,7 +11,8 @@ param (
 )
 Begin
 {
-    Write-Host $Path
+    Write-Host $SDKName
+    $Path = Resolve-Path $PSScriptRoot/../SDKs/PowerShell/$SDKName/test
     # Regex search for tests
     $regex = [regex]"It.*{"
     $pesterRegex = [regex]"[\S\s]*(?=Describe)"

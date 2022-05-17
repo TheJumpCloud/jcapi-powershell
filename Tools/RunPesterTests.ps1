@@ -299,7 +299,7 @@ If (!(Test-Path -Path:($PesterTestResultFolder))) { New-Item -Path:($PesterTestR
 $PesterTestResultPath = Join-Path $PesterTestResultFolder "$moduleName-TestResults.xml"
 $PesterTestCoveragePath = Join-Path $PesterTestResultFolder "$moduleName-TestCoverage.xml"
 # Print Test Coverage & Pester 5 Compatibility:
-. "$PSScriptRoot/../../../Tools/ValidateTests.ps1" -Path $testFolder
+. "$PSScriptRoot/../../../Tools/ValidateTests.ps1" -SDKName $moduleName
 # Write-Host "$($PesterTestFiles.FullName)"
 $configuration = [PesterConfiguration]::Default
 $configuration.Run.Path = $($PesterTestFiles.FullName)
