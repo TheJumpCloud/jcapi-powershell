@@ -295,6 +295,7 @@ $TransformConfig = [Ordered]@{
             'groups_user_put'                                   = 'UserGroup_Set';
             'gsuites_get'                                       = 'GSuite_Get';
             'gsuites_listImportUsers'                           = 'GSuiteUsersToImport_List';
+            'gsuites_listImportJumpcloudUsers'                  = 'GsuiteUsersToExport_List'
             'gsuites_patch'                                     = 'GSuite_Update';
             'import_users'                                      = 'SCIM_Import';
             'iplists_delete'                                    = 'IpList_Delete';
@@ -415,8 +416,8 @@ $TransformConfig = [Ordered]@{
             'workdays_workers'                                  = 'WorkdayWorker_Get';
         };
         ExcludedList       = @(
-            # '/bulk/assets',
-            # '/bulk/assets/{job_id}/results'
+            '/bulk/assets',
+            '/bulk/assets/{job_id}/results'
             '/providers/{provider_id}/integrations',
             '/providers/{provider_id}/integrations/connectwise',
             '/integrations/connectwise/{UUID}',
@@ -435,8 +436,9 @@ $TransformConfig = [Ordered]@{
             '/integrations/autotask/{UUID}/contracts/services',
             '/integrations/autotask/{UUID}/mappings',
             '/integrations/{integration_type}/{UUID}/errors',
-            '/providers/{provider_id}/integrations/autotask',
-            '/gsuites/{gsuite_id}/import/jumpcloudusers')
+            '/providers/{provider_id}/integrations/autotask'
+            # '/gsuites/{gsuite_id}/import/jumpcloudusers'
+            )
     }
 }
 Function Get-SwaggerItem
