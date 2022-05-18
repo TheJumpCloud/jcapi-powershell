@@ -17,14 +17,14 @@ if(($null -eq $TestName) -or ($TestName -contains 'Set-JcSdkAdministratorUser'))
 
 
 }
-Describe 'Set-JcSdkAdministratorUser' -Tag:(""){
+Describe 'Set-JcSdkAdministratorUser' -Tag:("MTP"){
     It 'SetExpanded' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
     It 'Set' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
-        # TODO: Implement MTP test
+        $administratorUser = $global:PesterTestAdministratorUsers.results | Where-Object {$_.firstname -eq "Pester"}
+        { Set-JcSdkAdministratorUser -Id $administratorUser._id -Firstname "Pester" } | Should -Not -Throw
     }
 
     It 'SetViaIdentity' -skip {

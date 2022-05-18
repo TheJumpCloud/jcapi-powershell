@@ -247,6 +247,11 @@ If ($moduleName -eq 'JumpCloud.SDK.V1' -or $moduleName -eq 'JumpCloud.SDK.V2' -a
         Firstname = 'AdminFirst'
         Lastname  = 'AdminLast'
     }
+    # Get admins on an org (Required to test V1 MTP methods)
+    $headers = @{
+        "x-api-key" = $env:JCApiKey
+    }
+    $global:PesterTestAdministratorUsers = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/users?skip=0&limit=20' -Method GET -Headers $headers
 }
 #endregion Define Objects
 

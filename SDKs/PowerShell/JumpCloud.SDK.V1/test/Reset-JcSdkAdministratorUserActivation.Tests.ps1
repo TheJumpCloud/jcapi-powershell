@@ -17,10 +17,10 @@ if(($null -eq $TestName) -or ($TestName -contains 'Reset-JcSdkAdministratorUserA
 
 
 }
-Describe 'Reset-JcSdkAdministratorUserActivation' -Tag:(""){
+Describe 'Reset-JcSdkAdministratorUserActivation' -Tag:("MTP"){
     It 'Reset' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
-        # TODO: Implement MTP test
+        # Tested locally, activation emails are sent, not testing automatically to prevent unauthorized access
     }
 
     It 'ResetViaIdentity' -skip {
