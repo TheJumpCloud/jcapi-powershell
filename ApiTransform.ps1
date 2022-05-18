@@ -38,6 +38,7 @@ $TransformConfig = [Ordered]@{
             '"produces":\["application\/json","text\/plain"\]'                                                                                                                    = '';
             '"responses":{"200":{"description":"OK","schema":{"type":"string"}}'                                                                                                  = '"responses":{"200":{"description":""}';
             '{"in":"body","name":"body","schema":{"additionalProperties":true,"type":"object"}}'                                                                                  = ''; # Remove bodies that don't have parameters
+            '"operationId":"systemusers_state_activate","parameters":\[{"in":"path","name":"id","required":true,"type":"string"},{"in":"body","name":"body","schema":{"properties":{"email":{"type":"object"}},"type":"object"}}\]'   = '"operationId":"systemusers_state_activate","parameters":[{"in":"path","name":"id","required":true,"type":"string"},{"in":"body","name":"body","schema":{"properties":{"email":{"type":"string"}},"type":"object"}}]' # Flatten email type so we can just pass in Initialize-JcSdkUserState -email "alternateEmail@domain.com"
             # Custom Tweaks
             '{"\$ref":"#\/parameters\/trait:systemContextAuth:Authorization"}'                                                                                                    = ''; # We don't want to support authentication through system context via the SDK
             '{"\$ref":"#\/parameters\/trait:systemContextAuth:Date"}'                                                                                                             = ''; # We don't want to support authentication through system context via the SDK
@@ -52,7 +53,7 @@ $TransformConfig = [Ordered]@{
             ',]'                                                                                                                                                                  = ']';
         };
         OperationIdMapping = [Ordered]@{
-            'admin_totpreset_begin'          = 'AdminUserTotp_Reset';
+            'admin_totpreset_begin'          = 'AdministratorUserTotp_Reset';
             'application_templates_get'      = 'ApplicationTemplate_Get';
             'application_templates_list'     = 'ApplicationTemplate_List';
             'applications_delete'            = 'Application_Delete';
@@ -104,8 +105,8 @@ $TransformConfig = [Ordered]@{
             'systemusers_resetmfa'           = 'UserMfa_Reset';
             'systemusers_state_activate'     = 'UserState_Activate';
             'systemusers_unlock'             = 'User_Unlock';
-            'users_put'                      = 'AdminUser_Set';
-            'users_reactivate_get'           = 'AdminUserActivation_Reset';
+            'users_put'                      = 'AdministratorUser_Set';
+            'users_reactivate_get'           = 'AdministratorUserActivation_Reset';
         };
         ExcludedList       = @(); # Excluding for now until we can resolve in SA-2316
     }
@@ -132,26 +133,6 @@ $TransformConfig = [Ordered]@{
             ',]'                                                                                  = ']';
         };
         OperationIdMapping = [Ordered]@{
-            # 'autotask_createConfiguration'                      = 'AutotaskConfiguration_Create'
-            # 'autotask_deleteConfiguration'                      = 'AutotaskConfiguration_Delete'
-            # 'autotask_getConfiguration'                         = 'AutotaskConfiguration_Get'
-            # 'autotask_patchSettings'                            = 'AutotaskSettings_Update'
-            # 'autotask_retrieveCompanyTypes'                     = 'Autotask_CompanyTypes_Get'
-            # 'autotask_retrieveSettings'                         = 'AutotaskSettings_Get'
-            # 'autotask_updateConfiguration'                      = 'AutotaskConfiguration_Update'
-            # 'connectwise_createConfiguration'                   = 'ConnectwiseConfiguration_Create'
-            # 'connectwise_deleteConfiguration'                   = 'ConnectwiseConfiguration_Delete'
-            # 'connectwise_getConfiguration'                  = 'ConnectwiseConfiguration_Get'
-            # 'connectwise_patchMappings'                 = 'ConnectwiseMappings_Set'
-            # 'connectwise_patchSettings'                         = 'ConnectwiseSetttings_Set'
-            # 'connectwise_retrieveAdditions'                 = 'ConnectwiseAdditions_Get'
-            # 'connectwise_retrieveAgreements'                    = 'ConnectwiseConfiguration_Delete'
-            # 'connectwise_retrieveCompanies'                 = 'ConnectwiseCompanies_Get'
-            # 'connectwise_retrieveCompanyTypes'                  = 'ConnectwiseCompanyTypes_Get'
-            # 'connectwise_retrieveMappings'                  = 'ConnectwiseMappings_Get'
-            # 'connectwise_retrieveSettings'                      = 'ConnectwiseSettings_Get'
-            # 'connectwise_updateConfiguration'                   = 'ConnectwiseConfiguration_Set'
-            # 'providers_retrieveIntegrations'                    = 'ProvidersIntegrations_Get'
             'activedirectories_agentsDelete'                    = 'ActiveDirectoryAgent_Delete';
             'activedirectories_agentsGet'                       = 'ActiveDirectoryAgent_Get';
             'activedirectories_agentsList'                      = 'ActiveDirectoryAgent_List';
@@ -434,10 +415,8 @@ $TransformConfig = [Ordered]@{
             'workdays_workers'                                  = 'WorkdayWorker_Get';
         };
         ExcludedList       = @(
-            '/bulk/assets',
-            '/bulk/assets/{job_id}/results'
-            # '/applications/{application_id}',
-            # '/applications/{application_id}/import/users',
+            # '/bulk/assets',
+            # '/bulk/assets/{job_id}/results'
             '/providers/{provider_id}/integrations',
             '/providers/{provider_id}/integrations/connectwise',
             '/integrations/connectwise/{UUID}',
@@ -447,12 +426,6 @@ $TransformConfig = [Ordered]@{
             '/integrations/connectwise/{UUID}/companies',
             '/integrations/connectwise/{UUID}/companytypes',
             '/integrations/connectwise/{UUID}/mappings',
-            # '/providers/{provider_id}/administrators',
-            # '/providers/{provider_id}/administrators/{id}',
-            # '/providers/{provider_id}/organizations',
-            # '/administrators/{id}/organizationlinks',
-            # '/administrators/{administrator_id}/organizationlinks/{id}',
-            # '/organizations/{id}/administratorlinks',
             '/integrations/autotask/{UUID}',
             '/integrations/autotask/{UUID}/settings',
             '/integrations/autotask/{UUID}/companytypes',
