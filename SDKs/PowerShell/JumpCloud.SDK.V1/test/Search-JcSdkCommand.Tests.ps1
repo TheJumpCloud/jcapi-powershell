@@ -22,8 +22,14 @@ Describe 'Search-JcSdkCommand' -Tag:(""){
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
-    It 'Search' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
-        # TODO: Implement command search w/ filter
+    It 'Search' {
+        { $Search = @{
+            filter = @{
+                or = @(
+                    'Name:$regex:/PesterTestCommand/i'
+                )
+            }
+        }
+        { Search-JcSdkCommand -Body:($Search) } | Should -Not -Throw } | Should -Not -Throw
     }
 }
