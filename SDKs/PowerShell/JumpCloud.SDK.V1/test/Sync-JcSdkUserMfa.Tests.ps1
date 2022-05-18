@@ -28,6 +28,7 @@ Describe 'Sync-JcSdkUserMfa' -Tag:(""){
         }
         $userToSync = New-JcSdkUser -Body $body
         { Sync-JcSdkUserMfa -Id $userToSync.Id } | Should -Not Throw
+        Remove-JcSdkUser -Id $userToSync.Id
     }
 
     It 'SyncViaIdentity' -skip {
