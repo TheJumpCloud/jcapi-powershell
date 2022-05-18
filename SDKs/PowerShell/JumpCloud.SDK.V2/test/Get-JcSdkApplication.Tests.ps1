@@ -19,8 +19,7 @@ if(($null -eq $TestName) -or ($TestName -contains 'Get-JcSdkApplication'))
 }
 Describe 'Get-JcSdkApplication' -Tag:(""){
     It 'Get' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
-        # TODO: Implement Test
+        { Get-JcSdkApplication } | Should -Not -Throw
     }
 
     It 'GetViaIdentity' -skip {

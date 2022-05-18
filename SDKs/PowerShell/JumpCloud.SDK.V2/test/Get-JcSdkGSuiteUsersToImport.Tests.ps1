@@ -16,6 +16,7 @@ while(-not $mockingPath) {
 }
 Describe 'Get-JcSdkGSuiteUsersToImport' -Tag:(""){
     It 'List' -skip {
+        # Skipping automated tests because of Gsuite vaildation requirement, tested locally and this function works as expected
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 }
