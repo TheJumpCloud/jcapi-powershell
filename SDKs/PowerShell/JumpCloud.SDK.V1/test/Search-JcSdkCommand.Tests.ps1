@@ -22,7 +22,7 @@ Describe 'Search-JcSdkCommand' -Tag:(""){
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
-    It 'Search' -skip {
+    It 'Search' {
         { $Search = @{
             filter = @{
                 or = @(
