@@ -22,7 +22,7 @@ Describe 'Set-JcSdkAdministratorUser' -Tag:("MTP"){
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 
-    It 'Set' -skip {
+    It 'Set' {
         $administratorUser = $global:PesterTestAdministratorUsers.results | Where-Object {$_.firstname -eq "Pester"}
         { Set-JcSdkAdministratorUser -Id $administratorUser._id -Firstname "Pester" } | Should -Not -Throw
     }

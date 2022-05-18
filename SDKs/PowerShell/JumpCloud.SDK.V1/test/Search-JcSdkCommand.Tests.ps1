@@ -23,13 +23,13 @@ Describe 'Search-JcSdkCommand' -Tag:(""){
     }
 
     It 'Search' {
-        { $Search = @{
+        $Search = @{
             filter = @{
                 or = @(
                     'Name:$regex:/PesterTestCommand/i'
                 )
             }
         }
-        { Search-JcSdkCommand -Body:($Search) } | Should -Not -Throw } | Should -Not -Throw
+        { Search-JcSdkCommand -Body:($Search) } | Should -Not -Throw }
     }
 }

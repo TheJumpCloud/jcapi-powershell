@@ -18,7 +18,7 @@ if(($null -eq $TestName) -or ($TestName -contains 'Get-JcSdkApplication'))
 
 }
 Describe 'Get-JcSdkApplication' -Tag:(""){
-    It 'Get' -skip {
+    It 'Get' {
         { Get-JcSdkApplication } | Should -Not -Throw
     }
 
