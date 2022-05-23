@@ -26,7 +26,7 @@ Describe 'Search-JcSdkCommand' -Tag:(""){
         $Search = @{
             filter = @{
                 or = @(
-                    'Name:$regex:/PesterTestCommand/i'
+                    'name:$regex:/PesterTestCommand/i'
                 )
             }
         }
