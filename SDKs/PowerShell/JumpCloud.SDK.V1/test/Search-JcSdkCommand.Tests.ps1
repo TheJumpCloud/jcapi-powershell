@@ -30,6 +30,6 @@ Describe 'Search-JcSdkCommand' -Tag:(""){
                 )
             }
         }
-        { Search-JcSdkCommand -Body:($Search) } | Should -Not -Throw }
+        { Search-JcSdkCommand -Body:($Search) } | Should -Not -Throw
     }
 }
