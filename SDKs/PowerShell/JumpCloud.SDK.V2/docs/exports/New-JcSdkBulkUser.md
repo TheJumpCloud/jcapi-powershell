@@ -61,7 +61,7 @@ curl -X POST https://console.jumpcloud.com/api/v2/bulk/users \\
 ## SYNTAX
 
 ```
-New-JcSdkBulkUser -Body <IBulkUserCreate[]> [-CreationSource <CreationSource>] [-Confirm] [-WhatIf]
+New-JcSdkBulkUser -Body <IBulkUserCreate[]> [-CreationSource <CreationSource2>] [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
@@ -155,7 +155,7 @@ Defines the creation-source header for gapps, o365 and workdays requests.
 If the header isn't sent, the default value is `jumpcloud:bulk`, if you send the header with a malformed value you receive a 400 error.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Support.CreationSource
+Type: JumpCloud.SDK.V2.Support.CreationSource2
 Parameter Sets: (All)
 Aliases:
 

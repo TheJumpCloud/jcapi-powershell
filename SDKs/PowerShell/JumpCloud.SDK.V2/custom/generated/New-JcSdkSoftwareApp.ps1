@@ -1,6 +1,7 @@
 <#
 .Synopsis
 This endpoint allows you to create a Software Application that will be managed by JumpCloud on associated JumpCloud systems.
+The optional isConfigEnabled and appConfiguration apple_vpp attributes are not included in the response.
 
 #### Sample Request
 ```
@@ -15,6 +16,7 @@ $ curl -X POST https://console.jumpcloud.com/api/v2/softwareapps \\
 ```
 .Description
 This endpoint allows you to create a Software Application that will be managed by JumpCloud on associated JumpCloud systems.
+The optional isConfigEnabled and appConfiguration apple_vpp attributes are not included in the response.
 
 #### Sample Request
 ```
@@ -50,12 +52,12 @@ BODY <ISoftwareApp>:
   [Id <String>]:
   [Settings <ISoftwareAppSettings[]>]:
     [AllowUpdateDelay <Boolean?>]:
-    [AppleVppAppConfiguration <String>]: Text sent to configure the application, the text should be a valid plist.
+    [AppleVppAppConfiguration <String>]: Text sent to configure the application, the text should be a valid plist.  Returned only by 'GET /softwareapps/{id}'.
     [AppleVppAssignedLicenses <Int32?>]:
     [AppleVppAvailableLicenses <Int32?>]:
     [AppleVppDetails <ISoftwareAppAppleVppDetails>]: App details returned by iTunes API. See example. The properties in this field are out of our control and we cannot guarantee consistency, so it should be checked by the client and manage the details accordingly.
       [(Any) <Object>]: This indicates any property can be added to this object.
-    [AppleVppIsConfigEnabled <Boolean?>]: Denotes if configuration has been enabled for the application.
+    [AppleVppIsConfigEnabled <Boolean?>]: Denotes if configuration has been enabled for the application.  Returned only by ''GET /softwareapps/{id}''.
     [AppleVppSupportedDeviceFamilies <String[]>]: The supported device families for this VPP Application.
     [AppleVppTotalLicenses <Int32?>]:
     [AssetKind <String>]: The manifest asset kind (ex: software).
@@ -74,12 +76,12 @@ BODY <ISoftwareApp>:
 
 SETTINGS <ISoftwareAppSettings[]>:
   [AllowUpdateDelay <Boolean?>]:
-  [AppleVppAppConfiguration <String>]: Text sent to configure the application, the text should be a valid plist.
+  [AppleVppAppConfiguration <String>]: Text sent to configure the application, the text should be a valid plist.  Returned only by 'GET /softwareapps/{id}'.
   [AppleVppAssignedLicenses <Int32?>]:
   [AppleVppAvailableLicenses <Int32?>]:
   [AppleVppDetails <ISoftwareAppAppleVppDetails>]: App details returned by iTunes API. See example. The properties in this field are out of our control and we cannot guarantee consistency, so it should be checked by the client and manage the details accordingly.
     [(Any) <Object>]: This indicates any property can be added to this object.
-  [AppleVppIsConfigEnabled <Boolean?>]: Denotes if configuration has been enabled for the application.
+  [AppleVppIsConfigEnabled <Boolean?>]: Denotes if configuration has been enabled for the application.  Returned only by ''GET /softwareapps/{id}''.
   [AppleVppSupportedDeviceFamilies <String[]>]: The supported device families for this VPP Application.
   [AppleVppTotalLicenses <Int32?>]:
   [AssetKind <String>]: The manifest asset kind (ex: software).

@@ -68,6 +68,7 @@ namespace JumpCloud.SDK.V1
             // Adding elements to List
             mtpUrls.Add("/api/search/organizations");
             mtpUrls.Add("/api/organizations");
+            mtpUrls.Add("/api/users");
             mtpUrls.Add("/api/v2/organizations");
             mtpUrls.Add("/api/v2/administrators");
             mtpUrls.Add("/api/v2/providers");
@@ -85,10 +86,10 @@ namespace JumpCloud.SDK.V1
                 request.Headers.Add("Accept", "application/json");
             }
             // If headers do not contain an "UserAgent" with the correct value fix it
-            if (request.Headers.UserAgent.ToString() != "JumpCloud_JumpCloud.PowerShell.SDK.V1/0.0.28")
+            if (request.Headers.UserAgent.ToString() != "JumpCloud_JumpCloud.PowerShell.SDK.V1/0.0.29")
             {
                 request.Headers.UserAgent.Clear();
-                request.Headers.UserAgent.ParseAdd("JumpCloud_JumpCloud.PowerShell.SDK.V1/0.0.28");
+                request.Headers.UserAgent.ParseAdd("JumpCloud_JumpCloud.PowerShell.SDK.V1/0.0.29");
             }
             // // request.Headers.Add("Content-Type", "application/json");
             System.Net.Http.HttpResponseMessage response = await next.SendAsync(request, callback);

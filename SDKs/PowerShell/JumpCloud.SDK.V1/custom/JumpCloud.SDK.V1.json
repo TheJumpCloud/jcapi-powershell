@@ -904,11 +904,7 @@
           "type": "object"
         },
         "sso": {
-          "allOf": [
-            {
-              "$ref": "#/definitions/sso"
-            }
-          ]
+          "$ref": "#/definitions/sso"
         },
         "ssoUrl": {
           "type": "string"
@@ -1007,6 +1003,10 @@
             "type": "string"
           },
           "type": "array"
+        },
+        "timeToLiveSeconds": {
+          "description": "Time in seconds a command can wait in the queue to be run before timing out",
+          "type": "integer"
         },
         "timeout": {
           "description": "The time in seconds to allow the command to run for.",
@@ -1610,6 +1610,14 @@
                   "type": "object"
                 },
                 "learningCenter": {
+                  "properties": {
+                    "visible": {
+                      "type": "boolean"
+                    }
+                  },
+                  "type": "object"
+                },
+                "mdmCertificateExpirations": {
                   "properties": {
                     "visible": {
                       "type": "boolean"
@@ -2632,6 +2640,9 @@
         "remoteIP": {
           "type": "string"
         },
+        "serialNumber": {
+          "type": "string"
+        },
         "serviceAccountState": {
           "properties": {
             "hasSecureToken": {
@@ -3618,6 +3629,106 @@
       ],
       "title": "trustedappConfigPut",
       "type": "object"
+    },
+    "userput": {
+      "properties": {
+        "email": {
+          "format": "email",
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "enableMultiFactor": {
+          "type": "boolean"
+        },
+        "firstname": {
+          "type": "string"
+        },
+        "growthData": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "lastWhatsNewChecked": {
+          "format": "date",
+          "type": "string"
+        },
+        "lastname": {
+          "type": "string"
+        },
+        "roleName": {
+          "type": "string"
+        }
+      },
+      "title": "UserPut",
+      "type": "object"
+    },
+    "userreturn": {
+      "properties": {
+        "_id": {
+          "type": "string"
+        },
+        "created": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "disableIntroduction": {
+          "type": "boolean"
+        },
+        "email": {
+          "type": "string"
+        },
+        "enableMultiFactor": {
+          "type": "boolean"
+        },
+        "firstname": {
+          "type": "string"
+        },
+        "growthData": {
+          "properties": {
+            "experimentStates": {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            "onboardingState": {
+              "additionalProperties": true,
+              "type": "object"
+            }
+          },
+          "type": "object"
+        },
+        "lastWhatsNewChecked": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "lastname": {
+          "type": "string"
+        },
+        "organization": {
+          "type": "string"
+        },
+        "provider": {
+          "type": "string"
+        },
+        "role": {
+          "type": "string"
+        },
+        "roleName": {
+          "type": "string"
+        },
+        "sessionCount": {
+          "type": "integer"
+        },
+        "suspended": {
+          "type": "boolean"
+        },
+        "totpEnrolled": {
+          "type": "boolean"
+        },
+        "usersTimeZone": {
+          "type": "string"
+        }
+      },
+      "title": "UserReturn",
+      "type": "object"
     }
   },
   "host": "console.jumpcloud.com",
@@ -3627,7 +3738,7 @@
       "name": "JumpCloud Support",
       "url": "https://support.jumpcloud.com/support/s/"
     },
-    "description": "# Overview\n\nJumpCloud's V1 API. This set of endpoints allows JumpCloud customers to manage commands, systems, and system users.\n\n# API Key\n\n## Access Your API Key\n\nTo locate your API Key:\n\n1. Log into the [JumpCloud Admin Console](https://console.jumpcloud.com/).\n2. Go to the username drop down located in the top-right of the Console.\n3. Retrieve your API key from API Settings.\n\n## API Key Considerations\n\nThis API key is associated to the currently logged in administrator. Other admins will have different API keys.\n\n**WARNING** Please keep this API key secret, as it grants full access to any data accessible via your JumpCloud console account.\n\nYou can also reset your API key in the same location in the JumpCloud Admin Console.\n\n## Recycling or Resetting Your API Key\n\nIn order to revoke access with the current API key, simply reset your API key. This will render all calls using the previous API key inaccessible.\n\nYour API key will be passed in as a header with the header name \"x-api-key\".\n\n```bash\ncurl -H \"x-api-key: [YOUR_API_KEY_HERE]\" \"https://console.jumpcloud.com/api/systemusers\"\n```\n\n# System Context\n\n* [Introduction](#introduction)\n* [Supported endpoints](#supported-endpoints)\n* [Response codes](#response-codes)\n* [Authentication](#authentication)\n* [Additional examples](#additional-examples)\n* [Third party](#third-party)\n\n## Introduction\n\nJumpCloud System Context Authorization is an alternative way to authenticate with a subset of JumpCloud's REST APIs. Using this method, a system can manage its information and resource associations, allowing modern auto provisioning environments to scale as needed.\n\n**Note: The following documentation applies to Linux Operating Systems only.**\n\n## Supported Endpoints\n\nJumpCloud System Context Authorization can be used in conjunction with Systems endpoints found in the V1 API and certain System Group endpoints found in the v2 API.\n\n* A system may fetch, alter, and delete metadata about itself, including manipulating a system's Group and Systemuser associations,\n  * `/api/systems/{system_id}` | [`GET`](https://docs.jumpcloud.com/api/1.0/index.html#operation/systems_get) [`PUT`](https://docs.jumpcloud.com/api/1.0/index.html#operation/systems_put)\n* A system may delete itself from your JumpCloud organization\n  * `/api/systems/{system_id}` | [`DELETE`](https://docs.jumpcloud.com/api/1.0/index.html#operation/systems_delete)\n* A system may fetch its direct resource associations under v2 (Groups)\n  * `/api/v2/systems/{system_id}/memberof` | [`GET`](https://docs.jumpcloud.com/api/2.0/index.html#operation/graph_systemGroupMembership)\n  * `/api/v2/systems/{system_id}/associations` | [`GET`](https://docs.jumpcloud.com/api/2.0/index.html#operation/graph_systemAssociationsList)\n  * `/api/v2/systems/{system_id}/users` | [`GET`](https://docs.jumpcloud.com/api/2.0/index.html#operation/graph_systemTraverseUser)\n* A system may alter its direct resource associations under v2 (Groups)\n  * `/api/v2/systems/{system_id}/associations` | [`POST`](https://docs.jumpcloud.com/api/2.0/index.html#operation/graph_systemAssociationsPost)\n* A system may alter its System Group associations\n  * `/api/v2/systemgroups/{group_id}/members` | [`POST`](https://docs.jumpcloud.com/api/2.0/index.html#operation/graph_systemGroupMembersPost)\n    * _NOTE_ If a system attempts to alter the system group membership of a different system the request will be rejected\n\n## Response Codes\n\nIf endpoints other than those described above are called using the System Context API, the server will return a `401` response.\n\n## Authentication\n\nTo allow for secure access to our APIs, you must authenticate each API request.\nJumpCloud System Context Authorization uses [HTTP Signatures](https://tools.ietf.org/html/draft-cavage-http-signatures-00) to authenticate API requests.\nThe HTTP Signatures sent with each request are similar to the signatures used by the Amazon Web Services REST API.\nTo help with the request-signing process, we have provided an [example bash script](https://github.com/TheJumpCloud/SystemContextAPI/blob/master/examples/shell/SigningExample.sh). This example API request simply requests the entire system record. You must be root, or have permissions to access the contents of the `/opt/jc` directory to generate a signature.\n\nHere is a breakdown of the example script with explanations.\n\nFirst, the script extracts the systemKey from the JSON formatted `/opt/jc/jcagent.conf` file.\n\n```bash\n#!/bin/bash\nconf=\"`cat /opt/jc/jcagent.conf`\"\nregex=\"systemKey\\\":\\\"(\\w+)\\\"\"\n\nif [[ $conf =~ $regex ]] ; then\n  systemKey=\"${BASH_REMATCH[1]}\"\nfi\n```\n\nThen, the script retrieves the current date in the correct format.\n\n```bash\nnow=`date -u \"+%a, %d %h %Y %H:%M:%S GMT\"`;\n```\n\nNext, we build a signing string to demonstrate the expected signature format. The signed string must consist of the [request-line](https://tools.ietf.org/html/rfc2616#page-35) and the date header, separated by a newline character.\n\n```bash\nsignstr=\"GET /api/systems/${systemKey} HTTP/1.1\\ndate: ${now}\"\n```\n\nThe next step is to calculate and apply the signature. This is a two-step process:\n\n1. Create a signature from the signing string using the JumpCloud Agent private key: ``printf \"$signstr\" | openssl dgst -sha256 -sign /opt/jc/client.key``\n2. Then Base64-encode the signature string and trim off the newline characters: ``| openssl enc -e -a | tr -d '\\n'``\n\nThe combined steps above result in:\n\n```bash\nsignature=`printf \"$signstr\" | openssl dgst -sha256 -sign /opt/jc/client.key | openssl enc -e -a | tr -d '\\n'` ;\n```\n\nFinally, we make sure the API call sending the signature has the same Authorization and Date header values, HTTP method, and URL that were used in the signing string.\n\n```bash\ncurl -iq \\\n  -H \"Accept: application/json\" \\\n  -H \"Content-Type: application/json\" \\\n  -H \"Date: ${now}\" \\\n  -H \"Authorization: Signature keyId=\\\"system/${systemKey}\\\",headers=\\\"request-line date\\\",algorithm=\\\"rsa-sha256\\\",signature=\\\"${signature}\\\"\" \\\n  --url https://console.jumpcloud.com/api/systems/${systemKey}\n```\n\n### Input Data\n\nAll PUT and POST methods should use the HTTP Content-Type header with a value of 'application/json'. PUT methods are used for updating a record. POST methods are used to create a record.\n\nThe following example demonstrates how to update the `displayName` of the system.\n\n```bash\nsignstr=\"PUT /api/systems/${systemKey} HTTP/1.1\\ndate: ${now}\"\nsignature=`printf \"$signstr\" | openssl dgst -sha256 -sign /opt/jc/client.key | openssl enc -e -a | tr -d '\\n'` ;\n\ncurl -iq \\\n  -d \"{\\\"displayName\\\" : \\\"updated-system-name-1\\\"}\" \\\n  -X \"PUT\" \\\n  -H \"Content-Type: application/json\" \\\n  -H \"Accept: application/json\" \\\n  -H \"Date: ${now}\" \\\n  -H \"Authorization: Signature keyId=\\\"system/${systemKey}\\\",headers=\\\"request-line date\\\",algorithm=\\\"rsa-sha256\\\",signature=\\\"${signature}\\\"\" \\\n  --url https://console.jumpcloud.com/api/systems/${systemKey}\n```\n\n### Output Data\n\nAll results will be formatted as JSON.\n\nHere is an abbreviated example of response output:\n\n```json\n{\n  \"_id\": \"525ee96f52e144993e000015\",\n  \"agentServer\": \"lappy386\",\n  \"agentVersion\": \"0.9.42\",\n  \"arch\": \"x86_64\",\n  \"connectionKey\": \"127.0.0.1_51812\",\n  \"displayName\": \"ubuntu-1204\",\n  \"firstContact\": \"2013-10-16T19:30:55.611Z\",\n  \"hostname\": \"ubuntu-1204\"\n  ...\n```\n\n## Additional Examples\n\n### Signing Authentication Example\n\nThis example demonstrates how to make an authenticated request to fetch the JumpCloud record for this system.\n\n[SigningExample.sh](https://github.com/TheJumpCloud/SystemContextAPI/blob/master/examples/shell/SigningExample.sh)\n\n### Shutdown Hook\n\nThis example demonstrates how to make an authenticated request on system shutdown.\nUsing an init.d script registered at run level 0, you can call the System Context API as the system is shutting down.\n\n[Instance-shutdown-initd](https://github.com/TheJumpCloud/SystemContextAPI/blob/master/examples/instance-shutdown-initd) is an example of an init.d script that only runs at system shutdown.\n\nAfter customizing the [instance-shutdown-initd](https://github.com/TheJumpCloud/SystemContextAPI/blob/master/examples/instance-shutdown-initd) script, you should install it on the system(s) running the JumpCloud agent.\n\n1. Copy the modified [instance-shutdown-initd](https://github.com/TheJumpCloud/SystemContextAPI/blob/master/examples/instance-shutdown-initd) to `/etc/init.d/instance-shutdown`.\n2. On Ubuntu systems, run `update-rc.d instance-shutdown defaults`. On RedHat/CentOS systems, run `chkconfig --add instance-shutdown`.\n\n## Third Party\n\n### Chef Cookbooks\n\n[https://github.com/nshenry03/jumpcloud](https://github.com/nshenry03/jumpcloud)\n\n[https://github.com/cjs226/jumpcloud](https://github.com/cjs226/jumpcloud)\n\n# Multi-Tenant Portal Headers\n\nMulti-Tenant Organization API Headers are available for JumpCloud Admins to use when making API requests from Organizations that have multiple managed organizations.\n\nThe `x-org-id` is a required header for all multi-tenant admins when making API requests to JumpCloud. This header will define to which organization you would like to make the request.\n\n**NOTE** Single Tenant Admins do not need to provide this header when making an API request.\n\n## Header Value\n\n`x-org-id`\n\n## API Response Codes\n\n* `400` Malformed ID.\n* `400` x-org-id and Organization path ID do not match.\n* `401` ID not included for multi-tenant admin\n* `403` ID included on unsupported route.\n* `404` Organization ID Not Found.\n\n```bash\ncurl -X GET https://console.jumpcloud.com/api/v2/directories \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -H 'x-org-id: {ORG_ID}'\n\n```\n\n## To Obtain an Individual Organization ID via the UI\n\nAs a prerequisite, your Primary Organization will need to be setup for Multi-Tenancy. This provides access to the Multi-Tenant Organization Admin Portal.\n\n1. Log into JumpCloud [Admin Console](https://console.jumpcloud.com). If you are a multi-tenant Admin, you will automatically be routed to the Multi-Tenant Admin Portal.\n2. From the Multi-Tenant Portal's primary navigation bar, select the Organization you'd like to access.\n3. You will automatically be routed to that Organization's Admin Console.\n4. Go to Settings in the sub-tenant's primary navigation.\n5. You can obtain your Organization ID below your Organization's Contact Information on the Settings page.\n\n## To Obtain All Organization IDs via the API\n\n* You can make an API request to this endpoint using the API key of your Primary Organization.  `https://console.jumpcloud.com/api/organizations/` This will return all your managed organizations.\n\n```bash\ncurl -X GET \\\n  https://console.jumpcloud.com/api/organizations/ \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```\n\n# SDKs\n\nYou can find language specific SDKs that can help you kickstart your Integration with JumpCloud in the following GitHub repositories:\n\n* [Python](https://github.com/TheJumpCloud/jcapi-python)\n* [Go](https://github.com/TheJumpCloud/jcapi-go)\n* [Ruby](https://github.com/TheJumpCloud/jcapi-ruby)\n* [Java](https://github.com/TheJumpCloud/jcapi-java)\n",
+    "description": "# Overview\n\nJumpCloud's V1 API. This set of endpoints allows JumpCloud customers to manage commands, systems, and system users.\n\n# API Key\n\n## Access Your API Key\n\nTo locate your API Key:\n\n1. Log into the [JumpCloud Admin Console](https://console.jumpcloud.com/).\n2. Go to the username drop down located in the top-right of the Console.\n3. Retrieve your API key from API Settings.\n\n## API Key Considerations\n\nThis API key is associated to the currently logged in administrator. Other admins will have different API keys.\n\n**WARNING** Please keep this API key secret, as it grants full access to any data accessible via your JumpCloud console account.\n\nYou can also reset your API key in the same location in the JumpCloud Admin Console.\n\n## Recycling or Resetting Your API Key\n\nIn order to revoke access with the current API key, simply reset your API key. This will render all calls using the previous API key inaccessible.\n\nYour API key will be passed in as a header with the header name \"x-api-key\".\n\n```bash\ncurl -H \"x-api-key: [YOUR_API_KEY_HERE]\" \"https://console.jumpcloud.com/api/systemusers\"\n```\n\n# System Context\n\n* [Introduction](#introduction)\n* [Supported endpoints](#supported-endpoints)\n* [Response codes](#response-codes)\n* [Authentication](#authentication)\n* [Additional examples](#additional-examples)\n* [Third party](#third-party)\n\n## Introduction\n\nJumpCloud System Context Authorization is an alternative way to authenticate with a subset of JumpCloud's REST APIs. Using this method, a system can manage its information and resource associations, allowing modern auto provisioning environments to scale as needed.\n\n**Notes:**\n\n * The following documentation applies to Linux Operating Systems only.\n * Systems that have been automatically enrolled using Apple's Device Enrollment Program (DEP) or systems enrolled using the User Portal install are not eligible to use the System Context API to prevent unauthorized access to system groups and resources. If a script that utilizes the System Context API is invoked on a system enrolled in this way, it will display an error.\n\n## Supported Endpoints\n\nJumpCloud System Context Authorization can be used in conjunction with Systems endpoints found in the V1 API and certain System Group endpoints found in the v2 API.\n\n* A system may fetch, alter, and delete metadata about itself, including manipulating a system's Group and Systemuser associations,\n  * `/api/systems/{system_id}` | [`GET`](https://docs.jumpcloud.com/api/1.0/index.html#operation/systems_get) [`PUT`](https://docs.jumpcloud.com/api/1.0/index.html#operation/systems_put)\n* A system may delete itself from your JumpCloud organization\n  * `/api/systems/{system_id}` | [`DELETE`](https://docs.jumpcloud.com/api/1.0/index.html#operation/systems_delete)\n* A system may fetch its direct resource associations under v2 (Groups)\n  * `/api/v2/systems/{system_id}/memberof` | [`GET`](https://docs.jumpcloud.com/api/2.0/index.html#operation/graph_systemGroupMembership)\n  * `/api/v2/systems/{system_id}/associations` | [`GET`](https://docs.jumpcloud.com/api/2.0/index.html#operation/graph_systemAssociationsList)\n  * `/api/v2/systems/{system_id}/users` | [`GET`](https://docs.jumpcloud.com/api/2.0/index.html#operation/graph_systemTraverseUser)\n* A system may alter its direct resource associations under v2 (Groups)\n  * `/api/v2/systems/{system_id}/associations` | [`POST`](https://docs.jumpcloud.com/api/2.0/index.html#operation/graph_systemAssociationsPost)\n* A system may alter its System Group associations\n  * `/api/v2/systemgroups/{group_id}/members` | [`POST`](https://docs.jumpcloud.com/api/2.0/index.html#operation/graph_systemGroupMembersPost)\n    * _NOTE_ If a system attempts to alter the system group membership of a different system the request will be rejected\n\n## Response Codes\n\nIf endpoints other than those described above are called using the System Context API, the server will return a `401` response.\n\n## Authentication\n\nTo allow for secure access to our APIs, you must authenticate each API request.\nJumpCloud System Context Authorization uses [HTTP Signatures](https://tools.ietf.org/html/draft-cavage-http-signatures-00) to authenticate API requests.\nThe HTTP Signatures sent with each request are similar to the signatures used by the Amazon Web Services REST API.\nTo help with the request-signing process, we have provided an [example bash script](https://github.com/TheJumpCloud/SystemContextAPI/blob/master/examples/shell/SigningExample.sh). This example API request simply requests the entire system record. You must be root, or have permissions to access the contents of the `/opt/jc` directory to generate a signature.\n\nHere is a breakdown of the example script with explanations.\n\nFirst, the script extracts the systemKey from the JSON formatted `/opt/jc/jcagent.conf` file.\n\n```bash\n#!/bin/bash\nconf=\"`cat /opt/jc/jcagent.conf`\"\nregex=\"systemKey\\\":\\\"(\\w+)\\\"\"\n\nif [[ $conf =~ $regex ]] ; then\n  systemKey=\"${BASH_REMATCH[1]}\"\nfi\n```\n\nThen, the script retrieves the current date in the correct format.\n\n```bash\nnow=`date -u \"+%a, %d %h %Y %H:%M:%S GMT\"`;\n```\n\nNext, we build a signing string to demonstrate the expected signature format. The signed string must consist of the [request-line](https://tools.ietf.org/html/rfc2616#page-35) and the date header, separated by a newline character.\n\n```bash\nsignstr=\"GET /api/systems/${systemKey} HTTP/1.1\\ndate: ${now}\"\n```\n\nThe next step is to calculate and apply the signature. This is a two-step process:\n\n1. Create a signature from the signing string using the JumpCloud Agent private key: ``printf \"$signstr\" | openssl dgst -sha256 -sign /opt/jc/client.key``\n2. Then Base64-encode the signature string and trim off the newline characters: ``| openssl enc -e -a | tr -d '\\n'``\n\nThe combined steps above result in:\n\n```bash\nsignature=`printf \"$signstr\" | openssl dgst -sha256 -sign /opt/jc/client.key | openssl enc -e -a | tr -d '\\n'` ;\n```\n\nFinally, we make sure the API call sending the signature has the same Authorization and Date header values, HTTP method, and URL that were used in the signing string.\n\n```bash\ncurl -iq \\\n  -H \"Accept: application/json\" \\\n  -H \"Content-Type: application/json\" \\\n  -H \"Date: ${now}\" \\\n  -H \"Authorization: Signature keyId=\\\"system/${systemKey}\\\",headers=\\\"request-line date\\\",algorithm=\\\"rsa-sha256\\\",signature=\\\"${signature}\\\"\" \\\n  --url https://console.jumpcloud.com/api/systems/${systemKey}\n```\n\n### Input Data\n\nAll PUT and POST methods should use the HTTP Content-Type header with a value of 'application/json'. PUT methods are used for updating a record. POST methods are used to create a record.\n\nThe following example demonstrates how to update the `displayName` of the system.\n\n```bash\nsignstr=\"PUT /api/systems/${systemKey} HTTP/1.1\\ndate: ${now}\"\nsignature=`printf \"$signstr\" | openssl dgst -sha256 -sign /opt/jc/client.key | openssl enc -e -a | tr -d '\\n'` ;\n\ncurl -iq \\\n  -d \"{\\\"displayName\\\" : \\\"updated-system-name-1\\\"}\" \\\n  -X \"PUT\" \\\n  -H \"Content-Type: application/json\" \\\n  -H \"Accept: application/json\" \\\n  -H \"Date: ${now}\" \\\n  -H \"Authorization: Signature keyId=\\\"system/${systemKey}\\\",headers=\\\"request-line date\\\",algorithm=\\\"rsa-sha256\\\",signature=\\\"${signature}\\\"\" \\\n  --url https://console.jumpcloud.com/api/systems/${systemKey}\n```\n\n### Output Data\n\nAll results will be formatted as JSON.\n\nHere is an abbreviated example of response output:\n\n```json\n{\n  \"_id\": \"525ee96f52e144993e000015\",\n  \"agentServer\": \"lappy386\",\n  \"agentVersion\": \"0.9.42\",\n  \"arch\": \"x86_64\",\n  \"connectionKey\": \"127.0.0.1_51812\",\n  \"displayName\": \"ubuntu-1204\",\n  \"firstContact\": \"2013-10-16T19:30:55.611Z\",\n  \"hostname\": \"ubuntu-1204\"\n  ...\n```\n\n## Additional Examples\n\n### Signing Authentication Example\n\nThis example demonstrates how to make an authenticated request to fetch the JumpCloud record for this system.\n\n[SigningExample.sh](https://github.com/TheJumpCloud/SystemContextAPI/blob/master/examples/shell/SigningExample.sh)\n\n### Shutdown Hook\n\nThis example demonstrates how to make an authenticated request on system shutdown.\nUsing an init.d script registered at run level 0, you can call the System Context API as the system is shutting down.\n\n[Instance-shutdown-initd](https://github.com/TheJumpCloud/SystemContextAPI/blob/master/examples/instance-shutdown-initd) is an example of an init.d script that only runs at system shutdown.\n\nAfter customizing the [instance-shutdown-initd](https://github.com/TheJumpCloud/SystemContextAPI/blob/master/examples/instance-shutdown-initd) script, you should install it on the system(s) running the JumpCloud agent.\n\n1. Copy the modified [instance-shutdown-initd](https://github.com/TheJumpCloud/SystemContextAPI/blob/master/examples/instance-shutdown-initd) to `/etc/init.d/instance-shutdown`.\n2. On Ubuntu systems, run `update-rc.d instance-shutdown defaults`. On RedHat/CentOS systems, run `chkconfig --add instance-shutdown`.\n\n## Third Party\n\n### Chef Cookbooks\n\n[https://github.com/nshenry03/jumpcloud](https://github.com/nshenry03/jumpcloud)\n\n[https://github.com/cjs226/jumpcloud](https://github.com/cjs226/jumpcloud)\n\n# Multi-Tenant Portal Headers\n\nMulti-Tenant Organization API Headers are available for JumpCloud Admins to use when making API requests from Organizations that have multiple managed organizations.\n\nThe `x-org-id` is a required header for all multi-tenant admins when making API requests to JumpCloud. This header will define to which organization you would like to make the request.\n\n**NOTE** Single Tenant Admins do not need to provide this header when making an API request.\n\n## Header Value\n\n`x-org-id`\n\n## API Response Codes\n\n* `400` Malformed ID.\n* `400` x-org-id and Organization path ID do not match.\n* `401` ID not included for multi-tenant admin\n* `403` ID included on unsupported route.\n* `404` Organization ID Not Found.\n\n```bash\ncurl -X GET https://console.jumpcloud.com/api/v2/directories \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -H 'x-org-id: {ORG_ID}'\n\n```\n\n## To Obtain an Individual Organization ID via the UI\n\nAs a prerequisite, your Primary Organization will need to be setup for Multi-Tenancy. This provides access to the Multi-Tenant Organization Admin Portal.\n\n1. Log into JumpCloud [Admin Console](https://console.jumpcloud.com). If you are a multi-tenant Admin, you will automatically be routed to the Multi-Tenant Admin Portal.\n2. From the Multi-Tenant Portal's primary navigation bar, select the Organization you'd like to access.\n3. You will automatically be routed to that Organization's Admin Console.\n4. Go to Settings in the sub-tenant's primary navigation.\n5. You can obtain your Organization ID below your Organization's Contact Information on the Settings page.\n\n## To Obtain All Organization IDs via the API\n\n* You can make an API request to this endpoint using the API key of your Primary Organization.  `https://console.jumpcloud.com/api/organizations/` This will return all your managed organizations.\n\n```bash\ncurl -X GET \\\n  https://console.jumpcloud.com/api/organizations/ \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```\n\n# SDKs\n\nYou can find language specific SDKs that can help you kickstart your Integration with JumpCloud in the following GitHub repositories:\n\n* [Python](https://github.com/TheJumpCloud/jcapi-python)\n* [Go](https://github.com/TheJumpCloud/jcapi-go)\n* [Ruby](https://github.com/TheJumpCloud/jcapi-ruby)\n* [Java](https://github.com/TheJumpCloud/jcapi-java)\n",
     "title": "JumpCloud API",
     "version": "1.0"
   },
@@ -3902,15 +4013,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request POST \\\n  --url https://console.jumpcloud.com/api/applications \\\n  --header 'Accept: SOME_STRING_VALUE' \\\n  --header 'Content-Type: SOME_STRING_VALUE' \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --header 'x-org-id: SOME_STRING_VALUE' \\\n  --data '{\"_id\":\"string\",\"active\":true,\"beta\":true,\"color\":\"\",\"config\":{\"acsUrl\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"constantAttributes\":{\"label\":\"string\",\"mutable\":true,\"options\":null,\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":null,\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":[{\"name\":\"string\",\"readOnly\":true,\"required\":true,\"value\":\"string\",\"visible\":true}],\"visible\":true},\"databaseAttributes\":{\"position\":0},\"idpCertificate\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"idpEntityId\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"idpPrivateKey\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"spEntityId\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true}},\"created\":\"string\",\"databaseAttributes\":[{}],\"description\":\"string\",\"displayLabel\":\"string\",\"displayName\":\"string\",\"learnMore\":\"string\",\"logo\":{\"color\":\"\",\"url\":\"string\"},\"name\":\"string\",\"organization\":\"string\",\"sso\":{\"beta\":true,\"idpCertExpirationAt\":\"2019-08-24T14:15:22Z\",\"jit\":true,\"type\":\"string\"},\"ssoUrl\":\"string\"}'"
+            "source": "curl --request POST \\\n  --url https://console.jumpcloud.com/api/applications \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --data '{\"_id\":\"string\",\"active\":true,\"beta\":true,\"color\":\"\",\"config\":{\"acsUrl\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"constantAttributes\":{\"label\":\"string\",\"mutable\":true,\"options\":null,\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":null,\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":[{\"name\":\"string\",\"readOnly\":true,\"required\":true,\"value\":\"string\",\"visible\":true}],\"visible\":true},\"databaseAttributes\":{\"position\":0},\"idpCertificate\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"idpEntityId\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"idpPrivateKey\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"spEntityId\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true}},\"created\":\"string\",\"databaseAttributes\":[{}],\"description\":\"string\",\"displayLabel\":\"string\",\"displayName\":\"string\",\"learnMore\":\"string\",\"logo\":{\"color\":\"\",\"url\":\"string\"},\"name\":\"string\",\"organization\":\"string\",\"sso\":{\"beta\":true,\"idpCertExpirationAt\":\"2019-08-24T14:15:22Z\",\"jit\":true,\"type\":\"string\"},\"ssoUrl\":\"string\"}'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/applications\"\n\npayload = {\n    \"_id\": \"string\",\n    \"active\": True,\n    \"beta\": True,\n    \"color\": \"\",\n    \"config\": {\n        \"acsUrl\": {\n            \"label\": \"string\",\n            \"options\": \"string\",\n            \"position\": 0,\n            \"readOnly\": True,\n            \"required\": True,\n            \"toggle\": \"string\",\n            \"tooltip\": {\n                \"template\": \"string\",\n                \"variables\": {\n                    \"icon\": \"string\",\n                    \"message\": \"string\"\n                }\n            },\n            \"type\": \"string\",\n            \"value\": \"string\",\n            \"visible\": True\n        },\n        \"constantAttributes\": {\n            \"label\": \"string\",\n            \"mutable\": True,\n            \"options\": None,\n            \"position\": 0,\n            \"readOnly\": True,\n            \"required\": True,\n            \"toggle\": None,\n            \"tooltip\": {\n                \"template\": \"string\",\n                \"variables\": {\n                    \"icon\": \"string\",\n                    \"message\": \"string\"\n                }\n            },\n            \"type\": \"string\",\n            \"value\": [\n                {\n                    \"name\": \"string\",\n                    \"readOnly\": True,\n                    \"required\": True,\n                    \"value\": \"string\",\n                    \"visible\": True\n                }\n            ],\n            \"visible\": True\n        },\n        \"databaseAttributes\": {\"position\": 0},\n        \"idpCertificate\": {\n            \"label\": \"string\",\n            \"options\": \"string\",\n            \"position\": 0,\n            \"readOnly\": True,\n            \"required\": True,\n            \"toggle\": \"string\",\n            \"tooltip\": {\n                \"template\": \"string\",\n                \"variables\": {\n                    \"icon\": \"string\",\n                    \"message\": \"string\"\n                }\n            },\n            \"type\": \"string\",\n            \"value\": \"string\",\n            \"visible\": True\n        },\n        \"idpEntityId\": {\n            \"label\": \"string\",\n            \"options\": \"string\",\n            \"position\": 0,\n            \"readOnly\": True,\n            \"required\": True,\n            \"toggle\": \"string\",\n            \"tooltip\": {\n                \"template\": \"string\",\n                \"variables\": {\n                    \"icon\": \"string\",\n                    \"message\": \"string\"\n                }\n            },\n            \"type\": \"string\",\n            \"value\": \"string\",\n            \"visible\": True\n        },\n        \"idpPrivateKey\": {\n            \"label\": \"string\",\n            \"options\": \"string\",\n            \"position\": 0,\n            \"readOnly\": True,\n            \"required\": True,\n            \"toggle\": \"string\",\n            \"tooltip\": {\n                \"template\": \"string\",\n                \"variables\": {\n                    \"icon\": \"string\",\n                    \"message\": \"string\"\n                }\n            },\n            \"type\": \"string\",\n            \"value\": \"string\",\n            \"visible\": True\n        },\n        \"spEntityId\": {\n            \"label\": \"string\",\n            \"options\": \"string\",\n            \"position\": 0,\n            \"readOnly\": True,\n            \"required\": True,\n            \"toggle\": \"string\",\n            \"tooltip\": {\n                \"template\": \"string\",\n                \"variables\": {\n                    \"icon\": \"string\",\n                    \"message\": \"string\"\n                }\n            },\n            \"type\": \"string\",\n            \"value\": \"string\",\n            \"visible\": True\n        }\n    },\n    \"created\": \"string\",\n    \"databaseAttributes\": [{}],\n    \"description\": \"string\",\n    \"displayLabel\": \"string\",\n    \"displayName\": \"string\",\n    \"learnMore\": \"string\",\n    \"logo\": {\n        \"color\": \"\",\n        \"url\": \"string\"\n    },\n    \"name\": \"string\",\n    \"organization\": \"string\",\n    \"sso\": {\n        \"beta\": True,\n        \"idpCertExpirationAt\": \"2019-08-24T14:15:22Z\",\n        \"jit\": True,\n        \"type\": \"string\"\n    },\n    \"ssoUrl\": \"string\"\n}\nheaders = {\n    \"Content-Type\": \"SOME_STRING_VALUE\",\n    \"Accept\": \"SOME_STRING_VALUE\",\n    \"x-org-id\": \"SOME_STRING_VALUE\",\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/applications\"\n\npayload = {\n    \"_id\": \"string\",\n    \"active\": True,\n    \"beta\": True,\n    \"color\": \"\",\n    \"config\": {\n        \"acsUrl\": {\n            \"label\": \"string\",\n            \"options\": \"string\",\n            \"position\": 0,\n            \"readOnly\": True,\n            \"required\": True,\n            \"toggle\": \"string\",\n            \"tooltip\": {\n                \"template\": \"string\",\n                \"variables\": {\n                    \"icon\": \"string\",\n                    \"message\": \"string\"\n                }\n            },\n            \"type\": \"string\",\n            \"value\": \"string\",\n            \"visible\": True\n        },\n        \"constantAttributes\": {\n            \"label\": \"string\",\n            \"mutable\": True,\n            \"options\": None,\n            \"position\": 0,\n            \"readOnly\": True,\n            \"required\": True,\n            \"toggle\": None,\n            \"tooltip\": {\n                \"template\": \"string\",\n                \"variables\": {\n                    \"icon\": \"string\",\n                    \"message\": \"string\"\n                }\n            },\n            \"type\": \"string\",\n            \"value\": [\n                {\n                    \"name\": \"string\",\n                    \"readOnly\": True,\n                    \"required\": True,\n                    \"value\": \"string\",\n                    \"visible\": True\n                }\n            ],\n            \"visible\": True\n        },\n        \"databaseAttributes\": {\"position\": 0},\n        \"idpCertificate\": {\n            \"label\": \"string\",\n            \"options\": \"string\",\n            \"position\": 0,\n            \"readOnly\": True,\n            \"required\": True,\n            \"toggle\": \"string\",\n            \"tooltip\": {\n                \"template\": \"string\",\n                \"variables\": {\n                    \"icon\": \"string\",\n                    \"message\": \"string\"\n                }\n            },\n            \"type\": \"string\",\n            \"value\": \"string\",\n            \"visible\": True\n        },\n        \"idpEntityId\": {\n            \"label\": \"string\",\n            \"options\": \"string\",\n            \"position\": 0,\n            \"readOnly\": True,\n            \"required\": True,\n            \"toggle\": \"string\",\n            \"tooltip\": {\n                \"template\": \"string\",\n                \"variables\": {\n                    \"icon\": \"string\",\n                    \"message\": \"string\"\n                }\n            },\n            \"type\": \"string\",\n            \"value\": \"string\",\n            \"visible\": True\n        },\n        \"idpPrivateKey\": {\n            \"label\": \"string\",\n            \"options\": \"string\",\n            \"position\": 0,\n            \"readOnly\": True,\n            \"required\": True,\n            \"toggle\": \"string\",\n            \"tooltip\": {\n                \"template\": \"string\",\n                \"variables\": {\n                    \"icon\": \"string\",\n                    \"message\": \"string\"\n                }\n            },\n            \"type\": \"string\",\n            \"value\": \"string\",\n            \"visible\": True\n        },\n        \"spEntityId\": {\n            \"label\": \"string\",\n            \"options\": \"string\",\n            \"position\": 0,\n            \"readOnly\": True,\n            \"required\": True,\n            \"toggle\": \"string\",\n            \"tooltip\": {\n                \"template\": \"string\",\n                \"variables\": {\n                    \"icon\": \"string\",\n                    \"message\": \"string\"\n                }\n            },\n            \"type\": \"string\",\n            \"value\": \"string\",\n            \"visible\": True\n        }\n    },\n    \"created\": \"string\",\n    \"databaseAttributes\": [{}],\n    \"description\": \"string\",\n    \"displayLabel\": \"string\",\n    \"displayName\": \"string\",\n    \"learnMore\": \"string\",\n    \"logo\": {\n        \"color\": \"\",\n        \"url\": \"string\"\n    },\n    \"name\": \"string\",\n    \"organization\": \"string\",\n    \"sso\": {\n        \"beta\": True,\n        \"idpCertExpirationAt\": \"2019-08-24T14:15:22Z\",\n        \"jit\": True,\n        \"type\": \"string\"\n    },\n    \"ssoUrl\": \"string\"\n}\nheaders = {\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"Content-Type\", \"SOME_STRING_VALUE\")\n$headers.Add(\"Accept\", \"SOME_STRING_VALUE\")\n$headers.Add(\"x-org-id\", \"SOME_STRING_VALUE\")\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/applications' -Method POST -Headers $headers -ContentType 'SOME_STRING_VALUE' -Body '{\"_id\":\"string\",\"active\":true,\"beta\":true,\"color\":\"\",\"config\":{\"acsUrl\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"constantAttributes\":{\"label\":\"string\",\"mutable\":true,\"options\":null,\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":null,\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":[{\"name\":\"string\",\"readOnly\":true,\"required\":true,\"value\":\"string\",\"visible\":true}],\"visible\":true},\"databaseAttributes\":{\"position\":0},\"idpCertificate\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"idpEntityId\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"idpPrivateKey\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"spEntityId\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true}},\"created\":\"string\",\"databaseAttributes\":[{}],\"description\":\"string\",\"displayLabel\":\"string\",\"displayName\":\"string\",\"learnMore\":\"string\",\"logo\":{\"color\":\"\",\"url\":\"string\"},\"name\":\"string\",\"organization\":\"string\",\"sso\":{\"beta\":true,\"idpCertExpirationAt\":\"2019-08-24T14:15:22Z\",\"jit\":true,\"type\":\"string\"},\"ssoUrl\":\"string\"}'"
+            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/applications' -Method POST -Headers $headers -ContentType 'application/json' -Body '{\"_id\":\"string\",\"active\":true,\"beta\":true,\"color\":\"\",\"config\":{\"acsUrl\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"constantAttributes\":{\"label\":\"string\",\"mutable\":true,\"options\":null,\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":null,\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":[{\"name\":\"string\",\"readOnly\":true,\"required\":true,\"value\":\"string\",\"visible\":true}],\"visible\":true},\"databaseAttributes\":{\"position\":0},\"idpCertificate\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"idpEntityId\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"idpPrivateKey\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"spEntityId\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true}},\"created\":\"string\",\"databaseAttributes\":[{}],\"description\":\"string\",\"displayLabel\":\"string\",\"displayName\":\"string\",\"learnMore\":\"string\",\"logo\":{\"color\":\"\",\"url\":\"string\"},\"name\":\"string\",\"organization\":\"string\",\"sso\":{\"beta\":true,\"idpCertExpirationAt\":\"2019-08-24T14:15:22Z\",\"jit\":true,\"type\":\"string\"},\"ssoUrl\":\"string\"}'"
           }
         ]
       }
@@ -3937,15 +4048,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request DELETE \\\n  --url https://console.jumpcloud.com/api/applications/{id} \\\n  --header 'Accept: SOME_STRING_VALUE' \\\n  --header 'Content-Type: SOME_STRING_VALUE' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --header 'x-org-id: SOME_STRING_VALUE'"
+            "source": "curl --request DELETE \\\n  --url https://console.jumpcloud.com/api/applications/{id} \\\n  --header 'x-api-key: REPLACE_KEY_VALUE'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/applications/{id}\"\n\nheaders = {\n    \"Content-Type\": \"SOME_STRING_VALUE\",\n    \"Accept\": \"SOME_STRING_VALUE\",\n    \"x-org-id\": \"SOME_STRING_VALUE\",\n    \"x-api-key\": \"REPLACE_KEY_VALUE\"\n}\n\nresponse = requests.request(\"DELETE\", url, headers=headers)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/applications/{id}\"\n\nheaders = {\"x-api-key\": \"REPLACE_KEY_VALUE\"}\n\nresponse = requests.request(\"DELETE\", url, headers=headers)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"Content-Type\", \"SOME_STRING_VALUE\")\n$headers.Add(\"Accept\", \"SOME_STRING_VALUE\")\n$headers.Add(\"x-org-id\", \"SOME_STRING_VALUE\")\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/applications/{id}' -Method DELETE -Headers $headers"
+            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/applications/{id}' -Method DELETE -Headers $headers"
           }
         ]
       },
@@ -3970,15 +4081,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request GET \\\n  --url https://console.jumpcloud.com/api/applications/{id} \\\n  --header 'Accept: SOME_STRING_VALUE' \\\n  --header 'Content-Type: SOME_STRING_VALUE' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --header 'x-org-id: SOME_STRING_VALUE'"
+            "source": "curl --request GET \\\n  --url https://console.jumpcloud.com/api/applications/{id} \\\n  --header 'x-api-key: REPLACE_KEY_VALUE'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/applications/{id}\"\n\nheaders = {\n    \"Content-Type\": \"SOME_STRING_VALUE\",\n    \"Accept\": \"SOME_STRING_VALUE\",\n    \"x-org-id\": \"SOME_STRING_VALUE\",\n    \"x-api-key\": \"REPLACE_KEY_VALUE\"\n}\n\nresponse = requests.request(\"GET\", url, headers=headers)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/applications/{id}\"\n\nheaders = {\"x-api-key\": \"REPLACE_KEY_VALUE\"}\n\nresponse = requests.request(\"GET\", url, headers=headers)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"Content-Type\", \"SOME_STRING_VALUE\")\n$headers.Add(\"Accept\", \"SOME_STRING_VALUE\")\n$headers.Add(\"x-org-id\", \"SOME_STRING_VALUE\")\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/applications/{id}' -Method GET -Headers $headers"
+            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/applications/{id}' -Method GET -Headers $headers"
           }
         ]
       },
@@ -4019,15 +4130,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request PUT \\\n  --url https://console.jumpcloud.com/api/applications/{id} \\\n  --header 'Accept: SOME_STRING_VALUE' \\\n  --header 'Content-Type: SOME_STRING_VALUE' \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --header 'x-org-id: SOME_STRING_VALUE' \\\n  --data '{\"_id\":\"string\",\"active\":true,\"beta\":true,\"color\":\"\",\"config\":{\"acsUrl\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"constantAttributes\":{\"label\":\"string\",\"mutable\":true,\"options\":null,\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":null,\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":[{\"name\":\"string\",\"readOnly\":true,\"required\":true,\"value\":\"string\",\"visible\":true}],\"visible\":true},\"databaseAttributes\":{\"position\":0},\"idpCertificate\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"idpEntityId\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"idpPrivateKey\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"spEntityId\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true}},\"created\":\"string\",\"databaseAttributes\":[{}],\"description\":\"string\",\"displayLabel\":\"string\",\"displayName\":\"string\",\"learnMore\":\"string\",\"logo\":{\"color\":\"\",\"url\":\"string\"},\"name\":\"string\",\"organization\":\"string\",\"sso\":{\"beta\":true,\"idpCertExpirationAt\":\"2019-08-24T14:15:22Z\",\"jit\":true,\"type\":\"string\"},\"ssoUrl\":\"string\"}'"
+            "source": "curl --request PUT \\\n  --url https://console.jumpcloud.com/api/applications/{id} \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --data '{\"_id\":\"string\",\"active\":true,\"beta\":true,\"color\":\"\",\"config\":{\"acsUrl\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"constantAttributes\":{\"label\":\"string\",\"mutable\":true,\"options\":null,\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":null,\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":[{\"name\":\"string\",\"readOnly\":true,\"required\":true,\"value\":\"string\",\"visible\":true}],\"visible\":true},\"databaseAttributes\":{\"position\":0},\"idpCertificate\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"idpEntityId\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"idpPrivateKey\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"spEntityId\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true}},\"created\":\"string\",\"databaseAttributes\":[{}],\"description\":\"string\",\"displayLabel\":\"string\",\"displayName\":\"string\",\"learnMore\":\"string\",\"logo\":{\"color\":\"\",\"url\":\"string\"},\"name\":\"string\",\"organization\":\"string\",\"sso\":{\"beta\":true,\"idpCertExpirationAt\":\"2019-08-24T14:15:22Z\",\"jit\":true,\"type\":\"string\"},\"ssoUrl\":\"string\"}'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/applications/{id}\"\n\npayload = {\n    \"_id\": \"string\",\n    \"active\": True,\n    \"beta\": True,\n    \"color\": \"\",\n    \"config\": {\n        \"acsUrl\": {\n            \"label\": \"string\",\n            \"options\": \"string\",\n            \"position\": 0,\n            \"readOnly\": True,\n            \"required\": True,\n            \"toggle\": \"string\",\n            \"tooltip\": {\n                \"template\": \"string\",\n                \"variables\": {\n                    \"icon\": \"string\",\n                    \"message\": \"string\"\n                }\n            },\n            \"type\": \"string\",\n            \"value\": \"string\",\n            \"visible\": True\n        },\n        \"constantAttributes\": {\n            \"label\": \"string\",\n            \"mutable\": True,\n            \"options\": None,\n            \"position\": 0,\n            \"readOnly\": True,\n            \"required\": True,\n            \"toggle\": None,\n            \"tooltip\": {\n                \"template\": \"string\",\n                \"variables\": {\n                    \"icon\": \"string\",\n                    \"message\": \"string\"\n                }\n            },\n            \"type\": \"string\",\n            \"value\": [\n                {\n                    \"name\": \"string\",\n                    \"readOnly\": True,\n                    \"required\": True,\n                    \"value\": \"string\",\n                    \"visible\": True\n                }\n            ],\n            \"visible\": True\n        },\n        \"databaseAttributes\": {\"position\": 0},\n        \"idpCertificate\": {\n            \"label\": \"string\",\n            \"options\": \"string\",\n            \"position\": 0,\n            \"readOnly\": True,\n            \"required\": True,\n            \"toggle\": \"string\",\n            \"tooltip\": {\n                \"template\": \"string\",\n                \"variables\": {\n                    \"icon\": \"string\",\n                    \"message\": \"string\"\n                }\n            },\n            \"type\": \"string\",\n            \"value\": \"string\",\n            \"visible\": True\n        },\n        \"idpEntityId\": {\n            \"label\": \"string\",\n            \"options\": \"string\",\n            \"position\": 0,\n            \"readOnly\": True,\n            \"required\": True,\n            \"toggle\": \"string\",\n            \"tooltip\": {\n                \"template\": \"string\",\n                \"variables\": {\n                    \"icon\": \"string\",\n                    \"message\": \"string\"\n                }\n            },\n            \"type\": \"string\",\n            \"value\": \"string\",\n            \"visible\": True\n        },\n        \"idpPrivateKey\": {\n            \"label\": \"string\",\n            \"options\": \"string\",\n            \"position\": 0,\n            \"readOnly\": True,\n            \"required\": True,\n            \"toggle\": \"string\",\n            \"tooltip\": {\n                \"template\": \"string\",\n                \"variables\": {\n                    \"icon\": \"string\",\n                    \"message\": \"string\"\n                }\n            },\n            \"type\": \"string\",\n            \"value\": \"string\",\n            \"visible\": True\n        },\n        \"spEntityId\": {\n            \"label\": \"string\",\n            \"options\": \"string\",\n            \"position\": 0,\n            \"readOnly\": True,\n            \"required\": True,\n            \"toggle\": \"string\",\n            \"tooltip\": {\n                \"template\": \"string\",\n                \"variables\": {\n                    \"icon\": \"string\",\n                    \"message\": \"string\"\n                }\n            },\n            \"type\": \"string\",\n            \"value\": \"string\",\n            \"visible\": True\n        }\n    },\n    \"created\": \"string\",\n    \"databaseAttributes\": [{}],\n    \"description\": \"string\",\n    \"displayLabel\": \"string\",\n    \"displayName\": \"string\",\n    \"learnMore\": \"string\",\n    \"logo\": {\n        \"color\": \"\",\n        \"url\": \"string\"\n    },\n    \"name\": \"string\",\n    \"organization\": \"string\",\n    \"sso\": {\n        \"beta\": True,\n        \"idpCertExpirationAt\": \"2019-08-24T14:15:22Z\",\n        \"jit\": True,\n        \"type\": \"string\"\n    },\n    \"ssoUrl\": \"string\"\n}\nheaders = {\n    \"Content-Type\": \"SOME_STRING_VALUE\",\n    \"Accept\": \"SOME_STRING_VALUE\",\n    \"x-org-id\": \"SOME_STRING_VALUE\",\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"PUT\", url, json=payload, headers=headers)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/applications/{id}\"\n\npayload = {\n    \"_id\": \"string\",\n    \"active\": True,\n    \"beta\": True,\n    \"color\": \"\",\n    \"config\": {\n        \"acsUrl\": {\n            \"label\": \"string\",\n            \"options\": \"string\",\n            \"position\": 0,\n            \"readOnly\": True,\n            \"required\": True,\n            \"toggle\": \"string\",\n            \"tooltip\": {\n                \"template\": \"string\",\n                \"variables\": {\n                    \"icon\": \"string\",\n                    \"message\": \"string\"\n                }\n            },\n            \"type\": \"string\",\n            \"value\": \"string\",\n            \"visible\": True\n        },\n        \"constantAttributes\": {\n            \"label\": \"string\",\n            \"mutable\": True,\n            \"options\": None,\n            \"position\": 0,\n            \"readOnly\": True,\n            \"required\": True,\n            \"toggle\": None,\n            \"tooltip\": {\n                \"template\": \"string\",\n                \"variables\": {\n                    \"icon\": \"string\",\n                    \"message\": \"string\"\n                }\n            },\n            \"type\": \"string\",\n            \"value\": [\n                {\n                    \"name\": \"string\",\n                    \"readOnly\": True,\n                    \"required\": True,\n                    \"value\": \"string\",\n                    \"visible\": True\n                }\n            ],\n            \"visible\": True\n        },\n        \"databaseAttributes\": {\"position\": 0},\n        \"idpCertificate\": {\n            \"label\": \"string\",\n            \"options\": \"string\",\n            \"position\": 0,\n            \"readOnly\": True,\n            \"required\": True,\n            \"toggle\": \"string\",\n            \"tooltip\": {\n                \"template\": \"string\",\n                \"variables\": {\n                    \"icon\": \"string\",\n                    \"message\": \"string\"\n                }\n            },\n            \"type\": \"string\",\n            \"value\": \"string\",\n            \"visible\": True\n        },\n        \"idpEntityId\": {\n            \"label\": \"string\",\n            \"options\": \"string\",\n            \"position\": 0,\n            \"readOnly\": True,\n            \"required\": True,\n            \"toggle\": \"string\",\n            \"tooltip\": {\n                \"template\": \"string\",\n                \"variables\": {\n                    \"icon\": \"string\",\n                    \"message\": \"string\"\n                }\n            },\n            \"type\": \"string\",\n            \"value\": \"string\",\n            \"visible\": True\n        },\n        \"idpPrivateKey\": {\n            \"label\": \"string\",\n            \"options\": \"string\",\n            \"position\": 0,\n            \"readOnly\": True,\n            \"required\": True,\n            \"toggle\": \"string\",\n            \"tooltip\": {\n                \"template\": \"string\",\n                \"variables\": {\n                    \"icon\": \"string\",\n                    \"message\": \"string\"\n                }\n            },\n            \"type\": \"string\",\n            \"value\": \"string\",\n            \"visible\": True\n        },\n        \"spEntityId\": {\n            \"label\": \"string\",\n            \"options\": \"string\",\n            \"position\": 0,\n            \"readOnly\": True,\n            \"required\": True,\n            \"toggle\": \"string\",\n            \"tooltip\": {\n                \"template\": \"string\",\n                \"variables\": {\n                    \"icon\": \"string\",\n                    \"message\": \"string\"\n                }\n            },\n            \"type\": \"string\",\n            \"value\": \"string\",\n            \"visible\": True\n        }\n    },\n    \"created\": \"string\",\n    \"databaseAttributes\": [{}],\n    \"description\": \"string\",\n    \"displayLabel\": \"string\",\n    \"displayName\": \"string\",\n    \"learnMore\": \"string\",\n    \"logo\": {\n        \"color\": \"\",\n        \"url\": \"string\"\n    },\n    \"name\": \"string\",\n    \"organization\": \"string\",\n    \"sso\": {\n        \"beta\": True,\n        \"idpCertExpirationAt\": \"2019-08-24T14:15:22Z\",\n        \"jit\": True,\n        \"type\": \"string\"\n    },\n    \"ssoUrl\": \"string\"\n}\nheaders = {\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"PUT\", url, json=payload, headers=headers)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"Content-Type\", \"SOME_STRING_VALUE\")\n$headers.Add(\"Accept\", \"SOME_STRING_VALUE\")\n$headers.Add(\"x-org-id\", \"SOME_STRING_VALUE\")\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/applications/{id}' -Method PUT -Headers $headers -ContentType 'SOME_STRING_VALUE' -Body '{\"_id\":\"string\",\"active\":true,\"beta\":true,\"color\":\"\",\"config\":{\"acsUrl\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"constantAttributes\":{\"label\":\"string\",\"mutable\":true,\"options\":null,\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":null,\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":[{\"name\":\"string\",\"readOnly\":true,\"required\":true,\"value\":\"string\",\"visible\":true}],\"visible\":true},\"databaseAttributes\":{\"position\":0},\"idpCertificate\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"idpEntityId\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"idpPrivateKey\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"spEntityId\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true}},\"created\":\"string\",\"databaseAttributes\":[{}],\"description\":\"string\",\"displayLabel\":\"string\",\"displayName\":\"string\",\"learnMore\":\"string\",\"logo\":{\"color\":\"\",\"url\":\"string\"},\"name\":\"string\",\"organization\":\"string\",\"sso\":{\"beta\":true,\"idpCertExpirationAt\":\"2019-08-24T14:15:22Z\",\"jit\":true,\"type\":\"string\"},\"ssoUrl\":\"string\"}'"
+            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/applications/{id}' -Method PUT -Headers $headers -ContentType 'application/json' -Body '{\"_id\":\"string\",\"active\":true,\"beta\":true,\"color\":\"\",\"config\":{\"acsUrl\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"constantAttributes\":{\"label\":\"string\",\"mutable\":true,\"options\":null,\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":null,\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":[{\"name\":\"string\",\"readOnly\":true,\"required\":true,\"value\":\"string\",\"visible\":true}],\"visible\":true},\"databaseAttributes\":{\"position\":0},\"idpCertificate\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"idpEntityId\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"idpPrivateKey\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"spEntityId\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true}},\"created\":\"string\",\"databaseAttributes\":[{}],\"description\":\"string\",\"displayLabel\":\"string\",\"displayName\":\"string\",\"learnMore\":\"string\",\"logo\":{\"color\":\"\",\"url\":\"string\"},\"name\":\"string\",\"organization\":\"string\",\"sso\":{\"beta\":true,\"idpCertExpirationAt\":\"2019-08-24T14:15:22Z\",\"jit\":true,\"type\":\"string\"},\"ssoUrl\":\"string\"}'"
           }
         ]
       }
@@ -4288,15 +4399,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request POST \\\n  --url https://console.jumpcloud.com/api/commands \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --data '{\"command\":\"string\",\"commandRunners\":[\"string\"],\"commandType\":\"linux\",\"files\":[\"string\"],\"launchType\":\"string\",\"listensTo\":\"string\",\"name\":\"string\",\"organization\":\"string\",\"schedule\":\"string\",\"scheduleRepeatType\":\"string\",\"shell\":\"string\",\"sudo\":true,\"systems\":[\"string\"],\"timeout\":\"string\",\"trigger\":\"string\",\"user\":\"string\"}'"
+            "source": "curl --request POST \\\n  --url https://console.jumpcloud.com/api/commands \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --data '{\"command\":\"string\",\"commandRunners\":[\"string\"],\"commandType\":\"linux\",\"files\":[\"string\"],\"launchType\":\"string\",\"listensTo\":\"string\",\"name\":\"string\",\"organization\":\"string\",\"schedule\":\"string\",\"scheduleRepeatType\":\"string\",\"shell\":\"string\",\"sudo\":true,\"systems\":[\"string\"],\"timeToLiveSeconds\":0,\"timeout\":\"string\",\"trigger\":\"string\",\"user\":\"string\"}'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/commands\"\n\npayload = {\n    \"command\": \"string\",\n    \"commandRunners\": [\"string\"],\n    \"commandType\": \"linux\",\n    \"files\": [\"string\"],\n    \"launchType\": \"string\",\n    \"listensTo\": \"string\",\n    \"name\": \"string\",\n    \"organization\": \"string\",\n    \"schedule\": \"string\",\n    \"scheduleRepeatType\": \"string\",\n    \"shell\": \"string\",\n    \"sudo\": True,\n    \"systems\": [\"string\"],\n    \"timeout\": \"string\",\n    \"trigger\": \"string\",\n    \"user\": \"string\"\n}\nheaders = {\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/commands\"\n\npayload = {\n    \"command\": \"string\",\n    \"commandRunners\": [\"string\"],\n    \"commandType\": \"linux\",\n    \"files\": [\"string\"],\n    \"launchType\": \"string\",\n    \"listensTo\": \"string\",\n    \"name\": \"string\",\n    \"organization\": \"string\",\n    \"schedule\": \"string\",\n    \"scheduleRepeatType\": \"string\",\n    \"shell\": \"string\",\n    \"sudo\": True,\n    \"systems\": [\"string\"],\n    \"timeToLiveSeconds\": 0,\n    \"timeout\": \"string\",\n    \"trigger\": \"string\",\n    \"user\": \"string\"\n}\nheaders = {\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/commands' -Method POST -Headers $headers -ContentType 'application/json' -Body '{\"command\":\"string\",\"commandRunners\":[\"string\"],\"commandType\":\"linux\",\"files\":[\"string\"],\"launchType\":\"string\",\"listensTo\":\"string\",\"name\":\"string\",\"organization\":\"string\",\"schedule\":\"string\",\"scheduleRepeatType\":\"string\",\"shell\":\"string\",\"sudo\":true,\"systems\":[\"string\"],\"timeout\":\"string\",\"trigger\":\"string\",\"user\":\"string\"}'"
+            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/commands' -Method POST -Headers $headers -ContentType 'application/json' -Body '{\"command\":\"string\",\"commandRunners\":[\"string\"],\"commandType\":\"linux\",\"files\":[\"string\"],\"launchType\":\"string\",\"listensTo\":\"string\",\"name\":\"string\",\"organization\":\"string\",\"schedule\":\"string\",\"scheduleRepeatType\":\"string\",\"shell\":\"string\",\"sudo\":true,\"systems\":[\"string\"],\"timeToLiveSeconds\":0,\"timeout\":\"string\",\"trigger\":\"string\",\"user\":\"string\"}'"
           }
         ]
       }
@@ -4409,15 +4520,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request PUT \\\n  --url https://console.jumpcloud.com/api/commands/{id} \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --data '{\"command\":\"string\",\"commandRunners\":[\"string\"],\"commandType\":\"linux\",\"files\":[\"string\"],\"launchType\":\"string\",\"listensTo\":\"string\",\"name\":\"string\",\"organization\":\"string\",\"schedule\":\"string\",\"scheduleRepeatType\":\"string\",\"shell\":\"string\",\"sudo\":true,\"systems\":[\"string\"],\"timeout\":\"string\",\"trigger\":\"string\",\"user\":\"string\"}'"
+            "source": "curl --request PUT \\\n  --url https://console.jumpcloud.com/api/commands/{id} \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --data '{\"command\":\"string\",\"commandRunners\":[\"string\"],\"commandType\":\"linux\",\"files\":[\"string\"],\"launchType\":\"string\",\"listensTo\":\"string\",\"name\":\"string\",\"organization\":\"string\",\"schedule\":\"string\",\"scheduleRepeatType\":\"string\",\"shell\":\"string\",\"sudo\":true,\"systems\":[\"string\"],\"timeToLiveSeconds\":0,\"timeout\":\"string\",\"trigger\":\"string\",\"user\":\"string\"}'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/commands/{id}\"\n\npayload = {\n    \"command\": \"string\",\n    \"commandRunners\": [\"string\"],\n    \"commandType\": \"linux\",\n    \"files\": [\"string\"],\n    \"launchType\": \"string\",\n    \"listensTo\": \"string\",\n    \"name\": \"string\",\n    \"organization\": \"string\",\n    \"schedule\": \"string\",\n    \"scheduleRepeatType\": \"string\",\n    \"shell\": \"string\",\n    \"sudo\": True,\n    \"systems\": [\"string\"],\n    \"timeout\": \"string\",\n    \"trigger\": \"string\",\n    \"user\": \"string\"\n}\nheaders = {\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"PUT\", url, json=payload, headers=headers)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/commands/{id}\"\n\npayload = {\n    \"command\": \"string\",\n    \"commandRunners\": [\"string\"],\n    \"commandType\": \"linux\",\n    \"files\": [\"string\"],\n    \"launchType\": \"string\",\n    \"listensTo\": \"string\",\n    \"name\": \"string\",\n    \"organization\": \"string\",\n    \"schedule\": \"string\",\n    \"scheduleRepeatType\": \"string\",\n    \"shell\": \"string\",\n    \"sudo\": True,\n    \"systems\": [\"string\"],\n    \"timeToLiveSeconds\": 0,\n    \"timeout\": \"string\",\n    \"trigger\": \"string\",\n    \"user\": \"string\"\n}\nheaders = {\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"PUT\", url, json=payload, headers=headers)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/commands/{id}' -Method PUT -Headers $headers -ContentType 'application/json' -Body '{\"command\":\"string\",\"commandRunners\":[\"string\"],\"commandType\":\"linux\",\"files\":[\"string\"],\"launchType\":\"string\",\"listensTo\":\"string\",\"name\":\"string\",\"organization\":\"string\",\"schedule\":\"string\",\"scheduleRepeatType\":\"string\",\"shell\":\"string\",\"sudo\":true,\"systems\":[\"string\"],\"timeout\":\"string\",\"trigger\":\"string\",\"user\":\"string\"}'"
+            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/commands/{id}' -Method PUT -Headers $headers -ContentType 'application/json' -Body '{\"command\":\"string\",\"commandRunners\":[\"string\"],\"commandType\":\"linux\",\"files\":[\"string\"],\"launchType\":\"string\",\"listensTo\":\"string\",\"name\":\"string\",\"organization\":\"string\",\"schedule\":\"string\",\"scheduleRepeatType\":\"string\",\"shell\":\"string\",\"sudo\":true,\"systems\":[\"string\"],\"timeToLiveSeconds\":0,\"timeout\":\"string\",\"trigger\":\"string\",\"user\":\"string\"}'"
           }
         ]
       }
@@ -4914,6 +5025,61 @@
           {
             "lang": "Powershell",
             "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/radiusservers/{id}' -Method PUT -Headers $headers -ContentType 'application/json' -Body '{\"name\":\"test radius\",\"networkSourceIp\":\"0.0.0.0\",\"sharedSecret\":\"secretradiuspassword\",\"tagsNames\":[\"tag1\"]}'"
+          }
+        ]
+      }
+    },
+    "/search/commands": {
+      "post": {
+        "description": "Return Commands in multi-record format allowing for the passing of the `filter` and `searchFilter` parameters. This WILL NOT allow you to add a new command.\nTo support advanced filtering you can use the `filter` and `searchFilter` parameters that can only be passed in the body of POST /api/search/* routes. The `filter` and `searchFilter` parameters must be passed as Content-Type application/json.\nThe `filter` parameter is an object with a single property, either `and` or `or` with the value of the property being an array of query expressions.\nThis allows you to filter records using the logic of matching ALL or ANY records in the array of query expressions. If the `and` or `or` are not included the default behavior is to match ALL query expressions.\nThe `searchFilter` parameter allows text searching on supported fields by specifying a `searchTerm` and a list of `fields` to query on. If any `field` has a partial text match on the `searchTerm` the record will be returned.\n\n#### Sample Request\nExact search for a list of commands in a launchType\n```\ncurl -X POST https://console.jumpcloud.com/api/search/commands \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"filter\" : [{\"launchType\" : \"repeated\"}],\n  \"fields\" : \"name launchType sudo\"\n}'\n```\nText search for commands with name\n```\ncurl -X POST https://console.jumpcloud.com/api/search/commands \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"searchFilter\" : {\n    \"searchTerm\": \"List\",\n    \"fields\": [\"name\"]\n  },\n  \"fields\" : \"name launchType sudo\"\n}'\n```\nText search for multiple commands\n```\ncurl -X POST https://console.jumpcloud.com/api/search/commands \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"searchFilter\" : {\n    \"searchTerm\": [\"List\", \"Log\"],\n    \"fields\": [\"name\"]\n  },\n  \"fields\" : \"name launchType sudo\"\n}'\n```\nCombining `filter` and `searchFilter` to text search for commands with name who are in a list of launchType\n```\ncurl -X POST https://console.jumpcloud.com/api/search/commands \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"searchFilter\": {\n    \"searchTerm\": \"List\",\n    \"fields\": [\"name\"]\n  },\n  \"filter\": {\n    \"or\": [\n      {\"launchType\" : \"repeated\"},\n      {\"launchType\" : \"one-time\"}\n    ]\n  },\n  \"fields\" : \"name launchType sudo\"\n}'\n```",
+        "operationId": "Commands_Search",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/search"
+            }
+          },
+          {
+            "$ref": "#/parameters/trait:fields:fields"
+          },
+          {
+            "$ref": "#/parameters/trait:filter:filter"
+          },
+          {
+            "$ref": "#/parameters/trait:limit:limit"
+          },
+          {
+            "$ref": "#/parameters/trait:skip:skip"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/commandslist"
+            }
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ],
+        "summary": "Search Commands",
+        "x-codeSamples": [
+          {
+            "lang": "Shell",
+            "source": "curl --request POST \\\n  --url 'https://console.jumpcloud.com/api/search/commands?fields=&filter=SOME_STRING_VALUE&limit=10&skip=0' \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --data '{\"fields\":\"string\",\"filter\":{},\"searchFilter\":{}}'"
+          },
+          {
+            "lang": "Python",
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/search/commands\"\n\nquerystring = {\"fields\":\"\",\"filter\":\"SOME_STRING_VALUE\",\"limit\":\"10\",\"skip\":\"0\"}\n\npayload = {\n    \"fields\": \"string\",\n    \"filter\": {},\n    \"searchFilter\": {}\n}\nheaders = {\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers, params=querystring)\n\nprint(response.text)"
+          },
+          {
+            "lang": "Powershell",
+            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/search/commands?fields=&filter=SOME_STRING_VALUE&limit=10&skip=0' -Method POST -Headers $headers -ContentType 'application/json' -Body '{\"fields\":\"string\",\"filter\":{},\"searchFilter\":{}}'"
           }
         ]
       }
@@ -5696,6 +5862,45 @@
         ]
       }
     },
+    "/systemusers/{id}/mfasync": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "id",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "post": {
+        "description": "This endpoint allows you to re-sync a user's mfa enrollment status\n\n#### Sample Request\n```\ncurl -X POST \\\n  https://console.jumpcloud.com/api/systemusers/{UserID}/mfasync \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n\n```",
+        "operationId": "UserMfa_Sync",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ],
+        "summary": "Sync a systemuser's mfa enrollment status",
+        "x-codeSamples": [
+          {
+            "lang": "Shell",
+            "source": "curl --request POST \\\n  --url https://console.jumpcloud.com/api/systemusers/{id}/mfasync \\\n  --header 'x-api-key: REPLACE_KEY_VALUE'"
+          },
+          {
+            "lang": "Python",
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/systemusers/{id}/mfasync\"\n\nheaders = {\"x-api-key\": \"REPLACE_KEY_VALUE\"}\n\nresponse = requests.request(\"POST\", url, headers=headers)\n\nprint(response.text)"
+          },
+          {
+            "lang": "Powershell",
+            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/systemusers/{id}/mfasync' -Method POST -Headers $headers"
+          }
+        ]
+      }
+    },
     "/systemusers/{id}/resetmfa": {
       "parameters": [
         {
@@ -5844,6 +6049,57 @@
         ]
       }
     },
+    "/systemusers/{id}/state/activate": {
+      "post": {
+        "description": "This endpoint changes the state of a STAGED user to ACTIVATED.\n#### Email Flag\nUse the \"email\" flag to determine whether or not to send a Welcome or\nActivation email to the newly activated user. Sending an empty body\nwithout the `email` flag, will send an email with default behavior\n(see the \"Behavior\" section below)\n```\n{}\n```\nSending `email=true` flag will send an email with default behavior (see `Behavior` below)\n```\n{ \"email\": true }\n```\nPopulated email will override the default behavior and send to the specified email value\n```\n{ \"email\": \"example@example.com\" }\n```\nSending `email=false` will suppress sending the email\n```\n{ \"email\": false }\n```\n#### Behavior\nUsers with a password will be sent a Welcome email to:\n  - The address specified in `email` flag in the request\n  - If no `email` flag, the user's primary email address (default behavior)\nUsers without a password will be sent an Activation email to:\n  - The address specified in `email` flag in the request\n  - If no `email` flag, the user's alternate email address (default behavior)\n  - If no alternate email address, the user's primary email address (default behavior)\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/systemusers/{id}/state/activate \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: <api-key>' \\\n  -d '{ \"email\": \"alternate-activation-email@email.com\" }'\n\n```",
+        "operationId": "UserState_Activate",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "properties": {
+                "email": {
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ],
+        "summary": "Activate System User",
+        "x-codeSamples": [
+          {
+            "lang": "Shell",
+            "source": "curl --request POST \\\n  --url https://console.jumpcloud.com/api/systemusers/{id}/state/activate \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --data '{\"email\":{}}'"
+          },
+          {
+            "lang": "Python",
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/systemusers/{id}/state/activate\"\n\npayload = {\"email\": {}}\nheaders = {\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
+          },
+          {
+            "lang": "Powershell",
+            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/systemusers/{id}/state/activate' -Method POST -Headers $headers -ContentType 'application/json' -Body '{\"email\":{}}'"
+          }
+        ]
+      }
+    },
     "/systemusers/{id}/unlock": {
       "parameters": [
         {
@@ -5929,6 +6185,135 @@
           "type": "string"
         }
       ]
+    },
+    "/users/reactivate/{id}": {
+      "get": {
+        "description": "This endpoint triggers the sending of a reactivation e-mail to an administrator.",
+        "operationId": "AdministratorUserActivation_Reset",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ],
+        "summary": "Administrator Password Reset Initiation",
+        "x-codeSamples": [
+          {
+            "lang": "Shell",
+            "source": "curl --request GET \\\n  --url https://console.jumpcloud.com/api/users/reactivate/{id} \\\n  --header 'x-api-key: REPLACE_KEY_VALUE'"
+          },
+          {
+            "lang": "Python",
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/users/reactivate/{id}\"\n\nheaders = {\"x-api-key\": \"REPLACE_KEY_VALUE\"}\n\nresponse = requests.request(\"GET\", url, headers=headers)\n\nprint(response.text)"
+          },
+          {
+            "lang": "Powershell",
+            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/users/reactivate/{id}' -Method GET -Headers $headers"
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "id",
+          "required": true,
+          "type": "string"
+        }
+      ]
+    },
+    "/users/resettotp/{id}": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "id",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "post": {
+        "description": "This endpoint initiates a TOTP reset for an admin. This request does not accept a body.",
+        "operationId": "AdministratorUserTotp_Reset",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ],
+        "summary": "Administrator TOTP Reset Initiation",
+        "x-codeSamples": [
+          {
+            "lang": "Shell",
+            "source": "curl --request POST \\\n  --url https://console.jumpcloud.com/api/users/resettotp/{id} \\\n  --header 'x-api-key: REPLACE_KEY_VALUE'"
+          },
+          {
+            "lang": "Python",
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/users/resettotp/{id}\"\n\nheaders = {\"x-api-key\": \"REPLACE_KEY_VALUE\"}\n\nresponse = requests.request(\"POST\", url, headers=headers)\n\nprint(response.text)"
+          },
+          {
+            "lang": "Powershell",
+            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/users/resettotp/{id}' -Method POST -Headers $headers"
+          }
+        ]
+      }
+    },
+    "/users/{id}": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "id",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "put": {
+        "description": "This endpoint allows you to update a user.",
+        "operationId": "AdministratorUser_Set",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/userput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/userreturn"
+            }
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ],
+        "summary": "Update a user",
+        "x-codeSamples": [
+          {
+            "lang": "Shell",
+            "source": "curl --request PUT \\\n  --url https://console.jumpcloud.com/api/users/{id} \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --data '{\"email\":\"user@example.com\",\"enableMultiFactor\":true,\"firstname\":\"string\",\"growthData\":{},\"lastWhatsNewChecked\":\"2019-08-24\",\"lastname\":\"string\",\"roleName\":\"string\"}'"
+          },
+          {
+            "lang": "Python",
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/users/{id}\"\n\npayload = {\n    \"email\": \"user@example.com\",\n    \"enableMultiFactor\": True,\n    \"firstname\": \"string\",\n    \"growthData\": {},\n    \"lastWhatsNewChecked\": \"2019-08-24\",\n    \"lastname\": \"string\",\n    \"roleName\": \"string\"\n}\nheaders = {\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"PUT\", url, json=payload, headers=headers)\n\nprint(response.text)"
+          },
+          {
+            "lang": "Powershell",
+            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/users/{id}' -Method PUT -Headers $headers -ContentType 'application/json' -Body '{\"email\":\"user@example.com\",\"enableMultiFactor\":true,\"firstname\":\"string\",\"growthData\":{},\"lastWhatsNewChecked\":\"2019-08-24\",\"lastname\":\"string\",\"roleName\":\"string\"}'"
+          }
+        ]
+      }
     }
   },
   "produces": [

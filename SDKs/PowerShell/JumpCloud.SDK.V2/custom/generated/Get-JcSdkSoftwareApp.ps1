@@ -1,6 +1,7 @@
 <#
 .Synopsis
 Retrieves a Software Application.
+The optional isConfigEnabled and appConfiguration apple_vpp attributes are populated in this response.
 
 #### Sample Request
 ```
@@ -11,6 +12,7 @@ curl -X GET https://console.jumpcloud.com/api/v2/softwareapps/{id} \\
 ```
 .Description
 Retrieves a Software Application.
+The optional isConfigEnabled and appConfiguration apple_vpp attributes are populated in this response.
 
 #### Sample Request
 ```

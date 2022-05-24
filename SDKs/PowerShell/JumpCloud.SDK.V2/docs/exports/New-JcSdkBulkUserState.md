@@ -26,7 +26,8 @@ curl -X POST \"https://console.jumpcloud.com/api/v2/bulk/userstates\" \\
 
 ### CreateExpanded (Default)
 ```
-New-JcSdkBulkUserState -StartDate <DateTime> -UserIds <String[]> [-Confirm] [-WhatIf] [<CommonParameters>]
+New-JcSdkBulkUserState -StartDate <DateTime> -State <String> -UserIds <String[]> [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### Create
@@ -88,6 +89,21 @@ Date and time that scheduled action should occur
 
 ```yaml
 Type: System.DateTime
+Parameter Sets: CreateExpanded
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -State
+The state to move the user(s) to
+
+```yaml
+Type: System.String
 Parameter Sets: CreateExpanded
 Aliases:
 
@@ -166,6 +182,7 @@ To create the parameters described below, construct a hash table containing the 
 
 BODY <IBulkScheduledStatechangeCreate>: Model to support bulk scheduling of a state change for one or more users
   - `StartDate <DateTime>`: Date and time that scheduled action should occur
+  - `State <String>`: The state to move the user(s) to
   - `UserIds <String[]>`: Array of system user ids to schedule for a state change
 
 ## RELATED LINKS
