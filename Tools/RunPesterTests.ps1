@@ -250,6 +250,7 @@ If ($moduleName -eq 'JumpCloud.SDK.V1' -or $moduleName -eq 'JumpCloud.SDK.V2' -a
     # Get admins on an org (Required to test V1 MTP methods)
     $headers = @{
         "x-api-key" = $env:JCApiKey
+        "x-org-id"  = $env:JCOrgId
     }
     $global:PesterTestAdministratorUsers = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/users?skip=0&limit=20' -Method GET -Headers $headers
 }

@@ -21,7 +21,7 @@ Describe 'Get-JcSdkNextScheduledBulkUserState' -Tag:(""){
         $username = "PesterTestNextBulkUser-$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
         $user = New-JCsdkUser -Username $username -Email "$username@pestertest.com"
         # Suspend the use with this endpoint
-        New-JcSdkBulkUserState -StartDate (Get-Date).AddDays(1) -UserIds $user.Id
+        New-JcSdkBulkUserState -StartDate (Get-Date).AddDays(1) -UserIds $user.Id -State "SUSPENDED"
         { Get-JcSdkNextScheduledBulkUserState -Users @($user.Id) } | Should -Not -Throw
         # Cleanup any users with the username matching "PesterTestBulkUserState-"
         $users = Get-JCSDKUser | Where-Object { $_.username -match "PesterTestNextBulkUser-" }
