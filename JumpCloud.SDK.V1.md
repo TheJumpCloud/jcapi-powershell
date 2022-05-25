@@ -2,14 +2,8 @@
 Release Date: May 25, 2022
 #### RELEASE NOTES
 ```
-{{Fill in the Release Notes}}
+This release includes several new functions for the V1 SDK, see "Generated Changes" for a complete list of functions added/modified.
 ```
-#### FEATURES:
-{{Fill in the Features}}
-#### IMPROVEMENTS:
-{{Fill in the Improvements}}
-#### BUG FIXES:
-{{Fill in the Bug Fixes}}
 #### Generated Changes:
 
 <details>

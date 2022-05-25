@@ -2,14 +2,11 @@
 Release Date: May 25, 2022
 #### RELEASE NOTES
 ```
-{{Fill in the Release Notes}}
+This release includes several new functions for the V2 SDK, see "Generated Changes" for a complete list of functions added/modified.
 ```
-#### FEATURES:
-{{Fill in the Features}}
-#### IMPROVEMENTS:
-{{Fill in the Improvements}}
 #### BUG FIXES:
-{{Fill in the Bug Fixes}}
+
+In previous versions of the SDK, the `Get-JcSdkGsuiteUsersToImport` function would not return the `nextPageToken` which was required to paginate to the next page of Google Workspace users, this release addressed the issue and the function should now return the page token.
 #### Generated Changes:
 
 <details>
