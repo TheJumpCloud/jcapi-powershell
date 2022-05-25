@@ -17,9 +17,6 @@ $TransformConfig = [Ordered]@{
             'directoryInsights_eventsDistinctPost' = 'EventDistinct_Get';
             'directoryInsights_eventsIntervalPost' = 'EventInterval_Get';
             'directoryInsights_eventsPost'         = 'Event_Get';
-            # 'directoryInsights_commandResultsReportsGet' = 'EventCommandResultReport_Get';
-            # 'directoryInsights_policyResultsReportsGet'  = 'EventPolicyResultReport_Get';
-            # 'directoryInsights_deviceHealthReportGet'    = 'EventDeviceHealthReport_Get';
         };
         ExcludedList       = @();
     }
@@ -42,12 +39,7 @@ $TransformConfig = [Ordered]@{
             # Custom Tweaks
             '{"\$ref":"#\/parameters\/trait:systemContextAuth:Authorization"}'                                                                                                    = ''; # We don't want to support authentication through system context via the SDK
             '{"\$ref":"#\/parameters\/trait:systemContextAuth:Date"}'                                                                                                             = ''; # We don't want to support authentication through system context via the SDK
-            # '{"\$ref":"#\/parameters\/trait:requestHeaders:Content-Type"}'                                                                                                        = ''; # This will be passed in later through the Module.cs file.
-            # '{"\$ref":"#\/parameters\/trait:requestHeaders:Accept"}'                                                                                                              = ''; # This will be passed in later through the Module.cs file.
             '{"\$ref":"#\/parameters\/trait:multiTenantRequestHeaders:x-org-id"}'                                                                                                 = ''; # Along with the ApiKey this will be passed in later through the Module.cs file.
-            # '{"in":"header","name":"Content-Type","type":"string"}'                                                                                                               = ''; # This will be passed in later through the Module.cs file.
-            # '{"in":"header","name":"Accept","type":"string"}'                                                                                                                     = ''; # This will be passed in later through the Module.cs file.
-            # '{"in":"header","name":"x-org-id","type":"string"}'                                                                                                                   = ''; # This will be passed in later through the Module.cs file.
             ',,'                                                                                                                                                                  = ',';
             '\[,'                                                                                                                                                                 = '[';
             ',]'                                                                                                                                                                  = ']';
@@ -122,13 +114,7 @@ $TransformConfig = [Ordered]@{
             # Custom Tweaks
             '"operationId":"gsuites_listImportUsers","parameters":\[{"\$ref":"#\/parameters\/trait:limit:limit"},{"\$ref":"#\/parameters\/trait:gsuite:maxResults"},' = '"operationId":"gsuites_listImportUsers","parameters":[{"$ref":"#/parameters/trait:gsuite:maxResults"},' # Get-JCsdkGsuiteUsersToImport does not require a limit parameter
             '"responses":{"201":{"description":"","schema":{"\$ref":"#\/definitions\/job-id"}}'   = '"responses":{"200":{"description":"OK","schema":{"$ref":"#/definitions/job-id"}}'; # Workaround incorrectly defined 201 response in swagger should be 200; affects New-JcSdkBulkUser
-            # '{"\$ref":"#\/parameters\/trait:requestHeaders:Content-Type"}'                        = ''; # This will be passed in later through the Module.cs file.
-            # '{"\$ref":"#\/parameters\/trait:requestHeaders:Accept"}'                              = ''; # This will be passed in later through the Module.cs file.
             '{"\$ref":"#\/parameters\/trait:multiTenantRequestHeaders:x-org-id"}'                 = ''; # Along with the ApiKey this will be passed in later through the Module.cs file.
-            # '{"default":"application\/json","in":"header","name":"Content-Type","type":"string"}' = ''; # This will be passed in later through the Module.cs file.
-            # '{"default":"application\/json","in":"header","name":"Accept","type":"string"}'       = ''; # This will be passed in later through the Module.cs file.
-            # '{"in":"header","name":"x-org-id","type":"string"}'                                   = ''; # This will be passed in later through the Module.cs file.
-            # '{"in":"header","name":"x-api-key","type":"string"}'                                  = ''; # This will be passed in later through the Module.cs file.
             ',,'                                                                                  = ',';
             '\[,'                                                                                 = '[';
             ',]'                                                                                  = ']';
@@ -438,7 +424,6 @@ $TransformConfig = [Ordered]@{
             '/integrations/autotask/{UUID}/mappings',
             '/integrations/{integration_type}/{UUID}/errors',
             '/providers/{provider_id}/integrations/autotask'
-            # '/gsuites/{gsuite_id}/import/jumpcloudusers'
             )
     }
 }
