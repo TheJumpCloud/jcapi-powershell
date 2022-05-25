@@ -123,6 +123,48 @@ curl -X GET https://console.jumpcloud.com/api/systemusers/{UserID} \\
 ### [Get-JcSdkUserSshKey](Get-JcSdkUserSshKey.md)
 This endpoint will return a specific System User's public SSH key.
 
+### [Initialize-JcSdkUserState](Initialize-JcSdkUserState.md)
+This endpoint changes the state of a STAGED user to ACTIVATED.
+#### Email Flag
+Use the \"email\" flag to determine whether or not to send a Welcome or
+Activation email to the newly activated user.
+Sending an empty body
+without the `email` flag, will send an email with default behavior
+(see the \"Behavior\" section below)
+```
+{}
+```
+Sending `email=true` flag will send an email with default behavior (see `Behavior` below)
+```
+{ \"email\": true }
+```
+Populated email will override the default behavior and send to the specified email value
+```
+{ \"email\": \"example@example.com\" }
+```
+Sending `email=false` will suppress sending the email
+```
+{ \"email\": false }
+```
+#### Behavior
+Users with a password will be sent a Welcome email to:
+  - The address specified in `email` flag in the request
+  - If no `email` flag, the user's primary email address (default behavior)
+Users without a password will be sent an Activation email to:
+  - The address specified in `email` flag in the request
+  - If no `email` flag, the user's alternate email address (default behavior)
+  - If no alternate email address, the user's primary email address (default behavior)
+
+#### Sample Request
+```
+curl -X POST https://console.jumpcloud.com/api/systemusers/{id}/state/activate \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: \<api-key\>' \\
+  -d '{ \"email\": \"alternate-activation-email@email.com\" }'
+
+```
+
 ### [Invoke-JcSdkCommandTrigger](Invoke-JcSdkCommandTrigger.md)
 This endpoint allows you to launch a command based on a defined trigger.
 
@@ -303,6 +345,13 @@ curl -X DELETE https://console.jumpcloud.com/api/systemusers/{UserID} \\
 ### [Remove-JcSdkUserSshKey](Remove-JcSdkUserSshKey.md)
 This endpoint will delete a specific System User's SSH Key.
 
+### [Reset-JcSdkAdministratorUserActivation](Reset-JcSdkAdministratorUserActivation.md)
+This endpoint triggers the sending of a reactivation e-mail to an administrator.
+
+### [Reset-JcSdkAdministratorUserTotp](Reset-JcSdkAdministratorUserTotp.md)
+This endpoint initiates a TOTP reset for an admin.
+This request does not accept a body.
+
 ### [Reset-JcSdkUserMfa](Reset-JcSdkUserMfa.md)
 This endpoint allows you to reset the TOTP key for a specified system user and put them in an TOTP MFA enrollment period.
 This will result in the user being prompted to setup TOTP MFA when logging into userportal.
@@ -333,6 +382,78 @@ curl -X POST \\
   -H 'Content-Type: application/json' \\
   -H 'x-api-key: {API_KEY}' \\
   -d {}
+```
+
+### [Search-JcSdkCommand](Search-JcSdkCommand.md)
+Return Commands in multi-record format allowing for the passing of the `filter` and `searchFilter` parameters.
+This WILL NOT allow you to add a new command.
+To support advanced filtering you can use the `filter` and `searchFilter` parameters that can only be passed in the body of POST /api/search/* routes.
+The `filter` and `searchFilter` parameters must be passed as Content-Type application/json.
+The `filter` parameter is an object with a single property, either `and` or `or` with the value of the property being an array of query expressions.
+This allows you to filter records using the logic of matching ALL or ANY records in the array of query expressions.
+If the `and` or `or` are not included the default behavior is to match ALL query expressions.
+The `searchFilter` parameter allows text searching on supported fields by specifying a `searchTerm` and a list of `fields` to query on.
+If any `field` has a partial text match on the `searchTerm` the record will be returned.
+
+#### Sample Request
+Exact search for a list of commands in a launchType
+```
+curl -X POST https://console.jumpcloud.com/api/search/commands \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+  \"filter\" : [{\"launchType\" : \"repeated\"}],
+  \"fields\" : \"name launchType sudo\"
+}'
+```
+Text search for commands with name
+```
+curl -X POST https://console.jumpcloud.com/api/search/commands \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+  \"searchFilter\" : {
+    \"searchTerm\": \"List\",
+    \"fields\": [\"name\"]
+  },
+  \"fields\" : \"name launchType sudo\"
+}'
+```
+Text search for multiple commands
+```
+curl -X POST https://console.jumpcloud.com/api/search/commands \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+  \"searchFilter\" : {
+    \"searchTerm\": [\"List\", \"Log\"],
+    \"fields\": [\"name\"]
+  },
+  \"fields\" : \"name launchType sudo\"
+}'
+```
+Combining `filter` and `searchFilter` to text search for commands with name who are in a list of launchType
+```
+curl -X POST https://console.jumpcloud.com/api/search/commands \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+  \"searchFilter\": {
+    \"searchTerm\": \"List\",
+    \"fields\": [\"name\"]
+  },
+  \"filter\": {
+    \"or\": [
+      {\"launchType\" : \"repeated\"},
+      {\"launchType\" : \"one-time\"}
+    ]
+  },
+  \"fields\" : \"name launchType sudo\"
+}'
 ```
 
 ### [Search-JcSdkOrganization](Search-JcSdkOrganization.md)
@@ -528,6 +649,9 @@ curl -X POST https://console.jumpcloud.com/api/search/systemusers \\
 }'
 ```
 
+### [Set-JcSdkAdministratorUser](Set-JcSdkAdministratorUser.md)
+This endpoint allows you to update a user.
+
 ### [Set-JcSdkApplication](Set-JcSdkApplication.md)
 The endpoint updates a SSO / SAML Application.
 
@@ -643,6 +767,19 @@ curl -X POST \\
   -H 'Content-Type: application/json' \\
   -H 'x-api-key: {API_KEY}' \\
   -d {}
+```
+
+### [Sync-JcSdkUserMfa](Sync-JcSdkUserMfa.md)
+This endpoint allows you to re-sync a user's mfa enrollment status
+
+#### Sample Request
+```
+curl -X POST \\
+  https://console.jumpcloud.com/api/systemusers/{UserID}/mfasync \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+
 ```
 
 ### [Unlock-JcSdkUser](Unlock-JcSdkUser.md)

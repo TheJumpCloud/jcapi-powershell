@@ -69,6 +69,7 @@ BODY <ICommand>:
   [Shell <String>]: The shell used to run the command.
   [Sudo <Boolean?>]:
   [Systems <String[]>]: An array of system IDs to run the command on. Not available if you are using Groups.
+  [TimeToLiveSeconds <Int32?>]: Time in seconds a command can wait in the queue to be run before timing out
   [Timeout <String>]: The time in seconds to allow the command to run for.
   [Trigger <String>]: The name of the command trigger.
   [User <String>]: The ID of the system user to run the command as. This field is required when creating a command with a commandType of "mac" or "linux".
@@ -204,6 +205,13 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     # An array of system IDs to run the command on.
     # Not available if you are using Groups.
     ${Systems},
+
+    [Parameter(ParameterSetName='SetExpanded')]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
+    [JumpCloud.SDK.V1.Category('Body')]
+    [System.Int32]
+    # Time in seconds a command can wait in the queue to be run before timing out
+    ${TimeToLiveSeconds},
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]

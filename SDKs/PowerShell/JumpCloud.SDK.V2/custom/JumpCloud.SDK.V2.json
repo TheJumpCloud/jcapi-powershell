@@ -43,6 +43,46 @@
       "title": "ADES",
       "type": "object"
     },
+    "Address": {
+      "properties": {
+        "country": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "extendedAddress": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "locality": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "poBox": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "postalCode": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "region": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "streetAddress": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "type": {
+          "maxLength": 1024,
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "Administrator": {
       "example": {
         "email": "joe@example.com",
@@ -1934,30 +1974,30 @@
       "type": "object"
     },
     "Office365BuiltinTranslation": {
-      "description": "Built-in translations for Office 365 (Microsoft Graph) export:\n* `user_street_address` - Translate `streetAddress` field of JumpCloud user address of type `work` to `city` field of Microsoft Graph user\n* `user_city` - Translate `locality` field of JumpCloud user address of type `work` to `city` field of Microsoft Graph user\n* `user_state` - Translate `region` field of JumpCloud user address of type `work` to `state` field of Microsoft Graph `user`\n* `user_country` - Translate `country` field of JumpCloud user address of type `work` to `country` field of Microsoft Graph `user`\n* `user_postal_code` - Translate `postalCode` field of JumpCloud user address of type `work` to `postalCode` field of Microsoft Graph `user`\n* `user_business_phones` - Translate `number` field of first JumpCloud user `phoneNumber` of type `work` to `businessPhones` field of Microsoft Graph `user`\n* `user_mobile_phone` - Translate `number` field of first JumpCloud user `phoneNumber` of type `mobile` to `mobilePhone` field of Microsoft Graph `user`\n* `user_department` - Translate `department` field of JumpCloud user to `department` field of Microsoft Graph `user`\n* `user_job_title` - Translate `jobTitle` field of JumpCloud user to `jobTitle` field of Microsoft Graph `user`\n* `user_office_location` - Translate `location` field of JumpCloud user to `officeLocation` field of Microsoft Graph `user`\n* `user_manager` - Translate `manager` field of JumpCloud user to `manager` field of Microsoft Graph `user`\n* `user_alternate_email` - Translate `alternateEmail` field of JumpCloud user to `otherMails` field of Microsoft Graph `user`",
+      "description": "Built-in translations for Office 365 (Microsoft Graph) export:\n* `user_alternate_email` - Translate `alternateEmail` field of JumpCloud user to `otherMails` field of Microsoft Graph `user`\n* `user_business_phones` - Translate `number` field of first JumpCloud user `phoneNumber` of type `work` to `businessPhones` field of Microsoft Graph `user`\n* `user_city` - Translate `locality` field of JumpCloud user address of type `work` to `city` field of Microsoft Graph user\n* `user_country` - Translate `country` field of JumpCloud user address of type `work` to `country` field of Microsoft Graph `user`\n* `user_department` - Translate `department` field of JumpCloud user to `department` field of Microsoft Graph `user`\n* `user_job_title` - Translate `jobTitle` field of JumpCloud user to `jobTitle` field of Microsoft Graph `user`\n* `user_manager` - Translate `manager` field of JumpCloud user to `manager` field of Microsoft Graph `user`\n* `user_mobile_phone` - Translate `number` field of first JumpCloud user `phoneNumber` of type `mobile` to `mobilePhone` field of Microsoft Graph `user`\n* `user_office_location` - Translate `location` field of JumpCloud user to `officeLocation` field of Microsoft Graph `user`\n* `user_postal_code` - Translate `postalCode` field of JumpCloud user address of type `work` to `postalCode` field of Microsoft Graph `user`\n* `user_principal_name_from_alternate_email` - Translate user `alternateEmail` field of Jumpcloud user to `userPrincipalName` field of Microsoft Graph `user`\n* `user_state` - Translate `region` field of JumpCloud user address of type `work` to `state` field of Microsoft Graph `user`\n* `user_street_address` - Translate `streetAddress` field of JumpCloud user address of type `work` to `streetAddress` field of Microsoft Graph user",
       "enum": [
-        "user_street_address",
-        "user_city",
-        "user_state",
-        "user_country",
-        "user_postal_code",
+        "user_alternate_email",
         "user_business_phones",
-        "user_mobile_phone",
+        "user_city",
+        "user_country",
         "user_department",
         "user_job_title",
-        "user_office_location",
         "user_manager",
-        "user_alternate_email"
+        "user_mobile_phone",
+        "user_office_location",
+        "user_postal_code",
+        "user_principal_name_from_alternate_email",
+        "user_state",
+        "user_street_address"
       ],
       "title": "Office 365 BuiltIn Translation",
       "type": "string"
     },
     "Office365DirectionTranslation": {
       "default": "export",
-      "description": "Direction identify if a attribute is going to be exported or imported from Office365\n* `Import`- The data will be imported from Office365 into the user modal\n* `Export`- The data will exported from the user modal to Office365\n",
+      "description": "Direction identify if a attribute is going to be exported or imported from Office365\n* `Export`- The data will exported from the user modal to Office365\n",
       "enum": [
-        "export",
-        "import"
+        "export"
       ],
       "title": "Office 365 Direction translation",
       "type": "string"
@@ -2008,6 +2048,22 @@
         }
       },
       "title": "Organization",
+      "type": "object"
+    },
+    "PhoneNumber": {
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "number": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "type": {
+          "maxLength": 1024,
+          "type": "string"
+        }
+      },
       "type": "object"
     },
     "Policy": {
@@ -2689,6 +2745,68 @@
       "title": "SystemGroupData",
       "type": "object"
     },
+    "User": {
+      "properties": {
+        "addresses": {
+          "items": {
+            "$ref": "#/definitions/Address"
+          },
+          "type": "array"
+        },
+        "alternateEmail": {
+          "type": "string"
+        },
+        "company": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "costCenter": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "department": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "email": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "employeeIdentifier": {
+          "description": "Must be unique per user.",
+          "maxLength": 256,
+          "type": "string"
+        },
+        "employeeType": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "firstname": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "jobTitle": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "lastname": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "location": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "phoneNumbers": {
+          "items": {
+            "$ref": "#/definitions/PhoneNumber"
+          },
+          "type": "array"
+        }
+      },
+      "title": "User",
+      "type": "object"
+    },
     "UserGroup": {
       "properties": {
         "attributes": {
@@ -3101,6 +3219,7 @@
         "state": {
           "description": "The state to move the user(s) to",
           "enum": [
+            "ACTIVATED",
             "SUSPENDED"
           ],
           "type": "string"
@@ -3124,6 +3243,15 @@
         "example-1": {
           "start_date": "2020-01-01T02:00:00",
           "state": "SUSPENDED",
+          "user_ids": [
+            "666f6f2d6261722d71757578",
+            "0123456789ab0123456789ab",
+            "666f6f2d6261722d71757555"
+          ]
+        },
+        "example-2": {
+          "start_date": "2020-01-01T02:00:00",
+          "state": "ACTIVATED",
           "user_ids": [
             "666f6f2d6261722d71757578",
             "0123456789ab0123456789ab",
@@ -3217,36 +3345,32 @@
       "type": "object"
     },
     "gsuite-output": {
-      "allOf": [
-        {
-          "properties": {
-            "groupsEnabled": {
-              "type": "boolean"
-            },
-            "id": {
-              "type": "string"
-            },
-            "name": {
-              "type": "string"
-            },
-            "userLockoutAction": {
-              "enum": [
-                "suspend",
-                "maintain"
-              ],
-              "type": "string"
-            },
-            "userPasswordExpirationAction": {
-              "enum": [
-                "suspend",
-                "maintain",
-                "remove_access"
-              ],
-              "type": "string"
-            }
-          }
+      "properties": {
+        "groupsEnabled": {
+          "type": "boolean"
+        },
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "userLockoutAction": {
+          "enum": [
+            "suspend",
+            "maintain"
+          ],
+          "type": "string"
+        },
+        "userPasswordExpirationAction": {
+          "enum": [
+            "suspend",
+            "maintain",
+            "remove_access"
+          ],
+          "type": "string"
         }
-      ],
+      },
       "title": "GSuite Output",
       "type": "object"
     },
@@ -3275,6 +3399,120 @@
         }
       },
       "title": "GSuite Patch Input",
+      "type": "object"
+    },
+    "importUser": {
+      "properties": {
+        "addresses": {
+          "items": {
+            "$ref": "#/definitions/importUserAddress"
+          },
+          "type": "array"
+        },
+        "company": {
+          "type": "string"
+        },
+        "costCenter": {
+          "type": "string"
+        },
+        "department": {
+          "type": "string"
+        },
+        "displayname": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "employeeIdentifier": {
+          "type": "string"
+        },
+        "employeeType": {
+          "type": "string"
+        },
+        "firstname": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "jobTitle": {
+          "type": "string"
+        },
+        "lastname": {
+          "type": "string"
+        },
+        "location": {
+          "type": "string"
+        },
+        "manager": {
+          "type": "string"
+        },
+        "middlename": {
+          "type": "string"
+        },
+        "phoneNumbers": {
+          "items": {
+            "$ref": "#/definitions/importUserPhoneNumber"
+          },
+          "type": "array"
+        },
+        "username": {
+          "type": "string"
+        }
+      },
+      "title": "Import User",
+      "type": "object"
+    },
+    "importUserAddress": {
+      "properties": {
+        "country": {
+          "type": "string"
+        },
+        "locality": {
+          "type": "string"
+        },
+        "postalCode": {
+          "type": "string"
+        },
+        "region": {
+          "type": "string"
+        },
+        "streetAddress": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      },
+      "title": "Import User Address",
+      "type": "object"
+    },
+    "importUserPhoneNumber": {
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      },
+      "title": "Import User Address",
+      "type": "object"
+    },
+    "importUsersResponse": {
+      "properties": {
+        "total_count": {
+          "type": "number"
+        },
+        "users": {
+          "items": {
+            "$ref": "#/definitions/importUser"
+          },
+          "type": "array"
+        }
+      },
+      "title": "Import Users Response",
       "type": "object"
     },
     "job-id": {
@@ -3498,7 +3736,7 @@
       "description": "appleVpp is an optional attribute, it will only be present on apps with a 'setting' 'package_manager' type of 'APPLE_VPP'.",
       "properties": {
         "appConfiguration": {
-          "description": "Text sent to configure the application, the text should be a valid plist.",
+          "description": "Text sent to configure the application, the text should be a valid plist.  Returned only by 'GET /softwareapps/{id}'.",
           "type": "string"
         },
         "assignedLicenses": {
@@ -3515,7 +3753,7 @@
           "additionalProperties": true
         },
         "isConfigEnabled": {
-          "description": "Denotes if configuration has been enabled for the application.",
+          "description": "Denotes if configuration has been enabled for the application.  Returned only by ''GET /softwareapps/{id}''.",
           "type": "boolean"
         },
         "supportedDeviceFamilies": {
@@ -6098,7 +6336,7 @@
       "name": "JumpCloud Support",
       "url": "https://support.jumpcloud.com/support/s/"
     },
-    "description": "# Overview\n\nJumpCloud's V2 API. This set of endpoints allows JumpCloud customers to manage objects, groupings and mappings and interact with the JumpCloud Graph.\n\n# Directory Objects\n\nThis API offers the ability to interact with some of our core features; otherwise known as Directory Objects. The Directory Objects are:\n\n* Commands\n* Policies\n* Policy Groups\n* Applications\n* Systems\n* Users\n* User Groups\n* System Groups\n* Radius Servers\n* Directories: Office 365, LDAP,G-Suite, Active Directory\n* Duo accounts and applications.\n\nThe Directory Object is an important concept to understand in order to successfully use JumpCloud API.\n\n## JumpCloud Graph\n\nWe've also introduced the concept of the JumpCloud Graph along with  Directory Objects. The Graph is a powerful aspect of our platform which will enable you to associate objects with each other, or establish membership for certain objects to become members of other objects.\n\nSpecific `GET` endpoints will allow you to traverse the JumpCloud Graph to return all indirect and directly bound objects in your organization.\n\n| ![alt text](https://s3.amazonaws.com/jumpcloud-kb/Knowledge+Base+Photos/API+Docs/jumpcloud_graph.png \"JumpCloud Graph Model Example\") |\n|:--:|\n| **This diagram highlights our association and membership model as it relates to Directory Objects.** |\n\n# API Key\n\n## Access Your API Key\n\nTo locate your API Key:\n\n1. Log into the [JumpCloud Admin Console](https://console.jumpcloud.com/).\n2. Go to the username drop down located in the top-right of the Console.\n3. Retrieve your API key from API Settings.\n\n## API Key Considerations\n\nThis API key is associated to the currently logged in administrator. Other admins will have different API keys.\n\n**WARNING** Please keep this API key secret, as it grants full access to any data accessible via your JumpCloud console account.\n\nYou can also reset your API key in the same location in the JumpCloud Admin Console.\n\n## Recycling or Resetting Your API Key\n\nIn order to revoke access with the current API key, simply reset your API key. This will render all calls using the previous API key inaccessible.\n\nYour API key will be passed in as a header with the header name \"x-api-key\".\n\n```bash\ncurl -H \"x-api-key: [YOUR_API_KEY_HERE]\" \"https://console.jumpcloud.com/api/v2/systemgroups\"\n```\n\n# System Context\n\n* [Introduction](#introduction)\n* [Supported endpoints](#supported-endpoints)\n* [Response codes](#response-codes)\n* [Authentication](#authentication)\n* [Additional examples](#additional-examples)\n* [Third party](#third-party)\n\n## Introduction\n\nJumpCloud System Context Authorization is an alternative way to authenticate with a subset of JumpCloud's REST APIs. Using this method, a system can manage its information and resource associations, allowing modern auto provisioning environments to scale as needed.\n\n**Note: The following documentation applies to Linux Operating Systems only.**\n\n## Supported Endpoints\n\nJumpCloud System Context Authorization can be used in conjunction with Systems endpoints found in the V1 API and certain System Group endpoints found in the v2 API.\n\n* A system may fetch, alter, and delete metadata about itself, including manipulating a system's Group and Systemuser associations,\n  * `/api/systems/{system_id}` | [`GET`](https://docs.jumpcloud.com/api/1.0/index.html#operation/systems_get) [`PUT`](https://docs.jumpcloud.com/api/1.0/index.html#operation/systems_put)\n* A system may delete itself from your JumpCloud organization\n  * `/api/systems/{system_id}` | [`DELETE`](https://docs.jumpcloud.com/api/1.0/index.html#operation/systems_delete)\n* A system may fetch its direct resource associations under v2 (Groups)\n  * `/api/v2/systems/{system_id}/memberof` | [`GET`](https://docs.jumpcloud.com/api/2.0/index.html#operation/graph_systemGroupMembership)\n  * `/api/v2/systems/{system_id}/associations` | [`GET`](https://docs.jumpcloud.com/api/2.0/index.html#operation/graph_systemAssociationsList)\n  * `/api/v2/systems/{system_id}/users` | [`GET`](https://docs.jumpcloud.com/api/2.0/index.html#operation/graph_systemTraverseUser)\n* A system may alter its direct resource associations under v2 (Groups)\n  * `/api/v2/systems/{system_id}/associations` | [`POST`](https://docs.jumpcloud.com/api/2.0/index.html#operation/graph_systemAssociationsPost)\n* A system may alter its System Group associations\n  * `/api/v2/systemgroups/{group_id}/members` | [`POST`](https://docs.jumpcloud.com/api/2.0/index.html#operation/graph_systemGroupMembersPost)\n    * _NOTE_ If a system attempts to alter the system group membership of a different system the request will be rejected\n\n## Response Codes\n\nIf endpoints other than those described above are called using the System Context API, the server will return a `401` response.\n\n## Authentication\n\nTo allow for secure access to our APIs, you must authenticate each API request.\nJumpCloud System Context Authorization uses [HTTP Signatures](https://tools.ietf.org/html/draft-cavage-http-signatures-00) to authenticate API requests.\nThe HTTP Signatures sent with each request are similar to the signatures used by the Amazon Web Services REST API.\nTo help with the request-signing process, we have provided an [example bash script](https://github.com/TheJumpCloud/SystemContextAPI/blob/master/examples/shell/SigningExample.sh). This example API request simply requests the entire system record. You must be root, or have permissions to access the contents of the `/opt/jc` directory to generate a signature.\n\nHere is a breakdown of the example script with explanations.\n\nFirst, the script extracts the systemKey from the JSON formatted `/opt/jc/jcagent.conf` file.\n\n```bash\n#!/bin/bash\nconf=\"`cat /opt/jc/jcagent.conf`\"\nregex=\"systemKey\\\":\\\"(\\w+)\\\"\"\n\nif [[ $conf =~ $regex ]] ; then\n  systemKey=\"${BASH_REMATCH[1]}\"\nfi\n```\n\nThen, the script retrieves the current date in the correct format.\n\n```bash\nnow=`date -u \"+%a, %d %h %Y %H:%M:%S GMT\"`;\n```\n\nNext, we build a signing string to demonstrate the expected signature format. The signed string must consist of the [request-line](https://tools.ietf.org/html/rfc2616#page-35) and the date header, separated by a newline character.\n\n```bash\nsignstr=\"GET /api/systems/${systemKey} HTTP/1.1\\ndate: ${now}\"\n```\n\nThe next step is to calculate and apply the signature. This is a two-step process:\n\n1. Create a signature from the signing string using the JumpCloud Agent private key: ``printf \"$signstr\" | openssl dgst -sha256 -sign /opt/jc/client.key``\n2. Then Base64-encode the signature string and trim off the newline characters: ``| openssl enc -e -a | tr -d '\\n'``\n\nThe combined steps above result in:\n\n```bash\nsignature=`printf \"$signstr\" | openssl dgst -sha256 -sign /opt/jc/client.key | openssl enc -e -a | tr -d '\\n'` ;\n```\n\nFinally, we make sure the API call sending the signature has the same Authorization and Date header values, HTTP method, and URL that were used in the signing string.\n\n```bash\ncurl -iq \\\n  -H \"Accept: application/json\" \\\n  -H \"Content-Type: application/json\" \\\n  -H \"Date: ${now}\" \\\n  -H \"Authorization: Signature keyId=\\\"system/${systemKey}\\\",headers=\\\"request-line date\\\",algorithm=\\\"rsa-sha256\\\",signature=\\\"${signature}\\\"\" \\\n  --url https://console.jumpcloud.com/api/systems/${systemKey}\n```\n\n### Input Data\n\nAll PUT and POST methods should use the HTTP Content-Type header with a value of 'application/json'. PUT methods are used for updating a record. POST methods are used to create a record.\n\nThe following example demonstrates how to update the `displayName` of the system.\n\n```bash\nsignstr=\"PUT /api/systems/${systemKey} HTTP/1.1\\ndate: ${now}\"\nsignature=`printf \"$signstr\" | openssl dgst -sha256 -sign /opt/jc/client.key | openssl enc -e -a | tr -d '\\n'` ;\n\ncurl -iq \\\n  -d \"{\\\"displayName\\\" : \\\"updated-system-name-1\\\"}\" \\\n  -X \"PUT\" \\\n  -H \"Content-Type: application/json\" \\\n  -H \"Accept: application/json\" \\\n  -H \"Date: ${now}\" \\\n  -H \"Authorization: Signature keyId=\\\"system/${systemKey}\\\",headers=\\\"request-line date\\\",algorithm=\\\"rsa-sha256\\\",signature=\\\"${signature}\\\"\" \\\n  --url https://console.jumpcloud.com/api/systems/${systemKey}\n```\n\n### Output Data\n\nAll results will be formatted as JSON.\n\nHere is an abbreviated example of response output:\n\n```json\n{\n  \"_id\": \"525ee96f52e144993e000015\",\n  \"agentServer\": \"lappy386\",\n  \"agentVersion\": \"0.9.42\",\n  \"arch\": \"x86_64\",\n  \"connectionKey\": \"127.0.0.1_51812\",\n  \"displayName\": \"ubuntu-1204\",\n  \"firstContact\": \"2013-10-16T19:30:55.611Z\",\n  \"hostname\": \"ubuntu-1204\"\n  ...\n```\n\n## Additional Examples\n\n### Signing Authentication Example\n\nThis example demonstrates how to make an authenticated request to fetch the JumpCloud record for this system.\n\n[SigningExample.sh](https://github.com/TheJumpCloud/SystemContextAPI/blob/master/examples/shell/SigningExample.sh)\n\n### Shutdown Hook\n\nThis example demonstrates how to make an authenticated request on system shutdown.\nUsing an init.d script registered at run level 0, you can call the System Context API as the system is shutting down.\n\n[Instance-shutdown-initd](https://github.com/TheJumpCloud/SystemContextAPI/blob/master/examples/instance-shutdown-initd) is an example of an init.d script that only runs at system shutdown.\n\nAfter customizing the [instance-shutdown-initd](https://github.com/TheJumpCloud/SystemContextAPI/blob/master/examples/instance-shutdown-initd) script, you should install it on the system(s) running the JumpCloud agent.\n\n1. Copy the modified [instance-shutdown-initd](https://github.com/TheJumpCloud/SystemContextAPI/blob/master/examples/instance-shutdown-initd) to `/etc/init.d/instance-shutdown`.\n2. On Ubuntu systems, run `update-rc.d instance-shutdown defaults`. On RedHat/CentOS systems, run `chkconfig --add instance-shutdown`.\n\n## Third Party\n\n### Chef Cookbooks\n\n[https://github.com/nshenry03/jumpcloud](https://github.com/nshenry03/jumpcloud)\n\n[https://github.com/cjs226/jumpcloud](https://github.com/cjs226/jumpcloud)\n\n# Multi-Tenant Portal Headers\n\nMulti-Tenant Organization API Headers are available for JumpCloud Admins to use when making API requests from Organizations that have multiple managed organizations.\n\nThe `x-org-id` is a required header for all multi-tenant admins when making API requests to JumpCloud. This header will define to which organization you would like to make the request.\n\n**NOTE** Single Tenant Admins do not need to provide this header when making an API request.\n\n## Header Value\n\n`x-org-id`\n\n## API Response Codes\n\n* `400` Malformed ID.\n* `400` x-org-id and Organization path ID do not match.\n* `401` ID not included for multi-tenant admin\n* `403` ID included on unsupported route.\n* `404` Organization ID Not Found.\n\n```bash\ncurl -X GET https://console.jumpcloud.com/api/v2/directories \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -H 'x-org-id: {ORG_ID}'\n\n```\n\n## To Obtain an Individual Organization ID via the UI\n\nAs a prerequisite, your Primary Organization will need to be setup for Multi-Tenancy. This provides access to the Multi-Tenant Organization Admin Portal.\n\n1. Log into JumpCloud [Admin Console](https://console.jumpcloud.com). If you are a multi-tenant Admin, you will automatically be routed to the Multi-Tenant Admin Portal.\n2. From the Multi-Tenant Portal's primary navigation bar, select the Organization you'd like to access.\n3. You will automatically be routed to that Organization's Admin Console.\n4. Go to Settings in the sub-tenant's primary navigation.\n5. You can obtain your Organization ID below your Organization's Contact Information on the Settings page.\n\n## To Obtain All Organization IDs via the API\n\n* You can make an API request to this endpoint using the API key of your Primary Organization.  `https://console.jumpcloud.com/api/organizations/` This will return all your managed organizations.\n\n```bash\ncurl -X GET \\\n  https://console.jumpcloud.com/api/organizations/ \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```\n\n# SDKs\n\nYou can find language specific SDKs that can help you kickstart your Integration with JumpCloud in the following GitHub repositories:\n\n* [Python](https://github.com/TheJumpCloud/jcapi-python)\n* [Go](https://github.com/TheJumpCloud/jcapi-go)\n* [Ruby](https://github.com/TheJumpCloud/jcapi-ruby)\n* [Java](https://github.com/TheJumpCloud/jcapi-java)\n",
+    "description": "# Overview\n\nJumpCloud's V2 API. This set of endpoints allows JumpCloud customers to manage objects, groupings and mappings and interact with the JumpCloud Graph.\n\n# Directory Objects\n\nThis API offers the ability to interact with some of our core features; otherwise known as Directory Objects. The Directory Objects are:\n\n* Commands\n* Policies\n* Policy Groups\n* Applications\n* Systems\n* Users\n* User Groups\n* System Groups\n* Radius Servers\n* Directories: Office 365, LDAP,G-Suite, Active Directory\n* Duo accounts and applications.\n\nThe Directory Object is an important concept to understand in order to successfully use JumpCloud API.\n\n## JumpCloud Graph\n\nWe've also introduced the concept of the JumpCloud Graph along with  Directory Objects. The Graph is a powerful aspect of our platform which will enable you to associate objects with each other, or establish membership for certain objects to become members of other objects.\n\nSpecific `GET` endpoints will allow you to traverse the JumpCloud Graph to return all indirect and directly bound objects in your organization.\n\n| ![alt text](https://s3.amazonaws.com/jumpcloud-kb/Knowledge+Base+Photos/API+Docs/jumpcloud_graph.png \"JumpCloud Graph Model Example\") |\n|:--:|\n| **This diagram highlights our association and membership model as it relates to Directory Objects.** |\n\n# API Key\n\n## Access Your API Key\n\nTo locate your API Key:\n\n1. Log into the [JumpCloud Admin Console](https://console.jumpcloud.com/).\n2. Go to the username drop down located in the top-right of the Console.\n3. Retrieve your API key from API Settings.\n\n## API Key Considerations\n\nThis API key is associated to the currently logged in administrator. Other admins will have different API keys.\n\n**WARNING** Please keep this API key secret, as it grants full access to any data accessible via your JumpCloud console account.\n\nYou can also reset your API key in the same location in the JumpCloud Admin Console.\n\n## Recycling or Resetting Your API Key\n\nIn order to revoke access with the current API key, simply reset your API key. This will render all calls using the previous API key inaccessible.\n\nYour API key will be passed in as a header with the header name \"x-api-key\".\n\n```bash\ncurl -H \"x-api-key: [YOUR_API_KEY_HERE]\" \"https://console.jumpcloud.com/api/v2/systemgroups\"\n```\n\n# System Context\n\n* [Introduction](#introduction)\n* [Supported endpoints](#supported-endpoints)\n* [Response codes](#response-codes)\n* [Authentication](#authentication)\n* [Additional examples](#additional-examples)\n* [Third party](#third-party)\n\n## Introduction\n\nJumpCloud System Context Authorization is an alternative way to authenticate with a subset of JumpCloud's REST APIs. Using this method, a system can manage its information and resource associations, allowing modern auto provisioning environments to scale as needed.\n\n**Notes:**\n\n * The following documentation applies to Linux Operating Systems only.\n * Systems that have been automatically enrolled using Apple's Device Enrollment Program (DEP) or systems enrolled using the User Portal install are not eligible to use the System Context API to prevent unauthorized access to system groups and resources. If a script that utilizes the System Context API is invoked on a system enrolled in this way, it will display an error.\n\n## Supported Endpoints\n\nJumpCloud System Context Authorization can be used in conjunction with Systems endpoints found in the V1 API and certain System Group endpoints found in the v2 API.\n\n* A system may fetch, alter, and delete metadata about itself, including manipulating a system's Group and Systemuser associations,\n  * `/api/systems/{system_id}` | [`GET`](https://docs.jumpcloud.com/api/1.0/index.html#operation/systems_get) [`PUT`](https://docs.jumpcloud.com/api/1.0/index.html#operation/systems_put)\n* A system may delete itself from your JumpCloud organization\n  * `/api/systems/{system_id}` | [`DELETE`](https://docs.jumpcloud.com/api/1.0/index.html#operation/systems_delete)\n* A system may fetch its direct resource associations under v2 (Groups)\n  * `/api/v2/systems/{system_id}/memberof` | [`GET`](https://docs.jumpcloud.com/api/2.0/index.html#operation/graph_systemGroupMembership)\n  * `/api/v2/systems/{system_id}/associations` | [`GET`](https://docs.jumpcloud.com/api/2.0/index.html#operation/graph_systemAssociationsList)\n  * `/api/v2/systems/{system_id}/users` | [`GET`](https://docs.jumpcloud.com/api/2.0/index.html#operation/graph_systemTraverseUser)\n* A system may alter its direct resource associations under v2 (Groups)\n  * `/api/v2/systems/{system_id}/associations` | [`POST`](https://docs.jumpcloud.com/api/2.0/index.html#operation/graph_systemAssociationsPost)\n* A system may alter its System Group associations\n  * `/api/v2/systemgroups/{group_id}/members` | [`POST`](https://docs.jumpcloud.com/api/2.0/index.html#operation/graph_systemGroupMembersPost)\n    * _NOTE_ If a system attempts to alter the system group membership of a different system the request will be rejected\n\n## Response Codes\n\nIf endpoints other than those described above are called using the System Context API, the server will return a `401` response.\n\n## Authentication\n\nTo allow for secure access to our APIs, you must authenticate each API request.\nJumpCloud System Context Authorization uses [HTTP Signatures](https://tools.ietf.org/html/draft-cavage-http-signatures-00) to authenticate API requests.\nThe HTTP Signatures sent with each request are similar to the signatures used by the Amazon Web Services REST API.\nTo help with the request-signing process, we have provided an [example bash script](https://github.com/TheJumpCloud/SystemContextAPI/blob/master/examples/shell/SigningExample.sh). This example API request simply requests the entire system record. You must be root, or have permissions to access the contents of the `/opt/jc` directory to generate a signature.\n\nHere is a breakdown of the example script with explanations.\n\nFirst, the script extracts the systemKey from the JSON formatted `/opt/jc/jcagent.conf` file.\n\n```bash\n#!/bin/bash\nconf=\"`cat /opt/jc/jcagent.conf`\"\nregex=\"systemKey\\\":\\\"(\\w+)\\\"\"\n\nif [[ $conf =~ $regex ]] ; then\n  systemKey=\"${BASH_REMATCH[1]}\"\nfi\n```\n\nThen, the script retrieves the current date in the correct format.\n\n```bash\nnow=`date -u \"+%a, %d %h %Y %H:%M:%S GMT\"`;\n```\n\nNext, we build a signing string to demonstrate the expected signature format. The signed string must consist of the [request-line](https://tools.ietf.org/html/rfc2616#page-35) and the date header, separated by a newline character.\n\n```bash\nsignstr=\"GET /api/systems/${systemKey} HTTP/1.1\\ndate: ${now}\"\n```\n\nThe next step is to calculate and apply the signature. This is a two-step process:\n\n1. Create a signature from the signing string using the JumpCloud Agent private key: ``printf \"$signstr\" | openssl dgst -sha256 -sign /opt/jc/client.key``\n2. Then Base64-encode the signature string and trim off the newline characters: ``| openssl enc -e -a | tr -d '\\n'``\n\nThe combined steps above result in:\n\n```bash\nsignature=`printf \"$signstr\" | openssl dgst -sha256 -sign /opt/jc/client.key | openssl enc -e -a | tr -d '\\n'` ;\n```\n\nFinally, we make sure the API call sending the signature has the same Authorization and Date header values, HTTP method, and URL that were used in the signing string.\n\n```bash\ncurl -iq \\\n  -H \"Accept: application/json\" \\\n  -H \"Content-Type: application/json\" \\\n  -H \"Date: ${now}\" \\\n  -H \"Authorization: Signature keyId=\\\"system/${systemKey}\\\",headers=\\\"request-line date\\\",algorithm=\\\"rsa-sha256\\\",signature=\\\"${signature}\\\"\" \\\n  --url https://console.jumpcloud.com/api/systems/${systemKey}\n```\n\n### Input Data\n\nAll PUT and POST methods should use the HTTP Content-Type header with a value of 'application/json'. PUT methods are used for updating a record. POST methods are used to create a record.\n\nThe following example demonstrates how to update the `displayName` of the system.\n\n```bash\nsignstr=\"PUT /api/systems/${systemKey} HTTP/1.1\\ndate: ${now}\"\nsignature=`printf \"$signstr\" | openssl dgst -sha256 -sign /opt/jc/client.key | openssl enc -e -a | tr -d '\\n'` ;\n\ncurl -iq \\\n  -d \"{\\\"displayName\\\" : \\\"updated-system-name-1\\\"}\" \\\n  -X \"PUT\" \\\n  -H \"Content-Type: application/json\" \\\n  -H \"Accept: application/json\" \\\n  -H \"Date: ${now}\" \\\n  -H \"Authorization: Signature keyId=\\\"system/${systemKey}\\\",headers=\\\"request-line date\\\",algorithm=\\\"rsa-sha256\\\",signature=\\\"${signature}\\\"\" \\\n  --url https://console.jumpcloud.com/api/systems/${systemKey}\n```\n\n### Output Data\n\nAll results will be formatted as JSON.\n\nHere is an abbreviated example of response output:\n\n```json\n{\n  \"_id\": \"525ee96f52e144993e000015\",\n  \"agentServer\": \"lappy386\",\n  \"agentVersion\": \"0.9.42\",\n  \"arch\": \"x86_64\",\n  \"connectionKey\": \"127.0.0.1_51812\",\n  \"displayName\": \"ubuntu-1204\",\n  \"firstContact\": \"2013-10-16T19:30:55.611Z\",\n  \"hostname\": \"ubuntu-1204\"\n  ...\n```\n\n## Additional Examples\n\n### Signing Authentication Example\n\nThis example demonstrates how to make an authenticated request to fetch the JumpCloud record for this system.\n\n[SigningExample.sh](https://github.com/TheJumpCloud/SystemContextAPI/blob/master/examples/shell/SigningExample.sh)\n\n### Shutdown Hook\n\nThis example demonstrates how to make an authenticated request on system shutdown.\nUsing an init.d script registered at run level 0, you can call the System Context API as the system is shutting down.\n\n[Instance-shutdown-initd](https://github.com/TheJumpCloud/SystemContextAPI/blob/master/examples/instance-shutdown-initd) is an example of an init.d script that only runs at system shutdown.\n\nAfter customizing the [instance-shutdown-initd](https://github.com/TheJumpCloud/SystemContextAPI/blob/master/examples/instance-shutdown-initd) script, you should install it on the system(s) running the JumpCloud agent.\n\n1. Copy the modified [instance-shutdown-initd](https://github.com/TheJumpCloud/SystemContextAPI/blob/master/examples/instance-shutdown-initd) to `/etc/init.d/instance-shutdown`.\n2. On Ubuntu systems, run `update-rc.d instance-shutdown defaults`. On RedHat/CentOS systems, run `chkconfig --add instance-shutdown`.\n\n## Third Party\n\n### Chef Cookbooks\n\n[https://github.com/nshenry03/jumpcloud](https://github.com/nshenry03/jumpcloud)\n\n[https://github.com/cjs226/jumpcloud](https://github.com/cjs226/jumpcloud)\n\n# Multi-Tenant Portal Headers\n\nMulti-Tenant Organization API Headers are available for JumpCloud Admins to use when making API requests from Organizations that have multiple managed organizations.\n\nThe `x-org-id` is a required header for all multi-tenant admins when making API requests to JumpCloud. This header will define to which organization you would like to make the request.\n\n**NOTE** Single Tenant Admins do not need to provide this header when making an API request.\n\n## Header Value\n\n`x-org-id`\n\n## API Response Codes\n\n* `400` Malformed ID.\n* `400` x-org-id and Organization path ID do not match.\n* `401` ID not included for multi-tenant admin\n* `403` ID included on unsupported route.\n* `404` Organization ID Not Found.\n\n```bash\ncurl -X GET https://console.jumpcloud.com/api/v2/directories \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -H 'x-org-id: {ORG_ID}'\n\n```\n\n## To Obtain an Individual Organization ID via the UI\n\nAs a prerequisite, your Primary Organization will need to be setup for Multi-Tenancy. This provides access to the Multi-Tenant Organization Admin Portal.\n\n1. Log into JumpCloud [Admin Console](https://console.jumpcloud.com). If you are a multi-tenant Admin, you will automatically be routed to the Multi-Tenant Admin Portal.\n2. From the Multi-Tenant Portal's primary navigation bar, select the Organization you'd like to access.\n3. You will automatically be routed to that Organization's Admin Console.\n4. Go to Settings in the sub-tenant's primary navigation.\n5. You can obtain your Organization ID below your Organization's Contact Information on the Settings page.\n\n## To Obtain All Organization IDs via the API\n\n* You can make an API request to this endpoint using the API key of your Primary Organization.  `https://console.jumpcloud.com/api/organizations/` This will return all your managed organizations.\n\n```bash\ncurl -X GET \\\n  https://console.jumpcloud.com/api/organizations/ \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```\n\n# SDKs\n\nYou can find language specific SDKs that can help you kickstart your Integration with JumpCloud in the following GitHub repositories:\n\n* [Python](https://github.com/TheJumpCloud/jcapi-python)\n* [Go](https://github.com/TheJumpCloud/jcapi-go)\n* [Ruby](https://github.com/TheJumpCloud/jcapi-ruby)\n* [Java](https://github.com/TheJumpCloud/jcapi-java)\n",
     "title": "JumpCloud API",
     "version": "2.0"
   },
@@ -7986,6 +8224,51 @@
         ]
       }
     },
+    "/applications/{application_id}": {
+      "get": {
+        "description": "The endpoint retrieves an Application.",
+        "operationId": "Application_Get",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object",
+              "additionalProperties": true
+            }
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ],
+        "summary": "Get an Application",
+        "x-codeSamples": [
+          {
+            "lang": "Shell",
+            "source": "curl --request GET \\\n  --url https://console.jumpcloud.com/api/v2/applications/{application_id} \\\n  --header 'x-api-key: REPLACE_KEY_VALUE'"
+          },
+          {
+            "lang": "Python",
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/v2/applications/{application_id}\"\n\nheaders = {\"x-api-key\": \"REPLACE_KEY_VALUE\"}\n\nresponse = requests.request(\"GET\", url, headers=headers)\n\nprint(response.text)"
+          },
+          {
+            "lang": "Powershell",
+            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/v2/applications/{application_id}' -Method GET -Headers $headers"
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "description": "ObjectID of the Application.",
+          "in": "path",
+          "name": "application_id",
+          "required": true,
+          "type": "string"
+        }
+      ]
+    },
     "/applications/{application_id}/associations": {
       "get": {
         "description": "This endpoint will return the _direct_ associations of an Application. A direct association can be a non-homogeneous relationship between 2 different objects, for example Applications and User Groups.\n\n\n#### Sample Request\n```\ncurl -X GET 'https://console.jumpcloud.com/api/v2/applications/{Application_ID}/associations?targets=user_group \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
@@ -8080,6 +8363,99 @@
           }
         ]
       }
+    },
+    "/applications/{application_id}/import/users": {
+      "get": {
+        "description": "Get a list of users to import from an Application IdM service provider.",
+        "operationId": "SCIM_Import",
+        "parameters": [
+          {
+            "default": "",
+            "description": "Filter users by a search term",
+            "in": "query",
+            "name": "filter",
+            "type": "string"
+          },
+          {
+            "default": "",
+            "description": "URL query to merge with the service provider request",
+            "in": "query",
+            "name": "query",
+            "type": "string"
+          },
+          {
+            "default": "",
+            "description": "Sort users by supported fields",
+            "enum": [
+              "firstname",
+              "lastname",
+              "email"
+            ],
+            "in": "query",
+            "name": "sort",
+            "type": "string",
+            "x-ms-enum": {
+              "name": "sort"
+            }
+          },
+          {
+            "default": "asc",
+            "enum": [
+              "asc",
+              "desc"
+            ],
+            "in": "query",
+            "name": "sortOrder",
+            "type": "string",
+            "x-ms-enum": {
+              "name": "sortOrder1"
+            }
+          },
+          {
+            "$ref": "#/parameters/trait:limit:limit"
+          },
+          {
+            "$ref": "#/parameters/trait:skip:skip"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/importUsersResponse"
+            }
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ],
+        "summary": "Get a list of users to import from an Application IdM service provider",
+        "x-codeSamples": [
+          {
+            "lang": "Shell",
+            "source": "curl --request GET \\\n  --url 'https://console.jumpcloud.com/api/v2/applications/{application_id}/import/users?filter=&query=&sort=&sortOrder=asc&limit=10&skip=0' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE'"
+          },
+          {
+            "lang": "Python",
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/v2/applications/{application_id}/import/users\"\n\nquerystring = {\"filter\":\"\",\"query\":\"\",\"sort\":\"\",\"sortOrder\":\"asc\",\"limit\":\"10\",\"skip\":\"0\"}\n\nheaders = {\"x-api-key\": \"REPLACE_KEY_VALUE\"}\n\nresponse = requests.request(\"GET\", url, headers=headers, params=querystring)\n\nprint(response.text)"
+          },
+          {
+            "lang": "Powershell",
+            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/v2/applications/{application_id}/import/users?filter=&query=&sort=&sortOrder=asc&limit=10&skip=0' -Method GET -Headers $headers"
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "description": "ObjectID of the Application.",
+          "in": "path",
+          "name": "application_id",
+          "required": true,
+          "type": "string"
+        }
+      ]
     },
     "/applications/{application_id}/logo": {
       "delete": {
@@ -8521,7 +8897,7 @@
             "name": "creation-source",
             "type": "string",
             "x-ms-enum": {
-              "name": "creation-source"
+              "name": "creation-source2"
             }
           }
         ],
@@ -8691,15 +9067,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request POST \\\n  --url https://console.jumpcloud.com/api/v2/bulk/userstates \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --data '{\"start_date\":\"2019-08-24T14:15:22Z\",\"state\":\"SUSPENDED\",\"user_ids\":[\"string\"]}'"
+            "source": "curl --request POST \\\n  --url https://console.jumpcloud.com/api/v2/bulk/userstates \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --data '{\"start_date\":\"2019-08-24T14:15:22Z\",\"state\":\"ACTIVATED\",\"user_ids\":[\"string\"]}'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/v2/bulk/userstates\"\n\npayload = {\n    \"start_date\": \"2019-08-24T14:15:22Z\",\n    \"state\": \"SUSPENDED\",\n    \"user_ids\": [\"string\"]\n}\nheaders = {\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/v2/bulk/userstates\"\n\npayload = {\n    \"start_date\": \"2019-08-24T14:15:22Z\",\n    \"state\": \"ACTIVATED\",\n    \"user_ids\": [\"string\"]\n}\nheaders = {\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/v2/bulk/userstates' -Method POST -Headers $headers -ContentType 'application/json' -Body '{\"start_date\":\"2019-08-24T14:15:22Z\",\"state\":\"SUSPENDED\",\"user_ids\":[\"string\"]}'"
+            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/v2/bulk/userstates' -Method POST -Headers $headers -ContentType 'application/json' -Body '{\"start_date\":\"2019-08-24T14:15:22Z\",\"state\":\"ACTIVATED\",\"user_ids\":[\"string\"]}'"
           }
         ]
       }
@@ -9778,14 +10154,81 @@
         ]
       }
     },
+    "/gsuites/{gsuite_id}/import/jumpcloudusers": {
+      "get": {
+        "description": "Lists available G Suite users for import, translated to the Jumpcloud user schema.",
+        "operationId": "GsuiteUsersToImportFormated_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/trait:gsuite:maxResults"
+          },
+          {
+            "$ref": "#/parameters/trait:gsuite:orderBy"
+          },
+          {
+            "$ref": "#/parameters/trait:gsuite:pageToken"
+          },
+          {
+            "$ref": "#/parameters/trait:gsuite:query"
+          },
+          {
+            "$ref": "#/parameters/trait:gsuite:sortOrder"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "properties": {
+                "nextPageToken": {
+                  "type": "string"
+                },
+                "users": {
+                  "items": {
+                    "$ref": "#/definitions/User"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ],
+        "summary": "Get a list of users in Jumpcloud format to import from a Google Workspace account.",
+        "x-codeSamples": [
+          {
+            "lang": "Shell",
+            "source": "curl --request GET \\\n  --url 'https://console.jumpcloud.com/api/v2/gsuites/{gsuite_id}/import/jumpcloudusers?maxResults=SOME_INTEGER_VALUE&orderBy=SOME_STRING_VALUE&pageToken=SOME_STRING_VALUE&query=SOME_STRING_VALUE&sortOrder=SOME_STRING_VALUE' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE'"
+          },
+          {
+            "lang": "Python",
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/v2/gsuites/{gsuite_id}/import/jumpcloudusers\"\n\nquerystring = {\"maxResults\":\"SOME_INTEGER_VALUE\",\"orderBy\":\"SOME_STRING_VALUE\",\"pageToken\":\"SOME_STRING_VALUE\",\"query\":\"SOME_STRING_VALUE\",\"sortOrder\":\"SOME_STRING_VALUE\"}\n\nheaders = {\"x-api-key\": \"REPLACE_KEY_VALUE\"}\n\nresponse = requests.request(\"GET\", url, headers=headers, params=querystring)\n\nprint(response.text)"
+          },
+          {
+            "lang": "Powershell",
+            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/v2/gsuites/{gsuite_id}/import/jumpcloudusers?maxResults=SOME_INTEGER_VALUE&orderBy=SOME_STRING_VALUE&pageToken=SOME_STRING_VALUE&query=SOME_STRING_VALUE&sortOrder=SOME_STRING_VALUE' -Method GET -Headers $headers"
+          }
+        ]
+      },
+      "parameters": [
+        {
+          "in": "path",
+          "name": "gsuite_id",
+          "required": true,
+          "type": "string"
+        }
+      ]
+    },
     "/gsuites/{gsuite_id}/import/users": {
       "get": {
         "description": "Lists G Suite users available for import.",
         "operationId": "GSuiteUsersToImport_List",
         "parameters": [
-          {
-            "$ref": "#/parameters/trait:limit:limit"
-          },
           {
             "$ref": "#/parameters/trait:gsuite:maxResults"
           },
@@ -9984,7 +10427,6 @@
       "delete": {
         "description": "This endpoint allows you to delete a translation rule for a specific G Suite instance. These rules specify how JumpCloud attributes translate to [G Suite Admin SDK](https://developers.google.com/admin-sdk/directory/) attributes.\n\n#### Sample Request\n\n```\ncurl -X DELETE https://console.jumpcloud.com/api/v2/gsuites/{gsuite_id}/translationrules/{id} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```",
         "operationId": "GSuiteTranslationRule_Delete",
-        "parameters": [],
         "responses": {
           "204": {
             "description": ""
@@ -10014,7 +10456,6 @@
       "get": {
         "description": "This endpoint returns a specific translation rule for a specific G Suite instance. These rules specify how JumpCloud attributes translate to [G Suite Admin SDK](https://developers.google.com/admin-sdk/directory/) attributes.\n\n###### Sample Request\n\n```\n  curl -X GET https://console.jumpcloud.com/api/v2/gsuites/{gsuite_id}/translationrules/{id} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```",
         "operationId": "GSuiteTranslationRule_Get",
-        "parameters": [],
         "responses": {
           "200": {
             "description": "",
@@ -10657,15 +11098,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request PATCH \\\n  --url https://console.jumpcloud.com/api/v2/ldapservers/{id} \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --header 'x-org-id: SOME_STRING_VALUE' \\\n  --data '{\"id\":\"string\",\"userLockoutAction\":\"disable\",\"userPasswordExpirationAction\":\"disable\"}'"
+            "source": "curl --request PATCH \\\n  --url https://console.jumpcloud.com/api/v2/ldapservers/{id} \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --data '{\"id\":\"string\",\"userLockoutAction\":\"disable\",\"userPasswordExpirationAction\":\"disable\"}'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/v2/ldapservers/{id}\"\n\npayload = {\n    \"id\": \"string\",\n    \"userLockoutAction\": \"disable\",\n    \"userPasswordExpirationAction\": \"disable\"\n}\nheaders = {\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"x-org-id\": \"SOME_STRING_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"PATCH\", url, json=payload, headers=headers)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/v2/ldapservers/{id}\"\n\npayload = {\n    \"id\": \"string\",\n    \"userLockoutAction\": \"disable\",\n    \"userPasswordExpirationAction\": \"disable\"\n}\nheaders = {\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"PATCH\", url, json=payload, headers=headers)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"x-org-id\", \"SOME_STRING_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/v2/ldapservers/{id}' -Method PATCH -Headers $headers -ContentType 'application/json' -Body '{\"id\":\"string\",\"userLockoutAction\":\"disable\",\"userPasswordExpirationAction\":\"disable\"}'"
+            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/v2/ldapservers/{id}' -Method PATCH -Headers $headers -ContentType 'application/json' -Body '{\"id\":\"string\",\"userLockoutAction\":\"disable\",\"userPasswordExpirationAction\":\"disable\"}'"
           }
         ]
       }
@@ -10806,15 +11247,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request GET \\\n  --url 'https://console.jumpcloud.com/api/v2/ldapservers/{ldapserver_id}/sambadomains?fields=&filter=&limit=10&skip=0&sort=' \\\n  --header 'Accept: application/json' \\\n  --header 'Content-Type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE'"
+            "source": "curl --request GET \\\n  --url 'https://console.jumpcloud.com/api/v2/ldapservers/{ldapserver_id}/sambadomains?fields=&filter=&limit=10&skip=0&sort=' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/v2/ldapservers/{ldapserver_id}/sambadomains\"\n\nquerystring = {\"fields\":\"\",\"filter\":\"\",\"limit\":\"10\",\"skip\":\"0\",\"sort\":\"\"}\n\nheaders = {\n    \"Content-Type\": \"application/json\",\n    \"Accept\": \"application/json\",\n    \"x-api-key\": \"REPLACE_KEY_VALUE\"\n}\n\nresponse = requests.request(\"GET\", url, headers=headers, params=querystring)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/v2/ldapservers/{ldapserver_id}/sambadomains\"\n\nquerystring = {\"fields\":\"\",\"filter\":\"\",\"limit\":\"10\",\"skip\":\"0\",\"sort\":\"\"}\n\nheaders = {\"x-api-key\": \"REPLACE_KEY_VALUE\"}\n\nresponse = requests.request(\"GET\", url, headers=headers, params=querystring)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"Content-Type\", \"application/json\")\n$headers.Add(\"Accept\", \"application/json\")\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/v2/ldapservers/{ldapserver_id}/sambadomains?fields=&filter=&limit=10&skip=0&sort=' -Method GET -Headers $headers"
+            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/v2/ldapservers/{ldapserver_id}/sambadomains?fields=&filter=&limit=10&skip=0&sort=' -Method GET -Headers $headers"
           }
         ]
       },
@@ -10856,15 +11297,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request POST \\\n  --url https://console.jumpcloud.com/api/v2/ldapservers/{ldapserver_id}/sambadomains \\\n  --header 'Accept: application/json' \\\n  --header 'Content-Type: application/json' \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --data '{\"name\":\"string\",\"sid\":\"string\"}'"
+            "source": "curl --request POST \\\n  --url https://console.jumpcloud.com/api/v2/ldapservers/{ldapserver_id}/sambadomains \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --data '{\"name\":\"string\",\"sid\":\"string\"}'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/v2/ldapservers/{ldapserver_id}/sambadomains\"\n\npayload = {\n    \"name\": \"string\",\n    \"sid\": \"string\"\n}\nheaders = {\n    \"Content-Type\": \"application/json\",\n    \"Accept\": \"application/json\",\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/v2/ldapservers/{ldapserver_id}/sambadomains\"\n\npayload = {\n    \"name\": \"string\",\n    \"sid\": \"string\"\n}\nheaders = {\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"Content-Type\", \"application/json\")\n$headers.Add(\"Accept\", \"application/json\")\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/v2/ldapservers/{ldapserver_id}/sambadomains' -Method POST -Headers $headers -ContentType 'application/json' -Body '{\"name\":\"string\",\"sid\":\"string\"}'"
+            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/v2/ldapservers/{ldapserver_id}/sambadomains' -Method POST -Headers $headers -ContentType 'application/json' -Body '{\"name\":\"string\",\"sid\":\"string\"}'"
           }
         ]
       }
@@ -10894,15 +11335,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request DELETE \\\n  --url https://console.jumpcloud.com/api/v2/ldapservers/{ldapserver_id}/sambadomains/{id} \\\n  --header 'Accept: application/json' \\\n  --header 'Content-Type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE'"
+            "source": "curl --request DELETE \\\n  --url https://console.jumpcloud.com/api/v2/ldapservers/{ldapserver_id}/sambadomains/{id} \\\n  --header 'x-api-key: REPLACE_KEY_VALUE'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/v2/ldapservers/{ldapserver_id}/sambadomains/{id}\"\n\nheaders = {\n    \"Content-Type\": \"application/json\",\n    \"Accept\": \"application/json\",\n    \"x-api-key\": \"REPLACE_KEY_VALUE\"\n}\n\nresponse = requests.request(\"DELETE\", url, headers=headers)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/v2/ldapservers/{ldapserver_id}/sambadomains/{id}\"\n\nheaders = {\"x-api-key\": \"REPLACE_KEY_VALUE\"}\n\nresponse = requests.request(\"DELETE\", url, headers=headers)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"Content-Type\", \"application/json\")\n$headers.Add(\"Accept\", \"application/json\")\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/v2/ldapservers/{ldapserver_id}/sambadomains/{id}' -Method DELETE -Headers $headers"
+            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/v2/ldapservers/{ldapserver_id}/sambadomains/{id}' -Method DELETE -Headers $headers"
           }
         ]
       },
@@ -10927,15 +11368,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request GET \\\n  --url https://console.jumpcloud.com/api/v2/ldapservers/{ldapserver_id}/sambadomains/{id} \\\n  --header 'Accept: application/json' \\\n  --header 'Content-Type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE'"
+            "source": "curl --request GET \\\n  --url https://console.jumpcloud.com/api/v2/ldapservers/{ldapserver_id}/sambadomains/{id} \\\n  --header 'x-api-key: REPLACE_KEY_VALUE'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/v2/ldapservers/{ldapserver_id}/sambadomains/{id}\"\n\nheaders = {\n    \"Content-Type\": \"application/json\",\n    \"Accept\": \"application/json\",\n    \"x-api-key\": \"REPLACE_KEY_VALUE\"\n}\n\nresponse = requests.request(\"GET\", url, headers=headers)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/v2/ldapservers/{ldapserver_id}/sambadomains/{id}\"\n\nheaders = {\"x-api-key\": \"REPLACE_KEY_VALUE\"}\n\nresponse = requests.request(\"GET\", url, headers=headers)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"Content-Type\", \"application/json\")\n$headers.Add(\"Accept\", \"application/json\")\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/v2/ldapservers/{ldapserver_id}/sambadomains/{id}' -Method GET -Headers $headers"
+            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/v2/ldapservers/{ldapserver_id}/sambadomains/{id}' -Method GET -Headers $headers"
           }
         ]
       },
@@ -10984,15 +11425,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request PUT \\\n  --url https://console.jumpcloud.com/api/v2/ldapservers/{ldapserver_id}/sambadomains/{id} \\\n  --header 'Accept: application/json' \\\n  --header 'Content-Type: application/json' \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --data '{\"name\":\"string\",\"sid\":\"string\"}'"
+            "source": "curl --request PUT \\\n  --url https://console.jumpcloud.com/api/v2/ldapservers/{ldapserver_id}/sambadomains/{id} \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --data '{\"name\":\"string\",\"sid\":\"string\"}'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/v2/ldapservers/{ldapserver_id}/sambadomains/{id}\"\n\npayload = {\n    \"name\": \"string\",\n    \"sid\": \"string\"\n}\nheaders = {\n    \"Content-Type\": \"application/json\",\n    \"Accept\": \"application/json\",\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"PUT\", url, json=payload, headers=headers)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/v2/ldapservers/{ldapserver_id}/sambadomains/{id}\"\n\npayload = {\n    \"name\": \"string\",\n    \"sid\": \"string\"\n}\nheaders = {\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"PUT\", url, json=payload, headers=headers)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"Content-Type\", \"application/json\")\n$headers.Add(\"Accept\", \"application/json\")\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/v2/ldapservers/{ldapserver_id}/sambadomains/{id}' -Method PUT -Headers $headers -ContentType 'application/json' -Body '{\"name\":\"string\",\"sid\":\"string\"}'"
+            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/v2/ldapservers/{ldapserver_id}/sambadomains/{id}' -Method PUT -Headers $headers -ContentType 'application/json' -Body '{\"name\":\"string\",\"sid\":\"string\"}'"
           }
         ]
       }
@@ -11528,7 +11969,6 @@
       "delete": {
         "description": "This endpoint allows you to delete a translation rule for a specific Office 365 instance. These rules specify how JumpCloud attributes translate to [Microsoft Graph](https://developer.microsoft.com/en-us/graph) attributes.\n\n#### Sample Request\n\n```\ncurl -X DELETE https://console.jumpcloud.com/api/v2/office365s/{office365_id}/translationrules/{id} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```",
         "operationId": "Office365TranslationRule_Delete",
-        "parameters": [],
         "responses": {
           "204": {
             "description": ""
@@ -11558,7 +11998,6 @@
       "get": {
         "description": "This endpoint returns a specific translation rule for a specific Office 365 instance. These rules specify how JumpCloud attributes translate to [Microsoft Graph](https://developer.microsoft.com/en-us/graph) attributes.\n\n###### Sample Request\n\n```\n  curl -X GET https://console.jumpcloud.com/api/v2/office365s/{office365_id}/translationrules/{id} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```",
         "operationId": "Office365TranslationRule_Get",
-        "parameters": [],
         "responses": {
           "200": {
             "description": "",
@@ -13688,7 +14127,7 @@
     },
     "/softwareapps": {
       "get": {
-        "description": "This endpoint allows you to get all configured Software Applications that will be managed by JumpCloud on associated JumpCloud systems.\n\n#### Sample Request\n```\n$ curl -X GET https://console.jumpcloud.com/api/v2/softwareapps \\\n-H 'Accept: application/json' \\\n-H 'Content-Type: application/json' \\\n-H 'x-api-key: {API_KEY}' \\\n```",
+        "description": "This endpoint allows you to get all configured Software Applications that will be managed by JumpCloud on associated JumpCloud systems.\nThe optional isConfigEnabled and appConfiguration apple_vpp attributes are not included in the response.\n\n#### Sample Request\n```\n$ curl -X GET https://console.jumpcloud.com/api/v2/softwareapps \\\n-H 'Accept: application/json' \\\n-H 'Content-Type: application/json' \\\n-H 'x-api-key: {API_KEY}' \\\n```",
         "operationId": "SoftwareApp_List",
         "parameters": [
           {
@@ -13720,7 +14159,7 @@
             "x-api-key": []
           }
         ],
-        "summary": "Get all configured Software Applications",
+        "summary": "Get all configured Software Applications.",
         "x-codeSamples": [
           {
             "lang": "Shell",
@@ -13737,7 +14176,7 @@
         ]
       },
       "post": {
-        "description": "This endpoint allows you to create a Software Application that will be managed by JumpCloud on associated JumpCloud systems.\n\n#### Sample Request\n```\n$ curl -X POST https://console.jumpcloud.com/api/v2/softwareapps \\\n-H 'Accept: application/json' \\\n-H 'Content-Type: application/json' \\\n-H 'x-api-key: {API_KEY}' \\\n-d '{\n  \"displayName\": \"Adobe Reader\",\n  \"settings\": [{\"packageId\": \"adobereader\"}]\n}'\n```",
+        "description": "This endpoint allows you to create a Software Application that will be managed by JumpCloud on associated JumpCloud systems.\nThe optional isConfigEnabled and appConfiguration apple_vpp attributes are not included in the response.\n\n#### Sample Request\n```\n$ curl -X POST https://console.jumpcloud.com/api/v2/softwareapps \\\n-H 'Accept: application/json' \\\n-H 'Content-Type: application/json' \\\n-H 'x-api-key: {API_KEY}' \\\n-d '{\n  \"displayName\": \"Adobe Reader\",\n  \"settings\": [{\"packageId\": \"adobereader\"}]\n}'\n```",
         "operationId": "SoftwareApp_Create",
         "parameters": [
           {
@@ -13761,7 +14200,7 @@
             "x-api-key": []
           }
         ],
-        "summary": "Create a Software Application that will be managed by JumpCloud",
+        "summary": "Create a Software Application that will be managed by JumpCloud.",
         "x-codeSamples": [
           {
             "lang": "Shell",
@@ -13810,7 +14249,7 @@
         ]
       },
       "get": {
-        "description": "Retrieves a Software Application.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/softwareapps/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
+        "description": "Retrieves a Software Application.\nThe optional isConfigEnabled and appConfiguration apple_vpp attributes are populated in this response.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/softwareapps/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "operationId": "SoftwareApp_Get",
         "parameters": [],
         "responses": {
@@ -13826,7 +14265,7 @@
             "x-api-key": []
           }
         ],
-        "summary": "Retrieve a configured Software Application",
+        "summary": "Retrieve a configured Software Application.",
         "x-codeSamples": [
           {
             "lang": "Shell",
@@ -13851,7 +14290,7 @@
         }
       ],
       "put": {
-        "description": "This endpoint updates a specific Software Application configuration for the organization.\ndisplayName can be changed alone if no settings are provided.\nIf a setting is provided, it should include all its information since this endpoint will update all the settings' fields.\n\n#### Sample Request - displayName only\n```\n curl -X PUT https://console.jumpcloud.com/api/v2/softwareapps/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"displayName\": \"My Software App\"\n  }'\n```\n\n#### Sample Request - all attributes\n```\n curl -X PUT https://console.jumpcloud.com/api/v2/softwareapps/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"displayName\": \"My Software App\",\n    \"settings\": [\n      {\n        \"packageId\": \"123456\",\n        \"autoUpdate\": false,\n        \"allowUpdateDelay\": false,\n        \"packageManager\": \"APPLE_VPP\",\n        \"locationObjectId\": \"123456789012123456789012\",\n        \"location\": \"123456\",\n        \"desiredState\": \"Install\",\n        \"appleVpp\": {\n          \"appConfiguration\": \"<?xml version=\\\"1.0\\\" encoding=\\\"UTF-8\\\"?><!DOCTYPE plist PUBLIC \\\"-//Apple//DTD PLIST 1.0//EN\\\" \\\"http://www.apple.com/DTDs/PropertyList-1.0.dtd\\\"><plist version=\\\"1.0\\\"><dict><key>MyKey</key><string>My String</string></dict></plist>\",\n          \"assignedLicenses\": 20,\n          \"availableLicenses\": 10,\n          \"details\": {},\n          \"isConfigEnabled\": true,\n          \"supportedDeviceFamilies\": [\n            \"IPAD\",\n            \"MAC\"\n          ],\n          \"totalLicenses\": 30\n        },\n        \"packageSubtitle\": \"My package subtitle\",\n        \"packageVersion\": \"1.2.3\",\n        \"packageKind\": \"software-package\",\n        \"assetKind\": \"software\",\n        \"assetSha256Size\": 256,\n        \"assetSha256Strings\": [\n          \"a123b123c123d123\"\n        ],\n        \"description\": \"My app description\"\n      }\n    ]\n  }'\n```",
+        "description": "This endpoint updates a specific Software Application configuration for the organization.\ndisplayName can be changed alone if no settings are provided.\nIf a setting is provided, it should include all its information since this endpoint will update all the settings' fields.\nThe optional isConfigEnabled and appConfiguration apple_vpp attributes are not included in the response.\n\n#### Sample Request - displayName only\n```\n curl -X PUT https://console.jumpcloud.com/api/v2/softwareapps/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"displayName\": \"My Software App\"\n  }'\n```\n\n#### Sample Request - all attributes\n```\n curl -X PUT https://console.jumpcloud.com/api/v2/softwareapps/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"displayName\": \"My Software App\",\n    \"settings\": [\n      {\n        \"packageId\": \"123456\",\n        \"autoUpdate\": false,\n        \"allowUpdateDelay\": false,\n        \"packageManager\": \"APPLE_VPP\",\n        \"locationObjectId\": \"123456789012123456789012\",\n        \"location\": \"123456\",\n        \"desiredState\": \"Install\",\n        \"appleVpp\": {\n          \"appConfiguration\": \"<?xml version=\\\"1.0\\\" encoding=\\\"UTF-8\\\"?><!DOCTYPE plist PUBLIC \\\"-//Apple//DTD PLIST 1.0//EN\\\" \\\"http://www.apple.com/DTDs/PropertyList-1.0.dtd\\\"><plist version=\\\"1.0\\\"><dict><key>MyKey</key><string>My String</string></dict></plist>\",\n          \"assignedLicenses\": 20,\n          \"availableLicenses\": 10,\n          \"details\": {},\n          \"isConfigEnabled\": true,\n          \"supportedDeviceFamilies\": [\n            \"IPAD\",\n            \"MAC\"\n          ],\n          \"totalLicenses\": 30\n        },\n        \"packageSubtitle\": \"My package subtitle\",\n        \"packageVersion\": \"1.2.3\",\n        \"packageKind\": \"software-package\",\n        \"assetKind\": \"software\",\n        \"assetSha256Size\": 256,\n        \"assetSha256Strings\": [\n          \"a123b123c123d123\"\n        ],\n        \"description\": \"My app description\"\n      }\n    ]\n  }'\n```",
         "operationId": "SoftwareApp_Set",
         "parameters": [
           {
@@ -13916,7 +14355,7 @@
             "x-api-key": []
           }
         ],
-        "summary": "Update a Software Application Configuration",
+        "summary": "Update a Software Application Configuration.",
         "x-codeSamples": [
           {
             "lang": "Shell",
@@ -14248,7 +14687,6 @@
       "get": {
         "description": "This endpoint returns all pricing & packaging subscriptions.\n\n##### Sample Request\n\n```\n curl -X GET  https://console.jumpcloud.com/api/v2/subscriptions \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```",
         "operationId": "Subscription_Get",
-        "parameters": [],
         "responses": {
           "200": {
             "description": "OK",
@@ -18295,7 +18733,7 @@
     },
     "/usergroups": {
       "get": {
-        "description": "This endpoint returns all User Groups.\n\nAvailable filter fields:\n  - `name`\n  - `disabled`\n  - `type`\n  - `suggestionCounts.add`\n  - `suggestionCounts.remove`\n  - `suggestionCounts.total`\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/usergroups \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
+        "description": "This endpoint returns all User Groups.\n\nAvailable filter fields:\n  - `name`\n  - `disabled`\n  - `type`\n  - `suggestionCounts.add`\n  - `suggestionCounts.remove`\n  - `suggestionCounts.total`\n  - `attributes.sudo.enabled`\n  - `attributes.sudo.withoutPassword`\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/usergroups \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "operationId": "UserGroup_List",
         "parameters": [
           {

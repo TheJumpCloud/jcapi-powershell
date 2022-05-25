@@ -132,9 +132,9 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [CmdletBinding(DefaultParameterSetName='Create', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter()]
-    [ArgumentCompleter([JumpCloud.SDK.V2.Support.CreationSource])]
+    [ArgumentCompleter([JumpCloud.SDK.V2.Support.CreationSource2])]
     [JumpCloud.SDK.V2.Category('Header')]
-    [JumpCloud.SDK.V2.Support.CreationSource]
+    [JumpCloud.SDK.V2.Support.CreationSource2]
     # Defines the creation-source header for gapps, o365 and workdays requests.
     # If the header isn't sent, the default value is `jumpcloud:bulk`, if you send the header with a malformed value you receive a 400 error.
     ${CreationSource},

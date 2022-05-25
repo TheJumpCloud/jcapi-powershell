@@ -34,7 +34,8 @@ curl -X POST https://console.jumpcloud.com/api/commands/ \\
 New-JcSdkCommand -Command <String> -CommandType <String> -Name <String> [-CommandRunners <String[]>]
  [-Files <String[]>] [-LaunchType <String>] [-ListensTo <String>] [-Organization <String>]
  [-Schedule <String>] [-ScheduleRepeatType <String>] [-Shell <String>] [-Sudo] [-Systems <String[]>]
- [-Timeout <String>] [-Trigger <String>] [-User <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-Timeout <String>] [-TimeToLiveSeconds <Int32>] [-Trigger <String>] [-User <String>] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### Create
@@ -308,6 +309,21 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -TimeToLiveSeconds
+Time in seconds a command can wait in the queue to be run before timing out
+
+```yaml
+Type: System.Int32
+Parameter Sets: CreateExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Trigger
 The name of the command trigger.
 
@@ -404,6 +420,7 @@ BODY <ICommand>: Command
   - `[Shell <String>]`: The shell used to run the command.
   - `[Sudo <Boolean?>]`: 
   - `[Systems <String[]>]`: An array of system IDs to run the command on. Not available if you are using Groups.
+  - `[TimeToLiveSeconds <Int32?>]`: Time in seconds a command can wait in the queue to be run before timing out
   - `[Timeout <String>]`: The time in seconds to allow the command to run for.
   - `[Trigger <String>]`: The name of the command trigger.
   - `[User <String>]`: The ID of the system user to run the command as. This field is required when creating a command with a commandType of "mac" or "linux".

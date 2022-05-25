@@ -153,6 +153,9 @@ Note: currently only one enrollment profile is supported.
   -H 'x-api-key: {API_KEY}'
 ```
 
+### [Get-JcSdkApplication](Get-JcSdkApplication.md)
+The endpoint retrieves an Application.
+
 ### [Get-JcSdkApplicationAssociation](Get-JcSdkApplicationAssociation.md)
 This endpoint will return the _direct_ associations of an Application.
 A direct association can be a non-homogeneous relationship between 2 different objects, for example Applications and User Groups.
@@ -436,6 +439,9 @@ See `/members` and `/associations` endpoints to manage those collections.
 
 ### [Get-JcSdkGSuiteUsersToImport](Get-JcSdkGSuiteUsersToImport.md)
 Lists G Suite users available for import.
+
+### [Get-JcSdkGsuiteUsersToImportFormated](Get-JcSdkGsuiteUsersToImportFormated.md)
+Lists available G Suite users for import, translated to the Jumpcloud user schema.
 
 ### [Get-JcSdkIPList](Get-JcSdkIPList.md)
 Return a specific IP list.
@@ -881,6 +887,7 @@ curl -X GET https://console.jumpcloud.com/api/v2/radiusservers/{RADIUS_ID}/userg
 
 ### [Get-JcSdkSoftwareApp](Get-JcSdkSoftwareApp.md)
 Retrieves a Software Application.
+The optional isConfigEnabled and appConfiguration apple_vpp attributes are populated in this response.
 
 #### Sample Request
 ```
@@ -1892,6 +1899,9 @@ curl -X POST https://console.jumpcloud.com/api/v2/workdays/{WorkDayID}/auth \\
 
 ```
 
+### [Import-JcSdkScim](Import-JcSdkScim.md)
+Get a list of users to import from an Application IdM service provider.
+
 ### [Import-JcSdkWorkday](Import-JcSdkWorkday.md)
 The endpoint allows you to create a Workday Import request.
 
@@ -2211,6 +2221,7 @@ You must provide either `role` or `roleName`.
 
 ### [New-JcSdkSoftwareApp](New-JcSdkSoftwareApp.md)
 This endpoint allows you to create a Software Application that will be managed by JumpCloud on associated JumpCloud systems.
+The optional isConfigEnabled and appConfiguration apple_vpp attributes are not included in the response.
 
 #### Sample Request
 ```
@@ -2811,6 +2822,7 @@ curl -X POST https://console.jumpcloud.com/api/v2/radiusservers/{RADIUS_ID}/asso
 This endpoint updates a specific Software Application configuration for the organization.
 displayName can be changed alone if no settings are provided.
 If a setting is provided, it should include all its information since this endpoint will update all the settings' fields.
+The optional isConfigEnabled and appConfiguration apple_vpp attributes are not included in the response.
 
 #### Sample Request - displayName only
 ```
