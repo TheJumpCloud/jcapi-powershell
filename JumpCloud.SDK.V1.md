@@ -15,13 +15,21 @@ Release Date: May 25, 2022
 <details>
 <summary>Functions Added</summary>
 
-No changes
+* Initialize-JcSdkUserState.ps1
+* Reset-JcSdkAdministratorUserActivation.ps1
+* Reset-JcSdkAdministratorUserTotp.ps1
+* Search-JcSdkCommand.ps1
+* Set-JcSdkAdministratorUser.ps1
+* Sync-JcSdkUserMfa.ps1
+
 </details>
 
 <details>
 <summary>Functions Modified</summary>
 
-No changes
+* New-JcSdkCommand.ps1
+* Set-JcSdkCommand.ps1
+
 </details>
 
 <details>

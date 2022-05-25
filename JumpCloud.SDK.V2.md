@@ -15,13 +15,23 @@ Release Date: May 25, 2022
 <details>
 <summary>Functions Added</summary>
 
-No changes
+* Get-JcSdkApplication.ps1
+* Get-JcSdkGsuiteUsersToImportFormated.ps1
+* Import-JcSdkScim.ps1
+
 </details>
 
 <details>
 <summary>Functions Modified</summary>
 
-No changes
+* Get-JcSdkGSuiteUsersToImport.ps1
+* Get-JcSdkSoftwareApp.ps1
+* New-JcSdkBulkUser.ps1
+* New-JcSdkBulkUserState.ps1
+* New-JcSdkOffice365TranslationRule.ps1
+* New-JcSdkSoftwareApp.ps1
+* Set-JcSdkSoftwareApp.ps1
+
 </details>
 
 <details>
