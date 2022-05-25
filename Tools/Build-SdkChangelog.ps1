@@ -5,15 +5,17 @@ param (
 $SdkChangelogFilePath = "./$SDKName.md"
 Import-Module ($PSScriptRoot + '/New-SdkChangelog.ps1')
 # For authorized requests add header & OAuth Token:
-# $headers = @{
-#     "Authorization" = "<OAuth Token>"
-# }
-$release = Invoke-WebRequest -Uri 'https://api.github.com/repos/TheJumpCloud/jcapi-powershell/releases'  -Method 'GET' # -Headers $Headers
+$headers = @{
+    "Authorization" = "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"
+}
+$release = Invoke-WebRequest -Uri 'https://api.github.com/repos/TheJumpCloud/jcapi-powershell/releases'  -Method 'GET'  -Headers $Headers
 # Get latest release by sorting last published
 $releaseVersions = ($release | ConvertFrom-Json -Depth 4) | Where-Object { $_.name -match $SDKName } | Select-Object name, target_commitish, published_at, tag_name | Sort-Object -Property published_at -Descending
 # Latest release commit, getting the first value since it is the most recent
 $LatestCommit = $releaseVersions[0].target_commitish
-Write-Host "Latest Release Commit: $LatestCommit"
+$LatestVersion = $releaseVersions[0].name
+Write-Host "Last Release Commit: $LatestCommit"
+Write-Host "Last Release Name: $LatestVersion"
 
 # For each diff type, replace string with '* ' to turn it into a markdown list; we only care about reporting functions in the /custom/generated directory
 $diffAdded = (git diff $LatestCommit HEAD --diff-filter=A --name-only ./SDKs/PowerShell/$SDKName/custom/generated/ | Out-String).replace("SDKs/PowerShell/$SDKName/custom/generated/", '* ')
@@ -21,12 +23,15 @@ $diffModified = (git diff $LatestCommit HEAD --diff-filter=M --name-only ./SDKs/
 $diffDeleted = (git diff $LatestCommit HEAD --diff-filter=D --name-only ./SDKs/PowerShell/$SDKName/custom/generated/ | Out-String).replace("SDKs/PowerShell/$SDKName/custom/generated/", '* ')
 # If nothing is returned, return no changes
 if (!$diffAdded) {
+    Write-Host "No new functions were generated"
     $diffAdded = 'No changes'
 }
 if (!$diffModified) {
+    Write-Host "No functions were modified"
     $diffModified = 'No changes'
 }
 if (!$diffDeleted) {
+    Write-Host "No existing functions were deleted"
     $diffDeleted = 'No changes'
 }
 # Get Latest Version from Changelog
@@ -51,12 +56,12 @@ $NewSdkChangelogRecord = New-SdkChangelog -LatestVersion:($LatestPsd1Version) -R
 
 # Check if we need to post a new changelog block or update the diffs
 if ($SdkChangelog -notmatch "$LatestPsd1Version") {
-    # Write-Host "Latest Release Version: $LatestPsd1Version differs from changlog version $LatestVersionInChangelog"
+    Write-Host "Latest Release Version: $LatestPsd1Version differs from changlog version $LatestVersionInChangelog"
     # Write-Host "Creating new changelog verion header"
     ($NewSdkChangelogRecord + ($SdkChangelog | Out-String)).Trim() | Set-Content -Path $SdkChangelogFilePath -Force
 }
 elseif ($SdkChangelog -match "$LatestPsd1Version") {
-    # Write-Host "Updating Diffs"
+    Write-Host "Updating Diffs"
     # Get the current version content up to the last version content
     $LastChangeRegex = [regex]"## $LatestPsd1Version[\s\S]*?(?=## $sdkname-)"
     $ChangeLogContent = Select-String -InputObject $SdkChangelog -Pattern $LastChangeRegex
@@ -83,9 +88,15 @@ $diffDeleted
 </details>
 
 "
-    # Update the Functions Modifed
+    # Update the Generated Changes Block:
     $ReplacedContent = $ContentToEdit -replace ("#### Generated Changes:[\s\S]*", $UpdatedDiffText)
-    # Update the Release Date
+    $SdkChangelog -replace ($LastChangeRegex, $ReplacedContent) | Set-Content -Path $SdkChangelogFilePath -NoNewline -Force
+    # Finally reaplce the "Release Date" date if there is a change required:
+    $SdkChangelog = Get-Content -Path $SdkChangelogFilePath -Raw
+    $LastChangeRegex = [regex]"## $LatestPsd1Version[\s\S]*?(?=## $sdkname-)"
+    $ChangeLogContent = Select-String -InputObject $SdkChangelog -Pattern $LastChangeRegex
+    $ContentToEdit = $ChangeLogContent.Matches.Value
     $ReplacedContent = $ContentToEdit -replace ("Release Date:.*", "Release Date: $(Get-Date -UFormat:('%B %d, %Y'))")
+    # Update the Release Date
     $SdkChangelog -replace ($LastChangeRegex, $ReplacedContent) | Set-Content -Path $SdkChangelogFilePath -NoNewline -Force
 }
