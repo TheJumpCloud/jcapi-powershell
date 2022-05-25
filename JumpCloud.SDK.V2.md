@@ -1,5 +1,5 @@
 ## JumpCloud.SDK.V2-0.0.33
-Release Date: May 24, 2022
+Release Date: May 25, 2022
 #### RELEASE NOTES
 ```
 {{Fill in the Release Notes}}
