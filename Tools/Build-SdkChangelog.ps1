@@ -5,10 +5,10 @@ param (
 $SdkChangelogFilePath = "./$SDKName.md"
 Import-Module ($PSScriptRoot + '/New-SdkChangelog.ps1')
 # For authorized requests add header & OAuth Token:
-$headers = @{
-    "Authorization" = "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"
-}
-$release = Invoke-WebRequest -Uri 'https://api.github.com/repos/TheJumpCloud/jcapi-powershell/releases'  -Method 'GET'  -Headers $Headers
+# $headers = @{
+#     "Authorization" = ""
+# }
+$release = Invoke-WebRequest -Uri 'https://api.github.com/repos/TheJumpCloud/jcapi-powershell/releases'  -Method 'GET'#  -Headers $Headers
 # Get latest release by sorting last published
 $releaseVersions = ($release | ConvertFrom-Json -Depth 4) | Where-Object { $_.name -match $SDKName } | Select-Object name, target_commitish, published_at, tag_name | Sort-Object -Property published_at -Descending
 # Latest release commit, getting the first value since it is the most recent
