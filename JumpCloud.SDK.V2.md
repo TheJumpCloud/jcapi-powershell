@@ -1,3 +1,42 @@
+## JumpCloud.SDK.V2-0.0.33
+Release Date: May 31, 2022
+#### RELEASE NOTES
+```
+This release includes several new functions for the V2 SDK, see "Generated Changes" for a complete list of functions added/modified.
+```
+#### BUG FIXES:
+
+In previous versions of the SDK, the `Get-JcSdkGsuiteUsersToImport` function would not return the `nextPageToken` which was required to paginate to the next page of Google Workspace users, this release addressed the issue and the function should now return the page token.
+#### Generated Changes:
+
+<details>
+<summary>Functions Added</summary>
+
+* Get-JcSdkApplication.ps1
+* Get-JcSdkGsuiteUsersToImportFormated.ps1
+* Import-JcSdkScim.ps1
+
+</details>
+
+<details>
+<summary>Functions Modified</summary>
+
+* Get-JcSdkGSuiteUsersToImport.ps1
+* Get-JcSdkSoftwareApp.ps1
+* New-JcSdkBulkUser.ps1
+* New-JcSdkBulkUserState.ps1
+* New-JcSdkOffice365TranslationRule.ps1
+* New-JcSdkSoftwareApp.ps1
+* Set-JcSdkSoftwareApp.ps1
+
+</details>
+
+<details>
+<summary>Functions Removed</summary>
+
+No changes
+</details>
+
 ## JumpCloud.SDK.V2-0.0.32
 Release Date: May 02, 2022
 #### RELEASE NOTES

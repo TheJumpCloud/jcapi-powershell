@@ -9,6 +9,7 @@ schema: 2.0.0
 
 ## SYNOPSIS
 Retrieves a Software Application.
+The optional isConfigEnabled and appConfiguration apple_vpp attributes are populated in this response.
 
 #### Sample Request
 ```
@@ -37,6 +38,7 @@ Get-JcSdkSoftwareApp -InputObject <IJumpCloudApiIdentity> [<CommonParameters>]
 
 ## DESCRIPTION
 Retrieves a Software Application.
+The optional isConfigEnabled and appConfiguration apple_vpp attributes are populated in this response.
 
 #### Sample Request
 ```

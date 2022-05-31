@@ -1,3 +1,37 @@
+## JumpCloud.SDK.V1-0.0.29
+Release Date: May 31, 2022
+#### RELEASE NOTES
+```
+This release includes several new functions for the V1 SDK, see "Generated Changes" for a complete list of functions added/modified.
+```
+#### Generated Changes:
+
+<details>
+<summary>Functions Added</summary>
+
+* Initialize-JcSdkUserState.ps1
+* Reset-JcSdkAdministratorUserActivation.ps1
+* Reset-JcSdkAdministratorUserTotp.ps1
+* Search-JcSdkCommand.ps1
+* Set-JcSdkAdministratorUser.ps1
+* Sync-JcSdkUserMfa.ps1
+
+</details>
+
+<details>
+<summary>Functions Modified</summary>
+
+* New-JcSdkCommand.ps1
+* Set-JcSdkCommand.ps1
+
+</details>
+
+<details>
+<summary>Functions Removed</summary>
+
+No changes
+</details>
+
 ## JumpCloud.SDK.V1-0.0.28
 Release Date: May 02, 2022
 #### RELEASE NOTES

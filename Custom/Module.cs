@@ -68,6 +68,7 @@ namespace ModuleNameSpace
             // Adding elements to List
             mtpUrls.Add("/api/search/organizations");
             mtpUrls.Add("/api/organizations");
+            mtpUrls.Add("/api/users");
             mtpUrls.Add("/api/v2/organizations");
             mtpUrls.Add("/api/v2/administrators");
             mtpUrls.Add("/api/v2/providers");

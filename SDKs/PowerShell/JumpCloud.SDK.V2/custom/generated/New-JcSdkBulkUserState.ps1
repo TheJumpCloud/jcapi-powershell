@@ -47,6 +47,7 @@ To create the parameters described below, construct a hash table containing the 
 
 BODY <IBulkScheduledStatechangeCreate>:
   StartDate <DateTime>: Date and time that scheduled action should occur
+  State <String>: The state to move the user(s) to
   UserIds <String[]>: Array of system user ids to schedule for a state change
 .Link
 https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/New-JcSdkBulkUserState.md
@@ -68,6 +69,12 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [System.DateTime]
     # Date and time that scheduled action should occur
     ${StartDate},
+
+    [Parameter(ParameterSetName='CreateExpanded', Mandatory)]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [System.String]
+    # The state to move the user(s) to
+    ${State},
 
     [Parameter(ParameterSetName='CreateExpanded', Mandatory)]
     [AllowEmptyCollection()]

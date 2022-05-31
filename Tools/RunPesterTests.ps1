@@ -247,6 +247,12 @@ If ($moduleName -eq 'JumpCloud.SDK.V1' -or $moduleName -eq 'JumpCloud.SDK.V2' -a
         Firstname = 'AdminFirst'
         Lastname  = 'AdminLast'
     }
+    # Get admins on an org (Required to test V1 MTP methods)
+    $headers = @{
+        "x-api-key" = $env:JCApiKey
+        "x-org-id"  = $env:JCOrgId
+    }
+    $global:PesterTestAdministratorUsers = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/users?skip=0&limit=20' -Method GET -Headers $headers
 }
 #endregion Define Objects
 
@@ -299,7 +305,7 @@ If (!(Test-Path -Path:($PesterTestResultFolder))) { New-Item -Path:($PesterTestR
 $PesterTestResultPath = Join-Path $PesterTestResultFolder "$moduleName-TestResults.xml"
 $PesterTestCoveragePath = Join-Path $PesterTestResultFolder "$moduleName-TestCoverage.xml"
 # Print Test Coverage & Pester 5 Compatibility:
-. "$PSScriptRoot/../../../Tools/ValidateTests.ps1" -Path $testFolder
+. "$PSScriptRoot/../../../Tools/ValidateTests.ps1" -SDKName $moduleName
 # Write-Host "$($PesterTestFiles.FullName)"
 $configuration = [PesterConfiguration]::Default
 $configuration.Run.Path = $($PesterTestFiles.FullName)

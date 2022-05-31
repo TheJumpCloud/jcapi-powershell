@@ -100,12 +100,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V2.Category('Runtime')]
     [System.Management.Automation.SwitchParameter]
     # Use the default credentials for the proxy
-    ${ProxyUseDefaultCredentials},
-
-    [Parameter(DontShow)]
-    [System.Boolean]
-    # Set to $true to return all results. This will overwrite any skip and limit parameter.
-    $Paginate = $true
+    ${ProxyUseDefaultCredentials}
     )
     Begin
     {
@@ -124,57 +119,22 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        If ($Paginate -and $PSCmdlet.ParameterSetName -in ('List'))
+        $Result = (JumpCloud.SDK.V2.internal\Get-JcSdkInternalGSuiteUsersToImport @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
+        Write-Debug ('HttpRequest: ' + $JCHttpRequest);
+        Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
+        Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);
+        # Write-Debug ('HttpResponseContent: ' + $JCHttpResponseContent.Result);
+        $Result = If ('Results' -in $Result.PSObject.Properties.Name)
         {
-            $PSBoundParameters.Remove('Paginate') | Out-Null
-            If ([System.String]::IsNullOrEmpty($PSBoundParameters.Limit))
-            {
-                $PSBoundParameters.Add('Limit', 100)
-            }
-            Do
-            {
-                Write-Debug ("Limit: $($PSBoundParameters.Limit); ");
-                $Result = (JumpCloud.SDK.V2.internal\Get-JcSdkInternalGSuiteUsersToImport @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
-                Write-Debug ('HttpRequest: ' + $JCHttpRequest);
-                Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
-                Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);
-                # Write-Debug ('HttpResponseContent: ' + $JCHttpResponseContent.Result);
-                $Result = If ('Results' -in $Result.PSObject.Properties.Name)
-                {
-                    $Result.results
-                }
-                Else
-                {
-                    $Result
-                }
-                If (-not [System.String]::IsNullOrEmpty($Result))
-                {
-                    $ResultCount = ($Result | Measure-Object).Count;
-                    $Results += $Result;
-                }
-            }
-            While ($ResultCount -eq $PSBoundParameters.Limit -and -not [System.String]::IsNullOrEmpty($Result))
+            $Result.results
         }
         Else
         {
-            $PSBoundParameters.Remove('Paginate') | Out-Null
-            $Result = (JumpCloud.SDK.V2.internal\Get-JcSdkInternalGSuiteUsersToImport @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
-            Write-Debug ('HttpRequest: ' + $JCHttpRequest);
-            Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
-            Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);
-            # Write-Debug ('HttpResponseContent: ' + $JCHttpResponseContent.Result);
-            $Result = If ('Results' -in $Result.PSObject.Properties.Name)
-            {
-                $Result.results
-            }
-            Else
-            {
-                $Result
-            }
-            If (-not [System.String]::IsNullOrEmpty($Result))
-            {
-                $Results += $Result;
-            }
+            $Result
+        }
+        If (-not [System.String]::IsNullOrEmpty($Result))
+        {
+            $Results += $Result;
         }
     }
     End

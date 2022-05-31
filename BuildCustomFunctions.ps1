@@ -380,7 +380,7 @@ $($IndentChar)$($IndentChar)Return `$Results"
                     Write-Error ('Unknown module $($ModuleName)')
                 }
             }
-            ElseIf ($Command.Verb -in ('Restart', 'Invoke', 'New', 'Set', 'Remove', 'Start', 'Unlock', 'Update', 'Reset', 'Grant', 'Import', 'Clear', 'Lock', 'Stop', 'Sync'))
+            ElseIf ($Command.Verb -in ('Restart', 'Invoke', 'New', 'Set', 'Remove', 'Start', 'Unlock', 'Update', 'Reset', 'Grant', 'Import', 'Clear', 'Lock', 'Stop', 'Sync', 'Initialize'))
             {
                 # Build "Begin" block
                 $BeginContent += "$($IndentChar)$($IndentChar)`$Results = @()

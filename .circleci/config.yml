@@ -172,9 +172,14 @@ workflows:
     when:
       equal: [<< pipeline.parameters.workflow >>, "ci-nightly"]
     jobs:
+      - Build JumpCloud SDK DirectoryInsights
+      - Build JumpCloud SDK V1
+      - Build JumpCloud SDK V2
       - Test JumpCloud SDK DirectoryInsights
       - Test JumpCloud SDK V1
+      - Test JumpCloud SDK V1 MTP
       - Test JumpCloud SDK V2
+      - Test JumpCloud SDK V2 MTP
 jobs:
   Build JumpCloud SDK DirectoryInsights:
     executor: win/default
@@ -280,7 +285,7 @@ jobs:
     executor: win/default
     steps:
       - setup
-      - setup_nuget
+      - setup_codeartifact_nuget
       - attach_workspace:
           at: .
       - deploy-nupkg:
@@ -296,7 +301,7 @@ jobs:
     executor: win/default
     steps:
       - setup
-      - setup_nuget
+      - setup_psgallery_nuget
       - attach_workspace:
           at: .
       - deploy-nupkg:
@@ -411,7 +416,14 @@ commands:
             Write-Host ('Imported Variables') -BackgroundColor:('Green') -ForegroundColor:('Black')
             Write-Host ("---------------------------------------------------------------------------------------")
             Get-Variable | Format-Table
-  setup_nuget:
+  setup_psgallery_nuget:
+    steps:
+      - run:
+          name: Add nuget sources
+          shell: pwsh.exe
+          command: |
+            dotnet nuget add source "https://www.powershellgallery.com/api/v2/package" --name PSGallery
+  setup_codeartifact_nuget:
     steps:
       - run:
           name: Add nuget sources
@@ -420,7 +432,6 @@ commands:
             Set-AWSCredential -AccessKey:($env:AWS_ACCESS_KEY_ID) -SecretKey:($env:AWS_SECRET_ACCESS_KEY)
             $CARepoEndpoint = "$(Get-CARepositoryEndpoint -Domain jumpcloud-artifacts -Region us-east-1 -Repository jumpcloud-nuget-modules -Format nuget)v3/index.json"
             dotnet nuget add source $CARepoEndpoint --name CodeArtifact --username aws --password (Get-CAAuthorizationToken -Domain:("jumpcloud-artifacts") -Region:("us-east-1")).AuthorizationToken
-            dotnet nuget add source "https://www.powershellgallery.com/api/v2/package" --name PSGallery
   build-sdk:
     parameters:
       SDKName:

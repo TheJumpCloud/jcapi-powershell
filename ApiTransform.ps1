@@ -17,9 +17,6 @@ $TransformConfig = [Ordered]@{
             'directoryInsights_eventsDistinctPost' = 'EventDistinct_Get';
             'directoryInsights_eventsIntervalPost' = 'EventInterval_Get';
             'directoryInsights_eventsPost'         = 'Event_Get';
-            # 'directoryInsights_commandResultsReportsGet' = 'EventCommandResultReport_Get';
-            # 'directoryInsights_policyResultsReportsGet'  = 'EventPolicyResultReport_Get';
-            # 'directoryInsights_deviceHealthReportGet'    = 'EventDeviceHealthReport_Get';
         };
         ExcludedList       = @();
     }
@@ -38,20 +35,17 @@ $TransformConfig = [Ordered]@{
             '"produces":\["application\/json","text\/plain"\]'                                                                                                                    = '';
             '"responses":{"200":{"description":"OK","schema":{"type":"string"}}'                                                                                                  = '"responses":{"200":{"description":""}';
             '{"in":"body","name":"body","schema":{"additionalProperties":true,"type":"object"}}'                                                                                  = ''; # Remove bodies that don't have parameters
+            '"operationId":"systemusers_state_activate","parameters":\[{"in":"path","name":"id","required":true,"type":"string"},{"in":"body","name":"body","schema":{"properties":{"email":{"type":"object"}},"type":"object"}}\]'   = '"operationId":"systemusers_state_activate","parameters":[{"in":"path","name":"id","required":true,"type":"string"},{"in":"body","name":"body","schema":{"properties":{"email":{"type":"string"}},"type":"object"}}]' # Flatten email type so we can just pass in Initialize-JcSdkUserState -email "alternateEmail@domain.com"
             # Custom Tweaks
             '{"\$ref":"#\/parameters\/trait:systemContextAuth:Authorization"}'                                                                                                    = ''; # We don't want to support authentication through system context via the SDK
             '{"\$ref":"#\/parameters\/trait:systemContextAuth:Date"}'                                                                                                             = ''; # We don't want to support authentication through system context via the SDK
-            '{"\$ref":"#\/parameters\/trait:requestHeaders:Content-Type"}'                                                                                                        = ''; # This will be passed in later through the Module.cs file.
-            '{"\$ref":"#\/parameters\/trait:requestHeaders:Accept"}'                                                                                                              = ''; # This will be passed in later through the Module.cs file.
             '{"\$ref":"#\/parameters\/trait:multiTenantRequestHeaders:x-org-id"}'                                                                                                 = ''; # Along with the ApiKey this will be passed in later through the Module.cs file.
-            '{"in":"header","name":"Content-Type","type":"string"}'                                                                                                               = ''; # This will be passed in later through the Module.cs file.
-            '{"in":"header","name":"Accept","type":"string"}'                                                                                                                     = ''; # This will be passed in later through the Module.cs file.
-            '{"in":"header","name":"x-org-id","type":"string"}'                                                                                                                   = ''; # This will be passed in later through the Module.cs file.
             ',,'                                                                                                                                                                  = ',';
             '\[,'                                                                                                                                                                 = '[';
             ',]'                                                                                                                                                                  = ']';
         };
         OperationIdMapping = [Ordered]@{
+            'admin_totpreset_begin'          = 'AdministratorUserTotp_Reset';
             'application_templates_get'      = 'ApplicationTemplate_Get';
             'application_templates_list'     = 'ApplicationTemplate_List';
             'applications_delete'            = 'Application_Delete';
@@ -78,6 +72,7 @@ $TransformConfig = [Ordered]@{
             'radius_servers_list'            = 'RadiusServer_List';
             'radius_servers_post'            = 'RadiusServer_Create';
             'radius_servers_put'             = 'RadiusServer_Set';
+            'search_commands_post'           = 'Commands_Search';
             'search_organizations_post'      = 'Organization_Search';
             'search_systems_post'            = 'System_Search';
             'search_systemusers_post'        = 'User_Search';
@@ -96,12 +91,16 @@ $TransformConfig = [Ordered]@{
             'systemusers_expire'             = 'ExpireUserPassword_POST';
             'systemusers_get'                = 'User_Get';
             'systemusers_list'               = 'User_List';
+            'systemusers_mfasync'            = 'UserMfa_Sync';
             'systemusers_post'               = 'User_Create';
             'systemusers_put'                = 'User_Set';
             'systemusers_resetmfa'           = 'UserMfa_Reset';
+            'systemusers_state_activate'     = 'UserState_Activate';
             'systemusers_unlock'             = 'User_Unlock';
+            'users_put'                      = 'AdministratorUser_Set';
+            'users_reactivate_get'           = 'AdministratorUserActivation_Reset';
         };
-        ExcludedList       = @('/search/commands', '/systemusers/{id}/mfasync', '/systemusers/{id}/state/activate', '/users/reactivate/{id}', '/users/resettotp/{id}', '/users/{id}'); # Excluding for now until we can resolve in SA-2316
+        ExcludedList       = @(); # Excluding for now until we can resolve in SA-2316
     }
     'JumpCloud.SDK.V2'                = [PSCustomObject]@{
         PublicUrl          = "https://docs.jumpcloud.com/api/2.0/index.yaml"
@@ -113,14 +112,9 @@ $TransformConfig = [Ordered]@{
             '"in":"body","name":"body","schema":{"\$ref":"#\/definitions\/CustomEmail"}'          = '"in":"body","name":"CustomEmail","schema":{"$ref":"#/definitions/CustomEmail"}'; # The type 'SetJcSdkInternalCustomEmailConfiguration_SetExpanded, SetJcSdkInternalCustomEmailConfiguration_SetViaIdentityExpanded, NewJcSdkInternalCustomEmailConfiguration_CreateExpanded' already contains a definition for 'Body'
             '"format":"uint32"'                                                                   = '"format":"int64"' # SI code uses uint32 which is larger than int32 . Swagger 2 doesnt have a concept of uint32 . AutoRest defaults to int32 when it sees a type of integer.
             # Custom Tweaks
+            '"operationId":"gsuites_listImportUsers","parameters":\[{"\$ref":"#\/parameters\/trait:limit:limit"},{"\$ref":"#\/parameters\/trait:gsuite:maxResults"},' = '"operationId":"gsuites_listImportUsers","parameters":[{"$ref":"#/parameters/trait:gsuite:maxResults"},' # Get-JCsdkGsuiteUsersToImport does not require a limit parameter
             '"responses":{"201":{"description":"","schema":{"\$ref":"#\/definitions\/job-id"}}'   = '"responses":{"200":{"description":"OK","schema":{"$ref":"#/definitions/job-id"}}'; # Workaround incorrectly defined 201 response in swagger should be 200; affects New-JcSdkBulkUser
-            '{"\$ref":"#\/parameters\/trait:requestHeaders:Content-Type"}'                        = ''; # This will be passed in later through the Module.cs file.
-            '{"\$ref":"#\/parameters\/trait:requestHeaders:Accept"}'                              = ''; # This will be passed in later through the Module.cs file.
             '{"\$ref":"#\/parameters\/trait:multiTenantRequestHeaders:x-org-id"}'                 = ''; # Along with the ApiKey this will be passed in later through the Module.cs file.
-            '{"default":"application\/json","in":"header","name":"Content-Type","type":"string"}' = ''; # This will be passed in later through the Module.cs file.
-            '{"default":"application\/json","in":"header","name":"Accept","type":"string"}'       = ''; # This will be passed in later through the Module.cs file.
-            '{"in":"header","name":"x-org-id","type":"string"}'                                   = ''; # This will be passed in later through the Module.cs file.
-            '{"in":"header","name":"x-api-key","type":"string"}'                                  = ''; # This will be passed in later through the Module.cs file.
             ',,'                                                                                  = ',';
             '\[,'                                                                                 = '[';
             ',]'                                                                                  = ']';
@@ -141,10 +135,10 @@ $TransformConfig = [Ordered]@{
             'applemdms_delete'                                  = 'AppleMDM_Delete';
             'applemdms_deletedevice'                            = 'AppleMDMDevice_Delete'
             'applemdms_devicesClearActivationLock'              = 'AppleMDMDeviceActivationLock_Clear';
+            'applemdms_devicesRefreshActivationLockInformation' = 'AppleMDMDeviceLockInformation_Refresh';
             'applemdms_deviceserase'                            = 'AppleMDMDevice_Clear';
             'applemdms_deviceslist'                             = 'AppleMDMDevice_List';
             'applemdms_deviceslock'                             = 'AppleMDMDevice_Lock';
-            'applemdms_devicesRefreshActivationLockInformation' = 'AppleMDMDeviceLockInformation_Refresh';
             'applemdms_devicesrestart'                          = 'AppleMDMDevice_Restart';
             'applemdms_devicesshutdown'                         = 'AppleMDMDevice_Stop';
             'applemdms_enrollmentprofileslist'                  = 'AppleMDMEnrollmentProfile_List';
@@ -153,37 +147,19 @@ $TransformConfig = [Ordered]@{
             'applemdms_put'                                     = 'AppleMDM_Set';
             'applemdms_refreshdepdevices'                       = 'AppleMDMDevice_Sync';
             'applications_deleteLogo'                           = 'ApplicationLogo_Delete';
+            'applications_get'                                  = 'Application_Get';
             'authnpolicies_delete'                              = 'AuthenticationPolicy_Delete';
             'authnpolicies_get'                                 = 'AuthenticationPolicy_Get';
             'authnpolicies_list'                                = 'AuthenticationPolicy_List';
             'authnpolicies_patch'                               = 'AuthenticationPolicy_Update';
             'authnpolicies_post'                                = 'AuthenticationPolicy_Create';
-            # 'autotask_deleteConfiguration'                      = 'AutotaskConfiguration_Delete'
-            # 'autotask_getConfiguration'                         = 'AutotaskConfiguration_Get'
-            # 'autotask_updateConfiguration'                      = 'AutotaskConfiguration_Update'
-            # 'autotask_retrieveCompanyTypes'                     = 'Autotask_CompanyTypes_Get'
-            # 'autotask_retrieveSettings'                         = 'AutotaskSettings_Get'
-            # 'autotask_patchSettings'                            = 'AutotaskSettings_Update'
-            # 'autotask_createConfiguration'                      = 'AutotaskConfiguration_Create'
-            'bulk_usersCreate'                                  = 'BulkUsers_Create';
-            'bulk_usersCreateResults'                           = 'BulkUsersResult_Get';
             'bulk_userStatesCreate'                             = 'BulkUserState_Create';
             'bulk_userStatesDelete'                             = 'BulkUserState_Delete';
             'bulk_userStatesGetNextScheduled'                   = 'NextScheduledBulkUserState_Get';
             'bulk_userStatesList'                               = 'BulkUserStates_List';
+            'bulk_usersCreate'                                  = 'BulkUsers_Create';
+            'bulk_usersCreateResults'                           = 'BulkUsersResult_Get';
             'bulk_usersUpdate'                                  = 'BulkUsers_Update';
-            # 'connectwise_retrieveSettings'                      = 'ConnectwiseSettings_Get'
-            # 'connectwise_patchSettings'                         = 'ConnectwiseSetttings_Set'
-            # 'connectwise_deleteConfiguration'                   = 'ConnectwiseConfiguration_Delete'
-            # 'connectwise_getConfiguration'                  = 'ConnectwiseConfiguration_Get'
-            # 'connectwise_createConfiguration'                   = 'ConnectwiseConfiguration_Create'
-            # 'connectwise_updateConfiguration'                   = 'ConnectwiseConfiguration_Set'
-            # 'connectwise_retrieveAgreements'                    = 'ConnectwiseConfiguration_Delete'
-            # 'connectwise_retrieveAdditions'                 = 'ConnectwiseAdditions_Get'
-            # 'connectwise_retrieveCompanies'                 = 'ConnectwiseCompanies_Get'
-            # 'connectwise_retrieveCompanyTypes'                  = 'ConnectwiseCompanyTypes_Get'
-            # 'connectwise_retrieveMappings'                  = 'ConnectwiseMappings_Get'
-            # 'connectwise_patchMappings'                 = 'ConnectwiseMappings_Set'
             'customEmails_create'                               = 'CustomEmailConfiguration_Create';
             'customEmails_destroy'                              = 'CustomEmailConfiguration_Delete';
             'customEmails_getTemplates'                         = 'CustomEmailTemplates_List';
@@ -227,9 +203,9 @@ $TransformConfig = [Ordered]@{
             'graph_policyAssociationsPost'                      = 'PolicyAssociation_Set';
             'graph_policyGroupAssociationsList'                 = 'PolicyGroupAssociation_List';
             'graph_policyGroupAssociationsPost'                 = 'PolicyGroupAssociation_Set';
-            'graph_policyGroupMembership'                       = 'PolicyGroupMembership_Get';
             'graph_policyGroupMembersList'                      = 'PolicyGroupMembers_List';
             'graph_policyGroupMembersPost'                      = 'PolicyGroupMembers_Set';
+            'graph_policyGroupMembership'                       = 'PolicyGroupMembership_Get';
             'graph_policyGroupTraverseSystem'                   = 'PolicyGroupTraverseSystem_Get';
             'graph_policyGroupTraverseSystemGroup'              = 'PolicyGroupTraverseSystemGroup_Get';
             'graph_policyMemberOf'                              = 'PolicyGroupMember_Get';
@@ -247,9 +223,9 @@ $TransformConfig = [Ordered]@{
             'graph_systemAssociationsPost'                      = 'SystemAssociation_Set';
             'graph_systemGroupAssociationsList'                 = 'SystemGroupAssociation_Get';
             'graph_systemGroupAssociationsPost'                 = 'SystemGroupAssociation_Set';
-            'graph_systemGroupMembership'                       = 'SystemGroupMembership_Get';
             'graph_systemGroupMembersList'                      = 'SystemGroupMembers_Get';
             'graph_systemGroupMembersPost'                      = 'SystemGroupMembers_Set';
+            'graph_systemGroupMembership'                       = 'SystemGroupMembership_Get';
             'graph_systemGroupTraverseCommand'                  = 'SystemGroupTraverseCommand_Get';
             'graph_systemGroupTraversePolicy'                   = 'SystemGroupTraversePolicy_Get';
             'graph_systemGroupTraversePolicyGroup'              = 'SystemGroupTraversePolicyGroup_Get';
@@ -265,9 +241,9 @@ $TransformConfig = [Ordered]@{
             'graph_userAssociationsPost'                        = 'UserAssociation_Set';
             'graph_userGroupAssociationsList'                   = 'UserGroupAssociation_Get';
             'graph_userGroupAssociationsPost'                   = 'UserGroupAssociation_Set';
-            'graph_userGroupMembership'                         = 'UserGroupMembership_Get';
             'graph_userGroupMembersList'                        = 'UserGroupMembers_Get';
             'graph_userGroupMembersPost'                        = 'UserGroupMembers_Set';
+            'graph_userGroupMembership'                         = 'UserGroupMembership_Get';
             'graph_userGroupTraverseActiveDirectory'            = 'UserGroupTraverseActiveDirectory_Get';
             'graph_userGroupTraverseApplication'                = 'UserGroupTraverseApplication_Get';
             'graph_userGroupTraverseDirectory'                  = 'UserGroupTraverseDirectory_Get';
@@ -306,7 +282,9 @@ $TransformConfig = [Ordered]@{
             'groups_user_put'                                   = 'UserGroup_Set';
             'gsuites_get'                                       = 'GSuite_Get';
             'gsuites_listImportUsers'                           = 'GSuiteUsersToImport_List';
+            'gsuites_listImportJumpcloudUsers'                  = 'GsuiteUsersToImportFormated_List'
             'gsuites_patch'                                     = 'GSuite_Update';
+            'import_users'                                      = 'SCIM_Import';
             'iplists_delete'                                    = 'IpList_Delete';
             'iplists_get'                                       = 'IpList_Get';
             'iplists_list'                                      = 'IpList_List';
@@ -341,22 +319,21 @@ $TransformConfig = [Ordered]@{
             'providers_postAdmins'                              = 'ProviderAdministrator_Create';
             'providers_removeAdministrator'                     = 'ProviderAdministrator_Delete';
             'providers_retrieveInvoices'                        = 'ProvidersInvoices_Get'
-            # 'providers_retrieveIntegrations'                    = 'ProvidersIntegrations_Get'
             'pushEndpoints_delete'                              = 'UserPushEndpoint_Delete';
             'pushEndpoints_get'                                 = 'UserPushEndpoint_Get';
             'pushEndpoints_list'                                = 'UserPushEndpoints_List';
             'pushEndpoints_patch'                               = 'UserPushEndpoint_Update';
+            'softwareAppStatuses_list'                          = 'SoftwareAppStatus_Get';
             'softwareApps_delete'                               = 'SoftwareApp_Delete';
             'softwareApps_get'                                  = 'SoftwareApp_Get';
             'softwareApps_list'                                 = 'SoftwareApp_List';
             'softwareApps_post'                                 = 'SoftwareApp_Create';
             'softwareApps_reclaimLicenses'                      = 'SoftwareAppsLicenses_Reclaim';
             'softwareApps_update'                               = 'SoftwareApp_Set';
-            'softwareAppStatuses_list'                          = 'SoftwareAppStatus_Get';
             'subscriptions_get'                                 = 'Subscription_Get';
+            'systeminsights_list_alf'                           = 'SystemInsightAlf_List';
             'systeminsights_list_alf_exceptions'                = 'SystemInsightAlfException_List';
             'systeminsights_list_alf_explicit_auths'            = 'SystemInsightAlfExplicitAuth_List';
-            'systeminsights_list_alf'                           = 'SystemInsightAlf_List';
             'systeminsights_list_appcompat_shims'               = 'SystemInsightAppCompatShim_List';
             'systeminsights_list_apps'                          = 'SystemInsightApps_List';
             'systeminsights_list_authorized_keys'               = 'SystemInsightAuthorizedKey_List';
@@ -426,8 +403,8 @@ $TransformConfig = [Ordered]@{
             'workdays_workers'                                  = 'WorkdayWorker_Get';
         };
         ExcludedList       = @(
-            '/applications/{application_id}',
-            '/applications/{application_id}/import/users',
+            '/bulk/assets',
+            '/bulk/assets/{job_id}/results'
             '/providers/{provider_id}/integrations',
             '/providers/{provider_id}/integrations/connectwise',
             '/integrations/connectwise/{UUID}',
@@ -437,12 +414,6 @@ $TransformConfig = [Ordered]@{
             '/integrations/connectwise/{UUID}/companies',
             '/integrations/connectwise/{UUID}/companytypes',
             '/integrations/connectwise/{UUID}/mappings',
-            # '/providers/{provider_id}/administrators',
-            # '/providers/{provider_id}/administrators/{id}',
-            # '/providers/{provider_id}/organizations',
-            # '/administrators/{id}/organizationlinks',
-            # '/administrators/{administrator_id}/organizationlinks/{id}',
-            # '/organizations/{id}/administratorlinks',
             '/integrations/autotask/{UUID}',
             '/integrations/autotask/{UUID}/settings',
             '/integrations/autotask/{UUID}/companytypes',
@@ -452,8 +423,8 @@ $TransformConfig = [Ordered]@{
             '/integrations/autotask/{UUID}/contracts/services',
             '/integrations/autotask/{UUID}/mappings',
             '/integrations/{integration_type}/{UUID}/errors',
-            '/providers/{provider_id}/integrations/autotask',
-            '/gsuites/{gsuite_id}/import/jumpcloudusers')
+            '/providers/{provider_id}/integrations/autotask'
+            )
     }
 }
 Function Get-SwaggerItem
