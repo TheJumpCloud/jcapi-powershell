@@ -147,7 +147,6 @@ $TransformConfig = [Ordered]@{
             'applemdms_put'                                     = 'AppleMDM_Set';
             'applemdms_refreshdepdevices'                       = 'AppleMDMDevice_Sync';
             'applications_deleteLogo'                           = 'ApplicationLogo_Delete';
-            'applications_get'                                  = 'Application_Get';
             'authnpolicies_delete'                              = 'AuthenticationPolicy_Delete';
             'authnpolicies_get'                                 = 'AuthenticationPolicy_Get';
             'authnpolicies_list'                                = 'AuthenticationPolicy_List';
@@ -328,7 +327,7 @@ $TransformConfig = [Ordered]@{
             'softwareApps_get'                                  = 'SoftwareApp_Get';
             'softwareApps_list'                                 = 'SoftwareApp_List';
             'softwareApps_post'                                 = 'SoftwareApp_Create';
-            'softwareApps_reclaimLicenses'                      = 'SoftwareAppsLicenses_Reclaim';
+            'softwareApps_reclaimLicenses'                      = 'SoftwareAppLicenses_Reclaim';
             'softwareApps_update'                               = 'SoftwareApp_Set';
             'subscriptions_get'                                 = 'Subscription_Get';
             'systeminsights_list_alf'                           = 'SystemInsightAlf_List';
@@ -403,8 +402,10 @@ $TransformConfig = [Ordered]@{
             'workdays_workers'                                  = 'WorkdayWorker_Get';
         };
         ExcludedList       = @(
+            '/applications/{application_id}',
             '/bulk/assets',
-            '/bulk/assets/{job_id}/results'
+            '/bulk/assets/{job_id}/results',
+            '/providers/{provider_id}/organizations/{id}'
             '/providers/{provider_id}/integrations',
             '/providers/{provider_id}/integrations/connectwise',
             '/integrations/connectwise/{UUID}',
@@ -423,8 +424,9 @@ $TransformConfig = [Ordered]@{
             '/integrations/autotask/{UUID}/contracts/services',
             '/integrations/autotask/{UUID}/mappings',
             '/integrations/{integration_type}/{UUID}/errors',
-            '/providers/{provider_id}/integrations/autotask'
-            )
+            '/providers/{provider_id}/integrations/autotask',
+            '/softwareapps/{software_app_id}/retry-installation'
+        )
     }
 }
 Function Get-SwaggerItem
