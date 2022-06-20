@@ -2,14 +2,8 @@
 Release Date: June 20, 2022
 #### RELEASE NOTES
 ```
-{{Fill in the Release Notes}}
+No changes, version increment
 ```
-#### FEATURES:
-{{Fill in the Features}}
-#### IMPROVEMENTS:
-{{Fill in the Improvements}}
-#### BUG FIXES:
-{{Fill in the Bug Fixes}}
 #### Generated Changes:
 
 <details>

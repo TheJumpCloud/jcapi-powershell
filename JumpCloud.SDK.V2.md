@@ -2,14 +2,8 @@
 Release Date: June 20, 2022
 #### RELEASE NOTES
 ```
-{{Fill in the Release Notes}}
+This release removes the V2 function Get-JCSdkApplication, a duplicate version of this function exists already in the V1 Module.
 ```
-#### FEATURES:
-{{Fill in the Features}}
-#### IMPROVEMENTS:
-{{Fill in the Improvements}}
-#### BUG FIXES:
-{{Fill in the Bug Fixes}}
 #### Generated Changes:
 
 <details>
