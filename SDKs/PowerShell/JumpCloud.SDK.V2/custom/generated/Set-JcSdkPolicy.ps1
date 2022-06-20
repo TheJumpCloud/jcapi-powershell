@@ -9,7 +9,7 @@ Given the amount of configurable parameters required to update a Policy, we sugg
 curl -X PUT https://console.jumpcloud.com/api/v2/policies/59fced45c9118022172547ff \\
   -H 'Accept: application/json' \\
   -H 'Content-Type: application/json' \\
-  -H 'x-api-key: {API_KEY' \\
+  -H 'x-api-key: {API_KEY}' \\
   -d '{
     {Policy_Parameters}
   }'
@@ -24,7 +24,7 @@ Given the amount of configurable parameters required to update a Policy, we sugg
 curl -X PUT https://console.jumpcloud.com/api/v2/policies/59fced45c9118022172547ff \\
   -H 'Accept: application/json' \\
   -H 'Content-Type: application/json' \\
-  -H 'x-api-key: {API_KEY' \\
+  -H 'x-api-key: {API_KEY}' \\
   -d '{
     {Policy_Parameters}
   }'

@@ -228,8 +228,8 @@ BODY <IUserGroupPost>: UserGroupPost
   - `Name <String>`: Display name of a User Group.
   - `[Attributes <IGroupAttributesUserGroup>]`: The graph attributes for a UserGroup.
     - `[(Any) <Object>]`: This indicates any property can be added to this object.
-    - `[LdapGroups <IGraphAttributeLdapGroupsItem[]>]`: 
-      - `Name <String>`: 
+    - `[LdapGroups <ILdapGroup[]>]`: 
+      - `[Name <String>]`: 
     - `[PosixGroups <IGraphAttributePosixGroupsItem[]>]`: 
       - `Id <Int32>`: 
       - `Name <String>`: 

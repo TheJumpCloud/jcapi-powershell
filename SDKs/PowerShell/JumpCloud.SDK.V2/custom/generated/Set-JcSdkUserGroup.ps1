@@ -7,7 +7,7 @@ This endpoint allows you to do a full update of the User Group.
 curl -X PUT https://console.jumpcloud.com/api/v2/usergroups/{Group_ID} \\
   -H 'Accept: application/json' \\
   -H 'Content-Type: application/json' \\
-  -H 'x-api-key: {API_KEY' \\
+  -H 'x-api-key: {API_KEY}' \\
   -d '{
     \"name\": \"group_update\"
   }'
@@ -20,7 +20,7 @@ This endpoint allows you to do a full update of the User Group.
 curl -X PUT https://console.jumpcloud.com/api/v2/usergroups/{Group_ID} \\
   -H 'Accept: application/json' \\
   -H 'Content-Type: application/json' \\
-  -H 'x-api-key: {API_KEY' \\
+  -H 'x-api-key: {API_KEY}' \\
   -d '{
     \"name\": \"group_update\"
   }'
@@ -49,8 +49,8 @@ BODY <IUserGroupPut>:
   Name <String>: Display name of a User Group.
   [Attributes <IGroupAttributesUserGroup>]: The graph attributes for a UserGroup.
     [(Any) <Object>]: This indicates any property can be added to this object.
-    [LdapGroups <IGraphAttributeLdapGroupsItem[]>]:
-      Name <String>:
+    [LdapGroups <ILdapGroup[]>]:
+      [Name <String>]:
     [PosixGroups <IGraphAttributePosixGroupsItem[]>]:
       Id <Int32>:
       Name <String>:

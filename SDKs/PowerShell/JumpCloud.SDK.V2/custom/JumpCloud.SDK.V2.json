@@ -905,15 +905,7 @@
       "properties": {
         "ldapGroups": {
           "items": {
-            "properties": {
-              "name": {
-                "type": "string"
-              }
-            },
-            "required": [
-              "name"
-            ],
-            "type": "object"
+            "$ref": "#/definitions/LdapGroup"
           },
           "type": "array"
         }
@@ -1882,6 +1874,16 @@
       "title": "IPListRequest",
       "type": "object"
     },
+    "LdapGroup": {
+      "description": "An LDAP group object.",
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "title": "Ldap Group",
+      "type": "object"
+    },
     "LdapServerAction": {
       "enum": [
         "disable",
@@ -2042,6 +2044,10 @@
       "properties": {
         "id": {
           "type": "string"
+        },
+        "maxSystemUsers": {
+          "description": "The maximum number of users allowed in this organization. Requires organizations.billing scope to modify.",
+          "type": "integer"
         },
         "name": {
           "type": "string"
@@ -7310,7 +7316,7 @@
     },
     "/activedirectories/{id}": {
       "delete": {
-        "description": "This endpoint allows you to delete an Active Directory Instance.\n\n#### Sample Request\n```\ncurl -X DELETE https://console.jumpcloud.com/api/v2/activedirectories/{ActiveDirectory_ID} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY'\n  ```",
+        "description": "This endpoint allows you to delete an Active Directory Instance.\n\n#### Sample Request\n```\ncurl -X DELETE https://console.jumpcloud.com/api/v2/activedirectories/{ActiveDirectory_ID} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```",
         "operationId": "ActiveDirectory_Delete",
         "parameters": [],
         "responses": {
@@ -8223,51 +8229,6 @@
           }
         ]
       }
-    },
-    "/applications/{application_id}": {
-      "get": {
-        "description": "The endpoint retrieves an Application.",
-        "operationId": "Application_Get",
-        "parameters": [],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "object",
-              "additionalProperties": true
-            }
-          }
-        },
-        "security": [
-          {
-            "x-api-key": []
-          }
-        ],
-        "summary": "Get an Application",
-        "x-codeSamples": [
-          {
-            "lang": "Shell",
-            "source": "curl --request GET \\\n  --url https://console.jumpcloud.com/api/v2/applications/{application_id} \\\n  --header 'x-api-key: REPLACE_KEY_VALUE'"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/v2/applications/{application_id}\"\n\nheaders = {\"x-api-key\": \"REPLACE_KEY_VALUE\"}\n\nresponse = requests.request(\"GET\", url, headers=headers)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/v2/applications/{application_id}' -Method GET -Headers $headers"
-          }
-        ]
-      },
-      "parameters": [
-        {
-          "description": "ObjectID of the Application.",
-          "in": "path",
-          "name": "application_id",
-          "required": true,
-          "type": "string"
-        }
-      ]
     },
     "/applications/{application_id}/associations": {
       "get": {
@@ -12378,7 +12339,7 @@
         }
       ],
       "put": {
-        "description": "This endpoint allows you to update a policy. Given the amount of configurable parameters required to update a Policy, we suggest you use the JumpCloud Admin Console to create new policies.\n\n\n##### Sample Request\n```\ncurl -X PUT https://console.jumpcloud.com/api/v2/policies/59fced45c9118022172547ff \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY' \\\n  -d '{\n    {Policy_Parameters}\n  }'\n```",
+        "description": "This endpoint allows you to update a policy. Given the amount of configurable parameters required to update a Policy, we suggest you use the JumpCloud Admin Console to create new policies.\n\n\n##### Sample Request\n```\ncurl -X PUT https://console.jumpcloud.com/api/v2/policies/59fced45c9118022172547ff \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    {Policy_Parameters}\n  }'\n```",
         "operationId": "Policy_Set",
         "parameters": [
           {
@@ -13354,7 +13315,7 @@
         }
       ],
       "put": {
-        "description": "This endpoint allows you to do a full update of the Policy Group.\n\n#### Sample Request\n```\ncurl -X PUT https://console.jumpcloud.com/api/v2/policygroups/{Group_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY' \\\n  -d '{\n    \"name\": \"group_update\"\n  }'\n```",
+        "description": "This endpoint allows you to do a full update of the Policy Group.\n\n#### Sample Request\n```\ncurl -X PUT https://console.jumpcloud.com/api/v2/policygroups/{Group_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"name\": \"group_update\"\n  }'\n```",
         "operationId": "PolicyGroup_Set",
         "parameters": [
           {
@@ -14478,7 +14439,7 @@
       ],
       "post": {
         "description": "This endpoint allows you to reclaim the licenses from a software app associated with devices that are deleted.\n#### Sample Request\n```\n$ curl -X POST https://console.jumpcloud.com/api/v2/softwareapps/{software_app_id}/reclaim-licenses \\\n-H 'Accept: application/json' \\\n-H 'Content-Type: application/json' \\\n-H 'x-api-key: {API_KEY}' \\\n-d '{}'\n```",
-        "operationId": "SoftwareAppsLicenses_Reclaim",
+        "operationId": "SoftwareAppLicenses_Reclaim",
         "responses": {
           "200": {
             "description": "Reclaim Licenses Response",
@@ -19718,7 +19679,7 @@
         }
       ],
       "put": {
-        "description": "This endpoint allows you to do a full update of the User Group.\n\n#### Sample Request\n```\ncurl -X PUT https://console.jumpcloud.com/api/v2/usergroups/{Group_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY' \\\n  -d '{\n    \"name\": \"group_update\"\n  }'\n```",
+        "description": "This endpoint allows you to do a full update of the User Group.\n\n#### Sample Request\n```\ncurl -X PUT https://console.jumpcloud.com/api/v2/usergroups/{Group_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"name\": \"group_update\"\n  }'\n```",
         "operationId": "UserGroup_Set",
         "parameters": [
           {

@@ -29,8 +29,8 @@ curl -X POST https://console.jumpcloud.com/api/radiusservers/ \\
 
 ### CreateExpanded (Default)
 ```
-New-JcSdkRadiusServer -Name <String> -NetworkSourceIP <String> -SharedSecret <String> [-Mfa <String>]
- [-UserLockoutAction <String>] [-UserPasswordExpirationAction <String>] [-Confirm] [-WhatIf]
+New-JcSdkRadiusServer -Name <String> -NetworkSourceIP <String> -SharedSecret <String> [-AuthIdp <String>]
+ [-Mfa <String>] [-UserLockoutAction <String>] [-UserPasswordExpirationAction <String>] [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
@@ -74,6 +74,21 @@ curl -X POST https://console.jumpcloud.com/api/radiusservers/ \\
 {{ Add output here }}
 
 ## PARAMETERS
+
+### -AuthIdp
+.
+
+```yaml
+Type: System.String
+Parameter Sets: CreateExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### -Body
 RadiusServerPost
@@ -236,6 +251,7 @@ BODY <IRadiusserverpost>: RadiusServerPost
   - `Name <String>`: 
   - `NetworkSourceIP <String>`: 
   - `SharedSecret <String>`: RADIUS shared secret between the server and client.
+  - `[AuthIdp <String>]`: 
   - `[Mfa <String>]`: 
   - `[UserLockoutAction <String>]`: 
   - `[UserPasswordExpirationAction <String>]`: 

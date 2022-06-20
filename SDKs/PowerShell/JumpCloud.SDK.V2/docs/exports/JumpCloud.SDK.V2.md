@@ -153,9 +153,6 @@ Note: currently only one enrollment profile is supported.
   -H 'x-api-key: {API_KEY}'
 ```
 
-### [Get-JcSdkApplication](Get-JcSdkApplication.md)
-The endpoint retrieves an Application.
-
 ### [Get-JcSdkApplicationAssociation](Get-JcSdkApplicationAssociation.md)
 This endpoint will return the _direct_ associations of an Application.
 A direct association can be a non-homogeneous relationship between 2 different objects, for example Applications and User Groups.
@@ -2300,7 +2297,7 @@ This endpoint allows you to delete an Active Directory Instance.
 curl -X DELETE https://console.jumpcloud.com/api/v2/activedirectories/{ActiveDirectory_ID} \\
   -H 'accept: application/json' \\
   -H 'content-type: application/json' \\
-  -H 'x-api-key: {API_KEY'
+  -H 'x-api-key: {API_KEY}'
   ```
 
 ### [Remove-JcSdkActiveDirectoryAgent](Remove-JcSdkActiveDirectoryAgent.md)
@@ -2725,7 +2722,7 @@ Given the amount of configurable parameters required to update a Policy, we sugg
 curl -X PUT https://console.jumpcloud.com/api/v2/policies/59fced45c9118022172547ff \\
   -H 'Accept: application/json' \\
   -H 'Content-Type: application/json' \\
-  -H 'x-api-key: {API_KEY' \\
+  -H 'x-api-key: {API_KEY}' \\
   -d '{
     {Policy_Parameters}
   }'
@@ -2757,7 +2754,7 @@ This endpoint allows you to do a full update of the Policy Group.
 curl -X PUT https://console.jumpcloud.com/api/v2/policygroups/{Group_ID} \\
   -H 'Accept: application/json' \\
   -H 'Content-Type: application/json' \\
-  -H 'x-api-key: {API_KEY' \\
+  -H 'x-api-key: {API_KEY}' \\
   -d '{
     \"name\": \"group_update\"
   }'
@@ -3001,7 +2998,7 @@ This endpoint allows you to do a full update of the User Group.
 curl -X PUT https://console.jumpcloud.com/api/v2/usergroups/{Group_ID} \\
   -H 'Accept: application/json' \\
   -H 'Content-Type: application/json' \\
-  -H 'x-api-key: {API_KEY' \\
+  -H 'x-api-key: {API_KEY}' \\
   -d '{
     \"name\": \"group_update\"
   }'
