@@ -15,7 +15,7 @@ This endpoint allows you to do a full update of the Policy Group.
 curl -X PUT https://console.jumpcloud.com/api/v2/policygroups/{Group_ID} \\
   -H 'Accept: application/json' \\
   -H 'Content-Type: application/json' \\
-  -H 'x-api-key: {API_KEY' \\
+  -H 'x-api-key: {API_KEY}' \\
   -d '{
     \"name\": \"group_update\"
   }'
@@ -53,7 +53,7 @@ This endpoint allows you to do a full update of the Policy Group.
 curl -X PUT https://console.jumpcloud.com/api/v2/policygroups/{Group_ID} \\
   -H 'Accept: application/json' \\
   -H 'Content-Type: application/json' \\
-  -H 'x-api-key: {API_KEY' \\
+  -H 'x-api-key: {API_KEY}' \\
   -d '{
     \"name\": \"group_update\"
   }'

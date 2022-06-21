@@ -15,7 +15,7 @@ This endpoint allows you to delete an Active Directory Instance.
 curl -X DELETE https://console.jumpcloud.com/api/v2/activedirectories/{ActiveDirectory_ID} \\
   -H 'accept: application/json' \\
   -H 'content-type: application/json' \\
-  -H 'x-api-key: {API_KEY'
+  -H 'x-api-key: {API_KEY}'
   ```
 
 ## SYNTAX
@@ -38,7 +38,7 @@ This endpoint allows you to delete an Active Directory Instance.
 curl -X DELETE https://console.jumpcloud.com/api/v2/activedirectories/{ActiveDirectory_ID} \\
   -H 'accept: application/json' \\
   -H 'content-type: application/json' \\
-  -H 'x-api-key: {API_KEY'
+  -H 'x-api-key: {API_KEY}'
   ```
 
 ## EXAMPLES

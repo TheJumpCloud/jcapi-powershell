@@ -1,3 +1,30 @@
+## JumpCloud.SDK.V1-0.0.30
+Release Date: June 21, 2022
+#### RELEASE NOTES
+```
+No changes, version increment
+```
+#### Generated Changes:
+
+<details>
+<summary>Functions Added</summary>
+
+No changes
+</details>
+
+<details>
+<summary>Functions Modified</summary>
+
+* New-JcSdkRadiusServer.ps1
+
+</details>
+
+<details>
+<summary>Functions Removed</summary>
+
+No changes
+</details>
+
 ## JumpCloud.SDK.V1-0.0.29
 Release Date: May 31, 2022
 #### RELEASE NOTES
