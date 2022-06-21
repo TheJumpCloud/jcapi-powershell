@@ -405,6 +405,7 @@ $TransformConfig = [Ordered]@{
             '/applications/{application_id}',
             '/bulk/assets',
             '/bulk/assets/{job_id}/results',
+            '/providers/{provider_id}'
             '/providers/{provider_id}/organizations/{id}'
             '/providers/{provider_id}/integrations',
             '/providers/{provider_id}/integrations/connectwise',
