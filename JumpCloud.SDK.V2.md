@@ -1,5 +1,5 @@
 ## JumpCloud.SDK.V2-0.0.34
-Release Date: June 20, 2022
+Release Date: June 21, 2022
 #### RELEASE NOTES
 ```
 This release removes the V2 function Get-JCSdkApplication, a duplicate version of this function exists already in the V1 Module.
@@ -15,7 +15,12 @@ No changes
 <details>
 <summary>Functions Modified</summary>
 
-No changes
+* New-JcSdkUserGroup.ps1
+* Remove-JcSdkActiveDirectory.ps1
+* Set-JcSdkPolicy.ps1
+* Set-JcSdkPolicyGroup.ps1
+* Set-JcSdkUserGroup.ps1
+
 </details>
 
 <details>

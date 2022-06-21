@@ -1,5 +1,5 @@
 ## JumpCloud.SDK.DirectoryInsights-0.0.18
-Release Date: June 20, 2022
+Release Date: June 21, 2022
 #### RELEASE NOTES
 ```
 No changes, version increment
