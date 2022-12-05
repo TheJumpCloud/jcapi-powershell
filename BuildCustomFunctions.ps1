@@ -6,9 +6,10 @@ Param(
     , [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Path to examples files.')][ValidateNotNullOrEmpty()][System.String[]]$ExamplesFolderPath
     , [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Path to test files.')][ValidateNotNullOrEmpty()][System.String[]]$TestFolderPath
 )
-Try
-{
-    If (!(Test-Path -Path:($CustomFolderPath))) { New-Item -Path:($CustomFolderPath) -ItemType:('Directory') }
+Try {
+    If (!(Test-Path -Path:($CustomFolderPath))) {
+        New-Item -Path:($CustomFolderPath) -ItemType:('Directory')
+    }
     $IndentChar = '    '
     # Get AutoRest Versions
     $coreRegex = [regex]'autorest_core@([0-9]+\.[0-9]+\.[0-9]+)'
@@ -24,8 +25,7 @@ Try
     $ConfigPrefix = $Config.prefix | Select-Object -First 1
     $ConfigCustomFunctionPrefix = $Config.customFunctionPrefix
     # Misc Functions
-    Function Convert-GeneratedToCustom ([System.String]$InputString, [System.String]$ConfigPrefix, [System.String]$ConfigCustomFunctionPrefix)
-    {
+    Function Convert-GeneratedToCustom ([System.String]$InputString, [System.String]$ConfigPrefix, [System.String]$ConfigCustomFunctionPrefix) {
         # Swap out SDK prefix for customFunction prefix
         $InputString = $InputString.Replace($ConfigPrefix, $ConfigCustomFunctionPrefix)
         # Remove weird output conversion for the customFunctions
@@ -39,14 +39,16 @@ Try
     # Load the module
     $ImportedModule = Import-Module $psd1Path -Force -PassThru
     # Start generation
-    If (Get-Module -Name($ImportedModule.Name))
-    {
+    If (Get-Module -Name($ImportedModule.Name)) {
         # Get list of commands from module
         $Commands = Get-Command -Module:($ImportedModule.Name) # -Verb:('Get') -Noun:('JcSdkInternalEvent') # Use to troubleshoot single command
-        ForEach ($Command In $Commands)
-        {
+        ForEach ($Command In $Commands) {
             # Get module name
-            $ModuleName = If ($Command.Module.Name -like '*.internal') { $Command.Module.Name.Replace('.internal', '') } Else { $Command.Module.Name }
+            $ModuleName = If ($Command.Module.Name -like '*.internal') {
+                $Command.Module.Name.Replace('.internal', '')
+            } Else {
+                $Command.Module.Name
+            }
             # Create new function name
             $CommandName = $Command.Name
             $NewCommandName = $CommandName.Replace($ConfigPrefix, $ConfigCustomFunctionPrefix)
@@ -56,8 +58,7 @@ Try
             $CommandFilePathContent = Get-Content -Path:($CommandFilePath) -Raw
             $MSCopyrightHeader = "`n<#`n.Synopsis`n"
             $Divider = "`n[SPLIT]`n<#`n.Synopsis`n"
-            $FunctionContent = If ($CommandFilePath -like '*ProxyCmdletDefinitions.ps1')
-            {
+            $FunctionContent = If ($CommandFilePath -like '*ProxyCmdletDefinitions.ps1') {
                 <# When the autorest generated module has been installed and imported from the PSGallery all the
             cmdlets will exist in a single ProxyCmdletDefinitions.ps1 file. We need to parse
             out the specific function in order to gather the parts we need to copy over. #>
@@ -65,17 +66,13 @@ Try
 
                 $ProxyContent = $CommandFilePathContent.Replace($MSCopyrightHeader, $Divider)
                 $ProxyContentSplit = $ProxyContent.Split("[SPLIT]")
-                foreach ($functionSplit in $ProxyContentSplit)
-                {
-                    if ($functionSplit -match "function $CommandName {")
-                    {
+                foreach ($functionSplit in $ProxyContentSplit) {
+                    if ($functionSplit -match "function $CommandName {") {
                         # return the matched content
                         $functionSplit
                     }
                 }
-            }
-            Else
-            {
+            } Else {
                 <# When the autorest generated module has been imported from a local psd1 module the function will
             remain in their individual files. #>
                 $CommandFilePathContent
@@ -92,63 +89,50 @@ Try
             $ParameterSetLimit = ($ContainsLimit | Select-String -Pattern:([regex]"(?<=ParameterSetName=')(.*?)(?=')")).Matches.Value
             $ParameterSetSkip = ($ContainsSkip | Select-String -Pattern:([regex]"(?<=ParameterSetName=')(.*?)(?=')")).Matches.Value
             # Build CmdletBinding
-            If (-not [System.String]::IsNullOrEmpty($OutputType)) { $CmdletBinding = "$($OutputType)`n$($IndentChar)$($CmdletBinding)" }
+            If (-not [System.String]::IsNullOrEmpty($OutputType)) {
+                $CmdletBinding = "$($OutputType)`n$($IndentChar)$($CmdletBinding)"
+            }
             # Build $BeginContent, $ProcessContent, and $EndContent
             $BeginContent = @()
             $ProcessContent = @()
             $EndContent = @()
             # Results logic - If the output model is undefined in the swagger spec
-            $ResultsLogic = If ($Command.OutputType -like "$ModuleName.Models.*ApplicationJson*")
-            {
+            $ResultsLogic = If ($Command.OutputType -like "$ModuleName.Models.*ApplicationJson*") {
                 "($($ImportedModule.Name)\$($CommandName) @PSBoundParameters).ToJsonString() | ConvertFrom-Json;"
-            }
-            Else
-            {
+            } Else {
                 "$($ImportedModule.Name)\$($CommandName) @PSBoundParameters"
             }
-            If ($Command.Verb -in ('Get', 'Search'))
-            {
+            If ($Command.Verb -in ('Get', 'Search')) {
                 # Add paginate parameter if function contains Limit or Skip parameters
-                If (-not [System.String]::IsNullOrEmpty($ContainsSkip) -or -not [System.String]::IsNullOrEmpty($ContainsLimit))
-                {
-                    $ParameterSetLimitSkip = If (-not [System.String]::IsNullOrEmpty($ParameterSetLimit) -or -not [System.String]::IsNullOrEmpty($ParameterSetSkip))
-                    {
+                If (-not [System.String]::IsNullOrEmpty($ContainsSkip) -or -not [System.String]::IsNullOrEmpty($ContainsLimit)) {
+                    $ParameterSetLimitSkip = If (-not [System.String]::IsNullOrEmpty($ParameterSetLimit) -or -not [System.String]::IsNullOrEmpty($ParameterSetSkip)) {
                         $ParameterSetLimitSkipArray = @()
-                        If (-not [System.String]::IsNullOrEmpty($ParameterSetLimit))
-                        {
+                        If (-not [System.String]::IsNullOrEmpty($ParameterSetLimit)) {
                             $ParameterSetLimit | ForEach-Object {
                                 $ParameterSetLimitSkipArray += $_.Trim()
                             }
                         }
-                        If (-not [System.String]::IsNullOrEmpty($ParameterSetSkip))
-                        {
+                        If (-not [System.String]::IsNullOrEmpty($ParameterSetSkip)) {
                             $ParameterSetSkip | ForEach-Object {
                                 $ParameterSetLimitSkipArray += $_.Trim()
                             }
                         }
                         "'$(($ParameterSetLimitSkipArray | Select-Object -Unique ) -join "','")'"
 
-                    }
-                    Else
-                    {
+                    } Else {
                         "'$(($DefaultParameterSetName | Select-Object -Unique) -join "','")'"
                     }
-                    If (-not [System.String]::IsNullOrEmpty($ParameterContent))
-                    {
-                        If ($ParameterContent.Count -eq 1)
-                        {
+                    If (-not [System.String]::IsNullOrEmpty($ParameterContent)) {
+                        If ($ParameterContent.Count -eq 1) {
                             # Add paginate parameter
                             $ParameterContent += ",$($IndentChar)[Parameter(DontShow)]`n$($IndentChar)[System.Boolean]`n$($IndentChar)# Set to `$true to return all results. This will overwrite any skip and limit parameter.`n$($IndentChar)`$Paginate = `$true"
-                        }
-                        Else
-                        {
+                        } Else {
                             $ParameterContent += "$($IndentChar)[Parameter(DontShow)]`n$($IndentChar)[System.Boolean]`n$($IndentChar)# Set to `$true to return all results. This will overwrite any skip and limit parameter.`n$($IndentChar)`$Paginate = `$true"
                         }
                     }
                 }
                 # Build script content
-                If ($ModuleName -eq 'JumpCloud.SDK.DirectoryInsights')
-                {
+                If ($ModuleName -eq 'JumpCloud.SDK.DirectoryInsights') {
                     # Build "Begin" block
                     $BeginContent += "$($IndentChar)$($IndentChar)`$Results = @()
 $($IndentChar)$($IndentChar)`$PSBoundParameters.Add('HttpPipelineAppend', {
@@ -164,8 +148,7 @@ $($IndentChar)$($IndentChar)$($IndentChar)}
 $($IndentChar)$($IndentChar))"
                     # Build "Process" block
                     # Add paginate logic if function contains Limit and Skip parameters
-                    If (-not [System.String]::IsNullOrEmpty($ContainsSkip) -or -not [System.String]::IsNullOrEmpty($ContainsLimit))
-                    {
+                    If (-not [System.String]::IsNullOrEmpty($ContainsSkip) -or -not [System.String]::IsNullOrEmpty($ContainsLimit)) {
                         $ProcessContent += "$($IndentChar)$($IndentChar)If (`$Paginate -and `$PSCmdlet.ParameterSetName -in ($ParameterSetLimitSkip))
 $($IndentChar)$($IndentChar){
 $($IndentChar)$($IndentChar)$($IndentChar)`$PSBoundParameters.Remove('Paginate') | Out-Null
@@ -223,9 +206,7 @@ $($IndentChar)$($IndentChar)$($IndentChar){
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Results += `$Result
 $($IndentChar)$($IndentChar)$($IndentChar)}
 $($IndentChar)$($IndentChar)}"
-                    }
-                    Else
-                    {
+                    } Else {
                         $ProcessContent += "$($IndentChar)$($IndentChar)`$Result = $ResultsLogic
 $($IndentChar)$($IndentChar)Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
 $($IndentChar)$($IndentChar)Write-Debug ('HttpRequestContent: ' + `$JCHttpRequestContent.Result);
@@ -243,9 +224,7 @@ $($IndentChar)$($IndentChar)`$GlobalVars | ForEach-Object {
 $($IndentChar)$($IndentChar)$($IndentChar)If ((Get-Variable -Scope:('Global')).Where( { `$_.Name -eq `$_ })) { Remove-Variable -Name:(`$_) -Scope:('Global') }
 $($IndentChar)$($IndentChar)}
 $($IndentChar)$($IndentChar)Return `$Results"
-                }
-                ElseIf ($ModuleName -In ('JumpCloud.SDK.V1', 'JumpCloud.SDK.V2'))
-                {
+                } ElseIf ($ModuleName -In ('JumpCloud.SDK.V1', 'JumpCloud.SDK.V2')) {
                     # Build "Begin" block
                     $BeginContent += "$($IndentChar)$($IndentChar)`$Results = @()
 $($IndentChar)$($IndentChar)`$PSBoundParameters.Add('HttpPipelineAppend', {
@@ -261,20 +240,17 @@ $($IndentChar)$($IndentChar)$($IndentChar)}
 $($IndentChar)$($IndentChar))"
                     # Build "Process" block
                     # Add paginate logic if function contains Limit and Skip parameters
-                    If (-not [System.String]::IsNullOrEmpty($ContainsSkip) -or -not [System.String]::IsNullOrEmpty($ContainsLimit))
-                    {
+                    If (-not [System.String]::IsNullOrEmpty($ContainsSkip) -or -not [System.String]::IsNullOrEmpty($ContainsLimit)) {
                         $ProcessContent += "$($IndentChar)$($IndentChar)If (`$Paginate -and `$PSCmdlet.ParameterSetName -in ($ParameterSetLimitSkip))
 $($IndentChar)$($IndentChar){
 $($IndentChar)$($IndentChar)$($IndentChar)`$PSBoundParameters.Remove('Paginate') | Out-Null"
-                        If (-not [System.String]::IsNullOrEmpty($ContainsLimit))
-                        {
+                        If (-not [System.String]::IsNullOrEmpty($ContainsLimit)) {
                             $ProcessContent += "$($IndentChar)$($IndentChar)$($IndentChar)If ([System.String]::IsNullOrEmpty(`$PSBoundParameters.Limit))
 $($IndentChar)$($IndentChar)$($IndentChar){
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$PSBoundParameters.Add('Limit', 100)
 $($IndentChar)$($IndentChar)$($IndentChar)}"
                         }
-                        If (-not [System.String]::IsNullOrEmpty($ContainsSkip))
-                        {
+                        If (-not [System.String]::IsNullOrEmpty($ContainsSkip)) {
                             $ProcessContent += "$($IndentChar)$($IndentChar)$($IndentChar)If ([System.String]::IsNullOrEmpty(`$PSBoundParameters.Skip))
 $($IndentChar)$($IndentChar)$($IndentChar){
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$PSBoundParameters.Add('Skip', 0)
@@ -282,12 +258,10 @@ $($IndentChar)$($IndentChar)$($IndentChar)}"
                         }
                         $ProcessContent += "$($IndentChar)$($IndentChar)$($IndentChar)Do
 $($IndentChar)$($IndentChar)$($IndentChar){"
-                        If (-not [System.String]::IsNullOrEmpty($ContainsLimit))
-                        {
+                        If (-not [System.String]::IsNullOrEmpty($ContainsLimit)) {
                             $ProcessContent += "$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug (`"Limit: `$(`$PSBoundParameters.Limit); `");"
                         }
-                        If (-not [System.String]::IsNullOrEmpty($ContainsSkip))
-                        {
+                        If (-not [System.String]::IsNullOrEmpty($ContainsSkip)) {
                             $ProcessContent += "$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug (`"Skip: `$(`$PSBoundParameters.Skip); `");"
                         }
                         $ProcessContent += "$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Result = $ResultsLogic
@@ -305,23 +279,18 @@ $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Result
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)}
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)If (-not [System.String]::IsNullOrEmpty(`$Result))
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar){"
-                        If (-not [System.String]::IsNullOrEmpty($ContainsLimit) -or -not [System.String]::IsNullOrEmpty($ContainsSkip))
-                        {
+                        If (-not [System.String]::IsNullOrEmpty($ContainsLimit) -or -not [System.String]::IsNullOrEmpty($ContainsSkip)) {
                             $ProcessContent += "$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$ResultCount = (`$Result | Measure-Object).Count;"
                         }
                         $ProcessContent += "$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Results += `$Result;"
-                        If (-not [System.String]::IsNullOrEmpty($ContainsSkip))
-                        {
+                        If (-not [System.String]::IsNullOrEmpty($ContainsSkip)) {
                             $ProcessContent += "$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$PSBoundParameters.Skip += `$ResultCount"
                         }
                         $ProcessContent += "$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)}
 $($IndentChar)$($IndentChar)$($IndentChar)}"
-                        $ProcessContent += If (-not [System.String]::IsNullOrEmpty($ContainsLimit))
-                        {
+                        $ProcessContent += If (-not [System.String]::IsNullOrEmpty($ContainsLimit)) {
                             "$($IndentChar)$($IndentChar)$($IndentChar)While (`$ResultCount -eq `$PSBoundParameters.Limit -and -not [System.String]::IsNullOrEmpty(`$Result))"
-                        }
-                        Else
-                        {
+                        } Else {
                             "$($IndentChar)$($IndentChar)$($IndentChar)While (-not [System.String]::IsNullOrEmpty(`$Result))"
                         }
                         $ProcessContent += "$($IndentChar)$($IndentChar)}
@@ -346,9 +315,7 @@ $($IndentChar)$($IndentChar)$($IndentChar){
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Results += `$Result;
 $($IndentChar)$($IndentChar)$($IndentChar)}
 $($IndentChar)$($IndentChar)}"
-                    }
-                    Else
-                    {
+                    } Else {
                         $ProcessContent += "$($IndentChar)$($IndentChar)`$Result = $ResultsLogic
 $($IndentChar)$($IndentChar)Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
 $($IndentChar)$($IndentChar)Write-Debug ('HttpRequestContent: ' + `$JCHttpRequestContent.Result);
@@ -374,14 +341,10 @@ $($IndentChar)$($IndentChar)`$GlobalVars | ForEach-Object {
 $($IndentChar)$($IndentChar)$($IndentChar)If ((Get-Variable -Scope:('Global')).Where( { `$_.Name -eq `$_ })) { Remove-Variable -Name:(`$_) -Scope:('Global') }
 $($IndentChar)$($IndentChar)}
 $($IndentChar)$($IndentChar)Return `$Results"
-                }
-                Else
-                {
+                } Else {
                     Write-Error ('Unknown module $($ModuleName)')
                 }
-            }
-            ElseIf ($Command.Verb -in ('Restart', 'Invoke', 'New', 'Set', 'Remove', 'Start', 'Unlock', 'Update', 'Reset', 'Grant', 'Import', 'Clear', 'Lock', 'Stop', 'Sync', 'Initialize'))
-            {
+            } ElseIf ($Command.Verb -in ('Restart', 'Invoke', 'New', 'Set', 'Remove', 'Start', 'Unlock', 'Update', 'Reset', 'Grant', 'Import', 'Clear', 'Lock', 'Stop', 'Sync', 'Initialize')) {
                 # Build "Begin" block
                 $BeginContent += "$($IndentChar)$($IndentChar)`$Results = @()
 $($IndentChar)$($IndentChar)`$PSBoundParameters.Add('HttpPipelineAppend', {
@@ -396,6 +359,7 @@ $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Return `$ResponseTask
 $($IndentChar)$($IndentChar)$($IndentChar)}
 $($IndentChar)$($IndentChar))"
                 # Build "Process" block
+                # TODO: add custom code for only the Set-JcSdkUserAssociation.ps1 function
                 $ProcessContent += "$($IndentChar)$($IndentChar)`$Results = $ResultsLogic"
                 # Build "End" block
                 $EndContent += "$($IndentChar)$($IndentChar)Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
@@ -408,14 +372,11 @@ $($IndentChar)$($IndentChar)`$GlobalVars | ForEach-Object {
 $($IndentChar)$($IndentChar)$($IndentChar)If ((Get-Variable -Scope:('Global')).Where( { `$_.Name -eq `$_ })) { Remove-Variable -Name:(`$_) -Scope:('Global') }
 $($IndentChar)$($IndentChar)}
 $($IndentChar)$($IndentChar)Return `$Results"
-            }
-            Else
-            {
+            } Else {
                 Write-Error ("Unmapped command: $CommandName")
                 $null
             }
-            If (-not [System.String]::IsNullOrEmpty($BeginContent) -and -not [System.String]::IsNullOrEmpty($ProcessContent) -and -not [System.String]::IsNullOrEmpty($EndContent))
-            {
+            If (-not [System.String]::IsNullOrEmpty($BeginContent) -and -not [System.String]::IsNullOrEmpty($ProcessContent) -and -not [System.String]::IsNullOrEmpty($EndContent)) {
                 # Build "Function"
                 $NewScript = $FunctionTemplate -f '', $NewCommandName, $CmdletBinding, ($ParameterContent -join ",`n`n"), ($BeginContent -join "`n"), ($ProcessContent -join "`n"), ($EndContent -join "`n")
                 # Fix line endings
@@ -426,14 +387,13 @@ $($IndentChar)$($IndentChar)Return `$Results"
                 [System.IO.File]::WriteAllLines($OutputFilePath, $NewScript, (New-Object System.Text.UTF8Encoding $true))
             }
         }
-    }
-    Else
-    {
+    } Else {
         Write-Error ('No modules found.')
     }
-}
-Catch
-{
+} Catch {
     Get-Error
     Write-Error ($_)
 }
+
+
+# /Users/jworkman/Documents/GitHub/jcapi-powershell/BuildCustomFunctions.ps1 -ConfigPath:("/Users/jworkman/Documents/GitHub/jcapi-powershell/Configs/JumpCloud.SDK.V2.yaml") -psd1Path:("/Users/jworkman/Documents/GitHub/jcapi-powershell/SDKs/PowerShell/JumpCloud.SDK.V2/internal/JumpCloud.SDK.V2.internal.psm1") -CustomFolderPath:("/Users/jworkman/Documents/GitHub/jcapi-powershell/SDKs/PowerShell/JumpCloud.SDK.V2/custom/generated") -ExamplesFolderPath:("/Users/jworkman/Documents/GitHub/jcapi-powershell/SDKs/PowerShell/JumpCloud.SDK.V2/examples") -TestFolderPath:("/Users/jworkman/Documents/GitHub/jcapi-powershell/SDKs/PowerShell/JumpCloud.SDK.V2/test")

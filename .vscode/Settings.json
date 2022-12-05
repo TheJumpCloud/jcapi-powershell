@@ -1,4 +1,9 @@
 {
-    "powershell.scriptAnalysis.settingsPath": "jcapi-powershell/Tools/PSScriptAnalyzerSettings.psd1",
-    "powershell.scriptAnalysis.enable": true
+  "powershell.scriptAnalysis.settingsPath": "jcapi-powershell/Tools/PSScriptAnalyzerSettings.psd1",
+  "powershell.scriptAnalysis.enable": true,
+  "spellright.language": ["en"],
+  "spellright.documentTypes": ["markdown", "latex", "plaintext"],
+  "editor.formatOnSave": true,
+  "powershell.codeFormatting.preset": "OTBS",
+  "files.trimTrailingWhitespace": true
 }
