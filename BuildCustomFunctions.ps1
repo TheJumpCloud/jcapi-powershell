@@ -359,7 +359,6 @@ $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Return `$ResponseTask
 $($IndentChar)$($IndentChar)$($IndentChar)}
 $($IndentChar)$($IndentChar))"
                 # Build "Process" block
-                # TODO: add custom code for only the Set-JcSdkUserAssociation.ps1 function
                 $ProcessContent += "$($IndentChar)$($IndentChar)`$Results = $ResultsLogic"
                 # Build "End" block
                 $EndContent += "$($IndentChar)$($IndentChar)Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
@@ -394,6 +393,3 @@ $($IndentChar)$($IndentChar)Return `$Results"
     Get-Error
     Write-Error ($_)
 }
-
-
-# /Users/jworkman/Documents/GitHub/jcapi-powershell/BuildCustomFunctions.ps1 -ConfigPath:("/Users/jworkman/Documents/GitHub/jcapi-powershell/Configs/JumpCloud.SDK.V2.yaml") -psd1Path:("/Users/jworkman/Documents/GitHub/jcapi-powershell/SDKs/PowerShell/JumpCloud.SDK.V2/internal/JumpCloud.SDK.V2.internal.psm1") -CustomFolderPath:("/Users/jworkman/Documents/GitHub/jcapi-powershell/SDKs/PowerShell/JumpCloud.SDK.V2/custom/generated") -ExamplesFolderPath:("/Users/jworkman/Documents/GitHub/jcapi-powershell/SDKs/PowerShell/JumpCloud.SDK.V2/examples") -TestFolderPath:("/Users/jworkman/Documents/GitHub/jcapi-powershell/SDKs/PowerShell/JumpCloud.SDK.V2/test")
