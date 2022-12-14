@@ -31,6 +31,8 @@ $TransformConfig = [Ordered]@{
             '"system":{"properties"'                                                                                                                                                                                                = '"JcSystem":{"properties"'; # error CS0426: The type name 'ComponentModel' does not exist in the type 'System'
             '"title":"System"'                                                                                                                                                                                                      = '"title":"JcSystem"'; # error CS0426: The type name 'ComponentModel' does not exist in the type 'System'
             # V1 Issues
+            '\/systemuserputpost"}},{"\$ref":"#\/parameters\/trait:multiTenantRequestHeaders:x-org-id"},{.*?"in":"query"'                                                                                                           = '/systemuserputpost"}},{"in":"query"' # Remove very large query description, it breaks Autorest's ability to build the parameter
+            '\/systemuserput"}},{"\$ref":"#\/parameters\/trait:multiTenantRequestHeaders:x-org-id"},{.*?"in":"query"'                                                                                                               = '/systemuserput"}},{"in":"query"' # Remove very large query description, it breaks Autorest's ability to build the parameter
             '"enrollmentType":{"enum":\["unknown","automated device","device","user"\],"type":"string"},"internal":{"properties":{"deviceId":{"type":"string"},"windowsDeviceId":{"type":"string"}},"type":"object"}'               = '' # error CS0262: Partial declarations of 'IJcSystemMdmInternal' have conflicting accessibility modifiers; error CS0535: 'JcSystemMdm' does not implement interface member 'IJcSystemMdmInternal.DeviceId'
             '"systems":{"description":"Not used. Use \/api\/v2\/commands\/{id}\/associations to bind commands to systems.","items":{"type":"string"},"type":"array"}'                                                               = '' # remove unused commands system param
             '"basePath":"\/api"'                                                                                                                                                                                                    = '"basePath":"/api/"'; # The extra slash at the end is needed to properly build the url.
@@ -844,7 +846,7 @@ $SDKName | ForEach-Object {
                 $AllDefinitions = $UpdatedSwagger.definitions.PSObject.Properties.Name | Select-Object -Unique | Sort-Object
                 $AllDefinitions | ForEach-Object {
                     If ($UsedDefinitions -notcontains $_) {
-                        # Write-Warning ("Removing unused definition: $_")
+                        Write-Warning ("Removing unused definition: $_")
                         $UpdatedSwagger.definitions.PSObject.Properties.Remove($_)
                     }
                 }
@@ -855,7 +857,7 @@ $SDKName | ForEach-Object {
                 $AllParameters = $UpdatedSwagger.parameters.PSObject.Properties.Name | Select-Object -Unique | Sort-Object
                 $AllParameters | ForEach-Object {
                     If ($UsedParameters -notcontains $_) {
-                        # Write-Warning ("Removing unused parameter: $_")
+                        Write-Warning ("Removing unused parameter: $_")
                         $UpdatedSwagger.parameters.PSObject.Properties.Remove($_)
                     }
                 }
