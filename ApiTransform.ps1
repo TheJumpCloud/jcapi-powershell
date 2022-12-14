@@ -13,6 +13,7 @@ $TransformConfig = [Ordered]@{
         FindAndReplace     = [Ordered]@{
             '"name":"\w+Body","in":"body"'                                                                                                                                                  = '"name":"body","in":"body"' # Across our APIs the standard is using "body" for the name of the body
             '"search_after":{"description":"Specific query to search after, see x-\* response headers for next values","type":"array","items":{"type":"object"},"x-go-name":"SearchAfter"}' = '"search_after":{"description":"Specific query to search after, see x-* response headers for next values","type":"array","items":{"type":"string"},"x-go-name":"SearchAfter"}';
+            '"enum":\["CREATED_AT","EXPIRATION","REQUESTER_EMAIL","STATUS","TYPE","UPDATED_AT","-CREATED_AT","-EXPIRATION","-REQUESTER_EMAIL","-STATUS","-TYPE","-UPDATED_AT"\]'            = '"enum":["CREATED_AT","EXPIRATION","REQUESTER_EMAIL","STATUS","TYPE","UPDATED_AT"]'
         };
         OperationIdMapping = [Ordered]@{
             'directoryInsights_eventsCountPost'    = 'EventCount_Get';
@@ -113,6 +114,7 @@ $TransformConfig = [Ordered]@{
             'software-app-settings'                                                                                                                                   = 'SoftwareAppSettings'; # Error: Collision detected inserting into object: software-app-settings
             '"in":"body","name":"body","schema":{"\$ref":"#\/definitions\/CustomEmail"}'                                                                              = '"in":"body","name":"CustomEmail","schema":{"$ref":"#/definitions/CustomEmail"}'; # The type 'SetJcSdkInternalCustomEmailConfiguration_SetExpanded, SetJcSdkInternalCustomEmailConfiguration_SetViaIdentityExpanded, NewJcSdkInternalCustomEmailConfiguration_CreateExpanded' already contains a definition for 'Body'
             '"format":"uint32"'                                                                                                                                       = '"format":"int64"' # SI code uses uint32 which is larger than int32 . Swagger 2 doesnt have a concept of uint32 . AutoRest defaults to int32 when it sees a type of integer.
+            '"produces":\["text\/html"\]'                                                                                                                             = '' # produces text/html is not valid, just remove
             # Custom Tweaks
             # TODO: add find and replace text to generate tpm_info table
             '"operationId":"gsuites_listImportUsers","parameters":\[{"\$ref":"#\/parameters\/trait:limit:limit"},{"\$ref":"#\/parameters\/trait:gsuite:maxResults"},' = '"operationId":"gsuites_listImportUsers","parameters":[{"$ref":"#/parameters/trait:gsuite:maxResults"},' # Get-JCsdkGsuiteUsersToImport does not require a limit parameter
@@ -121,6 +123,7 @@ $TransformConfig = [Ordered]@{
             ',,'                                                                                                                                                      = ',';
             '\[,'                                                                                                                                                     = '[';
             ',]'                                                                                                                                                      = ']';
+            '"properties":{"conditions":{"description":.*?"type":"object"}'                                                                                           = '"properties":{"conditions":{"type":"object"}' # Parameter Description is declared in parameter-set 'createExpanded' multiple times in
         };
         OperationIdMapping = [Ordered]@{
             'activedirectories_agentsDelete'                    = 'ActiveDirectoryAgent_Delete';
@@ -271,7 +274,7 @@ $TransformConfig = [Ordered]@{
             'groups_policy_list'                                = 'PolicyGroup_List';
             'groups_policy_post'                                = 'PolicyGroup_Create';
             'groups_policy_put'                                 = 'PolicyGroup_Set';
-            'groups_suggestions_get'                            = 'GroupSuggestion_Get';
+            # 'groups_suggestions_get'                            = 'GroupSuggestion_Get';
             'groups_system_delete'                              = 'SystemGroup_Delete';
             'groups_system_get'                                 = 'SystemGroup_Get';
             'groups_system_list'                                = 'SystemGroup_List';
@@ -385,7 +388,14 @@ $TransformConfig = [Ordered]@{
             'systeminsights_list_wifi_networks'                 = 'SystemInsightWifiNetwork_List';
             'systeminsights_list_wifi_status'                   = 'SystemInsightWifiStatus_List';
             'systeminsights_list_windows_security_products'     = 'SystemInsightWindowSecurityProduct_List';
-            # TODO: add missing system insights tables
+            'systeminsights_list_azure_instance_metadata'       = 'SystemInsightAzureInstancceMetadata_List'
+            'systeminsights_list_azure_instance_tags'           = 'SystemInsightAzureInstanceTags_List'
+            'systeminsights_list_chassis_info'                  = 'SystemInsightCChassisInfo_List'
+            'systeminsights_list_linux_packages'                = 'SystemInsightLinuxPackages_List'
+            'systeminsights_list_secureboot'                    = 'SystemInsightSecureboot_List'
+            'systeminsights_list_userassist'                    = 'SystemInsightUserAssist_List'
+            'systeminsights_list_windows_security_center'       = 'SystemInsightWindowsSecurityCenter_List'
+            'systeminsights_list_tpm_info'                      = 'SystemInsightTpmInfo_List'
             'systems_getFDEKey'                                 = 'SystemFDEKey_Get';
             'translationRules_gSuiteDelete'                     = 'GSuiteTranslationRule_Delete';
             'translationRules_gSuiteGet'                        = 'GSuiteTranslationRule_Get';
@@ -406,6 +416,35 @@ $TransformConfig = [Ordered]@{
             'workdays_workers'                                  = 'WorkdayWorker_Get';
         };
         ExcludedList       = @(
+            '/applemdms/{apple_mdm_id}/devices/{device_id}/osUpdateStatus',
+            '/applemdms/{apple_mdm_id}/devices/{device_id}/scheduleOSUpdate',
+            '/cloudinsights/accounts',
+            '/cloudinsights/accounts/{cloud_insights_id}',
+            '/cloudinsights/events',
+            '/cloudinsights/events/distinct',
+            '/cloudinsights/views',
+            '/cloudinsights/views/{view_id}',
+            '/commandqueue/{workflow_instance_id}',
+            '/commandresult/workflows',
+            '/integrations/syncro/{UUID}',
+            '/integrations/syncro/{UUID}/companies',
+            '/integrations/syncro/{UUID}/mappings',
+            '/integrations/syncro/{UUID}/settings',
+            '/organizations/cases',
+            '/providers/{provider_id}/integrations/autotask/alerts/configuration',
+            '/providers/{provider_id}/integrations/autotask/alerts/configuration/options',
+            '/providers/{provider_id}/integrations/autotask/alerts/{alert_UUID}/configuration',
+            '/providers/{provider_id}/integrations/connectwise/alerts/configuration',
+            '/providers/{provider_id}/integrations/connectwise/alerts/configuration/options',
+            '/providers/{provider_id}/integrations/connectwise/alerts/{alert_UUID}/configuration',
+            '/providers/{provider_id}/integrations/syncro',
+            '/providers/{provider_id}/integrations/syncro/alerts/configuration',
+            '/providers/{provider_id}/integrations/syncro/alerts/configuration/options',
+            '/providers/{provider_id}/integrations/syncro/alerts/{alert_UUID}/configuration',
+            '/providers/{provider_id}/integrations/ticketing/alerts',
+            '/queuedcommand/workflows',
+            '/systems/{system_id}/softwareappstatuses',
+            '/usergroups/{group_id}/suggestions',
             '/applications/{application_id}',
             '/providers/{provider_id}'
             '/providers/{provider_id}/organizations/{id}'
