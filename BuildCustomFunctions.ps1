@@ -362,23 +362,25 @@ $($IndentChar)$($IndentChar))"
                 # temp fix for Set-JcSdkUserAssociation TODO: remove when DE-2630 is done
                 if ($NewCommandName -eq "Set-JcSdkUserAssociation") {
                     $ProcessContent += "$($IndentChar)$($IndentChar)if ((-not `$PSBoundParameters['attributes']) -and (`$PSBoundParameters['op'] -eq 'remove')) {
-                    $($IndentChar)$($IndentChar)$($IndentChar)`$PSBoundParameters.Add('attributes', @{ '' = '' })
-                    $($IndentChar)$($IndentChar)}"
+$($IndentChar)$($IndentChar)$($IndentChar)`$PSBoundParameters.Add('attributes', @{ '' = '' })
+$($IndentChar)$($IndentChar)} elseif ((`$PSBoundParameters['body']) -And (`$Body.Op -eq 'remove')) {
+$($IndentChar)$($IndentChar)$($IndentChar)`$Body.Attributes = @{ '' = '' }
+$($IndentChar)$($IndentChar)}"
                 }
                 $ProcessContent += "$($IndentChar)$($IndentChar)`$Results = $ResultsLogic"
                 # Build "End" block
                 $EndContent += "$($IndentChar)$($IndentChar)Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
-                $($IndentChar)$($IndentChar)# Write-Debug ('HttpRequestContent: ' + `$JCHttpRequestContent.Result);
-                $($IndentChar)$($IndentChar)Write-Debug ('HttpResponse: ' + `$JCHttpResponse.Result);
-                $($IndentChar)$($IndentChar)# Write-Debug ('HttpResponseContent: ' + `$JCHttpResponseContent.Result);
-                $($IndentChar)$($IndentChar)# Clean up global variables
-                $($IndentChar)$($IndentChar)`$GlobalVars = @('JCHttpRequest', 'JCHttpRequestContent', 'JCHttpResponse', 'JCHttpResponseContent')
-                $($IndentChar)$($IndentChar)`$GlobalVars | ForEach-Object {
-                    $($IndentChar)$($IndentChar)$($IndentChar)If ((Get-Variable -Scope:('Global')).Where( { `$_.Name -eq `$_ })) {
-                        Remove-Variable -Name:(`$_) -Scope:('Global')
-                    }
-                    $($IndentChar)$($IndentChar) }
-                $($IndentChar)$($IndentChar)Return `$Results"
+$($IndentChar)$($IndentChar)# Write-Debug ('HttpRequestContent: ' + `$JCHttpRequestContent.Result);
+$($IndentChar)$($IndentChar)Write-Debug ('HttpResponse: ' + `$JCHttpResponse.Result);
+$($IndentChar)$($IndentChar)# Write-Debug ('HttpResponseContent: ' + `$JCHttpResponseContent.Result);
+$($IndentChar)$($IndentChar)# Clean up global variables
+$($IndentChar)$($IndentChar)`$GlobalVars = @('JCHttpRequest', 'JCHttpRequestContent', 'JCHttpResponse', 'JCHttpResponseContent')
+$($IndentChar)$($IndentChar)`$GlobalVars | ForEach-Object {
+$($IndentChar)$($IndentChar)$($IndentChar)If ((Get-Variable -Scope:('Global')).Where( { `$_.Name -eq `$_ })) {
+        Remove-Variable -Name:(`$_) -Scope:('Global')
+    }
+$($IndentChar)$($IndentChar) }
+$($IndentChar)$($IndentChar)Return `$Results"
             } Else {
                 Write-Error ("Unmapped command: $CommandName")
                 $null
