@@ -158,7 +158,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V1.Category('Path')]
     [System.String]
     # .
-    ${Id},
+    ${Id}, 
 
     [Parameter(ParameterSetName='SetViaIdentity', Mandatory, ValueFromPipeline)]
     [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory, ValueFromPipeline)]
@@ -166,7 +166,13 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V1.Models.IJumpCloudApiIdentity]
     # Identity Parameter
     # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
-    ${InputObject},
+    ${InputObject}, 
+
+    [Parameter()]
+    [JumpCloud.SDK.V1.Category('Query')]
+    [System.String]
+    # .
+    ${FullValidationDetails}, 
 
     [Parameter(ParameterSetName='Set', Mandatory, ValueFromPipeline)]
     [Parameter(ParameterSetName='SetViaIdentity', Mandatory, ValueFromPipeline)]
@@ -174,14 +180,14 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V1.Models.ISystemuserput]
     # SystemUserPut
     # To construct, see NOTES section for BODY properties and create a hash table.
-    ${Body},
+    ${Body}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.Management.Automation.SwitchParameter]
     # .
-    ${AccountLocked},
+    ${AccountLocked}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
@@ -190,21 +196,21 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V1.Models.ISystemuserputAddressesItem[]]
     # type, poBox, extendedAddress, streetAddress, locality, region, postalCode, country
     # To construct, see NOTES section for ADDRESSES properties and create a hash table.
-    ${Addresses},
+    ${Addresses}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.Management.Automation.SwitchParameter]
     # .
-    ${AllowPublicKey},
+    ${AllowPublicKey}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # .
-    ${AlternateEmail},
+    ${AlternateEmail}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
@@ -213,210 +219,210 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V1.Models.ISystemuserputAttributesItem[]]
     # .
     # To construct, see NOTES section for ATTRIBUTES properties and create a hash table.
-    ${Attributes},
+    ${Attributes}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # .
-    ${Company},
+    ${Company}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # .
-    ${CostCenter},
+    ${CostCenter}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # .
-    ${Department},
+    ${Department}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # .
-    ${Description},
+    ${Description}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.Management.Automation.SwitchParameter]
     # .
-    ${DisableDeviceMaxLoginAttempts},
+    ${DisableDeviceMaxLoginAttempts}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # .
-    ${Displayname},
+    ${Displayname}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # .
-    ${Email},
+    ${Email}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # Must be unique per user.
-    ${EmployeeIdentifier},
+    ${EmployeeIdentifier}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # .
-    ${EmployeeType},
+    ${EmployeeType}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.Management.Automation.SwitchParameter]
     # .
-    ${EnableManagedUid},
+    ${EnableManagedUid}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.Management.Automation.SwitchParameter]
     # .
-    ${EnableUserPortalMultifactor},
+    ${EnableUserPortalMultifactor}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # .
-    ${ExternalDn},
+    ${ExternalDn}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # .
-    ${ExternalPasswordExpirationDate},
+    ${ExternalPasswordExpirationDate}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # .
-    ${ExternalSourceType},
+    ${ExternalSourceType}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.Management.Automation.SwitchParameter]
     # .
-    ${ExternallyManaged},
+    ${ExternallyManaged}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # .
-    ${Firstname},
+    ${Firstname}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # .
-    ${JobTitle},
+    ${JobTitle}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # .
-    ${Lastname},
+    ${Lastname}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.Management.Automation.SwitchParameter]
     # .
-    ${LdapBindingUser},
+    ${LdapBindingUser}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # .
-    ${Location},
+    ${Location}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # .
-    ${ManagedAppleId},
+    ${ManagedAppleId}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # Relation with another systemuser to identify the last as a manager.
-    ${Manager},
+    ${Manager}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.Management.Automation.SwitchParameter]
     # .
-    ${MfaConfigured},
+    ${MfaConfigured}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.Management.Automation.SwitchParameter]
     # .
-    ${MfaExclusion},
+    ${MfaExclusion}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.Int32]
     # .
-    ${MfaExclusionDays},
+    ${MfaExclusionDays}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.DateTime]
     # .
-    ${MfaExclusionUntil},
+    ${MfaExclusionUntil}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # .
-    ${Middlename},
+    ${Middlename}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # .
-    ${Password},
+    ${Password}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.Management.Automation.SwitchParameter]
     # .
-    ${PasswordNeverExpires},
+    ${PasswordNeverExpires}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
@@ -425,14 +431,14 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V1.Models.ISystemuserputPhoneNumbersItem[]]
     # .
     # To construct, see NOTES section for PHONENUMBERS properties and create a hash table.
-    ${PhoneNumbers},
+    ${PhoneNumbers}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # .
-    ${PublicKey},
+    ${PublicKey}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
@@ -441,14 +447,14 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V1.Models.ISystemuserputRelationshipsItem[]]
     # .
     # To construct, see NOTES section for RELATIONSHIPS properties and create a hash table.
-    ${Relationships},
+    ${Relationships}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.Management.Automation.SwitchParameter]
     # .
-    ${SambaServiceUser},
+    ${SambaServiceUser}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
@@ -457,82 +463,82 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V1.Models.ISshkeypost[]]
     # .
     # To construct, see NOTES section for SSHKEYS properties and create a hash table.
-    ${SshKeys},
+    ${SshKeys}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # .
-    ${State},
+    ${State}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.Management.Automation.SwitchParameter]
     # .
-    ${Sudo},
+    ${Sudo}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.Management.Automation.SwitchParameter]
     # .
-    ${Suspended},
+    ${Suspended}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.Int32]
     # .
-    ${UnixGuid},
+    ${UnixGuid}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.Int32]
     # .
-    ${UnixUid},
+    ${UnixUid}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # .
-    ${Username},
+    ${Username}, 
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V1.Category('Runtime')]
     [System.Management.Automation.SwitchParameter]
     # Wait for .NET debugger to attach
-    ${Break},
+    ${Break}, 
 
     [Parameter(DontShow)]
     [ValidateNotNull()]
     [JumpCloud.SDK.V1.Category('Runtime')]
     [JumpCloud.SDK.V1.Runtime.SendAsyncStep[]]
     # SendAsync Pipeline Steps to be appended to the front of the pipeline
-    ${HttpPipelineAppend},
+    ${HttpPipelineAppend}, 
 
     [Parameter(DontShow)]
     [ValidateNotNull()]
     [JumpCloud.SDK.V1.Category('Runtime')]
     [JumpCloud.SDK.V1.Runtime.SendAsyncStep[]]
     # SendAsync Pipeline Steps to be prepended to the front of the pipeline
-    ${HttpPipelinePrepend},
+    ${HttpPipelinePrepend}, 
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V1.Category('Runtime')]
     [System.Uri]
     # The URI for the proxy server to use
-    ${Proxy},
+    ${Proxy}, 
 
     [Parameter(DontShow)]
     [ValidateNotNull()]
     [JumpCloud.SDK.V1.Category('Runtime')]
     [System.Management.Automation.PSCredential]
     # Credentials for a proxy server to use for the remote call
-    ${ProxyCredential},
+    ${ProxyCredential}, 
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V1.Category('Runtime')]
@@ -568,8 +574,10 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         # Clean up global variables
         $GlobalVars = @('JCHttpRequest', 'JCHttpRequestContent', 'JCHttpResponse', 'JCHttpResponseContent')
         $GlobalVars | ForEach-Object {
-            If ((Get-Variable -Scope:('Global')).Where( { $_.Name -eq $_ })) { Remove-Variable -Name:($_) -Scope:('Global') }
-        }
+            If ((Get-Variable -Scope:('Global')).Where( { $_.Name -eq $_ })) {
+        Remove-Variable -Name:($_) -Scope:('Global')
+    }
+         }
         Return $Results
     }
 }

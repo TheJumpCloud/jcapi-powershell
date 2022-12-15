@@ -23,7 +23,7 @@ Locks a DEP-enrolled device.
 
 ### LockExpanded (Default)
 ```
-Lock-JcSdkAppleMdmDevice -AppleMdmId <String> -DeviceId <String> -Pin <String> [-PassThru] [-Confirm]
+Lock-JcSdkAppleMdmDevice -AppleMdmId <String> -DeviceId <String> [-Pin <String>] [-PassThru] [-Confirm]
  [-WhatIf] [<CommonParameters>]
 ```
 
@@ -43,7 +43,7 @@ Lock-JcSdkAppleMdmDevice -InputObject <IJumpCloudApiIdentity>
 
 ### LockViaIdentityExpanded
 ```
-Lock-JcSdkAppleMdmDevice -InputObject <IJumpCloudApiIdentity> -Pin <String> [-PassThru] [-Confirm] [-WhatIf]
+Lock-JcSdkAppleMdmDevice -InputObject <IJumpCloudApiIdentity> [-Pin <String>] [-PassThru] [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
@@ -155,14 +155,14 @@ Accept wildcard characters: False
 ```
 
 ### -Pin
-6-digit PIN required to erase the device
+6-digit PIN, required for MacOS, to lock the device
 
 ```yaml
 Type: System.String
 Parameter Sets: LockExpanded, LockViaIdentityExpanded
 Aliases:
 
-Required: True
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -223,7 +223,7 @@ To create the parameters described below, construct a hash table containing the 
 
 
 BODY <IPathsLf7IzoApplemdmsAppleMdmIdDevicesDeviceIdLockPostRequestbodyContentApplicationJsonSchema>: .
-  - `Pin <String>`: 6-digit PIN required to erase the device
+  - `[Pin <String>]`: 6-digit PIN, required for MacOS, to lock the device
 
 INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter
   - `[AccountId <String>]`: 

@@ -73,14 +73,14 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V2.Category('Path')]
     [System.String]
     # ObjectID of the Policy Group.
-    ${Id},
+    ${Id}, 
 
     [Parameter(ParameterSetName='GetViaIdentity', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Path')]
     [JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity]
     # Identity Parameter
     # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
-    ${InputObject},
+    ${InputObject}, 
 
     [Parameter(ParameterSetName='List')]
     [AllowEmptyCollection()]
@@ -88,7 +88,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [System.String[]]
     # The comma separated fields included in the returned records.
     # If omitted, the default list of fields will be returned.
-    ${Fields},
+    ${Fields}, 
 
     [Parameter(ParameterSetName='List')]
     [AllowEmptyCollection()]
@@ -108,7 +108,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     # Supports wild cards.
     # 
     # **EX:** `GET /api/v2/groups?filter=name:eq:Test+Group`
-    ${Filter},
+    ${Filter}, 
 
     [Parameter(ParameterSetName='List')]
     [AllowEmptyCollection()]
@@ -116,46 +116,46 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [System.String[]]
     # The comma separated fields used to sort the collection.
     # Default sort is ascending, prefix with `-` to sort descending.
-    ${Sort},
+    ${Sort}, 
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]
     [System.Management.Automation.SwitchParameter]
     # Wait for .NET debugger to attach
-    ${Break},
+    ${Break}, 
 
     [Parameter(DontShow)]
     [ValidateNotNull()]
     [JumpCloud.SDK.V2.Category('Runtime')]
     [JumpCloud.SDK.V2.Runtime.SendAsyncStep[]]
     # SendAsync Pipeline Steps to be appended to the front of the pipeline
-    ${HttpPipelineAppend},
+    ${HttpPipelineAppend}, 
 
     [Parameter(DontShow)]
     [ValidateNotNull()]
     [JumpCloud.SDK.V2.Category('Runtime')]
     [JumpCloud.SDK.V2.Runtime.SendAsyncStep[]]
     # SendAsync Pipeline Steps to be prepended to the front of the pipeline
-    ${HttpPipelinePrepend},
+    ${HttpPipelinePrepend}, 
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]
     [System.Uri]
     # The URI for the proxy server to use
-    ${Proxy},
+    ${Proxy}, 
 
     [Parameter(DontShow)]
     [ValidateNotNull()]
     [JumpCloud.SDK.V2.Category('Runtime')]
     [System.Management.Automation.PSCredential]
     # Credentials for a proxy server to use for the remote call
-    ${ProxyCredential},
+    ${ProxyCredential}, 
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]
     [System.Management.Automation.SwitchParameter]
     # Use the default credentials for the proxy
-    ${ProxyUseDefaultCredentials},
+    ${ProxyUseDefaultCredentials}, 
 
     [Parameter(DontShow)]
     [System.Boolean]

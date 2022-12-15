@@ -113,7 +113,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V2.Category('Path')]
     [System.String]
     # ObjectID of the System.
-    ${SystemId},
+    ${SystemId}, 
 
     [Parameter(ParameterSetName='SetViaIdentity', Mandatory, ValueFromPipeline)]
     [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory, ValueFromPipeline)]
@@ -121,19 +121,19 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity]
     # Identity Parameter
     # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
-    ${InputObject},
+    ${InputObject}, 
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Header')]
     [System.String]
     # Authorization header for the System Context API
-    ${Authorization},
+    ${Authorization}, 
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Header')]
     [System.String]
     # Current date header for the System Context API
-    ${Date},
+    ${Date}, 
 
     [Parameter(ParameterSetName='Set', Mandatory, ValueFromPipeline)]
     [Parameter(ParameterSetName='SetViaIdentity', Mandatory, ValueFromPipeline)]
@@ -141,21 +141,21 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V2.Models.IGraphOperationSystem]
     # GraphOperation (System)
     # To construct, see NOTES section for BODY properties and create a hash table.
-    ${Body},
+    ${Body}, 
 
     [Parameter(ParameterSetName='SetExpanded', Mandatory)]
     [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory)]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.String]
     # The ObjectID of graph object being added or removed as an association.
-    ${Id},
+    ${Id}, 
 
     [Parameter(ParameterSetName='SetExpanded', Mandatory)]
     [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory)]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.String]
     # How to modify the graph connection.
-    ${Op},
+    ${Op}, 
 
     [Parameter(ParameterSetName='SetExpanded', Mandatory)]
     [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory)]
@@ -163,7 +163,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V2.Category('Body')]
     [JumpCloud.SDK.V2.Support.GraphOperationSystem3]
     # Targets which a "system" can be associated to.
-    ${Type},
+    ${Type}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
@@ -171,46 +171,46 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V2.Runtime.Info(PossibleTypes=([JumpCloud.SDK.V2.Models.IGraphOperationSystemAttributes]))]
     [System.Collections.Hashtable]
     # .
-    ${Attributes},
+    ${Attributes}, 
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]
     [System.Management.Automation.SwitchParameter]
     # Wait for .NET debugger to attach
-    ${Break},
+    ${Break}, 
 
     [Parameter(DontShow)]
     [ValidateNotNull()]
     [JumpCloud.SDK.V2.Category('Runtime')]
     [JumpCloud.SDK.V2.Runtime.SendAsyncStep[]]
     # SendAsync Pipeline Steps to be appended to the front of the pipeline
-    ${HttpPipelineAppend},
+    ${HttpPipelineAppend}, 
 
     [Parameter(DontShow)]
     [ValidateNotNull()]
     [JumpCloud.SDK.V2.Category('Runtime')]
     [JumpCloud.SDK.V2.Runtime.SendAsyncStep[]]
     # SendAsync Pipeline Steps to be prepended to the front of the pipeline
-    ${HttpPipelinePrepend},
+    ${HttpPipelinePrepend}, 
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Runtime')]
     [System.Management.Automation.SwitchParameter]
     # Returns true when the command succeeds
-    ${PassThru},
+    ${PassThru}, 
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]
     [System.Uri]
     # The URI for the proxy server to use
-    ${Proxy},
+    ${Proxy}, 
 
     [Parameter(DontShow)]
     [ValidateNotNull()]
     [JumpCloud.SDK.V2.Category('Runtime')]
     [System.Management.Automation.PSCredential]
     # Credentials for a proxy server to use for the remote call
-    ${ProxyCredential},
+    ${ProxyCredential}, 
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]
@@ -246,8 +246,10 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         # Clean up global variables
         $GlobalVars = @('JCHttpRequest', 'JCHttpRequestContent', 'JCHttpResponse', 'JCHttpResponseContent')
         $GlobalVars | ForEach-Object {
-            If ((Get-Variable -Scope:('Global')).Where( { $_.Name -eq $_ })) { Remove-Variable -Name:($_) -Scope:('Global') }
-        }
+            If ((Get-Variable -Scope:('Global')).Where( { $_.Name -eq $_ })) {
+        Remove-Variable -Name:($_) -Scope:('Global')
+    }
+         }
         Return $Results
     }
 }

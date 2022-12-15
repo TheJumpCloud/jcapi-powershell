@@ -10,21 +10,16 @@ schema: 2.0.0
 ## SYNOPSIS
 This endpoint allows you to create a new command.
 
-#### Sample Request
+NOTE: the system property in the command is not used.
+Use a POST to /api/v2/commands/{id}/associations to bind a command to a system.
 
+#### Sample Request
 ```
 curl -X POST https://console.jumpcloud.com/api/commands/ \\
   -H 'Accept: application/json' \\
-  -H 'Content-Type: application/json' \\
-  -H 'x-api-key: {API_KEY}' \\
-  -d '{
-\t\"name\":\"Test API Command\",
-\t\"command\":\"String\",
-\t\"user\":\"{UserID}\",
-\t\"schedule\":\"\",
-\t\"timeout\":\"100\"
-}'
-
+  -H 'Content-Type: application/json'
+  -H 'x-api-key: {API_KEY}'
+  -d '{\"name\":\"Test API Command\", \"command\":\"String\", \"user\":\"{UserID}\", \"schedule\":\"\", \"timeout\":\"100\"}'
 ```
 
 ## SYNTAX
@@ -33,9 +28,9 @@ curl -X POST https://console.jumpcloud.com/api/commands/ \\
 ```
 New-JcSdkCommand -Command <String> -CommandType <String> -Name <String> [-CommandRunners <String[]>]
  [-Files <String[]>] [-LaunchType <String>] [-ListensTo <String>] [-Organization <String>]
- [-Schedule <String>] [-ScheduleRepeatType <String>] [-Shell <String>] [-Sudo] [-Systems <String[]>]
- [-Timeout <String>] [-TimeToLiveSeconds <Int32>] [-Trigger <String>] [-User <String>] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+ [-Schedule <String>] [-ScheduleRepeatType <String>] [-ScheduleYear <Int32>] [-Shell <String>] [-Sudo]
+ [-Template <String>] [-Timeout <String>] [-TimeToLiveSeconds <Int32>] [-Trigger <String>] [-User <String>]
+ [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Create
@@ -46,21 +41,16 @@ New-JcSdkCommand -Body <ICommand> [-Confirm] [-WhatIf] [<CommonParameters>]
 ## DESCRIPTION
 This endpoint allows you to create a new command.
 
-#### Sample Request
+NOTE: the system property in the command is not used.
+Use a POST to /api/v2/commands/{id}/associations to bind a command to a system.
 
+#### Sample Request
 ```
 curl -X POST https://console.jumpcloud.com/api/commands/ \\
   -H 'Accept: application/json' \\
-  -H 'Content-Type: application/json' \\
-  -H 'x-api-key: {API_KEY}' \\
-  -d '{
-\t\"name\":\"Test API Command\",
-\t\"command\":\"String\",
-\t\"user\":\"{UserID}\",
-\t\"schedule\":\"\",
-\t\"timeout\":\"100\"
-}'
-
+  -H 'Content-Type: application/json'
+  -H 'x-api-key: {API_KEY}'
+  -d '{\"name\":\"Test API Command\", \"command\":\"String\", \"user\":\"{UserID}\", \"schedule\":\"\", \"timeout\":\"100\"}'
 ```
 
 ## EXAMPLES
@@ -248,6 +238,21 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -ScheduleYear
+The year that a scheduled command will launch in.
+
+```yaml
+Type: System.Int32
+Parameter Sets: CreateExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Shell
 The shell used to run the command.
 
@@ -278,12 +283,11 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Systems
-An array of system IDs to run the command on.
-Not available if you are using Groups.
+### -Template
+The template this command was created from
 
 ```yaml
-Type: System.String[]
+Type: System.String
 Parameter Sets: CreateExpanded
 Aliases:
 
@@ -417,9 +421,10 @@ BODY <ICommand>: Command
   - `[Organization <String>]`: The ID of the organization.
   - `[Schedule <String>]`: A crontab that consists of: [ (seconds) (minutes) (hours) (days of month) (months) (weekdays) ] or [ immediate ]. If you send this as an empty string, it will run immediately.         
   - `[ScheduleRepeatType <String>]`: When the command will repeat.
+  - `[ScheduleYear <Int32?>]`: The year that a scheduled command will launch in.
   - `[Shell <String>]`: The shell used to run the command.
   - `[Sudo <Boolean?>]`: 
-  - `[Systems <String[]>]`: An array of system IDs to run the command on. Not available if you are using Groups.
+  - `[Template <String>]`: The template this command was created from
   - `[TimeToLiveSeconds <Int32?>]`: Time in seconds a command can wait in the queue to be run before timing out
   - `[Timeout <String>]`: The time in seconds to allow the command to run for.
   - `[Trigger <String>]`: The name of the command trigger.

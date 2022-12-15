@@ -1,8 +1,10 @@
 <#
 .Synopsis
 The endpoint updates a SSO / SAML Application.
+Any fields not provided will be reset or created with default values.
 .Description
 The endpoint updates a SSO / SAML Application.
+Any fields not provided will be reset or created with default values.
 .Example
 PS C:\> {{ Add code here }}
 
@@ -120,6 +122,7 @@ BODY <IApplication>:
   [LogoUrl <String>]:
   [Organization <String>]:
   [SsoBeta <Boolean?>]:
+  [SsoHidden <Boolean?>]:
   [SsoIdpCertExpirationAt <DateTime?>]:
   [SsoJit <Boolean?>]:
   [SsoType <String>]:
@@ -224,7 +227,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V1.Category('Path')]
     [System.String]
     # .
-    ${Id},
+    ${Id}, 
 
     [Parameter(ParameterSetName='SetViaIdentity', Mandatory, ValueFromPipeline)]
     [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory, ValueFromPipeline)]
@@ -232,7 +235,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V1.Models.IJumpCloudApiIdentity]
     # Identity Parameter
     # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
-    ${InputObject},
+    ${InputObject}, 
 
     [Parameter(ParameterSetName='Set', Mandatory, ValueFromPipeline)]
     [Parameter(ParameterSetName='SetViaIdentity', Mandatory, ValueFromPipeline)]
@@ -240,7 +243,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V1.Models.IApplication]
     # Application
     # To construct, see NOTES section for BODY properties and create a hash table.
-    ${Body},
+    ${Body}, 
 
     [Parameter(ParameterSetName='SetExpanded', Mandatory)]
     [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory)]
@@ -248,49 +251,49 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V1.Models.IApplicationConfig]
     # .
     # To construct, see NOTES section for CONFIG properties and create a hash table.
-    ${Config},
+    ${Config}, 
 
     [Parameter(ParameterSetName='SetExpanded', Mandatory)]
     [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory)]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # .
-    ${Name},
+    ${Name}, 
 
     [Parameter(ParameterSetName='SetExpanded', Mandatory)]
     [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory)]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # .
-    ${SsoUrl},
+    ${SsoUrl}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.Management.Automation.SwitchParameter]
     # .
-    ${Active},
+    ${Active}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.Management.Automation.SwitchParameter]
     # .
-    ${Beta},
+    ${Beta}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # .
-    ${Color},
+    ${Color}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # .
-    ${Created},
+    ${Created}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
@@ -298,123 +301,130 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V1.Category('Body')]
     [JumpCloud.SDK.V1.Models.IApplicationDatabaseAttributesItem[]]
     # .
-    ${DatabaseAttributes},
+    ${DatabaseAttributes}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # .
-    ${Description},
+    ${Description}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # .
-    ${DisplayLabel},
+    ${DisplayLabel}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # .
-    ${DisplayName},
+    ${DisplayName}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # .
-    ${Id1},
-
-    [Parameter(ParameterSetName='SetExpanded')]
-    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
-    [JumpCloud.SDK.V1.Category('Body')]
-    [System.String]
-    # .
-    ${LearnMore},
+    ${Id1}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # .
-    ${LogoColor},
+    ${LearnMore}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # .
-    ${LogoUrl},
+    ${LogoColor}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # .
-    ${Organization},
+    ${LogoUrl}, 
+
+    [Parameter(ParameterSetName='SetExpanded')]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
+    [JumpCloud.SDK.V1.Category('Body')]
+    [System.String]
+    # .
+    ${Organization}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.Management.Automation.SwitchParameter]
     # .
-    ${SsoBeta},
+    ${SsoBeta}, 
+
+    [Parameter(ParameterSetName='SetExpanded')]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
+    [JumpCloud.SDK.V1.Category('Body')]
+    [System.Management.Automation.SwitchParameter]
+    # .
+    ${SsoHidden}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.DateTime]
     # .
-    ${SsoIdpCertExpirationAt},
+    ${SsoIdpCertExpirationAt}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.Management.Automation.SwitchParameter]
     # .
-    ${SsoJit},
+    ${SsoJit}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # .
-    ${SsoType},
+    ${SsoType}, 
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V1.Category('Runtime')]
     [System.Management.Automation.SwitchParameter]
     # Wait for .NET debugger to attach
-    ${Break},
+    ${Break}, 
 
     [Parameter(DontShow)]
     [ValidateNotNull()]
     [JumpCloud.SDK.V1.Category('Runtime')]
     [JumpCloud.SDK.V1.Runtime.SendAsyncStep[]]
     # SendAsync Pipeline Steps to be appended to the front of the pipeline
-    ${HttpPipelineAppend},
+    ${HttpPipelineAppend}, 
 
     [Parameter(DontShow)]
     [ValidateNotNull()]
     [JumpCloud.SDK.V1.Category('Runtime')]
     [JumpCloud.SDK.V1.Runtime.SendAsyncStep[]]
     # SendAsync Pipeline Steps to be prepended to the front of the pipeline
-    ${HttpPipelinePrepend},
+    ${HttpPipelinePrepend}, 
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V1.Category('Runtime')]
     [System.Uri]
     # The URI for the proxy server to use
-    ${Proxy},
+    ${Proxy}, 
 
     [Parameter(DontShow)]
     [ValidateNotNull()]
     [JumpCloud.SDK.V1.Category('Runtime')]
     [System.Management.Automation.PSCredential]
     # Credentials for a proxy server to use for the remote call
-    ${ProxyCredential},
+    ${ProxyCredential}, 
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V1.Category('Runtime')]
@@ -450,8 +460,10 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         # Clean up global variables
         $GlobalVars = @('JCHttpRequest', 'JCHttpRequestContent', 'JCHttpResponse', 'JCHttpResponseContent')
         $GlobalVars | ForEach-Object {
-            If ((Get-Variable -Scope:('Global')).Where( { $_.Name -eq $_ })) { Remove-Variable -Name:($_) -Scope:('Global') }
-        }
+            If ((Get-Variable -Scope:('Global')).Where( { $_.Name -eq $_ })) {
+        Remove-Variable -Name:($_) -Scope:('Global')
+    }
+         }
         Return $Results
     }
 }

@@ -118,6 +118,7 @@ BODY <IApplication>:
   [LogoUrl <String>]:
   [Organization <String>]:
   [SsoBeta <Boolean?>]:
+  [SsoHidden <Boolean?>]:
   [SsoIdpCertExpirationAt <DateTime?>]:
   [SsoJit <Boolean?>]:
   [SsoType <String>]:
@@ -215,162 +216,168 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V1.Models.IApplication]
     # Application
     # To construct, see NOTES section for BODY properties and create a hash table.
-    ${Body},
+    ${Body}, 
 
     [Parameter(ParameterSetName='CreateExpanded', Mandatory)]
     [JumpCloud.SDK.V1.Category('Body')]
     [JumpCloud.SDK.V1.Models.IApplicationConfig]
     # .
     # To construct, see NOTES section for CONFIG properties and create a hash table.
-    ${Config},
+    ${Config}, 
 
     [Parameter(ParameterSetName='CreateExpanded', Mandatory)]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # .
-    ${Name},
+    ${Name}, 
 
     [Parameter(ParameterSetName='CreateExpanded', Mandatory)]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # .
-    ${SsoUrl},
+    ${SsoUrl}, 
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.Management.Automation.SwitchParameter]
     # .
-    ${Active},
+    ${Active}, 
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.Management.Automation.SwitchParameter]
     # .
-    ${Beta},
+    ${Beta}, 
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # .
-    ${Color},
+    ${Color}, 
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # .
-    ${Created},
+    ${Created}, 
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [AllowEmptyCollection()]
     [JumpCloud.SDK.V1.Category('Body')]
     [JumpCloud.SDK.V1.Models.IApplicationDatabaseAttributesItem[]]
     # .
-    ${DatabaseAttributes},
+    ${DatabaseAttributes}, 
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # .
-    ${Description},
+    ${Description}, 
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # .
-    ${DisplayLabel},
+    ${DisplayLabel}, 
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # .
-    ${DisplayName},
+    ${DisplayName}, 
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # .
-    ${Id},
+    ${Id}, 
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # .
-    ${LearnMore},
+    ${LearnMore}, 
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # .
-    ${LogoColor},
+    ${LogoColor}, 
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # .
-    ${LogoUrl},
+    ${LogoUrl}, 
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # .
-    ${Organization},
+    ${Organization}, 
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.Management.Automation.SwitchParameter]
     # .
-    ${SsoBeta},
+    ${SsoBeta}, 
+
+    [Parameter(ParameterSetName='CreateExpanded')]
+    [JumpCloud.SDK.V1.Category('Body')]
+    [System.Management.Automation.SwitchParameter]
+    # .
+    ${SsoHidden}, 
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.DateTime]
     # .
-    ${SsoIdpCertExpirationAt},
+    ${SsoIdpCertExpirationAt}, 
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.Management.Automation.SwitchParameter]
     # .
-    ${SsoJit},
+    ${SsoJit}, 
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # .
-    ${SsoType},
+    ${SsoType}, 
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V1.Category('Runtime')]
     [System.Management.Automation.SwitchParameter]
     # Wait for .NET debugger to attach
-    ${Break},
+    ${Break}, 
 
     [Parameter(DontShow)]
     [ValidateNotNull()]
     [JumpCloud.SDK.V1.Category('Runtime')]
     [JumpCloud.SDK.V1.Runtime.SendAsyncStep[]]
     # SendAsync Pipeline Steps to be appended to the front of the pipeline
-    ${HttpPipelineAppend},
+    ${HttpPipelineAppend}, 
 
     [Parameter(DontShow)]
     [ValidateNotNull()]
     [JumpCloud.SDK.V1.Category('Runtime')]
     [JumpCloud.SDK.V1.Runtime.SendAsyncStep[]]
     # SendAsync Pipeline Steps to be prepended to the front of the pipeline
-    ${HttpPipelinePrepend},
+    ${HttpPipelinePrepend}, 
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V1.Category('Runtime')]
     [System.Uri]
     # The URI for the proxy server to use
-    ${Proxy},
+    ${Proxy}, 
 
     [Parameter(DontShow)]
     [ValidateNotNull()]
     [JumpCloud.SDK.V1.Category('Runtime')]
     [System.Management.Automation.PSCredential]
     # Credentials for a proxy server to use for the remote call
-    ${ProxyCredential},
+    ${ProxyCredential}, 
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V1.Category('Runtime')]
@@ -406,8 +413,10 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         # Clean up global variables
         $GlobalVars = @('JCHttpRequest', 'JCHttpRequestContent', 'JCHttpResponse', 'JCHttpResponseContent')
         $GlobalVars | ForEach-Object {
-            If ((Get-Variable -Scope:('Global')).Where( { $_.Name -eq $_ })) { Remove-Variable -Name:($_) -Scope:('Global') }
-        }
+            If ((Get-Variable -Scope:('Global')).Where( { $_.Name -eq $_ })) {
+        Remove-Variable -Name:($_) -Scope:('Global')
+    }
+         }
         Return $Results
     }
 }

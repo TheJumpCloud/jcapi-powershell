@@ -3,13 +3,13 @@
 Query the API for Directory Insights events
 #### Sample Request
 ```
-curl -X POST 'https://api.jumpcloud.com/insights/directory/v1/events' -H 'Content-Type: application/json' -H 'x-api-key: {API_KEY}' --data '{\"service\": [\"all\"], \"start_time\": \"2021-07-14T23:00:00Z\", \"end_time\": \"2021-07-28T14:00:00Z\", \"sort\": \"DESC\", \"fields\": [\"timestamp\", \"event_type\", \"initiated_by\", \"success\", \"client_ip\", \"provider\", \"organization\"]}'
+curl -X POST 'https://api.jumpcloud.com/insights/directory/v1/events' -H 'Content-Type: application/json' -H 'x-api-key: REPLACE_KEY_VALUE' --data '{\"service\": [\"all\"], \"start_time\": \"2021-07-14T23:00:00Z\", \"end_time\": \"2021-07-28T14:00:00Z\", \"sort\": \"DESC\", \"fields\": [\"timestamp\", \"event_type\", \"initiated_by\", \"success\", \"client_ip\", \"provider\", \"organization\"]}'
 ```
 .Description
 Query the API for Directory Insights events
 #### Sample Request
 ```
-curl -X POST 'https://api.jumpcloud.com/insights/directory/v1/events' -H 'Content-Type: application/json' -H 'x-api-key: {API_KEY}' --data '{\"service\": [\"all\"], \"start_time\": \"2021-07-14T23:00:00Z\", \"end_time\": \"2021-07-28T14:00:00Z\", \"sort\": \"DESC\", \"fields\": [\"timestamp\", \"event_type\", \"initiated_by\", \"success\", \"client_ip\", \"provider\", \"organization\"]}'
+curl -X POST 'https://api.jumpcloud.com/insights/directory/v1/events' -H 'Content-Type: application/json' -H 'x-api-key: REPLACE_KEY_VALUE' --data '{\"service\": [\"all\"], \"start_time\": \"2021-07-14T23:00:00Z\", \"end_time\": \"2021-07-28T14:00:00Z\", \"sort\": \"DESC\", \"fields\": [\"timestamp\", \"event_type\", \"initiated_by\", \"success\", \"client_ip\", \"provider\", \"organization\"]}'
 ```
 .Example
 PS C:\> Get-JcSdkEvent -Service:('all') -StartTime:((Get-date).AddDays(-30))
@@ -62,6 +62,7 @@ BODY <IEventQuery>:
   [SearchAfter <String[]>]: Specific query to search after, see x-* response headers for next values
   [SearchTermAnd <ITermConjunction>]: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
     [(Any) <Object>]: This indicates any property can be added to this object.
+  [SearchTermNot <ITermConjunction>]: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
   [SearchTermOr <ITermConjunction>]: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
   [Sort <String>]: ASC or DESC order for timestamp
 .Link
@@ -77,99 +78,106 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.DirectoryInsights.Models.IEventQuery]
     # EventQuery is the users' command to search our auth logs
     # To construct, see NOTES section for BODY properties and create a hash table.
-    ${Body},
+    ${Body}, 
 
     [Parameter(ParameterSetName='GetExpanded', Mandatory)]
     [AllowEmptyCollection()]
     [JumpCloud.SDK.DirectoryInsights.Category('Body')]
     [System.String[]]
     # service name to query.
-    ${Service},
+    ${Service}, 
 
     [Parameter(ParameterSetName='GetExpanded', Mandatory)]
     [JumpCloud.SDK.DirectoryInsights.Category('Body')]
     [System.DateTime]
     # query start time, UTC in RFC3339 format
-    ${StartTime},
+    ${StartTime}, 
 
     [Parameter(ParameterSetName='GetExpanded')]
     [JumpCloud.SDK.DirectoryInsights.Category('Body')]
     [System.DateTime]
     # optional query end time, UTC in RFC3339 format
-    ${EndTime},
+    ${EndTime}, 
 
     [Parameter(ParameterSetName='GetExpanded')]
     [AllowEmptyCollection()]
     [JumpCloud.SDK.DirectoryInsights.Category('Body')]
     [System.String[]]
     # optional list of fields to return from query
-    ${Fields},
+    ${Fields}, 
 
     [Parameter(ParameterSetName='GetExpanded')]
     [AllowEmptyCollection()]
     [JumpCloud.SDK.DirectoryInsights.Category('Body')]
     [System.String[]]
     # Specific query to search after, see x-* response headers for next values
-    ${SearchAfter},
+    ${SearchAfter}, 
 
     [Parameter(ParameterSetName='GetExpanded')]
     [JumpCloud.SDK.DirectoryInsights.Category('Body')]
     [JumpCloud.SDK.DirectoryInsights.Runtime.Info(PossibleTypes=([JumpCloud.SDK.DirectoryInsights.Models.ITermConjunction]))]
     [System.Collections.Hashtable]
     # TermConjunction represents a conjunction (and/or)NOTE: the validator limits what the operator can be, not the objectfor future-proof-nessand a list of sub-values
-    ${SearchTermAnd},
+    ${SearchTermAnd}, 
 
     [Parameter(ParameterSetName='GetExpanded')]
     [JumpCloud.SDK.DirectoryInsights.Category('Body')]
     [JumpCloud.SDK.DirectoryInsights.Runtime.Info(PossibleTypes=([JumpCloud.SDK.DirectoryInsights.Models.ITermConjunction]))]
     [System.Collections.Hashtable]
     # TermConjunction represents a conjunction (and/or)NOTE: the validator limits what the operator can be, not the objectfor future-proof-nessand a list of sub-values
-    ${SearchTermOr},
+    ${SearchTermNot}, 
+
+    [Parameter(ParameterSetName='GetExpanded')]
+    [JumpCloud.SDK.DirectoryInsights.Category('Body')]
+    [JumpCloud.SDK.DirectoryInsights.Runtime.Info(PossibleTypes=([JumpCloud.SDK.DirectoryInsights.Models.ITermConjunction]))]
+    [System.Collections.Hashtable]
+    # TermConjunction represents a conjunction (and/or)NOTE: the validator limits what the operator can be, not the objectfor future-proof-nessand a list of sub-values
+    ${SearchTermOr}, 
 
     [Parameter(ParameterSetName='GetExpanded')]
     [JumpCloud.SDK.DirectoryInsights.Category('Body')]
     [System.String]
     # ASC or DESC order for timestamp
-    ${Sort},
+    ${Sort}, 
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.DirectoryInsights.Category('Runtime')]
     [System.Management.Automation.SwitchParameter]
     # Wait for .NET debugger to attach
-    ${Break},
+    ${Break}, 
 
     [Parameter(DontShow)]
     [ValidateNotNull()]
     [JumpCloud.SDK.DirectoryInsights.Category('Runtime')]
     [JumpCloud.SDK.DirectoryInsights.Runtime.SendAsyncStep[]]
     # SendAsync Pipeline Steps to be appended to the front of the pipeline
-    ${HttpPipelineAppend},
+    ${HttpPipelineAppend}, 
 
     [Parameter(DontShow)]
     [ValidateNotNull()]
     [JumpCloud.SDK.DirectoryInsights.Category('Runtime')]
     [JumpCloud.SDK.DirectoryInsights.Runtime.SendAsyncStep[]]
     # SendAsync Pipeline Steps to be prepended to the front of the pipeline
-    ${HttpPipelinePrepend},
+    ${HttpPipelinePrepend}, 
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.DirectoryInsights.Category('Runtime')]
     [System.Uri]
     # The URI for the proxy server to use
-    ${Proxy},
+    ${Proxy}, 
 
     [Parameter(DontShow)]
     [ValidateNotNull()]
     [JumpCloud.SDK.DirectoryInsights.Category('Runtime')]
     [System.Management.Automation.PSCredential]
     # Credentials for a proxy server to use for the remote call
-    ${ProxyCredential},
+    ${ProxyCredential}, 
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.DirectoryInsights.Category('Runtime')]
     [System.Management.Automation.SwitchParameter]
     # Use the default credentials for the proxy
-    ${ProxyUseDefaultCredentials},
+    ${ProxyUseDefaultCredentials}, 
 
     [Parameter(DontShow)]
     [System.Boolean]

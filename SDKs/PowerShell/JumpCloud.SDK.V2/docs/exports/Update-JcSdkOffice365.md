@@ -29,7 +29,7 @@ curl -X PATCH https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID} \\
 
 ### UpdateExpanded (Default)
 ```
-Update-JcSdkOffice365 -Office365Id <String> [-Name <String>] [-UserLockoutAction <String>]
+Update-JcSdkOffice365 -Office365Id <String> [-GroupsEnabled] [-Name <String>] [-UserLockoutAction <String>]
  [-UserPasswordExpirationAction <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
@@ -47,8 +47,9 @@ Update-JcSdkOffice365 -InputObject <IJumpCloudApiIdentity> -Body <IOffice365Patc
 
 ### UpdateViaIdentityExpanded
 ```
-Update-JcSdkOffice365 -InputObject <IJumpCloudApiIdentity> [-Name <String>] [-UserLockoutAction <String>]
- [-UserPasswordExpirationAction <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+Update-JcSdkOffice365 -InputObject <IJumpCloudApiIdentity> [-GroupsEnabled] [-Name <String>]
+ [-UserLockoutAction <String>] [-UserPasswordExpirationAction <String>] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -100,6 +101,21 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -GroupsEnabled
+.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -233,6 +249,7 @@ To create the parameters described below, construct a hash table containing the 
 
 
 BODY <IOffice365PatchInput>: Office 365 Patch Input
+  - `[GroupsEnabled <Boolean?>]`: 
   - `[Name <String>]`: 
   - `[UserLockoutAction <String>]`: 
   - `[UserPasswordExpirationAction <String>]`: 

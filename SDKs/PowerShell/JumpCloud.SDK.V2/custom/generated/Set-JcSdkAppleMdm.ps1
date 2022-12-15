@@ -69,6 +69,7 @@ To create the parameters described below, construct a hash table containing the 
 
 BODY <IAppleMdmPatchInput>:
   [AllowMobileUserEnrollment <Boolean?>]: A toggle to allow mobile device enrollment for an organization.
+  [AppleCertCreatorAppleId <String>]: The Apple ID of the admin who created the Apple signed certificate.
   [AppleSignedCert <String>]: A signed certificate obtained from Apple after providing Apple with the plist file provided on POST.
   [DefaultIosUserEnrollmentDeviceGroupId <String>]: ObjectId uniquely identifying the MDM default iOS user enrollment device group.
   [DefaultSystemGroupId <String>]: ObjectId uniquely identifying the MDM default System Group.
@@ -139,7 +140,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V2.Category('Path')]
     [System.String]
     # .
-    ${Id},
+    ${Id}, 
 
     [Parameter(ParameterSetName='SetViaIdentity', Mandatory, ValueFromPipeline)]
     [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory, ValueFromPipeline)]
@@ -147,7 +148,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity]
     # Identity Parameter
     # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
-    ${InputObject},
+    ${InputObject}, 
 
     [Parameter(ParameterSetName='Set', Mandatory, ValueFromPipeline)]
     [Parameter(ParameterSetName='SetViaIdentity', Mandatory, ValueFromPipeline)]
@@ -155,42 +156,49 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V2.Models.IAppleMdmPatchInput]
     # Apple MDM Patch Input
     # To construct, see NOTES section for BODY properties and create a hash table.
-    ${Body},
+    ${Body}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.Management.Automation.SwitchParameter]
     # A toggle to allow mobile device enrollment for an organization.
-    ${AllowMobileUserEnrollment},
+    ${AllowMobileUserEnrollment}, 
+
+    [Parameter(ParameterSetName='SetExpanded')]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [System.String]
+    # The Apple ID of the admin who created the Apple signed certificate.
+    ${AppleCertCreatorAppleId}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.String]
     # A signed certificate obtained from Apple after providing Apple with the plist file provided on POST.
-    ${AppleSignedCert},
+    ${AppleSignedCert}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.String]
     # ObjectId uniquely identifying the MDM default iOS user enrollment device group.
-    ${DefaultIosUserEnrollmentDeviceGroupId},
+    ${DefaultIosUserEnrollmentDeviceGroupId}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.String]
     # ObjectId uniquely identifying the MDM default System Group.
-    ${DefaultSystemGroupId},
+    ${DefaultSystemGroupId}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.Management.Automation.SwitchParameter]
     # A toggle to determine if DEP registered devices should go through JumpCloud Zero Touch Enrollment.
-    ${DepEnableZeroTouchEnrollment},
+    ${DepEnableZeroTouchEnrollment}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
@@ -199,14 +207,14 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V2.Models.IDepSetupAssistantOption[]]
     # .
     # To construct, see NOTES section for DEPSETUPASSISTANTOPTIONS properties and create a hash table.
-    ${DepSetupAssistantOptions},
+    ${DepSetupAssistantOptions}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.String]
     # The S/MIME encoded DEP Server Token returned by Apple Business Manager when creating an MDM instance.
-    ${EncryptedDepServerToken},
+    ${EncryptedDepServerToken}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
@@ -215,14 +223,14 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [System.String[]]
     # An array of ObjectIDs identifying the default device groups for this specific type (based on the OS family) of automated device enrollment.
     # Currently, only a single DeviceGroupID is supported.
-    ${IoDefaultDeviceGroupObjectIds},
+    ${IoDefaultDeviceGroupObjectIds}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.Management.Automation.SwitchParameter]
     # A toggle to determine if ADE registered devices should go through JumpCloud Zero Touch Enrollment.
-    ${IoEnableZeroTouchEnrollment},
+    ${IoEnableZeroTouchEnrollment}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
@@ -231,28 +239,28 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V2.Models.IDepSetupAssistantOption[]]
     # .
     # To construct, see NOTES section for IOSETUPASSISTANTOPTIONS properties and create a hash table.
-    ${IoSetupAssistantOptions},
+    ${IoSetupAssistantOptions}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.String]
     # Text to display on the button on the DEP Welcome Screen.
-    ${IosWelcomeScreenButton},
+    ${IosWelcomeScreenButton}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.String]
     # A message to display on the DEP Welcome Screen.
-    ${IosWelcomeScreenParagraph},
+    ${IosWelcomeScreenParagraph}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.String]
     # The title to display on the DEP Welcome Screen.
-    ${IosWelcomeScreenTitle},
+    ${IosWelcomeScreenTitle}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
@@ -261,14 +269,14 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [System.String[]]
     # An array of ObjectIDs identifying the default device groups for this specific type (based on the OS family) of automated device enrollment.
     # Currently, only a single DeviceGroupID is supported.
-    ${MacoDefaultDeviceGroupObjectIds},
+    ${MacoDefaultDeviceGroupObjectIds}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.Management.Automation.SwitchParameter]
     # A toggle to determine if ADE registered devices should go through JumpCloud Zero Touch Enrollment.
-    ${MacoEnableZeroTouchEnrollment},
+    ${MacoEnableZeroTouchEnrollment}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
@@ -277,89 +285,89 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V2.Models.IDepSetupAssistantOption[]]
     # .
     # To construct, see NOTES section for MACOSETUPASSISTANTOPTIONS properties and create a hash table.
-    ${MacoSetupAssistantOptions},
+    ${MacoSetupAssistantOptions}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.String]
     # Text to display on the button on the DEP Welcome Screen.
-    ${MacosWelcomeScreenButton},
+    ${MacosWelcomeScreenButton}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.String]
     # A message to display on the DEP Welcome Screen.
-    ${MacosWelcomeScreenParagraph},
+    ${MacosWelcomeScreenParagraph}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.String]
     # The title to display on the DEP Welcome Screen.
-    ${MacosWelcomeScreenTitle},
+    ${MacosWelcomeScreenTitle}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.String]
     # A new name for the Apple MDM configuration.
-    ${Name},
+    ${Name}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.String]
     # Text to display on the button on the DEP Welcome Screen.
-    ${WelcomeScreenButton},
+    ${WelcomeScreenButton}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.String]
     # A message to display on the DEP Welcome Screen.
-    ${WelcomeScreenParagraph},
+    ${WelcomeScreenParagraph}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.String]
     # The title to display on the DEP Welcome Screen.
-    ${WelcomeScreenTitle},
+    ${WelcomeScreenTitle}, 
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]
     [System.Management.Automation.SwitchParameter]
     # Wait for .NET debugger to attach
-    ${Break},
+    ${Break}, 
 
     [Parameter(DontShow)]
     [ValidateNotNull()]
     [JumpCloud.SDK.V2.Category('Runtime')]
     [JumpCloud.SDK.V2.Runtime.SendAsyncStep[]]
     # SendAsync Pipeline Steps to be appended to the front of the pipeline
-    ${HttpPipelineAppend},
+    ${HttpPipelineAppend}, 
 
     [Parameter(DontShow)]
     [ValidateNotNull()]
     [JumpCloud.SDK.V2.Category('Runtime')]
     [JumpCloud.SDK.V2.Runtime.SendAsyncStep[]]
     # SendAsync Pipeline Steps to be prepended to the front of the pipeline
-    ${HttpPipelinePrepend},
+    ${HttpPipelinePrepend}, 
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]
     [System.Uri]
     # The URI for the proxy server to use
-    ${Proxy},
+    ${Proxy}, 
 
     [Parameter(DontShow)]
     [ValidateNotNull()]
     [JumpCloud.SDK.V2.Category('Runtime')]
     [System.Management.Automation.PSCredential]
     # Credentials for a proxy server to use for the remote call
-    ${ProxyCredential},
+    ${ProxyCredential}, 
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]
@@ -395,8 +403,10 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         # Clean up global variables
         $GlobalVars = @('JCHttpRequest', 'JCHttpRequestContent', 'JCHttpResponse', 'JCHttpResponseContent')
         $GlobalVars | ForEach-Object {
-            If ((Get-Variable -Scope:('Global')).Where( { $_.Name -eq $_ })) { Remove-Variable -Name:($_) -Scope:('Global') }
-        }
+            If ((Get-Variable -Scope:('Global')).Where( { $_.Name -eq $_ })) {
+        Remove-Variable -Name:($_) -Scope:('Global')
+    }
+         }
         Return $Results
     }
 }

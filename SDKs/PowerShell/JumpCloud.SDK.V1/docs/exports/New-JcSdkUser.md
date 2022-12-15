@@ -44,8 +44,8 @@ curl -X POST https://console.jumpcloud.com/api/systemusers \\
 
 ### CreateExpanded (Default)
 ```
-New-JcSdkUser -Email <String> -Username <String> [-AccountLocked] [-Activated]
- [-Addresses <ISystemuserputpostAddressesItem[]>] [-AllowPublicKey] [-AlternateEmail <String>]
+New-JcSdkUser -Email <String> -Username <String> [-FullValidationDetails <String>] [-AccountLocked]
+ [-Activated] [-Addresses <ISystemuserputpostAddressesItem[]>] [-AllowPublicKey] [-AlternateEmail <String>]
  [-Attributes <ISystemuserputpostAttributesItem[]>] [-Company <String>] [-CostCenter <String>]
  [-Department <String>] [-Description <String>] [-DisableDeviceMaxLoginAttempts] [-Displayname <String>]
  [-EmployeeIdentifier <String>] [-EmployeeType <String>] [-EnableManagedUid] [-EnableUserPortalMultifactor]
@@ -61,7 +61,8 @@ New-JcSdkUser -Email <String> -Username <String> [-AccountLocked] [-Activated]
 
 ### Create
 ```
-New-JcSdkUser -Body <ISystemuserputpost> [-Confirm] [-WhatIf] [<CommonParameters>]
+New-JcSdkUser -Body <ISystemuserputpost> [-FullValidationDetails <String>] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -454,6 +455,21 @@ Accept wildcard characters: False
 ```yaml
 Type: System.String
 Parameter Sets: CreateExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -FullValidationDetails
+.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
 Aliases:
 
 Required: False

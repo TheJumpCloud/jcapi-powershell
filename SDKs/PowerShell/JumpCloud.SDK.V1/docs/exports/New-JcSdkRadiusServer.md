@@ -30,8 +30,8 @@ curl -X POST https://console.jumpcloud.com/api/radiusservers/ \\
 ### CreateExpanded (Default)
 ```
 New-JcSdkRadiusServer -Name <String> -NetworkSourceIP <String> -SharedSecret <String> [-AuthIdp <String>]
- [-Mfa <String>] [-UserLockoutAction <String>] [-UserPasswordExpirationAction <String>] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+ [-CaCert <String>] [-DeviceCertEnabled] [-Mfa <String>] [-UserCertEnabled] [-UserLockoutAction <String>]
+ [-UserPasswordEnabled] [-UserPasswordExpirationAction <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Create
@@ -106,6 +106,36 @@ Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
+### -CaCert
+.
+
+```yaml
+Type: System.String
+Parameter Sets: CreateExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -DeviceCertEnabled
+.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: CreateExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Mfa
 .
 
@@ -166,11 +196,41 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -UserCertEnabled
+.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: CreateExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -UserLockoutAction
 .
 
 ```yaml
 Type: System.String
+Parameter Sets: CreateExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -UserPasswordEnabled
+.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: CreateExpanded
 Aliases:
 
@@ -252,8 +312,12 @@ BODY <IRadiusserverpost>: RadiusServerPost
   - `NetworkSourceIP <String>`: 
   - `SharedSecret <String>`: RADIUS shared secret between the server and client.
   - `[AuthIdp <String>]`: 
+  - `[CaCert <String>]`: 
+  - `[DeviceCertEnabled <Boolean?>]`: 
   - `[Mfa <String>]`: 
+  - `[UserCertEnabled <Boolean?>]`: 
   - `[UserLockoutAction <String>]`: 
+  - `[UserPasswordEnabled <Boolean?>]`: 
   - `[UserPasswordExpirationAction <String>]`: 
 
 ## RELATED LINKS

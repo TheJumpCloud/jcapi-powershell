@@ -3,13 +3,13 @@
 Query the API for a list of distinct values for a field
 #### Sample Request
 ```
-curl -X POST 'https://api.jumpcloud.com/insights/directory/v1/events/distinct' -H 'Content-Type: application/json' -H 'x-api-key: {API_KEY}' --data '{\"service\": [\"all\"], \"start_time\": \"2021-07-14T23:00:00Z\", \"end_time\": \"2021-07-28T14:00:00Z\", \"sort\": \"DESC\", \"field\": \"event_type\"}'
+curl -X POST 'https://api.jumpcloud.com/insights/directory/v1/events/distinct' -H 'Content-Type: application/json' -H 'x-api-key: REPLACE_KEY_VALUE' --data '{\"service\": [\"all\"], \"start_time\": \"2021-07-14T23:00:00Z\", \"end_time\": \"2021-07-28T14:00:00Z\", \"sort\": \"DESC\", \"field\": \"event_type\"}'
 ```
 .Description
 Query the API for a list of distinct values for a field
 #### Sample Request
 ```
-curl -X POST 'https://api.jumpcloud.com/insights/directory/v1/events/distinct' -H 'Content-Type: application/json' -H 'x-api-key: {API_KEY}' --data '{\"service\": [\"all\"], \"start_time\": \"2021-07-14T23:00:00Z\", \"end_time\": \"2021-07-28T14:00:00Z\", \"sort\": \"DESC\", \"field\": \"event_type\"}'
+curl -X POST 'https://api.jumpcloud.com/insights/directory/v1/events/distinct' -H 'Content-Type: application/json' -H 'x-api-key: REPLACE_KEY_VALUE' --data '{\"service\": [\"all\"], \"start_time\": \"2021-07-14T23:00:00Z\", \"end_time\": \"2021-07-28T14:00:00Z\", \"sort\": \"DESC\", \"field\": \"event_type\"}'
 ```
 .Example
 PS C:\> {{ Add code here }}
@@ -36,6 +36,7 @@ BODY <IEventDistinctQuery>:
   [EndTime <DateTime?>]: optional query end time, UTC in RFC3339 format
   [SearchTermAnd <ITermConjunction>]: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
     [(Any) <Object>]: This indicates any property can be added to this object.
+  [SearchTermNot <ITermConjunction>]: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
   [SearchTermOr <ITermConjunction>]: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
 .Link
 https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/docs/exports/Get-JcSdkEventDistinct.md
@@ -50,85 +51,92 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.DirectoryInsights.Models.IEventDistinctQuery]
     # EventDistinctQuery is the users' command to search our auth logs for distinct values of the specified field
     # To construct, see NOTES section for BODY properties and create a hash table.
-    ${Body},
+    ${Body}, 
 
     [Parameter(ParameterSetName='GetExpanded', Mandatory)]
     [JumpCloud.SDK.DirectoryInsights.Category('Body')]
     [System.String]
     # field is what they wish to query on
-    ${Field},
+    ${Field}, 
 
     [Parameter(ParameterSetName='GetExpanded', Mandatory)]
     [AllowEmptyCollection()]
     [JumpCloud.SDK.DirectoryInsights.Category('Body')]
     [System.String[]]
     # service name to query.
-    ${Service},
+    ${Service}, 
 
     [Parameter(ParameterSetName='GetExpanded', Mandatory)]
     [JumpCloud.SDK.DirectoryInsights.Category('Body')]
     [System.DateTime]
     # query start time, UTC in RFC3339 format
-    ${StartTime},
+    ${StartTime}, 
 
     [Parameter(ParameterSetName='GetExpanded')]
     [JumpCloud.SDK.DirectoryInsights.Category('Body')]
     [System.DateTime]
     # optional query end time, UTC in RFC3339 format
-    ${EndTime},
+    ${EndTime}, 
 
     [Parameter(ParameterSetName='GetExpanded')]
     [JumpCloud.SDK.DirectoryInsights.Category('Body')]
     [JumpCloud.SDK.DirectoryInsights.Runtime.Info(PossibleTypes=([JumpCloud.SDK.DirectoryInsights.Models.ITermConjunction]))]
     [System.Collections.Hashtable]
     # TermConjunction represents a conjunction (and/or)NOTE: the validator limits what the operator can be, not the objectfor future-proof-nessand a list of sub-values
-    ${SearchTermAnd},
+    ${SearchTermAnd}, 
 
     [Parameter(ParameterSetName='GetExpanded')]
     [JumpCloud.SDK.DirectoryInsights.Category('Body')]
     [JumpCloud.SDK.DirectoryInsights.Runtime.Info(PossibleTypes=([JumpCloud.SDK.DirectoryInsights.Models.ITermConjunction]))]
     [System.Collections.Hashtable]
     # TermConjunction represents a conjunction (and/or)NOTE: the validator limits what the operator can be, not the objectfor future-proof-nessand a list of sub-values
-    ${SearchTermOr},
+    ${SearchTermNot}, 
+
+    [Parameter(ParameterSetName='GetExpanded')]
+    [JumpCloud.SDK.DirectoryInsights.Category('Body')]
+    [JumpCloud.SDK.DirectoryInsights.Runtime.Info(PossibleTypes=([JumpCloud.SDK.DirectoryInsights.Models.ITermConjunction]))]
+    [System.Collections.Hashtable]
+    # TermConjunction represents a conjunction (and/or)NOTE: the validator limits what the operator can be, not the objectfor future-proof-nessand a list of sub-values
+    ${SearchTermOr}, 
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.DirectoryInsights.Category('Runtime')]
     [System.Management.Automation.SwitchParameter]
     # Wait for .NET debugger to attach
-    ${Break},
+    ${Break}, 
 
     [Parameter(DontShow)]
     [ValidateNotNull()]
     [JumpCloud.SDK.DirectoryInsights.Category('Runtime')]
     [JumpCloud.SDK.DirectoryInsights.Runtime.SendAsyncStep[]]
     # SendAsync Pipeline Steps to be appended to the front of the pipeline
-    ${HttpPipelineAppend},
+    ${HttpPipelineAppend}, 
 
     [Parameter(DontShow)]
     [ValidateNotNull()]
     [JumpCloud.SDK.DirectoryInsights.Category('Runtime')]
     [JumpCloud.SDK.DirectoryInsights.Runtime.SendAsyncStep[]]
     # SendAsync Pipeline Steps to be prepended to the front of the pipeline
-    ${HttpPipelinePrepend},
+    ${HttpPipelinePrepend}, 
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.DirectoryInsights.Category('Runtime')]
     [System.Uri]
     # The URI for the proxy server to use
-    ${Proxy},
+    ${Proxy}, 
 
     [Parameter(DontShow)]
     [ValidateNotNull()]
     [JumpCloud.SDK.DirectoryInsights.Category('Runtime')]
     [System.Management.Automation.PSCredential]
     # Credentials for a proxy server to use for the remote call
-    ${ProxyCredential},
+    ${ProxyCredential}, 
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.DirectoryInsights.Category('Runtime')]
     [System.Management.Automation.SwitchParameter]
     # Use the default credentials for the proxy
-    ${ProxyUseDefaultCredentials},
+    ${ProxyUseDefaultCredentials}, 
 
     [Parameter(DontShow)]
     [System.Boolean]

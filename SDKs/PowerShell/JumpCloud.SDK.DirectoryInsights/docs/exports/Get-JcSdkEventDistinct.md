@@ -11,7 +11,7 @@ schema: 2.0.0
 Query the API for a list of distinct values for a field
 #### Sample Request
 ```
-curl -X POST 'https://api.jumpcloud.com/insights/directory/v1/events/distinct' -H 'Content-Type: application/json' -H 'x-api-key: {API_KEY}' --data '{\"service\": [\"all\"], \"start_time\": \"2021-07-14T23:00:00Z\", \"end_time\": \"2021-07-28T14:00:00Z\", \"sort\": \"DESC\", \"field\": \"event_type\"}'
+curl -X POST 'https://api.jumpcloud.com/insights/directory/v1/events/distinct' -H 'Content-Type: application/json' -H 'x-api-key: REPLACE_KEY_VALUE' --data '{\"service\": [\"all\"], \"start_time\": \"2021-07-14T23:00:00Z\", \"end_time\": \"2021-07-28T14:00:00Z\", \"sort\": \"DESC\", \"field\": \"event_type\"}'
 ```
 
 ## SYNTAX
@@ -19,7 +19,8 @@ curl -X POST 'https://api.jumpcloud.com/insights/directory/v1/events/distinct' -
 ### GetExpanded (Default)
 ```
 Get-JcSdkEventDistinct -Field <String> -Service <String[]> -StartTime <DateTime> [-EndTime <DateTime>]
- [-SearchTermAnd <Hashtable>] [-SearchTermOr <Hashtable>] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-SearchTermAnd <Hashtable>] [-SearchTermNot <Hashtable>] [-SearchTermOr <Hashtable>] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### Get
@@ -31,7 +32,7 @@ Get-JcSdkEventDistinct -Body <IEventDistinctQuery> [-Confirm] [-WhatIf] [<Common
 Query the API for a list of distinct values for a field
 #### Sample Request
 ```
-curl -X POST 'https://api.jumpcloud.com/insights/directory/v1/events/distinct' -H 'Content-Type: application/json' -H 'x-api-key: {API_KEY}' --data '{\"service\": [\"all\"], \"start_time\": \"2021-07-14T23:00:00Z\", \"end_time\": \"2021-07-28T14:00:00Z\", \"sort\": \"DESC\", \"field\": \"event_type\"}'
+curl -X POST 'https://api.jumpcloud.com/insights/directory/v1/events/distinct' -H 'Content-Type: application/json' -H 'x-api-key: REPLACE_KEY_VALUE' --data '{\"service\": [\"all\"], \"start_time\": \"2021-07-14T23:00:00Z\", \"end_time\": \"2021-07-28T14:00:00Z\", \"sort\": \"DESC\", \"field\": \"event_type\"}'
 ```
 
 ## EXAMPLES
@@ -99,6 +100,21 @@ Accept wildcard characters: False
 ```
 
 ### -SearchTermAnd
+TermConjunction represents a conjunction (and/or)NOTE: the validator limits what the operator can be, not the objectfor future-proof-nessand a list of sub-values
+
+```yaml
+Type: System.Collections.Hashtable
+Parameter Sets: GetExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -SearchTermNot
 TermConjunction represents a conjunction (and/or)NOTE: the validator limits what the operator can be, not the objectfor future-proof-nessand a list of sub-values
 
 ```yaml
@@ -216,6 +232,7 @@ BODY <IEventDistinctQuery>: EventDistinctQuery is the users' command to search o
   - `[EndTime <DateTime?>]`: optional query end time, UTC in RFC3339 format
   - `[SearchTermAnd <ITermConjunction>]`: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
     - `[(Any) <Object>]`: This indicates any property can be added to this object.
+  - `[SearchTermNot <ITermConjunction>]`: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
   - `[SearchTermOr <ITermConjunction>]`: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
 
 ## RELATED LINKS

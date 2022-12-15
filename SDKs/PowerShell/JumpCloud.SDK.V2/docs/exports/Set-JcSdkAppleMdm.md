@@ -36,12 +36,13 @@ It may also be used to update the DEP Settings.
 
 ### SetExpanded (Default)
 ```
-Set-JcSdkAppleMdm -Id <String> [-AllowMobileUserEnrollment] [-AppleSignedCert <String>]
- [-DefaultIosUserEnrollmentDeviceGroupId <String>] [-DefaultSystemGroupId <String>]
- [-DepEnableZeroTouchEnrollment] [-DepSetupAssistantOptions <IDepSetupAssistantOption[]>]
- [-EncryptedDepServerToken <String>] [-IoDefaultDeviceGroupObjectIds <String[]>]
- [-IoEnableZeroTouchEnrollment] [-IoSetupAssistantOptions <IDepSetupAssistantOption[]>]
- [-IosWelcomeScreenButton <String>] [-IosWelcomeScreenParagraph <String>] [-IosWelcomeScreenTitle <String>]
+Set-JcSdkAppleMdm -Id <String> [-AllowMobileUserEnrollment] [-AppleCertCreatorAppleId <String>]
+ [-AppleSignedCert <String>] [-DefaultIosUserEnrollmentDeviceGroupId <String>]
+ [-DefaultSystemGroupId <String>] [-DepEnableZeroTouchEnrollment]
+ [-DepSetupAssistantOptions <IDepSetupAssistantOption[]>] [-EncryptedDepServerToken <String>]
+ [-IoDefaultDeviceGroupObjectIds <String[]>] [-IoEnableZeroTouchEnrollment]
+ [-IoSetupAssistantOptions <IDepSetupAssistantOption[]>] [-IosWelcomeScreenButton <String>]
+ [-IosWelcomeScreenParagraph <String>] [-IosWelcomeScreenTitle <String>]
  [-MacoDefaultDeviceGroupObjectIds <String[]>] [-MacoEnableZeroTouchEnrollment]
  [-MacoSetupAssistantOptions <IDepSetupAssistantOption[]>] [-MacosWelcomeScreenButton <String>]
  [-MacosWelcomeScreenParagraph <String>] [-MacosWelcomeScreenTitle <String>] [-Name <String>]
@@ -63,12 +64,12 @@ Set-JcSdkAppleMdm -InputObject <IJumpCloudApiIdentity> -Body <IAppleMdmPatchInpu
 ### SetViaIdentityExpanded
 ```
 Set-JcSdkAppleMdm -InputObject <IJumpCloudApiIdentity> [-AllowMobileUserEnrollment]
- [-AppleSignedCert <String>] [-DefaultIosUserEnrollmentDeviceGroupId <String>]
- [-DefaultSystemGroupId <String>] [-DepEnableZeroTouchEnrollment]
- [-DepSetupAssistantOptions <IDepSetupAssistantOption[]>] [-EncryptedDepServerToken <String>]
- [-IoDefaultDeviceGroupObjectIds <String[]>] [-IoEnableZeroTouchEnrollment]
- [-IoSetupAssistantOptions <IDepSetupAssistantOption[]>] [-IosWelcomeScreenButton <String>]
- [-IosWelcomeScreenParagraph <String>] [-IosWelcomeScreenTitle <String>]
+ [-AppleCertCreatorAppleId <String>] [-AppleSignedCert <String>]
+ [-DefaultIosUserEnrollmentDeviceGroupId <String>] [-DefaultSystemGroupId <String>]
+ [-DepEnableZeroTouchEnrollment] [-DepSetupAssistantOptions <IDepSetupAssistantOption[]>]
+ [-EncryptedDepServerToken <String>] [-IoDefaultDeviceGroupObjectIds <String[]>]
+ [-IoEnableZeroTouchEnrollment] [-IoSetupAssistantOptions <IDepSetupAssistantOption[]>]
+ [-IosWelcomeScreenButton <String>] [-IosWelcomeScreenParagraph <String>] [-IosWelcomeScreenTitle <String>]
  [-MacoDefaultDeviceGroupObjectIds <String[]>] [-MacoEnableZeroTouchEnrollment]
  [-MacoSetupAssistantOptions <IDepSetupAssistantOption[]>] [-MacosWelcomeScreenButton <String>]
  [-MacosWelcomeScreenParagraph <String>] [-MacosWelcomeScreenTitle <String>] [-Name <String>]
@@ -124,6 +125,21 @@ A toggle to allow mobile device enrollment for an organization.
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -AppleCertCreatorAppleId
+The Apple ID of the admin who created the Apple signed certificate.
+
+```yaml
+Type: System.String
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -571,6 +587,7 @@ To create the parameters described below, construct a hash table containing the 
 
 BODY <IAppleMdmPatchInput>: Apple MDM Patch Input
   - `[AllowMobileUserEnrollment <Boolean?>]`: A toggle to allow mobile device enrollment for an organization.
+  - `[AppleCertCreatorAppleId <String>]`: The Apple ID of the admin who created the Apple signed certificate.
   - `[AppleSignedCert <String>]`: A signed certificate obtained from Apple after providing Apple with the plist file provided on POST.
   - `[DefaultIosUserEnrollmentDeviceGroupId <String>]`: ObjectId uniquely identifying the MDM default iOS user enrollment device group.
   - `[DefaultSystemGroupId <String>]`: ObjectId uniquely identifying the MDM default System Group.

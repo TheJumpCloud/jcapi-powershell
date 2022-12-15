@@ -33,7 +33,7 @@ input-file:
 module-name: JumpCloud.SDK.DirectoryInsights
 namespace: JumpCloud.SDK.DirectoryInsights
 sample-generation: true
-module-version: 0.0.18
+module-version: 0.0.19
 dll-name: JumpCloud.SDK.DirectoryInsights.private
 
 directive:

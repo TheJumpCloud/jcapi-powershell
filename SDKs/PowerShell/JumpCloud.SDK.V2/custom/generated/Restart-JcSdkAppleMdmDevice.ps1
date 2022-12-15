@@ -8,7 +8,7 @@ Restarts a DEP-enrolled device.
   -H 'accept: application/json' \\
   -H 'content-type: application/json' \\
   -H 'x-api-key: {API_KEY}' \\
-  -d '{}'
+  -d '{\"kextPaths\": [\"Path1\", \"Path2\"]}'
 ```
 .Description
 Restarts a DEP-enrolled device.
@@ -19,7 +19,7 @@ Restarts a DEP-enrolled device.
   -H 'accept: application/json' \\
   -H 'content-type: application/json' \\
   -H 'x-api-key: {API_KEY}' \\
-  -d '{}'
+  -d '{\"kextPaths\": [\"Path1\", \"Path2\"]}'
 ```
 .Example
 PS C:\> {{ Add code here }}
@@ -32,12 +32,17 @@ PS C:\> {{ Add code here }}
 
 .Inputs
 JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
+.Inputs
+JumpCloud.SDK.V2.Models.IPaths1Whnyt3ApplemdmsAppleMdmIdDevicesDeviceIdRestartPostRequestbodyContentApplicationJsonSchema
 .Outputs
 System.Boolean
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
+
+BODY <IPaths1Whnyt3ApplemdmsAppleMdmIdDevicesDeviceIdRestartPostRequestbodyContentApplicationJsonSchema>:
+  [KextPaths <String[]>]: The string to pass when doing a restart and performing a RebuildKernelCache.
 
 INPUTOBJECT <IJumpCloudApiIdentity>:
   [AccountId <String>]:
@@ -69,65 +74,84 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
  Function Restart-JcSdkAppleMdmDevice
 {
     [OutputType([System.Boolean])]
-    [CmdletBinding(DefaultParameterSetName='Restart', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
+    [CmdletBinding(DefaultParameterSetName='RestartExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(ParameterSetName='Restart', Mandatory)]
+    [Parameter(ParameterSetName='RestartExpanded', Mandatory)]
     [JumpCloud.SDK.V2.Category('Path')]
     [System.String]
     # .
-    ${AppleMdmId},
+    ${AppleMdmId}, 
 
     [Parameter(ParameterSetName='Restart', Mandatory)]
+    [Parameter(ParameterSetName='RestartExpanded', Mandatory)]
     [JumpCloud.SDK.V2.Category('Path')]
     [System.String]
     # .
-    ${DeviceId},
+    ${DeviceId}, 
 
     [Parameter(ParameterSetName='RestartViaIdentity', Mandatory, ValueFromPipeline)]
+    [Parameter(ParameterSetName='RestartViaIdentityExpanded', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Path')]
     [JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity]
     # Identity Parameter
     # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
-    ${InputObject},
+    ${InputObject}, 
+
+    [Parameter(ParameterSetName='Restart', Mandatory, ValueFromPipeline)]
+    [Parameter(ParameterSetName='RestartViaIdentity', Mandatory, ValueFromPipeline)]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [JumpCloud.SDK.V2.Models.IPaths1Whnyt3ApplemdmsAppleMdmIdDevicesDeviceIdRestartPostRequestbodyContentApplicationJsonSchema]
+    # .
+    # To construct, see NOTES section for BODY properties and create a hash table.
+    ${Body}, 
+
+    [Parameter(ParameterSetName='RestartExpanded')]
+    [Parameter(ParameterSetName='RestartViaIdentityExpanded')]
+    [AllowEmptyCollection()]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [System.String[]]
+    # The string to pass when doing a restart and performing a RebuildKernelCache.
+    ${KextPaths}, 
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]
     [System.Management.Automation.SwitchParameter]
     # Wait for .NET debugger to attach
-    ${Break},
+    ${Break}, 
 
     [Parameter(DontShow)]
     [ValidateNotNull()]
     [JumpCloud.SDK.V2.Category('Runtime')]
     [JumpCloud.SDK.V2.Runtime.SendAsyncStep[]]
     # SendAsync Pipeline Steps to be appended to the front of the pipeline
-    ${HttpPipelineAppend},
+    ${HttpPipelineAppend}, 
 
     [Parameter(DontShow)]
     [ValidateNotNull()]
     [JumpCloud.SDK.V2.Category('Runtime')]
     [JumpCloud.SDK.V2.Runtime.SendAsyncStep[]]
     # SendAsync Pipeline Steps to be prepended to the front of the pipeline
-    ${HttpPipelinePrepend},
+    ${HttpPipelinePrepend}, 
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Runtime')]
     [System.Management.Automation.SwitchParameter]
     # Returns true when the command succeeds
-    ${PassThru},
+    ${PassThru}, 
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]
     [System.Uri]
     # The URI for the proxy server to use
-    ${Proxy},
+    ${Proxy}, 
 
     [Parameter(DontShow)]
     [ValidateNotNull()]
     [JumpCloud.SDK.V2.Category('Runtime')]
     [System.Management.Automation.PSCredential]
     # Credentials for a proxy server to use for the remote call
-    ${ProxyCredential},
+    ${ProxyCredential}, 
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]
@@ -163,8 +187,10 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         # Clean up global variables
         $GlobalVars = @('JCHttpRequest', 'JCHttpRequestContent', 'JCHttpResponse', 'JCHttpResponseContent')
         $GlobalVars | ForEach-Object {
-            If ((Get-Variable -Scope:('Global')).Where( { $_.Name -eq $_ })) { Remove-Variable -Name:($_) -Scope:('Global') }
-        }
+            If ((Get-Variable -Scope:('Global')).Where( { $_.Name -eq $_ })) {
+        Remove-Variable -Name:($_) -Scope:('Global')
+    }
+         }
         Return $Results
     }
 }

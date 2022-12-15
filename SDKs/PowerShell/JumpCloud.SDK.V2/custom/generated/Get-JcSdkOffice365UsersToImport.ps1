@@ -26,95 +26,95 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V2.Category('Path')]
     [System.String]
     # .
-    ${Office365Id},
+    ${Office365Id}, 
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
     [System.Management.Automation.SwitchParameter]
     # Office 365 API count parameter.
     # See https://docs.microsoft.com/en-us/graph/api/user-list?view=graph-rest-1.0&tabs=http#optional-query-parameters.
-    ${Count},
+    ${Count}, 
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
     [System.String]
     # Office 365 API filter parameter.
     # See https://docs.microsoft.com/en-us/graph/api/user-list?view=graph-rest-1.0&tabs=http#optional-query-parameters.
-    ${Filter},
+    ${Filter}, 
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
     [System.String]
     # Office 365 API orderby parameter.
     # See https://docs.microsoft.com/en-us/graph/api/user-list?view=graph-rest-1.0&tabs=http#optional-query-parameters.
-    ${Orderby},
+    ${Orderby}, 
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
     [System.String]
     # Office 365 API search parameter.
     # See https://docs.microsoft.com/en-us/graph/api/user-list?view=graph-rest-1.0&tabs=http#optional-query-parameters.
-    ${Search},
+    ${Search}, 
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
     [System.String]
     # Office 365 API token used to access the next page of results.
     # See https://docs.microsoft.com/en-us/graph/paging.
-    ${SkipToken},
+    ${SkipToken}, 
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
     [System.Int32]
     # Office 365 API maximum number of results per page.
     # See https://docs.microsoft.com/en-us/graph/paging.
-    ${Top},
+    ${Top}, 
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Header')]
     [System.String]
     # Defines the consistency header for O365 requests.
     # See https://docs.microsoft.com/en-us/graph/api/user-list?view=graph-rest-1.0&tabs=http#request-headers
-    ${ConsistencyLevel},
+    ${ConsistencyLevel}, 
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]
     [System.Management.Automation.SwitchParameter]
     # Wait for .NET debugger to attach
-    ${Break},
+    ${Break}, 
 
     [Parameter(DontShow)]
     [ValidateNotNull()]
     [JumpCloud.SDK.V2.Category('Runtime')]
     [JumpCloud.SDK.V2.Runtime.SendAsyncStep[]]
     # SendAsync Pipeline Steps to be appended to the front of the pipeline
-    ${HttpPipelineAppend},
+    ${HttpPipelineAppend}, 
 
     [Parameter(DontShow)]
     [ValidateNotNull()]
     [JumpCloud.SDK.V2.Category('Runtime')]
     [JumpCloud.SDK.V2.Runtime.SendAsyncStep[]]
     # SendAsync Pipeline Steps to be prepended to the front of the pipeline
-    ${HttpPipelinePrepend},
+    ${HttpPipelinePrepend}, 
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]
     [System.Uri]
     # The URI for the proxy server to use
-    ${Proxy},
+    ${Proxy}, 
 
     [Parameter(DontShow)]
     [ValidateNotNull()]
     [JumpCloud.SDK.V2.Category('Runtime')]
     [System.Management.Automation.PSCredential]
     # Credentials for a proxy server to use for the remote call
-    ${ProxyCredential},
+    ${ProxyCredential}, 
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]
     [System.Management.Automation.SwitchParameter]
     # Use the default credentials for the proxy
-    ${ProxyUseDefaultCredentials},
+    ${ProxyUseDefaultCredentials}, 
 
     [Parameter(DontShow)]
     [System.Boolean]

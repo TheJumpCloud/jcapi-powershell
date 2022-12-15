@@ -2,40 +2,30 @@
 .Synopsis
 This endpoint allows you to create a new command.
 
-#### Sample Request
+NOTE: the system property in the command is not used.
+Use a POST to /api/v2/commands/{id}/associations to bind a command to a system.
 
+#### Sample Request
 ```
 curl -X POST https://console.jumpcloud.com/api/commands/ \\
   -H 'Accept: application/json' \\
-  -H 'Content-Type: application/json' \\
-  -H 'x-api-key: {API_KEY}' \\
-  -d '{
-\t\"name\":\"Test API Command\",
-\t\"command\":\"String\",
-\t\"user\":\"{UserID}\",
-\t\"schedule\":\"\",
-\t\"timeout\":\"100\"
-}'
-
+  -H 'Content-Type: application/json'
+  -H 'x-api-key: {API_KEY}'
+  -d '{\"name\":\"Test API Command\", \"command\":\"String\", \"user\":\"{UserID}\", \"schedule\":\"\", \"timeout\":\"100\"}'
 ```
 .Description
 This endpoint allows you to create a new command.
 
-#### Sample Request
+NOTE: the system property in the command is not used.
+Use a POST to /api/v2/commands/{id}/associations to bind a command to a system.
 
+#### Sample Request
 ```
 curl -X POST https://console.jumpcloud.com/api/commands/ \\
   -H 'Accept: application/json' \\
-  -H 'Content-Type: application/json' \\
-  -H 'x-api-key: {API_KEY}' \\
-  -d '{
-\t\"name\":\"Test API Command\",
-\t\"command\":\"String\",
-\t\"user\":\"{UserID}\",
-\t\"schedule\":\"\",
-\t\"timeout\":\"100\"
-}'
-
+  -H 'Content-Type: application/json'
+  -H 'x-api-key: {API_KEY}'
+  -d '{\"name\":\"Test API Command\", \"command\":\"String\", \"user\":\"{UserID}\", \"schedule\":\"\", \"timeout\":\"100\"}'
 ```
 .Example
 PS C:\> {{ Add code here }}
@@ -66,9 +56,10 @@ BODY <ICommand>:
   [Organization <String>]: The ID of the organization.
   [Schedule <String>]: A crontab that consists of: [ (seconds) (minutes) (hours) (days of month) (months) (weekdays) ] or [ immediate ]. If you send this as an empty string, it will run immediately.        
   [ScheduleRepeatType <String>]: When the command will repeat.
+  [ScheduleYear <Int32?>]: The year that a scheduled command will launch in.
   [Shell <String>]: The shell used to run the command.
   [Sudo <Boolean?>]:
-  [Systems <String[]>]: An array of system IDs to run the command on. Not available if you are using Groups.
+  [Template <String>]: The template this command was created from
   [TimeToLiveSeconds <Int32?>]: Time in seconds a command can wait in the queue to be run before timing out
   [Timeout <String>]: The time in seconds to allow the command to run for.
   [Trigger <String>]: The name of the command trigger.
@@ -86,148 +77,152 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V1.Models.ICommand]
     # Command
     # To construct, see NOTES section for BODY properties and create a hash table.
-    ${Body},
+    ${Body}, 
 
     [Parameter(ParameterSetName='CreateExpanded', Mandatory)]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # The command to execute on the server.
-    ${Command},
+    ${Command}, 
 
     [Parameter(ParameterSetName='CreateExpanded', Mandatory)]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # The Command OS
-    ${CommandType},
+    ${CommandType}, 
 
     [Parameter(ParameterSetName='CreateExpanded', Mandatory)]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # .
-    ${Name},
+    ${Name}, 
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [AllowEmptyCollection()]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String[]]
     # An array of IDs of the Command Runner Users that can execute this command.
-    ${CommandRunners},
+    ${CommandRunners}, 
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [AllowEmptyCollection()]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String[]]
     # An array of file IDs to include with the command.
-    ${Files},
+    ${Files}, 
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # How the command will execute.
-    ${LaunchType},
+    ${LaunchType}, 
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # .
-    ${ListensTo},
+    ${ListensTo}, 
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # The ID of the organization.
-    ${Organization},
+    ${Organization}, 
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # A crontab that consists of: [ (seconds) (minutes) (hours) (days of month) (months) (weekdays) ] or [ immediate ].
     # If you send this as an empty string, it will run immediately.
-    ${Schedule},
+    ${Schedule}, 
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # When the command will repeat.
-    ${ScheduleRepeatType},
+    ${ScheduleRepeatType}, 
+
+    [Parameter(ParameterSetName='CreateExpanded')]
+    [JumpCloud.SDK.V1.Category('Body')]
+    [System.Int32]
+    # The year that a scheduled command will launch in.
+    ${ScheduleYear}, 
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # The shell used to run the command.
-    ${Shell},
+    ${Shell}, 
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.Management.Automation.SwitchParameter]
     # .
-    ${Sudo},
+    ${Sudo}, 
 
     [Parameter(ParameterSetName='CreateExpanded')]
-    [AllowEmptyCollection()]
     [JumpCloud.SDK.V1.Category('Body')]
-    [System.String[]]
-    # An array of system IDs to run the command on.
-    # Not available if you are using Groups.
-    ${Systems},
+    [System.String]
+    # The template this command was created from
+    ${Template}, 
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.Int32]
     # Time in seconds a command can wait in the queue to be run before timing out
-    ${TimeToLiveSeconds},
+    ${TimeToLiveSeconds}, 
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # The time in seconds to allow the command to run for.
-    ${Timeout},
+    ${Timeout}, 
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # The name of the command trigger.
-    ${Trigger},
+    ${Trigger}, 
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # The ID of the system user to run the command as.
     # This field is required when creating a command with a commandType of "mac" or "linux".
-    ${User},
+    ${User}, 
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V1.Category('Runtime')]
     [System.Management.Automation.SwitchParameter]
     # Wait for .NET debugger to attach
-    ${Break},
+    ${Break}, 
 
     [Parameter(DontShow)]
     [ValidateNotNull()]
     [JumpCloud.SDK.V1.Category('Runtime')]
     [JumpCloud.SDK.V1.Runtime.SendAsyncStep[]]
     # SendAsync Pipeline Steps to be appended to the front of the pipeline
-    ${HttpPipelineAppend},
+    ${HttpPipelineAppend}, 
 
     [Parameter(DontShow)]
     [ValidateNotNull()]
     [JumpCloud.SDK.V1.Category('Runtime')]
     [JumpCloud.SDK.V1.Runtime.SendAsyncStep[]]
     # SendAsync Pipeline Steps to be prepended to the front of the pipeline
-    ${HttpPipelinePrepend},
+    ${HttpPipelinePrepend}, 
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V1.Category('Runtime')]
     [System.Uri]
     # The URI for the proxy server to use
-    ${Proxy},
+    ${Proxy}, 
 
     [Parameter(DontShow)]
     [ValidateNotNull()]
     [JumpCloud.SDK.V1.Category('Runtime')]
     [System.Management.Automation.PSCredential]
     # Credentials for a proxy server to use for the remote call
-    ${ProxyCredential},
+    ${ProxyCredential}, 
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V1.Category('Runtime')]
@@ -263,8 +258,10 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         # Clean up global variables
         $GlobalVars = @('JCHttpRequest', 'JCHttpRequestContent', 'JCHttpResponse', 'JCHttpResponseContent')
         $GlobalVars | ForEach-Object {
-            If ((Get-Variable -Scope:('Global')).Where( { $_.Name -eq $_ })) { Remove-Variable -Name:($_) -Scope:('Global') }
-        }
+            If ((Get-Variable -Scope:('Global')).Where( { $_.Name -eq $_ })) {
+        Remove-Variable -Name:($_) -Scope:('Global')
+    }
+         }
         Return $Results
     }
 }

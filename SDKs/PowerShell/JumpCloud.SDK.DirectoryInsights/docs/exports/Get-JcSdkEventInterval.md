@@ -11,7 +11,7 @@ schema: 2.0.0
 Query the API for a list of counts by time interval
 #### Sample Request
 ```
-curl -X POST 'https://api.jumpcloud.com/insights/directory/v1/events/interval' -H 'Content-Type: application/json' -H 'x-api-key: {API_KEY}' --data '{\"service\": [\"all\"], \"start_time\": \"2021-07-14T23:00:00Z\", \"end_time\": \"2021-07-28T14:00:00Z\", \"timezone\": \"-0500\", \"interval_unit\": \"h\", \"interval_value\": \"2\"}'
+curl -X POST 'https://api.jumpcloud.com/insights/directory/v1/events/interval' -H 'Content-Type: application/json' -H 'x-api-key: REPLACE_KEY_VALUE' --data '{\"service\": [\"all\"], \"start_time\": \"2021-07-14T23:00:00Z\", \"end_time\": \"2021-07-28T14:00:00Z\", \"timezone\": \"-0500\", \"interval_unit\": \"h\", \"interval_value\": \"2\"}'
 ```
 
 ## SYNTAX
@@ -19,8 +19,8 @@ curl -X POST 'https://api.jumpcloud.com/insights/directory/v1/events/interval' -
 ### GetExpanded (Default)
 ```
 Get-JcSdkEventInterval -IntervalUnit <String> -Service <String[]> -StartTime <DateTime> [-EndTime <DateTime>]
- [-IntervalValue <String>] [-SearchTermAnd <Hashtable>] [-SearchTermOr <Hashtable>] [-Timezone <String>]
- [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-IntervalValue <String>] [-SearchTermAnd <Hashtable>] [-SearchTermNot <Hashtable>]
+ [-SearchTermOr <Hashtable>] [-Timezone <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Get
@@ -32,7 +32,7 @@ Get-JcSdkEventInterval -Body <IEventIntervalQuery> [-Confirm] [-WhatIf] [<Common
 Query the API for a list of counts by time interval
 #### Sample Request
 ```
-curl -X POST 'https://api.jumpcloud.com/insights/directory/v1/events/interval' -H 'Content-Type: application/json' -H 'x-api-key: {API_KEY}' --data '{\"service\": [\"all\"], \"start_time\": \"2021-07-14T23:00:00Z\", \"end_time\": \"2021-07-28T14:00:00Z\", \"timezone\": \"-0500\", \"interval_unit\": \"h\", \"interval_value\": \"2\"}'
+curl -X POST 'https://api.jumpcloud.com/insights/directory/v1/events/interval' -H 'Content-Type: application/json' -H 'x-api-key: REPLACE_KEY_VALUE' --data '{\"service\": [\"all\"], \"start_time\": \"2021-07-14T23:00:00Z\", \"end_time\": \"2021-07-28T14:00:00Z\", \"timezone\": \"-0500\", \"interval_unit\": \"h\", \"interval_value\": \"2\"}'
 ```
 
 ## EXAMPLES
@@ -116,6 +116,21 @@ Accept wildcard characters: False
 ```
 
 ### -SearchTermAnd
+TermConjunction represents a conjunction (and/or)NOTE: the validator limits what the operator can be, not the objectfor future-proof-nessand a list of sub-values
+
+```yaml
+Type: System.Collections.Hashtable
+Parameter Sets: GetExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -SearchTermNot
 TermConjunction represents a conjunction (and/or)NOTE: the validator limits what the operator can be, not the objectfor future-proof-nessand a list of sub-values
 
 ```yaml
@@ -250,6 +265,7 @@ BODY <IEventIntervalQuery>: EventIntervalQuery is the users' command to search o
   - `[IntervalValue <String>]`: Interval Value. This specifies how many units you want to bucket the event counts by
   - `[SearchTermAnd <ITermConjunction>]`: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
     - `[(Any) <Object>]`: This indicates any property can be added to this object.
+  - `[SearchTermNot <ITermConjunction>]`: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
   - `[SearchTermOr <ITermConjunction>]`: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
   - `[Timezone <String>]`: TimeZone. Specify the timezone in which the user is in         optional
 
