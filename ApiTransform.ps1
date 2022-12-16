@@ -492,6 +492,26 @@ Function Get-SwaggerItem {
     }
     Return $Object
 }
+function Remove-NewEndpoints {
+    Param(
+        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'An object representing a swagger file.')]$InputObject
+    )
+
+    foreach ($path in $InputObject.paths.PSObject.Properties){
+        $paths = $InputObject.paths.$($path.name).PSObject.Properties | Where-object { $_.Name -ne "parameters" }
+        foreach ($endpoint in $paths) {
+            $opperationID = ($InputObject.paths.$($path.name).$($endpoint.name)).operationId
+            if ($opperationID) {
+                If (($opperationID) -notin ($TransformConfig."$($SDKName)".OperationIdMapping.keys)) {
+                    $excludePath = $path.name
+                    Write-Warning "[status] New SDK Endpoint Found: `nOperationId: $($opperationID) `nPath: $excludePath"
+                    $ConfigStatus += [PSCustomObject]@{'opperationID' = $opperationID; "path" = $excludePath }
+                    $TransformConfig."$($SDKName)".ExcludedList += $excludePath
+                }
+            }
+        }
+    }
+}
 Function Update-SwaggerObject {
     Param(
         [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'An object representing a swagger file.')]$InputObject
@@ -551,12 +571,9 @@ Function Update-SwaggerObject {
                             $global:OperationIdMapping.Remove($OperationId)
                             $NewOperationId = $ThisObject.operationId
                         } Else {
-                            $excludePath += ($InputObjectName -replace '.paths.', '') -replace "\.\w+", ''
+                            $excludePath = ($InputObjectName -replace '.paths.', '') -replace "\.\w+", ''
                             Write-Warning "[status] New SDK Endpoint Found: `nOperationId: $($ThisObject.operationId) `nPath: $excludePath"
-                            # Add to excludeList
-                            $TransformConfig."$($SDKName)".ExcludedList += $excludePath
-                            $ConfigStatus += [PSCustomObject]@{'opperationID' = $ThisObject.operationId; "path" = $excludePath }
-                            # Write-Error ("In '$($CurrentSDKName)' unknown operationId '$($ThisObject.operationId) - $($InputObjectName)'.")
+                            Write-Error ("In '$($CurrentSDKName)' unknown operationId '$($ThisObject.operationId) - $($InputObjectName)'.")
                         }
                     }
 
@@ -776,8 +793,7 @@ $SDKName | ForEach-Object {
         $Config = $TransformConfig.($SDKNameItem)
         $CurrentSDKName = $SDKNameItem
         $global:OperationIdMapping = $Config.OperationIdMapping
-        $global:ExcludedList = [System.Collections.ArrayList]$Config.ExcludedList
-        $global:ExcludedListOrg = [System.Collections.ArrayList]$Config.ExcludedList
+
         # Create output file path
         $OutputFullPathJson = "$($OutputFilePath)/$($SDKNameItem).json"
         If (-not (Test-Path -Path:($OutputFilePath))) {
@@ -835,6 +851,12 @@ $SDKName | ForEach-Object {
             #######################################################################
             # Update swagger object
             $SwaggerObject = $SwaggerObject | ConvertFrom-Json -Depth:(100)
+            # Exclude New SDK Endpoints
+            Remove-NewEndpoints -InputObject:($SwaggerObject)
+            # Define Exclude LIst
+            $global:ExcludedList = [System.Collections.ArrayList]$Config.ExcludedList
+            $global:ExcludedListOrg = [System.Collections.ArrayList]$Config.ExcludedList
+            # Find new SDK Endpoints
             $UpdatedSwagger = Update-SwaggerObject -InputObject:($SwaggerObject) -InputObjectOrg:($SwaggerObject)
             Do {
                 $UsedRefs = ($UpdatedSwagger | ConvertTo-Json -Depth:(100) -Compress | Select-String -Pattern:('(\{"\$ref":")(.*?)("\})') -AllMatches).Matches
