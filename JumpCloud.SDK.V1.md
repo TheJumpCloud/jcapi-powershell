@@ -15,8 +15,7 @@ Release Date: December 19, 2022
 <details>
 <summary>Functions Added</summary>
 
-* Invoke-JcSdkSearchCommandresult.ps1
-
+No changes
 </details>
 
 <details>

@@ -18,6 +18,7 @@ Release Date: December 19, 2022
 * Get-JcSdkSystemInsightAzureInstancceMetadata.ps1
 * Get-JcSdkSystemInsightAzureInstanceTag.ps1
 * Get-JcSdkSystemInsightChassisInfo.ps1
+* Get-JcSdkSystemInsightLinuxPackage.ps1
 * Get-JcSdkSystemInsightSecureboot.ps1
 * Get-JcSdkSystemInsightTpmInfo.ps1
 * Get-JcSdkSystemInsightUserAssist.ps1
@@ -61,6 +62,7 @@ Release Date: December 19, 2022
 * Get-JcSdkGSuiteTraverseUserGroup.ps1
 * Get-JcSdkGSuiteUsersToImport.ps1
 * Get-JcSdkGroup.ps1
+* Get-JcSdkGroupSuggestion.ps1
 * Get-JcSdkGsuiteUsersToImportFormated.ps1
 * Get-JcSdkIPList.ps1
 * Get-JcSdkLdapServer.ps1
