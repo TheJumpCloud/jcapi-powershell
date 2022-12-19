@@ -1,21 +1,17 @@
 ---
 external help file:
 Module Name: JumpCloud.SDK.V2
-online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkOffice365.md
+online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkGroupSuggestion.md
 schema: 2.0.0
 ---
 
-# Get-JcSdkOffice365
+# Get-JcSdkGroupSuggestion
 
 ## SYNOPSIS
-This endpoint returns a specific Office 365 instance.
-
-#####
-
-Sample Request
-
+This endpoint returns available suggestions for a given group
+#### Sample Request
 ```
-curl -X GET https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID} \\
+curl -X GET https://console.jumpcloud.com/api/v2/usergroups/{GroupID}/suggestions \\
   -H 'Accept: application/json' \\
   -H 'Content-Type: application/json' \\
   -H 'x-api-key: {API_KEY}'
@@ -26,23 +22,19 @@ curl -X GET https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID} \\
 
 ### Get (Default)
 ```
-Get-JcSdkOffice365 -Office365Id <String> [<CommonParameters>]
+Get-JcSdkGroupSuggestion -GroupId <String> [<CommonParameters>]
 ```
 
 ### GetViaIdentity
 ```
-Get-JcSdkOffice365 -InputObject <IJumpCloudApiIdentity> [<CommonParameters>]
+Get-JcSdkGroupSuggestion -InputObject <IJumpCloudApiIdentity> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-This endpoint returns a specific Office 365 instance.
-
-#####
-
-Sample Request
-
+This endpoint returns available suggestions for a given group
+#### Sample Request
 ```
-curl -X GET https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID} \\
+curl -X GET https://console.jumpcloud.com/api/v2/usergroups/{GroupID}/suggestions \\
   -H 'Accept: application/json' \\
   -H 'Content-Type: application/json' \\
   -H 'x-api-key: {API_KEY}'
@@ -67,6 +59,21 @@ curl -X GET https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID} \\
 
 ## PARAMETERS
 
+### -GroupId
+ID of the group
+
+```yaml
+Type: System.String
+Parameter Sets: Get
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -InputObject
 Identity Parameter
 To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
@@ -83,21 +90,6 @@ Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
-### -Office365Id
-ObjectID of the Office 365 instance.
-
-```yaml
-Type: System.String
-Parameter Sets: Get
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
@@ -107,7 +99,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V2.Models.IOffice365
+### JumpCloud.SDK.V2.Models.IMemberSuggestion
 
 ## NOTES
 

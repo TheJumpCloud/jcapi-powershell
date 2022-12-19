@@ -1893,6 +1893,21 @@
       "title": "LDAP Server Action",
       "type": "string"
     },
+    "MemberSuggestion": {
+      "properties": {
+        "object": {
+          "$ref": "#/definitions/GraphObject"
+        },
+        "op": {
+          "description": "How to modify group membership.",
+          "enum": [
+            "add",
+            "remove"
+          ],
+          "type": "string"
+        }
+      }
+    },
     "OSRestriction": {
       "description": "Contains OS properties to restrict the application of policies to devices based on the device's OS",
       "example": {
@@ -3259,7 +3274,27 @@
       "title": "UserGroupPut",
       "type": "object"
     },
-    "active-directory-agent-get-output": {
+    "active-directory": {
+      "properties": {
+        "domain": {
+          "description": "Domain name for this Active Directory instance.",
+          "type": "string"
+        },
+        "id": {
+          "description": "ObjectID of this Active Directory instance.",
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "title": "Active Directory",
+      "type": "object"
+    },
+    "active-directory-agent": {
+      "title": "Active Directory Agent",
+      "type": "object",
+      "additionalProperties": true
+    },
+    "active-directory-agent-get": {
       "properties": {
         "connectKey": {
           "description": "The connect key to use when installing the Agent on a Domain Controller.",
@@ -3293,15 +3328,10 @@
       "required": [
         "id"
       ],
-      "title": "Active Directory Agent Get Output",
+      "title": "Active Directory Agent Get",
       "type": "object"
     },
-    "active-directory-agent-input": {
-      "title": "Active Directory Agent Input",
-      "type": "object",
-      "additionalProperties": true
-    },
-    "active-directory-agent-list-output": {
+    "active-directory-agent-list": {
       "properties": {
         "contactAt": {
           "type": "string"
@@ -3328,38 +3358,8 @@
           "type": "string"
         }
       },
-      "title": "Active Directory Agent List Output",
+      "title": "Active Directory Agent List",
       "type": "object"
-    },
-    "active-directory-input": {
-      "properties": {
-        "domain": {
-          "description": "Domain name for this Active Directory instance.",
-          "type": "string"
-        }
-      },
-      "title": "Active Directory Input",
-      "type": "object"
-    },
-    "active-directory-output": {
-      "allOf": [
-        {
-          "properties": {
-            "id": {
-              "description": "ObjectID of this Active Directory instance.",
-              "type": "string"
-            }
-          },
-          "required": [
-            "id"
-          ],
-          "type": "object"
-        },
-        {
-          "$ref": "#/definitions/active-directory-input"
-        }
-      ],
-      "title": "Active Directory Output"
     },
     "apple-mdm-device": {
       "properties": {
@@ -3465,7 +3465,7 @@
       "title": "Apple MDM Device Security Info",
       "type": "object"
     },
-    "apple-mdm-patch-input": {
+    "apple-mdm-patch": {
       "properties": {
         "ades": {
           "$ref": "#/definitions/ADES"
@@ -3503,7 +3503,7 @@
           "type": "string"
         }
       },
-      "title": "Apple MDM Patch Input",
+      "title": "Apple MDM Patch",
       "type": "object"
     },
     "auth-info": {
@@ -3722,12 +3722,13 @@
       },
       "type": "object"
     },
-    "gsuite-output": {
+    "gsuite": {
       "properties": {
         "groupsEnabled": {
           "type": "boolean"
         },
         "id": {
+          "readOnly": true,
           "type": "string"
         },
         "name": {
@@ -3749,34 +3750,7 @@
           "type": "string"
         }
       },
-      "title": "GSuite Output",
-      "type": "object"
-    },
-    "gsuite-patch-input": {
-      "properties": {
-        "groupsEnabled": {
-          "type": "boolean"
-        },
-        "name": {
-          "type": "string"
-        },
-        "userLockoutAction": {
-          "enum": [
-            "suspend",
-            "maintain"
-          ],
-          "type": "string"
-        },
-        "userPasswordExpirationAction": {
-          "enum": [
-            "suspend",
-            "maintain",
-            "remove_access"
-          ],
-          "type": "string"
-        }
-      },
-      "title": "GSuite Patch Input",
+      "title": "GSuite",
       "type": "object"
     },
     "importUser": {
@@ -3939,8 +3913,13 @@
       "title": "Job WorkResult",
       "type": "object"
     },
-    "ldap-server-input": {
+    "ldap-server": {
       "properties": {
+        "id": {
+          "description": "Unique identifier of this LDAP server",
+          "readOnly": true,
+          "type": "string"
+        },
         "name": {
           "description": "The name of this LDAP server",
           "type": "string"
@@ -3962,35 +3941,16 @@
           "type": "string"
         }
       },
-      "title": "LDAP Server Input",
+      "title": "LDAP Server",
       "type": "object"
     },
-    "ldap-server-output": {
-      "allOf": [
-        {
-          "properties": {
-            "id": {
-              "description": "Unique identifier of this LDAP server",
-              "type": "string"
-            }
-          },
-          "required": [
-            "id"
-          ],
-          "type": "object"
-        },
-        {
-          "$ref": "#/definitions/ldap-server-input"
-        }
-      ],
-      "title": "LDAP Server Output"
-    },
-    "office365-output": {
+    "office365": {
       "properties": {
         "groupsEnabled": {
           "type": "boolean"
         },
         "id": {
+          "readOnly": true,
           "type": "string"
         },
         "name": {
@@ -4001,6 +3961,7 @@
             "suspend",
             "maintain"
           ],
+          "readOnly": true,
           "type": "string"
         },
         "userPasswordExpirationAction": {
@@ -4008,45 +3969,20 @@
             "suspend",
             "maintain"
           ],
+          "readOnly": true,
           "type": "string"
         }
       },
-      "required": [
-        "id",
-        "userLockoutAction",
-        "userPasswordExpirationAction"
-      ],
-      "title": "Office 365 Output",
+      "title": "Office 365",
       "type": "object"
     },
-    "office365-patch-input": {
+    "samba-domain": {
       "properties": {
-        "groupsEnabled": {
-          "type": "boolean"
-        },
-        "name": {
+        "id": {
+          "description": "Unique identifier of this domain",
+          "readOnly": true,
           "type": "string"
         },
-        "userLockoutAction": {
-          "enum": [
-            "suspend",
-            "maintain"
-          ],
-          "type": "string"
-        },
-        "userPasswordExpirationAction": {
-          "enum": [
-            "suspend",
-            "maintain"
-          ],
-          "type": "string"
-        }
-      },
-      "title": "Office 365 Patch Input",
-      "type": "object"
-    },
-    "samba-domain-input": {
-      "properties": {
         "name": {
           "description": "Name of this domain's WorkGroup",
           "type": "string"
@@ -4060,28 +3996,8 @@
         "name",
         "sid"
       ],
-      "title": "Samba Domain Input",
+      "title": "Samba Domain",
       "type": "object"
-    },
-    "samba-domain-output": {
-      "allOf": [
-        {
-          "properties": {
-            "id": {
-              "description": "Unique identifier of this domain",
-              "type": "string"
-            }
-          },
-          "required": [
-            "id"
-          ],
-          "type": "object"
-        },
-        {
-          "$ref": "#/definitions/samba-domain-input"
-        }
-      ],
-      "title": "Samba Domain Output"
     },
     "scheduled-userstate-result": {
       "properties": {
@@ -7595,7 +7511,7 @@
             "description": "",
             "schema": {
               "items": {
-                "$ref": "#/definitions/active-directory-output"
+                "$ref": "#/definitions/active-directory"
               },
               "type": "array"
             }
@@ -7631,7 +7547,7 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "$ref": "#/definitions/active-directory-input"
+              "$ref": "#/definitions/active-directory"
             }
           }
         ],
@@ -7639,7 +7555,7 @@
           "201": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/active-directory-output"
+              "$ref": "#/definitions/active-directory"
             }
           }
         },
@@ -7688,7 +7604,7 @@
             "description": "",
             "schema": {
               "items": {
-                "$ref": "#/definitions/active-directory-agent-list-output"
+                "$ref": "#/definitions/active-directory-agent-list"
               },
               "type": "array"
             }
@@ -7731,7 +7647,7 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "$ref": "#/definitions/active-directory-agent-input"
+              "$ref": "#/definitions/active-directory-agent"
             }
           }
         ],
@@ -7739,7 +7655,7 @@
           "201": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/active-directory-agent-get-output"
+              "$ref": "#/definitions/active-directory-agent-get"
             }
           }
         },
@@ -7807,7 +7723,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/active-directory-agent-list-output"
+              "$ref": "#/definitions/active-directory-agent-list"
             }
           }
         },
@@ -8076,7 +7992,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/active-directory-output"
+              "$ref": "#/definitions/active-directory"
             }
           }
         },
@@ -8109,7 +8025,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/active-directory-output"
+              "$ref": "#/definitions/active-directory"
             }
           }
         },
@@ -9088,7 +9004,7 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "$ref": "#/definitions/apple-mdm-patch-input"
+              "$ref": "#/definitions/apple-mdm-patch"
             }
           }
         ],
@@ -11489,7 +11405,7 @@
     },
     "/gsuites/{gsuite_id}/translationrules": {
       "get": {
-        "description": "This endpoint returns all graph translation rules for a specific G Suite instance. These rules specify how JumpCloud attributes translate to [G Suite Admin SDK](https://developers.google.com/admin-sdk/directory/) attributes.\n\n##### Sample Request\n\n```\n curl -X GET  https://console.jumpcloud.com/api/v2/gsuites/{gsuite_id}/translationrules \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```",
+        "description": "This endpoint returns all graph translation rules for a specific G Suite instance. These rules specify how JumpCloud attributes translate to [G Suite Admin SDK](https://developers.google.com/admin-sdk/directory/) attributes.\n\n##### Sample Request\n\n```\ncurl -X GET  https://console.jumpcloud.com/api/v2/gsuites/{gsuite_id}/translationrules \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ```",
         "operationId": "GSuiteTranslationRule_List",
         "parameters": [
           {
@@ -11811,7 +11727,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/gsuite-output"
+              "$ref": "#/definitions/gsuite"
             }
           }
         },
@@ -11853,7 +11769,7 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "$ref": "#/definitions/gsuite-patch-input"
+              "$ref": "#/definitions/gsuite"
             }
           }
         ],
@@ -11861,7 +11777,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/gsuite-output"
+              "$ref": "#/definitions/gsuite"
             }
           }
         },
@@ -12214,7 +12130,7 @@
             "description": "",
             "schema": {
               "items": {
-                "$ref": "#/definitions/ldap-server-output"
+                "$ref": "#/definitions/ldap-server"
               },
               "type": "array"
             }
@@ -12254,7 +12170,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/ldap-server-output"
+              "$ref": "#/definitions/ldap-server"
             }
           }
         },
@@ -12485,7 +12401,7 @@
             "description": "",
             "schema": {
               "items": {
-                "$ref": "#/definitions/samba-domain-output"
+                "$ref": "#/definitions/samba-domain"
               },
               "type": "array"
             }
@@ -12529,7 +12445,7 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "$ref": "#/definitions/samba-domain-input"
+              "$ref": "#/definitions/samba-domain"
             }
           }
         ],
@@ -12537,7 +12453,7 @@
           "201": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/samba-domain-output"
+              "$ref": "#/definitions/samba-domain"
             }
           }
         },
@@ -12611,7 +12527,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/samba-domain-output"
+              "$ref": "#/definitions/samba-domain"
             }
           }
         },
@@ -12660,7 +12576,7 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "$ref": "#/definitions/samba-domain-input"
+              "$ref": "#/definitions/samba-domain"
             }
           }
         ],
@@ -12668,7 +12584,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/samba-domain-output"
+              "$ref": "#/definitions/samba-domain"
             }
           }
         },
@@ -12889,7 +12805,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/office365-output"
+              "$ref": "#/definitions/office365"
             }
           }
         },
@@ -12934,7 +12850,7 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "$ref": "#/definitions/office365-patch-input"
+              "$ref": "#/definitions/office365"
             }
           }
         ],
@@ -12942,7 +12858,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/office365-output"
+              "$ref": "#/definitions/office365"
             }
           }
         },
@@ -12958,15 +12874,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request PATCH \\\n  --url https://console.jumpcloud.com/api/v2/office365s/{office365_id} \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --header 'x-org-id: SOME_STRING_VALUE' \\\n  --data '{\"groupsEnabled\":true,\"name\":\"string\",\"userLockoutAction\":\"suspend\",\"userPasswordExpirationAction\":\"suspend\"}'"
+            "source": "curl --request PATCH \\\n  --url https://console.jumpcloud.com/api/v2/office365s/{office365_id} \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --header 'x-org-id: SOME_STRING_VALUE' \\\n  --data '{\"groupsEnabled\":true,\"name\":\"string\"}'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/v2/office365s/{office365_id}\"\n\npayload = {\n    \"groupsEnabled\": True,\n    \"name\": \"string\",\n    \"userLockoutAction\": \"suspend\",\n    \"userPasswordExpirationAction\": \"suspend\"\n}\nheaders = {\n    \"x-org-id\": \"SOME_STRING_VALUE\",\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"PATCH\", url, json=payload, headers=headers)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/v2/office365s/{office365_id}\"\n\npayload = {\n    \"groupsEnabled\": True,\n    \"name\": \"string\"\n}\nheaders = {\n    \"x-org-id\": \"SOME_STRING_VALUE\",\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"PATCH\", url, json=payload, headers=headers)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"x-org-id\", \"SOME_STRING_VALUE\")\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/v2/office365s/{office365_id}' -Method PATCH -Headers $headers -ContentType 'application/json' -Body '{\"groupsEnabled\":true,\"name\":\"string\",\"userLockoutAction\":\"suspend\",\"userPasswordExpirationAction\":\"suspend\"}'"
+            "source": "$headers=@{}\n$headers.Add(\"x-org-id\", \"SOME_STRING_VALUE\")\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/v2/office365s/{office365_id}' -Method PATCH -Headers $headers -ContentType 'application/json' -Body '{\"groupsEnabled\":true,\"name\":\"string\"}'"
           }
         ]
       }
@@ -22265,6 +22181,61 @@
       "x-functionalities-tags": [
         "groups",
         "radius-read"
+      ]
+    },
+    "/usergroups/{group_id}/suggestions": {
+      "get": {
+        "description": "This endpoint returns available suggestions for a given group\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/usergroups/{GroupID}/suggestions \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```",
+        "operationId": "GroupSuggestion_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/trait:limit:limit"
+          },
+          {
+            "$ref": "#/parameters/trait:skip:skip"
+          },
+          {
+            "description": "ID of the group",
+            "in": "path",
+            "name": "group_id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "items": {
+                "$ref": "#/definitions/MemberSuggestion"
+              },
+              "type": "array"
+            }
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ],
+        "summary": "List Suggestions for a User Group",
+        "x-codeSamples": [
+          {
+            "lang": "Shell",
+            "source": "curl --request GET \\\n  --url 'https://console.jumpcloud.com/api/v2/usergroups/{group_id}/suggestions?limit=10&skip=0' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --header 'x-org-id: SOME_STRING_VALUE'"
+          },
+          {
+            "lang": "Python",
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/v2/usergroups/{group_id}/suggestions\"\n\nquerystring = {\"limit\":\"10\",\"skip\":\"0\"}\n\nheaders = {\n    \"x-org-id\": \"SOME_STRING_VALUE\",\n    \"x-api-key\": \"REPLACE_KEY_VALUE\"\n}\n\nresponse = requests.request(\"GET\", url, headers=headers, params=querystring)\n\nprint(response.text)"
+          },
+          {
+            "lang": "Powershell",
+            "source": "$headers=@{}\n$headers.Add(\"x-org-id\", \"SOME_STRING_VALUE\")\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/v2/usergroups/{group_id}/suggestions?limit=10&skip=0' -Method GET -Headers $headers"
+          }
+        ]
+      },
+      "x-functionalities-tags": [
+        "groups"
       ]
     },
     "/usergroups/{group_id}/systemgroups": {

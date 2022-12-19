@@ -39,7 +39,7 @@ PS C:\> {{ Add code here }}
 .Inputs
 JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
 .Outputs
-JumpCloud.SDK.V2.Models.IOffice365Output
+JumpCloud.SDK.V2.Models.IOffice365
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -74,7 +74,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Get-JcSdkOffice365
 {
-    [OutputType([JumpCloud.SDK.V2.Models.IOffice365Output])]
+    [OutputType([JumpCloud.SDK.V2.Models.IOffice365])]
     [CmdletBinding(DefaultParameterSetName='Get', PositionalBinding=$false)]
     Param(
     [Parameter(ParameterSetName='Get', Mandatory)]

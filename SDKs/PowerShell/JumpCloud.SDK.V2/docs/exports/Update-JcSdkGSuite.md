@@ -33,12 +33,12 @@ Update-JcSdkGSuite -Id <String> [-GroupsEnabled] [-Name <String>] [-UserLockoutA
 
 ### Update
 ```
-Update-JcSdkGSuite -Id <String> -Body <IGsuitePatchInput> [-Confirm] [-WhatIf] [<CommonParameters>]
+Update-JcSdkGSuite -Id <String> -Body <IGsuite> [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### UpdateViaIdentity
 ```
-Update-JcSdkGSuite -InputObject <IJumpCloudApiIdentity> -Body <IGsuitePatchInput> [-Confirm] [-WhatIf]
+Update-JcSdkGSuite -InputObject <IJumpCloudApiIdentity> -Body <IGsuite> [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
@@ -84,11 +84,11 @@ curl -X PATCH https://console.jumpcloud.com/api/v2/gsuites/{GSUITE_ID} \\
 ## PARAMETERS
 
 ### -Body
-GSuite Patch Input
+GSuite
 To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IGsuitePatchInput
+Type: JumpCloud.SDK.V2.Models.IGsuite
 Parameter Sets: Update, UpdateViaIdentity
 Aliases:
 
@@ -226,13 +226,13 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### JumpCloud.SDK.V2.Models.IGsuitePatchInput
+### JumpCloud.SDK.V2.Models.IGsuite
 
 ### JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V2.Models.IGsuiteOutput
+### JumpCloud.SDK.V2.Models.IGsuite
 
 ## NOTES
 
@@ -243,7 +243,7 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <IGsuitePatchInput>: GSuite Patch Input
+BODY <IGsuite>: GSuite
   - `[GroupsEnabled <Boolean?>]`: 
   - `[Name <String>]`: 
   - `[UserLockoutAction <String>]`: 

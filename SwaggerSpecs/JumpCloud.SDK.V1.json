@@ -5413,59 +5413,6 @@
       ]
     },
     "/search/commandresults": {
-      "post": {
-        "description": "Return Command Results in multi-record format allowing for the passing of the `filter` parameter.\n\nTo support advanced filtering you can use the `filter` and `searchFilter` parameters that can only be passed in the body of POST /api/search/commandresults route. The `filter` parameter must be passed as Content-Type application/json.\n\nThe `filter` parameter is an object with a single property, either `and` or `or` with the value of the property being an array of query expressions.\n\nThis allows you to filter records using the logic of matching ALL or ANY records in the array of query expressions. If the `and` or `or` are not included the default behavior is to match ALL query expressions.\n\n\n#### Sample Request\n\nExact search for a specific command result\n```\ncurl -X POST https://console.jumpcloud.com/api/search/commandresults \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n  \"filter\" : \"workflowInstanceId:$eq:62f3c599ec4e928499069c7f\",\n  \"fields\" : \"name workflowId sudo\"\n}'\n```",
-        "operationId": "search_commandresults_post",
-        "parameters": [
-          {
-            "in": "body",
-            "name": "body",
-            "schema": {
-              "$ref": "#/definitions/search"
-            }
-          },
-          {
-            "$ref": "#/parameters/trait:fields:fields"
-          },
-          {
-            "$ref": "#/parameters/trait:filter:filter"
-          },
-          {
-            "$ref": "#/parameters/trait:limit:limit"
-          },
-          {
-            "$ref": "#/parameters/trait:skip:skip"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/commandresultslist"
-            }
-          }
-        },
-        "security": [
-          {
-            "x-api-key": []
-          }
-        ],
-        "summary": "Search Commands Results",
-        "x-codeSamples": [
-          {
-            "lang": "Shell",
-            "source": "curl --request POST \\\n  --url 'https://console.jumpcloud.com/api/search/commandresults?fields=&filter=SOME_STRING_VALUE&limit=10&skip=0' \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --header 'x-org-id: ' \\\n  --data '{\"fields\":\"string\",\"filter\":{},\"searchFilter\":{}}'"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/search/commandresults\"\n\nquerystring = {\"fields\":\"\",\"filter\":\"SOME_STRING_VALUE\",\"limit\":\"10\",\"skip\":\"0\"}\n\npayload = {\n    \"fields\": \"string\",\n    \"filter\": {},\n    \"searchFilter\": {}\n}\nheaders = {\n    \"x-org-id\": \"\",\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers, params=querystring)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"x-org-id\", \"\")\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/search/commandresults?fields=&filter=SOME_STRING_VALUE&limit=10&skip=0' -Method POST -Headers $headers -ContentType 'application/json' -Body '{\"fields\":\"string\",\"filter\":{},\"searchFilter\":{}}'"
-          }
-        ]
-      },
       "x-functionalities-tags": [
         "search"
       ]

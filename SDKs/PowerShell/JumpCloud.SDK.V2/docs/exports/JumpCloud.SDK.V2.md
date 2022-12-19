@@ -346,6 +346,17 @@ This endpoint returns all Groups that exist in your organization.
   -H 'x-api-key: {API_KEY}'
 ```
 
+### [Get-JcSdkGroupSuggestion](Get-JcSdkGroupSuggestion.md)
+This endpoint returns available suggestions for a given group
+#### Sample Request
+```
+curl -X GET https://console.jumpcloud.com/api/v2/usergroups/{GroupID}/suggestions \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+
+```
+
 ### [Get-JcSdkGSuite](Get-JcSdkGSuite.md)
 This endpoint returns a specific G Suite.
 

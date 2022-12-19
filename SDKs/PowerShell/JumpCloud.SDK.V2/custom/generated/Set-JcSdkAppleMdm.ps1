@@ -57,7 +57,7 @@ PS C:\> {{ Add code here }}
 {{ Add output here }}
 
 .Inputs
-JumpCloud.SDK.V2.Models.IAppleMdmPatchInput
+JumpCloud.SDK.V2.Models.IAppleMdmPatch
 .Inputs
 JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
 .Outputs
@@ -67,7 +67,7 @@ COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
-BODY <IAppleMdmPatchInput>:
+BODY <IAppleMdmPatch>:
   [AllowMobileUserEnrollment <Boolean?>]: A toggle to allow mobile device enrollment for an organization.
   [AppleCertCreatorAppleId <String>]: The Apple ID of the admin who created the Apple signed certificate.
   [AppleSignedCert <String>]: A signed certificate obtained from Apple after providing Apple with the plist file provided on POST.
@@ -153,8 +153,8 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='Set', Mandatory, ValueFromPipeline)]
     [Parameter(ParameterSetName='SetViaIdentity', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Models.IAppleMdmPatchInput]
-    # Apple MDM Patch Input
+    [JumpCloud.SDK.V2.Models.IAppleMdmPatch]
+    # Apple MDM Patch
     # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body}, 
 

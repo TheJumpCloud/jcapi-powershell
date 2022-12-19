@@ -39,17 +39,17 @@ PS C:\> {{ Add code here }}
 {{ Add output here }}
 
 .Inputs
-JumpCloud.SDK.V2.Models.IGsuitePatchInput
+JumpCloud.SDK.V2.Models.IGsuite
 .Inputs
 JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
 .Outputs
-JumpCloud.SDK.V2.Models.IGsuiteOutput
+JumpCloud.SDK.V2.Models.IGsuite
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
-BODY <IGsuitePatchInput>:
+BODY <IGsuite>:
   [GroupsEnabled <Boolean?>]:
   [Name <String>]:
   [UserLockoutAction <String>]:
@@ -84,7 +84,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Update-JcSdkGSuite
 {
-    [OutputType([JumpCloud.SDK.V2.Models.IGsuiteOutput])]
+    [OutputType([JumpCloud.SDK.V2.Models.IGsuite])]
     [CmdletBinding(DefaultParameterSetName='UpdateExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(ParameterSetName='Update', Mandatory)]
@@ -105,8 +105,8 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='Update', Mandatory, ValueFromPipeline)]
     [Parameter(ParameterSetName='UpdateViaIdentity', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Models.IGsuitePatchInput]
-    # GSuite Patch Input
+    [JumpCloud.SDK.V2.Models.IGsuite]
+    # GSuite
     # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body}, 
 

@@ -52,12 +52,12 @@ Set-JcSdkAppleMdm -Id <String> [-AllowMobileUserEnrollment] [-AppleCertCreatorAp
 
 ### Set
 ```
-Set-JcSdkAppleMdm -Id <String> -Body <IAppleMdmPatchInput> [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkAppleMdm -Id <String> -Body <IAppleMdmPatch> [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentity
 ```
-Set-JcSdkAppleMdm -InputObject <IJumpCloudApiIdentity> -Body <IAppleMdmPatchInput> [-Confirm] [-WhatIf]
+Set-JcSdkAppleMdm -InputObject <IJumpCloudApiIdentity> -Body <IAppleMdmPatch> [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
@@ -166,11 +166,11 @@ Accept wildcard characters: False
 ```
 
 ### -Body
-Apple MDM Patch Input
+Apple MDM Patch
 To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IAppleMdmPatchInput
+Type: JumpCloud.SDK.V2.Models.IAppleMdmPatch
 Parameter Sets: Set, SetViaIdentity
 Aliases:
 
@@ -568,7 +568,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### JumpCloud.SDK.V2.Models.IAppleMdmPatchInput
+### JumpCloud.SDK.V2.Models.IAppleMdmPatch
 
 ### JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
 
@@ -585,7 +585,7 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <IAppleMdmPatchInput>: Apple MDM Patch Input
+BODY <IAppleMdmPatch>: Apple MDM Patch
   - `[AllowMobileUserEnrollment <Boolean?>]`: A toggle to allow mobile device enrollment for an organization.
   - `[AppleCertCreatorAppleId <String>]`: The Apple ID of the admin who created the Apple signed certificate.
   - `[AppleSignedCert <String>]`: A signed certificate obtained from Apple after providing Apple with the plist file provided on POST.

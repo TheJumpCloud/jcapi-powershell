@@ -33,7 +33,7 @@ PS C:\> {{ Add code here }}
 .Inputs
 JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
 .Outputs
-JumpCloud.SDK.V2.Models.IGsuiteOutput
+JumpCloud.SDK.V2.Models.IGsuite
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -68,7 +68,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Get-JcSdkGSuite
 {
-    [OutputType([JumpCloud.SDK.V2.Models.IGsuiteOutput])]
+    [OutputType([JumpCloud.SDK.V2.Models.IGsuite])]
     [CmdletBinding(DefaultParameterSetName='Get', PositionalBinding=$false)]
     Param(
     [Parameter(ParameterSetName='Get', Mandatory)]

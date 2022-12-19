@@ -37,28 +37,28 @@ PS C:\> {{ Add code here }}
 {{ Add output here }}
 
 .Inputs
-JumpCloud.SDK.V2.Models.IActiveDirectoryInput
+JumpCloud.SDK.V2.Models.IActiveDirectory
 .Outputs
-JumpCloud.SDK.V2.Models.IActiveDirectoryOutput
+JumpCloud.SDK.V2.Models.IActiveDirectory
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
-BODY <IActiveDirectoryInput>:
+BODY <IActiveDirectory>:
   [Domain <String>]: Domain name for this Active Directory instance.
 .Link
 https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/New-JcSdkActiveDirectory.md
 #>
  Function New-JcSdkActiveDirectory
 {
-    [OutputType([JumpCloud.SDK.V2.Models.IActiveDirectoryOutput])]
+    [OutputType([JumpCloud.SDK.V2.Models.IActiveDirectory])]
     [CmdletBinding(DefaultParameterSetName='CreateExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(ParameterSetName='Create', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Models.IActiveDirectoryInput]
-    # Active Directory Input
+    [JumpCloud.SDK.V2.Models.IActiveDirectory]
+    # Active Directory
     # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body}, 
 

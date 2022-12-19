@@ -45,19 +45,17 @@ PS C:\> {{ Add code here }}
 .Inputs
 JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
 .Inputs
-JumpCloud.SDK.V2.Models.IOffice365PatchInput
+JumpCloud.SDK.V2.Models.IOffice365
 .Outputs
-JumpCloud.SDK.V2.Models.IOffice365Output
+JumpCloud.SDK.V2.Models.IOffice365
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
-BODY <IOffice365PatchInput>:
+BODY <IOffice365>:
   [GroupsEnabled <Boolean?>]:
   [Name <String>]:
-  [UserLockoutAction <String>]:
-  [UserPasswordExpirationAction <String>]:
 
 INPUTOBJECT <IJumpCloudApiIdentity>:
   [AccountId <String>]:
@@ -88,7 +86,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Update-JcSdkOffice365
 {
-    [OutputType([JumpCloud.SDK.V2.Models.IOffice365Output])]
+    [OutputType([JumpCloud.SDK.V2.Models.IOffice365])]
     [CmdletBinding(DefaultParameterSetName='UpdateExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(ParameterSetName='Update', Mandatory)]
@@ -109,8 +107,8 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='Update', Mandatory, ValueFromPipeline)]
     [Parameter(ParameterSetName='UpdateViaIdentity', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Models.IOffice365PatchInput]
-    # Office 365 Patch Input
+    [JumpCloud.SDK.V2.Models.IOffice365]
+    # Office 365
     # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body}, 
 
@@ -127,20 +125,6 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [System.String]
     # .
     ${Name}, 
-
-    [Parameter(ParameterSetName='UpdateExpanded')]
-    [Parameter(ParameterSetName='UpdateViaIdentityExpanded')]
-    [JumpCloud.SDK.V2.Category('Body')]
-    [System.String]
-    # .
-    ${UserLockoutAction}, 
-
-    [Parameter(ParameterSetName='UpdateExpanded')]
-    [Parameter(ParameterSetName='UpdateViaIdentityExpanded')]
-    [JumpCloud.SDK.V2.Category('Body')]
-    [System.String]
-    # .
-    ${UserPasswordExpirationAction}, 
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]

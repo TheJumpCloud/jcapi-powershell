@@ -192,32 +192,6 @@ curl --silent \\
 ### [Invoke-JcSdkExpireUserPassword](Invoke-JcSdkExpireUserPassword.md)
 This endpoint allows you to expire a user's password.
 
-### [Invoke-JcSdkSearchCommandresult](Invoke-JcSdkSearchCommandresult.md)
-Return Command Results in multi-record format allowing for the passing of the `filter` parameter.
-
-To support advanced filtering you can use the `filter` and `searchFilter` parameters that can only be passed in the body of POST /api/search/commandresults route.
-The `filter` parameter must be passed as Content-Type application/json.
-
-The `filter` parameter is an object with a single property, either `and` or `or` with the value of the property being an array of query expressions.
-
-This allows you to filter records using the logic of matching ALL or ANY records in the array of query expressions.
-If the `and` or `or` are not included the default behavior is to match ALL query expressions.
-
-
-#### Sample Request
-
-Exact search for a specific command result
-```
-curl -X POST https://console.jumpcloud.com/api/search/commandresults \\
-  -H 'Accept: application/json' \\
-  -H 'Content-Type: application/json' \\
-  -H 'x-api-key: {API_KEY}' \\
-  -d '{
-  \"filter\" : \"workflowInstanceId:$eq:62f3c599ec4e928499069c7f\",
-  \"fields\" : \"name workflowId sudo\"
-}'
-```
-
 ### [Lock-JcSdkSystem](Lock-JcSdkSystem.md)
 This endpoint allows you to run the lock command on the specified device.
 If a device is offline, the command will be run when the device becomes available.

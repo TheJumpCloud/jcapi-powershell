@@ -39,15 +39,15 @@ PS C:\> {{ Add code here }}
 .Inputs
 JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
 .Inputs
-JumpCloud.SDK.V2.Models.ISambaDomainInput
+JumpCloud.SDK.V2.Models.ISambaDomain
 .Outputs
-JumpCloud.SDK.V2.Models.ISambaDomainOutput
+JumpCloud.SDK.V2.Models.ISambaDomain
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
-BODY <ISambaDomainInput>:
+BODY <ISambaDomain>:
   Name <String>: Name of this domain's WorkGroup
   Sid <String>: Security identifier of this domain
 
@@ -80,7 +80,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Set-JcSdkLdapServerSambaDomain
 {
-    [OutputType([JumpCloud.SDK.V2.Models.ISambaDomainOutput])]
+    [OutputType([JumpCloud.SDK.V2.Models.ISambaDomain])]
     [CmdletBinding(DefaultParameterSetName='SetExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(ParameterSetName='Set', Mandatory)]
@@ -108,8 +108,8 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='Set', Mandatory, ValueFromPipeline)]
     [Parameter(ParameterSetName='SetViaIdentity', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Models.ISambaDomainInput]
-    # Samba Domain Input
+    [JumpCloud.SDK.V2.Models.ISambaDomain]
+    # Samba Domain
     # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body}, 
 

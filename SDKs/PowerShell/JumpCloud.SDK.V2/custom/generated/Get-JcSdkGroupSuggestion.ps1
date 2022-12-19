@@ -1,26 +1,24 @@
 <#
 .Synopsis
-This endpoint returns a specific samba domain for an LDAP server.
-
-##### Sample Request
+This endpoint returns available suggestions for a given group
+#### Sample Request
 ```
-curl -X GET \\
-  https://console.jumpcloud.com/api/v2/ldapservers/ldapservers/{LDAP_ID}/sambadomains/{SAMBA_ID} \\
+curl -X GET https://console.jumpcloud.com/api/v2/usergroups/{GroupID}/suggestions \\
   -H 'Accept: application/json' \\
   -H 'Content-Type: application/json' \\
   -H 'x-api-key: {API_KEY}'
-  ```
+
+```
 .Description
-This endpoint returns a specific samba domain for an LDAP server.
-
-##### Sample Request
+This endpoint returns available suggestions for a given group
+#### Sample Request
 ```
-curl -X GET \\
-  https://console.jumpcloud.com/api/v2/ldapservers/ldapservers/{LDAP_ID}/sambadomains/{SAMBA_ID} \\
+curl -X GET https://console.jumpcloud.com/api/v2/usergroups/{GroupID}/suggestions \\
   -H 'Accept: application/json' \\
   -H 'Content-Type: application/json' \\
   -H 'x-api-key: {API_KEY}'
-  ```
+
+```
 .Example
 PS C:\> {{ Add code here }}
 
@@ -33,7 +31,7 @@ PS C:\> {{ Add code here }}
 .Inputs
 JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
 .Outputs
-JumpCloud.SDK.V2.Models.ISambaDomain
+JumpCloud.SDK.V2.Models.IMemberSuggestion
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -64,25 +62,18 @@ INPUTOBJECT <IJumpCloudApiIdentity>:
   [UserId <String>]: ObjectID of the User.
   [WorkdayId <String>]:
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkLdapServerSambaDomain.md
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkGroupSuggestion.md
 #>
- Function Get-JcSdkLdapServerSambaDomain
+ Function Get-JcSdkGroupSuggestion
 {
-    [OutputType([JumpCloud.SDK.V2.Models.ISambaDomain])]
-    [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
+    [OutputType([JumpCloud.SDK.V2.Models.IMemberSuggestion])]
+    [CmdletBinding(DefaultParameterSetName='Get', PositionalBinding=$false)]
     Param(
     [Parameter(ParameterSetName='Get', Mandatory)]
     [JumpCloud.SDK.V2.Category('Path')]
     [System.String]
-    # Unique identifier of the samba domain.
-    ${Id}, 
-
-    [Parameter(ParameterSetName='Get', Mandatory)]
-    [Parameter(ParameterSetName='List', Mandatory)]
-    [JumpCloud.SDK.V2.Category('Path')]
-    [System.String]
-    # Unique identifier of the LDAP server.
-    ${LdapserverId}, 
+    # ID of the group
+    ${GroupId}, 
 
     [Parameter(ParameterSetName='GetViaIdentity', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Path')]
@@ -90,42 +81,6 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     # Identity Parameter
     # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
     ${InputObject}, 
-
-    [Parameter(ParameterSetName='List')]
-    [AllowEmptyCollection()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.String[]]
-    # The comma separated fields included in the returned records.
-    # If omitted, the default list of fields will be returned.
-    ${Fields}, 
-
-    [Parameter(ParameterSetName='List')]
-    [AllowEmptyCollection()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.String[]]
-    # A filter to apply to the query.
-    # 
-    # **Filter structure**: `<field>:<operator>:<value>`.
-    # 
-    # **field** = Populate with a valid field from an endpoint response.
-    # 
-    # **operator** = Supported operators are: eq, ne, gt, ge, lt, le, between, search, in.
-    # _Note: v1 operators differ from v2 operators._
-    # 
-    # **value** = Populate with the value you want to search for.
-    # Is case sensitive.
-    # Supports wild cards.
-    # 
-    # **EX:** `GET /api/v2/groups?filter=name:eq:Test+Group`
-    ${Filter}, 
-
-    [Parameter(ParameterSetName='List')]
-    [AllowEmptyCollection()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.String[]]
-    # The comma separated fields used to sort the collection.
-    # Default sort is ascending, prefix with `-` to sort descending.
-    ${Sort}, 
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]
@@ -188,7 +143,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        If ($Paginate -and $PSCmdlet.ParameterSetName -in ('List'))
+        If ($Paginate -and $PSCmdlet.ParameterSetName -in ('Get'))
         {
             $PSBoundParameters.Remove('Paginate') | Out-Null
             If ([System.String]::IsNullOrEmpty($PSBoundParameters.Limit))
@@ -203,7 +158,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
             {
                 Write-Debug ("Limit: $($PSBoundParameters.Limit); ");
                 Write-Debug ("Skip: $($PSBoundParameters.Skip); ");
-                $Result = JumpCloud.SDK.V2.internal\Get-JcSdkInternalLdapServerSambaDomain @PSBoundParameters
+                $Result = JumpCloud.SDK.V2.internal\Get-JcSdkInternalGroupSuggestion @PSBoundParameters
                 Write-Debug ('HttpRequest: ' + $JCHttpRequest);
                 Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
                 Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);
@@ -228,7 +183,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Else
         {
             $PSBoundParameters.Remove('Paginate') | Out-Null
-            $Result = JumpCloud.SDK.V2.internal\Get-JcSdkInternalLdapServerSambaDomain @PSBoundParameters
+            $Result = JumpCloud.SDK.V2.internal\Get-JcSdkInternalGroupSuggestion @PSBoundParameters
             Write-Debug ('HttpRequest: ' + $JCHttpRequest);
             Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
             Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);

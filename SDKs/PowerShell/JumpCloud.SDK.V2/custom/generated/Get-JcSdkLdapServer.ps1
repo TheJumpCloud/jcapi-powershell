@@ -33,7 +33,7 @@ PS C:\> {{ Add code here }}
 .Inputs
 JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
 .Outputs
-JumpCloud.SDK.V2.Models.ILdapServerOutput
+JumpCloud.SDK.V2.Models.ILdapServer
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -68,7 +68,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Get-JcSdkLdapServer
 {
-    [OutputType([JumpCloud.SDK.V2.Models.ILdapServerOutput])]
+    [OutputType([JumpCloud.SDK.V2.Models.ILdapServer])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
     Param(
     [Parameter(ParameterSetName='Get', Mandatory)]

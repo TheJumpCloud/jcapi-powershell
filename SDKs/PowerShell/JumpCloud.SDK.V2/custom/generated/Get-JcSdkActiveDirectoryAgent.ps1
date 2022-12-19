@@ -31,7 +31,7 @@ PS C:\> {{ Add code here }}
 .Inputs
 JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
 .Outputs
-JumpCloud.SDK.V2.Models.IActiveDirectoryAgentListOutput
+JumpCloud.SDK.V2.Models.IActiveDirectoryAgentList
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -66,7 +66,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Get-JcSdkActiveDirectoryAgent
 {
-    [OutputType([JumpCloud.SDK.V2.Models.IActiveDirectoryAgentListOutput])]
+    [OutputType([JumpCloud.SDK.V2.Models.IActiveDirectoryAgentList])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
     Param(
     [Parameter(ParameterSetName='Get', Mandatory)]

@@ -166,7 +166,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V2.Models.ILdapServerOutput
+### JumpCloud.SDK.V2.Models.ILdapServer
 
 ## NOTES
 

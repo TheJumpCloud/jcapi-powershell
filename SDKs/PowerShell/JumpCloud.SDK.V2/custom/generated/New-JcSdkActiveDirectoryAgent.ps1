@@ -37,7 +37,7 @@ JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
 .Inputs
 System.Collections.Hashtable
 .Outputs
-JumpCloud.SDK.V2.Models.IActiveDirectoryAgentGetOutput
+JumpCloud.SDK.V2.Models.IActiveDirectoryAgentGet
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -72,7 +72,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function New-JcSdkActiveDirectoryAgent
 {
-    [OutputType([JumpCloud.SDK.V2.Models.IActiveDirectoryAgentGetOutput])]
+    [OutputType([JumpCloud.SDK.V2.Models.IActiveDirectoryAgentGet])]
     [CmdletBinding(DefaultParameterSetName='CreateExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(ParameterSetName='Create', Mandatory)]
@@ -93,9 +93,9 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='Create', Mandatory, ValueFromPipeline)]
     [Parameter(ParameterSetName='CreateViaIdentity', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Runtime.Info(Required, PossibleTypes=([JumpCloud.SDK.V2.Models.IActiveDirectoryAgentInput]))]
+    [JumpCloud.SDK.V2.Runtime.Info(Required, PossibleTypes=([JumpCloud.SDK.V2.Models.IActiveDirectoryAgent]))]
     [System.Collections.Hashtable]
-    # Active Directory Agent Input
+    # Active Directory Agent
     ${Body}, 
 
     [Parameter(ParameterSetName='CreateExpanded')]

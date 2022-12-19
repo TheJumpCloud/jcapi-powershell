@@ -32,14 +32,14 @@ Set-JcSdkLdapServerSambaDomain -Id <String> -LdapserverId <String> -Name <String
 
 ### Set
 ```
-Set-JcSdkLdapServerSambaDomain -Id <String> -LdapserverId <String> -Body <ISambaDomainInput> [-Confirm]
- [-WhatIf] [<CommonParameters>]
+Set-JcSdkLdapServerSambaDomain -Id <String> -LdapserverId <String> -Body <ISambaDomain> [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### SetViaIdentity
 ```
-Set-JcSdkLdapServerSambaDomain -InputObject <IJumpCloudApiIdentity> -Body <ISambaDomainInput> [-Confirm]
- [-WhatIf] [<CommonParameters>]
+Set-JcSdkLdapServerSambaDomain -InputObject <IJumpCloudApiIdentity> -Body <ISambaDomain> [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### SetViaIdentityExpanded
@@ -82,11 +82,11 @@ curl -X PUT https://console.jumpcloud.com/api/v2/ldapservers/{LDAP_ID}/sambadoma
 ## PARAMETERS
 
 ### -Body
-Samba Domain Input
+Samba Domain
 To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.ISambaDomainInput
+Type: JumpCloud.SDK.V2.Models.ISambaDomain
 Parameter Sets: Set, SetViaIdentity
 Aliases:
 
@@ -211,11 +211,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
 
-### JumpCloud.SDK.V2.Models.ISambaDomainInput
+### JumpCloud.SDK.V2.Models.ISambaDomain
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V2.Models.ISambaDomainOutput
+### JumpCloud.SDK.V2.Models.ISambaDomain
 
 ## NOTES
 
@@ -226,7 +226,7 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <ISambaDomainInput>: Samba Domain Input
+BODY <ISambaDomain>: Samba Domain
   - `Name <String>`: Name of this domain's WorkGroup
   - `Sid <String>`: Security identifier of this domain
 
