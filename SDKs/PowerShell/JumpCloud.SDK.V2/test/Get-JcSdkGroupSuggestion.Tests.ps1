@@ -4,7 +4,7 @@ BeforeAll {
         $loadEnvPath = Join-Path $PSScriptRoot '..\loadEnv.ps1'
     }
     . ($loadEnvPath)
-    $TestRecordingFile = Join-Path $PSScriptRoot 'Remove-JcSdkApplicationLogo.Recording.json'
+    $TestRecordingFile = Join-Path $PSScriptRoot 'Get-JcSdkGroupSuggestion.Recording.json'
     $currentPath = $PSScriptRoot
     while (-not $mockingPath) {
         $mockingPath = Get-ChildItem -Path $currentPath -Recurse -Include 'HttpPipelineMocking.ps1' -File
@@ -14,13 +14,12 @@ BeforeAll {
 
 
 }
-Describe 'Remove-JcSdkApplicationLogo' -Tag:("") {
-    It 'Delete' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+Describe 'Get-JcSdkGroupSuggestion' -Tag:("") {
+    It 'Get' {
+        { Get-JcSdkGroupSuggestion -GroupId $global:PesterTestUserGroup.Id } | Should -Not -Throw
     }
 
-    It 'DeleteViaIdentity' -skip {
+    It 'GetViaIdentity' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }
 }
-
