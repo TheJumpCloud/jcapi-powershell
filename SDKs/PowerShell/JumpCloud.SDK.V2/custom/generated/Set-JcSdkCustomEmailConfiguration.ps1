@@ -204,9 +204,9 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         $GlobalVars = @('JCHttpRequest', 'JCHttpRequestContent', 'JCHttpResponse', 'JCHttpResponseContent')
         $GlobalVars | ForEach-Object {
             If ((Get-Variable -Scope:('Global')).Where( { $_.Name -eq $_ })) {
-        Remove-Variable -Name:($_) -Scope:('Global')
-    }
-         }
+                Remove-Variable -Name:($_) -Scope:('Global')
+            }
+        }
         Return $Results
     }
 }

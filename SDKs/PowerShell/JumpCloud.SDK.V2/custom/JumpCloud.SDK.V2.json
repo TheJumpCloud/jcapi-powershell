@@ -3047,6 +3047,16 @@
           "description": "ObjectId uniquely identifying a System Group.",
           "type": "string"
         },
+        "memberQuery": {
+          "$ref": "#/definitions/FilterQuery"
+        },
+        "memberQueryExemptions": {
+          "description": "Array of GraphObjects exempted from the query",
+          "items": {
+            "$ref": "#/definitions/GraphObject"
+          },
+          "type": "array"
+        },
         "name": {
           "description": "Display name of a System Group.",
           "type": "string"
@@ -3062,8 +3072,29 @@
       "title": "SystemGroup",
       "type": "object"
     },
-    "SystemGroupData": {
+    "SystemGroupPost": {
       "properties": {
+        "attributes": {
+          "$ref": "#/definitions/GraphAttributes"
+        },
+        "description": {
+          "description": "Description of a System Group",
+          "type": "string"
+        },
+        "email": {
+          "description": "Email address of a System Group",
+          "type": "string"
+        },
+        "memberQuery": {
+          "$ref": "#/definitions/FilterQuery"
+        },
+        "memberQueryExemptions": {
+          "description": "Array of GraphObjects exempted from the query",
+          "items": {
+            "$ref": "#/definitions/GraphObject"
+          },
+          "type": "array"
+        },
         "name": {
           "description": "Display name of a System Group.",
           "type": "string"
@@ -3072,7 +3103,41 @@
       "required": [
         "name"
       ],
-      "title": "SystemGroupData",
+      "title": "SystemGroupPost",
+      "type": "object"
+    },
+    "SystemGroupPut": {
+      "properties": {
+        "attributes": {
+          "$ref": "#/definitions/GraphAttributes"
+        },
+        "description": {
+          "description": "Description of a System Group",
+          "type": "string"
+        },
+        "email": {
+          "description": "Email address of a System Group",
+          "type": "string"
+        },
+        "memberQuery": {
+          "$ref": "#/definitions/FilterQuery"
+        },
+        "memberQueryExemptions": {
+          "description": "Array of GraphObjects exempted from the query",
+          "items": {
+            "$ref": "#/definitions/GraphObject"
+          },
+          "type": "array"
+        },
+        "name": {
+          "description": "Display name of a System Group.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "title": "SystemGroupPut",
       "type": "object"
     },
     "User": {
@@ -16525,7 +16590,7 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "$ref": "#/definitions/SystemGroupData"
+              "$ref": "#/definitions/SystemGroupPost"
             }
           }
         ],
@@ -16546,15 +16611,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request POST \\\n  --url https://console.jumpcloud.com/api/v2/systemgroups \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --header 'x-org-id: SOME_STRING_VALUE' \\\n  --data '{\"name\":\"string\"}'"
+            "source": "curl --request POST \\\n  --url https://console.jumpcloud.com/api/v2/systemgroups \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --header 'x-org-id: SOME_STRING_VALUE' \\\n  --data '{\"attributes\":{},\"description\":\"string\",\"email\":\"string\",\"memberQuery\":{\"queryType\":\"FilterQuery\",\"filters\":[{\"field\":\"string\",\"operator\":\"eq\",\"value\":\"string\"}]},\"memberQueryExemptions\":[{\"attributes\":{},\"id\":\"string\",\"type\":\"string\"}],\"name\":\"string\"}'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/v2/systemgroups\"\n\npayload = {\"name\": \"string\"}\nheaders = {\n    \"x-org-id\": \"SOME_STRING_VALUE\",\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/v2/systemgroups\"\n\npayload = {\n    \"attributes\": {},\n    \"description\": \"string\",\n    \"email\": \"string\",\n    \"memberQuery\": {\n        \"queryType\": \"FilterQuery\",\n        \"filters\": [\n            {\n                \"field\": \"string\",\n                \"operator\": \"eq\",\n                \"value\": \"string\"\n            }\n        ]\n    },\n    \"memberQueryExemptions\": [\n        {\n            \"attributes\": {},\n            \"id\": \"string\",\n            \"type\": \"string\"\n        }\n    ],\n    \"name\": \"string\"\n}\nheaders = {\n    \"x-org-id\": \"SOME_STRING_VALUE\",\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"x-org-id\", \"SOME_STRING_VALUE\")\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/v2/systemgroups' -Method POST -Headers $headers -ContentType 'application/json' -Body '{\"name\":\"string\"}'"
+            "source": "$headers=@{}\n$headers.Add(\"x-org-id\", \"SOME_STRING_VALUE\")\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/v2/systemgroups' -Method POST -Headers $headers -ContentType 'application/json' -Body '{\"attributes\":{},\"description\":\"string\",\"email\":\"string\",\"memberQuery\":{\"queryType\":\"FilterQuery\",\"filters\":[{\"field\":\"string\",\"operator\":\"eq\",\"value\":\"string\"}]},\"memberQueryExemptions\":[{\"attributes\":{},\"id\":\"string\",\"type\":\"string\"}],\"name\":\"string\"}'"
           }
         ]
       },
@@ -17233,7 +17298,7 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "$ref": "#/definitions/SystemGroupData"
+              "$ref": "#/definitions/SystemGroupPut"
             }
           }
         ],
@@ -17261,15 +17326,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request PUT \\\n  --url https://console.jumpcloud.com/api/v2/systemgroups/{id} \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --header 'x-org-id: SOME_STRING_VALUE' \\\n  --data '{\"name\":\"string\"}'"
+            "source": "curl --request PUT \\\n  --url https://console.jumpcloud.com/api/v2/systemgroups/{id} \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --header 'x-org-id: SOME_STRING_VALUE' \\\n  --data '{\"attributes\":{},\"description\":\"string\",\"email\":\"string\",\"memberQuery\":{\"queryType\":\"FilterQuery\",\"filters\":[{\"field\":\"string\",\"operator\":\"eq\",\"value\":\"string\"}]},\"memberQueryExemptions\":[{\"attributes\":{},\"id\":\"string\",\"type\":\"string\"}],\"name\":\"string\"}'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/v2/systemgroups/{id}\"\n\npayload = {\"name\": \"string\"}\nheaders = {\n    \"x-org-id\": \"SOME_STRING_VALUE\",\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"PUT\", url, json=payload, headers=headers)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/v2/systemgroups/{id}\"\n\npayload = {\n    \"attributes\": {},\n    \"description\": \"string\",\n    \"email\": \"string\",\n    \"memberQuery\": {\n        \"queryType\": \"FilterQuery\",\n        \"filters\": [\n            {\n                \"field\": \"string\",\n                \"operator\": \"eq\",\n                \"value\": \"string\"\n            }\n        ]\n    },\n    \"memberQueryExemptions\": [\n        {\n            \"attributes\": {},\n            \"id\": \"string\",\n            \"type\": \"string\"\n        }\n    ],\n    \"name\": \"string\"\n}\nheaders = {\n    \"x-org-id\": \"SOME_STRING_VALUE\",\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"PUT\", url, json=payload, headers=headers)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"x-org-id\", \"SOME_STRING_VALUE\")\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/v2/systemgroups/{id}' -Method PUT -Headers $headers -ContentType 'application/json' -Body '{\"name\":\"string\"}'"
+            "source": "$headers=@{}\n$headers.Add(\"x-org-id\", \"SOME_STRING_VALUE\")\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/v2/systemgroups/{id}' -Method PUT -Headers $headers -ContentType 'application/json' -Body '{\"attributes\":{},\"description\":\"string\",\"email\":\"string\",\"memberQuery\":{\"queryType\":\"FilterQuery\",\"filters\":[{\"field\":\"string\",\"operator\":\"eq\",\"value\":\"string\"}]},\"memberQueryExemptions\":[{\"attributes\":{},\"id\":\"string\",\"type\":\"string\"}],\"name\":\"string\"}'"
           }
         ]
       },
@@ -17604,7 +17669,7 @@
     "/systeminsights/azure_instance_metadata": {
       "get": {
         "description": "Valid filter fields are `system_id`.",
-        "operationId": "SystemInsightAzureInstancceMetadata_List",
+        "operationId": "SystemInsightAzureInstanceMetadata_List",
         "parameters": [
           {
             "$ref": "#/parameters/trait:skip:skip"
@@ -20436,7 +20501,7 @@
     "/systeminsights/windows_security_products": {
       "get": {
         "description": "Valid filter fields are `system_id` and `state`.",
-        "operationId": "SystemInsightWindowSecurityProduct_List",
+        "operationId": "SystemInsightWindowsSecurityProduct_List",
         "parameters": [
           {
             "$ref": "#/parameters/trait:skip:skip"

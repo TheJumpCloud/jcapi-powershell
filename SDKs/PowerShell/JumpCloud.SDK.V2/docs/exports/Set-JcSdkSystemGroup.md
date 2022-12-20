@@ -25,24 +25,27 @@ curl -X PUT https://console.jumpcloud.com/api/v2/systemgroups/{Group_ID} \\
 
 ### SetExpanded (Default)
 ```
-Set-JcSdkSystemGroup -Id <String> -Name <String> [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkSystemGroup -Id <String> -Name <String> [-Attributes <Hashtable>] [-Description <String>]
+ [-Email <String>] [-MemberQueryExemptions <IGraphObject[]>] [-MemberQueryFilters <IFilter[]>] [-Confirm]
+ [-WhatIf] [<CommonParameters>]
 ```
 
 ### Set
 ```
-Set-JcSdkSystemGroup -Id <String> -Body <ISystemGroupData> [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkSystemGroup -Id <String> -Body <ISystemGroupPut> [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentity
 ```
-Set-JcSdkSystemGroup -InputObject <IJumpCloudApiIdentity> -Body <ISystemGroupData> [-Confirm] [-WhatIf]
+Set-JcSdkSystemGroup -InputObject <IJumpCloudApiIdentity> -Body <ISystemGroupPut> [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkSystemGroup -InputObject <IJumpCloudApiIdentity> -Name <String> [-Confirm] [-WhatIf]
- [<CommonParameters>]
+Set-JcSdkSystemGroup -InputObject <IJumpCloudApiIdentity> -Name <String> [-Attributes <Hashtable>]
+ [-Description <String>] [-Email <String>] [-MemberQueryExemptions <IGraphObject[]>]
+ [-MemberQueryFilters <IFilter[]>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -77,12 +80,27 @@ curl -X PUT https://console.jumpcloud.com/api/v2/systemgroups/{Group_ID} \\
 
 ## PARAMETERS
 
+### -Attributes
+The graph attributes.
+
+```yaml
+Type: System.Collections.Hashtable
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Body
-SystemGroupData
+SystemGroupPut
 To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.ISystemGroupData
+Type: JumpCloud.SDK.V2.Models.ISystemGroupPut
 Parameter Sets: Set, SetViaIdentity
 Aliases:
 
@@ -90,6 +108,36 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -Description
+Description of a System Group
+
+```yaml
+Type: System.String
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Email
+Email address of a System Group
+
+```yaml
+Type: System.String
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -121,6 +169,38 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -MemberQueryExemptions
+Array of GraphObjects exempted from the query
+To construct, see NOTES section for MEMBERQUERYEXEMPTIONS properties and create a hash table.
+
+```yaml
+Type: JumpCloud.SDK.V2.Models.IGraphObject[]
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -MemberQueryFilters
+.
+To construct, see NOTES section for MEMBERQUERYFILTERS properties and create a hash table.
+
+```yaml
+Type: JumpCloud.SDK.V2.Models.IFilter[]
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -177,7 +257,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
 
-### JumpCloud.SDK.V2.Models.ISystemGroupData
+### JumpCloud.SDK.V2.Models.ISystemGroupPut
 
 ## OUTPUTS
 
@@ -192,8 +272,20 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <ISystemGroupData>: SystemGroupData
+BODY <ISystemGroupPut>: SystemGroupPut
   - `Name <String>`: Display name of a System Group.
+  - `[Attributes <IGraphAttributes>]`: The graph attributes.
+    - `[(Any) <Object>]`: This indicates any property can be added to this object.
+  - `[Description <String>]`: Description of a System Group
+  - `[Email <String>]`: Email address of a System Group
+  - `[MemberQueryExemptions <IGraphObject[]>]`: Array of GraphObjects exempted from the query
+    - `Id <String>`: The ObjectID of the graph object.
+    - `Type <String>`: The type of graph object.
+    - `[Attributes <IGraphAttributes>]`: The graph attributes.
+  - `[MemberQueryFilters <IFilter[]>]`: 
+    - `Field <String>`: Name of field in filter target object.
+    - `Operator <String>`: Filter comparison operator.
+    - `Value <String>`: Filter comparison value.
 
 INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter
   - `[AccountId <String>]`: 
@@ -219,6 +311,17 @@ INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter
   - `[SystemId <String>]`: ObjectID of the System.
   - `[UserId <String>]`: ObjectID of the User.
   - `[WorkdayId <String>]`: 
+
+MEMBERQUERYEXEMPTIONS <IGraphObject[]>: Array of GraphObjects exempted from the query
+  - `Id <String>`: The ObjectID of the graph object.
+  - `Type <String>`: The type of graph object.
+  - `[Attributes <IGraphAttributes>]`: The graph attributes.
+    - `[(Any) <Object>]`: This indicates any property can be added to this object.
+
+MEMBERQUERYFILTERS <IFilter[]>: .
+  - `Field <String>`: Name of field in filter target object.
+  - `Operator <String>`: Filter comparison operator.
+  - `Value <String>`: Filter comparison value.
 
 ## RELATED LINKS
 

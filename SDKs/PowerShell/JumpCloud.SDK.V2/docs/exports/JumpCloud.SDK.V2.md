@@ -1156,7 +1156,7 @@ Valid filter fields are `system_id` and `enabled`.
 ### [Get-JcSdkSystemInsightAuthorizedKey](Get-JcSdkSystemInsightAuthorizedKey.md)
 Valid filter fields are `system_id` and `uid`.
 
-### [Get-JcSdkSystemInsightAzureInstancceMetadata](Get-JcSdkSystemInsightAzureInstancceMetadata.md)
+### [Get-JcSdkSystemInsightAzureInstanceMetadata](Get-JcSdkSystemInsightAzureInstanceMetadata.md)
 Valid filter fields are `system_id`.
 
 ### [Get-JcSdkSystemInsightAzureInstanceTag](Get-JcSdkSystemInsightAzureInstanceTag.md)
@@ -1319,11 +1319,11 @@ Valid filter fields are `system_id` and `security_type`.
 ### [Get-JcSdkSystemInsightWifiStatus](Get-JcSdkSystemInsightWifiStatus.md)
 Valid filter fields are `system_id` and `security_type`.
 
-### [Get-JcSdkSystemInsightWindowSecurityProduct](Get-JcSdkSystemInsightWindowSecurityProduct.md)
-Valid filter fields are `system_id` and `state`.
-
 ### [Get-JcSdkSystemInsightWindowsSecurityCenter](Get-JcSdkSystemInsightWindowsSecurityCenter.md)
 Valid filter fields are `system_id`.
+
+### [Get-JcSdkSystemInsightWindowsSecurityProduct](Get-JcSdkSystemInsightWindowsSecurityProduct.md)
+Valid filter fields are `system_id` and `state`.
 
 ### [Get-JcSdkSystemMember](Get-JcSdkSystemMember.md)
 This endpoint returns all the System Groups a System is a member of.

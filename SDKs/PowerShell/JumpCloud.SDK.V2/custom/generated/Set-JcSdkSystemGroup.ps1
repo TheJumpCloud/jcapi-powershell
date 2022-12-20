@@ -37,7 +37,7 @@ PS C:\> {{ Add code here }}
 .Inputs
 JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
 .Inputs
-JumpCloud.SDK.V2.Models.ISystemGroupData
+JumpCloud.SDK.V2.Models.ISystemGroupPut
 .Outputs
 JumpCloud.SDK.V2.Models.ISystemGroup
 .Notes
@@ -45,8 +45,20 @@ COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
-BODY <ISystemGroupData>:
+BODY <ISystemGroupPut>:
   Name <String>: Display name of a System Group.
+  [Attributes <IGraphAttributes>]: The graph attributes.
+    [(Any) <Object>]: This indicates any property can be added to this object.
+  [Description <String>]: Description of a System Group
+  [Email <String>]: Email address of a System Group
+  [MemberQueryExemptions <IGraphObject[]>]: Array of GraphObjects exempted from the query
+    Id <String>: The ObjectID of the graph object.
+    Type <String>: The type of graph object.
+    [Attributes <IGraphAttributes>]: The graph attributes.
+  [MemberQueryFilters <IFilter[]>]:
+    Field <String>: Name of field in filter target object.
+    Operator <String>: Filter comparison operator.
+    Value <String>: Filter comparison value.
 
 INPUTOBJECT <IJumpCloudApiIdentity>:
   [AccountId <String>]:
@@ -72,6 +84,17 @@ INPUTOBJECT <IJumpCloudApiIdentity>:
   [SystemId <String>]: ObjectID of the System.
   [UserId <String>]: ObjectID of the User.
   [WorkdayId <String>]:
+
+MEMBERQUERYEXEMPTIONS <IGraphObject[]>:
+  Id <String>: The ObjectID of the graph object.
+  Type <String>: The type of graph object.
+  [Attributes <IGraphAttributes>]: The graph attributes.
+    [(Any) <Object>]: This indicates any property can be added to this object.
+
+MEMBERQUERYFILTERS <IFilter[]>:
+  Field <String>: Name of field in filter target object.
+  Operator <String>: Filter comparison operator.
+  Value <String>: Filter comparison value.
 .Link
 https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Set-JcSdkSystemGroup.md
 #>
@@ -98,8 +121,8 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='Set', Mandatory, ValueFromPipeline)]
     [Parameter(ParameterSetName='SetViaIdentity', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Models.ISystemGroupData]
-    # SystemGroupData
+    [JumpCloud.SDK.V2.Models.ISystemGroupPut]
+    # SystemGroupPut
     # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body}, 
 
@@ -109,6 +132,46 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [System.String]
     # Display name of a System Group.
     ${Name}, 
+
+    [Parameter(ParameterSetName='SetExpanded')]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [JumpCloud.SDK.V2.Runtime.Info(PossibleTypes=([JumpCloud.SDK.V2.Models.IGraphAttributes]))]
+    [System.Collections.Hashtable]
+    # The graph attributes.
+    ${Attributes}, 
+
+    [Parameter(ParameterSetName='SetExpanded')]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [System.String]
+    # Description of a System Group
+    ${Description}, 
+
+    [Parameter(ParameterSetName='SetExpanded')]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [System.String]
+    # Email address of a System Group
+    ${Email}, 
+
+    [Parameter(ParameterSetName='SetExpanded')]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
+    [AllowEmptyCollection()]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [JumpCloud.SDK.V2.Models.IGraphObject[]]
+    # Array of GraphObjects exempted from the query
+    # To construct, see NOTES section for MEMBERQUERYEXEMPTIONS properties and create a hash table.
+    ${MemberQueryExemptions}, 
+
+    [Parameter(ParameterSetName='SetExpanded')]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
+    [AllowEmptyCollection()]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [JumpCloud.SDK.V2.Models.IFilter[]]
+    # .
+    # To construct, see NOTES section for MEMBERQUERYFILTERS properties and create a hash table.
+    ${MemberQueryFilters}, 
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]
@@ -178,9 +241,9 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         $GlobalVars = @('JCHttpRequest', 'JCHttpRequestContent', 'JCHttpResponse', 'JCHttpResponseContent')
         $GlobalVars | ForEach-Object {
             If ((Get-Variable -Scope:('Global')).Where( { $_.Name -eq $_ })) {
-        Remove-Variable -Name:($_) -Scope:('Global')
-    }
-         }
+                Remove-Variable -Name:($_) -Scope:('Global')
+            }
+        }
         Return $Results
     }
 }

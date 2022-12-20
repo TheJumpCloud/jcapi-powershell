@@ -1,5 +1,5 @@
 ## JumpCloud.SDK.V2-0.0.35
-Release Date: December 19, 2022
+Release Date: December 20, 2022
 #### RELEASE NOTES
 ```
 This release is a rollup of SDK changes and adds several new system insights tables to the SDK module. See Functions Added for a full list of system insight functions added.
@@ -26,14 +26,12 @@ Fix for Set-JcSdkUserAssociation where removing a user/ system association would
 <details>
 <summary>Functions Added</summary>
 
-* Get-JcSdkSystemInsightAzureInstancceMetadata.ps1
 * Get-JcSdkSystemInsightAzureInstanceTag.ps1
 * Get-JcSdkSystemInsightChassisInfo.ps1
 * Get-JcSdkSystemInsightLinuxPackage.ps1
 * Get-JcSdkSystemInsightSecureboot.ps1
 * Get-JcSdkSystemInsightTpmInfo.ps1
 * Get-JcSdkSystemInsightUserAssist.ps1
-* Get-JcSdkSystemInsightWindowsSecurityCenter.ps1
 
 </details>
 
@@ -176,7 +174,6 @@ Fix for Set-JcSdkUserAssociation where removing a user/ system association would
 * Get-JcSdkSystemInsightUserSshKey.ps1
 * Get-JcSdkSystemInsightWifiNetwork.ps1
 * Get-JcSdkSystemInsightWifiStatus.ps1
-* Get-JcSdkSystemInsightWindowSecurityProduct.ps1
 * Get-JcSdkSystemMember.ps1
 * Get-JcSdkSystemPolicyStatus.ps1
 * Get-JcSdkSystemTraverseCommand.ps1
