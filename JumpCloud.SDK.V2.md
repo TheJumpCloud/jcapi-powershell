@@ -2,14 +2,25 @@
 Release Date: December 19, 2022
 #### RELEASE NOTES
 ```
-{{Fill in the Release Notes}}
+This release is a rollup of SDK changes and adds several new system insights tables to the SDK module. See Functions Added for a full list of system insight functions added.
 ```
 #### FEATURES:
-{{Fill in the Features}}
-#### IMPROVEMENTS:
-{{Fill in the Improvements}}
+Get-JcSdkAppleMdm — `ProxyUseDefaultCredentials` parameter added
+Get-JcSdkBulkUserState — `Filter` parameter added
+Get-JcSdkProviderAdministrator — `SortIgnoreCase` parameter added
+Get-JcSdkProviderOrganization — `SortIgnoreCase` parameter added
+New-JcSdkAuthenticationPolicy — `UserVerificationRequirement` parameter added
+New-JcSdkBulkUserState — `ActivationEmailOverride` `SendActivationEmails` parameters added
+New-JcSdkBulkUserState — `ActivationEmailOverride` `SendActivationEmails` parameters added
+New-JcSdkUserGroup — `MemberQueryExemptions` `MembershipAutomated` parameters added
+Restart-JcSdkAppleMdmDevice — `Body` `KextPaths` parameters added
+Set-JcSdkAppleMdm — `AppleCertCreatorAppleId` parameter added
+Set-JcSdkUserGroup — `MemberQueryExemptions` `MembershipAutomated` parameters added
+Update-JcSdkAuthenticationPolicy — `UserVerificationRequirement` parameter added
+
 #### BUG FIXES:
-{{Fill in the Bug Fixes}}
+Fix for Set-JcSdkUserAssociation where removing a user/ system association would timeout
+
 #### Generated Changes:
 
 <details>

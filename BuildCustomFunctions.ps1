@@ -377,9 +377,9 @@ $($IndentChar)$($IndentChar)# Clean up global variables
 $($IndentChar)$($IndentChar)`$GlobalVars = @('JCHttpRequest', 'JCHttpRequestContent', 'JCHttpResponse', 'JCHttpResponseContent')
 $($IndentChar)$($IndentChar)`$GlobalVars | ForEach-Object {
 $($IndentChar)$($IndentChar)$($IndentChar)If ((Get-Variable -Scope:('Global')).Where( { `$_.Name -eq `$_ })) {
-        Remove-Variable -Name:(`$_) -Scope:('Global')
-    }
-$($IndentChar)$($IndentChar) }
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Remove-Variable -Name:(`$_) -Scope:('Global')
+$($IndentChar)$($IndentChar)$($IndentChar)}
+$($IndentChar)$($IndentChar)}
 $($IndentChar)$($IndentChar)Return `$Results"
             } Else {
                 Write-Error ("Unmapped command: $CommandName")

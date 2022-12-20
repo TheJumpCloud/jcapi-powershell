@@ -2,14 +2,18 @@
 Release Date: December 19, 2022
 #### RELEASE NOTES
 ```
-{{Fill in the Release Notes}}
+This release is a rollup of SDK changes, several parameters have been added to V1 functions
 ```
 #### FEATURES:
-{{Fill in the Features}}
-#### IMPROVEMENTS:
-{{Fill in the Improvements}}
-#### BUG FIXES:
-{{Fill in the Bug Fixes}}
+Get-JcSdkOrganization — `SortIgnoreCase` parameter added
+New-JcSdkApplication — `SsoHidden` parameter added
+New-JcSdkCommand — `ScheduleYear` parameter added
+New-JcSdkRadiusServer — `CaCert` `DeviceCertEnabled` `UserCertEnabled` `UserPasswordEnabled` parameters added
+New-JcSdkUser — `FullValidationDetails` parameter added
+Set-JcSdkApplication — `SsoHidden` parameter addedSet-JcSdkCommand — `ScheduleYear` parameter added
+Set-JcSdkRadiusServer — `CaCert` `DeviceCertEnabled` `UserCertEnabled` `UserPasswordEnabled` parameters added
+Set-JcSdkUser — `FullValidationDetails` parameter added
+
 #### Generated Changes:
 
 <details>

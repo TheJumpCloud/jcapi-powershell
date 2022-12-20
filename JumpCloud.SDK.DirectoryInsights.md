@@ -2,14 +2,14 @@
 Release Date: December 19, 2022
 #### RELEASE NOTES
 ```
-{{Fill in the Release Notes}}
+SDK version update params added to DI functions
 ```
 #### FEATURES:
-{{Fill in the Features}}
-#### IMPROVEMENTS:
-{{Fill in the Improvements}}
-#### BUG FIXES:
-{{Fill in the Bug Fixes}}
+Get-JcSdkEvent — `SearchTermNot` parameter added
+Get-JcSdkEventCount — `SearchTermNot` parameter added
+Get-JcSdkEventDistinct — `SearchTermNot` parameter added
+Get-JcSdkEventInterval — `SearchTermNot` parameter added
+
 #### Generated Changes:
 
 <details>
