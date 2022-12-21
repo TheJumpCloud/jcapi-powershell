@@ -24,7 +24,7 @@ curl -X GET https://console.jumpcloud.com/api/organizations/{OrganizationID} \\
 ### List (Default)
 ```
 Get-JcSdkOrganization [-Fields <String>] [-Filter <String>] [-Search <String>] [-Sort <String>]
- [<CommonParameters>]
+ [-SortIgnoreCase <String>] [<CommonParameters>]
 ```
 
 ### Get
@@ -180,6 +180,23 @@ Accept wildcard characters: False
 
 ### -Sort
 Use space separated sort parameters to sort the collection.
+Default sort is ascending.
+Prefix with `-` to sort descending.
+
+```yaml
+Type: System.String
+Parameter Sets: List
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -SortIgnoreCase
+Use space separated sort parameters to sort the collection, ignoring case.
 Default sort is ascending.
 Prefix with `-` to sort descending.
 

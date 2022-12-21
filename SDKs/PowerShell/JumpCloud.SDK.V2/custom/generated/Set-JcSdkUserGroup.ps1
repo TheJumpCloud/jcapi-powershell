@@ -49,6 +49,8 @@ BODY <IUserGroupPut>:
   Name <String>: Display name of a User Group.
   [Attributes <IGroupAttributesUserGroup>]: The graph attributes for a UserGroup.
     [(Any) <Object>]: This indicates any property can be added to this object.
+    [SudoEnabled <Boolean?>]: Enables sudo
+    [SudoWithoutPassword <Boolean?>]: Enable sudo without password (requires 'enabled' to be true)
     [LdapGroups <ILdapGroup[]>]:
       [Name <String>]:
     [PosixGroups <IGraphAttributePosixGroupsItem[]>]:
@@ -60,11 +62,17 @@ BODY <IUserGroupPut>:
     [SambaEnabled <Boolean?>]:
   [Description <String>]: Description of a User Group
   [Email <String>]: Email address of a User Group
+  [MemberQueryExemptions <IGraphObject[]>]: Array of GraphObjects exempted from the query
+    Id <String>: The ObjectID of the graph object.
+    Type <String>: The type of graph object.
+    [Attributes <IGraphAttributes>]: The graph attributes.
+      [(Any) <Object>]: This indicates any property can be added to this object.
   [MemberQueryFilters <IFilter[]>]:
     Field <String>: Name of field in filter target object.
     Operator <String>: Filter comparison operator.
     Value <String>: Filter comparison value.
   [MemberSuggestionsNotify <Boolean?>]: True if notification emails are to be sent for membership suggestions.
+  [MembershipAutomated <Boolean?>]: True if membership of this group is automatically updated based on the Member Query and Member Query Exemptions, if configured
 
 INPUTOBJECT <IJumpCloudApiIdentity>:
   [AccountId <String>]:
@@ -91,6 +99,12 @@ INPUTOBJECT <IJumpCloudApiIdentity>:
   [UserId <String>]: ObjectID of the User.
   [WorkdayId <String>]:
 
+MEMBERQUERYEXEMPTIONS <IGraphObject[]>:
+  Id <String>: The ObjectID of the graph object.
+  Type <String>: The type of graph object.
+  [Attributes <IGraphAttributes>]: The graph attributes.
+    [(Any) <Object>]: This indicates any property can be added to this object.
+
 MEMBERQUERYFILTERS <IFilter[]>:
   Field <String>: Name of field in filter target object.
   Operator <String>: Filter comparison operator.
@@ -108,7 +122,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V2.Category('Path')]
     [System.String]
     # ObjectID of the User Group.
-    ${Id},
+    ${Id}, 
 
     [Parameter(ParameterSetName='SetViaIdentity', Mandatory, ValueFromPipeline)]
     [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory, ValueFromPipeline)]
@@ -116,7 +130,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity]
     # Identity Parameter
     # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
-    ${InputObject},
+    ${InputObject}, 
 
     [Parameter(ParameterSetName='Set', Mandatory, ValueFromPipeline)]
     [Parameter(ParameterSetName='SetViaIdentity', Mandatory, ValueFromPipeline)]
@@ -124,14 +138,14 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V2.Models.IUserGroupPut]
     # UserGroupPut
     # To construct, see NOTES section for BODY properties and create a hash table.
-    ${Body},
+    ${Body}, 
 
     [Parameter(ParameterSetName='SetExpanded', Mandatory)]
     [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory)]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.String]
     # Display name of a User Group.
-    ${Name},
+    ${Name}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
@@ -139,21 +153,30 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V2.Runtime.Info(PossibleTypes=([JumpCloud.SDK.V2.Models.IGroupAttributesUserGroup]))]
     [System.Collections.Hashtable]
     # The graph attributes for a UserGroup.
-    ${Attributes},
+    ${Attributes}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.String]
     # Description of a User Group
-    ${Description},
+    ${Description}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.String]
     # Email address of a User Group
-    ${Email},
+    ${Email}, 
+
+    [Parameter(ParameterSetName='SetExpanded')]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
+    [AllowEmptyCollection()]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [JumpCloud.SDK.V2.Models.IGraphObject[]]
+    # Array of GraphObjects exempted from the query
+    # To construct, see NOTES section for MEMBERQUERYEXEMPTIONS properties and create a hash table.
+    ${MemberQueryExemptions}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
@@ -162,47 +185,54 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V2.Models.IFilter[]]
     # .
     # To construct, see NOTES section for MEMBERQUERYFILTERS properties and create a hash table.
-    ${MemberQueryFilters},
+    ${MemberQueryFilters}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.Management.Automation.SwitchParameter]
     # True if notification emails are to be sent for membership suggestions.
-    ${MemberSuggestionsNotify},
+    ${MemberSuggestionsNotify}, 
+
+    [Parameter(ParameterSetName='SetExpanded')]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [System.Management.Automation.SwitchParameter]
+    # True if membership of this group is automatically updated based on the Member Query and Member Query Exemptions, if configured
+    ${MembershipAutomated}, 
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]
     [System.Management.Automation.SwitchParameter]
     # Wait for .NET debugger to attach
-    ${Break},
+    ${Break}, 
 
     [Parameter(DontShow)]
     [ValidateNotNull()]
     [JumpCloud.SDK.V2.Category('Runtime')]
     [JumpCloud.SDK.V2.Runtime.SendAsyncStep[]]
     # SendAsync Pipeline Steps to be appended to the front of the pipeline
-    ${HttpPipelineAppend},
+    ${HttpPipelineAppend}, 
 
     [Parameter(DontShow)]
     [ValidateNotNull()]
     [JumpCloud.SDK.V2.Category('Runtime')]
     [JumpCloud.SDK.V2.Runtime.SendAsyncStep[]]
     # SendAsync Pipeline Steps to be prepended to the front of the pipeline
-    ${HttpPipelinePrepend},
+    ${HttpPipelinePrepend}, 
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]
     [System.Uri]
     # The URI for the proxy server to use
-    ${Proxy},
+    ${Proxy}, 
 
     [Parameter(DontShow)]
     [ValidateNotNull()]
     [JumpCloud.SDK.V2.Category('Runtime')]
     [System.Management.Automation.PSCredential]
     # Credentials for a proxy server to use for the remote call
-    ${ProxyCredential},
+    ${ProxyCredential}, 
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]
@@ -238,7 +268,9 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         # Clean up global variables
         $GlobalVars = @('JCHttpRequest', 'JCHttpRequestContent', 'JCHttpResponse', 'JCHttpResponseContent')
         $GlobalVars | ForEach-Object {
-            If ((Get-Variable -Scope:('Global')).Where( { $_.Name -eq $_ })) { Remove-Variable -Name:($_) -Scope:('Global') }
+            If ((Get-Variable -Scope:('Global')).Where( { $_.Name -eq $_ })) {
+                Remove-Variable -Name:($_) -Scope:('Global')
+            }
         }
         Return $Results
     }

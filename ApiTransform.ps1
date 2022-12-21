@@ -3,6 +3,8 @@ Param(
     [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Name of the API to build an SDK for.')][ValidateSet('JumpCloud.SDK.DirectoryInsights', 'JumpCloud.SDK.V1', 'JumpCloud.SDK.V2')][ValidateNotNullOrEmpty()][System.String[]]$SDKName
 )
 Set-Location $PSScriptRoot
+# Config Status List (used to track new endpoints)
+$configStatus = @()
 $OutputFilePath = $PSScriptRoot + '/SwaggerSpecs'
 # OperationId to Function name mapping - https://github.com/Azure/autorest.powershell/blob/a530bd721c9326a4356fba15638fee236722aca9/powershell/autorest-configuration.md
 $TransformConfig = [Ordered]@{
@@ -11,6 +13,7 @@ $TransformConfig = [Ordered]@{
         FindAndReplace     = [Ordered]@{
             '"name":"\w+Body","in":"body"'                                                                                                                                                  = '"name":"body","in":"body"' # Across our APIs the standard is using "body" for the name of the body
             '"search_after":{"description":"Specific query to search after, see x-\* response headers for next values","type":"array","items":{"type":"object"},"x-go-name":"SearchAfter"}' = '"search_after":{"description":"Specific query to search after, see x-* response headers for next values","type":"array","items":{"type":"string"},"x-go-name":"SearchAfter"}';
+            '"enum":\["CREATED_AT","EXPIRATION","REQUESTER_EMAIL","STATUS","TYPE","UPDATED_AT","-CREATED_AT","-EXPIRATION","-REQUESTER_EMAIL","-STATUS","-TYPE","-UPDATED_AT"\]'            = '"enum":["CREATED_AT","EXPIRATION","REQUESTER_EMAIL","STATUS","TYPE","UPDATED_AT"]'
         };
         OperationIdMapping = [Ordered]@{
             'directoryInsights_eventsCountPost'    = 'EventCount_Get';
@@ -24,25 +27,28 @@ $TransformConfig = [Ordered]@{
         PublicUrl          = "https://docs.jumpcloud.com/api/1.0/index.yaml"
         FindAndReplace     = [Ordered]@{
             # Path Issues
-            '"#\/definitions\/system"'                                                                                                                                            = '"#/definitions/JcSystem"'; # error CS0426: The type name 'ComponentModel' does not exist in the type 'System'
-            '"system":{"properties"'                                                                                                                                              = '"JcSystem":{"properties"'; # error CS0426: The type name 'ComponentModel' does not exist in the type 'System'
-            '"title":"System"'                                                                                                                                                    = '"title":"JcSystem"'; # error CS0426: The type name 'ComponentModel' does not exist in the type 'System'
+            '"#\/definitions\/system"'                                                                                                                                                                                              = '"#/definitions/JcSystem"'; # error CS0426: The type name 'ComponentModel' does not exist in the type 'System'
+            '"system":{"properties"'                                                                                                                                                                                                = '"JcSystem":{"properties"'; # error CS0426: The type name 'ComponentModel' does not exist in the type 'System'
+            '"title":"System"'                                                                                                                                                                                                      = '"title":"JcSystem"'; # error CS0426: The type name 'ComponentModel' does not exist in the type 'System'
             # V1 Issues
-            '"enrollmentType":{"enum":\["unknown","automated device","device","user"\],"type":"string"},"internal":{"properties":{"deviceId":{"type":"string"}},"type":"object"}' = '' # error CS0262: Partial declarations of 'IJcSystemMdmInternal' have conflicting accessibility modifiers; error CS0535: 'JcSystemMdm' does not implement interface member 'IJcSystemMdmInternal.DeviceId'
-            '"basePath":"\/api"'                                                                                                                                                  = '"basePath":"/api/"'; # The extra slash at the end is needed to properly build the url.
-            '"type":"null"'                                                                                                                                                       = '"type":"string"'; # A type of null is not valid.
-            '{"description":"This is an optional flag that can be enabled on the DELETE call.*?","in":"query","name":"cascade_manager".*?"}'                                      = ''; # TODO: Add this back in eventually - fix to remove the cascade manager param from delete user (autorest thinks multiple matching 'break' parameters are declared in the delete function)
-            '"produces":\["application\/json","text\/plain"\]'                                                                                                                    = '';
-            '"responses":{"200":{"description":"OK","schema":{"type":"string"}}'                                                                                                  = '"responses":{"200":{"description":""}';
-            '{"in":"body","name":"body","schema":{"additionalProperties":true,"type":"object"}}'                                                                                  = ''; # Remove bodies that don't have parameters
-            '"operationId":"systemusers_state_activate","parameters":\[{"in":"path","name":"id","required":true,"type":"string"},{"in":"body","name":"body","schema":{"properties":{"email":{"type":"object"}},"type":"object"}}\]'   = '"operationId":"systemusers_state_activate","parameters":[{"in":"path","name":"id","required":true,"type":"string"},{"in":"body","name":"body","schema":{"properties":{"email":{"type":"string"}},"type":"object"}}]' # Flatten email type so we can just pass in Initialize-JcSdkUserState -email "alternateEmail@domain.com"
+            '\/systemuserputpost"}},{"\$ref":"#\/parameters\/trait:multiTenantRequestHeaders:x-org-id"},{.*?"in":"query"'                                                                                                           = '/systemuserputpost"}},{"in":"query"' # Remove very large query description, it breaks Autorest's ability to build the parameter
+            '\/systemuserput"}},{"\$ref":"#\/parameters\/trait:multiTenantRequestHeaders:x-org-id"},{.*?"in":"query"'                                                                                                               = '/systemuserput"}},{"in":"query"' # Remove very large query description, it breaks Autorest's ability to build the parameter
+            '"enrollmentType":{"enum":\["unknown","automated device","device","user"\],"type":"string"},"internal":{"properties":{"deviceId":{"type":"string"},"windowsDeviceId":{"type":"string"}},"type":"object"}'               = '' # error CS0262: Partial declarations of 'IJcSystemMdmInternal' have conflicting accessibility modifiers; error CS0535: 'JcSystemMdm' does not implement interface member 'IJcSystemMdmInternal.DeviceId'
+            '"systems":{"description":"Not used. Use \/api\/v2\/commands\/{id}\/associations to bind commands to systems.","items":{"type":"string"},"type":"array"}'                                                               = '' # remove unused commands system param
+            '"basePath":"\/api"'                                                                                                                                                                                                    = '"basePath":"/api/"'; # The extra slash at the end is needed to properly build the url.
+            '"type":"null"'                                                                                                                                                                                                         = '"type":"string"'; # A type of null is not valid.
+            '{"description":"This is an optional flag that can be enabled on the DELETE call.*?","in":"query","name":"cascade_manager".*?"}'                                                                                        = ''; # TODO: Add this back in eventually - fix to remove the cascade manager param from delete user (autorest thinks multiple matching 'break' parameters are declared in the delete function)
+            '"produces":\["application\/json","text\/plain"\]'                                                                                                                                                                      = '';
+            '"responses":{"200":{"description":"OK","schema":{"type":"string"}}'                                                                                                                                                    = '"responses":{"200":{"description":""}';
+            '{"in":"body","name":"body","schema":{"additionalProperties":true,"type":"object"}}'                                                                                                                                    = ''; # Remove bodies that don't have parameters
+            '"operationId":"systemusers_state_activate","parameters":\[{"in":"path","name":"id","required":true,"type":"string"},{"in":"body","name":"body","schema":{"properties":{"email":{"type":"object"}},"type":"object"}}\]' = '"operationId":"systemusers_state_activate","parameters":[{"in":"path","name":"id","required":true,"type":"string"},{"in":"body","name":"body","schema":{"properties":{"email":{"type":"string"}},"type":"object"}}]' # Flatten email type so we can just pass in Initialize-JcSdkUserState -email "alternateEmail@domain.com"
             # Custom Tweaks
-            '{"\$ref":"#\/parameters\/trait:systemContextAuth:Authorization"}'                                                                                                    = ''; # We don't want to support authentication through system context via the SDK
-            '{"\$ref":"#\/parameters\/trait:systemContextAuth:Date"}'                                                                                                             = ''; # We don't want to support authentication through system context via the SDK
-            '{"\$ref":"#\/parameters\/trait:multiTenantRequestHeaders:x-org-id"}'                                                                                                 = ''; # Along with the ApiKey this will be passed in later through the Module.cs file.
-            ',,'                                                                                                                                                                  = ',';
-            '\[,'                                                                                                                                                                 = '[';
-            ',]'                                                                                                                                                                  = ']';
+            '{"\$ref":"#\/parameters\/trait:systemContextAuth:Authorization"}'                                                                                                                                                      = ''; # We don't want to support authentication through system context via the SDK
+            '{"\$ref":"#\/parameters\/trait:systemContextAuth:Date"}'                                                                                                                                                               = ''; # We don't want to support authentication through system context via the SDK
+            '{"\$ref":"#\/parameters\/trait:multiTenantRequestHeaders:x-org-id"}'                                                                                                                                                   = ''; # Along with the ApiKey this will be passed in later through the Module.cs file.
+            ',,'                                                                                                                                                                                                                    = ',';
+            '\[,'                                                                                                                                                                                                                   = '[';
+            ',]'                                                                                                                                                                                                                    = ']';
         };
         OperationIdMapping = [Ordered]@{
             'admin_totpreset_begin'          = 'AdministratorUserTotp_Reset';
@@ -106,18 +112,21 @@ $TransformConfig = [Ordered]@{
         PublicUrl          = "https://docs.jumpcloud.com/api/2.0/index.yaml"
         FindAndReplace     = [Ordered]@{
             # V2 Issues
-            '"basePath":"\/api\/v2"'                                                              = '"basePath":"/api/v2/"'; # The extra slash at the end is needed to properly build the url.
-            '\["object","null"]'                                                                  = '"object"';
-            'software-app-settings'                                                               = 'SoftwareAppSettings'; # Error: Collision detected inserting into object: software-app-settings
-            '"in":"body","name":"body","schema":{"\$ref":"#\/definitions\/CustomEmail"}'          = '"in":"body","name":"CustomEmail","schema":{"$ref":"#/definitions/CustomEmail"}'; # The type 'SetJcSdkInternalCustomEmailConfiguration_SetExpanded, SetJcSdkInternalCustomEmailConfiguration_SetViaIdentityExpanded, NewJcSdkInternalCustomEmailConfiguration_CreateExpanded' already contains a definition for 'Body'
-            '"format":"uint32"'                                                                   = '"format":"int64"' # SI code uses uint32 which is larger than int32 . Swagger 2 doesnt have a concept of uint32 . AutoRest defaults to int32 when it sees a type of integer.
+            '"basePath":"\/api\/v2"'                                                                                                                                  = '"basePath":"/api/v2/"'; # The extra slash at the end is needed to properly build the url.
+            '\["object","null"]'                                                                                                                                      = '"object"';
+            'software-app-settings'                                                                                                                                   = 'SoftwareAppSettings'; # Error: Collision detected inserting into object: software-app-settings
+            '"in":"body","name":"body","schema":{"\$ref":"#\/definitions\/CustomEmail"}'                                                                              = '"in":"body","name":"CustomEmail","schema":{"$ref":"#/definitions/CustomEmail"}'; # The type 'SetJcSdkInternalCustomEmailConfiguration_SetExpanded, SetJcSdkInternalCustomEmailConfiguration_SetViaIdentityExpanded, NewJcSdkInternalCustomEmailConfiguration_CreateExpanded' already contains a definition for 'Body'
+            '"format":"uint32"'                                                                                                                                       = '"format":"int64"' # SI code uses uint32 which is larger than int32 . Swagger 2 doesnt have a concept of uint32 . AutoRest defaults to int32 when it sees a type of integer.
+            '"produces":\["text\/html"\]'                                                                                                                             = '' # produces text/html is not valid, just remove
             # Custom Tweaks
+            # TODO: add find and replace text to generate tpm_info table
             '"operationId":"gsuites_listImportUsers","parameters":\[{"\$ref":"#\/parameters\/trait:limit:limit"},{"\$ref":"#\/parameters\/trait:gsuite:maxResults"},' = '"operationId":"gsuites_listImportUsers","parameters":[{"$ref":"#/parameters/trait:gsuite:maxResults"},' # Get-JCsdkGsuiteUsersToImport does not require a limit parameter
-            '"responses":{"201":{"description":"","schema":{"\$ref":"#\/definitions\/job-id"}}'   = '"responses":{"200":{"description":"OK","schema":{"$ref":"#/definitions/job-id"}}'; # Workaround incorrectly defined 201 response in swagger should be 200; affects New-JcSdkBulkUser
-            '{"\$ref":"#\/parameters\/trait:multiTenantRequestHeaders:x-org-id"}'                 = ''; # Along with the ApiKey this will be passed in later through the Module.cs file.
-            ',,'                                                                                  = ',';
-            '\[,'                                                                                 = '[';
-            ',]'                                                                                  = ']';
+            '"responses":{"201":{"description":"","schema":{"\$ref":"#\/definitions\/job-id"}}'                                                                       = '"responses":{"200":{"description":"OK","schema":{"$ref":"#/definitions/job-id"}}'; # Workaround incorrectly defined 201 response in swagger should be 200; affects New-JcSdkBulkUser
+            '{"\$ref":"#\/parameters\/trait:multiTenantRequestHeaders:x-org-id"}'                                                                                     = ''; # Along with the ApiKey this will be passed in later through the Module.cs file.
+            ',,'                                                                                                                                                      = ',';
+            '\[,'                                                                                                                                                     = '[';
+            ',]'                                                                                                                                                      = ']';
+            '"properties":{"conditions":{"description":.*?"type":"object"}'                                                                                           = '"properties":{"conditions":{"type":"object"}' # Parameter Description is declared in parameter-set 'createExpanded' multiple times in
         };
         OperationIdMapping = [Ordered]@{
             'activedirectories_agentsDelete'                    = 'ActiveDirectoryAgent_Delete';
@@ -381,7 +390,15 @@ $TransformConfig = [Ordered]@{
             'systeminsights_list_users'                         = 'SystemInsightUsers_List';
             'systeminsights_list_wifi_networks'                 = 'SystemInsightWifiNetwork_List';
             'systeminsights_list_wifi_status'                   = 'SystemInsightWifiStatus_List';
-            'systeminsights_list_windows_security_products'     = 'SystemInsightWindowSecurityProduct_List';
+            'systeminsights_list_windows_security_products'     = 'SystemInsightWindowsSecurityProduct_List';
+            'systeminsights_list_azure_instance_metadata'       = 'SystemInsightAzureInstanceMetadata_List'
+            'systeminsights_list_azure_instance_tags'           = 'SystemInsightAzureInstanceTags_List'
+            'systeminsights_list_chassis_info'                  = 'SystemInsightChassisInfo_List'
+            'systeminsights_list_linux_packages'                = 'SystemInsightLinuxPackages_List'
+            'systeminsights_list_secureboot'                    = 'SystemInsightSecureboot_List'
+            'systeminsights_list_userassist'                    = 'SystemInsightUserAssist_List'
+            'systeminsights_list_windows_security_center'       = 'SystemInsightWindowsSecurityCenter_List'
+            'systeminsights_list_tpm_info'                      = 'SystemInsightTpmInfo_List'
             'systems_getFDEKey'                                 = 'SystemFDEKey_Get';
             'translationRules_gSuiteDelete'                     = 'GSuiteTranslationRule_Delete';
             'translationRules_gSuiteGet'                        = 'GSuiteTranslationRule_Get';
@@ -402,9 +419,36 @@ $TransformConfig = [Ordered]@{
             'workdays_workers'                                  = 'WorkdayWorker_Get';
         };
         ExcludedList       = @(
+            # Excluded items are listed by Path and do not include opperation type (put, post, get, etc.)
+            '/applemdms/{apple_mdm_id}/devices/{device_id}/osUpdateStatus',
+            '/applemdms/{apple_mdm_id}/devices/{device_id}/scheduleOSUpdate',
+            '/cloudinsights/accounts',
+            '/cloudinsights/accounts/{cloud_insights_id}',
+            '/cloudinsights/events',
+            '/cloudinsights/events/distinct',
+            '/cloudinsights/views',
+            '/cloudinsights/views/{view_id}',
+            '/commandqueue/{workflow_instance_id}',
+            '/commandresult/workflows',
+            '/integrations/syncro/{UUID}',
+            '/integrations/syncro/{UUID}/companies',
+            '/integrations/syncro/{UUID}/mappings',
+            '/integrations/syncro/{UUID}/settings',
+            '/organizations/cases',
+            '/providers/{provider_id}/integrations/autotask/alerts/configuration',
+            '/providers/{provider_id}/integrations/autotask/alerts/configuration/options',
+            '/providers/{provider_id}/integrations/autotask/alerts/{alert_UUID}/configuration',
+            '/providers/{provider_id}/integrations/connectwise/alerts/configuration',
+            '/providers/{provider_id}/integrations/connectwise/alerts/configuration/options',
+            '/providers/{provider_id}/integrations/connectwise/alerts/{alert_UUID}/configuration',
+            '/providers/{provider_id}/integrations/syncro',
+            '/providers/{provider_id}/integrations/syncro/alerts/configuration',
+            '/providers/{provider_id}/integrations/syncro/alerts/configuration/options',
+            '/providers/{provider_id}/integrations/syncro/alerts/{alert_UUID}/configuration',
+            '/providers/{provider_id}/integrations/ticketing/alerts',
+            '/queuedcommand/workflows',
+            '/systems/{system_id}/softwareappstatuses',
             '/applications/{application_id}',
-            '/bulk/assets',
-            '/bulk/assets/{job_id}/results',
             '/providers/{provider_id}'
             '/providers/{provider_id}/organizations/{id}'
             '/providers/{provider_id}/integrations',
@@ -430,15 +474,13 @@ $TransformConfig = [Ordered]@{
         )
     }
 }
-Function Get-SwaggerItem
-{
+Function Get-SwaggerItem {
     Param(
         [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'An object representing a swagger file.')]$InputObject
         , $Path
     )
     # Brake up parts of path to iterate through
-    If ($Path -match '#')
-    {
+    If ($Path -match '#') {
         $Path = $Path.Replace('#', '')
     }
     $PathDotSource = $Path.Split('/').Split('.') | Where-Object { $_ }
@@ -450,14 +492,50 @@ Function Get-SwaggerItem
     }
     Return $Object
 }
-Function Update-SwaggerObject
-{
+function Remove-NewEndpoints {
+    Param(
+        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'An object representing a swagger file.')]$InputObject
+    )
+    foreach ($path in $InputObject.paths.PSObject.Properties) {
+        $paths = $InputObject.paths.$($path.name).PSObject.Properties | Where-object { $_.Name -ne "parameters" }
+        foreach ($endpoint in $paths) {
+            $opperationID = ($InputObject.paths.$($path.name).$($endpoint.name)).operationId
+            $opperationMethod = $($endpoint.name)
+            if ($opperationID) {
+                If (($opperationID) -notin ($TransformConfig."$($SDKName)".OperationIdMapping.keys)) {
+                    $excludePath = "$($path.name)/$opperationMethod"
+                    Write-Warning "[status] Excluding New SDK Endpoint: `n    OperationId: $($opperationID) `n    Path: $excludePath"
+                    # Remove the object from swagger
+                    $InputObject.paths.$($path.name).psObject.Properties.remove($opperationMethod)
+                }
+            }
+        }
+    }
+    return $InputObject
+}
+function Remove-ExcludedEndpoints {
+    Param(
+        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'An object representing a swagger file.')]$InputObject
+    )
+    foreach ($path in $InputObject.paths.PSObject.Properties) {
+        if ($($path.name) -in $TransformConfig."$($SDKName)".ExcludedList) {
+            Write-Warning "[status] Excluding Path: `n    Path: $($path.name)"
+            # Remove the object from swagger
+            $InputObject.paths.PSObject.Properties.Remove($($path.name))
+            # update global exclude list variable to valide it was removed later
+            $global:ExcludedList.Remove($($path.name))
+        }
+    }
+    return $InputObject
+}
+Function Update-SwaggerObject {
     Param(
         [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'An object representing a swagger file.')]$InputObject
         , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'The name of the object that is being passed in.')]$InputObjectName = ''
         , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Use to disable changes made to the swagger object.')][bool]$NoUpdate = $false
         , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'The original input object which will be used as a reference', DontShow)]$InputObjectOrg
     )
+
     $InputObject | ForEach-Object {
         $ThisObject = $_
         # # Use for debugging. Specify the attribute path you want to troubleshoot and add break point.
@@ -466,96 +544,82 @@ Function Update-SwaggerObject
         #     Write-Host "Break Point"
         #     $ThisObject.description = 'Test'
         # }
-        If ($NoUpdate -eq $false)
-        {
+        If ($NoUpdate -eq $false) {
+            # Array to print Status for new endpoints
             # TODO: Unsure why leaving as an array wont work with autorest. Convert the enum array to a string.
             # TODO: If left as is in an array autorest throws error "error CS0023: Operator '?' cannot be applied to operand of type 'Items1'"
-            If ($InputObjectName -like '.parameters.*')
-            {
+            If ($InputObjectName -like '.parameters.*') {
                 $ThisObjectName = $ThisObject.name
-                If ($ThisObject | Get-Member -Name type)
-                {
-                    If ($ThisObject | Get-Member -Name name)
-                    {
-                        If ($ThisObject.name -eq "targets")
-                        {
+                If ($ThisObject | Get-Member -Name type) {
+                    If ($ThisObject | Get-Member -Name name) {
+                        If ($ThisObject.name -eq "targets") {
                             $ThisObject.type = 'string'
                             Add-Member -InputObject:($ThisObject) -MemberType:('NoteProperty') -Name:('enum') -Value:($ThisObject.items.enum) -Force
                             $ThisObject.PSObject.Properties.Remove('items')
                         }
                     }
                 }
-            }
-            Else
-            {
+            } Else {
                 $ThisObjectName = $InputObjectName.split('.') | Select-Object -Last 1
             }
         }
         # Get child objects
-        If (-not [System.String]::IsNullOrEmpty($ThisObject))
-        {
+        If (-not [System.String]::IsNullOrEmpty($ThisObject)) {
             $AttributeType = $ThisObject.GetType()
-            $AttributeNames = If ($AttributeType.FullName -in ('System.Management.Automation.PSCustomObject'))
-            {
+            $AttributeNames = If ($AttributeType.FullName -in ('System.Management.Automation.PSCustomObject')) {
                 $ThisObject.PSObject.Properties.Name
             }
-        }
-        Else
-        {
+        } Else {
             $AttributeNames = $null
         }
         # Iterate through child objects
-        If (-not [System.String]::IsNullOrEmpty($AttributeNames))
-        {
+        If (-not [System.String]::IsNullOrEmpty($AttributeNames)) {
             # Write-Host ("AttributeNames: $AttributeNames")
             $AttributeNames | ForEach-Object {
                 $AttributeName = $_
                 $AttributePath = (@($InputObjectName, $AttributeName) -join ('.'))
-                If ($NoUpdate -eq $false)
-                {
+                If ($NoUpdate -eq $false) {
                     # Map operationIds
-                    If ($AttributePath -like '*.operationId')
-                    {
-                        If (($global:OperationIdMapping).Contains($ThisObject.operationId))
-                        {
+                    If ($AttributePath -like '*.operationId') {
+                        If (($global:OperationIdMapping).Contains($ThisObject.operationId)) {
                             $OperationId = $ThisObject.operationId
                             $ThisObject.operationId = $global:OperationIdMapping.($ThisObject.operationId)
                             $global:OperationIdMapping.Remove($OperationId)
                             $NewOperationId = $ThisObject.operationId
-                        }
-                        Else
-                        {
+                        } Else {
+                            $excludePath = ($InputObjectName -replace '.paths.', '') -replace "\.\w+", ''
+                            # Write-Warning "[status] New SDK Endpoint Found: `nOperationId: $($ThisObject.operationId) `nPath: $excludePath"
                             Write-Error ("In '$($CurrentSDKName)' unknown operationId '$($ThisObject.operationId) - $($InputObjectName)'.")
                         }
                     }
+
                     # Remove blank values from enum
-                    If ($AttributePath -like '*.enum')
-                    {
-                        If ($ThisObject.enum -contains '') { $ThisObject.enum = $ThisObject.enum | Where-Object { $_ } } # error CS1519: Invalid token '=' in class, struct, or interface member declaration # FATAL: Error: Name is empty!
+                    If ($AttributePath -like '*.enum') {
+                        If ($ThisObject.enum -contains '') {
+                            $ThisObject.enum = $ThisObject.enum | Where-Object { $_ }
+                        } # error CS1519: Invalid token '=' in class, struct, or interface member declaration # FATAL: Error: Name is empty!
                     }
                     # Append "x-ms-enum" to "enum" section
-                    If ($AttributePath -like '.paths.*.parameters.enum' -or $AttributePath -like '.definitions.GraphOperation-*.enum' -or $AttributePath -like '.parameters.*.enum')
-                    {
+                    If ($AttributePath -like '.paths.*.parameters.enum' -or $AttributePath -like '.definitions.GraphOperation-*.enum' -or $AttributePath -like '.parameters.*.enum') {
                         # Determine unique xMsEnum name
-                        $xMsEnumNameProperty = If ($ThisObject.name) { $ThisObject.name }
-                        $xMsEnumModelName = If ($AttributePath -match [regex]'\.definitions\.(.*?)\.allOf\.properties\.type\.enum') { $matches[1] }
-                        ElseIf ($AttributePath -match [regex]'\.parameters\.trait:(.*?)\.items\.enum') { $matches[1].Replace(':', '-') }
-                        ElseIf ($AttributePath -match [regex]'\.parameters\.trait:(.*?)\.enum') { $matches[1].Replace(':', '-') }
+                        $xMsEnumNameProperty = If ($ThisObject.name) {
+                            $ThisObject.name
+                        }
+                        $xMsEnumModelName = If ($AttributePath -match [regex]'\.definitions\.(.*?)\.allOf\.properties\.type\.enum') {
+                            $matches[1]
+                        } ElseIf ($AttributePath -match [regex]'\.parameters\.trait:(.*?)\.items\.enum') {
+                            $matches[1].Replace(':', '-')
+                        } ElseIf ($AttributePath -match [regex]'\.parameters\.trait:(.*?)\.enum') {
+                            $matches[1].Replace(':', '-')
+                        }
                         # Else { $ThisObjectName }
-                        $xMsEnumName = If (-not [System.String]::IsNullOrEmpty($xMsEnumNameProperty) -and -not [System.String]::IsNullOrEmpty($xMsEnumModelName))
-                        {
+                        $xMsEnumName = If (-not [System.String]::IsNullOrEmpty($xMsEnumNameProperty) -and -not [System.String]::IsNullOrEmpty($xMsEnumModelName)) {
                             "$($xMsEnumModelName.Replace($xMsEnumNameProperty,''))$((Get-Culture).TextInfo.ToTitleCase($xMsEnumNameProperty))"
-                        }
-                        ElseIf (-not [System.String]::IsNullOrEmpty($xMsEnumNameProperty) -and [System.String]::IsNullOrEmpty($xMsEnumModelName))
-                        {
+                        } ElseIf (-not [System.String]::IsNullOrEmpty($xMsEnumNameProperty) -and [System.String]::IsNullOrEmpty($xMsEnumModelName)) {
                             "$($xMsEnumNameProperty)"
-                        }
-                        ElseIf ([System.String]::IsNullOrEmpty($xMsEnumNameProperty) -and -not [System.String]::IsNullOrEmpty($xMsEnumModelName))
-                        {
+                        } ElseIf ([System.String]::IsNullOrEmpty($xMsEnumNameProperty) -and -not [System.String]::IsNullOrEmpty($xMsEnumModelName)) {
                             "$($xMsEnumModelName)"
-                        }
-                        Else
-                        {
+                        } Else {
                             Write-Error ("Unable to determine enum name: $($AttributePath)  $($ThisObject.name)")
                         }
                         $xMsEnum = [PSCustomObject]@{
@@ -563,8 +627,7 @@ Function Update-SwaggerObject
                             # modelAsString = $true
                         }
                         # C# does not like it when we use these characters/reserved words so we have to make the "Name" diffrent from the "Value"
-                        If ($ThisObject.enum -contains 'system' -or $ThisObject.enum -like '*#*')
-                        {
+                        If ($ThisObject.enum -contains 'system' -or $ThisObject.enum -like '*#*') {
                             $xMsEnumValues = @(
                                 $ThisObject.enum | ForEach-Object {
                                     $EnumItem = $_
@@ -572,12 +635,9 @@ Function Update-SwaggerObject
                                     [PSCustomObject]@{
                                         name  = $EnumItemName;
                                         value = $EnumItem | ForEach-Object {
-                                            If ($_ -match [regex]'(\#|\s)')
-                                            {
+                                            If ($_ -match [regex]'(\#|\s)') {
                                                 "'$($_)'"
-                                            }
-                                            Else
-                                            {
+                                            } Else {
                                                 $_
                                             };
                                         };
@@ -590,8 +650,7 @@ Function Update-SwaggerObject
                         # Make x-ms-enum names unique
                         # See if x-ms-enum already exists by name
                         $xMsEnumObjectByName = $global:xMsEnumObject | Where-Object { $_.Name -eq $ThisObjectName }
-                        If ([System.String]::IsNullOrEmpty($xMsEnumObjectByName))
-                        {
+                        If ([System.String]::IsNullOrEmpty($xMsEnumObjectByName)) {
                             $xMsEnumObjectFilteredId = 0
                             $xMsEnumItem = @{
                                 Id   = $xMsEnumObjectFilteredId
@@ -599,13 +658,10 @@ Function Update-SwaggerObject
                                 Enum = $ThisObject.enum
                             }
                             $global:xMsEnumObject += $xMsEnumItem
-                        }
-                        Else
-                        {
+                        } Else {
                             # See if x-ms-enum already exists by name and value
                             $xMsEnumObjectByNameValue = $global:xMsEnumObject | Where-Object { $_.Name -eq $ThisObjectName -and [String]$_.Enum -eq [String]$ThisObject.enum }
-                            If ([System.String]::IsNullOrEmpty($xMsEnumObjectByNameValue))
-                            {
+                            If ([System.String]::IsNullOrEmpty($xMsEnumObjectByNameValue)) {
                                 $xMsEnumObjectFilteredId = [int](($xMsEnumObjectByName | Measure-Object -Property Id -Maximum).maximum) + 1
                                 $xMsEnumItem = @{
                                     Id   = $xMsEnumObjectFilteredId
@@ -613,29 +669,23 @@ Function Update-SwaggerObject
                                     Enum = $ThisObject.enum
                                 }
                                 $global:xMsEnumObject += $xMsEnumItem
-                            }
-                            Else
-                            {
+                            } Else {
                                 $xMsEnumObjectFilteredId = $xMsEnumObjectByNameValue.Id
                             }
                         }
-                        If ($xMsEnumObjectFilteredId -gt 0)
-                        {
+                        If ($xMsEnumObjectFilteredId -gt 0) {
                             $ThisObject.'x-ms-enum'.name = "$($ThisObject.'x-ms-enum'.name)$($xMsEnumObjectFilteredId)"
                         }
                         # Write-Host ("$($CurrentSDKName)|$($NewOperationId)|$($AttributePath)|$($xMsEnumObjectFilteredId)|$($ThisObject.enum -join ',')")
                     }
                     # Check for when type is object without defined properties
-                    If ($AttributePath -like '*.type')
-                    {
-                        If ('object' -in $ThisObject.type -and 'properties' -notin $ThisObject.PSObject.Properties.Name -and 'allOf' -notin $ThisObject.PSObject.Properties.Name -and 'additionalProperties' -notin $ThisObject.PSObject.Properties.Name)
-                        {
+                    If ($AttributePath -like '*.type') {
+                        If ('object' -in $ThisObject.type -and 'properties' -notin $ThisObject.PSObject.Properties.Name -and 'allOf' -notin $ThisObject.PSObject.Properties.Name -and 'additionalProperties' -notin $ThisObject.PSObject.Properties.Name) {
                             Add-Member -InputObject:($ThisObject) -MemberType:('NoteProperty') -Name:('additionalProperties') -Value:($true)
                         }
                     }
                     # Exclude $ref
-                    If ($AttributeName -eq '$ref' -and (($ThisObject.$AttributeName).split('/') | Select-Object -Last 1) -in $global:ExcludedListOrg)
-                    {
+                    If ($AttributeName -eq '$ref' -and (($ThisObject.$AttributeName).split('/') | Select-Object -Last 1) -in $global:ExcludedListOrg) {
                         Write-Host "$($AttributeName): $($ThisObject.$AttributeName)"
                         $ThisObject.PSObject.Properties.Remove($AttributeName)
                         Add-Member -InputObject:($ThisObject) -MemberType:('NoteProperty') -Name:('type') -Value:('string')
@@ -665,72 +715,75 @@ Function Update-SwaggerObject
                     #         Add-Member -InputObject:($ThisObject) -MemberType:('NoteProperty') -Name:('schema') -Value:($GeneralObject)
                     #     }
                     # }
-                    # Exclude paths
-                    If ($AttributeName -in $global:ExcludedList)
-                    {
-                        $ThisObject.PSObject.Properties.Remove($AttributeName)
-                        $global:ExcludedList.Remove($AttributeName)
-                    }
                     # Remove non 2XX response so that autorest returns correct errors to PowerShell
-                    If ($AttributePath -like '.paths.*.responses.*' -and $AttributePath -notlike '.paths.*.responses.2*')
-                    {
+                    If ($AttributePath -like '.paths.*.responses.*' -and $AttributePath -notlike '.paths.*.responses.2*') {
                         $ThisObject.PSObject.Properties.Remove($AttributeName)
                     }
                     # Remove endpoints that are not AutoRest compatible or that should be hidden from the public
-                    If ($AttributePath -match '(.paths.)([a-zA-Z0-9\/\{\}\-_]+$|.*\.xml$)')
-                    {
+                    If ($AttributePath -match '(.paths.)([a-zA-Z0-9\/\{\}\-_]+$|.*\.xml$)') {
                         $ThisObject.$AttributeName.PSObject.Properties.Name | ForEach-Object {
                             $Method = $_
                             # Remove endpoint where "consumes" and "produces" does not contain "application/json" or "text/plain"
                             If (
                                 ('produces' -in $ThisObject.$AttributeName.$Method.PSObject.Properties.Name -and $ThisObject.$AttributeName.$Method.produces -notcontains 'application/json' -and $ThisObject.$AttributeName.$Method.produces -notcontains 'text/plain') `
                                     -or ('consumes' -in $ThisObject.$AttributeName.$Method.PSObject.Properties.Name -and $ThisObject.$AttributeName.$Method.consumes -notcontains 'application/json' -and $ThisObject.$AttributeName.$Method.consumes -notcontains 'text/plain')
-                            )
-                            {
+                            ) {
                                 # Write-Warning ("Removing: $($AttributeName) - $($Method.ToUpper())")
                                 $ThisObject.$AttributeName.PSObject.Properties.Remove($Method)
                             }
                         }
                     }
                     # Remove x-swagger-jumpcloud-auto-insert
-                    If ($AttributePath -like '*.x-swagger-jumpcloud-auto-insert*') { $ThisObject.PSObject.Properties.Remove($AttributeName) }
+                    If ($AttributePath -like '*.x-swagger-jumpcloud-auto-insert*') {
+                        $ThisObject.PSObject.Properties.Remove($AttributeName)
+                    }
                     # Remove x-jumpcloud
-                    If ($AttributePath -like '*.x-jumpcloud*') { $ThisObject.PSObject.Properties.Remove($AttributeName) }
+                    If ($AttributePath -like '*.x-jumpcloud*') {
+                        $ThisObject.PSObject.Properties.Remove($AttributeName)
+                    }
                     # Remove x-scopes
-                    If ($AttributePath -like '*.x-scopes') { $ThisObject.PSObject.Properties.Remove($AttributeName) }
+                    If ($AttributePath -like '*.x-scopes') {
+                        $ThisObject.PSObject.Properties.Remove($AttributeName)
+                    }
                     # Remove x-tagGroups
-                    If ($AttributePath -eq '.x-tagGroups') { $ThisObject.PSObject.Properties.Remove($AttributeName) }
+                    If ($AttributePath -eq '.x-tagGroups') {
+                        $ThisObject.PSObject.Properties.Remove($AttributeName)
+                    }
                     # Remove x-tests
-                    If ($AttributePath -eq '.x-tests') { $ThisObject.PSObject.Properties.Remove($AttributeName) }
+                    If ($AttributePath -eq '.x-tests') {
+                        $ThisObject.PSObject.Properties.Remove($AttributeName)
+                    }
                     # Remove x-go-package
-                    If ($AttributePath -like '*.x-go-package') { $ThisObject.PSObject.Properties.Remove($AttributeName) }
+                    If ($AttributePath -like '*.x-go-package') {
+                        $ThisObject.PSObject.Properties.Remove($AttributeName)
+                    }
                     # Remove tags
-                    If ($AttributePath -like '*.tags') { $ThisObject.PSObject.Properties.Remove($AttributeName) }
+                    If ($AttributePath -like '*.tags') {
+                        $ThisObject.PSObject.Properties.Remove($AttributeName)
+                    }
                     # Remove x-tags
-                    If ($AttributePath -like '*.x-tags*') { $ThisObject.PSObject.Properties.Remove($AttributeName) }
+                    If ($AttributePath -like '*.x-tags*') {
+                        $ThisObject.PSObject.Properties.Remove($AttributeName)
+                    }
                     # Remove tagnames
-                    If ($AttributePath -like '*.tagnames') { $ThisObject.PSObject.Properties.Remove($AttributeName) }
+                    If ($AttributePath -like '*.tagnames') {
+                        $ThisObject.PSObject.Properties.Remove($AttributeName)
+                    }
                     # If ($AttributePath -like '*.enum') { $ThisObject.PSObject.Properties.Remove($AttributeName) }
-                    If ($ThisObject.$AttributeName)
-                    {
+                    If ($ThisObject.$AttributeName) {
                         $ModifiedObject = Update-SwaggerObject -InputObject:($ThisObject.$AttributeName) -InputObjectName:($AttributePath) -NoUpdate:($NoUpdate) -InputObjectOrg:($InputObjectOrg)
                         # If it was an array of objects before reapply the parent array.
                         # accounting for objects which may have been removed, check that thisobject is not null
-                        If (($ThisObject.$AttributeName.GetType()).FullName -eq 'System.Object[]')
-                        {
+                        If (($ThisObject.$AttributeName.GetType()).FullName -eq 'System.Object[]') {
                             $ModifiedObject = @($ModifiedObject)
                         }
                         $ThisObject.$AttributeName = $ModifiedObject
                     }
-                }
-                Else
-                {
-                    If ($ThisObject.$AttributeName)
-                    {
+                } Else {
+                    If ($ThisObject.$AttributeName) {
                         $ModifiedObject = Update-SwaggerObject -InputObject:($ThisObject.$AttributeName) -InputObjectName:($AttributePath) -NoUpdate:($NoUpdate) -InputObjectOrg:($InputObjectOrg)
                         # If it was an array of objects before reapply the parent array.
-                        If (($ThisObject.$AttributeName.GetType()).FullName -eq 'System.Object[]')
-                        {
+                        If (($ThisObject.$AttributeName.GetType()).FullName -eq 'System.Object[]') {
                             $ModifiedObject = @($ModifiedObject)
                         }
                         $ThisObject.$AttributeName = $ModifiedObject
@@ -742,69 +795,52 @@ Function Update-SwaggerObject
     # Return modified object
     Return $InputObject
 }
+
 # Start script
 $SDKName | ForEach-Object {
     $SDKNameItem = $_
     $global:xMsEnumObject = @()
-    If ($TransformConfig.Contains($SDKNameItem))
-    {
+    If ($TransformConfig.Contains($SDKNameItem)) {
         $Config = $TransformConfig.($SDKNameItem)
         $CurrentSDKName = $SDKNameItem
         $global:OperationIdMapping = $Config.OperationIdMapping
-        $global:ExcludedList = [System.Collections.ArrayList]$Config.ExcludedList
-        $global:ExcludedListOrg = [System.Collections.ArrayList]$Config.ExcludedList
+
         # Create output file path
         $OutputFullPathJson = "$($OutputFilePath)/$($SDKNameItem).json"
-        If (-not (Test-Path -Path:($OutputFilePath)))
-        {
+        If (-not (Test-Path -Path:($OutputFilePath))) {
             New-Item -Path:($OutputFilePath) -ItemType:('Directory')
         }
         # Get OAS content from Public URL
         $SwaggerUrl = $Config.PublicUrl
-        $OASContent = If ($SwaggerUrl -like '*https*')
-        {
+        $OASContent = If ($SwaggerUrl -like '*https*') {
             (Invoke-WebRequest -Uri:($SwaggerUrl)).Content
-        }
-        Else
-        {
+        } Else {
             Get-Content -Path:($SwaggerUrl) -Raw
         }
-        If ([System.String]::IsNullOrEmpty($OASContent))
-        {
+        If ([System.String]::IsNullOrEmpty($OASContent)) {
             Write-Error ("No content was returned from: $($SwaggerUrl)")
         }
-        If ([System.String]::IsNullOrEmpty($OASContent))
-        {
+        If ([System.String]::IsNullOrEmpty($OASContent)) {
             Write-Error ("No content was returned from: $($SwaggerUrl)")
-        }
-        Else
-        {
+        } Else {
             # Prep json for find and replace by flattening string
-            $SwaggerObjectContent = If ($SwaggerUrl -like '*.yaml*')
-            {
+            $SwaggerObjectContent = If ($SwaggerUrl -like '*.yaml*') {
                 $OASContent | ConvertFrom-Yaml -Ordered # | ConvertTo-Yaml -JsonCompatible
-            }
-            Else
-            {
+            } Else {
                 $OASContent | ConvertFrom-Json -Depth:(100)
             }
             # Find and replace on file
             $SwaggerObject = $SwaggerObjectContent | ConvertTo-Json -Depth:(100) -Compress
             # Perform find and replace
-            If (-not [System.String]::IsNullOrEmpty($Config.FindAndReplace))
-            {
+            If (-not [System.String]::IsNullOrEmpty($Config.FindAndReplace)) {
                 ($Config.FindAndReplace).GetEnumerator() | ForEach-Object {
                     $PatternMatch = $SwaggerObject | Select-String -Pattern:([regex]($_.Name))
-                    If (-not [System.String]::IsNullOrEmpty($PatternMatch))
-                    {
-                        Do
-                        {
+                    If (-not [System.String]::IsNullOrEmpty($PatternMatch)) {
+                        Do {
                             $SwaggerObject = $SwaggerObject -Replace ([regex]$_.Name, [string]$_.Value)
                             $PatternExists = $SwaggerObject | Select-String -Pattern:([regex]($_.Name))
                         } While ($PatternExists -and $PatternExists.Matches.Value -ne $_.Value)
-                    }
-                    Else
-                    {
+                    } Else {
                         Write-Error ("Unable to find a match in '$CurrentSDKName' for:$($_.Name)")
                     }
                 }
@@ -826,91 +862,84 @@ $SDKName | ForEach-Object {
             #######################################################################
             # Update swagger object
             $SwaggerObject = $SwaggerObject | ConvertFrom-Json -Depth:(100)
+            # Exclude New SDK Endpoints (Automatically exclude newly added endpoints)
+            $SwaggerObject = Remove-NewEndpoints -InputObject:($SwaggerObject)
+            # Define Exclude Lists
+            $global:ExcludedList = [System.Collections.ArrayList]$Config.ExcludedList
+            $global:ExcludedListOrg = [System.Collections.ArrayList]$Config.ExcludedList
+            # Excluded Endpoints specifed by API Transform Exclude List
+            $SwaggerObject = Remove-ExcludedEndpoints -InputObject:($SwaggerObject)
+            # Find new SDK Endpoints
             $UpdatedSwagger = Update-SwaggerObject -InputObject:($SwaggerObject) -InputObjectOrg:($SwaggerObject)
-            Do
-            {
+            Do {
                 $UsedRefs = ($UpdatedSwagger | ConvertTo-Json -Depth:(100) -Compress | Select-String -Pattern:('(\{"\$ref":")(.*?)("\})') -AllMatches).Matches
-                If (-not [System.String]::IsNullOrEmpty($UsedRefs))
-                {
+                If (-not [System.String]::IsNullOrEmpty($UsedRefs)) {
                     $UsedDefinitions = ($UsedRefs | ForEach-Object { $_.Groups[2].Value.Where( { $_ -like '*definitions*' }) }) | ForEach-Object { $_.Split('/') | Select-Object -Last 1 } | Select-Object -Unique | Sort-Object
                     $UsedParameters = ($UsedRefs | ForEach-Object { $_.Groups[2].Value.Where( { $_ -like '*parameters*' }) }) | ForEach-Object { $_.Split('/') | Select-Object -Last 1 } | Select-Object -Unique | Sort-Object
                 }
                 # Remove unused definitions
                 $AllDefinitions = $UpdatedSwagger.definitions.PSObject.Properties.Name | Select-Object -Unique | Sort-Object
                 $AllDefinitions | ForEach-Object {
-                    If ($UsedDefinitions -notcontains $_)
-                    {
+                    If ($UsedDefinitions -notcontains $_) {
                         # Write-Warning ("Removing unused definition: $_")
                         $UpdatedSwagger.definitions.PSObject.Properties.Remove($_)
                     }
                 }
-                $DefinitionResults = If (-not [System.String]::IsNullOrEmpty($UsedDefinitions) -and -not [System.String]::IsNullOrEmpty($AllDefinitions))
-                {
+                $DefinitionResults = If (-not [System.String]::IsNullOrEmpty($UsedDefinitions) -and -not [System.String]::IsNullOrEmpty($AllDefinitions)) {
                     Compare-Object -ReferenceObject $UsedDefinitions -DifferenceObject $AllDefinitions
                 }
                 # Remove unused parameters
                 $AllParameters = $UpdatedSwagger.parameters.PSObject.Properties.Name | Select-Object -Unique | Sort-Object
                 $AllParameters | ForEach-Object {
-                    If ($UsedParameters -notcontains $_)
-                    {
+                    If ($UsedParameters -notcontains $_) {
                         # Write-Warning ("Removing unused parameter: $_")
                         $UpdatedSwagger.parameters.PSObject.Properties.Remove($_)
                     }
                 }
-                $ParameterResults = If (-not [System.String]::IsNullOrEmpty($UsedParameters) -and -not [System.String]::IsNullOrEmpty($AllParameters))
-                {
+                $ParameterResults = If (-not [System.String]::IsNullOrEmpty($UsedParameters) -and -not [System.String]::IsNullOrEmpty($AllParameters)) {
                     Compare-Object -ReferenceObject $UsedParameters -DifferenceObject $AllParameters
                 }
             } While ($DefinitionResults -or $ParameterResults)
             #endregion
             $SwaggerString = $UpdatedSwagger | ConvertTo-Json -Depth:(100)
             # TODO: Validate that all "enum" locations have been updated to add "x-ms-enum"
+            # TODO: Replace with Get-OperationIDs on Swagger object / Ensure all documented operationIDs have been accounted for
             # Validate that all operationIds in mapping have been found in spec
-            If (-not [System.String]::IsNullOrEmpty($global:OperationIdMapping))
-            {
+            If (-not [System.String]::IsNullOrEmpty($global:OperationIdMapping)) {
                 ($global:OperationIdMapping).GetEnumerator() | ForEach-Object {
                     Write-Error ("In '$($CurrentSDKName)' unable to find operationId '$($_.Key)'.")
                 }
             }
+            # TODO: Replace with Get-ExcludedPaths / Ensure all documented Excludes are not in swaggerObject
             # Validate that all "ExcludedList" in mapping have been removed from spec
-            If (-not [System.String]::IsNullOrEmpty($global:ExcludedList))
-            {
-                $global:ExcludedList | ForEach-Object {
-                    Write-Error ("In '$($CurrentSDKName)' unable to find ExcludedPath '$($_)'.")
-                }
-            }
+            # If (-not [System.String]::IsNullOrEmpty($global:ExcludedList)) {
+            #     $global:ExcludedList | ForEach-Object {
+            #         Write-Error ("In '$($CurrentSDKName)' unable to find ExcludedPath '$($_)'.")
+            #     }
+            # }
             $global:ExcludedListOrg | ForEach-Object {
-                If ($SwaggerString -match """$($_)""" -or $SwaggerString -match [regex]("(""\`$ref"": ""\#\/)(.*?)($($_)"")"))
-                {
+                If ($SwaggerString -match """$($_)""" -or $SwaggerString -match [regex]("(""\`$ref"": ""\#\/)(.*?)($($_)"")")) {
                     Write-Error ("In '$($CurrentSDKName)' the item '$($_)' has not been excluded.")
                 }
             }
             # Validate that "tags" have been removed
             $Tags = $SwaggerString | Select-String -Pattern:('"Tags"')
-            If ($Tags.Matches.Value)
-            {
+            If ($Tags.Matches.Value) {
                 Write-Error ("In '$($CurrentSDKName)' still has '$($Tags.Matches.Value)' in it.")
             }
             # Compare current spec to old spec and if they are diffrent then export the new file
             $UpdatedSpec = $false
-            If (Test-Path -Path:($OutputFullPathJson))
-            {
+            If (Test-Path -Path:($OutputFullPathJson)) {
                 $OldSpec = Get-Content -Path:($OutputFullPathJson) -Raw | ConvertFrom-Json -Depth:(100) | ConvertTo-Json -Depth:(100)
-                If (-not [System.String]::IsNullOrEmpty($OldSpec))
-                {
+                If (-not [System.String]::IsNullOrEmpty($OldSpec)) {
                     $CompareResults = Compare-Object -ReferenceObject:($OldSpec.Trim()) -DifferenceObject:($SwaggerString.Trim())
-                    If (-not [System.String]::IsNullOrEmpty($CompareResults))
-                    {
+                    If (-not [System.String]::IsNullOrEmpty($CompareResults)) {
                         $UpdatedSpec = $true
                     }
-                }
-                Else
-                {
+                } Else {
                     $UpdatedSpec = $true
                 }
-            }
-            Else
-            {
+            } Else {
                 $UpdatedSpec = $true
             }
             # Output new file
@@ -923,9 +952,7 @@ $SDKName | ForEach-Object {
             # Return variable to Azure Pipelines
             Return $UpdatedSpec
         }
-    }
-    Else
-    {
+    } Else {
         Write-Error ("Config 'TransformConfig' does not contain an SDK called '$($SDKNameItem)'.")
     }
 }

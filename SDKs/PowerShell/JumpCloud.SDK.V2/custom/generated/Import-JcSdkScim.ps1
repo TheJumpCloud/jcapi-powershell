@@ -57,73 +57,73 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V2.Category('Path')]
     [System.String]
     # ObjectID of the Application.
-    ${ApplicationId},
+    ${ApplicationId}, 
 
     [Parameter(ParameterSetName='ImportViaIdentity', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Path')]
     [JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity]
     # Identity Parameter
     # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
-    ${InputObject},
+    ${InputObject}, 
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
     [System.String]
     # Filter users by a search term
-    ${Filter},
+    ${Filter}, 
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
     [System.String]
     # URL query to merge with the service provider request
-    ${Query},
+    ${Query}, 
 
     [Parameter()]
     [ArgumentCompleter([JumpCloud.SDK.V2.Support.Sort])]
     [JumpCloud.SDK.V2.Category('Query')]
     [JumpCloud.SDK.V2.Support.Sort]
     # Sort users by supported fields
-    ${Sort},
+    ${Sort}, 
 
     [Parameter()]
     [ArgumentCompleter([JumpCloud.SDK.V2.Support.SortOrder1])]
     [JumpCloud.SDK.V2.Category('Query')]
     [JumpCloud.SDK.V2.Support.SortOrder1]
     # .
-    ${SortOrder},
+    ${SortOrder}, 
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]
     [System.Management.Automation.SwitchParameter]
     # Wait for .NET debugger to attach
-    ${Break},
+    ${Break}, 
 
     [Parameter(DontShow)]
     [ValidateNotNull()]
     [JumpCloud.SDK.V2.Category('Runtime')]
     [JumpCloud.SDK.V2.Runtime.SendAsyncStep[]]
     # SendAsync Pipeline Steps to be appended to the front of the pipeline
-    ${HttpPipelineAppend},
+    ${HttpPipelineAppend}, 
 
     [Parameter(DontShow)]
     [ValidateNotNull()]
     [JumpCloud.SDK.V2.Category('Runtime')]
     [JumpCloud.SDK.V2.Runtime.SendAsyncStep[]]
     # SendAsync Pipeline Steps to be prepended to the front of the pipeline
-    ${HttpPipelinePrepend},
+    ${HttpPipelinePrepend}, 
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]
     [System.Uri]
     # The URI for the proxy server to use
-    ${Proxy},
+    ${Proxy}, 
 
     [Parameter(DontShow)]
     [ValidateNotNull()]
     [JumpCloud.SDK.V2.Category('Runtime')]
     [System.Management.Automation.PSCredential]
     # Credentials for a proxy server to use for the remote call
-    ${ProxyCredential},
+    ${ProxyCredential}, 
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]
@@ -159,7 +159,9 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         # Clean up global variables
         $GlobalVars = @('JCHttpRequest', 'JCHttpRequestContent', 'JCHttpResponse', 'JCHttpResponseContent')
         $GlobalVars | ForEach-Object {
-            If ((Get-Variable -Scope:('Global')).Where( { $_.Name -eq $_ })) { Remove-Variable -Name:($_) -Scope:('Global') }
+            If ((Get-Variable -Scope:('Global')).Where( { $_.Name -eq $_ })) {
+                Remove-Variable -Name:($_) -Scope:('Global')
+            }
         }
         Return $Results
     }

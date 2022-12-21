@@ -67,7 +67,7 @@ PS C:\> {{ Add code here }}
 {{ Add output here }}
 
 .Inputs
-JumpCloud.SDK.V2.Models.IAuthnPolicyInput
+JumpCloud.SDK.V2.Models.IAuthnPolicy
 .Outputs
 JumpCloud.SDK.V2.Models.IAuthnPolicy
 .Notes
@@ -75,8 +75,8 @@ COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
-BODY <IAuthnPolicyInput>:
-  [Conditions <IAuthnPolicyInputConditions>]: Dictionary of <any>
+BODY <IAuthnPolicy>:
+  [Conditions <IAuthnPolicyConditions>]: Dictionary of <any>
     [(Any) <Object>]: This indicates any property can be added to this object.
   [Description <String>]:
   [Disabled <Boolean?>]:
@@ -95,6 +95,7 @@ BODY <IAuthnPolicyInput>:
   [UserGroupExclusions <String[]>]:
   [UserGroupInclusions <String[]>]:
   [UserInclusions <String[]>]:
+  [UserVerificationRequirement <String>]:
 
 TARGETRESOURCES <IAuthnPolicyResourceTarget[]>:
   Type <String>:
@@ -119,47 +120,48 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     Param(
     [Parameter(ParameterSetName='Create', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Models.IAuthnPolicyInput]
-    # AuthnPolicyInput
+    [JumpCloud.SDK.V2.Models.IAuthnPolicy]
+    # This represents an authentication policy.
+    # See the details of each field for valid values and restrictions.
     # To construct, see NOTES section for BODY properties and create a hash table.
-    ${Body},
+    ${Body}, 
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Runtime.Info(PossibleTypes=([JumpCloud.SDK.V2.Models.IAuthnPolicyInputConditions]))]
+    [JumpCloud.SDK.V2.Runtime.Info(PossibleTypes=([JumpCloud.SDK.V2.Models.IAuthnPolicyConditions]))]
     [System.Collections.Hashtable]
     # Dictionary of <any>
-    ${Conditions},
+    ${Conditions}, 
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.String]
     # .
-    ${Description},
+    ${Description}, 
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.Management.Automation.SwitchParameter]
     # .
-    ${Disabled},
+    ${Disabled}, 
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.String]
     # .
-    ${EffectAction},
+    ${EffectAction}, 
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.Management.Automation.SwitchParameter]
     # .
-    ${MfaRequired},
+    ${MfaRequired}, 
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.String]
     # .
-    ${Name},
+    ${Name}, 
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [AllowEmptyCollection()]
@@ -167,13 +169,13 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V2.Models.IAuthnPolicyResourceTarget[]]
     # .
     # To construct, see NOTES section for TARGETRESOURCES properties and create a hash table.
-    ${TargetResources},
+    ${TargetResources}, 
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.String]
     # AuthnPolicyType
-    ${Type},
+    ${Type}, 
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [AllowEmptyCollection()]
@@ -181,7 +183,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V2.Models.IAuthnPolicyUserAttributeFilter[]]
     # .
     # To construct, see NOTES section for USERATTRIBUTEEXCLUSIONS properties and create a hash table.
-    ${UserAttributeExclusions},
+    ${UserAttributeExclusions}, 
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [AllowEmptyCollection()]
@@ -189,61 +191,67 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V2.Models.IAuthnPolicyUserAttributeFilter[]]
     # .
     # To construct, see NOTES section for USERATTRIBUTEINCLUSIONS properties and create a hash table.
-    ${UserAttributeInclusions},
+    ${UserAttributeInclusions}, 
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [AllowEmptyCollection()]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.String[]]
     # .
-    ${UserGroupExclusions},
+    ${UserGroupExclusions}, 
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [AllowEmptyCollection()]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.String[]]
     # .
-    ${UserGroupInclusions},
+    ${UserGroupInclusions}, 
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [AllowEmptyCollection()]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.String[]]
     # .
-    ${UserInclusions},
+    ${UserInclusions}, 
+
+    [Parameter(ParameterSetName='CreateExpanded')]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [System.String]
+    # .
+    ${UserVerificationRequirement}, 
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]
     [System.Management.Automation.SwitchParameter]
     # Wait for .NET debugger to attach
-    ${Break},
+    ${Break}, 
 
     [Parameter(DontShow)]
     [ValidateNotNull()]
     [JumpCloud.SDK.V2.Category('Runtime')]
     [JumpCloud.SDK.V2.Runtime.SendAsyncStep[]]
     # SendAsync Pipeline Steps to be appended to the front of the pipeline
-    ${HttpPipelineAppend},
+    ${HttpPipelineAppend}, 
 
     [Parameter(DontShow)]
     [ValidateNotNull()]
     [JumpCloud.SDK.V2.Category('Runtime')]
     [JumpCloud.SDK.V2.Runtime.SendAsyncStep[]]
     # SendAsync Pipeline Steps to be prepended to the front of the pipeline
-    ${HttpPipelinePrepend},
+    ${HttpPipelinePrepend}, 
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]
     [System.Uri]
     # The URI for the proxy server to use
-    ${Proxy},
+    ${Proxy}, 
 
     [Parameter(DontShow)]
     [ValidateNotNull()]
     [JumpCloud.SDK.V2.Category('Runtime')]
     [System.Management.Automation.PSCredential]
     # Credentials for a proxy server to use for the remote call
-    ${ProxyCredential},
+    ${ProxyCredential}, 
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]
@@ -279,7 +287,9 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         # Clean up global variables
         $GlobalVars = @('JCHttpRequest', 'JCHttpRequestContent', 'JCHttpResponse', 'JCHttpResponseContent')
         $GlobalVars | ForEach-Object {
-            If ((Get-Variable -Scope:('Global')).Where( { $_.Name -eq $_ })) { Remove-Variable -Name:($_) -Scope:('Global') }
+            If ((Get-Variable -Scope:('Global')).Where( { $_.Name -eq $_ })) {
+                Remove-Variable -Name:($_) -Scope:('Global')
+            }
         }
         Return $Results
     }

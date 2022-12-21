@@ -9,6 +9,7 @@ schema: 2.0.0
 
 ## SYNOPSIS
 The endpoint updates a SSO / SAML Application.
+Any fields not provided will be reset or created with default values.
 
 ## SYNTAX
 
@@ -23,7 +24,8 @@ Set-JcSdkApplication -Id <String> -Config <IApplicationConfig> -Name <String> -S
  [-Beta] [-Color <String>] [-Created <String>] [-DatabaseAttributes <IApplicationDatabaseAttributesItem[]>]
  [-Description <String>] [-DisplayLabel <String>] [-DisplayName <String>] [-Id1 <String>]
  [-LearnMore <String>] [-LogoColor <String>] [-LogoUrl <String>] [-Organization <String>] [-SsoBeta]
- [-SsoIdpCertExpirationAt <DateTime>] [-SsoJit] [-SsoType <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-SsoHidden] [-SsoIdpCertExpirationAt <DateTime>] [-SsoJit] [-SsoType <String>] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### SetViaIdentity
@@ -38,12 +40,13 @@ Set-JcSdkApplication -InputObject <IJumpCloudApiIdentity> -Config <IApplicationC
  -SsoUrl <String> [-Id <String>] [-Active] [-Beta] [-Color <String>] [-Created <String>]
  [-DatabaseAttributes <IApplicationDatabaseAttributesItem[]>] [-Description <String>] [-DisplayLabel <String>]
  [-DisplayName <String>] [-LearnMore <String>] [-LogoColor <String>] [-LogoUrl <String>]
- [-Organization <String>] [-SsoBeta] [-SsoIdpCertExpirationAt <DateTime>] [-SsoJit] [-SsoType <String>]
- [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-Organization <String>] [-SsoBeta] [-SsoHidden] [-SsoIdpCertExpirationAt <DateTime>] [-SsoJit]
+ [-SsoType <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 The endpoint updates a SSO / SAML Application.
+Any fields not provided will be reset or created with default values.
 
 ## EXAMPLES
 
@@ -351,6 +354,21 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -SsoHidden
+.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -SsoIdpCertExpirationAt
 .
 
@@ -561,6 +579,7 @@ BODY <IApplication>: Application
   - `[LogoUrl <String>]`: 
   - `[Organization <String>]`: 
   - `[SsoBeta <Boolean?>]`: 
+  - `[SsoHidden <Boolean?>]`: 
   - `[SsoIdpCertExpirationAt <DateTime?>]`: 
   - `[SsoJit <Boolean?>]`: 
   - `[SsoType <String>]`: 

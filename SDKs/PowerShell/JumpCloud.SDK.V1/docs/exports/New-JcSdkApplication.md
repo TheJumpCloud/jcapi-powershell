@@ -22,7 +22,7 @@ New-JcSdkApplication -Body <IApplication> [-Confirm] [-WhatIf] [<CommonParameter
 New-JcSdkApplication -Config <IApplicationConfig> -Name <String> -SsoUrl <String> [-Active] [-Beta]
  [-Color <String>] [-Created <String>] [-DatabaseAttributes <IApplicationDatabaseAttributesItem[]>]
  [-Description <String>] [-DisplayLabel <String>] [-DisplayName <String>] [-Id <String>] [-LearnMore <String>]
- [-LogoColor <String>] [-LogoUrl <String>] [-Organization <String>] [-SsoBeta]
+ [-LogoColor <String>] [-LogoUrl <String>] [-Organization <String>] [-SsoBeta] [-SsoHidden]
  [-SsoIdpCertExpirationAt <DateTime>] [-SsoJit] [-SsoType <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
@@ -304,6 +304,21 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -SsoHidden
+.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: CreateExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -SsoIdpCertExpirationAt
 .
 
@@ -512,6 +527,7 @@ BODY <IApplication>: Application
   - `[LogoUrl <String>]`: 
   - `[Organization <String>]`: 
   - `[SsoBeta <Boolean?>]`: 
+  - `[SsoHidden <Boolean?>]`: 
   - `[SsoIdpCertExpirationAt <DateTime?>]`: 
   - `[SsoJit <Boolean?>]`: 
   - `[SsoType <String>]`: 

@@ -3,24 +3,26 @@
 This endpoint is used to lookup the next upcoming scheduled state change for each user in the
 given list.
 The users parameter is limited to 100 items per request.
-#### Sample Request
-```
-curl -X GET \"https://console.jumpcloud.com/api/v2/bulk/userstates/eventlist/next?users={UserID1},{UserID2},{UserID3}\" \\
-  -H 'x-api-key: {API_KEY}' \\
-  -H 'Content-Type: application/json' \\
-  -H 'Accept: application/json'
-```
+The results are also limited
+to 100 items.
+This endpoint returns a max of 1 event per state per user.
+For example, if a user
+has 3 ACTIVATED events scheduled it will return the next upcoming activation event.
+However, if a
+user also has a SUSPENDED event scheduled along with the ACTIVATED events it will return the next
+upcoming activation event _and_ the next upcoming suspension event.
 .Description
 This endpoint is used to lookup the next upcoming scheduled state change for each user in the
 given list.
 The users parameter is limited to 100 items per request.
-#### Sample Request
-```
-curl -X GET \"https://console.jumpcloud.com/api/v2/bulk/userstates/eventlist/next?users={UserID1},{UserID2},{UserID3}\" \\
-  -H 'x-api-key: {API_KEY}' \\
-  -H 'Content-Type: application/json' \\
-  -H 'Accept: application/json'
-```
+The results are also limited
+to 100 items.
+This endpoint returns a max of 1 event per state per user.
+For example, if a user
+has 3 ACTIVATED events scheduled it will return the next upcoming activation event.
+However, if a
+user also has a SUSPENDED event scheduled along with the ACTIVATED events it will return the next
+upcoming activation event _and_ the next upcoming suspension event.
 .Example
 PS C:\> {{ Add code here }}
 
@@ -44,47 +46,47 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [AllowEmptyCollection()]
     [JumpCloud.SDK.V2.Category('Query')]
     [System.String[]]
-    # A list of system user IDs
-    ${Users},
+    # A list of system user IDs, limited to 100 items.
+    ${Users}, 
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]
     [System.Management.Automation.SwitchParameter]
     # Wait for .NET debugger to attach
-    ${Break},
+    ${Break}, 
 
     [Parameter(DontShow)]
     [ValidateNotNull()]
     [JumpCloud.SDK.V2.Category('Runtime')]
     [JumpCloud.SDK.V2.Runtime.SendAsyncStep[]]
     # SendAsync Pipeline Steps to be appended to the front of the pipeline
-    ${HttpPipelineAppend},
+    ${HttpPipelineAppend}, 
 
     [Parameter(DontShow)]
     [ValidateNotNull()]
     [JumpCloud.SDK.V2.Category('Runtime')]
     [JumpCloud.SDK.V2.Runtime.SendAsyncStep[]]
     # SendAsync Pipeline Steps to be prepended to the front of the pipeline
-    ${HttpPipelinePrepend},
+    ${HttpPipelinePrepend}, 
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]
     [System.Uri]
     # The URI for the proxy server to use
-    ${Proxy},
+    ${Proxy}, 
 
     [Parameter(DontShow)]
     [ValidateNotNull()]
     [JumpCloud.SDK.V2.Category('Runtime')]
     [System.Management.Automation.PSCredential]
     # Credentials for a proxy server to use for the remote call
-    ${ProxyCredential},
+    ${ProxyCredential}, 
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]
     [System.Management.Automation.SwitchParameter]
     # Use the default credentials for the proxy
-    ${ProxyUseDefaultCredentials},
+    ${ProxyUseDefaultCredentials}, 
 
     [Parameter(DontShow)]
     [System.Boolean]

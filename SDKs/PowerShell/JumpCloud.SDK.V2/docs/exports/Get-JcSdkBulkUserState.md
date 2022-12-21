@@ -20,7 +20,7 @@ curl -X GET \"https://console.jumpcloud.com/api/v2/bulk/userstates\" \\
 ## SYNTAX
 
 ```
-Get-JcSdkBulkUserState [-Userid <String>] [<CommonParameters>]
+Get-JcSdkBulkUserState [-Filter <String[]>] [-Userid <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -50,6 +50,34 @@ curl -X GET \"https://console.jumpcloud.com/api/v2/bulk/userstates\" \\
 {{ Add output here }}
 
 ## PARAMETERS
+
+### -Filter
+A filter to apply to the query.
+
+**Filter structure**: `\<field\>:\<operator\>:\<value\>`.
+
+**field** = Populate with a valid field from an endpoint response.
+
+**operator** = Supported operators are: eq, ne, gt, ge, lt, le, between, search, in.
+_Note: v1 operators differ from v2 operators._
+
+**value** = Populate with the value you want to search for.
+Is case sensitive.
+Supports wild cards.
+
+**EX:** `GET /api/v2/groups?filter=name:eq:Test+Group`
+
+```yaml
+Type: System.String[]
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### -Userid
 The systemuser id to filter by.

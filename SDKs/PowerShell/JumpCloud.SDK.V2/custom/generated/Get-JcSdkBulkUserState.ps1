@@ -37,49 +37,69 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
     Param(
     [Parameter()]
+    [AllowEmptyCollection()]
+    [JumpCloud.SDK.V2.Category('Query')]
+    [System.String[]]
+    # A filter to apply to the query.
+    # 
+    # **Filter structure**: `<field>:<operator>:<value>`.
+    # 
+    # **field** = Populate with a valid field from an endpoint response.
+    # 
+    # **operator** = Supported operators are: eq, ne, gt, ge, lt, le, between, search, in.
+    # _Note: v1 operators differ from v2 operators._
+    # 
+    # **value** = Populate with the value you want to search for.
+    # Is case sensitive.
+    # Supports wild cards.
+    # 
+    # **EX:** `GET /api/v2/groups?filter=name:eq:Test+Group`
+    ${Filter}, 
+
+    [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
     [System.String]
     # The systemuser id to filter by.
-    ${Userid},
+    ${Userid}, 
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]
     [System.Management.Automation.SwitchParameter]
     # Wait for .NET debugger to attach
-    ${Break},
+    ${Break}, 
 
     [Parameter(DontShow)]
     [ValidateNotNull()]
     [JumpCloud.SDK.V2.Category('Runtime')]
     [JumpCloud.SDK.V2.Runtime.SendAsyncStep[]]
     # SendAsync Pipeline Steps to be appended to the front of the pipeline
-    ${HttpPipelineAppend},
+    ${HttpPipelineAppend}, 
 
     [Parameter(DontShow)]
     [ValidateNotNull()]
     [JumpCloud.SDK.V2.Category('Runtime')]
     [JumpCloud.SDK.V2.Runtime.SendAsyncStep[]]
     # SendAsync Pipeline Steps to be prepended to the front of the pipeline
-    ${HttpPipelinePrepend},
+    ${HttpPipelinePrepend}, 
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]
     [System.Uri]
     # The URI for the proxy server to use
-    ${Proxy},
+    ${Proxy}, 
 
     [Parameter(DontShow)]
     [ValidateNotNull()]
     [JumpCloud.SDK.V2.Category('Runtime')]
     [System.Management.Automation.PSCredential]
     # Credentials for a proxy server to use for the remote call
-    ${ProxyCredential},
+    ${ProxyCredential}, 
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]
     [System.Management.Automation.SwitchParameter]
     # Use the default credentials for the proxy
-    ${ProxyUseDefaultCredentials},
+    ${ProxyUseDefaultCredentials}, 
 
     [Parameter(DontShow)]
     [System.Boolean]

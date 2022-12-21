@@ -11,13 +11,14 @@ schema: 2.0.0
 This endpoint is used to lookup the next upcoming scheduled state change for each user in the
 given list.
 The users parameter is limited to 100 items per request.
-#### Sample Request
-```
-curl -X GET \"https://console.jumpcloud.com/api/v2/bulk/userstates/eventlist/next?users={UserID1},{UserID2},{UserID3}\" \\
-  -H 'x-api-key: {API_KEY}' \\
-  -H 'Content-Type: application/json' \\
-  -H 'Accept: application/json'
-```
+The results are also limited
+to 100 items.
+This endpoint returns a max of 1 event per state per user.
+For example, if a user
+has 3 ACTIVATED events scheduled it will return the next upcoming activation event.
+However, if a
+user also has a SUSPENDED event scheduled along with the ACTIVATED events it will return the next
+upcoming activation event _and_ the next upcoming suspension event.
 
 ## SYNTAX
 
@@ -29,13 +30,14 @@ Get-JcSdkNextScheduledBulkUserState -Users <String[]> [<CommonParameters>]
 This endpoint is used to lookup the next upcoming scheduled state change for each user in the
 given list.
 The users parameter is limited to 100 items per request.
-#### Sample Request
-```
-curl -X GET \"https://console.jumpcloud.com/api/v2/bulk/userstates/eventlist/next?users={UserID1},{UserID2},{UserID3}\" \\
-  -H 'x-api-key: {API_KEY}' \\
-  -H 'Content-Type: application/json' \\
-  -H 'Accept: application/json'
-```
+The results are also limited
+to 100 items.
+This endpoint returns a max of 1 event per state per user.
+For example, if a user
+has 3 ACTIVATED events scheduled it will return the next upcoming activation event.
+However, if a
+user also has a SUSPENDED event scheduled along with the ACTIVATED events it will return the next
+upcoming activation event _and_ the next upcoming suspension event.
 
 ## EXAMPLES
 
@@ -56,7 +58,7 @@ curl -X GET \"https://console.jumpcloud.com/api/v2/bulk/userstates/eventlist/nex
 ## PARAMETERS
 
 ### -Users
-A list of system user IDs
+A list of system user IDs, limited to 100 items.
 
 ```yaml
 Type: System.String[]

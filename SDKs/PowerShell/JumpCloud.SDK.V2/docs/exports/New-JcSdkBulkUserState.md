@@ -26,8 +26,8 @@ curl -X POST \"https://console.jumpcloud.com/api/v2/bulk/userstates\" \\
 
 ### CreateExpanded (Default)
 ```
-New-JcSdkBulkUserState -StartDate <DateTime> -State <String> -UserIds <String[]> [-Confirm] [-WhatIf]
- [<CommonParameters>]
+New-JcSdkBulkUserState -StartDate <DateTime> -State <String> -UserIds <String[]>
+ [-ActivationEmailOverride <String>] [-SendActivationEmails] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Create
@@ -68,6 +68,23 @@ curl -X POST \"https://console.jumpcloud.com/api/v2/bulk/userstates\" \\
 
 ## PARAMETERS
 
+### -ActivationEmailOverride
+Send the activation or welcome email to the specified email address upon activation.
+Can only be used with a single user_id and scheduled activation.
+This field will be ignored if `send_activation_emails` is explicitly set to false.
+
+```yaml
+Type: System.String
+Parameter Sets: CreateExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Body
 Model to support bulk scheduling of a state change for one or more users
 To construct, see NOTES section for BODY properties and create a hash table.
@@ -81,6 +98,23 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -SendActivationEmails
+Set to true to send activation or welcome email(s) to each user_id upon activation.
+Set to false to suppress emails.
+Can only be used with scheduled activation(s).
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: CreateExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -184,6 +218,8 @@ BODY <IBulkScheduledStatechangeCreate>: Model to support bulk scheduling of a st
   - `StartDate <DateTime>`: Date and time that scheduled action should occur
   - `State <String>`: The state to move the user(s) to
   - `UserIds <String[]>`: Array of system user ids to schedule for a state change
+  - `[ActivationEmailOverride <String>]`: Send the activation or welcome email to the specified email address upon activation. Can only be used with a single user_id and scheduled activation. This field will be ignored if `send_activation_emails` is explicitly set to false.
+  - `[SendActivationEmails <Boolean?>]`: Set to true to send activation or welcome email(s) to each user_id upon activation. Set to false to suppress emails. Can only be used with scheduled activation(s).
 
 ## RELATED LINKS
 

@@ -23,7 +23,7 @@ Erases a DEP-enrolled device.
 
 ### ClearExpanded (Default)
 ```
-Clear-JcSdkAppleMdmDevice -AppleMdmId <String> -DeviceId <String> -Pin <String> [-PassThru] [-Confirm]
+Clear-JcSdkAppleMdmDevice -AppleMdmId <String> -DeviceId <String> [-Pin <String>] [-PassThru] [-Confirm]
  [-WhatIf] [<CommonParameters>]
 ```
 
@@ -43,8 +43,8 @@ Clear-JcSdkAppleMdmDevice -InputObject <IJumpCloudApiIdentity>
 
 ### ClearViaIdentityExpanded
 ```
-Clear-JcSdkAppleMdmDevice -InputObject <IJumpCloudApiIdentity> -Pin <String> [-PassThru] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+Clear-JcSdkAppleMdmDevice -InputObject <IJumpCloudApiIdentity> [-Pin <String>] [-PassThru] [-Confirm]
+ [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -155,14 +155,14 @@ Accept wildcard characters: False
 ```
 
 ### -Pin
-6-digit PIN required to erase the device
+6-digit PIN, required for MacOS, to erase the device
 
 ```yaml
 Type: System.String
 Parameter Sets: ClearExpanded, ClearViaIdentityExpanded
 Aliases:
 
-Required: True
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -223,7 +223,7 @@ To create the parameters described below, construct a hash table containing the 
 
 
 BODY <IPaths1FfbqfwApplemdmsAppleMdmIdDevicesDeviceIdErasePostRequestbodyContentApplicationJsonSchema>: .
-  - `Pin <String>`: 6-digit PIN required to erase the device
+  - `[Pin <String>]`: 6-digit PIN, required for MacOS, to erase the device
 
 INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter
   - `[AccountId <String>]`: 

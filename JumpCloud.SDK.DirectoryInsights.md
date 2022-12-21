@@ -1,3 +1,39 @@
+## JumpCloud.SDK.DirectoryInsights-0.0.19
+Release Date: December 20, 2022
+#### RELEASE NOTES
+```
+SDK version update params added to DI functions
+```
+#### FEATURES:
+Get-JcSdkEvent — `SearchTermNot` parameter added
+Get-JcSdkEventCount — `SearchTermNot` parameter added
+Get-JcSdkEventDistinct — `SearchTermNot` parameter added
+Get-JcSdkEventInterval — `SearchTermNot` parameter added
+
+#### Generated Changes:
+
+<details>
+<summary>Functions Added</summary>
+
+No changes
+</details>
+
+<details>
+<summary>Functions Modified</summary>
+
+* Get-JcSdkEvent.ps1
+* Get-JcSdkEventCount.ps1
+* Get-JcSdkEventDistinct.ps1
+* Get-JcSdkEventInterval.ps1
+
+</details>
+
+<details>
+<summary>Functions Removed</summary>
+
+No changes
+</details>
+
 ## JumpCloud.SDK.DirectoryInsights-0.0.18
 Release Date: June 21, 2022
 #### RELEASE NOTES

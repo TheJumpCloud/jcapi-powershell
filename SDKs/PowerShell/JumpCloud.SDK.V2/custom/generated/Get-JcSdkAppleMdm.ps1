@@ -44,40 +44,45 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V2.Category('Runtime')]
     [System.Management.Automation.SwitchParameter]
     # Wait for .NET debugger to attach
-    ${Break},
+    ${Break}, 
 
     [Parameter(DontShow)]
     [ValidateNotNull()]
     [JumpCloud.SDK.V2.Category('Runtime')]
     [JumpCloud.SDK.V2.Runtime.SendAsyncStep[]]
     # SendAsync Pipeline Steps to be appended to the front of the pipeline
-    ${HttpPipelineAppend},
+    ${HttpPipelineAppend}, 
 
     [Parameter(DontShow)]
     [ValidateNotNull()]
     [JumpCloud.SDK.V2.Category('Runtime')]
     [JumpCloud.SDK.V2.Runtime.SendAsyncStep[]]
     # SendAsync Pipeline Steps to be prepended to the front of the pipeline
-    ${HttpPipelinePrepend},
+    ${HttpPipelinePrepend}, 
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]
     [System.Uri]
     # The URI for the proxy server to use
-    ${Proxy},
+    ${Proxy}, 
 
     [Parameter(DontShow)]
     [ValidateNotNull()]
     [JumpCloud.SDK.V2.Category('Runtime')]
     [System.Management.Automation.PSCredential]
     # Credentials for a proxy server to use for the remote call
-    ${ProxyCredential},
+    ${ProxyCredential}, 
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]
     [System.Management.Automation.SwitchParameter]
     # Use the default credentials for the proxy
-    ${ProxyUseDefaultCredentials}
+    ${ProxyUseDefaultCredentials}, 
+
+    [Parameter(DontShow)]
+    [System.Boolean]
+    # Set to $true to return all results. This will overwrite any skip and limit parameter.
+    $Paginate = $true
     )
     Begin
     {
@@ -96,22 +101,63 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        $Result = JumpCloud.SDK.V2.internal\Get-JcSdkInternalAppleMdm @PSBoundParameters
-        Write-Debug ('HttpRequest: ' + $JCHttpRequest);
-        Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
-        Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);
-        # Write-Debug ('HttpResponseContent: ' + $JCHttpResponseContent.Result);
-        $Result = If ('Results' -in $Result.PSObject.Properties.Name)
+        If ($Paginate -and $PSCmdlet.ParameterSetName -in ('List'))
         {
-            $Result.results
+            $PSBoundParameters.Remove('Paginate') | Out-Null
+            If ([System.String]::IsNullOrEmpty($PSBoundParameters.Limit))
+            {
+                $PSBoundParameters.Add('Limit', 100)
+            }
+            If ([System.String]::IsNullOrEmpty($PSBoundParameters.Skip))
+            {
+                $PSBoundParameters.Add('Skip', 0)
+            }
+            Do
+            {
+                Write-Debug ("Limit: $($PSBoundParameters.Limit); ");
+                Write-Debug ("Skip: $($PSBoundParameters.Skip); ");
+                $Result = JumpCloud.SDK.V2.internal\Get-JcSdkInternalAppleMdm @PSBoundParameters
+                Write-Debug ('HttpRequest: ' + $JCHttpRequest);
+                Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
+                Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);
+                # Write-Debug ('HttpResponseContent: ' + $JCHttpResponseContent.Result);
+                $Result = If ('Results' -in $Result.PSObject.Properties.Name)
+                {
+                    $Result.results
+                }
+                Else
+                {
+                    $Result
+                }
+                If (-not [System.String]::IsNullOrEmpty($Result))
+                {
+                    $ResultCount = ($Result | Measure-Object).Count;
+                    $Results += $Result;
+                    $PSBoundParameters.Skip += $ResultCount
+                }
+            }
+            While ($ResultCount -eq $PSBoundParameters.Limit -and -not [System.String]::IsNullOrEmpty($Result))
         }
         Else
         {
-            $Result
-        }
-        If (-not [System.String]::IsNullOrEmpty($Result))
-        {
-            $Results += $Result;
+            $PSBoundParameters.Remove('Paginate') | Out-Null
+            $Result = JumpCloud.SDK.V2.internal\Get-JcSdkInternalAppleMdm @PSBoundParameters
+            Write-Debug ('HttpRequest: ' + $JCHttpRequest);
+            Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
+            Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);
+            # Write-Debug ('HttpResponseContent: ' + $JCHttpResponseContent.Result);
+            $Result = If ('Results' -in $Result.PSObject.Properties.Name)
+            {
+                $Result.results
+            }
+            Else
+            {
+                $Result
+            }
+            If (-not [System.String]::IsNullOrEmpty($Result))
+            {
+                $Results += $Result;
+            }
         }
     }
     End

@@ -26,75 +26,75 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V2.Category('Path')]
     [System.String]
     # .
-    ${GsuiteId},
+    ${GsuiteId}, 
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
     [System.Int32]
     # Google Directory API maximum number of results per page.
     # See https://developers.google.com/admin-sdk/directory/reference/rest/v1/users/list.
-    ${MaxResults},
+    ${MaxResults}, 
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
     [System.String]
     # Google Directory API sort field parameter.
     # See https://developers.google.com/admin-sdk/directory/reference/rest/v1/users/list.
-    ${OrderBy},
+    ${OrderBy}, 
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
     [System.String]
     # Google Directory API token used to access the next page of results.
     # See https://developers.google.com/admin-sdk/directory/reference/rest/v1/users/list.
-    ${PageToken},
+    ${PageToken}, 
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
     [System.String]
     # Google Directory API search parameter.
     # See https://developers.google.com/admin-sdk/directory/v1/guides/search-users.
-    ${Query},
+    ${Query}, 
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
     [System.String]
     # Google Directory API sort direction parameter.
     # See https://developers.google.com/admin-sdk/directory/reference/rest/v1/users/list.
-    ${SortOrder},
+    ${SortOrder}, 
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]
     [System.Management.Automation.SwitchParameter]
     # Wait for .NET debugger to attach
-    ${Break},
+    ${Break}, 
 
     [Parameter(DontShow)]
     [ValidateNotNull()]
     [JumpCloud.SDK.V2.Category('Runtime')]
     [JumpCloud.SDK.V2.Runtime.SendAsyncStep[]]
     # SendAsync Pipeline Steps to be appended to the front of the pipeline
-    ${HttpPipelineAppend},
+    ${HttpPipelineAppend}, 
 
     [Parameter(DontShow)]
     [ValidateNotNull()]
     [JumpCloud.SDK.V2.Category('Runtime')]
     [JumpCloud.SDK.V2.Runtime.SendAsyncStep[]]
     # SendAsync Pipeline Steps to be prepended to the front of the pipeline
-    ${HttpPipelinePrepend},
+    ${HttpPipelinePrepend}, 
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]
     [System.Uri]
     # The URI for the proxy server to use
-    ${Proxy},
+    ${Proxy}, 
 
     [Parameter(DontShow)]
     [ValidateNotNull()]
     [JumpCloud.SDK.V2.Category('Runtime')]
     [System.Management.Automation.PSCredential]
     # Credentials for a proxy server to use for the remote call
-    ${ProxyCredential},
+    ${ProxyCredential}, 
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]

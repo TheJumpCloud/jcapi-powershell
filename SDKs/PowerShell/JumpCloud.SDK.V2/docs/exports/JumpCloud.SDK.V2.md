@@ -531,13 +531,14 @@ curl -X GET https://console.jumpcloud.com/api/v2/ldapservers/{LDAP_ID}/usergroup
 This endpoint is used to lookup the next upcoming scheduled state change for each user in the
 given list.
 The users parameter is limited to 100 items per request.
-#### Sample Request
-```
-curl -X GET \"https://console.jumpcloud.com/api/v2/bulk/userstates/eventlist/next?users={UserID1},{UserID2},{UserID3}\" \\
-  -H 'x-api-key: {API_KEY}' \\
-  -H 'Content-Type: application/json' \\
-  -H 'Accept: application/json'
-```
+The results are also limited
+to 100 items.
+This endpoint returns a max of 1 event per state per user.
+For example, if a user
+has 3 ACTIVATED events scheduled it will return the next upcoming activation event.
+However, if a
+user also has a SUSPENDED event scheduled along with the ACTIVATED events it will return the next
+upcoming activation event _and_ the next upcoming suspension event.
 
 ### [Get-JcSdkOffice365](Get-JcSdkOffice365.md)
 This endpoint returns a specific Office 365 instance.
@@ -1155,6 +1156,12 @@ Valid filter fields are `system_id` and `enabled`.
 ### [Get-JcSdkSystemInsightAuthorizedKey](Get-JcSdkSystemInsightAuthorizedKey.md)
 Valid filter fields are `system_id` and `uid`.
 
+### [Get-JcSdkSystemInsightAzureInstanceMetadata](Get-JcSdkSystemInsightAzureInstanceMetadata.md)
+Valid filter fields are `system_id`.
+
+### [Get-JcSdkSystemInsightAzureInstanceTag](Get-JcSdkSystemInsightAzureInstanceTag.md)
+Valid filter fields are `system_id`.
+
 ### [Get-JcSdkSystemInsightBattery](Get-JcSdkSystemInsightBattery.md)
 Valid filter fields are `system_id` and `health`.
 
@@ -1166,6 +1173,9 @@ Valid filter fields are `system_id` and `name`.
 
 ### [Get-JcSdkSystemInsightCertificate](Get-JcSdkSystemInsightCertificate.md)
 Valid filter fields are `system_id` and `common_name`.
+
+### [Get-JcSdkSystemInsightChassisInfo](Get-JcSdkSystemInsightChassisInfo.md)
+Valid filter fields are `system_id`.
 
 ### [Get-JcSdkSystemInsightChromeExtension](Get-JcSdkSystemInsightChromeExtension.md)
 Valid filter fields are `system_id` and `name`.
@@ -1212,6 +1222,13 @@ Valid filter fields are `system_id` and `version`.
 ### [Get-JcSdkSystemInsightLaunchd](Get-JcSdkSystemInsightLaunchd.md)
 Valid filter fields are `system_id` and `name`.
 
+### [Get-JcSdkSystemInsightLinuxPackage](Get-JcSdkSystemInsightLinuxPackage.md)
+Lists all programs for Linux devices.
+For macOS devices, use [List System Insights System Apps](#operation/systeminsights_list_apps).
+For windows devices, use [List System Insights System Apps](#operation/systeminsights_list_programs).
+
+Valid filter fields are `name` and `package_format`.
+
 ### [Get-JcSdkSystemInsightLoggedinUser](Get-JcSdkSystemInsightLoggedinUser.md)
 Valid filter fields are `system_id` and `user`.
 
@@ -1245,6 +1262,9 @@ Valid filter fields are `system_id` and `name`.
 ### [Get-JcSdkSystemInsightScheduledTask](Get-JcSdkSystemInsightScheduledTask.md)
 Valid filter fields are `system_id` and `enabled`.
 
+### [Get-JcSdkSystemInsightSecureboot](Get-JcSdkSystemInsightSecureboot.md)
+Valid filter fields are `system_id`.
+
 ### [Get-JcSdkSystemInsightService](Get-JcSdkSystemInsightService.md)
 Valid filter fields are `system_id` and `name`.
 
@@ -1272,6 +1292,9 @@ Valid filter fields are `system_id` and `name`.
 ### [Get-JcSdkSystemInsightSystemInfo](Get-JcSdkSystemInsightSystemInfo.md)
 Valid filter fields are `system_id` and `cpu_subtype`.
 
+### [Get-JcSdkSystemInsightTpmInfo](Get-JcSdkSystemInsightTpmInfo.md)
+Valid filter fields are `system_id`.
+
 ### [Get-JcSdkSystemInsightUptime](Get-JcSdkSystemInsightUptime.md)
 Valid filter fields are `system_id` and `days`.
 
@@ -1280,6 +1303,9 @@ Valid filter fields are `system_id` and `model`.
 
 ### [Get-JcSdkSystemInsightUser](Get-JcSdkSystemInsightUser.md)
 Valid filter fields are `system_id` and `username`.
+
+### [Get-JcSdkSystemInsightUserAssist](Get-JcSdkSystemInsightUserAssist.md)
+Valid filter fields are `system_id`.
 
 ### [Get-JcSdkSystemInsightUserGroup](Get-JcSdkSystemInsightUserGroup.md)
 Only valid filter field is `system_id`.
@@ -1293,7 +1319,10 @@ Valid filter fields are `system_id` and `security_type`.
 ### [Get-JcSdkSystemInsightWifiStatus](Get-JcSdkSystemInsightWifiStatus.md)
 Valid filter fields are `system_id` and `security_type`.
 
-### [Get-JcSdkSystemInsightWindowSecurityProduct](Get-JcSdkSystemInsightWindowSecurityProduct.md)
+### [Get-JcSdkSystemInsightWindowsSecurityCenter](Get-JcSdkSystemInsightWindowsSecurityCenter.md)
+Valid filter fields are `system_id`.
+
+### [Get-JcSdkSystemInsightWindowsSecurityProduct](Get-JcSdkSystemInsightWindowsSecurityProduct.md)
 Valid filter fields are `system_id` and `state`.
 
 ### [Get-JcSdkSystemMember](Get-JcSdkSystemMember.md)
@@ -2523,7 +2552,7 @@ Restarts a DEP-enrolled device.
   -H 'accept: application/json' \\
   -H 'content-type: application/json' \\
   -H 'x-api-key: {API_KEY}' \\
-  -d '{}'
+  -d '{\"kextPaths\": [\"Path1\", \"Path2\"]}'
 ```
 
 ### [Set-JcSdkActiveDirectoryAssociation](Set-JcSdkActiveDirectoryAssociation.md)

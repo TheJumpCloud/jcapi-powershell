@@ -212,21 +212,16 @@ The endpoint adds a new SSO / SAML Applications.
 ### [New-JcSdkCommand](New-JcSdkCommand.md)
 This endpoint allows you to create a new command.
 
-#### Sample Request
+NOTE: the system property in the command is not used.
+Use a POST to /api/v2/commands/{id}/associations to bind a command to a system.
 
+#### Sample Request
 ```
 curl -X POST https://console.jumpcloud.com/api/commands/ \\
   -H 'Accept: application/json' \\
-  -H 'Content-Type: application/json' \\
-  -H 'x-api-key: {API_KEY}' \\
-  -d '{
-\t\"name\":\"Test API Command\",
-\t\"command\":\"String\",
-\t\"user\":\"{UserID}\",
-\t\"schedule\":\"\",
-\t\"timeout\":\"100\"
-}'
-
+  -H 'Content-Type: application/json'
+  -H 'x-api-key: {API_KEY}'
+  -d '{\"name\":\"Test API Command\", \"command\":\"String\", \"user\":\"{UserID}\", \"schedule\":\"\", \"timeout\":\"100\"}'
 ```
 
 ### [New-JcSdkRadiusServer](New-JcSdkRadiusServer.md)
@@ -303,7 +298,7 @@ This endpoint deletes a specific command result.
 
 #### Sample Request
 ```
-curl -X GET https://console.jumpcloud.com/api/commandresults/{CommandID} \\
+curl -X DELETE https://console.jumpcloud.com/api/commandresults/{CommandID} \\
   -H 'Accept: application/json' \\
   -H 'Content-Type: application/json' \\
   -H 'x-api-key: {API_KEY}'
@@ -654,6 +649,7 @@ This endpoint allows you to update a user.
 
 ### [Set-JcSdkApplication](Set-JcSdkApplication.md)
 The endpoint updates a SSO / SAML Application.
+Any fields not provided will be reset or created with default values.
 
 ### [Set-JcSdkCommand](Set-JcSdkCommand.md)
 This endpoint Updates a command based on the command ID and returns the modified command record.

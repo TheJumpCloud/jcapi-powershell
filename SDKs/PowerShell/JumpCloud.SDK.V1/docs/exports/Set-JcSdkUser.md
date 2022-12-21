@@ -28,11 +28,12 @@ curl -X PUT https://console.jumpcloud.com/api/systemusers/{UserID} \\
 
 ### SetExpanded (Default)
 ```
-Set-JcSdkUser -Id <String> [-AccountLocked] [-Addresses <ISystemuserputAddressesItem[]>] [-AllowPublicKey]
- [-AlternateEmail <String>] [-Attributes <ISystemuserputAttributesItem[]>] [-Company <String>]
- [-CostCenter <String>] [-Department <String>] [-Description <String>] [-DisableDeviceMaxLoginAttempts]
- [-Displayname <String>] [-Email <String>] [-EmployeeIdentifier <String>] [-EmployeeType <String>]
- [-EnableManagedUid] [-EnableUserPortalMultifactor] [-ExternalDn <String>] [-ExternallyManaged]
+Set-JcSdkUser -Id <String> [-FullValidationDetails <String>] [-AccountLocked]
+ [-Addresses <ISystemuserputAddressesItem[]>] [-AllowPublicKey] [-AlternateEmail <String>]
+ [-Attributes <ISystemuserputAttributesItem[]>] [-Company <String>] [-CostCenter <String>]
+ [-Department <String>] [-Description <String>] [-DisableDeviceMaxLoginAttempts] [-Displayname <String>]
+ [-Email <String>] [-EmployeeIdentifier <String>] [-EmployeeType <String>] [-EnableManagedUid]
+ [-EnableUserPortalMultifactor] [-ExternalDn <String>] [-ExternallyManaged]
  [-ExternalPasswordExpirationDate <String>] [-ExternalSourceType <String>] [-Firstname <String>]
  [-JobTitle <String>] [-Lastname <String>] [-LdapBindingUser] [-Location <String>] [-ManagedAppleId <String>]
  [-Manager <String>] [-MfaConfigured] [-MfaExclusion] [-MfaExclusionDays <Int32>]
@@ -45,18 +46,19 @@ Set-JcSdkUser -Id <String> [-AccountLocked] [-Addresses <ISystemuserputAddresses
 
 ### Set
 ```
-Set-JcSdkUser -Id <String> -Body <ISystemuserput> [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkUser -Id <String> -Body <ISystemuserput> [-FullValidationDetails <String>] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### SetViaIdentity
 ```
-Set-JcSdkUser -InputObject <IJumpCloudApiIdentity> -Body <ISystemuserput> [-Confirm] [-WhatIf]
- [<CommonParameters>]
+Set-JcSdkUser -InputObject <IJumpCloudApiIdentity> -Body <ISystemuserput> [-FullValidationDetails <String>]
+ [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkUser -InputObject <IJumpCloudApiIdentity> [-AccountLocked]
+Set-JcSdkUser -InputObject <IJumpCloudApiIdentity> [-FullValidationDetails <String>] [-AccountLocked]
  [-Addresses <ISystemuserputAddressesItem[]>] [-AllowPublicKey] [-AlternateEmail <String>]
  [-Attributes <ISystemuserputAttributesItem[]>] [-Company <String>] [-CostCenter <String>]
  [-Department <String>] [-Description <String>] [-DisableDeviceMaxLoginAttempts] [-Displayname <String>]
@@ -431,6 +433,21 @@ Accept wildcard characters: False
 ```yaml
 Type: System.String
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -FullValidationDetails
+.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
 Aliases:
 
 Required: False

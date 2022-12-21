@@ -20,7 +20,10 @@ Describe 'Set-JcSdkSystemGroup' -Tag:(""){
     }
 
     It 'Set' {
-        { Set-JcSdkSystemGroup -Body:($global:PesterTestSystemGroup) -Id:($global:PesterTestSystemGroup.Id) } | Should -Not -Throw
+        $group = Get-JcSdkSystemGroup -Id:($global:PesterTestSystemGroup.Id)
+        $groupPut = [JumpCloud.SDK.V2.Models.SystemGroupPut]::new()
+        $groupPut.Name = $group.Name
+        { Set-JcSdkSystemGroup -Body:($groupPut) -Id:($global:PesterTestSystemGroup.Id) } | Should -Not -Throw
     }
 
     It 'SetViaIdentity' -skip {

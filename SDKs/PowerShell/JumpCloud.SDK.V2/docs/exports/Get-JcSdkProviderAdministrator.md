@@ -15,7 +15,7 @@ You must be associated with the provider to use this route.
 
 ```
 Get-JcSdkProviderAdministrator -ProviderId <String> [-Fields <String[]>] [-Filter <String[]>]
- [-Sort <String[]>] [<CommonParameters>]
+ [-Sort <String[]>] [-SortIgnoreCase <String[]>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -101,6 +101,22 @@ Accept wildcard characters: False
 
 ### -Sort
 The comma separated fields used to sort the collection.
+Default sort is ascending, prefix with `-` to sort descending.
+
+```yaml
+Type: System.String[]
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -SortIgnoreCase
+The comma separated fields used to sort the collection, ignoring case.
 Default sort is ascending, prefix with `-` to sort descending.
 
 ```yaml

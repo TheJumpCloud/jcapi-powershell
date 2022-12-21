@@ -45,12 +45,13 @@ New-JcSdkAuthenticationPolicy [-Conditions <Hashtable>] [-Description <String>] 
  [-EffectAction <String>] [-MfaRequired] [-Name <String>] [-TargetResources <IAuthnPolicyResourceTarget[]>]
  [-Type <String>] [-UserAttributeExclusions <IAuthnPolicyUserAttributeFilter[]>]
  [-UserAttributeInclusions <IAuthnPolicyUserAttributeFilter[]>] [-UserGroupExclusions <String[]>]
- [-UserGroupInclusions <String[]>] [-UserInclusions <String[]>] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-UserGroupInclusions <String[]>] [-UserInclusions <String[]>] [-UserVerificationRequirement <String>]
+ [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Create
 ```
-New-JcSdkAuthenticationPolicy -Body <IAuthnPolicyInput> [-Confirm] [-WhatIf] [<CommonParameters>]
+New-JcSdkAuthenticationPolicy -Body <IAuthnPolicy> [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -102,11 +103,12 @@ curl -X POST https://console.jumpcloud.com/api/v2/authn/policies \\
 ## PARAMETERS
 
 ### -Body
-AuthnPolicyInput
+This represents an authentication policy.
+See the details of each field for valid values and restrictions.
 To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IAuthnPolicyInput
+Type: JumpCloud.SDK.V2.Models.IAuthnPolicy
 Parameter Sets: Create
 Aliases:
 
@@ -315,6 +317,21 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -UserVerificationRequirement
+.
+
+```yaml
+Type: System.String
+Parameter Sets: CreateExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Confirm
 Prompts you for confirmation before running the cmdlet.
 
@@ -351,7 +368,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### JumpCloud.SDK.V2.Models.IAuthnPolicyInput
+### JumpCloud.SDK.V2.Models.IAuthnPolicy
 
 ## OUTPUTS
 
@@ -366,8 +383,8 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <IAuthnPolicyInput>: AuthnPolicyInput
-  - `[Conditions <IAuthnPolicyInputConditions>]`: Dictionary of <any>
+BODY <IAuthnPolicy>: This represents an authentication policy. See the details of each field for valid values and restrictions.
+  - `[Conditions <IAuthnPolicyConditions>]`: Dictionary of <any>
     - `[(Any) <Object>]`: This indicates any property can be added to this object.
   - `[Description <String>]`: 
   - `[Disabled <Boolean?>]`: 
@@ -386,6 +403,7 @@ BODY <IAuthnPolicyInput>: AuthnPolicyInput
   - `[UserGroupExclusions <String[]>]`: 
   - `[UserGroupInclusions <String[]>]`: 
   - `[UserInclusions <String[]>]`: 
+  - `[UserVerificationRequirement <String>]`: 
 
 TARGETRESOURCES <IAuthnPolicyResourceTarget[]>: .
   - `Type <String>`: 

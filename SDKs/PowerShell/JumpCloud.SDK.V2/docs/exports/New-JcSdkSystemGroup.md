@@ -26,12 +26,14 @@ curl -X POST https://console.jumpcloud.com/api/v2/systemgroups \\
 
 ### CreateExpanded (Default)
 ```
-New-JcSdkSystemGroup -Name <String> [-Confirm] [-WhatIf] [<CommonParameters>]
+New-JcSdkSystemGroup -Name <String> [-Attributes <Hashtable>] [-Description <String>] [-Email <String>]
+ [-MemberQueryExemptions <IGraphObject[]>] [-MemberQueryFilters <IFilter[]>] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### Create
 ```
-New-JcSdkSystemGroup -Body <ISystemGroupData> [-Confirm] [-WhatIf] [<CommonParameters>]
+New-JcSdkSystemGroup -Body <ISystemGroupPost> [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -67,12 +69,27 @@ curl -X POST https://console.jumpcloud.com/api/v2/systemgroups \\
 
 ## PARAMETERS
 
+### -Attributes
+The graph attributes.
+
+```yaml
+Type: System.Collections.Hashtable
+Parameter Sets: CreateExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Body
-SystemGroupData
+SystemGroupPost
 To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.ISystemGroupData
+Type: JumpCloud.SDK.V2.Models.ISystemGroupPost
 Parameter Sets: Create
 Aliases:
 
@@ -80,6 +97,68 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -Description
+Description of a System Group
+
+```yaml
+Type: System.String
+Parameter Sets: CreateExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Email
+Email address of a System Group
+
+```yaml
+Type: System.String
+Parameter Sets: CreateExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -MemberQueryExemptions
+Array of GraphObjects exempted from the query
+To construct, see NOTES section for MEMBERQUERYEXEMPTIONS properties and create a hash table.
+
+```yaml
+Type: JumpCloud.SDK.V2.Models.IGraphObject[]
+Parameter Sets: CreateExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -MemberQueryFilters
+.
+To construct, see NOTES section for MEMBERQUERYFILTERS properties and create a hash table.
+
+```yaml
+Type: JumpCloud.SDK.V2.Models.IFilter[]
+Parameter Sets: CreateExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -134,7 +213,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### JumpCloud.SDK.V2.Models.ISystemGroupData
+### JumpCloud.SDK.V2.Models.ISystemGroupPost
 
 ## OUTPUTS
 
@@ -149,8 +228,31 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <ISystemGroupData>: SystemGroupData
+BODY <ISystemGroupPost>: SystemGroupPost
   - `Name <String>`: Display name of a System Group.
+  - `[Attributes <IGraphAttributes>]`: The graph attributes.
+    - `[(Any) <Object>]`: This indicates any property can be added to this object.
+  - `[Description <String>]`: Description of a System Group
+  - `[Email <String>]`: Email address of a System Group
+  - `[MemberQueryExemptions <IGraphObject[]>]`: Array of GraphObjects exempted from the query
+    - `Id <String>`: The ObjectID of the graph object.
+    - `Type <String>`: The type of graph object.
+    - `[Attributes <IGraphAttributes>]`: The graph attributes.
+  - `[MemberQueryFilters <IFilter[]>]`: 
+    - `Field <String>`: Name of field in filter target object.
+    - `Operator <String>`: Filter comparison operator.
+    - `Value <String>`: Filter comparison value.
+
+MEMBERQUERYEXEMPTIONS <IGraphObject[]>: Array of GraphObjects exempted from the query
+  - `Id <String>`: The ObjectID of the graph object.
+  - `Type <String>`: The type of graph object.
+  - `[Attributes <IGraphAttributes>]`: The graph attributes.
+    - `[(Any) <Object>]`: This indicates any property can be added to this object.
+
+MEMBERQUERYFILTERS <IFilter[]>: .
+  - `Field <String>`: Name of field in filter target object.
+  - `Operator <String>`: Filter comparison operator.
+  - `Value <String>`: Filter comparison value.
 
 ## RELATED LINKS
 

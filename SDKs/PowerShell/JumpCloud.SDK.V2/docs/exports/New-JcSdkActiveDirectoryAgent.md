@@ -108,7 +108,7 @@ Accept wildcard characters: False
 ```
 
 ### -Body
-Active Directory Agent Input
+Active Directory Agent
 
 ```yaml
 Type: System.Collections.Hashtable
@@ -180,7 +180,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V2.Models.IActiveDirectoryAgentGetOutput
+### JumpCloud.SDK.V2.Models.IActiveDirectoryAgentGet
 
 ## NOTES
 

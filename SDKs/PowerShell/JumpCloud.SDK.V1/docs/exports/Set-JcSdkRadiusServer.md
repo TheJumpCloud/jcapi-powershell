@@ -30,8 +30,8 @@ curl -X PUT https://console.jumpcloud.com/api/radiusservers/{ServerID} \\
 ### SetExpanded (Default)
 ```
 Set-JcSdkRadiusServer -Id <String> -Name <String> -NetworkSourceIP <String> -SharedSecret <String>
- [-Mfa <String>] [-UserLockoutAction <String>] [-UserPasswordExpirationAction <String>] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+ [-CaCert <String>] [-DeviceCertEnabled] [-Mfa <String>] [-UserCertEnabled] [-UserLockoutAction <String>]
+ [-UserPasswordEnabled] [-UserPasswordExpirationAction <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Set
@@ -51,8 +51,9 @@ Set-JcSdkRadiusServer -InputObject <IJumpCloudApiIdentity>
 ### SetViaIdentityExpanded
 ```
 Set-JcSdkRadiusServer -InputObject <IJumpCloudApiIdentity> -Name <String> -NetworkSourceIP <String>
- -SharedSecret <String> [-Mfa <String>] [-UserLockoutAction <String>] [-UserPasswordExpirationAction <String>]
- [-Confirm] [-WhatIf] [<CommonParameters>]
+ -SharedSecret <String> [-CaCert <String>] [-DeviceCertEnabled] [-Mfa <String>] [-UserCertEnabled]
+ [-UserLockoutAction <String>] [-UserPasswordEnabled] [-UserPasswordExpirationAction <String>] [-Confirm]
+ [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -104,6 +105,36 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -CaCert
+.
+
+```yaml
+Type: System.String
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -DeviceCertEnabled
+.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -198,11 +229,41 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -UserCertEnabled
+.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -UserLockoutAction
 .
 
 ```yaml
 Type: System.String
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -UserPasswordEnabled
+.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -285,8 +346,12 @@ BODY <IPathsKeqea5RadiusserversIdPutRequestbodyContentApplicationJsonSchema>: .
   - `Name <String>`: 
   - `NetworkSourceIP <String>`: 
   - `SharedSecret <String>`: 
+  - `[CaCert <String>]`: 
+  - `[DeviceCertEnabled <Boolean?>]`: 
   - `[Mfa <String>]`: 
+  - `[UserCertEnabled <Boolean?>]`: 
   - `[UserLockoutAction <String>]`: 
+  - `[UserPasswordEnabled <Boolean?>]`: 
   - `[UserPasswordExpirationAction <String>]`: 
 
 INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter

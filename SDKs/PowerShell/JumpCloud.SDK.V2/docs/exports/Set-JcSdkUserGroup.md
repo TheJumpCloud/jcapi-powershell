@@ -26,8 +26,8 @@ curl -X PUT https://console.jumpcloud.com/api/v2/usergroups/{Group_ID} \\
 ### SetExpanded (Default)
 ```
 Set-JcSdkUserGroup -Id <String> -Name <String> [-Attributes <Hashtable>] [-Description <String>]
- [-Email <String>] [-MemberQueryFilters <IFilter[]>] [-MemberSuggestionsNotify] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+ [-Email <String>] [-MemberQueryExemptions <IGraphObject[]>] [-MemberQueryFilters <IFilter[]>]
+ [-MembershipAutomated] [-MemberSuggestionsNotify] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Set
@@ -44,8 +44,9 @@ Set-JcSdkUserGroup -InputObject <IJumpCloudApiIdentity> -Body <IUserGroupPut> [-
 ### SetViaIdentityExpanded
 ```
 Set-JcSdkUserGroup -InputObject <IJumpCloudApiIdentity> -Name <String> [-Attributes <Hashtable>]
- [-Description <String>] [-Email <String>] [-MemberQueryFilters <IFilter[]>] [-MemberSuggestionsNotify]
- [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-Description <String>] [-Email <String>] [-MemberQueryExemptions <IGraphObject[]>]
+ [-MemberQueryFilters <IFilter[]>] [-MembershipAutomated] [-MemberSuggestionsNotify] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -172,12 +173,43 @@ Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
+### -MemberQueryExemptions
+Array of GraphObjects exempted from the query
+To construct, see NOTES section for MEMBERQUERYEXEMPTIONS properties and create a hash table.
+
+```yaml
+Type: JumpCloud.SDK.V2.Models.IGraphObject[]
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -MemberQueryFilters
 .
 To construct, see NOTES section for MEMBERQUERYFILTERS properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IFilter[]
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -MembershipAutomated
+True if membership of this group is automatically updated based on the Member Query and Member Query Exemptions, if configured
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -275,6 +307,8 @@ BODY <IUserGroupPut>: UserGroupPut
   - `Name <String>`: Display name of a User Group.
   - `[Attributes <IGroupAttributesUserGroup>]`: The graph attributes for a UserGroup.
     - `[(Any) <Object>]`: This indicates any property can be added to this object.
+    - `[SudoEnabled <Boolean?>]`: Enables sudo
+    - `[SudoWithoutPassword <Boolean?>]`: Enable sudo without password (requires 'enabled' to be true)
     - `[LdapGroups <ILdapGroup[]>]`: 
       - `[Name <String>]`: 
     - `[PosixGroups <IGraphAttributePosixGroupsItem[]>]`: 
@@ -286,11 +320,17 @@ BODY <IUserGroupPut>: UserGroupPut
     - `[SambaEnabled <Boolean?>]`: 
   - `[Description <String>]`: Description of a User Group
   - `[Email <String>]`: Email address of a User Group
+  - `[MemberQueryExemptions <IGraphObject[]>]`: Array of GraphObjects exempted from the query
+    - `Id <String>`: The ObjectID of the graph object.
+    - `Type <String>`: The type of graph object.
+    - `[Attributes <IGraphAttributes>]`: The graph attributes.
+      - `[(Any) <Object>]`: This indicates any property can be added to this object.
   - `[MemberQueryFilters <IFilter[]>]`: 
     - `Field <String>`: Name of field in filter target object.
     - `Operator <String>`: Filter comparison operator.
     - `Value <String>`: Filter comparison value.
   - `[MemberSuggestionsNotify <Boolean?>]`: True if notification emails are to be sent for membership suggestions.
+  - `[MembershipAutomated <Boolean?>]`: True if membership of this group is automatically updated based on the Member Query and Member Query Exemptions, if configured
 
 INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter
   - `[AccountId <String>]`: 
@@ -316,6 +356,12 @@ INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter
   - `[SystemId <String>]`: ObjectID of the System.
   - `[UserId <String>]`: ObjectID of the User.
   - `[WorkdayId <String>]`: 
+
+MEMBERQUERYEXEMPTIONS <IGraphObject[]>: Array of GraphObjects exempted from the query
+  - `Id <String>`: The ObjectID of the graph object.
+  - `Type <String>`: The type of graph object.
+  - `[Attributes <IGraphAttributes>]`: The graph attributes.
+    - `[(Any) <Object>]`: This indicates any property can be added to this object.
 
 MEMBERQUERYFILTERS <IFilter[]>: .
   - `Field <String>`: Name of field in filter target object.

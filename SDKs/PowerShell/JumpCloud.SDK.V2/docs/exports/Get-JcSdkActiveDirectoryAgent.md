@@ -135,7 +135,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V2.Models.IActiveDirectoryAgentListOutput
+### JumpCloud.SDK.V2.Models.IActiveDirectoryAgentList
 
 ## NOTES
 

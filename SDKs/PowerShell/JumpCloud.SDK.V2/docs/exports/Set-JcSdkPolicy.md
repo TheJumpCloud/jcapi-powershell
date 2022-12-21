@@ -233,6 +233,7 @@ BODY <IPolicyRequest>: An instance of a policy template.
   - `[TemplateId <String>]`: ObjectId uniquely identifying a Policy instance; only allowed on POST requests.
   - `[Values <IPolicyValue[]>]`: 
     - `[ConfigFieldId <String>]`: The ObjectId of the corresponding Policy Template configuration field.
+    - `[Sensitive <Boolean?>]`: Defines if the value is sensitive or not.
     - `[Value <String>]`: The value for the configuration field for this Policy instance.
 
 INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter
@@ -262,6 +263,7 @@ INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter
 
 VALUES <IPolicyValue[]>: .
   - `[ConfigFieldId <String>]`: The ObjectId of the corresponding Policy Template configuration field.
+  - `[Sensitive <Boolean?>]`: Defines if the value is sensitive or not.
   - `[Value <String>]`: The value for the configuration field for this Policy instance.
 
 ## RELATED LINKS
