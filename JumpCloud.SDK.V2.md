@@ -1,5 +1,5 @@
 ## JumpCloud.SDK.V2-0.0.35
-Release Date: December 21, 2022
+Release Date: December 27, 2022
 #### RELEASE NOTES
 ```
 This release is a rollup of SDK changes and adds several new system insights tables to the SDK module. See Functions Added for a full list of system insight functions added.
