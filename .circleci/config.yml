@@ -626,6 +626,10 @@ commands:
           name: Publishing to "<< parameters.source >>" repo
           shell: pwsh.exe
           command: |
+            # finally remove source PSGallery and add again with the v2/package path for publishing
+            dotnet nuget remove source PSGallery
+            dotnet nuget add source "https://www.powershellgallery.com/api/v2/package" --name PSGallery
+
             $NupkgPath = (Get-ChildItem -Path:("./SDKs/PowerShell/<< parameters.SDKName >>/bin/nupkg/<< parameters.SDKName >>*.nupkg")).FullName
             If('<< parameters.source >>' -eq 'CodeArtifact'){dotnet nuget push $NupkgPath --source << parameters.source >>}
             ElseIf('<< parameters.source >>' -eq 'PSGallery'){dotnet nuget push $NupkgPath --source << parameters.source >> --api-key $env:NuGetApiKey}
