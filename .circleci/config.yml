@@ -422,7 +422,7 @@ commands:
           name: Add nuget sources
           shell: pwsh.exe
           command: |
-            dotnet nuget add source "https://www.powershellgallery.com/api/v2/package" --name PSGallery
+            dotnet nuget add source "https://www.powershellgallery.com/api/v2" --name PSGallery
   setup_codeartifact_nuget:
     steps:
       - run:

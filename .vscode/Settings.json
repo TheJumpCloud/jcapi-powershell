@@ -3,7 +3,7 @@
   "powershell.scriptAnalysis.enable": true,
   "spellright.language": ["en"],
   "spellright.documentTypes": ["markdown", "latex", "plaintext"],
-  "editor.formatOnSave": true,
+  "editor.formatOnSave": false,
   "powershell.codeFormatting.preset": "OTBS",
   "files.trimTrailingWhitespace": true
 }
