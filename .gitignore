@@ -3,4 +3,4 @@
 **/*JumpCloud.SDK.*.log
 **/localEnv.json
 *.DS_Store
-node_modules/
+node_modules/.git/
