@@ -18,5 +18,11 @@ Describe 'Get-JcSdkGroup' -Tag:(""){
     It 'List' {
         { Get-JcSdkGroup } | Should -Not -Throw
     }
+    It 'List Group Filter Tests' {
+        $group = Get-JcSdkGroup | Get-Random -Count 1
+        Get-JcSdkGroup -Filter @("name:eq:$($group.name)") | Should -Not -BeNullOrEmpty
+        Get-JcSdkGroup -Filter @("name:eq:$($group.name)", "type:eq:$($group.type)") | Should -Not -BeNullOrEmpty
+        Get-JcSdkGroup -Filter @("name:eq:fakeName") | Should -BeNullOrEmpty
+    }
 }
 
