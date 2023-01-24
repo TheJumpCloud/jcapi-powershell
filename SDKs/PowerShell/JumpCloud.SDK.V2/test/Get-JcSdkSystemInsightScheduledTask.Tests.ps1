@@ -18,5 +18,15 @@ Describe 'Get-JcSdkSystemInsightScheduledTask' -Tag:(""){
     It 'List' {
         { Get-JcSdkSystemInsightScheduledTask } | Should -Not -Throw
     }
+
+    It 'List Filter Tests' {
+        $siSchedTask = Get-JcSdkSystemInsightScheduledTask | Get-Random -Count 1
+        if ($siSchedTask) {
+            Get-JcSdkSystemInsightScheduledTask -Filter @("system_id:eq:$($siSchedTask.systemId)") | Should -Not -BeNullOrEmpty
+            Get-JcSdkSystemInsightScheduledTask -Filter @("system_id:eq:$($siSchedTask.systemId)", "enabled:eq:$($siSchedTask.enabled)") | Should -Not -BeNullOrEmpty
+            # enabled accepts strings, fakeString is a fake value
+            Get-JcSdkSystemInsightScheduledTask -Filter @("system_id:eq:$($siSchedTask.systemId)", "enabled:eq:fakeString") | Should -BeNullOrEmpty
+        }
+    }
 }
 
