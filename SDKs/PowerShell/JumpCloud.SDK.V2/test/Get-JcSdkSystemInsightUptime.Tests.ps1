@@ -18,5 +18,15 @@ Describe 'Get-JcSdkSystemInsightUptime' -Tag:(""){
     It 'List' {
         { Get-JcSdkSystemInsightUptime } | Should -Not -Throw
     }
+
+    It 'List Filter Tests' {
+        $siUptime = Get-JcSdkSystemInsightUptime | Get-Random -Count 1
+        if ($siUptime) {
+            Get-JcSdkSystemInsightUptime -Filter @("system_id:eq:$($siUptime.systemId)") | Should -Not -BeNullOrEmpty
+            Get-JcSdkSystemInsightUptime -Filter @("system_id:eq:$($siUptime.systemId)", "days:eq:$($siUptime.days)") | Should -Not -BeNullOrEmpty
+            # days accepts strings, 9988 is a fake value
+            Get-JcSdkSystemInsightUptime -Filter @("system_id:eq:$($siUptime.systemId)", "days:eq:9988") | Should -BeNullOrEmpty
+        }
+    }
 }
 

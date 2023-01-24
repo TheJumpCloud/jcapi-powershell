@@ -18,5 +18,11 @@ Describe 'Get-JcSdkSystemInsightConnectivity' -Tag:(""){
     It 'List' {
         { Get-JcSdkSystemInsightConnectivity } | Should -Not -Throw
     }
+    It 'List Filter Tests' {
+        $siConnect = Get-JcSdkSystemInsightConnectivity | Get-Random -Count 1
+        if ($siConnect) {
+            Get-JcSdkSystemInsightConnectivity -Filter @("system_id:eq:$($siConnect.systemId)") | Should -Not -BeNullOrEmpty
+        }
+    }
 }
 

@@ -18,5 +18,15 @@ Describe 'Get-JcSdkSystemInsightSafariExtension' -Tag:(""){
     It 'List' {
         { Get-JcSdkSystemInsightSafariExtension } | Should -Not -Throw
     }
+
+    It 'List Filter Tests' {
+        $siSafariExt = Get-JcSdkSystemInsightSafariExtension | Get-Random -Count 1
+        if ($siSafariExt) {
+            Get-JcSdkSystemInsightSafariExtension -Filter @("system_id:eq:$($siSafariExt.systemId)") | Should -Not -BeNullOrEmpty
+            Get-JcSdkSystemInsightSafariExtension -Filter @("system_id:eq:$($siSafariExt.systemId)", "name:eq:$($siSafariExt.name)") | Should -Not -BeNullOrEmpty
+            # name accepts strings, fakeString is a fake value
+            Get-JcSdkSystemInsightSafariExtension -Filter @("system_id:eq:$($siSafariExt.systemId)", "name:eq:fakeString") | Should -BeNullOrEmpty
+        }
+    }
 }
 

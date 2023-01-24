@@ -18,5 +18,15 @@ Describe 'Get-JcSdkSystemInsightFirefoxAddon' -Tag:(""){
     It 'List' {
         { Get-JcSdkSystemInsightFirefoxAddon } | Should -Not -Throw
     }
+
+    It 'List Filter Tests' {
+        $siFirefox = Get-JcSdkSystemInsightFirefoxAddon | Get-Random -Count 1
+        if ($siFirefox) {
+            Get-JcSdkSystemInsightFirefoxAddon -Filter @("system_id:eq:$($siFirefox.systemId)") | Should -Not -BeNullOrEmpty
+            Get-JcSdkSystemInsightFirefoxAddon -Filter @("system_id:eq:$($siFirefox.systemId)", "name:eq:$($siFirefox.name)") | Should -Not -BeNullOrEmpty
+            # name accepts strings, fakeString is a fake value
+            Get-JcSdkSystemInsightFirefoxAddon -Filter @("system_id:eq:$($siFirefox.systemId)", "name:eq:fakeString") | Should -BeNullOrEmpty
+        }
+    }
 }
 

@@ -18,5 +18,15 @@ Describe 'Get-JcSdkSystemInsightInterfaceAddress' -Tag:(""){
     It 'List' {
         { Get-JcSdkSystemInsightInterfaceAddress } | Should -Not -Throw
     }
+
+    It 'List Filter Tests' {
+        $siIAddress = Get-JcSdkSystemInsightInterfaceAddress | Get-Random -Count 1
+        if ($siIAddress) {
+            Get-JcSdkSystemInsightInterfaceAddress -Filter @("system_id:eq:$($siIAddress.systemId)") | Should -Not -BeNullOrEmpty
+            Get-JcSdkSystemInsightInterfaceAddress -Filter @("system_id:eq:$($siIAddress.systemId)", "address:eq:$($siIAddress.address)") | Should -Not -BeNullOrEmpty
+            # address accepts strings, fakeString is a fake value
+            Get-JcSdkSystemInsightInterfaceAddress -Filter @("system_id:eq:$($siIAddress.systemId)", "address:eq:fakeString") | Should -BeNullOrEmpty
+        }
+    }
 }
 

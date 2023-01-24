@@ -18,5 +18,15 @@ Describe 'Get-JcSdkSystemInsightAuthorizedKey' -Tag:("") {
     It 'List' {
         { Get-JcSdkSystemInsightAuthorizedKey } | Should -Not -Throw
     }
+
+    It 'List Filter Tests' {
+        $siAuthKey = Get-JcSdkSystemInsightAuthorizedKey | Get-Random -Count 1
+        if ($siAuthKey) {
+            Get-JcSdkSystemInsightAuthorizedKey -Filter @("system_id:eq:$($siAuthKey.systemId)") | Should -Not -BeNullOrEmpty
+            Get-JcSdkSystemInsightAuthorizedKey -Filter @("system_id:eq:$($siAuthKey.systemId)", "uid:eq:$($siAuthKey.uid)") | Should -Not -BeNullOrEmpty
+            # uid accepts ints, 9988 is a fake value
+            Get-JcSdkSystemInsightAuthorizedKey -Filter @("system_id:eq:$($siAuthKey.systemId)", "uid:eq:9988") | Should -BeNullOrEmpty
+        }
+    }
 }
 

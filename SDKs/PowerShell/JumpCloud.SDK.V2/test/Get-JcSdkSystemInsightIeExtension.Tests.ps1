@@ -18,5 +18,15 @@ Describe 'Get-JcSdkSystemInsightIeExtension' -Tag:(""){
     It 'List' {
         { Get-JcSdkSystemInsightIeExtension } | Should -Not -Throw
     }
+
+    It 'List Filter Tests' {
+        $siIeExt = Get-JcSdkSystemInsightIeExtension | Get-Random -Count 1
+        if ($siIeExt) {
+            Get-JcSdkSystemInsightIeExtension -Filter @("system_id:eq:$($siIeExt.systemId)") | Should -Not -BeNullOrEmpty
+            Get-JcSdkSystemInsightIeExtension -Filter @("system_id:eq:$($siIeExt.systemId)", "name:eq:$($siIeExt.name)") | Should -Not -BeNullOrEmpty
+            # name accepts strings, fakeString is a fake value
+            Get-JcSdkSystemInsightIeExtension -Filter @("system_id:eq:$($siIeExt.systemId)", "name:eq:fakeString") | Should -BeNullOrEmpty
+        }
+    }
 }
 

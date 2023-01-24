@@ -18,5 +18,15 @@ Describe 'Get-JcSdkSystemInsightCupDestination' -Tag:(""){
     It 'List' {
         { Get-JcSdkSystemInsightCupDestination } | Should -Not -Throw
     }
+
+    It 'List Filter Tests' {
+        $siCups = Get-JcSdkSystemInsightCupDestination | Get-Random -Count 1
+        if ($siCups) {
+            Get-JcSdkSystemInsightCupDestination -Filter @("system_id:eq:$($siCups.systemId)") | Should -Not -BeNullOrEmpty
+            Get-JcSdkSystemInsightCupDestination -Filter @("system_id:eq:$($siCups.systemId)", "name:eq:$($siCups.name)") | Should -Not -BeNullOrEmpty
+            # name accepts strings, fakeString is a fake value
+            Get-JcSdkSystemInsightCupDestination -Filter @("system_id:eq:$($siCups.systemId)", "name:eq:fakeString") | Should -BeNullOrEmpty
+        }
+    }
 }
 

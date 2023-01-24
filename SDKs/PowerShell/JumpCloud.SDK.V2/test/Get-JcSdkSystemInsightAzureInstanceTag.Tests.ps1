@@ -20,4 +20,11 @@ Describe 'Get-JcSdkSystemInsightAzureInstanceTag' -Tag:("") {
     It 'List' {
         { Get-JcSdkSystemInsightAzureInstanceTag } | Should -Not -Throw
     }
+
+    It 'List Filter Tests' {
+        $siAzureTag = Get-JcSdkSystemInsightAzureInstanceTag | Get-Random -Count 1
+        if ($siAzureTag) {
+            Get-JcSdkSystemInsightAzureInstanceTag -Filter @("system_id:eq:$($siAzureTag.systemId)") | Should -Not -BeNullOrEmpty
+        }
+    }
 }

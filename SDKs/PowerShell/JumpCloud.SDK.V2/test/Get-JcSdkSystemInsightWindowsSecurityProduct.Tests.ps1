@@ -21,4 +21,14 @@ Describe 'Get-JcSdkSystemInsightWindowsSecurityProduct' -Tag:(""){
     It 'List' -skip {
         { Get-JcSdkSystemInsightWindowsSecurityProduct } | Should -Not -Throw
     }
+
+    It 'List Filter Tests' {
+        $siWinSecurityProd = Get-JcSdkSystemInsightWindowsSecurityProduct | Get-Random -Count 1
+        if ($siWinSecurityProd) {
+            Get-JcSdkSystemInsightWindowsSecurityProduct -Filter @("system_id:eq:$($siWinSecurityProd.systemId)") | Should -Not -BeNullOrEmpty
+            Get-JcSdkSystemInsightWindowsSecurityProduct -Filter @("system_id:eq:$($siWinSecurityProd.systemId)", "state:eq:$($siWinSecurityProd.state)") | Should -Not -BeNullOrEmpty
+            # state accepts strings, fakeString is a fake value
+            Get-JcSdkSystemInsightWindowsSecurityProduct -Filter @("system_id:eq:$($siWinSecurityProd.systemId)", "state:eq:fakeString") | Should -BeNullOrEmpty
+        }
+    }
 }

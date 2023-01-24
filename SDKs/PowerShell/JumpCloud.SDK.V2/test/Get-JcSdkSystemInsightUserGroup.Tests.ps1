@@ -18,5 +18,15 @@ Describe 'Get-JcSdkSystemInsightUserGroup' -Tag:(""){
     It 'List' {
         { Get-JcSdkSystemInsightUserGroup } | Should -Not -Throw
     }
+
+    It 'List Filter Tests' {
+        $siUserGroup = Get-JcSdkSystemInsightUserGroup | Get-Random -Count 1
+        if ($siUserGroup) {
+            Get-JcSdkSystemInsightUserGroup -Filter @("system_id:eq:$($siUserGroup.systemId)") | Should -Not -BeNullOrEmpty
+            Get-JcSdkSystemInsightUserGroup -Filter @("system_id:eq:$($siUserGroup.systemId)", "uid:eq:$($siUserGroup.uid)") | Should -Not -BeNullOrEmpty
+            # uid accepts int, 9988 is a fake value
+            Get-JcSdkSystemInsightUserGroup -Filter @("system_id:eq:$($siUserGroup.systemId)", "uid:eq:9988") | Should -BeNullOrEmpty
+        }
+    }
 }
 

@@ -18,5 +18,15 @@ Describe 'Get-JcSdkSystemInsightAppCompatShim' -Tag:(""){
     It 'List' {
         { Get-JcSdkSystemInsightAppCompatShim } | Should -Not -Throw
     }
+
+    It 'List Filter Tests' {
+        $siAppShim = Get-JcSdkSystemInsightAppCompatShim | Get-Random -Count 1
+        if ($siAppShim){
+            Get-JcSdkSystemInsightAppCompatShim -Filter @("system_id:eq:$($siAppShim.systemId)") | Should -Not -BeNullOrEmpty
+            Get-JcSdkSystemInsightAppCompatShim -Filter @("system_id:eq:$($siAppShim.systemId)", "enabled:eq:$($siAppShim.enabled)") | Should -Not -BeNullOrEmpty
+            # enabled accepts strings, fakeString is a fake value
+            Get-JcSdkSystemInsightAppCompatShim -Filter @("system_id:eq:$($siAppShim.systemId)", "enabled:eq:fakeString") | Should -BeNullOrEmpty
+        }
+    }
 }
 

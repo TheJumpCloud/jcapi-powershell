@@ -18,5 +18,15 @@ Describe 'Get-JcSdkSystemInsightSharedFolder' -Tag:(""){
     It 'List' {
         { Get-JcSdkSystemInsightSharedFolder } | Should -Not -Throw
     }
+
+    It 'List Filter Tests' {
+        $siSharedDir = Get-JcSdkSystemInsightSharedFolder | Get-Random -Count 1
+        if ($siSharedDir) {
+            Get-JcSdkSystemInsightSharedFolder -Filter @("system_id:eq:$($siSharedDir.systemId)") | Should -Not -BeNullOrEmpty
+            Get-JcSdkSystemInsightSharedFolder -Filter @("system_id:eq:$($siSharedDir.systemId)", "name:eq:$($siSharedDir.name)") | Should -Not -BeNullOrEmpty
+            # name accepts strings, fakeString is a fake value
+            Get-JcSdkSystemInsightSharedFolder -Filter @("system_id:eq:$($siSharedDir.systemId)", "name:eq:fakeString") | Should -BeNullOrEmpty
+        }
+    }
 }
 

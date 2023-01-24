@@ -18,5 +18,15 @@ Describe 'Get-JcSdkSystemInsightShadow' -Tag:(""){
     It 'List' {
         { Get-JcSdkSystemInsightShadow } | Should -Not -Throw
     }
+
+    It 'List Filter Tests' {
+        $siShadow = Get-JcSdkSystemInsightShadow | Get-Random -Count 1
+        if ($siShadow) {
+            Get-JcSdkSystemInsightShadow -Filter @("system_id:eq:$($siShadow.systemId)") | Should -Not -BeNullOrEmpty
+            Get-JcSdkSystemInsightShadow -Filter @("system_id:eq:$($siShadow.systemId)", "username:eq:$($siShadow.username)") | Should -Not -BeNullOrEmpty
+            # username accepts strings, fakeString is a fake value
+            Get-JcSdkSystemInsightShadow -Filter @("system_id:eq:$($siShadow.systemId)", "username:eq:fakeString") | Should -BeNullOrEmpty
+        }
+    }
 }
 

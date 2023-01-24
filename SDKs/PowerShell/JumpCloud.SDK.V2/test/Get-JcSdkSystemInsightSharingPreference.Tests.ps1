@@ -18,5 +18,12 @@ Describe 'Get-JcSdkSystemInsightSharingPreference' -Tag:(""){
     It 'List' {
         { Get-JcSdkSystemInsightSharingPreference } | Should -Not -Throw
     }
+
+    It 'List Filter Tests' {
+        $siSharePref = Get-JcSdkSystemInsightSharingPreference | Get-Random -Count 1
+        if ($siSharePref) {
+            Get-JcSdkSystemInsightSharingPreference -Filter @("system_id:eq:$($siSharePref.systemId)") | Should -Not -BeNullOrEmpty
+        }
+    }
 }
 

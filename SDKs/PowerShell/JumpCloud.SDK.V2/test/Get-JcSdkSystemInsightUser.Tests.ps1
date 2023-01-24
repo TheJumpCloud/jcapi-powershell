@@ -18,5 +18,15 @@ Describe 'Get-JcSdkSystemInsightUser' -Tag:(""){
     It 'List' {
         { Get-JcSdkSystemInsightUser } | Should -Not -Throw
     }
+
+    It 'List Filter Tests' {
+        $siUser = Get-JcSdkSystemInsightUser | Get-Random -Count 1
+        if ($siUser) {
+            Get-JcSdkSystemInsightUser -Filter @("system_id:eq:$($siUser.systemId)") | Should -Not -BeNullOrEmpty
+            Get-JcSdkSystemInsightUser -Filter @("system_id:eq:$($siUser.systemId)", "description:eq:$($siUser.description)") | Should -Not -BeNullOrEmpty
+            # description description strings, fakeString is a fake value
+            Get-JcSdkSystemInsightUser -Filter @("system_id:eq:$($siUser.systemId)", "description:eq:fakeString") | Should -BeNullOrEmpty
+        }
+    }
 }
 
