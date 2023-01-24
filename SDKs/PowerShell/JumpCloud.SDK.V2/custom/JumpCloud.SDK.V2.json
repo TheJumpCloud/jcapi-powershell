@@ -232,6 +232,23 @@
       "title": "AppleMDM",
       "type": "object"
     },
+    "Apps": {
+      "items": {
+        "properties": {
+          "appVersion": {
+            "example": "1.1.1",
+            "type": "string"
+          },
+          "osId": {
+            "example": 1,
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "type": "object"
+      },
+      "type": "array"
+    },
     "AuthnPolicy": {
       "description": "This represents an authentication policy.  See the details of each field for valid values and restrictions.",
       "properties": {
@@ -1836,6 +1853,26 @@
       "title": "GroupType",
       "type": "string"
     },
+    "Groups": {
+      "items": {
+        "properties": {
+          "id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "name": {
+            "example": "group name",
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "name"
+        ],
+        "type": "object"
+      },
+      "type": "array"
+    },
     "IPList": {
       "properties": {
         "description": {
@@ -2055,6 +2092,31 @@
         }
       },
       "title": "Organization",
+      "type": "object"
+    },
+    "PasswordsSecurity": {
+      "properties": {
+        "compromisedPasswords": {
+          "example": 10,
+          "format": "int32",
+          "type": "integer"
+        },
+        "oldPasswords": {
+          "example": 10,
+          "format": "int32",
+          "type": "integer"
+        },
+        "reusedPasswords": {
+          "example": 10,
+          "format": "int32",
+          "type": "integer"
+        },
+        "weakPasswords": {
+          "example": 10,
+          "format": "int32",
+          "type": "integer"
+        }
+      },
       "type": "object"
     },
     "PhoneNumber": {
@@ -2647,51 +2709,53 @@
       "properties": {
         "results": {
           "items": {
-            "properties": {
-              "email": {
-                "format": "email",
-                "type": "string"
+            "$ref": "#/definitions/PwmUser"
+          },
+          "type": "array"
+        },
+        "totalCount": {
+          "example": 50,
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "results",
+        "totalCount"
+      ],
+      "type": "object"
+    },
+    "PwmItemHistory": {
+      "properties": {
+        "createdBy": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "dateCreated": {
+          "type": "string"
+        },
+        "dateUpdated": {
+          "type": "string"
+        },
+        "updatedBy": {
+          "format": "uuid",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "PwmItemsMetadata": {
+      "properties": {
+        "results": {
+          "items": {
+            "allOf": [
+              {
+                "$ref": "#/definitions/PwmUserItem"
               },
-              "groups": {
-                "items": {
-                  "properties": {
-                    "id": {
-                      "format": "uuid",
-                      "type": "string"
-                    },
-                    "name": {
-                      "example": "group name",
-                      "type": "string"
-                    }
-                  },
-                  "required": [
-                    "id",
-                    "name"
-                  ],
-                  "type": "object"
-                },
-                "type": "array"
-              },
-              "id": {
-                "format": "uuid",
-                "type": "string"
-              },
-              "name": {
-                "example": "folder admin",
-                "type": "string"
-              },
-              "status": {
-                "example": "active",
-                "type": "string"
+              {
+                "$ref": "#/definitions/PwmItemHistory"
               }
-            },
-            "required": [
-              "id",
-              "name",
-              "email",
-              "status"
-            ],
-            "type": "object"
+            ]
           },
           "type": "array"
         },
@@ -2740,6 +2804,11 @@
     },
     "PwmOverviewMain": {
       "properties": {
+        "compromisedPasswords": {
+          "example": 10,
+          "format": "int32",
+          "type": "integer"
+        },
         "devices": {
           "items": {
             "properties": {
@@ -2762,6 +2831,24 @@
           },
           "type": "array"
         },
+        "enrolledGroups": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "oldPasswords": {
+          "example": 10,
+          "format": "int32",
+          "type": "integer"
+        },
+        "passwordsCount": {
+          "example": 10,
+          "format": "int32",
+          "type": "integer"
+        },
+        "passwordsScore": {
+          "example": 80.5,
+          "type": "number"
+        },
         "pendingInvites": {
           "example": 50,
           "format": "int32",
@@ -2776,6 +2863,11 @@
           "example": 50,
           "format": "int32",
           "type": "integer"
+        },
+        "weakPasswords": {
+          "example": 10,
+          "format": "int32",
+          "type": "integer"
         }
       },
       "required": [
@@ -2783,6 +2875,201 @@
         "pendingInvites",
         "totalUsers",
         "devices"
+      ],
+      "type": "object"
+    },
+    "PwmUser": {
+      "properties": {
+        "apps": {
+          "$ref": "#/definitions/Apps"
+        },
+        "email": {
+          "format": "email",
+          "type": "string"
+        },
+        "externalId": {
+          "type": "string"
+        },
+        "groups": {
+          "$ref": "#/definitions/Groups"
+        },
+        "id": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "name": {
+          "example": "folder admin",
+          "type": "string"
+        },
+        "passwordsCount": {
+          "example": 10,
+          "format": "int32",
+          "type": "integer"
+        },
+        "passwordsScore": {
+          "example": 80.5,
+          "type": "number"
+        },
+        "scoreUpdatedAt": {
+          "type": "string"
+        },
+        "status": {
+          "example": "active",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "email",
+        "status"
+      ],
+      "type": "object"
+    },
+    "PwmUserById": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/PwmUser"
+        },
+        {
+          "$ref": "#/definitions/PasswordsSecurity"
+        },
+        {
+          "properties": {
+            "apps": {
+              "$ref": "#/definitions/Apps"
+            },
+            "groups": {
+              "$ref": "#/definitions/Groups"
+            }
+          },
+          "type": "object"
+        }
+      ]
+    },
+    "PwmUserItem": {
+      "properties": {
+        "field1": {
+          "type": "string"
+        },
+        "field2": {
+          "type": "string"
+        },
+        "folderName": {
+          "example": "folder 1",
+          "type": "string"
+        },
+        "folderUuid": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "itemUuid": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "nickname": {
+          "type": "string"
+        },
+        "type": {
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "itemUuid",
+        "type",
+        "nickname",
+        "field1",
+        "field2"
+      ],
+      "type": "object"
+    },
+    "PwmUserItems": {
+      "properties": {
+        "results": {
+          "items": {
+            "$ref": "#/definitions/PwmUserItem"
+          },
+          "type": "array"
+        },
+        "totalCount": {
+          "example": 50,
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "results",
+        "totalCount"
+      ],
+      "type": "object"
+    },
+    "PwmUserSharedFolders": {
+      "properties": {
+        "results": {
+          "items": {
+            "properties": {
+              "accessLevelId": {
+                "format": "uuid",
+                "type": "string"
+              },
+              "accessLevelName": {
+                "example": "folder admin",
+                "type": "string"
+              },
+              "createdAt": {
+                "type": "string"
+              },
+              "id": {
+                "format": "uuid",
+                "type": "string"
+              },
+              "itemsInFolder": {
+                "example": 15,
+                "format": "int32",
+                "type": "integer"
+              },
+              "name": {
+                "example": "folder 1",
+                "type": "string"
+              },
+              "passwordsScore": {
+                "example": 80,
+                "type": "number"
+              },
+              "scoreUpdatedAt": {
+                "type": "string"
+              },
+              "usersWithAccess": {
+                "example": 5,
+                "format": "int32",
+                "type": "integer"
+              }
+            },
+            "required": [
+              "id",
+              "name",
+              "usersWithAccess",
+              "itemsInFolder",
+              "createdAt"
+            ],
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "totalCount": {
+          "example": 50,
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "results",
+        "totalCount"
       ],
       "type": "object"
     },
@@ -2846,6 +3133,51 @@
       "title": "Setup Assistant Option",
       "type": "string"
     },
+    "SharedFolder": {
+      "properties": {
+        "createdAt": {
+          "type": "string"
+        },
+        "itemsInFolder": {
+          "example": 15,
+          "format": "int32",
+          "type": "integer"
+        },
+        "name": {
+          "example": "folder admin",
+          "type": "string"
+        },
+        "passwordsCount": {
+          "example": 25,
+          "format": "int32",
+          "type": "integer"
+        },
+        "passwordsScore": {
+          "example": 70.5,
+          "type": "number"
+        },
+        "scoreUpdatedAt": {
+          "type": "string"
+        },
+        "usersWithAccess": {
+          "example": 5,
+          "format": "int32",
+          "type": "integer"
+        },
+        "uuid": {
+          "format": "uuid",
+          "type": "string"
+        }
+      },
+      "required": [
+        "uuid",
+        "name",
+        "usersWithAccess",
+        "itemsInFolder",
+        "createdAt"
+      ],
+      "type": "object"
+    },
     "SharedFolderAccessLevels": {
       "properties": {
         "results": {
@@ -2879,37 +3211,14 @@
       "type": "object"
     },
     "SharedFolderDetails": {
-      "properties": {
-        "createdAt": {
-          "type": "string"
+      "allOf": [
+        {
+          "$ref": "#/definitions/SharedFolder"
         },
-        "itemsInFolder": {
-          "example": 15,
-          "format": "int32",
-          "type": "integer"
-        },
-        "name": {
-          "example": "folder admin",
-          "type": "string"
-        },
-        "usersWithAccess": {
-          "example": 5,
-          "format": "int32",
-          "type": "integer"
-        },
-        "uuid": {
-          "format": "uuid",
-          "type": "string"
+        {
+          "$ref": "#/definitions/PasswordsSecurity"
         }
-      },
-      "required": [
-        "uuid",
-        "name",
-        "usersWithAccess",
-        "itemsInFolder",
-        "createdAt"
-      ],
-      "type": "object"
+      ]
     },
     "SharedFolderUsers": {
       "properties": {
@@ -2924,8 +3233,14 @@
                 "example": "folder admin",
                 "type": "string"
               },
+              "apps": {
+                "$ref": "#/definitions/Apps"
+              },
               "email": {
                 "format": "email",
+                "type": "string"
+              },
+              "externalId": {
                 "type": "string"
               },
               "id": {
@@ -2969,37 +3284,7 @@
       "properties": {
         "results": {
           "items": {
-            "properties": {
-              "createdAt": {
-                "type": "string"
-              },
-              "itemsInFolder": {
-                "example": 15,
-                "format": "int32",
-                "type": "integer"
-              },
-              "name": {
-                "example": "folder admin",
-                "type": "string"
-              },
-              "usersWithAccess": {
-                "example": 5,
-                "format": "int32",
-                "type": "integer"
-              },
-              "uuid": {
-                "format": "uuid",
-                "type": "string"
-              }
-            },
-            "required": [
-              "uuid",
-              "name",
-              "usersWithAccess",
-              "itemsInFolder",
-              "createdAt"
-            ],
-            "type": "object"
+            "$ref": "#/definitions/SharedFolder"
           },
           "type": "array"
         },
@@ -7050,7 +7335,9 @@
         "type": "string"
       },
       "name": "filter",
-      "type": "array"
+      "type": "array",
+      "collectionFormat": "multi",
+      "x-ms-skip-url-encoding": true
     },
     "trait:graphTargetsActiveDirectory:targets": {
       "description": "Targets which a \"active_directory\" can be associated to.",
@@ -13661,6 +13948,9 @@
         "pwm-user-app-versions"
       ]
     },
+    "/passwordmanager/items": {
+      "x-functionalities-tags": "pwm-items-metadata"
+    },
     "/passwordmanager/overview": {
       "x-functionalities-tags": [
         "pwm-user-overiew"
@@ -15574,6 +15864,25 @@
         {
           "in": "path",
           "name": "provider_id",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "x-functionalities-tags": [
+        "policy-group-templates"
+      ]
+    },
+    "/providers/{provider_id}/policygrouptemplates/{id}": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "provider_id",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "in": "path",
+          "name": "id",
           "required": true,
           "type": "string"
         }
@@ -23981,6 +24290,12 @@
         "$ref": "#/definitions/PwmAllUsers"
       }
     },
+    "PwmItemsMetadata": {
+      "description": "Success",
+      "schema": {
+        "$ref": "#/definitions/PwmItemsMetadata"
+      }
+    },
     "PwmOverviewAppVersions": {
       "description": "Success",
       "schema": {
@@ -23991,6 +24306,24 @@
       "description": "Success",
       "schema": {
         "$ref": "#/definitions/PwmOverviewMain"
+      }
+    },
+    "PwmUserById": {
+      "description": "Success",
+      "schema": {
+        "$ref": "#/definitions/PwmUserById"
+      }
+    },
+    "PwmUserItems": {
+      "description": "Success",
+      "schema": {
+        "$ref": "#/definitions/PwmUserItems"
+      }
+    },
+    "PwmUserSharedFolders": {
+      "description": "Success",
+      "schema": {
+        "$ref": "#/definitions/PwmUserSharedFolders"
       }
     },
     "SharedFolderAccessLevels": {

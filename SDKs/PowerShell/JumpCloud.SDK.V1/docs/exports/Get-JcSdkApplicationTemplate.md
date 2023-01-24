@@ -23,18 +23,18 @@ curl -X GET https://console.jumpcloud.com/api/application-templates/{id} \\
 
 ### List (Default)
 ```
-Get-JcSdkApplicationTemplate [-Fields <String>] [-Filter <String>] [-Sort <String>] [<CommonParameters>]
+Get-JcSdkApplicationTemplate [-Fields <String>] [-Filter <String[]>] [-Sort <String>] [<CommonParameters>]
 ```
 
 ### Get
 ```
-Get-JcSdkApplicationTemplate -Id <String> [-Fields <String>] [-Filter <String>] [-Sort <String>]
+Get-JcSdkApplicationTemplate -Id <String> [-Fields <String>] [-Filter <String[]>] [-Sort <String>]
  [<CommonParameters>]
 ```
 
 ### GetViaIdentity
 ```
-Get-JcSdkApplicationTemplate -InputObject <IJumpCloudApiIdentity> [-Fields <String>] [-Filter <String>]
+Get-JcSdkApplicationTemplate -InputObject <IJumpCloudApiIdentity> [-Fields <String>] [-Filter <String[]>]
  [-Sort <String>] [<CommonParameters>]
 ```
 
@@ -121,7 +121,7 @@ Is case sensitive.
  OR the filters together.
 
 ```yaml
-Type: System.String
+Type: System.String[]
 Parameter Sets: (All)
 Aliases:
 

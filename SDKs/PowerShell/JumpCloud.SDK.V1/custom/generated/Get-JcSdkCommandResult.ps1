@@ -79,8 +79,9 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='Get')]
     [Parameter(ParameterSetName='GetViaIdentity')]
     [Parameter(ParameterSetName='List')]
+    [AllowEmptyCollection()]
     [JumpCloud.SDK.V1.Category('Query')]
-    [System.String]
+    [System.String[]]
     # A filter to apply to the query.
     # See the supported operators below.
     # For more complex searches,

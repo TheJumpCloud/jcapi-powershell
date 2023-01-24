@@ -22,7 +22,7 @@ curl -X GET https://console.jumpcloud.com/api/commands/{CommandID} \\
 
 ### List (Default)
 ```
-Get-JcSdkCommand [-Fields <String>] [-Filter <String>] [-Sort <String>] [<CommonParameters>]
+Get-JcSdkCommand [-Fields <String>] [-Filter <String[]>] [-Sort <String>] [<CommonParameters>]
 ```
 
 ### Get
@@ -117,7 +117,7 @@ Is case sensitive.
  OR the filters together.
 
 ```yaml
-Type: System.String
+Type: System.String[]
 Parameter Sets: List
 Aliases:
 

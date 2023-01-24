@@ -22,7 +22,7 @@ curl -X PUT https://console.jumpcloud.com/api/radiusservers/{ServerID} \\
 
 ### List (Default)
 ```
-Get-JcSdkRadiusServer [-Fields <String>] [-Filter <String>] [-Sort <String>] [<CommonParameters>]
+Get-JcSdkRadiusServer [-Fields <String>] [-Filter <String[]>] [-Sort <String>] [<CommonParameters>]
 ```
 
 ### Get
@@ -117,7 +117,7 @@ Is case sensitive.
  OR the filters together.
 
 ```yaml
-Type: System.String
+Type: System.String[]
 Parameter Sets: List
 Aliases:
 
