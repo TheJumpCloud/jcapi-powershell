@@ -18,6 +18,13 @@ Describe 'Get-JcSdkUser' -Tag:(""){
         { Get-JcSdkUser } | Should -Not -Throw
     }
 
+    It 'List User Filter Tests'{
+        $user = Get-JcSdkUser | Get-Random -count 1
+        Get-jcsdkuser -filter @("firstname:`$eq:$($user.firstname)") | should -not -BeNullOrEmpty
+        Get-jcsdkuser -filter @("firstname:`$eq:$($user.firstname)", "company:`$eq:$($user.company)") | should -not -BeNullOrEmpty
+        Get-jcsdkuser -filter @("firstname:`$eq:$($user.firstname)", "company:`$eq:fakeCompany") | should -BeNullOrEmpty
+    }
+
     It 'Get' {
         { Get-JcSdkUser -Id:($global:PesterTestUser.Id) } | Should -Not -Throw
     }
