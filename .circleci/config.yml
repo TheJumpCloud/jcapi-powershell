@@ -127,6 +127,8 @@ build-sdks: &build-sdks
             - master
   - Draft JumpCloud SDK DirectoryInsights GitHub Release:
       context: aws-credentials
+      requires:
+        - Build JumpCloud SDK DirectoryInsights
       # requires:
       #   - Test JumpCloud SDK DirectoryInsights
       #   - Commit Changes
@@ -136,6 +138,8 @@ build-sdks: &build-sdks
       #       - master
   - Draft JumpCloud SDK V1 GitHub Release:
       context: aws-credentials
+      requires:
+        - Build JumpCloud SDK V1
       # requires:
       #   - Test JumpCloud SDK DirectoryInsights
       #   - Test JumpCloud SDK V1
@@ -146,6 +150,8 @@ build-sdks: &build-sdks
       #       - master
   - Draft JumpCloud SDK V2 GitHub Release:
       context: aws-credentials
+      requires:
+        - Build JumpCloud SDK V2
       # requires:
       #   - Test JumpCloud SDK DirectoryInsights
       #   - Test JumpCloud SDK V1
