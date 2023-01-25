@@ -22,6 +22,12 @@ build-sdks: &build-sdks
       context: aws-credentials
   - Build JumpCloud SDK V2:
       context: aws-credentials
+  - Draft JumpCloud SDK DirectoryInsights GitHub Release:
+      context: github-credentials
+  - Draft JumpCloud SDK V1 GitHub Release:
+      context: github-credentials
+  - Draft JumpCloud SDK V2 GitHub Release:
+      context: github-credentials
   - Test JumpCloud SDK DirectoryInsights:
       requires:
         - Build JumpCloud SDK DirectoryInsights
@@ -126,6 +132,7 @@ build-sdks: &build-sdks
           only:
             - master
   - Draft JumpCloud SDK DirectoryInsights GitHub Release:
+      context: aws-credentials
       requires:
         - Test JumpCloud SDK DirectoryInsights
         - Commit Changes
@@ -134,6 +141,7 @@ build-sdks: &build-sdks
           only:
             - master
   - Draft JumpCloud SDK V1 GitHub Release:
+      context: aws-credentials
       requires:
         - Test JumpCloud SDK DirectoryInsights
         - Test JumpCloud SDK V1
@@ -143,6 +151,7 @@ build-sdks: &build-sdks
           only:
             - master
   - Draft JumpCloud SDK V2 GitHub Release:
+      context: aws-credentials
       requires:
         - Test JumpCloud SDK DirectoryInsights
         - Test JumpCloud SDK V1
@@ -554,9 +563,8 @@ commands:
             TAG="<< parameters.SDKName >>-$VERSION"
             echo ${CIRCLE_PROJECT_USERNAME}
             echo ${CIRCLE_PROJECT_REPONAME}
-            echo ${GITHUB_TOKEN}
             # Post Draft Release
-            ghr -t ${GitHubAccessToken} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -n "$TITLE" -b "$BODY" -delete -draft "$TAG"
+            ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -n "$TITLE" -b "$BODY" -delete -draft "$TAG"
   commit:
     parameters:
       SDKName:
