@@ -20,4 +20,14 @@ Describe 'Get-JcSdkSystemInsightWindowsSecurityCenter' -Tag:("") {
     It 'List' {
         { Get-JcSdkSystemInsightWindowsSecurityCenter } | Should -Not -Throw
     }
+
+    It 'List Filter Tests' {
+        $siWinSecurity = Get-JcSdkSystemInsightWindowsSecurityCenter | Get-Random -Count 1
+        if ($siWinSecurity) {
+            Get-JcSdkSystemInsightWindowsSecurityCenter -Filter @("system_id:eq:$($siWinSecurity.systemId)") | Should -Not -BeNullOrEmpty
+            Get-JcSdkSystemInsightWindowsSecurityCenter -Filter @("system_id:eq:$($siWinSecurity.systemId)", "antivirus:eq:$($siWinSecurity.antivirus)") | Should -Not -BeNullOrEmpty
+            # antivirus accepts strings, fakeString is a fake value
+            Get-JcSdkSystemInsightWindowsSecurityCenter -Filter @("system_id:eq:$($siWinSecurity.systemId)", "antivirus:eq:fakeString") | Should -BeNullOrEmpty
+        }
+    }
 }

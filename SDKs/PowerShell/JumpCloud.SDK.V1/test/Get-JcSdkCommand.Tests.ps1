@@ -18,6 +18,13 @@ Describe 'Get-JcSdkCommand' -Tag:(""){
         { Get-JcSdkCommand } | Should -Not -Throw
     }
 
+    It 'List Command Filter Tests' {
+        $command = Get-JcSdkCommand | Select-Object -First 1
+        Get-JcSdkCommand -Filter @("name:eq:$($command.name)") | Should -Not -BeNullOrEmpty
+        Get-JcSdkCommand -Filter @("name:eq:$($command.name)", "_id:eq:$($command.id)")  | Should -Not -BeNullOrEmpty
+        Get-JcSdkCommand -Filter @("name:eq:$($command.name)", "_id:eq:$($command.Organization)")  | Should -BeNullOrEmpty
+    }
+
     It 'Get' {
         { Get-JcSdkCommand -Id:($global:PesterTestCommand.Id) } | Should -Not -Throw
     }

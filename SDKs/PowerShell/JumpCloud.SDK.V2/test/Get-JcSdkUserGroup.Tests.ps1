@@ -19,6 +19,16 @@ Describe 'Get-JcSdkUserGroup' -Tag:(""){
         { Get-JcSdkUserGroup } | Should -Not -Throw
     }
 
+    It 'List Filter Tests' {
+        $group = Get-JcSdkUserGroup | Get-Random -Count 1
+        if ($group) {
+            Get-JcSdkUserGroup -Filter @("type:eq:$($group.type)") | Should -Not -BeNullOrEmpty
+            Get-JcSdkUserGroup -Filter @("type:eq:$($group.type)", "name:eq:$($group.name)") | Should -Not -BeNullOrEmpty
+            # name accepts strings, fakeString is a fake value
+            Get-JcSdkUserGroup -Filter @("type:eq:$($group.type)", "name:eq:fakeString") | Should -BeNullOrEmpty
+        }
+    }
+
     It 'Get' {
         { Get-JcSdkUserGroup -Id:($global:PesterTestUserGroup.Id) } | Should -Not -Throw
     }

@@ -18,5 +18,15 @@ Describe 'Get-JcSdkSystemInsightUsbDevice' -Tag:(""){
     It 'List' {
         { Get-JcSdkSystemInsightUsbDevice } | Should -Not -Throw
     }
+
+    It 'List Filter Tests' {
+        $siUSB = Get-JcSdkSystemInsightUsbDevice | Get-Random -Count 1
+        if ($siUSB) {
+            Get-JcSdkSystemInsightUsbDevice -Filter @("system_id:eq:$($siUSB.systemId)") | Should -Not -BeNullOrEmpty
+            Get-JcSdkSystemInsightUsbDevice -Filter @("system_id:eq:$($siUSB.systemId)", "model:eq:$($siUSB.model)") | Should -Not -BeNullOrEmpty
+            # model accepts strings, fakeString is a fake value
+            Get-JcSdkSystemInsightUsbDevice -Filter @("system_id:eq:$($siUSB.systemId)", "model:eq:fakeString") | Should -BeNullOrEmpty
+        }
+    }
 }
 

@@ -21,4 +21,11 @@ Describe 'Get-JcSdkSystemInsightAzureInstanceMetadata' -Tag:(""){
     It 'List' -skip {
         { Get-JcSdkSystemInsightAzureInstanceMetadata } | Should -Not -Throw
     }
+
+    It 'List Filter Tests' {
+        $siAppShim = Get-JcSdkSystemInsightAzureInstanceMetadata | Get-Random -Count 1
+        if ($siAppShim) {
+            Get-JcSdkSystemInsightAzureInstanceMetadata -Filter @("system_id:eq:$($siAppShim.systemId)") | Should -Not -BeNullOrEmpty
+        }
+    }
 }

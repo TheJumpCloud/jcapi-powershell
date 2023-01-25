@@ -14,7 +14,7 @@ The endpoint retrieves an SSO / SAML Application.
 
 ### List (Default)
 ```
-Get-JcSdkApplication [-Fields <String>] [-Filter <String>] [-Sort <String>] [<CommonParameters>]
+Get-JcSdkApplication [-Fields <String>] [-Filter <String[]>] [-Sort <String>] [<CommonParameters>]
 ```
 
 ### Get
@@ -101,7 +101,7 @@ Is case sensitive.
  OR the filters together.
 
 ```yaml
-Type: System.String
+Type: System.String[]
 Parameter Sets: List
 Aliases:
 

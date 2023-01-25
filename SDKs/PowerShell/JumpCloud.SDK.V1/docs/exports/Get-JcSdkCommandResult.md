@@ -22,12 +22,12 @@ curl -X GET https://console.jumpcloud.com/api/commandresults/{CommandResultID} \
 
 ### List (Default)
 ```
-Get-JcSdkCommandResult [-Fields <String>] [-Filter <String>] [-Sort <String>] [<CommonParameters>]
+Get-JcSdkCommandResult [-Fields <String>] [-Filter <String[]>] [-Sort <String>] [<CommonParameters>]
 ```
 
 ### Get
 ```
-Get-JcSdkCommandResult -Id <String> [-Fields <String>] [-Filter <String>] [<CommonParameters>]
+Get-JcSdkCommandResult -Id <String> [-Fields <String>] [-Filter <String[]>] [<CommonParameters>]
 ```
 
 ### Get1
@@ -37,7 +37,7 @@ Get-JcSdkCommandResult -Id <String> [<CommonParameters>]
 
 ### GetViaIdentity
 ```
-Get-JcSdkCommandResult -InputObject <IJumpCloudApiIdentity> [-Fields <String>] [-Filter <String>]
+Get-JcSdkCommandResult -InputObject <IJumpCloudApiIdentity> [-Fields <String>] [-Filter <String[]>]
  [<CommonParameters>]
 ```
 
@@ -128,7 +128,7 @@ Is case sensitive.
  OR the filters together.
 
 ```yaml
-Type: System.String
+Type: System.String[]
 Parameter Sets: Get, GetViaIdentity, List
 Aliases:
 

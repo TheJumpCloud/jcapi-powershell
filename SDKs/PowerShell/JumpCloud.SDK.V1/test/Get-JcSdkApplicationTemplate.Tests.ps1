@@ -18,6 +18,18 @@ Describe 'Get-JcSdkApplicationTemplate' -Tag:(""){
         { Get-JcSdkApplicationTemplate } | Should -Not -Throw
     }
 
+    It 'List Filter Tests' {
+        $appTemplate = Get-JcSdkApplicationTemplate | Get-Random -Count 1
+        Get-JcSdkApplicationTemplate -Filter @("name:`$eq:$($appTemplate.Name)") | Should -Not -BeNullOrEmpty
+        Get-JcSdkApplicationTemplate -Filter @("name:`$eq:$($appTemplate.Name)xx") | Should -BeNullOrEmpty
+
+        # multiple Filter Tests
+        Get-JcSdkApplicationTemplate -Filter @("name:`$eq:$($appTemplate.Name)", "_id:`$eq:$($appTemplate.Id)") | Should -Not -BeNullOrEmpty
+        Get-JcSdkApplicationTemplate -Filter @("name:`$eq:$($appTemplate.Name)", "_id:`$eq:181434648125485878639646") | Should -BeNullOrEmpty
+        Get-JcSdkApplicationTemplate -Filter @("name:`$eq:$($appTemplate.Name)", "_id:`$ne:181434648125485878639646") | Should -Not -BeNullOrEmpty
+
+    }
+
     It 'Get' {
         { Get-JcSdkApplicationTemplate -Id:($global:PesterTestApplicationTemplate.Id) } | Should -Not -Throw
     }

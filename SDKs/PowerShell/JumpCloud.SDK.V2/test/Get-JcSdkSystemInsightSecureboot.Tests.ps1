@@ -20,4 +20,11 @@ Describe 'Get-JcSdkSystemInsightSecureboot' -Tag:("") {
     It 'List' {
         { Get-JcSdkSystemInsightSecureboot } | Should -Not -Throw
     }
+
+    It 'List Filter Tests' {
+        $siSecureBoot = Get-JcSdkSystemInsightSecureboot | Get-Random -Count 1
+        if ($siSecureBoot) {
+            Get-JcSdkSystemInsightSecureboot -Filter @("system_id:eq:$($siSecureBoot.systemId)") | Should -Not -BeNullOrEmpty
+        }
+    }
 }

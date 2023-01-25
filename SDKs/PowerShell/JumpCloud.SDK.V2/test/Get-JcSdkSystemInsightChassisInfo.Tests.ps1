@@ -20,4 +20,11 @@ Describe 'Get-JcSdkSystemInsightChassisInfo' -Tag:(""){
     It 'List' {
         { Get-JcSdkSystemInsightChassisInfo } | Should -Not -Throw
     }
+
+    It 'List Filter Tests' {
+        $siChassisInfo = Get-JcSdkSystemInsightChassisInfo | Get-Random -Count 1
+        if ($siChassisInfo) {
+            Get-JcSdkSystemInsightChassisInfo -Filter @("system_id:eq:$($siChassisInfo.systemId)") | Should -Not -BeNullOrEmpty
+        }
+    }
 }

@@ -18,5 +18,15 @@ Describe 'Get-JcSdkSystemInsightSystemInfo' -Tag:(""){
     It 'List' {
         { Get-JcSdkSystemInsightSystemInfo } | Should -Not -Throw
     }
+
+    It 'List Filter Tests' {
+        $siSystemInfo = Get-JcSdkSystemInsightSystemInfo | Get-Random -Count 1
+        if ($siSystemInfo) {
+            Get-JcSdkSystemInsightSystemInfo -Filter @("system_id:eq:$($siSystemInfo.systemId)") | Should -Not -BeNullOrEmpty
+            Get-JcSdkSystemInsightSystemInfo -Filter @("system_id:eq:$($siSystemInfo.systemId)", "computer_name:eq:$($siSystemInfo.computerName)") | Should -Not -BeNullOrEmpty
+            # computer_name accepts strings, fakeString is a fake value
+            Get-JcSdkSystemInsightSystemInfo -Filter @("system_id:eq:$($siSystemInfo.systemId)", "computer_name:eq:fakeString") | Should -BeNullOrEmpty
+        }
+    }
 }
 

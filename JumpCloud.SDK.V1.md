@@ -1,3 +1,43 @@
+## JumpCloud.SDK.V1-0.0.32
+Release Date: January 24, 2023
+#### RELEASE NOTES
+```
+This release address an incompatability with the `-Filter` parameter on V1 endpoitns
+```
+#### BUG FIXES:
+Multiple filter can now be passed into V1 endpoint functions. To use multiple filters on the V1 module, please refer to the individual function documentation. In general filter parameters will consist of an array of strings where filter strings are composed of the field, operator and value you wish to search for. Ex. `Get-jcsdkuser -filter @("firstname:``$eq:foo", "company:``$eq:fakeCompany")`
+#### Generated Changes:
+
+<details>
+<summary>Functions Added</summary>
+
+No changes
+</details>
+
+<details>
+<summary>Functions Modified</summary>
+
+* Get-JcSdkApplication.ps1
+* Get-JcSdkApplicationTemplate.ps1
+* Get-JcSdkCommand.ps1
+* Get-JcSdkCommandResult.ps1
+* Get-JcSdkOrganization.ps1
+* Get-JcSdkRadiusServer.ps1
+* Get-JcSdkSystem.ps1
+* Get-JcSdkUser.ps1
+* Search-JcSdkCommand.ps1
+* Search-JcSdkOrganization.ps1
+* Search-JcSdkSystem.ps1
+* Search-JcSdkUser.ps1
+
+</details>
+
+<details>
+<summary>Functions Removed</summary>
+
+No changes
+</details>
+
 ## JumpCloud.SDK.V1-0.0.31
 Release Date: December 28, 2022
 #### RELEASE NOTES

@@ -18,5 +18,15 @@ Describe 'Get-JcSdkSystemInsightUserSshKey' -Tag:(""){
     It 'List' {
         { Get-JcSdkSystemInsightUserSshKey } | Should -Not -Throw
     }
+
+    It 'List Filter Tests' {
+        $siUserSSH = Get-JcSdkSystemInsightUserSshKey | Get-Random -Count 1
+        if ($siUserSSH) {
+            Get-JcSdkSystemInsightUserSshKey -Filter @("system_id:eq:$($siUserSSH.systemId)") | Should -Not -BeNullOrEmpty
+            Get-JcSdkSystemInsightUserSshKey -Filter @("system_id:eq:$($siUserSSH.systemId)", "uid:eq:$($siUserSSH.uid)") | Should -Not -BeNullOrEmpty
+            # uid accepts int, 9988 is a fake value
+            Get-JcSdkSystemInsightUserSshKey -Filter @("system_id:eq:$($siUserSSH.systemId)", "uid:eq:9988") | Should -BeNullOrEmpty
+        }
+    }
 }
 

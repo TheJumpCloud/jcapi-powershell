@@ -18,5 +18,14 @@ Describe 'Get-JcSdkSystemInsightDnsResolver' -Tag:(""){
     It 'List' {
         { Get-JcSdkSystemInsightDnsResolver } | Should -Not -Throw
     }
+    It 'List Filter Tests' {
+        $siDNS = Get-JcSdkSystemInsightDnsResolver | Get-Random -Count 1
+        if ($siDNS) {
+            Get-JcSdkSystemInsightDnsResolver -Filter @("system_id:eq:$($siDNS.systemId)") | Should -Not -BeNullOrEmpty
+            Get-JcSdkSystemInsightDnsResolver -Filter @("system_id:eq:$($siDNS.systemId)", "type:eq:$($siDNS.type)") | Should -Not -BeNullOrEmpty
+            # type accepts strings, fakeString is a fake value
+            Get-JcSdkSystemInsightDnsResolver -Filter @("system_id:eq:$($siDNS.systemId)", "type:eq:fakeString") | Should -BeNullOrEmpty
+        }
+    }
 }
 

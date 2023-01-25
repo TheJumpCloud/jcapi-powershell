@@ -18,5 +18,15 @@ Describe 'Get-JcSdkSystemInsightLaunchd' -Tag:(""){
     It 'List' {
         { Get-JcSdkSystemInsightLaunchd } | Should -Not -Throw
     }
+
+    It 'List Filter Tests' {
+        $siLaunchD = Get-JcSdkSystemInsightLaunchd | Get-Random -Count 1
+        if ($siLaunchD) {
+            Get-JcSdkSystemInsightLaunchd -Filter @("system_id:eq:$($siLaunchD.systemId)") | Should -Not -BeNullOrEmpty
+            Get-JcSdkSystemInsightLaunchd -Filter @("system_id:eq:$($siLaunchD.systemId)", "name:eq:$($siLaunchD.name)") | Should -Not -BeNullOrEmpty
+            # name accepts strings, fakeString is a fake value
+            Get-JcSdkSystemInsightLaunchd -Filter @("system_id:eq:$($siLaunchD.systemId)", "name:eq:fakeString") | Should -BeNullOrEmpty
+        }
+    }
 }
 

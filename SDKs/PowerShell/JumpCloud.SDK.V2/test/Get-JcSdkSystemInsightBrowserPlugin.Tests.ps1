@@ -18,5 +18,14 @@ Describe 'Get-JcSdkSystemInsightBrowserPlugin' -Tag:(""){
     It 'List' {
         { Get-JcSdkSystemInsightBrowserPlugin } | Should -Not -Throw
     }
+    It 'List Filter Tests' {
+        $siBrowserPlugin = Get-JcSdkSystemInsightBrowserPlugin | Get-Random -Count 1
+        if ($siBrowserPlugin) {
+            Get-JcSdkSystemInsightBrowserPlugin -Filter @("system_id:eq:$($siBrowserPlugin.systemId)") | Should -Not -BeNullOrEmpty
+            Get-JcSdkSystemInsightBrowserPlugin -Filter @("system_id:eq:$($siBrowserPlugin.systemId)", "name:eq:$($siBrowserPlugin.name)") | Should -Not -BeNullOrEmpty
+            # name accepts strings, fakeString is a fake value
+            Get-JcSdkSystemInsightBrowserPlugin -Filter @("system_id:eq:$($siBrowserPlugin.systemId)", "name:eq:fakeString") | Should -BeNullOrEmpty
+        }
+    }
 }
 

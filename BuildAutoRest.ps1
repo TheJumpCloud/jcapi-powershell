@@ -142,6 +142,13 @@ ForEach ($SDK In $SDKName)
         ###########################################################################
         If ($BuildModule)
         {
+            # For V1, V2 builds, apply this change to the generated c# code to filter correctly
+            if (($SDKName -eq "JumpCloud.SDK.V1") -or ($SDKName -eq "JumpCloud.SDK.V2")) {
+                # Modify .cs file "https://github.com/Azure/autorest/issues/3604" #autorest does not support even the "collectionFormat": "multi" in my testing
+                $inputFile = Get-Content -Path "$OutputFullPath/generated/api/JumpCloudApi.cs" -Raw
+                $newFile = $inputFile -replace "\+ \(null != filter  && filter\.Length > 0 .*? : global::System\.String\.Empty\)", "+ (null != filter  && filter.Length > 0 ? `"filter=`" + global::System.Linq.Enumerable.Aggregate(filter, (current, each) => current + `"&filter=`" + ( each?.ToString()??global::System.String.Empty )) : global::System.String.Empty)"
+                Set-Content -Path "$OutputFullPath/generated/api/JumpCloudApi.cs" -Value $newFile
+            }
             $BuildModuleContent = Get-Content -Path:($buildModulePath) -Raw
             $BuildModuleContent.Replace('Export-ExampleStub -ExportsFolder', '#Export-ExampleStub -ExportsFolder') | Set-Content -Path:($buildModulePath)
             $BuildModuleCommand = "$buildModulePath -Release"

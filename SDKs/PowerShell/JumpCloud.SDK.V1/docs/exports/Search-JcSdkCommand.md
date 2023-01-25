@@ -83,13 +83,13 @@ curl -X POST https://console.jumpcloud.com/api/search/commands \\
 
 ### SearchExpanded (Default)
 ```
-Search-JcSdkCommand [-Fields <String>] [-Filter <String>] [-Fields1 <String>] [-Filter1 <Hashtable>]
+Search-JcSdkCommand [-Fields <String>] [-Filter <String[]>] [-Fields1 <String>] [-Filter1 <Hashtable>]
  [-SearchFilter <Hashtable>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Search
 ```
-Search-JcSdkCommand -Body <ISearch> [-Fields <String>] [-Filter <String>] [-Confirm] [-WhatIf]
+Search-JcSdkCommand -Body <ISearch> [-Fields <String>] [-Filter <String[]>] [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
@@ -267,7 +267,7 @@ Is case sensitive.
  OR the filters together.
 
 ```yaml
-Type: System.String
+Type: System.String[]
 Parameter Sets: (All)
 Aliases:
 

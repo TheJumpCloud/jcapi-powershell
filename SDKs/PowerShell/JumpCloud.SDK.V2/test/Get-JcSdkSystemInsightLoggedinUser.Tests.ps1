@@ -18,5 +18,15 @@ Describe 'Get-JcSdkSystemInsightLoggedinUser' -Tag:(""){
     It 'List' {
         { Get-JcSdkSystemInsightLoggedinUser } | Should -Not -Throw
     }
+
+    It 'List Filter Tests' {
+        $siUser = Get-JcSdkSystemInsightLoggedinUser | Get-Random -Count 1
+        if ($siUser) {
+            Get-JcSdkSystemInsightLoggedinUser -Filter @("system_id:eq:$($siUser.systemId)") | Should -Not -BeNullOrEmpty
+            Get-JcSdkSystemInsightLoggedinUser -Filter @("system_id:eq:$($siUser.systemId)", "type:eq:$($siUser.type)") | Should -Not -BeNullOrEmpty
+            # type accepts strings, fakeString is a fake value
+            Get-JcSdkSystemInsightLoggedinUser -Filter @("system_id:eq:$($siUser.systemId)", "type:eq:fakeString") | Should -BeNullOrEmpty
+        }
+    }
 }
 

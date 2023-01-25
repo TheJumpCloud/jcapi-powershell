@@ -19,6 +19,13 @@ Describe 'Get-JcSdkPolicy' -Tag:(""){
         { Get-JcSdkPolicy } | Should -Not -Throw
     }
 
+    It 'List Policy Filter Tests' {
+        $policy = Get-JcSdkPolicy | Get-Random -Count 1
+        Get-JcSdkPolicy -Filter @("name:eq:$($policy.name)") | Should -Not -BeNullOrEmpty
+        Get-JcSdkPolicy -Filter @("name:eq:$($policy.name)", "id:eq:$($policy.id)") | Should -Not -BeNullOrEmpty
+        Get-JcSdkPolicy -Filter @("name:eq:fakeName", "id:eq:$($policy.id)") | Should -BeNullOrEmpty
+    }
+
     It 'Get' {
         { Get-JcSdkPolicy -Id:($global:PesterTestPolicy.Id) } | Should -Not -Throw
     }

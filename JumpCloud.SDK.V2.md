@@ -1,3 +1,32 @@
+## JumpCloud.SDK.V2-0.0.36
+Release Date: January 24, 2023
+#### RELEASE NOTES
+```
+This release address an incompatability with the `-Filter` parameter on V2 endpoitns
+```
+#### BUG FIXES:
+Multiple filter can now be passed into V2 endpoint functions. To use multiple filters on the V2 module, please refer to the individual function documentation. In general filter parameters will consist of an array of strings where filter strings are composed of the field, operator and value you wish to search for. Ex. `Get-JcSdkSystemInsightApp -Filter @("system_id:eq:61a90ffe7ef39016dc09ec5c", "bundle_name:eq:googleChrome")`
+`
+#### Generated Changes:
+
+<details>
+<summary>Functions Added</summary>
+
+No changes
+</details>
+
+<details>
+<summary>Functions Modified</summary>
+
+No changes
+</details>
+
+<details>
+<summary>Functions Removed</summary>
+
+No changes
+</details>
+
 ## JumpCloud.SDK.V2-0.0.35
 Release Date: December 28, 2022
 #### RELEASE NOTES
