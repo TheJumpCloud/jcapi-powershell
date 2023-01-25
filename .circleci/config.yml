@@ -22,12 +22,6 @@ build-sdks: &build-sdks
       context: aws-credentials
   - Build JumpCloud SDK V2:
       context: aws-credentials
-  - Draft JumpCloud SDK DirectoryInsights GitHub Release:
-      context: github-credentials
-  - Draft JumpCloud SDK V1 GitHub Release:
-      context: github-credentials
-  - Draft JumpCloud SDK V2 GitHub Release:
-      context: github-credentials
   - Test JumpCloud SDK DirectoryInsights:
       requires:
         - Build JumpCloud SDK DirectoryInsights
@@ -133,62 +127,40 @@ build-sdks: &build-sdks
             - master
   - Draft JumpCloud SDK DirectoryInsights GitHub Release:
       context: aws-credentials
-      requires:
-        - Test JumpCloud SDK DirectoryInsights
-        - Commit Changes
-      filters:
-        branches:
-          only:
-            - master
+      # requires:
+      #   - Test JumpCloud SDK DirectoryInsights
+      #   - Commit Changes
+      # filters:
+      #   branches:
+      #     only:
+      #       - master
   - Draft JumpCloud SDK V1 GitHub Release:
       context: aws-credentials
-      requires:
-        - Test JumpCloud SDK DirectoryInsights
-        - Test JumpCloud SDK V1
-        - Commit Changes
-      filters:
-        branches:
-          only:
-            - master
+      # requires:
+      #   - Test JumpCloud SDK DirectoryInsights
+      #   - Test JumpCloud SDK V1
+      #   - Commit Changes
+      # filters:
+      #   branches:
+      #     only:
+      #       - master
   - Draft JumpCloud SDK V2 GitHub Release:
       context: aws-credentials
-      requires:
-        - Test JumpCloud SDK DirectoryInsights
-        - Test JumpCloud SDK V1
-        - Test JumpCloud SDK V2
-        - Commit Changes
-      filters:
-        branches:
-          only:
-            - master
+      # requires:
+      #   - Test JumpCloud SDK DirectoryInsights
+      #   - Test JumpCloud SDK V1
+      #   - Test JumpCloud SDK V2
+      #   - Commit Changes
+      # filters:
+      #   branches:
+      #     only:
+      #       - master
 workflows:
   version: 2
   ci:
     when:
       equal: [<< pipeline.parameters.workflow >>, "ci"]
     jobs: *build-sdks
-  trigger-ci-nightly:
-    triggers:
-      - schedule:
-          cron: '0 6 * * 1-5' # Run on weekdays at 12AM MST (6AM UTC)
-          filters:
-            branches:
-              only:
-                - master
-    jobs:
-      - Trigger ci-nightly
-  ci-nightly:
-    when:
-      equal: [<< pipeline.parameters.workflow >>, "ci-nightly"]
-    jobs:
-      - Build JumpCloud SDK DirectoryInsights
-      - Build JumpCloud SDK V1
-      - Build JumpCloud SDK V2
-      - Test JumpCloud SDK DirectoryInsights
-      - Test JumpCloud SDK V1
-      - Test JumpCloud SDK V1 MTP
-      - Test JumpCloud SDK V2
-      - Test JumpCloud SDK V2 MTP
 jobs:
   Build JumpCloud SDK DirectoryInsights:
     executor: win/default
