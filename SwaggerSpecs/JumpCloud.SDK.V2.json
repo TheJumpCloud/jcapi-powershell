@@ -12166,6 +12166,19 @@
         "gsuites"
       ]
     },
+    "/integrations/syncro/{UUID}/billing_mapping_configuration_options": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "UUID",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "x-functionalities-tags": [
+        "mtp-create-syncro-integration"
+      ]
+    },
     "/iplists": {
       "get": {
         "description": "Retrieve all IP lists.\n\n#### Sample Request\n```\ncurl https://console.jumpcloud.com/api/v2/iplists \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",

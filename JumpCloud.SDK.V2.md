@@ -1,5 +1,5 @@
 ## JumpCloud.SDK.V2-0.0.36
-Release Date: January 24, 2023
+Release Date: January 25, 2023
 #### RELEASE NOTES
 ```
 This release address an incompatability with the `-Filter` parameter on V2 endpoitns
