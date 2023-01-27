@@ -18,6 +18,13 @@ Describe 'Get-JcSdkSystem' -Tag:(""){
         { Get-JcSdkSystem } | Should -Not -Throw
     }
 
+    It 'List System Filter Tests' {
+        $system  = Get-JcSdkSystem | Get-Random -count 1
+        Get-jcsdksystem -filter @("os:`$eq:$($system.os)") | Should -Not -BeNullOrEmpty
+        Get-jcsdksystem -filter @("os:`$eq:$($system.os)", "_id:`$eq:$($system.id)") | Should -Not -BeNullOrEmpty
+        Get-jcsdksystem -filter @("os:`$eq:fakeValue", "_id:`$eq:$($system.id)") | Should -BeNullOrEmpty
+    }
+
     It 'Get' {
         { Get-JcSdkSystem -Id:($global:PesterTestSystem.Id) } | Should -Not -Throw
     }

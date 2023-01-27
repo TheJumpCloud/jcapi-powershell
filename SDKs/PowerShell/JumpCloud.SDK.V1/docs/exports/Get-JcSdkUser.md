@@ -23,17 +23,18 @@ curl -X GET https://console.jumpcloud.com/api/systemusers/{UserID} \\
 
 ### List (Default)
 ```
-Get-JcSdkUser [-Fields <String>] [-Filter <String>] [-Search <String>] [-Sort <String>] [<CommonParameters>]
+Get-JcSdkUser [-Fields <String>] [-Filter <String[]>] [-Search <String>] [-Sort <String>] [<CommonParameters>]
 ```
 
 ### Get
 ```
-Get-JcSdkUser -Id <String> [-Fields <String>] [-Filter <String>] [<CommonParameters>]
+Get-JcSdkUser -Id <String> [-Fields <String>] [-Filter <String[]>] [<CommonParameters>]
 ```
 
 ### GetViaIdentity
 ```
-Get-JcSdkUser -InputObject <IJumpCloudApiIdentity> [-Fields <String>] [-Filter <String>] [<CommonParameters>]
+Get-JcSdkUser -InputObject <IJumpCloudApiIdentity> [-Fields <String>] [-Filter <String[]>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -119,7 +120,7 @@ Is case sensitive.
  OR the filters together.
 
 ```yaml
-Type: System.String
+Type: System.String[]
 Parameter Sets: (All)
 Aliases:
 

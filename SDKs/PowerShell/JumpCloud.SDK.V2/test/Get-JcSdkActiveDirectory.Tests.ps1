@@ -19,6 +19,12 @@ Describe 'Get-JcSdkActiveDirectory' -Tag:(""){
         { Get-JcSdkActiveDirectory } | Should -Not -Throw
     }
 
+    It 'List AD Filter Tests'{
+        $ad = Get-JcSdkActiveDirectory | Get-Random -Count 1
+        Get-JcSdkActiveDirectory -Filter @("domain:eq:$($ad.domain)") | Should -Not -BeNullOrEmpty
+        Get-JcSdkActiveDirectory -Filter @("domain:eq:$($ad.domain)", "domain:eq:fakedomain") | Should -BeNullOrEmpty
+    }
+
     It 'Get' {
         { Get-JcSdkActiveDirectory -Id:($global:PesterTestActiveDirectory.Id) } | Should -Not -Throw
     }

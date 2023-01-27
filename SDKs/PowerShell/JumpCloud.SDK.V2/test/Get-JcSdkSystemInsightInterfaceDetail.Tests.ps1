@@ -18,5 +18,15 @@ Describe 'Get-JcSdkSystemInsightInterfaceDetail' -Tag:(""){
     It 'List' {
         { Get-JcSdkSystemInsightInterfaceDetail } | Should -Not -Throw
     }
+
+    It 'List Filter Tests' {
+        $siIDetail = Get-JcSdkSystemInsightInterfaceDetail | Get-Random -Count 1
+        if ($siIDetail) {
+            Get-JcSdkSystemInsightInterfaceDetail -Filter @("system_id:eq:$($siIDetail.systemId)") | Should -Not -BeNullOrEmpty
+            Get-JcSdkSystemInsightInterfaceDetail -Filter @("system_id:eq:$($siIDetail.systemId)", "interface:eq:$($siIDetail.interface)") | Should -Not -BeNullOrEmpty
+            # interface accepts strings, fakeString is a fake value
+            Get-JcSdkSystemInsightInterfaceDetail -Filter @("system_id:eq:$($siIDetail.systemId)", "interface:eq:fakeString") | Should -BeNullOrEmpty
+        }
+    }
 }
 

@@ -17,7 +17,19 @@ No changes
 <details>
 <summary>Functions Modified</summary>
 
-No changes
+* Get-JcSdkApplication.ps1
+* Get-JcSdkApplicationTemplate.ps1
+* Get-JcSdkCommand.ps1
+* Get-JcSdkCommandResult.ps1
+* Get-JcSdkOrganization.ps1
+* Get-JcSdkRadiusServer.ps1
+* Get-JcSdkSystem.ps1
+* Get-JcSdkUser.ps1
+* Search-JcSdkCommand.ps1
+* Search-JcSdkOrganization.ps1
+* Search-JcSdkSystem.ps1
+* Search-JcSdkUser.ps1
+
 </details>
 
 <details>

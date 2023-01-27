@@ -18,5 +18,15 @@ Describe 'Get-JcSdkSystemInsightBattery' -Tag:(""){
     It 'List' {
         { Get-JcSdkSystemInsightBattery } | Should -Not -Throw
     }
+
+    It 'List Filter Tests' {
+        $siBattery = Get-JcSdkSystemInsightBattery | Get-Random -Count 1
+        if ($siBattery) {
+            Get-JcSdkSystemInsightBattery -Filter @("system_id:eq:$($siBattery.systemId)") | Should -Not -BeNullOrEmpty
+            Get-JcSdkSystemInsightBattery -Filter @("system_id:eq:$($siBattery.systemId)", "health:eq:$($siBattery.health)") | Should -Not -BeNullOrEmpty
+            # health accepts strings, fakeString is a fake value
+            Get-JcSdkSystemInsightBattery -Filter @("system_id:eq:$($siBattery.systemId)", "health:eq:fakeString") | Should -BeNullOrEmpty
+        }
+    }
 }
 

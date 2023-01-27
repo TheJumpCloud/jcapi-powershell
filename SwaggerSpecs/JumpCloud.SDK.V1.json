@@ -3597,7 +3597,12 @@
       "description": "A filter to apply to the query. See the supported operators below. For more complex searches,\nsee the related `/search/<domain>` endpoints,\ne.g. `/search/systems`.\n\n**Filter structure**: `<field>:<operator>:<value>`.\n\n**field** = Populate with a valid field from an endpoint response.\n\n**operator** = Supported operators are:\n- `$eq` (equals)\n- `$ne` (does not equal)\n- `$gt` (is greater than)\n- `$gte` (is greater than or equal to)\n- `$lt` (is less than)\n- `$lte` (is less than or equal to)\n\n_Note: v1 operators differ from v2 operators._\n\n_Note: For v1 operators, excluding the `$` will result in undefined behavior._\n\n**value** = Populate with the value you want to search for. Is case sensitive.\n\n**Examples**\n- `GET /users?filter=username:$eq:testuser`\n- `GET /systemusers?filter=password_expiration_date:$lte:2021-10-24`\n- `GET /systemusers?filter=department:$ne:Accounting`\n- `GET /systems?filter[0]=firstname:$eq:foo&filter[1]=lastname:$eq:bar` - this will\n   AND the filters together.\n- `GET /systems?filter[or][0]=lastname:$eq:foo&filter[or][1]=lastname:$eq:bar` - this will\n   OR the filters together.",
       "in": "query",
       "name": "filter",
-      "type": "string"
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "collectionFormat": "multi",
+      "x-ms-skip-url-encoding": true
     },
     "trait:limit:limit": {
       "default": 10,

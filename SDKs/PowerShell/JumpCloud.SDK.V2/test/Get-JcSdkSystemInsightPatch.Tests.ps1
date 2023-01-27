@@ -18,5 +18,15 @@ Describe 'Get-JcSdkSystemInsightPatch' -Tag:(""){
     It 'List' {
         { Get-JcSdkSystemInsightPatch } | Should -Not -Throw
     }
+
+    It 'List Filter Tests' {
+        $siHotfix = Get-JcSdkSystemInsightPatch | Get-Random -Count 1
+        if ($siHotfix) {
+            Get-JcSdkSystemInsightPatch -Filter @("system_id:eq:$($siHotfix.systemId)") | Should -Not -BeNullOrEmpty
+            Get-JcSdkSystemInsightPatch -Filter @("system_id:eq:$($siHotfix.systemId)", "hotfix_id:eq:$($siHotfix.hotfixid)") | Should -Not -BeNullOrEmpty
+            # hotfix_id accepts strings, fakeString is a fake value
+            Get-JcSdkSystemInsightPatch -Filter @("system_id:eq:$($siHotfix.systemId)", "hotfix_id:eq:fakeString") | Should -BeNullOrEmpty
+        }
+    }
 }
 

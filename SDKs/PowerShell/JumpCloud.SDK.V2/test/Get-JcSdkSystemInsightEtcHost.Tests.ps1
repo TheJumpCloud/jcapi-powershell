@@ -18,5 +18,15 @@ Describe 'Get-JcSdkSystemInsightEtcHost' -Tag:(""){
     It 'List' {
         { Get-JcSdkSystemInsightEtcHost } | Should -Not -Throw
     }
+
+    It 'List Filter Tests' {
+        $siETC = Get-JcSdkSystemInsightEtcHost | Get-Random -Count 1
+        if ($siETC) {
+            Get-JcSdkSystemInsightEtcHost -Filter @("system_id:eq:$($siETC.systemId)") | Should -Not -BeNullOrEmpty
+            Get-JcSdkSystemInsightEtcHost -Filter @("system_id:eq:$($siETC.systemId)", "address:eq:$($siETC.address)") | Should -Not -BeNullOrEmpty
+            # address accepts strings, fakeString is a fake value
+            Get-JcSdkSystemInsightEtcHost -Filter @("system_id:eq:$($siETC.systemId)", "address:eq:fakeString") | Should -BeNullOrEmpty
+        }
+    }
 }
 

@@ -18,5 +18,15 @@ Describe 'Get-JcSdkSystemInsightSharedResource' -Tag:(""){
     It 'List' {
         { Get-JcSdkSystemInsightSharedResource } | Should -Not -Throw
     }
+
+    It 'List Filter Tests' {
+        $siSharedResource = Get-JcSdkSystemInsightSharedResource | Get-Random -Count 1
+        if ($siSharedResource) {
+            Get-JcSdkSystemInsightSharedResource -Filter @("system_id:eq:$($siSharedResource.systemId)") | Should -Not -BeNullOrEmpty
+            Get-JcSdkSystemInsightSharedResource -Filter @("system_id:eq:$($siSharedResource.systemId)", "type:eq:$($siSharedResource.type)") | Should -Not -BeNullOrEmpty
+            # type accepts strings, fakeString is a fake value
+            Get-JcSdkSystemInsightSharedResource -Filter @("system_id:eq:$($siSharedResource.systemId)", "type:eq:fakeString") | Should -BeNullOrEmpty
+        }
+    }
 }
 

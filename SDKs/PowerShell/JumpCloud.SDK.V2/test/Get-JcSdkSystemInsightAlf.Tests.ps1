@@ -18,5 +18,15 @@ Describe 'Get-JcSdkSystemInsightAlf' -Tag:(""){
     It 'List' {
         { Get-JcSdkSystemInsightAlf } | Should -Not -Throw
     }
+
+    It 'List Filter Tests' {
+        $siAlf = Get-JcSdkSystemInsightAlf | Get-Random -Count 1
+        if ($siAlf){
+            Get-JcSdkSystemInsightAlf -Filter @("system_id:eq:$($siAlf.systemId)") | Should -Not -BeNullOrEmpty
+            Get-JcSdkSystemInsightAlf -Filter @("system_id:eq:$($siAlf.systemId)", "global_state:eq:$($siAlf.globalState)") | Should -Not -BeNullOrEmpty
+            # global_state accepts ints, 9 is a fake value
+            Get-JcSdkSystemInsightAlf -Filter @("system_id:eq:$($siAlf.systemId)", "global_state:eq:9") | Should -BeNullOrEmpty
+        }
+    }
 }
 

@@ -20,4 +20,11 @@ Describe 'Get-JcSdkSystemInsightTpmInfo' -Tag:("") {
     It 'List' {
         { Get-JcSdkSystemInsightTpmInfo } | Should -Not -Throw
     }
+
+    It 'List Filter Tests' {
+        $siTPM = Get-JcSdkSystemInsightTpmInfo | Get-Random -Count 1
+        if ($siTPM) {
+            Get-JcSdkSystemInsightTpmInfo -Filter @("system_id:eq:$($siTPM.systemId)") | Should -Not -BeNullOrEmpty
+        }
+    }
 }

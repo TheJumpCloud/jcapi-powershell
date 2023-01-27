@@ -19,6 +19,13 @@ Describe 'Get-JcSdkAuthenticationPolicy' -Tag:(""){
         { Get-JcSdkAuthenticationPolicy } | Should -Not -Throw
     }
 
+    It 'List Auth Policy Filter Tests' {
+        $authPolicy = Get-JcSdkAuthenticationPolicy | Get-Random -Count 1
+        Get-JcSdkAuthenticationPolicy -Filter @("name:eq:$($authPolicy.name)") | Should -Not -BeNullOrEmpty
+        Get-JcSdkAuthenticationPolicy -Filter @("name:eq:$($authPolicy.name)", "type:eq:$($authPolicy.type)") | Should -Not -BeNullOrEmpty
+        Get-JcSdkAuthenticationPolicy -Filter @("name:eq:$($authPolicy.name)", "type:eq:fakeType") | Should -BeNullOrEmpty
+    }
+
     It 'Get' {
         { Get-JcSdkAuthenticationPolicy -Id:($global:PesterTestAuthenticationPolicy.Id) } | Should -Not -Throw
     }

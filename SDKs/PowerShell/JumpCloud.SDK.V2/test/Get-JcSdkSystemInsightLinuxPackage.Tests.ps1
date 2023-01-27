@@ -20,4 +20,14 @@ Describe 'Get-JcSdkSystemInsightLinuxPackage' -Tag:("") {
     It 'List' {
         { Get-JcSdkSystemInsightLinuxPackage } | Should -Not -Throw
     }
+
+    It 'List Filter Tests' {
+        $siLinuxPackage = Get-JcSdkSystemInsightLinuxPackage | Get-Random -Count 1
+        if ($siLinuxPackage) {
+            Get-JcSdkSystemInsightLinuxPackage -Filter @("system_id:eq:$($siLinuxPackage.systemId)") | Should -Not -BeNullOrEmpty
+            Get-JcSdkSystemInsightLinuxPackage -Filter @("system_id:eq:$($siLinuxPackage.systemId)", "package_format:eq:$($siLinuxPackage.packageFormat)") | Should -Not -BeNullOrEmpty
+            # package_format accepts strings, fakeString is a fake value
+            Get-JcSdkSystemInsightLinuxPackage -Filter @("system_id:eq:$($siLinuxPackage.systemId)", "package_format:eq:fakeString") | Should -BeNullOrEmpty
+        }
+    }
 }

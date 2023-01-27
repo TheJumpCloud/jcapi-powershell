@@ -18,5 +18,15 @@ Describe 'Get-JcSdkSystemInsightProgram' -Tag:(""){
     It 'List' {
         { Get-JcSdkSystemInsightProgram } | Should -Not -Throw
     }
+
+    It 'List Filter Tests' {
+        $siProgram = Get-JcSdkSystemInsightProgram | Get-Random -Count 1
+        if ($siProgram) {
+            Get-JcSdkSystemInsightProgram -Filter @("system_id:eq:$($siProgram.systemId)") | Should -Not -BeNullOrEmpty
+            Get-JcSdkSystemInsightProgram -Filter @("system_id:eq:$($siProgram.systemId)", "name:eq:$($siProgram.name)") | Should -Not -BeNullOrEmpty
+            # name accepts strings, fakeString is a fake value
+            Get-JcSdkSystemInsightProgram -Filter @("system_id:eq:$($siProgram.systemId)", "name:eq:fakeString") | Should -BeNullOrEmpty
+        }
+    }
 }
 

@@ -18,5 +18,15 @@ Describe 'Get-JcSdkSystemInsightPythonPackage' -Tag:(""){
     It 'List' {
         { Get-JcSdkSystemInsightPythonPackage } | Should -Not -Throw
     }
+
+    It 'List Filter Tests' {
+        $siPythonPkg = Get-JcSdkSystemInsightPythonPackage | Get-Random -Count 1
+        if ($siPythonPkg) {
+            Get-JcSdkSystemInsightPythonPackage -Filter @("system_id:eq:$($siPythonPkg.systemId)") | Should -Not -BeNullOrEmpty
+            Get-JcSdkSystemInsightPythonPackage -Filter @("system_id:eq:$($siPythonPkg.systemId)", "name:eq:$($siPythonPkg.name)") | Should -Not -BeNullOrEmpty
+            # name accepts strings, fakeString is a fake value
+            Get-JcSdkSystemInsightPythonPackage -Filter @("system_id:eq:$($siPythonPkg.systemId)", "name:eq:fakeString") | Should -BeNullOrEmpty
+        }
+    }
 }
 

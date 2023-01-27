@@ -7335,7 +7335,9 @@
         "type": "string"
       },
       "name": "filter",
-      "type": "array"
+      "type": "array",
+      "collectionFormat": "multi",
+      "x-ms-skip-url-encoding": true
     },
     "trait:graphTargetsActiveDirectory:targets": {
       "description": "Targets which a \"active_directory\" can be associated to.",

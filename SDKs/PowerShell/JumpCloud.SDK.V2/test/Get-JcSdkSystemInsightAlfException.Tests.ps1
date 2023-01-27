@@ -18,5 +18,15 @@ Describe 'Get-JcSdkSystemInsightAlfException' -Tag:(""){
     It 'List' {
         { Get-JcSdkSystemInsightAlfException } | Should -Not -Throw
     }
+
+    It 'List Filter Tests' {
+        $siAlfExc = Get-JcSdkSystemInsightAlfException | Get-Random -Count 1
+        if ($siAlfExc){
+            Get-JcSdkSystemInsightAlfException -Filter @("system_id:eq:$($siAlfExc.systemId)") | Should -Not -BeNullOrEmpty
+            Get-JcSdkSystemInsightAlfException -Filter @("system_id:eq:$($siAlfExc.systemId)", "state:eq:$($siAlfExc.state)") | Should -Not -BeNullOrEmpty
+            # state accepts ints, 9 is a fake value
+            Get-JcSdkSystemInsightAlfException -Filter @("system_id:eq:$($siAlfExc.systemId)", "state:eq:9") | Should -BeNullOrEmpty
+        }
+    }
 }
 

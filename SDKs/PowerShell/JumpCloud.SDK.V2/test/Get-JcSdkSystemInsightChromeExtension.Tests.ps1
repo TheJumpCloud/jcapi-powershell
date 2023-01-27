@@ -18,5 +18,15 @@ Describe 'Get-JcSdkSystemInsightChromeExtension' -Tag:(""){
     It 'List' {
         { Get-JcSdkSystemInsightChromeExtension } | Should -Not -Throw
     }
+
+    It 'List Filter Tests' {
+        $siChromeExt = Get-JcSdkSystemInsightChromeExtension | Get-Random -Count 1
+        if ($siChromeExt) {
+            Get-JcSdkSystemInsightChromeExtension -Filter @("system_id:eq:$($siChromeExt.systemId)") | Should -Not -BeNullOrEmpty
+            Get-JcSdkSystemInsightChromeExtension -Filter @("system_id:eq:$($siChromeExt.systemId)", "name:eq:$($siChromeExt.name)") | Should -Not -BeNullOrEmpty
+            # name accepts strings, fakeString is a fake value
+            Get-JcSdkSystemInsightChromeExtension -Filter @("system_id:eq:$($siChromeExt.systemId)", "name:eq:fakeString") | Should -BeNullOrEmpty
+        }
+    }
 }
 

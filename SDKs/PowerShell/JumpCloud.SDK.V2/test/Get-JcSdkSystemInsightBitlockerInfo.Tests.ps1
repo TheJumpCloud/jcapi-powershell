@@ -18,5 +18,15 @@ Describe 'Get-JcSdkSystemInsightBitlockerInfo' -Tag:(""){
     It 'List' {
         { Get-JcSdkSystemInsightBitlockerInfo } | Should -Not -Throw
     }
+
+    It 'List Filter Tests' {
+        $siBitLocker = Get-JcSdkSystemInsightBitlockerInfo | Get-Random -Count 1
+        if ($siBitLocker) {
+            Get-JcSdkSystemInsightBitlockerInfo -Filter @("system_id:eq:$($siBitLocker.systemId)") | Should -Not -BeNullOrEmpty
+            Get-JcSdkSystemInsightBitlockerInfo -Filter @("system_id:eq:$($siBitLocker.systemId)", "protection_status:eq:$($siBitLocker.protectionstatus)") | Should -Not -BeNullOrEmpty
+            # protection_status accepts ints, 9988 is a fake value
+            Get-JcSdkSystemInsightBitlockerInfo -Filter @("system_id:eq:$($siBitLocker.systemId)", "protection_status:eq:9988") | Should -BeNullOrEmpty
+        }
+    }
 }
 

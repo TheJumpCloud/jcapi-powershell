@@ -18,5 +18,14 @@ Describe 'Get-JcSdkSystemInsightCrash' -Tag:(""){
     It 'List' {
         { Get-JcSdkSystemInsightCrash } | Should -Not -Throw
     }
+    It 'List Filter Tests' {
+        $siCrash = Get-JcSdkSystemInsightCrash | Get-Random -Count 1
+        if ($siCrash) {
+            Get-JcSdkSystemInsightCrash -Filter @("system_id:eq:$($siCrash.systemId)") | Should -Not -BeNullOrEmpty
+            Get-JcSdkSystemInsightCrash -Filter @("system_id:eq:$($siCrash.systemId)", "identifier:eq:$($siCrash.identifier)") | Should -Not -BeNullOrEmpty
+            # identifier accepts strings, fakeString is a fake value
+            Get-JcSdkSystemInsightCrash -Filter @("system_id:eq:$($siCrash.systemId)", "identifier:eq:fakeString") | Should -BeNullOrEmpty
+        }
+    }
 }
 

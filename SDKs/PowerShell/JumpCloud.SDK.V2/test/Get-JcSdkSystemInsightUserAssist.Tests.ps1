@@ -20,4 +20,11 @@ Describe 'Get-JcSdkSystemInsightUserAssist' -Tag:("") {
     It 'List' {
         { Get-JcSdkSystemInsightUserAssist } | Should -Not -Throw
     }
+
+    It 'List Filter Tests' {
+        $siUserAssist = Get-JcSdkSystemInsightUserAssist | Get-Random -Count 1
+        if ($siUserAssist) {
+            Get-JcSdkSystemInsightUserAssist -Filter @("system_id:eq:$($siUserAssist.systemId)") | Should -Not -BeNullOrEmpty
+        }
+    }
 }

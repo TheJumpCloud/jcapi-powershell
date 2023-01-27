@@ -18,5 +18,15 @@ Describe 'Get-JcSdkSystemInsightService' -Tag:(""){
     It 'List' {
         { Get-JcSdkSystemInsightService } | Should -Not -Throw
     }
+
+    It 'List Filter Tests' {
+        $siservice = Get-JcSdkSystemInsightService | Get-Random -Count 1
+        if ($siservice) {
+            Get-JcSdkSystemInsightService -Filter @("system_id:eq:$($siservice.systemId)") | Should -Not -BeNullOrEmpty
+            Get-JcSdkSystemInsightService -Filter @("system_id:eq:$($siservice.systemId)", "name:eq:$($siservice.name)") | Should -Not -BeNullOrEmpty
+            # name accepts strings, fakeString is a fake value
+            Get-JcSdkSystemInsightService -Filter @("system_id:eq:$($siservice.systemId)", "name:eq:fakeString") | Should -BeNullOrEmpty
+        }
+    }
 }
 

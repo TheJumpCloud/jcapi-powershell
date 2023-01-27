@@ -18,5 +18,15 @@ Describe 'Get-JcSdkSystemInsightKernelInfo' -Tag:(""){
     It 'List' {
         { Get-JcSdkSystemInsightKernelInfo } | Should -Not -Throw
     }
+
+    It 'List Filter Tests' {
+        $siKernelInfo = Get-JcSdkSystemInsightKernelInfo | Get-Random -Count 1
+        if ($siKernelInfo) {
+            Get-JcSdkSystemInsightKernelInfo -Filter @("system_id:eq:$($siKernelInfo.systemId)") | Should -Not -BeNullOrEmpty
+            Get-JcSdkSystemInsightKernelInfo -Filter @("system_id:eq:$($siKernelInfo.systemId)", "device:eq:$($siKernelInfo.device)") | Should -Not -BeNullOrEmpty
+            # device accepts strings, fakeString is a fake value
+            Get-JcSdkSystemInsightKernelInfo -Filter @("system_id:eq:$($siKernelInfo.systemId)", "device:eq:fakeString") | Should -BeNullOrEmpty
+        }
+    }
 }
 

@@ -23,18 +23,18 @@ curl -X GET https://console.jumpcloud.com/api/organizations/{OrganizationID} \\
 
 ### List (Default)
 ```
-Get-JcSdkOrganization [-Fields <String>] [-Filter <String>] [-Search <String>] [-Sort <String>]
+Get-JcSdkOrganization [-Fields <String>] [-Filter <String[]>] [-Search <String>] [-Sort <String>]
  [-SortIgnoreCase <String>] [<CommonParameters>]
 ```
 
 ### Get
 ```
-Get-JcSdkOrganization -Id <String> [-Fields <String>] [-Filter <String>] [<CommonParameters>]
+Get-JcSdkOrganization -Id <String> [-Fields <String>] [-Filter <String[]>] [<CommonParameters>]
 ```
 
 ### GetViaIdentity
 ```
-Get-JcSdkOrganization -InputObject <IJumpCloudApiIdentity> [-Fields <String>] [-Filter <String>]
+Get-JcSdkOrganization -InputObject <IJumpCloudApiIdentity> [-Fields <String>] [-Filter <String[]>]
  [<CommonParameters>]
 ```
 
@@ -121,7 +121,7 @@ Is case sensitive.
  OR the filters together.
 
 ```yaml
-Type: System.String
+Type: System.String[]
 Parameter Sets: (All)
 Aliases:
 
