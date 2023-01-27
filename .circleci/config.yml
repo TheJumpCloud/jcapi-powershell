@@ -126,6 +126,7 @@ build-sdks: &build-sdks
           only:
             - master
   - Draft JumpCloud SDK DirectoryInsights GitHub Release:
+      context: github-credentials-sa-releases
       requires:
         - Test JumpCloud SDK DirectoryInsights
         - Commit Changes
@@ -134,6 +135,7 @@ build-sdks: &build-sdks
           only:
             - master
   - Draft JumpCloud SDK V1 GitHub Release:
+      context: github-credentials-sa-releases
       requires:
         - Test JumpCloud SDK DirectoryInsights
         - Test JumpCloud SDK V1
@@ -143,6 +145,7 @@ build-sdks: &build-sdks
           only:
             - master
   - Draft JumpCloud SDK V2 GitHub Release:
+      context: github-credentials-sa-releases
       requires:
         - Test JumpCloud SDK DirectoryInsights
         - Test JumpCloud SDK V1
@@ -158,28 +161,6 @@ workflows:
     when:
       equal: [<< pipeline.parameters.workflow >>, "ci"]
     jobs: *build-sdks
-  trigger-ci-nightly:
-    triggers:
-      - schedule:
-          cron: '0 6 * * 1-5' # Run on weekdays at 12AM MST (6AM UTC)
-          filters:
-            branches:
-              only:
-                - master
-    jobs:
-      - Trigger ci-nightly
-  ci-nightly:
-    when:
-      equal: [<< pipeline.parameters.workflow >>, "ci-nightly"]
-    jobs:
-      - Build JumpCloud SDK DirectoryInsights
-      - Build JumpCloud SDK V1
-      - Build JumpCloud SDK V2
-      - Test JumpCloud SDK DirectoryInsights
-      - Test JumpCloud SDK V1
-      - Test JumpCloud SDK V1 MTP
-      - Test JumpCloud SDK V2
-      - Test JumpCloud SDK V2 MTP
 jobs:
   Build JumpCloud SDK DirectoryInsights:
     executor: win/default
@@ -554,9 +535,8 @@ commands:
             TAG="<< parameters.SDKName >>-$VERSION"
             echo ${CIRCLE_PROJECT_USERNAME}
             echo ${CIRCLE_PROJECT_REPONAME}
-            echo ${GITHUB_TOKEN}
             # Post Draft Release
-            ghr -t ${GitHubAccessToken} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -n "$TITLE" -b "$BODY" -delete -draft "$TAG"
+            ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -n "$TITLE" -b "$BODY" -delete -draft "$TAG"
   commit:
     parameters:
       SDKName:
