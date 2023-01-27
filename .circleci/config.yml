@@ -126,7 +126,7 @@ build-sdks: &build-sdks
           only:
             - master
   - Draft JumpCloud SDK DirectoryInsights GitHub Release:
-      context: github-credentials
+      context: github-credentials-sa-releases
       requires:
         - Build JumpCloud SDK DirectoryInsights
       # requires:
@@ -137,7 +137,7 @@ build-sdks: &build-sdks
       #     only:
       #       - master
   - Draft JumpCloud SDK V1 GitHub Release:
-      context: github-credentials
+      context: github-credentials-sa-releases
       requires:
         - Build JumpCloud SDK V1
       # requires:
@@ -149,7 +149,7 @@ build-sdks: &build-sdks
       #     only:
       #       - master
   - Draft JumpCloud SDK V2 GitHub Release:
-      context: github-credentials
+      context: github-credentials-sa-releases
       requires:
         - Build JumpCloud SDK V2
       # requires:
