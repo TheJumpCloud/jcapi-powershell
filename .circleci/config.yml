@@ -128,37 +128,31 @@ build-sdks: &build-sdks
   - Draft JumpCloud SDK DirectoryInsights GitHub Release:
       context: github-credentials-sa-releases
       requires:
-        - Build JumpCloud SDK DirectoryInsights
-      # requires:
-      #   - Test JumpCloud SDK DirectoryInsights
-      #   - Commit Changes
-      # filters:
-      #   branches:
-      #     only:
-      #       - master
+        - Test JumpCloud SDK DirectoryInsights
+        - Commit Changes
+      filters:
+        branches:
+          only:
+            - master
   - Draft JumpCloud SDK V1 GitHub Release:
       context: github-credentials-sa-releases
       requires:
-        - Build JumpCloud SDK V1
-      # requires:
-      #   - Test JumpCloud SDK DirectoryInsights
-      #   - Test JumpCloud SDK V1
-      #   - Commit Changes
-      # filters:
-      #   branches:
-      #     only:
+        - Test JumpCloud SDK DirectoryInsights
+        - Test JumpCloud SDK V1
+        - Commit Changes
+      filters:
+        branches:
+          only:
       #       - master
   - Draft JumpCloud SDK V2 GitHub Release:
       context: github-credentials-sa-releases
       requires:
-        - Build JumpCloud SDK V2
-      # requires:
-      #   - Test JumpCloud SDK DirectoryInsights
-      #   - Test JumpCloud SDK V1
-      #   - Test JumpCloud SDK V2
-      #   - Commit Changes
-      # filters:
-      #   branches:
+        - Test JumpCloud SDK DirectoryInsights
+        - Test JumpCloud SDK V1
+        - Test JumpCloud SDK V2
+        - Commit Changes
+      filters:
+        branches:
       #     only:
       #       - master
 workflows:
