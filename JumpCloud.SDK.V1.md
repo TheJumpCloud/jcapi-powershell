@@ -2,14 +2,10 @@
 Release Date: January 27, 2023
 #### RELEASE NOTES
 ```
-{{Fill in the Release Notes}}
+This release address an incompatability with the `-Filter` parameter on V1 endpoitns
 ```
-#### FEATURES:
-{{Fill in the Features}}
-#### IMPROVEMENTS:
-{{Fill in the Improvements}}
 #### BUG FIXES:
-{{Fill in the Bug Fixes}}
+Multiple filter can now be passed into V1 endpoint functions. To use multiple filters on the V1 module, please refer to the individual function documentation. In general filter parameters will consist of an array of strings where filter strings are composed of the field, operator and value you wish to search for. Ex. `Get-jcsdkuser -filter @("firstname:``$eq:foo", "company:``$eq:fakeCompany")`
 #### Generated Changes:
 
 <details>
@@ -21,7 +17,19 @@ No changes
 <details>
 <summary>Functions Modified</summary>
 
-No changes
+* Get-JcSdkApplication.ps1
+* Get-JcSdkApplicationTemplate.ps1
+* Get-JcSdkCommand.ps1
+* Get-JcSdkCommandResult.ps1
+* Get-JcSdkOrganization.ps1
+* Get-JcSdkRadiusServer.ps1
+* Get-JcSdkSystem.ps1
+* Get-JcSdkUser.ps1
+* Search-JcSdkCommand.ps1
+* Search-JcSdkOrganization.ps1
+* Search-JcSdkSystem.ps1
+* Search-JcSdkUser.ps1
+
 </details>
 
 <details>
