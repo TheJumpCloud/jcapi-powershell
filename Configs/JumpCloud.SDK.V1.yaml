@@ -37,7 +37,12 @@ module-version: 0.0.32
 dll-name: JumpCloud.SDK.V1.private
 
 directive:
-  - where:
+  - from: swagger-document
+    where: "$.definitions.commandresultssearchlist.properties.results.items.properties.system"
+    transform: >-
+      $["x-ms-client-name"] = "systemId";
+  - from: swagger-document
+    where:
       prefix: JcSdk
     hide: true
 # Prevent response flattening: https://github.com/Azure/autorest.powershell/issues/743
