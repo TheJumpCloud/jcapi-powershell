@@ -2,14 +2,12 @@
 Release Date: March 10, 2023
 #### RELEASE NOTES
 ```
-{{Fill in the Release Notes}}
+This release adderesses several changes to the command result functions.
 ```
 #### FEATURES:
-{{Fill in the Features}}
-#### IMPROVEMENTS:
-{{Fill in the Improvements}}
+`Get-JCSdkCommandResultByCommandID`, `Search-JCSdkCommandResult` functions added
 #### BUG FIXES:
-{{Fill in the Bug Fixes}}
+Fixed a bug in `Get-JcSdkCommandResult` where the ID parameter could not be used
 #### Generated Changes:
 
 <details>
