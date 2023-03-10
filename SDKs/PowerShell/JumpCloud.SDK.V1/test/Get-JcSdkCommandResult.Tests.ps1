@@ -18,8 +18,7 @@ Describe 'Get-JcSdkCommandResult' -Tag:(""){
         { Get-JcSdkCommandResult } | Should -Not -Throw
     }
 
-    It 'Get' -Skip {
-        # TODO: Id Param not accepted, fix required
+    It 'Get' {
         { Get-JcSdkCommandResult -Id:($global:PesterTestCommand.Id) } | Should -Not -Throw
     }
 
