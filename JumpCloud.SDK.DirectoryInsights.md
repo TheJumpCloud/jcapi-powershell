@@ -21,7 +21,11 @@ No changes
 <details>
 <summary>Functions Modified</summary>
 
-No changes
+* Get-JcSdkEvent.ps1
+* Get-JcSdkEventCount.ps1
+* Get-JcSdkEventDistinct.ps1
+* Get-JcSdkEventInterval.ps1
+
 </details>
 
 <details>
