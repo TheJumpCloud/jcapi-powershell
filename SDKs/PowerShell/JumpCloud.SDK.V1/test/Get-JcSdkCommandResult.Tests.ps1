@@ -19,7 +19,8 @@ Describe 'Get-JcSdkCommandResult' -Tag:(""){
     }
 
     It 'Get' {
-        { Get-JcSdkCommandResult -Id:($global:PesterTestCommand.Id) } | Should -Not -Throw
+        $cmd = Get-JcSdkCommandResult | Get-Random -Count 1
+        { Get-JcSdkCommandResult -Id:($cmd.Id) } | Should -Not -Throw
     }
 
     It 'GetViaIdentity' -skip {
