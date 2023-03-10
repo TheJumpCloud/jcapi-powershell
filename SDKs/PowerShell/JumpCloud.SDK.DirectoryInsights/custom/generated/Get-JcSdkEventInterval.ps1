@@ -23,7 +23,7 @@ PS C:\> {{ Add code here }}
 .Inputs
 JumpCloud.SDK.DirectoryInsights.Models.IEventIntervalQuery
 .Outputs
-JumpCloud.SDK.DirectoryInsights.Models.IPost200ApplicationJsonPropertiesItemsItem
+JumpCloud.SDK.DirectoryInsights.Models.IPathsD98A8EventsIntervalPostResponses200ContentApplicationJsonSchemaPropertiesBucketsItems
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -35,6 +35,7 @@ BODY <IEventIntervalQuery>:
   IntervalUnit <String>:
   [EndTime <DateTime?>]: optional query end time, UTC in RFC3339 format
   [IntervalValue <String>]: Interval Value. This specifies how many units you want to bucket the event counts by
+  [Q <String>]: optional string for specifying a full text query
   [SearchTermAnd <ITermConjunction>]: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
     [(Any) <Object>]: This indicates any property can be added to this object.
   [SearchTermNot <ITermConjunction>]: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
@@ -45,7 +46,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Get-JcSdkEventInterval
 {
-    [OutputType([JumpCloud.SDK.DirectoryInsights.Models.IPost200ApplicationJsonPropertiesItemsItem])]
+    [OutputType([JumpCloud.SDK.DirectoryInsights.Models.IPathsD98A8EventsIntervalPostResponses200ContentApplicationJsonSchemaPropertiesBucketsItems])]
     [CmdletBinding(DefaultParameterSetName='GetExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(ParameterSetName='Get', Mandatory, ValueFromPipeline)]
@@ -86,6 +87,12 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     # Interval Value.
     # This specifies how many units you want to bucket the event counts by
     ${IntervalValue}, 
+
+    [Parameter(ParameterSetName='GetExpanded')]
+    [JumpCloud.SDK.DirectoryInsights.Category('Body')]
+    [System.String]
+    # optional string for specifying a full text query
+    ${Q}, 
 
     [Parameter(ParameterSetName='GetExpanded')]
     [JumpCloud.SDK.DirectoryInsights.Category('Body')]

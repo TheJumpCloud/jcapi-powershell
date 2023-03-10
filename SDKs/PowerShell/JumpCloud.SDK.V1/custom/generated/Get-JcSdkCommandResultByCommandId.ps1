@@ -1,35 +1,31 @@
 <#
 .Synopsis
-This endpoint returns a specific command result.
+This endpoint returns results for a specific command.
 
 #### Sample Request
 ```
-curl -X GET https://console.jumpcloud.com/api/commandresults/{CommandResultID} \\
+curl -X GET https://console.jumpcloud.com/api/commands/{id}/results \\
   -H 'Accept: application/json' \\
   -H 'Content-Type: application/json' \\
   -H 'x-api-key: {API_KEY}'
-  ```
+  ````
 .Description
-This endpoint returns a specific command result.
+This endpoint returns results for a specific command.
 
 #### Sample Request
 ```
-curl -X GET https://console.jumpcloud.com/api/commandresults/{CommandResultID} \\
+curl -X GET https://console.jumpcloud.com/api/commands/{id}/results \\
   -H 'Accept: application/json' \\
   -H 'Content-Type: application/json' \\
   -H 'x-api-key: {API_KEY}'
-  ```
+  ````
 .Example
-Get-JcSdkCommandResult
-.Example
-Get-JcSdkCommandResult -Id 640659f4b7ac4d5f061f8ac9
+get-JcSdkCommandResultByCommandId -Id 6406532738e1a32cafa24260
 
 .Inputs
 JumpCloud.SDK.V1.Models.IJumpCloudApiIdentity
 .Outputs
-JumpCloud.SDK.V1.Models.ICommandresult
-.Outputs
-JumpCloud.SDK.V1.Models.ICommandresultslist
+JumpCloud.SDK.V1.Models.ICommandresultbycommandid
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -41,12 +37,12 @@ INPUTOBJECT <IJumpCloudApiIdentity>:
   [SystemuserId <String>]:
   [Triggername <String>]:
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/Get-JcSdkCommandResult.md
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/Get-JcSdkCommandResultByCommandId.md
 #>
- Function Get-JcSdkCommandResult
+ Function Get-JcSdkCommandResultByCommandId
 {
-    [OutputType([JumpCloud.SDK.V1.Models.ICommandresult], [JumpCloud.SDK.V1.Models.ICommandresultslist])]
-    [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
+    [OutputType([JumpCloud.SDK.V1.Models.ICommandresultbycommandid])]
+    [CmdletBinding(DefaultParameterSetName='Get', PositionalBinding=$false)]
     Param(
     [Parameter(ParameterSetName='Get', Mandatory)]
     [JumpCloud.SDK.V1.Category('Path')]
@@ -60,61 +56,6 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     # Identity Parameter
     # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
     ${InputObject}, 
-
-    [Parameter()]
-    [JumpCloud.SDK.V1.Category('Query')]
-    [System.String]
-    # Use a space seperated string of field parameters to include the data in the response.
-    # If omitted, the default list of fields will be returned.
-    ${Fields}, 
-
-    [Parameter()]
-    [AllowEmptyCollection()]
-    [JumpCloud.SDK.V1.Category('Query')]
-    [System.String[]]
-    # A filter to apply to the query.
-    # See the supported operators below.
-    # For more complex searches,
-    # see the related `/search/<domain>` endpoints,
-    # e.g.
-    # `/search/systems`.
-    # 
-    # **Filter structure**: `<field>:<operator>:<value>`.
-    # 
-    # **field** = Populate with a valid field from an endpoint response.
-    # 
-    # **operator** = Supported operators are:
-    # - `$eq` (equals)
-    # - `$ne` (does not equal)
-    # - `$gt` (is greater than)
-    # - `$gte` (is greater than or equal to)
-    # - `$lt` (is less than)
-    # - `$lte` (is less than or equal to)
-    # 
-    # _Note: v1 operators differ from v2 operators._
-    # 
-    # _Note: For v1 operators, excluding the `$` will result in undefined behavior._
-    # 
-    # **value** = Populate with the value you want to search for.
-    # Is case sensitive.
-    # 
-    # **Examples**
-    # - `GET /users?filter=username:$eq:testuser`
-    # - `GET /systemusers?filter=password_expiration_date:$lte:2021-10-24`
-    # - `GET /systemusers?filter=department:$ne:Accounting`
-    # - `GET /systems?filter[0]=firstname:$eq:foo&filter[1]=lastname:$eq:bar` - this will
-    #  AND the filters together.
-    # - `GET /systems?filter[or][0]=lastname:$eq:foo&filter[or][1]=lastname:$eq:bar` - this will
-    #  OR the filters together.
-    ${Filter}, 
-
-    [Parameter(ParameterSetName='List')]
-    [JumpCloud.SDK.V1.Category('Query')]
-    [System.String]
-    # Use space separated sort parameters to sort the collection.
-    # Default sort is ascending.
-    # Prefix with `-` to sort descending.
-    ${Sort}, 
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V1.Category('Runtime')]
@@ -177,7 +118,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        If ($Paginate -and $PSCmdlet.ParameterSetName -in ('List'))
+        If ($Paginate -and $PSCmdlet.ParameterSetName -in ('Get'))
         {
             $PSBoundParameters.Remove('Paginate') | Out-Null
             If ([System.String]::IsNullOrEmpty($PSBoundParameters.Limit))
@@ -192,7 +133,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
             {
                 Write-Debug ("Limit: $($PSBoundParameters.Limit); ");
                 Write-Debug ("Skip: $($PSBoundParameters.Skip); ");
-                $Result = JumpCloud.SDK.V1.internal\Get-JcSdkInternalCommandResult @PSBoundParameters
+                $Result = JumpCloud.SDK.V1.internal\Get-JcSdkInternalCommandResultByCommandId @PSBoundParameters
                 Write-Debug ('HttpRequest: ' + $JCHttpRequest);
                 Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
                 Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);
@@ -217,7 +158,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Else
         {
             $PSBoundParameters.Remove('Paginate') | Out-Null
-            $Result = JumpCloud.SDK.V1.internal\Get-JcSdkInternalCommandResult @PSBoundParameters
+            $Result = JumpCloud.SDK.V1.internal\Get-JcSdkInternalCommandResultByCommandId @PSBoundParameters
             Write-Debug ('HttpRequest: ' + $JCHttpRequest);
             Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
             Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);

@@ -1,8 +1,12 @@
 <#
 .Synopsis
-Update the custom email configuration for the specified custom email type
+Update the custom email configuration for the specified custom email type.
+
+This action is only available to paying customers.
 .Description
-Update the custom email configuration for the specified custom email type
+Update the custom email configuration for the specified custom email type.
+
+This action is only available to paying customers.
 .Example
 PS C:\> {{ Add code here }}
 

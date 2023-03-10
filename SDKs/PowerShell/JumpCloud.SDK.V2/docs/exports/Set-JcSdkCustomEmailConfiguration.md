@@ -8,7 +8,9 @@ schema: 2.0.0
 # Set-JcSdkCustomEmailConfiguration
 
 ## SYNOPSIS
-Update the custom email configuration for the specified custom email type
+Update the custom email configuration for the specified custom email type.
+
+This action is only available to paying customers.
 
 ## SYNTAX
 
@@ -39,7 +41,9 @@ Set-JcSdkCustomEmailConfiguration -InputObject <IJumpCloudApiIdentity> -Subject 
 ```
 
 ## DESCRIPTION
-Update the custom email configuration for the specified custom email type
+Update the custom email configuration for the specified custom email type.
+
+This action is only available to paying customers.
 
 ## EXAMPLES
 

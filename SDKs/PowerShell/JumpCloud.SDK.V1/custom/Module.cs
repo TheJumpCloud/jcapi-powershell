@@ -86,10 +86,10 @@ namespace JumpCloud.SDK.V1
                 request.Headers.Add("Accept", "application/json");
             }
             // If headers do not contain an "UserAgent" with the correct value fix it
-            if (request.Headers.UserAgent.ToString() != "JumpCloud_JumpCloud.PowerShell.SDK.V1/0.0.32")
+            if (request.Headers.UserAgent.ToString() != "JumpCloud_JumpCloud.PowerShell.SDK.V1/0.0.33")
             {
                 request.Headers.UserAgent.Clear();
-                request.Headers.UserAgent.ParseAdd("JumpCloud_JumpCloud.PowerShell.SDK.V1/0.0.32");
+                request.Headers.UserAgent.ParseAdd("JumpCloud_JumpCloud.PowerShell.SDK.V1/0.0.33");
             }
             // // request.Headers.Add("Content-Type", "application/json");
             System.Net.Http.HttpResponseMessage response = await next.SendAsync(request, callback);

@@ -19,7 +19,7 @@ curl -X POST 'https://api.jumpcloud.com/insights/directory/v1/events/interval' -
 ### GetExpanded (Default)
 ```
 Get-JcSdkEventInterval -IntervalUnit <String> -Service <String[]> -StartTime <DateTime> [-EndTime <DateTime>]
- [-IntervalValue <String>] [-SearchTermAnd <Hashtable>] [-SearchTermNot <Hashtable>]
+ [-IntervalValue <String>] [-Q <String>] [-SearchTermAnd <Hashtable>] [-SearchTermNot <Hashtable>]
  [-SearchTermOr <Hashtable>] [-Timezone <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
@@ -102,6 +102,21 @@ Accept wildcard characters: False
 ### -IntervalValue
 Interval Value.
 This specifies how many units you want to bucket the event counts by
+
+```yaml
+Type: System.String
+Parameter Sets: GetExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Q
+optional string for specifying a full text query
 
 ```yaml
 Type: System.String
@@ -246,7 +261,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.DirectoryInsights.Models.IPost200ApplicationJsonPropertiesItemsItem
+### JumpCloud.SDK.DirectoryInsights.Models.IPathsD98A8EventsIntervalPostResponses200ContentApplicationJsonSchemaPropertiesBucketsItems
 
 ## NOTES
 
@@ -263,6 +278,7 @@ BODY <IEventIntervalQuery>: EventIntervalQuery is the users' command to search o
   - `IntervalUnit <String>`: 
   - `[EndTime <DateTime?>]`: optional query end time, UTC in RFC3339 format
   - `[IntervalValue <String>]`: Interval Value. This specifies how many units you want to bucket the event counts by
+  - `[Q <String>]`: optional string for specifying a full text query
   - `[SearchTermAnd <ITermConjunction>]`: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
     - `[(Any) <Object>]`: This indicates any property can be added to this object.
   - `[SearchTermNot <ITermConjunction>]`: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values

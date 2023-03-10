@@ -2114,7 +2114,9 @@ curl -X POST \"https://console.jumpcloud.com/api/v2/bulk/userstates\" \\
 ```
 
 ### [New-JcSdkCustomEmailConfiguration](New-JcSdkCustomEmailConfiguration.md)
-Create the custom email configuration for the specified custom email type
+Create the custom email configuration for the specified custom email type.
+
+This action is only available to paying customers.
 
 ### [New-JcSdkDuoAccount](New-JcSdkDuoAccount.md)
 Registers a Duo account for an organization.
@@ -2635,7 +2637,9 @@ A direct association can be a non-homogeneous relationship between 2 different o
 ```
 
 ### [Set-JcSdkCustomEmailConfiguration](Set-JcSdkCustomEmailConfiguration.md)
-Update the custom email configuration for the specified custom email type
+Update the custom email configuration for the specified custom email type.
+
+This action is only available to paying customers.
 
 ### [Set-JcSdkDuoApplication](Set-JcSdkDuoApplication.md)
 Updates the specified Duo application.

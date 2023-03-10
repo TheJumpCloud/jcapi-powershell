@@ -19,7 +19,7 @@ curl -X POST 'https://api.jumpcloud.com/insights/directory/v1/events' -H 'Conten
 ### GetExpanded (Default)
 ```
 Get-JcSdkEvent -Service <String[]> -StartTime <DateTime> [-EndTime <DateTime>] [-Fields <String[]>]
- [-SearchAfter <String[]>] [-SearchTermAnd <Hashtable>] [-SearchTermNot <Hashtable>]
+ [-Q <String>] [-SearchAfter <String[]>] [-SearchTermAnd <Hashtable>] [-SearchTermNot <Hashtable>]
  [-SearchTermOr <Hashtable>] [-Sort <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
@@ -131,6 +131,21 @@ optional list of fields to return from query
 
 ```yaml
 Type: System.String[]
+Parameter Sets: GetExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Q
+optional string for specifying a full text query
+
+```yaml
+Type: System.String
 Parameter Sets: GetExpanded
 Aliases:
 
@@ -303,6 +318,7 @@ BODY <IEventQuery>: EventQuery is the users' command to search our auth logs
   - `[EndTime <DateTime?>]`: optional query end time, UTC in RFC3339 format
   - `[Fields <String[]>]`: optional list of fields to return from query
   - `[Limit <Int64?>]`: Max number of rows to return
+  - `[Q <String>]`: optional string for specifying a full text query
   - `[SearchAfter <String[]>]`: Specific query to search after, see x-* response headers for next values
   - `[SearchTermAnd <ITermConjunction>]`: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
     - `[(Any) <Object>]`: This indicates any property can be added to this object.
