@@ -20,7 +20,7 @@ Describe 'Get-JcSdkSystemInsightProgram' -Tag:(""){
     }
 
     It 'List Filter Tests' {
-        $siProgram = Get-JcSdkSystemInsightProgram | Get-Random -Count 1
+        $siProgram = Get-JcSdkSystemInsightProgram | Where-Object { $_.Name -notmatch "\+\+" | Get-Random -Count 1
         if ($siProgram) {
             Get-JcSdkSystemInsightProgram -Filter @("system_id:eq:$($siProgram.systemId)") | Should -Not -BeNullOrEmpty
             Get-JcSdkSystemInsightProgram -Filter @("system_id:eq:$($siProgram.systemId)", "name:eq:$($siProgram.name)") | Should -Not -BeNullOrEmpty

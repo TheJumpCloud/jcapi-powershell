@@ -23,7 +23,7 @@ Describe 'Get-JcSdkSystemInsightDiskInfo' -Tag:(""){
         $siAppShim = Get-JcSdkSystemInsightDiskInfo | Get-Random -Count 1
         if ($siAppShim) {
             Get-JcSdkSystemInsightDiskInfo -Filter @("system_id:eq:$($siAppShim.systemId)") | Should -Not -BeNullOrEmpty
-            Get-JcSdkSystemInsightDiskInfo -Filter @("system_id:eq:$($siAppShim.systemId)", "disk_index:eq:$($siAppShim.disk_index)") | Should -Not -BeNullOrEmpty
+            Get-JcSdkSystemInsightDiskInfo -Filter @("system_id:eq:$($siAppShim.systemId)", "disk_index:eq:$($siAppShim.diskindex)") | Should -Not -BeNullOrEmpty
             # disk_index accepts ints, 9988 is a fake value
             Get-JcSdkSystemInsightDiskInfo -Filter @("system_id:eq:$($siAppShim.systemId)", "disk_index:eq:9988") | Should -BeNullOrEmpty
         }
