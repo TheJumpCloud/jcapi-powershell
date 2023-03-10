@@ -74,6 +74,17 @@ curl -X GET https://console.jumpcloud.com/api/commandresults/{CommandResultID} \
   -H 'x-api-key: {API_KEY}'
   ```
 
+### [Get-JcSdkCommandResultByCommandId](Get-JcSdkCommandResultByCommandId.md)
+This endpoint returns results for a specific command.
+
+#### Sample Request
+```
+curl -X GET https://console.jumpcloud.com/api/commands/{id}/results \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+  ````
+
 ### [Get-JcSdkOrganization](Get-JcSdkOrganization.md)
 This endpoint returns a particular Organization.
 
@@ -451,6 +462,32 @@ curl -X POST https://console.jumpcloud.com/api/search/commands \\
 }'
 ```
 
+### [Search-JcSdkCommandResult](Search-JcSdkCommandResult.md)
+Return Command Results in multi-record format allowing for the passing of the `filter` parameter.
+
+To support advanced filtering you can use the `filter` and `searchFilter` parameters that can only be passed in the body of POST /api/search/commandresults route.
+The `filter` parameter must be passed as Content-Type application/json.
+
+The `filter` parameter is an object with a single property, either `and` or `or` with the value of the property being an array of query expressions.
+
+This allows you to filter records using the logic of matching ALL or ANY records in the array of query expressions.
+If the `and` or `or` are not included the default behavior is to match ALL query expressions.
+
+
+#### Sample Request
+
+Exact search for a specific command result
+```
+curl -X POST https://console.jumpcloud.com/api/search/commandresults \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+  \"filter\" : \"workflowInstanceId:$eq:62f3c599ec4e928499069c7f\",
+  \"fields\" : \"name workflowId sudo\"
+}'
+```
+
 ### [Search-JcSdkOrganization](Search-JcSdkOrganization.md)
 This endpoint will return Organization data based on your search parameters.
 This endpoint WILL NOT allow you to add a new Organization.
@@ -675,6 +712,8 @@ This endpoint allows you to update an Organization.
 
 Note: `passwordPolicy` settings are only used when `passwordCompliance` is set to \"custom\".
 We discourage the use of non-custom passwordCompliance values.
+
+`emailDisclaimer` can only be modified by paying customers.
 
 `hasStripeCustomerId` is deprecated and will be removed.
 

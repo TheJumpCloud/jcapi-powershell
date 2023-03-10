@@ -66,6 +66,30 @@ BODY <ISoftwareApp>:
     [AutoUpdate <Boolean?>]:
     [Description <String>]: The software app description.
     [DesiredState <String>]: State of Install or Uninstall
+    [EnterpriseObjectId <String>]: ID of the Enterprise with which this app is associated
+    [GoogleAndroidAppPricing <String>]: Whether this app is free, free with in-app purchases, or paid.
+    [GoogleAndroidAppVersion <String>]: Latest version currently available for this app.
+    [GoogleAndroidAuthor <String>]: The name of the author of this app.
+    [GoogleAndroidAutoUpdateMode <String>]: Controls the auto-update mode for the app.
+    [GoogleAndroidCategory <String>]: The app category (e.g. COMMUNICATION, SOCIAL, etc.).
+    [GoogleAndroidContentRating <String>]: The content rating for this app.
+    [GoogleAndroidDisplayMode <String>]: The display mode of the web app.
+    [GoogleAndroidDistributionChannel <String>]: How and to whom the package is made available.
+    [GoogleAndroidFullDescription <String>]: Full app description, if available.
+    [GoogleAndroidIconUrl <String>]: A link to an image that can be used as an icon for the app.
+    [GoogleAndroidInstallType <String>]: The type of installation to perform for an app.
+    [GoogleAndroidManagedConfigurationTemplateId <String>]: The managed configurations template for the app.
+    [GoogleAndroidManagedProperties <Boolean?>]: Indicates whether this app has managed properties or not.
+    [GoogleAndroidMinSdkVersion <Int32?>]: The minimum Android SDK necessary to run the app.
+    [GoogleAndroidName <String>]: The name of the app in the form enterprises/{enterprise}/applications/{packageName}.
+    [GoogleAndroidPermissionGrants <ISoftwareAppPermissionGrants[]>]:
+      [Id <String>]: An opaque string uniquely identifying the Android permission, e.g. android.permission.READ_CALENDAR.
+      [Policy <String>]: The policy for granting the permission.
+    [GoogleAndroidRuntimePermission <String>]: The policy for granting permission requests to apps.
+    [GoogleAndroidStartUrl <String>]: The start URL, i.e. the URL that should load when the user opens the application. Applicable only for webapps.
+    [GoogleAndroidType <String>]: Type of this android application.
+    [GoogleAndroidUpdateTime <String>]: The approximate time (within 7 days) the app was last published.
+    [GoogleAndroidVersionCode <Int32?>]: The current version of the web app.
     [Location <String>]: Repository where the app is located within the package manager
     [LocationObjectId <String>]: ID of the repository where the app is located within the package manager
     [PackageId <String>]:
@@ -90,6 +114,30 @@ SETTINGS <ISoftwareAppSettings[]>:
   [AutoUpdate <Boolean?>]:
   [Description <String>]: The software app description.
   [DesiredState <String>]: State of Install or Uninstall
+  [EnterpriseObjectId <String>]: ID of the Enterprise with which this app is associated
+  [GoogleAndroidAppPricing <String>]: Whether this app is free, free with in-app purchases, or paid.
+  [GoogleAndroidAppVersion <String>]: Latest version currently available for this app.
+  [GoogleAndroidAuthor <String>]: The name of the author of this app.
+  [GoogleAndroidAutoUpdateMode <String>]: Controls the auto-update mode for the app.
+  [GoogleAndroidCategory <String>]: The app category (e.g. COMMUNICATION, SOCIAL, etc.).
+  [GoogleAndroidContentRating <String>]: The content rating for this app.
+  [GoogleAndroidDisplayMode <String>]: The display mode of the web app.
+  [GoogleAndroidDistributionChannel <String>]: How and to whom the package is made available.
+  [GoogleAndroidFullDescription <String>]: Full app description, if available.
+  [GoogleAndroidIconUrl <String>]: A link to an image that can be used as an icon for the app.
+  [GoogleAndroidInstallType <String>]: The type of installation to perform for an app.
+  [GoogleAndroidManagedConfigurationTemplateId <String>]: The managed configurations template for the app.
+  [GoogleAndroidManagedProperties <Boolean?>]: Indicates whether this app has managed properties or not.
+  [GoogleAndroidMinSdkVersion <Int32?>]: The minimum Android SDK necessary to run the app.
+  [GoogleAndroidName <String>]: The name of the app in the form enterprises/{enterprise}/applications/{packageName}.
+  [GoogleAndroidPermissionGrants <ISoftwareAppPermissionGrants[]>]:
+    [Id <String>]: An opaque string uniquely identifying the Android permission, e.g. android.permission.READ_CALENDAR.
+    [Policy <String>]: The policy for granting the permission.
+  [GoogleAndroidRuntimePermission <String>]: The policy for granting permission requests to apps.
+  [GoogleAndroidStartUrl <String>]: The start URL, i.e. the URL that should load when the user opens the application. Applicable only for webapps.
+  [GoogleAndroidType <String>]: Type of this android application.
+  [GoogleAndroidUpdateTime <String>]: The approximate time (within 7 days) the app was last published.
+  [GoogleAndroidVersionCode <Int32?>]: The current version of the web app.
   [Location <String>]: Repository where the app is located within the package manager
   [LocationObjectId <String>]: ID of the repository where the app is located within the package manager
   [PackageId <String>]:

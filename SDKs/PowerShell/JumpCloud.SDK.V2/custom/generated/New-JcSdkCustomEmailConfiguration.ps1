@@ -1,8 +1,12 @@
 <#
 .Synopsis
-Create the custom email configuration for the specified custom email type
+Create the custom email configuration for the specified custom email type.
+
+This action is only available to paying customers.
 .Description
-Create the custom email configuration for the specified custom email type
+Create the custom email configuration for the specified custom email type.
+
+This action is only available to paying customers.
 .Example
 PS C:\> {{ Add code here }}
 

@@ -8,7 +8,9 @@ schema: 2.0.0
 # New-JcSdkCustomEmailConfiguration
 
 ## SYNOPSIS
-Create the custom email configuration for the specified custom email type
+Create the custom email configuration for the specified custom email type.
+
+This action is only available to paying customers.
 
 ## SYNTAX
 
@@ -25,7 +27,9 @@ New-JcSdkCustomEmailConfiguration -CustomEmail <ICustomEmail> [-Confirm] [-WhatI
 ```
 
 ## DESCRIPTION
-Create the custom email configuration for the specified custom email type
+Create the custom email configuration for the specified custom email type.
+
+This action is only available to paying customers.
 
 ## EXAMPLES
 
