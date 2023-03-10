@@ -1,3 +1,4 @@
+BeforeAll {
 if(($null -eq $TestName) -or ($TestName -contains 'Search-JcSdkCommandResult'))
 {
   $loadEnvPath = Join-Path $PSScriptRoot 'loadEnv.ps1'
@@ -14,7 +15,9 @@ if(($null -eq $TestName) -or ($TestName -contains 'Search-JcSdkCommandResult'))
   . ($mockingPath | Select-Object -First 1).FullName
 }
 
-Describe 'Search-JcSdkCommandResult' {
+
+}
+Describe 'Search-JcSdkCommandResult' -Tag:(""){
     It 'SearchExpanded' {
         { Search-JcSdkCommandResult -Filter @{'and' = @("workflowId:eq:$($global:PesterTestCommand.Id)") } } | Should -Not -Throw
 

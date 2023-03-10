@@ -1,3 +1,4 @@
+BeforeAll {
 if(($null -eq $TestName) -or ($TestName -contains 'Get-JcSdkCommandResultByCommandId'))
 {
   $loadEnvPath = Join-Path $PSScriptRoot 'loadEnv.ps1'
@@ -14,7 +15,9 @@ if(($null -eq $TestName) -or ($TestName -contains 'Get-JcSdkCommandResultByComma
   . ($mockingPath | Select-Object -First 1).FullName
 }
 
-Describe 'Get-JcSdkCommandResultByCommandId' {
+
+}
+Describe 'Get-JcSdkCommandResultByCommandId' -Tag:(""){
     It 'Get' {
         { Get-JcSdkCommandResultByCommandId -Id:($global:PesterTestCommand.Id) } | Should -Not -Throw
     }
