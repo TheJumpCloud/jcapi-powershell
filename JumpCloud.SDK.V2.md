@@ -21,7 +21,11 @@ No changes
 <details>
 <summary>Functions Modified</summary>
 
-No changes
+* New-JcSdkCustomEmailConfiguration.ps1
+* New-JcSdkSoftwareApp.ps1
+* Set-JcSdkCustomEmailConfiguration.ps1
+* Set-JcSdkSoftwareApp.ps1
+
 </details>
 
 <details>

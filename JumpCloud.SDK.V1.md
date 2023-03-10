@@ -15,13 +15,17 @@ Release Date: March 10, 2023
 <details>
 <summary>Functions Added</summary>
 
-No changes
+* Get-JcSdkCommandResultByCommandId.ps1
+* Search-JcSdkCommandResult.ps1
+
 </details>
 
 <details>
 <summary>Functions Modified</summary>
 
-No changes
+* Get-JcSdkCommandResult.ps1
+* Set-JcSdkOrganization.ps1
+
 </details>
 
 <details>
