@@ -1,5 +1,5 @@
 ## JumpCloud.SDK.V1-0.0.33
-Release Date: March 10, 2023
+Release Date: March 13, 2023
 #### RELEASE NOTES
 ```
 This release adderesses several changes to the command result functions.
