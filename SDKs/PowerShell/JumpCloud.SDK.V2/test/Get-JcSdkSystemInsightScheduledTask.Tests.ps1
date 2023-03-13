@@ -24,8 +24,8 @@ Describe 'Get-JcSdkSystemInsightScheduledTask' -Tag:(""){
         if ($siSchedTask) {
             Get-JcSdkSystemInsightScheduledTask -Filter @("system_id:eq:$($siSchedTask.systemId)") | Should -Not -BeNullOrEmpty
             Get-JcSdkSystemInsightScheduledTask -Filter @("system_id:eq:$($siSchedTask.systemId)", "enabled:eq:$($siSchedTask.enabled)") | Should -Not -BeNullOrEmpty
-            # enabled accepts strings, fakeString is a fake value
-            Get-JcSdkSystemInsightScheduledTask -Filter @("system_id:eq:$($siSchedTask.systemId)", "enabled:eq:fakeString") | Should -BeNullOrEmpty
+            # enabled accepts ints, 9988 is a fake value
+            Get-JcSdkSystemInsightScheduledTask -Filter @("system_id:eq:$($siSchedTask.systemId)", "enabled:eq:9988") | Should -BeNullOrEmpty
         }
     }
 }

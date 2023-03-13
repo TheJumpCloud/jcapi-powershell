@@ -1,3 +1,33 @@
+## JumpCloud.SDK.V2-0.0.37
+Release Date: March 13, 2023
+#### RELEASE NOTES
+```
+This is a rollup release for the V2 module, no functional changes were made other than new parameters on several functions.
+```
+#### Generated Changes:
+
+<details>
+<summary>Functions Added</summary>
+
+No changes
+</details>
+
+<details>
+<summary>Functions Modified</summary>
+
+* New-JcSdkCustomEmailConfiguration.ps1
+* New-JcSdkSoftwareApp.ps1
+* Set-JcSdkCustomEmailConfiguration.ps1
+* Set-JcSdkSoftwareApp.ps1
+
+</details>
+
+<details>
+<summary>Functions Removed</summary>
+
+No changes
+</details>
+
 ## JumpCloud.SDK.V2-0.0.36
 Release Date: January 27, 2023
 #### RELEASE NOTES

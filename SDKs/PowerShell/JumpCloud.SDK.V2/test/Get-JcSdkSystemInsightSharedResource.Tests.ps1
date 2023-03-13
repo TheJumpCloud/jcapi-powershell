@@ -24,8 +24,8 @@ Describe 'Get-JcSdkSystemInsightSharedResource' -Tag:(""){
         if ($siSharedResource) {
             Get-JcSdkSystemInsightSharedResource -Filter @("system_id:eq:$($siSharedResource.systemId)") | Should -Not -BeNullOrEmpty
             Get-JcSdkSystemInsightSharedResource -Filter @("system_id:eq:$($siSharedResource.systemId)", "type:eq:$($siSharedResource.type)") | Should -Not -BeNullOrEmpty
-            # type accepts strings, fakeString is a fake value
-            Get-JcSdkSystemInsightSharedResource -Filter @("system_id:eq:$($siSharedResource.systemId)", "type:eq:fakeString") | Should -BeNullOrEmpty
+            # type accepts ints, 9988 is a fake value
+            Get-JcSdkSystemInsightSharedResource -Filter @("system_id:eq:$($siSharedResource.systemId)", "type:eq:9988") | Should -BeNullOrEmpty
         }
     }
 }

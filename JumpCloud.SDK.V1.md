@@ -1,3 +1,37 @@
+## JumpCloud.SDK.V1-0.0.33
+Release Date: March 13, 2023
+#### RELEASE NOTES
+```
+This release adderesses several changes to the command result functions.
+```
+#### FEATURES:
+`Get-JCSdkCommandResultByCommandID`, `Search-JCSdkCommandResult` functions added
+#### BUG FIXES:
+Fixed a bug in `Get-JcSdkCommandResult` where the ID parameter could not be used
+#### Generated Changes:
+
+<details>
+<summary>Functions Added</summary>
+
+* Get-JcSdkCommandResultByCommandId.ps1
+* Search-JcSdkCommandResult.ps1
+
+</details>
+
+<details>
+<summary>Functions Modified</summary>
+
+* Get-JcSdkCommandResult.ps1
+* Set-JcSdkOrganization.ps1
+
+</details>
+
+<details>
+<summary>Functions Removed</summary>
+
+No changes
+</details>
+
 ## JumpCloud.SDK.V1-0.0.32
 Release Date: January 27, 2023
 #### RELEASE NOTES

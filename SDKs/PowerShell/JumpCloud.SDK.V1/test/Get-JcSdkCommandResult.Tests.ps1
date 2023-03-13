@@ -18,9 +18,11 @@ Describe 'Get-JcSdkCommandResult' -Tag:(""){
         { Get-JcSdkCommandResult } | Should -Not -Throw
     }
 
-    It 'Get' -Skip {
-        # TODO: Id Param not accepted, fix required
-        { Get-JcSdkCommandResult -Id:($global:PesterTestCommand.Id) } | Should -Not -Throw
+    It 'Get' {
+        $cmd = Get-JcSdkCommandResult | Get-Random -Count 1
+        if ($cmd){
+            { Get-JcSdkCommandResult -Id:($cmd.Id) } | Should -Not -Throw
+        }
     }
 
     It 'GetViaIdentity' -skip {

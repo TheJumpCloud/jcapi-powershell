@@ -30,20 +30,10 @@ Get-JcSdkCommandResult [-Fields <String>] [-Filter <String[]>] [-Sort <String>] 
 Get-JcSdkCommandResult -Id <String> [-Fields <String>] [-Filter <String[]>] [<CommonParameters>]
 ```
 
-### Get1
-```
-Get-JcSdkCommandResult -Id <String> [<CommonParameters>]
-```
-
 ### GetViaIdentity
 ```
 Get-JcSdkCommandResult -InputObject <IJumpCloudApiIdentity> [-Fields <String>] [-Filter <String[]>]
  [<CommonParameters>]
-```
-
-### GetViaIdentity1
-```
-Get-JcSdkCommandResult -InputObject <IJumpCloudApiIdentity> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -61,17 +51,17 @@ curl -X GET https://console.jumpcloud.com/api/commandresults/{CommandResultID} \
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkCommandResult
 ```
 
-{{ Add output here }}
+
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkCommandResult -Id 640659f4b7ac4d5f061f8ac9
 ```
 
-{{ Add output here }}
+
 
 ## PARAMETERS
 
@@ -81,7 +71,7 @@ If omitted, the default list of fields will be returned.
 
 ```yaml
 Type: System.String
-Parameter Sets: Get, GetViaIdentity, List
+Parameter Sets: (All)
 Aliases:
 
 Required: False
@@ -129,7 +119,7 @@ Is case sensitive.
 
 ```yaml
 Type: System.String[]
-Parameter Sets: Get, GetViaIdentity, List
+Parameter Sets: (All)
 Aliases:
 
 Required: False
@@ -144,7 +134,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.String
-Parameter Sets: Get, Get1
+Parameter Sets: Get
 Aliases:
 
 Required: True
@@ -160,7 +150,7 @@ To construct, see NOTES section for INPUTOBJECT properties and create a hash tab
 
 ```yaml
 Type: JumpCloud.SDK.V1.Models.IJumpCloudApiIdentity
-Parameter Sets: GetViaIdentity, GetViaIdentity1
+Parameter Sets: GetViaIdentity
 Aliases:
 
 Required: True
