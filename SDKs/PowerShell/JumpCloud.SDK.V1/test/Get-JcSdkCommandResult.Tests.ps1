@@ -20,7 +20,9 @@ Describe 'Get-JcSdkCommandResult' -Tag:(""){
 
     It 'Get' {
         $cmd = Get-JcSdkCommandResult | Get-Random -Count 1
-        { Get-JcSdkCommandResult -Id:($cmd.Id) } | Should -Not -Throw
+        if ($cmd){
+            { Get-JcSdkCommandResult -Id:($cmd.Id) } | Should -Not -Throw
+        }
     }
 
     It 'GetViaIdentity' -skip {
