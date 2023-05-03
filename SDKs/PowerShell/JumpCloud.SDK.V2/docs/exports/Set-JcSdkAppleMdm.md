@@ -41,13 +41,13 @@ Set-JcSdkAppleMdm -Id <String> [-AllowMobileUserEnrollment] [-AppleCertCreatorAp
  [-DefaultSystemGroupId <String>] [-DepEnableZeroTouchEnrollment]
  [-DepSetupAssistantOptions <IDepSetupAssistantOption[]>] [-EncryptedDepServerToken <String>]
  [-IoDefaultDeviceGroupObjectIds <String[]>] [-IoEnableZeroTouchEnrollment]
- [-IoSetupAssistantOptions <IDepSetupAssistantOption[]>] [-IosWelcomeScreenButton <String>]
- [-IosWelcomeScreenParagraph <String>] [-IosWelcomeScreenTitle <String>]
+ [-IoSetupAssistantOptions <IDepSetupAssistantOption[]>] [-IoSetupOptions <String[]>]
+ [-IosWelcomeScreenButton <String>] [-IosWelcomeScreenParagraph <String>] [-IosWelcomeScreenTitle <String>]
  [-MacoDefaultDeviceGroupObjectIds <String[]>] [-MacoEnableZeroTouchEnrollment]
- [-MacoSetupAssistantOptions <IDepSetupAssistantOption[]>] [-MacosWelcomeScreenButton <String>]
- [-MacosWelcomeScreenParagraph <String>] [-MacosWelcomeScreenTitle <String>] [-Name <String>]
- [-WelcomeScreenButton <String>] [-WelcomeScreenParagraph <String>] [-WelcomeScreenTitle <String>] [-Confirm]
- [-WhatIf] [<CommonParameters>]
+ [-MacoSetupAssistantOptions <IDepSetupAssistantOption[]>] [-MacoSetupOptions <String[]>]
+ [-MacosWelcomeScreenButton <String>] [-MacosWelcomeScreenParagraph <String>]
+ [-MacosWelcomeScreenTitle <String>] [-Name <String>] [-WelcomeScreenButton <String>]
+ [-WelcomeScreenParagraph <String>] [-WelcomeScreenTitle <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Set
@@ -69,12 +69,12 @@ Set-JcSdkAppleMdm -InputObject <IJumpCloudApiIdentity> [-AllowMobileUserEnrollme
  [-DepEnableZeroTouchEnrollment] [-DepSetupAssistantOptions <IDepSetupAssistantOption[]>]
  [-EncryptedDepServerToken <String>] [-IoDefaultDeviceGroupObjectIds <String[]>]
  [-IoEnableZeroTouchEnrollment] [-IoSetupAssistantOptions <IDepSetupAssistantOption[]>]
- [-IosWelcomeScreenButton <String>] [-IosWelcomeScreenParagraph <String>] [-IosWelcomeScreenTitle <String>]
- [-MacoDefaultDeviceGroupObjectIds <String[]>] [-MacoEnableZeroTouchEnrollment]
- [-MacoSetupAssistantOptions <IDepSetupAssistantOption[]>] [-MacosWelcomeScreenButton <String>]
- [-MacosWelcomeScreenParagraph <String>] [-MacosWelcomeScreenTitle <String>] [-Name <String>]
- [-WelcomeScreenButton <String>] [-WelcomeScreenParagraph <String>] [-WelcomeScreenTitle <String>] [-Confirm]
- [-WhatIf] [<CommonParameters>]
+ [-IoSetupOptions <String[]>] [-IosWelcomeScreenButton <String>] [-IosWelcomeScreenParagraph <String>]
+ [-IosWelcomeScreenTitle <String>] [-MacoDefaultDeviceGroupObjectIds <String[]>]
+ [-MacoEnableZeroTouchEnrollment] [-MacoSetupAssistantOptions <IDepSetupAssistantOption[]>]
+ [-MacoSetupOptions <String[]>] [-MacosWelcomeScreenButton <String>] [-MacosWelcomeScreenParagraph <String>]
+ [-MacosWelcomeScreenTitle <String>] [-Name <String>] [-WelcomeScreenButton <String>]
+ [-WelcomeScreenParagraph <String>] [-WelcomeScreenTitle <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -320,11 +320,26 @@ Accept wildcard characters: False
 ```
 
 ### -IoSetupAssistantOptions
-.
+A Setup Option wrapped as an object
 To construct, see NOTES section for IOSETUPASSISTANTOPTIONS properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IDepSetupAssistantOption[]
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -IoSetupOptions
+A list of configured setup options for this enrollment.
+
+```yaml
+Type: System.String[]
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -412,11 +427,26 @@ Accept wildcard characters: False
 ```
 
 ### -MacoSetupAssistantOptions
-.
+A Setup Option wrapped as an object
 To construct, see NOTES section for MACOSETUPASSISTANTOPTIONS properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IDepSetupAssistantOption[]
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -MacoSetupOptions
+A list of configured setup options for this enrollment.
+
+```yaml
+Type: System.String[]
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -597,13 +627,15 @@ BODY <IAppleMdmPatch>: Apple MDM Patch
   - `[EncryptedDepServerToken <String>]`: The S/MIME encoded DEP Server Token returned by Apple Business Manager when creating an MDM instance.
   - `[IoDefaultDeviceGroupObjectIds <String[]>]`: An array of ObjectIDs identifying the default device groups for this specific type (based on the OS family) of automated device enrollment. Currently, only a single DeviceGroupID is supported.
   - `[IoEnableZeroTouchEnrollment <Boolean?>]`: A toggle to determine if ADE registered devices should go through JumpCloud Zero Touch Enrollment.
-  - `[IoSetupAssistantOptions <IDepSetupAssistantOption[]>]`: 
+  - `[IoSetupAssistantOptions <IDepSetupAssistantOption[]>]`: A Setup Option wrapped as an object
+  - `[IoSetupOptions <String[]>]`: A list of configured setup options for this enrollment.
   - `[IosWelcomeScreenButton <String>]`: Text to display on the button on the DEP Welcome Screen.
   - `[IosWelcomeScreenParagraph <String>]`: A message to display on the DEP Welcome Screen.
   - `[IosWelcomeScreenTitle <String>]`: The title to display on the DEP Welcome Screen.
   - `[MacoDefaultDeviceGroupObjectIds <String[]>]`: An array of ObjectIDs identifying the default device groups for this specific type (based on the OS family) of automated device enrollment. Currently, only a single DeviceGroupID is supported.
   - `[MacoEnableZeroTouchEnrollment <Boolean?>]`: A toggle to determine if ADE registered devices should go through JumpCloud Zero Touch Enrollment.
-  - `[MacoSetupAssistantOptions <IDepSetupAssistantOption[]>]`: 
+  - `[MacoSetupAssistantOptions <IDepSetupAssistantOption[]>]`: A Setup Option wrapped as an object
+  - `[MacoSetupOptions <String[]>]`: A list of configured setup options for this enrollment.
   - `[MacosWelcomeScreenButton <String>]`: Text to display on the button on the DEP Welcome Screen.
   - `[MacosWelcomeScreenParagraph <String>]`: A message to display on the DEP Welcome Screen.
   - `[MacosWelcomeScreenTitle <String>]`: The title to display on the DEP Welcome Screen.
@@ -640,10 +672,10 @@ INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter
   - `[UserId <String>]`: ObjectID of the User.
   - `[WorkdayId <String>]`: 
 
-IOSETUPASSISTANTOPTIONS <IDepSetupAssistantOption[]>: .
+IOSETUPASSISTANTOPTIONS <IDepSetupAssistantOption[]>: A Setup Option wrapped as an object
   - `[Option <String>]`: Options to skip screens during MacOS and iOS setup:         * `accessibility` - Skips the Accessibility pane, only if the Mac is connected to Ethernet and the cloud config is downloaded.         * `appearance` - Skips the Choose Your Look screen.         * `appleID` - Skips Apple ID setup.         * `biometric` - Skips biometric setup.         * `diagnostics` - Skips the App Analytics pane.         * `displayTone` - Skips display tone setup.         * `fileVault` - Skips FileVault setup assistant screen.         * `icloudDiagnostics` - Skips iCloud analytics screen.         * `icloudStorage` - Skips iCloud documents and desktop screen.         * `location` - Skips location services setup.         * `payment` - Skips Apple Pay setup.         * `privacy` - Skips the Privacy setup.         * `restore` - Skips restoring from backup.         * `screenTime` - Skips screen time setup.         * `siri` - Skips Siri setup.         * `tos` - Skips terms and conditions.         * `appStore` - Skips the App Store pane.         * `deviceToDeviceMigration` - Skips Device to Device Migration pane.         * `displayZoom` - Skips zoom setup.         * `homeButton` - Skips the Meet the New Home Button screen on iPhone 7, iPhone 7 Plus, iPhone 8, iPhone 8 Plus and iPhone SE.         * `imessageAndFacetime` - Skips the iMessage and FaceTime screen in iOS.         * `messagingActivationUsingPhoneNumber` - Skips the iMessage pane.         * `moveFromAndroid` - If the Restore pane is not skipped, removes the Move from Android option in the Restore pane on iOS.O         * `passcode` - Hides and disables the passcode pane.         * `restoreComplete` - Skips the Restore Completed pane.         * `setupCellular` - Skips the add cellular plan pane.         * `softwareUpdate` - Skips the mandatory software update screen in iOS.         * `unlockWithWatch` - Skips Unlock Your Mac with your Apple Watch pane.         * `updateComplete` - Skips the Software Update Complete pane.         * `watchMigration` - Skips the screen for watch migration.         * `welcome` - Skips the Get Started pane.         
 
-MACOSETUPASSISTANTOPTIONS <IDepSetupAssistantOption[]>: .
+MACOSETUPASSISTANTOPTIONS <IDepSetupAssistantOption[]>: A Setup Option wrapped as an object
   - `[Option <String>]`: Options to skip screens during MacOS and iOS setup:         * `accessibility` - Skips the Accessibility pane, only if the Mac is connected to Ethernet and the cloud config is downloaded.         * `appearance` - Skips the Choose Your Look screen.         * `appleID` - Skips Apple ID setup.         * `biometric` - Skips biometric setup.         * `diagnostics` - Skips the App Analytics pane.         * `displayTone` - Skips display tone setup.         * `fileVault` - Skips FileVault setup assistant screen.         * `icloudDiagnostics` - Skips iCloud analytics screen.         * `icloudStorage` - Skips iCloud documents and desktop screen.         * `location` - Skips location services setup.         * `payment` - Skips Apple Pay setup.         * `privacy` - Skips the Privacy setup.         * `restore` - Skips restoring from backup.         * `screenTime` - Skips screen time setup.         * `siri` - Skips Siri setup.         * `tos` - Skips terms and conditions.         * `appStore` - Skips the App Store pane.         * `deviceToDeviceMigration` - Skips Device to Device Migration pane.         * `displayZoom` - Skips zoom setup.         * `homeButton` - Skips the Meet the New Home Button screen on iPhone 7, iPhone 7 Plus, iPhone 8, iPhone 8 Plus and iPhone SE.         * `imessageAndFacetime` - Skips the iMessage and FaceTime screen in iOS.         * `messagingActivationUsingPhoneNumber` - Skips the iMessage pane.         * `moveFromAndroid` - If the Restore pane is not skipped, removes the Move from Android option in the Restore pane on iOS.O         * `passcode` - Hides and disables the passcode pane.         * `restoreComplete` - Skips the Restore Completed pane.         * `setupCellular` - Skips the add cellular plan pane.         * `softwareUpdate` - Skips the mandatory software update screen in iOS.         * `unlockWithWatch` - Skips Unlock Your Mac with your Apple Watch pane.         * `updateComplete` - Skips the Software Update Complete pane.         * `watchMigration` - Skips the screen for watch migration.         * `welcome` - Skips the Get Started pane.         
 
 ## RELATED LINKS

@@ -14,7 +14,7 @@ Lists Office 365 users available for import.
 
 ```
 Get-JcSdkOffice365UsersToImport -Office365Id <String> [-Count] [-Filter <String>] [-Orderby <String>]
- [-Search <String>] [-SkipToken <String>] [-Top <Int32>] [-ConsistencyLevel <String>] [<CommonParameters>]
+ [-Search <String>] [-ConsistencyLevel <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -123,38 +123,6 @@ See https://docs.microsoft.com/en-us/graph/api/user-list?view=graph-rest-1.0&tab
 
 ```yaml
 Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -SkipToken
-Office 365 API token used to access the next page of results.
-See https://docs.microsoft.com/en-us/graph/paging.
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Top
-Office 365 API maximum number of results per page.
-See https://docs.microsoft.com/en-us/graph/paging.
-
-```yaml
-Type: System.Int32
 Parameter Sets: (All)
 Aliases:
 

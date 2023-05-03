@@ -79,13 +79,15 @@ BODY <IAppleMdmPatch>:
   [EncryptedDepServerToken <String>]: The S/MIME encoded DEP Server Token returned by Apple Business Manager when creating an MDM instance.
   [IoDefaultDeviceGroupObjectIds <String[]>]: An array of ObjectIDs identifying the default device groups for this specific type (based on the OS family) of automated device enrollment. Currently, only a single DeviceGroupID is supported.
   [IoEnableZeroTouchEnrollment <Boolean?>]: A toggle to determine if ADE registered devices should go through JumpCloud Zero Touch Enrollment.
-  [IoSetupAssistantOptions <IDepSetupAssistantOption[]>]:
+  [IoSetupAssistantOptions <IDepSetupAssistantOption[]>]: A Setup Option wrapped as an object
+  [IoSetupOptions <String[]>]: A list of configured setup options for this enrollment.
   [IosWelcomeScreenButton <String>]: Text to display on the button on the DEP Welcome Screen.
   [IosWelcomeScreenParagraph <String>]: A message to display on the DEP Welcome Screen.
   [IosWelcomeScreenTitle <String>]: The title to display on the DEP Welcome Screen.
   [MacoDefaultDeviceGroupObjectIds <String[]>]: An array of ObjectIDs identifying the default device groups for this specific type (based on the OS family) of automated device enrollment. Currently, only a single DeviceGroupID is supported.
   [MacoEnableZeroTouchEnrollment <Boolean?>]: A toggle to determine if ADE registered devices should go through JumpCloud Zero Touch Enrollment.
-  [MacoSetupAssistantOptions <IDepSetupAssistantOption[]>]:
+  [MacoSetupAssistantOptions <IDepSetupAssistantOption[]>]: A Setup Option wrapped as an object
+  [MacoSetupOptions <String[]>]: A list of configured setup options for this enrollment.
   [MacosWelcomeScreenButton <String>]: Text to display on the button on the DEP Welcome Screen.
   [MacosWelcomeScreenParagraph <String>]: A message to display on the DEP Welcome Screen.
   [MacosWelcomeScreenTitle <String>]: The title to display on the DEP Welcome Screen.
@@ -237,9 +239,17 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [AllowEmptyCollection()]
     [JumpCloud.SDK.V2.Category('Body')]
     [JumpCloud.SDK.V2.Models.IDepSetupAssistantOption[]]
-    # .
+    # A Setup Option wrapped as an object
     # To construct, see NOTES section for IOSETUPASSISTANTOPTIONS properties and create a hash table.
     ${IoSetupAssistantOptions}, 
+
+    [Parameter(ParameterSetName='SetExpanded')]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
+    [AllowEmptyCollection()]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [System.String[]]
+    # A list of configured setup options for this enrollment.
+    ${IoSetupOptions}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
@@ -283,9 +293,17 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [AllowEmptyCollection()]
     [JumpCloud.SDK.V2.Category('Body')]
     [JumpCloud.SDK.V2.Models.IDepSetupAssistantOption[]]
-    # .
+    # A Setup Option wrapped as an object
     # To construct, see NOTES section for MACOSETUPASSISTANTOPTIONS properties and create a hash table.
     ${MacoSetupAssistantOptions}, 
+
+    [Parameter(ParameterSetName='SetExpanded')]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
+    [AllowEmptyCollection()]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [System.String[]]
+    # A list of configured setup options for this enrollment.
+    ${MacoSetupOptions}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]

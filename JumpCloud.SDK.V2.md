@@ -1,3 +1,36 @@
+## JumpCloud.SDK.V2-0.0.38
+Release Date: May 03, 2023
+#### RELEASE NOTES
+```
+{{Fill in the Release Notes}}
+```
+#### FEATURES:
+{{Fill in the Features}}
+#### IMPROVEMENTS:
+{{Fill in the Improvements}}
+#### BUG FIXES:
+{{Fill in the Bug Fixes}}
+#### Generated Changes:
+
+<details>
+<summary>Functions Added</summary>
+
+No changes
+</details>
+
+<details>
+<summary>Functions Modified</summary>
+
+No changes
+</details>
+
+<details>
+<summary>Functions Removed</summary>
+
+* Get-JcSdkGroupSuggestion.ps1
+
+</details>
+
 ## JumpCloud.SDK.V2-0.0.37
 Release Date: March 13, 2023
 #### RELEASE NOTES

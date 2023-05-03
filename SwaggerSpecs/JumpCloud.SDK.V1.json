@@ -2469,6 +2469,9 @@
         "arch": {
           "type": "string"
         },
+        "archFamily": {
+          "type": "string"
+        },
         "azureAdJoined": {
           "type": "boolean"
         },
@@ -4968,19 +4971,6 @@
       ]
     },
     "/organizations/{id}/paymentdetails": {
-      "parameters": [
-        {
-          "in": "path",
-          "name": "id",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "x-functionalities-tags": [
-        "accounts-page-payment-info"
-      ]
-    },
-    "/organizations/{id}/paymentdetails/card": {
       "parameters": [
         {
           "in": "path",

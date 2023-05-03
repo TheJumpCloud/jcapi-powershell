@@ -59,6 +59,9 @@ BODY <ISystemGroupPost>:
     Field <String>: Name of field in filter target object.
     Operator <String>: Filter comparison operator.
     Value <String>: Filter comparison value.
+  [MemberSuggestionsNotify <Boolean?>]: True if notification emails are to be sent for membership suggestions.
+  [MembershipAutomated <Boolean?>]: True if membership of this group is automatically updated based on the Member Query and Member Query Exemptions, if configured
+  [MembershipMethod <String>]: The type of membership method for this group. Valid values include NOTSET, STATIC, DYNAMIC_REVIEW_REQUIRED, and DYNAMIC_AUTOMATED.
 
 MEMBERQUERYEXEMPTIONS <IGraphObject[]>:
   Id <String>: The ObjectID of the graph object.
@@ -125,6 +128,25 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     # .
     # To construct, see NOTES section for MEMBERQUERYFILTERS properties and create a hash table.
     ${MemberQueryFilters}, 
+
+    [Parameter(ParameterSetName='CreateExpanded')]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [System.Management.Automation.SwitchParameter]
+    # True if notification emails are to be sent for membership suggestions.
+    ${MemberSuggestionsNotify}, 
+
+    [Parameter(ParameterSetName='CreateExpanded')]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [System.Management.Automation.SwitchParameter]
+    # True if membership of this group is automatically updated based on the Member Query and Member Query Exemptions, if configured
+    ${MembershipAutomated}, 
+
+    [Parameter(ParameterSetName='CreateExpanded')]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [System.String]
+    # The type of membership method for this group.
+    # Valid values include NOTSET, STATIC, DYNAMIC_REVIEW_REQUIRED, and DYNAMIC_AUTOMATED.
+    ${MembershipMethod}, 
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]
