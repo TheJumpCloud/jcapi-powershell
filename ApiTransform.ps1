@@ -294,7 +294,6 @@ $TransformConfig = [Ordered]@{
             'groups_policy_list'                                = 'PolicyGroup_List';
             'groups_policy_post'                                = 'PolicyGroup_Create';
             'groups_policy_put'                                 = 'PolicyGroup_Set';
-            'groups_suggestions_get'                            = 'GroupSuggestion_Get';
             'groups_system_delete'                              = 'SystemGroup_Delete';
             'groups_system_get'                                 = 'SystemGroup_Get';
             'groups_system_list'                                = 'SystemGroup_List';
