@@ -19,8 +19,17 @@
           "type": "boolean"
         },
         "setupAssistantOptions": {
+          "description": "A Setup Option wrapped as an object",
           "items": {
             "$ref": "#/definitions/DEPSetupAssistantOption"
+          },
+          "type": "array",
+          "x-deprecated": true
+        },
+        "setupOptions": {
+          "description": "A list of configured setup options for this enrollment.",
+          "items": {
+            "$ref": "#/definitions/SetupAssistantOption"
           },
           "type": "array"
         },
@@ -1843,6 +1852,17 @@
       "title": "GroupAttributes (UserGroup)",
       "type": "object"
     },
+    "GroupMembershipMethodType": {
+      "description": "The type of membership method for this group. Valid values include NOTSET, STATIC, DYNAMIC_REVIEW_REQUIRED, and DYNAMIC_AUTOMATED.",
+      "enum": [
+        "NOTSET",
+        "STATIC",
+        "DYNAMIC_REVIEW_REQUIRED",
+        "DYNAMIC_AUTOMATED"
+      ],
+      "title": "GroupMembershipMethodType",
+      "type": "string"
+    },
     "GroupPwm": {
       "properties": {
         "accessLevelId": {
@@ -1967,21 +1987,6 @@
       ],
       "title": "LDAP Server Action",
       "type": "string"
-    },
-    "MemberSuggestion": {
-      "properties": {
-        "object": {
-          "$ref": "#/definitions/GraphObject"
-        },
-        "op": {
-          "description": "How to modify group membership.",
-          "enum": [
-            "add",
-            "remove"
-          ],
-          "type": "string"
-        }
-      }
     },
     "OSRestriction": {
       "description": "Contains OS properties to restrict the application of policies to devices based on the device's OS",
@@ -2241,6 +2246,10 @@
       "properties": {
         "name": {
           "description": "The description for this specific Policy.",
+          "type": "string"
+        },
+        "notes": {
+          "description": "The notes for this specific Policy.",
           "type": "string"
         },
         "template": {
@@ -2593,6 +2602,10 @@
         },
         "name": {
           "description": "The description for this specific Policy.",
+          "type": "string"
+        },
+        "notes": {
+          "description": "The notes for this specific Policy.",
           "type": "string"
         },
         "template": {
@@ -3438,6 +3451,17 @@
           },
           "type": "array"
         },
+        "memberSuggestionsNotify": {
+          "description": "True if notification emails are to be sent for membership suggestions.",
+          "type": "boolean"
+        },
+        "membershipAutomated": {
+          "description": "True if membership of this group is automatically updated based on the Member Query and Member Query Exemptions, if configured",
+          "type": "boolean"
+        },
+        "membershipMethod": {
+          "$ref": "#/definitions/GroupMembershipMethodType"
+        },
         "name": {
           "description": "Display name of a System Group.",
           "type": "string"
@@ -3476,6 +3500,17 @@
           },
           "type": "array"
         },
+        "memberSuggestionsNotify": {
+          "description": "True if notification emails are to be sent for membership suggestions.",
+          "type": "boolean"
+        },
+        "membershipAutomated": {
+          "description": "True if membership of this group is automatically updated based on the Member Query and Member Query Exemptions, if configured",
+          "type": "boolean"
+        },
+        "membershipMethod": {
+          "$ref": "#/definitions/GroupMembershipMethodType"
+        },
         "name": {
           "description": "Display name of a System Group.",
           "type": "string"
@@ -3509,6 +3544,17 @@
             "$ref": "#/definitions/GraphObject"
           },
           "type": "array"
+        },
+        "memberSuggestionsNotify": {
+          "description": "True if notification emails are to be sent for membership suggestions.",
+          "type": "boolean"
+        },
+        "membershipAutomated": {
+          "description": "True if membership of this group is automatically updated based on the Member Query and Member Query Exemptions, if configured",
+          "type": "boolean"
+        },
+        "membershipMethod": {
+          "$ref": "#/definitions/GroupMembershipMethodType"
         },
         "name": {
           "description": "Display name of a System Group.",
@@ -3618,6 +3664,9 @@
           "description": "True if membership of this group is automatically updated based on the Member Query and Member Query Exemptions, if configured",
           "type": "boolean"
         },
+        "membershipMethod": {
+          "$ref": "#/definitions/GroupMembershipMethodType"
+        },
         "name": {
           "description": "Display name of a User Group.",
           "type": "string"
@@ -3667,6 +3716,9 @@
           "description": "True if membership of this group is automatically updated based on the Member Query and Member Query Exemptions, if configured",
           "type": "boolean"
         },
+        "membershipMethod": {
+          "$ref": "#/definitions/GroupMembershipMethodType"
+        },
         "name": {
           "description": "Display name of a User Group.",
           "type": "string"
@@ -3708,6 +3760,9 @@
         "membershipAutomated": {
           "description": "True if membership of this group is automatically updated based on the Member Query and Member Query Exemptions, if configured",
           "type": "boolean"
+        },
+        "membershipMethod": {
+          "$ref": "#/definitions/GroupMembershipMethodType"
         },
         "name": {
           "description": "Display name of a User Group.",
@@ -9612,15 +9667,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request PUT \\\n  --url https://console.jumpcloud.com/api/v2/applemdms/{id} \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --header 'x-org-id: SOME_STRING_VALUE' \\\n  --data '{\"ades\":{\"ios\":{\"defaultDeviceGroupObjectIds\":[\"string\"],\"enableZeroTouchEnrollment\":true,\"setupAssistantOptions\":[{\"option\":\"accessibility\"}],\"welcomeScreen\":{\"button\":\"string\",\"paragraph\":\"string\",\"title\":\"string\"}},\"macos\":{\"defaultDeviceGroupObjectIds\":[\"string\"],\"enableZeroTouchEnrollment\":true,\"setupAssistantOptions\":[{\"option\":\"accessibility\"}],\"welcomeScreen\":{\"button\":\"string\",\"paragraph\":\"string\",\"title\":\"string\"}}},\"allowMobileUserEnrollment\":true,\"appleCertCreatorAppleID\":\"string\",\"appleSignedCert\":\"string\",\"defaultIosUserEnrollmentDeviceGroupID\":\"string\",\"defaultSystemGroupID\":\"string\",\"dep\":{\"enableZeroTouchEnrollment\":true,\"setupAssistantOptions\":[{\"option\":\"accessibility\"}],\"welcomeScreen\":{\"button\":\"string\",\"paragraph\":\"string\",\"title\":\"string\"}},\"encryptedDepServerToken\":\"string\",\"name\":\"string\"}'"
+            "source": "curl --request PUT \\\n  --url https://console.jumpcloud.com/api/v2/applemdms/{id} \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --header 'x-org-id: SOME_STRING_VALUE' \\\n  --data '{\"ades\":{\"ios\":{\"defaultDeviceGroupObjectIds\":[\"string\"],\"enableZeroTouchEnrollment\":true,\"setupAssistantOptions\":[{\"option\":\"accessibility\"}],\"setupOptions\":[\"accessibility\"],\"welcomeScreen\":{\"button\":\"string\",\"paragraph\":\"string\",\"title\":\"string\"}},\"macos\":{\"defaultDeviceGroupObjectIds\":[\"string\"],\"enableZeroTouchEnrollment\":true,\"setupAssistantOptions\":[{\"option\":\"accessibility\"}],\"setupOptions\":[\"accessibility\"],\"welcomeScreen\":{\"button\":\"string\",\"paragraph\":\"string\",\"title\":\"string\"}}},\"allowMobileUserEnrollment\":true,\"appleCertCreatorAppleID\":\"string\",\"appleSignedCert\":\"string\",\"defaultIosUserEnrollmentDeviceGroupID\":\"string\",\"defaultSystemGroupID\":\"string\",\"dep\":{\"enableZeroTouchEnrollment\":true,\"setupAssistantOptions\":[{\"option\":\"accessibility\"}],\"welcomeScreen\":{\"button\":\"string\",\"paragraph\":\"string\",\"title\":\"string\"}},\"encryptedDepServerToken\":\"string\",\"name\":\"string\"}'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/v2/applemdms/{id}\"\n\npayload = {\n    \"ades\": {\n        \"ios\": {\n            \"defaultDeviceGroupObjectIds\": [\"string\"],\n            \"enableZeroTouchEnrollment\": True,\n            \"setupAssistantOptions\": [{\"option\": \"accessibility\"}],\n            \"welcomeScreen\": {\n                \"button\": \"string\",\n                \"paragraph\": \"string\",\n                \"title\": \"string\"\n            }\n        },\n        \"macos\": {\n            \"defaultDeviceGroupObjectIds\": [\"string\"],\n            \"enableZeroTouchEnrollment\": True,\n            \"setupAssistantOptions\": [{\"option\": \"accessibility\"}],\n            \"welcomeScreen\": {\n                \"button\": \"string\",\n                \"paragraph\": \"string\",\n                \"title\": \"string\"\n            }\n        }\n    },\n    \"allowMobileUserEnrollment\": True,\n    \"appleCertCreatorAppleID\": \"string\",\n    \"appleSignedCert\": \"string\",\n    \"defaultIosUserEnrollmentDeviceGroupID\": \"string\",\n    \"defaultSystemGroupID\": \"string\",\n    \"dep\": {\n        \"enableZeroTouchEnrollment\": True,\n        \"setupAssistantOptions\": [{\"option\": \"accessibility\"}],\n        \"welcomeScreen\": {\n            \"button\": \"string\",\n            \"paragraph\": \"string\",\n            \"title\": \"string\"\n        }\n    },\n    \"encryptedDepServerToken\": \"string\",\n    \"name\": \"string\"\n}\nheaders = {\n    \"x-org-id\": \"SOME_STRING_VALUE\",\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"PUT\", url, json=payload, headers=headers)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/v2/applemdms/{id}\"\n\npayload = {\n    \"ades\": {\n        \"ios\": {\n            \"defaultDeviceGroupObjectIds\": [\"string\"],\n            \"enableZeroTouchEnrollment\": True,\n            \"setupAssistantOptions\": [{\"option\": \"accessibility\"}],\n            \"setupOptions\": [\"accessibility\"],\n            \"welcomeScreen\": {\n                \"button\": \"string\",\n                \"paragraph\": \"string\",\n                \"title\": \"string\"\n            }\n        },\n        \"macos\": {\n            \"defaultDeviceGroupObjectIds\": [\"string\"],\n            \"enableZeroTouchEnrollment\": True,\n            \"setupAssistantOptions\": [{\"option\": \"accessibility\"}],\n            \"setupOptions\": [\"accessibility\"],\n            \"welcomeScreen\": {\n                \"button\": \"string\",\n                \"paragraph\": \"string\",\n                \"title\": \"string\"\n            }\n        }\n    },\n    \"allowMobileUserEnrollment\": True,\n    \"appleCertCreatorAppleID\": \"string\",\n    \"appleSignedCert\": \"string\",\n    \"defaultIosUserEnrollmentDeviceGroupID\": \"string\",\n    \"defaultSystemGroupID\": \"string\",\n    \"dep\": {\n        \"enableZeroTouchEnrollment\": True,\n        \"setupAssistantOptions\": [{\"option\": \"accessibility\"}],\n        \"welcomeScreen\": {\n            \"button\": \"string\",\n            \"paragraph\": \"string\",\n            \"title\": \"string\"\n        }\n    },\n    \"encryptedDepServerToken\": \"string\",\n    \"name\": \"string\"\n}\nheaders = {\n    \"x-org-id\": \"SOME_STRING_VALUE\",\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"PUT\", url, json=payload, headers=headers)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"x-org-id\", \"SOME_STRING_VALUE\")\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/v2/applemdms/{id}' -Method PUT -Headers $headers -ContentType 'application/json' -Body '{\"ades\":{\"ios\":{\"defaultDeviceGroupObjectIds\":[\"string\"],\"enableZeroTouchEnrollment\":true,\"setupAssistantOptions\":[{\"option\":\"accessibility\"}],\"welcomeScreen\":{\"button\":\"string\",\"paragraph\":\"string\",\"title\":\"string\"}},\"macos\":{\"defaultDeviceGroupObjectIds\":[\"string\"],\"enableZeroTouchEnrollment\":true,\"setupAssistantOptions\":[{\"option\":\"accessibility\"}],\"welcomeScreen\":{\"button\":\"string\",\"paragraph\":\"string\",\"title\":\"string\"}}},\"allowMobileUserEnrollment\":true,\"appleCertCreatorAppleID\":\"string\",\"appleSignedCert\":\"string\",\"defaultIosUserEnrollmentDeviceGroupID\":\"string\",\"defaultSystemGroupID\":\"string\",\"dep\":{\"enableZeroTouchEnrollment\":true,\"setupAssistantOptions\":[{\"option\":\"accessibility\"}],\"welcomeScreen\":{\"button\":\"string\",\"paragraph\":\"string\",\"title\":\"string\"}},\"encryptedDepServerToken\":\"string\",\"name\":\"string\"}'"
+            "source": "$headers=@{}\n$headers.Add(\"x-org-id\", \"SOME_STRING_VALUE\")\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/v2/applemdms/{id}' -Method PUT -Headers $headers -ContentType 'application/json' -Body '{\"ades\":{\"ios\":{\"defaultDeviceGroupObjectIds\":[\"string\"],\"enableZeroTouchEnrollment\":true,\"setupAssistantOptions\":[{\"option\":\"accessibility\"}],\"setupOptions\":[\"accessibility\"],\"welcomeScreen\":{\"button\":\"string\",\"paragraph\":\"string\",\"title\":\"string\"}},\"macos\":{\"defaultDeviceGroupObjectIds\":[\"string\"],\"enableZeroTouchEnrollment\":true,\"setupAssistantOptions\":[{\"option\":\"accessibility\"}],\"setupOptions\":[\"accessibility\"],\"welcomeScreen\":{\"button\":\"string\",\"paragraph\":\"string\",\"title\":\"string\"}}},\"allowMobileUserEnrollment\":true,\"appleCertCreatorAppleID\":\"string\",\"appleSignedCert\":\"string\",\"defaultIosUserEnrollmentDeviceGroupID\":\"string\",\"defaultSystemGroupID\":\"string\",\"dep\":{\"enableZeroTouchEnrollment\":true,\"setupAssistantOptions\":[{\"option\":\"accessibility\"}],\"welcomeScreen\":{\"button\":\"string\",\"paragraph\":\"string\",\"title\":\"string\"}},\"encryptedDepServerToken\":\"string\",\"name\":\"string\"}'"
           }
         ]
       },
@@ -11667,6 +11722,16 @@
         "geolocation"
       ]
     },
+    "/google-emm/devices/{deviceId}": {},
+    "/google-emm/devices/{deviceId}/lock": {},
+    "/google-emm/devices/{deviceId}/policy_results": {},
+    "/google-emm/devices/{deviceId}/relinquishownership": {},
+    "/google-emm/devices/{deviceId}/resetpassword": {},
+    "/google-emm/enterprises": {},
+    "/google-emm/enterprises/{enterpriseId}": {},
+    "/google-emm/enterprises/{enterpriseId}/connection-status": {},
+    "/google-emm/signup-urls": {},
+    "/google-emm/web-tokens": {},
     "/groups": {
       "get": {
         "description": "This endpoint returns all Groups that exist in your organization.\n\n#### Available filter fields:\n  - `name`\n  - `disabled`\n  - `type`\n\n#### Sample Request\n\n```\n  curl -X GET \\\n  https://console.jumpcloud.com/api/v2/groups \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
@@ -11834,7 +11899,7 @@
     "/gsuites/{gsuite_id}/import/jumpcloudusers": {
       "get": {
         "description": "Lists available G Suite users for import, translated to the Jumpcloud user schema.",
-        "operationId": "GsuiteUsersToImportFormated_List",
+        "operationId": "GsuiteUsersToImportFormatted_List",
         "parameters": [
           {
             "$ref": "#/parameters/trait:gsuite:maxResults"
@@ -12759,7 +12824,7 @@
         ]
       },
       "x-functionalities-tags": [
-        "ldap-read"
+        "ldap-management"
       ]
     },
     "/ldapservers/{id}": {
@@ -12782,7 +12847,7 @@
         ],
         "summary": "Get LDAP Server",
         "x-functionalities-tags": [
-          "ldap-read"
+          "ldap-management"
         ],
         "x-codeSamples": [
           {
@@ -12860,7 +12925,7 @@
         ],
         "summary": "Update existing LDAP server",
         "x-functionalities-tags": [
-          "ldap-update"
+          "ldap-management"
         ],
         "x-codeSamples": [
           {
@@ -12910,6 +12975,9 @@
           }
         ],
         "summary": "List the associations of a LDAP Server",
+        "x-functionalities-tags": [
+          "ldap-management"
+        ],
         "x-codeSamples": [
           {
             "lang": "Shell",
@@ -12957,6 +13025,9 @@
           }
         ],
         "summary": "Manage the associations of a LDAP Server",
+        "x-functionalities-tags": [
+          "ldap-management"
+        ],
         "x-codeSamples": [
           {
             "lang": "Shell",
@@ -13014,6 +13085,9 @@
           }
         ],
         "summary": "List Samba Domains",
+        "x-functionalities-tags": [
+          "ldap-samba"
+        ],
         "x-codeSamples": [
           {
             "lang": "Shell",
@@ -13105,6 +13179,9 @@
           }
         ],
         "summary": "Delete Samba Domain",
+        "x-functionalities-tags": [
+          "ldap-samba"
+        ],
         "x-codeSamples": [
           {
             "lang": "Shell",
@@ -13138,6 +13215,9 @@
           }
         ],
         "summary": "Get Samba Domain",
+        "x-functionalities-tags": [
+          "ldap-samba"
+        ],
         "x-codeSamples": [
           {
             "lang": "Shell",
@@ -13278,6 +13358,9 @@
           }
         ],
         "summary": "List the User Groups bound to a LDAP Server",
+        "x-functionalities-tags": [
+          "ldap-associations"
+        ],
         "x-codeSamples": [
           {
             "lang": "Shell",
@@ -13303,7 +13386,7 @@
         }
       ],
       "x-functionalities-tags": [
-        "ldap-read"
+        "ldap-management"
       ]
     },
     "/ldapservers/{ldapserver_id}/users": {
@@ -13338,6 +13421,9 @@
           }
         ],
         "summary": "List the Users bound to a LDAP Server",
+        "x-functionalities-tags": [
+          "ldap-associations"
+        ],
         "x-codeSamples": [
           {
             "lang": "Shell",
@@ -13363,7 +13449,7 @@
         }
       ],
       "x-functionalities-tags": [
-        "ldap-read"
+        "ldap-management"
       ]
     },
     "/logos/{id}": {
@@ -14084,19 +14170,6 @@
         "organizations"
       ]
     },
-    "/organizations/{id}/crypto": {
-      "parameters": [
-        {
-          "in": "path",
-          "name": "id",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "x-functionalities-tags": [
-        "organizations"
-      ]
-    },
     "/organizations/{organization_id}/commandTemplates": {
       "parameters": [
         {
@@ -14347,15 +14420,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request POST \\\n  --url https://console.jumpcloud.com/api/v2/policies \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --header 'x-org-id: SOME_STRING_VALUE' \\\n  --data '{\"name\":\"string\",\"template\":{\"id\":\"string\"},\"values\":[{\"configFieldID\":\"string\",\"sensitive\":true,\"value\":\"string\"}]}'"
+            "source": "curl --request POST \\\n  --url https://console.jumpcloud.com/api/v2/policies \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --header 'x-org-id: SOME_STRING_VALUE' \\\n  --data '{\"name\":\"string\",\"notes\":\"string\",\"template\":{\"id\":\"string\"},\"values\":[{\"configFieldID\":\"string\",\"sensitive\":true,\"value\":\"string\"}]}'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/v2/policies\"\n\npayload = {\n    \"name\": \"string\",\n    \"template\": {\"id\": \"string\"},\n    \"values\": [\n        {\n            \"configFieldID\": \"string\",\n            \"sensitive\": True,\n            \"value\": \"string\"\n        }\n    ]\n}\nheaders = {\n    \"x-org-id\": \"SOME_STRING_VALUE\",\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/v2/policies\"\n\npayload = {\n    \"name\": \"string\",\n    \"notes\": \"string\",\n    \"template\": {\"id\": \"string\"},\n    \"values\": [\n        {\n            \"configFieldID\": \"string\",\n            \"sensitive\": True,\n            \"value\": \"string\"\n        }\n    ]\n}\nheaders = {\n    \"x-org-id\": \"SOME_STRING_VALUE\",\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"x-org-id\", \"SOME_STRING_VALUE\")\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/v2/policies' -Method POST -Headers $headers -ContentType 'application/json' -Body '{\"name\":\"string\",\"template\":{\"id\":\"string\"},\"values\":[{\"configFieldID\":\"string\",\"sensitive\":true,\"value\":\"string\"}]}'"
+            "source": "$headers=@{}\n$headers.Add(\"x-org-id\", \"SOME_STRING_VALUE\")\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/v2/policies' -Method POST -Headers $headers -ContentType 'application/json' -Body '{\"name\":\"string\",\"notes\":\"string\",\"template\":{\"id\":\"string\"},\"values\":[{\"configFieldID\":\"string\",\"sensitive\":true,\"value\":\"string\"}]}'"
           }
         ]
       },
@@ -14468,15 +14541,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request PUT \\\n  --url https://console.jumpcloud.com/api/v2/policies/{id} \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --header 'x-org-id: SOME_STRING_VALUE' \\\n  --data '{\"name\":\"string\",\"template\":{\"id\":\"string\"},\"values\":[{\"configFieldID\":\"string\",\"sensitive\":true,\"value\":\"string\"}]}'"
+            "source": "curl --request PUT \\\n  --url https://console.jumpcloud.com/api/v2/policies/{id} \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --header 'x-org-id: SOME_STRING_VALUE' \\\n  --data '{\"name\":\"string\",\"notes\":\"string\",\"template\":{\"id\":\"string\"},\"values\":[{\"configFieldID\":\"string\",\"sensitive\":true,\"value\":\"string\"}]}'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/v2/policies/{id}\"\n\npayload = {\n    \"name\": \"string\",\n    \"template\": {\"id\": \"string\"},\n    \"values\": [\n        {\n            \"configFieldID\": \"string\",\n            \"sensitive\": True,\n            \"value\": \"string\"\n        }\n    ]\n}\nheaders = {\n    \"x-org-id\": \"SOME_STRING_VALUE\",\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"PUT\", url, json=payload, headers=headers)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/v2/policies/{id}\"\n\npayload = {\n    \"name\": \"string\",\n    \"notes\": \"string\",\n    \"template\": {\"id\": \"string\"},\n    \"values\": [\n        {\n            \"configFieldID\": \"string\",\n            \"sensitive\": True,\n            \"value\": \"string\"\n        }\n    ]\n}\nheaders = {\n    \"x-org-id\": \"SOME_STRING_VALUE\",\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"PUT\", url, json=payload, headers=headers)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"x-org-id\", \"SOME_STRING_VALUE\")\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/v2/policies/{id}' -Method PUT -Headers $headers -ContentType 'application/json' -Body '{\"name\":\"string\",\"template\":{\"id\":\"string\"},\"values\":[{\"configFieldID\":\"string\",\"sensitive\":true,\"value\":\"string\"}]}'"
+            "source": "$headers=@{}\n$headers.Add(\"x-org-id\", \"SOME_STRING_VALUE\")\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/v2/policies/{id}' -Method PUT -Headers $headers -ContentType 'application/json' -Body '{\"name\":\"string\",\"notes\":\"string\",\"template\":{\"id\":\"string\"},\"values\":[{\"configFieldID\":\"string\",\"sensitive\":true,\"value\":\"string\"}]}'"
           }
         ]
       },
@@ -17250,15 +17323,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request POST \\\n  --url https://console.jumpcloud.com/api/v2/systemgroups \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --header 'x-org-id: SOME_STRING_VALUE' \\\n  --data '{\"attributes\":{},\"description\":\"string\",\"email\":\"string\",\"memberQuery\":{\"queryType\":\"FilterQuery\",\"filters\":[{\"field\":\"string\",\"operator\":\"eq\",\"value\":\"string\"}]},\"memberQueryExemptions\":[{\"attributes\":{},\"id\":\"string\",\"type\":\"string\"}],\"name\":\"string\"}'"
+            "source": "curl --request POST \\\n  --url https://console.jumpcloud.com/api/v2/systemgroups \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --header 'x-org-id: SOME_STRING_VALUE' \\\n  --data '{\"attributes\":{},\"description\":\"string\",\"email\":\"string\",\"memberQuery\":{\"queryType\":\"FilterQuery\",\"filters\":[{\"field\":\"string\",\"operator\":\"eq\",\"value\":\"string\"}]},\"memberQueryExemptions\":[{\"attributes\":{},\"id\":\"string\",\"type\":\"string\"}],\"memberSuggestionsNotify\":true,\"membershipAutomated\":true,\"membershipMethod\":\"NOTSET\",\"name\":\"string\"}'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/v2/systemgroups\"\n\npayload = {\n    \"attributes\": {},\n    \"description\": \"string\",\n    \"email\": \"string\",\n    \"memberQuery\": {\n        \"queryType\": \"FilterQuery\",\n        \"filters\": [\n            {\n                \"field\": \"string\",\n                \"operator\": \"eq\",\n                \"value\": \"string\"\n            }\n        ]\n    },\n    \"memberQueryExemptions\": [\n        {\n            \"attributes\": {},\n            \"id\": \"string\",\n            \"type\": \"string\"\n        }\n    ],\n    \"name\": \"string\"\n}\nheaders = {\n    \"x-org-id\": \"SOME_STRING_VALUE\",\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/v2/systemgroups\"\n\npayload = {\n    \"attributes\": {},\n    \"description\": \"string\",\n    \"email\": \"string\",\n    \"memberQuery\": {\n        \"queryType\": \"FilterQuery\",\n        \"filters\": [\n            {\n                \"field\": \"string\",\n                \"operator\": \"eq\",\n                \"value\": \"string\"\n            }\n        ]\n    },\n    \"memberQueryExemptions\": [\n        {\n            \"attributes\": {},\n            \"id\": \"string\",\n            \"type\": \"string\"\n        }\n    ],\n    \"memberSuggestionsNotify\": True,\n    \"membershipAutomated\": True,\n    \"membershipMethod\": \"NOTSET\",\n    \"name\": \"string\"\n}\nheaders = {\n    \"x-org-id\": \"SOME_STRING_VALUE\",\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"x-org-id\", \"SOME_STRING_VALUE\")\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/v2/systemgroups' -Method POST -Headers $headers -ContentType 'application/json' -Body '{\"attributes\":{},\"description\":\"string\",\"email\":\"string\",\"memberQuery\":{\"queryType\":\"FilterQuery\",\"filters\":[{\"field\":\"string\",\"operator\":\"eq\",\"value\":\"string\"}]},\"memberQueryExemptions\":[{\"attributes\":{},\"id\":\"string\",\"type\":\"string\"}],\"name\":\"string\"}'"
+            "source": "$headers=@{}\n$headers.Add(\"x-org-id\", \"SOME_STRING_VALUE\")\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/v2/systemgroups' -Method POST -Headers $headers -ContentType 'application/json' -Body '{\"attributes\":{},\"description\":\"string\",\"email\":\"string\",\"memberQuery\":{\"queryType\":\"FilterQuery\",\"filters\":[{\"field\":\"string\",\"operator\":\"eq\",\"value\":\"string\"}]},\"memberQueryExemptions\":[{\"attributes\":{},\"id\":\"string\",\"type\":\"string\"}],\"memberSuggestionsNotify\":true,\"membershipAutomated\":true,\"membershipMethod\":\"NOTSET\",\"name\":\"string\"}'"
           }
         ]
       },
@@ -17723,6 +17796,11 @@
         "systemgroups"
       ]
     },
+    "/systemgroups/{group_id}/suggestions": {
+      "x-functionalities-tags": [
+        "groups"
+      ]
+    },
     "/systemgroups/{group_id}/usergroups": {
       "get": {
         "description": "This endpoint will return all User Groups bound to a System Group, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.\n\nEach element will contain the type, id, attributes and paths.\n\nThe `attributes` object is a key/value hash of compiled graph attributes for all paths followed.\n\nThe `paths` array enumerates each path from this System Group to the corresponding User Group; this array represents all grouping and/or associations that would have to be removed to deprovision the User Group from this System Group.\n\nSee `/members` and `/associations` endpoints to manage those collections.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/systemgroups/{GroupID}/usergroups \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```",
@@ -17965,15 +18043,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request PUT \\\n  --url https://console.jumpcloud.com/api/v2/systemgroups/{id} \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --header 'x-org-id: SOME_STRING_VALUE' \\\n  --data '{\"attributes\":{},\"description\":\"string\",\"email\":\"string\",\"memberQuery\":{\"queryType\":\"FilterQuery\",\"filters\":[{\"field\":\"string\",\"operator\":\"eq\",\"value\":\"string\"}]},\"memberQueryExemptions\":[{\"attributes\":{},\"id\":\"string\",\"type\":\"string\"}],\"name\":\"string\"}'"
+            "source": "curl --request PUT \\\n  --url https://console.jumpcloud.com/api/v2/systemgroups/{id} \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --header 'x-org-id: SOME_STRING_VALUE' \\\n  --data '{\"attributes\":{},\"description\":\"string\",\"email\":\"string\",\"memberQuery\":{\"queryType\":\"FilterQuery\",\"filters\":[{\"field\":\"string\",\"operator\":\"eq\",\"value\":\"string\"}]},\"memberQueryExemptions\":[{\"attributes\":{},\"id\":\"string\",\"type\":\"string\"}],\"memberSuggestionsNotify\":true,\"membershipAutomated\":true,\"membershipMethod\":\"NOTSET\",\"name\":\"string\"}'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/v2/systemgroups/{id}\"\n\npayload = {\n    \"attributes\": {},\n    \"description\": \"string\",\n    \"email\": \"string\",\n    \"memberQuery\": {\n        \"queryType\": \"FilterQuery\",\n        \"filters\": [\n            {\n                \"field\": \"string\",\n                \"operator\": \"eq\",\n                \"value\": \"string\"\n            }\n        ]\n    },\n    \"memberQueryExemptions\": [\n        {\n            \"attributes\": {},\n            \"id\": \"string\",\n            \"type\": \"string\"\n        }\n    ],\n    \"name\": \"string\"\n}\nheaders = {\n    \"x-org-id\": \"SOME_STRING_VALUE\",\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"PUT\", url, json=payload, headers=headers)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/v2/systemgroups/{id}\"\n\npayload = {\n    \"attributes\": {},\n    \"description\": \"string\",\n    \"email\": \"string\",\n    \"memberQuery\": {\n        \"queryType\": \"FilterQuery\",\n        \"filters\": [\n            {\n                \"field\": \"string\",\n                \"operator\": \"eq\",\n                \"value\": \"string\"\n            }\n        ]\n    },\n    \"memberQueryExemptions\": [\n        {\n            \"attributes\": {},\n            \"id\": \"string\",\n            \"type\": \"string\"\n        }\n    ],\n    \"memberSuggestionsNotify\": True,\n    \"membershipAutomated\": True,\n    \"membershipMethod\": \"NOTSET\",\n    \"name\": \"string\"\n}\nheaders = {\n    \"x-org-id\": \"SOME_STRING_VALUE\",\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"PUT\", url, json=payload, headers=headers)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"x-org-id\", \"SOME_STRING_VALUE\")\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/v2/systemgroups/{id}' -Method PUT -Headers $headers -ContentType 'application/json' -Body '{\"attributes\":{},\"description\":\"string\",\"email\":\"string\",\"memberQuery\":{\"queryType\":\"FilterQuery\",\"filters\":[{\"field\":\"string\",\"operator\":\"eq\",\"value\":\"string\"}]},\"memberQueryExemptions\":[{\"attributes\":{},\"id\":\"string\",\"type\":\"string\"}],\"name\":\"string\"}'"
+            "source": "$headers=@{}\n$headers.Add(\"x-org-id\", \"SOME_STRING_VALUE\")\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/v2/systemgroups/{id}' -Method PUT -Headers $headers -ContentType 'application/json' -Body '{\"attributes\":{},\"description\":\"string\",\"email\":\"string\",\"memberQuery\":{\"queryType\":\"FilterQuery\",\"filters\":[{\"field\":\"string\",\"operator\":\"eq\",\"value\":\"string\"}]},\"memberQueryExemptions\":[{\"attributes\":{},\"id\":\"string\",\"type\":\"string\"}],\"memberSuggestionsNotify\":true,\"membershipAutomated\":true,\"membershipMethod\":\"NOTSET\",\"name\":\"string\"}'"
           }
         ]
       },
@@ -22177,15 +22255,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request POST \\\n  --url https://console.jumpcloud.com/api/v2/usergroups \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --header 'x-org-id: SOME_STRING_VALUE' \\\n  --data '{\"attributes\":{\"sudo\":{\"enabled\":true,\"withoutPassword\":true},\"ldapGroups\":[{\"name\":\"string\"}],\"posixGroups\":[{\"id\":0,\"name\":\"string\"}],\"radius\":{\"reply\":[{\"name\":\"string\",\"value\":\"string\"}]},\"sambaEnabled\":true},\"description\":\"string\",\"email\":\"string\",\"memberQuery\":{\"queryType\":\"FilterQuery\",\"filters\":[{\"field\":\"string\",\"operator\":\"eq\",\"value\":\"string\"}]},\"memberQueryExemptions\":[{\"attributes\":{},\"id\":\"string\",\"type\":\"string\"}],\"memberSuggestionsNotify\":true,\"membershipAutomated\":true,\"name\":\"string\"}'"
+            "source": "curl --request POST \\\n  --url https://console.jumpcloud.com/api/v2/usergroups \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --header 'x-org-id: SOME_STRING_VALUE' \\\n  --data '{\"attributes\":{\"sudo\":{\"enabled\":true,\"withoutPassword\":true},\"ldapGroups\":[{\"name\":\"string\"}],\"posixGroups\":[{\"id\":0,\"name\":\"string\"}],\"radius\":{\"reply\":[{\"name\":\"string\",\"value\":\"string\"}]},\"sambaEnabled\":true},\"description\":\"string\",\"email\":\"string\",\"memberQuery\":{\"queryType\":\"FilterQuery\",\"filters\":[{\"field\":\"string\",\"operator\":\"eq\",\"value\":\"string\"}]},\"memberQueryExemptions\":[{\"attributes\":{},\"id\":\"string\",\"type\":\"string\"}],\"memberSuggestionsNotify\":true,\"membershipAutomated\":true,\"membershipMethod\":\"NOTSET\",\"name\":\"string\"}'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/v2/usergroups\"\n\npayload = {\n    \"attributes\": {\n        \"sudo\": {\n            \"enabled\": True,\n            \"withoutPassword\": True\n        },\n        \"ldapGroups\": [{\"name\": \"string\"}],\n        \"posixGroups\": [\n            {\n                \"id\": 0,\n                \"name\": \"string\"\n            }\n        ],\n        \"radius\": {\"reply\": [\n                {\n                    \"name\": \"string\",\n                    \"value\": \"string\"\n                }\n            ]},\n        \"sambaEnabled\": True\n    },\n    \"description\": \"string\",\n    \"email\": \"string\",\n    \"memberQuery\": {\n        \"queryType\": \"FilterQuery\",\n        \"filters\": [\n            {\n                \"field\": \"string\",\n                \"operator\": \"eq\",\n                \"value\": \"string\"\n            }\n        ]\n    },\n    \"memberQueryExemptions\": [\n        {\n            \"attributes\": {},\n            \"id\": \"string\",\n            \"type\": \"string\"\n        }\n    ],\n    \"memberSuggestionsNotify\": True,\n    \"membershipAutomated\": True,\n    \"name\": \"string\"\n}\nheaders = {\n    \"x-org-id\": \"SOME_STRING_VALUE\",\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/v2/usergroups\"\n\npayload = {\n    \"attributes\": {\n        \"sudo\": {\n            \"enabled\": True,\n            \"withoutPassword\": True\n        },\n        \"ldapGroups\": [{\"name\": \"string\"}],\n        \"posixGroups\": [\n            {\n                \"id\": 0,\n                \"name\": \"string\"\n            }\n        ],\n        \"radius\": {\"reply\": [\n                {\n                    \"name\": \"string\",\n                    \"value\": \"string\"\n                }\n            ]},\n        \"sambaEnabled\": True\n    },\n    \"description\": \"string\",\n    \"email\": \"string\",\n    \"memberQuery\": {\n        \"queryType\": \"FilterQuery\",\n        \"filters\": [\n            {\n                \"field\": \"string\",\n                \"operator\": \"eq\",\n                \"value\": \"string\"\n            }\n        ]\n    },\n    \"memberQueryExemptions\": [\n        {\n            \"attributes\": {},\n            \"id\": \"string\",\n            \"type\": \"string\"\n        }\n    ],\n    \"memberSuggestionsNotify\": True,\n    \"membershipAutomated\": True,\n    \"membershipMethod\": \"NOTSET\",\n    \"name\": \"string\"\n}\nheaders = {\n    \"x-org-id\": \"SOME_STRING_VALUE\",\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"x-org-id\", \"SOME_STRING_VALUE\")\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/v2/usergroups' -Method POST -Headers $headers -ContentType 'application/json' -Body '{\"attributes\":{\"sudo\":{\"enabled\":true,\"withoutPassword\":true},\"ldapGroups\":[{\"name\":\"string\"}],\"posixGroups\":[{\"id\":0,\"name\":\"string\"}],\"radius\":{\"reply\":[{\"name\":\"string\",\"value\":\"string\"}]},\"sambaEnabled\":true},\"description\":\"string\",\"email\":\"string\",\"memberQuery\":{\"queryType\":\"FilterQuery\",\"filters\":[{\"field\":\"string\",\"operator\":\"eq\",\"value\":\"string\"}]},\"memberQueryExemptions\":[{\"attributes\":{},\"id\":\"string\",\"type\":\"string\"}],\"memberSuggestionsNotify\":true,\"membershipAutomated\":true,\"name\":\"string\"}'"
+            "source": "$headers=@{}\n$headers.Add(\"x-org-id\", \"SOME_STRING_VALUE\")\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/v2/usergroups' -Method POST -Headers $headers -ContentType 'application/json' -Body '{\"attributes\":{\"sudo\":{\"enabled\":true,\"withoutPassword\":true},\"ldapGroups\":[{\"name\":\"string\"}],\"posixGroups\":[{\"id\":0,\"name\":\"string\"}],\"radius\":{\"reply\":[{\"name\":\"string\",\"value\":\"string\"}]},\"sambaEnabled\":true},\"description\":\"string\",\"email\":\"string\",\"memberQuery\":{\"queryType\":\"FilterQuery\",\"filters\":[{\"field\":\"string\",\"operator\":\"eq\",\"value\":\"string\"}]},\"memberQueryExemptions\":[{\"attributes\":{},\"id\":\"string\",\"type\":\"string\"}],\"memberSuggestionsNotify\":true,\"membershipAutomated\":true,\"membershipMethod\":\"NOTSET\",\"name\":\"string\"}'"
           }
         ]
       },
@@ -22590,7 +22668,7 @@
       ],
       "x-functionalities-tags": [
         "groups",
-        "ldap-read"
+        "ldap-management"
       ]
     },
     "/usergroups/{group_id}/memberof": {
@@ -22888,56 +22966,6 @@
       ]
     },
     "/usergroups/{group_id}/suggestions": {
-      "get": {
-        "description": "This endpoint returns available suggestions for a given group\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/usergroups/{GroupID}/suggestions \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```",
-        "operationId": "GroupSuggestion_Get",
-        "parameters": [
-          {
-            "$ref": "#/parameters/trait:limit:limit"
-          },
-          {
-            "$ref": "#/parameters/trait:skip:skip"
-          },
-          {
-            "description": "ID of the group",
-            "in": "path",
-            "name": "group_id",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "items": {
-                "$ref": "#/definitions/MemberSuggestion"
-              },
-              "type": "array"
-            }
-          }
-        },
-        "security": [
-          {
-            "x-api-key": []
-          }
-        ],
-        "summary": "List Suggestions for a User Group",
-        "x-codeSamples": [
-          {
-            "lang": "Shell",
-            "source": "curl --request GET \\\n  --url 'https://console.jumpcloud.com/api/v2/usergroups/{group_id}/suggestions?limit=10&skip=0' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --header 'x-org-id: SOME_STRING_VALUE'"
-          },
-          {
-            "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/v2/usergroups/{group_id}/suggestions\"\n\nquerystring = {\"limit\":\"10\",\"skip\":\"0\"}\n\nheaders = {\n    \"x-org-id\": \"SOME_STRING_VALUE\",\n    \"x-api-key\": \"REPLACE_KEY_VALUE\"\n}\n\nresponse = requests.request(\"GET\", url, headers=headers, params=querystring)\n\nprint(response.text)"
-          },
-          {
-            "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"x-org-id\", \"SOME_STRING_VALUE\")\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/v2/usergroups/{group_id}/suggestions?limit=10&skip=0' -Method GET -Headers $headers"
-          }
-        ]
-      },
       "x-functionalities-tags": [
         "groups"
       ]
@@ -23172,15 +23200,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request PUT \\\n  --url https://console.jumpcloud.com/api/v2/usergroups/{id} \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --header 'x-org-id: SOME_STRING_VALUE' \\\n  --data '{\"attributes\":{\"sudo\":{\"enabled\":true,\"withoutPassword\":true},\"ldapGroups\":[{\"name\":\"string\"}],\"posixGroups\":[{\"id\":0,\"name\":\"string\"}],\"radius\":{\"reply\":[{\"name\":\"string\",\"value\":\"string\"}]},\"sambaEnabled\":true},\"description\":\"string\",\"email\":\"string\",\"memberQuery\":{\"queryType\":\"FilterQuery\",\"filters\":[{\"field\":\"string\",\"operator\":\"eq\",\"value\":\"string\"}]},\"memberQueryExemptions\":[{\"attributes\":{},\"id\":\"string\",\"type\":\"string\"}],\"memberSuggestionsNotify\":true,\"membershipAutomated\":true,\"name\":\"string\"}'"
+            "source": "curl --request PUT \\\n  --url https://console.jumpcloud.com/api/v2/usergroups/{id} \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --header 'x-org-id: SOME_STRING_VALUE' \\\n  --data '{\"attributes\":{\"sudo\":{\"enabled\":true,\"withoutPassword\":true},\"ldapGroups\":[{\"name\":\"string\"}],\"posixGroups\":[{\"id\":0,\"name\":\"string\"}],\"radius\":{\"reply\":[{\"name\":\"string\",\"value\":\"string\"}]},\"sambaEnabled\":true},\"description\":\"string\",\"email\":\"string\",\"memberQuery\":{\"queryType\":\"FilterQuery\",\"filters\":[{\"field\":\"string\",\"operator\":\"eq\",\"value\":\"string\"}]},\"memberQueryExemptions\":[{\"attributes\":{},\"id\":\"string\",\"type\":\"string\"}],\"memberSuggestionsNotify\":true,\"membershipAutomated\":true,\"membershipMethod\":\"NOTSET\",\"name\":\"string\"}'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/v2/usergroups/{id}\"\n\npayload = {\n    \"attributes\": {\n        \"sudo\": {\n            \"enabled\": True,\n            \"withoutPassword\": True\n        },\n        \"ldapGroups\": [{\"name\": \"string\"}],\n        \"posixGroups\": [\n            {\n                \"id\": 0,\n                \"name\": \"string\"\n            }\n        ],\n        \"radius\": {\"reply\": [\n                {\n                    \"name\": \"string\",\n                    \"value\": \"string\"\n                }\n            ]},\n        \"sambaEnabled\": True\n    },\n    \"description\": \"string\",\n    \"email\": \"string\",\n    \"memberQuery\": {\n        \"queryType\": \"FilterQuery\",\n        \"filters\": [\n            {\n                \"field\": \"string\",\n                \"operator\": \"eq\",\n                \"value\": \"string\"\n            }\n        ]\n    },\n    \"memberQueryExemptions\": [\n        {\n            \"attributes\": {},\n            \"id\": \"string\",\n            \"type\": \"string\"\n        }\n    ],\n    \"memberSuggestionsNotify\": True,\n    \"membershipAutomated\": True,\n    \"name\": \"string\"\n}\nheaders = {\n    \"x-org-id\": \"SOME_STRING_VALUE\",\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"PUT\", url, json=payload, headers=headers)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/v2/usergroups/{id}\"\n\npayload = {\n    \"attributes\": {\n        \"sudo\": {\n            \"enabled\": True,\n            \"withoutPassword\": True\n        },\n        \"ldapGroups\": [{\"name\": \"string\"}],\n        \"posixGroups\": [\n            {\n                \"id\": 0,\n                \"name\": \"string\"\n            }\n        ],\n        \"radius\": {\"reply\": [\n                {\n                    \"name\": \"string\",\n                    \"value\": \"string\"\n                }\n            ]},\n        \"sambaEnabled\": True\n    },\n    \"description\": \"string\",\n    \"email\": \"string\",\n    \"memberQuery\": {\n        \"queryType\": \"FilterQuery\",\n        \"filters\": [\n            {\n                \"field\": \"string\",\n                \"operator\": \"eq\",\n                \"value\": \"string\"\n            }\n        ]\n    },\n    \"memberQueryExemptions\": [\n        {\n            \"attributes\": {},\n            \"id\": \"string\",\n            \"type\": \"string\"\n        }\n    ],\n    \"memberSuggestionsNotify\": True,\n    \"membershipAutomated\": True,\n    \"membershipMethod\": \"NOTSET\",\n    \"name\": \"string\"\n}\nheaders = {\n    \"x-org-id\": \"SOME_STRING_VALUE\",\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"PUT\", url, json=payload, headers=headers)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"x-org-id\", \"SOME_STRING_VALUE\")\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/v2/usergroups/{id}' -Method PUT -Headers $headers -ContentType 'application/json' -Body '{\"attributes\":{\"sudo\":{\"enabled\":true,\"withoutPassword\":true},\"ldapGroups\":[{\"name\":\"string\"}],\"posixGroups\":[{\"id\":0,\"name\":\"string\"}],\"radius\":{\"reply\":[{\"name\":\"string\",\"value\":\"string\"}]},\"sambaEnabled\":true},\"description\":\"string\",\"email\":\"string\",\"memberQuery\":{\"queryType\":\"FilterQuery\",\"filters\":[{\"field\":\"string\",\"operator\":\"eq\",\"value\":\"string\"}]},\"memberQueryExemptions\":[{\"attributes\":{},\"id\":\"string\",\"type\":\"string\"}],\"memberSuggestionsNotify\":true,\"membershipAutomated\":true,\"name\":\"string\"}'"
+            "source": "$headers=@{}\n$headers.Add(\"x-org-id\", \"SOME_STRING_VALUE\")\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/v2/usergroups/{id}' -Method PUT -Headers $headers -ContentType 'application/json' -Body '{\"attributes\":{\"sudo\":{\"enabled\":true,\"withoutPassword\":true},\"ldapGroups\":[{\"name\":\"string\"}],\"posixGroups\":[{\"id\":0,\"name\":\"string\"}],\"radius\":{\"reply\":[{\"name\":\"string\",\"value\":\"string\"}]},\"sambaEnabled\":true},\"description\":\"string\",\"email\":\"string\",\"memberQuery\":{\"queryType\":\"FilterQuery\",\"filters\":[{\"field\":\"string\",\"operator\":\"eq\",\"value\":\"string\"}]},\"memberQueryExemptions\":[{\"attributes\":{},\"id\":\"string\",\"type\":\"string\"}],\"memberSuggestionsNotify\":true,\"membershipAutomated\":true,\"membershipMethod\":\"NOTSET\",\"name\":\"string\"}'"
           }
         ]
       },
@@ -23594,7 +23622,7 @@
         }
       ],
       "x-functionalities-tags": [
-        "ldap-read"
+        "ldap-management"
       ]
     },
     "/users/{user_id}/memberof": {

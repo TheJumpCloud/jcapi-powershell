@@ -24,6 +24,24 @@ Try {
     $Config = Get-Content -Path:($ConfigPath) | ConvertFrom-Yaml
     $ConfigPrefix = $Config.prefix | Select-Object -First 1
     $ConfigCustomFunctionPrefix = $Config.customFunctionPrefix
+    # Pagination Mapping
+    $CustomPaginationMap = @{
+        'Get-JCSDKGsuiteUsersToImport' = @{
+            skip = 'pageToken'
+            limit = 'maxResults'
+            nextToken = '$result.nextPageToken'
+        }
+        'Get-JcSdkGsuiteUsersToImportFormatted' = @{
+            skip = 'pageToken'
+            limit = 'maxResults'
+            nextToken = '$result.nextPageToken'
+        }
+        'Get-JCSDKOffice365UsersToImport'   = @{
+            skip  = 'skipToken'
+            limit = 'top'
+            nextToken = '$result.skipToken'
+        }
+    }
     # Misc Functions
     Function Convert-GeneratedToCustom ([System.String]$InputString, [System.String]$ConfigPrefix, [System.String]$ConfigCustomFunctionPrefix) {
         # Swap out SDK prefix for customFunction prefix
@@ -83,9 +101,25 @@ Try {
             $CmdletBinding = (($FunctionContent | Select-String -Pattern:([regex]'(\[CmdletBinding)(.*?)(\]\s+)')).Matches.Value).TrimEnd()
             $DefaultParameterSetName = ($CmdletBinding | Select-String -Pattern:([regex]"(?<=DefaultParameterSetName=')(.*?)(?=')")).Matches.Value
             # Strip out parameters that match "DontShow"
-            $ParameterContent = ($Params.Matches.Value | Where-Object { $_ -notlike '*${Limit}*' -and $_ -notlike '*${Skip}*' })
-            $ContainsLimit = $Params.Matches.Value | Where-Object { $_ -like '*Limit*' }
-            $ContainsSkip = $Params.Matches.Value | Where-Object { $_ -like '*Skip*' }
+            if ($NewCommandName -in $CustomPaginationMap.Keys){
+                $ParameterContent = ($Params.Matches.Value | Where-Object { $_ -notlike "*`${$($CustomPaginationMap.$NewCommandName.limit)}*" -and $_ -notlike "*`${$($CustomPaginationMap.$NewCommandName.skip)}*" })
+                $ContainsLimit = $Params.Matches.Value | Where-Object { $_ -like "*`${$($CustomPaginationMap.$NewCommandName.limit)}*" }
+                $ContainsSkip = $Params.Matches.Value | Where-Object { $_ -like "*`${$($CustomPaginationMap.$NewCommandName.skip)}*" }
+                $skip = $($CustomPaginationMap.$NewCommandName.skip)
+                $limit = $($CustomPaginationMap.$NewCommandName.limit)
+                $tokenizedPaginate = $true
+                $skipToken = $($CustomPaginationMap.$NewCommandName.nextToken)
+
+            } else {
+                $ParameterContent = ($Params.Matches.Value | Where-Object { $_ -notlike '*${Limit}*' -and $_ -notlike '*${Skip}*' })
+                $ContainsLimit = $Params.Matches.Value | Where-Object { $_ -like '*Limit*' }
+                $ContainsSkip = $Params.Matches.Value | Where-Object { $_ -like '*Skip*' }
+                $skip = 'Skip'
+                $limit = 'Limit'
+                $tokenizedPaginate = $false
+                $skipToken = '$ResultCount'
+
+            }
             $ParameterSetLimit = ($ContainsLimit | Select-String -Pattern:([regex]"(?<=ParameterSetName=')(.*?)(?=')")).Matches.Value
             $ParameterSetSkip = ($ContainsSkip | Select-String -Pattern:([regex]"(?<=ParameterSetName=')(.*?)(?=')")).Matches.Value
             # Build CmdletBinding
@@ -245,24 +279,24 @@ $($IndentChar)$($IndentChar))"
 $($IndentChar)$($IndentChar){
 $($IndentChar)$($IndentChar)$($IndentChar)`$PSBoundParameters.Remove('Paginate') | Out-Null"
                         If (-not [System.String]::IsNullOrEmpty($ContainsLimit)) {
-                            $ProcessContent += "$($IndentChar)$($IndentChar)$($IndentChar)If ([System.String]::IsNullOrEmpty(`$PSBoundParameters.Limit))
+                            $ProcessContent += "$($IndentChar)$($IndentChar)$($IndentChar)If ([System.String]::IsNullOrEmpty(`$PSBoundParameters.$limit))
 $($IndentChar)$($IndentChar)$($IndentChar){
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$PSBoundParameters.Add('Limit', 100)
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$PSBoundParameters.Add('$limit', 100)
 $($IndentChar)$($IndentChar)$($IndentChar)}"
                         }
-                        If (-not [System.String]::IsNullOrEmpty($ContainsSkip)) {
-                            $ProcessContent += "$($IndentChar)$($IndentChar)$($IndentChar)If ([System.String]::IsNullOrEmpty(`$PSBoundParameters.Skip))
+                        If ( (-not [System.String]::IsNullOrEmpty($ContainsSkip)) -and ($tokenizedPaginate -eq $false) ) {
+                            $ProcessContent += "$($IndentChar)$($IndentChar)$($IndentChar)If ([System.String]::IsNullOrEmpty(`$PSBoundParameters.$skip))
 $($IndentChar)$($IndentChar)$($IndentChar){
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$PSBoundParameters.Add('Skip', 0)
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$PSBoundParameters.Add('$skip', 0)
 $($IndentChar)$($IndentChar)$($IndentChar)}"
                         }
                         $ProcessContent += "$($IndentChar)$($IndentChar)$($IndentChar)Do
 $($IndentChar)$($IndentChar)$($IndentChar){"
                         If (-not [System.String]::IsNullOrEmpty($ContainsLimit)) {
-                            $ProcessContent += "$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug (`"Limit: `$(`$PSBoundParameters.Limit); `");"
+                            $ProcessContent += "$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug (`"Limit: `$(`$PSBoundParameters.$limit); `");"
                         }
                         If (-not [System.String]::IsNullOrEmpty($ContainsSkip)) {
-                            $ProcessContent += "$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug (`"Skip: `$(`$PSBoundParameters.Skip); `");"
+                            $ProcessContent += "$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug (`"Skip: `$(`$PSBoundParameters.$skip); `");"
                         }
                         $ProcessContent += "$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Result = $ResultsLogic
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
@@ -279,20 +313,28 @@ $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Result
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)}
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)If (-not [System.String]::IsNullOrEmpty(`$Result))
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar){"
-                        If (-not [System.String]::IsNullOrEmpty($ContainsLimit) -or -not [System.String]::IsNullOrEmpty($ContainsSkip)) {
+                        If ((-not [System.String]::IsNullOrEmpty($ContainsLimit) -or -not [System.String]::IsNullOrEmpty($ContainsSkip)) -And ($tokenizedPaginate -eq $false)) {
                             $ProcessContent += "$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$ResultCount = (`$Result | Measure-Object).Count;"
+                            $ProcessContent += "$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Results += `$Result;"
                         }
-                        $ProcessContent += "$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Results += `$Result;"
-                        If (-not [System.String]::IsNullOrEmpty($ContainsSkip)) {
-                            $ProcessContent += "$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$PSBoundParameters.Skip += `$ResultCount"
+                        If ((-not [System.String]::IsNullOrEmpty($ContainsLimit) -or -not [System.String]::IsNullOrEmpty($ContainsSkip)) -And ($tokenizedPaginate -eq $true)) {
+                            $ProcessContent += "$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$ResultCount = (`$Result.users | Measure-Object).Count;"
+                            $ProcessContent += "$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Results += `$Result.users;"
+                        }
+                        If ((-not [System.String]::IsNullOrEmpty($ContainsSkip)) -And ($tokenizedPaginate -eq $false)) {
+                            $ProcessContent += "$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$PSBoundParameters.$skip += $skipToken"
+                        }
+                        If ((-not [System.String]::IsNullOrEmpty($ContainsSkip)) -And ($tokenizedPaginate -eq $true)) {
+                            $ProcessContent += "$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$PSBoundParameters.$skip = $skipToken"
                         }
                         $ProcessContent += "$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)}
 $($IndentChar)$($IndentChar)$($IndentChar)}"
                         $ProcessContent += If (-not [System.String]::IsNullOrEmpty($ContainsLimit)) {
-                            "$($IndentChar)$($IndentChar)$($IndentChar)While (`$ResultCount -eq `$PSBoundParameters.Limit -and -not [System.String]::IsNullOrEmpty(`$Result))"
+                            "$($IndentChar)$($IndentChar)$($IndentChar)While (`$ResultCount -eq `$PSBoundParameters.$limit -and -not [System.String]::IsNullOrEmpty(`$Result))"
                         } Else {
                             "$($IndentChar)$($IndentChar)$($IndentChar)While (-not [System.String]::IsNullOrEmpty(`$Result))"
                         }
+                        if ($tokenizedPaginate -eq $false){
                         $ProcessContent += "$($IndentChar)$($IndentChar)}
 $($IndentChar)$($IndentChar)Else
 $($IndentChar)$($IndentChar){
@@ -315,6 +357,30 @@ $($IndentChar)$($IndentChar)$($IndentChar){
 $($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Results += `$Result;
 $($IndentChar)$($IndentChar)$($IndentChar)}
 $($IndentChar)$($IndentChar)}"
+                        } elseif ($tokenizedPaginate -eq $true){
+                        $ProcessContent += "$($IndentChar)$($IndentChar)}
+$($IndentChar)$($IndentChar)Else
+$($IndentChar)$($IndentChar){
+$($IndentChar)$($IndentChar)$($IndentChar)`$PSBoundParameters.Remove('Paginate') | Out-Null
+$($IndentChar)$($IndentChar)$($IndentChar)`$Result = $ResultsLogic
+$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
+$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug ('HttpRequestContent: ' + `$JCHttpRequestContent.Result);
+$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug ('HttpResponse: ' + `$JCHttpResponse.Result);
+$($IndentChar)$($IndentChar)$($IndentChar)# Write-Debug ('HttpResponseContent: ' + `$JCHttpResponseContent.Result);
+$($IndentChar)$($IndentChar)$($IndentChar)`$Result = If ('Results' -in `$Result.PSObject.Properties.Name)
+$($IndentChar)$($IndentChar)$($IndentChar){
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Result.results
+$($IndentChar)$($IndentChar)$($IndentChar)}
+$($IndentChar)$($IndentChar)$($IndentChar)Else
+$($IndentChar)$($IndentChar)$($IndentChar){
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Result
+$($IndentChar)$($IndentChar)$($IndentChar)}
+$($IndentChar)$($IndentChar)$($IndentChar)If (-not [System.String]::IsNullOrEmpty(`$Result))
+$($IndentChar)$($IndentChar)$($IndentChar){
+$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Results += `$Result.users;
+$($IndentChar)$($IndentChar)$($IndentChar)}
+$($IndentChar)$($IndentChar)}"
+                        }
                     } Else {
                         $ProcessContent += "$($IndentChar)$($IndentChar)`$Result = $ResultsLogic
 $($IndentChar)$($IndentChar)Write-Debug ('HttpRequest: ' + `$JCHttpRequest);

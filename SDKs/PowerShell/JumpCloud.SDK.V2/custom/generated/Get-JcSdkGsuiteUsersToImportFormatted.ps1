@@ -1,24 +1,8 @@
 <#
 .Synopsis
-This endpoint returns available suggestions for a given group
-#### Sample Request
-```
-curl -X GET https://console.jumpcloud.com/api/v2/usergroups/{GroupID}/suggestions \\
-  -H 'Accept: application/json' \\
-  -H 'Content-Type: application/json' \\
-  -H 'x-api-key: {API_KEY}'
-
-```
+Lists available G Suite users for import, translated to the Jumpcloud user schema.
 .Description
-This endpoint returns available suggestions for a given group
-#### Sample Request
-```
-curl -X GET https://console.jumpcloud.com/api/v2/usergroups/{GroupID}/suggestions \\
-  -H 'Accept: application/json' \\
-  -H 'Content-Type: application/json' \\
-  -H 'x-api-key: {API_KEY}'
-
-```
+Lists available G Suite users for import, translated to the Jumpcloud user schema.
 .Example
 PS C:\> {{ Add code here }}
 
@@ -28,59 +12,42 @@ PS C:\> {{ Add code here }}
 
 {{ Add output here }}
 
-.Inputs
-JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
 .Outputs
-JumpCloud.SDK.V2.Models.IMemberSuggestion
-.Notes
-COMPLEX PARAMETER PROPERTIES
-
-To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
-
-INPUTOBJECT <IJumpCloudApiIdentity>:
-  [AccountId <String>]:
-  [ActivedirectoryId <String>]:
-  [AdministratorId <String>]:
-  [AgentId <String>]:
-  [AppleMdmId <String>]:
-  [ApplicationId <String>]: ObjectID of the Application.
-  [CommandId <String>]: ObjectID of the Command.
-  [CustomEmailType <String>]:
-  [DeviceId <String>]:
-  [GroupId <String>]: ObjectID of the Policy Group.
-  [GsuiteId <String>]: ObjectID of the G Suite instance.
-  [Id <String>]: ObjectID of this Active Directory instance.
-  [JobId <String>]:
-  [LdapserverId <String>]: ObjectID of the LDAP Server.
-  [Office365Id <String>]: ObjectID of the Office 365 instance.
-  [PolicyId <String>]: ObjectID of the Policy.
-  [ProviderId <String>]:
-  [PushEndpointId <String>]:
-  [RadiusserverId <String>]: ObjectID of the Radius Server.
-  [SoftwareAppId <String>]: ObjectID of the Software App.
-  [SystemId <String>]: ObjectID of the System.
-  [UserId <String>]: ObjectID of the User.
-  [WorkdayId <String>]:
+JumpCloud.SDK.V2.Models.IPathsKa8FhwGsuitesGsuiteIdImportJumpcloudusersGetResponses200ContentApplicationJsonSchema
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkGroupSuggestion.md
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkGsuiteUsersToImportFormatted.md
 #>
- Function Get-JcSdkGroupSuggestion
+ Function Get-JcSdkGsuiteUsersToImportFormatted
 {
-    [OutputType([JumpCloud.SDK.V2.Models.IMemberSuggestion])]
-    [CmdletBinding(DefaultParameterSetName='Get', PositionalBinding=$false)]
+    [OutputType([JumpCloud.SDK.V2.Models.IPathsKa8FhwGsuitesGsuiteIdImportJumpcloudusersGetResponses200ContentApplicationJsonSchema])]
+    [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
     Param(
-    [Parameter(ParameterSetName='Get', Mandatory)]
+    [Parameter(Mandatory)]
     [JumpCloud.SDK.V2.Category('Path')]
     [System.String]
-    # ID of the group
-    ${GroupId}, 
+    # .
+    ${GsuiteId}, 
 
-    [Parameter(ParameterSetName='GetViaIdentity', Mandatory, ValueFromPipeline)]
-    [JumpCloud.SDK.V2.Category('Path')]
-    [JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity]
-    # Identity Parameter
-    # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
-    ${InputObject}, 
+    [Parameter()]
+    [JumpCloud.SDK.V2.Category('Query')]
+    [System.String]
+    # Google Directory API sort field parameter.
+    # See https://developers.google.com/admin-sdk/directory/reference/rest/v1/users/list.
+    ${OrderBy}, 
+
+    [Parameter()]
+    [JumpCloud.SDK.V2.Category('Query')]
+    [System.String]
+    # Google Directory API search parameter.
+    # See https://developers.google.com/admin-sdk/directory/v1/guides/search-users.
+    ${Query}, 
+
+    [Parameter()]
+    [JumpCloud.SDK.V2.Category('Query')]
+    [System.String]
+    # Google Directory API sort direction parameter.
+    # See https://developers.google.com/admin-sdk/directory/reference/rest/v1/users/list.
+    ${SortOrder}, 
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]
@@ -143,22 +110,18 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        If ($Paginate -and $PSCmdlet.ParameterSetName -in ('Get'))
+        If ($Paginate -and $PSCmdlet.ParameterSetName -in ('List'))
         {
             $PSBoundParameters.Remove('Paginate') | Out-Null
-            If ([System.String]::IsNullOrEmpty($PSBoundParameters.Limit))
+            If ([System.String]::IsNullOrEmpty($PSBoundParameters.maxResults))
             {
-                $PSBoundParameters.Add('Limit', 100)
-            }
-            If ([System.String]::IsNullOrEmpty($PSBoundParameters.Skip))
-            {
-                $PSBoundParameters.Add('Skip', 0)
+                $PSBoundParameters.Add('maxResults', 100)
             }
             Do
             {
-                Write-Debug ("Limit: $($PSBoundParameters.Limit); ");
-                Write-Debug ("Skip: $($PSBoundParameters.Skip); ");
-                $Result = JumpCloud.SDK.V2.internal\Get-JcSdkInternalGroupSuggestion @PSBoundParameters
+                Write-Debug ("Limit: $($PSBoundParameters.maxResults); ");
+                Write-Debug ("Skip: $($PSBoundParameters.pageToken); ");
+                $Result = (JumpCloud.SDK.V2.internal\Get-JcSdkInternalGsuiteUsersToImportFormatted @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
                 Write-Debug ('HttpRequest: ' + $JCHttpRequest);
                 Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
                 Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);
@@ -173,17 +136,17 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
                 }
                 If (-not [System.String]::IsNullOrEmpty($Result))
                 {
-                    $ResultCount = ($Result | Measure-Object).Count;
-                    $Results += $Result;
-                    $PSBoundParameters.Skip += $ResultCount
+                    $ResultCount = ($Result.users | Measure-Object).Count;
+                    $Results += $Result.users;
+                    $PSBoundParameters.pageToken = $result.nextPageToken
                 }
             }
-            While ($ResultCount -eq $PSBoundParameters.Limit -and -not [System.String]::IsNullOrEmpty($Result))
+            While ($ResultCount -eq $PSBoundParameters.maxResults -and -not [System.String]::IsNullOrEmpty($Result))
         }
         Else
         {
             $PSBoundParameters.Remove('Paginate') | Out-Null
-            $Result = JumpCloud.SDK.V2.internal\Get-JcSdkInternalGroupSuggestion @PSBoundParameters
+            $Result = (JumpCloud.SDK.V2.internal\Get-JcSdkInternalGsuiteUsersToImportFormatted @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
             Write-Debug ('HttpRequest: ' + $JCHttpRequest);
             Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
             Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);
@@ -198,7 +161,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
             }
             If (-not [System.String]::IsNullOrEmpty($Result))
             {
-                $Results += $Result;
+                $Results += $Result.users;
             }
         }
     }

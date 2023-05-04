@@ -27,8 +27,8 @@ curl -X PUT https://console.jumpcloud.com/api/v2/policies/59fced45c9118022172547
 
 ### SetExpanded (Default)
 ```
-Set-JcSdkPolicy -Id <String> -Name <String> [-TemplateId <String>] [-Values <IPolicyValue[]>] [-Confirm]
- [-WhatIf] [<CommonParameters>]
+Set-JcSdkPolicy -Id <String> -Name <String> [-Notes <String>] [-TemplateId <String>]
+ [-Values <IPolicyValue[]>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Set
@@ -44,7 +44,7 @@ Set-JcSdkPolicy -InputObject <IJumpCloudApiIdentity> -Body <IPolicyRequest> [-Co
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkPolicy -InputObject <IJumpCloudApiIdentity> -Name <String> [-TemplateId <String>]
+Set-JcSdkPolicy -InputObject <IJumpCloudApiIdentity> -Name <String> [-Notes <String>] [-TemplateId <String>]
  [-Values <IPolicyValue[]>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
@@ -144,6 +144,21 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -Notes
+The notes for this specific Policy.
+
+```yaml
+Type: System.String
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -TemplateId
 ObjectId uniquely identifying a Policy instance; only allowed on POST requests.
 
@@ -230,6 +245,7 @@ To create the parameters described below, construct a hash table containing the 
 
 BODY <IPolicyRequest>: An instance of a policy template.
   - `Name <String>`: The description for this specific Policy.
+  - `[Notes <String>]`: The notes for this specific Policy.
   - `[TemplateId <String>]`: ObjectId uniquely identifying a Policy instance; only allowed on POST requests.
   - `[Values <IPolicyValue[]>]`: 
     - `[ConfigFieldId <String>]`: The ObjectId of the corresponding Policy Template configuration field.

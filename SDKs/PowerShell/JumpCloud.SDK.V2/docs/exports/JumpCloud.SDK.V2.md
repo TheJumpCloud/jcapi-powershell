@@ -346,17 +346,6 @@ This endpoint returns all Groups that exist in your organization.
   -H 'x-api-key: {API_KEY}'
 ```
 
-### [Get-JcSdkGroupSuggestion](Get-JcSdkGroupSuggestion.md)
-This endpoint returns available suggestions for a given group
-#### Sample Request
-```
-curl -X GET https://console.jumpcloud.com/api/v2/usergroups/{GroupID}/suggestions \\
-  -H 'Accept: application/json' \\
-  -H 'Content-Type: application/json' \\
-  -H 'x-api-key: {API_KEY}'
-
-```
-
 ### [Get-JcSdkGSuite](Get-JcSdkGSuite.md)
 This endpoint returns a specific G Suite.
 
@@ -437,7 +426,7 @@ See `/members` and `/associations` endpoints to manage those collections.
 ### [Get-JcSdkGSuiteUsersToImport](Get-JcSdkGSuiteUsersToImport.md)
 Lists G Suite users available for import.
 
-### [Get-JcSdkGsuiteUsersToImportFormated](Get-JcSdkGsuiteUsersToImportFormated.md)
+### [Get-JcSdkGsuiteUsersToImportFormatted](Get-JcSdkGsuiteUsersToImportFormatted.md)
 Lists available G Suite users for import, translated to the Jumpcloud user schema.
 
 ### [Get-JcSdkIPList](Get-JcSdkIPList.md)

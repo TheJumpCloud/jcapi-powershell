@@ -73,6 +73,7 @@ BODY <IUserGroupPut>:
     Value <String>: Filter comparison value.
   [MemberSuggestionsNotify <Boolean?>]: True if notification emails are to be sent for membership suggestions.
   [MembershipAutomated <Boolean?>]: True if membership of this group is automatically updated based on the Member Query and Member Query Exemptions, if configured
+  [MembershipMethod <String>]: The type of membership method for this group. Valid values include NOTSET, STATIC, DYNAMIC_REVIEW_REQUIRED, and DYNAMIC_AUTOMATED.
 
 INPUTOBJECT <IJumpCloudApiIdentity>:
   [AccountId <String>]:
@@ -200,6 +201,14 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [System.Management.Automation.SwitchParameter]
     # True if membership of this group is automatically updated based on the Member Query and Member Query Exemptions, if configured
     ${MembershipAutomated}, 
+
+    [Parameter(ParameterSetName='SetExpanded')]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [System.String]
+    # The type of membership method for this group.
+    # Valid values include NOTSET, STATIC, DYNAMIC_REVIEW_REQUIRED, and DYNAMIC_AUTOMATED.
+    ${MembershipMethod}, 
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]

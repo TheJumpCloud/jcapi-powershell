@@ -13,8 +13,8 @@ Lists G Suite users available for import.
 ## SYNTAX
 
 ```
-Get-JcSdkGSuiteUsersToImport -GsuiteId <String> [-MaxResults <Int32>] [-OrderBy <String>]
- [-PageToken <String>] [-Query <String>] [-SortOrder <String>] [<CommonParameters>]
+Get-JcSdkGSuiteUsersToImport -GsuiteId <String> [-OrderBy <String>] [-Query <String>] [-SortOrder <String>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -53,40 +53,8 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -MaxResults
-Google Directory API maximum number of results per page.
-See https://developers.google.com/admin-sdk/directory/reference/rest/v1/users/list.
-
-```yaml
-Type: System.Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -OrderBy
 Google Directory API sort field parameter.
-See https://developers.google.com/admin-sdk/directory/reference/rest/v1/users/list.
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -PageToken
-Google Directory API token used to access the next page of results.
 See https://developers.google.com/admin-sdk/directory/reference/rest/v1/users/list.
 
 ```yaml

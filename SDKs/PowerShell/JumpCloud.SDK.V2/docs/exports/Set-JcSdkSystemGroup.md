@@ -26,8 +26,9 @@ curl -X PUT https://console.jumpcloud.com/api/v2/systemgroups/{Group_ID} \\
 ### SetExpanded (Default)
 ```
 Set-JcSdkSystemGroup -Id <String> -Name <String> [-Attributes <Hashtable>] [-Description <String>]
- [-Email <String>] [-MemberQueryExemptions <IGraphObject[]>] [-MemberQueryFilters <IFilter[]>] [-Confirm]
- [-WhatIf] [<CommonParameters>]
+ [-Email <String>] [-MemberQueryExemptions <IGraphObject[]>] [-MemberQueryFilters <IFilter[]>]
+ [-MembershipAutomated] [-MembershipMethod <String>] [-MemberSuggestionsNotify] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### Set
@@ -45,7 +46,8 @@ Set-JcSdkSystemGroup -InputObject <IJumpCloudApiIdentity> -Body <ISystemGroupPut
 ```
 Set-JcSdkSystemGroup -InputObject <IJumpCloudApiIdentity> -Name <String> [-Attributes <Hashtable>]
  [-Description <String>] [-Email <String>] [-MemberQueryExemptions <IGraphObject[]>]
- [-MemberQueryFilters <IFilter[]>] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-MemberQueryFilters <IFilter[]>] [-MembershipAutomated] [-MembershipMethod <String>]
+ [-MemberSuggestionsNotify] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -204,6 +206,52 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -MembershipAutomated
+True if membership of this group is automatically updated based on the Member Query and Member Query Exemptions, if configured
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -MembershipMethod
+The type of membership method for this group.
+Valid values include NOTSET, STATIC, DYNAMIC_REVIEW_REQUIRED, and DYNAMIC_AUTOMATED.
+
+```yaml
+Type: System.String
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -MemberSuggestionsNotify
+True if notification emails are to be sent for membership suggestions.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Name
 Display name of a System Group.
 
@@ -286,6 +334,9 @@ BODY <ISystemGroupPut>: SystemGroupPut
     - `Field <String>`: Name of field in filter target object.
     - `Operator <String>`: Filter comparison operator.
     - `Value <String>`: Filter comparison value.
+  - `[MemberSuggestionsNotify <Boolean?>]`: True if notification emails are to be sent for membership suggestions.
+  - `[MembershipAutomated <Boolean?>]`: True if membership of this group is automatically updated based on the Member Query and Member Query Exemptions, if configured
+  - `[MembershipMethod <String>]`: The type of membership method for this group. Valid values include NOTSET, STATIC, DYNAMIC_REVIEW_REQUIRED, and DYNAMIC_AUTOMATED.
 
 INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter
   - `[AccountId <String>]`: 

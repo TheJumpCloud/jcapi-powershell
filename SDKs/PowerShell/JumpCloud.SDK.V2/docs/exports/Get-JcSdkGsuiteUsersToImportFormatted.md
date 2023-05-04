@@ -1,11 +1,11 @@
 ---
 external help file:
 Module Name: JumpCloud.SDK.V2
-online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkGsuiteUsersToImportFormated.md
+online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkGsuiteUsersToImportFormatted.md
 schema: 2.0.0
 ---
 
-# Get-JcSdkGsuiteUsersToImportFormated
+# Get-JcSdkGsuiteUsersToImportFormatted
 
 ## SYNOPSIS
 Lists available G Suite users for import, translated to the Jumpcloud user schema.
@@ -13,8 +13,8 @@ Lists available G Suite users for import, translated to the Jumpcloud user schem
 ## SYNTAX
 
 ```
-Get-JcSdkGsuiteUsersToImportFormated -GsuiteId <String> [-MaxResults <Int32>] [-OrderBy <String>]
- [-PageToken <String>] [-Query <String>] [-SortOrder <String>] [<CommonParameters>]
+Get-JcSdkGsuiteUsersToImportFormatted -GsuiteId <String> [-OrderBy <String>] [-Query <String>]
+ [-SortOrder <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -53,40 +53,8 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -MaxResults
-Google Directory API maximum number of results per page.
-See https://developers.google.com/admin-sdk/directory/reference/rest/v1/users/list.
-
-```yaml
-Type: System.Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -OrderBy
 Google Directory API sort field parameter.
-See https://developers.google.com/admin-sdk/directory/reference/rest/v1/users/list.
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -PageToken
-Google Directory API token used to access the next page of results.
 See https://developers.google.com/admin-sdk/directory/reference/rest/v1/users/list.
 
 ```yaml

@@ -57,20 +57,6 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     ${Search}, 
 
     [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.String]
-    # Office 365 API token used to access the next page of results.
-    # See https://docs.microsoft.com/en-us/graph/paging.
-    ${SkipToken}, 
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # Office 365 API maximum number of results per page.
-    # See https://docs.microsoft.com/en-us/graph/paging.
-    ${Top}, 
-
-    [Parameter()]
     [JumpCloud.SDK.V2.Category('Header')]
     [System.String]
     # Defines the consistency header for O365 requests.
@@ -141,13 +127,14 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         If ($Paginate -and $PSCmdlet.ParameterSetName -in ('List'))
         {
             $PSBoundParameters.Remove('Paginate') | Out-Null
-            If ([System.String]::IsNullOrEmpty($PSBoundParameters.Skip))
+            If ([System.String]::IsNullOrEmpty($PSBoundParameters.top))
             {
-                $PSBoundParameters.Add('Skip', 0)
+                $PSBoundParameters.Add('top', 100)
             }
             Do
             {
-                Write-Debug ("Skip: $($PSBoundParameters.Skip); ");
+                Write-Debug ("Limit: $($PSBoundParameters.top); ");
+                Write-Debug ("Skip: $($PSBoundParameters.skipToken); ");
                 $Result = (JumpCloud.SDK.V2.internal\Get-JcSdkInternalOffice365UsersToImport @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
                 Write-Debug ('HttpRequest: ' + $JCHttpRequest);
                 Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
@@ -163,12 +150,12 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
                 }
                 If (-not [System.String]::IsNullOrEmpty($Result))
                 {
-                    $ResultCount = ($Result | Measure-Object).Count;
-                    $Results += $Result;
-                    $PSBoundParameters.Skip += $ResultCount
+                    $ResultCount = ($Result.users | Measure-Object).Count;
+                    $Results += $Result.users;
+                    $PSBoundParameters.skipToken = $result.skipToken
                 }
             }
-            While (-not [System.String]::IsNullOrEmpty($Result))
+            While ($ResultCount -eq $PSBoundParameters.top -and -not [System.String]::IsNullOrEmpty($Result))
         }
         Else
         {
@@ -188,7 +175,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
             }
             If (-not [System.String]::IsNullOrEmpty($Result))
             {
-                $Results += $Result;
+                $Results += $Result.users;
             }
         }
     }

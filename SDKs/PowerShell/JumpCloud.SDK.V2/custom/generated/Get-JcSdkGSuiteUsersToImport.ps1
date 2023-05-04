@@ -30,24 +30,10 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
-    [System.Int32]
-    # Google Directory API maximum number of results per page.
-    # See https://developers.google.com/admin-sdk/directory/reference/rest/v1/users/list.
-    ${MaxResults}, 
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
     [System.String]
     # Google Directory API sort field parameter.
     # See https://developers.google.com/admin-sdk/directory/reference/rest/v1/users/list.
     ${OrderBy}, 
-
-    [Parameter()]
-    [JumpCloud.SDK.V2.Category('Query')]
-    [System.String]
-    # Google Directory API token used to access the next page of results.
-    # See https://developers.google.com/admin-sdk/directory/reference/rest/v1/users/list.
-    ${PageToken}, 
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
@@ -100,7 +86,12 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V2.Category('Runtime')]
     [System.Management.Automation.SwitchParameter]
     # Use the default credentials for the proxy
-    ${ProxyUseDefaultCredentials}
+    ${ProxyUseDefaultCredentials}, 
+
+    [Parameter(DontShow)]
+    [System.Boolean]
+    # Set to $true to return all results. This will overwrite any skip and limit parameter.
+    $Paginate = $true
     )
     Begin
     {
@@ -119,22 +110,59 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        $Result = (JumpCloud.SDK.V2.internal\Get-JcSdkInternalGSuiteUsersToImport @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
-        Write-Debug ('HttpRequest: ' + $JCHttpRequest);
-        Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
-        Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);
-        # Write-Debug ('HttpResponseContent: ' + $JCHttpResponseContent.Result);
-        $Result = If ('Results' -in $Result.PSObject.Properties.Name)
+        If ($Paginate -and $PSCmdlet.ParameterSetName -in ('List'))
         {
-            $Result.results
+            $PSBoundParameters.Remove('Paginate') | Out-Null
+            If ([System.String]::IsNullOrEmpty($PSBoundParameters.maxResults))
+            {
+                $PSBoundParameters.Add('maxResults', 100)
+            }
+            Do
+            {
+                Write-Debug ("Limit: $($PSBoundParameters.maxResults); ");
+                Write-Debug ("Skip: $($PSBoundParameters.pageToken); ");
+                $Result = (JumpCloud.SDK.V2.internal\Get-JcSdkInternalGSuiteUsersToImport @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
+                Write-Debug ('HttpRequest: ' + $JCHttpRequest);
+                Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
+                Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);
+                # Write-Debug ('HttpResponseContent: ' + $JCHttpResponseContent.Result);
+                $Result = If ('Results' -in $Result.PSObject.Properties.Name)
+                {
+                    $Result.results
+                }
+                Else
+                {
+                    $Result
+                }
+                If (-not [System.String]::IsNullOrEmpty($Result))
+                {
+                    $ResultCount = ($Result.users | Measure-Object).Count;
+                    $Results += $Result.users;
+                    $PSBoundParameters.pageToken = $result.nextPageToken
+                }
+            }
+            While ($ResultCount -eq $PSBoundParameters.maxResults -and -not [System.String]::IsNullOrEmpty($Result))
         }
         Else
         {
-            $Result
-        }
-        If (-not [System.String]::IsNullOrEmpty($Result))
-        {
-            $Results += $Result;
+            $PSBoundParameters.Remove('Paginate') | Out-Null
+            $Result = (JumpCloud.SDK.V2.internal\Get-JcSdkInternalGSuiteUsersToImport @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
+            Write-Debug ('HttpRequest: ' + $JCHttpRequest);
+            Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
+            Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);
+            # Write-Debug ('HttpResponseContent: ' + $JCHttpResponseContent.Result);
+            $Result = If ('Results' -in $Result.PSObject.Properties.Name)
+            {
+                $Result.results
+            }
+            Else
+            {
+                $Result
+            }
+            If (-not [System.String]::IsNullOrEmpty($Result))
+            {
+                $Results += $Result.users;
+            }
         }
     }
     End

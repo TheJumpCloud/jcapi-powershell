@@ -1911,6 +1911,10 @@
         },
         "windowsMDM": {
           "properties": {
+            "autoEnroll": {
+              "description": "Indicates if MDM Auto Enroll is active.",
+              "type": "boolean"
+            },
             "enabled": {
               "description": "Indicates if the Windows MDM is active.",
               "type": "boolean"
@@ -2467,6 +2471,9 @@
           "type": "string"
         },
         "arch": {
+          "type": "string"
+        },
+        "archFamily": {
           "type": "string"
         },
         "azureAdJoined": {
@@ -4968,19 +4975,6 @@
       ]
     },
     "/organizations/{id}/paymentdetails": {
-      "parameters": [
-        {
-          "in": "path",
-          "name": "id",
-          "required": true,
-          "type": "string"
-        }
-      ],
-      "x-functionalities-tags": [
-        "accounts-page-payment-info"
-      ]
-    },
-    "/organizations/{id}/paymentdetails/card": {
       "parameters": [
         {
           "in": "path",
