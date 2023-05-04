@@ -31,6 +31,11 @@ Try {
             limit = 'maxResults'
             nextToken = '$result.nextPageToken'
         }
+        'Get-JcSdkGsuiteUsersToImportFormatted' = @{
+            skip = 'pageToken'
+            limit = 'maxResults'
+            nextToken = '$result.nextPageToken'
+        }
         'Get-JCSDKOffice365UsersToImport'   = @{
             skip  = 'skipToken'
             limit = 'top'
