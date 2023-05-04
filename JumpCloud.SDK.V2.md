@@ -32,8 +32,7 @@ No changes
 <details>
 <summary>Functions Removed</summary>
 
-* Get-JcSdkGroupSuggestion.ps1
-
+No changes
 </details>
 
 ## JumpCloud.SDK.V2-0.0.37
