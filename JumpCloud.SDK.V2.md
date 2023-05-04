@@ -2,14 +2,10 @@
 Release Date: May 03, 2023
 #### RELEASE NOTES
 ```
-{{Fill in the Release Notes}}
+This release addresses a bugfix for both the `Get-JCSdkGSuiteUsersToImport` & `Get-JCSdkOffice365UsersToImport` functions. In addition several models have been updated with new functionatily from the public facing API.
 ```
-#### FEATURES:
-{{Fill in the Features}}
-#### IMPROVEMENTS:
-{{Fill in the Improvements}}
 #### BUG FIXES:
-{{Fill in the Bug Fixes}}
+`Get-JCSdkGSuiteUsersToImport` & `Get-JCSdkOffice365UsersToImport` now support automatic pagination
 #### Generated Changes:
 
 <details>
@@ -21,7 +17,9 @@ No changes
 <details>
 <summary>Functions Modified</summary>
 
-No changes
+* Get-JCSdkGSuiteUsersToImport
+* Get-JCSdkOffice365UsersToImport
+
 </details>
 
 <details>

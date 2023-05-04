@@ -2,14 +2,8 @@
 Release Date: May 03, 2023
 #### RELEASE NOTES
 ```
-{{Fill in the Release Notes}}
+This is a rollup release for the V1 module, no functional changes were made
 ```
-#### FEATURES:
-{{Fill in the Features}}
-#### IMPROVEMENTS:
-{{Fill in the Improvements}}
-#### BUG FIXES:
-{{Fill in the Bug Fixes}}
 #### Generated Changes:
 
 <details>
