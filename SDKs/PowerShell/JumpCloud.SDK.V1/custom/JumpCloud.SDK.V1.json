@@ -1911,6 +1911,10 @@
         },
         "windowsMDM": {
           "properties": {
+            "autoEnroll": {
+              "description": "Indicates if MDM Auto Enroll is active.",
+              "type": "boolean"
+            },
             "enabled": {
               "description": "Indicates if the Windows MDM is active.",
               "type": "boolean"

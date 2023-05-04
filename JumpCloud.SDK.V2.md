@@ -1,5 +1,5 @@
 ## JumpCloud.SDK.V2-0.0.38
-Release Date: May 03, 2023
+Release Date: May 04, 2023
 #### RELEASE NOTES
 ```
 This release addresses a bugfix for both the `Get-JCSdkGSuiteUsersToImport` & `Get-JCSdkOffice365UsersToImport` functions. In addition several models have been updated with new functionatily from the public facing API.
@@ -17,8 +17,15 @@ No changes
 <details>
 <summary>Functions Modified</summary>
 
-* Get-JCSdkGSuiteUsersToImport
-* Get-JCSdkOffice365UsersToImport
+* Get-JcSdkGSuiteUsersToImport.ps1
+* Get-JcSdkOffice365UsersToImport.ps1
+* New-JcSdkPolicy.ps1
+* New-JcSdkSystemGroup.ps1
+* New-JcSdkUserGroup.ps1
+* Set-JcSdkAppleMdm.ps1
+* Set-JcSdkPolicy.ps1
+* Set-JcSdkSystemGroup.ps1
+* Set-JcSdkUserGroup.ps1
 
 </details>
 

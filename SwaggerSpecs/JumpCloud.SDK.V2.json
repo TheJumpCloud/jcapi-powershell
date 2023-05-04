@@ -11899,7 +11899,7 @@
     "/gsuites/{gsuite_id}/import/jumpcloudusers": {
       "get": {
         "description": "Lists available G Suite users for import, translated to the Jumpcloud user schema.",
-        "operationId": "GsuiteUsersToImportFormated_List",
+        "operationId": "GsuiteUsersToImportFormatted_List",
         "parameters": [
           {
             "$ref": "#/parameters/trait:gsuite:maxResults"

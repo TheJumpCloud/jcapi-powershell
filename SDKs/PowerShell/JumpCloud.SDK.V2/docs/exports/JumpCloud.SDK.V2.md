@@ -426,7 +426,7 @@ See `/members` and `/associations` endpoints to manage those collections.
 ### [Get-JcSdkGSuiteUsersToImport](Get-JcSdkGSuiteUsersToImport.md)
 Lists G Suite users available for import.
 
-### [Get-JcSdkGsuiteUsersToImportFormated](Get-JcSdkGsuiteUsersToImportFormated.md)
+### [Get-JcSdkGsuiteUsersToImportFormatted](Get-JcSdkGsuiteUsersToImportFormatted.md)
 Lists available G Suite users for import, translated to the Jumpcloud user schema.
 
 ### [Get-JcSdkIPList](Get-JcSdkIPList.md)
