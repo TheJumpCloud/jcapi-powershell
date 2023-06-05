@@ -247,6 +247,7 @@ BODY <IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema>: .
     - `[GrowthData <IOrganizationsettingsputGrowthData>]`: Object containing Optimizely experimentIds and states corresponding to them
       - `[(Any) <Object>]`: This indicates any property can be added to this object.
     - `[Logo <String>]`: 
+    - `[MaxSystemUsers <Int32?>]`: 
     - `[Name <String>]`: 
     - `[NewSystemUserStateDefaultApplicationImport <String>]`: 
     - `[NewSystemUserStateDefaultCsvImport <String>]`: 
@@ -284,7 +285,6 @@ BODY <IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema>: .
     - `[SystemInsightUpdatedAt <String>]`: 
     - `[SystemUserPasswordExpirationInDays <Int32?>]`: 
     - `[SystemUsersCanEdit <Boolean?>]`: 
-    - `[SystemUsersCap <Int32?>]`: 
     - `[TrustedAppConfigTrustedApps <ITrustedappConfigPutTrustedAppsItem[]>]`: List of authorized apps for the organization 
       - `Name <String>`: Name of the trusted application
       - `[Path <String>]`: Absolute path for the app's location in user's device
@@ -314,6 +314,7 @@ SETTINGS <IOrganizationsettingsput>: OrganizationSettingsPut
   - `[GrowthData <IOrganizationsettingsputGrowthData>]`: Object containing Optimizely experimentIds and states corresponding to them
     - `[(Any) <Object>]`: This indicates any property can be added to this object.
   - `[Logo <String>]`: 
+  - `[MaxSystemUsers <Int32?>]`: 
   - `[Name <String>]`: 
   - `[NewSystemUserStateDefaultApplicationImport <String>]`: 
   - `[NewSystemUserStateDefaultCsvImport <String>]`: 
@@ -351,7 +352,6 @@ SETTINGS <IOrganizationsettingsput>: OrganizationSettingsPut
   - `[SystemInsightUpdatedAt <String>]`: 
   - `[SystemUserPasswordExpirationInDays <Int32?>]`: 
   - `[SystemUsersCanEdit <Boolean?>]`: 
-  - `[SystemUsersCap <Int32?>]`: 
   - `[TrustedAppConfigTrustedApps <ITrustedappConfigPutTrustedAppsItem[]>]`: List of authorized apps for the organization 
     - `Name <String>`: Name of the trusted application
     - `[Path <String>]`: Absolute path for the app's location in user's device

@@ -164,8 +164,9 @@ BODY <IBulkUserUpdate[]>: Array of bulk-user-update
   - `[Attributes <IBulkUserUpdateAttributesItem[]>]`: Map of additional attributes.
   - `[Email <String>]`: 
   - `[Firstname <String>]`: 
-  - `[Id <String>]`: Object ID of the systemuser being updated
+  - `[Id <String>]`: Object ID of the user being updated
   - `[Lastname <String>]`: 
+  - `[Organization <String>]`: Organization object id of the user
   - `[Username <String>]`: 
 
 ## RELATED LINKS

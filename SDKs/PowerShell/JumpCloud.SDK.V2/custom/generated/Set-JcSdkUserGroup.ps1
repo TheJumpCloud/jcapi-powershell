@@ -72,7 +72,7 @@ BODY <IUserGroupPut>:
     Operator <String>: Filter comparison operator.
     Value <String>: Filter comparison value.
   [MemberSuggestionsNotify <Boolean?>]: True if notification emails are to be sent for membership suggestions.
-  [MembershipAutomated <Boolean?>]: True if membership of this group is automatically updated based on the Member Query and Member Query Exemptions, if configured
+  [MembershipAutomated <Boolean?>]: Deprecated. Use membershipMethod instead
   [MembershipMethod <String>]: The type of membership method for this group. Valid values include NOTSET, STATIC, DYNAMIC_REVIEW_REQUIRED, and DYNAMIC_AUTOMATED.
 
 INPUTOBJECT <IJumpCloudApiIdentity>:
@@ -199,7 +199,8 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.Management.Automation.SwitchParameter]
-    # True if membership of this group is automatically updated based on the Member Query and Member Query Exemptions, if configured
+    # Deprecated.
+    # Use membershipMethod instead
     ${MembershipAutomated}, 
 
     [Parameter(ParameterSetName='SetExpanded')]

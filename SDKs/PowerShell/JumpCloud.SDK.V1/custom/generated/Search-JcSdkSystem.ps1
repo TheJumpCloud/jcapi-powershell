@@ -201,53 +201,6 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [OutputType([JumpCloud.SDK.V1.Models.ISystemslist])]
     [CmdletBinding(DefaultParameterSetName='SearchExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
-    [Parameter()]
-    [JumpCloud.SDK.V1.Category('Query')]
-    [System.String]
-    # Use a space seperated string of field parameters to include the data in the response.
-    # If omitted, the default list of fields will be returned.
-    ${Fields}, 
-
-    [Parameter()]
-    [AllowEmptyCollection()]
-    [JumpCloud.SDK.V1.Category('Query')]
-    [System.String[]]
-    # A filter to apply to the query.
-    # See the supported operators below.
-    # For more complex searches,
-    # see the related `/search/<domain>` endpoints,
-    # e.g.
-    # `/search/systems`.
-    # 
-    # **Filter structure**: `<field>:<operator>:<value>`.
-    # 
-    # **field** = Populate with a valid field from an endpoint response.
-    # 
-    # **operator** = Supported operators are:
-    # - `$eq` (equals)
-    # - `$ne` (does not equal)
-    # - `$gt` (is greater than)
-    # - `$gte` (is greater than or equal to)
-    # - `$lt` (is less than)
-    # - `$lte` (is less than or equal to)
-    # 
-    # _Note: v1 operators differ from v2 operators._
-    # 
-    # _Note: For v1 operators, excluding the `$` will result in undefined behavior._
-    # 
-    # **value** = Populate with the value you want to search for.
-    # Is case sensitive.
-    # 
-    # **Examples**
-    # - `GET /users?filter=username:$eq:testuser`
-    # - `GET /systemusers?filter=password_expiration_date:$lte:2021-10-24`
-    # - `GET /systemusers?filter=department:$ne:Accounting`
-    # - `GET /systems?filter[0]=firstname:$eq:foo&filter[1]=lastname:$eq:bar` - this will
-    #  AND the filters together.
-    # - `GET /systems?filter[or][0]=lastname:$eq:foo&filter[or][1]=lastname:$eq:bar` - this will
-    #  OR the filters together.
-    ${Filter}, 
-
     [Parameter(ParameterSetName='Search', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V1.Category('Body')]
     [JumpCloud.SDK.V1.Models.ISearch]
@@ -259,14 +212,14 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # .
-    ${Fields1}, 
+    ${Fields}, 
 
     [Parameter(ParameterSetName='SearchExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [JumpCloud.SDK.V1.Runtime.Info(PossibleTypes=([JumpCloud.SDK.V1.Models.ISearchFilter]))]
     [System.Collections.Hashtable]
     # Dictionary of <any>
-    ${Filter1}, 
+    ${Filter}, 
 
     [Parameter(ParameterSetName='SearchExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]

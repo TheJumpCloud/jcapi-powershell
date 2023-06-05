@@ -628,6 +628,18 @@
     "Directory": {
       "description": "",
       "properties": {
+        "defaultDomain": {
+          "description": "The default domain object if exists, contains id and name of the domain.",
+          "properties": {
+            "domain": {
+              "type": "string"
+            },
+            "id": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
         "id": {
           "description": "The ObjectID of the directory.",
           "type": "string"
@@ -2788,6 +2800,19 @@
       ],
       "type": "object"
     },
+    "PwmCloudBackupRestores": {
+      "properties": {
+        "approved": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "requested": {
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
     "PwmItemHistory": {
       "properties": {
         "createdBy": {
@@ -2965,8 +2990,15 @@
         "apps": {
           "$ref": "#/definitions/Apps"
         },
+        "cloudBackupRestores": {
+          "$ref": "#/definitions/PwmCloudBackupRestores"
+        },
         "email": {
           "format": "email",
+          "type": "string"
+        },
+        "employeeUuid": {
+          "format": "uuid",
           "type": "string"
         },
         "externalId": {
@@ -3345,6 +3377,10 @@
                 "format": "email",
                 "type": "string"
               },
+              "employeeUuid": {
+                "format": "uuid",
+                "type": "string"
+              },
               "externalId": {
                 "type": "string"
               },
@@ -3456,8 +3492,9 @@
           "type": "boolean"
         },
         "membershipAutomated": {
-          "description": "True if membership of this group is automatically updated based on the Member Query and Member Query Exemptions, if configured",
-          "type": "boolean"
+          "description": "Deprecated. Use membershipMethod instead",
+          "type": "boolean",
+          "x-deprecated": true
         },
         "membershipMethod": {
           "$ref": "#/definitions/GroupMembershipMethodType"
@@ -3505,8 +3542,9 @@
           "type": "boolean"
         },
         "membershipAutomated": {
-          "description": "True if membership of this group is automatically updated based on the Member Query and Member Query Exemptions, if configured",
-          "type": "boolean"
+          "description": "Deprecated. Use membershipMethod instead",
+          "type": "boolean",
+          "x-deprecated": true
         },
         "membershipMethod": {
           "$ref": "#/definitions/GroupMembershipMethodType"
@@ -3550,8 +3588,9 @@
           "type": "boolean"
         },
         "membershipAutomated": {
-          "description": "True if membership of this group is automatically updated based on the Member Query and Member Query Exemptions, if configured",
-          "type": "boolean"
+          "description": "Deprecated. Use membershipMethod instead",
+          "type": "boolean",
+          "x-deprecated": true
         },
         "membershipMethod": {
           "$ref": "#/definitions/GroupMembershipMethodType"
@@ -3661,8 +3700,9 @@
           "type": "boolean"
         },
         "membershipAutomated": {
-          "description": "True if membership of this group is automatically updated based on the Member Query and Member Query Exemptions, if configured",
-          "type": "boolean"
+          "description": "Deprecated. Use membershipMethod instead",
+          "type": "boolean",
+          "x-deprecated": true
         },
         "membershipMethod": {
           "$ref": "#/definitions/GroupMembershipMethodType"
@@ -3713,8 +3753,9 @@
           "type": "boolean"
         },
         "membershipAutomated": {
-          "description": "True if membership of this group is automatically updated based on the Member Query and Member Query Exemptions, if configured",
-          "type": "boolean"
+          "description": "Deprecated. Use membershipMethod instead",
+          "type": "boolean",
+          "x-deprecated": true
         },
         "membershipMethod": {
           "$ref": "#/definitions/GroupMembershipMethodType"
@@ -3758,8 +3799,9 @@
           "type": "boolean"
         },
         "membershipAutomated": {
-          "description": "True if membership of this group is automatically updated based on the Member Query and Member Query Exemptions, if configured",
-          "type": "boolean"
+          "description": "Deprecated. Use membershipMethod instead",
+          "type": "boolean",
+          "x-deprecated": true
         },
         "membershipMethod": {
           "$ref": "#/definitions/GroupMembershipMethodType"
@@ -4181,10 +4223,14 @@
           "type": "string"
         },
         "id": {
-          "description": "Object ID of the systemuser being updated",
+          "description": "Object ID of the user being updated",
           "type": "string"
         },
         "lastname": {
+          "type": "string"
+        },
+        "organization": {
+          "description": "Organization object id of the user",
           "type": "string"
         },
         "username": {
@@ -4192,6 +4238,64 @@
         }
       },
       "title": "Bulk User Update",
+      "type": "object"
+    },
+    "commandsGraphObjectWithPaths": {
+      "properties": {
+        "command": {
+          "type": "string"
+        },
+        "commandType": {
+          "type": "string"
+        },
+        "compiledAttributes": {
+          "$ref": "#/definitions/GraphAttributes"
+        },
+        "id": {
+          "description": "Object ID of this graph object.",
+          "type": "string"
+        },
+        "launchType": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "organization": {
+          "type": "string"
+        },
+        "paths": {
+          "description": "A path through the graph between two graph objects.",
+          "items": {
+            "items": {
+              "$ref": "#/definitions/GraphConnection"
+            },
+            "type": "array"
+          },
+          "type": "array"
+        },
+        "schedule": {
+          "type": "string"
+        },
+        "scheduleRepeatType": {
+          "type": "string"
+        },
+        "timeToLiveSeconds": {
+          "type": "integer"
+        },
+        "timeout": {
+          "type": "string"
+        },
+        "type": {
+          "$ref": "#/definitions/GraphType"
+        }
+      },
+      "required": [
+        "type",
+        "id",
+        "paths"
+      ],
+      "title": "commandsGraphObjectWithPaths",
       "type": "object"
     },
     "feature": {
@@ -4447,6 +4551,18 @@
     },
     "office365": {
       "properties": {
+        "defaultDomain": {
+          "properties": {
+            "domain": {
+              "readOnly": true,
+              "type": "string"
+            },
+            "id": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
         "groupsEnabled": {
           "type": "boolean"
         },
@@ -7590,6 +7706,18 @@
     "version": "2.0"
   },
   "parameters": {
+    "trait:GraphObjectWithPaths:details": {
+      "description": "This will provide detail descriptive response for the request.",
+      "enum": [
+        "v1"
+      ],
+      "in": "query",
+      "name": "details",
+      "type": "string",
+      "x-ms-enum": {
+        "name": "GraphObjectWithPaths-Details"
+      }
+    },
     "trait:authnfallbackpolicy:resourceType": {
       "in": "path",
       "items": {
@@ -10402,6 +10530,8 @@
         "policies"
       ]
     },
+    "/bulk/user/expires": {},
+    "/bulk/user/unlocks": {},
     "/bulk/users": {
       "patch": {
         "description": "The endpoint allows you to create a bulk job to asynchronously update users. See [Update a System User](https://docs.jumpcloud.com/api/1.0/index.html#operation/systemusers_put) for full list of attributes.\n\n#### Sample Request \n```\ncurl -X PATCH https://console.jumpcloud.com/api/v2/bulk/users \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '[\n\t{\n\t  \"id\":\"5be9fb4ddb01290001e85109\",\n\t\t\"firstname\":\"{UPDATED_FIRSTNAME}\",\n\t\t\"department\":\"{UPDATED_DEPARTMENT}\",\n\t\t\"attributes\":[\n\t\t\t{\"name\":\"Custom\",\"value\":\"{ATTRIBUTE_VALUE}\"}\n\t\t]\n\t},\n\t{\n\t  \"id\":\"5be9fb4ddb01290001e85109\",\n\t\t\"firstname\":\"{UPDATED_FIRSTNAME}\",\n\t\t\"costCenter\":\"{UPDATED_COST_CENTER}\",\n\t\t\"phoneNumbers\":[\n\t\t\t{\"type\":\"home\",\"number\":\"{HOME_PHONE_NUMBER}\"},\n\t\t\t{\"type\":\"work\",\"number\":\"{WORK_PHONE_NUMBER}\"}\n\t\t]\n\t}\n]\n```",
@@ -10435,15 +10565,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request PATCH \\\n  --url https://console.jumpcloud.com/api/v2/bulk/users \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --header 'x-org-id: SOME_STRING_VALUE' \\\n  --data '[{\"attributes\":[{}],\"email\":\"string\",\"firstname\":\"string\",\"id\":\"string\",\"lastname\":\"string\",\"username\":\"string\"}]'"
+            "source": "curl --request PATCH \\\n  --url https://console.jumpcloud.com/api/v2/bulk/users \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --header 'x-org-id: SOME_STRING_VALUE' \\\n  --data '[{\"attributes\":[{}],\"email\":\"string\",\"firstname\":\"string\",\"id\":\"string\",\"lastname\":\"string\",\"organization\":\"string\",\"username\":\"string\"}]'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/v2/bulk/users\"\n\npayload = [\n    {\n        \"attributes\": [{}],\n        \"email\": \"string\",\n        \"firstname\": \"string\",\n        \"id\": \"string\",\n        \"lastname\": \"string\",\n        \"username\": \"string\"\n    }\n]\nheaders = {\n    \"x-org-id\": \"SOME_STRING_VALUE\",\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"PATCH\", url, json=payload, headers=headers)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/v2/bulk/users\"\n\npayload = [\n    {\n        \"attributes\": [{}],\n        \"email\": \"string\",\n        \"firstname\": \"string\",\n        \"id\": \"string\",\n        \"lastname\": \"string\",\n        \"organization\": \"string\",\n        \"username\": \"string\"\n    }\n]\nheaders = {\n    \"x-org-id\": \"SOME_STRING_VALUE\",\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"PATCH\", url, json=payload, headers=headers)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"x-org-id\", \"SOME_STRING_VALUE\")\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/v2/bulk/users' -Method PATCH -Headers $headers -ContentType 'application/json' -Body '[{\"attributes\":[{}],\"email\":\"string\",\"firstname\":\"string\",\"id\":\"string\",\"lastname\":\"string\",\"username\":\"string\"}]'"
+            "source": "$headers=@{}\n$headers.Add(\"x-org-id\", \"SOME_STRING_VALUE\")\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/v2/bulk/users' -Method PATCH -Headers $headers -ContentType 'application/json' -Body '[{\"attributes\":[{}],\"email\":\"string\",\"firstname\":\"string\",\"id\":\"string\",\"lastname\":\"string\",\"organization\":\"string\",\"username\":\"string\"}]'"
           }
         ]
       },
@@ -11222,6 +11352,7 @@
         "reports-devices"
       ]
     },
+    "/devices/settings/signinwithjumpcloud": {},
     "/directories": {
       "get": {
         "description": "This endpoint returns all active directories (LDAP, O365 Suite, G-Suite).\n\n#### Sample Request\n```\n curl -X GET https://console.jumpcloud.com/api/v2/directories \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
@@ -11243,6 +11374,24 @@
         "responses": {
           "200": {
             "description": "OK",
+            "examples": {
+              "application/json": [
+                {
+                  "id": "string",
+                  "name": "string",
+                  "type": "active_directory"
+                },
+                {
+                  "defaultDomain": {
+                    "domain": "string",
+                    "id": "string"
+                  },
+                  "id": "string",
+                  "name": "string",
+                  "type": "office_365"
+                }
+              ]
+            },
             "schema": {
               "items": {
                 "$ref": "#/definitions/Directory"
@@ -11723,9 +11872,10 @@
       ]
     },
     "/google-emm/devices/{deviceId}": {},
+    "/google-emm/devices/{deviceId}/erase-device": {},
     "/google-emm/devices/{deviceId}/lock": {},
     "/google-emm/devices/{deviceId}/policy_results": {},
-    "/google-emm/devices/{deviceId}/relinquishownership": {},
+    "/google-emm/devices/{deviceId}/reboot": {},
     "/google-emm/devices/{deviceId}/resetpassword": {},
     "/google-emm/enterprises": {},
     "/google-emm/enterprises/{enterpriseId}": {},
@@ -13530,7 +13680,7 @@
         }
       ],
       "patch": {
-        "description": "This endpoint allows updating some attributes of an Office 365 instance.\n\n#####\n\nSample Request\n\n```\ncurl -X PATCH https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"userLockoutAction\": \"maintain\",\n    \"userPasswordExpirationAction\": \"suspend\"\n  }'\n```",
+        "description": "This endpoint allows updating some attributes of an Office 365 instance.\n\n#####\n\nSample Request\n\n```\ncurl -X PATCH https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"userLockoutAction\": \"maintain\",\n    \"userPasswordExpirationAction\": \"suspend\",\n  }'\n```\n\nSample Request, set a default domain\n\n```\ncurl -X PATCH https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"defaultDomain\": {\n        \"id\": \"{domainObjectID}\"\n      }\n  }'\n```\n\nSample Request, unset the default domain\n\n```\ncurl -X PATCH https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\n    \"defaultDomain\": {}\n  }'\n```",
         "operationId": "Office365_Update",
         "parameters": [
           {
@@ -13561,15 +13711,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request PATCH \\\n  --url https://console.jumpcloud.com/api/v2/office365s/{office365_id} \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --header 'x-org-id: SOME_STRING_VALUE' \\\n  --data '{\"groupsEnabled\":true,\"name\":\"string\"}'"
+            "source": "curl --request PATCH \\\n  --url https://console.jumpcloud.com/api/v2/office365s/{office365_id} \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --header 'x-org-id: SOME_STRING_VALUE' \\\n  --data '{\"defaultDomain\":{\"id\":\"string\"},\"groupsEnabled\":true,\"name\":\"string\"}'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/v2/office365s/{office365_id}\"\n\npayload = {\n    \"groupsEnabled\": True,\n    \"name\": \"string\"\n}\nheaders = {\n    \"x-org-id\": \"SOME_STRING_VALUE\",\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"PATCH\", url, json=payload, headers=headers)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/v2/office365s/{office365_id}\"\n\npayload = {\n    \"defaultDomain\": {\"id\": \"string\"},\n    \"groupsEnabled\": True,\n    \"name\": \"string\"\n}\nheaders = {\n    \"x-org-id\": \"SOME_STRING_VALUE\",\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"PATCH\", url, json=payload, headers=headers)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"x-org-id\", \"SOME_STRING_VALUE\")\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/v2/office365s/{office365_id}' -Method PATCH -Headers $headers -ContentType 'application/json' -Body '{\"groupsEnabled\":true,\"name\":\"string\"}'"
+            "source": "$headers=@{}\n$headers.Add(\"x-org-id\", \"SOME_STRING_VALUE\")\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/v2/office365s/{office365_id}' -Method PATCH -Headers $headers -ContentType 'application/json' -Body '{\"defaultDomain\":{\"id\":\"string\"},\"groupsEnabled\":true,\"name\":\"string\"}'"
           }
         ]
       }
@@ -13672,6 +13822,8 @@
         "m365-associations"
       ]
     },
+    "/office365s/{office365_id}/domains": {},
+    "/office365s/{office365_id}/domains/{domain_id}": {},
     "/office365s/{office365_id}/import/users": {
       "get": {
         "description": "Lists Office 365 users available for import.",
@@ -14270,6 +14422,8 @@
         "pwm-user-app-versions"
       ]
     },
+    "/passwordmanager/devices": {},
+    "/passwordmanager/devices/{UUID}": {},
     "/passwordmanager/items": {
       "x-functionalities-tags": "pwm-items-metadata"
     },
@@ -17450,6 +17604,9 @@
           },
           {
             "$ref": "#/parameters/trait:filter:filter"
+          },
+          {
+            "$ref": "#/parameters/trait:GraphObjectWithPaths:details"
           }
         ],
         "responses": {
@@ -17457,7 +17614,7 @@
             "description": "OK",
             "schema": {
               "items": {
-                "$ref": "#/definitions/GraphObjectWithPaths"
+                "$ref": "#/definitions/commandsGraphObjectWithPaths"
               },
               "type": "array"
             }
@@ -17472,15 +17629,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request GET \\\n  --url 'https://console.jumpcloud.com/api/v2/systemgroups/{group_id}/commands?limit=10&skip=0' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --header 'x-org-id: SOME_STRING_VALUE'"
+            "source": "curl --request GET \\\n  --url 'https://console.jumpcloud.com/api/v2/systemgroups/{group_id}/commands?limit=10&skip=0&details=SOME_STRING_VALUE' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --header 'x-org-id: SOME_STRING_VALUE'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/v2/systemgroups/{group_id}/commands\"\n\nquerystring = {\"limit\":\"10\",\"skip\":\"0\"}\n\nheaders = {\n    \"x-org-id\": \"SOME_STRING_VALUE\",\n    \"x-api-key\": \"REPLACE_KEY_VALUE\"\n}\n\nresponse = requests.request(\"GET\", url, headers=headers, params=querystring)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/v2/systemgroups/{group_id}/commands\"\n\nquerystring = {\"limit\":\"10\",\"skip\":\"0\",\"details\":\"SOME_STRING_VALUE\"}\n\nheaders = {\n    \"x-org-id\": \"SOME_STRING_VALUE\",\n    \"x-api-key\": \"REPLACE_KEY_VALUE\"\n}\n\nresponse = requests.request(\"GET\", url, headers=headers, params=querystring)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"x-org-id\", \"SOME_STRING_VALUE\")\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/v2/systemgroups/{group_id}/commands?limit=10&skip=0' -Method GET -Headers $headers"
+            "source": "$headers=@{}\n$headers.Add(\"x-org-id\", \"SOME_STRING_VALUE\")\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/v2/systemgroups/{group_id}/commands?limit=10&skip=0&details=SOME_STRING_VALUE' -Method GET -Headers $headers"
           }
         ]
       },
@@ -21678,6 +21835,9 @@
           },
           {
             "$ref": "#/parameters/trait:filter:filter"
+          },
+          {
+            "$ref": "#/parameters/trait:GraphObjectWithPaths:details"
           }
         ],
         "responses": {
@@ -21685,7 +21845,7 @@
             "description": "OK",
             "schema": {
               "items": {
-                "$ref": "#/definitions/GraphObjectWithPaths"
+                "$ref": "#/definitions/commandsGraphObjectWithPaths"
               },
               "type": "array"
             }
@@ -21700,15 +21860,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request GET \\\n  --url 'https://console.jumpcloud.com/api/v2/systems/{system_id}/commands?limit=10&skip=0' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --header 'x-org-id: SOME_STRING_VALUE'"
+            "source": "curl --request GET \\\n  --url 'https://console.jumpcloud.com/api/v2/systems/{system_id}/commands?limit=10&skip=0&details=SOME_STRING_VALUE' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --header 'x-org-id: SOME_STRING_VALUE'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/v2/systems/{system_id}/commands\"\n\nquerystring = {\"limit\":\"10\",\"skip\":\"0\"}\n\nheaders = {\n    \"x-org-id\": \"SOME_STRING_VALUE\",\n    \"x-api-key\": \"REPLACE_KEY_VALUE\"\n}\n\nresponse = requests.request(\"GET\", url, headers=headers, params=querystring)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/v2/systems/{system_id}/commands\"\n\nquerystring = {\"limit\":\"10\",\"skip\":\"0\",\"details\":\"SOME_STRING_VALUE\"}\n\nheaders = {\n    \"x-org-id\": \"SOME_STRING_VALUE\",\n    \"x-api-key\": \"REPLACE_KEY_VALUE\"\n}\n\nresponse = requests.request(\"GET\", url, headers=headers, params=querystring)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"x-org-id\", \"SOME_STRING_VALUE\")\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/v2/systems/{system_id}/commands?limit=10&skip=0' -Method GET -Headers $headers"
+            "source": "$headers=@{}\n$headers.Add(\"x-org-id\", \"SOME_STRING_VALUE\")\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/v2/systems/{system_id}/commands?limit=10&skip=0&details=SOME_STRING_VALUE' -Method GET -Headers $headers"
           }
         ]
       },
