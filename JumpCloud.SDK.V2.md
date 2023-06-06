@@ -1,5 +1,5 @@
 ## JumpCloud.SDK.V2-0.0.39
-Release Date: June 05, 2023
+Release Date: June 06, 2023
 #### RELEASE NOTES
 ```
 This is a rollup release for the V2 module, no functional changes were made
@@ -15,7 +15,15 @@ No changes
 <details>
 <summary>Functions Modified</summary>
 
-No changes
+* Get-JcSdkSystemGroupTraverseCommand.ps1
+* Get-JcSdkSystemTraverseCommand.ps1
+* New-JcSdkSystemGroup.ps1
+* New-JcSdkUserGroup.ps1
+* Set-JcSdkSystemGroup.ps1
+* Set-JcSdkUserGroup.ps1
+* Update-JcSdkBulkUser.ps1
+* Update-JcSdkOffice365.ps1
+
 </details>
 
 <details>

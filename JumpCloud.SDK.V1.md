@@ -1,5 +1,5 @@
 ## JumpCloud.SDK.V1-0.0.35
-Release Date: June 05, 2023
+Release Date: June 06, 2023
 #### RELEASE NOTES
 ```
 This release makes changes to available parameters in the Search functions
@@ -21,7 +21,12 @@ No changes
 <details>
 <summary>Functions Modified</summary>
 
-No changes
+* Search-JcSdkCommand.ps1
+* Search-JcSdkOrganization.ps1
+* Search-JcSdkSystem.ps1
+* Search-JcSdkUser.ps1
+* Set-JcSdkOrganization.ps1
+
 </details>
 
 <details>
