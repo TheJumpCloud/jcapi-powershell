@@ -2,14 +2,14 @@
 Release Date: June 05, 2023
 #### RELEASE NOTES
 ```
-{{Fill in the Release Notes}}
+This release makes changes to available parameters in the Search functions
 ```
-#### FEATURES:
-{{Fill in the Features}}
 #### IMPROVEMENTS:
-{{Fill in the Improvements}}
-#### BUG FIXES:
-{{Fill in the Bug Fixes}}
+`filter1` and `fields1` parameters have been removed for the following functions:
+* `Search-JcSdkCommand`
+* `Search-JcSdkOrganization`
+* `Search-JcSdkSystem`
+* `Search-JcSdkUser`
 #### Generated Changes:
 
 <details>
