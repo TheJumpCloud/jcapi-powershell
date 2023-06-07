@@ -1,5 +1,5 @@
 ## JumpCloud.SDK.V2-0.0.39
-Release Date: June 06, 2023
+Release Date: June 07, 2023
 #### RELEASE NOTES
 ```
 This is a rollup release for the V2 module, no functional changes were made
