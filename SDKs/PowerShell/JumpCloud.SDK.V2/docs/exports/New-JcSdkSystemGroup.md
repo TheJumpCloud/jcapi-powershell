@@ -163,7 +163,8 @@ Accept wildcard characters: False
 ```
 
 ### -MembershipAutomated
-True if membership of this group is automatically updated based on the Member Query and Member Query Exemptions, if configured
+Deprecated.
+Use membershipMethod instead
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -289,7 +290,7 @@ BODY <ISystemGroupPost>: SystemGroupPost
     - `Operator <String>`: Filter comparison operator.
     - `Value <String>`: Filter comparison value.
   - `[MemberSuggestionsNotify <Boolean?>]`: True if notification emails are to be sent for membership suggestions.
-  - `[MembershipAutomated <Boolean?>]`: True if membership of this group is automatically updated based on the Member Query and Member Query Exemptions, if configured
+  - `[MembershipAutomated <Boolean?>]`: Deprecated. Use membershipMethod instead
   - `[MembershipMethod <String>]`: The type of membership method for this group. Valid values include NOTSET, STATIC, DYNAMIC_REVIEW_REQUIRED, and DYNAMIC_AUTOMATED.
 
 MEMBERQUERYEXEMPTIONS <IGraphObject[]>: Array of GraphObjects exempted from the query

@@ -21,7 +21,33 @@ curl -X PATCH https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID} \\
   -H 'x-api-key: {API_KEY}' \\
   -d '{
     \"userLockoutAction\": \"maintain\",
-    \"userPasswordExpirationAction\": \"suspend\"
+    \"userPasswordExpirationAction\": \"suspend\",
+  }'
+```
+
+Sample Request, set a default domain
+
+```
+curl -X PATCH https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"defaultDomain\": {
+        \"id\": \"{domainObjectID}\"
+      }
+  }'
+```
+
+Sample Request, unset the default domain
+
+```
+curl -X PATCH https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"defaultDomain\": {}
   }'
 ```
 
@@ -29,8 +55,8 @@ curl -X PATCH https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID} \\
 
 ### UpdateExpanded (Default)
 ```
-Update-JcSdkOffice365 -Office365Id <String> [-GroupsEnabled] [-Name <String>] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+Update-JcSdkOffice365 -Office365Id <String> [-DefaultDomainId <String>] [-GroupsEnabled] [-Name <String>]
+ [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Update
@@ -46,8 +72,8 @@ Update-JcSdkOffice365 -InputObject <IJumpCloudApiIdentity> -Body <IOffice365> [-
 
 ### UpdateViaIdentityExpanded
 ```
-Update-JcSdkOffice365 -InputObject <IJumpCloudApiIdentity> [-GroupsEnabled] [-Name <String>] [-Confirm]
- [-WhatIf] [<CommonParameters>]
+Update-JcSdkOffice365 -InputObject <IJumpCloudApiIdentity> [-DefaultDomainId <String>] [-GroupsEnabled]
+ [-Name <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -64,7 +90,33 @@ curl -X PATCH https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID} \\
   -H 'x-api-key: {API_KEY}' \\
   -d '{
     \"userLockoutAction\": \"maintain\",
-    \"userPasswordExpirationAction\": \"suspend\"
+    \"userPasswordExpirationAction\": \"suspend\",
+  }'
+```
+
+Sample Request, set a default domain
+
+```
+curl -X PATCH https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"defaultDomain\": {
+        \"id\": \"{domainObjectID}\"
+      }
+  }'
+```
+
+Sample Request, unset the default domain
+
+```
+curl -X PATCH https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"defaultDomain\": {}
   }'
 ```
 
@@ -99,6 +151,21 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -DefaultDomainId
+.
+
+```yaml
+Type: System.String
+Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -217,6 +284,7 @@ To create the parameters described below, construct a hash table containing the 
 
 
 BODY <IOffice365>: Office 365
+  - `[DefaultDomainId <String>]`: 
   - `[GroupsEnabled <Boolean?>]`: 
   - `[Name <String>]`: 
 

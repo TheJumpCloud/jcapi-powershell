@@ -31,12 +31,14 @@ curl -X GET https://console.jumpcloud.com/api/v2/systems/{System_ID}/commands \\
 
 ### Get (Default)
 ```
-Get-JcSdkSystemTraverseCommand -SystemId <String> [-Filter <String[]>] [<CommonParameters>]
+Get-JcSdkSystemTraverseCommand -SystemId <String> [-Details <GraphObjectWithPathsDetails>]
+ [-Filter <String[]>] [<CommonParameters>]
 ```
 
 ### GetViaIdentity
 ```
-Get-JcSdkSystemTraverseCommand -InputObject <IJumpCloudApiIdentity> [-Filter <String[]>] [<CommonParameters>]
+Get-JcSdkSystemTraverseCommand -InputObject <IJumpCloudApiIdentity> [-Details <GraphObjectWithPathsDetails>]
+ [-Filter <String[]>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -76,6 +78,21 @@ curl -X GET https://console.jumpcloud.com/api/v2/systems/{System_ID}/commands \\
 {{ Add output here }}
 
 ## PARAMETERS
+
+### -Details
+This will provide detail descriptive response for the request.
+
+```yaml
+Type: JumpCloud.SDK.V2.Support.GraphObjectWithPathsDetails
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### -Filter
 A filter to apply to the query.
@@ -145,7 +162,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V2.Models.IGraphObjectWithPaths
+### JumpCloud.SDK.V2.Models.ICommandsGraphObjectWithPaths
 
 ## NOTES
 

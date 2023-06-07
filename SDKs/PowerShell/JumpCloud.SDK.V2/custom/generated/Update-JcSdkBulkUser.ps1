@@ -81,8 +81,9 @@ BODY <IBulkUserUpdate[]>:
   [Attributes <IBulkUserUpdateAttributesItem[]>]: Map of additional attributes.
   [Email <String>]:
   [Firstname <String>]:
-  [Id <String>]: Object ID of the systemuser being updated
+  [Id <String>]: Object ID of the user being updated
   [Lastname <String>]:
+  [Organization <String>]: Organization object id of the user
   [Username <String>]:
 .Link
 https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Update-JcSdkBulkUser.md

@@ -49,7 +49,7 @@ PS C:\> {{ Add code here }}
 .Inputs
 JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
 .Outputs
-JumpCloud.SDK.V2.Models.IGraphObjectWithPaths
+JumpCloud.SDK.V2.Models.ICommandsGraphObjectWithPaths
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -84,7 +84,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Get-JcSdkSystemTraverseCommand
 {
-    [OutputType([JumpCloud.SDK.V2.Models.IGraphObjectWithPaths])]
+    [OutputType([JumpCloud.SDK.V2.Models.ICommandsGraphObjectWithPaths])]
     [CmdletBinding(DefaultParameterSetName='Get', PositionalBinding=$false)]
     Param(
     [Parameter(ParameterSetName='Get', Mandatory)]
@@ -99,6 +99,13 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     # Identity Parameter
     # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
     ${InputObject}, 
+
+    [Parameter()]
+    [ArgumentCompleter([JumpCloud.SDK.V2.Support.GraphObjectWithPathsDetails])]
+    [JumpCloud.SDK.V2.Category('Query')]
+    [JumpCloud.SDK.V2.Support.GraphObjectWithPathsDetails]
+    # This will provide detail descriptive response for the request.
+    ${Details}, 
 
     [Parameter()]
     [AllowEmptyCollection()]

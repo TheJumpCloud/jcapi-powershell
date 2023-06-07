@@ -33,7 +33,7 @@ input-file:
 module-name: JumpCloud.SDK.V1
 namespace: JumpCloud.SDK.V1
 sample-generation: true
-module-version: 0.0.34
+module-version: 0.0.35
 dll-name: JumpCloud.SDK.V1.private
 
 directive:

@@ -3216,7 +3216,33 @@ curl -X PATCH https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID} \\
   -H 'x-api-key: {API_KEY}' \\
   -d '{
     \"userLockoutAction\": \"maintain\",
-    \"userPasswordExpirationAction\": \"suspend\"
+    \"userPasswordExpirationAction\": \"suspend\",
+  }'
+```
+
+Sample Request, set a default domain
+
+```
+curl -X PATCH https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"defaultDomain\": {
+        \"id\": \"{domainObjectID}\"
+      }
+  }'
+```
+
+Sample Request, unset the default domain
+
+```
+curl -X PATCH https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"defaultDomain\": {}
   }'
 ```
 

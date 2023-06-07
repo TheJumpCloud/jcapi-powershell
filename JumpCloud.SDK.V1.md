@@ -1,3 +1,40 @@
+## JumpCloud.SDK.V1-0.0.35
+Release Date: June 07, 2023
+#### RELEASE NOTES
+```
+This release makes changes to available parameters in the Search functions
+```
+#### IMPROVEMENTS:
+`filter1` and `fields1` parameters have been removed for the following functions:
+* `Search-JcSdkCommand`
+* `Search-JcSdkOrganization`
+* `Search-JcSdkSystem`
+* `Search-JcSdkUser`
+#### Generated Changes:
+
+<details>
+<summary>Functions Added</summary>
+
+No changes
+</details>
+
+<details>
+<summary>Functions Modified</summary>
+
+* Search-JcSdkCommand.ps1
+* Search-JcSdkOrganization.ps1
+* Search-JcSdkSystem.ps1
+* Search-JcSdkUser.ps1
+* Set-JcSdkOrganization.ps1
+
+</details>
+
+<details>
+<summary>Functions Removed</summary>
+
+No changes
+</details>
+
 ## JumpCloud.SDK.V1-0.0.34
 Release Date: May 04, 2023
 #### RELEASE NOTES

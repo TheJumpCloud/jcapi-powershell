@@ -92,14 +92,13 @@ curl -X POST https://console.jumpcloud.com/api/search/systemusers \\
 
 ### SearchExpanded (Default)
 ```
-Search-JcSdkUser [-Fields <String>] [-Filter <String[]>] [-Fields1 <String>] [-Filter1 <Hashtable>]
- [-SearchFilter <Hashtable>] [-Confirm] [-WhatIf] [<CommonParameters>]
+Search-JcSdkUser [-Fields <String>] [-Filter <Hashtable>] [-SearchFilter <Hashtable>] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### Search
 ```
-Search-JcSdkUser -Body <ISearch> [-Fields <String>] [-Filter <String[]>] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+Search-JcSdkUser -Body <ISearch> [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -218,22 +217,6 @@ Accept wildcard characters: False
 ```
 
 ### -Fields
-Use a space seperated string of field parameters to include the data in the response.
-If omitted, the default list of fields will be returned.
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Fields1
 .
 
 ```yaml
@@ -249,54 +232,6 @@ Accept wildcard characters: False
 ```
 
 ### -Filter
-A filter to apply to the query.
-See the supported operators below.
-For more complex searches,
-see the related `/search/\<domain\>` endpoints,
-e.g.
-`/search/systems`.
-
-**Filter structure**: `\<field\>:\<operator\>:\<value\>`.
-
-**field** = Populate with a valid field from an endpoint response.
-
-**operator** = Supported operators are:
-- `$eq` (equals)
-- `$ne` (does not equal)
-- `$gt` (is greater than)
-- `$gte` (is greater than or equal to)
-- `$lt` (is less than)
-- `$lte` (is less than or equal to)
-
-_Note: v1 operators differ from v2 operators._
-
-_Note: For v1 operators, excluding the `$` will result in undefined behavior._
-
-**value** = Populate with the value you want to search for.
-Is case sensitive.
-
-**Examples**
-- `GET /users?filter=username:$eq:testuser`
-- `GET /systemusers?filter=password_expiration_date:$lte:2021-10-24`
-- `GET /systemusers?filter=department:$ne:Accounting`
-- `GET /systems?filter[0]=firstname:$eq:foo&filter[1]=lastname:$eq:bar` - this will
- AND the filters together.
-- `GET /systems?filter[or][0]=lastname:$eq:foo&filter[or][1]=lastname:$eq:bar` - this will
- OR the filters together.
-
-```yaml
-Type: System.String[]
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Filter1
 Dictionary of \<any\>
 
 ```yaml
