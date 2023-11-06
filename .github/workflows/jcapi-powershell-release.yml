@@ -1,1 +1,126 @@
 Name: Release and Publish SDKs
+on:
+  pull_request:
+    branches:
+      - master
+    types: [opened, synchronize, reopened, labeled, unlabeled]
+  # will be switched to:
+  # pull_request:
+  #   types:
+  #     - closed
+  #   branches:
+  #     - master
+jobs:
+  Check-If-Merged:
+    # will be switched to true
+    if: github.event.pull_request.merged == false
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check if Merged
+        run: echo {GITHUB_HEAD_REF} merged into master
+  Check-PR-Labels:
+    needs: ["Check-If-Merged"]
+    runs-on: ubuntu-latest
+    outputs:
+      RELEASE_TYPE: ${{ steps.validate.outputs.RELEASE_TYPE }}
+    steps:
+      - name: Validate-PR-Version-Labels
+        id: validate
+        shell: pwsh
+        run: |
+          $PR_LABEL_LIST=$(curl -s "https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/labels" | jq -r '.[].name')
+          if ("SDK" -in $PR_LABEL_LIST) {
+              write-host "Starting Build for PowerShell SDK Release"
+          }
+          # validate type from label list:
+          $types = @('major', 'minor', 'patch', 'manual')
+          $typeCount = 0
+          foreach ($item in $PR_LABEL_LIST) {
+              if ($item -in $types) {
+                  write-host "$item"
+                  $typeCount += 1
+                  $RELEASE_TYPE = $item
+              }
+          }
+          if ($typeCount -eq 1) {
+              echo "RELEASE_TYPE=$RELEASE_TYPE" >> $env:GITHUB_OUTPUT
+          } else {
+              throw "Multiple or invalid release types were found on PR"
+              exit 1
+          }
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  Setup-Build-Dependancies:
+    needs: ["Check-PR-Labels"]
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup PowerShell Module Cache
+        id: cacher
+        uses: actions/cache@v3
+        with:
+          path: "/home/runner/.local/share/powershell/Modules/"
+          key: PS-Dependancies
+      - name: Install dependencies
+        if: steps.cacher.outputs.cache-hit != 'true'
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          . "${{ github.workspace }}\Setup-Dependencies.ps1"
+  Draft-GH-Release:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        sdkName: ['JumpCloud.SDK.V1','JumpCloud.SDK.V2','JumpCloud.SDK.DirectoryInsights']
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build Draft Release
+        run: |
+          MODULE_VERSION=$(grep -Po '(\d+\.\d+\.\d+)' ${{ github.workspace }}//SDKs/PowerShell/${{ matrix.sdkName }}/${{ matrix.sdkName }}.psd1)
+          VERSION=$(echo $MODULE_VERSION | grep -Po "\d\+\.\d\+\.\d\+")
+          TITLE="${{ matrix.sdkName }}-$VERSION"
+          # Get the changelog text between the latest release # and the next sequential "## SemanticVersionNumber"
+          CHANGELOG=$(cat ${{ github.workspace }}/${{ matrix.sdkName }}.md | awk "/^## ${{ matrix.sdkName }}-$VERSION/{ f = 1; next } /## ${{ matrix.sdkName }}-[0-9]+.[0-9]+.[0-9]+/{ f = 0 } f")
+          BODY="$TITLE $CHANGELOG"
+          TAG="${{ matrix.sdkName }}-$VERSION"
+          BODY="$TITLE $CHANGELOG"
+          # draft release
+          (gh release view $TAG && echo "Release exists for $TAG") || gh release create $TAG --title "$TITLE" --notes "$BODY" --draft
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  Manual-Approval-Release:
+    needs: ["Draft-GH-Release"]
+    environment: PublishToPSGallery
+    runs-on: ubuntu-latest
+    steps:
+      - name: Manual Approval for Release
+        run: echo "Awaiting approval from required reviewers before continuing"
+  Download-Artifact:
+    needs: [Manual-Approval-Release]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download SDK Artifact
+        run: |
+          WF_NAME="jcapi-powershell-ci.yml"
+          ARTIFACT_NAME="jcapi-powershell"
+          RUN_ID=`gh run --repo ${{ github.repository }} list --workflow ${WF_NAME} --branch ${{ github.ref_name }} --json databaseId --jq .[0].databaseId`
+          gh run --repo ${{ github.repository }} download ${RUN_ID} -n ${ARTIFACT_NAME}
+          # List the artifiact directory/files
+          ls -lR
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  Deploy-Nupkg:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        sdkName: ['JumpCloud.SDK.V1','JumpCloud.SDK.V2','JumpCloud.SDK.DirectoryInsights']
+    steps:
+      - name: publish
+        run: |
+          # finally remove source PSGallery and add again with the v2/package path for publishing
+          dotnet nuget remove source PSGallery
+          dotnet nuget add source "https://www.powershellgallery.com/api/v2/package" --name PSGallery
+
+          $NupkgPath = (Get-ChildItem -Path:("./SDKs/PowerShell/${{ matrix.sdkName }}/bin/nupkg/${{ matrix.sdkName }}*.nupkg")).FullName
+          write-host "push ${{ matrix.sdkName }} to psgallery"
