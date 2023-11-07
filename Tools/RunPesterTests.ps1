@@ -83,7 +83,7 @@ If ($moduleName -eq 'JumpCloud.SDK.V1' -or $moduleName -eq 'JumpCloud.SDK.V2' -a
     # Using Requests, assign the command to the system / Splatting the command object with system does not work perhaps it's been deprecated in favor of associations?
     # This Association is set to run one instance of the command on a system
     # It is removed in order for the Set-JcSdkCommandAssociation tests to work as expected
-    $CommandAssociaion = Get-JcSdkSystem | Where-Object { $_.os -eq 'Ubuntu' } | Select-Object -ExpandProperty Id
+    $CommandAssociaion = Get-JcSdkSystem | Where-Object { $_.osfamily -eq 'linux' } | Select-Object -ExpandProperty Id
     $headers = @{
         "x-api-key" = $env:JCApiKey
         "content-type" = "application/json"
