@@ -1,15 +1,16 @@
-Name: Release and Publish SDKs
+name: Release and Publish SDKs
+
 on:
   pull_request:
+    types:
+      - closed
     branches:
       - master
-    types: [opened, synchronize, reopened, labeled, unlabeled]
-  # will be switched to:
+  # test with:
   # pull_request:
-  #   types:
-  #     - closed
   #   branches:
   #     - master
+  #   types: [opened, synchronize, reopened, labeled, unlabeled]
 jobs:
   Check-If-Merged:
     # will be switched to true
