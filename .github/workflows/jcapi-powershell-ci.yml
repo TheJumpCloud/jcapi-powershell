@@ -57,7 +57,7 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                SDKName: ['JumpCloud.SDK.DirectoryInsights', 'JumpCloud.SDK.V1', 'JumpCloud.SDK.V2']
+                SDKName: ['JumpCloud.SDK.DirectoryInsights', 'JumpCloud.SDK.V1']
         steps:
             - uses: actions/checkout@v4
             - uses: actions/cache@v3
@@ -68,10 +68,12 @@ jobs:
               shell: pwsh
               run: |
                 ./BuildAutoRest -SDKName:("${{ matrix.SDKName }}")
+                # zip contents for artifact
+                Compress-Archive -Path ./SDKs/PowerShell/${{ matrix.SDKName }} -DestinationPath ./SDKs/PowerShell/${{ matrix.SDKName }}.zip -CompressionLevel Optimal -Force
             - uses: actions/upload-artifact@v3
               with:
                 name: build-${{ matrix.SDKName }}
-                path: /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/${{ matrix.SDKName }}
+                path: /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/${{ matrix.SDKName }}.zip
     Test-SDK:
         needs: ["Setup-Build-Dependancies", "Build-SDK"]
         runs-on: ubuntu-latest
@@ -79,7 +81,7 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                SDKName: ['JumpCloud.SDK.DirectoryInsights', 'JumpCloud.SDK.V1', 'JumpCloud.SDK.V2']
+                SDKName: ['JumpCloud.SDK.DirectoryInsights', 'JumpCloud.SDK.V1']
         steps:
             - uses: actions/checkout@v4
             - uses: actions/cache@v3
@@ -90,6 +92,10 @@ jobs:
               with:
                 name: build-${{ matrix.SDKName }}
                 path: /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/${{ matrix.SDKName }}
+            - name: Unzip ${{ matrix.SDKName }} module
+              shell: pwsh
+              run: |
+                Expand-Archive -Path ./SDKs/PowerShell/${{ matrix.SDKName }}.zip -DestinationPath ./SDKs/PowerShell/${{ matrix.SDKName }} -Force
             - name: Test ${{ matrix.SDKName }}
               shell: pwsh
               env:
@@ -100,6 +106,7 @@ jobs:
               run: |
                 $ErrorActionnPreference = 'Stop'
                 ./Test-Module.ps1 -JCApiKey:($env:PESTER_APIKEY) -JCOrgId:($env:PESTER_ORGID) -JCApiKeyMTP:($env:PESTER_MSP_APIKEY) -JCProviderId:($env:PESTER_PROVIDERID) -ExcludeTagList:("MTP") -IncludeTagList:("*") -testModulePath:("./SDKs/PowerShell/${{ matrix.SDKName }}/test-module.ps1")
+
     Test-SDK-MTP:
         needs: ["Setup-Build-Dependancies", "Build-SDK"]
         runs-on: ubuntu-latest
