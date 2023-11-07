@@ -50,58 +50,8 @@ jobs:
                         Install-Module -Name $RequiredModule -Repository:($($PSDependencies[$RequiredModule].Repository)) -RequiredVersion:($($PSDependencies[$RequiredModule].RequiredVersion)) -AllowPrerelease -Force
                     }
                 }
-    Build-SDK:
+    Build-Test-SDK:
         needs: ["Setup-Build-Dependancies"]
-        runs-on: ubuntu-latest
-        timeout-minutes: 70
-        strategy:
-            fail-fast: false
-            matrix:
-                SDKName: ['JumpCloud.SDK.DirectoryInsights', 'JumpCloud.SDK.V1', 'JumpCloud.SDK.V2']
-        steps:
-            - uses: actions/checkout@v4
-            - uses: actions/cache@v3
-              with:
-                path: "/home/runner/.local/share/powershell/Modules/"
-                key: PS-Dependancies
-            - name: Build ${{ matrix.SDKName }}
-              shell: pwsh
-              run: |
-                ./BuildAutoRest.ps1 -SDKName:("${{ matrix.SDKName }}")
-            - uses: actions/upload-artifact@v3
-              with:
-                name: jcapi-powershell-build
-                path: /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell
-    Test-SDK:
-        needs: ["Setup-Build-Dependancies", "Build-SDK"]
-        runs-on: ubuntu-latest
-        timeout-minutes: 70
-        strategy:
-            fail-fast: false
-            matrix:
-                SDKName: ['JumpCloud.SDK.DirectoryInsights', 'JumpCloud.SDK.V1', 'JumpCloud.SDK.V2']
-        steps:
-            - uses: actions/checkout@v4
-            - uses: actions/cache@v3
-              with:
-                path: "/home/runner/.local/share/powershell/Modules/"
-                key: PS-Dependancies
-            - uses: actions/download-artifact
-              with:
-                name: jcapi-powershell-build
-                path: /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell
-            - name: Test ${{ matrix.SDKName }}
-              shell: pwsh
-              env:
-                PESTER_APIKEY: ${{ secrets.PESTER_APIKEY }}
-                PESTER_ORGID: ${{ secrets.PESTER_ORGID }}
-                PESTER_MSP_APIKEY: ${{ secrets.PESTER_MSP_APIKEY }}
-                PESTER_PROVIDERID: ${{ secrets.PESTER_PROVIDERID }}
-              run: |
-                $ErrorActionnPreference = 'Stop'
-                ./Test-Module.ps1 -JCApiKey:($env:PESTER_APIKEY) -JCOrgId:($env:PESTER_ORGID) -JCApiKeyMTP:($env:PESTER_MSP_APIKEY) -JCProviderId:($env:PESTER_PROVIDERID) -ExcludeTagList:("MTP") -IncludeTagList:("*") -testModulePath:("./SDKs/PowerShell/${{ matrix.SDKName }}/test-module.ps1")
-    Test-MTP:
-        needs: ["Setup-Build-Dependancies", "Test-SDK", "Build-SDK"]
         runs-on: ubuntu-latest
         timeout-minutes: 70
         strategy:
@@ -118,6 +68,10 @@ jobs:
               with:
                 name: jcapi-powershell-build
                 path: /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell
+            - name: Build ${{ matrix.SDKName }}
+              shell: pwsh
+              run: |
+                ./BuildAutoRest -SDKName:("${{ matrix.SDKName }}")
             - name: Test ${{ matrix.SDKName }}
               shell: pwsh
               env:
@@ -127,9 +81,20 @@ jobs:
                 PESTER_PROVIDERID: ${{ secrets.PESTER_PROVIDERID }}
               run: |
                 $ErrorActionnPreference = 'Stop'
-                ./Test-Module.ps1 -JCApiKey:($env:PESTER_APIKEY) -JCOrgId:($env:PESTER_ORGID) -JCApiKeyMTP:($env:PESTER_MSP_APIKEY) -JCProviderId:($env:PESTER_PROVIDERID) -ExcludeTagList:("None") -IncludeTagList:("MTP") -testModulePath:("./SDKs/PowerShell/${{ matrix.SDKName }}/test-module.ps1")
+                # build v1 for v2 tests:
+                if ("${{ matrix.SDKName }}" -eq "JumpCloud.SDK.V2"){
+                  # build v1
+                  ./buildAutoRest.ps1 -SDKName:("JumpCloud.SDK.V1")
+                  # change dir back to root
+                  cd ../../../
+                }
+                ./Test-Module.ps1 -JCApiKey:($env:PESTER_APIKEY) -JCOrgId:($env:PESTER_ORGID) -JCApiKeyMTP:($env:PESTER_MSP_APIKEY) -JCProviderId:($env:PESTER_PROVIDERID) -ExcludeTagList:("MTP") -IncludeTagList:("*") -testModulePath:("./SDKs/PowerShell/${{ matrix.SDKName }}/test-module.ps1")
+                if if (("${{ matrix.SDKName }}" -eq "JumpCloud.SDK.V2") -or ("${{ matrix.SDKName }}" -eq "JumpCloud.SDK.V1")){
+                  # invoke MTP tests:
+                  ./Test-Module.ps1 -JCApiKey:($env:PESTER_APIKEY) -JCOrgId:($env:PESTER_ORGID) -JCApiKeyMTP:($env:PESTER_MSP_APIKEY) -JCProviderId:($env:PESTER_PROVIDERID) -ExcludeTagList:("None") -IncludeTagList:("MTP") -testModulePath:("./SDKs/PowerShell/${{ matrix.SDKName }}/test-module.ps1")
+                }
     Invoke-Pester:
-        needs: ["Setup-Build-Dependancies", "Build-SDK", "Test-MTP"]
+        needs: ["Setup-Build-Dependancies", "Build-Test-SDK"]
         runs-on: ubuntu-latest
         timeout-minutes: 70
         steps:
