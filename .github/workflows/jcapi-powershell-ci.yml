@@ -102,10 +102,10 @@ jobs:
                 name: build-JumpCloud.SDK.V1
                 path: /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/
               if: matrix.SDKName == 'JumpCloud.SDK.V2'
-            - name: Unzip ${{ matrix.SDKName }} module
+            - name: Unzip V1 module for V2 Tests
               shell: pwsh
               run: |
-                Expand-Archive -Path /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/build-JumpCloud.SDK.V1.zip -DestinationPath /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/ -Force
+                Expand-Archive -Path /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/JumpCloud.SDK.V1.zip -DestinationPath /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/ -Force
               if: matrix.SDKName == 'JumpCloud.SDK.V2'
 
             - name: Test ${{ matrix.SDKName }}
@@ -146,10 +146,10 @@ jobs:
                 name: build-JumpCloud.SDK.V1
                 path: /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/
               if: matrix.SDKName == 'JumpCloud.SDK.V2'
-            - name: Unzip ${{ matrix.SDKName }} module
+            - name: Unzip V1 module for V2 Tests
               shell: pwsh
               run: |
-                Expand-Archive -Path /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/build-JumpCloud.SDK.V1.zip -DestinationPath /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/ -Force
+                Expand-Archive -Path /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/JumpCloud.SDK.V1.zip -DestinationPath /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/ -Force
               if: matrix.SDKName == 'JumpCloud.SDK.V2'
             - name: Test MTP ${{ matrix.SDKName }}
               shell: pwsh
