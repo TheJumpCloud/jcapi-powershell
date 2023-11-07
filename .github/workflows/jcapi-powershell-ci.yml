@@ -69,7 +69,7 @@ jobs:
               run: |
                 ./BuildAutoRest -SDKName:("${{ matrix.SDKName }}")
                 # zip contents for artifact
-                Compress-Archive -Path ./SDKs/PowerShell/${{ matrix.SDKName }} -DestinationPath ./SDKs/PowerShell/${{ matrix.SDKName }}.zip -CompressionLevel Optimal -Force
+                Compress-Archive -Path /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/${{ matrix.SDKName }} -DestinationPath /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/${{ matrix.SDKName }}.zip -CompressionLevel Optimal -Force
             - uses: actions/upload-artifact@v3
               with:
                 name: build-${{ matrix.SDKName }}
@@ -95,7 +95,7 @@ jobs:
             - name: Unzip ${{ matrix.SDKName }} module
               shell: pwsh
               run: |
-                Expand-Archive -Path ./SDKs/PowerShell/${{ matrix.SDKName }}.zip -DestinationPath ./SDKs/PowerShell/${{ matrix.SDKName }} -Force
+                Expand-Archive -Path /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/${{ matrix.SDKName }}.zip -DestinationPath /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/${{ matrix.SDKName }} -Force
             - name: Test ${{ matrix.SDKName }}
               shell: pwsh
               env:
