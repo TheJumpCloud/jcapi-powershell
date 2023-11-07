@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>JumpCloud.SDK.DirectoryInsights</id>
+    <version>0.0.24</version>
+    <authors>JumpCloud</authors>
+    <owners>JumpCloud</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <licenseUrl>https://github.com/TheJumpCloud/jcapi-powershell/tree/$(branch)/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/TheJumpCloud/jcapi-powershell/tree/$(branch)/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/</projectUrl>
+    <description>The JumpCloud DirectoryInsights PowerShell SDK</description>
+    <releaseNotes>
+    </releaseNotes>
+    <copyright>(c) JumpCloud. All rights reserved.</copyright>
+    <tags>JumpCloud, DaaS, Jump, Cloud, Directory</tags>
+    <repository type="git" url="https://github.com/TheJumpCloud/jcapi-powershell" />
+  </metadata>
+  <files>
+    <file src="JumpCloud.SDK.DirectoryInsights.format.ps1xml" />
+    <file src="JumpCloud.SDK.DirectoryInsights.psd1" />
+    <file src="JumpCloud.SDK.DirectoryInsights.psm1" />
+    <!-- https://github.com/NuGet/Home/issues/3584 -->
+    <file src="bin/JumpCloud.SDK.DirectoryInsights.private.dll" target="bin" />
+    <file src="bin\JumpCloud.SDK.DirectoryInsights.private.deps.json" target="bin" />
+    <file src="internal\**\*.*" exclude="internal\README.md" target="internal" />
+    <file src="custom\**\*.*" exclude="custom\README.md;custom\**\*.cs" target="custom" />
+    <file src="docs\**\*.md" exclude="docs\README.md" target="docs" />
+    <file src="exports\**\ProxyCmdletDefinitions.ps1" target="exports" />
+    <file src="utils\**\*.*" target="utils" />
+  </files>
+</package>
