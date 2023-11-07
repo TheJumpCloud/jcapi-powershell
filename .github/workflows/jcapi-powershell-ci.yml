@@ -70,8 +70,8 @@ jobs:
                 ./BuildAutoRest.ps1 -SDKName:("${{ matrix.SDKName }}")
             - uses: actions/upload-artifact@v3
               with:
-                name: build-${{ matrix.SDKName }}
-                path: "./SDKs/PowerShell/${{ matrix.SDKName }}"
+                name: jcapi-powershell-build
+                path: "./SDKs/PowerShell/"
     Test-SDK:
         needs: ["Setup-Build-Dependancies", "Build-SDK"]
         runs-on: ubuntu-latest
@@ -88,8 +88,8 @@ jobs:
                 key: PS-Dependancies
             - uses: actions/download-artifact
               with:
-                name: build-${{ matrix.SDKName }}
-                path: "./SDKs/PowerShell/${{ matrix.SDKName }}"
+                name: jcapi-powershell-build
+                path: "./SDKs/PowerShell/}}"
             - name: Test ${{ matrix.SDKName }}
               shell: pwsh
               env:
@@ -116,8 +116,8 @@ jobs:
                 key: PS-Dependancies
             - uses: actions/download-artifact
               with:
-                name: build-${{ matrix.SDKName }}
-                path: "./SDKs/PowerShell/${{ matrix.SDKName }}"
+                name: jcapi-powershell-build
+                path: "./SDKs/PowerShell/"
             - name: Test ${{ matrix.SDKName }}
               shell: pwsh
               env:
