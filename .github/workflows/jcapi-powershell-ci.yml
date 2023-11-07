@@ -129,7 +129,7 @@ jobs:
                 $ErrorActionnPreference = 'Stop'
                 ./Test-Module.ps1 -JCApiKey:($env:PESTER_APIKEY) -JCOrgId:($env:PESTER_ORGID) -JCApiKeyMTP:($env:PESTER_MSP_APIKEY) -JCProviderId:($env:PESTER_PROVIDERID) -ExcludeTagList:("None") -IncludeTagList:("MTP") -testModulePath:("./SDKs/PowerShell/${{ matrix.SDKName }}/test-module.ps1")
     Invoke-Pester:
-        needs: ["Setup-Build-Dependancies", "Build-Test-SDK"]
+        needs: ["Setup-Build-Dependancies", "Build-SDK", "Test-SDK"]
         runs-on: ubuntu-latest
         timeout-minutes: 70
         steps:
@@ -138,6 +138,18 @@ jobs:
             with:
               path: "/home/runner/.local/share/powershell/Modules/"
               key: PS-Dependancies
+          - uses: actions/download-artifact@v3
+            with:
+              name: build-JumpCloud.SDK.DirectoryInsights
+              path: /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights
+          - uses: actions/download-artifact@v3
+            with:
+              name: build-JumpCloud.SDK.V1
+              path: /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/JumpCloud.SDK.V1
+          - uses: actions/download-artifact@v3
+            with:
+              name: build-JumpCloud.SDK.V2
+              path: /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/JumpCloud.SDK.V2
           - name: Invoke Pester
             shell: pwsh
             env:
