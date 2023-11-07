@@ -22,7 +22,6 @@ Param(
 )
 # https://github.com/Azure/autorest/blob/master/docs/powershell/options.md
 # CI Variables
-$CI_USERNAME = 'TheJumpCloud'
 $CurrentBranch = If ([System.String]::IsNullOrEmpty($env:CIRCLE_BRANCH)) { git branch --show-current } Else { $env:CIRCLE_BRANCH }
 $BuildNumber = If ([System.String]::IsNullOrEmpty($env:CIRCLE_BUILD_NUM)) { '0000' } Else { $env:CIRCLE_BUILD_NUM }
 $RepoUrl = If ([System.String]::IsNullOrEmpty($env:CIRCLE_REPOSITORY_URL)) { 'https://github.com/TheJumpCloud/jcapi-powershell' } Else { $env:CIRCLE_REPOSITORY_URL }
