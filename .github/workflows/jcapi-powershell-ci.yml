@@ -50,7 +50,7 @@ jobs:
                         Install-Module -Name $RequiredModule -Repository:($($PSDependencies[$RequiredModule].Repository)) -RequiredVersion:($($PSDependencies[$RequiredModule].RequiredVersion)) -AllowPrerelease -Force
                     }
                 }
-    Test-SDK:
+    Build-Test-SDK:
         needs: ["Setup-Build-Dependancies"]
         runs-on: ubuntu-latest
         timeout-minutes: 70
@@ -64,6 +64,10 @@ jobs:
               with:
                 path: "/home/runner/.local/share/powershell/Modules/"
                 key: PS-Dependancies
+            - name: Build ${{ matrix.SDKName }}
+              shell: pwsh
+              run: |
+                ./BuildAutoRest.ps1 -SDKName:(${{ matrix.SDKName }})
             - name: Test ${{ matrix.SDKName }}
               shell: pwsh
               env:

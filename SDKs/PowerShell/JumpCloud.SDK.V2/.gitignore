@@ -8,9 +8,9 @@ tools
 custom/*.psm1
 custom/autogen-model-cmdlets
 test/*-TestResults.xml
-# /*.ps1
-# /*.ps1xml
-# /*.psm1
-# /*.snk
-# /*.csproj
-# /*.nuspec
+/*.ps1
+/*.ps1xml
+/*.psm1
+/*.snk
+/*.csproj
+/*.nuspec
