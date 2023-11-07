@@ -68,10 +68,10 @@ jobs:
               shell: pwsh
               run: |
                 ./BuildAutoRest -SDKName:("${{ matrix.SDKName }}")
-            uses: actions/upload-artifact@v3
-            with:
-              name: build-${{ matrix.SDKName }}
-              path: /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/${{ matrix.SDKName }}
+            - uses: actions/upload-artifact@v3
+              with:
+                name: build-${{ matrix.SDKName }}
+                path: /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/${{ matrix.SDKName }}
     Test-SDK:
         needs: ["Setup-Build-Dependancies", "Build-SDK"]
         runs-on: ubuntu-latest
