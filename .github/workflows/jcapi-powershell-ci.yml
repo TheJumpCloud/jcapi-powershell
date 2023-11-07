@@ -74,6 +74,7 @@ jobs:
               with:
                 name: build-${{ matrix.SDKName }}
                 path: /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/${{ matrix.SDKName }}.zip
+                retention-days: 1
     Test-SDK:
         needs: ["Setup-Build-Dependancies", "Build-SDK"]
         runs-on: ubuntu-latest
@@ -91,7 +92,7 @@ jobs:
             - uses: actions/download-artifact@v3
               with:
                 name: build-${{ matrix.SDKName }}
-                path: /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/${{ matrix.SDKName }}
+                path: /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/
             - name: Unzip ${{ matrix.SDKName }} module
               shell: pwsh
               run: |
