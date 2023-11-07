@@ -71,7 +71,7 @@ jobs:
             - uses: actions/upload-artifact@v3
               with:
                 name: build-${{ matrix.SDKName }}
-                path: ${{ github.workspace }}//SDKs/PowerShell/${{ matrix.sdkName }}
+                path: ./SDKs/PowerShell/${{ matrix.sdkName }}
     Test-SDK:
         needs: ["Setup-Build-Dependancies", "Build-SDK"]
         runs-on: ubuntu-latest
@@ -89,7 +89,7 @@ jobs:
             - uses: actions/download-artifact
               with:
                 name: build-${{ matrix.SDKName }}
-                path: ${{ github.workspace }}//SDKs/PowerShell/${{ matrix.sdkName }}
+                path: ./SDKs/PowerShell/${{ matrix.sdkName }}
             - name: Test ${{ matrix.SDKName }}
               shell: pwsh
               env:
@@ -117,7 +117,7 @@ jobs:
             - uses: actions/download-artifact
               with:
                 name: build-${{ matrix.SDKName }}
-                path: ${{ github.workspace }}//SDKs/PowerShell/${{ matrix.sdkName }}
+                path: ./SDKs/PowerShell/${{ matrix.sdkName }}
             - name: Test ${{ matrix.SDKName }}
               shell: pwsh
               env:
@@ -141,15 +141,15 @@ jobs:
           - uses: actions/download-artifact
             with:
               name: build-JumpCloud.SDK.DirectoryInsights
-              path: ${{ github.workspace }}//SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights
+              path: ./SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights
           - uses: actions/download-artifact
             with:
               name: build-JumpCloud.SDK.V1
-              path: ${{ github.workspace }}//SDKs/PowerShell/JumpCloud.SDK.V1
+              path: ./SDKs/PowerShell/JumpCloud.SDK.V1
           - uses: actions/download-artifact
             with:
               name: build-JumpCloud.SDK.V2
-              path: ${{ github.workspace }}//SDKs/PowerShell/JumpCloud.SDK.V2
+              path: ./SDKs/PowerShell/JumpCloud.SDK.V2
           - name: Invoke Pester
             shell: pwsh
             env:
