@@ -140,8 +140,16 @@ jobs:
               key: PS-Dependancies
           - uses: actions/download-artifact
             with:
-              name: build-${{ matrix.SDKName }}
-              path: ${{ github.workspace }}//SDKs/PowerShell/${{ matrix.sdkName }}
+              name: build-JumpCloud.SDK.DirectoryInsights
+              path: ${{ github.workspace }}//SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights
+          - uses: actions/download-artifact
+            with:
+              name: build-JumpCloud.SDK.V1
+              path: ${{ github.workspace }}//SDKs/PowerShell/JumpCloud.SDK.V1
+          - uses: actions/download-artifact
+            with:
+              name: build-JumpCloud.SDK.V2
+              path: ${{ github.workspace }}//SDKs/PowerShell/JumpCloud.SDK.V2
           - name: Invoke Pester
             shell: pwsh
             env:
