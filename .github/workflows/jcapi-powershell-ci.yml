@@ -67,7 +67,7 @@ jobs:
             - name: Build ${{ matrix.SDKName }}
               shell: pwsh
               run: |
-                ./BuildAutoRest.ps1 -SDKName:("${{ matrix.SDKName }}"")
+                ./BuildAutoRest.ps1 -SDKName:("${{ matrix.SDKName }}")
             - name: Test ${{ matrix.SDKName }}
               shell: pwsh
               env:
