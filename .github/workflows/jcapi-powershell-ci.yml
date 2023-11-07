@@ -97,6 +97,17 @@ jobs:
               shell: pwsh
               run: |
                 Expand-Archive -Path /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/${{ matrix.SDKName }}.zip -DestinationPath /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/ -Force
+            - uses: actions/download-artifact@v3
+              with:
+                name: build-JumpCloud.SDK.V1
+                path: /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/
+              if: matrix.SDKName == 'JumpCloud.SDK.V2'
+            - name: Unzip ${{ matrix.SDKName }} module
+              shell: pwsh
+              run: |
+                Expand-Archive -Path /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/build-JumpCloud.SDK.V1.zip -DestinationPath /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/ -Force
+              if: matrix.SDKName == 'JumpCloud.SDK.V2'
+
             - name: Test ${{ matrix.SDKName }}
               shell: pwsh
               env:
@@ -130,6 +141,16 @@ jobs:
               shell: pwsh
               run: |
                 Expand-Archive -Path /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/${{ matrix.SDKName }}.zip -DestinationPath /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/ -Force
+            - uses: actions/download-artifact@v3
+              with:
+                name: build-JumpCloud.SDK.V1
+                path: /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/
+              if: matrix.SDKName == 'JumpCloud.SDK.V2'
+            - name: Unzip ${{ matrix.SDKName }} module
+              shell: pwsh
+              run: |
+                Expand-Archive -Path /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/build-JumpCloud.SDK.V1.zip -DestinationPath /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/ -Force
+              if: matrix.SDKName == 'JumpCloud.SDK.V2'
             - name: Test MTP ${{ matrix.SDKName }}
               shell: pwsh
               env:
