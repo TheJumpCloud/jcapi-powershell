@@ -1,1 +1,70 @@
-Name: PowerShell SDK CI
+name: PowerShell SDK CI
+
+on:
+    pull_request:
+      branches:
+        - "master"
+concurrency:
+    group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+    cancel-in-progress: true
+jobs:
+    Setup-Build-Dependancies:
+        runs-on: ubuntu-latest
+        timeout-minutes: 10
+        steps:
+            - uses: actions/checkout@v4
+            - name: Setup PowerShell Module Cache
+              id: cacher
+              uses: actions/cache@v3
+              with:
+                path: "/home/runner/.local/share/powershell/Modules/"
+                key: PS-Dependancies
+            - name: Install dependencies
+              if: steps.cacher.outputs.cache-hit != 'true'
+              shell: pwsh
+              env:
+                PESTER_APIKEY: ${{ secrets.PESTER_APIKEY }}
+                PESTER_ORGID: ${{ secrets.PESTER_ORGID }}
+                PESTER_MSP_APIKEY: ${{ secrets.PESTER_MSP_APIKEY }}
+              run: |
+                Set-PSRepository PSGallery -InstallationPolicy Trusted
+
+                If (!(Get-PackageProvider -Name:('NuGet') -ListAvailable -ErrorAction:('SilentlyContinue'))) {
+                    Write-Host ('[status]Installing package provider NuGet');
+                    Install-PackageProvider -Name:('NuGet') -Scope:('CurrentUser') -Force
+                }
+
+                $PSDependencies = @{
+                    'AWS.Tools.CodeArtifact' = @{Repository = 'PSGallery'; RequiredVersion = '4.1.14.0' }
+                    'AWS.Tools.Common'       = @{Repository = 'PSGallery'; RequiredVersion = '4.1.14.0' }
+                    'BuildHelpers'           = @{Repository = 'PSGallery'; RequiredVersion = '2.0.15'}
+                    'Pester'                 = @{Repository = 'PSGallery'; RequiredVersion = '5.3.1'}
+                    'powershell-yaml'        = @{Repository = 'PSGallery'; RequiredVersion = '0.4.2'}
+                    'PowerShellGet'          = @{Repository = 'PSGallery'; RequiredVersion = '3.0.12-beta'}
+                    'PSScriptAnalyzer'       = @{Repository = 'PSGallery'; RequiredVersion = '1.19.1'}
+                }
+
+                foreach ($RequiredModule in $PSDependencies.Keys) {
+                    If ([System.String]::IsNullOrEmpty((Get-InstalledModule | Where-Object { $_.Name -eq $RequiredModule }))) {
+                        Write-Host("[status]Installing module: '$RequiredModule'; version: $($PSDependencies[$RequiredModule].RequiredVersion) from $($PSDependencies[$RequiredModule].Repository)")
+                        Install-Module -Name $RequiredModule -Repository:($($PSDependencies[$RequiredModule].Repository)) -RequiredVersion:($($PSDependencies[$RequiredModule].RequiredVersion)) -AllowPrerelease -Force
+                    }
+                }
+    Build-SDK:
+        runs-on: ubuntu-latest
+        timeout-minutes: 70
+        strategy:
+            fail-fast: false
+            matrix:
+                SDKName: ['JumpCloud.SDK.DirectoryInsights', 'JumpCloud.SDK.V1', 'JumpCloud.SDK.V2']
+        steps:
+            - uses: actions/checkout@v4
+            - uses: actions/cache@v3
+              with:
+                path: "/home/runner/.local/share/powershell/Modules/"
+                key: PS-Dependancies
+            - name: Build ${{ matrix.SDKName }}
+              shell: pwsh
+              run: |
+                $ErrorActionnPreference = 'Stop'
+                ./BuildAutoRest.ps1 -SDKName:('${{ matrix.SDKName }}') -ManualModuleVersion '' -RunApiTransform $true
