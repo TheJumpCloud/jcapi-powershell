@@ -96,7 +96,7 @@ jobs:
             - name: Unzip ${{ matrix.SDKName }} module
               shell: pwsh
               run: |
-                Expand-Archive -Path /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/${{ matrix.SDKName }}.zip -DestinationPath /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/${{ matrix.SDKName }} -Force
+                Expand-Archive -Path /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/${{ matrix.SDKName }}.zip -DestinationPath /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/ -Force
             - name: Test ${{ matrix.SDKName }}
               shell: pwsh
               env:
