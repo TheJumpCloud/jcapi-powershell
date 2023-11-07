@@ -71,7 +71,7 @@ jobs:
             - uses: actions/upload-artifact@v3
               with:
                 name: jcapi-powershell-build
-                path: SDKs/PowerShell/
+                path: /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell
     Test-SDK:
         needs: ["Setup-Build-Dependancies", "Build-SDK"]
         runs-on: ubuntu-latest
@@ -89,7 +89,7 @@ jobs:
             - uses: actions/download-artifact
               with:
                 name: jcapi-powershell-build
-                path: SDKs/PowerShell/
+                path: /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell
             - name: Test ${{ matrix.SDKName }}
               shell: pwsh
               env:
@@ -117,7 +117,7 @@ jobs:
             - uses: actions/download-artifact
               with:
                 name: jcapi-powershell-build
-                path: SDKs/PowerShell/
+                path: /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell
             - name: Test ${{ matrix.SDKName }}
               shell: pwsh
               env:
