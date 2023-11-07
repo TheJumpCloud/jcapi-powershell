@@ -118,7 +118,7 @@ ForEach ($SDK In $SDKName)
         {
             If (Test-Path -Path:($OutputFullPath)) { Get-ChildItem -Path:($OutputFullPath) | Where-Object { $_.Name -notin $FolderExcludeList } | Remove-Item -Force -Recurse }
             If (!(Test-Path -Path:($OutputFullPath))) { New-Item -Path:($OutputFullPath) -ItemType:('Directory') }
-            if ($IsMacOS)
+            if ($IsMacOS -or $IsLinux)
             {
                 Write-Host ('[RUN COMMAND] Clean Script') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
                 # check if the /bin /obj directories need to permissions reset and deleted before continuing.
@@ -151,7 +151,7 @@ ForEach ($SDK In $SDKName)
             $BuildModuleContent = Get-Content -Path:($buildModulePath) -Raw
             $BuildModuleContent.Replace('Export-ExampleStub -ExportsFolder', '#Export-ExampleStub -ExportsFolder') | Set-Content -Path:($buildModulePath)
             $BuildModuleCommand = "$buildModulePath -Release"
-            if ($IsMacOS)
+            if ($IsMacOS -or $IsLinux)
             {
                 Write-Host ('[RUN COMMAND] Clean Script') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
                 bash $CleanScript $PSScriptRoot $OutputFullPath
@@ -192,7 +192,7 @@ ForEach ($SDK In $SDKName)
                     $BuildModuleContent.Replace('#Export-ExampleStub -ExportsFolder', 'Export-ExampleStub -ExportsFolder') | Set-Content -Path:($buildModulePath)
                     # Build-module
                     $BuildModuleCommand = "$buildModulePath -Docs -Release"
-                    if ($IsMacOS)
+                    if ($IsMacOS -or $IsLinux)
                     {
                         Write-Host ('[RUN COMMAND] Clean Script') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
                         bash $CleanScript $PSScriptRoot $OutputFullPath
@@ -245,7 +245,7 @@ ForEach ($SDK In $SDKName)
                     If (-not [System.String]::IsNullOrEmpty($UnusedTestFiles)) { $UnusedTestFiles | Remove-Item -Force -Recurse }
                     # Rebuild to distribute the update PSScriptInfo to other locations
                     $BuildModuleCommand = "$buildModulePath -Docs -Release"
-                    if ($IsMacOS)
+                    if ($IsMacOS -or $IsLinux)
                     {
                         Write-Host ('[RUN COMMAND] Clean Script') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
                         bash $CleanScript $PSScriptRoot $OutputFullPath
