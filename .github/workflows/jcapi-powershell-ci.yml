@@ -77,7 +77,11 @@ jobs:
                 PESTER_PROVIDERID: ${{ secrets.PESTER_PROVIDERID }}
               run: |
                 $ErrorActionnPreference = 'Stop'
-                ./Test-Module.ps1 -JCApiKey:($env:PESTER_APIKEY) -JCOrgId:($env:PESTER_ORGID) -JCApiKeyMTP:($env:PESTER_MSP_APIKEY) -JCProviderId:($env:PESTER_PROVIDERID) -ExcludeTagList:("None") -IncludeTagList:("*") -testModulePath:("./SDKs/PowerShell/${{ matrix.SDKName }}/test-module.ps1")
+                if ("${{ matrix.SDKName }}" -eq "JumpCloud.SDK.V2"){
+                  # require V1 to be built before V2 test
+                  ./BuildAutoRest.ps1 -SDKName:("JumpCloud.SDK.V1")
+                }
+                ./Test-Module.ps1 -JCApiKey:($env:PESTER_APIKEY) -JCOrgId:($env:PESTER_ORGID) -JCApiKeyMTP:($env:PESTER_MSP_APIKEY) -JCProviderId:($env:PESTER_PROVIDERID) -ExcludeTagList:("MTP") -IncludeTagList:("*") -testModulePath:("./SDKs/PowerShell/${{ matrix.SDKName }}/test-module.ps1")
     Test-MTP:
         needs: ["Setup-Build-Dependancies", "Build-Test-SDK"]
         runs-on: ubuntu-latest
