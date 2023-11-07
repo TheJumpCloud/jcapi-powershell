@@ -57,7 +57,7 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                SDKName: ['JumpCloud.SDK.DirectoryInsights', 'JumpCloud.SDK.V1']
+                SDKName: ['JumpCloud.SDK.DirectoryInsights', 'JumpCloud.SDK.V1', 'JumpCloud.SDK.V2']
         steps:
             - uses: actions/checkout@v4
             - uses: actions/cache@v3
@@ -82,7 +82,7 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                SDKName: ['JumpCloud.SDK.DirectoryInsights', 'JumpCloud.SDK.V1']
+                SDKName: ['JumpCloud.SDK.DirectoryInsights', 'JumpCloud.SDK.V1', 'JumpCloud.SDK.V2']
         steps:
             - uses: actions/checkout@v4
             - uses: actions/cache@v3
@@ -125,8 +125,12 @@ jobs:
             - uses: actions/download-artifact@v3
               with:
                 name: build-${{ matrix.SDKName }}
-                path: /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/${{ matrix.SDKName }}
-            - name: Test ${{ matrix.SDKName }}
+                path: /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/
+            - name: Unzip ${{ matrix.SDKName }} module
+              shell: pwsh
+              run: |
+                Expand-Archive -Path /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/${{ matrix.SDKName }}.zip -DestinationPath /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/ -Force
+            - name: Test MTP ${{ matrix.SDKName }}
               shell: pwsh
               env:
                 PESTER_APIKEY: ${{ secrets.PESTER_APIKEY }}
@@ -141,6 +145,11 @@ jobs:
         runs-on: ubuntu-latest
         timeout-minutes: 70
         steps:
+          - name: Checkout Support Repo
+            uses: actions/checkout@v4
+            with:
+              repository: TheJumpCloud/support
+              path: './support'
           - uses: actions/checkout@v4
           - uses: actions/cache@v3
             with:
@@ -149,15 +158,21 @@ jobs:
           - uses: actions/download-artifact@v3
             with:
               name: build-JumpCloud.SDK.DirectoryInsights
-              path: /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights
+              path: /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/
           - uses: actions/download-artifact@v3
             with:
               name: build-JumpCloud.SDK.V1
-              path: /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/JumpCloud.SDK.V1
+              path: /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/
           - uses: actions/download-artifact@v3
             with:
               name: build-JumpCloud.SDK.V2
-              path: /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/JumpCloud.SDK.V2
+              path: /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/
+          - name: Unzip artifacts
+            shell: pwsh
+            run: |
+              Expand-Archive -Path /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights.zip -DestinationPath /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/ -Force
+              Expand-Archive -Path /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/JumpCloud.SDK.V1.zip -DestinationPath /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/ -Force
+              Expand-Archive -Path /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/JumpCloud.SDK.V2.zip -DestinationPath /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/ -Force
           - name: Invoke Pester
             shell: pwsh
             env:
