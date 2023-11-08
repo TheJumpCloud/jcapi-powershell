@@ -213,10 +213,14 @@ jobs:
               # . /home/runner/work/support/support/PowerShell/Deploy/SdkSync/jcapiToSupportSync.ps1 -RequiredModulesRepo CodeArtifact
               # Get functions where 'jcsdk' functions are found
               # Private & Public Functions
+              # print directory paths:
+              gci ./ -Directory
+
               $pathList = @('Private', 'Public')
               # Get matching functions
+
               $functions = $pathList | ForEach-Object {
-                  Get-ChildItem "./support/PowerShell/Jumpcloud Module/$($_)/*.ps1" -Recurse
+                  Get-ChildItem "./support/PowerShell/JumpCloud Module/$($_)/*.ps1" -Recurse
               }
               $testTags = @()
               # For each function file
@@ -225,7 +229,7 @@ jobs:
                   if (Select-String -path $file.FullName -Pattern $regex){
                       # If 'jcsdk' is used in the function file continue
                       # get test file
-                      $testFile = ($file.FullName -replace "Jumpcloud Module", "Jumpcloud Module/Tests") -replace ".ps1", ".Tests.ps1"
+                      $testFile = ($file.FullName -replace "JumpCloud Module", "JumpCloud Module/Tests") -replace ".ps1", ".Tests.ps1"
                       $tagRegex = [regex]'-Tag:\(.(\w+).\)'
                       $testTag = Select-String -path $testFile -Pattern $tagRegex
                       # "$test"
@@ -241,5 +245,5 @@ jobs:
               # At this time only associations need to be added:
               $tags += 'JCAssociation'
               # Invoke Pester
-              .  "./support/PowerShell/Jumpcloud Module/Tests/InvokePester.ps1" -JumpCloudApiKey $env:PESTER_APIKEY -ExcludeTagList:('MSP') -IncludeTagList:($tags) -RequiredModulesRepo:('PSGallery')
+              .  "./support/PowerShell/JumpCloud Module/Tests/InvokePester.ps1" -JumpCloudApiKey $env:PESTER_APIKEY -ExcludeTagList:('MSP') -IncludeTagList:($tags) -RequiredModulesRepo:('PSGallery')
 
