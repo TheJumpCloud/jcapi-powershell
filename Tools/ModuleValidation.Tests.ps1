@@ -34,6 +34,7 @@ Describe 'Validate Module versions' -Tag:("Module_Version"){
                 $DiGalleryVersion | Should -BeGreaterThan $DiGalleryVersion
             }
             'patch' {
+                #Test
                 $V1LocalVersion.Build | Should -Be ($v1GalleryVersion.Build + 1)
                 $V2LocalVersion.Build | Should -Be ($v2GalleryVersion.Build + 1)
                 $DiLocalVersion.Build | Should -Be ($DiGalleryVersion.Build + 1)
