@@ -176,24 +176,24 @@ jobs:
             with:
               path: "/home/runner/.local/share/powershell/Modules/"
               key: PS-Dependancies
-          - uses: actions/download-artifact@v3
-            with:
-              name: build-JumpCloud.SDK.DirectoryInsights
-              path: /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/
-          - uses: actions/download-artifact@v3
-            with:
-              name: build-JumpCloud.SDK.V1
-              path: /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/
-          - uses: actions/download-artifact@v3
-            with:
-              name: build-JumpCloud.SDK.V2
-              path: /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/
-          - name: Unzip artifacts
-            shell: pwsh
-            run: |
-              Expand-Archive -Path /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights.zip -DestinationPath /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/ -Force
-              Expand-Archive -Path /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/JumpCloud.SDK.V1.zip -DestinationPath /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/ -Force
-              Expand-Archive -Path /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/JumpCloud.SDK.V2.zip -DestinationPath /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/ -Force
+          # - uses: actions/download-artifact@v3
+          #   with:
+          #     name: build-JumpCloud.SDK.DirectoryInsights
+          #     path: /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/
+          # - uses: actions/download-artifact@v3
+          #   with:
+          #     name: build-JumpCloud.SDK.V1
+          #     path: /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/
+          # - uses: actions/download-artifact@v3
+          #   with:
+          #     name: build-JumpCloud.SDK.V2
+          #     path: /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/
+          # - name: Unzip artifacts
+          #   shell: pwsh
+          #   run: |
+          #     Expand-Archive -Path /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights.zip -DestinationPath /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/ -Force
+          #     Expand-Archive -Path /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/JumpCloud.SDK.V1.zip -DestinationPath /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/ -Force
+          #     Expand-Archive -Path /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/JumpCloud.SDK.V2.zip -DestinationPath /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/ -Force
           - name: Invoke Pester
             shell: pwsh
             env:
@@ -204,11 +204,11 @@ jobs:
             run: |
               # Import all the SDKs
               # $sdks = @('JumpCloud.SDK.DirectoryInsights', 'JumpCloud.SDK.V1', 'JumpCloud.SDK.V2')
-              foreach ($sdk in $sdks){
-                Import-Module "/home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/$sdk/$sdk.psd1" -force
-              }
+              # foreach ($sdk in $sdks){
+              #   Import-Module "/home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/$sdk/$sdk.psd1" -force
+              # }
               # print tree path
-              tree
+              # tree
               $ErrorActionPreference = 'stop'
               # . /home/runner/work/support/support/PowerShell/Deploy/SdkSync/jcapiToSupportSync.ps1 -RequiredModulesRepo CodeArtifact
               # Get functions where 'jcsdk' functions are found
@@ -216,7 +216,7 @@ jobs:
               $pathList = @('Private', 'Public')
               # Get matching functions
               $functions = $pathList | ForEach-Object {
-                  Get-ChildItem "/home/runner/work/jcapi-powershell/jcapi-powershell/support/PowerShell/Jumpcloud Module/$($_)/*.ps1" -Recurse
+                  Get-ChildItem "./support/PowerShell/Jumpcloud Module/$($_)/*.ps1" -Recurse
               }
               $testTags = @()
               # For each function file
@@ -225,7 +225,7 @@ jobs:
                   if (Select-String -path $file.FullName -Pattern $regex){
                       # If 'jcsdk' is used in the function file continue
                       # get test file
-                      $testFile = ($file.FullName -replace "\\Jumpcloud Module\\", "\\Jumpcloud Module\\Tests\\") -replace ".ps1", ".Tests.ps1"
+                      $testFile = ($file.FullName -replace "Jumpcloud Module", "Jumpcloud Module/Tests") -replace ".ps1", ".Tests.ps1"
                       $tagRegex = [regex]'-Tag:\(.(\w+).\)'
                       $testTag = Select-String -path $testFile -Pattern $tagRegex
                       # "$test"
@@ -241,5 +241,5 @@ jobs:
               # At this time only associations need to be added:
               $tags += 'JCAssociation'
               # Invoke Pester
-              . "/home/runner/work/jcapi-powershell/jcapi-powershell/support/PowerShell/JumpCloud Module/Tests/InvokePester.ps1" -JumpCloudApiKey $env:PESTER_APIKEY -ExcludeTagList:('MSP') -IncludeTagList:($tags) -RequiredModulesRepo:('PSGallery')
+              .  "./support/PowerShell/Jumpcloud Module/Tests/InvokePester.ps1" -JumpCloudApiKey $env:PESTER_APIKEY -ExcludeTagList:('MSP') -IncludeTagList:($tags) -RequiredModulesRepo:('PSGallery')
 
