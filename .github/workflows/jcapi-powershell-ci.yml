@@ -239,5 +239,5 @@ jobs:
               # At this time only associations need to be added:
               $tags += 'JCAssociation'
               # Invoke Pester
-              . /home/runner/work/support/support/PowerShell/JumpCloud Module/Tests/InvokePester.ps1" -JumpCloudApiKey $env:PESTER_APIKEY -ExcludeTagList:('MSP') -IncludeTagList:($tags) -RequiredModulesRepo:('PSGallery')
+              . "/home/runner/work/support/support/PowerShell/JumpCloud Module/Tests/InvokePester.ps1" -JumpCloudApiKey $env:PESTER_APIKEY -ExcludeTagList:('MSP') -IncludeTagList:($tags) -RequiredModulesRepo:('PSGallery')
 
