@@ -208,13 +208,13 @@ jobs:
                 Import-Module "/home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/$sdk/$sdk.psd1" -force
               }
               $ErrorActionPreference = 'stop'
-              . /home/runner/work/support/support/PowerShell/Deploy/SdkSync/jcapiToSupportSync.ps1 -RequiredModulesRepo CodeArtifact
+              # . /home/runner/work/support/support/PowerShell/Deploy/SdkSync/jcapiToSupportSync.ps1 -RequiredModulesRepo CodeArtifact
               # Get functions where 'jcsdk' functions are found
               # Private & Public Functions
               $pathList = @('Private', 'Public')
               # Get matching functions
               $functions = $pathList | ForEach-Object {
-                  Get-ChildItem "/home/runner/work/support/support/PowerShellJumpcloud Module/$($_)/*.ps1" -Recurse
+                  Get-ChildItem "/home/runner/work/jcapi-powershell/jcapi-powershell/support/PowerShellJumpcloud Module/$($_)/*.ps1" -Recurse
               }
               $testTags = @()
               # For each function file
@@ -239,5 +239,5 @@ jobs:
               # At this time only associations need to be added:
               $tags += 'JCAssociation'
               # Invoke Pester
-              . "/home/runner/work/support/support/PowerShell/JumpCloud Module/Tests/InvokePester.ps1" -JumpCloudApiKey $env:PESTER_APIKEY -ExcludeTagList:('MSP') -IncludeTagList:($tags) -RequiredModulesRepo:('PSGallery')
+              . "/home/runner/work/jcapi-powershell/jcapi-powershell/support/PowerShell/JumpCloud Module/Tests/InvokePester.ps1" -JumpCloudApiKey $env:PESTER_APIKEY -ExcludeTagList:('MSP') -IncludeTagList:($tags) -RequiredModulesRepo:('PSGallery')
 
