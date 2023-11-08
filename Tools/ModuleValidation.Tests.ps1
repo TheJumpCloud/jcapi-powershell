@@ -3,15 +3,15 @@ Describe 'Validate Module versions' -Tag:("Module_Version"){
     It ('Validates Module Versions'){
         [version]$v1GalleryVersion = Find-Module -name JumpCloud.SDK.V1 | Select-Object -Property Version | ForEach-Object { $_.Version }
         # Compare the versions to SDKs/PowerShell/JumpCloud.SDK.V1/JumpCloud.SDK.V1.psd1
-        [version]$V1LocalVersion = Get-Content -Path "/Users/kmaranion/Documents/GitHub/jcapi-powershell/SDKs/PowerShell/JumpCloud.SDK.V1/JumpCloud.SDK.V1.psd1" | Select-String -Pattern "ModuleVersion = '(.*)'" | ForEach-Object { $_.Matches.Groups[1].Value }
+        [version]$V1LocalVersion = Get-Content -Path "./SDKs/PowerShell/JumpCloud.SDK.V1/JumpCloud.SDK.V1.psd1" | Select-String -Pattern "ModuleVersion = '(.*)'" | ForEach-Object { $_.Matches.Groups[1].Value }
 
         # Compare the versions to SDKs/PowerShell/JumpCloud.SDK.V2/JumpCloud.SDK.V2.psd1
         [version]$v2GalleryVersion = Find-Module -name JumpCloud.SDK.V2 | Select-Object -Property Version | ForEach-Object { $_.Version }
-        [version]$V2LocalVersion = Get-Content -Path "/Users/kmaranion/Documents/GitHub/jcapi-powershell/SDKs/PowerShell/JumpCloud.SDK.V2/JumpCloud.SDK.V2.psd1" | Select-String -Pattern "ModuleVersion = '(.*)'" | ForEach-Object { $_.Matches.Groups[1].Value }
+        [version]$V2LocalVersion = Get-Content -Path "./SDKs/PowerShell/JumpCloud.SDK.V2/JumpCloud.SDK.V2.psd1" | Select-String -Pattern "ModuleVersion = '(.*)'" | ForEach-Object { $_.Matches.Groups[1].Value }
 
         # Compare the versions to SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/JumpCloud.SDK.DirectoryInsights.psd1
         [version]$DiGalleryVersion = Find-Module -name JumpCloud.SDK.DirectoryInsights | Select-Object -Property Version | ForEach-Object { $_.Version }
-        [version]$DiLocalVersion = Get-Content -Path "/Users/kmaranion/Documents/GitHub/jcapi-powershell/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/JumpCloud.SDK.DirectoryInsights.psd1" | Select-String -Pattern "ModuleVersion = '(.*)'" | ForEach-Object { $_.Matches.Groups[1].Value }
+        [version]$DiLocalVersion = Get-Content -Path "./SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/JumpCloud.SDK.DirectoryInsights.psd1" | Select-String -Pattern "ModuleVersion = '(.*)'" | ForEach-Object { $_.Matches.Groups[1].Value }
 
 
         switch ($env:RELEASE_TYPE) {
