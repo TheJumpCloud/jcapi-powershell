@@ -208,6 +208,9 @@ jobs:
               foreach ($sdk in $sdks){
                 Import-Module "/home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/$sdk/$sdk.psd1" -force
               }
+              # list JumpCloud Modules Imported
+              Get-Module -Name Jumpcloud*
+
               # Get functions from module:
               $pathList = @('Private', 'Public')
               # Get matching functions
@@ -240,5 +243,5 @@ jobs:
               # setup org:
               . "./support/PowerShell/JumpCloud Module/Tests/SetupOrg.ps1" -JumpCloudApiKey "$env:PESTER_APIKEY" -JumpCloudApiKeyMsp "$env:PESTER_MSP_APIKEY"
               # Invoke Pester
-              .  "./support/PowerShell/JumpCloud Module/Tests/InvokePester.ps1" -JumpCloudApiKey $env:PESTER_APIKEY -ExcludeTagList:('MSP') -IncludeTagList:($tags) -RequiredModulesRepo:('PSGallery')
+              .  "./support/PowerShell/JumpCloud Module/Tests/InvokePester.ps1" -JumpCloudApiKey $env:PESTER_APIKEY -ExcludeTagList:('MSP', 'JCDeployment') -IncludeTagList:($tags) -RequiredModulesRepo:('PSGallery')
 
