@@ -207,6 +207,8 @@ jobs:
               # foreach ($sdk in $sdks){
               #   Import-Module "/home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/$sdk/$sdk.psd1" -force
               # }
+              # print tree path
+              tree
               $ErrorActionPreference = 'stop'
               # . /home/runner/work/support/support/PowerShell/Deploy/SdkSync/jcapiToSupportSync.ps1 -RequiredModulesRepo CodeArtifact
               # Get functions where 'jcsdk' functions are found
