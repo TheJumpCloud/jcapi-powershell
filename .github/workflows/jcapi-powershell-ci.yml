@@ -205,7 +205,7 @@ jobs:
               # Import all the SDKs
               $sdks = @('JumpCloud.SDK.DirectoryInsights', 'JumpCloud.SDK.V1', 'JumpCloud.SDK.V2')
               foreach ($sdk in $sdks){
-                Import-Module -Path "/home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/$sdk/$sdk.psd1" -force
+                Import-Module "/home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/$sdk/$sdk.psd1" -force
               }
               $ErrorActionPreference = 'stop'
               . /home/runner/work/support/support/PowerShell/Deploy/SdkSync/jcapiToSupportSync.ps1 -RequiredModulesRepo CodeArtifact
