@@ -76,7 +76,7 @@ jobs:
                 path: /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/${{ matrix.SDKName }}.zip
                 retention-days: 1
     Test-SDK:
-        needs: ["Setup-Build-Dependancies", "Build-SDK"]
+        needs: ["Setup-Build-Dependancies", "Build-SDK", "Invoke-Pester"]
         runs-on: ubuntu-latest
         timeout-minutes: 70
         strategy:
@@ -120,7 +120,7 @@ jobs:
                 ./Test-Module.ps1 -JCApiKey:($env:PESTER_APIKEY) -JCOrgId:($env:PESTER_ORGID) -JCApiKeyMTP:($env:PESTER_MSP_APIKEY) -JCProviderId:($env:PESTER_PROVIDERID) -ExcludeTagList:("MTP") -IncludeTagList:("*") -testModulePath:("./SDKs/PowerShell/${{ matrix.SDKName }}/test-module.ps1")
 
     Test-SDK-MTP:
-        needs: ["Setup-Build-Dependancies", "Build-SDK"]
+        needs: ["Setup-Build-Dependancies", "Build-SDK", "Invoke-Pester"]
         runs-on: ubuntu-latest
         timeout-minutes: 70
         strategy:
@@ -162,7 +162,7 @@ jobs:
                 $ErrorActionnPreference = 'Stop'
                 ./Test-Module.ps1 -JCApiKey:($env:PESTER_APIKEY) -JCOrgId:($env:PESTER_ORGID) -JCApiKeyMTP:($env:PESTER_MSP_APIKEY) -JCProviderId:($env:PESTER_PROVIDERID) -ExcludeTagList:("None") -IncludeTagList:("MTP") -testModulePath:("./SDKs/PowerShell/${{ matrix.SDKName }}/test-module.ps1")
     Invoke-Pester:
-        needs: ["Setup-Build-Dependancies", "Build-SDK", "Test-SDK"]
+        needs: ["Setup-Build-Dependancies", "Build-SDK"]
         runs-on: ubuntu-latest
         timeout-minutes: 70
         steps:
@@ -214,7 +214,7 @@ jobs:
               $pathList = @('Private', 'Public')
               # Get matching functions
               $functions = $pathList | ForEach-Object {
-                  Get-ChildItem "/home/runner/work/jcapi-powershell/jcapi-powershell/support/PowerShellJumpcloud Module/$($_)/*.ps1" -Recurse
+                  Get-ChildItem "/home/runner/work/jcapi-powershell/jcapi-powershell/support/PowerShell/Jumpcloud Module/$($_)/*.ps1" -Recurse
               }
               $testTags = @()
               # For each function file
