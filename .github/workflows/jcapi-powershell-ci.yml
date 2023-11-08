@@ -162,7 +162,7 @@ jobs:
                 $ErrorActionnPreference = 'Stop'
                 ./Test-Module.ps1 -JCApiKey:($env:PESTER_APIKEY) -JCOrgId:($env:PESTER_ORGID) -JCApiKeyMTP:($env:PESTER_MSP_APIKEY) -JCProviderId:($env:PESTER_PROVIDERID) -ExcludeTagList:("None") -IncludeTagList:("MTP") -testModulePath:("./SDKs/PowerShell/${{ matrix.SDKName }}/test-module.ps1")
     Invoke-Pester:
-        needs: ["Setup-Build-Dependancies", "Build-SDK"]
+        needs: ["Setup-Build-Dependancies"]
         runs-on: ubuntu-latest
         timeout-minutes: 70
         steps:
