@@ -117,12 +117,13 @@ If ($moduleName -eq 'JumpCloud.SDK.V1' -or $moduleName -eq 'JumpCloud.SDK.V2' -a
     $global:PesterTestSystem = Get-JcSdkSystem | Select-Object -First 1
     # # Create a Application
     $global:PesterDefApplicationConfig = [JumpCloud.SDK.V1.Models.IApplicationConfig]@{}
+    $randomBookmarkName = "Bookmark$(Get-Random -Maximum 999 -Minimum 100)"
     $global:PesterDefApplication = @{
         Name   = 'bookmark'
         ssoUrl = 'https://JumpCloud.com'
         config = $global:PesterDefApplicationConfig
-        DisplayName = 'Bookmark'
-        DisplayLabel = 'Bookmark'
+        DisplayName  = $randomBookmarkName
+        DisplayLabel = $randomBookmarkName
     }
     # Post a command file (README.md from SDK directory)
     $headers = @{}

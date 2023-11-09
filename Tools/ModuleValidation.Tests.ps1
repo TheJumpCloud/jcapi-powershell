@@ -45,6 +45,8 @@ Describe -Tag:('ModuleValidation') 'Module Manifest Tests' {
 
 
             }
+        }
+    }
     It 'The data on the current version of the Module Changelog should be todays date' {
         if ($env:RELEASE_TYPE) {
             @('JumpCloud.SDK.DirectoryInsights', 'JumpCloud.SDK.V1', 'JumpCloud.SDK.V2')| ForEach-Object {

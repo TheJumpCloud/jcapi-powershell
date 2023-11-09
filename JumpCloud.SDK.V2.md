@@ -1,15 +1,15 @@
 ## JumpCloud.SDK.V2-0.0.40
-Release Date: November 08, 2023
+Release Date: November 09, 2023
 #### RELEASE NOTES
 ```
-{{Fill in the Release Notes}}
+This is a rollup release for the DI module, no functional changes were made
 ```
 #### FEATURES:
-{{Fill in the Features}}
+NA
 #### IMPROVEMENTS:
-{{Fill in the Improvements}}
+NA
 #### BUG FIXES:
-{{Fill in the Bug Fixes}}
+NA
 #### Generated Changes:
 
 <details>
@@ -21,24 +21,13 @@ No changes
 <details>
 <summary>Functions Modified</summary>
 
-* Get-JcSdkAppleMdm.ps1
-* Get-JcSdkProvidersInvoice.ps1
-* New-JcSdkProviderAdministrator.ps1
-* New-JcSdkSoftwareApp.ps1
-* New-JcSdkSystemGroup.ps1
-* New-JcSdkUserGroup.ps1
-* Set-JcSdkSoftwareApp.ps1
-* Set-JcSdkSystemGroup.ps1
-* Set-JcSdkUserGroup.ps1
-* Update-JcSdkGSuite.ps1
-
+No changes
 </details>
 
 <details>
 <summary>Functions Removed</summary>
 
-* Get-JcSdkGsuiteUsersToImportFormated.ps1
-
+No changes
 </details>
 
 ## JumpCloud.SDK.V2-0.0.39

@@ -1,15 +1,15 @@
 ## JumpCloud.SDK.DirectoryInsights-0.0.24
-Release Date: November 08, 2023
+Release Date: November 09, 2023
 #### RELEASE NOTES
 ```
-{{Fill in the Release Notes}}
+This is a rollup release for the DI module, no functional changes were made
 ```
 #### FEATURES:
-{{Fill in the Features}}
+NA
 #### IMPROVEMENTS:
-{{Fill in the Improvements}}
+NA
 #### BUG FIXES:
-{{Fill in the Bug Fixes}}
+NA
 #### Generated Changes:
 
 <details>
