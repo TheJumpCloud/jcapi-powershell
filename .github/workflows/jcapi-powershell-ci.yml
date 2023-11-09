@@ -277,7 +277,13 @@ jobs:
               # At this time only associations need to be added:
               $tags += 'JCAssociation'
               # setup org:
-              $orgVars = . "./support/PowerShell/JumpCloud Module/Tests/SetupOrg.ps1" -JumpCloudApiKey "$env:PESTER_APIKEY" -JumpCloudApiKeyMsp "$env:PESTER_MSP_APIKEY"
+              $variables = . "./support/PowerShell/JumpCloud Module/Tests/SetupOrg.ps1" -JumpCloudApiKey "$env:PESTER_APIKEY" -JumpCloudApiKeyMsp "$env:PESTER_MSP_APIKEY"
+              Write-Host "[status] Setting Env Variables for tests"
+              $variables | Foreach-Object {
+                  if ($_.Name) {
+                      Set-Variable -Name $_.Name -Value $_.Value -Scope Global
+                  }
+              }
               # Invoke Pester
               Import-Module "./support/PowerShell/JumpCloud Module/JumpCloud.psd1"
               # disable parallel tests:
