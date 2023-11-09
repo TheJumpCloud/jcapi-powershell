@@ -8,15 +8,7 @@ concurrency:
     group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
     cancel-in-progress: true
 jobs:
-    Check-If-Merged:
-      # will be switched to true
-      if: github.event.pull_request.merged == true
-      runs-on: ubuntu-latest
-      steps:
-        - name: Check if Merged
-          run: echo {GITHUB_HEAD_REF} merged into master
     Check-PR-Labels:
-      needs: ["Check-If-Merged"]
       runs-on: ubuntu-latest
       outputs:
         RELEASE_TYPE: ${{ steps.validate.outputs.RELEASE_TYPE }}
@@ -86,12 +78,11 @@ jobs:
                         Install-Module -Name $RequiredModule -Repository:($($PSDependencies[$RequiredModule].Repository)) -RequiredVersion:($($PSDependencies[$RequiredModule].RequiredVersion)) -AllowPrerelease -Force
                     }
                 }
-    Validate-SDK-Version:
-      needs: Check-PR-Labels
+    Validate-SDK-Module:
       runs-on: ubuntu-latest
       steps:
         - uses: actions/checkout@v4
-        - name: Validate SDK Versions
+        - name: Validate SDK Module
           id: validate
           shell: pwsh
           run: |
