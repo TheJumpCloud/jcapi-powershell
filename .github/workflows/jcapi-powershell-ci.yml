@@ -79,6 +79,7 @@ jobs:
                     }
                 }
     Validate-SDK-Module:
+      needs: ["Setup-Build-Dependancies"]
       runs-on: ubuntu-latest
       steps:
         - uses: actions/checkout@v4
@@ -240,9 +241,12 @@ jobs:
             run: |
               $ErrorActionPreference = 'stop'
               # Import all the SDKs
+              # register PS Repo local
+              Register-PSRepository -Name SDKs -SourceLocation "/home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/"
               $sdks = @('JumpCloud.SDK.DirectoryInsights', 'JumpCloud.SDK.V1', 'JumpCloud.SDK.V2')
               foreach ($sdk in $sdks){
-                Import-Module "/home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/$sdk/$sdk.psd1" -force
+                Publish-Module -Path /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/$sdk/ -Repository SDKs
+                Install-Module -Repository SDKs -Name $sdk -Force
               }
               # list JumpCloud Modules Imported
               Get-Module -Name Jumpcloud*
@@ -287,11 +291,5 @@ jobs:
               Import-Module "./support/PowerShell/JumpCloud Module/JumpCloud.psd1"
               # disable parallel tests:
               Set-JCSettingsFile -parallelOverride $true
-              # Set backup test:
-              $path = "./support/PowerShell/JumpCloud Module/Tests/Public/Utilities/Backup-JCOrganization.Tests.ps1"
-              $content = Get-Content -Path $path
-              $newContent = $content -replace ('-Path ./', '-Path "$FolderPath_Tests/"')
-              $newContent = $newContent -replace ('-DestinationPath ./', '-DestinationPath "$FolderPath_Tests/"')
-              $NewContent | OUt-File $Path
               # Invoke Pester
-              . "./support/PowerShell/JumpCloud Module/Tests/InvokePester.ps1" -JumpCloudApiKey $env:PESTER_APIKEY -ExcludeTagList:('MSP', 'JCDeployment', 'JCOnline') -IncludeTagList:('JCBackupOrg', 'JCAssociation') -RequiredModulesRepo:('PSGallery')
+              . "./support/PowerShell/JumpCloud Module/Tests/InvokePester.ps1" -JumpCloudApiKey $env:PESTER_APIKEY -ExcludeTagList:('MSP', 'JCDeployment', 'JCOnline') -IncludeTagList:($tags) -RequiredModulesRepo:('PSGallery')

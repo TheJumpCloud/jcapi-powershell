@@ -88,8 +88,8 @@ FunctionsToExport = 'Clear-JcSdkSystem', 'Get-JcSdkApplication',
                'Search-JcSdkSystem', 'Search-JcSdkUser', 
                'Set-JcSdkAdministratorUser', 'Set-JcSdkApplication', 
                'Set-JcSdkCommand', 'Set-JcSdkOrganization', 'Set-JcSdkRadiusServer', 
-               'Set-JcSdkSystem', 'Set-JcSdkUser', 'Stop-JcSdkSystem', 
-               'Sync-JcSdkUserMfa', 'Unlock-JcSdkUser', 'Start-JcSdkCommand'
+               'Set-JcSdkSystem', 'Set-JcSdkUser', 'Start-JcSdkCommand', 
+               'Stop-JcSdkSystem', 'Sync-JcSdkUserMfa', 'Unlock-JcSdkUser'
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
 CmdletsToExport = @()

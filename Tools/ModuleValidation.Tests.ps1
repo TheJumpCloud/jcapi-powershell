@@ -93,11 +93,24 @@ Describe -Tag:('ModuleValidation') 'Module Manifest Tests' {
         }
     }
     It 'The ModuleChangeLog Congent should not contain placeholder content'{
+        $rootPath = "$PSScriptRoot/../"
         @('JumpCloud.SDK.DirectoryInsights', 'JumpCloud.SDK.V1', 'JumpCloud.SDK.V2') | ForEach-Object {
-            $rootPath = "$PSScriptRoot/../"
             $moduleChangelogPath = "$rootPath/$_.md"
             $moduleChangelogContent = Get-Content ("$moduleChangelogPath")
             $moduleChangelogContent | Should -Not -Match "{{Fill in the"
+        }
+    }
+    It 'Runs API Transform and validates no changes in SwaggerSpec exist (branch is up to date with public docs)'{
+        $rootPath = "$PSScriptRoot/../"
+        @('JumpCloud.SDK.DirectoryInsights', 'JumpCloud.SDK.V1', 'JumpCloud.SDK.V2') | ForEach-Object {
+            . "$rootpath/ApiTransform.ps1" -SDKName $_ 3>$null
+            $sdkSwaggerFile = "$rootpath/SwaggerSpecs/$_.json"
+            $currentBranch = git rev-parse --abbrev-ref HEAD
+            $changes = git diff $currentBranch -- $sdkSwaggerFile
+            if ($changes){
+                Write-Warning "Git Diff changes found in /SwaggerSpecs/$_.json have you run build.ps1 today?"
+            }
+            $changes | should -BeNullOrEmpty
         }
     }
 }

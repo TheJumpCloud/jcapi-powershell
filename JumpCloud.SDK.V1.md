@@ -1,5 +1,5 @@
 ## JumpCloud.SDK.V1-0.0.36
-Release Date: November 09, 2023
+Release Date: November 10, 2023
 #### RELEASE NOTES
 ```
 This is a rollup release for the DI module, no functional changes were made
