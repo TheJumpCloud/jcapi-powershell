@@ -244,7 +244,7 @@ jobs:
               Register-PSRepository -Name SDKs -SourceLocation "/home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/"
               $sdks = @('JumpCloud.SDK.DirectoryInsights', 'JumpCloud.SDK.V1', 'JumpCloud.SDK.V2')
               foreach ($sdk in $sdks){
-                Publish-Module -Path /Users/jworkman/Documents/GitHub/jcapi-powershell/SDKs/PowerShell/$sdk/ -Repository SDKs
+                Publish-Module -Path /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/$sdk/ -Repository SDKs
                 Install-Module -Repository SDKs -Name $sdk -Force
               }
               # list JumpCloud Modules Imported
