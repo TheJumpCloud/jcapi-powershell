@@ -89,6 +89,7 @@ $TransformConfig = [Ordered]@{
             'commands_list'                  = 'Command_List';
             'commands_post'                  = 'Command_Create';
             'commands_put'                   = 'Command_Set';
+            'commands_run'                   = 'Commands_Run';
             'organization_list'              = 'Organization_List';
             'organization_put'               = 'Organization_Set';
             'organizations_get'              = 'Organization_Get';
