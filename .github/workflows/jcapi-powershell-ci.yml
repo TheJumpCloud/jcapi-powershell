@@ -79,6 +79,7 @@ jobs:
                     }
                 }
     Validate-SDK-Module:
+      needs: ["Setup-Build-Dependancies"]
       runs-on: ubuntu-latest
       steps:
         - uses: actions/checkout@v4
