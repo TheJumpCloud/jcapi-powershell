@@ -5422,6 +5422,34 @@
       </TableControl>
     </View>
     <View>
+      <Name>JumpCloud.SDK.V1.Models.Paths3Rrc57RuncommandPostResponses200ContentApplicationJsonSchema</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloud.SDK.V1.Models.Paths3Rrc57RuncommandPostResponses200ContentApplicationJsonSchema</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>QueueIds</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>WorkflowInstanceId</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>QueueIds</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>WorkflowInstanceId</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
       <Name>JumpCloud.SDK.V1.Models.PathsDi9CukSystemusersIdStateActivatePostRequestbodyContentApplicationJsonSchema</Name>
       <ViewSelectedBy>
         <TypeName>JumpCloud.SDK.V1.Models.PathsDi9CukSystemusersIdStateActivatePostRequestbodyContentApplicationJsonSchema</TypeName>
@@ -5513,6 +5541,34 @@
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>UserPasswordExpirationAction</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>JumpCloud.SDK.V1.Models.PathsPnxbyeRuncommandPostRequestbodyContentApplicationJsonSchema</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloud.SDK.V1.Models.PathsPnxbyeRuncommandPostRequestbodyContentApplicationJsonSchema</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Id</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>SystemIds</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Id</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>SystemIds</PropertyName>
               </TableColumnItem>
             </TableColumnItems>
           </TableRowEntry>

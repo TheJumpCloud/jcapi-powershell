@@ -790,6 +790,18 @@ curl -X PUT https://console.jumpcloud.com/api/systemusers/{UserID} \\
 }'
 ```
 
+### [Start-JcSdkCommand](Start-JcSdkCommand.md)
+This endpoint allows you to run a command.
+#### Sample Request
+
+```
+curl -X POST https://console.jumpcloud.com/api/runCommand \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+  -d '{\"_id\":\"{commandID}\", \"systemIds\":[\"systemId\"]}'
+```
+
 ### [Stop-JcSdkSystem](Stop-JcSdkSystem.md)
 This endpoint allows you to run the shutdown command on the specified device.
 If a device is offline, the command will be run when the device becomes available.

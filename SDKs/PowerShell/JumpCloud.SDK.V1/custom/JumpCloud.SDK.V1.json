@@ -5655,6 +5655,71 @@
       ]
     },
     "/runCommand": {
+      "post": {
+        "description": "This endpoint allows you to run a command.\n#### Sample Request\n\n```\ncurl -X POST https://console.jumpcloud.com/api/runCommand \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  -d '{\"_id\":\"{commandID}\", \"systemIds\":[\"systemId\"]}'\n```",
+        "operationId": "Commands_Run",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "properties": {
+                "_id": {
+                  "description": "The ID of the command.",
+                  "type": "string"
+                },
+                "systemIds": {
+                  "description": "An optional list of device IDs to run the command on. If omitted, the command will run on devices bound to the command.",
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                }
+              },
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "properties": {
+                "queueIds": {
+                  "items": {
+                    "type": "string"
+                  },
+                  "type": "array"
+                },
+                "workflowInstanceId": {
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ],
+        "summary": "Run a command",
+        "x-codeSamples": [
+          {
+            "lang": "Shell",
+            "source": "curl --request POST \\\n  --url https://console.jumpcloud.com/api/runCommand \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --data '{\"_id\":\"string\",\"systemIds\":[\"string\"]}'"
+          },
+          {
+            "lang": "Python",
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/runCommand\"\n\npayload = {\n    \"_id\": \"string\",\n    \"systemIds\": [\"string\"]\n}\nheaders = {\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
+          },
+          {
+            "lang": "Powershell",
+            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/runCommand' -Method POST -Headers $headers -ContentType 'application/json' -Body '{\"_id\":\"string\",\"systemIds\":[\"string\"]}'"
+          }
+        ]
+      },
       "x-functionalities-tags": [
         "run-command"
       ]
