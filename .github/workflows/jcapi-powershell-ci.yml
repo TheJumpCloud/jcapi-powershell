@@ -284,8 +284,14 @@ jobs:
                       Set-Variable -Name $_.Name -Value $_.Value -Scope Global
                   }
               }
-              # Invoke Pester
               Import-Module "./support/PowerShell/JumpCloud Module/JumpCloud.psd1"
               # disable parallel tests:
               Set-JCSettingsFile -parallelOverride $true
+              # Set backup test:
+              $path = "./support/PowerShell/JumpCloud Module/Tests/Public/Utilities/Backup-JCOrganization.Tests.ps1"
+              $content = Get-Content -Path $path
+              $newContent = $content -replace ('-Path ./', '-Path "$FolderPath_Tests/"')
+              $newContent = $newContent -replace ('-DestinationPath ./', '-DestinationPath "$FolderPath_Tests/"')
+              $NewContent | OUt-File $Path
+              # Invoke Pester
               . "./support/PowerShell/JumpCloud Module/Tests/InvokePester.ps1" -JumpCloudApiKey $env:PESTER_APIKEY -ExcludeTagList:('MSP', 'JCDeployment', 'JCOnline') -IncludeTagList:('JCBackupOrg', 'JCAssociation') -RequiredModulesRepo:('PSGallery')
