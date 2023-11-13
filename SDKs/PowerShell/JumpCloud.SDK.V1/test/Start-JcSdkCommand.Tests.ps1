@@ -13,11 +13,11 @@ BeforeAll {
     . ($mockingPath | Select-Object -First 1).FullName
 }
 
-Describe 'Set-JcSdkCommand' -Tag:(""){
+Describe 'Start-JcSdkCommand' -Tag:(""){
     It 'Start a command just by command Id' {
-        Start-JcSdkCommand -Id:($global:PesterTestCommand.Id) | Should -Not -Throw
+        { Start-JcSdkCommand -Id:($global:PesterTestCommand.Id) } | Should -Not -Throw
     }
     It 'Start a command by command Id and system Id' {
-        Start-JcSdkCommand -Id:($global:PesterTestCommand.Id) -SystemId:($global:PesterTestSystem.Id) | Should -Not -Throw
+        { Start-JcSdkCommand -Id:($global:PesterTestCommand.Id) -SystemId:($global:PesterTestSystem.Id) } | Should -Not -Throw
     }
 }
