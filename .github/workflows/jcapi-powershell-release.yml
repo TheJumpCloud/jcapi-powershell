@@ -51,25 +51,8 @@ jobs:
           }
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  Setup-Build-Dependancies:
-    needs: ["Check-PR-Labels"]
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    steps:
-      - uses: actions/checkout@v4
-      - name: Setup PowerShell Module Cache
-        id: cacher
-        uses: actions/cache@v3
-        with:
-          path: "/home/runner/.local/share/powershell/Modules/"
-          key: PS-Dependancies
-      - name: Install dependencies
-        if: steps.cacher.outputs.cache-hit != 'true'
-        shell: pwsh
-        run: |
-          $ErrorActionPreference = 'Stop'
-          . "${{ github.workspace }}\Setup-Dependencies.ps1"
   Draft-GH-Release:
+    needs: ['Check-PR-Labels']
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -78,7 +61,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Build Draft Release
         run: |
-          MODULE_VERSION=$(grep -Po '(\d+\.\d+\.\d+)' ${{ github.workspace }}//SDKs/PowerShell/${{ matrix.sdkName }}/${{ matrix.sdkName }}.psd1)
+          MODULE_VERSION=$(grep -Po '(\d+\.\d+\.\d+)' ${{ github.workspace }}/SDKs/PowerShell/${{ matrix.sdkName }}/${{ matrix.sdkName }}.psd1)
           VERSION=$(echo $MODULE_VERSION | grep -Po "\d\+\.\d\+\.\d\+")
           TITLE="${{ matrix.sdkName }}-$VERSION"
           # Get the changelog text between the latest release # and the next sequential "## SemanticVersionNumber"
@@ -97,8 +80,8 @@ jobs:
     steps:
       - name: Manual Approval for Release
         run: echo "Awaiting approval from required reviewers before continuing"
-  Download-Artifact:
-    needs: [Manual-Approval-Release]
+  Deploy-Nupkg:
+    needs: ['Manual-Approval-Release']
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -116,13 +99,7 @@ jobs:
           #TODO: extract and list
         env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  Deploy-Nupkg:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        sdkName: ['JumpCloud.SDK.V1','JumpCloud.SDK.V2','JumpCloud.SDK.DirectoryInsights']
-    steps:
-      - name: publish
+      - name: Publish SDKs
         run: |
           # finally remove source PSGallery and add again with the v2/package path for publishing
           dotnet nuget remove source PSGallery
