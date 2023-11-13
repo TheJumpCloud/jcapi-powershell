@@ -59,6 +59,9 @@ jobs:
         sdkName: ['JumpCloud.SDK.V1','JumpCloud.SDK.V2','JumpCloud.SDK.DirectoryInsights']
     steps:
       - uses: actions/checkout@v4
+      - name: Zip SDK Directory
+        run: |
+          zip -r ${{ github.workspace }}/SDKs/PowerShell/${{ matrix.sdkName }}.zip ${{ github.workspace }}/SDKs/PowerShell/${{ matrix.sdkName }}/
       - name: Build Draft Release
         run: |
           MODULE_CAPTURE=$(grep -Po "ModuleVersion = '(\d+\.\d+\.\d+)'" ${{ github.workspace }}/SDKs/PowerShell/${{ matrix.sdkName }}/${{ matrix.sdkName }}.psd1)
@@ -71,6 +74,8 @@ jobs:
           BODY="$TITLE $CHANGELOG"
           # draft release
           (gh release view $TAG && echo "Release exists for $TAG") || gh release create $TAG --title "$TITLE" --notes "$BODY" --draft
+          # add artifact:
+          gh release upload $TAG ${{ github.workspace }}/SDKs/PowerShell/${{ matrix.sdkName }}.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   Manual-Approval-Release:
@@ -92,18 +97,20 @@ jobs:
         run: |
           WF_NAME="jcapi-powershell-ci.yml"
           ARTIFACT_NAME="build-${{ matrix.SDKName }}"
-          RUN_ID=`gh run --repo ${{ github.repository }} list --workflow ${WF_NAME} --branch ${{ github.ref_name }} --json databaseId --jq .[2].databaseId`
+          RUN_ID=`gh run --repo ${{ github.repository }} list --workflow ${WF_NAME} --branch ${{ github.ref_name }} --json databaseId --jq .[0].databaseId`
           gh run --repo ${{ github.repository }} download ${RUN_ID} -n ${ARTIFACT_NAME}
           # List the artifiact directory/files
           ls -lR
           #TODO: extract and list
+          unzip ${{ matrix.SDKName }}.zip
         env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Publish SDKs
+        shell: pwsh
         run: |
           # finally remove source PSGallery and add again with the v2/package path for publishing
           dotnet nuget remove source PSGallery
           dotnet nuget add source "https://www.powershellgallery.com/api/v2/package" --name PSGallery
 
-          $NupkgPath = (Get-ChildItem -Path:("./SDKs/PowerShell/${{ matrix.sdkName }}/bin/nupkg/${{ matrix.sdkName }}*.nupkg")).FullName
+          $NupkgPath = (Get-ChildItem -Path:("./${{ matrix.sdkName }}/bin/nupkg/${{ matrix.sdkName }}*.nupkg")).FullName
           write-host "push ${{ matrix.sdkName }} to psgallery"

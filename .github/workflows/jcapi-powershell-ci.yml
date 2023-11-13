@@ -111,6 +111,22 @@ jobs:
               shell: pwsh
               run: |
                 ./BuildAutoRest -SDKName:("${{ matrix.SDKName }}")
+            - name: Pack ${{ matrix.SDKName }} Module
+              shell: pwsh
+              run: |
+                $ModuleName = ${{ matrix.SDKName }}
+                $Psd1 = Import-PowerShellDataFile -Path:("/home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/$ModuleName/$ModuleName.psd1")
+                $nupkgFilePath = "/home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/$ModuleName/bin/nupkg"
+                $csprojFilePath = "/home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/$ModuleName/$ModuleName.csproj"
+                $nuspecFilePath = "/home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/$ModuleName/$ModuleName.nuspec"
+                $BuildVersion = $Psd1.ModuleVersion
+                $nuspecContent = [System.Xml.XmlDocument](Get-Content -Path:($nuspecFilePath))
+                $nuspecContent.package.metadata.version = $BuildVersion
+                $nuspecContent.save($nuspecFilePath)
+                dotnet pack $csprojFilePath --output $nupkgFilePath --configuration=$ModuleName
+            - name: Zip ${{ matrix.SDKName }} Module
+              shell: pwsh
+              run: |
                 # zip contents for artifact
                 Compress-Archive -Path /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/${{ matrix.SDKName }} -DestinationPath /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/${{ matrix.SDKName }}.zip -CompressionLevel Optimal -Force
             - uses: actions/upload-artifact@v3
@@ -285,6 +301,10 @@ jobs:
               # At this time only associations need to be added:
               $tags += 'JCAssociation'
               # setup org:
+              $emailUsers = Search-JCSDKUser -Searchfilter @{searchTerm = 'importcsvuser';fields = @('email')}
+              if ($emailUsers){
+                $emailUsers | ForEach-Object { Remove-JcSdkUser -id $_.id }
+              }
               $variables = . "./support/PowerShell/JumpCloud Module/Tests/SetupOrg.ps1" -JumpCloudApiKey "$env:PESTER_APIKEY" -JumpCloudApiKeyMsp "$env:PESTER_MSP_APIKEY"
               Write-Host "[status] Setting Env Variables for tests"
               $variables | Foreach-Object {
