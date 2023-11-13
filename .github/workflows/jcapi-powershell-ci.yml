@@ -301,16 +301,17 @@ jobs:
               # At this time only associations need to be added:
               $tags += 'JCAssociation'
               # setup org:
-              $emailUsers = Search-JCSDKUser -Searchfilter @{searchTerm = 'importcsvuser';fields = @('email')}
-              if ($emailUsers){
-                $emailUsers | ForEach-Object { Remove-JcSdkUser -id $_.id }
-              }
               $variables = . "./support/PowerShell/JumpCloud Module/Tests/SetupOrg.ps1" -JumpCloudApiKey "$env:PESTER_APIKEY" -JumpCloudApiKeyMsp "$env:PESTER_MSP_APIKEY"
               Write-Host "[status] Setting Env Variables for tests"
               $variables | Foreach-Object {
                   if ($_.Name) {
                       Set-Variable -Name $_.Name -Value $_.Value -Scope Global
                   }
+              }
+              # remove email users if they exitst
+              $emailUsers = Search-JCSDKUser -Searchfilter @{searchTerm = 'importcsvuser';fields = @('email')}
+              if ($emailUsers){
+                $emailUsers | ForEach-Object { Remove-JcSdkUser -id $_.id }
               }
               Import-Module "./support/PowerShell/JumpCloud Module/JumpCloud.psd1"
               # disable parallel tests:
