@@ -61,7 +61,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Zip SDK Directory
         run: |
-          zip -r ${{ github.workspace }}/SDKs/PowerShell/${{ matrix.sdkName }}.zip ${{ github.workspace }}/SDKs/PowerShell/${{ matrix.sdkName }}/
+          zip -r ${{ matrix.sdkName }}.zip ${{ github.workspace }}/SDKs/PowerShell/${{ matrix.sdkName }}/
       - name: Build Draft Release
         run: |
           MODULE_CAPTURE=$(grep -Po "ModuleVersion = '(\d+\.\d+\.\d+)'" ${{ github.workspace }}/SDKs/PowerShell/${{ matrix.sdkName }}/${{ matrix.sdkName }}.psd1)
@@ -75,7 +75,7 @@ jobs:
           # draft release
           (gh release view $TAG && echo "Release exists for $TAG") || gh release create $TAG --title "$TITLE" --notes "$BODY" --draft
           # add artifact:
-          gh release upload $TAG ${{ github.workspace }}/SDKs/PowerShell/${{ matrix.sdkName }}.zip
+          gh release upload $TAG ${{ matrix.sdkName }}.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   Manual-Approval-Release:

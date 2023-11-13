@@ -114,7 +114,7 @@ jobs:
             - name: Pack ${{ matrix.SDKName }} Module
               shell: pwsh
               run: |
-                $ModuleName = ${{ matrix.SDKName }}
+                $ModuleName = "${{ matrix.SDKName }}"
                 $Psd1 = Import-PowerShellDataFile -Path:("/home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/$ModuleName/$ModuleName.psd1")
                 $nupkgFilePath = "/home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/$ModuleName/bin/nupkg"
                 $csprojFilePath = "/home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/$ModuleName/$ModuleName.csproj"
