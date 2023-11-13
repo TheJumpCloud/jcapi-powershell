@@ -290,7 +290,7 @@ ForEach ($SDK In $SDKName)
         # Remove auto generated .gitignore files
         If ($ModifyGitIgnore)
         {
-            $GitIgnoreFiles = Get-ChildItem -Path:($OutputFullPath) -Recurse -File | Where-Object { $_.Extension -eq '.gitignore' }
+            $GitIgnoreFiles = Get-ChildItem -Path:($OutputFullPath) -Recurse -File -Hidden | Where-Object { $_.Extension -eq '.gitignore' }
             $GitIgnoreFiles | ForEach-Object {
                 $GitIgnoreContent = Get-Content -Path:($_.FullName) -Raw
                 $GitIgnoreContent = $GitIgnoreContent.Replace('exports', "exports`n!docs/exports")
