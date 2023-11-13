@@ -1,9 +1,11 @@
 bin
 obj
 .vs
-/generated
+generated
+!custom/generated
 internal
 exports
+!docs/exports
 tools
 custom/*.psm1
 custom/autogen-model-cmdlets
