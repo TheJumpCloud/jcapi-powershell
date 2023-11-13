@@ -61,7 +61,7 @@ jobs:
       - uses: actions/checkout@v4
       - name: Build Draft Release
         run: |
-          MODULE_CAPTURE=$(grep -Po 'ModuleVersion = '(\d+\.\d+\.\d+)'' ${{ github.workspace }}/SDKs/PowerShell/${{ matrix.sdkName }}/${{ matrix.sdkName }}.psd1)
+          MODULE_CAPTURE=$(grep -Po "ModuleVersion = '(\d+\.\d+\.\d+)'" ${{ github.workspace }}/SDKs/PowerShell/${{ matrix.sdkName }}/${{ matrix.sdkName }}.psd1)
           VERSION=$(echo $MODULE_CAPTURE | grep -Po "(\d+\.\d+\.\d+)")
           TITLE="${{ matrix.sdkName }}-$VERSION"
           # Get the changelog text between the latest release # and the next sequential "## SemanticVersionNumber"
