@@ -106,7 +106,7 @@ Describe -Tag:('ModuleValidation') 'Module Manifest Tests' {
             . "$rootpath/ApiTransform.ps1" -SDKName $_ 3>$null
             $sdkSwaggerFile = "$rootpath/SwaggerSpecs/$_.json"
             $currentBranch = git rev-parse --abbrev-ref HEAD
-            $changes = git diff $currentBranch -- $sdkSwaggerFile
+            $changes = git diff -I "collection_time" -I "dueDate" $currentBranch -- $sdkSwaggerFile
             if ($changes){
                 Write-Warning "Git Diff changes found in /SwaggerSpecs/$_.json have you run build.ps1 today?"
             }
