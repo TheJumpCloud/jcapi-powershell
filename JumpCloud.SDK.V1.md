@@ -2,7 +2,7 @@
 Release Date: November 14, 2023
 #### RELEASE NOTES
 ```
-This is a rollup release for the DI module, no functional changes were made
+This release includes a new funcion `Start-JCSdkCommand` which can be used to ad-hoc invoke commands on a list of systems
 ```
 #### FEATURES:
 NA

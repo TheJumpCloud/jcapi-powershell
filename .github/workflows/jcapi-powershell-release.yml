@@ -96,7 +96,6 @@ jobs:
           gh run --repo ${{ github.repository }} download ${RUN_ID} -n ${ARTIFACT_NAME}
           # List the artifiact directory/files
           ls -lR
-          #TODO: extract and list
           unzip ${{ matrix.SDKName }}.zip
         env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
