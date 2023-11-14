@@ -22,7 +22,10 @@ NA
 <details>
 <summary>Functions Modified</summary>
 
-No changes
+* New-JcSdkApplication.ps1
+* Set-JcSdkAdministratorUser.ps1
+* Set-JcSdkApplication.ps1
+
 </details>
 
 <details>
