@@ -29,6 +29,7 @@ To create the parameters described below, construct a hash table containing the 
 
 BODY <IProviderAdminReq>:
   Email <String>:
+  [ApiKeyAllowed <Boolean?>]:
   [BindNoOrgs <Boolean?>]:
   [EnableMultiFactor <Boolean?>]:
   [Firstname <String>]:
@@ -97,6 +98,13 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [System.String]
     # .
     ${Email}, 
+
+    [Parameter(ParameterSetName='CreateExpanded')]
+    [Parameter(ParameterSetName='CreateViaIdentityExpanded')]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [System.Management.Automation.SwitchParameter]
+    # .
+    ${ApiKeyAllowed}, 
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [Parameter(ParameterSetName='CreateViaIdentityExpanded')]

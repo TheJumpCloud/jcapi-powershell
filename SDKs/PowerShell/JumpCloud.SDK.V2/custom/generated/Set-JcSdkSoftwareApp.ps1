@@ -154,6 +154,7 @@ BODY <ISoftwareApp>:
     [AssetSha256Size <Int32?>]: The incremental size to use for summing the package as it is downloaded.
     [AssetSha256Strings <String[]>]: The array of checksums, one each for the hash size up to the total size of the package.
     [AutoUpdate <Boolean?>]:
+    [CommandLineArguments <String>]: Command line arguments to use with the application.
     [Description <String>]: The software app description.
     [DesiredState <String>]: State of Install or Uninstall
     [EnterpriseObjectId <String>]: ID of the Enterprise with which this app is associated
@@ -182,11 +183,22 @@ BODY <ISoftwareApp>:
     [GoogleAndroidVersionCode <Int32?>]: The current version of the web app.
     [Location <String>]: Repository where the app is located within the package manager
     [LocationObjectId <String>]: ID of the repository where the app is located within the package manager
+    [ObjectId <String>]:
     [PackageId <String>]:
     [PackageKind <String>]: The package manifest kind (ex: software-package).
     [PackageManager <String>]: App store serving the app: APPLE_VPP, CHOCOLATEY, etc.
     [PackageSubtitle <String>]: The package manifest subtitle.
     [PackageVersion <String>]: The package manifest version.
+    [StoredPackageObjectId <String>]: ID of the stored package this app uses to reference the stored install media.
+    [StoredPackageVersions <IObjectStorageVersion[]>]:
+      [Metadata <IObjectStorageVersionMetadata>]: Dictionary of <any>
+        [(Any) <Object>]: This indicates any property can be added to this object.
+      [Name <String>]:
+      [RejectedReason <String>]:
+      [Sha256Sum <String>]:
+      [Size <Int32?>]:
+      [Status <String>]:
+      [Version <Int32?>]:
 
 INPUTOBJECT <IJumpCloudApiIdentity>:
   [AccountId <String>]:
@@ -227,6 +239,7 @@ SETTINGS <ISoftwareAppSettings[]>:
   [AssetSha256Size <Int32?>]: The incremental size to use for summing the package as it is downloaded.
   [AssetSha256Strings <String[]>]: The array of checksums, one each for the hash size up to the total size of the package.
   [AutoUpdate <Boolean?>]:
+  [CommandLineArguments <String>]: Command line arguments to use with the application.
   [Description <String>]: The software app description.
   [DesiredState <String>]: State of Install or Uninstall
   [EnterpriseObjectId <String>]: ID of the Enterprise with which this app is associated
@@ -255,11 +268,22 @@ SETTINGS <ISoftwareAppSettings[]>:
   [GoogleAndroidVersionCode <Int32?>]: The current version of the web app.
   [Location <String>]: Repository where the app is located within the package manager
   [LocationObjectId <String>]: ID of the repository where the app is located within the package manager
+  [ObjectId <String>]:
   [PackageId <String>]:
   [PackageKind <String>]: The package manifest kind (ex: software-package).
   [PackageManager <String>]: App store serving the app: APPLE_VPP, CHOCOLATEY, etc.
   [PackageSubtitle <String>]: The package manifest subtitle.
   [PackageVersion <String>]: The package manifest version.
+  [StoredPackageObjectId <String>]: ID of the stored package this app uses to reference the stored install media.
+  [StoredPackageVersions <IObjectStorageVersion[]>]:
+    [Metadata <IObjectStorageVersionMetadata>]: Dictionary of <any>
+      [(Any) <Object>]: This indicates any property can be added to this object.
+    [Name <String>]:
+    [RejectedReason <String>]:
+    [Sha256Sum <String>]:
+    [Size <Int32?>]:
+    [Status <String>]:
+    [Version <Int32?>]:
 .Link
 https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Set-JcSdkSoftwareApp.md
 #>

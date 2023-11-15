@@ -24,6 +24,7 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 BODY <IUserput>:
+  [ApiKeyAllowed <Boolean?>]:
   [Email <String>]:
   [EnableMultiFactor <Boolean?>]:
   [Firstname <String>]:
@@ -68,6 +69,13 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     # UserPut
     # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body}, 
+
+    [Parameter(ParameterSetName='SetExpanded')]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
+    [JumpCloud.SDK.V1.Category('Body')]
+    [System.Management.Automation.SwitchParameter]
+    # .
+    ${ApiKeyAllowed}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]

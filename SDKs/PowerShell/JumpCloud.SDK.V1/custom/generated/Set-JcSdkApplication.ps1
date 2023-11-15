@@ -94,6 +94,26 @@ BODY <IApplication>:
     [IdpPrivateKeyType <String>]:
     [IdpPrivateKeyValue <String>]:
     [IdpPrivateKeyVisible <Boolean?>]:
+    [SignAssertionLabel <String>]:
+    [SignAssertionPosition <Int32?>]:
+    [SignAssertionReadOnly <Boolean?>]:
+    [SignAssertionRequired <Boolean?>]:
+    [SignAssertionTooltipTemplate <String>]:
+    [SignAssertionTooltipVariablesIcon <String>]:
+    [SignAssertionTooltipVariablesMessage <String>]:
+    [SignAssertionType <String>]:
+    [SignAssertionValue <Boolean?>]:
+    [SignAssertionVisible <Boolean?>]:
+    [SignResponseLabel <String>]:
+    [SignResponsePosition <Int32?>]:
+    [SignResponseReadOnly <Boolean?>]:
+    [SignResponseRequired <Boolean?>]:
+    [SignResponseTooltipTemplate <String>]:
+    [SignResponseTooltipVariablesIcon <String>]:
+    [SignResponseTooltipVariablesMessage <String>]:
+    [SignResponseType <String>]:
+    [SignResponseValue <Boolean?>]:
+    [SignResponseVisible <Boolean?>]:
     [SpEntityIdLabel <String>]:
     [SpEntityIdOptions <String>]:
     [SpEntityIdPosition <Int32?>]:
@@ -106,6 +126,16 @@ BODY <IApplication>:
     [SpEntityIdType <String>]:
     [SpEntityIdValue <String>]:
     [SpEntityIdVisible <Boolean?>]:
+    [SpErrorFlowLabel <String>]:
+    [SpErrorFlowPosition <Int32?>]:
+    [SpErrorFlowReadOnly <Boolean?>]:
+    [SpErrorFlowRequired <Boolean?>]:
+    [SpErrorFlowTooltipTemplate <String>]:
+    [SpErrorFlowTooltipVariablesIcon <String>]:
+    [SpErrorFlowTooltipVariablesMessage <String>]:
+    [SpErrorFlowType <String>]:
+    [SpErrorFlowValue <Boolean?>]:
+    [SpErrorFlowVisible <Boolean?>]:
   Name <String>:
   SsoUrl <String>:
   [Active <Boolean?>]:
@@ -195,6 +225,26 @@ CONFIG <IApplicationConfig>:
   [IdpPrivateKeyType <String>]:
   [IdpPrivateKeyValue <String>]:
   [IdpPrivateKeyVisible <Boolean?>]:
+  [SignAssertionLabel <String>]:
+  [SignAssertionPosition <Int32?>]:
+  [SignAssertionReadOnly <Boolean?>]:
+  [SignAssertionRequired <Boolean?>]:
+  [SignAssertionTooltipTemplate <String>]:
+  [SignAssertionTooltipVariablesIcon <String>]:
+  [SignAssertionTooltipVariablesMessage <String>]:
+  [SignAssertionType <String>]:
+  [SignAssertionValue <Boolean?>]:
+  [SignAssertionVisible <Boolean?>]:
+  [SignResponseLabel <String>]:
+  [SignResponsePosition <Int32?>]:
+  [SignResponseReadOnly <Boolean?>]:
+  [SignResponseRequired <Boolean?>]:
+  [SignResponseTooltipTemplate <String>]:
+  [SignResponseTooltipVariablesIcon <String>]:
+  [SignResponseTooltipVariablesMessage <String>]:
+  [SignResponseType <String>]:
+  [SignResponseValue <Boolean?>]:
+  [SignResponseVisible <Boolean?>]:
   [SpEntityIdLabel <String>]:
   [SpEntityIdOptions <String>]:
   [SpEntityIdPosition <Int32?>]:
@@ -207,6 +257,16 @@ CONFIG <IApplicationConfig>:
   [SpEntityIdType <String>]:
   [SpEntityIdValue <String>]:
   [SpEntityIdVisible <Boolean?>]:
+  [SpErrorFlowLabel <String>]:
+  [SpErrorFlowPosition <Int32?>]:
+  [SpErrorFlowReadOnly <Boolean?>]:
+  [SpErrorFlowRequired <Boolean?>]:
+  [SpErrorFlowTooltipTemplate <String>]:
+  [SpErrorFlowTooltipVariablesIcon <String>]:
+  [SpErrorFlowTooltipVariablesMessage <String>]:
+  [SpErrorFlowType <String>]:
+  [SpErrorFlowValue <Boolean?>]:
+  [SpErrorFlowVisible <Boolean?>]:
 
 INPUTOBJECT <IJumpCloudApiIdentity>:
   [Id <String>]:
