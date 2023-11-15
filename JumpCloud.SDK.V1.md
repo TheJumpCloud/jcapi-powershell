@@ -1,3 +1,39 @@
+## JumpCloud.SDK.V1-0.0.36
+Release Date: November 14, 2023
+#### RELEASE NOTES
+```
+This release includes a new funcion `Start-JCSdkCommand` which can be used to ad-hoc invoke commands on a list of systems
+```
+#### FEATURES:
+NA
+#### IMPROVEMENTS:
+NA
+#### BUG FIXES:
+NA
+#### Generated Changes:
+
+<details>
+<summary>Functions Added</summary>
+
+* Start-JcSdkCommand.ps1
+
+</details>
+
+<details>
+<summary>Functions Modified</summary>
+
+* New-JcSdkApplication.ps1
+* Set-JcSdkAdministratorUser.ps1
+* Set-JcSdkApplication.ps1
+
+</details>
+
+<details>
+<summary>Functions Removed</summary>
+
+No changes
+</details>
+
 ## JumpCloud.SDK.V1-0.0.35
 Release Date: June 07, 2023
 #### RELEASE NOTES

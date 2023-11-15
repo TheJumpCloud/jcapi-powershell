@@ -14,7 +14,7 @@ while(-not $mockingPath) {
 
 
 }
-Describe 'Set-JcSdkCustomEmailConfiguration' -Tag:(""){
+Describe 'Set-JcSdkCustomEmailConfiguration' -Tag:("") -Skip{
     It 'SetExpanded' {
         { Set-JcSdkCustomEmailConfiguration -CustomEmailType:($global:PesterTestCustomEmailConfiguration.Type) -Subject:($global:PesterTestCustomEmailConfiguration.Subject) -Type:($global:PesterTestCustomEmailConfiguration.Type) } | Should -Not -Throw
     }

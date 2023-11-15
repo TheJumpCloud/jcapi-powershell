@@ -22,7 +22,6 @@ Param(
 )
 # https://github.com/Azure/autorest/blob/master/docs/powershell/options.md
 # CI Variables
-$CI_USERNAME = 'TheJumpCloud'
 $CurrentBranch = If ([System.String]::IsNullOrEmpty($env:CIRCLE_BRANCH)) { git branch --show-current } Else { $env:CIRCLE_BRANCH }
 $BuildNumber = If ([System.String]::IsNullOrEmpty($env:CIRCLE_BUILD_NUM)) { '0000' } Else { $env:CIRCLE_BUILD_NUM }
 $RepoUrl = If ([System.String]::IsNullOrEmpty($env:CIRCLE_REPOSITORY_URL)) { 'https://github.com/TheJumpCloud/jcapi-powershell' } Else { $env:CIRCLE_REPOSITORY_URL }
@@ -119,7 +118,7 @@ ForEach ($SDK In $SDKName)
         {
             If (Test-Path -Path:($OutputFullPath)) { Get-ChildItem -Path:($OutputFullPath) | Where-Object { $_.Name -notin $FolderExcludeList } | Remove-Item -Force -Recurse }
             If (!(Test-Path -Path:($OutputFullPath))) { New-Item -Path:($OutputFullPath) -ItemType:('Directory') }
-            if ($IsMacOS)
+            if ($IsMacOS -or $IsLinux)
             {
                 Write-Host ('[RUN COMMAND] Clean Script') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
                 # check if the /bin /obj directories need to permissions reset and deleted before continuing.
@@ -152,7 +151,7 @@ ForEach ($SDK In $SDKName)
             $BuildModuleContent = Get-Content -Path:($buildModulePath) -Raw
             $BuildModuleContent.Replace('Export-ExampleStub -ExportsFolder', '#Export-ExampleStub -ExportsFolder') | Set-Content -Path:($buildModulePath)
             $BuildModuleCommand = "$buildModulePath -Release"
-            if ($IsMacOS)
+            if ($IsMacOS -or $IsLinux)
             {
                 Write-Host ('[RUN COMMAND] Clean Script') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
                 bash $CleanScript $PSScriptRoot $OutputFullPath
@@ -193,7 +192,7 @@ ForEach ($SDK In $SDKName)
                     $BuildModuleContent.Replace('#Export-ExampleStub -ExportsFolder', 'Export-ExampleStub -ExportsFolder') | Set-Content -Path:($buildModulePath)
                     # Build-module
                     $BuildModuleCommand = "$buildModulePath -Docs -Release"
-                    if ($IsMacOS)
+                    if ($IsMacOS -or $IsLinux)
                     {
                         Write-Host ('[RUN COMMAND] Clean Script') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
                         bash $CleanScript $PSScriptRoot $OutputFullPath
@@ -246,7 +245,7 @@ ForEach ($SDK In $SDKName)
                     If (-not [System.String]::IsNullOrEmpty($UnusedTestFiles)) { $UnusedTestFiles | Remove-Item -Force -Recurse }
                     # Rebuild to distribute the update PSScriptInfo to other locations
                     $BuildModuleCommand = "$buildModulePath -Docs -Release"
-                    if ($IsMacOS)
+                    if ($IsMacOS -or $IsLinux)
                     {
                         Write-Host ('[RUN COMMAND] Clean Script') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
                         bash $CleanScript $PSScriptRoot $OutputFullPath
@@ -291,7 +290,7 @@ ForEach ($SDK In $SDKName)
         # Remove auto generated .gitignore files
         If ($ModifyGitIgnore)
         {
-            $GitIgnoreFiles = Get-ChildItem -Path:($OutputFullPath) -Recurse -File | Where-Object { $_.Extension -eq '.gitignore' }
+            $GitIgnoreFiles = Get-ChildItem -Path:($OutputFullPath) -Recurse -File -Hidden | Where-Object { $_.Extension -eq '.gitignore' }
             $GitIgnoreFiles | ForEach-Object {
                 $GitIgnoreContent = Get-Content -Path:($_.FullName) -Raw
                 $GitIgnoreContent = $GitIgnoreContent.Replace('exports', "exports`n!docs/exports")

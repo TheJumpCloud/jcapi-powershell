@@ -2,6 +2,8 @@
 .Synopsis
 This endpoint allows you to do a full update of the System Group.
 
+See the [Dynamic Group Configuration KB article](https://jumpcloud.com/support/configure-dynamic-device-groups) for more details on maintaining a Dynamic Group.
+
 #### Sample Request
 ```
 curl -X PUT https://console.jumpcloud.com/api/v2/systemgroups/{Group_ID} \\
@@ -14,6 +16,8 @@ curl -X PUT https://console.jumpcloud.com/api/v2/systemgroups/{Group_ID} \\
 ```
 .Description
 This endpoint allows you to do a full update of the System Group.
+
+See the [Dynamic Group Configuration KB article](https://jumpcloud.com/support/configure-dynamic-device-groups) for more details on maintaining a Dynamic Group.
 
 #### Sample Request
 ```
@@ -60,8 +64,7 @@ BODY <ISystemGroupPut>:
     Operator <String>: Filter comparison operator.
     Value <String>: Filter comparison value.
   [MemberSuggestionsNotify <Boolean?>]: True if notification emails are to be sent for membership suggestions.
-  [MembershipAutomated <Boolean?>]: Deprecated. Use membershipMethod instead
-  [MembershipMethod <String>]: The type of membership method for this group. Valid values include NOTSET, STATIC, DYNAMIC_REVIEW_REQUIRED, and DYNAMIC_AUTOMATED.
+  [MembershipMethod <String>]: The type of membership method for this group. Valid values include NOTSET, STATIC, DYNAMIC_REVIEW_REQUIRED, and DYNAMIC_AUTOMATED.          Note DYNAMIC_AUTOMATED and DYNAMIC_REVIEW_REQUIRED group rules will supersede any group enrollment for [group-associated MDM-enrolled devices](https://jumpcloud.com/support/change-a-default-device-group-for-apple-devices).          Use caution when creating dynamic device groups with MDM-enrolled devices to avoid creating conflicting rule sets.
 
 INPUTOBJECT <IJumpCloudApiIdentity>:
   [AccountId <String>]:
@@ -186,17 +189,9 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
-    [System.Management.Automation.SwitchParameter]
-    # Deprecated.
-    # Use membershipMethod instead
-    ${MembershipAutomated}, 
-
-    [Parameter(ParameterSetName='SetExpanded')]
-    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
-    [JumpCloud.SDK.V2.Category('Body')]
     [System.String]
     # The type of membership method for this group.
-    # Valid values include NOTSET, STATIC, DYNAMIC_REVIEW_REQUIRED, and DYNAMIC_AUTOMATED.
+    # Valid values include NOTSET, STATIC, DYNAMIC_REVIEW_REQUIRED, and DYNAMIC_AUTOMATED.Note DYNAMIC_AUTOMATED and DYNAMIC_REVIEW_REQUIRED group rules will supersede any group enrollment for [group-associated MDM-enrolled devices](https://jumpcloud.com/support/change-a-default-device-group-for-apple-devices).Use caution when creating dynamic device groups with MDM-enrolled devices to avoid creating conflicting rule sets.
     ${MembershipMethod}, 
 
     [Parameter(DontShow)]
