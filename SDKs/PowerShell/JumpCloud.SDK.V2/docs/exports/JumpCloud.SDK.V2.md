@@ -2255,6 +2255,8 @@ $ curl -X POST https://console.jumpcloud.com/api/v2/softwareapps \\
 ### [New-JcSdkSystemGroup](New-JcSdkSystemGroup.md)
 This endpoint allows you to create a new System Group.
 
+See the [Dynamic Group Configuration KB article](https://jumpcloud.com/support/configure-dynamic-device-groups) for more details on maintaining a Dynamic Group.
+
 #### Sample Request
 
 ```
@@ -2269,6 +2271,8 @@ curl -X POST https://console.jumpcloud.com/api/v2/systemgroups \\
 
 ### [New-JcSdkUserGroup](New-JcSdkUserGroup.md)
 This endpoint allows you to create a new User Group.
+
+See the [Dynamic Group Configuration KB article](https://jumpcloud.com/support/configure-dynamic-device-groups) for more details on maintaining a Dynamic Group.
 
 #### Sample Request
 ```
@@ -2941,6 +2945,8 @@ curl -X POST https://console.jumpcloud.com/api/v2/systems/{System_ID}/associatio
 ### [Set-JcSdkSystemGroup](Set-JcSdkSystemGroup.md)
 This endpoint allows you to do a full update of the System Group.
 
+See the [Dynamic Group Configuration KB article](https://jumpcloud.com/support/configure-dynamic-device-groups) for more details on maintaining a Dynamic Group.
+
 #### Sample Request
 ```
 curl -X PUT https://console.jumpcloud.com/api/v2/systemgroups/{Group_ID} \\
@@ -3014,6 +3020,8 @@ curl -X POST https://console.jumpcloud.com/api/v2/users/{UserID}/associations \\
 
 ### [Set-JcSdkUserGroup](Set-JcSdkUserGroup.md)
 This endpoint allows you to do a full update of the User Group.
+
+See the [Dynamic Group Configuration KB article](https://jumpcloud.com/support/configure-dynamic-device-groups) for more details on maintaining a Dynamic Group.
 
 #### Sample Request
 ```
@@ -3171,6 +3179,31 @@ curl -X PATCH https://console.jumpcloud.com/api/v2/gsuites/{GSUITE_ID} \\
   -d '{
     \"userLockoutAction\": \"suspend\",
     \"userPasswordExpirationAction\": \"maintain\"
+  }'
+```
+Sample Request, set a default domain
+
+```
+curl -X PATCH https://console.jumpcloud.com/api/v2/gsuites/{GSUITE_ID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"defaultDomain\": {
+        \"id\": \"{domainObjectID}\"
+      }
+  }'
+```
+
+Sample Request, unset the default domain
+
+```
+curl -X PATCH https://console.jumpcloud.com/api/v2/gsuites/{GSUITE_ID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"defaultDomain\": {}
   }'
 ```
 

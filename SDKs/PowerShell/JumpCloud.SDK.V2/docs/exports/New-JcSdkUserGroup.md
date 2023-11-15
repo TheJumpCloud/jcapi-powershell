@@ -10,6 +10,8 @@ schema: 2.0.0
 ## SYNOPSIS
 This endpoint allows you to create a new User Group.
 
+See the [Dynamic Group Configuration KB article](https://jumpcloud.com/support/configure-dynamic-device-groups) for more details on maintaining a Dynamic Group.
+
 #### Sample Request
 ```
 curl -X POST https://console.jumpcloud.com/api/v2/usergroups \\
@@ -26,8 +28,8 @@ curl -X POST https://console.jumpcloud.com/api/v2/usergroups \\
 ### CreateExpanded (Default)
 ```
 New-JcSdkUserGroup -Name <String> [-Attributes <Hashtable>] [-Description <String>] [-Email <String>]
- [-MemberQueryExemptions <IGraphObject[]>] [-MemberQueryFilters <IFilter[]>] [-MembershipAutomated]
- [-MembershipMethod <String>] [-MemberSuggestionsNotify] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-MemberQueryExemptions <IGraphObject[]>] [-MemberQueryFilters <IFilter[]>] [-MembershipMethod <String>]
+ [-MemberSuggestionsNotify] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Create
@@ -37,6 +39,8 @@ New-JcSdkUserGroup -Body <IUserGroupPost> [-Confirm] [-WhatIf] [<CommonParameter
 
 ## DESCRIPTION
 This endpoint allows you to create a new User Group.
+
+See the [Dynamic Group Configuration KB article](https://jumpcloud.com/support/configure-dynamic-device-groups) for more details on maintaining a Dynamic Group.
 
 #### Sample Request
 ```
@@ -160,25 +164,9 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -MembershipAutomated
-Deprecated.
-Use membershipMethod instead
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: CreateExpanded
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -MembershipMethod
 The type of membership method for this group.
-Valid values include NOTSET, STATIC, DYNAMIC_REVIEW_REQUIRED, and DYNAMIC_AUTOMATED.
+Valid values include NOTSET, STATIC, DYNAMIC_REVIEW_REQUIRED, and DYNAMIC_AUTOMATED.Note DYNAMIC_AUTOMATED and DYNAMIC_REVIEW_REQUIRED group rules will supersede any group enrollment for [group-associated MDM-enrolled devices](https://jumpcloud.com/support/change-a-default-device-group-for-apple-devices).Use caution when creating dynamic device groups with MDM-enrolled devices to avoid creating conflicting rule sets.
 
 ```yaml
 Type: System.String
@@ -300,8 +288,7 @@ BODY <IUserGroupPost>: UserGroupPost
     - `Operator <String>`: Filter comparison operator.
     - `Value <String>`: Filter comparison value.
   - `[MemberSuggestionsNotify <Boolean?>]`: True if notification emails are to be sent for membership suggestions.
-  - `[MembershipAutomated <Boolean?>]`: Deprecated. Use membershipMethod instead
-  - `[MembershipMethod <String>]`: The type of membership method for this group. Valid values include NOTSET, STATIC, DYNAMIC_REVIEW_REQUIRED, and DYNAMIC_AUTOMATED.
+  - `[MembershipMethod <String>]`: The type of membership method for this group. Valid values include NOTSET, STATIC, DYNAMIC_REVIEW_REQUIRED, and DYNAMIC_AUTOMATED.          Note DYNAMIC_AUTOMATED and DYNAMIC_REVIEW_REQUIRED group rules will supersede any group enrollment for [group-associated MDM-enrolled devices](https://jumpcloud.com/support/change-a-default-device-group-for-apple-devices).          Use caution when creating dynamic device groups with MDM-enrolled devices to avoid creating conflicting rule sets.
 
 MEMBERQUERYEXEMPTIONS <IGraphObject[]>: Array of GraphObjects exempted from the query
   - `Id <String>`: The ObjectID of the graph object.

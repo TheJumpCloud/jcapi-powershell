@@ -22,13 +22,39 @@ curl -X PATCH https://console.jumpcloud.com/api/v2/gsuites/{GSUITE_ID} \\
     \"userPasswordExpirationAction\": \"maintain\"
   }'
 ```
+Sample Request, set a default domain
+
+```
+curl -X PATCH https://console.jumpcloud.com/api/v2/gsuites/{GSUITE_ID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"defaultDomain\": {
+        \"id\": \"{domainObjectID}\"
+      }
+  }'
+```
+
+Sample Request, unset the default domain
+
+```
+curl -X PATCH https://console.jumpcloud.com/api/v2/gsuites/{GSUITE_ID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"defaultDomain\": {}
+  }'
+```
 
 ## SYNTAX
 
 ### UpdateExpanded (Default)
 ```
-Update-JcSdkGSuite -Id <String> [-GroupsEnabled] [-Name <String>] [-UserLockoutAction <String>]
- [-UserPasswordExpirationAction <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+Update-JcSdkGSuite -Id <String> [-DefaultDomainId <String>] [-GroupsEnabled] [-Name <String>]
+ [-UserLockoutAction <String>] [-UserPasswordExpirationAction <String>] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### Update
@@ -44,8 +70,8 @@ Update-JcSdkGSuite -InputObject <IJumpCloudApiIdentity> -Body <IGsuite> [-Confir
 
 ### UpdateViaIdentityExpanded
 ```
-Update-JcSdkGSuite -InputObject <IJumpCloudApiIdentity> [-GroupsEnabled] [-Name <String>]
- [-UserLockoutAction <String>] [-UserPasswordExpirationAction <String>] [-Confirm] [-WhatIf]
+Update-JcSdkGSuite -InputObject <IJumpCloudApiIdentity> [-DefaultDomainId <String>] [-GroupsEnabled]
+ [-Name <String>] [-UserLockoutAction <String>] [-UserPasswordExpirationAction <String>] [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
@@ -62,6 +88,31 @@ curl -X PATCH https://console.jumpcloud.com/api/v2/gsuites/{GSUITE_ID} \\
   -d '{
     \"userLockoutAction\": \"suspend\",
     \"userPasswordExpirationAction\": \"maintain\"
+  }'
+```
+Sample Request, set a default domain
+
+```
+curl -X PATCH https://console.jumpcloud.com/api/v2/gsuites/{GSUITE_ID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"defaultDomain\": {
+        \"id\": \"{domainObjectID}\"
+      }
+  }'
+```
+
+Sample Request, unset the default domain
+
+```
+curl -X PATCH https://console.jumpcloud.com/api/v2/gsuites/{GSUITE_ID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"defaultDomain\": {}
   }'
 ```
 
@@ -96,6 +147,21 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -DefaultDomainId
+.
+
+```yaml
+Type: System.String
+Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -244,6 +310,7 @@ To create the parameters described below, construct a hash table containing the 
 
 
 BODY <IGsuite>: GSuite
+  - `[DefaultDomainId <String>]`: 
   - `[GroupsEnabled <Boolean?>]`: 
   - `[Name <String>]`: 
   - `[UserLockoutAction <String>]`: 

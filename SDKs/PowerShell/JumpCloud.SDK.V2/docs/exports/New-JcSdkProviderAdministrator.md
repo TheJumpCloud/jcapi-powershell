@@ -16,9 +16,9 @@ You must provide either `role` or `roleName`.
 
 ### CreateExpanded (Default)
 ```
-New-JcSdkProviderAdministrator -ProviderId <String> -Email <String> [-BindNoOrgs] [-EnableMultiFactor]
- [-Firstname <String>] [-Lastname <String>] [-Role <String>] [-RoleName <String>] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+New-JcSdkProviderAdministrator -ProviderId <String> -Email <String> [-ApiKeyAllowed] [-BindNoOrgs]
+ [-EnableMultiFactor] [-Firstname <String>] [-Lastname <String>] [-Role <String>] [-RoleName <String>]
+ [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Create
@@ -35,9 +35,9 @@ New-JcSdkProviderAdministrator -InputObject <IJumpCloudApiIdentity> -Body <IProv
 
 ### CreateViaIdentityExpanded
 ```
-New-JcSdkProviderAdministrator -InputObject <IJumpCloudApiIdentity> -Email <String> [-BindNoOrgs]
- [-EnableMultiFactor] [-Firstname <String>] [-Lastname <String>] [-Role <String>] [-RoleName <String>]
- [-Confirm] [-WhatIf] [<CommonParameters>]
+New-JcSdkProviderAdministrator -InputObject <IJumpCloudApiIdentity> -Email <String> [-ApiKeyAllowed]
+ [-BindNoOrgs] [-EnableMultiFactor] [-Firstname <String>] [-Lastname <String>] [-Role <String>]
+ [-RoleName <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -62,6 +62,21 @@ You must provide either `role` or `roleName`.
 {{ Add output here }}
 
 ## PARAMETERS
+
+### -ApiKeyAllowed
+.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: CreateExpanded, CreateViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### -BindNoOrgs
 .
@@ -270,6 +285,7 @@ To create the parameters described below, construct a hash table containing the 
 
 BODY <IProviderAdminReq>: ProviderAdminReq
   - `Email <String>`: 
+  - `[ApiKeyAllowed <Boolean?>]`: 
   - `[BindNoOrgs <Boolean?>]`: 
   - `[EnableMultiFactor <Boolean?>]`: 
   - `[Firstname <String>]`: 

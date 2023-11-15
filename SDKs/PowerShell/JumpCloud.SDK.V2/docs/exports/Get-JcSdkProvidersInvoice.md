@@ -15,12 +15,13 @@ You must be associated to the provider to use this endpoint.
 
 ### Get (Default)
 ```
-Get-JcSdkProvidersInvoice -ProviderId <String> [-Sort <String[]>] [<CommonParameters>]
+Get-JcSdkProvidersInvoice -ProviderId <String> [-Filter <String[]>] [-Sort <String[]>] [<CommonParameters>]
 ```
 
 ### GetViaIdentity
 ```
-Get-JcSdkProvidersInvoice -InputObject <IJumpCloudApiIdentity> [-Sort <String[]>] [<CommonParameters>]
+Get-JcSdkProvidersInvoice -InputObject <IJumpCloudApiIdentity> [-Filter <String[]>] [-Sort <String[]>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -44,6 +45,34 @@ You must be associated to the provider to use this endpoint.
 {{ Add output here }}
 
 ## PARAMETERS
+
+### -Filter
+A filter to apply to the query.
+
+**Filter structure**: `\<field\>:\<operator\>:\<value\>`.
+
+**field** = Populate with a valid field from an endpoint response.
+
+**operator** = Supported operators are: eq, ne, gt, ge, lt, le, between, search, in.
+_Note: v1 operators differ from v2 operators._
+
+**value** = Populate with the value you want to search for.
+Is case sensitive.
+Supports wild cards.
+
+**EX:** `GET /api/v2/groups?filter=name:eq:Test+Group`
+
+```yaml
+Type: System.String[]
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### -InputObject
 Identity Parameter

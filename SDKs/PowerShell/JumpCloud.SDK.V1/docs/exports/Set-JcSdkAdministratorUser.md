@@ -14,9 +14,9 @@ This endpoint allows you to update a user.
 
 ### SetExpanded (Default)
 ```
-Set-JcSdkAdministratorUser -Id <String> [-Email <String>] [-EnableMultiFactor] [-Firstname <String>]
- [-GrowthData <Hashtable>] [-Lastname <String>] [-LastWhatsNewChecked <DateTime>] [-RoleName <String>]
- [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkAdministratorUser -Id <String> [-ApiKeyAllowed] [-Email <String>] [-EnableMultiFactor]
+ [-Firstname <String>] [-GrowthData <Hashtable>] [-Lastname <String>] [-LastWhatsNewChecked <DateTime>]
+ [-RoleName <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Set
@@ -32,9 +32,9 @@ Set-JcSdkAdministratorUser -InputObject <IJumpCloudApiIdentity> -Body <IUserput>
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkAdministratorUser -InputObject <IJumpCloudApiIdentity> [-Email <String>] [-EnableMultiFactor]
- [-Firstname <String>] [-GrowthData <Hashtable>] [-Lastname <String>] [-LastWhatsNewChecked <DateTime>]
- [-RoleName <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkAdministratorUser -InputObject <IJumpCloudApiIdentity> [-ApiKeyAllowed] [-Email <String>]
+ [-EnableMultiFactor] [-Firstname <String>] [-GrowthData <Hashtable>] [-Lastname <String>]
+ [-LastWhatsNewChecked <DateTime>] [-RoleName <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -57,6 +57,21 @@ This endpoint allows you to update a user.
 {{ Add output here }}
 
 ## PARAMETERS
+
+### -ApiKeyAllowed
+.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### -Body
 UserPut
@@ -264,6 +279,7 @@ To create the parameters described below, construct a hash table containing the 
 
 
 BODY <IUserput>: UserPut
+  - `[ApiKeyAllowed <Boolean?>]`: 
   - `[Email <String>]`: 
   - `[EnableMultiFactor <Boolean?>]`: 
   - `[Firstname <String>]`: 

@@ -2,7 +2,8 @@
 param (
     [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Name of the API to build an SDK for.')][ValidateSet('JumpCloud.SDK.DirectoryInsights', 'JumpCloud.SDK.V1', 'JumpCloud.SDK.V2')][ValidateNotNullOrEmpty()][System.String[]]$SDKName
 )
-$SdkChangelogFilePath = "./$SDKName.md"
+$rootPath = "$PSScriptRoot/../"
+$SdkChangelogFilePath = "$rootPath/$SDKName.md"
 Import-Module ($PSScriptRoot + '/New-SdkChangelog.ps1')
 # For authorized requests add header & OAuth Token:
 # $headers = @{
@@ -44,7 +45,7 @@ if ($ChangelogVersions){
 Write-Host "Last Version in Changelog: $LatestVersionInChangelog"
 
 # Get lastest development version from PSD1 file:
-$sdkPsd1FilePath = "./SDKs/PowerShell/$SDKName/$SDKName.psd1"
+$sdkPsd1FilePath = "$rootPath/SDKs/PowerShell/$SDKName/$SDKName.psd1"
 $SdkPsd1 = Get-Content -Path $sdkPsd1FilePath -Raw
 $sdkPsd1Regex = [regex]"ModuleVersion\ =\ '(\d+\.\d+\.\d+)'"
 $SdkDevVersion = Select-String -InputObject $SdkPsd1 -Pattern $sdkPsd1Regex

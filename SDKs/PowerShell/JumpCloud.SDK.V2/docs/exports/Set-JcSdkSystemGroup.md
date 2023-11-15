@@ -10,6 +10,8 @@ schema: 2.0.0
 ## SYNOPSIS
 This endpoint allows you to do a full update of the System Group.
 
+See the [Dynamic Group Configuration KB article](https://jumpcloud.com/support/configure-dynamic-device-groups) for more details on maintaining a Dynamic Group.
+
 #### Sample Request
 ```
 curl -X PUT https://console.jumpcloud.com/api/v2/systemgroups/{Group_ID} \\
@@ -27,8 +29,7 @@ curl -X PUT https://console.jumpcloud.com/api/v2/systemgroups/{Group_ID} \\
 ```
 Set-JcSdkSystemGroup -Id <String> -Name <String> [-Attributes <Hashtable>] [-Description <String>]
  [-Email <String>] [-MemberQueryExemptions <IGraphObject[]>] [-MemberQueryFilters <IFilter[]>]
- [-MembershipAutomated] [-MembershipMethod <String>] [-MemberSuggestionsNotify] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+ [-MembershipMethod <String>] [-MemberSuggestionsNotify] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Set
@@ -46,12 +47,14 @@ Set-JcSdkSystemGroup -InputObject <IJumpCloudApiIdentity> -Body <ISystemGroupPut
 ```
 Set-JcSdkSystemGroup -InputObject <IJumpCloudApiIdentity> -Name <String> [-Attributes <Hashtable>]
  [-Description <String>] [-Email <String>] [-MemberQueryExemptions <IGraphObject[]>]
- [-MemberQueryFilters <IFilter[]>] [-MembershipAutomated] [-MembershipMethod <String>]
- [-MemberSuggestionsNotify] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-MemberQueryFilters <IFilter[]>] [-MembershipMethod <String>] [-MemberSuggestionsNotify] [-Confirm]
+ [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 This endpoint allows you to do a full update of the System Group.
+
+See the [Dynamic Group Configuration KB article](https://jumpcloud.com/support/configure-dynamic-device-groups) for more details on maintaining a Dynamic Group.
 
 #### Sample Request
 ```
@@ -206,25 +209,9 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -MembershipAutomated
-Deprecated.
-Use membershipMethod instead
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: SetExpanded, SetViaIdentityExpanded
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -MembershipMethod
 The type of membership method for this group.
-Valid values include NOTSET, STATIC, DYNAMIC_REVIEW_REQUIRED, and DYNAMIC_AUTOMATED.
+Valid values include NOTSET, STATIC, DYNAMIC_REVIEW_REQUIRED, and DYNAMIC_AUTOMATED.Note DYNAMIC_AUTOMATED and DYNAMIC_REVIEW_REQUIRED group rules will supersede any group enrollment for [group-associated MDM-enrolled devices](https://jumpcloud.com/support/change-a-default-device-group-for-apple-devices).Use caution when creating dynamic device groups with MDM-enrolled devices to avoid creating conflicting rule sets.
 
 ```yaml
 Type: System.String
@@ -336,8 +323,7 @@ BODY <ISystemGroupPut>: SystemGroupPut
     - `Operator <String>`: Filter comparison operator.
     - `Value <String>`: Filter comparison value.
   - `[MemberSuggestionsNotify <Boolean?>]`: True if notification emails are to be sent for membership suggestions.
-  - `[MembershipAutomated <Boolean?>]`: Deprecated. Use membershipMethod instead
-  - `[MembershipMethod <String>]`: The type of membership method for this group. Valid values include NOTSET, STATIC, DYNAMIC_REVIEW_REQUIRED, and DYNAMIC_AUTOMATED.
+  - `[MembershipMethod <String>]`: The type of membership method for this group. Valid values include NOTSET, STATIC, DYNAMIC_REVIEW_REQUIRED, and DYNAMIC_AUTOMATED.          Note DYNAMIC_AUTOMATED and DYNAMIC_REVIEW_REQUIRED group rules will supersede any group enrollment for [group-associated MDM-enrolled devices](https://jumpcloud.com/support/change-a-default-device-group-for-apple-devices).          Use caution when creating dynamic device groups with MDM-enrolled devices to avoid creating conflicting rule sets.
 
 INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter
   - `[AccountId <String>]`: 
