@@ -115,12 +115,8 @@ jobs:
           $ validate package
           $nupkgPath | Should -Exist
           Write-Host "Nupkg Artifact Restored: $nupkgPath"
-          # finally remove source PSGallery and add again with the v2/package path for publishing
-          dotnet nuget remove source PSGallery
-          dotnet nuget add source "https://www.powershellgallery.com/api/v2/package" --name PSGallery
-          $NupkgPath = (Get-ChildItem -Path:("./${{ matrix.sdkName }}/bin/nupkg/${{ matrix.sdkName }}*.nupkg")).FullName
-          write-host "push ${{ matrix.sdkName }} to psgallery"
-          # nuget push from here:
+          write-host "push ${{ matrix.sdkName }} to PSGallery"
+          # nuget push:
           dotnet nuget push $NupkgPath --source PSGallery --api-key $env:NuGetApiKey
         env:
           NuGetApiKey: ${{ secrets.NUGETAPIKEY }}
