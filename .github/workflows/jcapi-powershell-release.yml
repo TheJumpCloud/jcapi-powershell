@@ -1,0 +1,116 @@
+name: Release and Publish SDKs
+
+on:
+  pull_request:
+    types:
+      - closed
+    branches:
+      - master
+jobs:
+  Check-If-Merged:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check if Merged
+        run: echo {GITHUB_HEAD_REF} merged into master
+  Check-PR-Labels:
+    needs: ["Check-If-Merged"]
+    runs-on: ubuntu-latest
+    outputs:
+      RELEASE_TYPE: ${{ steps.validate.outputs.RELEASE_TYPE }}
+    steps:
+      - name: Validate-PR-Version-Labels
+        id: validate
+        shell: pwsh
+        run: |
+          $PR_LABEL_LIST=$(curl -s "https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/labels" | jq -r '.[].name')
+          if ("SDK" -in $PR_LABEL_LIST) {
+              write-host "Starting Build for PowerShell SDK Release"
+          }
+          # validate type from label list:
+          $types = @('major', 'minor', 'patch', 'manual')
+          $typeCount = 0
+          foreach ($item in $PR_LABEL_LIST) {
+              if ($item -in $types) {
+                  write-host "$item"
+                  $typeCount += 1
+                  $RELEASE_TYPE = $item
+              }
+          }
+          if ($typeCount -eq 1) {
+              echo "RELEASE_TYPE=$RELEASE_TYPE" >> $env:GITHUB_OUTPUT
+          } else {
+              throw "Multiple or invalid release types were found on PR"
+              exit 1
+          }
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  Draft-GH-Release:
+    needs: ['Check-PR-Labels']
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        sdkName: ['JumpCloud.SDK.V1','JumpCloud.SDK.V2','JumpCloud.SDK.DirectoryInsights']
+    steps:
+      - uses: actions/checkout@v4
+      - name: Zip SDK Directory
+        run: |
+          cd ${{ github.workspace }}/SDKs/PowerShell/${{ matrix.sdkName }}/;
+          zip -r ${{ github.workspace }}/SDKs/PowerShell/${{ matrix.sdkName }}.zip ./*
+      - name: Build Draft Release
+        run: |
+          MODULE_CAPTURE=$(grep -Po "ModuleVersion = '(\d+\.\d+\.\d+)'" ${{ github.workspace }}/SDKs/PowerShell/${{ matrix.sdkName }}/${{ matrix.sdkName }}.psd1)
+          VERSION=$(echo $MODULE_CAPTURE | grep -Po "(\d+\.\d+\.\d+)")
+          TITLE="${{ matrix.sdkName }}-$VERSION"
+          # Get the changelog text between the latest release # and the next sequential "## SemanticVersionNumber"
+          CHANGELOG=$(cat ${{ github.workspace }}/${{ matrix.sdkName }}.md | awk "/^## ${{ matrix.sdkName }}-$VERSION/{ f = 1; next } /## ${{ matrix.sdkName }}-[0-9]+.[0-9]+.[0-9]+/{ f = 0 } f")
+          BODY="$TITLE $CHANGELOG"
+          TAG="${{ matrix.sdkName }}-$VERSION"
+          BODY="$TITLE $CHANGELOG"
+          # draft release
+          (gh release view $TAG && echo "Release exists for $TAG") || gh release create $TAG --title "$TITLE" --notes "$BODY" --draft
+          # add artifact:
+          gh release upload $TAG ${{ github.workspace }}/SDKs/PowerShell/${{ matrix.sdkName }}.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  Manual-Approval-Release:
+    needs: ["Draft-GH-Release"]
+    environment: PublishToPSGallery
+    runs-on: ubuntu-latest
+    steps:
+      - name: Manual Approval for Release
+        run: echo "Awaiting approval from required reviewers before continuing"
+  Deploy-Nupkg:
+    needs: ['Manual-Approval-Release']
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+          SDKName: ['JumpCloud.SDK.DirectoryInsights', 'JumpCloud.SDK.V1', 'JumpCloud.SDK.V2']
+    steps:
+      - name: Download SDK Artifact
+        run: |
+          WF_NAME="jcapi-powershell-ci.yml"
+          ARTIFACT_NAME="build-${{ matrix.SDKName }}"
+          RUN_ID=`gh run --repo ${{ github.repository }} list --workflow ${WF_NAME} --branch ${{ github.ref_name }} --json databaseId --jq .[0].databaseId`
+          gh run --repo ${{ github.repository }} download ${RUN_ID} -n ${ARTIFACT_NAME}
+          # List the artifiact directory/files
+          ls -lR
+          unzip ${{ matrix.SDKName }}.zip
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Publish SDKs
+        shell: pwsh
+        run: |
+          # add nuget source for PSGallery:
+          dotnet nuget add source "https://www.powershellgallery.com/api/v2/package" --name PSGallery
+          # get nupkg artifact:
+          $NupkgPath = (Get-ChildItem -Path:("./${{ matrix.sdkName }}/bin/nupkg/${{ matrix.sdkName }}*.nupkg")).FullName
+          $ validate package
+          $nupkgPath | Should -Exist
+          Write-Host "Nupkg Artifact Restored: $nupkgPath"
+          write-host "push ${{ matrix.sdkName }} to psgallery"
+          # nuget push from here:
+          dotnet nuget push $NupkgPath --source PSGallery --api-key $env:NuGetApiKey
+        env:
+          NuGetApiKey: ${{ secrets.NUGETAPIKEY }}
