@@ -56,7 +56,8 @@ curl -X PATCH https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID} \\
 ### UpdateExpanded (Default)
 ```
 Update-JcSdkOffice365 -Office365Id <String> [-DefaultDomainId <String>] [-GroupsEnabled] [-Name <String>]
- [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-UserLockoutAction <String>] [-UserPasswordExpirationAction <String>] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### Update
@@ -73,7 +74,8 @@ Update-JcSdkOffice365 -InputObject <IJumpCloudApiIdentity> -Body <IOffice365> [-
 ### UpdateViaIdentityExpanded
 ```
 Update-JcSdkOffice365 -InputObject <IJumpCloudApiIdentity> [-DefaultDomainId <String>] [-GroupsEnabled]
- [-Name <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-Name <String>] [-UserLockoutAction <String>] [-UserPasswordExpirationAction <String>] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -230,6 +232,36 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -UserLockoutAction
+.
+
+```yaml
+Type: System.String
+Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -UserPasswordExpirationAction
+.
+
+```yaml
+Type: System.String
+Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Confirm
 Prompts you for confirmation before running the cmdlet.
 
@@ -287,6 +319,8 @@ BODY <IOffice365>: Office 365
   - `[DefaultDomainId <String>]`: 
   - `[GroupsEnabled <Boolean?>]`: 
   - `[Name <String>]`: 
+  - `[UserLockoutAction <String>]`: 
+  - `[UserPasswordExpirationAction <String>]`: 
 
 INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter
   - `[AccountId <String>]`: 

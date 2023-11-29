@@ -1,3 +1,35 @@
+## JumpCloud.SDK.V2-0.0.41
+Release Date: November 29, 2023
+#### RELEASE NOTES
+```
+Unset a property of the office_365 functions which now allows admins to set the `UserLockoutAction` and `User PasswordExpirationAction` values
+```
+#### FEATURES:
+NA
+#### IMPROVEMENTS:
+NA
+#### BUG FIXES:
+Addressed an issue in `Update-JcSdkOffice365` where the `UserLockoutAction` and `User PasswordExpirationAction` values could not be set
+#### Generated Changes:
+
+<details>
+<summary>Functions Added</summary>
+
+No changes
+</details>
+
+<details>
+<summary>Functions Modified</summary>
+
+No changes
+</details>
+
+<details>
+<summary>Functions Removed</summary>
+
+No changes
+</details>
+
 ## JumpCloud.SDK.V2-0.0.40
 Release Date: November 14, 2023
 #### RELEASE NOTES

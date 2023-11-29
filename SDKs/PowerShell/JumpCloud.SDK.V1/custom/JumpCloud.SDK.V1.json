@@ -3824,6 +3824,51 @@
           },
           "type": "array"
         },
+        "restrictedFields": {
+          "items": {
+            "properties": {
+              "field": {
+                "enum": [
+                  "addresses",
+                  "company",
+                  "costCenter",
+                  "department",
+                  "description",
+                  "displayname",
+                  "email",
+                  "employeeIdentifier",
+                  "employeeType",
+                  "firstname",
+                  "jobTitle",
+                  "lastname",
+                  "location",
+                  "middlename",
+                  "password",
+                  "phoneNumbers",
+                  "sudo",
+                  "username"
+                ],
+                "maxLength": 32,
+                "type": "string"
+              },
+              "id": {
+                "maxLength": 24,
+                "type": "string"
+              },
+              "type": {
+                "enum": [
+                  "active_directory",
+                  "federated_identity_provider",
+                  "scim"
+                ],
+                "maxLength": 128,
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
         "samba_service_user": {
           "type": "boolean"
         },

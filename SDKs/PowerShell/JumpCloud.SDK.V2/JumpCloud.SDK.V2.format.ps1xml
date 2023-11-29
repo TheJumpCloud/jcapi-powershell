@@ -14,6 +14,9 @@
           <TableColumnHeader>
             <Label>Id</Label>
           </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>UseCase</Label>
+          </TableColumnHeader>
         </TableHeaders>
         <TableRowEntries>
           <TableRowEntry>
@@ -23,6 +26,9 @@
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>Id</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>UseCase</PropertyName>
               </TableColumnItem>
             </TableColumnItems>
           </TableRowEntry>
