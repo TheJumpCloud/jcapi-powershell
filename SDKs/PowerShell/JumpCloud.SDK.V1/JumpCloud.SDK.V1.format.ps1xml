@@ -7420,6 +7420,40 @@
       </TableControl>
     </View>
     <View>
+      <Name>JumpCloud.SDK.V1.Models.SystemuserreturnRestrictedFieldsItem</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloud.SDK.V1.Models.SystemuserreturnRestrictedFieldsItem</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Field</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Id</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Type</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Field</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Id</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Type</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
       <Name>JumpCloud.SDK.V1.Models.Systemuserslist</Name>
       <ViewSelectedBy>
         <TypeName>JumpCloud.SDK.V1.Models.Systemuserslist</TypeName>

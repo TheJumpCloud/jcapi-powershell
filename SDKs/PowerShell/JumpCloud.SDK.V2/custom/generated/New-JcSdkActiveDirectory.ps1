@@ -47,6 +47,7 @@ To create the parameters described below, construct a hash table containing the 
 
 BODY <IActiveDirectory>:
   [Domain <String>]: Domain name for this Active Directory instance.
+  [UseCase <String>]:
 .Link
 https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/New-JcSdkActiveDirectory.md
 #>
@@ -67,6 +68,12 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [System.String]
     # Domain name for this Active Directory instance.
     ${Domain}, 
+
+    [Parameter(ParameterSetName='CreateExpanded')]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [System.String]
+    # .
+    ${UseCase}, 
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]

@@ -26,7 +26,7 @@ curl -X POST https://console.jumpcloud.com/api/v2/activedirectories/ \\
 
 ### CreateExpanded (Default)
 ```
-New-JcSdkActiveDirectory [-Domain <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+New-JcSdkActiveDirectory [-Domain <String>] [-UseCase <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Create
@@ -98,6 +98,21 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -UseCase
+.
+
+```yaml
+Type: System.String
+Parameter Sets: CreateExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Confirm
 Prompts you for confirmation before running the cmdlet.
 
@@ -151,6 +166,7 @@ To create the parameters described below, construct a hash table containing the 
 
 BODY <IActiveDirectory>: Active Directory
   - `[Domain <String>]`: Domain name for this Active Directory instance.
+  - `[UseCase <String>]`: 
 
 ## RELATED LINKS
 

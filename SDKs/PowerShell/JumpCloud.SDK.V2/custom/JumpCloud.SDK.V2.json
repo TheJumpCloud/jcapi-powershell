@@ -3814,6 +3814,15 @@
           "description": "ObjectID of this Active Directory instance.",
           "readOnly": true,
           "type": "string"
+        },
+        "useCase": {
+          "enum": [
+            "UNSET",
+            "TWOWAYSYNC",
+            "JCASAUTHORITY",
+            "ADASAUTHORITY"
+          ],
+          "type": "string"
         }
       },
       "title": "Active Directory",
@@ -4619,7 +4628,6 @@
             "suspend",
             "maintain"
           ],
-          "readOnly": true,
           "type": "string"
         },
         "userPasswordExpirationAction": {
@@ -4627,7 +4635,6 @@
             "suspend",
             "maintain"
           ],
-          "readOnly": true,
           "type": "string"
         }
       },
@@ -8409,15 +8416,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request POST \\\n  --url https://console.jumpcloud.com/api/v2/activedirectories \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --data '{\"domain\":\"string\"}'"
+            "source": "curl --request POST \\\n  --url https://console.jumpcloud.com/api/v2/activedirectories \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --data '{\"domain\":\"string\",\"useCase\":\"UNSET\"}'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/v2/activedirectories\"\n\npayload = {\"domain\": \"string\"}\nheaders = {\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/v2/activedirectories\"\n\npayload = {\n    \"domain\": \"string\",\n    \"useCase\": \"UNSET\"\n}\nheaders = {\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/v2/activedirectories' -Method POST -Headers $headers -ContentType 'application/json' -Body '{\"domain\":\"string\"}'"
+            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/v2/activedirectories' -Method POST -Headers $headers -ContentType 'application/json' -Body '{\"domain\":\"string\",\"useCase\":\"UNSET\"}'"
           }
         ]
       },
@@ -17502,7 +17509,7 @@
     },
     "/systemgroups": {
       "get": {
-        "description": "This endpoint returns all System Groups.\n\nAvailable filter fields:\n  - `name`\n  - `disabled`\n  - `type`\n\n#### Sample Request\n\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/systemgroups \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
+        "description": "This endpoint returns all System Groups.\n\nAvailable filter fields:\n  - `name`\n  - `disabled`\n  - `type`\n  - `membershipMethod`\n\n#### Sample Request\n\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/systemgroups \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "operationId": "SystemGroup_List",
         "parameters": [
           {
@@ -22454,7 +22461,7 @@
     },
     "/usergroups": {
       "get": {
-        "description": "This endpoint returns all User Groups.\n\nAvailable filter fields:\n  - `name`\n  - `disabled`\n  - `type`\n  - `suggestionCounts.add`\n  - `suggestionCounts.remove`\n  - `suggestionCounts.total`\n  - `attributes.sudo.enabled`\n  - `attributes.sudo.withoutPassword`\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/usergroups \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
+        "description": "This endpoint returns all User Groups.\n\nAvailable filter fields:\n  - `name`\n  - `disabled`\n  - `type`\n  - `membershipMethod`\n  - `suggestionCounts.add`\n  - `suggestionCounts.remove`\n  - `suggestionCounts.total`\n  - `attributes.sudo.enabled`\n  - `attributes.sudo.withoutPassword`\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/usergroups \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
         "operationId": "UserGroup_List",
         "parameters": [
           {
