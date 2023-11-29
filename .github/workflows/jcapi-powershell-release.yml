@@ -7,7 +7,13 @@ on:
     branches:
       - master
 jobs:
+  Filter-Branch:
+    runs-on: ubuntu-latest
+    if: contains(github.event.pull_request.labels.*.name, 'SDK')
+    steps:
+      - run: echo "Building SDKs"
   Check-If-Merged:
+    needs: ['Filter-Branch']
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
@@ -102,12 +108,15 @@ jobs:
       - name: Publish SDKs
         shell: pwsh
         run: |
-          # finally remove source PSGallery and add again with the v2/package path for publishing
-          dotnet nuget remove source PSGallery
+          # add nuget source for PSGallery:
           dotnet nuget add source "https://www.powershellgallery.com/api/v2/package" --name PSGallery
+          # get nupkg artifact:
           $NupkgPath = (Get-ChildItem -Path:("./${{ matrix.sdkName }}/bin/nupkg/${{ matrix.sdkName }}*.nupkg")).FullName
-          write-host "push ${{ matrix.sdkName }} to psgallery"
-          # nuget push from here:
+          $ validate package
+          $nupkgPath | Should -Exist
+          Write-Host "Nupkg Artifact Restored: $nupkgPath"
+          write-host "push ${{ matrix.sdkName }} to PSGallery"
+          # nuget push:
           dotnet nuget push $NupkgPath --source PSGallery --api-key $env:NuGetApiKey
         env:
           NuGetApiKey: ${{ secrets.NUGETAPIKEY }}

@@ -8,7 +8,13 @@ concurrency:
     group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
     cancel-in-progress: true
 jobs:
+    Filter-Branch:
+      runs-on: ubuntu-latest
+      if: contains(github.event.pull_request.labels.*.name, 'SDK')
+      steps:
+        - run: echo "Building SDKs"
     Check-PR-Labels:
+      needs: ['Filter-Branch']
       runs-on: ubuntu-latest
       outputs:
         RELEASE_TYPE: ${{ steps.validate.outputs.RELEASE_TYPE }}
@@ -40,6 +46,7 @@ jobs:
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     Setup-Build-Dependancies:
+        needs: ['Filter-Branch']
         runs-on: ubuntu-latest
         timeout-minutes: 10
         steps:
