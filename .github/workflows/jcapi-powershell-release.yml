@@ -112,7 +112,7 @@ jobs:
           dotnet nuget add source "https://www.powershellgallery.com/api/v2/package" --name PSGallery
           # get nupkg artifact:
           $NupkgPath = (Get-ChildItem -Path:("./${{ matrix.sdkName }}/bin/nupkg/${{ matrix.sdkName }}*.nupkg")).FullName
-          $ validate package
+          # validate package
           $nupkgPath | Should -Exist
           Write-Host "Nupkg Artifact Restored: $nupkgPath"
           write-host "push ${{ matrix.sdkName }} to PSGallery"
