@@ -426,7 +426,7 @@ $($IndentChar)$($IndentChar)$($IndentChar)}
 $($IndentChar)$($IndentChar))"
                 # Build "Process" block
                 # temp fix for Set-JcSdkUserAssociation TODO: remove when DE-2630 is done
-                if ($NewCommandName -eq "Set-JcSdkUserAssociation") {
+                if ($NewCommandName -eq ("Set-JcSdkUserAssociation" -or "Set-JcSdkSystemAssociation")) {
                     $ProcessContent += "$($IndentChar)$($IndentChar)if ((-not `$PSBoundParameters['attributes']) -and (`$PSBoundParameters['op'] -eq 'remove')) {
 $($IndentChar)$($IndentChar)$($IndentChar)`$PSBoundParameters.Add('attributes', @{ '' = '' })
 $($IndentChar)$($IndentChar)} elseif ((`$PSBoundParameters['body']) -And (`$Body.Op -eq 'remove')) {
