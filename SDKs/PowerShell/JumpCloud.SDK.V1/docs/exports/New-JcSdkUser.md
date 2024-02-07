@@ -405,7 +405,8 @@ Accept wildcard characters: False
 ```
 
 ### -ExternallyManaged
-.
+The externally_managed property has been deprecated.
+Whenever a user has their externally_managed field modified their restrictedFields property gets populated with the appropriate value, even if it is already set to a value an administrator manually set.
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
@@ -953,7 +954,7 @@ BODY <ISystemuserputpost>: SystemUserPost
   - `[ExternalDn <String>]`: 
   - `[ExternalPasswordExpirationDate <DateTime?>]`: 
   - `[ExternalSourceType <String>]`: 
-  - `[ExternallyManaged <Boolean?>]`: 
+  - `[ExternallyManaged <Boolean?>]`: The externally_managed property has been deprecated. Whenever a user has their externally_managed field modified their restrictedFields property gets populated with the appropriate value, even if it is already set to a value an administrator manually set.
   - `[Firstname <String>]`: 
   - `[JobTitle <String>]`: 
   - `[Lastname <String>]`: 

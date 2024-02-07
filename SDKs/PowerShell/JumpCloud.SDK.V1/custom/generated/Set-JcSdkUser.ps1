@@ -95,7 +95,7 @@ BODY <ISystemuserput>:
   [ExternalDn <String>]:
   [ExternalPasswordExpirationDate <String>]:
   [ExternalSourceType <String>]:
-  [ExternallyManaged <Boolean?>]:
+  [ExternallyManaged <Boolean?>]: The externally_managed property has been deprecated. Whenever a user has their externally_managed field modified their restrictedFields property gets populated with the appropriate value, even if it is already set to a value an administrator manually set.
   [Firstname <String>]:
   [JobTitle <String>]:
   [Lastname <String>]:
@@ -323,7 +323,8 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.Management.Automation.SwitchParameter]
-    # .
+    # The externally_managed property has been deprecated.
+    # Whenever a user has their externally_managed field modified their restrictedFields property gets populated with the appropriate value, even if it is already set to a value an administrator manually set.
     ${ExternallyManaged}, 
 
     [Parameter(ParameterSetName='SetExpanded')]

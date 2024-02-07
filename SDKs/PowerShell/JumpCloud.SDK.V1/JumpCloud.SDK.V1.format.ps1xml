@@ -3966,6 +3966,46 @@
       </TableControl>
     </View>
     <View>
+      <Name>JumpCloud.SDK.V1.Models.JcSystemPolicyStats</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloud.SDK.V1.Models.JcSystemPolicyStats</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Failed</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Pending</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Success</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Total</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Failed</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Pending</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Success</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Total</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
       <Name>JumpCloud.SDK.V1.Models.JcSystemProvisionMetadataProvisioner</Name>
       <ViewSelectedBy>
         <TypeName>JumpCloud.SDK.V1.Models.JcSystemProvisionMetadataProvisioner</TypeName>
@@ -4257,6 +4297,9 @@
       <TableControl>
         <TableHeaders>
           <TableColumnHeader>
+            <Label>AccessRestriction</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
             <Label>AccountsReceivable</Label>
           </TableColumnHeader>
           <TableColumnHeader>
@@ -4290,6 +4333,9 @@
         <TableRowEntries>
           <TableRowEntry>
             <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>AccessRestriction</PropertyName>
+              </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>AccountsReceivable</PropertyName>
               </TableColumnItem>

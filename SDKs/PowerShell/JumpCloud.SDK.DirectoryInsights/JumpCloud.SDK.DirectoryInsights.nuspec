@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
   <metadata>
     <id>JumpCloud.SDK.DirectoryInsights</id>
-    <version>0.0.25</version>
+    <version>0.0.26</version>
     <authors>JumpCloud</authors>
     <owners>JumpCloud</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
