@@ -48,13 +48,23 @@ curl -X POST https://console.jumpcloud.com/api/v2/users/{UserID}/associations \\
   }'
 ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Set-JcSdkUserAssociation -UserId <UserID> -id <SystemID> -op 'add' -type 'user' -Attributes @{ 'sudoEnabled' = $true; 'SudoWithoutPassword' = $true }
 
-{{ Add output here }}
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Set-JcSdkUserAssociation -UserId <UserID> -id <SystemID> -op 'update' -type 'user' -Attributes @{ 'sudoEnabled' = $true; 'SudoWithoutPassword' = $true }
 
-{{ Add output here }}
+.Example
+PS C:\> Set-JcSdkUserAssociation -UserId <UserID> -id <SystemID> -op 'remove' -type 'user' -Attributes @{ 'sudoEnabled' = $false; 'SudoWithoutPassword' = $false }
+
+.Example
+PS C:\> Set-JcSdkUserAssociation -UserId <UserID> -id <SystemGroupID> -op 'add' -type 'system_group' -Attributes @{ 'sudoEnabled' = $true; 'SudoWithoutPassword' = $false }
+
+.Example
+PS C:\> Set-JcSdkUserAssociation -UserId <UserID> -id <SystemGroupID> -op 'update' -type 'system_group' -Attributes @{ 'sudoEnabled' = $true; 'SudoWithoutPassword' = $false }
+
+.Example
+PS C:\> Set-JcSdkUserAssociation -UserId <UserID> -id <SystemGroupID> -op 'remove' -type 'system_group' -Attributes @{ 'sudoEnabled' = $false; 'SudoWithoutPassword' = $false }
+
 
 .Inputs
 JumpCloud.SDK.V2.Models.IGraphOperationUser
@@ -97,7 +107,7 @@ INPUTOBJECT <IJumpCloudApiIdentity>:
   [PushEndpointId <String>]:
   [RadiusserverId <String>]: ObjectID of the Radius Server.
   [SoftwareAppId <String>]: ObjectID of the Software App.
-  [SystemId <String>]: ObjectID of the System.
+  [UserID <String>]: ObjectID of the System.
   [UserId <String>]: ObjectID of the User.
   [WorkdayId <String>]:
 .Link
@@ -113,7 +123,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V2.Category('Path')]
     [System.String]
     # ObjectID of the User.
-    ${UserId}, 
+    ${UserId},
 
     [Parameter(ParameterSetName='SetViaIdentity', Mandatory, ValueFromPipeline)]
     [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory, ValueFromPipeline)]
@@ -121,7 +131,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity]
     # Identity Parameter
     # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
-    ${InputObject}, 
+    ${InputObject},
 
     [Parameter(ParameterSetName='Set', Mandatory, ValueFromPipeline)]
     [Parameter(ParameterSetName='SetViaIdentity', Mandatory, ValueFromPipeline)]
@@ -129,21 +139,21 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V2.Models.IGraphOperationUser]
     # GraphOperation (User)
     # To construct, see NOTES section for BODY properties and create a hash table.
-    ${Body}, 
+    ${Body},
 
     [Parameter(ParameterSetName='SetExpanded', Mandatory)]
     [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory)]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.String]
     # The ObjectID of graph object being added or removed as an association.
-    ${Id}, 
+    ${Id},
 
     [Parameter(ParameterSetName='SetExpanded', Mandatory)]
     [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory)]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.String]
     # How to modify the graph connection.
-    ${Op}, 
+    ${Op},
 
     [Parameter(ParameterSetName='SetExpanded', Mandatory)]
     [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory)]
@@ -151,7 +161,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V2.Category('Body')]
     [JumpCloud.SDK.V2.Support.GraphOperationUser5]
     # Targets which a "user" can be associated to.
-    ${Type}, 
+    ${Type},
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
@@ -159,46 +169,46 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V2.Runtime.Info(PossibleTypes=([JumpCloud.SDK.V2.Models.IGraphOperationUserAttributes]))]
     [System.Collections.Hashtable]
     # .
-    ${Attributes}, 
+    ${Attributes},
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]
     [System.Management.Automation.SwitchParameter]
     # Wait for .NET debugger to attach
-    ${Break}, 
+    ${Break},
 
     [Parameter(DontShow)]
     [ValidateNotNull()]
     [JumpCloud.SDK.V2.Category('Runtime')]
     [JumpCloud.SDK.V2.Runtime.SendAsyncStep[]]
     # SendAsync Pipeline Steps to be appended to the front of the pipeline
-    ${HttpPipelineAppend}, 
+    ${HttpPipelineAppend},
 
     [Parameter(DontShow)]
     [ValidateNotNull()]
     [JumpCloud.SDK.V2.Category('Runtime')]
     [JumpCloud.SDK.V2.Runtime.SendAsyncStep[]]
     # SendAsync Pipeline Steps to be prepended to the front of the pipeline
-    ${HttpPipelinePrepend}, 
+    ${HttpPipelinePrepend},
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Runtime')]
     [System.Management.Automation.SwitchParameter]
     # Returns true when the command succeeds
-    ${PassThru}, 
+    ${PassThru},
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]
     [System.Uri]
     # The URI for the proxy server to use
-    ${Proxy}, 
+    ${Proxy},
 
     [Parameter(DontShow)]
     [ValidateNotNull()]
     [JumpCloud.SDK.V2.Category('Runtime')]
     [System.Management.Automation.PSCredential]
     # Credentials for a proxy server to use for the remote call
-    ${ProxyCredential}, 
+    ${ProxyCredential},
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]
@@ -223,11 +233,6 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        if ((-not $PSBoundParameters['attributes']) -and ($PSBoundParameters['op'] -eq 'remove')) {
-            $PSBoundParameters.Add('attributes', @{ '' = '' })
-        } elseif (($PSBoundParameters['body']) -And ($Body.Op -eq 'remove')) {
-            $Body.Attributes = @{ '' = '' }
-        }
         $Results = JumpCloud.SDK.V2.internal\Set-JcSdkInternalUserAssociation @PSBoundParameters
     }
     End
