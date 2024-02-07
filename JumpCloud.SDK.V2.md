@@ -1,3 +1,42 @@
+## JumpCloud.SDK.V2-0.0.42
+Release Date: February 07, 2024
+#### RELEASE NOTES
+```
+This is a rollup release for the V2 module, no functional changes were made. Usage examples were added to the Set-JcSdkSystemAssociation and Set-JcSdkUserAssociation functions.
+```
+#### FEATURES:
+NA
+#### IMPROVEMENTS:
+NA
+#### BUG FIXES:
+NA
+#### Generated Changes:
+
+<details>
+<summary>Functions Added</summary>
+
+No changes
+</details>
+
+<details>
+<summary>Functions Modified</summary>
+
+* New-JcSdkActiveDirectoryAgent.ps1
+* New-JcSdkPolicy.ps1
+* New-JcSdkSoftwareApp.ps1
+* Set-JcSdkPolicy.ps1
+* Set-JcSdkSoftwareApp.ps1
+* Set-JcSdkSystemAssociation.ps1
+* Set-JcSdkUserAssociation.ps1
+
+</details>
+
+<details>
+<summary>Functions Removed</summary>
+
+No changes
+</details>
+
 ## JumpCloud.SDK.V2-0.0.41
 Release Date: November 29, 2023
 #### RELEASE NOTES

@@ -1,3 +1,38 @@
+## JumpCloud.SDK.V1-0.0.38
+Release Date: February 07, 2024
+#### RELEASE NOTES
+```
+This is a rollup release for the V1 module, no functional changes were made
+```
+#### FEATURES:
+NA
+#### IMPROVEMENTS:
+NA
+#### BUG FIXES:
+NA
+#### Generated Changes:
+
+<details>
+<summary>Functions Added</summary>
+
+No changes
+</details>
+
+<details>
+<summary>Functions Modified</summary>
+
+* Get-JcSdkCommandResult.ps1
+* New-JcSdkUser.ps1
+* Set-JcSdkUser.ps1
+
+</details>
+
+<details>
+<summary>Functions Removed</summary>
+
+No changes
+</details>
+
 ## JumpCloud.SDK.V1-0.0.37
 Release Date: November 29, 2023
 #### RELEASE NOTES
