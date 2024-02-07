@@ -2000,7 +2000,7 @@ curl -X POST https://console.jumpcloud.com/api/v2/activedirectories/{activedirec
   -H 'accept: application/json' \\
   -H 'content-type: application/json' \\
   -H 'x-api-key: {API_KEY}' \\
-  -d '{}'
+  -d '{ \"agent_type\":\"{SYNC}\" }'
 ```
 
 ### [New-JcSdkAdministratorOrganization](New-JcSdkAdministratorOrganization.md)

@@ -15,6 +15,9 @@
             <Label>Id</Label>
           </TableColumnHeader>
           <TableColumnHeader>
+            <Label>PrimaryAgent</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
             <Label>UseCase</Label>
           </TableColumnHeader>
         </TableHeaders>
@@ -28,7 +31,32 @@
                 <PropertyName>Id</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
+                <PropertyName>PrimaryAgent</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
                 <PropertyName>UseCase</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>JumpCloud.SDK.V2.Models.ActiveDirectoryAgent</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloud.SDK.V2.Models.ActiveDirectoryAgent</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>AgentType</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>AgentType</PropertyName>
               </TableColumnItem>
             </TableColumnItems>
           </TableRowEntry>
@@ -4336,6 +4364,56 @@
       </TableControl>
     </View>
     <View>
+      <Name>JumpCloud.SDK.V2.Models.PolicyCreateRequest</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloud.SDK.V2.Models.PolicyCreateRequest</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Name</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Notes</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Name</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Notes</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>JumpCloud.SDK.V2.Models.PolicyCreateRequestTemplate</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloud.SDK.V2.Models.PolicyCreateRequestTemplate</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Id</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Id</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
       <Name>JumpCloud.SDK.V2.Models.PolicyGroup</Name>
       <ViewSelectedBy>
         <TypeName>JumpCloud.SDK.V2.Models.PolicyGroup</TypeName>
@@ -4397,56 +4475,6 @@
             <TableColumnItems>
               <TableColumnItem>
                 <PropertyName>Name</PropertyName>
-              </TableColumnItem>
-            </TableColumnItems>
-          </TableRowEntry>
-        </TableRowEntries>
-      </TableControl>
-    </View>
-    <View>
-      <Name>JumpCloud.SDK.V2.Models.PolicyRequest</Name>
-      <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.PolicyRequest</TypeName>
-      </ViewSelectedBy>
-      <TableControl>
-        <TableHeaders>
-          <TableColumnHeader>
-            <Label>Name</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>Notes</Label>
-          </TableColumnHeader>
-        </TableHeaders>
-        <TableRowEntries>
-          <TableRowEntry>
-            <TableColumnItems>
-              <TableColumnItem>
-                <PropertyName>Name</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>Notes</PropertyName>
-              </TableColumnItem>
-            </TableColumnItems>
-          </TableRowEntry>
-        </TableRowEntries>
-      </TableControl>
-    </View>
-    <View>
-      <Name>JumpCloud.SDK.V2.Models.PolicyRequestTemplate</Name>
-      <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.PolicyRequestTemplate</TypeName>
-      </ViewSelectedBy>
-      <TableControl>
-        <TableHeaders>
-          <TableColumnHeader>
-            <Label>Id</Label>
-          </TableColumnHeader>
-        </TableHeaders>
-        <TableRowEntries>
-          <TableRowEntry>
-            <TableColumnItems>
-              <TableColumnItem>
-                <PropertyName>Id</PropertyName>
               </TableColumnItem>
             </TableColumnItems>
           </TableRowEntry>
@@ -4789,6 +4817,34 @@
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>OSMetaFamily</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>JumpCloud.SDK.V2.Models.PolicyUpdateRequest</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloud.SDK.V2.Models.PolicyUpdateRequest</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Name</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Notes</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Name</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Notes</PropertyName>
               </TableColumnItem>
             </TableColumnItems>
           </TableRowEntry>
@@ -6523,6 +6579,9 @@
       <TableControl>
         <TableHeaders>
           <TableColumnHeader>
+            <Label>AndroidFeatures</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
             <Label>AppPricing</Label>
           </TableColumnHeader>
           <TableColumnHeader>
@@ -6586,6 +6645,9 @@
         <TableRowEntries>
           <TableRowEntry>
             <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>AndroidFeatures</PropertyName>
+              </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>AppPricing</PropertyName>
               </TableColumnItem>

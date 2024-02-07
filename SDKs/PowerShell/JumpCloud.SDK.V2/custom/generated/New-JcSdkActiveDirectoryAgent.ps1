@@ -9,7 +9,7 @@ curl -X POST https://console.jumpcloud.com/api/v2/activedirectories/{activedirec
   -H 'accept: application/json' \\
   -H 'content-type: application/json' \\
   -H 'x-api-key: {API_KEY}' \\
-  -d '{}'
+  -d '{ \"agent_type\":\"{SYNC}\" }'
 ```
 .Description
 This endpoint allows you to create a new Active Directory Agent.
@@ -21,7 +21,7 @@ curl -X POST https://console.jumpcloud.com/api/v2/activedirectories/{activedirec
   -H 'accept: application/json' \\
   -H 'content-type: application/json' \\
   -H 'x-api-key: {API_KEY}' \\
-  -d '{}'
+  -d '{ \"agent_type\":\"{SYNC}\" }'
 ```
 .Example
 PS C:\> {{ Add code here }}
@@ -33,15 +33,18 @@ PS C:\> {{ Add code here }}
 {{ Add output here }}
 
 .Inputs
-JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
+JumpCloud.SDK.V2.Models.IActiveDirectoryAgent
 .Inputs
-System.Collections.Hashtable
+JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
 .Outputs
 JumpCloud.SDK.V2.Models.IActiveDirectoryAgentGet
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
+
+BODY <IActiveDirectoryAgent>:
+  [AgentType <String>]:
 
 INPUTOBJECT <IJumpCloudApiIdentity>:
   [AccountId <String>]:
@@ -93,17 +96,17 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='Create', Mandatory, ValueFromPipeline)]
     [Parameter(ParameterSetName='CreateViaIdentity', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Runtime.Info(Required, PossibleTypes=([JumpCloud.SDK.V2.Models.IActiveDirectoryAgent]))]
-    [System.Collections.Hashtable]
+    [JumpCloud.SDK.V2.Models.IActiveDirectoryAgent]
     # Active Directory Agent
+    # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body}, 
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [Parameter(ParameterSetName='CreateViaIdentityExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
-    [System.Collections.Hashtable]
-    # Additional Parameters
-    ${AdditionalProperties}, 
+    [System.String]
+    # .
+    ${AgentType}, 
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]

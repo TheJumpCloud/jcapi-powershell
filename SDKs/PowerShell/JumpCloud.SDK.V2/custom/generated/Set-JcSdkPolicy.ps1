@@ -41,7 +41,7 @@ PS C:\> {{ Add code here }}
 .Inputs
 JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
 .Inputs
-JumpCloud.SDK.V2.Models.IPolicyRequest
+JumpCloud.SDK.V2.Models.IPolicyUpdateRequest
 .Outputs
 JumpCloud.SDK.V2.Models.IPolicy
 .Notes
@@ -49,10 +49,9 @@ COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
-BODY <IPolicyRequest>:
+BODY <IPolicyUpdateRequest>:
   Name <String>: The description for this specific Policy.
   [Notes <String>]: The notes for this specific Policy.
-  [TemplateId <String>]: ObjectId uniquely identifying a Policy instance; only allowed on POST requests.
   [Values <IPolicyValue[]>]:
     [ConfigFieldId <String>]: The ObjectId of the corresponding Policy Template configuration field.
     [Sensitive <Boolean?>]: Defines if the value is sensitive or not.
@@ -113,8 +112,8 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='Set', Mandatory, ValueFromPipeline)]
     [Parameter(ParameterSetName='SetViaIdentity', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Models.IPolicyRequest]
-    # An instance of a policy template.
+    [JumpCloud.SDK.V2.Models.IPolicyUpdateRequest]
+    # A request to update an instance of a policy template.
     # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body}, 
 
@@ -131,13 +130,6 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [System.String]
     # The notes for this specific Policy.
     ${Notes}, 
-
-    [Parameter(ParameterSetName='SetExpanded')]
-    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
-    [JumpCloud.SDK.V2.Category('Body')]
-    [System.String]
-    # ObjectId uniquely identifying a Policy instance; only allowed on POST requests.
-    ${TemplateId}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
