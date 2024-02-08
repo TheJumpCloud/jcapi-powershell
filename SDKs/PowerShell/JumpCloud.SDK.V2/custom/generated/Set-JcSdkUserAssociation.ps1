@@ -54,7 +54,7 @@ PS C:\> Set-JcSdkUserAssociation -UserId <UserID> -id <SystemID> -op 'add' -type
 PS C:\> Set-JcSdkUserAssociation -UserId <UserID> -id <SystemID> -op 'update' -type 'user' -Attributes @{ 'sudoEnabled' = $true; 'SudoWithoutPassword' = $true }
 
 .Example
-PS C:\> Set-JcSdkUserAssociation -UserId <UserID> -id <SystemID> -op 'remove' -type 'user' -Attributes @{ 'sudoEnabled' = $false; 'SudoWithoutPassword' = $false }
+PS C:\> Set-JcSdkUserAssociation -UserId <UserID> -id <SystemID> -op 'remove' -type 'user'
 
 .Example
 PS C:\> Set-JcSdkUserAssociation -UserId <UserID> -id <SystemGroupID> -op 'add' -type 'system_group' -Attributes @{ 'sudoEnabled' = $true; 'SudoWithoutPassword' = $false }
@@ -63,7 +63,7 @@ PS C:\> Set-JcSdkUserAssociation -UserId <UserID> -id <SystemGroupID> -op 'add' 
 PS C:\> Set-JcSdkUserAssociation -UserId <UserID> -id <SystemGroupID> -op 'update' -type 'system_group' -Attributes @{ 'sudoEnabled' = $true; 'SudoWithoutPassword' = $false }
 
 .Example
-PS C:\> Set-JcSdkUserAssociation -UserId <UserID> -id <SystemGroupID> -op 'remove' -type 'system_group' -Attributes @{ 'sudoEnabled' = $false; 'SudoWithoutPassword' = $false }
+PS C:\> Set-JcSdkUserAssociation -UserId <UserID> -id <SystemGroupID> -op 'remove' -type 'system_group'
 
 
 .Inputs

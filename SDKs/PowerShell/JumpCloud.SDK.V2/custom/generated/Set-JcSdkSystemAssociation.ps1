@@ -54,7 +54,7 @@ PS C:\> Set-JcSdkSystemAssociation -SystemId <SystemID> -id <UserID> -op 'add' -
 PS C:\> Set-JcSdkSystemAssociation -SystemId <SystemID> -id <UserID> -op 'update' -type 'user' -Attributes @{ 'sudoEnabled' = $true; 'SudoWithoutPassword' = $true }
 
 .Example
-PS C:\> Set-JcSdkSystemAssociation -SystemId <SystemID> -id <UserID> -op 'remove' -type 'user' -Attributes @{ 'sudoEnabled' = $false; 'SudoWithoutPassword' = $false }
+PS C:\> Set-JcSdkSystemAssociation -SystemId <SystemID> -id <UserID> -op 'remove' -type 'user'
 
 .Example
 PS C:\> Set-JcSdkSystemAssociation -SystemId <SystemID> -id <UserGroupID> -op 'add' -type 'user_group' -Attributes @{ 'sudoEnabled' = $true; 'SudoWithoutPassword' = $false }
@@ -63,7 +63,7 @@ PS C:\> Set-JcSdkSystemAssociation -SystemId <SystemID> -id <UserGroupID> -op 'a
 PS C:\> Set-JcSdkSystemAssociation -SystemId <SystemID> -id <UserGroupID> -op 'update' -type 'user_group' -Attributes @{ 'sudoEnabled' = $true; 'SudoWithoutPassword' = $false }
 
 .Example
-PS C:\> Set-JcSdkSystemAssociation -SystemId <SystemID> -id <UserGroupID> -op 'remove' -type 'user_group' -Attributes @{ 'sudoEnabled' = $false; 'SudoWithoutPassword' = $false }
+PS C:\> Set-JcSdkSystemAssociation -SystemId <SystemID> -id <UserGroupID> -op 'remove' -type 'user_group'
 
 .Inputs
 JumpCloud.SDK.V2.Models.IGraphOperationSystem
