@@ -27,24 +27,24 @@ curl -X PUT https://console.jumpcloud.com/api/v2/policies/59fced45c9118022172547
 
 ### SetExpanded (Default)
 ```
-Set-JcSdkPolicy -Id <String> -Name <String> [-Notes <String>] [-TemplateId <String>]
- [-Values <IPolicyValue[]>] [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkPolicy -Id <String> -Name <String> [-Notes <String>] [-Values <IPolicyValue[]>] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### Set
 ```
-Set-JcSdkPolicy -Id <String> -Body <IPolicyRequest> [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkPolicy -Id <String> -Body <IPolicyUpdateRequest> [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentity
 ```
-Set-JcSdkPolicy -InputObject <IJumpCloudApiIdentity> -Body <IPolicyRequest> [-Confirm] [-WhatIf]
+Set-JcSdkPolicy -InputObject <IJumpCloudApiIdentity> -Body <IPolicyUpdateRequest> [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkPolicy -InputObject <IJumpCloudApiIdentity> -Name <String> [-Notes <String>] [-TemplateId <String>]
+Set-JcSdkPolicy -InputObject <IJumpCloudApiIdentity> -Name <String> [-Notes <String>]
  [-Values <IPolicyValue[]>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
@@ -83,11 +83,11 @@ curl -X PUT https://console.jumpcloud.com/api/v2/policies/59fced45c9118022172547
 ## PARAMETERS
 
 ### -Body
-An instance of a policy template.
+A request to update an instance of a policy template.
 To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IPolicyRequest
+Type: JumpCloud.SDK.V2.Models.IPolicyUpdateRequest
 Parameter Sets: Set, SetViaIdentity
 Aliases:
 
@@ -159,21 +159,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -TemplateId
-ObjectId uniquely identifying a Policy instance; only allowed on POST requests.
-
-```yaml
-Type: System.String
-Parameter Sets: SetExpanded, SetViaIdentityExpanded
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Values
 .
 To construct, see NOTES section for VALUES properties and create a hash table.
@@ -228,7 +213,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
 
-### JumpCloud.SDK.V2.Models.IPolicyRequest
+### JumpCloud.SDK.V2.Models.IPolicyUpdateRequest
 
 ## OUTPUTS
 
@@ -243,10 +228,9 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <IPolicyRequest>: An instance of a policy template.
+BODY <IPolicyUpdateRequest>: A request to update an instance of a policy template.
   - `Name <String>`: The description for this specific Policy.
   - `[Notes <String>]`: The notes for this specific Policy.
-  - `[TemplateId <String>]`: ObjectId uniquely identifying a Policy instance; only allowed on POST requests.
   - `[Values <IPolicyValue[]>]`: 
     - `[ConfigFieldId <String>]`: The ObjectId of the corresponding Policy Template configuration field.
     - `[Sensitive <Boolean?>]`: Defines if the value is sensitive or not.

@@ -825,9 +825,9 @@
             "ge",
             "lt",
             "le",
-            "between",
-            "search",
-            "in"
+            "in",
+            "nin",
+            "sw"
           ],
           "type": "string"
         },
@@ -2214,6 +2214,43 @@
       "title": "Policy",
       "type": "object"
     },
+    "PolicyCreateRequest": {
+      "description": "A request to create an instance of a policy template.",
+      "properties": {
+        "name": {
+          "description": "The description for this specific Policy.",
+          "type": "string"
+        },
+        "notes": {
+          "description": "The notes for this specific Policy.",
+          "type": "string"
+        },
+        "template": {
+          "properties": {
+            "id": {
+              "description": "ObjectId uniquely identifying a Policy instance.",
+              "type": "string"
+            }
+          },
+          "required": [
+            "id"
+          ],
+          "type": "object"
+        },
+        "values": {
+          "items": {
+            "$ref": "#/definitions/PolicyValue"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "name",
+        "template"
+      ],
+      "title": "PolicyCreateRequest",
+      "type": "object"
+    },
     "PolicyGroup": {
       "properties": {
         "attributes": {
@@ -2257,39 +2294,6 @@
         "name"
       ],
       "title": "PolicyGroupData",
-      "type": "object"
-    },
-    "PolicyRequest": {
-      "description": "An instance of a policy template.",
-      "properties": {
-        "name": {
-          "description": "The description for this specific Policy.",
-          "type": "string"
-        },
-        "notes": {
-          "description": "The notes for this specific Policy.",
-          "type": "string"
-        },
-        "template": {
-          "properties": {
-            "id": {
-              "description": "ObjectId uniquely identifying a Policy instance; only allowed on POST requests.",
-              "type": "string"
-            }
-          },
-          "type": "object"
-        },
-        "values": {
-          "items": {
-            "$ref": "#/definitions/PolicyValue"
-          },
-          "type": "array"
-        }
-      },
-      "required": [
-        "name"
-      ],
-      "title": "PolicyRequest",
       "type": "object"
     },
     "PolicyResult": {
@@ -2592,6 +2596,30 @@
         }
       },
       "title": "PolicyTemplateWithDetails",
+      "type": "object"
+    },
+    "PolicyUpdateRequest": {
+      "description": "A request to update an instance of a policy template.",
+      "properties": {
+        "name": {
+          "description": "The description for this specific Policy.",
+          "type": "string"
+        },
+        "notes": {
+          "description": "The notes for this specific Policy.",
+          "type": "string"
+        },
+        "values": {
+          "items": {
+            "$ref": "#/definitions/PolicyValue"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "title": "PolicyRequest",
       "type": "object"
     },
     "PolicyValue": {
@@ -3815,6 +3843,11 @@
           "readOnly": true,
           "type": "string"
         },
+        "primaryAgent": {
+          "description": "ObjectID of the primary agent of domain.",
+          "readOnly": true,
+          "type": "string"
+        },
         "useCase": {
           "enum": [
             "UNSET",
@@ -3829,9 +3862,17 @@
       "type": "object"
     },
     "active-directory-agent": {
+      "properties": {
+        "agentType": {
+          "enum": [
+            "SYNC",
+            "IMPORT"
+          ],
+          "type": "string"
+        }
+      },
       "title": "Active Directory Agent",
-      "type": "object",
-      "additionalProperties": true
+      "type": "object"
     },
     "active-directory-agent-get": {
       "properties": {
@@ -4313,23 +4354,26 @@
           "description": "The unique identifier for this feature.",
           "enum": [
             "cloudDirectory",
+            "cloudInsights",
             "deviceManagement",
             "directoryInsightsPremium",
+            "federatedDeviceIdentity",
             "implementationQuickstart",
+            "jcManagedDeviceIdentity",
+            "jumpcloudGo",
+            "jumpcloudProtect",
             "ldap",
             "mdm",
             "mfa",
+            "osPatchManagement",
+            "passwordManagement",
             "premiumSupport",
             "radius",
+            "remoteAccess",
             "sso",
             "systemInsights",
             "userLifecycle",
-            "zeroTrust",
-            "jumpcloudProtect",
-            "osPatchManagement",
-            "remoteAccess",
-            "cloudInsights",
-            "passwordManagement"
+            "zeroTrust"
           ],
           "type": "string"
         }
@@ -4773,6 +4817,13 @@
     "software-app-google-android": {
       "description": "googleAndroid is an optional attribute, it will only be present on apps with a 'setting' 'package_manager' type of 'GOOGLE_ANDROID'.",
       "properties": {
+        "androidFeatures": {
+          "description": "The array of android features for the app.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
         "appPricing": {
           "description": "Whether this app is free, free with in-app purchases, or paid.",
           "type": "string"
@@ -7030,7 +7081,7 @@
           "type": "string"
         },
         "maximum_allowed": {
-          "type": "integer"
+          "type": "string"
         },
         "name": {
           "type": "string"
@@ -7045,7 +7096,7 @@
           "type": "string"
         },
         "type": {
-          "type": "integer"
+          "type": "string"
         }
       },
       "title": "System Insights Shared Resources",
@@ -8488,7 +8539,7 @@
         }
       ],
       "post": {
-        "description": "This endpoint allows you to create a new Active Directory Agent.\n\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/activedirectories/{activedirectory_id}/agents \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{}'\n```",
+        "description": "This endpoint allows you to create a new Active Directory Agent.\n\n\n#### Sample Request\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/activedirectories/{activedirectory_id}/agents \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{ \"agent_type\":\"{SYNC}\" }'\n```",
         "operationId": "ActiveDirectoryAgent_Create",
         "parameters": [
           {
@@ -8516,15 +8567,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request POST \\\n  --url https://console.jumpcloud.com/api/v2/activedirectories/{activedirectory_id}/agents \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --data '{}'"
+            "source": "curl --request POST \\\n  --url https://console.jumpcloud.com/api/v2/activedirectories/{activedirectory_id}/agents \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --data '{\"agentType\":\"SYNC\"}'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/v2/activedirectories/{activedirectory_id}/agents\"\n\npayload = {}\nheaders = {\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/v2/activedirectories/{activedirectory_id}/agents\"\n\npayload = {\"agentType\": \"SYNC\"}\nheaders = {\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/v2/activedirectories/{activedirectory_id}/agents' -Method POST -Headers $headers -ContentType 'application/json' -Body '{}'"
+            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/v2/activedirectories/{activedirectory_id}/agents' -Method POST -Headers $headers -ContentType 'application/json' -Body '{\"agentType\":\"SYNC\"}'"
           }
         ]
       },
@@ -11438,6 +11489,7 @@
         "reports-devices"
       ]
     },
+    "/devices/settings/defaultpasswordsync": {},
     "/devices/settings/signinwithjumpcloud": {},
     "/directories": {
       "get": {
@@ -13716,6 +13768,7 @@
         "custom-email"
       ]
     },
+    "/microsoft-mdm/configuration-files": {},
     "/office365/activate": {
       "x-functionalities-tags": [
         "m365-activate-deactivate"
@@ -14667,7 +14720,7 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "$ref": "#/definitions/PolicyRequest"
+              "$ref": "#/definitions/PolicyCreateRequest"
             }
           }
         ],
@@ -14788,7 +14841,7 @@
             "in": "body",
             "name": "body",
             "schema": {
-              "$ref": "#/definitions/PolicyRequest"
+              "$ref": "#/definitions/PolicyUpdateRequest"
             }
           }
         ],
@@ -14809,15 +14862,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request PUT \\\n  --url https://console.jumpcloud.com/api/v2/policies/{id} \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --data '{\"name\":\"string\",\"notes\":\"string\",\"template\":{\"id\":\"string\"},\"values\":[{\"configFieldID\":\"string\",\"sensitive\":true,\"value\":\"string\"}]}'"
+            "source": "curl --request PUT \\\n  --url https://console.jumpcloud.com/api/v2/policies/{id} \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --data '{\"name\":\"string\",\"notes\":\"string\",\"values\":[{\"configFieldID\":\"string\",\"sensitive\":true,\"value\":\"string\"}]}'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/v2/policies/{id}\"\n\npayload = {\n    \"name\": \"string\",\n    \"notes\": \"string\",\n    \"template\": {\"id\": \"string\"},\n    \"values\": [\n        {\n            \"configFieldID\": \"string\",\n            \"sensitive\": True,\n            \"value\": \"string\"\n        }\n    ]\n}\nheaders = {\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"PUT\", url, json=payload, headers=headers)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/v2/policies/{id}\"\n\npayload = {\n    \"name\": \"string\",\n    \"notes\": \"string\",\n    \"values\": [\n        {\n            \"configFieldID\": \"string\",\n            \"sensitive\": True,\n            \"value\": \"string\"\n        }\n    ]\n}\nheaders = {\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"PUT\", url, json=payload, headers=headers)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/v2/policies/{id}' -Method PUT -Headers $headers -ContentType 'application/json' -Body '{\"name\":\"string\",\"notes\":\"string\",\"template\":{\"id\":\"string\"},\"values\":[{\"configFieldID\":\"string\",\"sensitive\":true,\"value\":\"string\"}]}'"
+            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/v2/policies/{id}' -Method PUT -Headers $headers -ContentType 'application/json' -Body '{\"name\":\"string\",\"notes\":\"string\",\"values\":[{\"configFieldID\":\"string\",\"sensitive\":true,\"value\":\"string\"}]}'"
           }
         ]
       },
@@ -16937,15 +16990,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request POST \\\n  --url https://console.jumpcloud.com/api/v2/softwareapps \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --data '{\"displayName\":\"string\",\"id\":\"string\",\"settings\":[{\"allowUpdateDelay\":false,\"appleVpp\":{\"appConfiguration\":\"string\",\"assignedLicenses\":0,\"availableLicenses\":0,\"details\":{},\"isConfigEnabled\":true,\"supportedDeviceFamilies\":[\"IPAD\"],\"totalLicenses\":0},\"assetKind\":\"string\",\"assetSha256Size\":0,\"assetSha256Strings\":[\"string\"],\"autoUpdate\":false,\"commandLineArguments\":\"string\",\"description\":\"string\",\"desiredState\":\"string\",\"enterpriseObjectId\":\"string\",\"googleAndroid\":{\"appPricing\":\"string\",\"appVersion\":\"string\",\"author\":\"string\",\"autoUpdateMode\":\"AUTO_UPDATE_DEFAULT\",\"category\":\"string\",\"contentRating\":\"string\",\"displayMode\":\"string\",\"distributionChannel\":\"string\",\"fullDescription\":\"string\",\"iconUrl\":\"string\",\"installType\":\"AVAILABLE\",\"managedConfigurationTemplateId\":\"string\",\"managedProperties\":true,\"minSdkVersion\":0,\"name\":\"string\",\"permissionGrants\":[{\"id\":\"string\",\"policy\":\"PROMPT\"}],\"runtimePermission\":\"PROMPT\",\"startUrl\":\"string\",\"type\":\"APP_TYPE_UNSPECIFIED\",\"updateTime\":\"string\",\"versionCode\":0},\"location\":\"string\",\"locationObjectId\":\"string\",\"packageId\":\"string\",\"packageKind\":\"string\",\"packageManager\":\"string\",\"packageSubtitle\":\"string\",\"packageVersion\":\"string\",\"storedPackage\":{\"objectId\":\"string\",\"versions\":[{\"metadata\":{},\"name\":\"string\",\"rejectedReason\":\"string\",\"sha256sum\":\"string\",\"size\":0,\"status\":\"string\",\"version\":0}]},\"storedPackageObjectId\":\"string\"}]}'"
+            "source": "curl --request POST \\\n  --url https://console.jumpcloud.com/api/v2/softwareapps \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --data '{\"displayName\":\"string\",\"id\":\"string\",\"settings\":[{\"allowUpdateDelay\":false,\"appleVpp\":{\"appConfiguration\":\"string\",\"assignedLicenses\":0,\"availableLicenses\":0,\"details\":{},\"isConfigEnabled\":true,\"supportedDeviceFamilies\":[\"IPAD\"],\"totalLicenses\":0},\"assetKind\":\"string\",\"assetSha256Size\":0,\"assetSha256Strings\":[\"string\"],\"autoUpdate\":false,\"commandLineArguments\":\"string\",\"description\":\"string\",\"desiredState\":\"string\",\"enterpriseObjectId\":\"string\",\"googleAndroid\":{\"androidFeatures\":[\"string\"],\"appPricing\":\"string\",\"appVersion\":\"string\",\"author\":\"string\",\"autoUpdateMode\":\"AUTO_UPDATE_DEFAULT\",\"category\":\"string\",\"contentRating\":\"string\",\"displayMode\":\"string\",\"distributionChannel\":\"string\",\"fullDescription\":\"string\",\"iconUrl\":\"string\",\"installType\":\"AVAILABLE\",\"managedConfigurationTemplateId\":\"string\",\"managedProperties\":true,\"minSdkVersion\":0,\"name\":\"string\",\"permissionGrants\":[{\"id\":\"string\",\"policy\":\"PROMPT\"}],\"runtimePermission\":\"PROMPT\",\"startUrl\":\"string\",\"type\":\"APP_TYPE_UNSPECIFIED\",\"updateTime\":\"string\",\"versionCode\":0},\"location\":\"string\",\"locationObjectId\":\"string\",\"packageId\":\"string\",\"packageKind\":\"string\",\"packageManager\":\"string\",\"packageSubtitle\":\"string\",\"packageVersion\":\"string\",\"storedPackage\":{\"objectId\":\"string\",\"versions\":[{\"metadata\":{},\"name\":\"string\",\"rejectedReason\":\"string\",\"sha256sum\":\"string\",\"size\":0,\"status\":\"string\",\"version\":0}]},\"storedPackageObjectId\":\"string\"}]}'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/v2/softwareapps\"\n\npayload = {\n    \"displayName\": \"string\",\n    \"id\": \"string\",\n    \"settings\": [\n        {\n            \"allowUpdateDelay\": False,\n            \"appleVpp\": {\n                \"appConfiguration\": \"string\",\n                \"assignedLicenses\": 0,\n                \"availableLicenses\": 0,\n                \"details\": {},\n                \"isConfigEnabled\": True,\n                \"supportedDeviceFamilies\": [\"IPAD\"],\n                \"totalLicenses\": 0\n            },\n            \"assetKind\": \"string\",\n            \"assetSha256Size\": 0,\n            \"assetSha256Strings\": [\"string\"],\n            \"autoUpdate\": False,\n            \"commandLineArguments\": \"string\",\n            \"description\": \"string\",\n            \"desiredState\": \"string\",\n            \"enterpriseObjectId\": \"string\",\n            \"googleAndroid\": {\n                \"appPricing\": \"string\",\n                \"appVersion\": \"string\",\n                \"author\": \"string\",\n                \"autoUpdateMode\": \"AUTO_UPDATE_DEFAULT\",\n                \"category\": \"string\",\n                \"contentRating\": \"string\",\n                \"displayMode\": \"string\",\n                \"distributionChannel\": \"string\",\n                \"fullDescription\": \"string\",\n                \"iconUrl\": \"string\",\n                \"installType\": \"AVAILABLE\",\n                \"managedConfigurationTemplateId\": \"string\",\n                \"managedProperties\": True,\n                \"minSdkVersion\": 0,\n                \"name\": \"string\",\n                \"permissionGrants\": [\n                    {\n                        \"id\": \"string\",\n                        \"policy\": \"PROMPT\"\n                    }\n                ],\n                \"runtimePermission\": \"PROMPT\",\n                \"startUrl\": \"string\",\n                \"type\": \"APP_TYPE_UNSPECIFIED\",\n                \"updateTime\": \"string\",\n                \"versionCode\": 0\n            },\n            \"location\": \"string\",\n            \"locationObjectId\": \"string\",\n            \"packageId\": \"string\",\n            \"packageKind\": \"string\",\n            \"packageManager\": \"string\",\n            \"packageSubtitle\": \"string\",\n            \"packageVersion\": \"string\",\n            \"storedPackage\": {\n                \"objectId\": \"string\",\n                \"versions\": [\n                    {\n                        \"metadata\": {},\n                        \"name\": \"string\",\n                        \"rejectedReason\": \"string\",\n                        \"sha256sum\": \"string\",\n                        \"size\": 0,\n                        \"status\": \"string\",\n                        \"version\": 0\n                    }\n                ]\n            },\n            \"storedPackageObjectId\": \"string\"\n        }\n    ]\n}\nheaders = {\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/v2/softwareapps\"\n\npayload = {\n    \"displayName\": \"string\",\n    \"id\": \"string\",\n    \"settings\": [\n        {\n            \"allowUpdateDelay\": False,\n            \"appleVpp\": {\n                \"appConfiguration\": \"string\",\n                \"assignedLicenses\": 0,\n                \"availableLicenses\": 0,\n                \"details\": {},\n                \"isConfigEnabled\": True,\n                \"supportedDeviceFamilies\": [\"IPAD\"],\n                \"totalLicenses\": 0\n            },\n            \"assetKind\": \"string\",\n            \"assetSha256Size\": 0,\n            \"assetSha256Strings\": [\"string\"],\n            \"autoUpdate\": False,\n            \"commandLineArguments\": \"string\",\n            \"description\": \"string\",\n            \"desiredState\": \"string\",\n            \"enterpriseObjectId\": \"string\",\n            \"googleAndroid\": {\n                \"androidFeatures\": [\"string\"],\n                \"appPricing\": \"string\",\n                \"appVersion\": \"string\",\n                \"author\": \"string\",\n                \"autoUpdateMode\": \"AUTO_UPDATE_DEFAULT\",\n                \"category\": \"string\",\n                \"contentRating\": \"string\",\n                \"displayMode\": \"string\",\n                \"distributionChannel\": \"string\",\n                \"fullDescription\": \"string\",\n                \"iconUrl\": \"string\",\n                \"installType\": \"AVAILABLE\",\n                \"managedConfigurationTemplateId\": \"string\",\n                \"managedProperties\": True,\n                \"minSdkVersion\": 0,\n                \"name\": \"string\",\n                \"permissionGrants\": [\n                    {\n                        \"id\": \"string\",\n                        \"policy\": \"PROMPT\"\n                    }\n                ],\n                \"runtimePermission\": \"PROMPT\",\n                \"startUrl\": \"string\",\n                \"type\": \"APP_TYPE_UNSPECIFIED\",\n                \"updateTime\": \"string\",\n                \"versionCode\": 0\n            },\n            \"location\": \"string\",\n            \"locationObjectId\": \"string\",\n            \"packageId\": \"string\",\n            \"packageKind\": \"string\",\n            \"packageManager\": \"string\",\n            \"packageSubtitle\": \"string\",\n            \"packageVersion\": \"string\",\n            \"storedPackage\": {\n                \"objectId\": \"string\",\n                \"versions\": [\n                    {\n                        \"metadata\": {},\n                        \"name\": \"string\",\n                        \"rejectedReason\": \"string\",\n                        \"sha256sum\": \"string\",\n                        \"size\": 0,\n                        \"status\": \"string\",\n                        \"version\": 0\n                    }\n                ]\n            },\n            \"storedPackageObjectId\": \"string\"\n        }\n    ]\n}\nheaders = {\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/v2/softwareapps' -Method POST -Headers $headers -ContentType 'application/json' -Body '{\"displayName\":\"string\",\"id\":\"string\",\"settings\":[{\"allowUpdateDelay\":false,\"appleVpp\":{\"appConfiguration\":\"string\",\"assignedLicenses\":0,\"availableLicenses\":0,\"details\":{},\"isConfigEnabled\":true,\"supportedDeviceFamilies\":[\"IPAD\"],\"totalLicenses\":0},\"assetKind\":\"string\",\"assetSha256Size\":0,\"assetSha256Strings\":[\"string\"],\"autoUpdate\":false,\"commandLineArguments\":\"string\",\"description\":\"string\",\"desiredState\":\"string\",\"enterpriseObjectId\":\"string\",\"googleAndroid\":{\"appPricing\":\"string\",\"appVersion\":\"string\",\"author\":\"string\",\"autoUpdateMode\":\"AUTO_UPDATE_DEFAULT\",\"category\":\"string\",\"contentRating\":\"string\",\"displayMode\":\"string\",\"distributionChannel\":\"string\",\"fullDescription\":\"string\",\"iconUrl\":\"string\",\"installType\":\"AVAILABLE\",\"managedConfigurationTemplateId\":\"string\",\"managedProperties\":true,\"minSdkVersion\":0,\"name\":\"string\",\"permissionGrants\":[{\"id\":\"string\",\"policy\":\"PROMPT\"}],\"runtimePermission\":\"PROMPT\",\"startUrl\":\"string\",\"type\":\"APP_TYPE_UNSPECIFIED\",\"updateTime\":\"string\",\"versionCode\":0},\"location\":\"string\",\"locationObjectId\":\"string\",\"packageId\":\"string\",\"packageKind\":\"string\",\"packageManager\":\"string\",\"packageSubtitle\":\"string\",\"packageVersion\":\"string\",\"storedPackage\":{\"objectId\":\"string\",\"versions\":[{\"metadata\":{},\"name\":\"string\",\"rejectedReason\":\"string\",\"sha256sum\":\"string\",\"size\":0,\"status\":\"string\",\"version\":0}]},\"storedPackageObjectId\":\"string\"}]}'"
+            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/v2/softwareapps' -Method POST -Headers $headers -ContentType 'application/json' -Body '{\"displayName\":\"string\",\"id\":\"string\",\"settings\":[{\"allowUpdateDelay\":false,\"appleVpp\":{\"appConfiguration\":\"string\",\"assignedLicenses\":0,\"availableLicenses\":0,\"details\":{},\"isConfigEnabled\":true,\"supportedDeviceFamilies\":[\"IPAD\"],\"totalLicenses\":0},\"assetKind\":\"string\",\"assetSha256Size\":0,\"assetSha256Strings\":[\"string\"],\"autoUpdate\":false,\"commandLineArguments\":\"string\",\"description\":\"string\",\"desiredState\":\"string\",\"enterpriseObjectId\":\"string\",\"googleAndroid\":{\"androidFeatures\":[\"string\"],\"appPricing\":\"string\",\"appVersion\":\"string\",\"author\":\"string\",\"autoUpdateMode\":\"AUTO_UPDATE_DEFAULT\",\"category\":\"string\",\"contentRating\":\"string\",\"displayMode\":\"string\",\"distributionChannel\":\"string\",\"fullDescription\":\"string\",\"iconUrl\":\"string\",\"installType\":\"AVAILABLE\",\"managedConfigurationTemplateId\":\"string\",\"managedProperties\":true,\"minSdkVersion\":0,\"name\":\"string\",\"permissionGrants\":[{\"id\":\"string\",\"policy\":\"PROMPT\"}],\"runtimePermission\":\"PROMPT\",\"startUrl\":\"string\",\"type\":\"APP_TYPE_UNSPECIFIED\",\"updateTime\":\"string\",\"versionCode\":0},\"location\":\"string\",\"locationObjectId\":\"string\",\"packageId\":\"string\",\"packageKind\":\"string\",\"packageManager\":\"string\",\"packageSubtitle\":\"string\",\"packageVersion\":\"string\",\"storedPackage\":{\"objectId\":\"string\",\"versions\":[{\"metadata\":{},\"name\":\"string\",\"rejectedReason\":\"string\",\"sha256sum\":\"string\",\"size\":0,\"status\":\"string\",\"version\":0}]},\"storedPackageObjectId\":\"string\"}]}'"
           }
         ]
       },
@@ -17103,15 +17156,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request PUT \\\n  --url https://console.jumpcloud.com/api/v2/softwareapps/{id} \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --data '{\"displayName\":\"string\",\"id\":\"string\",\"settings\":[{\"allowUpdateDelay\":false,\"appleVpp\":{\"appConfiguration\":\"string\",\"assignedLicenses\":0,\"availableLicenses\":0,\"details\":{},\"isConfigEnabled\":true,\"supportedDeviceFamilies\":[\"IPAD\"],\"totalLicenses\":0},\"assetKind\":\"string\",\"assetSha256Size\":0,\"assetSha256Strings\":[\"string\"],\"autoUpdate\":false,\"commandLineArguments\":\"string\",\"description\":\"string\",\"desiredState\":\"string\",\"enterpriseObjectId\":\"string\",\"googleAndroid\":{\"appPricing\":\"string\",\"appVersion\":\"string\",\"author\":\"string\",\"autoUpdateMode\":\"AUTO_UPDATE_DEFAULT\",\"category\":\"string\",\"contentRating\":\"string\",\"displayMode\":\"string\",\"distributionChannel\":\"string\",\"fullDescription\":\"string\",\"iconUrl\":\"string\",\"installType\":\"AVAILABLE\",\"managedConfigurationTemplateId\":\"string\",\"managedProperties\":true,\"minSdkVersion\":0,\"name\":\"string\",\"permissionGrants\":[{\"id\":\"string\",\"policy\":\"PROMPT\"}],\"runtimePermission\":\"PROMPT\",\"startUrl\":\"string\",\"type\":\"APP_TYPE_UNSPECIFIED\",\"updateTime\":\"string\",\"versionCode\":0},\"location\":\"string\",\"locationObjectId\":\"string\",\"packageId\":\"string\",\"packageKind\":\"string\",\"packageManager\":\"string\",\"packageSubtitle\":\"string\",\"packageVersion\":\"string\",\"storedPackage\":{\"objectId\":\"string\",\"versions\":[{\"metadata\":{},\"name\":\"string\",\"rejectedReason\":\"string\",\"sha256sum\":\"string\",\"size\":0,\"status\":\"string\",\"version\":0}]},\"storedPackageObjectId\":\"string\"}]}'"
+            "source": "curl --request PUT \\\n  --url https://console.jumpcloud.com/api/v2/softwareapps/{id} \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --data '{\"displayName\":\"string\",\"id\":\"string\",\"settings\":[{\"allowUpdateDelay\":false,\"appleVpp\":{\"appConfiguration\":\"string\",\"assignedLicenses\":0,\"availableLicenses\":0,\"details\":{},\"isConfigEnabled\":true,\"supportedDeviceFamilies\":[\"IPAD\"],\"totalLicenses\":0},\"assetKind\":\"string\",\"assetSha256Size\":0,\"assetSha256Strings\":[\"string\"],\"autoUpdate\":false,\"commandLineArguments\":\"string\",\"description\":\"string\",\"desiredState\":\"string\",\"enterpriseObjectId\":\"string\",\"googleAndroid\":{\"androidFeatures\":[\"string\"],\"appPricing\":\"string\",\"appVersion\":\"string\",\"author\":\"string\",\"autoUpdateMode\":\"AUTO_UPDATE_DEFAULT\",\"category\":\"string\",\"contentRating\":\"string\",\"displayMode\":\"string\",\"distributionChannel\":\"string\",\"fullDescription\":\"string\",\"iconUrl\":\"string\",\"installType\":\"AVAILABLE\",\"managedConfigurationTemplateId\":\"string\",\"managedProperties\":true,\"minSdkVersion\":0,\"name\":\"string\",\"permissionGrants\":[{\"id\":\"string\",\"policy\":\"PROMPT\"}],\"runtimePermission\":\"PROMPT\",\"startUrl\":\"string\",\"type\":\"APP_TYPE_UNSPECIFIED\",\"updateTime\":\"string\",\"versionCode\":0},\"location\":\"string\",\"locationObjectId\":\"string\",\"packageId\":\"string\",\"packageKind\":\"string\",\"packageManager\":\"string\",\"packageSubtitle\":\"string\",\"packageVersion\":\"string\",\"storedPackage\":{\"objectId\":\"string\",\"versions\":[{\"metadata\":{},\"name\":\"string\",\"rejectedReason\":\"string\",\"sha256sum\":\"string\",\"size\":0,\"status\":\"string\",\"version\":0}]},\"storedPackageObjectId\":\"string\"}]}'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/v2/softwareapps/{id}\"\n\npayload = {\n    \"displayName\": \"string\",\n    \"id\": \"string\",\n    \"settings\": [\n        {\n            \"allowUpdateDelay\": False,\n            \"appleVpp\": {\n                \"appConfiguration\": \"string\",\n                \"assignedLicenses\": 0,\n                \"availableLicenses\": 0,\n                \"details\": {},\n                \"isConfigEnabled\": True,\n                \"supportedDeviceFamilies\": [\"IPAD\"],\n                \"totalLicenses\": 0\n            },\n            \"assetKind\": \"string\",\n            \"assetSha256Size\": 0,\n            \"assetSha256Strings\": [\"string\"],\n            \"autoUpdate\": False,\n            \"commandLineArguments\": \"string\",\n            \"description\": \"string\",\n            \"desiredState\": \"string\",\n            \"enterpriseObjectId\": \"string\",\n            \"googleAndroid\": {\n                \"appPricing\": \"string\",\n                \"appVersion\": \"string\",\n                \"author\": \"string\",\n                \"autoUpdateMode\": \"AUTO_UPDATE_DEFAULT\",\n                \"category\": \"string\",\n                \"contentRating\": \"string\",\n                \"displayMode\": \"string\",\n                \"distributionChannel\": \"string\",\n                \"fullDescription\": \"string\",\n                \"iconUrl\": \"string\",\n                \"installType\": \"AVAILABLE\",\n                \"managedConfigurationTemplateId\": \"string\",\n                \"managedProperties\": True,\n                \"minSdkVersion\": 0,\n                \"name\": \"string\",\n                \"permissionGrants\": [\n                    {\n                        \"id\": \"string\",\n                        \"policy\": \"PROMPT\"\n                    }\n                ],\n                \"runtimePermission\": \"PROMPT\",\n                \"startUrl\": \"string\",\n                \"type\": \"APP_TYPE_UNSPECIFIED\",\n                \"updateTime\": \"string\",\n                \"versionCode\": 0\n            },\n            \"location\": \"string\",\n            \"locationObjectId\": \"string\",\n            \"packageId\": \"string\",\n            \"packageKind\": \"string\",\n            \"packageManager\": \"string\",\n            \"packageSubtitle\": \"string\",\n            \"packageVersion\": \"string\",\n            \"storedPackage\": {\n                \"objectId\": \"string\",\n                \"versions\": [\n                    {\n                        \"metadata\": {},\n                        \"name\": \"string\",\n                        \"rejectedReason\": \"string\",\n                        \"sha256sum\": \"string\",\n                        \"size\": 0,\n                        \"status\": \"string\",\n                        \"version\": 0\n                    }\n                ]\n            },\n            \"storedPackageObjectId\": \"string\"\n        }\n    ]\n}\nheaders = {\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"PUT\", url, json=payload, headers=headers)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/v2/softwareapps/{id}\"\n\npayload = {\n    \"displayName\": \"string\",\n    \"id\": \"string\",\n    \"settings\": [\n        {\n            \"allowUpdateDelay\": False,\n            \"appleVpp\": {\n                \"appConfiguration\": \"string\",\n                \"assignedLicenses\": 0,\n                \"availableLicenses\": 0,\n                \"details\": {},\n                \"isConfigEnabled\": True,\n                \"supportedDeviceFamilies\": [\"IPAD\"],\n                \"totalLicenses\": 0\n            },\n            \"assetKind\": \"string\",\n            \"assetSha256Size\": 0,\n            \"assetSha256Strings\": [\"string\"],\n            \"autoUpdate\": False,\n            \"commandLineArguments\": \"string\",\n            \"description\": \"string\",\n            \"desiredState\": \"string\",\n            \"enterpriseObjectId\": \"string\",\n            \"googleAndroid\": {\n                \"androidFeatures\": [\"string\"],\n                \"appPricing\": \"string\",\n                \"appVersion\": \"string\",\n                \"author\": \"string\",\n                \"autoUpdateMode\": \"AUTO_UPDATE_DEFAULT\",\n                \"category\": \"string\",\n                \"contentRating\": \"string\",\n                \"displayMode\": \"string\",\n                \"distributionChannel\": \"string\",\n                \"fullDescription\": \"string\",\n                \"iconUrl\": \"string\",\n                \"installType\": \"AVAILABLE\",\n                \"managedConfigurationTemplateId\": \"string\",\n                \"managedProperties\": True,\n                \"minSdkVersion\": 0,\n                \"name\": \"string\",\n                \"permissionGrants\": [\n                    {\n                        \"id\": \"string\",\n                        \"policy\": \"PROMPT\"\n                    }\n                ],\n                \"runtimePermission\": \"PROMPT\",\n                \"startUrl\": \"string\",\n                \"type\": \"APP_TYPE_UNSPECIFIED\",\n                \"updateTime\": \"string\",\n                \"versionCode\": 0\n            },\n            \"location\": \"string\",\n            \"locationObjectId\": \"string\",\n            \"packageId\": \"string\",\n            \"packageKind\": \"string\",\n            \"packageManager\": \"string\",\n            \"packageSubtitle\": \"string\",\n            \"packageVersion\": \"string\",\n            \"storedPackage\": {\n                \"objectId\": \"string\",\n                \"versions\": [\n                    {\n                        \"metadata\": {},\n                        \"name\": \"string\",\n                        \"rejectedReason\": \"string\",\n                        \"sha256sum\": \"string\",\n                        \"size\": 0,\n                        \"status\": \"string\",\n                        \"version\": 0\n                    }\n                ]\n            },\n            \"storedPackageObjectId\": \"string\"\n        }\n    ]\n}\nheaders = {\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"PUT\", url, json=payload, headers=headers)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/v2/softwareapps/{id}' -Method PUT -Headers $headers -ContentType 'application/json' -Body '{\"displayName\":\"string\",\"id\":\"string\",\"settings\":[{\"allowUpdateDelay\":false,\"appleVpp\":{\"appConfiguration\":\"string\",\"assignedLicenses\":0,\"availableLicenses\":0,\"details\":{},\"isConfigEnabled\":true,\"supportedDeviceFamilies\":[\"IPAD\"],\"totalLicenses\":0},\"assetKind\":\"string\",\"assetSha256Size\":0,\"assetSha256Strings\":[\"string\"],\"autoUpdate\":false,\"commandLineArguments\":\"string\",\"description\":\"string\",\"desiredState\":\"string\",\"enterpriseObjectId\":\"string\",\"googleAndroid\":{\"appPricing\":\"string\",\"appVersion\":\"string\",\"author\":\"string\",\"autoUpdateMode\":\"AUTO_UPDATE_DEFAULT\",\"category\":\"string\",\"contentRating\":\"string\",\"displayMode\":\"string\",\"distributionChannel\":\"string\",\"fullDescription\":\"string\",\"iconUrl\":\"string\",\"installType\":\"AVAILABLE\",\"managedConfigurationTemplateId\":\"string\",\"managedProperties\":true,\"minSdkVersion\":0,\"name\":\"string\",\"permissionGrants\":[{\"id\":\"string\",\"policy\":\"PROMPT\"}],\"runtimePermission\":\"PROMPT\",\"startUrl\":\"string\",\"type\":\"APP_TYPE_UNSPECIFIED\",\"updateTime\":\"string\",\"versionCode\":0},\"location\":\"string\",\"locationObjectId\":\"string\",\"packageId\":\"string\",\"packageKind\":\"string\",\"packageManager\":\"string\",\"packageSubtitle\":\"string\",\"packageVersion\":\"string\",\"storedPackage\":{\"objectId\":\"string\",\"versions\":[{\"metadata\":{},\"name\":\"string\",\"rejectedReason\":\"string\",\"sha256sum\":\"string\",\"size\":0,\"status\":\"string\",\"version\":0}]},\"storedPackageObjectId\":\"string\"}]}'"
+            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/v2/softwareapps/{id}' -Method PUT -Headers $headers -ContentType 'application/json' -Body '{\"displayName\":\"string\",\"id\":\"string\",\"settings\":[{\"allowUpdateDelay\":false,\"appleVpp\":{\"appConfiguration\":\"string\",\"assignedLicenses\":0,\"availableLicenses\":0,\"details\":{},\"isConfigEnabled\":true,\"supportedDeviceFamilies\":[\"IPAD\"],\"totalLicenses\":0},\"assetKind\":\"string\",\"assetSha256Size\":0,\"assetSha256Strings\":[\"string\"],\"autoUpdate\":false,\"commandLineArguments\":\"string\",\"description\":\"string\",\"desiredState\":\"string\",\"enterpriseObjectId\":\"string\",\"googleAndroid\":{\"androidFeatures\":[\"string\"],\"appPricing\":\"string\",\"appVersion\":\"string\",\"author\":\"string\",\"autoUpdateMode\":\"AUTO_UPDATE_DEFAULT\",\"category\":\"string\",\"contentRating\":\"string\",\"displayMode\":\"string\",\"distributionChannel\":\"string\",\"fullDescription\":\"string\",\"iconUrl\":\"string\",\"installType\":\"AVAILABLE\",\"managedConfigurationTemplateId\":\"string\",\"managedProperties\":true,\"minSdkVersion\":0,\"name\":\"string\",\"permissionGrants\":[{\"id\":\"string\",\"policy\":\"PROMPT\"}],\"runtimePermission\":\"PROMPT\",\"startUrl\":\"string\",\"type\":\"APP_TYPE_UNSPECIFIED\",\"updateTime\":\"string\",\"versionCode\":0},\"location\":\"string\",\"locationObjectId\":\"string\",\"packageId\":\"string\",\"packageKind\":\"string\",\"packageManager\":\"string\",\"packageSubtitle\":\"string\",\"packageVersion\":\"string\",\"storedPackage\":{\"objectId\":\"string\",\"versions\":[{\"metadata\":{},\"name\":\"string\",\"rejectedReason\":\"string\",\"sha256sum\":\"string\",\"size\":0,\"status\":\"string\",\"version\":0}]},\"storedPackageObjectId\":\"string\"}]}'"
           }
         ]
       },
@@ -21838,6 +21891,7 @@
         "system-insights"
       ]
     },
+    "/systems/{systemObjectId}/aggregated-policy-stats": {},
     "/systems/{system_id}/associations": {
       "get": {
         "description": "This endpoint returns the _direct_ associations of a System.\n\nA direct association can be a non-homogeneous relationship between 2 different objects, for example Systems and Users.\n\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/systems/{System_ID}/associations?targets=user \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n\n```",
@@ -24431,6 +24485,20 @@
         {
           "in": "path",
           "name": "webauthn_credential_id",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "x-functionalities-tags": [
+        "user-login"
+      ]
+    },
+    "/validatedomain": {
+      "parameters": [
+        {
+          "description": "send a domain as query parameter . It accepts only one domain per API request.",
+          "in": "query",
+          "name": "domain",
           "required": true,
           "type": "string"
         }

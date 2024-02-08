@@ -17,33 +17,33 @@ curl -X POST https://console.jumpcloud.com/api/v2/activedirectories/{activedirec
   -H 'accept: application/json' \\
   -H 'content-type: application/json' \\
   -H 'x-api-key: {API_KEY}' \\
-  -d '{}'
+  -d '{ \"agent_type\":\"{SYNC}\" }'
 ```
 
 ## SYNTAX
 
 ### CreateExpanded (Default)
 ```
-New-JcSdkActiveDirectoryAgent -ActivedirectoryId <String> [-AdditionalProperties <Hashtable>] [-Confirm]
- [-WhatIf] [<CommonParameters>]
+New-JcSdkActiveDirectoryAgent -ActivedirectoryId <String> [-AgentType <String>] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### Create
 ```
-New-JcSdkActiveDirectoryAgent -ActivedirectoryId <String> -Body <Hashtable> [-Confirm] [-WhatIf]
+New-JcSdkActiveDirectoryAgent -ActivedirectoryId <String> -Body <IActiveDirectoryAgent> [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
 ### CreateViaIdentity
 ```
-New-JcSdkActiveDirectoryAgent -InputObject <IJumpCloudApiIdentity> -Body <Hashtable> [-Confirm] [-WhatIf]
- [<CommonParameters>]
+New-JcSdkActiveDirectoryAgent -InputObject <IJumpCloudApiIdentity> -Body <IActiveDirectoryAgent> [-Confirm]
+ [-WhatIf] [<CommonParameters>]
 ```
 
 ### CreateViaIdentityExpanded
 ```
-New-JcSdkActiveDirectoryAgent -InputObject <IJumpCloudApiIdentity> [-AdditionalProperties <Hashtable>]
- [-Confirm] [-WhatIf] [<CommonParameters>]
+New-JcSdkActiveDirectoryAgent -InputObject <IJumpCloudApiIdentity> [-AgentType <String>] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -56,7 +56,7 @@ curl -X POST https://console.jumpcloud.com/api/v2/activedirectories/{activedirec
   -H 'accept: application/json' \\
   -H 'content-type: application/json' \\
   -H 'x-api-key: {API_KEY}' \\
-  -d '{}'
+  -d '{ \"agent_type\":\"{SYNC}\" }'
 ```
 
 ## EXAMPLES
@@ -92,11 +92,11 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -AdditionalProperties
-Additional Parameters
+### -AgentType
+.
 
 ```yaml
-Type: System.Collections.Hashtable
+Type: System.String
 Parameter Sets: CreateExpanded, CreateViaIdentityExpanded
 Aliases:
 
@@ -109,9 +109,10 @@ Accept wildcard characters: False
 
 ### -Body
 Active Directory Agent
+To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
-Type: System.Collections.Hashtable
+Type: JumpCloud.SDK.V2.Models.IActiveDirectoryAgent
 Parameter Sets: Create, CreateViaIdentity
 Aliases:
 
@@ -174,9 +175,9 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
+### JumpCloud.SDK.V2.Models.IActiveDirectoryAgent
 
-### System.Collections.Hashtable
+### JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
 
 ## OUTPUTS
 
@@ -190,6 +191,9 @@ COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
+
+BODY <IActiveDirectoryAgent>: Active Directory Agent
+  - `[AgentType <String>]`: 
 
 INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter
   - `[AccountId <String>]`: 

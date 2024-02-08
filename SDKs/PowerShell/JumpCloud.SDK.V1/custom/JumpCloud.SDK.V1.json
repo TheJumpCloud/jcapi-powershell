@@ -1754,6 +1754,10 @@
       "title": "CommandsList",
       "type": "object"
     },
+    "externallymanagedpropertyinfo": {
+      "description": "The externally_managed property has been deprecated. Whenever a user has their externally_managed field modified their restrictedFields property gets populated with the appropriate value, even if it is already set to a value an administrator manually set.",
+      "type": "boolean"
+    },
     "fde": {
       "description": "Indicates if the Full Disk Encryption is active in the system",
       "properties": {
@@ -1820,6 +1824,9 @@
     "organization": {
       "properties": {
         "_id": {
+          "type": "string"
+        },
+        "accessRestriction": {
           "type": "string"
         },
         "accountsReceivable": {
@@ -2949,6 +2956,23 @@
           },
           "type": "object"
         },
+        "policyStats": {
+          "properties": {
+            "failed": {
+              "type": "integer"
+            },
+            "pending": {
+              "type": "integer"
+            },
+            "success": {
+              "type": "integer"
+            },
+            "total": {
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        },
         "provisionMetadata": {
           "properties": {
             "provisioner": {
@@ -3236,7 +3260,7 @@
           "type": "string"
         },
         "externally_managed": {
-          "type": "boolean"
+          "$ref": "#/definitions/externallymanagedpropertyinfo"
         },
         "firstname": {
           "maxLength": 1024,
@@ -3458,7 +3482,7 @@
           "type": "string"
         },
         "externally_managed": {
-          "type": "boolean"
+          "$ref": "#/definitions/externallymanagedpropertyinfo"
         },
         "firstname": {
           "type": "string"
@@ -3715,7 +3739,7 @@
           "type": "string"
         },
         "externally_managed": {
-          "type": "boolean"
+          "$ref": "#/definitions/externallymanagedpropertyinfo"
         },
         "firstname": {
           "maxLength": 1024,
@@ -4673,14 +4697,11 @@
     },
     "/commandresults": {
       "get": {
-        "description": "This endpoint returns all command results.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/commandresults \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key:{API_KEY}'\n  ```",
+        "description": "This endpoint returns all command results.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/commandresults \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key:{API_KEY}'\n  ```\n\nTo filter command results use the [**Search API**](#tag/Search/operation/search_commandresults_post)",
         "operationId": "CommandResult_List",
         "parameters": [
           {
             "$ref": "#/parameters/trait:fields:fields"
-          },
-          {
-            "$ref": "#/parameters/trait:filter:filter"
           },
           {
             "$ref": "#/parameters/trait:limit:limit"
@@ -4709,15 +4730,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request GET \\\n  --url 'https://console.jumpcloud.com/api/commandresults?fields=&filter=SOME_STRING_VALUE&limit=10&skip=0&sort=' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE'"
+            "source": "curl --request GET \\\n  --url 'https://console.jumpcloud.com/api/commandresults?fields=&limit=10&skip=0&sort=' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/commandresults\"\n\nquerystring = {\"fields\":\"\",\"filter\":\"SOME_STRING_VALUE\",\"limit\":\"10\",\"skip\":\"0\",\"sort\":\"\"}\n\nheaders = {\"x-api-key\": \"REPLACE_KEY_VALUE\"}\n\nresponse = requests.request(\"GET\", url, headers=headers, params=querystring)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/commandresults\"\n\nquerystring = {\"fields\":\"\",\"limit\":\"10\",\"skip\":\"0\",\"sort\":\"\"}\n\nheaders = {\"x-api-key\": \"REPLACE_KEY_VALUE\"}\n\nresponse = requests.request(\"GET\", url, headers=headers, params=querystring)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/commandresults?fields=&filter=SOME_STRING_VALUE&limit=10&skip=0&sort=' -Method GET -Headers $headers"
+            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/commandresults?fields=&limit=10&skip=0&sort=' -Method GET -Headers $headers"
           }
         ]
       }

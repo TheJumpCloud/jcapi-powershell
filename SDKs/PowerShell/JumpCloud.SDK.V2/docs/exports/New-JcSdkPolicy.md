@@ -26,13 +26,13 @@ curl -X POST https://console.jumpcloud.com/api/v2/policies \\
 
 ### CreateExpanded (Default)
 ```
-New-JcSdkPolicy -Name <String> [-Notes <String>] [-TemplateId <String>] [-Values <IPolicyValue[]>] [-Confirm]
+New-JcSdkPolicy -Name <String> -TemplateId <String> [-Notes <String>] [-Values <IPolicyValue[]>] [-Confirm]
  [-WhatIf] [<CommonParameters>]
 ```
 
 ### Create
 ```
-New-JcSdkPolicy -Body <IPolicyRequest> [-Confirm] [-WhatIf] [<CommonParameters>]
+New-JcSdkPolicy -Body <IPolicyCreateRequest> [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -69,11 +69,11 @@ curl -X POST https://console.jumpcloud.com/api/v2/policies \\
 ## PARAMETERS
 
 ### -Body
-An instance of a policy template.
+A request to create an instance of a policy template.
 To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IPolicyRequest
+Type: JumpCloud.SDK.V2.Models.IPolicyCreateRequest
 Parameter Sets: Create
 Aliases:
 
@@ -115,14 +115,14 @@ Accept wildcard characters: False
 ```
 
 ### -TemplateId
-ObjectId uniquely identifying a Policy instance; only allowed on POST requests.
+ObjectId uniquely identifying a Policy instance.
 
 ```yaml
 Type: System.String
 Parameter Sets: CreateExpanded
 Aliases:
 
-Required: False
+Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -181,7 +181,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### JumpCloud.SDK.V2.Models.IPolicyRequest
+### JumpCloud.SDK.V2.Models.IPolicyCreateRequest
 
 ## OUTPUTS
 
@@ -196,10 +196,10 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <IPolicyRequest>: An instance of a policy template.
+BODY <IPolicyCreateRequest>: A request to create an instance of a policy template.
   - `Name <String>`: The description for this specific Policy.
+  - `TemplateId <String>`: ObjectId uniquely identifying a Policy instance.
   - `[Notes <String>]`: The notes for this specific Policy.
-  - `[TemplateId <String>]`: ObjectId uniquely identifying a Policy instance; only allowed on POST requests.
   - `[Values <IPolicyValue[]>]`: 
     - `[ConfigFieldId <String>]`: The ObjectId of the corresponding Policy Template configuration field.
     - `[Sensitive <Boolean?>]`: Defines if the value is sensitive or not.

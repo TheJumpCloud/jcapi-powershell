@@ -68,7 +68,8 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     # If omitted, the default list of fields will be returned.
     ${Fields}, 
 
-    [Parameter()]
+    [Parameter(ParameterSetName='Get')]
+    [Parameter(ParameterSetName='GetViaIdentity')]
     [AllowEmptyCollection()]
     [JumpCloud.SDK.V1.Category('Query')]
     [System.String[]]

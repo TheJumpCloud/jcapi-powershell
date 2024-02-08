@@ -212,6 +212,7 @@ BODY <ISoftwareApp>: Software Application Package
     - `[GoogleAndroidContentRating <String>]`: The content rating for this app.
     - `[GoogleAndroidDisplayMode <String>]`: The display mode of the web app.
     - `[GoogleAndroidDistributionChannel <String>]`: How and to whom the package is made available.
+    - `[GoogleAndroidFeatures <String[]>]`: The array of android features for the app.
     - `[GoogleAndroidFullDescription <String>]`: Full app description, if available.
     - `[GoogleAndroidIconUrl <String>]`: A link to an image that can be used as an icon for the app.
     - `[GoogleAndroidInstallType <String>]`: The type of installation to perform for an app.
@@ -272,6 +273,7 @@ SETTINGS <ISoftwareAppSettings[]>: .
   - `[GoogleAndroidContentRating <String>]`: The content rating for this app.
   - `[GoogleAndroidDisplayMode <String>]`: The display mode of the web app.
   - `[GoogleAndroidDistributionChannel <String>]`: How and to whom the package is made available.
+  - `[GoogleAndroidFeatures <String[]>]`: The array of android features for the app.
   - `[GoogleAndroidFullDescription <String>]`: Full app description, if available.
   - `[GoogleAndroidIconUrl <String>]`: A link to an image that can be used as an icon for the app.
   - `[GoogleAndroidInstallType <String>]`: The type of installation to perform for an app.
