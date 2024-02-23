@@ -483,6 +483,7 @@ Try {
         If (-not [System.String]::IsNullOrEmpty(`$Result)) {
             `$Results += `$Result;
         }
+    }
 "@
                     }
                     # Build "End" block
