@@ -422,9 +422,11 @@ Try {
                 `$Result.results
             } Else {
                 `$Result
-            } If (-not [System.String]::IsNullOrEmpty(`$Result)) {
+            }
+            If (-not [System.String]::IsNullOrEmpty(`$Result)) {
                 `$Results += `$Result;
             }
+        }
 "@
                         } elseif ($tokenizedPaginate -eq $true){
                         $ProcessContent += @"
