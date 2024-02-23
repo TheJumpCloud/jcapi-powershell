@@ -189,17 +189,18 @@ Try {
         If (`$Paginate -and `$PSCmdlet.ParameterSetName -in ($ParameterSetLimitSkip)) {
             `$PSBoundParameters.Remove('Paginate') | Out-Null
             Do {
-                `$maxRetries = 3
+                `$maxRetries = 4
                 `$resultCounter = 0
                 do {
                     `$resultCounter++
                     `$Result = $ResultsLogic
                     If (`$JCHttpResponse.Result.StatusCode -eq 503) {
                         Write-Debug ("StatusCode: " + "`$JCHttpResponse.Result.StatusCode")
-                        Start-Sleep -Seconds (`$resultCounter * 5)
+                        Write-Warning ("503: Service Unavailable - retrying in " + (`$resultCounter * 5) + " seconds")
                     } else {
                         break
                     }
+                    Start-Sleep -Seconds (`$resultCounter * 5)
                 } while (`$resultCounter -lt `$maxRetries)
                 If (`$JCHttpResponse.Result.Headers.Contains('X-Search_after')) {
                     If (-not [System.String]::IsNullOrEmpty(`$Result)) {
@@ -230,17 +231,18 @@ Try {
             While (`$XResultCount -eq `$XLimit -and -not [System.String]::IsNullOrEmpty(`$Result))
         } Else {
             `$PSBoundParameters.Remove('Paginate') | Out-Null
-            `$maxRetries = 3
+            `$maxRetries = 4
             `$resultCounter = 0
             do {
                 `$resultCounter++
                 `$Result = $ResultsLogic
                 If (`$JCHttpResponse.Result.StatusCode -eq 503) {
                     Write-Debug ("StatusCode: " + "`$JCHttpResponse.Result.StatusCode")
-                    Start-Sleep -Seconds (`$resultCounter * 5)
+                    Write-Warning ("503: Service Unavailable - retrying in " + (`$resultCounter * 5) + " seconds")
                 } else {
                     break
                 }
+                Start-Sleep -Seconds (`$resultCounter * 5)
             } while (`$resultCounter -lt `$maxRetries)
             Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
             Write-Debug ('HttpRequestContent: ' + `$JCHttpRequestContent.Result);
@@ -253,17 +255,18 @@ Try {
 "@
                     } Else {
                         $ProcessContent += @"
-        `$maxRetries = 3
+        `$maxRetries = 4
         `$resultCounter = 0
         do {
             `$resultCounter++
             `$Result = $ResultsLogic
             If (`$JCHttpResponse.Result.StatusCode -eq 503) {
                 Write-Debug ("StatusCode: " + "`$JCHttpResponse.Result.StatusCode")
-                Start-Sleep -Seconds (`$resultCounter * 5)
+                Write-Warning ("503: Service Unavailable - retrying in " + (`$resultCounter * 5) + " seconds")
             } else {
                 break
             }
+            Start-Sleep -Seconds (`$resultCounter * 5)
         } while (`$resultCounter -lt `$maxRetries)
         Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
         Write-Debug ('HttpRequestContent: ' + `$JCHttpRequestContent.Result);
@@ -335,17 +338,18 @@ Try {
 "@
                         }
                         $ProcessContent += @"
-                `$maxRetries = 3
+                `$maxRetries = 4
                 `$resultCounter = 0
                 do {
                     `$resultCounter++
                     `$Result = $ResultsLogic
                     If (`$JCHttpResponse.Result.StatusCode -eq 503) {
                         Write-Debug ("StatusCode: " + "`$JCHttpResponse.Result.StatusCode")
-                        Start-Sleep -Seconds (`$resultCounter * 5)
+                        Write-Warning ("503: Service Unavailable - retrying in " + (`$resultCounter * 5) + " seconds")
                     } else {
                         break
                     }
+                    Start-Sleep -Seconds (`$resultCounter * 5)
                 } while (`$resultCounter -lt `$maxRetries)
                 Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
                 Write-Debug ('HttpRequestContent: ' + `$JCHttpRequestContent.Result);
@@ -402,17 +406,18 @@ Try {
                         $ProcessContent += @"
         } Else {
             `$PSBoundParameters.Remove('Paginate') | Out-Null
-            `$maxRetries = 3
+            `$maxRetries = 4
             `$resultCounter = 0
             do {
                 `$resultCounter++
                 `$Result = $ResultsLogic
                 If (`$JCHttpResponse.Result.StatusCode -eq 503) {
                     Write-Debug ("StatusCode: " + "`$JCHttpResponse.Result.StatusCode")
-                    Start-Sleep -Seconds (`$resultCounter * 5)
+                    Write-Warning ("503: Service Unavailable - retrying in " + (`$resultCounter * 5) + " seconds")
                 } else {
                     break
                 }
+                Start-Sleep -Seconds (`$resultCounter * 5)
             } while (`$resultCounter -lt `$maxRetries)
             Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
             Write-Debug ('HttpRequestContent: ' + `$JCHttpRequestContent.Result);
@@ -432,17 +437,18 @@ Try {
                         $ProcessContent += @"
         } Else {
             `$PSBoundParameters.Remove('Paginate') | Out-Null
-            `$maxRetries = 3
+            `$maxRetries = 4
             `$resultCounter = 0
             do {
                 `$resultCounter++
                 `$Result = $ResultsLogic
                 If (`$JCHttpResponse.Result.StatusCode -eq 503) {
                     Write-Debug ("StatusCode: " + "`$JCHttpResponse.Result.StatusCode")
-                    Start-Sleep -Seconds (`$resultCounter * 5)
+                    Write-Warning ("503: Service Unavailable - retrying in " + (`$resultCounter * 5) + " seconds")
                 } else {
                     break
                 }
+                Start-Sleep -Seconds (`$resultCounter * 5)
             } while (`$resultCounter -lt `$maxRetries)
             Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
             Write-Debug ('HttpRequestContent: ' + `$JCHttpRequestContent.Result);
@@ -461,17 +467,18 @@ Try {
                         }
                     } Else {
                         $ProcessContent += @"
-        `$maxRetries = 3
+        `$maxRetries = 4
         `$resultCounter = 0
         do {
             `$resultCounter++
             `$Result = $ResultsLogic
             If (`$JCHttpResponse.Result.StatusCode -eq 503) {
                 Write-Debug ("StatusCode: " + "`$JCHttpResponse.Result.StatusCode")
-                Start-Sleep -Seconds (`$resultCounter * 5)
+                Write-Warning ("503: Service Unavailable - retrying in " + (`$resultCounter * 5) + " seconds")
             } else {
                 break
             }
+            Start-Sleep -Seconds (`$resultCounter * 5)
         } while (`$resultCounter -lt `$maxRetries)
         Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
         Write-Debug ('HttpRequestContent: ' + `$JCHttpRequestContent.Result);
@@ -485,7 +492,6 @@ Try {
         If (-not [System.String]::IsNullOrEmpty(`$Result)) {
             `$Results += `$Result;
         }
-    }
 "@
                     }
                     # Build "End" block
@@ -528,17 +534,18 @@ Try {
 "@
                 }
                 $ProcessContent += @"
-        `$maxRetries = 3
+        `$maxRetries = 4
         `$resultCounter = 0
         do {
             `$resultCounter++
             `$Result = $ResultsLogic
             If (`$JCHttpResponse.Result.StatusCode -eq 503) {
                 Write-Debug ("StatusCode: " + "`$JCHttpResponse.Result.StatusCode")
-                Start-Sleep -Seconds (`$resultCounter * 5)
+                Write-Warning ("503: Service Unavailable - retrying in " + (`$resultCounter * 5) + " seconds")
             } else {
                 break
             }
+            Start-Sleep -Seconds (`$resultCounter * 5)
         } while (`$resultCounter -lt `$maxRetries)
 "@
                 # Build "End" block
