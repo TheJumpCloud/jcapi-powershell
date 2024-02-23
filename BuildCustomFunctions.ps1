@@ -168,285 +168,303 @@ Try {
                 # Build script content
                 If ($ModuleName -eq 'JumpCloud.SDK.DirectoryInsights') {
                     # Build "Begin" block
-                    $BeginContent += "$($IndentChar)$($IndentChar)`$Results = @()
-$($IndentChar)$($IndentChar)`$PSBoundParameters.Add('HttpPipelineAppend', {
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)param(`$req, `$callback, `$next)
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)# call the next step in the Pipeline
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$ResponseTask = `$next.SendAsync(`$req, `$callback)
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$global:JCHttpRequest = `$req
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$global:JCHttpRequestContent = If (-not [System.String]::IsNullOrEmpty(`$req.Content)) { `$req.Content.ReadAsStringAsync() }
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$global:JCHttpResponse = `$ResponseTask
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)# `$global:JCHttpResponseContent = If (-not [System.String]::IsNullOrEmpty(`$ResponseTask.Result.Content)) { `$ResponseTask.Result.Content.ReadAsStringAsync() }
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Return `$ResponseTask
-$($IndentChar)$($IndentChar)$($IndentChar)}
-$($IndentChar)$($IndentChar))"
+                    $BeginContent += @"
+        `$Results = @()
+        `$PSBoundParameters.Add('HttpPipelineAppend', {
+                param(`$req, `$callback, `$next)
+                # call the next step in the Pipeline
+                `$ResponseTask = `$next.SendAsync(`$req, `$callback)
+                `$global:JCHttpRequest = `$req
+                `$global:JCHttpRequestContent = If (-not [System.String]::IsNullOrEmpty(`$req.Content)) { `$req.Content.ReadAsStringAsync() }
+                `$global:JCHttpResponse = `$ResponseTask
+                # `$global:JCHttpResponseContent = If (-not [System.String]::IsNullOrEmpty(`$ResponseTask.Result.Content)) { `$ResponseTask.Result.Content.ReadAsStringAsync() }
+                Return `$ResponseTask
+            }
+        )
+"@
                     # Build "Process" block
                     # Add paginate logic if function contains Limit and Skip parameters
                     If (-not [System.String]::IsNullOrEmpty($ContainsSkip) -or -not [System.String]::IsNullOrEmpty($ContainsLimit)) {
-                        $ProcessContent += "$($IndentChar)$($IndentChar)If (`$Paginate -and `$PSCmdlet.ParameterSetName -in ($ParameterSetLimitSkip))
-$($IndentChar)$($IndentChar){
-$($IndentChar)$($IndentChar)$($IndentChar)`$PSBoundParameters.Remove('Paginate') | Out-Null
-$($IndentChar)$($IndentChar)$($IndentChar)Do
-$($IndentChar)$($IndentChar)$($IndentChar){
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Result = $ResultsLogic
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)If (`$JCHttpResponse.Result.Headers.Contains('X-Search_after'))
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar){
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)If (-not [System.String]::IsNullOrEmpty(`$Result))
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar){
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$XResultSearchAfter = (`$JCHttpResponse.Result.Headers.GetValues('X-Search_after') | ConvertFrom-Json);
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)If ([System.String]::IsNullOrEmpty(`$PSBoundParameters.SearchAfter))
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar){
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)If ([System.String]::IsNullOrEmpty(`$PSBoundParameters.Body))
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar){
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$PSBoundParameters.Add('SearchAfter', `$XResultSearchAfter)
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)}
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Else
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar){
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$PSBoundParameters.Body.SearchAfter = `$XResultSearchAfter
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)}
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)}
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Else
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar){
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$PSBoundParameters.SearchAfter = `$XResultSearchAfter
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)}
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$XResultCount = `$JCHttpResponse.Result.Headers.GetValues('X-Result-Count')
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$XLimit = `$JCHttpResponse.Result.Headers.GetValues('X-Limit')
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Results += `$Result
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug (""ResultCount: `$(`$XResultCount); Limit: `$(`$XLimit); XResultSearchAfter: `$(`$XResultSearchAfter); "");
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug ('HttpRequestContent: ' + `$JCHttpRequestContent.Result);
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug ('HttpResponse: ' + `$JCHttpResponse.Result);
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)# Write-Debug ('HttpResponseContent: ' + `$JCHttpResponseContent.Result);
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)}
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)}
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Else
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar){
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Results += `$Result
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Break
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)}
-$($IndentChar)$($IndentChar)$($IndentChar)}
-$($IndentChar)$($IndentChar)$($IndentChar)While (`$XResultCount -eq `$XLimit -and -not [System.String]::IsNullOrEmpty(`$Result))
-$($IndentChar)$($IndentChar)}
-$($IndentChar)$($IndentChar)Else
-$($IndentChar)$($IndentChar){
-$($IndentChar)$($IndentChar)$($IndentChar)`$PSBoundParameters.Remove('Paginate') | Out-Null
-$($IndentChar)$($IndentChar)$($IndentChar)`$Result = $ResultsLogic
-$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
-$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug ('HttpRequestContent: ' + `$JCHttpRequestContent.Result);
-$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug ('HttpResponse: ' + `$JCHttpResponse.Result);
-$($IndentChar)$($IndentChar)$($IndentChar)# Write-Debug ('HttpResponseContent: ' + `$JCHttpResponseContent.Result);
-$($IndentChar)$($IndentChar)$($IndentChar)If (-not [System.String]::IsNullOrEmpty(`$Result))
-$($IndentChar)$($IndentChar)$($IndentChar){
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Results += `$Result
-$($IndentChar)$($IndentChar)$($IndentChar)}
-$($IndentChar)$($IndentChar)}"
+                        $ProcessContent += @"
+        If (`$Paginate -and `$PSCmdlet.ParameterSetName -in ($ParameterSetLimitSkip)) {
+            `$PSBoundParameters.Remove('Paginate') | Out-Null
+            Do {
+                `$Result = $ResultsLogic
+                If (`$JCHttpResponse.Result.Headers.Contains('X-Search_after')) {
+                    If (-not [System.String]::IsNullOrEmpty(`$Result)) {
+                        `$XResultSearchAfter = (`$JCHttpResponse.Result.Headers.GetValues('X-Search_after') | ConvertFrom-Json);
+                        If ([System.String]::IsNullOrEmpty(`$PSBoundParameters.SearchAfter)) {
+                            If ([System.String]::IsNullOrEmpty(`$PSBoundParameters.Body)) {
+                                `$PSBoundParameters.Add('SearchAfter', `$XResultSearchAfter)
+                            } Else {
+                                `$PSBoundParameters.Body.SearchAfter = `$XResultSearchAfter
+                            }
+                        } Else {
+                            `$PSBoundParameters.SearchAfter = `$XResultSearchAfter
+                        }
+                        `$XResultCount = `$JCHttpResponse.Result.Headers.GetValues('X-Result-Count')
+                        `$XLimit = `$JCHttpResponse.Result.Headers.GetValues('X-Limit')
+                        `$Results += `$Result
+                        Write-Debug (""ResultCount: `$(`$XResultCount); Limit: `$(`$XLimit); XResultSearchAfter: `$(`$XResultSearchAfter); "");
+                        Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
+                        Write-Debug ('HttpRequestContent: ' + `$JCHttpRequestContent.Result);
+                        Write-Debug ('HttpResponse: ' + `$JCHttpResponse.Result);
+                        # Write-Debug ('HttpResponseContent: ' + `$JCHttpResponseContent.Result);
+                    }
+                } Else {
+                    `$Results += `$Result
+                    Break
+                }
+            }
+            While (`$XResultCount -eq `$XLimit -and -not [System.String]::IsNullOrEmpty(`$Result))
+        } Else {
+            `$PSBoundParameters.Remove('Paginate') | Out-Null
+            `$Result = $ResultsLogic
+            Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
+            Write-Debug ('HttpRequestContent: ' + `$JCHttpRequestContent.Result);
+            Write-Debug ('HttpResponse: ' + `$JCHttpResponse.Result);
+            # Write-Debug ('HttpResponseContent: ' + `$JCHttpResponseContent.Result);
+            If (-not [System.String]::IsNullOrEmpty(`$Result)) {
+                `$Results += `$Result
+            }
+        }
+"@
                     } Else {
-                        $ProcessContent += "$($IndentChar)$($IndentChar)`$Result = $ResultsLogic
-$($IndentChar)$($IndentChar)Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
-$($IndentChar)$($IndentChar)Write-Debug ('HttpRequestContent: ' + `$JCHttpRequestContent.Result);
-$($IndentChar)$($IndentChar)Write-Debug ('HttpResponse: ' + `$JCHttpResponse.Result);
-$($IndentChar)$($IndentChar)# Write-Debug ('HttpResponseContent: ' + `$JCHttpResponseContent.Result);
-$($IndentChar)$($IndentChar)If (-not [System.String]::IsNullOrEmpty(`$Result))
-$($IndentChar)$($IndentChar){
-$($IndentChar)$($IndentChar)$($IndentChar)`$Results += `$Result
-$($IndentChar)$($IndentChar)}"
+                        $ProcessContent += @"
+        `$Result = $ResultsLogic
+        Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
+        Write-Debug ('HttpRequestContent: ' + `$JCHttpRequestContent.Result);
+        Write-Debug ('HttpResponse: ' + `$JCHttpResponse.Result);
+        # Write-Debug ('HttpResponseContent: ' + `$JCHttpResponseContent.Result);
+        If (-not [System.String]::IsNullOrEmpty(`$Result))
+        {
+            `$Results += `$Result
+        }
+"@
                     }
                     # Build "End" block
-                    $EndContent += "$($IndentChar)$($IndentChar)# Clean up global variables
-$($IndentChar)$($IndentChar)`$GlobalVars = @('JCHttpRequest', 'JCHttpRequestContent', 'JCHttpResponse', 'JCHttpResponseContent')
-$($IndentChar)$($IndentChar)`$GlobalVars | ForEach-Object {
-$($IndentChar)$($IndentChar)$($IndentChar)If ((Get-Variable -Scope:('Global')).Where( { `$_.Name -eq `$_ })) { Remove-Variable -Name:(`$_) -Scope:('Global') }
-$($IndentChar)$($IndentChar)}
-$($IndentChar)$($IndentChar)Return `$Results"
+                    $EndContent += @"
+        # Clean up global variables
+        `$GlobalVars = @('JCHttpRequest', 'JCHttpRequestContent', 'JCHttpResponse', 'JCHttpResponseContent')
+        `$GlobalVars | ForEach-Object {
+            If ((Get-Variable -Scope:('Global')).Where( { `$_.Name -eq `$_ })) { Remove-Variable -Name:(`$_) -Scope:('Global') }
+        }
+        Return `$Results
+"@
                 } ElseIf ($ModuleName -In ('JumpCloud.SDK.V1', 'JumpCloud.SDK.V2')) {
                     # Build "Begin" block
-                    $BeginContent += "$($IndentChar)$($IndentChar)`$Results = @()
-$($IndentChar)$($IndentChar)`$PSBoundParameters.Add('HttpPipelineAppend', {
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)param(`$req, `$callback, `$next)
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)# call the next step in the Pipeline
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$ResponseTask = `$next.SendAsync(`$req, `$callback)
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$global:JCHttpRequest = `$req
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$global:JCHttpRequestContent = If (-not [System.String]::IsNullOrEmpty(`$req.Content)) { `$req.Content.ReadAsStringAsync() }
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$global:JCHttpResponse = `$ResponseTask
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)# `$global:JCHttpResponseContent = If (-not [System.String]::IsNullOrEmpty(`$ResponseTask.Result.Content)) { `$ResponseTask.Result.Content.ReadAsStringAsync() }
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Return `$ResponseTask
-$($IndentChar)$($IndentChar)$($IndentChar)}
-$($IndentChar)$($IndentChar))"
+                    $BeginContent += @"
+        `$Results = @()
+        `$PSBoundParameters.Add('HttpPipelineAppend', {
+                param(`$req, `$callback, `$next)
+                # call the next step in the Pipeline
+                `$ResponseTask = `$next.SendAsync(`$req, `$callback)
+                `$global:JCHttpRequest = `$req
+                `$global:JCHttpRequestContent = If (-not [System.String]::IsNullOrEmpty(`$req.Content)) { `$req.Content.ReadAsStringAsync() }
+                `$global:JCHttpResponse = `$ResponseTask
+                # `$global:JCHttpResponseContent = If (-not [System.String]::IsNullOrEmpty(`$ResponseTask.Result.Content)) { `$ResponseTask.Result.Content.ReadAsStringAsync() }
+                Return `$ResponseTask
+            }
+        )
+"@
                     # Build "Process" block
                     # Add paginate logic if function contains Limit and Skip parameters
                     If (-not [System.String]::IsNullOrEmpty($ContainsSkip) -or -not [System.String]::IsNullOrEmpty($ContainsLimit)) {
-                        $ProcessContent += "$($IndentChar)$($IndentChar)If (`$Paginate -and `$PSCmdlet.ParameterSetName -in ($ParameterSetLimitSkip))
-$($IndentChar)$($IndentChar){
-$($IndentChar)$($IndentChar)$($IndentChar)`$PSBoundParameters.Remove('Paginate') | Out-Null"
+                        $ProcessContent += @"
+        If (`$Paginate -and `$PSCmdlet.ParameterSetName -in ($ParameterSetLimitSkip)) {
+            `$PSBoundParameters.Remove('Paginate') | Out-Null
+"@
                         If (-not [System.String]::IsNullOrEmpty($ContainsLimit)) {
-                            $ProcessContent += "$($IndentChar)$($IndentChar)$($IndentChar)If ([System.String]::IsNullOrEmpty(`$PSBoundParameters.$limit))
-$($IndentChar)$($IndentChar)$($IndentChar){
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$PSBoundParameters.Add('$limit', 100)
-$($IndentChar)$($IndentChar)$($IndentChar)}"
+                            $ProcessContent += @"
+            If ([System.String]::IsNullOrEmpty(`$PSBoundParameters.$limit)) {
+                `$PSBoundParameters.Add('$limit', 100)
+            }
+"@
                         }
                         If ( (-not [System.String]::IsNullOrEmpty($ContainsSkip)) -and ($tokenizedPaginate -eq $false) ) {
-                            $ProcessContent += "$($IndentChar)$($IndentChar)$($IndentChar)If ([System.String]::IsNullOrEmpty(`$PSBoundParameters.$skip))
-$($IndentChar)$($IndentChar)$($IndentChar){
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$PSBoundParameters.Add('$skip', 0)
-$($IndentChar)$($IndentChar)$($IndentChar)}"
+                            $ProcessContent += @"
+            If ([System.String]::IsNullOrEmpty(`$PSBoundParameters.$skip)) {
+                `$PSBoundParameters.Add('$skip', 0)
+            }
+"@
                         }
-                        $ProcessContent += "$($IndentChar)$($IndentChar)$($IndentChar)Do
-$($IndentChar)$($IndentChar)$($IndentChar){"
+                        $ProcessContent += @"
+            Do {
+"@
                         If (-not [System.String]::IsNullOrEmpty($ContainsLimit)) {
-                            $ProcessContent += "$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug (`"Limit: `$(`$PSBoundParameters.$limit); `");"
+                            $ProcessContent += @"
+                Write-Debug (`"Limit: `$(`$PSBoundParameters.$limit); `");
+"@
                         }
                         If (-not [System.String]::IsNullOrEmpty($ContainsSkip)) {
-                            $ProcessContent += "$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug (`"Skip: `$(`$PSBoundParameters.$skip); `");"
+                            $ProcessContent += @"
+                Write-Debug (`"Skip: `$(`$PSBoundParameters.$skip); `");
+"@
                         }
-                        $ProcessContent += "$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Result = $ResultsLogic
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug ('HttpRequestContent: ' + `$JCHttpRequestContent.Result);
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug ('HttpResponse: ' + `$JCHttpResponse.Result);
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)# Write-Debug ('HttpResponseContent: ' + `$JCHttpResponseContent.Result);
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Result = If ('Results' -in `$Result.PSObject.Properties.Name)
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar){
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Result.results
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)}
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Else
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar){
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Result
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)}
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)If (-not [System.String]::IsNullOrEmpty(`$Result))
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar){"
+                        $ProcessContent += @"
+                `$Result = $ResultsLogic
+                Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
+                Write-Debug ('HttpRequestContent: ' + `$JCHttpRequestContent.Result);
+                Write-Debug ('HttpResponse: ' + `$JCHttpResponse.Result);
+                # Write-Debug ('HttpResponseContent: ' + `$JCHttpResponseContent.Result);
+                `$Result = If ('Results' -in `$Result.PSObject.Properties.Name) {
+                    `$Result.results
+                } Else {
+                    `$Result
+                }
+                If (-not [System.String]::IsNullOrEmpty(`$Result))
+                {
+"@
                         If ((-not [System.String]::IsNullOrEmpty($ContainsLimit) -or -not [System.String]::IsNullOrEmpty($ContainsSkip)) -And ($tokenizedPaginate -eq $false)) {
-                            $ProcessContent += "$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$ResultCount = (`$Result | Measure-Object).Count;"
-                            $ProcessContent += "$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Results += `$Result;"
+                            $ProcessContent += @"
+                    `$ResultCount = (`$Result | Measure-Object).Count;
+"@
+                            $ProcessContent += @"
+                    `$Results += `$Result;
+"@
                         }
                         If ((-not [System.String]::IsNullOrEmpty($ContainsLimit) -or -not [System.String]::IsNullOrEmpty($ContainsSkip)) -And ($tokenizedPaginate -eq $true)) {
-                            $ProcessContent += "$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$ResultCount = (`$Result.users | Measure-Object).Count;"
-                            $ProcessContent += "$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Results += `$Result.users;"
+                            $ProcessContent += @"
+                    `$ResultCount = (`$Result.users | Measure-Object).Count;
+"@
+                            $ProcessContent += @"
+                    `$Results += `$Result.users;
+"@
                         }
                         If ((-not [System.String]::IsNullOrEmpty($ContainsSkip)) -And ($tokenizedPaginate -eq $false)) {
-                            $ProcessContent += "$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$PSBoundParameters.$skip += $skipToken"
+                            $ProcessContent += @"
+                    `$PSBoundParameters.$skip += $skipToken
+"@
                         }
                         If ((-not [System.String]::IsNullOrEmpty($ContainsSkip)) -And ($tokenizedPaginate -eq $true)) {
-                            $ProcessContent += "$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$PSBoundParameters.$skip = $skipToken"
+                            $ProcessContent += @"
+                    `$PSBoundParameters.$skip = $skipToken
+"@
                         }
-                        $ProcessContent += "$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)}
-$($IndentChar)$($IndentChar)$($IndentChar)}"
+                        $ProcessContent += @"
+                }
+        }
+"@
                         $ProcessContent += If (-not [System.String]::IsNullOrEmpty($ContainsLimit)) {
-                            "$($IndentChar)$($IndentChar)$($IndentChar)While (`$ResultCount -eq `$PSBoundParameters.$limit -and -not [System.String]::IsNullOrEmpty(`$Result))"
+                            @"
+            While (`$ResultCount -eq `$PSBoundParameters.$limit -and -not [System.String]::IsNullOrEmpty(`$Result))
+"@
                         } Else {
-                            "$($IndentChar)$($IndentChar)$($IndentChar)While (-not [System.String]::IsNullOrEmpty(`$Result))"
+                            @"
+            While (-not [System.String]::IsNullOrEmpty(`$Result))
+"@
                         }
                         if ($tokenizedPaginate -eq $false){
-                        $ProcessContent += "$($IndentChar)$($IndentChar)}
-$($IndentChar)$($IndentChar)Else
-$($IndentChar)$($IndentChar){
-$($IndentChar)$($IndentChar)$($IndentChar)`$PSBoundParameters.Remove('Paginate') | Out-Null
-$($IndentChar)$($IndentChar)$($IndentChar)`$Result = $ResultsLogic
-$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
-$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug ('HttpRequestContent: ' + `$JCHttpRequestContent.Result);
-$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug ('HttpResponse: ' + `$JCHttpResponse.Result);
-$($IndentChar)$($IndentChar)$($IndentChar)# Write-Debug ('HttpResponseContent: ' + `$JCHttpResponseContent.Result);
-$($IndentChar)$($IndentChar)$($IndentChar)`$Result = If ('Results' -in `$Result.PSObject.Properties.Name)
-$($IndentChar)$($IndentChar)$($IndentChar){
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Result.results
-$($IndentChar)$($IndentChar)$($IndentChar)}
-$($IndentChar)$($IndentChar)$($IndentChar)Else
-$($IndentChar)$($IndentChar)$($IndentChar){
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Result
-$($IndentChar)$($IndentChar)$($IndentChar)}
-$($IndentChar)$($IndentChar)$($IndentChar)If (-not [System.String]::IsNullOrEmpty(`$Result))
-$($IndentChar)$($IndentChar)$($IndentChar){
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Results += `$Result;
-$($IndentChar)$($IndentChar)$($IndentChar)}
-$($IndentChar)$($IndentChar)}"
+                        $ProcessContent += @"
+        } Else {
+            `$PSBoundParameters.Remove('Paginate') | Out-Null
+            `$Result = $ResultsLogic
+            Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
+            Write-Debug ('HttpRequestContent: ' + `$JCHttpRequestContent.Result);
+            Write-Debug ('HttpResponse: ' + `$JCHttpResponse.Result);
+            # Write-Debug ('HttpResponseContent: ' + `$JCHttpResponseContent.Result);
+            `$Result = If ('Results' -in `$Result.PSObject.Properties.Name) {
+                `$Result.results
+            } Else {
+                `$Result
+            } If (-not [System.String]::IsNullOrEmpty(`$Result)) {
+                `$Results += `$Result;
+            }
+"@
                         } elseif ($tokenizedPaginate -eq $true){
-                        $ProcessContent += "$($IndentChar)$($IndentChar)}
-$($IndentChar)$($IndentChar)Else
-$($IndentChar)$($IndentChar){
-$($IndentChar)$($IndentChar)$($IndentChar)`$PSBoundParameters.Remove('Paginate') | Out-Null
-$($IndentChar)$($IndentChar)$($IndentChar)`$Result = $ResultsLogic
-$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
-$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug ('HttpRequestContent: ' + `$JCHttpRequestContent.Result);
-$($IndentChar)$($IndentChar)$($IndentChar)Write-Debug ('HttpResponse: ' + `$JCHttpResponse.Result);
-$($IndentChar)$($IndentChar)$($IndentChar)# Write-Debug ('HttpResponseContent: ' + `$JCHttpResponseContent.Result);
-$($IndentChar)$($IndentChar)$($IndentChar)`$Result = If ('Results' -in `$Result.PSObject.Properties.Name)
-$($IndentChar)$($IndentChar)$($IndentChar){
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Result.results
-$($IndentChar)$($IndentChar)$($IndentChar)}
-$($IndentChar)$($IndentChar)$($IndentChar)Else
-$($IndentChar)$($IndentChar)$($IndentChar){
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Result
-$($IndentChar)$($IndentChar)$($IndentChar)}
-$($IndentChar)$($IndentChar)$($IndentChar)If (-not [System.String]::IsNullOrEmpty(`$Result))
-$($IndentChar)$($IndentChar)$($IndentChar){
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$Results += `$Result.users;
-$($IndentChar)$($IndentChar)$($IndentChar)}
-$($IndentChar)$($IndentChar)}"
+                        $ProcessContent += @"
+        } Else {
+            `$PSBoundParameters.Remove('Paginate') | Out-Null
+            `$Result = $ResultsLogic
+            Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
+            Write-Debug ('HttpRequestContent: ' + `$JCHttpRequestContent.Result);
+            Write-Debug ('HttpResponse: ' + `$JCHttpResponse.Result);
+            # Write-Debug ('HttpResponseContent: ' + `$JCHttpResponseContent.Result);
+            `$Result = If ('Results' -in `$Result.PSObject.Properties.Name) {
+                `$Result.results
+            } Else {
+                `$Result
+            }
+            If (-not [System.String]::IsNullOrEmpty(`$Result)) {
+                `$Results += `$Result.users;
+            }
+        }
+"@
                         }
                     } Else {
-                        $ProcessContent += "$($IndentChar)$($IndentChar)`$Result = $ResultsLogic
-$($IndentChar)$($IndentChar)Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
-$($IndentChar)$($IndentChar)Write-Debug ('HttpRequestContent: ' + `$JCHttpRequestContent.Result);
-$($IndentChar)$($IndentChar)Write-Debug ('HttpResponse: ' + `$JCHttpResponse.Result);
-$($IndentChar)$($IndentChar)# Write-Debug ('HttpResponseContent: ' + `$JCHttpResponseContent.Result);
-$($IndentChar)$($IndentChar)`$Result = If ('Results' -in `$Result.PSObject.Properties.Name)
-$($IndentChar)$($IndentChar){
-$($IndentChar)$($IndentChar)$($IndentChar)`$Result.results
-$($IndentChar)$($IndentChar)}
-$($IndentChar)$($IndentChar)Else
-$($IndentChar)$($IndentChar){
-$($IndentChar)$($IndentChar)$($IndentChar)`$Result
-$($IndentChar)$($IndentChar)}
-$($IndentChar)$($IndentChar)If (-not [System.String]::IsNullOrEmpty(`$Result))
-$($IndentChar)$($IndentChar){
-$($IndentChar)$($IndentChar)$($IndentChar)`$Results += `$Result;
-$($IndentChar)$($IndentChar)}"
+                        $ProcessContent += @"
+        `$Result = $ResultsLogic
+        Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
+        Write-Debug ('HttpRequestContent: ' + `$JCHttpRequestContent.Result);
+        Write-Debug ('HttpResponse: ' + `$JCHttpResponse.Result);
+        # Write-Debug ('HttpResponseContent: ' + `$JCHttpResponseContent.Result);
+        `$Result = If ('Results' -in `$Result.PSObject.Properties.Name) {
+            `$Result.results
+        } Else {
+            `$Result
+        }
+        If (-not [System.String]::IsNullOrEmpty(`$Result)) {
+            `$Results += `$Result;
+        }
+"@
                     }
                     # Build "End" block
-                    $EndContent += "$($IndentChar)$($IndentChar)# Clean up global variables
-$($IndentChar)$($IndentChar)`$GlobalVars = @('JCHttpRequest', 'JCHttpRequestContent', 'JCHttpResponse','JCHttpResponseContent')
-$($IndentChar)$($IndentChar)`$GlobalVars | ForEach-Object {
-$($IndentChar)$($IndentChar)$($IndentChar)If ((Get-Variable -Scope:('Global')).Where( { `$_.Name -eq `$_ })) { Remove-Variable -Name:(`$_) -Scope:('Global') }
-$($IndentChar)$($IndentChar)}
-$($IndentChar)$($IndentChar)Return `$Results"
+                    $EndContent += @"
+        # Clean up global variables
+        `$GlobalVars = @('JCHttpRequest', 'JCHttpRequestContent', 'JCHttpResponse','JCHttpResponseContent')
+        `$GlobalVars | ForEach-Object {
+            If ((Get-Variable -Scope:('Global')).Where( { `$_.Name -eq `$_ })) { Remove-Variable -Name:(`$_) -Scope:('Global') }
+        }
+        Return `$Results
+"@
                 } Else {
                     Write-Error ('Unknown module $($ModuleName)')
                 }
             } ElseIf ($Command.Verb -in ('Restart', 'Invoke', 'New', 'Set', 'Remove', 'Start', 'Unlock', 'Update', 'Reset', 'Grant', 'Import', 'Clear', 'Lock', 'Stop', 'Sync', 'Initialize')) {
                 # Build "Begin" block
-                $BeginContent += "$($IndentChar)$($IndentChar)`$Results = @()
-$($IndentChar)$($IndentChar)`$PSBoundParameters.Add('HttpPipelineAppend', {
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)param(`$req, `$callback, `$next)
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)# call the next step in the Pipeline
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$ResponseTask = `$next.SendAsync(`$req, `$callback)
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$global:JCHttpRequest = `$req
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)# `$global:JCHttpRequestContent = If (-not [System.String]::IsNullOrEmpty(`$req.Content)) { `$req.Content.ReadAsStringAsync() }
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)`$global:JCHttpResponse = `$ResponseTask
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)# `$global:JCHttpResponseContent = If (-not [System.String]::IsNullOrEmpty(`$ResponseTask.Result.Content)) { `$ResponseTask.Result.Content.ReadAsStringAsync() }
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Return `$ResponseTask
-$($IndentChar)$($IndentChar)$($IndentChar)}
-$($IndentChar)$($IndentChar))"
+                $BeginContent += @"
+        `$Results = @()
+        `$PSBoundParameters.Add('HttpPipelineAppend', {
+                param(`$req, `$callback, `$next)
+                # call the next step in the Pipeline
+                `$ResponseTask = `$next.SendAsync(`$req, `$callback)
+                `$global:JCHttpRequest = `$req
+                # `$global:JCHttpRequestContent = If (-not [System.String]::IsNullOrEmpty(`$req.Content)) { `$req.Content.ReadAsStringAsync() }
+                `$global:JCHttpResponse = `$ResponseTask
+                # `$global:JCHttpResponseContent = If (-not [System.String]::IsNullOrEmpty(`$ResponseTask.Result.Content)) { `$ResponseTask.Result.Content.ReadAsStringAsync() }
+                Return `$ResponseTask
+            }
+        )
+"@
                 # Build "Process" block
                 # temp fix for Set-JcSdkUserAssociation TODO: remove when DE-2630 is done
                 if ($NewCommandName -eq ("Set-JcSdkUserAssociation" -or "Set-JcSdkSystemAssociation")) {
-                    $ProcessContent += "$($IndentChar)$($IndentChar)if ((-not `$PSBoundParameters['attributes']) -and (`$PSBoundParameters['op'] -eq 'remove')) {
-$($IndentChar)$($IndentChar)$($IndentChar)`$PSBoundParameters.Add('attributes', @{ '' = '' })
-$($IndentChar)$($IndentChar)} elseif ((`$PSBoundParameters['body']) -And (`$Body.Op -eq 'remove')) {
-$($IndentChar)$($IndentChar)$($IndentChar)`$Body.Attributes = @{ '' = '' }
-$($IndentChar)$($IndentChar)}"
+                    $ProcessContent += @"
+        if ((-not `$PSBoundParameters['attributes']) -and (`$PSBoundParameters['op'] -eq 'remove')) {
+            `$PSBoundParameters.Add('attributes', @{ '' = '' })
+        } elseif ((`$PSBoundParameters['body']) -And (`$Body.Op -eq 'remove')) {
+            `$Body.Attributes = @{ '' = '' }
+        }
+"@
                 }
-                $ProcessContent += "$($IndentChar)$($IndentChar)`$Results = $ResultsLogic"
+                $ProcessContent += @"
+        `$Results = $ResultsLogic
+"@
                 # Build "End" block
-                $EndContent += "$($IndentChar)$($IndentChar)Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
-$($IndentChar)$($IndentChar)# Write-Debug ('HttpRequestContent: ' + `$JCHttpRequestContent.Result);
-$($IndentChar)$($IndentChar)Write-Debug ('HttpResponse: ' + `$JCHttpResponse.Result);
-$($IndentChar)$($IndentChar)# Write-Debug ('HttpResponseContent: ' + `$JCHttpResponseContent.Result);
-$($IndentChar)$($IndentChar)# Clean up global variables
-$($IndentChar)$($IndentChar)`$GlobalVars = @('JCHttpRequest', 'JCHttpRequestContent', 'JCHttpResponse', 'JCHttpResponseContent')
-$($IndentChar)$($IndentChar)`$GlobalVars | ForEach-Object {
-$($IndentChar)$($IndentChar)$($IndentChar)If ((Get-Variable -Scope:('Global')).Where( { `$_.Name -eq `$_ })) {
-$($IndentChar)$($IndentChar)$($IndentChar)$($IndentChar)Remove-Variable -Name:(`$_) -Scope:('Global')
-$($IndentChar)$($IndentChar)$($IndentChar)}
-$($IndentChar)$($IndentChar)}
-$($IndentChar)$($IndentChar)Return `$Results"
+                $EndContent += @"
+        Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
+        # Write-Debug ('HttpRequestContent: ' + `$JCHttpRequestContent.Result);
+        Write-Debug ('HttpResponse: ' + `$JCHttpResponse.Result);
+        # Write-Debug ('HttpResponseContent: ' + `$JCHttpResponseContent.Result);
+        # Clean up global variables
+        `$GlobalVars = @('JCHttpRequest', 'JCHttpRequestContent', 'JCHttpResponse', 'JCHttpResponseContent')
+        `$GlobalVars | ForEach-Object {
+            If ((Get-Variable -Scope:('Global')).Where( { `$_.Name -eq `$_ })) {
+                Remove-Variable -Name:(`$_) -Scope:('Global')
+            }
+        }
+        Return `$Results
+"@
             } Else {
                 Write-Error ("Unmapped command: $CommandName")
                 $null
