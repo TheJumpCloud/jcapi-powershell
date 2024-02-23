@@ -216,7 +216,7 @@ Try {
                         `$XResultCount = `$JCHttpResponse.Result.Headers.GetValues('X-Result-Count')
                         `$XLimit = `$JCHttpResponse.Result.Headers.GetValues('X-Limit')
                         `$Results += `$Result
-                        Write-Debug (""ResultCount: `$(`$XResultCount); Limit: `$(`$XLimit); XResultSearchAfter: `$(`$XResultSearchAfter); "");
+                        Write-Debug ("ResultCount: `$(`$XResultCount); Limit: `$(`$XLimit); XResultSearchAfter: `$(`$XResultSearchAfter); ");
                         Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
                         Write-Debug ('HttpRequestContent: ' + `$JCHttpRequestContent.Result);
                         Write-Debug ('HttpResponse: ' + `$JCHttpResponse.Result);
