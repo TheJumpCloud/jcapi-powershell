@@ -189,7 +189,18 @@ Try {
         If (`$Paginate -and `$PSCmdlet.ParameterSetName -in ($ParameterSetLimitSkip)) {
             `$PSBoundParameters.Remove('Paginate') | Out-Null
             Do {
-                `$Result = $ResultsLogic
+                `$maxRetries = 3
+                `$resultCounter = 0
+                do {
+                    `$resultCounter++
+                    `$Result = $ResultsLogic
+                    If (`$JCHttpResponse.Result.StatusCode -eq 503) {
+                        Write-Debug ("StatusCode: " + "`$JCHttpResponse.Result.StatusCode")
+                        Start-Sleep -Seconds (`$resultCounter * 5)
+                    } else {
+                        break
+                    }
+                } while (`$resultCounter -lt `$maxRetries)
                 If (`$JCHttpResponse.Result.Headers.Contains('X-Search_after')) {
                     If (-not [System.String]::IsNullOrEmpty(`$Result)) {
                         `$XResultSearchAfter = (`$JCHttpResponse.Result.Headers.GetValues('X-Search_after') | ConvertFrom-Json);
@@ -219,7 +230,18 @@ Try {
             While (`$XResultCount -eq `$XLimit -and -not [System.String]::IsNullOrEmpty(`$Result))
         } Else {
             `$PSBoundParameters.Remove('Paginate') | Out-Null
-            `$Result = $ResultsLogic
+            `$maxRetries = 3
+            `$resultCounter = 0
+            do {
+                `$resultCounter++
+                `$Result = $ResultsLogic
+                If (`$JCHttpResponse.Result.StatusCode -eq 503) {
+                    Write-Debug ("StatusCode: " + "`$JCHttpResponse.Result.StatusCode")
+                    Start-Sleep -Seconds (`$resultCounter * 5)
+                } else {
+                    break
+                }
+            } while (`$resultCounter -lt `$maxRetries)
             Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
             Write-Debug ('HttpRequestContent: ' + `$JCHttpRequestContent.Result);
             Write-Debug ('HttpResponse: ' + `$JCHttpResponse.Result);
@@ -231,7 +253,18 @@ Try {
 "@
                     } Else {
                         $ProcessContent += @"
-        `$Result = $ResultsLogic
+        `$maxRetries = 3
+        `$resultCounter = 0
+        do {
+            `$resultCounter++
+            `$Result = $ResultsLogic
+            If (`$JCHttpResponse.Result.StatusCode -eq 503) {
+                Write-Debug ("StatusCode: " + "`$JCHttpResponse.Result.StatusCode")
+                Start-Sleep -Seconds (`$resultCounter * 5)
+            } else {
+                break
+            }
+        } while (`$resultCounter -lt `$maxRetries)
         Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
         Write-Debug ('HttpRequestContent: ' + `$JCHttpRequestContent.Result);
         Write-Debug ('HttpResponse: ' + `$JCHttpResponse.Result);
@@ -302,7 +335,18 @@ Try {
 "@
                         }
                         $ProcessContent += @"
-                `$Result = $ResultsLogic
+                `$maxRetries = 3
+                `$resultCounter = 0
+                do {
+                    `$resultCounter++
+                    `$Result = $ResultsLogic
+                    If (`$JCHttpResponse.Result.StatusCode -eq 503) {
+                        Write-Debug ("StatusCode: " + "`$JCHttpResponse.Result.StatusCode")
+                        Start-Sleep -Seconds (`$resultCounter * 5)
+                    } else {
+                        break
+                    }
+                } while (`$resultCounter -lt `$maxRetries)
                 Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
                 Write-Debug ('HttpRequestContent: ' + `$JCHttpRequestContent.Result);
                 Write-Debug ('HttpResponse: ' + `$JCHttpResponse.Result);
@@ -358,7 +402,18 @@ Try {
                         $ProcessContent += @"
         } Else {
             `$PSBoundParameters.Remove('Paginate') | Out-Null
-            `$Result = $ResultsLogic
+            `$maxRetries = 3
+            `$resultCounter = 0
+            do {
+                `$resultCounter++
+                `$Result = $ResultsLogic
+                If (`$JCHttpResponse.Result.StatusCode -eq 503) {
+                    Write-Debug ("StatusCode: " + "`$JCHttpResponse.Result.StatusCode")
+                    Start-Sleep -Seconds (`$resultCounter * 5)
+                } else {
+                    break
+                }
+            } while (`$resultCounter -lt `$maxRetries)
             Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
             Write-Debug ('HttpRequestContent: ' + `$JCHttpRequestContent.Result);
             Write-Debug ('HttpResponse: ' + `$JCHttpResponse.Result);
@@ -375,7 +430,18 @@ Try {
                         $ProcessContent += @"
         } Else {
             `$PSBoundParameters.Remove('Paginate') | Out-Null
-            `$Result = $ResultsLogic
+            `$maxRetries = 3
+            `$resultCounter = 0
+            do {
+                `$resultCounter++
+                `$Result = $ResultsLogic
+                If (`$JCHttpResponse.Result.StatusCode -eq 503) {
+                    Write-Debug ("StatusCode: " + "`$JCHttpResponse.Result.StatusCode")
+                    Start-Sleep -Seconds (`$resultCounter * 5)
+                } else {
+                    break
+                }
+            } while (`$resultCounter -lt `$maxRetries)
             Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
             Write-Debug ('HttpRequestContent: ' + `$JCHttpRequestContent.Result);
             Write-Debug ('HttpResponse: ' + `$JCHttpResponse.Result);
@@ -393,7 +459,18 @@ Try {
                         }
                     } Else {
                         $ProcessContent += @"
-        `$Result = $ResultsLogic
+        `$maxRetries = 3
+        `$resultCounter = 0
+        do {
+            `$resultCounter++
+            `$Result = $ResultsLogic
+            If (`$JCHttpResponse.Result.StatusCode -eq 503) {
+                Write-Debug ("StatusCode: " + "`$JCHttpResponse.Result.StatusCode")
+                Start-Sleep -Seconds (`$resultCounter * 5)
+            } else {
+                break
+            }
+        } while (`$resultCounter -lt `$maxRetries)
         Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
         Write-Debug ('HttpRequestContent: ' + `$JCHttpRequestContent.Result);
         Write-Debug ('HttpResponse: ' + `$JCHttpResponse.Result);
@@ -448,7 +525,18 @@ Try {
 "@
                 }
                 $ProcessContent += @"
-        `$Results = $ResultsLogic
+        `$maxRetries = 3
+        `$resultCounter = 0
+        do {
+            `$resultCounter++
+            `$Result = $ResultsLogic
+            If (`$JCHttpResponse.Result.StatusCode -eq 503) {
+                Write-Debug ("StatusCode: " + "`$JCHttpResponse.Result.StatusCode")
+                Start-Sleep -Seconds (`$resultCounter * 5)
+            } else {
+                break
+            }
+        } while (`$resultCounter -lt `$maxRetries)
 "@
                 # Build "End" block
                 $EndContent += @"
