@@ -207,7 +207,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         $resultCounter = 0
         do {
             $resultCounter++
-            $Result = JumpCloud.SDK.V2.internal\Set-JcSdkInternalDuoApplication @PSBoundParameters
+            $Results = JumpCloud.SDK.V2.internal\Set-JcSdkInternalDuoApplication @PSBoundParameters
             If ($JCHttpResponse.Result.StatusCode -eq 503) {
                 Write-Debug ("StatusCode: " + "$($JCHttpResponse.Result.StatusCode)")
             } else {

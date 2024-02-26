@@ -566,7 +566,7 @@ Try {
         `$resultCounter = 0
         do {
             `$resultCounter++
-            `$Result = $ResultsLogic
+            `$Results = $ResultsLogic
             If (`$JCHttpResponse.Result.StatusCode -eq 503) {
                 Write-Debug ("StatusCode: " + "`$(`$JCHttpResponse.Result.StatusCode)")
             } else {

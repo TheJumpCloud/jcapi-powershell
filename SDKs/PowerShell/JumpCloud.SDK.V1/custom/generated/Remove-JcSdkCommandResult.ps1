@@ -123,7 +123,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         $resultCounter = 0
         do {
             $resultCounter++
-            $Result = JumpCloud.SDK.V1.internal\Remove-JcSdkInternalCommandResult @PSBoundParameters
+            $Results = JumpCloud.SDK.V1.internal\Remove-JcSdkInternalCommandResult @PSBoundParameters
             If ($JCHttpResponse.Result.StatusCode -eq 503) {
                 Write-Debug ("StatusCode: " + "$($JCHttpResponse.Result.StatusCode)")
             } else {

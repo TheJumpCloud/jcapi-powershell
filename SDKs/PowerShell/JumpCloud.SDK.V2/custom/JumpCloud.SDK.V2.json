@@ -5263,7 +5263,7 @@
         "bundle_short_version": "2.4",
         "bundle_version": "658.1",
         "category": "public.app-category.utilities",
-        "collection_time": "2019-06-03T13:41:30.658-06:00",
+        "collection_time": "2019-06-03T12:41:30.658-07:00",
         "compiler": "com.apple.compilers.llvm.clang.1_0",
         "copyright": "",
         "development_region": "English",
@@ -5540,7 +5540,7 @@
     },
     "system-insights-bitlocker-info": {
       "example": {
-        "collection_time": "2019-06-03T13:41:30.658-06:00",
+        "collection_time": "2019-06-03T12:41:30.658-07:00",
         "conversion_status": 0,
         "devide_id": "\\\\\\\\?\\\\Volume{3ba5cc52-e0fd-45fa-b8b8-5c88f44f8b17}\\",
         "drive_letter": "C:",
@@ -5580,7 +5580,7 @@
     },
     "system-insights-browser-plugins": {
       "example": {
-        "collection_time": "2019-06-03T13:41:30.858-06:00",
+        "collection_time": "2019-06-03T12:41:30.858-07:00",
         "description": "LastPass Plugin",
         "development_region": "en-US",
         "disabled": 0,
@@ -5758,7 +5758,7 @@
     "system-insights-chrome-extensions": {
       "example": {
         "author": "",
-        "collection_time": "2019-06-03T13:41:31.125-06:00",
+        "collection_time": "2019-06-03T12:41:31.125-07:00",
         "description": "provider for discovery and services for mirroring of chrome media router",
         "identifier": "pkedcjkdefgpdelpbcmbmeomcjbeemfm",
         "locale": "en",
@@ -5932,7 +5932,7 @@
     },
     "system-insights-disk-encryption": {
       "example": {
-        "collection_time": "2019-06-03T13:41:31.557-06:00",
+        "collection_time": "2019-06-03T12:41:31.557-07:00",
         "encrypted": 0,
         "encryption_status": "undefined",
         "name": "/dev/disk8",
@@ -5976,7 +5976,7 @@
     },
     "system-insights-disk-info": {
       "example": {
-        "collection_time": "2019-06-03T13:41:30.658-06:00",
+        "collection_time": "2019-06-03T12:41:30.658-07:00",
         "description": "Disk drive",
         "disk_index": 0,
         "disk_size": "64420392960",
@@ -6064,7 +6064,7 @@
     "system-insights-etc-hosts": {
       "example": {
         "address": "192.168.2.21",
-        "collection_time": "2019-06-03T13:41:30.658-06:00",
+        "collection_time": "2019-06-03T12:41:30.658-07:00",
         "hostnames": "hosty hosty.local",
         "system_id": "5c9e51a13c5146f89bae12d9"
       },
@@ -6089,7 +6089,7 @@
       "example": {
         "active": 1,
         "autoupdate": 1,
-        "collection_time": "2019-06-03T13:41:31.204-06:00",
+        "collection_time": "2019-06-03T12:41:31.204-07:00",
         "creator": "null",
         "description": "",
         "disabled": 0,
@@ -6159,7 +6159,7 @@
     },
     "system-insights-groups": {
       "example": {
-        "collection_time": "2019-06-03T13:41:31.673-06:00",
+        "collection_time": "2019-06-03T12:41:31.673-07:00",
         "comment": "",
         "gid": "701",
         "gid_signed": "701",
@@ -6221,7 +6221,7 @@
       "example": {
         "address": "::1",
         "broadcast": "",
-        "collection_time": "2019-06-03T13:41:31.008-06:00",
+        "collection_time": "2019-06-03T12:41:31.008-07:00",
         "friendly_name": "",
         "interface": "lo0",
         "mask": "ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff",
@@ -6562,7 +6562,7 @@
     "system-insights-logical-drives": {
       "example": {
         "boot_partition": 0,
-        "collection_time": "2019-06-03T13:41:30.658-06:00",
+        "collection_time": "2019-06-03T12:41:30.658-07:00",
         "device_id": "C:",
         "file_system": "NTFS",
         "free_space": "43194331136",
@@ -6635,7 +6635,7 @@
         "blocks_available": "95135",
         "blocks_free": "95135",
         "blocks_size": "4096",
-        "collection_time": "2019-06-03T13:41:31.746-06:00",
+        "collection_time": "2019-06-03T12:41:31.746-07:00",
         "device": "/dev/disk5s1",
         "device_alias": "/dev/disk5s1",
         "flags": "70292505",
@@ -6693,7 +6693,7 @@
       "example": {
         "build": "17G65",
         "codename": "",
-        "collection_time": "2019-06-03T13:41:30.933-06:00",
+        "collection_time": "2019-06-03T12:41:30.933-07:00",
         "install_date": "",
         "major": 10,
         "minor": 13,
@@ -6748,7 +6748,7 @@
     "system-insights-patches": {
       "example": {
         "caption": "http://support.microsoft.com/?kbid=4503308",
-        "collection_time": "2019-06-03T13:41:31.673-06:00",
+        "collection_time": "2019-06-03T12:41:31.673-07:00",
         "csname": "DESKTOP-B17DUKP",
         "description": "Security Update",
         "fix_comments": "",
@@ -6795,7 +6795,7 @@
     },
     "system-insights-programs": {
       "example": {
-        "collection_time": "2019-06-03T13:41:31.673-06:00",
+        "collection_time": "2019-06-03T12:41:31.673-07:00",
         "identifying_number": "{2E8B8BDD-03DF-4C1C-8C99-E6A4BCBF43CE}",
         "install_date": "20190724",
         "install_location": "",
@@ -6876,7 +6876,7 @@
     "system-insights-safari-extensions": {
       "example": {
         "author": "Eyeo GmbH",
-        "collection_time": "2019-05-16T12:58:15.673-06:00",
+        "collection_time": "2019-05-16T11:58:15.673-07:00",
         "description": "Used by over 50 million people, a free ad blocker that blocks ALL annoying ads, malware and tracking.",
         "developer_id": "GRYYZR985A",
         "identifier": "org.adblockplus.adblockplussafari",
@@ -7251,7 +7251,7 @@
     },
     "system-insights-system-info": {
       "example": {
-        "collection_time": "2019-06-03T13:41:30.771-06:00",
+        "collection_time": "2019-06-03T12:41:30.771-07:00",
         "computer_name": "Johnny's MacBook Pro (2)",
         "cpu_brand": "Intel(R) Core(TM) i7-7820HQ CPU @ 2.90GHz",
         "cpu_logical_cores": 8,
@@ -7504,7 +7504,7 @@
     },
     "system-insights-users": {
       "example": {
-        "collection_time": "2019-06-03T13:41:29.71-06:00",
+        "collection_time": "2019-06-03T12:41:29.71-07:00",
         "description": "AppleEvents Daemon",
         "directory": "/var/empty",
         "gid": "55",
