@@ -2,33 +2,10 @@
 Release Date: February 26, 2024
 #### RELEASE NOTES
 ```
-{{Fill in the Release Notes}}
+Added retry functionality for functions if a 503 error is experienced
 ```
-#### FEATURES:
-{{Fill in the Features}}
 #### IMPROVEMENTS:
-{{Fill in the Improvements}}
-#### BUG FIXES:
-{{Fill in the Bug Fixes}}
-#### Generated Changes:
-
-<details>
-<summary>Functions Added</summary>
-
-No changes
-</details>
-
-<details>
-<summary>Functions Modified</summary>
-
-No changes
-</details>
-
-<details>
-<summary>Functions Removed</summary>
-
-No changes
-</details>
+Added retry functionality for functions if a 503 error is experienced
 
 ## JumpCloud.SDK.DirectoryInsights-0.0.26
 Release Date: February 07, 2024
