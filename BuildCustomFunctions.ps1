@@ -132,9 +132,9 @@ Try {
             $EndContent = @()
             # Results logic - If the output model is undefined in the swagger spec
             $ResultsLogic = If ($Command.OutputType -like "$ModuleName.Models.*ApplicationJson*") {
-                "($($ImportedModule.Name)\$($CommandName) @PSBoundParameters).ToJsonString() | ConvertFrom-Json;"
+                "($($ImportedModule.Name)\$($CommandName) -ErrorAction Stop @PSBoundParameters).ToJsonString() | ConvertFrom-Json;"
             } Else {
-                "$($ImportedModule.Name)\$($CommandName) @PSBoundParameters"
+                "$($ImportedModule.Name)\$($CommandName) @PSBoundParameters -ErrorAction Stop"
             }
             If ($Command.Verb -in ('Get', 'Search')) {
                 # Add paginate parameter if function contains Limit or Skip parameters
@@ -194,7 +194,7 @@ Try {
                 :retryLoop do {
                     `$resultCounter++
                     try {
-                        `$Result = $ResultsLogic -ErrorAction Stop
+                        `$Result = $ResultsLogic
                         break retryLoop
                     } catch {
                         If ((`$JCHttpResponse.Result.StatusCode -ne 503) -or (`$resultCounter -eq `$maxRetries)) {
@@ -240,7 +240,7 @@ Try {
             :retryLoop do {
                 `$resultCounter++
                 try {
-                    `$Result = $ResultsLogic -ErrorAction Stop
+                    `$Result = $ResultsLogic
                     break retryLoop
                 } catch {
                     If ((`$JCHttpResponse.Result.StatusCode -ne 503) -or (`$resultCounter -eq `$maxRetries)) {
@@ -268,7 +268,7 @@ Try {
         :retryLoop do {
             `$resultCounter++
             try {
-                `$Result = $ResultsLogic -ErrorAction Stop
+                `$Result = $ResultsLogic
                 break retryLoop
             } catch {
                 If ((`$JCHttpResponse.Result.StatusCode -ne 503) -or (`$resultCounter -eq `$maxRetries)) {
@@ -355,7 +355,7 @@ Try {
                 :retryLoop do {
                     `$resultCounter++
                     try {
-                        `$Result = $ResultsLogic -ErrorAction Stop
+                        `$Result = $ResultsLogic
                         break retryLoop
                     } catch {
                         If ((`$JCHttpResponse.Result.StatusCode -ne 503) -or (`$resultCounter -eq `$maxRetries)) {
@@ -427,7 +427,7 @@ Try {
             :retryLoop do {
                 `$resultCounter++
                 try {
-                    `$Result = $ResultsLogic -ErrorAction Stop
+                    `$Result = $ResultsLogic
                     break retryLoop
                 } catch {
                     If ((`$JCHttpResponse.Result.StatusCode -ne 503) -or (`$resultCounter -eq `$maxRetries)) {
@@ -462,7 +462,7 @@ Try {
             :retryLoop do {
                 `$resultCounter++
                 try {
-                    `$Result = $ResultsLogic -ErrorAction Stop
+                    `$Result = $ResultsLogic
                     break retryLoop
                 } catch {
                     If ((`$JCHttpResponse.Result.StatusCode -ne 503) -or (`$resultCounter -eq `$maxRetries)) {
@@ -496,7 +496,7 @@ Try {
         :retryLoop do {
             `$resultCounter++
             try {
-                `$Result = $ResultsLogic -ErrorAction Stop
+                `$Result = $ResultsLogic
                 break retryLoop
             } catch {
                 If ((`$JCHttpResponse.Result.StatusCode -ne 503) -or (`$resultCounter -eq `$maxRetries)) {
@@ -567,7 +567,7 @@ Try {
         :retryLoop do {
             `$resultCounter++
             try {
-                `$Results = $ResultsLogic -ErrorAction Stop
+                `$Results = $ResultsLogic
                 break retryLoop
             } catch {
                 If ((`$JCHttpResponse.Result.StatusCode -ne 503) -or (`$resultCounter -eq `$maxRetries)) {
