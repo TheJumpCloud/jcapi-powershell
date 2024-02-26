@@ -11,7 +11,7 @@ Import-Module ($PSScriptRoot + '/New-SdkChangelog.ps1')
 # }
 $release = Invoke-WebRequest -Uri 'https://api.github.com/repos/TheJumpCloud/jcapi-powershell/releases'  -Method 'GET'#  -Headers $Headers
 # Get latest release by sorting last published
-$releaseVersions = ($release | ConvertFrom-Json -Depth 4) | Where-Object { $_.name -match $SDKName } | Select-Object name, target_commitish, published_at, tag_name | Sort-Object -Property published_at -Descending
+$releaseVersions = ($release | ConvertFrom-Json -Depth 99) | Where-Object { $_.name -match $SDKName } | Select-Object name, target_commitish, published_at, tag_name | Sort-Object -Property published_at -Descending
 # Latest release commit, getting the first value since it is the most recent
 $LatestCommit = $releaseVersions[0].target_commitish
 $LatestVersion = $releaseVersions[0].name
