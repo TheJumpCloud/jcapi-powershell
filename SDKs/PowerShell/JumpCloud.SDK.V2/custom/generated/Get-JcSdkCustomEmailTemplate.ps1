@@ -78,21 +78,33 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        $Result = JumpCloud.SDK.V2.internal\Get-JcSdkInternalCustomEmailTemplate @PSBoundParameters
+        $maxRetries = 4
+        $resultCounter = 0
+        do {
+            $resultCounter++
+            $Result = JumpCloud.SDK.V2.internal\Get-JcSdkInternalCustomEmailTemplate @PSBoundParameters
+            If ($JCHttpResponse.Result.StatusCode -eq 503) {
+                Write-Debug ("StatusCode: " + "$($JCHttpResponse.Result.StatusCode)")
+            } else {
+                break
+            }
+            if ($resultCounter -eq $maxRetries) {
+                break
+            } else {
+                Write-Warning ("503: Service Unavailable - retrying in " + ($resultCounter * 5) + " seconds")
+                Start-Sleep -Seconds ($resultCounter * 5)
+            }
+        } while ($resultCounter -lt $maxRetries)
         Write-Debug ('HttpRequest: ' + $JCHttpRequest);
         Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
         Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);
         # Write-Debug ('HttpResponseContent: ' + $JCHttpResponseContent.Result);
-        $Result = If ('Results' -in $Result.PSObject.Properties.Name)
-        {
+        $Result = If ('Results' -in $Result.PSObject.Properties.Name) {
             $Result.results
-        }
-        Else
-        {
+        } Else {
             $Result
         }
-        If (-not [System.String]::IsNullOrEmpty($Result))
-        {
+        If (-not [System.String]::IsNullOrEmpty($Result)) {
             $Results += $Result;
         }
     }

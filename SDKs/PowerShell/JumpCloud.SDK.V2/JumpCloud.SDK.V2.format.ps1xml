@@ -6714,6 +6714,40 @@
       </TableControl>
     </View>
     <View>
+      <Name>JumpCloud.SDK.V2.Models.SoftwareAppMicrosoftStore</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloud.SDK.V2.Models.SoftwareAppMicrosoftStore</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>DoNotUpdate</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>NonRemovable</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>PackageFamilyName</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>DoNotUpdate</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>NonRemovable</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>PackageFamilyName</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
       <Name>JumpCloud.SDK.V2.Models.SoftwareAppPermissionGrants</Name>
       <ViewSelectedBy>
         <TypeName>JumpCloud.SDK.V2.Models.SoftwareAppPermissionGrants</TypeName>

@@ -209,7 +209,23 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        $Results = JumpCloud.SDK.V2.internal\Set-JcSdkInternalGSuiteAssociation @PSBoundParameters
+        $maxRetries = 4
+        $resultCounter = 0
+        do {
+            $resultCounter++
+            $Result = JumpCloud.SDK.V2.internal\Set-JcSdkInternalGSuiteAssociation @PSBoundParameters
+            If ($JCHttpResponse.Result.StatusCode -eq 503) {
+                Write-Debug ("StatusCode: " + "$($JCHttpResponse.Result.StatusCode)")
+            } else {
+                break
+            }
+            if ($resultCounter -eq $maxRetries) {
+                break
+            } else {
+                Write-Warning ("503: Service Unavailable - retrying in " + ($resultCounter * 5) + " seconds")
+                Start-Sleep -Seconds ($resultCounter * 5)
+            }
+        } while ($resultCounter -lt $maxRetries)
     }
     End
     {

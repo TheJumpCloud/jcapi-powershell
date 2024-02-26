@@ -184,6 +184,9 @@ BODY <ISoftwareApp>:
     [GoogleAndroidVersionCode <Int32?>]: The current version of the web app.
     [Location <String>]: Repository where the app is located within the package manager
     [LocationObjectId <String>]: ID of the repository where the app is located within the package manager
+    [MicrosoftStoreDoNotUpdate <Boolean?>]: Indicates whether the app can be updated or not.
+    [MicrosoftStoreNonRemovable <Boolean?>]: Indicates whether the app is removable by the users or not.
+    [MicrosoftStorePackageFamilyName <String>]: Package Family Name for the app from Microsoft App Store.
     [ObjectId <String>]:
     [PackageId <String>]:
     [PackageKind <String>]: The package manifest kind (ex: software-package).
@@ -270,6 +273,9 @@ SETTINGS <ISoftwareAppSettings[]>:
   [GoogleAndroidVersionCode <Int32?>]: The current version of the web app.
   [Location <String>]: Repository where the app is located within the package manager
   [LocationObjectId <String>]: ID of the repository where the app is located within the package manager
+  [MicrosoftStoreDoNotUpdate <Boolean?>]: Indicates whether the app can be updated or not.
+  [MicrosoftStoreNonRemovable <Boolean?>]: Indicates whether the app is removable by the users or not.
+  [MicrosoftStorePackageFamilyName <String>]: Package Family Name for the app from Microsoft App Store.
   [ObjectId <String>]:
   [PackageId <String>]:
   [PackageKind <String>]: The package manifest kind (ex: software-package).
@@ -396,7 +402,23 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        $Results = JumpCloud.SDK.V2.internal\Set-JcSdkInternalSoftwareApp @PSBoundParameters
+        $maxRetries = 4
+        $resultCounter = 0
+        do {
+            $resultCounter++
+            $Result = JumpCloud.SDK.V2.internal\Set-JcSdkInternalSoftwareApp @PSBoundParameters
+            If ($JCHttpResponse.Result.StatusCode -eq 503) {
+                Write-Debug ("StatusCode: " + "$($JCHttpResponse.Result.StatusCode)")
+            } else {
+                break
+            }
+            if ($resultCounter -eq $maxRetries) {
+                break
+            } else {
+                Write-Warning ("503: Service Unavailable - retrying in " + ($resultCounter * 5) + " seconds")
+                Start-Sleep -Seconds ($resultCounter * 5)
+            }
+        } while ($resultCounter -lt $maxRetries)
     }
     End
     {

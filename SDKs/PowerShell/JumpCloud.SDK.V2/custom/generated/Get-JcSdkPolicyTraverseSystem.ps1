@@ -179,32 +179,41 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        If ($Paginate -and $PSCmdlet.ParameterSetName -in ('Get'))
-        {
+        If ($Paginate -and $PSCmdlet.ParameterSetName -in ('Get')) {
             $PSBoundParameters.Remove('Paginate') | Out-Null
-            If ([System.String]::IsNullOrEmpty($PSBoundParameters.Limit))
-            {
+            If ([System.String]::IsNullOrEmpty($PSBoundParameters.Limit)) {
                 $PSBoundParameters.Add('Limit', 100)
             }
-            If ([System.String]::IsNullOrEmpty($PSBoundParameters.Skip))
-            {
+            If ([System.String]::IsNullOrEmpty($PSBoundParameters.Skip)) {
                 $PSBoundParameters.Add('Skip', 0)
             }
-            Do
-            {
+            Do {
                 Write-Debug ("Limit: $($PSBoundParameters.Limit); ");
                 Write-Debug ("Skip: $($PSBoundParameters.Skip); ");
-                $Result = JumpCloud.SDK.V2.internal\Get-JcSdkInternalPolicyTraverseSystem @PSBoundParameters
+                $maxRetries = 4
+                $resultCounter = 0
+                do {
+                    $resultCounter++
+                    $Result = JumpCloud.SDK.V2.internal\Get-JcSdkInternalPolicyTraverseSystem @PSBoundParameters
+                    If ($JCHttpResponse.Result.StatusCode -eq 503) {
+                        Write-Debug ("StatusCode: " + "$($JCHttpResponse.Result.StatusCode)")
+                    } else {
+                        break
+                    }
+                    if ($resultCounter -eq $maxRetries) {
+                        break
+                    } else {
+                        Write-Warning ("503: Service Unavailable - retrying in " + ($resultCounter * 5) + " seconds")
+                        Start-Sleep -Seconds ($resultCounter * 5)
+                    }
+                } while ($resultCounter -lt $maxRetries)
                 Write-Debug ('HttpRequest: ' + $JCHttpRequest);
                 Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
                 Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);
                 # Write-Debug ('HttpResponseContent: ' + $JCHttpResponseContent.Result);
-                $Result = If ('Results' -in $Result.PSObject.Properties.Name)
-                {
+                $Result = If ('Results' -in $Result.PSObject.Properties.Name) {
                     $Result.results
-                }
-                Else
-                {
+                } Else {
                     $Result
                 }
                 If (-not [System.String]::IsNullOrEmpty($Result))
@@ -213,27 +222,37 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
                     $Results += $Result;
                     $PSBoundParameters.Skip += $ResultCount
                 }
-            }
-            While ($ResultCount -eq $PSBoundParameters.Limit -and -not [System.String]::IsNullOrEmpty($Result))
         }
-        Else
-        {
+            While ($ResultCount -eq $PSBoundParameters.Limit -and -not [System.String]::IsNullOrEmpty($Result))
+        } Else {
             $PSBoundParameters.Remove('Paginate') | Out-Null
-            $Result = JumpCloud.SDK.V2.internal\Get-JcSdkInternalPolicyTraverseSystem @PSBoundParameters
+            $maxRetries = 4
+            $resultCounter = 0
+            do {
+                $resultCounter++
+                $Result = JumpCloud.SDK.V2.internal\Get-JcSdkInternalPolicyTraverseSystem @PSBoundParameters
+                If ($JCHttpResponse.Result.StatusCode -eq 503) {
+                    Write-Debug ("StatusCode: " + "$($JCHttpResponse.Result.StatusCode)")
+                } else {
+                    break
+                }
+                if ($resultCounter -eq $maxRetries) {
+                    break
+                } else {
+                    Write-Warning ("503: Service Unavailable - retrying in " + ($resultCounter * 5) + " seconds")
+                    Start-Sleep -Seconds ($resultCounter * 5)
+                }
+            } while ($resultCounter -lt $maxRetries)
             Write-Debug ('HttpRequest: ' + $JCHttpRequest);
             Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
             Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);
             # Write-Debug ('HttpResponseContent: ' + $JCHttpResponseContent.Result);
-            $Result = If ('Results' -in $Result.PSObject.Properties.Name)
-            {
+            $Result = If ('Results' -in $Result.PSObject.Properties.Name) {
                 $Result.results
-            }
-            Else
-            {
+            } Else {
                 $Result
             }
-            If (-not [System.String]::IsNullOrEmpty($Result))
-            {
+            If (-not [System.String]::IsNullOrEmpty($Result)) {
                 $Results += $Result;
             }
         }

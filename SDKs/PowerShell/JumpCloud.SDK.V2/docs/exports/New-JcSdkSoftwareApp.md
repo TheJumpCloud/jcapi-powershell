@@ -230,6 +230,9 @@ BODY <ISoftwareApp>: Software Application Package
     - `[GoogleAndroidVersionCode <Int32?>]`: The current version of the web app.
     - `[Location <String>]`: Repository where the app is located within the package manager
     - `[LocationObjectId <String>]`: ID of the repository where the app is located within the package manager
+    - `[MicrosoftStoreDoNotUpdate <Boolean?>]`: Indicates whether the app can be updated or not.
+    - `[MicrosoftStoreNonRemovable <Boolean?>]`: Indicates whether the app is removable by the users or not.
+    - `[MicrosoftStorePackageFamilyName <String>]`: Package Family Name for the app from Microsoft App Store.
     - `[ObjectId <String>]`: 
     - `[PackageId <String>]`: 
     - `[PackageKind <String>]`: The package manifest kind (ex: software-package).
@@ -291,6 +294,9 @@ SETTINGS <ISoftwareAppSettings[]>: .
   - `[GoogleAndroidVersionCode <Int32?>]`: The current version of the web app.
   - `[Location <String>]`: Repository where the app is located within the package manager
   - `[LocationObjectId <String>]`: ID of the repository where the app is located within the package manager
+  - `[MicrosoftStoreDoNotUpdate <Boolean?>]`: Indicates whether the app can be updated or not.
+  - `[MicrosoftStoreNonRemovable <Boolean?>]`: Indicates whether the app is removable by the users or not.
+  - `[MicrosoftStorePackageFamilyName <String>]`: Package Family Name for the app from Microsoft App Store.
   - `[ObjectId <String>]`: 
   - `[PackageId <String>]`: 
   - `[PackageKind <String>]`: The package manifest kind (ex: software-package).

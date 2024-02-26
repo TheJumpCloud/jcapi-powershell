@@ -160,30 +160,36 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        If ($Paginate -and $PSCmdlet.ParameterSetName -in ('GetExpanded'))
-        {
+        If ($Paginate -and $PSCmdlet.ParameterSetName -in ('GetExpanded')) {
             $PSBoundParameters.Remove('Paginate') | Out-Null
-            Do
-            {
-                $Result = (JumpCloud.SDK.DirectoryInsights.internal\Get-JcSdkInternalEventDistinct @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
-                If ($JCHttpResponse.Result.Headers.Contains('X-Search_after'))
-                {
-                    If (-not [System.String]::IsNullOrEmpty($Result))
-                    {
+            Do {
+                $maxRetries = 4
+                $resultCounter = 0
+                do {
+                    $resultCounter++
+                    $Result = (JumpCloud.SDK.DirectoryInsights.internal\Get-JcSdkInternalEventDistinct @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
+                    If ($JCHttpResponse.Result.StatusCode -eq 503) {
+                        Write-Debug ("StatusCode: " + "$($JCHttpResponse.Result.StatusCode)")
+                    } else {
+                        break
+                    }
+                    if ($resultCounter -eq $maxRetries) {
+                        break
+                    } else {
+                        Write-Warning ("503: Service Unavailable - retrying in " + ($resultCounter * 5) + " seconds")
+                        Start-Sleep -Seconds ($resultCounter * 5)
+                    }
+                } while ($resultCounter -lt $maxRetries)
+                If ($JCHttpResponse.Result.Headers.Contains('X-Search_after')) {
+                    If (-not [System.String]::IsNullOrEmpty($Result)) {
                         $XResultSearchAfter = ($JCHttpResponse.Result.Headers.GetValues('X-Search_after') | ConvertFrom-Json);
-                        If ([System.String]::IsNullOrEmpty($PSBoundParameters.SearchAfter))
-                        {
-                            If ([System.String]::IsNullOrEmpty($PSBoundParameters.Body))
-                            {
+                        If ([System.String]::IsNullOrEmpty($PSBoundParameters.SearchAfter)) {
+                            If ([System.String]::IsNullOrEmpty($PSBoundParameters.Body)) {
                                 $PSBoundParameters.Add('SearchAfter', $XResultSearchAfter)
-                            }
-                            Else
-                            {
+                            } Else {
                                 $PSBoundParameters.Body.SearchAfter = $XResultSearchAfter
                             }
-                        }
-                        Else
-                        {
+                        } Else {
                             $PSBoundParameters.SearchAfter = $XResultSearchAfter
                         }
                         $XResultCount = $JCHttpResponse.Result.Headers.GetValues('X-Result-Count')
@@ -195,25 +201,36 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
                         Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);
                         # Write-Debug ('HttpResponseContent: ' + $JCHttpResponseContent.Result);
                     }
-                }
-                Else
-                {
+                } Else {
                     $Results += $Result
                     Break
                 }
             }
             While ($XResultCount -eq $XLimit -and -not [System.String]::IsNullOrEmpty($Result))
-        }
-        Else
-        {
+        } Else {
             $PSBoundParameters.Remove('Paginate') | Out-Null
-            $Result = (JumpCloud.SDK.DirectoryInsights.internal\Get-JcSdkInternalEventDistinct @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
+            $maxRetries = 4
+            $resultCounter = 0
+            do {
+                $resultCounter++
+                $Result = (JumpCloud.SDK.DirectoryInsights.internal\Get-JcSdkInternalEventDistinct @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
+                If ($JCHttpResponse.Result.StatusCode -eq 503) {
+                    Write-Debug ("StatusCode: " + "$($JCHttpResponse.Result.StatusCode)")
+                } else {
+                    break
+                }
+                if ($resultCounter -eq $maxRetries) {
+                    break
+                } else {
+                    Write-Warning ("503: Service Unavailable - retrying in " + ($resultCounter * 5) + " seconds")
+                    Start-Sleep -Seconds ($resultCounter * 5)
+                }
+            } while ($resultCounter -lt $maxRetries)
             Write-Debug ('HttpRequest: ' + $JCHttpRequest);
             Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
             Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);
             # Write-Debug ('HttpResponseContent: ' + $JCHttpResponseContent.Result);
-            If (-not [System.String]::IsNullOrEmpty($Result))
-            {
+            If (-not [System.String]::IsNullOrEmpty($Result)) {
                 $Results += $Result
             }
         }
