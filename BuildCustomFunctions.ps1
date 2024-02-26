@@ -191,20 +191,19 @@ Try {
             Do {
                 `$maxRetries = 4
                 `$resultCounter = 0
-                do {
+                :retryLoop do {
+                    try {
+                        `$Result = $ResultsLogic
+                        If ((`$JCHttpResponse.Result.StatusCode -ne 503) -or (`$resultCounter -eq `$maxRetries)) {
+                            break retry
+                        } else {
+                            Write-Warning ("503: Service Unavailable - retrying in " + (`$resultCounter * 5) + " seconds.")
+                        }
+                    } catch {
+                        Write-Warning ("An error occurred: `$_. Retrying...")
+                    }
                     `$resultCounter++
-                    `$Result = $ResultsLogic
-                    If (`$JCHttpResponse.Result.StatusCode -eq 503) {
-                        Write-Debug ("StatusCode: " + "`$(`$JCHttpResponse.Result.StatusCode)")
-                    } else {
-                        break
-                    }
-                    if (`$resultCounter -eq `$maxRetries) {
-                        break
-                    } else {
-                        Write-Warning ("503: Service Unavailable - retrying in " + (`$resultCounter * 5) + " seconds")
-                        Start-Sleep -Seconds (`$resultCounter * 5)
-                    }
+                    Start-Sleep -Seconds (`$resultCounter * 5)
                 } while (`$resultCounter -lt `$maxRetries)
                 If (`$JCHttpResponse.Result.Headers.Contains('X-Search_after')) {
                     If (-not [System.String]::IsNullOrEmpty(`$Result)) {
@@ -237,20 +236,19 @@ Try {
             `$PSBoundParameters.Remove('Paginate') | Out-Null
             `$maxRetries = 4
             `$resultCounter = 0
-            do {
+            :retryLoop do {
+                try {
+                    `$Result = $ResultsLogic
+                    If ((`$JCHttpResponse.Result.StatusCode -ne 503) -or (`$resultCounter -eq `$maxRetries)) {
+                        break retry
+                    } else {
+                        Write-Warning ("503: Service Unavailable - retrying in " + (`$resultCounter * 5) + " seconds.")
+                    }
+                } catch {
+                    Write-Warning ("An error occurred: `$_. Retrying...")
+                }
                 `$resultCounter++
-                `$Result = $ResultsLogic
-                If (`$JCHttpResponse.Result.StatusCode -eq 503) {
-                    Write-Debug ("StatusCode: " + "`$(`$JCHttpResponse.Result.StatusCode)")
-                } else {
-                    break
-                }
-                if (`$resultCounter -eq `$maxRetries) {
-                    break
-                } else {
-                    Write-Warning ("503: Service Unavailable - retrying in " + (`$resultCounter * 5) + " seconds")
-                    Start-Sleep -Seconds (`$resultCounter * 5)
-                }
+                Start-Sleep -Seconds (`$resultCounter * 5)
             } while (`$resultCounter -lt `$maxRetries)
             Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
             Write-Debug ('HttpRequestContent: ' + `$JCHttpRequestContent.Result);
@@ -265,20 +263,19 @@ Try {
                         $ProcessContent += @"
         `$maxRetries = 4
         `$resultCounter = 0
-        do {
+        :retryLoop do {
+            try {
+                `$Result = $ResultsLogic
+                If ((`$JCHttpResponse.Result.StatusCode -ne 503) -or (`$resultCounter -eq `$maxRetries)) {
+                    break retry
+                } else {
+                    Write-Warning ("503: Service Unavailable - retrying in " + (`$resultCounter * 5) + " seconds.")
+                }
+            } catch {
+                Write-Warning ("An error occurred: `$_. Retrying...")
+            }
             `$resultCounter++
-            `$Result = $ResultsLogic
-            If (`$JCHttpResponse.Result.StatusCode -eq 503) {
-                Write-Debug ("StatusCode: " + "`$(`$JCHttpResponse.Result.StatusCode)")
-            } else {
-                break
-            }
-            if (`$resultCounter -eq `$maxRetries) {
-                break
-            } else {
-                Write-Warning ("503: Service Unavailable - retrying in " + (`$resultCounter * 5) + " seconds")
-                Start-Sleep -Seconds (`$resultCounter * 5)
-            }
+            Start-Sleep -Seconds (`$resultCounter * 5)
         } while (`$resultCounter -lt `$maxRetries)
         Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
         Write-Debug ('HttpRequestContent: ' + `$JCHttpRequestContent.Result);
@@ -352,20 +349,19 @@ Try {
                         $ProcessContent += @"
                 `$maxRetries = 4
                 `$resultCounter = 0
-                do {
+                :retryLoop do {
+                    try {
+                        `$Result = $ResultsLogic
+                        If ((`$JCHttpResponse.Result.StatusCode -ne 503) -or (`$resultCounter -eq `$maxRetries)) {
+                            break retry
+                        } else {
+                            Write-Warning ("503: Service Unavailable - retrying in " + (`$resultCounter * 5) + " seconds.")
+                        }
+                    } catch {
+                        Write-Warning ("An error occurred: `$_. Retrying...")
+                    }
                     `$resultCounter++
-                    `$Result = $ResultsLogic
-                    If (`$JCHttpResponse.Result.StatusCode -eq 503) {
-                        Write-Debug ("StatusCode: " + "`$(`$JCHttpResponse.Result.StatusCode)")
-                    } else {
-                        break
-                    }
-                    if (`$resultCounter -eq `$maxRetries) {
-                        break
-                    } else {
-                        Write-Warning ("503: Service Unavailable - retrying in " + (`$resultCounter * 5) + " seconds")
-                        Start-Sleep -Seconds (`$resultCounter * 5)
-                    }
+                    Start-Sleep -Seconds (`$resultCounter * 5)
                 } while (`$resultCounter -lt `$maxRetries)
                 Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
                 Write-Debug ('HttpRequestContent: ' + `$JCHttpRequestContent.Result);
@@ -424,20 +420,19 @@ Try {
             `$PSBoundParameters.Remove('Paginate') | Out-Null
             `$maxRetries = 4
             `$resultCounter = 0
-            do {
+            :retryLoop do {
+                try {
+                    `$Result = $ResultsLogic
+                    If ((`$JCHttpResponse.Result.StatusCode -ne 503) -or (`$resultCounter -eq `$maxRetries)) {
+                        break retry
+                    } else {
+                        Write-Warning ("503: Service Unavailable - retrying in " + (`$resultCounter * 5) + " seconds.")
+                    }
+                } catch {
+                    Write-Warning ("An error occurred: `$_. Retrying...")
+                }
                 `$resultCounter++
-                `$Result = $ResultsLogic
-                If (`$JCHttpResponse.Result.StatusCode -eq 503) {
-                    Write-Debug ("StatusCode: " + "`$(`$JCHttpResponse.Result.StatusCode)")
-                } else {
-                    break
-                }
-                if (`$resultCounter -eq `$maxRetries) {
-                    break
-                } else {
-                    Write-Warning ("503: Service Unavailable - retrying in " + (`$resultCounter * 5) + " seconds.")
-                    Start-Sleep -Seconds (`$resultCounter * 5)
-                }
+                Start-Sleep -Seconds (`$resultCounter * 5)
             } while (`$resultCounter -lt `$maxRetries)
             Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
             Write-Debug ('HttpRequestContent: ' + `$JCHttpRequestContent.Result);
@@ -459,20 +454,19 @@ Try {
             `$PSBoundParameters.Remove('Paginate') | Out-Null
             `$maxRetries = 4
             `$resultCounter = 0
-            do {
+            :retryLoop do {
+                try {
+                    `$Result = $ResultsLogic
+                    If ((`$JCHttpResponse.Result.StatusCode -ne 503) -or (`$resultCounter -eq `$maxRetries)) {
+                        break retry
+                    } else {
+                        Write-Warning ("503: Service Unavailable - retrying in " + (`$resultCounter * 5) + " seconds.")
+                    }
+                } catch {
+                    Write-Warning ("An error occurred: `$_. Retrying...")
+                }
                 `$resultCounter++
-                `$Result = $ResultsLogic
-                If (`$JCHttpResponse.Result.StatusCode -eq 503) {
-                    Write-Debug ("StatusCode: " + "`$(`$JCHttpResponse.Result.StatusCode)")
-                } else {
-                    break
-                }
-                if (`$resultCounter -eq `$maxRetries) {
-                    break
-                } else {
-                    Write-Warning ("503: Service Unavailable - retrying in " + (`$resultCounter * 5) + " seconds")
-                    Start-Sleep -Seconds (`$resultCounter * 5)
-                }
+                Start-Sleep -Seconds (`$resultCounter * 5)
             } while (`$resultCounter -lt `$maxRetries)
             Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
             Write-Debug ('HttpRequestContent: ' + `$JCHttpRequestContent.Result);
@@ -493,20 +487,19 @@ Try {
                         $ProcessContent += @"
         `$maxRetries = 4
         `$resultCounter = 0
-        do {
+        :retryLoop do {
+            try {
+                `$Result = $ResultsLogic
+                If ((`$JCHttpResponse.Result.StatusCode -ne 503) -or (`$resultCounter -eq `$maxRetries)) {
+                    break retry
+                } else {
+                    Write-Warning ("503: Service Unavailable - retrying in " + (`$resultCounter * 5) + " seconds.")
+                }
+            } catch {
+                Write-Warning ("An error occurred: `$_. Retrying...")
+            }
             `$resultCounter++
-            `$Result = $ResultsLogic
-            If (`$JCHttpResponse.Result.StatusCode -eq 503) {
-                Write-Debug ("StatusCode: " + "`$(`$JCHttpResponse.Result.StatusCode)")
-            } else {
-                break
-            }
-            if (`$resultCounter -eq `$maxRetries) {
-                break
-            } else {
-                Write-Warning ("503: Service Unavailable - retrying in " + (`$resultCounter * 5) + " seconds")
-                Start-Sleep -Seconds (`$resultCounter * 5)
-            }
+            Start-Sleep -Seconds (`$resultCounter * 5)
         } while (`$resultCounter -lt `$maxRetries)
         Write-Debug ('HttpRequest: ' + `$JCHttpRequest);
         Write-Debug ('HttpRequestContent: ' + `$JCHttpRequestContent.Result);
@@ -564,20 +557,19 @@ Try {
                 $ProcessContent += @"
         `$maxRetries = 4
         `$resultCounter = 0
-        do {
+        :retryLoop do {
+            try {
+                `$Result = $ResultsLogic
+                If ((`$JCHttpResponse.Result.StatusCode -ne 503) -or (`$resultCounter -eq `$maxRetries)) {
+                    break retry
+                } else {
+                    Write-Warning ("503: Service Unavailable - retrying in " + (`$resultCounter * 5) + " seconds.")
+                }
+            } catch {
+                Write-Warning ("An error occurred: `$_. Retrying...")
+            }
             `$resultCounter++
-            `$Results = $ResultsLogic
-            If (`$JCHttpResponse.Result.StatusCode -eq 503) {
-                Write-Debug ("StatusCode: " + "`$(`$JCHttpResponse.Result.StatusCode)")
-            } else {
-                break
-            }
-            if (`$resultCounter -eq `$maxRetries) {
-                break
-            } else {
-                Write-Warning ("503: Service Unavailable - retrying in " + (`$resultCounter * 5) + " seconds")
-                Start-Sleep -Seconds (`$resultCounter * 5)
-            }
+            Start-Sleep -Seconds (`$resultCounter * 5)
         } while (`$resultCounter -lt `$maxRetries)
 "@
                 # Build "End" block
