@@ -435,7 +435,7 @@ Try {
                 if (`$resultCounter -eq `$maxRetries) {
                     break
                 } else {
-                    Write-Warning ("503: Service Unavailable - retrying in " + (`$resultCounter * 5) + " seconds")
+                    Write-Warning ("503: Service Unavailable - retrying in " + (`$resultCounter * 5) + " seconds.")
                     Start-Sleep -Seconds (`$resultCounter * 5)
                 }
             } while (`$resultCounter -lt `$maxRetries)
