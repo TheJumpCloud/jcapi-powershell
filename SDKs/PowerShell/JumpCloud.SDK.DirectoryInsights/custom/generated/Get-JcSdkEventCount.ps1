@@ -197,20 +197,20 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
             Do {
                 $maxRetries = 4
                 $resultCounter = 0
-                do {
+                :retryLoop do {
                     $resultCounter++
-                    $Result = JumpCloud.SDK.DirectoryInsights.internal\Get-JcSdkInternalEventCount @PSBoundParameters
-                    If ($JCHttpResponse.Result.StatusCode -eq 503) {
-                        Write-Debug ("StatusCode: " + "$($JCHttpResponse.Result.StatusCode)")
-                    } else {
-                        break
+                    try {
+                        $Result = JumpCloud.SDK.DirectoryInsights.internal\Get-JcSdkInternalEventCount @PSBoundParameters -ErrorAction Stop
+                        break retryLoop
+                    } catch {
+                        If (($JCHttpResponse.Result.StatusCode -ne 503) -or ($resultCounter -eq $maxRetries)) {
+                            throw $_
+                        } else {
+                            Write-Warning ("An error occurred: $_.")
+                            Write-Warning ("503: Service Unavailable - retrying in " + ($resultCounter * 5) + " seconds.")
+                        }
                     }
-                    if ($resultCounter -eq $maxRetries) {
-                        break
-                    } else {
-                        Write-Warning ("503: Service Unavailable - retrying in " + ($resultCounter * 5) + " seconds")
-                        Start-Sleep -Seconds ($resultCounter * 5)
-                    }
+                    Start-Sleep -Seconds ($resultCounter * 5)
                 } while ($resultCounter -lt $maxRetries)
                 If ($JCHttpResponse.Result.Headers.Contains('X-Search_after')) {
                     If (-not [System.String]::IsNullOrEmpty($Result)) {
@@ -243,20 +243,20 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
             $PSBoundParameters.Remove('Paginate') | Out-Null
             $maxRetries = 4
             $resultCounter = 0
-            do {
+            :retryLoop do {
                 $resultCounter++
-                $Result = JumpCloud.SDK.DirectoryInsights.internal\Get-JcSdkInternalEventCount @PSBoundParameters
-                If ($JCHttpResponse.Result.StatusCode -eq 503) {
-                    Write-Debug ("StatusCode: " + "$($JCHttpResponse.Result.StatusCode)")
-                } else {
-                    break
+                try {
+                    $Result = JumpCloud.SDK.DirectoryInsights.internal\Get-JcSdkInternalEventCount @PSBoundParameters -ErrorAction Stop
+                    break retryLoop
+                } catch {
+                    If (($JCHttpResponse.Result.StatusCode -ne 503) -or ($resultCounter -eq $maxRetries)) {
+                        throw $_
+                    } else {
+                        Write-Warning ("An error occurred: $_.")
+                        Write-Warning ("503: Service Unavailable - retrying in " + ($resultCounter * 5) + " seconds.")
+                    }
                 }
-                if ($resultCounter -eq $maxRetries) {
-                    break
-                } else {
-                    Write-Warning ("503: Service Unavailable - retrying in " + ($resultCounter * 5) + " seconds")
-                    Start-Sleep -Seconds ($resultCounter * 5)
-                }
+                Start-Sleep -Seconds ($resultCounter * 5)
             } while ($resultCounter -lt $maxRetries)
             Write-Debug ('HttpRequest: ' + $JCHttpRequest);
             Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
