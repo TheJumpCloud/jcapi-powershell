@@ -110,28 +110,38 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     }
     Process
     {
-        If ($Paginate -and $PSCmdlet.ParameterSetName -in ('List'))
-        {
+        If ($Paginate -and $PSCmdlet.ParameterSetName -in ('List')) {
             $PSBoundParameters.Remove('Paginate') | Out-Null
-            If ([System.String]::IsNullOrEmpty($PSBoundParameters.maxResults))
-            {
+            If ([System.String]::IsNullOrEmpty($PSBoundParameters.maxResults)) {
                 $PSBoundParameters.Add('maxResults', 100)
             }
-            Do
-            {
+            Do {
                 Write-Debug ("Limit: $($PSBoundParameters.maxResults); ");
                 Write-Debug ("Skip: $($PSBoundParameters.pageToken); ");
-                $Result = (JumpCloud.SDK.V2.internal\Get-JcSdkInternalGsuiteUsersToImportFormatted @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
+                $maxRetries = 4
+                $resultCounter = 0
+                :retryLoop do {
+                    $resultCounter++
+                    try {
+                        $Result = (JumpCloud.SDK.V2.internal\Get-JcSdkInternalGsuiteUsersToImportFormatted -ErrorAction Stop @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
+                        break retryLoop
+                    } catch {
+                        If (($JCHttpResponse.Result.StatusCode -ne 503) -or ($resultCounter -eq $maxRetries)) {
+                            throw $_
+                        } else {
+                            Write-Warning ("An error occurred: $_.")
+                            Write-Warning ("503: Service Unavailable - retrying in " + ($resultCounter * 5) + " seconds.")
+                        }
+                    }
+                    Start-Sleep -Seconds ($resultCounter * 5)
+                } while ($resultCounter -lt $maxRetries)
                 Write-Debug ('HttpRequest: ' + $JCHttpRequest);
                 Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
                 Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);
                 # Write-Debug ('HttpResponseContent: ' + $JCHttpResponseContent.Result);
-                $Result = If ('Results' -in $Result.PSObject.Properties.Name)
-                {
+                $Result = If ('Results' -in $Result.PSObject.Properties.Name) {
                     $Result.results
-                }
-                Else
-                {
+                } Else {
                     $Result
                 }
                 If (-not [System.String]::IsNullOrEmpty($Result))
@@ -140,27 +150,37 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
                     $Results += $Result.users;
                     $PSBoundParameters.pageToken = $result.nextPageToken
                 }
-            }
-            While ($ResultCount -eq $PSBoundParameters.maxResults -and -not [System.String]::IsNullOrEmpty($Result))
         }
-        Else
-        {
+            While ($ResultCount -eq $PSBoundParameters.maxResults -and -not [System.String]::IsNullOrEmpty($Result))
+        } Else {
             $PSBoundParameters.Remove('Paginate') | Out-Null
-            $Result = (JumpCloud.SDK.V2.internal\Get-JcSdkInternalGsuiteUsersToImportFormatted @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
+            $maxRetries = 4
+            $resultCounter = 0
+            :retryLoop do {
+                $resultCounter++
+                try {
+                    $Result = (JumpCloud.SDK.V2.internal\Get-JcSdkInternalGsuiteUsersToImportFormatted -ErrorAction Stop @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
+                    break retryLoop
+                } catch {
+                    If (($JCHttpResponse.Result.StatusCode -ne 503) -or ($resultCounter -eq $maxRetries)) {
+                        throw $_
+                    } else {
+                        Write-Warning ("An error occurred: $_.")
+                        Write-Warning ("503: Service Unavailable - retrying in " + ($resultCounter * 5) + " seconds.")
+                    }
+                }
+                Start-Sleep -Seconds ($resultCounter * 5)
+            } while ($resultCounter -lt $maxRetries)
             Write-Debug ('HttpRequest: ' + $JCHttpRequest);
             Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
             Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);
             # Write-Debug ('HttpResponseContent: ' + $JCHttpResponseContent.Result);
-            $Result = If ('Results' -in $Result.PSObject.Properties.Name)
-            {
+            $Result = If ('Results' -in $Result.PSObject.Properties.Name) {
                 $Result.results
-            }
-            Else
-            {
+            } Else {
                 $Result
             }
-            If (-not [System.String]::IsNullOrEmpty($Result))
-            {
+            If (-not [System.String]::IsNullOrEmpty($Result)) {
                 $Results += $Result.users;
             }
         }
