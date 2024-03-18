@@ -100,9 +100,6 @@
             <Label>Label</Label>
           </TableColumnHeader>
           <TableColumnHeader>
-            <Label>Options</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
             <Label>Position</Label>
           </TableColumnHeader>
           <TableColumnHeader>
@@ -110,9 +107,6 @@
           </TableColumnHeader>
           <TableColumnHeader>
             <Label>Required</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>Toggle</Label>
           </TableColumnHeader>
           <TableColumnHeader>
             <Label>Type</Label>
@@ -131,9 +125,6 @@
                 <PropertyName>Label</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
-                <PropertyName>Options</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
                 <PropertyName>Position</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
@@ -141,9 +132,6 @@
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>Required</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>Toggle</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>Type</PropertyName>
@@ -223,9 +211,6 @@
             <Label>Mutable</Label>
           </TableColumnHeader>
           <TableColumnHeader>
-            <Label>Options</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
             <Label>Position</Label>
           </TableColumnHeader>
           <TableColumnHeader>
@@ -233,9 +218,6 @@
           </TableColumnHeader>
           <TableColumnHeader>
             <Label>Required</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>Toggle</Label>
           </TableColumnHeader>
           <TableColumnHeader>
             <Label>Type</Label>
@@ -254,9 +236,6 @@
                 <PropertyName>Mutable</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
-                <PropertyName>Options</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
                 <PropertyName>Position</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
@@ -264,9 +243,6 @@
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>Required</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>Toggle</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>Type</PropertyName>
@@ -398,17 +374,14 @@
       </TableControl>
     </View>
     <View>
-      <Name>JumpCloud.SDK.V1.Models.ApplicationConfigIdpCertificate</Name>
+      <Name>JumpCloud.SDK.V1.Models.ApplicationConfigDeclareRedirectEndpoint</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V1.Models.ApplicationConfigIdpCertificate</TypeName>
+        <TypeName>JumpCloud.SDK.V1.Models.ApplicationConfigDeclareRedirectEndpoint</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
           <TableColumnHeader>
             <Label>Label</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>Options</Label>
           </TableColumnHeader>
           <TableColumnHeader>
             <Label>Position</Label>
@@ -418,9 +391,6 @@
           </TableColumnHeader>
           <TableColumnHeader>
             <Label>Required</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>Toggle</Label>
           </TableColumnHeader>
           <TableColumnHeader>
             <Label>Type</Label>
@@ -439,7 +409,112 @@
                 <PropertyName>Label</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
-                <PropertyName>Options</PropertyName>
+                <PropertyName>Position</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>ReadOnly</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Required</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Type</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Value</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Visible</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>JumpCloud.SDK.V1.Models.ApplicationConfigDeclareRedirectEndpointTooltip</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloud.SDK.V1.Models.ApplicationConfigDeclareRedirectEndpointTooltip</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Template</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Template</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>JumpCloud.SDK.V1.Models.ApplicationConfigDeclareRedirectEndpointTooltipVariables</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloud.SDK.V1.Models.ApplicationConfigDeclareRedirectEndpointTooltipVariables</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Icon</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Message</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Icon</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Message</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>JumpCloud.SDK.V1.Models.ApplicationConfigDefaultTargetUrl</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloud.SDK.V1.Models.ApplicationConfigDefaultTargetUrl</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Label</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Position</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>ReadOnly</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Required</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Type</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Value</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Visible</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Label</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>Position</PropertyName>
@@ -451,7 +526,226 @@
                 <PropertyName>Required</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
-                <PropertyName>Toggle</PropertyName>
+                <PropertyName>Type</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Value</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Visible</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>JumpCloud.SDK.V1.Models.ApplicationConfigDefaultTargetUrlTooltip</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloud.SDK.V1.Models.ApplicationConfigDefaultTargetUrlTooltip</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Template</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Template</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>JumpCloud.SDK.V1.Models.ApplicationConfigDefaultTargetUrlTooltipVariables</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloud.SDK.V1.Models.ApplicationConfigDefaultTargetUrlTooltipVariables</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Icon</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Message</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Icon</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Message</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>JumpCloud.SDK.V1.Models.ApplicationConfigGroupsAttributeName</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloud.SDK.V1.Models.ApplicationConfigGroupsAttributeName</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>DependsOnProperty</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Label</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Position</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>ReadOnly</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Required</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Type</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Value</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Visible</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>DependsOnProperty</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Label</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Position</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>ReadOnly</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Required</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Type</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Value</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Visible</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>JumpCloud.SDK.V1.Models.ApplicationConfigGroupsAttributeNameTooltip</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloud.SDK.V1.Models.ApplicationConfigGroupsAttributeNameTooltip</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Template</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Template</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>JumpCloud.SDK.V1.Models.ApplicationConfigGroupsAttributeNameTooltipVariables</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloud.SDK.V1.Models.ApplicationConfigGroupsAttributeNameTooltipVariables</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Icon</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Message</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Icon</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Message</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>JumpCloud.SDK.V1.Models.ApplicationConfigIdpCertificate</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloud.SDK.V1.Models.ApplicationConfigIdpCertificate</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Label</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Position</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>ReadOnly</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Required</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Type</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Value</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Visible</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Label</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Position</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>ReadOnly</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Required</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>Type</PropertyName>
@@ -528,9 +822,6 @@
             <Label>Label</Label>
           </TableColumnHeader>
           <TableColumnHeader>
-            <Label>Options</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
             <Label>Position</Label>
           </TableColumnHeader>
           <TableColumnHeader>
@@ -538,9 +829,6 @@
           </TableColumnHeader>
           <TableColumnHeader>
             <Label>Required</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>Toggle</Label>
           </TableColumnHeader>
           <TableColumnHeader>
             <Label>Type</Label>
@@ -559,9 +847,6 @@
                 <PropertyName>Label</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
-                <PropertyName>Options</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
                 <PropertyName>Position</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
@@ -569,9 +854,6 @@
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>Required</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>Toggle</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>Type</PropertyName>
@@ -638,17 +920,14 @@
       </TableControl>
     </View>
     <View>
-      <Name>JumpCloud.SDK.V1.Models.ApplicationConfigIdpPrivateKey</Name>
+      <Name>JumpCloud.SDK.V1.Models.ApplicationConfigIdpInitUrl</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V1.Models.ApplicationConfigIdpPrivateKey</TypeName>
+        <TypeName>JumpCloud.SDK.V1.Models.ApplicationConfigIdpInitUrl</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
           <TableColumnHeader>
             <Label>Label</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>Options</Label>
           </TableColumnHeader>
           <TableColumnHeader>
             <Label>Position</Label>
@@ -658,9 +937,6 @@
           </TableColumnHeader>
           <TableColumnHeader>
             <Label>Required</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>Toggle</Label>
           </TableColumnHeader>
           <TableColumnHeader>
             <Label>Type</Label>
@@ -679,9 +955,6 @@
                 <PropertyName>Label</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
-                <PropertyName>Options</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
                 <PropertyName>Position</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
@@ -691,7 +964,112 @@
                 <PropertyName>Required</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
-                <PropertyName>Toggle</PropertyName>
+                <PropertyName>Type</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Value</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Visible</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>JumpCloud.SDK.V1.Models.ApplicationConfigIdpInitUrlTooltip</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloud.SDK.V1.Models.ApplicationConfigIdpInitUrlTooltip</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Template</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Template</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>JumpCloud.SDK.V1.Models.ApplicationConfigIdpInitUrlTooltipVariables</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloud.SDK.V1.Models.ApplicationConfigIdpInitUrlTooltipVariables</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Icon</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Message</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Icon</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Message</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>JumpCloud.SDK.V1.Models.ApplicationConfigIdpPrivateKey</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloud.SDK.V1.Models.ApplicationConfigIdpPrivateKey</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Label</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Position</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>ReadOnly</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Required</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Type</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Value</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Visible</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Label</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Position</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>ReadOnly</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Required</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>Type</PropertyName>
@@ -733,6 +1111,250 @@
       <Name>JumpCloud.SDK.V1.Models.ApplicationConfigIdpPrivateKeyTooltipVariables</Name>
       <ViewSelectedBy>
         <TypeName>JumpCloud.SDK.V1.Models.ApplicationConfigIdpPrivateKeyTooltipVariables</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Icon</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Message</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Icon</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Message</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>JumpCloud.SDK.V1.Models.ApplicationConfigIncludeGroups</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloud.SDK.V1.Models.ApplicationConfigIncludeGroups</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Label</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Position</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>ReadOnly</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Required</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Type</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Value</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Visible</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Label</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Position</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>ReadOnly</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Required</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Type</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Value</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Visible</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>JumpCloud.SDK.V1.Models.ApplicationConfigIncludeGroupsTooltip</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloud.SDK.V1.Models.ApplicationConfigIncludeGroupsTooltip</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Template</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Template</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>JumpCloud.SDK.V1.Models.ApplicationConfigIncludeGroupsTooltipVariables</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloud.SDK.V1.Models.ApplicationConfigIncludeGroupsTooltipVariables</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Icon</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Message</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Icon</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Message</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>JumpCloud.SDK.V1.Models.ApplicationConfigOverrideNameIdFormat</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloud.SDK.V1.Models.ApplicationConfigOverrideNameIdFormat</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Label</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Position</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>ReadOnly</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Required</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Type</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Value</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Visible</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Label</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Position</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>ReadOnly</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Required</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Type</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Value</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Visible</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>JumpCloud.SDK.V1.Models.ApplicationConfigOverrideNameIdFormatOptionsItem</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloud.SDK.V1.Models.ApplicationConfigOverrideNameIdFormatOptionsItem</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Text</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Value</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Text</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Value</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>JumpCloud.SDK.V1.Models.ApplicationConfigOverrideNameIdFormatTooltip</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloud.SDK.V1.Models.ApplicationConfigOverrideNameIdFormatTooltip</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Template</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Template</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>JumpCloud.SDK.V1.Models.ApplicationConfigOverrideNameIdFormatTooltipVariables</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloud.SDK.V1.Models.ApplicationConfigOverrideNameIdFormatTooltipVariables</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -816,9 +1438,95 @@
       </TableControl>
     </View>
     <View>
-      <Name>JumpCloud.SDK.V1.Models.ApplicationConfigSignAssertionTooltip</Name>
+      <Name>JumpCloud.SDK.V1.Models.ApplicationConfigSignatureAlgorithm</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V1.Models.ApplicationConfigSignAssertionTooltip</TypeName>
+        <TypeName>JumpCloud.SDK.V1.Models.ApplicationConfigSignatureAlgorithm</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Label</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Position</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>ReadOnly</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Required</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Type</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Value</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Visible</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Label</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Position</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>ReadOnly</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Required</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Type</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Value</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Visible</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>JumpCloud.SDK.V1.Models.ApplicationConfigSignatureAlgorithmOptionsItem</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloud.SDK.V1.Models.ApplicationConfigSignatureAlgorithmOptionsItem</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Text</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Value</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Text</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Value</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>JumpCloud.SDK.V1.Models.ApplicationConfigSignatureAlgorithmTooltip</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloud.SDK.V1.Models.ApplicationConfigSignatureAlgorithmTooltip</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -838,9 +1546,9 @@
       </TableControl>
     </View>
     <View>
-      <Name>JumpCloud.SDK.V1.Models.ApplicationConfigSignAssertionTooltipVariables</Name>
+      <Name>JumpCloud.SDK.V1.Models.ApplicationConfigSignatureAlgorithmTooltipVariables</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V1.Models.ApplicationConfigSignAssertionTooltipVariables</TypeName>
+        <TypeName>JumpCloud.SDK.V1.Models.ApplicationConfigSignatureAlgorithmTooltipVariables</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -924,9 +1632,67 @@
       </TableControl>
     </View>
     <View>
-      <Name>JumpCloud.SDK.V1.Models.ApplicationConfigSignResponseTooltip</Name>
+      <Name>JumpCloud.SDK.V1.Models.ApplicationConfigSpCertificate</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V1.Models.ApplicationConfigSignResponseTooltip</TypeName>
+        <TypeName>JumpCloud.SDK.V1.Models.ApplicationConfigSpCertificate</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Label</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Position</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>ReadOnly</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Required</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Type</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Value</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Visible</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Label</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Position</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>ReadOnly</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Required</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Type</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Value</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Visible</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>JumpCloud.SDK.V1.Models.ApplicationConfigSpCertificateTooltip</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloud.SDK.V1.Models.ApplicationConfigSpCertificateTooltip</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -946,9 +1712,9 @@
       </TableControl>
     </View>
     <View>
-      <Name>JumpCloud.SDK.V1.Models.ApplicationConfigSignResponseTooltipVariables</Name>
+      <Name>JumpCloud.SDK.V1.Models.ApplicationConfigSpCertificateTooltipVariables</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V1.Models.ApplicationConfigSignResponseTooltipVariables</TypeName>
+        <TypeName>JumpCloud.SDK.V1.Models.ApplicationConfigSpCertificateTooltipVariables</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -984,9 +1750,6 @@
             <Label>Label</Label>
           </TableColumnHeader>
           <TableColumnHeader>
-            <Label>Options</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
             <Label>Position</Label>
           </TableColumnHeader>
           <TableColumnHeader>
@@ -994,9 +1757,6 @@
           </TableColumnHeader>
           <TableColumnHeader>
             <Label>Required</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>Toggle</Label>
           </TableColumnHeader>
           <TableColumnHeader>
             <Label>Type</Label>
@@ -1015,9 +1775,6 @@
                 <PropertyName>Label</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
-                <PropertyName>Options</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
                 <PropertyName>Position</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
@@ -1025,9 +1782,6 @@
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>Required</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>Toggle</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>Type</PropertyName>
@@ -1177,6 +1931,142 @@
       <Name>JumpCloud.SDK.V1.Models.ApplicationConfigSpErrorFlowTooltipVariables</Name>
       <ViewSelectedBy>
         <TypeName>JumpCloud.SDK.V1.Models.ApplicationConfigSpErrorFlowTooltipVariables</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Icon</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Message</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Icon</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Message</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>JumpCloud.SDK.V1.Models.ApplicationConfigSubjectField</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloud.SDK.V1.Models.ApplicationConfigSubjectField</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Label</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Position</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>ReadOnly</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Required</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Type</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Value</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Visible</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Label</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Position</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>ReadOnly</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Required</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Type</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Value</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Visible</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>JumpCloud.SDK.V1.Models.ApplicationConfigSubjectFieldOptionsItem</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloud.SDK.V1.Models.ApplicationConfigSubjectFieldOptionsItem</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Text</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Value</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Text</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Value</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>JumpCloud.SDK.V1.Models.ApplicationConfigSubjectFieldTooltip</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloud.SDK.V1.Models.ApplicationConfigSubjectFieldTooltip</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Template</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Template</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>JumpCloud.SDK.V1.Models.ApplicationConfigSubjectFieldTooltipVariables</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloud.SDK.V1.Models.ApplicationConfigSubjectFieldTooltipVariables</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -3973,6 +4863,9 @@
       <TableControl>
         <TableHeaders>
           <TableColumnHeader>
+            <Label>Duplicate</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
             <Label>Failed</Label>
           </TableColumnHeader>
           <TableColumnHeader>
@@ -3984,10 +4877,16 @@
           <TableColumnHeader>
             <Label>Total</Label>
           </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>UnsupportedOS</Label>
+          </TableColumnHeader>
         </TableHeaders>
         <TableRowEntries>
           <TableRowEntry>
             <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Duplicate</PropertyName>
+              </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>Failed</PropertyName>
               </TableColumnItem>
@@ -3999,6 +4898,9 @@
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>Total</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>UnsupportedOS</PropertyName>
               </TableColumnItem>
             </TableColumnItems>
           </TableRowEntry>
@@ -5936,6 +6838,40 @@
       </TableControl>
     </View>
     <View>
+      <Name>JumpCloud.SDK.V1.Models.RestrictedFields</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloud.SDK.V1.Models.RestrictedFields</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Field</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Id</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Type</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Field</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Id</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Type</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
       <Name>JumpCloud.SDK.V1.Models.Search</Name>
       <ViewSelectedBy>
         <TypeName>JumpCloud.SDK.V1.Models.Search</TypeName>
@@ -7459,40 +8395,6 @@
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>Value</PropertyName>
-              </TableColumnItem>
-            </TableColumnItems>
-          </TableRowEntry>
-        </TableRowEntries>
-      </TableControl>
-    </View>
-    <View>
-      <Name>JumpCloud.SDK.V1.Models.SystemuserreturnRestrictedFieldsItem</Name>
-      <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V1.Models.SystemuserreturnRestrictedFieldsItem</TypeName>
-      </ViewSelectedBy>
-      <TableControl>
-        <TableHeaders>
-          <TableColumnHeader>
-            <Label>Field</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>Id</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>Type</Label>
-          </TableColumnHeader>
-        </TableHeaders>
-        <TableRowEntries>
-          <TableRowEntry>
-            <TableColumnItems>
-              <TableColumnItem>
-                <PropertyName>Field</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>Id</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>Type</PropertyName>
               </TableColumnItem>
             </TableColumnItems>
           </TableRowEntry>

@@ -14,6 +14,8 @@ The JumpCloud V1 PowerShell SDK
 ### [Clear-JcSdkSystem](Clear-JcSdkSystem.md)
 This endpoint allows you to run the erase command on the specified device.
 If a device is offline, the command will be run when the device becomes available.
+Only supported on Linux and Windows devices.
+Use Apple MDM security commands for macOS devices.
 
 #### Sample Request
 ```
@@ -206,6 +208,8 @@ This endpoint allows you to expire a user's password.
 ### [Lock-JcSdkSystem](Lock-JcSdkSystem.md)
 This endpoint allows you to run the lock command on the specified device.
 If a device is offline, the command will be run when the device becomes available.
+Only supported on Linux and Windows devices.
+Use Apple MDM security commands for macOS devices.
 
 #### Sample Request
 ```
@@ -379,6 +383,8 @@ curl -X POST \\
 ### [Restart-JcSdkSystem](Restart-JcSdkSystem.md)
 This endpoint allows you to run the restart command on the specified device.
 If a device is offline, the command will be run when the device becomes available.
+Only supported on Linux and Windows devices.
+Use Apple MDM security commands for macOS devices.
 
 #### Sample Request
 ```
@@ -805,6 +811,8 @@ curl -X POST https://console.jumpcloud.com/api/runCommand \\
 ### [Stop-JcSdkSystem](Stop-JcSdkSystem.md)
 This endpoint allows you to run the shutdown command on the specified device.
 If a device is offline, the command will be run when the device becomes available.
+Only supported on Linux and Windows devices.
+Use Apple MDM security commands for macOS devices.
 
 #### Sample Request
 ```

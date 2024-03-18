@@ -131,6 +131,10 @@ BODY <IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema>:
     [SystemInsightEnableNewWindows <Boolean?>]:
     [SystemInsightEnabled <Boolean?>]:
     [SystemInsightUpdatedAt <String>]:
+    [SystemUserDefaultRestrictedFields <IRestrictedFields[]>]:
+      [Field <String>]:
+      [Id <String>]:
+      [Type <String>]:
     [SystemUserPasswordExpirationInDays <Int32?>]:
     [SystemUsersCanEdit <Boolean?>]:
     [TrustedAppConfigTrustedApps <ITrustedappConfigPutTrustedAppsItem[]>]: List of authorized apps for the organization
@@ -198,6 +202,10 @@ SETTINGS <IOrganizationsettingsput>:
   [SystemInsightEnableNewWindows <Boolean?>]:
   [SystemInsightEnabled <Boolean?>]:
   [SystemInsightUpdatedAt <String>]:
+  [SystemUserDefaultRestrictedFields <IRestrictedFields[]>]:
+    [Field <String>]:
+    [Id <String>]:
+    [Type <String>]:
   [SystemUserPasswordExpirationInDays <Int32?>]:
   [SystemUsersCanEdit <Boolean?>]:
   [TrustedAppConfigTrustedApps <ITrustedappConfigPutTrustedAppsItem[]>]: List of authorized apps for the organization

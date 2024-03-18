@@ -61,7 +61,7 @@ BODY <ICommand>:
   [Sudo <Boolean?>]:
   [Template <String>]: The template this command was created from
   [TimeToLiveSeconds <Int32?>]: Time in seconds a command can wait in the queue to be run before timing out
-  [Timeout <String>]: The time in seconds to allow the command to run for.
+  [Timeout <String>]: The time in seconds to allow the command to run for. The maximum value is 86400 seconds (1 day).
   [Trigger <String>]: The name of the command trigger.
   [User <String>]: The ID of the system user to run the command as. This field is required when creating a command with a commandType of "mac" or "linux".
 .Link
@@ -176,6 +176,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # The time in seconds to allow the command to run for.
+    # The maximum value is 86400 seconds (1 day).
     ${Timeout}, 
 
     [Parameter(ParameterSetName='CreateExpanded')]

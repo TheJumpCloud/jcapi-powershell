@@ -2,6 +2,8 @@
 .Synopsis
 This endpoint allows you to run the restart command on the specified device.
 If a device is offline, the command will be run when the device becomes available.
+Only supported on Linux and Windows devices.
+Use Apple MDM security commands for macOS devices.
 
 #### Sample Request
 ```
@@ -15,6 +17,8 @@ curl -X POST \\
 .Description
 This endpoint allows you to run the restart command on the specified device.
 If a device is offline, the command will be run when the device becomes available.
+Only supported on Linux and Windows devices.
+Use Apple MDM security commands for macOS devices.
 
 #### Sample Request
 ```

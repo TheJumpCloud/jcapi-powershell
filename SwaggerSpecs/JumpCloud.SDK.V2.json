@@ -878,7 +878,7 @@
       }
     },
     "GSuiteBuiltinTranslation": {
-      "description": "Built-in translations for G Suite export:\n* `user_home_addresses` - Translate all JumpCloud user addresses of type `home` to G Suite Directory user addresses of type `home`\n* `user_work_addresses` - Translate all JumpCloud user addresses of type `work` to G Suite Directory user addresses of type `work`\n* `user_other_addresses` - Translate all JumpCloud user addresses of type `other` to G Suite Directory user addresses of type `other`\n* `user_home_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `home` to G Suite Directory user phones of type `home`\n* `user_mobile_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `mobile` to G Suite Directory user phones of type `mobile`\n* `user_other_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `other` to G Suite Directory user phones of type `other`\n* `user_work_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `work` to G Suite Directory user phones of type `work`\n* `user_work_fax_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `work_fax` to G Suite Directory user phones of type `work_fax`\n* `user_work_mobile_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `work_mobile` to G Suite Directory user phones of type `work_mobile`\n* `user_manager` - Translate JumpCloud user `manager` to G Suite Directory user `relations-manager`\n* `user_primary_organization_cost_center` - Translate JumpCloud user  `costCenter` to G Suite Directory user `costCenter` for `primary` organization\n* `user_primary_organization_department` - Translate JumpCloud user  `department` to G Suite Directory user `department` for `primary` organization\n* `user_primary_organization_description` - Translate JumpCloud user  `employeeType` to G Suite Directory user `description` for `primary` organization\n* `user_primary_organization_employee_id` - Translate JumpCloud user  `employeeIdentifier` to G Suite Directory user `externalIds` element of type `organization`\n* `user_primary_organization_title` - Translate JumpCloud user  `jobTitle` to G Suite Directory user `title` for `primary` organization\n* `user_alternate_email` - Translate JumpCloud user  `alternateEmail` to G Suite Directory user `emails`\n",
+      "description": "Built-in translations for G Suite export:\n* `user_home_addresses` - Translate all JumpCloud user addresses of type `home` to G Suite Directory user addresses of type `home`\n* `user_work_addresses` - Translate all JumpCloud user addresses of type `work` to G Suite Directory user addresses of type `work`\n* `user_other_addresses` - Translate all JumpCloud user addresses of type `other` to G Suite Directory user addresses of type `other`\n* `user_home_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `home` to G Suite Directory user phones of type `home`\n* `user_mobile_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `mobile` to G Suite Directory user phones of type `mobile`\n* `user_other_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `other` to G Suite Directory user phones of type `other`\n* `user_work_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `work` to G Suite Directory user phones of type `work`\n* `user_work_fax_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `work_fax` to G Suite Directory user phones of type `work_fax`\n* `user_work_mobile_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `work_mobile` to G Suite Directory user phones of type `work_mobile`\n* `user_manager` - Translate JumpCloud user `manager` to G Suite Directory user `relations-manager`\n* `user_primary_organization_cost_center` - Translate JumpCloud user  `costCenter` to G Suite Directory user `costCenter` for `primary` organization\n* `user_primary_organization_department` - Translate JumpCloud user  `department` to G Suite Directory user `department` for `primary` organization\n* `user_primary_organization_description` - Translate JumpCloud user  `employeeType` to G Suite Directory user `description` for `primary` organization\n* `user_primary_organization_employee_id` - Translate JumpCloud user  `employeeIdentifier` to G Suite Directory user `externalIds` element of type `organization`\n* `user_primary_organization_title` - Translate JumpCloud user  `jobTitle` to G Suite Directory user `title` for `primary` organization\n* `user_alternate_email` - Translate JumpCloud user  `alternateEmail` to G Suite Directory user `emails`\n* `user_status` - Translate JumpCloud user `status` to G Suite Directory user `status`\n* `user_password` - Translate JumpCloud user `password` to G Suite Directory user `password`\n",
       "enum": [
         "user_home_addresses",
         "user_work_addresses",
@@ -895,7 +895,9 @@
         "user_primary_organization_department",
         "user_primary_organization_description",
         "user_primary_organization_employee_id",
-        "user_primary_organization_title"
+        "user_primary_organization_title",
+        "user_status",
+        "user_password"
       ],
       "title": "G Suite BuiltIn Translation",
       "type": "string"
@@ -8394,6 +8396,9 @@
     }
   },
   "paths": {
+    "/accessrequests": {},
+    "/accessrequests/{accessId}": {},
+    "/accessrequests/{accessId}/revoke": {},
     "/accountManagerCalendar/{id}": {
       "parameters": [
         {
@@ -12793,6 +12798,48 @@
         "gsuites"
       ]
     },
+    "/identity-provider/policies/{idp_routing_policy_id}/associations": {
+      "parameters": [
+        {
+          "description": "ObjectID of the Routing Policy.",
+          "in": "path",
+          "name": "idp_routing_policy_id",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "x-functionalities-tags": [
+        "idproutingpolicy-users"
+      ]
+    },
+    "/identity-provider/policies/{idp_routing_policy_id}/associations/usergroups": {
+      "parameters": [
+        {
+          "description": "ObjectID of the Routing Policy.",
+          "in": "path",
+          "name": "idp_routing_policy_id",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "x-functionalities-tags": [
+        "idproutingpolicy-users"
+      ]
+    },
+    "/identity-provider/policies/{idp_routing_policy_id}/associations/users": {
+      "parameters": [
+        {
+          "description": "ObjectID of the Routing Policy.",
+          "in": "path",
+          "name": "idp_routing_policy_id",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "x-functionalities-tags": [
+        "idproutingpolicy-groups"
+      ]
+    },
     "/integrations/syncro/{UUID}/billing_mapping_configuration_options": {
       "parameters": [
         {
@@ -16700,6 +16747,7 @@
         "user-login"
       ]
     },
+    "/pushendpoints/verifications/{verificationId}": {},
     "/queuedcommands": {
       "x-functionalities-tags": [
         "queued-commands"
@@ -23579,6 +23627,7 @@
         "groups"
       ]
     },
+    "/users/{userId}/pushendpoints/{pushEndpointId}/verify": {},
     "/users/{user_id}/activedirectories": {
       "get": {
         "description": "This endpoint will return all Active Directory Instances bound to a User, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.\n\nEach element will contain the type, id, attributes and paths.\n\nThe `attributes` object is a key/value hash of compiled graph attributes for all paths followed.\n\nThe `paths` array enumerates each path from this User to the corresponding Active Directory instance; this array represents all grouping and/or associations that would have to be removed to deprovision the Active Directory instance from this User.\n\nSee `/members` and `/associations` endpoints to manage those collections.\n\n#### Sample Request\n```\ncurl -X GET https://console.jumpcloud.com/api/v2/users/{UserID}/activedirectories \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
