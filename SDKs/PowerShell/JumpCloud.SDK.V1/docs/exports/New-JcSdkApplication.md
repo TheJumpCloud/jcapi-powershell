@@ -458,7 +458,21 @@ BODY <IApplication>: Application
     - `[ConstantAttributesTooltipTemplate <String>]`: 
     - `[ConstantAttributesTooltipVariablesIcon <String>]`: 
     - `[ConstantAttributesTooltipVariablesMessage <String>]`: 
+    - `[DatabaseAttributeLabel <String>]`: 
     - `[DatabaseAttributePosition <Int32?>]`: 
+    - `[DatabaseAttributeReadOnly <Boolean?>]`: 
+    - `[DatabaseAttributeRequired <Boolean?>]`: 
+    - `[DatabaseAttributeType <String>]`: 
+    - `[DatabaseAttributeValue <IApplicationConfigDatabaseAttributesValueItem[]>]`: 
+      - `[Name <String>]`: 
+      - `[ReadOnly <Boolean?>]`: 
+      - `[Required <Boolean?>]`: 
+      - `[Value <String>]`: 
+      - `[Visible <Boolean?>]`: 
+    - `[DatabaseAttributeVisible <Boolean?>]`: 
+    - `[DatabaseAttributesTooltipTemplate <String>]`: 
+    - `[DatabaseAttributesTooltipVariablesIcon <String>]`: 
+    - `[DatabaseAttributesTooltipVariablesMessage <String>]`: 
     - `[DeclareRedirectEndpointLabel <String>]`: 
     - `[DeclareRedirectEndpointPosition <Int32?>]`: 
     - `[DeclareRedirectEndpointReadOnly <Boolean?>]`: 
@@ -671,7 +685,21 @@ CONFIG <IApplicationConfig>: .
   - `[ConstantAttributesTooltipTemplate <String>]`: 
   - `[ConstantAttributesTooltipVariablesIcon <String>]`: 
   - `[ConstantAttributesTooltipVariablesMessage <String>]`: 
+  - `[DatabaseAttributeLabel <String>]`: 
   - `[DatabaseAttributePosition <Int32?>]`: 
+  - `[DatabaseAttributeReadOnly <Boolean?>]`: 
+  - `[DatabaseAttributeRequired <Boolean?>]`: 
+  - `[DatabaseAttributeType <String>]`: 
+  - `[DatabaseAttributeValue <IApplicationConfigDatabaseAttributesValueItem[]>]`: 
+    - `[Name <String>]`: 
+    - `[ReadOnly <Boolean?>]`: 
+    - `[Required <Boolean?>]`: 
+    - `[Value <String>]`: 
+    - `[Visible <Boolean?>]`: 
+  - `[DatabaseAttributeVisible <Boolean?>]`: 
+  - `[DatabaseAttributesTooltipTemplate <String>]`: 
+  - `[DatabaseAttributesTooltipVariablesIcon <String>]`: 
+  - `[DatabaseAttributesTooltipVariablesMessage <String>]`: 
   - `[DeclareRedirectEndpointLabel <String>]`: 
   - `[DeclareRedirectEndpointPosition <Int32?>]`: 
   - `[DeclareRedirectEndpointReadOnly <Boolean?>]`: 

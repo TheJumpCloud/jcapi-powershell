@@ -879,12 +879,12 @@ $SDKName | ForEach-Object {
                     write-warning "$overrideDef"
                     $SwaggerObject = $SwaggerObject | ConvertFrom-Json -depth 100
                     # check that a coresponding def exists in /Custom directory
-                    if (Test-Path -Path "$PSScriptRoot/Custom/$($overrideDef).json"){
-                        $configContent = Get-Content -Path ("$PSScriptRoot/Custom/$($overrideDef).json")
+                    if (Test-Path -Path "$PSScriptRoot/CustomDefinitions/$($overrideDef).json") {
+                        $configContent = Get-Content -Path ("$PSScriptRoot/CustomDefinitions/$($overrideDef).json")
                         $configOverride = ($configContent | ConvertFrom-Json)
                         Invoke-Expression -Command ('$SwaggerObject.' + "$($overrideDef)" + '=' + '$configOverride' )
                     } else {
-                        Write-Warning "$overrideDef not found in /Custom directory, did you forget to define the json file?"
+                        Write-Warning "$overrideDef not found in /CustomDefinitions directory, did you forget to define the json file?"
                     }
                 }
             } else{

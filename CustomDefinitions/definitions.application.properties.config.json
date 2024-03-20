@@ -117,8 +117,65 @@
       },
       "databaseAttributes": {
         "properties": {
+          "label": {
+            "type": "string"
+          },
           "position": {
             "type": "integer"
+          },
+          "readOnly": {
+            "type": "boolean"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "tooltip": {
+            "properties": {
+              "template": {
+                "type": "string"
+              },
+              "variables": {
+                "properties": {
+                  "icon": {
+                    "type": "string"
+                  },
+                  "message": {
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              }
+            },
+            "type": "object"
+          },
+          "type": {
+            "type": "string"
+          },
+          "value": {
+            "items": {
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "readOnly": {
+                  "type": "boolean"
+                },
+                "required": {
+                  "type": "boolean"
+                },
+                "value": {
+                  "type": "string"
+                },
+                "visible": {
+                  "type": "boolean"
+                }
+              },
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "visible": {
+            "type": "boolean"
           }
         },
         "type": "object"

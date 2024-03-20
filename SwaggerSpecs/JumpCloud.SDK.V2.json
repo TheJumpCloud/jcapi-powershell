@@ -8397,8 +8397,6 @@
   },
   "paths": {
     "/accessrequests": {},
-    "/accessrequests/{accessId}": {},
-    "/accessrequests/{accessId}/revoke": {},
     "/accountManagerCalendar/{id}": {
       "parameters": [
         {
