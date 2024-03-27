@@ -10,6 +10,8 @@ schema: 2.0.0
 ## SYNOPSIS
 This endpoint allows you to run the lock command on the specified device.
 If a device is offline, the command will be run when the device becomes available.
+Only supported on Linux and Windows devices.
+Use Apple MDM security commands for macOS devices.
 
 #### Sample Request
 ```
@@ -36,6 +38,8 @@ Lock-JcSdkSystem -InputObject <IJumpCloudApiIdentity> [-PassThru] [-Confirm] [-W
 ## DESCRIPTION
 This endpoint allows you to run the lock command on the specified device.
 If a device is offline, the command will be run when the device becomes available.
+Only supported on Linux and Windows devices.
+Use Apple MDM security commands for macOS devices.
 
 #### Sample Request
 ```

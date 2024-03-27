@@ -69,6 +69,9 @@ $TransformConfig = [Ordered]@{
             '\[,'                                                                                                                                                                                                                   = '[';
             ',]'                                                                                                                                                                                                                    = ']';
         };
+        OverrideDefinitions = @(
+            'definitions.application.properties.config'
+        )
         OperationIdMapping = [Ordered]@{
             'admin_totpreset_begin'          = 'AdministratorUserTotp_Reset';
             'application_templates_get'      = 'ApplicationTemplate_Get';
@@ -492,7 +495,10 @@ $TransformConfig = [Ordered]@{
             '/integrations/autotask/{UUID}/mappings',
             '/integrations/{integration_type}/{UUID}/errors',
             '/providers/{provider_id}/integrations/autotask',
-            '/softwareapps/{software_app_id}/retry-installation'
+            '/softwareapps/{software_app_id}/retry-installation',
+            '/accessrequests/',
+            '/accessrequests/{accessId}',
+            '/accessrequests/{accessId}/revoke'
         )
     }
 }
@@ -611,7 +617,7 @@ Function Update-SwaggerObject {
                         } Else {
                             $excludePath = ($InputObjectName -replace '.paths.', '') -replace "\.\w+", ''
                             # Write-Warning "[status] New SDK Endpoint Found: `nOperationId: $($ThisObject.operationId) `nPath: $excludePath"
-                            Write-Error ("In '$($CurrentSDKName)' unknown operationId '$($ThisObject.operationId) - $($InputObjectName)'.")
+                            Write-Warning ("In '$($CurrentSDKName)' unknown operationId '$($ThisObject.operationId) - $($InputObjectName)'.")
                         }
                     }
 
@@ -867,6 +873,23 @@ $SDKName | ForEach-Object {
                     }
                 }
             }
+            # replace override definitions
+            if ($config.OverrideDefinitions){
+                foreach ($overrideDef in $config.OverrideDefinitions){
+                    write-warning "$overrideDef"
+                    $SwaggerObject = $SwaggerObject | ConvertFrom-Json -depth 100
+                    # check that a coresponding def exists in /Custom directory
+                    if (Test-Path -Path "$PSScriptRoot/CustomDefinitions/$($overrideDef).json") {
+                        $configContent = Get-Content -Path ("$PSScriptRoot/CustomDefinitions/$($overrideDef).json")
+                        $configOverride = ($configContent | ConvertFrom-Json)
+                        Invoke-Expression -Command ('$SwaggerObject.' + "$($overrideDef)" + '=' + '$configOverride' )
+                    } else {
+                        Write-Warning "$overrideDef not found in /CustomDefinitions directory, did you forget to define the json file?"
+                    }
+                }
+            } else{
+                $SwaggerObject = $SwaggerObject | ConvertFrom-Json -Depth:(100)
+            }
             #######################################################################
             # # Resolve the swagger references ($ref)/flatten
             # $SwaggerObjectRefMatches = $SwaggerObject | ConvertFrom-Json -Depth:(100)
@@ -883,7 +906,7 @@ $SDKName | ForEach-Object {
             # $SwaggerObject = $SwaggerObject | ConvertTo-Json -Depth:(100)
             #######################################################################
             # Update swagger object
-            $SwaggerObject = $SwaggerObject | ConvertFrom-Json -Depth:(100)
+            # $SwaggerObject = $SwaggerObject | ConvertFrom-Json -Depth:(100)
             # Exclude New SDK Endpoints (Automatically exclude newly added endpoints)
             $SwaggerObject = Remove-NewEndpoints -InputObject:($SwaggerObject)
             # Define Exclude Lists

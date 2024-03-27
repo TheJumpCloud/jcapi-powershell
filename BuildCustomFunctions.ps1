@@ -132,9 +132,9 @@ Try {
             $EndContent = @()
             # Results logic - If the output model is undefined in the swagger spec
             $ResultsLogic = If ($Command.OutputType -like "$ModuleName.Models.*ApplicationJson*") {
-                "($($ImportedModule.Name)\$($CommandName) -ErrorAction Stop @PSBoundParameters).ToJsonString() | ConvertFrom-Json;"
+                "($($ImportedModule.Name)\$($CommandName) -ErrorAction SilentlyContinue -errorVariable sdkError @PSBoundParameters).ToJsonString() | ConvertFrom-Json;"
             } Else {
-                "$($ImportedModule.Name)\$($CommandName) @PSBoundParameters -ErrorAction Stop"
+                "$($ImportedModule.Name)\$($CommandName) @PSBoundParameters -errorAction SilentlyContinue -errorVariable sdkError"
             }
             If ($Command.Verb -in ('Get', 'Search')) {
                 # Add paginate parameter if function contains Limit or Skip parameters
@@ -193,16 +193,18 @@ Try {
                 `$resultCounter = 0
                 :retryLoop do {
                     `$resultCounter++
-                    try {
-                        `$Result = $ResultsLogic
-                        break retryLoop
-                    } catch {
-                        If ((`$JCHttpResponse.Result.StatusCode -ne 503) -or (`$resultCounter -eq `$maxRetries)) {
-                            throw `$_
-                        } else {
-                            Write-Warning ("An error occurred: `$_.")
-                            Write-Warning ("503: Service Unavailable - retrying in " + (`$resultCounter * 5) + " seconds.")
+                    `$Result = $ResultsLogic
+                    If (`$sdkError){
+                        If (`$resultCounter -eq `$maxRetries){
+                            throw `$sdkError
                         }
+                        If (`$JCHttpResponse.Result.StatusCode -eq "503") {
+                            Write-Warning ("503: Service Unavailable - retrying in " + (`$resultCounter * 5) + " seconds.")
+                        } else {
+                            throw `$sdkError
+                        }
+                    } else {
+                        break retryLoop
                     }
                     Start-Sleep -Seconds (`$resultCounter * 5)
                 } while (`$resultCounter -lt `$maxRetries)
@@ -239,16 +241,18 @@ Try {
             `$resultCounter = 0
             :retryLoop do {
                 `$resultCounter++
-                try {
-                    `$Result = $ResultsLogic
-                    break retryLoop
-                } catch {
-                    If ((`$JCHttpResponse.Result.StatusCode -ne 503) -or (`$resultCounter -eq `$maxRetries)) {
-                        throw `$_
-                    } else {
-                        Write-Warning ("An error occurred: `$_.")
-                        Write-Warning ("503: Service Unavailable - retrying in " + (`$resultCounter * 5) + " seconds.")
+                `$Result = $ResultsLogic
+                If (`$sdkError){
+                    If (`$resultCounter -eq `$maxRetries){
+                        throw `$sdkError
                     }
+                    If (`$JCHttpResponse.Result.StatusCode -eq "503") {
+                        Write-Warning ("503: Service Unavailable - retrying in " + (`$resultCounter * 5) + " seconds.")
+                    } else {
+                        throw `$sdkError
+                    }
+                } else {
+                    break retryLoop
                 }
                 Start-Sleep -Seconds (`$resultCounter * 5)
             } while (`$resultCounter -lt `$maxRetries)
@@ -267,16 +271,18 @@ Try {
         `$resultCounter = 0
         :retryLoop do {
             `$resultCounter++
-            try {
-                `$Result = $ResultsLogic
-                break retryLoop
-            } catch {
-                If ((`$JCHttpResponse.Result.StatusCode -ne 503) -or (`$resultCounter -eq `$maxRetries)) {
-                    throw `$_
-                } else {
-                    Write-Warning ("An error occurred: `$_.")
-                    Write-Warning ("503: Service Unavailable - retrying in " + (`$resultCounter * 5) + " seconds.")
+            `$Result = $ResultsLogic
+            If (`$sdkError){
+                If (`$resultCounter -eq `$maxRetries){
+                    throw `$sdkError
                 }
+                If (`$JCHttpResponse.Result.StatusCode -eq "503") {
+                    Write-Warning ("503: Service Unavailable - retrying in " + (`$resultCounter * 5) + " seconds.")
+                } else {
+                    throw `$sdkError
+                }
+            } else {
+                break retryLoop
             }
             Start-Sleep -Seconds (`$resultCounter * 5)
         } while (`$resultCounter -lt `$maxRetries)
@@ -354,16 +360,18 @@ Try {
                 `$resultCounter = 0
                 :retryLoop do {
                     `$resultCounter++
-                    try {
-                        `$Result = $ResultsLogic
-                        break retryLoop
-                    } catch {
-                        If ((`$JCHttpResponse.Result.StatusCode -ne 503) -or (`$resultCounter -eq `$maxRetries)) {
-                            throw `$_
-                        } else {
-                            Write-Warning ("An error occurred: `$_.")
-                            Write-Warning ("503: Service Unavailable - retrying in " + (`$resultCounter * 5) + " seconds.")
+                    `$Result = $ResultsLogic
+                    If (`$sdkError){
+                        If (`$resultCounter -eq `$maxRetries){
+                            throw `$sdkError
                         }
+                        If (`$JCHttpResponse.Result.StatusCode -eq "503") {
+                            Write-Warning ("503: Service Unavailable - retrying in " + (`$resultCounter * 5) + " seconds.")
+                        } else {
+                            throw `$sdkError
+                        }
+                    } else {
+                        break retryLoop
                     }
                     Start-Sleep -Seconds (`$resultCounter * 5)
                 } while (`$resultCounter -lt `$maxRetries)
@@ -426,16 +434,18 @@ Try {
             `$resultCounter = 0
             :retryLoop do {
                 `$resultCounter++
-                try {
-                    `$Result = $ResultsLogic
-                    break retryLoop
-                } catch {
-                    If ((`$JCHttpResponse.Result.StatusCode -ne 503) -or (`$resultCounter -eq `$maxRetries)) {
-                        throw `$_
-                    } else {
-                        Write-Warning ("An error occurred: `$_.")
-                        Write-Warning ("503: Service Unavailable - retrying in " + (`$resultCounter * 5) + " seconds.")
+                `$Result = $ResultsLogic
+                If (`$sdkError){
+                    If (`$resultCounter -eq `$maxRetries){
+                        throw $`sdkError
                     }
+                    If (`$JCHttpResponse.Result.StatusCode -eq "503") {
+                        Write-Warning ("503: Service Unavailable - retrying in " + (`$resultCounter * 5) + " seconds.")
+                    } else {
+                        throw $`sdkError
+                    }
+                } else {
+                    break retryLoop
                 }
                 Start-Sleep -Seconds (`$resultCounter * 5)
             } while (`$resultCounter -lt `$maxRetries)
@@ -461,16 +471,18 @@ Try {
             `$resultCounter = 0
             :retryLoop do {
                 `$resultCounter++
-                try {
-                    `$Result = $ResultsLogic
-                    break retryLoop
-                } catch {
-                    If ((`$JCHttpResponse.Result.StatusCode -ne 503) -or (`$resultCounter -eq `$maxRetries)) {
-                        throw `$_
-                    } else {
-                        Write-Warning ("An error occurred: `$_.")
-                        Write-Warning ("503: Service Unavailable - retrying in " + (`$resultCounter * 5) + " seconds.")
+                `$Result = $ResultsLogic
+                If (`$sdkError){
+                    If (`$resultCounter -eq `$maxRetries){
+                        throw `$sdkError
                     }
+                    If (`$JCHttpResponse.Result.StatusCode -eq "503") {
+                        Write-Warning ("503: Service Unavailable - retrying in " + (`$resultCounter * 5) + " seconds.")
+                    } else {
+                        throw `$sdkError
+                    }
+                } else {
+                    break retryLoop
                 }
                 Start-Sleep -Seconds (`$resultCounter * 5)
             } while (`$resultCounter -lt `$maxRetries)
@@ -495,16 +507,18 @@ Try {
         `$resultCounter = 0
         :retryLoop do {
             `$resultCounter++
-            try {
-                `$Result = $ResultsLogic
-                break retryLoop
-            } catch {
-                If ((`$JCHttpResponse.Result.StatusCode -ne 503) -or (`$resultCounter -eq `$maxRetries)) {
-                    throw `$_
-                } else {
-                    Write-Warning ("An error occurred: `$_.")
-                    Write-Warning ("503: Service Unavailable - retrying in " + (`$resultCounter * 5) + " seconds.")
+            `$Result = $ResultsLogic
+            If (`$sdkError){
+                If (`$resultCounter -eq `$maxRetries){
+                    throw $sdkError
                 }
+                If (`$JCHttpResponse.Result.StatusCode -eq "503") {
+                    Write-Warning ("503: Service Unavailable - retrying in " + (`$resultCounter * 5) + " seconds.")
+                } else {
+                    throw `$sdkError
+                }
+            } else {
+                break retryLoop
             }
             Start-Sleep -Seconds (`$resultCounter * 5)
         } while (`$resultCounter -lt `$maxRetries)
@@ -566,16 +580,18 @@ Try {
         `$resultCounter = 0
         :retryLoop do {
             `$resultCounter++
-            try {
-                `$Results = $ResultsLogic
-                break retryLoop
-            } catch {
-                If ((`$JCHttpResponse.Result.StatusCode -ne 503) -or (`$resultCounter -eq `$maxRetries)) {
-                    throw `$_
-                } else {
-                    Write-Warning ("An error occurred: `$_.")
-                    Write-Warning ("503: Service Unavailable - retrying in " + (`$resultCounter * 5) + " seconds.")
+            `$Results = $ResultsLogic
+            If (`$sdkError){
+                If (`$resultCounter -eq `$maxRetries){
+                    throw `$sdkError
                 }
+                If (`$JCHttpResponse.Result.StatusCode -eq "503") {
+                    Write-Warning ("503: Service Unavailable - retrying in " + (`$resultCounter * 5) + " seconds.")
+                } else {
+                    throw `$sdkError
+                }
+            } else {
+                break retryLoop
             }
             Start-Sleep -Seconds (`$resultCounter * 5)
         } while (`$resultCounter -lt `$maxRetries)

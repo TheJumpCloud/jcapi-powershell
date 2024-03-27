@@ -59,10 +59,8 @@ BODY <ISystemGroupPut>:
     Id <String>: The ObjectID of the graph object.
     Type <String>: The type of graph object.
     [Attributes <IGraphAttributes>]: The graph attributes.
-  [MemberQueryFilters <IFilter[]>]:
-    Field <String>: Name of field in filter target object.
-    Operator <String>: Filter comparison operator.
-    Value <String>: Filter comparison value.
+  [MemberQueryFilters <IAny[]>]:
+  [MemberQueryType <String>]:
   [MemberSuggestionsNotify <Boolean?>]: True if notification emails are to be sent for membership suggestions.
   [MembershipMethod <String>]: The type of membership method for this group. Valid values include NOTSET, STATIC, DYNAMIC_REVIEW_REQUIRED, and DYNAMIC_AUTOMATED.          Note DYNAMIC_AUTOMATED and DYNAMIC_REVIEW_REQUIRED group rules will supersede any group enrollment for [group-associated MDM-enrolled devices](https://jumpcloud.com/support/change-a-default-device-group-for-apple-devices).          Use caution when creating dynamic device groups with MDM-enrolled devices to avoid creating conflicting rule sets.
 
@@ -96,11 +94,6 @@ MEMBERQUERYEXEMPTIONS <IGraphObject[]>:
   Type <String>: The type of graph object.
   [Attributes <IGraphAttributes>]: The graph attributes.
     [(Any) <Object>]: This indicates any property can be added to this object.
-
-MEMBERQUERYFILTERS <IFilter[]>:
-  Field <String>: Name of field in filter target object.
-  Operator <String>: Filter comparison operator.
-  Value <String>: Filter comparison value.
 .Link
 https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Set-JcSdkSystemGroup.md
 #>
@@ -174,10 +167,16 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [AllowEmptyCollection()]
     [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Models.IFilter[]]
+    [JumpCloud.SDK.V2.Models.IAny[]]
     # .
-    # To construct, see NOTES section for MEMBERQUERYFILTERS properties and create a hash table.
     ${MemberQueryFilters}, 
+
+    [Parameter(ParameterSetName='SetExpanded')]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [System.String]
+    # .
+    ${MemberQueryType}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
@@ -254,16 +253,18 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         $resultCounter = 0
         :retryLoop do {
             $resultCounter++
-            try {
-                $Results = JumpCloud.SDK.V2.internal\Set-JcSdkInternalSystemGroup @PSBoundParameters -ErrorAction Stop
-                break retryLoop
-            } catch {
-                If (($JCHttpResponse.Result.StatusCode -ne 503) -or ($resultCounter -eq $maxRetries)) {
-                    throw $_
-                } else {
-                    Write-Warning ("An error occurred: $_.")
-                    Write-Warning ("503: Service Unavailable - retrying in " + ($resultCounter * 5) + " seconds.")
+            $Results = JumpCloud.SDK.V2.internal\Set-JcSdkInternalSystemGroup @PSBoundParameters -errorAction SilentlyContinue -errorVariable sdkError
+            If ($sdkError){
+                If ($resultCounter -eq $maxRetries){
+                    throw $sdkError
                 }
+                If ($JCHttpResponse.Result.StatusCode -eq "503") {
+                    Write-Warning ("503: Service Unavailable - retrying in " + ($resultCounter * 5) + " seconds.")
+                } else {
+                    throw $sdkError
+                }
+            } else {
+                break retryLoop
             }
             Start-Sleep -Seconds ($resultCounter * 5)
         } while ($resultCounter -lt $maxRetries)

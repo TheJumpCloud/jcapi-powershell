@@ -12,37 +12,13 @@ Query the API for Directory Insights events
 curl -X POST 'https://api.jumpcloud.com/insights/directory/v1/events' -H 'Content-Type: application/json' -H 'x-api-key: REPLACE_KEY_VALUE' --data '{\"service\": [\"all\"], \"start_time\": \"2021-07-14T23:00:00Z\", \"end_time\": \"2021-07-28T14:00:00Z\", \"sort\": \"DESC\", \"fields\": [\"timestamp\", \"event_type\", \"initiated_by\", \"success\", \"client_ip\", \"provider\", \"organization\"]}'
 ```
 .Example
-PS C:\> Get-JcSdkEvent -Service:('all') -StartTime:((Get-date).AddDays(-30))
+PS C:\> {{ Add code here }}
 
-Pull all event records from the last thirty days
+{{ Add output here }}
 .Example
-PS C:\> Get-JcSdkEvent -Service:('directory') -StartTime:((Get-date).AddHours(-1)) -Limit:('10')
+PS C:\> {{ Add code here }}
 
-Get directory results from the last hour limit to the last 10 results in the time range
-.Example
-PS C:\> Get-JcSdkEvent -Service:('directory') -StartTime:((Get-date).AddDays(-30)) -Sort:("DESC") -EndTime:((Get-date).AddDays(-5))
-
-Get directory results between 30 and 5 days ago, sort timestamp by descending value
-.Example
-PS C:\> Get-JcSdkEvent -Service:('directory') -StartTime:((Get-date).AddDays(-30)) -Limit:('10') -searchTermAnd:@{"event_type" = "group_create"}
-
-Get only group_create from the last thirty days
-.Example
-PS C:\> Get-JcSdkEvent -Service:('all') -StartTime:('2020-04-14T00:00:00Z') -EndTime:('2020-04-20T23:00:00Z') -SearchTermOr @{"initiated_by.username" = @("user.1", "user.2")}
-
-Get login events initiated by either "user.1" or "user.2" between a universal time zone range
-.Example
-PS C:\> Get-JcSdkEvent -Service:('all') -StartTime:('2020-04-14T00:00:00Z') -EndTime:('2020-04-20T23:00:00Z') -SearchTermAnd @{"event_type" = "admin_login_attempt"; "resource.email" = "admin.user@adminbizorg.com"}
-
-Get all events between a date range and match event_type = admin_login_attempt and resource.email = admin.user@adminbizorg.com
-.Example
-PS C:\> Get-JcSdkEvent -Service:('sso') -StartTime:('2020-04-14T00:00:00Z')  -EndTime:('2020-04-20T23:00:00Z') -SearchTermAnd @{"initiated_by.username" = "user.1"}
-
-Get sso events with the search term initiated_by: username with value "user.1"
-.Example
-PS C:\> Get-JcSdkEvent -Service:('all') -StartTime:('2020-04-14T00:00:00Z') -EndTime:('2020-04-20T23:00:00Z') -SearchTermAnd @{"event_type" = "organization_update"}
-
-Get all events filtered by organization_update term between a date range
+{{ Add output here }}
 
 .Inputs
 JumpCloud.SDK.DirectoryInsights.Models.IEventQuery
@@ -215,16 +191,18 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
                 $resultCounter = 0
                 :retryLoop do {
                     $resultCounter++
-                    try {
-                        $Result = (JumpCloud.SDK.DirectoryInsights.internal\Get-JcSdkInternalEvent -ErrorAction Stop @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
-                        break retryLoop
-                    } catch {
-                        If (($JCHttpResponse.Result.StatusCode -ne 503) -or ($resultCounter -eq $maxRetries)) {
-                            throw $_
-                        } else {
-                            Write-Warning ("An error occurred: $_.")
-                            Write-Warning ("503: Service Unavailable - retrying in " + ($resultCounter * 5) + " seconds.")
+                    $Result = (JumpCloud.SDK.DirectoryInsights.internal\Get-JcSdkInternalEvent -ErrorAction SilentlyContinue -errorVariable sdkError @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
+                    If ($sdkError){
+                        If ($resultCounter -eq $maxRetries){
+                            throw $sdkError
                         }
+                        If ($JCHttpResponse.Result.StatusCode -eq "503") {
+                            Write-Warning ("503: Service Unavailable - retrying in " + ($resultCounter * 5) + " seconds.")
+                        } else {
+                            throw $sdkError
+                        }
+                    } else {
+                        break retryLoop
                     }
                     Start-Sleep -Seconds ($resultCounter * 5)
                 } while ($resultCounter -lt $maxRetries)
@@ -261,16 +239,18 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
             $resultCounter = 0
             :retryLoop do {
                 $resultCounter++
-                try {
-                    $Result = (JumpCloud.SDK.DirectoryInsights.internal\Get-JcSdkInternalEvent -ErrorAction Stop @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
-                    break retryLoop
-                } catch {
-                    If (($JCHttpResponse.Result.StatusCode -ne 503) -or ($resultCounter -eq $maxRetries)) {
-                        throw $_
-                    } else {
-                        Write-Warning ("An error occurred: $_.")
-                        Write-Warning ("503: Service Unavailable - retrying in " + ($resultCounter * 5) + " seconds.")
+                $Result = (JumpCloud.SDK.DirectoryInsights.internal\Get-JcSdkInternalEvent -ErrorAction SilentlyContinue -errorVariable sdkError @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
+                If ($sdkError){
+                    If ($resultCounter -eq $maxRetries){
+                        throw $sdkError
                     }
+                    If ($JCHttpResponse.Result.StatusCode -eq "503") {
+                        Write-Warning ("503: Service Unavailable - retrying in " + ($resultCounter * 5) + " seconds.")
+                    } else {
+                        throw $sdkError
+                    }
+                } else {
+                    break retryLoop
                 }
                 Start-Sleep -Seconds ($resultCounter * 5)
             } while ($resultCounter -lt $maxRetries)

@@ -104,16 +104,18 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
                 $resultCounter = 0
                 :retryLoop do {
                     $resultCounter++
-                    try {
-                        $Result = JumpCloud.SDK.V2.internal\Get-JcSdkInternalAdministratorOrganizationLink @PSBoundParameters -ErrorAction Stop
-                        break retryLoop
-                    } catch {
-                        If (($JCHttpResponse.Result.StatusCode -ne 503) -or ($resultCounter -eq $maxRetries)) {
-                            throw $_
-                        } else {
-                            Write-Warning ("An error occurred: $_.")
-                            Write-Warning ("503: Service Unavailable - retrying in " + ($resultCounter * 5) + " seconds.")
+                    $Result = JumpCloud.SDK.V2.internal\Get-JcSdkInternalAdministratorOrganizationLink @PSBoundParameters -errorAction SilentlyContinue -errorVariable sdkError
+                    If ($sdkError){
+                        If ($resultCounter -eq $maxRetries){
+                            throw $sdkError
                         }
+                        If ($JCHttpResponse.Result.StatusCode -eq "503") {
+                            Write-Warning ("503: Service Unavailable - retrying in " + ($resultCounter * 5) + " seconds.")
+                        } else {
+                            throw $sdkError
+                        }
+                    } else {
+                        break retryLoop
                     }
                     Start-Sleep -Seconds ($resultCounter * 5)
                 } while ($resultCounter -lt $maxRetries)
@@ -140,16 +142,18 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
             $resultCounter = 0
             :retryLoop do {
                 $resultCounter++
-                try {
-                    $Result = JumpCloud.SDK.V2.internal\Get-JcSdkInternalAdministratorOrganizationLink @PSBoundParameters -ErrorAction Stop
-                    break retryLoop
-                } catch {
-                    If (($JCHttpResponse.Result.StatusCode -ne 503) -or ($resultCounter -eq $maxRetries)) {
-                        throw $_
-                    } else {
-                        Write-Warning ("An error occurred: $_.")
-                        Write-Warning ("503: Service Unavailable - retrying in " + ($resultCounter * 5) + " seconds.")
+                $Result = JumpCloud.SDK.V2.internal\Get-JcSdkInternalAdministratorOrganizationLink @PSBoundParameters -errorAction SilentlyContinue -errorVariable sdkError
+                If ($sdkError){
+                    If ($resultCounter -eq $maxRetries){
+                        throw $sdkError
                     }
+                    If ($JCHttpResponse.Result.StatusCode -eq "503") {
+                        Write-Warning ("503: Service Unavailable - retrying in " + ($resultCounter * 5) + " seconds.")
+                    } else {
+                        throw $sdkError
+                    }
+                } else {
+                    break retryLoop
                 }
                 Start-Sleep -Seconds ($resultCounter * 5)
             } while ($resultCounter -lt $maxRetries)

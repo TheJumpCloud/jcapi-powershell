@@ -4,3 +4,4 @@
 **/localEnv.json
 *.DS_Store
 node_modules/
+jcapi-powershell.sln

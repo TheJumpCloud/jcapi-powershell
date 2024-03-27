@@ -58,10 +58,8 @@
                 "label": {
                   "type": "string"
                 },
-                "options": {
-                  "type": "string"
-                },
                 "position": {
+                  "format": "int32",
                   "type": "integer"
                 },
                 "readOnly": {
@@ -69,9 +67,6 @@
                 },
                 "required": {
                   "type": "boolean"
-                },
-                "toggle": {
-                  "type": "string"
                 },
                 "tooltip": {
                   "properties": {
@@ -112,10 +107,8 @@
                 "mutable": {
                   "type": "boolean"
                 },
-                "options": {
-                  "type": "string"
-                },
                 "position": {
+                  "format": "int32",
                   "type": "integer"
                 },
                 "readOnly": {
@@ -123,9 +116,6 @@
                 },
                 "required": {
                   "type": "boolean"
-                },
-                "toggle": {
-                  "type": "string"
                 },
                 "tooltip": {
                   "properties": {
@@ -180,18 +170,7 @@
             },
             "databaseAttributes": {
               "properties": {
-                "position": {
-                  "type": "integer"
-                }
-              },
-              "type": "object"
-            },
-            "idpCertificate": {
-              "properties": {
                 "label": {
-                  "type": "string"
-                },
-                "options": {
                   "type": "string"
                 },
                 "position": {
@@ -203,8 +182,212 @@
                 "required": {
                   "type": "boolean"
                 },
-                "toggle": {
+                "tooltip": {
+                  "properties": {
+                    "template": {
+                      "type": "string"
+                    },
+                    "variables": {
+                      "properties": {
+                        "icon": {
+                          "type": "string"
+                        },
+                        "message": {
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": {
                   "type": "string"
+                },
+                "value": {
+                  "items": {
+                    "properties": {
+                      "name": {
+                        "type": "string"
+                      },
+                      "readOnly": {
+                        "type": "boolean"
+                      },
+                      "required": {
+                        "type": "boolean"
+                      },
+                      "value": {
+                        "type": "string"
+                      },
+                      "visible": {
+                        "type": "boolean"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "type": "array"
+                },
+                "visible": {
+                  "type": "boolean"
+                }
+              },
+              "type": "object"
+            },
+            "declareRedirectEndpoint": {
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "position": {
+                  "format": "int32",
+                  "type": "integer"
+                },
+                "readOnly": {
+                  "type": "boolean"
+                },
+                "required": {
+                  "type": "boolean"
+                },
+                "tooltip": {
+                  "properties": {
+                    "template": {
+                      "type": "string"
+                    },
+                    "variables": {
+                      "properties": {
+                        "icon": {
+                          "type": "string"
+                        },
+                        "message": {
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "boolean"
+                },
+                "visible": {
+                  "type": "boolean"
+                }
+              },
+              "type": "object"
+            },
+            "defaultTargetUrl": {
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "position": {
+                  "format": "int32",
+                  "type": "integer"
+                },
+                "readOnly": {
+                  "type": "boolean"
+                },
+                "required": {
+                  "type": "boolean"
+                },
+                "tooltip": {
+                  "properties": {
+                    "template": {
+                      "type": "string"
+                    },
+                    "variables": {
+                      "properties": {
+                        "icon": {
+                          "type": "string"
+                        },
+                        "message": {
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                },
+                "visible": {
+                  "type": "boolean"
+                }
+              },
+              "type": "object"
+            },
+            "groupsAttributeName": {
+              "properties": {
+                "dependsOnProperty": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "position": {
+                  "format": "int32",
+                  "type": "integer"
+                },
+                "readOnly": {
+                  "type": "boolean"
+                },
+                "required": {
+                  "type": "boolean"
+                },
+                "tooltip": {
+                  "properties": {
+                    "template": {
+                      "type": "string"
+                    },
+                    "variables": {
+                      "properties": {
+                        "icon": {
+                          "type": "string"
+                        },
+                        "message": {
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                },
+                "visible": {
+                  "type": "boolean"
+                }
+              },
+              "type": "object"
+            },
+            "idpCertificate": {
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "position": {
+                  "format": "int32",
+                  "type": "integer"
+                },
+                "readOnly": {
+                  "type": "boolean"
+                },
+                "required": {
+                  "type": "boolean"
                 },
                 "tooltip": {
                   "properties": {
@@ -242,10 +425,8 @@
                 "label": {
                   "type": "string"
                 },
-                "options": {
-                  "type": "string"
-                },
                 "position": {
+                  "format": "int32",
                   "type": "integer"
                 },
                 "readOnly": {
@@ -254,8 +435,51 @@
                 "required": {
                   "type": "boolean"
                 },
-                "toggle": {
+                "tooltip": {
+                  "properties": {
+                    "template": {
+                      "type": "string"
+                    },
+                    "variables": {
+                      "properties": {
+                        "icon": {
+                          "type": "string"
+                        },
+                        "message": {
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": {
                   "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                },
+                "visible": {
+                  "type": "boolean"
+                }
+              },
+              "type": "object"
+            },
+            "idpInitUrl": {
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "position": {
+                  "format": "int32",
+                  "type": "integer"
+                },
+                "readOnly": {
+                  "type": "boolean"
+                },
+                "required": {
+                  "type": "boolean"
                 },
                 "tooltip": {
                   "properties": {
@@ -293,10 +517,8 @@
                 "label": {
                   "type": "string"
                 },
-                "options": {
-                  "type": "string"
-                },
                 "position": {
+                  "format": "int32",
                   "type": "integer"
                 },
                 "readOnly": {
@@ -305,8 +527,112 @@
                 "required": {
                   "type": "boolean"
                 },
-                "toggle": {
+                "tooltip": {
+                  "properties": {
+                    "template": {
+                      "type": "string"
+                    },
+                    "variables": {
+                      "properties": {
+                        "icon": {
+                          "type": "string"
+                        },
+                        "message": {
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": {
                   "type": "string"
+                },
+                "value": {
+                  "type": "string"
+                },
+                "visible": {
+                  "type": "boolean"
+                }
+              },
+              "type": "object"
+            },
+            "includeGroups": {
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "position": {
+                  "format": "int32",
+                  "type": "integer"
+                },
+                "readOnly": {
+                  "type": "boolean"
+                },
+                "required": {
+                  "type": "boolean"
+                },
+                "tooltip": {
+                  "properties": {
+                    "template": {
+                      "type": "string"
+                    },
+                    "variables": {
+                      "properties": {
+                        "icon": {
+                          "type": "string"
+                        },
+                        "message": {
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "boolean"
+                },
+                "visible": {
+                  "type": "boolean"
+                }
+              },
+              "type": "object"
+            },
+            "overrideNameIdFormat": {
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "options": {
+                  "items": {
+                    "properties": {
+                      "text": {
+                        "type": "string"
+                      },
+                      "value": {
+                        "format": "int32",
+                        "type": "integer"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "type": "array"
+                },
+                "position": {
+                  "format": "int32",
+                  "type": "integer"
+                },
+                "readOnly": {
+                  "type": "boolean"
+                },
+                "required": {
+                  "type": "boolean"
                 },
                 "tooltip": {
                   "properties": {
@@ -345,6 +671,49 @@
                   "type": "string"
                 },
                 "position": {
+                  "format": "int32",
+                  "type": "integer"
+                },
+                "readOnly": {
+                  "type": "boolean"
+                },
+                "required": {
+                  "type": "boolean"
+                },
+                "type": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "boolean"
+                },
+                "visible": {
+                  "type": "boolean"
+                }
+              },
+              "type": "object"
+            },
+            "signatureAlgorithm": {
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "options": {
+                  "items": {
+                    "properties": {
+                      "text": {
+                        "type": "string"
+                      },
+                      "value": {
+                        "format": "int32",
+                        "type": "integer"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "type": "array"
+                },
+                "position": {
+                  "format": "int32",
                   "type": "integer"
                 },
                 "readOnly": {
@@ -376,7 +745,7 @@
                   "type": "string"
                 },
                 "value": {
-                  "type": "boolean"
+                  "type": "string"
                 },
                 "visible": {
                   "type": "boolean"
@@ -390,6 +759,34 @@
                   "type": "string"
                 },
                 "position": {
+                  "format": "int32",
+                  "type": "integer"
+                },
+                "readOnly": {
+                  "type": "boolean"
+                },
+                "required": {
+                  "type": "boolean"
+                },
+                "type": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "boolean"
+                },
+                "visible": {
+                  "type": "boolean"
+                }
+              },
+              "type": "object"
+            },
+            "spCertificate": {
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "position": {
+                  "format": "int32",
                   "type": "integer"
                 },
                 "readOnly": {
@@ -421,7 +818,7 @@
                   "type": "string"
                 },
                 "value": {
-                  "type": "boolean"
+                  "type": "string"
                 },
                 "visible": {
                   "type": "boolean"
@@ -434,10 +831,8 @@
                 "label": {
                   "type": "string"
                 },
-                "options": {
-                  "type": "string"
-                },
                 "position": {
+                  "format": "int32",
                   "type": "integer"
                 },
                 "readOnly": {
@@ -445,9 +840,6 @@
                 },
                 "required": {
                   "type": "boolean"
-                },
-                "toggle": {
-                  "type": "string"
                 },
                 "tooltip": {
                   "properties": {
@@ -486,6 +878,7 @@
                   "type": "string"
                 },
                 "position": {
+                  "format": "int32",
                   "type": "integer"
                 },
                 "readOnly": {
@@ -518,6 +911,67 @@
                 },
                 "value": {
                   "type": "boolean"
+                },
+                "visible": {
+                  "type": "boolean"
+                }
+              },
+              "type": "object"
+            },
+            "subjectField": {
+              "properties": {
+                "label": {
+                  "type": "string"
+                },
+                "options": {
+                  "items": {
+                    "properties": {
+                      "text": {
+                        "type": "string"
+                      },
+                      "value": {
+                        "format": "int32",
+                        "type": "integer"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "type": "array"
+                },
+                "position": {
+                  "format": "int32",
+                  "type": "integer"
+                },
+                "readOnly": {
+                  "type": "boolean"
+                },
+                "required": {
+                  "type": "boolean"
+                },
+                "tooltip": {
+                  "properties": {
+                    "template": {
+                      "type": "string"
+                    },
+                    "variables": {
+                      "properties": {
+                        "icon": {
+                          "type": "string"
+                        },
+                        "message": {
+                          "type": "string"
+                        }
+                      },
+                      "type": "object"
+                    }
+                  },
+                  "type": "object"
+                },
+                "type": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "string"
                 },
                 "visible": {
                   "type": "boolean"
@@ -1320,7 +1774,7 @@
           "type": "integer"
         },
         "timeout": {
-          "description": "The time in seconds to allow the command to run for.",
+          "description": "The time in seconds to allow the command to run for. The maximum value is 86400 seconds (1 day).",
           "type": "string"
         },
         "trigger": {
@@ -2168,6 +2622,17 @@
         "showIntro": {
           "type": "boolean"
         },
+        "systemUserDefaults": {
+          "properties": {
+            "restrictedFields": {
+              "items": {
+                "$ref": "#/definitions/restrictedFields"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        },
         "systemUserPasswordExpirationInDays": {
           "type": "integer"
         },
@@ -2416,6 +2881,17 @@
         "showIntro": {
           "type": "boolean"
         },
+        "systemUserDefaults": {
+          "properties": {
+            "restrictedFields": {
+              "items": {
+                "$ref": "#/definitions/restrictedFields"
+              },
+              "type": "array"
+            }
+          },
+          "type": "object"
+        },
         "systemUserPasswordExpirationInDays": {
           "type": "integer"
         },
@@ -2642,6 +3118,48 @@
         }
       },
       "title": "RadiusServersList",
+      "type": "object"
+    },
+    "restrictedFields": {
+      "properties": {
+        "field": {
+          "enum": [
+            "addresses",
+            "company",
+            "costCenter",
+            "department",
+            "description",
+            "displayname",
+            "email",
+            "employeeIdentifier",
+            "employeeType",
+            "firstname",
+            "jobTitle",
+            "lastname",
+            "location",
+            "middlename",
+            "password",
+            "phoneNumbers",
+            "sudo",
+            "username"
+          ],
+          "maxLength": 32,
+          "type": "string"
+        },
+        "id": {
+          "maxLength": 24,
+          "type": "string"
+        },
+        "type": {
+          "enum": [
+            "active_directory",
+            "federated_identity_provider",
+            "scim"
+          ],
+          "maxLength": 128,
+          "type": "string"
+        }
+      },
       "type": "object"
     },
     "search": {
@@ -2958,6 +3476,9 @@
         },
         "policyStats": {
           "properties": {
+            "duplicate": {
+              "type": "integer"
+            },
             "failed": {
               "type": "integer"
             },
@@ -2968,6 +3489,9 @@
               "type": "integer"
             },
             "total": {
+              "type": "integer"
+            },
+            "unsupportedOs": {
               "type": "integer"
             }
           },
@@ -3850,46 +4374,7 @@
         },
         "restrictedFields": {
           "items": {
-            "properties": {
-              "field": {
-                "enum": [
-                  "addresses",
-                  "company",
-                  "costCenter",
-                  "department",
-                  "description",
-                  "displayname",
-                  "email",
-                  "employeeIdentifier",
-                  "employeeType",
-                  "firstname",
-                  "jobTitle",
-                  "lastname",
-                  "location",
-                  "middlename",
-                  "password",
-                  "phoneNumbers",
-                  "sudo",
-                  "username"
-                ],
-                "maxLength": 32,
-                "type": "string"
-              },
-              "id": {
-                "maxLength": 24,
-                "type": "string"
-              },
-              "type": {
-                "enum": [
-                  "active_directory",
-                  "federated_identity_provider",
-                  "scim"
-                ],
-                "maxLength": 128,
-                "type": "string"
-              }
-            },
-            "type": "object"
+            "$ref": "#/definitions/restrictedFields"
           },
           "type": "array"
         },
@@ -5365,15 +5850,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request PUT \\\n  --url https://console.jumpcloud.com/api/organizations/{id} \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --data '{\"settings\":{\"contactEmail\":\"string\",\"contactName\":\"string\",\"deviceIdentificationEnabled\":true,\"disableGoogleLogin\":true,\"disableLdap\":true,\"disableUM\":true,\"duplicateLDAPGroups\":true,\"emailDisclaimer\":\"string\",\"enableManagedUID\":true,\"features\":{\"directoryInsights\":{\"enabled\":true},\"directoryInsightsPremium\":{\"createdAt\":\"string\",\"enabled\":true,\"updatedAt\":\"string\"},\"systemInsights\":{\"createdAt\":\"string\",\"enableNewDarwin\":true,\"enableNewLinux\":true,\"enableNewWindows\":true,\"enabled\":true,\"updatedAt\":\"string\"}},\"growthData\":{},\"logo\":\"string\",\"maxSystemUsers\":0,\"name\":\"string\",\"newSystemUserStateDefaults\":{\"applicationImport\":\"ACTIVATED\",\"csvImport\":\"ACTIVATED\",\"manualEntry\":\"ACTIVATED\"},\"passwordCompliance\":\"custom\",\"passwordPolicy\":{\"allowUsernameSubstring\":true,\"daysAfterExpirationToSelfRecover\":0,\"daysBeforeExpirationToForceReset\":1,\"effectiveDate\":\"string\",\"enableDaysAfterExpirationToSelfRecover\":true,\"enableDaysBeforeExpirationToForceReset\":true,\"enableLockoutTimeInSeconds\":true,\"enableMaxHistory\":true,\"enableMaxLoginAttempts\":true,\"enableMinChangePeriodInDays\":true,\"enableMinLength\":true,\"enablePasswordExpirationInDays\":true,\"gracePeriodDate\":\"string\",\"lockoutTimeInSeconds\":0,\"maxHistory\":1,\"maxLoginAttempts\":1,\"minChangePeriodInDays\":0,\"minLength\":0,\"needsLowercase\":true,\"needsNumeric\":true,\"needsSymbolic\":true,\"needsUppercase\":true,\"passwordExpirationInDays\":1},\"showIntro\":true,\"systemUserPasswordExpirationInDays\":0,\"systemUsersCanEdit\":true,\"trustedAppConfig\":{\"trustedApps\":[{\"name\":\"Application 1\",\"path\":\"/someuser/Applications/application1.app\",\"teamid\":\"FakeTeamID\"}]},\"userPortal\":{\"idleSessionDurationMinutes\":1}}}'"
+            "source": "curl --request PUT \\\n  --url https://console.jumpcloud.com/api/organizations/{id} \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --data '{\"settings\":{\"contactEmail\":\"string\",\"contactName\":\"string\",\"deviceIdentificationEnabled\":true,\"disableGoogleLogin\":true,\"disableLdap\":true,\"disableUM\":true,\"duplicateLDAPGroups\":true,\"emailDisclaimer\":\"string\",\"enableManagedUID\":true,\"features\":{\"directoryInsights\":{\"enabled\":true},\"directoryInsightsPremium\":{\"createdAt\":\"string\",\"enabled\":true,\"updatedAt\":\"string\"},\"systemInsights\":{\"createdAt\":\"string\",\"enableNewDarwin\":true,\"enableNewLinux\":true,\"enableNewWindows\":true,\"enabled\":true,\"updatedAt\":\"string\"}},\"growthData\":{},\"logo\":\"string\",\"maxSystemUsers\":0,\"name\":\"string\",\"newSystemUserStateDefaults\":{\"applicationImport\":\"ACTIVATED\",\"csvImport\":\"ACTIVATED\",\"manualEntry\":\"ACTIVATED\"},\"passwordCompliance\":\"custom\",\"passwordPolicy\":{\"allowUsernameSubstring\":true,\"daysAfterExpirationToSelfRecover\":0,\"daysBeforeExpirationToForceReset\":1,\"effectiveDate\":\"string\",\"enableDaysAfterExpirationToSelfRecover\":true,\"enableDaysBeforeExpirationToForceReset\":true,\"enableLockoutTimeInSeconds\":true,\"enableMaxHistory\":true,\"enableMaxLoginAttempts\":true,\"enableMinChangePeriodInDays\":true,\"enableMinLength\":true,\"enablePasswordExpirationInDays\":true,\"gracePeriodDate\":\"string\",\"lockoutTimeInSeconds\":0,\"maxHistory\":1,\"maxLoginAttempts\":1,\"minChangePeriodInDays\":0,\"minLength\":0,\"needsLowercase\":true,\"needsNumeric\":true,\"needsSymbolic\":true,\"needsUppercase\":true,\"passwordExpirationInDays\":1},\"showIntro\":true,\"systemUserDefaults\":{\"restrictedFields\":[{\"field\":\"addresses\",\"id\":\"string\",\"type\":\"active_directory\"}]},\"systemUserPasswordExpirationInDays\":0,\"systemUsersCanEdit\":true,\"trustedAppConfig\":{\"trustedApps\":[{\"name\":\"Application 1\",\"path\":\"/someuser/Applications/application1.app\",\"teamid\":\"FakeTeamID\"}]},\"userPortal\":{\"idleSessionDurationMinutes\":1}}}'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/organizations/{id}\"\n\npayload = {\"settings\": {\n        \"contactEmail\": \"string\",\n        \"contactName\": \"string\",\n        \"deviceIdentificationEnabled\": True,\n        \"disableGoogleLogin\": True,\n        \"disableLdap\": True,\n        \"disableUM\": True,\n        \"duplicateLDAPGroups\": True,\n        \"emailDisclaimer\": \"string\",\n        \"enableManagedUID\": True,\n        \"features\": {\n            \"directoryInsights\": {\"enabled\": True},\n            \"directoryInsightsPremium\": {\n                \"createdAt\": \"string\",\n                \"enabled\": True,\n                \"updatedAt\": \"string\"\n            },\n            \"systemInsights\": {\n                \"createdAt\": \"string\",\n                \"enableNewDarwin\": True,\n                \"enableNewLinux\": True,\n                \"enableNewWindows\": True,\n                \"enabled\": True,\n                \"updatedAt\": \"string\"\n            }\n        },\n        \"growthData\": {},\n        \"logo\": \"string\",\n        \"maxSystemUsers\": 0,\n        \"name\": \"string\",\n        \"newSystemUserStateDefaults\": {\n            \"applicationImport\": \"ACTIVATED\",\n            \"csvImport\": \"ACTIVATED\",\n            \"manualEntry\": \"ACTIVATED\"\n        },\n        \"passwordCompliance\": \"custom\",\n        \"passwordPolicy\": {\n            \"allowUsernameSubstring\": True,\n            \"daysAfterExpirationToSelfRecover\": 0,\n            \"daysBeforeExpirationToForceReset\": 1,\n            \"effectiveDate\": \"string\",\n            \"enableDaysAfterExpirationToSelfRecover\": True,\n            \"enableDaysBeforeExpirationToForceReset\": True,\n            \"enableLockoutTimeInSeconds\": True,\n            \"enableMaxHistory\": True,\n            \"enableMaxLoginAttempts\": True,\n            \"enableMinChangePeriodInDays\": True,\n            \"enableMinLength\": True,\n            \"enablePasswordExpirationInDays\": True,\n            \"gracePeriodDate\": \"string\",\n            \"lockoutTimeInSeconds\": 0,\n            \"maxHistory\": 1,\n            \"maxLoginAttempts\": 1,\n            \"minChangePeriodInDays\": 0,\n            \"minLength\": 0,\n            \"needsLowercase\": True,\n            \"needsNumeric\": True,\n            \"needsSymbolic\": True,\n            \"needsUppercase\": True,\n            \"passwordExpirationInDays\": 1\n        },\n        \"showIntro\": True,\n        \"systemUserPasswordExpirationInDays\": 0,\n        \"systemUsersCanEdit\": True,\n        \"trustedAppConfig\": {\"trustedApps\": [\n                {\n                    \"name\": \"Application 1\",\n                    \"path\": \"/someuser/Applications/application1.app\",\n                    \"teamid\": \"FakeTeamID\"\n                }\n            ]},\n        \"userPortal\": {\"idleSessionDurationMinutes\": 1}\n    }}\nheaders = {\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"PUT\", url, json=payload, headers=headers)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/organizations/{id}\"\n\npayload = {\"settings\": {\n        \"contactEmail\": \"string\",\n        \"contactName\": \"string\",\n        \"deviceIdentificationEnabled\": True,\n        \"disableGoogleLogin\": True,\n        \"disableLdap\": True,\n        \"disableUM\": True,\n        \"duplicateLDAPGroups\": True,\n        \"emailDisclaimer\": \"string\",\n        \"enableManagedUID\": True,\n        \"features\": {\n            \"directoryInsights\": {\"enabled\": True},\n            \"directoryInsightsPremium\": {\n                \"createdAt\": \"string\",\n                \"enabled\": True,\n                \"updatedAt\": \"string\"\n            },\n            \"systemInsights\": {\n                \"createdAt\": \"string\",\n                \"enableNewDarwin\": True,\n                \"enableNewLinux\": True,\n                \"enableNewWindows\": True,\n                \"enabled\": True,\n                \"updatedAt\": \"string\"\n            }\n        },\n        \"growthData\": {},\n        \"logo\": \"string\",\n        \"maxSystemUsers\": 0,\n        \"name\": \"string\",\n        \"newSystemUserStateDefaults\": {\n            \"applicationImport\": \"ACTIVATED\",\n            \"csvImport\": \"ACTIVATED\",\n            \"manualEntry\": \"ACTIVATED\"\n        },\n        \"passwordCompliance\": \"custom\",\n        \"passwordPolicy\": {\n            \"allowUsernameSubstring\": True,\n            \"daysAfterExpirationToSelfRecover\": 0,\n            \"daysBeforeExpirationToForceReset\": 1,\n            \"effectiveDate\": \"string\",\n            \"enableDaysAfterExpirationToSelfRecover\": True,\n            \"enableDaysBeforeExpirationToForceReset\": True,\n            \"enableLockoutTimeInSeconds\": True,\n            \"enableMaxHistory\": True,\n            \"enableMaxLoginAttempts\": True,\n            \"enableMinChangePeriodInDays\": True,\n            \"enableMinLength\": True,\n            \"enablePasswordExpirationInDays\": True,\n            \"gracePeriodDate\": \"string\",\n            \"lockoutTimeInSeconds\": 0,\n            \"maxHistory\": 1,\n            \"maxLoginAttempts\": 1,\n            \"minChangePeriodInDays\": 0,\n            \"minLength\": 0,\n            \"needsLowercase\": True,\n            \"needsNumeric\": True,\n            \"needsSymbolic\": True,\n            \"needsUppercase\": True,\n            \"passwordExpirationInDays\": 1\n        },\n        \"showIntro\": True,\n        \"systemUserDefaults\": {\"restrictedFields\": [\n                {\n                    \"field\": \"addresses\",\n                    \"id\": \"string\",\n                    \"type\": \"active_directory\"\n                }\n            ]},\n        \"systemUserPasswordExpirationInDays\": 0,\n        \"systemUsersCanEdit\": True,\n        \"trustedAppConfig\": {\"trustedApps\": [\n                {\n                    \"name\": \"Application 1\",\n                    \"path\": \"/someuser/Applications/application1.app\",\n                    \"teamid\": \"FakeTeamID\"\n                }\n            ]},\n        \"userPortal\": {\"idleSessionDurationMinutes\": 1}\n    }}\nheaders = {\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"PUT\", url, json=payload, headers=headers)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/organizations/{id}' -Method PUT -Headers $headers -ContentType 'application/json' -Body '{\"settings\":{\"contactEmail\":\"string\",\"contactName\":\"string\",\"deviceIdentificationEnabled\":true,\"disableGoogleLogin\":true,\"disableLdap\":true,\"disableUM\":true,\"duplicateLDAPGroups\":true,\"emailDisclaimer\":\"string\",\"enableManagedUID\":true,\"features\":{\"directoryInsights\":{\"enabled\":true},\"directoryInsightsPremium\":{\"createdAt\":\"string\",\"enabled\":true,\"updatedAt\":\"string\"},\"systemInsights\":{\"createdAt\":\"string\",\"enableNewDarwin\":true,\"enableNewLinux\":true,\"enableNewWindows\":true,\"enabled\":true,\"updatedAt\":\"string\"}},\"growthData\":{},\"logo\":\"string\",\"maxSystemUsers\":0,\"name\":\"string\",\"newSystemUserStateDefaults\":{\"applicationImport\":\"ACTIVATED\",\"csvImport\":\"ACTIVATED\",\"manualEntry\":\"ACTIVATED\"},\"passwordCompliance\":\"custom\",\"passwordPolicy\":{\"allowUsernameSubstring\":true,\"daysAfterExpirationToSelfRecover\":0,\"daysBeforeExpirationToForceReset\":1,\"effectiveDate\":\"string\",\"enableDaysAfterExpirationToSelfRecover\":true,\"enableDaysBeforeExpirationToForceReset\":true,\"enableLockoutTimeInSeconds\":true,\"enableMaxHistory\":true,\"enableMaxLoginAttempts\":true,\"enableMinChangePeriodInDays\":true,\"enableMinLength\":true,\"enablePasswordExpirationInDays\":true,\"gracePeriodDate\":\"string\",\"lockoutTimeInSeconds\":0,\"maxHistory\":1,\"maxLoginAttempts\":1,\"minChangePeriodInDays\":0,\"minLength\":0,\"needsLowercase\":true,\"needsNumeric\":true,\"needsSymbolic\":true,\"needsUppercase\":true,\"passwordExpirationInDays\":1},\"showIntro\":true,\"systemUserPasswordExpirationInDays\":0,\"systemUsersCanEdit\":true,\"trustedAppConfig\":{\"trustedApps\":[{\"name\":\"Application 1\",\"path\":\"/someuser/Applications/application1.app\",\"teamid\":\"FakeTeamID\"}]},\"userPortal\":{\"idleSessionDurationMinutes\":1}}}'"
+            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/organizations/{id}' -Method PUT -Headers $headers -ContentType 'application/json' -Body '{\"settings\":{\"contactEmail\":\"string\",\"contactName\":\"string\",\"deviceIdentificationEnabled\":true,\"disableGoogleLogin\":true,\"disableLdap\":true,\"disableUM\":true,\"duplicateLDAPGroups\":true,\"emailDisclaimer\":\"string\",\"enableManagedUID\":true,\"features\":{\"directoryInsights\":{\"enabled\":true},\"directoryInsightsPremium\":{\"createdAt\":\"string\",\"enabled\":true,\"updatedAt\":\"string\"},\"systemInsights\":{\"createdAt\":\"string\",\"enableNewDarwin\":true,\"enableNewLinux\":true,\"enableNewWindows\":true,\"enabled\":true,\"updatedAt\":\"string\"}},\"growthData\":{},\"logo\":\"string\",\"maxSystemUsers\":0,\"name\":\"string\",\"newSystemUserStateDefaults\":{\"applicationImport\":\"ACTIVATED\",\"csvImport\":\"ACTIVATED\",\"manualEntry\":\"ACTIVATED\"},\"passwordCompliance\":\"custom\",\"passwordPolicy\":{\"allowUsernameSubstring\":true,\"daysAfterExpirationToSelfRecover\":0,\"daysBeforeExpirationToForceReset\":1,\"effectiveDate\":\"string\",\"enableDaysAfterExpirationToSelfRecover\":true,\"enableDaysBeforeExpirationToForceReset\":true,\"enableLockoutTimeInSeconds\":true,\"enableMaxHistory\":true,\"enableMaxLoginAttempts\":true,\"enableMinChangePeriodInDays\":true,\"enableMinLength\":true,\"enablePasswordExpirationInDays\":true,\"gracePeriodDate\":\"string\",\"lockoutTimeInSeconds\":0,\"maxHistory\":1,\"maxLoginAttempts\":1,\"minChangePeriodInDays\":0,\"minLength\":0,\"needsLowercase\":true,\"needsNumeric\":true,\"needsSymbolic\":true,\"needsUppercase\":true,\"passwordExpirationInDays\":1},\"showIntro\":true,\"systemUserDefaults\":{\"restrictedFields\":[{\"field\":\"addresses\",\"id\":\"string\",\"type\":\"active_directory\"}]},\"systemUserPasswordExpirationInDays\":0,\"systemUsersCanEdit\":true,\"trustedAppConfig\":{\"trustedApps\":[{\"name\":\"Application 1\",\"path\":\"/someuser/Applications/application1.app\",\"teamid\":\"FakeTeamID\"}]},\"userPortal\":{\"idleSessionDurationMinutes\":1}}}'"
           }
         ]
       },
@@ -6257,7 +6742,7 @@
         }
       ],
       "post": {
-        "description": "This endpoint allows you to run the erase command on the specified device. If a device is offline, the command will be run when the device becomes available.\n\n#### Sample Request\n```\ncurl -X POST \\\n  https://console.jumpcloud.com/api/systems/{system_id}/command/builtin/erase \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d {}\n```",
+        "description": "This endpoint allows you to run the erase command on the specified device. If a device is offline, the command will be run when the device becomes available. Only supported on Linux and Windows devices. Use Apple MDM security commands for macOS devices.\n\n#### Sample Request\n```\ncurl -X POST \\\n  https://console.jumpcloud.com/api/systems/{system_id}/command/builtin/erase \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d {}\n```",
         "operationId": "System_Clear",
         "parameters": [],
         "responses": {
@@ -6303,7 +6788,7 @@
         }
       ],
       "post": {
-        "description": "This endpoint allows you to run the lock command on the specified device. If a device is offline, the command will be run when the device becomes available.\n\n#### Sample Request\n```\ncurl -X POST \\\n  https://console.jumpcloud.com/api/systems/{system_id}/command/builtin/lock \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d {}\n```",
+        "description": "This endpoint allows you to run the lock command on the specified device. If a device is offline, the command will be run when the device becomes available. Only supported on Linux and Windows devices. Use Apple MDM security commands for macOS devices.\n\n#### Sample Request\n```\ncurl -X POST \\\n  https://console.jumpcloud.com/api/systems/{system_id}/command/builtin/lock \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d {}\n```",
         "operationId": "System_Lock",
         "parameters": [],
         "responses": {
@@ -6349,7 +6834,7 @@
         }
       ],
       "post": {
-        "description": "This endpoint allows you to run the restart command on the specified device. If a device is offline, the command will be run when the device becomes available.\n\n#### Sample Request\n```\ncurl -X POST \\\n  https://console.jumpcloud.com/api/systems/{system_id}/command/builtin/restart \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d {}\n```",
+        "description": "This endpoint allows you to run the restart command on the specified device. If a device is offline, the command will be run when the device becomes available. Only supported on Linux and Windows devices. Use Apple MDM security commands for macOS devices.\n\n#### Sample Request\n```\ncurl -X POST \\\n  https://console.jumpcloud.com/api/systems/{system_id}/command/builtin/restart \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d {}\n```",
         "operationId": "System_Restart",
         "parameters": [],
         "responses": {
@@ -6394,7 +6879,7 @@
         }
       ],
       "post": {
-        "description": "This endpoint allows you to run the shutdown command on the specified device. If a device is offline, the command will be run when the device becomes available.\n\n#### Sample Request\n```\ncurl -X POST \\\n  https://console.jumpcloud.com/api/systems/{system_id}/command/builtin/shutdown \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d {}\n```",
+        "description": "This endpoint allows you to run the shutdown command on the specified device. If a device is offline, the command will be run when the device becomes available. Only supported on Linux and Windows devices. Use Apple MDM security commands for macOS devices.\n\n#### Sample Request\n```\ncurl -X POST \\\n  https://console.jumpcloud.com/api/systems/{system_id}/command/builtin/shutdown \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d {}\n```",
         "operationId": "System_Stop",
         "parameters": [],
         "responses": {
