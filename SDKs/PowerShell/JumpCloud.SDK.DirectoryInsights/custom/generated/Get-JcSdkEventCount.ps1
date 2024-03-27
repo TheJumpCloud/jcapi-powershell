@@ -191,15 +191,18 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
                 $resultCounter = 0
                 :retryLoop do {
                     $resultCounter++
-                    try {
-                        $Result = JumpCloud.SDK.DirectoryInsights.internal\Get-JcSdkInternalEventCount @PSBoundParameters -errorAction SilentlyContinue
-                        break retryLoop
-                    } catch {
-                        If ($JCHttpResponse.Result.StatusCode -eq 503) {
+                    $Result = JumpCloud.SDK.DirectoryInsights.internal\Get-JcSdkInternalEventCount @PSBoundParameters -errorAction SilentlyContinue -errorVariable sdkError
+                    If ($errVar){
+                        If ($resultCounter -eq $maxRetries){
+                            throw $sdkError
+                        }
+                        If ($JCHttpResponse.Result.StatusCode -eq "503") {
                             Write-Warning ("503: Service Unavailable - retrying in " + ($resultCounter * 5) + " seconds.")
                         } else {
-                            Write-Warning ("An error occurred: $_.")
+                            throw $sdkError
                         }
+                    } else {
+                        break retryLoop
                     }
                     Start-Sleep -Seconds ($resultCounter * 5)
                 } while ($resultCounter -lt $maxRetries)
@@ -236,15 +239,18 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
             $resultCounter = 0
             :retryLoop do {
                 $resultCounter++
-                try {
-                    $Result = JumpCloud.SDK.DirectoryInsights.internal\Get-JcSdkInternalEventCount @PSBoundParameters -errorAction SilentlyContinue
-                    break retryLoop
-                } catch {
-                    If ($JCHttpResponse.Result.StatusCode -eq 503) {
+                $Result = JumpCloud.SDK.DirectoryInsights.internal\Get-JcSdkInternalEventCount @PSBoundParameters -errorAction SilentlyContinue -errorVariable sdkError
+                If ($errVar){
+                    If ($resultCounter -eq $maxRetries){
+                        throw $sdkError
+                    }
+                    If ($JCHttpResponse.Result.StatusCode -eq "503") {
                         Write-Warning ("503: Service Unavailable - retrying in " + ($resultCounter * 5) + " seconds.")
                     } else {
-                        Write-Warning ("An error occurred: $_.")
+                        throw $sdkError
                     }
+                } else {
+                    break retryLoop
                 }
                 Start-Sleep -Seconds ($resultCounter * 5)
             } while ($resultCounter -lt $maxRetries)
