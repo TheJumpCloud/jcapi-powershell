@@ -192,7 +192,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
                 :retryLoop do {
                     $resultCounter++
                     $Result = (JumpCloud.SDK.DirectoryInsights.internal\Get-JcSdkInternalEvent -ErrorAction SilentlyContinue -errorVariable sdkError @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
-                    If ($errVar){
+                    If ($sdkError){
                         If ($resultCounter -eq $maxRetries){
                             throw $sdkError
                         }
@@ -240,7 +240,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
             :retryLoop do {
                 $resultCounter++
                 $Result = (JumpCloud.SDK.DirectoryInsights.internal\Get-JcSdkInternalEvent -ErrorAction SilentlyContinue -errorVariable sdkError @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
-                If ($errVar){
+                If ($sdkError){
                     If ($resultCounter -eq $maxRetries){
                         throw $sdkError
                     }

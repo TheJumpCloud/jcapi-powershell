@@ -174,7 +174,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
                 :retryLoop do {
                     $resultCounter++
                     $Result = JumpCloud.SDK.V2.internal\Get-JcSdkInternalUserAssociation @PSBoundParameters -errorAction SilentlyContinue -errorVariable sdkError
-                    If ($errVar){
+                    If ($sdkError){
                         If ($resultCounter -eq $maxRetries){
                             throw $sdkError
                         }
@@ -212,7 +212,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
             :retryLoop do {
                 $resultCounter++
                 $Result = JumpCloud.SDK.V2.internal\Get-JcSdkInternalUserAssociation @PSBoundParameters -errorAction SilentlyContinue -errorVariable sdkError
-                If ($errVar){
+                If ($sdkError){
                     If ($resultCounter -eq $maxRetries){
                         throw $sdkError
                     }

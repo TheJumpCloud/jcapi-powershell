@@ -194,7 +194,7 @@ Try {
                 :retryLoop do {
                     `$resultCounter++
                     `$Result = $ResultsLogic
-                    If (`$errVar){
+                    If (`$sdkError){
                         If (`$resultCounter -eq `$maxRetries){
                             throw `$sdkError
                         }
@@ -242,7 +242,7 @@ Try {
             :retryLoop do {
                 `$resultCounter++
                 `$Result = $ResultsLogic
-                If (`$errVar){
+                If (`$sdkError){
                     If (`$resultCounter -eq `$maxRetries){
                         throw `$sdkError
                     }
@@ -272,7 +272,7 @@ Try {
         :retryLoop do {
             `$resultCounter++
             `$Result = $ResultsLogic
-            If (`$errVar){
+            If (`$sdkError){
                 If (`$resultCounter -eq `$maxRetries){
                     throw `$sdkError
                 }
@@ -361,7 +361,7 @@ Try {
                 :retryLoop do {
                     `$resultCounter++
                     `$Result = $ResultsLogic
-                    If (`$errVar){
+                    If (`$sdkError){
                         If (`$resultCounter -eq `$maxRetries){
                             throw `$sdkError
                         }
@@ -435,7 +435,7 @@ Try {
             :retryLoop do {
                 `$resultCounter++
                 `$Result = $ResultsLogic
-                If (`$errVar){
+                If (`$sdkError){
                     If (`$resultCounter -eq `$maxRetries){
                         throw $`sdkError
                     }
@@ -472,7 +472,7 @@ Try {
             :retryLoop do {
                 `$resultCounter++
                 `$Result = $ResultsLogic
-                If (`$errVar){
+                If (`$sdkError){
                     If (`$resultCounter -eq `$maxRetries){
                         throw `$sdkError
                     }
@@ -508,7 +508,7 @@ Try {
         :retryLoop do {
             `$resultCounter++
             `$Result = $ResultsLogic
-            If (`$errVar){
+            If (`$sdkError){
                 If (`$resultCounter -eq `$maxRetries){
                     throw $sdkError
                 }
@@ -581,7 +581,7 @@ Try {
         :retryLoop do {
             `$resultCounter++
             `$Results = $ResultsLogic
-            If (`$errVar){
+            If (`$sdkError){
                 If (`$resultCounter -eq `$maxRetries){
                     throw `$sdkError
                 }
