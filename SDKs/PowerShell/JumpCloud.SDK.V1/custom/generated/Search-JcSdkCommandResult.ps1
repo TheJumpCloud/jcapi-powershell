@@ -185,15 +185,15 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
                 $resultCounter = 0
                 :retryLoop do {
                     $resultCounter++
-                    $Result = JumpCloud.SDK.V1.internal\Search-JcSdkInternalCommandResult @PSBoundParameters -ErrorVariable StopVar
-                    If ($stopVar){
+                    try {
+                        $Result = JumpCloud.SDK.V1.internal\Search-JcSdkInternalCommandResult @PSBoundParameters -errorAction SilentlyContinue
+                        break retryLoop
+                    } catch {
                         If ($JCHttpResponse.Result.StatusCode -eq 503) {
                             Write-Warning ("503: Service Unavailable - retrying in " + ($resultCounter * 5) + " seconds.")
                         } else {
-                            break retryLoop
+                            Write-Warning ("An error occurred: $_.")
                         }
-                    } else {
-                        break retryLoop
                     }
                     Start-Sleep -Seconds ($resultCounter * 5)
                 } while ($resultCounter -lt $maxRetries)
@@ -220,15 +220,15 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
             $resultCounter = 0
             :retryLoop do {
                 $resultCounter++
-                $Result = JumpCloud.SDK.V1.internal\Search-JcSdkInternalCommandResult @PSBoundParameters -ErrorVariable StopVar
-                If ($stopVar){
+                try {
+                    $Result = JumpCloud.SDK.V1.internal\Search-JcSdkInternalCommandResult @PSBoundParameters -errorAction SilentlyContinue
+                    break retryLoop
+                } catch {
                     If ($JCHttpResponse.Result.StatusCode -eq 503) {
                         Write-Warning ("503: Service Unavailable - retrying in " + ($resultCounter * 5) + " seconds.")
                     } else {
-                        break retryLoop
+                        Write-Warning ("An error occurred: $_.")
                     }
-                } else {
-                    break retryLoop
                 }
                 Start-Sleep -Seconds ($resultCounter * 5)
             } while ($resultCounter -lt $maxRetries)

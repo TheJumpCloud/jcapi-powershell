@@ -191,16 +191,15 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
                 $resultCounter = 0
                 :retryLoop do {
                     $resultCounter++
-                    $Result = (JumpCloud.SDK.DirectoryInsights.internal\Get-JcSdkInternalEvent -ErrorVariable StopVar @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
-                    if ($stopVar){
-                        If (($JCHttpResponse.Result.StatusCode -ne 503) -or ($resultCounter -eq $maxRetries)) {
-                            throw $_
+                    try {
+                        $Result = (JumpCloud.SDK.DirectoryInsights.internal\Get-JcSdkInternalEvent -ErrorAction SilentlyContinue @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
+                        break retryLoop
+                    } catch {
+                        If ($JCHttpResponse.Result.StatusCode -eq 503) {
+                            Write-Warning ("503: Service Unavailable - retrying in " + ($resultCounter * 5) + " seconds.")
                         } else {
                             Write-Warning ("An error occurred: $_.")
-                            Write-Warning ("503: Service Unavailable - retrying in " + ($resultCounter * 5) + " seconds.")
                         }
-                    } else {
-                        break retryLoop
                     }
                     Start-Sleep -Seconds ($resultCounter * 5)
                 } while ($resultCounter -lt $maxRetries)
@@ -237,15 +236,15 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
             $resultCounter = 0
             :retryLoop do {
                 $resultCounter++
-                $Result = (JumpCloud.SDK.DirectoryInsights.internal\Get-JcSdkInternalEvent -ErrorVariable StopVar @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
-                If ($stopVar){
+                try {
+                    $Result = (JumpCloud.SDK.DirectoryInsights.internal\Get-JcSdkInternalEvent -ErrorAction SilentlyContinue @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
+                    break retryLoop
+                } catch {
                     If ($JCHttpResponse.Result.StatusCode -eq 503) {
                         Write-Warning ("503: Service Unavailable - retrying in " + ($resultCounter * 5) + " seconds.")
                     } else {
-                        break retryLoop
+                        Write-Warning ("An error occurred: $_.")
                     }
-                } else {
-                    break retryLoop
                 }
                 Start-Sleep -Seconds ($resultCounter * 5)
             } while ($resultCounter -lt $maxRetries)
