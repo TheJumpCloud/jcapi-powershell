@@ -1860,62 +1860,6 @@
       </TableControl>
     </View>
     <View>
-      <Name>JumpCloud.SDK.V2.Models.Filter</Name>
-      <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.Filter</TypeName>
-      </ViewSelectedBy>
-      <TableControl>
-        <TableHeaders>
-          <TableColumnHeader>
-            <Label>Field</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>Operator</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>Value</Label>
-          </TableColumnHeader>
-        </TableHeaders>
-        <TableRowEntries>
-          <TableRowEntry>
-            <TableColumnItems>
-              <TableColumnItem>
-                <PropertyName>Field</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>Operator</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>Value</PropertyName>
-              </TableColumnItem>
-            </TableColumnItems>
-          </TableRowEntry>
-        </TableRowEntries>
-      </TableControl>
-    </View>
-    <View>
-      <Name>JumpCloud.SDK.V2.Models.FilterQuery</Name>
-      <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.FilterQuery</TypeName>
-      </ViewSelectedBy>
-      <TableControl>
-        <TableHeaders>
-          <TableColumnHeader>
-            <Label>QueryType</Label>
-          </TableColumnHeader>
-        </TableHeaders>
-        <TableRowEntries>
-          <TableRowEntry>
-            <TableColumnItems>
-              <TableColumnItem>
-                <PropertyName>QueryType</PropertyName>
-              </TableColumnItem>
-            </TableColumnItems>
-          </TableRowEntry>
-        </TableRowEntries>
-      </TableControl>
-    </View>
-    <View>
       <Name>JumpCloud.SDK.V2.Models.Get200ApplicationJsonPropertiesItemsItem</Name>
       <ViewSelectedBy>
         <TypeName>JumpCloud.SDK.V2.Models.Get200ApplicationJsonPropertiesItemsItem</TypeName>
@@ -3625,6 +3569,28 @@
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>UserPasswordExpirationAction</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>JumpCloud.SDK.V2.Models.MemberQuery</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloud.SDK.V2.Models.MemberQuery</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>QueryType</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>QueryType</PropertyName>
               </TableColumnItem>
             </TableColumnItems>
           </TableRowEntry>

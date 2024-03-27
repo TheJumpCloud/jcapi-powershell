@@ -1,5 +1,5 @@
 ## JumpCloud.SDK.V1-0.0.40
-Release Date: March 20, 2024
+Release Date: March 27, 2024
 #### RELEASE NOTES
 ```
 This is a rollup release for the V1 module, a few changes were made to the Application model to return additinoal parameters.
