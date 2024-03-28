@@ -4184,22 +4184,210 @@
     "bulk-user-create": {
       "description": "See [V1 system user creation](https://docs.jumpcloud.com/api/1.0/index.html#operation/systemusers_post) for full list of attributes.",
       "properties": {
-        "attributes": {
-          "description": "Map of additional attributes.",
+        "account_locked": {
+          "type": "boolean"
+        },
+        "activated": {
+          "type": "boolean"
+        },
+        "addresses": {
           "items": {
-            "type": "object",
-            "additionalProperties": true
+            "properties": {
+              "country": {
+                "type": "string"
+              },
+              "extendedAddress": {
+                "type": "string"
+              },
+              "locality": {
+                "type": "string"
+              },
+              "poBox": {
+                "type": "string"
+              },
+              "postalCode": {
+                "type": "string"
+              },
+              "region": {
+                "type": "string"
+              },
+              "streetAddress": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string"
+              }
+            },
+            "type": "object"
           },
           "type": "array"
         },
+        "allow_public_key": {
+          "type": "boolean"
+        },
+        "alternateEmail": {
+          "type": "string"
+        },
+        "attributes": {
+          "items": {
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "value": {
+                "maxLength": 1024,
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "company": {
+          "type": "string"
+        },
+        "costCenter": {
+          "type": "string"
+        },
+        "department": {
+          "type": "string"
+        },
+        "description": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "disableDeviceMaxLoginAttempts": {
+          "type": "boolean"
+        },
+        "displayname": {
+          "type": "string"
+        },
         "email": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "employeeIdentifier": {
+          "description": "Must be unique per user. ",
+          "maxLength": 256,
+          "type": "string"
+        },
+        "employeeType": {
+          "type": "string"
+        },
+        "enable_managed_uid": {
+          "type": "boolean"
+        },
+        "enable_user_portal_multifactor": {
+          "type": "boolean"
+        },
+        "external_dn": {
+          "type": "string"
+        },
+        "external_password_expiration_date": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "external_source_type": {
           "type": "string"
         },
         "firstname": {
           "type": "string"
         },
+        "jobTitle": {
+          "type": "string"
+        },
         "lastname": {
           "type": "string"
+        },
+        "ldap_binding_user": {
+          "type": "boolean"
+        },
+        "location": {
+          "type": "string"
+        },
+        "managedAppleId": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "manager": {
+          "description": "Relation with another systemuser to identify the last as a manager.",
+          "type": "string"
+        },
+        "middlename": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "password_never_expires": {
+          "type": "boolean"
+        },
+        "passwordless_sudo": {
+          "type": "boolean"
+        },
+        "phoneNumbers": {
+          "items": {
+            "properties": {
+              "number": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "public_key": {
+          "type": "string"
+        },
+        "recoveryEmail": {
+          "properties": {
+            "address": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "relationships": {
+          "items": {
+            "properties": {
+              "type": {
+                "type": "string"
+              },
+              "value": {
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "samba_service_user": {
+          "type": "boolean"
+        },
+        "state": {
+          "enum": [
+            "STAGED",
+            "ACTIVATED",
+            "SUSPENDED"
+          ],
+          "type": "string"
+        },
+        "sudo": {
+          "type": "boolean"
+        },
+        "suspended": {
+          "type": "boolean"
+        },
+        "unix_guid": {
+          "minimum": 1,
+          "type": "integer"
+        },
+        "unix_uid": {
+          "minimum": 1,
+          "type": "integer"
         },
         "username": {
           "type": "string"

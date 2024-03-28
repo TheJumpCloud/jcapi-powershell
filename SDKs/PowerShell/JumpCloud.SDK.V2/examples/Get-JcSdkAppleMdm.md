@@ -1,8 +1,18 @@
 ### Example 1: {{ Add title here }}
 ```powershell
-PS C:\> Get-JcSdkAppleMdm
+PS C:\> {{ Add code here }}
 
-Get Apple MDM Server information within a JumpCloud Tenant
+{{ Add output here }}
 ```
 
-Get Apple MDM Server information within a JumpCloud Tenant
+{{ Add description here }}
+
+### Example 2: {{ Add title here }}
+```powershell
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+```
+
+{{ Add description here }}
+

@@ -26,9 +26,13 @@ curl https://console.jumpcloud.com/api/v2/applemdms \\
   -H 'x-api-key: {API_KEY}'
 ```
 .Example
-PS C:\> Get-JcSdkAppleMdm
+PS C:\> {{ Add code here }}
 
-Get Apple MDM Server information within a JumpCloud Tenant
+{{ Add output here }}
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
 
 .Outputs
 JumpCloud.SDK.V2.Models.IAppleMdm

@@ -187,10 +187,61 @@ To create the parameters described below, construct a hash table containing the 
 
 
 BODY <IBulkUserCreate[]>: Array of bulk-user-create
-  - `[Attributes <IBulkUserCreateAttributesItem[]>]`: Map of additional attributes.
+  - `[AccountLocked <Boolean?>]`: 
+  - `[Activated <Boolean?>]`: 
+  - `[Addresses <IBulkUserCreateAddressesItem[]>]`: 
+    - `[Country <String>]`: 
+    - `[ExtendedAddress <String>]`: 
+    - `[Locality <String>]`: 
+    - `[PoBox <String>]`: 
+    - `[PostalCode <String>]`: 
+    - `[Region <String>]`: 
+    - `[StreetAddress <String>]`: 
+    - `[Type <String>]`: 
+  - `[AllowPublicKey <Boolean?>]`: 
+  - `[AlternateEmail <String>]`: 
+  - `[Attributes <IBulkUserCreateAttributesItem[]>]`: 
+    - `[Name <String>]`: 
+    - `[Value <String>]`: 
+  - `[Company <String>]`: 
+  - `[CostCenter <String>]`: 
+  - `[Department <String>]`: 
+  - `[Description <String>]`: 
+  - `[DisableDeviceMaxLoginAttempts <Boolean?>]`: 
+  - `[Displayname <String>]`: 
   - `[Email <String>]`: 
+  - `[EmployeeIdentifier <String>]`: Must be unique per user. 
+  - `[EmployeeType <String>]`: 
+  - `[EnableManagedUid <Boolean?>]`: 
+  - `[EnableUserPortalMultifactor <Boolean?>]`: 
+  - `[ExternalDn <String>]`: 
+  - `[ExternalPasswordExpirationDate <DateTime?>]`: 
+  - `[ExternalSourceType <String>]`: 
   - `[Firstname <String>]`: 
+  - `[JobTitle <String>]`: 
   - `[Lastname <String>]`: 
+  - `[LdapBindingUser <Boolean?>]`: 
+  - `[Location <String>]`: 
+  - `[ManagedAppleId <String>]`: 
+  - `[Manager <String>]`: Relation with another systemuser to identify the last as a manager.
+  - `[Middlename <String>]`: 
+  - `[Password <String>]`: 
+  - `[PasswordNeverExpires <Boolean?>]`: 
+  - `[PasswordlessSudo <Boolean?>]`: 
+  - `[PhoneNumbers <IBulkUserCreatePhoneNumbersItem[]>]`: 
+    - `[Number <String>]`: 
+    - `[Type <String>]`: 
+  - `[PublicKey <String>]`: 
+  - `[RecoveryEmailAddress <String>]`: 
+  - `[Relationships <IBulkUserCreateRelationshipsItem[]>]`: 
+    - `[Type <String>]`: 
+    - `[Value <String>]`: 
+  - `[SambaServiceUser <Boolean?>]`: 
+  - `[State <String>]`: 
+  - `[Sudo <Boolean?>]`: 
+  - `[Suspended <Boolean?>]`: 
+  - `[UnixGuid <Int32?>]`: 
+  - `[UnixUid <Int32?>]`: 
   - `[Username <String>]`: 
 
 INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter

@@ -45,10 +45,17 @@ curl https://console.jumpcloud.com/api/v2/applemdms \\
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-Get-JcSdkAppleMdm
+{{ Add code here }}
 ```
 
-Get Apple MDM Server information within a JumpCloud Tenant
+{{ Add output here }}
+
+### -------------------------- EXAMPLE 2 --------------------------
+```powershell
+{{ Add code here }}
+```
+
+{{ Add output here }}
 
 ## PARAMETERS
 

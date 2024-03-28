@@ -43,17 +43,17 @@ Note: currently only one enrollment profile is supported.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-Get-JcSdkAppleMdmEnrollmentProfile -AppleMdmId 5ecfd88e63336c651d4f4n59
+{{ Add code here }}
 ```
 
-Get a list of enrollment profiles for an apple mdm
+{{ Add output here }}
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell
-Get-JcSdkAppleMdmEnrollmentProfile -AppleMdmId 5ecfd88e63336c651d4f4n59 -Id 5ecfd88e63336c651d4f4n60
+{{ Add code here }}
 ```
 
-Get an enrollment profile by Id
+{{ Add output here }}
 
 ## PARAMETERS
 

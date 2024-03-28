@@ -24,13 +24,13 @@ Note: currently only one enrollment profile is supported.
   -H 'x-api-key: {API_KEY}'
 ```
 .Example
-PS C:\> Get-JcSdkAppleMdmEnrollmentProfile -AppleMdmId 5ecfd88e63336c651d4f4n59
+PS C:\> {{ Add code here }}
 
-Get a list of enrollment profiles for an apple mdm
+{{ Add output here }}
 .Example
-PS C:\> Get-JcSdkAppleMdmEnrollmentProfile -AppleMdmId 5ecfd88e63336c651d4f4n59 -Id 5ecfd88e63336c651d4f4n60
+PS C:\> {{ Add code here }}
 
-Get an enrollment profile by Id
+{{ Add output here }}
 
 .Outputs
 JumpCloud.SDK.V2.Models.IAppleMdm
