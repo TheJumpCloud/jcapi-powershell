@@ -28,8 +28,8 @@ curl -X POST https://console.jumpcloud.com/api/v2/usergroups \\
 ### CreateExpanded (Default)
 ```
 New-JcSdkUserGroup -Name <String> [-Attributes <Hashtable>] [-Description <String>] [-Email <String>]
- [-MemberQueryExemptions <IGraphObject[]>] [-MemberQueryFilters <IFilter[]>] [-MembershipMethod <String>]
- [-MemberSuggestionsNotify] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-MemberQueryExemptions <IGraphObject[]>] [-MemberQueryFilters <IAny[]>] [-MemberQueryType <String>]
+ [-MembershipMethod <String>] [-MemberSuggestionsNotify] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Create
@@ -150,10 +150,24 @@ Accept wildcard characters: False
 
 ### -MemberQueryFilters
 .
-To construct, see NOTES section for MEMBERQUERYFILTERS properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IFilter[]
+Type: JumpCloud.SDK.V2.Models.IAny[]
+Parameter Sets: CreateExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -MemberQueryType
+.
+
+```yaml
+Type: System.String
 Parameter Sets: CreateExpanded
 Aliases:
 
@@ -283,10 +297,8 @@ BODY <IUserGroupPost>: UserGroupPost
     - `Type <String>`: The type of graph object.
     - `[Attributes <IGraphAttributes>]`: The graph attributes.
       - `[(Any) <Object>]`: This indicates any property can be added to this object.
-  - `[MemberQueryFilters <IFilter[]>]`: 
-    - `Field <String>`: Name of field in filter target object.
-    - `Operator <String>`: Filter comparison operator.
-    - `Value <String>`: Filter comparison value.
+  - `[MemberQueryFilters <IAny[]>]`: 
+  - `[MemberQueryType <String>]`: 
   - `[MemberSuggestionsNotify <Boolean?>]`: True if notification emails are to be sent for membership suggestions.
   - `[MembershipMethod <String>]`: The type of membership method for this group. Valid values include NOTSET, STATIC, DYNAMIC_REVIEW_REQUIRED, and DYNAMIC_AUTOMATED.          Note DYNAMIC_AUTOMATED and DYNAMIC_REVIEW_REQUIRED group rules will supersede any group enrollment for [group-associated MDM-enrolled devices](https://jumpcloud.com/support/change-a-default-device-group-for-apple-devices).          Use caution when creating dynamic device groups with MDM-enrolled devices to avoid creating conflicting rule sets.
 
@@ -295,11 +307,6 @@ MEMBERQUERYEXEMPTIONS <IGraphObject[]>: Array of GraphObjects exempted from the 
   - `Type <String>`: The type of graph object.
   - `[Attributes <IGraphAttributes>]`: The graph attributes.
     - `[(Any) <Object>]`: This indicates any property can be added to this object.
-
-MEMBERQUERYFILTERS <IFilter[]>: .
-  - `Field <String>`: Name of field in filter target object.
-  - `Operator <String>`: Filter comparison operator.
-  - `Value <String>`: Filter comparison value.
 
 ## RELATED LINKS
 

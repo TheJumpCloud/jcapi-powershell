@@ -286,13 +286,17 @@ If ($moduleName -eq 'JumpCloud.SDK.V2' -and "MTP" -notin $Env:IncludeTagList)
         }
     }
     # Create a User Group
-    $global:PesterDefUserGroup = @{
-        Name = "PesterTestUserGroup-$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
-        MemberQueryFilters = [JumpCloud.SDK.V2.Models.Filter]@{
+    $UserFilter = [JumpCloud.SDK.V2.Models.MemberQuery]::new()
+    $UserFilter.Filters = @{
             Field = "description";
             Operator = "eq";
             Value = "test";
         }
+    $UserFilter.QueryType = "FilterQuery"
+    $global:PesterDefUserGroup = @{
+        Name = "PesterTestUserGroup-$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
+        MemberQueryFilters = $UserFilter.Filters
+        MemberQueryType    = $UserFilter.QueryType
     }
     # Create a System Group
     $global:PesterDefSystemGroup = @{

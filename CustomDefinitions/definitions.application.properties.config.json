@@ -1,0 +1,932 @@
+{
+    "properties": {
+      "acsUrl": {
+        "properties": {
+          "label": {
+            "type": "string"
+          },
+          "position": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "readOnly": {
+            "type": "boolean"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "tooltip": {
+            "properties": {
+              "template": {
+                "type": "string"
+              },
+              "variables": {
+                "properties": {
+                  "icon": {
+                    "type": "string"
+                  },
+                  "message": {
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              }
+            },
+            "type": "object"
+          },
+          "type": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          },
+          "visible": {
+            "type": "boolean"
+          }
+        },
+        "type": "object"
+      },
+      "constantAttributes": {
+        "properties": {
+          "label": {
+            "type": "string"
+          },
+          "mutable": {
+            "type": "boolean"
+          },
+          "position": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "readOnly": {
+            "type": "boolean"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "tooltip": {
+            "properties": {
+              "template": {
+                "type": "string"
+              },
+              "variables": {
+                "properties": {
+                  "icon": {
+                    "type": "string"
+                  },
+                  "message": {
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              }
+            },
+            "type": "object"
+          },
+          "type": {
+            "type": "string"
+          },
+          "value": {
+            "items": {
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "readOnly": {
+                  "type": "boolean"
+                },
+                "required": {
+                  "type": "boolean"
+                },
+                "value": {
+                  "type": "string"
+                },
+                "visible": {
+                  "type": "boolean"
+                }
+              },
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "visible": {
+            "type": "boolean"
+          }
+        },
+        "type": "object"
+      },
+      "databaseAttributes": {
+        "properties": {
+          "label": {
+            "type": "string"
+          },
+          "position": {
+            "type": "integer"
+          },
+          "readOnly": {
+            "type": "boolean"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "tooltip": {
+            "properties": {
+              "template": {
+                "type": "string"
+              },
+              "variables": {
+                "properties": {
+                  "icon": {
+                    "type": "string"
+                  },
+                  "message": {
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              }
+            },
+            "type": "object"
+          },
+          "type": {
+            "type": "string"
+          },
+          "value": {
+            "items": {
+              "properties": {
+                "name": {
+                  "type": "string"
+                },
+                "readOnly": {
+                  "type": "boolean"
+                },
+                "required": {
+                  "type": "boolean"
+                },
+                "value": {
+                  "type": "string"
+                },
+                "visible": {
+                  "type": "boolean"
+                }
+              },
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "visible": {
+            "type": "boolean"
+          }
+        },
+        "type": "object"
+      },
+      "declareRedirectEndpoint": {
+        "properties": {
+          "label": {
+            "type": "string"
+          },
+          "position": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "readOnly": {
+            "type": "boolean"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "tooltip": {
+            "properties": {
+              "template": {
+                "type": "string"
+              },
+              "variables": {
+                "properties": {
+                  "icon": {
+                    "type": "string"
+                  },
+                  "message": {
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              }
+            },
+            "type": "object"
+          },
+          "type": {
+            "type": "string"
+          },
+          "value": {
+            "type": "boolean"
+          },
+          "visible": {
+            "type": "boolean"
+          }
+        },
+        "type": "object"
+      },
+      "defaultTargetUrl": {
+        "properties": {
+          "label": {
+            "type": "string"
+          },
+          "position": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "readOnly": {
+            "type": "boolean"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "tooltip": {
+            "properties": {
+              "template": {
+                "type": "string"
+              },
+              "variables": {
+                "properties": {
+                  "icon": {
+                    "type": "string"
+                  },
+                  "message": {
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              }
+            },
+            "type": "object"
+          },
+          "type": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          },
+          "visible": {
+            "type": "boolean"
+          }
+        },
+        "type": "object"
+      },
+      "groupsAttributeName": {
+        "properties": {
+          "dependsOnProperty": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "position": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "readOnly": {
+            "type": "boolean"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "tooltip": {
+            "properties": {
+              "template": {
+                "type": "string"
+              },
+              "variables": {
+                "properties": {
+                  "icon": {
+                    "type": "string"
+                  },
+                  "message": {
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              }
+            },
+            "type": "object"
+          },
+          "type": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          },
+          "visible": {
+            "type": "boolean"
+          }
+        },
+        "type": "object"
+      },
+      "idpCertificate": {
+        "properties": {
+          "label": {
+            "type": "string"
+          },
+          "position": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "readOnly": {
+            "type": "boolean"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "tooltip": {
+            "properties": {
+              "template": {
+                "type": "string"
+              },
+              "variables": {
+                "properties": {
+                  "icon": {
+                    "type": "string"
+                  },
+                  "message": {
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              }
+            },
+            "type": "object"
+          },
+          "type": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          },
+          "visible": {
+            "type": "boolean"
+          }
+        },
+        "type": "object"
+      },
+      "idpEntityId": {
+        "properties": {
+          "label": {
+            "type": "string"
+          },
+          "position": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "readOnly": {
+            "type": "boolean"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "tooltip": {
+            "properties": {
+              "template": {
+                "type": "string"
+              },
+              "variables": {
+                "properties": {
+                  "icon": {
+                    "type": "string"
+                  },
+                  "message": {
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              }
+            },
+            "type": "object"
+          },
+          "type": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          },
+          "visible": {
+            "type": "boolean"
+          }
+        },
+        "type": "object"
+      },
+      "idpInitUrl": {
+        "properties": {
+          "label": {
+            "type": "string"
+          },
+          "position": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "readOnly": {
+            "type": "boolean"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "tooltip": {
+            "properties": {
+              "template": {
+                "type": "string"
+              },
+              "variables": {
+                "properties": {
+                  "icon": {
+                    "type": "string"
+                  },
+                  "message": {
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              }
+            },
+            "type": "object"
+          },
+          "type": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          },
+          "visible": {
+            "type": "boolean"
+          }
+        },
+        "type": "object"
+      },
+      "idpPrivateKey": {
+        "properties": {
+          "label": {
+            "type": "string"
+          },
+          "position": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "readOnly": {
+            "type": "boolean"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "tooltip": {
+            "properties": {
+              "template": {
+                "type": "string"
+              },
+              "variables": {
+                "properties": {
+                  "icon": {
+                    "type": "string"
+                  },
+                  "message": {
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              }
+            },
+            "type": "object"
+          },
+          "type": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          },
+          "visible": {
+            "type": "boolean"
+          }
+        },
+        "type": "object"
+      },
+      "includeGroups": {
+        "properties": {
+          "label": {
+            "type": "string"
+          },
+          "position": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "readOnly": {
+            "type": "boolean"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "tooltip": {
+            "properties": {
+              "template": {
+                "type": "string"
+              },
+              "variables": {
+                "properties": {
+                  "icon": {
+                    "type": "string"
+                  },
+                  "message": {
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              }
+            },
+            "type": "object"
+          },
+          "type": {
+            "type": "string"
+          },
+          "value": {
+            "type": "boolean"
+          },
+          "visible": {
+            "type": "boolean"
+          }
+        },
+        "type": "object"
+      },
+      "overrideNameIdFormat": {
+        "properties": {
+          "label": {
+            "type": "string"
+          },
+          "options": {
+            "items": {
+              "properties": {
+                "text": {
+                  "type": "string"
+                },
+                "value": {
+                  "format": "int32",
+                  "type": "integer"
+                }
+              },
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "position": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "readOnly": {
+            "type": "boolean"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "tooltip": {
+            "properties": {
+              "template": {
+                "type": "string"
+              },
+              "variables": {
+                "properties": {
+                  "icon": {
+                    "type": "string"
+                  },
+                  "message": {
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              }
+            },
+            "type": "object"
+          },
+          "type": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          },
+          "visible": {
+            "type": "boolean"
+          }
+        },
+        "type": "object"
+      },
+      "signAssertion": {
+        "properties": {
+          "label": {
+            "type": "string"
+          },
+          "position": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "readOnly": {
+            "type": "boolean"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "type": {
+            "type": "string"
+          },
+          "value": {
+            "type": "boolean"
+          },
+          "visible": {
+            "type": "boolean"
+          }
+        },
+        "type": "object"
+      },
+      "signatureAlgorithm": {
+        "properties": {
+          "label": {
+            "type": "string"
+          },
+          "options": {
+            "items": {
+              "properties": {
+                "text": {
+                  "type": "string"
+                },
+                "value": {
+                  "format": "int32",
+                  "type": "integer"
+                }
+              },
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "position": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "readOnly": {
+            "type": "boolean"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "tooltip": {
+            "properties": {
+              "template": {
+                "type": "string"
+              },
+              "variables": {
+                "properties": {
+                  "icon": {
+                    "type": "string"
+                  },
+                  "message": {
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              }
+            },
+            "type": "object"
+          },
+          "type": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          },
+          "visible": {
+            "type": "boolean"
+          }
+        },
+        "type": "object"
+      },
+      "signResponse": {
+        "properties": {
+          "label": {
+            "type": "string"
+          },
+          "position": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "readOnly": {
+            "type": "boolean"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "type": {
+            "type": "string"
+          },
+          "value": {
+            "type": "boolean"
+          },
+          "visible": {
+            "type": "boolean"
+          }
+        },
+        "type": "object"
+      },
+      "spCertificate": {
+        "properties": {
+          "label": {
+            "type": "string"
+          },
+          "position": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "readOnly": {
+            "type": "boolean"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "tooltip": {
+            "properties": {
+              "template": {
+                "type": "string"
+              },
+              "variables": {
+                "properties": {
+                  "icon": {
+                    "type": "string"
+                  },
+                  "message": {
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              }
+            },
+            "type": "object"
+          },
+          "type": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          },
+          "visible": {
+            "type": "boolean"
+          }
+        },
+        "type": "object"
+      },
+      "spEntityId": {
+        "properties": {
+          "label": {
+            "type": "string"
+          },
+          "position": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "readOnly": {
+            "type": "boolean"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "tooltip": {
+            "properties": {
+              "template": {
+                "type": "string"
+              },
+              "variables": {
+                "properties": {
+                  "icon": {
+                    "type": "string"
+                  },
+                  "message": {
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              }
+            },
+            "type": "object"
+          },
+          "type": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          },
+          "visible": {
+            "type": "boolean"
+          }
+        },
+        "type": "object"
+      },
+      "spErrorFlow": {
+        "properties": {
+          "label": {
+            "type": "string"
+          },
+          "position": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "readOnly": {
+            "type": "boolean"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "tooltip": {
+            "properties": {
+              "template": {
+                "type": "string"
+              },
+              "variables": {
+                "properties": {
+                  "icon": {
+                    "type": "string"
+                  },
+                  "message": {
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              }
+            },
+            "type": "object"
+          },
+          "type": {
+            "type": "string"
+          },
+          "value": {
+            "type": "boolean"
+          },
+          "visible": {
+            "type": "boolean"
+          }
+        },
+        "type": "object"
+      },
+      "subjectField": {
+        "properties": {
+          "label": {
+            "type": "string"
+          },
+          "options": {
+            "items": {
+              "properties": {
+                "text": {
+                  "type": "string"
+                },
+                "value": {
+                  "format": "int32",
+                  "type": "integer"
+                }
+              },
+              "type": "object"
+            },
+            "type": "array"
+          },
+          "position": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "readOnly": {
+            "type": "boolean"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "tooltip": {
+            "properties": {
+              "template": {
+                "type": "string"
+              },
+              "variables": {
+                "properties": {
+                  "icon": {
+                    "type": "string"
+                  },
+                  "message": {
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              }
+            },
+            "type": "object"
+          },
+          "type": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          },
+          "visible": {
+            "type": "boolean"
+          }
+        },
+        "type": "object"
+      }
+    },
+    "type": "object"
+  }
+

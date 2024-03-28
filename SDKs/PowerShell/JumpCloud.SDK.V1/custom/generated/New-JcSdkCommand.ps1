@@ -61,7 +61,7 @@ BODY <ICommand>:
   [Sudo <Boolean?>]:
   [Template <String>]: The template this command was created from
   [TimeToLiveSeconds <Int32?>]: Time in seconds a command can wait in the queue to be run before timing out
-  [Timeout <String>]: The time in seconds to allow the command to run for.
+  [Timeout <String>]: The time in seconds to allow the command to run for. The maximum value is 86400 seconds (1 day).
   [Trigger <String>]: The name of the command trigger.
   [User <String>]: The ID of the system user to run the command as. This field is required when creating a command with a commandType of "mac" or "linux".
 .Link
@@ -176,6 +176,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # The time in seconds to allow the command to run for.
+    # The maximum value is 86400 seconds (1 day).
     ${Timeout}, 
 
     [Parameter(ParameterSetName='CreateExpanded')]
@@ -251,16 +252,18 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         $resultCounter = 0
         :retryLoop do {
             $resultCounter++
-            try {
-                $Results = JumpCloud.SDK.V1.internal\New-JcSdkInternalCommand @PSBoundParameters -ErrorAction Stop
-                break retryLoop
-            } catch {
-                If (($JCHttpResponse.Result.StatusCode -ne 503) -or ($resultCounter -eq $maxRetries)) {
-                    throw $_
-                } else {
-                    Write-Warning ("An error occurred: $_.")
-                    Write-Warning ("503: Service Unavailable - retrying in " + ($resultCounter * 5) + " seconds.")
+            $Results = JumpCloud.SDK.V1.internal\New-JcSdkInternalCommand @PSBoundParameters -errorAction SilentlyContinue -errorVariable sdkError
+            If ($sdkError){
+                If ($resultCounter -eq $maxRetries){
+                    throw $sdkError
                 }
+                If ($JCHttpResponse.Result.StatusCode -eq "503") {
+                    Write-Warning ("503: Service Unavailable - retrying in " + ($resultCounter * 5) + " seconds.")
+                } else {
+                    throw $sdkError
+                }
+            } else {
+                break retryLoop
             }
             Start-Sleep -Seconds ($resultCounter * 5)
         } while ($resultCounter -lt $maxRetries)

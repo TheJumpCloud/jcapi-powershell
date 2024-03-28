@@ -24,11 +24,9 @@ To create the parameters described below, construct a hash table containing the 
 BODY <IApplication>:
   Config <IApplicationConfig>:
     [AcUrlLabel <String>]:
-    [AcUrlOptions <String>]:
     [AcUrlPosition <Int32?>]:
     [AcUrlReadOnly <Boolean?>]:
     [AcUrlRequired <Boolean?>]:
-    [AcUrlToggle <String>]:
     [AcUrlType <String>]:
     [AcUrlValue <String>]:
     [AcUrlVisible <Boolean?>]:
@@ -37,11 +35,9 @@ BODY <IApplication>:
     [AcsUrlTooltipVariablesMessage <String>]:
     [ConstantAttributeLabel <String>]:
     [ConstantAttributeMutable <Boolean?>]:
-    [ConstantAttributeOptions <String>]:
     [ConstantAttributePosition <Int32?>]:
     [ConstantAttributeReadOnly <Boolean?>]:
     [ConstantAttributeRequired <Boolean?>]:
-    [ConstantAttributeToggle <String>]:
     [ConstantAttributeType <String>]:
     [ConstantAttributeValue <IApplicationConfigConstantAttributesValueItem[]>]:
       [Name <String>]:
@@ -53,13 +49,56 @@ BODY <IApplication>:
     [ConstantAttributesTooltipTemplate <String>]:
     [ConstantAttributesTooltipVariablesIcon <String>]:
     [ConstantAttributesTooltipVariablesMessage <String>]:
+    [DatabaseAttributeLabel <String>]:
     [DatabaseAttributePosition <Int32?>]:
+    [DatabaseAttributeReadOnly <Boolean?>]:
+    [DatabaseAttributeRequired <Boolean?>]:
+    [DatabaseAttributeType <String>]:
+    [DatabaseAttributeValue <IApplicationConfigDatabaseAttributesValueItem[]>]:
+      [Name <String>]:
+      [ReadOnly <Boolean?>]:
+      [Required <Boolean?>]:
+      [Value <String>]:
+      [Visible <Boolean?>]:
+    [DatabaseAttributeVisible <Boolean?>]:
+    [DatabaseAttributesTooltipTemplate <String>]:
+    [DatabaseAttributesTooltipVariablesIcon <String>]:
+    [DatabaseAttributesTooltipVariablesMessage <String>]:
+    [DeclareRedirectEndpointLabel <String>]:
+    [DeclareRedirectEndpointPosition <Int32?>]:
+    [DeclareRedirectEndpointReadOnly <Boolean?>]:
+    [DeclareRedirectEndpointRequired <Boolean?>]:
+    [DeclareRedirectEndpointTooltipTemplate <String>]:
+    [DeclareRedirectEndpointTooltipVariablesIcon <String>]:
+    [DeclareRedirectEndpointTooltipVariablesMessage <String>]:
+    [DeclareRedirectEndpointType <String>]:
+    [DeclareRedirectEndpointValue <Boolean?>]:
+    [DeclareRedirectEndpointVisible <Boolean?>]:
+    [DefaultTargetUrlLabel <String>]:
+    [DefaultTargetUrlPosition <Int32?>]:
+    [DefaultTargetUrlReadOnly <Boolean?>]:
+    [DefaultTargetUrlRequired <Boolean?>]:
+    [DefaultTargetUrlTooltipTemplate <String>]:
+    [DefaultTargetUrlTooltipVariablesIcon <String>]:
+    [DefaultTargetUrlTooltipVariablesMessage <String>]:
+    [DefaultTargetUrlType <String>]:
+    [DefaultTargetUrlValue <String>]:
+    [DefaultTargetUrlVisible <Boolean?>]:
+    [GroupAttributeNameDependsOnProperty <String>]:
+    [GroupAttributeNameLabel <String>]:
+    [GroupAttributeNamePosition <Int32?>]:
+    [GroupAttributeNameReadOnly <Boolean?>]:
+    [GroupAttributeNameRequired <Boolean?>]:
+    [GroupAttributeNameType <String>]:
+    [GroupAttributeNameValue <String>]:
+    [GroupAttributeNameVisible <Boolean?>]:
+    [GroupsAttributeNameTooltipTemplate <String>]:
+    [GroupsAttributeNameTooltipVariablesIcon <String>]:
+    [GroupsAttributeNameTooltipVariablesMessage <String>]:
     [IdpCertificateLabel <String>]:
-    [IdpCertificateOptions <String>]:
     [IdpCertificatePosition <Int32?>]:
     [IdpCertificateReadOnly <Boolean?>]:
     [IdpCertificateRequired <Boolean?>]:
-    [IdpCertificateToggle <String>]:
     [IdpCertificateTooltipTemplate <String>]:
     [IdpCertificateTooltipVariablesIcon <String>]:
     [IdpCertificateTooltipVariablesMessage <String>]:
@@ -67,36 +106,62 @@ BODY <IApplication>:
     [IdpCertificateValue <String>]:
     [IdpCertificateVisible <Boolean?>]:
     [IdpEntityIdLabel <String>]:
-    [IdpEntityIdOptions <String>]:
     [IdpEntityIdPosition <Int32?>]:
     [IdpEntityIdReadOnly <Boolean?>]:
     [IdpEntityIdRequired <Boolean?>]:
-    [IdpEntityIdToggle <String>]:
     [IdpEntityIdTooltipTemplate <String>]:
     [IdpEntityIdTooltipVariablesIcon <String>]:
     [IdpEntityIdTooltipVariablesMessage <String>]:
     [IdpEntityIdType <String>]:
     [IdpEntityIdValue <String>]:
     [IdpEntityIdVisible <Boolean?>]:
+    [IdpInitUrlLabel <String>]:
+    [IdpInitUrlPosition <Int32?>]:
+    [IdpInitUrlReadOnly <Boolean?>]:
+    [IdpInitUrlRequired <Boolean?>]:
+    [IdpInitUrlTooltipTemplate <String>]:
+    [IdpInitUrlTooltipVariablesIcon <String>]:
+    [IdpInitUrlTooltipVariablesMessage <String>]:
+    [IdpInitUrlType <String>]:
+    [IdpInitUrlValue <String>]:
+    [IdpInitUrlVisible <Boolean?>]:
     [IdpPrivateKeyLabel <String>]:
-    [IdpPrivateKeyOptions <String>]:
     [IdpPrivateKeyPosition <Int32?>]:
     [IdpPrivateKeyReadOnly <Boolean?>]:
     [IdpPrivateKeyRequired <Boolean?>]:
-    [IdpPrivateKeyToggle <String>]:
     [IdpPrivateKeyTooltipTemplate <String>]:
     [IdpPrivateKeyTooltipVariablesIcon <String>]:
     [IdpPrivateKeyTooltipVariablesMessage <String>]:
     [IdpPrivateKeyType <String>]:
     [IdpPrivateKeyValue <String>]:
     [IdpPrivateKeyVisible <Boolean?>]:
+    [IncludeGroupLabel <String>]:
+    [IncludeGroupPosition <Int32?>]:
+    [IncludeGroupReadOnly <Boolean?>]:
+    [IncludeGroupRequired <Boolean?>]:
+    [IncludeGroupType <String>]:
+    [IncludeGroupValue <Boolean?>]:
+    [IncludeGroupVisible <Boolean?>]:
+    [IncludeGroupsTooltipTemplate <String>]:
+    [IncludeGroupsTooltipVariablesIcon <String>]:
+    [IncludeGroupsTooltipVariablesMessage <String>]:
+    [OverrideNameIdFormatLabel <String>]:
+    [OverrideNameIdFormatOptions <IApplicationConfigOverrideNameIdFormatOptionsItem[]>]:
+      [Text <String>]:
+      [Value <Int32?>]:
+    [OverrideNameIdFormatPosition <Int32?>]:
+    [OverrideNameIdFormatReadOnly <Boolean?>]:
+    [OverrideNameIdFormatRequired <Boolean?>]:
+    [OverrideNameIdFormatTooltipTemplate <String>]:
+    [OverrideNameIdFormatTooltipVariablesIcon <String>]:
+    [OverrideNameIdFormatTooltipVariablesMessage <String>]:
+    [OverrideNameIdFormatType <String>]:
+    [OverrideNameIdFormatValue <String>]:
+    [OverrideNameIdFormatVisible <Boolean?>]:
     [SignAssertionLabel <String>]:
     [SignAssertionPosition <Int32?>]:
     [SignAssertionReadOnly <Boolean?>]:
     [SignAssertionRequired <Boolean?>]:
-    [SignAssertionTooltipTemplate <String>]:
-    [SignAssertionTooltipVariablesIcon <String>]:
-    [SignAssertionTooltipVariablesMessage <String>]:
     [SignAssertionType <String>]:
     [SignAssertionValue <Boolean?>]:
     [SignAssertionVisible <Boolean?>]:
@@ -104,18 +169,36 @@ BODY <IApplication>:
     [SignResponsePosition <Int32?>]:
     [SignResponseReadOnly <Boolean?>]:
     [SignResponseRequired <Boolean?>]:
-    [SignResponseTooltipTemplate <String>]:
-    [SignResponseTooltipVariablesIcon <String>]:
-    [SignResponseTooltipVariablesMessage <String>]:
     [SignResponseType <String>]:
     [SignResponseValue <Boolean?>]:
     [SignResponseVisible <Boolean?>]:
+    [SignatureAlgorithmLabel <String>]:
+    [SignatureAlgorithmOptions <IApplicationConfigSignatureAlgorithmOptionsItem[]>]:
+      [Text <String>]:
+      [Value <Int32?>]:
+    [SignatureAlgorithmPosition <Int32?>]:
+    [SignatureAlgorithmReadOnly <Boolean?>]:
+    [SignatureAlgorithmRequired <Boolean?>]:
+    [SignatureAlgorithmTooltipTemplate <String>]:
+    [SignatureAlgorithmTooltipVariablesIcon <String>]:
+    [SignatureAlgorithmTooltipVariablesMessage <String>]:
+    [SignatureAlgorithmType <String>]:
+    [SignatureAlgorithmValue <String>]:
+    [SignatureAlgorithmVisible <Boolean?>]:
+    [SpCertificateLabel <String>]:
+    [SpCertificatePosition <Int32?>]:
+    [SpCertificateReadOnly <Boolean?>]:
+    [SpCertificateRequired <Boolean?>]:
+    [SpCertificateTooltipTemplate <String>]:
+    [SpCertificateTooltipVariablesIcon <String>]:
+    [SpCertificateTooltipVariablesMessage <String>]:
+    [SpCertificateType <String>]:
+    [SpCertificateValue <String>]:
+    [SpCertificateVisible <Boolean?>]:
     [SpEntityIdLabel <String>]:
-    [SpEntityIdOptions <String>]:
     [SpEntityIdPosition <Int32?>]:
     [SpEntityIdReadOnly <Boolean?>]:
     [SpEntityIdRequired <Boolean?>]:
-    [SpEntityIdToggle <String>]:
     [SpEntityIdTooltipTemplate <String>]:
     [SpEntityIdTooltipVariablesIcon <String>]:
     [SpEntityIdTooltipVariablesMessage <String>]:
@@ -132,6 +215,19 @@ BODY <IApplication>:
     [SpErrorFlowType <String>]:
     [SpErrorFlowValue <Boolean?>]:
     [SpErrorFlowVisible <Boolean?>]:
+    [SubjectFieldLabel <String>]:
+    [SubjectFieldOptions <IApplicationConfigSubjectFieldOptionsItem[]>]:
+      [Text <String>]:
+      [Value <Int32?>]:
+    [SubjectFieldPosition <Int32?>]:
+    [SubjectFieldReadOnly <Boolean?>]:
+    [SubjectFieldRequired <Boolean?>]:
+    [SubjectFieldTooltipTemplate <String>]:
+    [SubjectFieldTooltipVariablesIcon <String>]:
+    [SubjectFieldTooltipVariablesMessage <String>]:
+    [SubjectFieldType <String>]:
+    [SubjectFieldValue <String>]:
+    [SubjectFieldVisible <Boolean?>]:
   Name <String>:
   SsoUrl <String>:
   [Active <Boolean?>]:
@@ -155,11 +251,9 @@ BODY <IApplication>:
 
 CONFIG <IApplicationConfig>:
   [AcUrlLabel <String>]:
-  [AcUrlOptions <String>]:
   [AcUrlPosition <Int32?>]:
   [AcUrlReadOnly <Boolean?>]:
   [AcUrlRequired <Boolean?>]:
-  [AcUrlToggle <String>]:
   [AcUrlType <String>]:
   [AcUrlValue <String>]:
   [AcUrlVisible <Boolean?>]:
@@ -168,11 +262,9 @@ CONFIG <IApplicationConfig>:
   [AcsUrlTooltipVariablesMessage <String>]:
   [ConstantAttributeLabel <String>]:
   [ConstantAttributeMutable <Boolean?>]:
-  [ConstantAttributeOptions <String>]:
   [ConstantAttributePosition <Int32?>]:
   [ConstantAttributeReadOnly <Boolean?>]:
   [ConstantAttributeRequired <Boolean?>]:
-  [ConstantAttributeToggle <String>]:
   [ConstantAttributeType <String>]:
   [ConstantAttributeValue <IApplicationConfigConstantAttributesValueItem[]>]:
     [Name <String>]:
@@ -184,13 +276,56 @@ CONFIG <IApplicationConfig>:
   [ConstantAttributesTooltipTemplate <String>]:
   [ConstantAttributesTooltipVariablesIcon <String>]:
   [ConstantAttributesTooltipVariablesMessage <String>]:
+  [DatabaseAttributeLabel <String>]:
   [DatabaseAttributePosition <Int32?>]:
+  [DatabaseAttributeReadOnly <Boolean?>]:
+  [DatabaseAttributeRequired <Boolean?>]:
+  [DatabaseAttributeType <String>]:
+  [DatabaseAttributeValue <IApplicationConfigDatabaseAttributesValueItem[]>]:
+    [Name <String>]:
+    [ReadOnly <Boolean?>]:
+    [Required <Boolean?>]:
+    [Value <String>]:
+    [Visible <Boolean?>]:
+  [DatabaseAttributeVisible <Boolean?>]:
+  [DatabaseAttributesTooltipTemplate <String>]:
+  [DatabaseAttributesTooltipVariablesIcon <String>]:
+  [DatabaseAttributesTooltipVariablesMessage <String>]:
+  [DeclareRedirectEndpointLabel <String>]:
+  [DeclareRedirectEndpointPosition <Int32?>]:
+  [DeclareRedirectEndpointReadOnly <Boolean?>]:
+  [DeclareRedirectEndpointRequired <Boolean?>]:
+  [DeclareRedirectEndpointTooltipTemplate <String>]:
+  [DeclareRedirectEndpointTooltipVariablesIcon <String>]:
+  [DeclareRedirectEndpointTooltipVariablesMessage <String>]:
+  [DeclareRedirectEndpointType <String>]:
+  [DeclareRedirectEndpointValue <Boolean?>]:
+  [DeclareRedirectEndpointVisible <Boolean?>]:
+  [DefaultTargetUrlLabel <String>]:
+  [DefaultTargetUrlPosition <Int32?>]:
+  [DefaultTargetUrlReadOnly <Boolean?>]:
+  [DefaultTargetUrlRequired <Boolean?>]:
+  [DefaultTargetUrlTooltipTemplate <String>]:
+  [DefaultTargetUrlTooltipVariablesIcon <String>]:
+  [DefaultTargetUrlTooltipVariablesMessage <String>]:
+  [DefaultTargetUrlType <String>]:
+  [DefaultTargetUrlValue <String>]:
+  [DefaultTargetUrlVisible <Boolean?>]:
+  [GroupAttributeNameDependsOnProperty <String>]:
+  [GroupAttributeNameLabel <String>]:
+  [GroupAttributeNamePosition <Int32?>]:
+  [GroupAttributeNameReadOnly <Boolean?>]:
+  [GroupAttributeNameRequired <Boolean?>]:
+  [GroupAttributeNameType <String>]:
+  [GroupAttributeNameValue <String>]:
+  [GroupAttributeNameVisible <Boolean?>]:
+  [GroupsAttributeNameTooltipTemplate <String>]:
+  [GroupsAttributeNameTooltipVariablesIcon <String>]:
+  [GroupsAttributeNameTooltipVariablesMessage <String>]:
   [IdpCertificateLabel <String>]:
-  [IdpCertificateOptions <String>]:
   [IdpCertificatePosition <Int32?>]:
   [IdpCertificateReadOnly <Boolean?>]:
   [IdpCertificateRequired <Boolean?>]:
-  [IdpCertificateToggle <String>]:
   [IdpCertificateTooltipTemplate <String>]:
   [IdpCertificateTooltipVariablesIcon <String>]:
   [IdpCertificateTooltipVariablesMessage <String>]:
@@ -198,36 +333,62 @@ CONFIG <IApplicationConfig>:
   [IdpCertificateValue <String>]:
   [IdpCertificateVisible <Boolean?>]:
   [IdpEntityIdLabel <String>]:
-  [IdpEntityIdOptions <String>]:
   [IdpEntityIdPosition <Int32?>]:
   [IdpEntityIdReadOnly <Boolean?>]:
   [IdpEntityIdRequired <Boolean?>]:
-  [IdpEntityIdToggle <String>]:
   [IdpEntityIdTooltipTemplate <String>]:
   [IdpEntityIdTooltipVariablesIcon <String>]:
   [IdpEntityIdTooltipVariablesMessage <String>]:
   [IdpEntityIdType <String>]:
   [IdpEntityIdValue <String>]:
   [IdpEntityIdVisible <Boolean?>]:
+  [IdpInitUrlLabel <String>]:
+  [IdpInitUrlPosition <Int32?>]:
+  [IdpInitUrlReadOnly <Boolean?>]:
+  [IdpInitUrlRequired <Boolean?>]:
+  [IdpInitUrlTooltipTemplate <String>]:
+  [IdpInitUrlTooltipVariablesIcon <String>]:
+  [IdpInitUrlTooltipVariablesMessage <String>]:
+  [IdpInitUrlType <String>]:
+  [IdpInitUrlValue <String>]:
+  [IdpInitUrlVisible <Boolean?>]:
   [IdpPrivateKeyLabel <String>]:
-  [IdpPrivateKeyOptions <String>]:
   [IdpPrivateKeyPosition <Int32?>]:
   [IdpPrivateKeyReadOnly <Boolean?>]:
   [IdpPrivateKeyRequired <Boolean?>]:
-  [IdpPrivateKeyToggle <String>]:
   [IdpPrivateKeyTooltipTemplate <String>]:
   [IdpPrivateKeyTooltipVariablesIcon <String>]:
   [IdpPrivateKeyTooltipVariablesMessage <String>]:
   [IdpPrivateKeyType <String>]:
   [IdpPrivateKeyValue <String>]:
   [IdpPrivateKeyVisible <Boolean?>]:
+  [IncludeGroupLabel <String>]:
+  [IncludeGroupPosition <Int32?>]:
+  [IncludeGroupReadOnly <Boolean?>]:
+  [IncludeGroupRequired <Boolean?>]:
+  [IncludeGroupType <String>]:
+  [IncludeGroupValue <Boolean?>]:
+  [IncludeGroupVisible <Boolean?>]:
+  [IncludeGroupsTooltipTemplate <String>]:
+  [IncludeGroupsTooltipVariablesIcon <String>]:
+  [IncludeGroupsTooltipVariablesMessage <String>]:
+  [OverrideNameIdFormatLabel <String>]:
+  [OverrideNameIdFormatOptions <IApplicationConfigOverrideNameIdFormatOptionsItem[]>]:
+    [Text <String>]:
+    [Value <Int32?>]:
+  [OverrideNameIdFormatPosition <Int32?>]:
+  [OverrideNameIdFormatReadOnly <Boolean?>]:
+  [OverrideNameIdFormatRequired <Boolean?>]:
+  [OverrideNameIdFormatTooltipTemplate <String>]:
+  [OverrideNameIdFormatTooltipVariablesIcon <String>]:
+  [OverrideNameIdFormatTooltipVariablesMessage <String>]:
+  [OverrideNameIdFormatType <String>]:
+  [OverrideNameIdFormatValue <String>]:
+  [OverrideNameIdFormatVisible <Boolean?>]:
   [SignAssertionLabel <String>]:
   [SignAssertionPosition <Int32?>]:
   [SignAssertionReadOnly <Boolean?>]:
   [SignAssertionRequired <Boolean?>]:
-  [SignAssertionTooltipTemplate <String>]:
-  [SignAssertionTooltipVariablesIcon <String>]:
-  [SignAssertionTooltipVariablesMessage <String>]:
   [SignAssertionType <String>]:
   [SignAssertionValue <Boolean?>]:
   [SignAssertionVisible <Boolean?>]:
@@ -235,18 +396,36 @@ CONFIG <IApplicationConfig>:
   [SignResponsePosition <Int32?>]:
   [SignResponseReadOnly <Boolean?>]:
   [SignResponseRequired <Boolean?>]:
-  [SignResponseTooltipTemplate <String>]:
-  [SignResponseTooltipVariablesIcon <String>]:
-  [SignResponseTooltipVariablesMessage <String>]:
   [SignResponseType <String>]:
   [SignResponseValue <Boolean?>]:
   [SignResponseVisible <Boolean?>]:
+  [SignatureAlgorithmLabel <String>]:
+  [SignatureAlgorithmOptions <IApplicationConfigSignatureAlgorithmOptionsItem[]>]:
+    [Text <String>]:
+    [Value <Int32?>]:
+  [SignatureAlgorithmPosition <Int32?>]:
+  [SignatureAlgorithmReadOnly <Boolean?>]:
+  [SignatureAlgorithmRequired <Boolean?>]:
+  [SignatureAlgorithmTooltipTemplate <String>]:
+  [SignatureAlgorithmTooltipVariablesIcon <String>]:
+  [SignatureAlgorithmTooltipVariablesMessage <String>]:
+  [SignatureAlgorithmType <String>]:
+  [SignatureAlgorithmValue <String>]:
+  [SignatureAlgorithmVisible <Boolean?>]:
+  [SpCertificateLabel <String>]:
+  [SpCertificatePosition <Int32?>]:
+  [SpCertificateReadOnly <Boolean?>]:
+  [SpCertificateRequired <Boolean?>]:
+  [SpCertificateTooltipTemplate <String>]:
+  [SpCertificateTooltipVariablesIcon <String>]:
+  [SpCertificateTooltipVariablesMessage <String>]:
+  [SpCertificateType <String>]:
+  [SpCertificateValue <String>]:
+  [SpCertificateVisible <Boolean?>]:
   [SpEntityIdLabel <String>]:
-  [SpEntityIdOptions <String>]:
   [SpEntityIdPosition <Int32?>]:
   [SpEntityIdReadOnly <Boolean?>]:
   [SpEntityIdRequired <Boolean?>]:
-  [SpEntityIdToggle <String>]:
   [SpEntityIdTooltipTemplate <String>]:
   [SpEntityIdTooltipVariablesIcon <String>]:
   [SpEntityIdTooltipVariablesMessage <String>]:
@@ -263,6 +442,19 @@ CONFIG <IApplicationConfig>:
   [SpErrorFlowType <String>]:
   [SpErrorFlowValue <Boolean?>]:
   [SpErrorFlowVisible <Boolean?>]:
+  [SubjectFieldLabel <String>]:
+  [SubjectFieldOptions <IApplicationConfigSubjectFieldOptionsItem[]>]:
+    [Text <String>]:
+    [Value <Int32?>]:
+  [SubjectFieldPosition <Int32?>]:
+  [SubjectFieldReadOnly <Boolean?>]:
+  [SubjectFieldRequired <Boolean?>]:
+  [SubjectFieldTooltipTemplate <String>]:
+  [SubjectFieldTooltipVariablesIcon <String>]:
+  [SubjectFieldTooltipVariablesMessage <String>]:
+  [SubjectFieldType <String>]:
+  [SubjectFieldValue <String>]:
+  [SubjectFieldVisible <Boolean?>]:
 .Link
 https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/New-JcSdkApplication.md
 #>
@@ -466,16 +658,18 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         $resultCounter = 0
         :retryLoop do {
             $resultCounter++
-            try {
-                $Results = JumpCloud.SDK.V1.internal\New-JcSdkInternalApplication @PSBoundParameters -ErrorAction Stop
-                break retryLoop
-            } catch {
-                If (($JCHttpResponse.Result.StatusCode -ne 503) -or ($resultCounter -eq $maxRetries)) {
-                    throw $_
-                } else {
-                    Write-Warning ("An error occurred: $_.")
-                    Write-Warning ("503: Service Unavailable - retrying in " + ($resultCounter * 5) + " seconds.")
+            $Results = JumpCloud.SDK.V1.internal\New-JcSdkInternalApplication @PSBoundParameters -errorAction SilentlyContinue -errorVariable sdkError
+            If ($sdkError){
+                If ($resultCounter -eq $maxRetries){
+                    throw $sdkError
                 }
+                If ($JCHttpResponse.Result.StatusCode -eq "503") {
+                    Write-Warning ("503: Service Unavailable - retrying in " + ($resultCounter * 5) + " seconds.")
+                } else {
+                    throw $sdkError
+                }
+            } else {
+                break retryLoop
             }
             Start-Sleep -Seconds ($resultCounter * 5)
         } while ($resultCounter -lt $maxRetries)
