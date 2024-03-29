@@ -71,8 +71,6 @@ $TransformConfig = [Ordered]@{
         };
         OverrideDefinitions = @(
             'definitions.application.properties.config'
-            'definitions.bulk-user-create.properties'
-            'definitions.bulk-user-update.properties'
         )
         OperationIdMapping = [Ordered]@{
             'admin_totpreset_begin'          = 'AdministratorUserTotp_Reset';
@@ -156,6 +154,10 @@ $TransformConfig = [Ordered]@{
             ',]'                                                                                                                                                      = ']';
             '"properties":{"conditions":{"description":.*?"type":"object"}'                                                                                           = '"properties":{"conditions":{"type":"object"}' # Parameter Description is declared in parameter-set 'createExpanded' multiple times in
         };
+        OverrideDefinitions = @(
+            'definitions.bulk-user-create.properties'
+            'definitions.bulk-user-update.properties'
+        )
         OperationIdMapping = [Ordered]@{
             'activedirectories_agentsDelete'                    = 'ActiveDirectoryAgent_Delete';
             'activedirectories_agentsGet'                       = 'ActiveDirectoryAgent_Get';
