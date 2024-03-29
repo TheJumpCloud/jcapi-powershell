@@ -1,3 +1,31 @@
+## JumpCloud.SDK.V2-0.0.45
+Release Date: March 29, 2024
+#### RELEASE NOTES
+```
+Fixed a bug where Update-JcSdkBulkUser and New-JcSdkBulkUser would not update expected properties
+```
+#### BUG FIXES:
+Fixed a bug where Update-JcSdkBulkUser and New-JcSdkBulkUser would not update expected properties
+#### Generated Changes:
+
+<details>
+<summary>Functions Added</summary>
+
+No changes
+</details>
+
+<details>
+<summary>Functions Modified</summary>
+
+No changes
+</details>
+
+<details>
+<summary>Functions Removed</summary>
+
+No changes
+</details>
+
 ## JumpCloud.SDK.V2-0.0.44
 Release Date: March 27, 2024
 #### RELEASE NOTES

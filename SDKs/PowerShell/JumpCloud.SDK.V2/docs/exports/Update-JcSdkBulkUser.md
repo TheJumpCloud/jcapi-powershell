@@ -161,12 +161,68 @@ To create the parameters described below, construct a hash table containing the 
 
 
 BODY <IBulkUserUpdate[]>: Array of bulk-user-update
-  - `[Attributes <IBulkUserUpdateAttributesItem[]>]`: Map of additional attributes.
+  - `[AccountLocked <Boolean?>]`: 
+  - `[Addresses <IBulkUserUpdateAddressesItem[]>]`: type, poBox, extendedAddress, streetAddress, locality, region, postalCode, country
+    - `[Country <String>]`: 
+    - `[ExtendedAddress <String>]`: 
+    - `[Locality <String>]`: 
+    - `[PoBox <String>]`: 
+    - `[PostalCode <String>]`: 
+    - `[Region <String>]`: 
+    - `[StreetAddress <String>]`: 
+    - `[Type <String>]`: 
+  - `[AllowPublicKey <Boolean?>]`: 
+  - `[AlternateEmail <String>]`: 
+  - `[Attributes <IBulkUserUpdateAttributesItem[]>]`: 
+    - `[Name <String>]`: 
+    - `[Value <String>]`: 
+  - `[Company <String>]`: 
+  - `[CostCenter <String>]`: 
+  - `[Department <String>]`: 
+  - `[Description <String>]`: 
+  - `[DisableDeviceMaxLoginAttempts <Boolean?>]`: 
+  - `[Displayname <String>]`: 
   - `[Email <String>]`: 
+  - `[EmployeeIdentifier <String>]`: Must be unique per user. 
+  - `[EmployeeType <String>]`: 
+  - `[EnableManagedUid <Boolean?>]`: 
+  - `[EnableUserPortalMultifactor <Boolean?>]`: 
+  - `[ExternalDn <String>]`: 
+  - `[ExternalPasswordExpirationDate <String>]`: 
+  - `[ExternalSourceType <String>]`: 
+  - `[ExternallyManaged <Boolean?>]`: 
   - `[Firstname <String>]`: 
   - `[Id <String>]`: Object ID of the user being updated
+  - `[JobTitle <String>]`: 
   - `[Lastname <String>]`: 
+  - `[LdapBindingUser <Boolean?>]`: 
+  - `[Location <String>]`: 
+  - `[ManagedAppleId <String>]`: 
+  - `[Manager <String>]`: Relation with another systemuser to identify the last as a manager.
+  - `[MfaConfigured <Boolean?>]`: 
+  - `[MfaExclusion <Boolean?>]`: 
+  - `[MfaExclusionDays <Int32?>]`: 
+  - `[MfaExclusionUntil <DateTime?>]`: 
+  - `[Middlename <String>]`: 
   - `[Organization <String>]`: Organization object id of the user
+  - `[Password <String>]`: 
+  - `[PasswordNeverExpires <Boolean?>]`: 
+  - `[PhoneNumbers <IBulkUserUpdatePhoneNumbersItem[]>]`: 
+    - `[Number <String>]`: 
+    - `[Type <String>]`: 
+  - `[PublicKey <String>]`: 
+  - `[Relationships <IBulkUserUpdateRelationshipsItem[]>]`: 
+    - `[Type <String>]`: 
+    - `[Value <String>]`: 
+  - `[SambaServiceUser <Boolean?>]`: 
+  - `[SshKeys <IBulkUserUpdateSshKeysItem[]>]`: 
+    - `Name <String>`: The name of the SSH key.
+    - `PublicKey <String>`: The Public SSH key.
+  - `[State <String>]`: 
+  - `[Sudo <Boolean?>]`: 
+  - `[Suspended <Boolean?>]`: 
+  - `[UnixGuid <Int32?>]`: 
+  - `[UnixUid <Int32?>]`: 
   - `[Username <String>]`: 
 
 ## RELATED LINKS
