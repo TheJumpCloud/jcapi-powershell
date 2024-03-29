@@ -886,6 +886,25 @@ $SDKName | ForEach-Object {
                     if (Test-Path -Path "$PSScriptRoot/CustomDefinitions/$($overrideDef).json") {
                         $configContent = Get-Content -Path ("$PSScriptRoot/CustomDefinitions/$($overrideDef).json")
                         $configOverride = ($configContent | ConvertFrom-Json)
+                        # test for special chars in property string:
+                        if ($overrideDef -match "-"){
+                            $splitDef = $overRideDef.Split(".")
+                            $newOverrideDef = ""
+                            for ($i = 0; $i -lt $splitDef.Count; $i++) {
+                                if ($splitDef[$i] -match "-") {
+                                    $splitDef[$i] = "'" + $splitDef[$i] + "'"
+                                }
+
+                                if ($i -eq ($splitDef.Count -1)){
+                                    $newOverrideDef += "$($splitDef[$i])"
+                                } else {
+                                    $newOverrideDef += "$($splitDef[$i])."
+
+                                }
+                            }
+                            $overrideDef = $newOverrideDef
+
+                        }
                         Invoke-Expression -Command ('$SwaggerObject.' + "$($overrideDef)" + '=' + '$configOverride' )
                     } else {
                         Write-Warning "$overrideDef not found in /CustomDefinitions directory, did you forget to define the json file?"
