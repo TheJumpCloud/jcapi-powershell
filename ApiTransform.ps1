@@ -71,6 +71,8 @@ $TransformConfig = [Ordered]@{
         };
         OverrideDefinitions = @(
             'definitions.application.properties.config'
+            'definitions.bulk-user-create.properties'
+            'definitions.bulk-user-update.properties'
         )
         OperationIdMapping = [Ordered]@{
             'admin_totpreset_begin'          = 'AdministratorUserTotp_Reset';
