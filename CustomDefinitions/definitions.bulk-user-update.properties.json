@@ -1,4 +1,8 @@
 {
+    "id": {
+        "description": "Object ID of the user being updated",
+        "type": "string"
+    },
     "account_locked": {
         "type": "boolean"
     },
@@ -166,6 +170,10 @@
     },
     "middlename": {
         "maxLength": 1024,
+        "type": "string"
+    },
+    "organization": {
+        "description": "Organization object id of the user",
         "type": "string"
     },
     "password": {
