@@ -15,7 +15,7 @@ if(($null -eq $TestName) -or ($TestName -contains 'Get-JcSdkReport'))
 }
 
 Describe 'Get-JcSdkReport' {
-    It 'List' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'List' {
+        { Get-JcSdkReport } | Should -Not -Throw
     }
 }

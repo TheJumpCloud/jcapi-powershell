@@ -15,8 +15,8 @@ if(($null -eq $TestName) -or ($TestName -contains 'New-JcSdkReport'))
 }
 
 Describe 'New-JcSdkReport' {
-    It 'Create' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'Create' {
+        { New-JcSdkReport -ReportType 'users-to-devices' } | Should -Not -Throw
     }
 
     It 'CreateViaIdentity' -skip {
