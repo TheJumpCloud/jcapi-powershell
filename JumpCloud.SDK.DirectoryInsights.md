@@ -1,3 +1,37 @@
+## JumpCloud.SDK.DirectoryInsights-0.0.29
+Release Date: April 15, 2024
+#### RELEASE NOTES
+```
+Added two new function `Get-JcSdkReport` and `New-JcSdkReport` to get the list of available reports and to request new reports.
+```
+#### FEATURES:
+New reports functions
+#### IMPROVEMENTS:
+NA
+#### BUG FIXES:
+NA
+#### Generated Changes:
+
+<details>
+<summary>Functions Added</summary>
+
+* Get-JcSdkReport.ps1
+* New-JcSdkReport.ps1
+
+</details>
+
+<details>
+<summary>Functions Modified</summary>
+
+No changes
+</details>
+
+<details>
+<summary>Functions Removed</summary>
+
+No changes
+</details>
+
 ## JumpCloud.SDK.DirectoryInsights-0.0.28
 Release Date: March 27, 2024
 #### RELEASE NOTES

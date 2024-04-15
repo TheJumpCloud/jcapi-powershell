@@ -39,9 +39,9 @@ Set-JcSdkUser -Id <String> [-FullValidationDetails <String>] [-AccountLocked]
  [-Manager <String>] [-MfaConfigured] [-MfaExclusion] [-MfaExclusionDays <Int32>]
  [-MfaExclusionUntil <DateTime>] [-Middlename <String>] [-Password <String>] [-PasswordNeverExpires]
  [-PhoneNumbers <ISystemuserputPhoneNumbersItem[]>] [-PublicKey <String>]
- [-Relationships <ISystemuserputRelationshipsItem[]>] [-SambaServiceUser] [-SshKeys <ISshkeypost[]>]
- [-State <String>] [-Sudo] [-Suspended] [-UnixGuid <Int32>] [-UnixUid <Int32>] [-Username <String>] [-Confirm]
- [-WhatIf] [<CommonParameters>]
+ [-Relationships <ISystemuserputRelationshipsItem[]>] [-RestrictedFields <IRestrictedField1[]>]
+ [-SambaServiceUser] [-SshKeys <ISshkeypost[]>] [-State <String>] [-Sudo] [-Suspended] [-UnixGuid <Int32>]
+ [-UnixUid <Int32>] [-Username <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Set
@@ -69,9 +69,9 @@ Set-JcSdkUser -InputObject <IJumpCloudApiIdentity> [-FullValidationDetails <Stri
  [-Manager <String>] [-MfaConfigured] [-MfaExclusion] [-MfaExclusionDays <Int32>]
  [-MfaExclusionUntil <DateTime>] [-Middlename <String>] [-Password <String>] [-PasswordNeverExpires]
  [-PhoneNumbers <ISystemuserputPhoneNumbersItem[]>] [-PublicKey <String>]
- [-Relationships <ISystemuserputRelationshipsItem[]>] [-SambaServiceUser] [-SshKeys <ISshkeypost[]>]
- [-State <String>] [-Sudo] [-Suspended] [-UnixGuid <Int32>] [-UnixUid <Int32>] [-Username <String>] [-Confirm]
- [-WhatIf] [<CommonParameters>]
+ [-Relationships <ISystemuserputRelationshipsItem[]>] [-RestrictedFields <IRestrictedField1[]>]
+ [-SambaServiceUser] [-SshKeys <ISshkeypost[]>] [-State <String>] [-Sudo] [-Suspended] [-UnixGuid <Int32>]
+ [-UnixUid <Int32>] [-Username <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -731,6 +731,22 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -RestrictedFields
+.
+To construct, see NOTES section for RESTRICTEDFIELDS properties and create a hash table.
+
+```yaml
+Type: JumpCloud.SDK.V1.Models.IRestrictedField1[]
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -SambaServiceUser
 .
 
@@ -971,6 +987,10 @@ BODY <ISystemuserput>: SystemUserPut
   - `[Relationships <ISystemuserputRelationshipsItem[]>]`: 
     - `[Type <String>]`: 
     - `[Value <String>]`: 
+  - `[RestrictedFields <IRestrictedField1[]>]`: 
+    - `[Field <String>]`: 
+    - `[Id <String>]`: 
+    - `[Type <String>]`: 
   - `[SambaServiceUser <Boolean?>]`: 
   - `[SshKeys <ISshkeypost[]>]`: 
     - `Name <String>`: The name of the SSH key.
@@ -995,6 +1015,11 @@ PHONENUMBERS <ISystemuserputPhoneNumbersItem[]>: .
 RELATIONSHIPS <ISystemuserputRelationshipsItem[]>: .
   - `[Type <String>]`: 
   - `[Value <String>]`: 
+
+RESTRICTEDFIELDS <IRestrictedField1[]>: .
+  - `[Field <String>]`: 
+  - `[Id <String>]`: 
+  - `[Type <String>]`: 
 
 SSHKEYS <ISshkeypost[]>: .
   - `Name <String>`: The name of the SSH key.

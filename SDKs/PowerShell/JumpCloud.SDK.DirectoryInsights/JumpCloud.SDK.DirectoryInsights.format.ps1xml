@@ -2,6 +2,28 @@
 <Configuration>
   <ViewDefinitions>
     <View>
+      <Name>JumpCloud.SDK.DirectoryInsights.Models.DirectoryInsightsApiIdentity</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloud.SDK.DirectoryInsights.Models.DirectoryInsightsApiIdentity</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>ReportType</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>ReportType</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
       <Name>JumpCloud.SDK.DirectoryInsights.Models.EventCount</Name>
       <ViewSelectedBy>
         <TypeName>JumpCloud.SDK.DirectoryInsights.Models.EventCount</TypeName>
@@ -220,6 +242,98 @@
       </TableControl>
     </View>
     <View>
+      <Name>JumpCloud.SDK.DirectoryInsights.Models.Get200ApplicationJsonItemsArtifactsItem</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloud.SDK.DirectoryInsights.Models.Get200ApplicationJsonItemsArtifactsItem</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Format</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Id</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Format</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Id</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>JumpCloud.SDK.DirectoryInsights.Models.Get200ApplicationJsonItemsItem</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloud.SDK.DirectoryInsights.Models.Get200ApplicationJsonItemsItem</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>CreatedAt</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Expiration</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Id</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>RequesterEmail</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>RequesterId</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Status</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Type</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>UpdatedAt</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>CreatedAt</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Expiration</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Id</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>RequesterEmail</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>RequesterId</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Status</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Type</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>UpdatedAt</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
       <Name>JumpCloud.SDK.DirectoryInsights.Models.Paths1Sc3SuiEventsDistinctPostResponses200ContentApplicationJsonSchema</Name>
       <ViewSelectedBy>
         <TypeName>JumpCloud.SDK.DirectoryInsights.Models.Paths1Sc3SuiEventsDistinctPostResponses200ContentApplicationJsonSchema</TypeName>
@@ -282,6 +396,70 @@
       </TableControl>
     </View>
     <View>
+      <Name>JumpCloud.SDK.DirectoryInsights.Models.PathsE6Q3GdReportsReportTypePostResponses202ContentApplicationJsonSchema</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloud.SDK.DirectoryInsights.Models.PathsE6Q3GdReportsReportTypePostResponses202ContentApplicationJsonSchema</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>CreatedAt</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Expiration</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Id</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>RequesterEmail</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>RequesterId</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Status</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Type</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>UpdatedAt</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>CreatedAt</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Expiration</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Id</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>RequesterEmail</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>RequesterId</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Status</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Type</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>UpdatedAt</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
       <Name>JumpCloud.SDK.DirectoryInsights.Models.Post200ApplicationJsonPropertiesItemsItem</Name>
       <ViewSelectedBy>
         <TypeName>JumpCloud.SDK.DirectoryInsights.Models.Post200ApplicationJsonPropertiesItemsItem</TypeName>
@@ -303,6 +481,34 @@
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>Key</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>JumpCloud.SDK.DirectoryInsights.Models.Post202ApplicationJsonPropertiesItemsItem</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloud.SDK.DirectoryInsights.Models.Post202ApplicationJsonPropertiesItemsItem</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Format</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Id</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Format</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Id</PropertyName>
               </TableColumnItem>
             </TableColumnItems>
           </TableRowEntry>

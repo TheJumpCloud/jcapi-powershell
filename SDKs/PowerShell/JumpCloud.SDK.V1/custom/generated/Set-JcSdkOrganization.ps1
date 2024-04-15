@@ -131,7 +131,7 @@ BODY <IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema>:
     [SystemInsightEnableNewWindows <Boolean?>]:
     [SystemInsightEnabled <Boolean?>]:
     [SystemInsightUpdatedAt <String>]:
-    [SystemUserDefaultRestrictedFields <IRestrictedFields[]>]:
+    [SystemUserDefaultRestrictedFields <IRestrictedField1[]>]:
       [Field <String>]:
       [Id <String>]:
       [Type <String>]:
@@ -202,7 +202,7 @@ SETTINGS <IOrganizationsettingsput>:
   [SystemInsightEnableNewWindows <Boolean?>]:
   [SystemInsightEnabled <Boolean?>]:
   [SystemInsightUpdatedAt <String>]:
-  [SystemUserDefaultRestrictedFields <IRestrictedFields[]>]:
+  [SystemUserDefaultRestrictedFields <IRestrictedField1[]>]:
     [Field <String>]:
     [Id <String>]:
     [Type <String>]:

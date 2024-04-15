@@ -1,8 +1,40 @@
+## JumpCloud.SDK.V1-0.0.41
+Release Date: April 15, 2024
+#### RELEASE NOTES
+```
+This is a rollup release for the V1 module, a few changes were made to the systemUser model to return additional parameters.
+```
+#### FEATURES:
+Restricted Fields can be set with Set/New-JcSdkUser
+#### IMPROVEMENTS:
+NA
+#### BUG FIXES:
+NA
+#### Generated Changes:
+
+<details>
+<summary>Functions Added</summary>
+
+No changes
+</details>
+
+<details>
+<summary>Functions Modified</summary>
+
+No changes
+</details>
+
+<details>
+<summary>Functions Removed</summary>
+
+No changes
+</details>
+
 ## JumpCloud.SDK.V1-0.0.40
 Release Date: March 27, 2024
 #### RELEASE NOTES
 ```
-This is a rollup release for the V1 module, a few changes were made to the Application model to return additinoal parameters.
+This is a rollup release for the V1 module, a few changes were made to the Application model to return additional parameters.
 ```
 #### FEATURES:
 Additional parameters were added to the Application model

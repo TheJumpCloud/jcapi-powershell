@@ -39,4 +39,10 @@ Query the API for a list of counts by time interval
 curl -X POST 'https://api.jumpcloud.com/insights/directory/v1/events/interval' -H 'Content-Type: application/json' -H 'x-api-key: REPLACE_KEY_VALUE' --data '{\"service\": [\"all\"], \"start_time\": \"2021-07-14T23:00:00Z\", \"end_time\": \"2021-07-28T14:00:00Z\", \"timezone\": \"-0500\", \"interval_unit\": \"h\", \"interval_value\": \"2\"}'
 ```
 
+### [Get-JcSdkReport](Get-JcSdkReport.md)
+Ordered list of report metadata
+
+### [New-JcSdkReport](New-JcSdkReport.md)
+Request a JumpCloud report to be generated asynchronously
+
 

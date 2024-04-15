@@ -13,8 +13,8 @@ Lists available G Suite users for import, translated to the Jumpcloud user schem
 ## SYNTAX
 
 ```
-Get-JcSdkGsuiteUsersToImportFormatted -GsuiteId <String> [-OrderBy <String>] [-Query <String>]
- [-SortOrder <String>] [<CommonParameters>]
+Get-JcSdkGsuiteUsersToImportFormatted -GsuiteId <String> [-AllowEmptyFields] [-OrderBy <String>]
+ [-Query <String>] [-SortOrder <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -37,6 +37,21 @@ Lists available G Suite users for import, translated to the Jumpcloud user schem
 {{ Add output here }}
 
 ## PARAMETERS
+
+### -AllowEmptyFields
+[EXPERIMENTAL] Allow empty fields of the user object to be sent in the response
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### -GsuiteId
 .
