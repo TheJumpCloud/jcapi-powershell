@@ -4,13 +4,13 @@ Ordered list of report metadata
 .Description
 Ordered list of report metadata
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkReport
 
-{{ Add output here }}
+Returns a list of all available reports
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkReport -Sort 'CREATED_AT'
 
-{{ Add output here }}
+Returns a list of all available reports, sorted by the most recently created report
 
 .Outputs
 JumpCloud.SDK.DirectoryInsights.Models.IGet200ApplicationJsonItemsItem

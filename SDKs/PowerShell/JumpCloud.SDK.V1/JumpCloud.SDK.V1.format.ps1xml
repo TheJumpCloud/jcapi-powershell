@@ -6964,9 +6964,9 @@
       </TableControl>
     </View>
     <View>
-      <Name>JumpCloud.SDK.V1.Models.RestrictedFields</Name>
+      <Name>JumpCloud.SDK.V1.Models.RestrictedField1</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V1.Models.RestrictedFields</TypeName>
+        <TypeName>JumpCloud.SDK.V1.Models.RestrictedField1</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>

@@ -29,17 +29,17 @@ Request a JumpCloud report to be generated asynchronously
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+New-JcSdkReport -ReportType 'users-to-sso-applications'
 ```
 
-{{ Add output here }}
+Queues creation of an user-to-sso-application report
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell
-{{ Add code here }}
+New-JcSdkReport -ReportType 'users-to-devices'
 ```
 
-{{ Add output here }}
+Queues creation of an users-to-devices report
 
 ## PARAMETERS
 

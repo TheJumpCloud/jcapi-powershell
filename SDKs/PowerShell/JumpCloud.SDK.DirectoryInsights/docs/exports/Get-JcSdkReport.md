@@ -23,17 +23,17 @@ Ordered list of report metadata
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkReport
 ```
 
-{{ Add output here }}
+Returns a list of all available reports
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkReport -Sort 'CREATED_AT'
 ```
 
-{{ Add output here }}
+Returns a list of all available reports, sorted by the most recently created report
 
 ## PARAMETERS
 

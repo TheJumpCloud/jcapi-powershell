@@ -4,13 +4,13 @@ Request a JumpCloud report to be generated asynchronously
 .Description
 Request a JumpCloud report to be generated asynchronously
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> New-JcSdkReport -ReportType 'users-to-sso-applications'
 
-{{ Add output here }}
+Queues creation of an user-to-sso-application report
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> New-JcSdkReport -ReportType 'users-to-devices'
 
-{{ Add output here }}
+Queues creation of an users-to-devices report
 
 .Inputs
 JumpCloud.SDK.DirectoryInsights.Models.IDirectoryInsightsApiIdentity
