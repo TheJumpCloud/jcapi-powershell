@@ -2,7 +2,7 @@
 Release Date: April 15, 2024
 #### RELEASE NOTES
 ```
-This is a rollup release for the V2 module, no functional changes were made
+This is a rollup release for the V2 module, no functional changes were made.
 ```
 #### FEATURES:
 NA
