@@ -150,11 +150,26 @@ foreach ($item in $list) {
 
         # Build the example string for the set
         $string = "$($item.functionName)"
+
+        # account for clear type verb actions:
+        if ($item.functionType -eq "Clear"){
+            # find the clear item, so it's not using the default .clear method when we call it
+            for ($i = 0; $i -lt $paramInfo.Count; $i++) {
+                <# Action that will repeat until the condition is met #>
+                if ($paramInfo[$i].Clear){
+                    $clearNum = $i
+                }
+            }
+            $parmSetCount = $paramInfo[$clearNum].$Set.Count
+        } else {
+            $parmSetCount = $paramInfo.$Set.Count
+        }
         # $descriptionString = "$($item.functionType) a $($item.functionBaseType) by"
-        for ($i = 0; $i -lt $paramInfo.$Set.Count; $i++) {
+
+        for ($i = 0; $i -lt $parmSetCount; $i++) {
             <# Action that will repeat until the condition is met #>
             if ($set -eq 'clear'){
-                $paramText = $paramInfo[0].$Set[$i]
+                $paramText = $paramInfo[$clearNum].$Set[$i]
             } else {
                 $paramText = $paramInfo.$Set[$i]
             }
@@ -178,7 +193,7 @@ foreach ($item in $list) {
                 $descriptionVerb = get-verb "$($item.functionType)"
                 $descriptionString = "$descriptionVerb $a_an $($item.functionBaseType)"
                 if ($set -eq 'clear'){
-                    $paramText = $paramInfo[0].$Set | Where-Object {$_.parameterMandatory -eq $true}
+                    $paramText = $paramInfo[$clearNum].$Set | Where-Object {$_.parameterMandatory -eq $true}
                 } else {
                     $paramText = $paramInfo.$Set | Where-Object {$_.parameterMandatory -eq $true}
                 }
