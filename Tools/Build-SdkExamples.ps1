@@ -1,8 +1,8 @@
 [CmdletBinding()]
 param (
-    [Parameter(HelpMessage = 'Name of the API to build an SDK for.')][ValidateSet('JumpCloud.SDK.DirectoryInsights', 'JumpCloud.SDK.V1', 'JumpCloud.SDK.V2')][ValidateNotNullOrEmpty()]
+    [Parameter(Mandatory, HelpMessage = 'Name of the API to build an SDK for.')][ValidateSet('JumpCloud.SDK.DirectoryInsights', 'JumpCloud.SDK.V1', 'JumpCloud.SDK.V2')][ValidateNotNullOrEmpty()]
     [System.String[]]
-    $SDKName = 'JumpCloud.SDK.V1'
+    $SDKName
 )
 $rootPath = "$PSScriptRoot/../"
 # examples:
@@ -202,7 +202,7 @@ foreach ($item in $list) {
                 $ParamTextlist = $($paramText.parameterName)
                 if ($ParamTextlist.count -eq 1){
                     $descriptionString += " by $ParamTextlist"
-                    $deatiledDescriptionString += " by $ParamTextlist. $ParamTextlist is a required parameter"
+                    $deatiledDescriptionString += " by $ParamTextlist. $ParamTextlist is a required parameter."
                 } else {
                     $descriptionString += " by"
                     $deatiledDescriptionString += " by $ParamTextlist."
@@ -210,7 +210,7 @@ foreach ($item in $list) {
                         <# Action that will repeat until the condition is met #>
                         if ($i+1 -eq $ParamTextlist.Count){
                             $descriptionString += " and $($ParamTextlist[$i])"
-                            $deatiledDescriptionString += " and $($ParamTextlist[$i]) are required parameters"
+                            $deatiledDescriptionString += " and $($ParamTextlist[$i]) are required parameters."
 
                         } else {
                             $descriptionString += " $($ParamTextlist[$i]),"
@@ -229,9 +229,9 @@ foreach ($item in $list) {
         $functionOutputMatch = $functionContent | Select-String -Pattern $outputRegex -AllMatches
         if ($functionOutputMatch){
             $functionOutputModel = ($functionOutputMatch.Matches.Value).Replace('.Models.I', '.Models.')
-            $functionOutputModel
+            # $functionOutputModel
 
-            Write-Warning "$($item.functionName) model: $functionOutputModel"
+            # Write-Warning "$($item.functionName) model: $functionOutputModel"
 
 
             if ($functionOutputModel -match ".Models"){
