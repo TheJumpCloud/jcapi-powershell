@@ -182,7 +182,22 @@ foreach ($item in $list) {
         switch ($set) {
             'List' {
                 $descriptionString = "List $($item.functionBaseType)s"
-                $deatiledDescriptionString = "This function will return a list of all $($item.functionBaseType)s"
+                $deatiledDescriptionString = "This function will return a list of all $($item.functionBaseType)s."
+                $optionalParams = ($paramInfo.$Set | Where-Object {$_.parameterMandatory -eq $false}).parameterName
+                if ($optionalParams.count -eq 1){
+                    $deatiledDescriptionString += " $optionalParams is an optional parameter."
+                } else {
+                    for ($i = 0; $i -lt $optionalParams.Count; $i++) {
+                        <# Action that will repeat until the condition is met #>
+                        if ($i+1 -eq $optionalParams.Count){
+                            $deatiledDescriptionString += " and $($optionalParams[$i]) are optional parameters."
+
+                        } else {
+                            $deatiledDescriptionString += " $($optionalParams[$i]),"
+                        }
+                    }
+
+                }
             }
             Default {
                 # an vs a
