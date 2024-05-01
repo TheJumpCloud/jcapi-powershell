@@ -1,8 +1,8 @@
 [CmdletBinding()]
 param (
-    [Parameter(Mandatory = $true, HelpMessage = 'Name of the API to build an SDK for.')][ValidateSet('JumpCloud.SDK.DirectoryInsights', 'JumpCloud.SDK.V1', 'JumpCloud.SDK.V2')][ValidateNotNullOrEmpty()]
+    [Parameter(HelpMessage = 'Name of the API to build an SDK for.')][ValidateSet('JumpCloud.SDK.DirectoryInsights', 'JumpCloud.SDK.V1', 'JumpCloud.SDK.V2')][ValidateNotNullOrEmpty()]
     [System.String[]]
-    $SDKName #= 'JumpCloud.SDK.V1'
+    $SDKName = 'JumpCloud.SDK.V1'
 )
 $rootPath = "$PSScriptRoot/../"
 # examples:
@@ -177,11 +177,12 @@ foreach ($item in $list) {
                 $string += " -$($paramText.ParameterName):(<$($($paramText.parameterValueType))>)"
             }
         }
-        # replace internal model name with non-internal model that can be publically used
+        # replace internal model name with non-internal model that can be publicly used
         $string = $string.Replace('.Models.I', '.Models.')
         switch ($set) {
             'List' {
                 $descriptionString = "List $($item.functionBaseType)s"
+                $deatiledDescriptionString = "This function will return a list of all $($item.functionBaseType)s"
             }
             Default {
                 # an vs a
@@ -192,6 +193,7 @@ foreach ($item in $list) {
                 }
                 $descriptionVerb = get-verb "$($item.functionType)"
                 $descriptionString = "$descriptionVerb $a_an $($item.functionBaseType)"
+                $deatiledDescriptionString = "This function will $descriptionVerb $a_an $($item.functionBaseType)"
                 if ($set -eq 'clear'){
                     $paramText = $paramInfo[$clearNum].$Set | Where-Object {$_.parameterMandatory -eq $true}
                 } else {
@@ -200,25 +202,78 @@ foreach ($item in $list) {
                 $ParamTextlist = $($paramText.parameterName)
                 if ($ParamTextlist.count -eq 1){
                     $descriptionString += " by $ParamTextlist"
+                    $deatiledDescriptionString += " by $ParamTextlist. $ParamTextlist is a required parameter"
                 } else {
                     $descriptionString += " by"
+                    $deatiledDescriptionString += " by $ParamTextlist."
                     for ($i = 0; $i -lt $ParamTextlist.Count; $i++) {
                         <# Action that will repeat until the condition is met #>
                         if ($i+1 -eq $ParamTextlist.Count){
                             $descriptionString += " and $($ParamTextlist[$i])"
+                            $deatiledDescriptionString += " and $($ParamTextlist[$i]) are required parameters"
 
                         } else {
                             $descriptionString += " $($ParamTextlist[$i]),"
+                            $deatiledDescriptionString += " $($ParamTextlist[$i]),"
                         }
                     }
 
                 }
             }
         }
+        # build the output string
+        # get funcitonContent
+        $functionContent = Get-Content $item.functionPath -raw
+        $outputRegex = [regex]"(?<=\.Outputs)([\s\S])*?(?=.Notes)"
+        $outputRegex = [regex]"(?<=Outputs\n)JumpCloud\.SDK\..*"
+        $functionOutputMatch = $functionContent | Select-String -Pattern $outputRegex -AllMatches
+        if ($functionOutputMatch){
+            $functionOutputModel = ($functionOutputMatch.Matches.Value).Replace('.Models.I', '.Models.')
+            $functionOutputModel
+
+            Write-Warning "$($item.functionName) model: $functionOutputModel"
+
+
+            if ($functionOutputModel -match ".Models"){
+                if ($functionOutputModel.count -gt 1){
+                    $model = invoke-expression "[$($functionOutputModel[0])]::new()"
+                } else {
+                    $model = invoke-expression "[$($functionOutputModel)]::new()"
+                }
+                $modelProperties = $model | GM | Where-Object {$_.MemberType -eq 'property'}
+
+                $out = $modelProperties | Select-Object name, Definition | Out-String
+
+                # Replace definition text
+                # replace name definition header
+                $out = $out -replace ('Name.*Definition', '')
+                # string
+                $out = $out -replace ('string *.+', 'String')
+                # int
+                $out = $out -replace ('System.Nullable\[int\] *.+', 'Int')
+                # boolean
+                $out = $out -replace ('System.Nullable\[bool\] *.+', 'Boolean')
+                # datetime
+                $out = $out -replace ('System.Nullable\[datetime\] *.+', 'Datetime')
+                # finally replace the models
+                # remove values on end of strings
+                $out = $out -replace ('(JumpCloud\.SDK[^\s]+) .*', '$1')
+                # replace the .Models.I internal model def
+                $out = $out -Replace ('(JumpCloud\.SDK..*.Models.)I', '$1')
+            }
+        } else {
+            $out = $null
+        }
+
+        # build detailed description
+
+
         # add the example to the $outputlist variable
         $outputList["$($item.functionName)"].add($set,[PSCustomObject]@{
             example = $string;
             description = "$($descriptionString)";
+            output = "$out"
+            detailedDescription = $deatiledDescriptionString
         })
     }
 }
@@ -247,16 +302,25 @@ foreach ($item in $list){
         <# Action that will repeat until the condition is met #>
         if ($exampleContent -match "\#\#\# Example $($i+1): {{ Add title here }}") {
             $exampleContent = $exampleContent.replace("### Example $($i+1): {{ Add title here }}", "### Example $($i+1): $((invoke-expression -command ('$functionexamples.' + $setList[$i])).description)")
-
-            $exampleRegex = [regex]"### Example $($i+1)[\s\S]*?(?={{ Add description here }})"
+            $exampleRegex = [regex]"### Example $($i+1)[\s\S]*?{{ Add description here }}"
             $cc = $exampleContent | Select-String -Pattern $exampleRegex
             # content to edit:
             $ContentToEdit = $cc.Matches.Value
+
+            # update example content
             $ReplacedContent = $ContentToEdit -replace ("{{ Add code here }}", $((invoke-expression -command ('$functionexamples.' + $setList[$i])).example))
-            # update example:
+            # replace output
+            if ($((invoke-expression -command ('$functionexamples.' + $setList[$i])).output)){
+                $ReplacedContent = $ReplacedContent -replace ("{{ Add output here }}", $((invoke-expression -command ('$functionexamples.' + $setList[$i])).output))
+            }
+            else {
+                $ReplacedContent = $ReplacedContent -replace ("{{ Add output here }}", "")
+            }
+            # replace detailed description
+            $ReplacedContent = $ReplacedContent -replace ("{{ Add description here }}", $((invoke-expression -command ('$functionexamples.' + $setList[$i])).detailedDescription))
+            # set the content
             $currentContent = Get-Content -Path $item.examplePath -Raw
             $currentContent -replace ($exampleRegex, $ReplacedContent) | Set-Content -Path $item.examplePath -NoNewline -Force
-
         }
     }
 }
