@@ -49,17 +49,41 @@ You must provide either `role` or `roleName`.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+New-JcSdkProviderAdministrator -ProviderId:(<string>) -Email:(<string>) -ApiKeyAllowed:(<switch>) -BindNoOrgs:(<switch>) -EnableMultiFactor:(<switch>) -Firstname:(<string>) -Lastname:(<string>) -Role:(<string>) -RoleName:(<string>)
 ```
 
-{{ Add output here }}
+----                    ----------
+ApiKeyAllowed           Boolean
+ApiKeySet               Boolean
+Email                   String
+EnableMultiFactor       Boolean
+Firstname               String
+Id                      String
+Lastname                String
+OrganizationAccessTotal System.Nullable[float] OrganizationAccessTotal {get;set;}
+Registered              Boolean
+Role                    String
+RoleName                String
+Suspended               Boolean
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell
-{{ Add code here }}
+New-JcSdkProviderAdministrator -ProviderId:(<string>) -Body:(<JumpCloud.SDK.V2.Models.ProviderAdminReq>)
 ```
 
-{{ Add output here }}
+----                    ----------
+ApiKeyAllowed           Boolean
+ApiKeySet               Boolean
+Email                   String
+EnableMultiFactor       Boolean
+Firstname               String
+Id                      String
+Lastname                String
+OrganizationAccessTotal System.Nullable[float] OrganizationAccessTotal {get;set;}
+Registered              Boolean
+Role                    String
+RoleName                String
+Suspended               Boolean
 
 ## PARAMETERS
 

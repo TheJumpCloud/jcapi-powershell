@@ -22,9 +22,9 @@ curl -X DELETE https://console.jumpcloud.com/api/v2/policies/5a837ecd232e110d429
   -H 'x-api-key: {API_KEY}'
   ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Remove-JcSdkPolicy -Id:(<string>)
 
-{{ Add output here }}
+
 .Example
 PS C:\> {{ Add code here }}
 

@@ -23,10 +23,15 @@ Valid filter fields are `system_id` and `enabled`.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkSystemInsightSipConfig
 ```
 
-{{ Add output here }}
+----           ----------
+CollectionTime String
+ConfigFlag     String
+Enabled        Int
+EnabledNvram   Int
+SystemId       String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

@@ -58,13 +58,55 @@ curl -X PUT https://console.jumpcloud.com/api/organizations/{OrganizationID} \\
 }'
 ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Set-JcSdkOrganization -Id:(<string>) -Body:(<JumpCloud.SDK.V1.Models.Paths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema>)
 
-{{ Add output here }}
+
+
+----                             ----------
+AccessRestriction                String
+AccountsReceivable               String
+Created                          String
+DisplayName                      String
+EntitlementBillingModel          String
+EntitlementIsManuallyBilled      Boolean
+EntitlementPricePerUserSum       Int
+EntitlementProducts              JumpCloud.SDK.V1.Models.OrganizationentitlementEntitlementProductsItem[]
+HasCreditCard                    Boolean
+HasStripeCustomerId              Boolean
+Id                               String
+LastEstimateCalculationTimeStamp String
+LastSfdcSyncStatus               JumpCloud.SDK.V1.Models.OrganizationLastSfdcSyncStatus
+LogoUrl                          String
+Provider                         String
+Settings                         JumpCloud.SDK.V1.Models.Organizationsettings
+TotalBillingEstimate             Int
+
+
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Set-JcSdkOrganization -Id:(<string>) -Settings:(<JumpCloud.SDK.V1.Models.Organizationsettingsput>)
 
-{{ Add output here }}
+
+
+----                             ----------
+AccessRestriction                String
+AccountsReceivable               String
+Created                          String
+DisplayName                      String
+EntitlementBillingModel          String
+EntitlementIsManuallyBilled      Boolean
+EntitlementPricePerUserSum       Int
+EntitlementProducts              JumpCloud.SDK.V1.Models.OrganizationentitlementEntitlementProductsItem[]
+HasCreditCard                    Boolean
+HasStripeCustomerId              Boolean
+Id                               String
+LastEstimateCalculationTimeStamp String
+LastSfdcSyncStatus               JumpCloud.SDK.V1.Models.OrganizationLastSfdcSyncStatus
+LogoUrl                          String
+Provider                         String
+Settings                         JumpCloud.SDK.V1.Models.Organizationsettings
+TotalBillingEstimate             Int
+
+
 
 .Inputs
 JumpCloud.SDK.V1.Models.IJumpCloudApiIdentity

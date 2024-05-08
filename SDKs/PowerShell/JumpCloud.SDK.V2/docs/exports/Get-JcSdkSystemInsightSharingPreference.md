@@ -23,10 +23,22 @@ Only valid filed field is `system_id`.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkSystemInsightSharingPreference
 ```
 
-{{ Add output here }}
+----              ----------
+BluetoothSharing  Int
+CollectionTime    String
+ContentCaching    Int
+DiscSharing       Int
+FileSharing       Int
+InternetSharing   Int
+PrinterSharing    Int
+RemoteAppleEvents Int
+RemoteLogin       Int
+RemoteManagement  Int
+ScreenSharing     Int
+SystemId          String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

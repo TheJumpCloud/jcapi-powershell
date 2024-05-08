@@ -23,10 +23,21 @@ Valid filter fields are `system_id` and `enabled`.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkSystemInsightScheduledTask
 ```
 
-{{ Add output here }}
+----           ----------
+Action         String
+Enabled        Int
+Hidden         Int
+LastRunCode    String
+LastRunMessage String
+LastRunTime    String
+Name           String
+NextRunTime    String
+Path           String
+State          String
+SystemId       String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

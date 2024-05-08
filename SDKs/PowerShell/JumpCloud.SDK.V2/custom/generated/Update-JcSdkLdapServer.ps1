@@ -30,13 +30,29 @@ curl -X PATCH https://console.jumpcloud.com/api/v2/ldapservers/{LDAP_ID} \\
   }'
 ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Update-JcSdkLdapServer -Id:(<string>) -Body:(<JumpCloud.SDK.V2.Models.Paths1Ka5IlhLdapserversIdPatchRequestbodyContentApplicationJsonSchema>)
 
-{{ Add output here }}
+
+
+----                         ----------
+Id                           String
+Name                         String
+UserLockoutAction            String
+UserPasswordExpirationAction String
+
+
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Update-JcSdkLdapServer -Id:(<string>) -Id1:(<string>) -UserLockoutAction:(<string>) -UserPasswordExpirationAction:(<string>)
 
-{{ Add output here }}
+
+
+----                         ----------
+Id                           String
+Name                         String
+UserLockoutAction            String
+UserPasswordExpirationAction String
+
+
 
 .Inputs
 JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity

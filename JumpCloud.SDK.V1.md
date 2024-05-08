@@ -2,14 +2,14 @@
 Release Date: May 08, 2024
 #### RELEASE NOTES
 ```
-{{Fill in the Release Notes}}
+This is a rollup release of the V1 Module, no functional changes have been made
 ```
 #### FEATURES:
-{{Fill in the Features}}
+NA
 #### IMPROVEMENTS:
-{{Fill in the Improvements}}
+NA
 #### BUG FIXES:
-{{Fill in the Bug Fixes}}
+NA
 #### Generated Changes:
 
 <details>

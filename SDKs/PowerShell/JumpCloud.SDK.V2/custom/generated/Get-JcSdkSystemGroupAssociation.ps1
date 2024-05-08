@@ -26,9 +26,20 @@ curl -X GET https://console.jumpcloud.com/api/v2/systemgroups/{GroupID}/associat
   -H 'x-api-key: {API_KEY}'
 ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemGroupAssociation -GroupId:(<string>)
 
-{{ Add output here }}
+
+
+----           ----------
+Attributes     JumpCloud.SDK.V2.Models.GraphAttributes
+FromAttributes JumpCloud.SDK.V2.Models.GraphAttributes
+FromId         String
+FromType       String
+ToAttributes   JumpCloud.SDK.V2.Models.GraphAttributes
+ToId           String
+ToType         String
+
+
 .Example
 PS C:\> {{ Add code here }}
 

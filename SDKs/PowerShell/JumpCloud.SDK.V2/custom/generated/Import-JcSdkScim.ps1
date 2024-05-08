@@ -4,9 +4,15 @@ Get a list of users to import from an Application IdM service provider.
 .Description
 Get a list of users to import from an Application IdM service provider.
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Import-JcSdkScim -ApplicationId:(<string>)
 
-{{ Add output here }}
+
+
+----       ----------
+TotalCount System.Nullable[float] TotalCount {get;set;}
+Users      JumpCloud.SDK.V2.Models.ImportUser[]
+
+
 .Example
 PS C:\> {{ Add code here }}
 

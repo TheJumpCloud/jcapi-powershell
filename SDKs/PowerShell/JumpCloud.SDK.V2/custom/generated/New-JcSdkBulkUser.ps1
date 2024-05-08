@@ -100,9 +100,9 @@ curl -X POST https://console.jumpcloud.com/api/v2/bulk/users \\
 ]'
 ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> New-JcSdkBulkUser
 
-{{ Add output here }}
+
 .Example
 PS C:\> {{ Add code here }}
 

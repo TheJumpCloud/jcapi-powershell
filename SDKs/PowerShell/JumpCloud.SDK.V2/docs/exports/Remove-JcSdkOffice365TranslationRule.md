@@ -51,10 +51,10 @@ curl -X DELETE https://console.jumpcloud.com/api/v2/office365s/{office365_id}/tr
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Remove-JcSdkOffice365TranslationRule -Id:(<string>) -Office365Id:(<string>)
 ```
 
-{{ Add output here }}
+
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

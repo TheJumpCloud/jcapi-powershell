@@ -23,10 +23,25 @@ Valid filter fields are `system_id` and `security_type`.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkSystemInsightWifiStatus
 ```
 
-{{ Add output here }}
+----           ----------
+Bssid          String
+Channel        System.Nullable[float] Channel {get;set;}
+ChannelBand    System.Nullable[float] ChannelBand {get;set;}
+ChannelWidth   System.Nullable[float] ChannelWidth {get;set;}
+CollectionTime String
+CountryCode    String
+Interface      String
+Mode           String
+NetworkName    String
+Noise          System.Nullable[float] Noise {get;set;}
+Rssi           System.Nullable[float] Rssi {get;set;}
+SecurityType   String
+Ssid           String
+SystemId       String
+TransmitRate   String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

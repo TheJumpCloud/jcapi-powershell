@@ -4,9 +4,31 @@ Valid filter fields are `system_id`.
 .Description
 Valid filter fields are `system_id`.
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemInsightAzureInstanceMetadata
 
-{{ Add output here }}
+
+
+----                 ----------
+CollectionTime       String
+Location             String
+Name                 String
+Offer                String
+OSType               String
+PlacementGroupId     String
+PlatformFaultDomain  String
+PlatformUpdateDomain String
+Publisher            String
+ResourceGroupName    String
+Sku                  String
+SubscriptionId       String
+SystemId             String
+Version              String
+VMId                 String
+VMScaleSetName       String
+VMSize               String
+Zone                 String
+
+
 .Example
 PS C:\> {{ Add code here }}
 

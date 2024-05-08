@@ -41,10 +41,16 @@ This endpoint returns all pricing & packaging subscriptions.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkSubscription
 ```
 
-{{ Add output here }}
+----                  ----------
+AnnualPrice           float AnnualPrice {get;set;}
+DisplayName           String
+Features              JumpCloud.SDK.V2.Models.Feature[]
+ListPrice             float ListPrice {get;set;}
+ProductCode           String
+UpgradeRecommendation String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

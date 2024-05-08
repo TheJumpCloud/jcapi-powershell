@@ -63,17 +63,29 @@ curl -X PUT https://console.jumpcloud.com/api/v2/policygroups/{Group_ID} \\
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Set-JcSdkPolicyGroup -Id:(<string>) -Body:(<JumpCloud.SDK.V2.Models.PolicyGroupData>)
 ```
 
-{{ Add output here }}
+----        ----------
+Attributes  JumpCloud.SDK.V2.Models.GraphAttributes
+Description String
+Email       String
+Id          String
+Name        String
+Type        String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell
-{{ Add code here }}
+Set-JcSdkPolicyGroup -Id:(<string>) -Name:(<string>)
 ```
 
-{{ Add output here }}
+----        ----------
+Attributes  JumpCloud.SDK.V2.Models.GraphAttributes
+Description String
+Email       String
+Id          String
+Name        String
+Type        String
 
 ## PARAMETERS
 

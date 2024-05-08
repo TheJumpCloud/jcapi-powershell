@@ -30,13 +30,49 @@ curl -X PUT https://console.jumpcloud.com/api/v2/usergroups/{Group_ID} \\
   }'
 ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Set-JcSdkUserGroup -Id:(<string>) -Body:(<JumpCloud.SDK.V2.Models.UserGroupPut>)
 
-{{ Add output here }}
+
+
+----                    ----------
+Attributes              JumpCloud.SDK.V2.Models.GroupAttributesUserGroup
+Description             String
+Email                   String
+Id                      String
+MemberQueryExemptions   JumpCloud.SDK.V2.Models.GraphObject[]
+MemberQueryFilters      JumpCloud.SDK.V2.Models.Any[]
+MemberQueryType         String
+MembershipMethod        String
+MemberSuggestionsNotify Boolean
+Name                    String
+SuggestionCountAdd      Int
+SuggestionCountRemove   Int
+SuggestionCountTotal    Int
+Type                    String
+
+
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Set-JcSdkUserGroup -Id:(<string>) -Name:(<string>) -Attributes:(<hashtable>) -Description:(<string>) -Email:(<string>) -MemberQueryExemptions:(<JumpCloud.SDK.V2.Models.GraphObject[]>) -MemberQueryFilters:(<JumpCloud.SDK.V2.Models.Any[]>) -MemberQueryType:(<string>) -MemberSuggestionsNotify:(<switch>) -MembershipMethod:(<string>)
 
-{{ Add output here }}
+
+
+----                    ----------
+Attributes              JumpCloud.SDK.V2.Models.GroupAttributesUserGroup
+Description             String
+Email                   String
+Id                      String
+MemberQueryExemptions   JumpCloud.SDK.V2.Models.GraphObject[]
+MemberQueryFilters      JumpCloud.SDK.V2.Models.Any[]
+MemberQueryType         String
+MembershipMethod        String
+MemberSuggestionsNotify Boolean
+Name                    String
+SuggestionCountAdd      Int
+SuggestionCountRemove   Int
+SuggestionCountTotal    Int
+Type                    String
+
+
 
 .Inputs
 JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity

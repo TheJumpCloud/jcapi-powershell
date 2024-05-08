@@ -4,9 +4,28 @@ Valid filter fields are `system_id`.
 .Description
 Valid filter fields are `system_id`.
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemInsightChassisInfo
 
-{{ Add output here }}
+
+
+----              ----------
+AudibleAlarm      String
+BreachDescription String
+ChassisTypes      String
+CollectionTime    String
+Description       String
+Lock              String
+Manufacturer      String
+Model             String
+SecurityBreach    String
+Serial            String
+Sku               String
+SmbiosTag         String
+Status            String
+SystemId          String
+VisibleAlarm      String
+
+
 .Example
 PS C:\> {{ Add code here }}
 

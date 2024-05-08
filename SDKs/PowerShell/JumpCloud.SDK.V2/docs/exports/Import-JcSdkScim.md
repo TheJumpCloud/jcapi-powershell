@@ -31,10 +31,12 @@ Get a list of users to import from an Application IdM service provider.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Import-JcSdkScim -ApplicationId:(<string>)
 ```
 
-{{ Add output here }}
+----       ----------
+TotalCount System.Nullable[float] TotalCount {get;set;}
+Users      JumpCloud.SDK.V2.Models.ImportUser[]
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

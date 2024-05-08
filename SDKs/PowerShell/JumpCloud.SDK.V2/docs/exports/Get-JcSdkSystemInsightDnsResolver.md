@@ -23,10 +23,17 @@ Valid filter fields are `system_id` and `type`.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkSystemInsightDnsResolver
 ```
 
-{{ Add output here }}
+----           ----------
+Address        String
+CollectionTime String
+Id             System.Nullable[float] Id {get;set;}
+Netmask        String
+Options        String
+SystemId       String
+Type           String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

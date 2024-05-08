@@ -23,10 +23,33 @@ Valid filter fields are `system_id` and `name`.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkSystemInsightLaunchd
 ```
 
-{{ Add output here }}
+----               ----------
+CollectionTime     String
+Disabled           String
+Groupname          String
+InetdCompatibility String
+KeepAlive          String
+Label              String
+Name               String
+OnDemand           String
+Path               String
+ProcessType        String
+Program            String
+ProgramArguments   String
+QueueDirectories   String
+RootDirectory      String
+RunAtLoad          String
+StartInterval      String
+StartOnMount       String
+StderrPath         String
+StdoutPath         String
+SystemId           String
+Username           String
+WatchPaths         String
+WorkingDirectory   String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

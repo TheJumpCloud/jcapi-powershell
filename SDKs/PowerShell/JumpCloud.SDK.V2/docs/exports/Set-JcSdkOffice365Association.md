@@ -74,17 +74,17 @@ curl -X POST https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID}/asso
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Set-JcSdkOffice365Association -Office365Id:(<string>) -Body:(<JumpCloud.SDK.V2.Models.GraphOperationOffice3651>)
 ```
 
-{{ Add output here }}
+
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell
-{{ Add code here }}
+Set-JcSdkOffice365Association -Office365Id:(<string>) -Id:(<string>) -Op:(<string>) -Type:(<JumpCloud.SDK.V2.Support.GraphOperationOffice365>) -Attributes:(<hashtable>)
 ```
 
-{{ Add output here }}
+
 
 ## PARAMETERS
 

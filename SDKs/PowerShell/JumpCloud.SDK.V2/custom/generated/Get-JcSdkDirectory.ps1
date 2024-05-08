@@ -20,9 +20,19 @@ This endpoint returns all active directories (LDAP, O365 Suite, G-Suite).
   -H 'x-api-key: {API_KEY}'
 ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkDirectory
 
-{{ Add output here }}
+
+
+----                ----------
+DefaultDomainDomain String
+DefaultDomainId     String
+Id                  String
+Name                String
+OAuthStatus         JumpCloud.SDK.V2.Models.DirectoryOAuthStatus
+Type                String
+
+
 .Example
 PS C:\> {{ Add code here }}
 

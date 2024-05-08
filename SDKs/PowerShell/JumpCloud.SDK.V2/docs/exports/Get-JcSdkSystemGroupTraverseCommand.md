@@ -63,10 +63,23 @@ curl -X GET https://console.jumpcloud.com/api/v2/systemgroups/{GroupID}/commands
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkSystemGroupTraverseCommand -GroupId:(<string>)
 ```
 
-{{ Add output here }}
+----               ----------
+Command            String
+CommandType        String
+CompiledAttributes JumpCloud.SDK.V2.Models.GraphAttributes
+Id                 String
+LaunchType         String
+Name               String
+Organization       String
+Paths              JumpCloud.SDK.V2.Models.GraphConnection[][]
+Schedule           String
+ScheduleRepeatType String
+Timeout            String
+TimeToLiveSeconds  Int
+Type               String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

@@ -22,13 +22,13 @@ Locks a DEP-enrolled device.
   -d '{}'
 ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Lock-JcSdkAppleMdmDevice -AppleMdmId:(<string>) -DeviceId:(<string>) -Pin:(<string>)
 
-{{ Add output here }}
+
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Lock-JcSdkAppleMdmDevice -AppleMdmId:(<string>) -DeviceId:(<string>) -Body:(<JumpCloud.SDK.V2.Models.PathsLf7IzoApplemdmsAppleMdmIdDevicesDeviceIdLockPostRequestbodyContentApplicationJsonSchema>)
 
-{{ Add output here }}
+
 
 .Inputs
 JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity

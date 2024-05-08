@@ -22,9 +22,17 @@ curl -X GET https://console.jumpcloud.com/api/v2/systems/{System_ID}/memberof \\
 
 ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemMember -SystemId:(<string>)
 
-{{ Add output here }}
+
+
+----               ----------
+CompiledAttributes JumpCloud.SDK.V2.Models.GraphAttributes
+Id                 String
+Paths              JumpCloud.SDK.V2.Models.GraphConnection[][]
+Type               String
+
+
 .Example
 PS C:\> {{ Add code here }}
 

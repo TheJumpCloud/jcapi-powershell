@@ -76,17 +76,21 @@ curl -X POST https://console.jumpcloud.com/api/search/organizations \\
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Search-JcSdkOrganization -Body:(<JumpCloud.SDK.V1.Models.Search>)
 ```
 
-{{ Add output here }}
+----       ----------
+Results    JumpCloud.SDK.V1.Models.OrganizationslistResultsItem[]
+TotalCount Int
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell
-{{ Add code here }}
+Search-JcSdkOrganization -Fields:(<string>) -Filter:(<hashtable>) -SearchFilter:(<hashtable>)
 ```
 
-{{ Add output here }}
+----       ----------
+Results    JumpCloud.SDK.V1.Models.OrganizationslistResultsItem[]
+TotalCount Int
 
 ## PARAMETERS
 

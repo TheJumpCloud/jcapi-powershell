@@ -55,17 +55,23 @@ These rules specify how JumpCloud attributes translate to [G Suite Admin SDK](ht
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkGSuiteTranslationRule -GsuiteId:(<string>) -Fields:(<string[]>) -Filter:(<string[]>) -Sort:(<string[]>)
 ```
 
-{{ Add output here }}
+----      ----------
+BuiltIn   String
+Direction String
+Id        String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkGSuiteTranslationRule -GsuiteId:(<string>) -Id:(<string>)
 ```
 
-{{ Add output here }}
+----      ----------
+BuiltIn   String
+Direction String
+Id        String
 
 ## PARAMETERS
 

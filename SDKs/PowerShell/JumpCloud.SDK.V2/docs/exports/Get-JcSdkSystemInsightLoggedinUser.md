@@ -23,10 +23,18 @@ Valid filter fields are `system_id` and `user`.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkSystemInsightLoggedinUser
 ```
 
-{{ Add output here }}
+----           ----------
+CollectionTime String
+Host           String
+Pid            Int
+SystemId       String
+Time           Int
+Tty            String
+Type           String
+User           String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

@@ -44,9 +44,17 @@ curl -X GET https://console.jumpcloud.com/api/v2/{System_ID}/policies \\
 
 ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemTraversePolicy -SystemId:(<string>)
 
-{{ Add output here }}
+
+
+----               ----------
+CompiledAttributes JumpCloud.SDK.V2.Models.GraphAttributes
+Id                 String
+Paths              JumpCloud.SDK.V2.Models.GraphConnection[][]
+Type               String
+
+
 .Example
 PS C:\> {{ Add code here }}
 

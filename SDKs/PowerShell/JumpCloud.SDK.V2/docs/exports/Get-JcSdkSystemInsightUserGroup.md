@@ -23,10 +23,14 @@ Only valid filter field is `system_id`.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkSystemInsightUserGroup
 ```
 
-{{ Add output here }}
+----           ----------
+CollectionTime String
+Gid            String
+SystemId       String
+Uid            String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

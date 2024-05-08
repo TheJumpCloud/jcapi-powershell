@@ -23,10 +23,23 @@ Valid filter fields are `system_id` and `name`.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkSystemInsightService
 ```
 
-{{ Add output here }}
+----            ----------
+Description     String
+DisplayName     String
+ModulePath      String
+Name            String
+Path            String
+Pid             Int
+ServiceExitCode Int
+ServiceType     String
+StartType       String
+Status          String
+SystemId        String
+UserAccount     String
+Win32ExitCode   Int
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

@@ -4,9 +4,19 @@ Valid filter fields are `system_id` and `uid`.
 .Description
 Valid filter fields are `system_id` and `uid`.
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemInsightAuthorizedKey
 
-{{ Add output here }}
+
+
+----           ----------
+Algorithm      String
+CollectionTime String
+Key            String
+KeyFile        String
+SystemId       String
+Uid            String
+
+
 .Example
 PS C:\> {{ Add code here }}
 

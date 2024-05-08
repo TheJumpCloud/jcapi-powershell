@@ -32,13 +32,41 @@ curl -X PUT https://console.jumpcloud.com/api/v2/workdays/{WorkdayID} \\
 }\t'
 ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Set-JcSdkWorkday -Id:(<string>) -Body:(<JumpCloud.SDK.V2.Models.WorkdayFields>)
 
-{{ Add output here }}
+
+
+----         ----------
+BasicExpiry  String
+BasicIsValid Boolean
+BasicMessage String
+Id           String
+LastImport   String
+Name         String
+OauthExpiry  String
+OauthIsValid Boolean
+OauthMessage String
+ReportUrl    String
+
+
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Set-JcSdkWorkday -Id:(<string>) -Name:(<string>) -ReportUrl:(<string>)
 
-{{ Add output here }}
+
+
+----         ----------
+BasicExpiry  String
+BasicIsValid Boolean
+BasicMessage String
+Id           String
+LastImport   String
+Name         String
+OauthExpiry  String
+OauthIsValid Boolean
+OauthMessage String
+ReportUrl    String
+
+
 
 .Inputs
 JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity

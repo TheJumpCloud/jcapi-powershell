@@ -80,17 +80,37 @@ curl -X POST https://console.jumpcloud.com/api/v2/workdays/ \\
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+New-JcSdkWorkday -BasicPassword:(<string>) -BasicUsername:(<string>) -Name:(<string>) -OauthCode:(<string>) -ReportUrl:(<string>)
 ```
 
-{{ Add output here }}
+----         ----------
+BasicExpiry  String
+BasicIsValid Boolean
+BasicMessage String
+Id           String
+LastImport   String
+Name         String
+OauthExpiry  String
+OauthIsValid Boolean
+OauthMessage String
+ReportUrl    String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell
-{{ Add code here }}
+New-JcSdkWorkday -Body:(<JumpCloud.SDK.V2.Models.WorkdayInput>)
 ```
 
-{{ Add output here }}
+----         ----------
+BasicExpiry  String
+BasicIsValid Boolean
+BasicMessage String
+Id           String
+LastImport   String
+Name         String
+OauthExpiry  String
+OauthIsValid Boolean
+OauthMessage String
+ReportUrl    String
 
 ## PARAMETERS
 

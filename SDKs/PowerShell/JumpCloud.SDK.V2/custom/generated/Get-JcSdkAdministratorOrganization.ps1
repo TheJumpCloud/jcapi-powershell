@@ -4,9 +4,15 @@ This endpoint returns the association links between an Administrator and Organiz
 .Description
 This endpoint returns the association links between an Administrator and Organizations.
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkAdministratorOrganization
 
-{{ Add output here }}
+
+
+----          ----------
+Administrator String
+Organization  String
+
+
 .Example
 PS C:\> {{ Add code here }}
 

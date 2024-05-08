@@ -80,13 +80,35 @@ curl -X PATCH https://console.jumpcloud.com/api/v2/gsuites/{GSUITE_ID} \\
   }'
 ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Update-JcSdkGSuite -Id:(<string>) -Body:(<JumpCloud.SDK.V2.Models.Gsuite>)
 
-{{ Add output here }}
+
+
+----                         ----------
+DefaultDomainDomain          String
+DefaultDomainId              String
+GroupsEnabled                Boolean
+Id                           String
+Name                         String
+UserLockoutAction            String
+UserPasswordExpirationAction String
+
+
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Update-JcSdkGSuite -Id:(<string>) -DefaultDomainId:(<string>) -GroupsEnabled:(<switch>) -Name:(<string>) -UserLockoutAction:(<string>) -UserPasswordExpirationAction:(<string>)
 
-{{ Add output here }}
+
+
+----                         ----------
+DefaultDomainDomain          String
+DefaultDomainId              String
+GroupsEnabled                Boolean
+Id                           String
+Name                         String
+UserLockoutAction            String
+UserPasswordExpirationAction String
+
+
 
 .Inputs
 JumpCloud.SDK.V2.Models.IGsuite

@@ -20,13 +20,51 @@ curl https://console.jumpcloud.com/api/v2/authn/policies/{id} \\
   -H 'x-api-key: {API_KEY}'
 ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkAuthenticationPolicy -Filter:(<string[]>) -Sort:(<string[]>) -XTotalCount:(<int>)
 
-{{ Add output here }}
+
+
+----                        ----------
+Conditions                  JumpCloud.SDK.V2.Models.AuthnPolicyConditions
+Description                 String
+Disabled                    Boolean
+EffectAction                String
+Id                          String
+MfaRequired                 Boolean
+Name                        String
+TargetResources             JumpCloud.SDK.V2.Models.AuthnPolicyResourceTarget[]
+Type                        String
+UserAttributeExclusions     JumpCloud.SDK.V2.Models.AuthnPolicyUserAttributeFilter[]
+UserAttributeInclusions     JumpCloud.SDK.V2.Models.AuthnPolicyUserAttributeFilter[]
+UserGroupExclusions         String
+UserGroupInclusions         String
+UserInclusions              String
+UserVerificationRequirement String
+
+
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkAuthenticationPolicy -Id:(<string>)
 
-{{ Add output here }}
+
+
+----                        ----------
+Conditions                  JumpCloud.SDK.V2.Models.AuthnPolicyConditions
+Description                 String
+Disabled                    Boolean
+EffectAction                String
+Id                          String
+MfaRequired                 Boolean
+Name                        String
+TargetResources             JumpCloud.SDK.V2.Models.AuthnPolicyResourceTarget[]
+Type                        String
+UserAttributeExclusions     JumpCloud.SDK.V2.Models.AuthnPolicyUserAttributeFilter[]
+UserAttributeInclusions     JumpCloud.SDK.V2.Models.AuthnPolicyUserAttributeFilter[]
+UserGroupExclusions         String
+UserGroupInclusions         String
+UserInclusions              String
+UserVerificationRequirement String
+
+
 
 .Inputs
 JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity

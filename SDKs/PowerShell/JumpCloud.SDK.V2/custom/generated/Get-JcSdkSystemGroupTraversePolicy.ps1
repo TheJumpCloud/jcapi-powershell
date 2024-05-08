@@ -40,9 +40,17 @@ curl -X GET https://console.jumpcloud.com/api/v2/systemgroups/{GroupID}/policies
   -H 'x-api-key: {API_KEY}'
 ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemGroupTraversePolicy -GroupId:(<string>)
 
-{{ Add output here }}
+
+
+----               ----------
+CompiledAttributes JumpCloud.SDK.V2.Models.GraphAttributes
+Id                 String
+Paths              JumpCloud.SDK.V2.Models.GraphConnection[][]
+Type               String
+
+
 .Example
 PS C:\> {{ Add code here }}
 

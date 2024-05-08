@@ -142,13 +142,25 @@ curl -X POST https://console.jumpcloud.com/api/search/commands \\
 }'
 ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Search-JcSdkCommand -Body:(<JumpCloud.SDK.V1.Models.Search>)
 
-{{ Add output here }}
+
+
+----       ----------
+Results    JumpCloud.SDK.V1.Models.CommandslistResultsItem[]
+TotalCount Int
+
+
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Search-JcSdkCommand -Fields:(<string>) -Filter:(<hashtable>) -SearchFilter:(<hashtable>)
 
-{{ Add output here }}
+
+
+----       ----------
+Results    JumpCloud.SDK.V1.Models.CommandslistResultsItem[]
+TotalCount Int
+
+
 
 .Inputs
 JumpCloud.SDK.V1.Models.ISearch

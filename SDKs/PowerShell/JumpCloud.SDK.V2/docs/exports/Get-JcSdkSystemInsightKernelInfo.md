@@ -23,10 +23,16 @@ Valid filter fields are `system_id` and `version`.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkSystemInsightKernelInfo
 ```
 
-{{ Add output here }}
+----           ----------
+Arguments      String
+CollectionTime String
+Device         String
+Path           String
+SystemId       String
+Version        String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

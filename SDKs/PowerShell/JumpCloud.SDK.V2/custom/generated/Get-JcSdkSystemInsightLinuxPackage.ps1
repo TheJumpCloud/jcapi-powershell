@@ -12,9 +12,25 @@ For windows devices, use [List System Insights System Apps](#operation/systemins
 
 Valid filter fields are `name` and `package_format`.
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemInsightLinuxPackage
 
-{{ Add output here }}
+
+
+----                  ----------
+Arch                  String
+InstallTime           Int
+MaintainerOrVendor    String
+MountNamespaceId      String
+Name                  String
+PackageFormat         String
+PackageGroupOrSection String
+PidWithNamespace      Int
+ReleaseOrRevision     String
+Size                  String
+SystemId              String
+Version               String
+
+
 .Example
 PS C:\> {{ Add code here }}
 

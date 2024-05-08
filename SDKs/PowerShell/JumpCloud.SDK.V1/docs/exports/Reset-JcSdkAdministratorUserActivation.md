@@ -29,10 +29,10 @@ This endpoint triggers the sending of a reactivation e-mail to an administrator.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Reset-JcSdkAdministratorUserActivation -Id:(<string>)
 ```
 
-{{ Add output here }}
+
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

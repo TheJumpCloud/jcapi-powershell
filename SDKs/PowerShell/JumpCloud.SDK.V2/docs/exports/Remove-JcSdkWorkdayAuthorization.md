@@ -46,10 +46,10 @@ curl -X DELETE https://console.jumpcloud.com/api/v2/workdays/{WorkDayID}/auth \\
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Remove-JcSdkWorkdayAuthorization -WorkdayId:(<string>)
 ```
 
-{{ Add output here }}
+
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

@@ -120,10 +120,10 @@ curl -X POST https://console.jumpcloud.com/api/v2/bulk/users \\
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+New-JcSdkBulkUser
 ```
 
-{{ Add output here }}
+
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

@@ -4,9 +4,24 @@ The only valid filter field is `system_id`.
 .Description
 The only valid filter field is `system_id`.
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemInsightConnectivity
 
-{{ Add output here }}
+
+
+----             ----------
+CollectionTime   String
+Disconnected     Int
+Ipv4Internet     Int
+Ipv4LocalNetwork Int
+Ipv4NoTraffic    Int
+Ipv4Subnet       Int
+Ipv6Internet     Int
+Ipv6LocalNetwork Int
+Ipv6NoTraffic    Int
+Ipv6Subnet       Int
+SystemId         String
+
+
 .Example
 PS C:\> {{ Add code here }}
 

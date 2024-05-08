@@ -23,10 +23,16 @@ Valid filter fields are `system_id`.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkSystemInsightUserAssist
 ```
 
-{{ Add output here }}
+----              ----------
+CollectionTime    String
+Count             System.Nullable[float] Count {get;set;}
+LastExecutionTime System.Nullable[float] LastExecutionTime {get;set;}
+Path              String
+Sid               String
+SystemId          String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

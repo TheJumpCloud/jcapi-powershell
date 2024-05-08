@@ -20,9 +20,17 @@ curl -X DELETE https://console.jumpcloud.com/api/v2/iplists/{id} \\
   -H 'x-api-key: {API_KEY}'
 ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Remove-JcSdkIPList -Id:(<string>)
 
-{{ Add output here }}
+
+
+----        ----------
+Description String
+Id          String
+Ips         String
+Name        String
+
+
 .Example
 PS C:\> {{ Add code here }}
 

@@ -36,9 +36,17 @@ curl -X GET https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID}/users
   -H 'x-api-key: {API_KEY}'
 ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkOffice365TraverseUser -Office365Id:(<string>)
 
-{{ Add output here }}
+
+
+----               ----------
+CompiledAttributes JumpCloud.SDK.V2.Models.GraphAttributes
+Id                 String
+Paths              JumpCloud.SDK.V2.Models.GraphConnection[][]
+Type               String
+
+
 .Example
 PS C:\> {{ Add code here }}
 

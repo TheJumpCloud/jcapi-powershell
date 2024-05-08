@@ -22,9 +22,9 @@ Clears the activation lock on the specified device.
   -d '{}'
 ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Clear-JcSdkAppleMdmDeviceActivationLock -AppleMdmId:(<string>) -DeviceId:(<string>)
 
-{{ Add output here }}
+
 .Example
 PS C:\> {{ Add code here }}
 

@@ -37,10 +37,14 @@ curl -X GET \"https://console.jumpcloud.com/api/v2/bulk/userstates\" \\
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkBulkUserState
 ```
 
-{{ Add output here }}
+----           ----------
+ScheduledDate  String
+ScheduledJobId String
+State          String
+SystemUserId   String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

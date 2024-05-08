@@ -20,13 +20,29 @@ This endpoint returns a specific Duo application that is associated with the spe
   -H 'x-api-key: {API_KEY}'
 ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkDuoApplication -AccountId:(<string>)
 
-{{ Add output here }}
+
+
+----           ----------
+ApiHost        String
+Id             String
+IntegrationKey String
+Name           String
+
+
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkDuoApplication -AccountId:(<string>) -ApplicationId:(<string>)
 
-{{ Add output here }}
+
+
+----           ----------
+ApiHost        String
+Id             String
+IntegrationKey String
+Name           String
+
+
 
 .Inputs
 JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity

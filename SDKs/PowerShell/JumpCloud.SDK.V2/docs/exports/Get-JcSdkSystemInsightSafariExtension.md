@@ -23,10 +23,22 @@ Valid filter fields are `system_id` and `name`.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkSystemInsightSafariExtension
 ```
 
-{{ Add output here }}
+----           ----------
+Author         String
+CollectionTime String
+Description    String
+DeveloperId    String
+Identifier     String
+Name           String
+Path           String
+Sdk            String
+SystemId       String
+Uid            String
+UpdateUrl      String
+Version        String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

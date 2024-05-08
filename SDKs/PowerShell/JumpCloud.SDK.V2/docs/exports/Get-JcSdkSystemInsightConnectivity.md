@@ -23,10 +23,21 @@ The only valid filter field is `system_id`.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkSystemInsightConnectivity
 ```
 
-{{ Add output here }}
+----             ----------
+CollectionTime   String
+Disconnected     Int
+Ipv4Internet     Int
+Ipv4LocalNetwork Int
+Ipv4NoTraffic    Int
+Ipv4Subnet       Int
+Ipv6Internet     Int
+Ipv6LocalNetwork Int
+Ipv6NoTraffic    Int
+Ipv6Subnet       Int
+SystemId         String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

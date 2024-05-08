@@ -50,17 +50,41 @@ This endpoint returns a specific policy template.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkPolicyTemplate -Fields:(<string[]>) -Filter:(<string[]>) -Sort:(<string[]>)
 ```
 
-{{ Add output here }}
+----           ----------
+Activation     String
+Alert          String
+Behavior       String
+DeliveryTypes  String
+Description    String
+DisplayName    String
+Id             String
+Name           String
+OSMetaFamily   String
+OSRestrictions JumpCloud.SDK.V2.Models.OSRestriction[]
+Reference      String
+State          String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkPolicyTemplate -Id:(<string>)
 ```
 
-{{ Add output here }}
+----           ----------
+Activation     String
+Alert          String
+Behavior       String
+DeliveryTypes  String
+Description    String
+DisplayName    String
+Id             String
+Name           String
+OSMetaFamily   String
+OSRestrictions JumpCloud.SDK.V2.Models.OSRestriction[]
+Reference      String
+State          String
 
 ## PARAMETERS
 

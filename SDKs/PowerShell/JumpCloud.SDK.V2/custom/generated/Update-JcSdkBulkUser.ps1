@@ -60,9 +60,9 @@ curl -X PATCH https://console.jumpcloud.com/api/v2/bulk/users \\
 ]
 ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Update-JcSdkBulkUser
 
-{{ Add output here }}
+
 .Example
 PS C:\> {{ Add code here }}
 

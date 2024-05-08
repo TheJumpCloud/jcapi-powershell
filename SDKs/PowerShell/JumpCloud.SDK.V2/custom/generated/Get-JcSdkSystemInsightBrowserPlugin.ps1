@@ -4,9 +4,25 @@ Valid filter fields are `system_id` and `name`.
 .Description
 Valid filter fields are `system_id` and `name`.
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemInsightBrowserPlugin
 
-{{ Add output here }}
+
+
+----              ----------
+CollectionTime    String
+Description       String
+DevelopmentRegion String
+Disabled          Int
+Identifier        String
+Name              String
+Native            Int
+Path              String
+Sdk               String
+SystemId          String
+Uid               String
+Version           String
+
+
 .Example
 PS C:\> {{ Add code here }}
 

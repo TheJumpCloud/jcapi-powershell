@@ -63,17 +63,17 @@ Restarts a DEP-enrolled device.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Restart-JcSdkAppleMdmDevice -AppleMdmId:(<string>) -DeviceId:(<string>) -Body:(<JumpCloud.SDK.V2.Models.Paths1Whnyt3ApplemdmsAppleMdmIdDevicesDeviceIdRestartPostRequestbodyContentApplicationJsonSchema>)
 ```
 
-{{ Add output here }}
+
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell
-{{ Add code here }}
+Restart-JcSdkAppleMdmDevice -AppleMdmId:(<string>) -DeviceId:(<string>) -KextPaths:(<string[]>)
 ```
 
-{{ Add output here }}
+
 
 ## PARAMETERS
 

@@ -23,10 +23,19 @@ Valid filter fields are `system_id` and `global_state`.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkSystemInsightAlf
 ```
 
-{{ Add output here }}
+----               ----------
+AllowSignedEnabled Int
+CollectionTime     String
+FirewallUnload     Int
+GlobalState        Int
+LoggingEnabled     Int
+LoggingOption      Int
+StealthEnabled     Int
+SystemId           String
+Version            String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

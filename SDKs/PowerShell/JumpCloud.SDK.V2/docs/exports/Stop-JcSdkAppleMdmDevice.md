@@ -49,10 +49,10 @@ Shuts down a DEP-enrolled device.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Stop-JcSdkAppleMdmDevice -AppleMdmId:(<string>) -DeviceId:(<string>)
 ```
 
-{{ Add output here }}
+
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

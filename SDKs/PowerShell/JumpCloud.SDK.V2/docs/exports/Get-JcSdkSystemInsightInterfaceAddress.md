@@ -23,10 +23,19 @@ Valid filter fields are `system_id` and `address`.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkSystemInsightInterfaceAddress
 ```
 
-{{ Add output here }}
+----           ----------
+Address        String
+Broadcast      String
+CollectionTime String
+FriendlyName   String
+Interface      String
+Mask           String
+PointToPoint   String
+SystemId       String
+Type           String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

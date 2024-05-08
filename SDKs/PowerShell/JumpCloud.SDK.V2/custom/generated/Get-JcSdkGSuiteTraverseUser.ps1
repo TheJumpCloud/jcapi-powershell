@@ -36,9 +36,17 @@ See `/members` and `/associations` endpoints to manage those collections.
   -H 'x-api-key: {API_KEY}'
 ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkGSuiteTraverseUser -GsuiteId:(<string>)
 
-{{ Add output here }}
+
+
+----               ----------
+CompiledAttributes JumpCloud.SDK.V2.Models.GraphAttributes
+Id                 String
+Paths              JumpCloud.SDK.V2.Models.GraphConnection[][]
+Type               String
+
+
 .Example
 PS C:\> {{ Add code here }}
 

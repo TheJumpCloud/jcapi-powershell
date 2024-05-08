@@ -23,10 +23,26 @@ Valid filter fields are `system_id` and `name`.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkSystemInsightFirefoxAddon
 ```
 
-{{ Add output here }}
+----           ----------
+Active         Int
+Autoupdate     Int
+CollectionTime String
+Creator        String
+Description    String
+Disabled       Int
+Identifier     String
+Location       String
+Name           String
+Path           String
+SourceUrl      String
+SystemId       String
+Type           String
+Uid            String
+Version        String
+Visible        Int
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

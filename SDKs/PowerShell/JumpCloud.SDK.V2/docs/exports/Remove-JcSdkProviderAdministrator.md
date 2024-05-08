@@ -33,10 +33,10 @@ You must be associated with the provider to use this route.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Remove-JcSdkProviderAdministrator -Id:(<string>) -ProviderId:(<string>)
 ```
 
-{{ Add output here }}
+
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

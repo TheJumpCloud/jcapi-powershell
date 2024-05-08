@@ -20,13 +20,25 @@ curl https://console.jumpcloud.com/api/v2/duo/accounts/{id} \\
   -H 'x-api-key: {API_KEY}'
 ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkDuoAccount
 
-{{ Add output here }}
+
+
+---- ----------
+Id   String
+Name String
+
+
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkDuoAccount -Id:(<string>)
 
-{{ Add output here }}
+
+
+---- ----------
+Id   String
+Name String
+
+
 
 .Inputs
 JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity

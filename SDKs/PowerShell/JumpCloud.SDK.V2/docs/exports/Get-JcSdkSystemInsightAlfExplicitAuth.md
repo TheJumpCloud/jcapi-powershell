@@ -23,10 +23,13 @@ Valid filter fields are `system_id` and `process`.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkSystemInsightAlfExplicitAuth
 ```
 
-{{ Add output here }}
+----           ----------
+CollectionTime String
+Process        String
+SystemId       String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

@@ -22,13 +22,25 @@ curl -X POST https://console.jumpcloud.com/api/runCommand \\
   -d '{\"_id\":\"{commandID}\", \"systemIds\":[\"systemId\"]}'
 ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Start-JcSdkCommand -Body:(<JumpCloud.SDK.V1.Models.PathsPnxbyeRuncommandPostRequestbodyContentApplicationJsonSchema>)
 
-{{ Add output here }}
+
+
+----               ----------
+QueueIds           String
+WorkflowInstanceId String
+
+
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Start-JcSdkCommand -Id:(<string>) -SystemIds:(<string[]>)
 
-{{ Add output here }}
+
+
+----               ----------
+QueueIds           String
+WorkflowInstanceId String
+
+
 
 .Inputs
 JumpCloud.SDK.V1.Models.IPathsPnxbyeRuncommandPostRequestbodyContentApplicationJsonSchema

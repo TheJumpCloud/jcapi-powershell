@@ -23,10 +23,24 @@ Valid filter fields are `system_id` and `model`.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkSystemInsightUsbDevice
 ```
 
-{{ Add output here }}
+----           ----------
+Class          String
+CollectionTime String
+Model          String
+ModelId        String
+Protocol       String
+Removable      Int
+Serial         String
+Subclass       String
+SystemId       String
+UsbAddress     Int
+UsbPort        Int
+Vendor         String
+VendorId       String
+Version        String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

@@ -23,10 +23,22 @@ Valid filter fields are `system_id` and `username`.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkSystemInsightShadow
 ```
 
-{{ Add output here }}
+----           ----------
+CollectionTime String
+Expire         String
+Flag           String
+HashAlg        String
+Inactive       String
+LastChange     String
+Max            String
+Min            String
+PasswordStatus String
+SystemId       String
+Username       String
+Warning        String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

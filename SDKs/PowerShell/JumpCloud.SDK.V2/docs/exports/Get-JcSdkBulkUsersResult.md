@@ -47,10 +47,17 @@ curl -X GET \\
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkBulkUsersResult -JobId:(<string>)
 ```
 
-{{ Add output here }}
+----            ----------
+CreatedAt       String
+Id              String
+Meta            JumpCloud.SDK.V2.Models.JobWorkresultMeta
+PersistedFields JumpCloud.SDK.V2.Models.JobWorkresultPersistedFields
+Status          String
+StatusMsg       String
+UpdatedAt       String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

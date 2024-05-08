@@ -4,9 +4,16 @@ Lists Office 365 users available for import.
 .Description
 Lists Office 365 users available for import.
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkOffice365UsersToImport
 
-{{ Add output here }}
+
+
+----      ----------
+SkipToken String
+Top       Int
+Users     JumpCloud.SDK.V2.Models.Paths1Hu9JikOffice365SOffice365IdImportUsersGetResponses200ContentApplicationJsonSchemaPropertiesUsersItem…
+
+
 .Example
 PS C:\> {{ Add code here }}
 

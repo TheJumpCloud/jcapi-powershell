@@ -8,13 +8,45 @@ This endpoint allows you to create a provider administrator.
 You must be associated with the provider to use this route.
 You must provide either `role` or `roleName`.
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> New-JcSdkProviderAdministrator -ProviderId:(<string>) -Email:(<string>) -ApiKeyAllowed:(<switch>) -BindNoOrgs:(<switch>) -EnableMultiFactor:(<switch>) -Firstname:(<string>) -Lastname:(<string>) -Role:(<string>) -RoleName:(<string>)
 
-{{ Add output here }}
+
+
+----                    ----------
+ApiKeyAllowed           Boolean
+ApiKeySet               Boolean
+Email                   String
+EnableMultiFactor       Boolean
+Firstname               String
+Id                      String
+Lastname                String
+OrganizationAccessTotal System.Nullable[float] OrganizationAccessTotal {get;set;}
+Registered              Boolean
+Role                    String
+RoleName                String
+Suspended               Boolean
+
+
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> New-JcSdkProviderAdministrator -ProviderId:(<string>) -Body:(<JumpCloud.SDK.V2.Models.ProviderAdminReq>)
 
-{{ Add output here }}
+
+
+----                    ----------
+ApiKeyAllowed           Boolean
+ApiKeySet               Boolean
+Email                   String
+EnableMultiFactor       Boolean
+Firstname               String
+Id                      String
+Lastname                String
+OrganizationAccessTotal System.Nullable[float] OrganizationAccessTotal {get;set;}
+Registered              Boolean
+Role                    String
+RoleName                String
+Suspended               Boolean
+
+
 
 .Inputs
 JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity

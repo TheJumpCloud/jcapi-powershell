@@ -23,10 +23,22 @@ Valid filter fields are `system_id` and `version`.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkSystemInsightOSVersion
 ```
 
-{{ Add output here }}
+----           ----------
+Build          String
+Codename       String
+CollectionTime String
+InstallDate    String
+Major          Int
+Minor          Int
+Name           String
+Patch          Int
+Platform       String
+PlatformLike   String
+SystemId       String
+Version        String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

@@ -23,10 +23,23 @@ Valid filter fields are `system_id` and `disk_index`.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkSystemInsightDiskInfo
 ```
 
-{{ Add output here }}
+----           ----------
+CollectionTime String
+Description    String
+DiskIndex      Int
+DiskSize       String
+HardwareModel  String
+Id             String
+Manufacturer   String
+Name           String
+Partitions     Int
+PnpDeviceId    String
+Serial         String
+SystemId       String
+Type           String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

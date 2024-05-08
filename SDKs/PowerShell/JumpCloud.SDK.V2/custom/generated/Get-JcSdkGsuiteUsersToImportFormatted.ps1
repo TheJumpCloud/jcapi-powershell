@@ -4,9 +4,15 @@ Lists available G Suite users for import, translated to the Jumpcloud user schem
 .Description
 Lists available G Suite users for import, translated to the Jumpcloud user schema.
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkGsuiteUsersToImportFormatted
 
-{{ Add output here }}
+
+
+----          ----------
+NextPageToken String
+Users         JumpCloud.SDK.V2.Models.User[]
+
+
 .Example
 PS C:\> {{ Add code here }}
 

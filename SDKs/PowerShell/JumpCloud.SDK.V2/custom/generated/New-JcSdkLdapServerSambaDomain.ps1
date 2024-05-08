@@ -28,13 +28,27 @@ curl -X POST https://console.jumpcloud.com/api/v2/ldapservers/{LDAP_ID}/sambadom
   }'
 ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> New-JcSdkLdapServerSambaDomain -LdapserverId:(<string>) -Name:(<string>) -Sid:(<string>)
 
-{{ Add output here }}
+
+
+---- ----------
+Id   String
+Name String
+Sid  String
+
+
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> New-JcSdkLdapServerSambaDomain -LdapserverId:(<string>) -Body:(<JumpCloud.SDK.V2.Models.SambaDomain>)
 
-{{ Add output here }}
+
+
+---- ----------
+Id   String
+Name String
+Sid  String
+
+
 
 .Inputs
 JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity

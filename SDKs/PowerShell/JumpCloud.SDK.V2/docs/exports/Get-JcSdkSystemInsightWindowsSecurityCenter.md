@@ -23,10 +23,19 @@ Valid filter fields are `system_id`.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkSystemInsightWindowsSecurityCenter
 ```
 
-{{ Add output here }}
+----                         ----------
+Antispyware                  String
+Antivirus                    String
+Autoupdate                   String
+CollectionTime               String
+Firewall                     String
+InternetSettings             String
+SystemId                     String
+UserAccountControl           String
+WindowsSecurityCenterService String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

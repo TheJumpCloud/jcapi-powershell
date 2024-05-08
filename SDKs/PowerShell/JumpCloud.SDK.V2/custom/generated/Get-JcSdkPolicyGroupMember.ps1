@@ -22,13 +22,35 @@ curl -X GET https://console.jumpcloud.com/api/v2/policies/{Policy_ID}/memberof \
 
 ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkPolicyGroupMember -PolicyId:(<string>) -Filter:(<string[]>) -Sort:(<string[]>) -Authorization:(<string>) -Date:(<string>)
 
-{{ Add output here }}
+
+
+----           ----------
+Attributes     JumpCloud.SDK.V2.Models.GraphAttributes
+FromAttributes JumpCloud.SDK.V2.Models.GraphAttributes
+FromId         String
+FromType       String
+ToAttributes   JumpCloud.SDK.V2.Models.GraphAttributes
+ToId           String
+ToType         String
+
+
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkPolicyGroupMember -GroupId:(<string>)
 
-{{ Add output here }}
+
+
+----           ----------
+Attributes     JumpCloud.SDK.V2.Models.GraphAttributes
+FromAttributes JumpCloud.SDK.V2.Models.GraphAttributes
+FromId         String
+FromType       String
+ToAttributes   JumpCloud.SDK.V2.Models.GraphAttributes
+ToId           String
+ToType         String
+
+
 
 .Inputs
 JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity

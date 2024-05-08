@@ -50,17 +50,25 @@ This endpoint returns a specific Duo application that is associated with the spe
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkDuoApplication -AccountId:(<string>)
 ```
 
-{{ Add output here }}
+----           ----------
+ApiHost        String
+Id             String
+IntegrationKey String
+Name           String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkDuoApplication -AccountId:(<string>) -ApplicationId:(<string>)
 ```
 
-{{ Add output here }}
+----           ----------
+ApiHost        String
+Id             String
+IntegrationKey String
+Name           String
 
 ## PARAMETERS
 

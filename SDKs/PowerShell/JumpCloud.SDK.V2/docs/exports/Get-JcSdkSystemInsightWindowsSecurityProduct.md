@@ -23,10 +23,18 @@ Valid filter fields are `system_id` and `state`.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkSystemInsightWindowsSecurityProduct
 ```
 
-{{ Add output here }}
+----               ----------
+CollectionTime     String
+Name               String
+RemediationPath    String
+SignaturesUpToDate System.Nullable[float] SignaturesUpToDate {get;set;}
+State              String
+StateTimestamp     String
+SystemId           String
+Type               String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

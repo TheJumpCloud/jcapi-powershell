@@ -32,13 +32,29 @@ Updates the specified Duo application.
   }'
 ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Set-JcSdkDuoApplication -AccountId:(<string>) -ApplicationId:(<string>) -Body:(<JumpCloud.SDK.V2.Models.DuoApplicationUpdateReq>)
 
-{{ Add output here }}
+
+
+----           ----------
+ApiHost        String
+Id             String
+IntegrationKey String
+Name           String
+
+
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Set-JcSdkDuoApplication -AccountId:(<string>) -ApplicationId:(<string>) -ApiHost:(<string>) -IntegrationKey:(<string>) -Name:(<string>) -SecretKey:(<string>)
 
-{{ Add output here }}
+
+
+----           ----------
+ApiHost        String
+Id             String
+IntegrationKey String
+Name           String
+
+
 
 .Inputs
 JumpCloud.SDK.V2.Models.IDuoApplicationUpdateReq

@@ -4,9 +4,26 @@ Valid filter fields are `system_id` and `disk_index`.
 .Description
 Valid filter fields are `system_id` and `disk_index`.
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemInsightDiskInfo
 
-{{ Add output here }}
+
+
+----           ----------
+CollectionTime String
+Description    String
+DiskIndex      Int
+DiskSize       String
+HardwareModel  String
+Id             String
+Manufacturer   String
+Name           String
+Partitions     Int
+PnpDeviceId    String
+Serial         String
+SystemId       String
+Type           String
+
+
 .Example
 PS C:\> {{ Add code here }}
 

@@ -62,17 +62,25 @@ curl -X POST https://console.jumpcloud.com/api/v2/iplists \\
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+New-JcSdkIPList -Description:(<string>) -Ips:(<string[]>) -Name:(<string>)
 ```
 
-{{ Add output here }}
+----        ----------
+Description String
+Id          String
+Ips         String
+Name        String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell
-{{ Add code here }}
+New-JcSdkIPList -Body:(<JumpCloud.SDK.V2.Models.IPListRequest>)
 ```
 
-{{ Add output here }}
+----        ----------
+Description String
+Id          String
+Ips         String
+Name        String
 
 ## PARAMETERS
 

@@ -22,9 +22,24 @@ This endpoint returns all policy results for an organization.
   -H 'x-api-key: {API_KEY}'
   ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkOrganizationPolicyResult
 
-{{ Add output here }}
+
+
+----       ----------
+Detail     String
+EndedAt    Datetime
+ExitStatus System.Nullable[long] ExitStatus {get;set;}
+Id         String
+PolicyId   String
+StartedAt  Datetime
+State      String
+StdErr     String
+StdOut     String
+Success    Boolean
+SystemId   String
+
+
 .Example
 PS C:\> {{ Add code here }}
 

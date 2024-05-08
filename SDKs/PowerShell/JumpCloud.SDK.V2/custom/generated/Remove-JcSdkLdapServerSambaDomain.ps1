@@ -20,9 +20,9 @@ curl -X DELETE https://console.jumpcloud.com/api/v2/ldapservers/{LDAP_ID}/sambad
   -H 'x-api-key: {API_KEY}'
 ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Remove-JcSdkLdapServerSambaDomain -Id:(<string>) -LdapserverId:(<string>)
 
-{{ Add output here }}
+
 .Example
 PS C:\> {{ Add code here }}
 

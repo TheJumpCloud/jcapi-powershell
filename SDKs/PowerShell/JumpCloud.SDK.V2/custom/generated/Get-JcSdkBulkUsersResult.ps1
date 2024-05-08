@@ -22,9 +22,20 @@ curl -X GET \\
   -H 'x-api-key: {API_KEY}'
   ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkBulkUsersResult -JobId:(<string>)
 
-{{ Add output here }}
+
+
+----            ----------
+CreatedAt       String
+Id              String
+Meta            JumpCloud.SDK.V2.Models.JobWorkresultMeta
+PersistedFields JumpCloud.SDK.V2.Models.JobWorkresultPersistedFields
+Status          String
+StatusMsg       String
+UpdatedAt       String
+
+
 .Example
 PS C:\> {{ Add code here }}
 

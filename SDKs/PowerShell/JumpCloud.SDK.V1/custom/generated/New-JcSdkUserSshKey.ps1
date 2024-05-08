@@ -4,13 +4,29 @@ This endpoint will create a specific System User's Public SSH Key.
 .Description
 This endpoint will create a specific System User's Public SSH Key.
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> New-JcSdkUserSshKey -Id:(<string>) -Name:(<string>) -PublicKey:(<string>)
 
-{{ Add output here }}
+
+
+----       ----------
+CreateDate String
+Id         String
+Name       String
+PublicKey  String
+
+
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> New-JcSdkUserSshKey -Id:(<string>) -Body:(<JumpCloud.SDK.V1.Models.Sshkeypost>)
 
-{{ Add output here }}
+
+
+----       ----------
+CreateDate String
+Id         String
+Name       String
+PublicKey  String
+
+
 
 .Inputs
 JumpCloud.SDK.V1.Models.IJumpCloudApiIdentity

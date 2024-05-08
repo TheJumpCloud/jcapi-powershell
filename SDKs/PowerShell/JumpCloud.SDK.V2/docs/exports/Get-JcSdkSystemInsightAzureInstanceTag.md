@@ -23,10 +23,15 @@ Valid filter fields are `system_id`.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkSystemInsightAzureInstanceTag
 ```
 
-{{ Add output here }}
+----           ----------
+CollectionTime String
+Key            String
+SystemId       String
+Value          String
+VMId           String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

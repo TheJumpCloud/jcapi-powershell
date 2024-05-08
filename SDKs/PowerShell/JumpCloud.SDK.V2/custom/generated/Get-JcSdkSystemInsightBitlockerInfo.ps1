@@ -4,9 +4,21 @@ Valid filter fields are `system_id` and `protection_status`.
 .Description
 Valid filter fields are `system_id` and `protection_status`.
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemInsightBitlockerInfo
 
-{{ Add output here }}
+
+
+----               ----------
+CollectionTime     String
+ConversionStatus   Int
+DeviceId           String
+DriveLetter        String
+EncryptionMethod   String
+PersistentVolumeId String
+ProtectionStatus   Int
+SystemId           String
+
+
 .Example
 PS C:\> {{ Add code here }}
 

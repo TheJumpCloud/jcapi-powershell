@@ -47,10 +47,18 @@ $ curl -X GET https://console.jumpcloud.com/api/v2/softwareapps/{software_app_id
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkSoftwareAppStatus -SoftwareAppId:(<string>)
 ```
 
-{{ Add output here }}
+----          ----------
+Code          Int
+Details       String
+Id            String
+SoftwareAppId String
+State         String
+SystemId      String
+Timestamp     String
+Version       String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

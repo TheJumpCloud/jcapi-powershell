@@ -31,10 +31,10 @@ This endpoint will delete a specific System User's SSH Key.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Remove-JcSdkUserSshKey -Id:(<string>) -SystemuserId:(<string>)
 ```
 
-{{ Add output here }}
+
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

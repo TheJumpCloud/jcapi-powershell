@@ -23,10 +23,23 @@ Valid filter fields are `system_id` and `path`.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkSystemInsightMount
 ```
 
-{{ Add output here }}
+----            ----------
+Blocks          String
+BlocksAvailable String
+BlocksFree      String
+BlocksSize      String
+CollectionTime  String
+Device          String
+DeviceAlias     String
+Flags           String
+Inodes          String
+InodesFree      String
+Path            String
+SystemId        String
+Type            String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

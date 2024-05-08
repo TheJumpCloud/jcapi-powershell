@@ -6,9 +6,9 @@ You must be associated with the provider to use this route.
 This endpoint removes an Administrator associated with the Provider.
 You must be associated with the provider to use this route.
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Remove-JcSdkProviderAdministrator -Id:(<string>) -ProviderId:(<string>)
 
-{{ Add output here }}
+
 .Example
 PS C:\> {{ Add code here }}
 

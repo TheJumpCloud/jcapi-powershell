@@ -29,10 +29,34 @@ The endpoint deletes an SSO / SAML Application.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Remove-JcSdkApplication -Id:(<string>)
 ```
 
-{{ Add output here }}
+----                       ----------
+Active                     Boolean
+Beta                       Boolean
+Color                      String
+Config                     JumpCloud.SDK.V1.Models.ApplicationConfig
+Created                    String
+DatabaseAttributes         JumpCloud.SDK.V1.Models.ApplicationDatabaseAttributesItem[]
+Description                String
+DisplayLabel               String
+DisplayName                String
+Id                         String
+LearnMore                  String
+LogoColor                  String
+LogoUrl                    String
+Name                       String
+Organization               String
+SsoBeta                    Boolean
+SsoHidden                  Boolean
+SsoIdpCertExpirationAt     Datetime
+SsoIdpCertificateUpdatedAt Datetime
+SsoIdpPrivateKeyUpdatedAt  Datetime
+SsoJit                     Boolean
+SsoSpCertificateUpdatedAt  Datetime
+SsoType                    String
+SsoUrl                     String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

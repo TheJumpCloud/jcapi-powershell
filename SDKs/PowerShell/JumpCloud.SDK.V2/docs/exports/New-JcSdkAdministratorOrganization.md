@@ -43,17 +43,21 @@ This endpoint allows you to grant Administrator access to an Organization.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+New-JcSdkAdministratorOrganization -Id:(<string>) -Organization:(<string>)
 ```
 
-{{ Add output here }}
+----          ----------
+Administrator String
+Organization  String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell
-{{ Add code here }}
+New-JcSdkAdministratorOrganization -Id:(<string>) -Body:(<JumpCloud.SDK.V2.Models.AdministratorOrganizationLinkReq>)
 ```
 
-{{ Add output here }}
+----          ----------
+Administrator String
+Organization  String
 
 ## PARAMETERS
 

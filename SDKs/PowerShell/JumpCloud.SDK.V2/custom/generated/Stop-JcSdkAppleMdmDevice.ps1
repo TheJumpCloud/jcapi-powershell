@@ -22,9 +22,9 @@ Shuts down a DEP-enrolled device.
   -d '{}'
 ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Stop-JcSdkAppleMdmDevice -AppleMdmId:(<string>) -DeviceId:(<string>)
 
-{{ Add output here }}
+
 .Example
 PS C:\> {{ Add code here }}
 

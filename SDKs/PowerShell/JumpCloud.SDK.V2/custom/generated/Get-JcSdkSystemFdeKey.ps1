@@ -4,9 +4,9 @@ This endpoint will return the current (latest) fde key saved for a system.
 .Description
 This endpoint will return the current (latest) fde key saved for a system.
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemFdeKey -SystemId:(<string>)
 
-{{ Add output here }}
+
 .Example
 PS C:\> {{ Add code here }}
 

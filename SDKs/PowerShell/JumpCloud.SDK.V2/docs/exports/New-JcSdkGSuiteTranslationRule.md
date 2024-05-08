@@ -67,17 +67,23 @@ curl -X POST https://console.jumpcloud.com/api/v2/gsuites/{gsuite_id}/translatio
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+New-JcSdkGSuiteTranslationRule -GsuiteId:(<string>) -BuiltIn:(<string>) -Direction:(<string>)
 ```
 
-{{ Add output here }}
+----      ----------
+BuiltIn   String
+Direction String
+Id        String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell
-{{ Add code here }}
+New-JcSdkGSuiteTranslationRule -GsuiteId:(<string>) -Body:(<JumpCloud.SDK.V2.Models.GSuiteTranslationRuleRequest>)
 ```
 
-{{ Add output here }}
+----      ----------
+BuiltIn   String
+Direction String
+Id        String
 
 ## PARAMETERS
 

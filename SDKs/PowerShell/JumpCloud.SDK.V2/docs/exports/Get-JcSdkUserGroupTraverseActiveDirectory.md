@@ -58,10 +58,14 @@ curl -X GET https://console.jumpcloud.com/api/v2/usergroups/{GroupID}/activedire
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkUserGroupTraverseActiveDirectory -GroupId:(<string>)
 ```
 
-{{ Add output here }}
+----               ----------
+CompiledAttributes JumpCloud.SDK.V2.Models.GraphAttributes
+Id                 String
+Paths              JumpCloud.SDK.V2.Models.GraphConnection[][]
+Type               String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

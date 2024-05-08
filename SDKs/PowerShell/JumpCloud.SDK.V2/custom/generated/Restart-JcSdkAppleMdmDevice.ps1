@@ -22,13 +22,13 @@ Restarts a DEP-enrolled device.
   -d '{\"kextPaths\": [\"Path1\", \"Path2\"]}'
 ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Restart-JcSdkAppleMdmDevice -AppleMdmId:(<string>) -DeviceId:(<string>) -Body:(<JumpCloud.SDK.V2.Models.Paths1Whnyt3ApplemdmsAppleMdmIdDevicesDeviceIdRestartPostRequestbodyContentApplicationJsonSchema>)
 
-{{ Add output here }}
+
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Restart-JcSdkAppleMdmDevice -AppleMdmId:(<string>) -DeviceId:(<string>) -KextPaths:(<string[]>)
 
-{{ Add output here }}
+
 
 .Inputs
 JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity

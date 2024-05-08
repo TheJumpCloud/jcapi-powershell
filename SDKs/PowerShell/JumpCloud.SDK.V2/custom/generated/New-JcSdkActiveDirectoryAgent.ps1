@@ -24,13 +24,35 @@ curl -X POST https://console.jumpcloud.com/api/v2/activedirectories/{activedirec
   -d '{ \"agent_type\":\"{SYNC}\" }'
 ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> New-JcSdkActiveDirectoryAgent -ActivedirectoryId:(<string>) -AgentType:(<string>)
 
-{{ Add output here }}
+
+
+----       ----------
+ConnectKey String
+ContactAt  String
+Hostname   String
+Id         String
+SourceIP   String
+State      String
+Version    String
+
+
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> New-JcSdkActiveDirectoryAgent -ActivedirectoryId:(<string>) -Body:(<JumpCloud.SDK.V2.Models.ActiveDirectoryAgent>)
 
-{{ Add output here }}
+
+
+----       ----------
+ConnectKey String
+ContactAt  String
+Hostname   String
+Id         String
+SourceIP   String
+State      String
+Version    String
+
+
 
 .Inputs
 JumpCloud.SDK.V2.Models.IActiveDirectoryAgent

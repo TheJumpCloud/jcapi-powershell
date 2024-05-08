@@ -23,10 +23,18 @@ Valid filter fields are `system_id` and `name`.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkSystemInsightPythonPackage
 ```
 
-{{ Add output here }}
+----      ----------
+Auther    String
+Directory String
+License   String
+Name      String
+Path      String
+Summary   String
+SystemId  String
+Version   String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

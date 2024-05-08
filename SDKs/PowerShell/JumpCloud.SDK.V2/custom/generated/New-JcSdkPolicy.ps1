@@ -28,13 +28,55 @@ curl -X POST https://console.jumpcloud.com/api/v2/policies \\
   }'
 ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> New-JcSdkPolicy -Name:(<string>) -TemplateId:(<string>) -Notes:(<string>) -Values:(<JumpCloud.SDK.V2.Models.PolicyValue[]>)
 
-{{ Add output here }}
+
+
+----                   ----------
+ConfigFields           JumpCloud.SDK.V2.Models.PolicyTemplateConfigField[]
+Id                     String
+Name                   String
+Notes                  String
+TemplateActivation     String
+TemplateAlert          String
+TemplateBehavior       String
+TemplateDeliveryTypes  String
+TemplateDescription    String
+TemplateDisplayName    String
+TemplateId             String
+TemplateName           String
+TemplateOSMetaFamily   String
+TemplateOSRestrictions JumpCloud.SDK.V2.Models.OSRestriction[]
+TemplateReference      String
+TemplateState          String
+Values                 JumpCloud.SDK.V2.Models.PolicyValue[]
+
+
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> New-JcSdkPolicy -Body:(<JumpCloud.SDK.V2.Models.PolicyCreateRequest>)
 
-{{ Add output here }}
+
+
+----                   ----------
+ConfigFields           JumpCloud.SDK.V2.Models.PolicyTemplateConfigField[]
+Id                     String
+Name                   String
+Notes                  String
+TemplateActivation     String
+TemplateAlert          String
+TemplateBehavior       String
+TemplateDeliveryTypes  String
+TemplateDescription    String
+TemplateDisplayName    String
+TemplateId             String
+TemplateName           String
+TemplateOSMetaFamily   String
+TemplateOSRestrictions JumpCloud.SDK.V2.Models.OSRestriction[]
+TemplateReference      String
+TemplateState          String
+Values                 JumpCloud.SDK.V2.Models.PolicyValue[]
+
+
 
 .Inputs
 JumpCloud.SDK.V2.Models.IPolicyCreateRequest

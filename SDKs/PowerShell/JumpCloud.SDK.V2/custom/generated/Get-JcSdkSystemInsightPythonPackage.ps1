@@ -4,9 +4,21 @@ Valid filter fields are `system_id` and `name`.
 .Description
 Valid filter fields are `system_id` and `name`.
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemInsightPythonPackage
 
-{{ Add output here }}
+
+
+----      ----------
+Auther    String
+Directory String
+License   String
+Name      String
+Path      String
+Summary   String
+SystemId  String
+Version   String
+
+
 .Example
 PS C:\> {{ Add code here }}
 

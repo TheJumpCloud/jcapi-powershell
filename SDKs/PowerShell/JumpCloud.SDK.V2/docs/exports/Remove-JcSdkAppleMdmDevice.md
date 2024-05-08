@@ -43,10 +43,36 @@ Remove a single Apple MDM device from MDM enrollment.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Remove-JcSdkAppleMdmDevice -AppleMdmId:(<string>) -DeviceId:(<string>)
 ```
 
-{{ Add output here }}
+----                                                  ----------
+CreatedAt                                             String
+DepRegistered                                         Boolean
+DeviceInformationActivationLockAllowedWhileSupervised Boolean
+DeviceInformationAvailableDeviceCapacity              System.Nullable[float] DeviceInformationAvailableDeviceCapacity {get;set;}
+DeviceInformationDeviceCapacity                       System.Nullable[float] DeviceInformationDeviceCapacity {get;set;}
+DeviceInformationDeviceName                           String
+DeviceInformationIccid                                String
+DeviceInformationImei                                 String
+DeviceInformationIsSupervised                         Boolean
+DeviceInformationModelName                            String
+DeviceInformationSecondIccid                          String
+DeviceInformationSecondImei                           String
+DeviceInformationSecondSubscriberCarrierNetwork       String
+DeviceInformationSubscriberCarrierNetwork             String
+DeviceInformationWifiMac                              String
+Enrolled                                              Boolean
+HasActivationLockBypassCodes                          Boolean
+Id                                                    String
+OSVersion                                             String
+SecurityInfoEnrolledViaDep                            Boolean
+SecurityInfoIsActivationLockManageable                Boolean
+SecurityInfoIsUserEnrollment                          Boolean
+SecurityInfoPasscodePresent                           Boolean
+SecurityInfoUserApprovedEnrollment                    Boolean
+SerialNumber                                          String
+Udid                                                  String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

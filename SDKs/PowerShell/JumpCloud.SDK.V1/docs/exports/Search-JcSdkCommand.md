@@ -168,17 +168,21 @@ curl -X POST https://console.jumpcloud.com/api/search/commands \\
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Search-JcSdkCommand -Body:(<JumpCloud.SDK.V1.Models.Search>)
 ```
 
-{{ Add output here }}
+----       ----------
+Results    JumpCloud.SDK.V1.Models.CommandslistResultsItem[]
+TotalCount Int
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell
-{{ Add code here }}
+Search-JcSdkCommand -Fields:(<string>) -Filter:(<hashtable>) -SearchFilter:(<hashtable>)
 ```
 
-{{ Add output here }}
+----       ----------
+Results    JumpCloud.SDK.V1.Models.CommandslistResultsItem[]
+TotalCount Int
 
 ## PARAMETERS
 

@@ -36,9 +36,26 @@ curl -X GET https://console.jumpcloud.com/api/v2/systemgroups/{GroupID}/commands
   -H 'x-api-key: {API_KEY}'
 ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemGroupTraverseCommand -GroupId:(<string>)
 
-{{ Add output here }}
+
+
+----               ----------
+Command            String
+CommandType        String
+CompiledAttributes JumpCloud.SDK.V2.Models.GraphAttributes
+Id                 String
+LaunchType         String
+Name               String
+Organization       String
+Paths              JumpCloud.SDK.V2.Models.GraphConnection[][]
+Schedule           String
+ScheduleRepeatType String
+Timeout            String
+TimeToLiveSeconds  Int
+Type               String
+
+
 .Example
 PS C:\> {{ Add code here }}
 

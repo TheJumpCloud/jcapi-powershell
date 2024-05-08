@@ -4,9 +4,9 @@ Delete the custom email configuration for the specified custom email type
 .Description
 Delete the custom email configuration for the specified custom email type
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Remove-JcSdkCustomEmailConfiguration -CustomEmailType:(<string>)
 
-{{ Add output here }}
+
 .Example
 PS C:\> {{ Add code here }}
 

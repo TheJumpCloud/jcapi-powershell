@@ -28,13 +28,27 @@ curl -X POST https://console.jumpcloud.com/api/v2/gsuites/{gsuite_id}/translatio
   }'
 ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> New-JcSdkGSuiteTranslationRule -GsuiteId:(<string>) -BuiltIn:(<string>) -Direction:(<string>)
 
-{{ Add output here }}
+
+
+----      ----------
+BuiltIn   String
+Direction String
+Id        String
+
+
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> New-JcSdkGSuiteTranslationRule -GsuiteId:(<string>) -Body:(<JumpCloud.SDK.V2.Models.GSuiteTranslationRuleRequest>)
 
-{{ Add output here }}
+
+
+----      ----------
+BuiltIn   String
+Direction String
+Id        String
+
+
 
 .Inputs
 JumpCloud.SDK.V2.Models.IGSuiteTranslationRuleRequest

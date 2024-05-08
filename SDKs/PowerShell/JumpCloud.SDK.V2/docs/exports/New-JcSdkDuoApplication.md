@@ -71,17 +71,25 @@ Creates a Duo application for your organization and the specified account.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+New-JcSdkDuoApplication -AccountId:(<string>) -ApiHost:(<string>) -IntegrationKey:(<string>) -Name:(<string>) -SecretKey:(<string>)
 ```
 
-{{ Add output here }}
+----           ----------
+ApiHost        String
+Id             String
+IntegrationKey String
+Name           String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell
-{{ Add code here }}
+New-JcSdkDuoApplication -AccountId:(<string>) -Body:(<JumpCloud.SDK.V2.Models.DuoApplicationReq>)
 ```
 
-{{ Add output here }}
+----           ----------
+ApiHost        String
+Id             String
+IntegrationKey String
+Name           String
 
 ## PARAMETERS
 

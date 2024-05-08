@@ -24,9 +24,9 @@ curl -X DELETE https://console.jumpcloud.com/api/v2/gsuites/{gsuite_id}/translat
   -H 'x-api-key: {API_KEY}'
   ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Remove-JcSdkGSuiteTranslationRule -GsuiteId:(<string>) -Id:(<string>)
 
-{{ Add output here }}
+
 .Example
 PS C:\> {{ Add code here }}
 

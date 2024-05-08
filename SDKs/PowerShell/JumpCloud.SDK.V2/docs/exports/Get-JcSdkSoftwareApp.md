@@ -52,17 +52,23 @@ curl -X GET https://console.jumpcloud.com/api/v2/softwareapps/{id} \\
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkSoftwareApp -Filter:(<string[]>) -Sort:(<string[]>)
 ```
 
-{{ Add output here }}
+----        ----------
+DisplayName String
+Id          String
+Settings    JumpCloud.SDK.V2.Models.SoftwareAppSettings[]
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkSoftwareApp -Id:(<string>)
 ```
 
-{{ Add output here }}
+----        ----------
+DisplayName String
+Id          String
+Settings    JumpCloud.SDK.V2.Models.SoftwareAppSettings[]
 
 ## PARAMETERS
 

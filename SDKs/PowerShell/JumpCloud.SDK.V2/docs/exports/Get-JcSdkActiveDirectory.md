@@ -52,17 +52,25 @@ curl -X GET https://console.jumpcloud.com/api/v2/activedirectories/{ActiveDirect
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkActiveDirectory -Fields:(<string[]>) -Filter:(<string[]>) -Sort:(<string[]>)
 ```
 
-{{ Add output here }}
+----         ----------
+Domain       String
+Id           String
+PrimaryAgent String
+UseCase      String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkActiveDirectory -Id:(<string>)
 ```
 
-{{ Add output here }}
+----         ----------
+Domain       String
+Id           String
+PrimaryAgent String
+UseCase      String
 
 ## PARAMETERS
 

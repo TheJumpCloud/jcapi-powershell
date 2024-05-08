@@ -20,9 +20,17 @@ $ curl -X POST https://console.jumpcloud.com/api/v2/softwareapps/{software_app_i
 -d '{}'
 ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Invoke-JcSdkReclaimSoftwareAppLicense -SoftwareAppId:(<string>)
 
-{{ Add output here }}
+
+
+----              ----------
+AssignedLicenses  Int
+AvailableLicenses Int
+ReclaimedLicenses Int
+TotalLicenses     Int
+
+
 .Example
 PS C:\> {{ Add code here }}
 

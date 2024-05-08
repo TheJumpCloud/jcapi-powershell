@@ -118,13 +118,27 @@ The optional isConfigEnabled and appConfiguration apple_vpp attributes are not i
   }'
 ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Set-JcSdkSoftwareApp -Id:(<string>) -Body:(<JumpCloud.SDK.V2.Models.SoftwareApp>)
 
-{{ Add output here }}
+
+
+----        ----------
+DisplayName String
+Id          String
+Settings    JumpCloud.SDK.V2.Models.SoftwareAppSettings[]
+
+
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Set-JcSdkSoftwareApp -Id:(<string>) -DisplayName:(<string>) -Id1:(<string>) -Settings:(<JumpCloud.SDK.V2.Models.SoftwareAppSettings[]>)
 
-{{ Add output here }}
+
+
+----        ----------
+DisplayName String
+Id          String
+Settings    JumpCloud.SDK.V2.Models.SoftwareAppSettings[]
+
+
 
 .Inputs
 JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity

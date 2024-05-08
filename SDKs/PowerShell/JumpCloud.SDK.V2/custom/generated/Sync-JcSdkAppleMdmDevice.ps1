@@ -22,9 +22,9 @@ Refreshes the list of devices that a JumpCloud admin has added to their virtual 
   -d '{}'
 ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Sync-JcSdkAppleMdmDevice -AppleMdmId:(<string>)
 
-{{ Add output here }}
+
 .Example
 PS C:\> {{ Add code here }}
 

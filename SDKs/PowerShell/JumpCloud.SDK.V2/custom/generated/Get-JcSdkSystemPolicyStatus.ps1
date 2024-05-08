@@ -24,9 +24,24 @@ curl -X GET https://console.jumpcloud.com/api/v2/systems/{System_ID}/policystatu
 
 ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemPolicyStatus
 
-{{ Add output here }}
+
+
+----       ----------
+Detail     String
+EndedAt    Datetime
+ExitStatus System.Nullable[long] ExitStatus {get;set;}
+Id         String
+PolicyId   String
+StartedAt  Datetime
+State      String
+StdErr     String
+StdOut     String
+Success    Boolean
+SystemId   String
+
+
 .Example
 PS C:\> {{ Add code here }}
 

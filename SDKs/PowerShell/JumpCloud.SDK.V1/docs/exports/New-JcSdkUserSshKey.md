@@ -41,17 +41,25 @@ This endpoint will create a specific System User's Public SSH Key.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+New-JcSdkUserSshKey -Id:(<string>) -Name:(<string>) -PublicKey:(<string>)
 ```
 
-{{ Add output here }}
+----       ----------
+CreateDate String
+Id         String
+Name       String
+PublicKey  String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell
-{{ Add code here }}
+New-JcSdkUserSshKey -Id:(<string>) -Body:(<JumpCloud.SDK.V1.Models.Sshkeypost>)
 ```
 
-{{ Add output here }}
+----       ----------
+CreateDate String
+Id         String
+Name       String
+PublicKey  String
 
 ## PARAMETERS
 

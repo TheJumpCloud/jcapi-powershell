@@ -52,17 +52,25 @@ This endpoint returns a specific LDAP server.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkLdapServer -Fields:(<string[]>) -Filter:(<string[]>) -Sort:(<string[]>)
 ```
 
-{{ Add output here }}
+----                         ----------
+Id                           String
+Name                         String
+UserLockoutAction            String
+UserPasswordExpirationAction String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkLdapServer -Id:(<string>)
 ```
 
-{{ Add output here }}
+----                         ----------
+Id                           String
+Name                         String
+UserLockoutAction            String
+UserPasswordExpirationAction String
 
 ## PARAMETERS
 

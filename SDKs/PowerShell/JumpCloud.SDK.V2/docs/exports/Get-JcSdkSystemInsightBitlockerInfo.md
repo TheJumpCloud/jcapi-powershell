@@ -23,10 +23,18 @@ Valid filter fields are `system_id` and `protection_status`.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkSystemInsightBitlockerInfo
 ```
 
-{{ Add output here }}
+----               ----------
+CollectionTime     String
+ConversionStatus   Int
+DeviceId           String
+DriveLetter        String
+EncryptionMethod   String
+PersistentVolumeId String
+ProtectionStatus   Int
+SystemId           String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

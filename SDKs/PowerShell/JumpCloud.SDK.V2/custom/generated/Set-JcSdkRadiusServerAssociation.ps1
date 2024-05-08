@@ -38,13 +38,13 @@ curl -X POST https://console.jumpcloud.com/api/v2/radiusservers/{RADIUS_ID}/asso
 }'
 ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Set-JcSdkRadiusServerAssociation -RadiusserverId:(<string>) -Body:(<JumpCloud.SDK.V2.Models.GraphOperationRadiusServer1>)
 
-{{ Add output here }}
+
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Set-JcSdkRadiusServerAssociation -RadiusserverId:(<string>) -Id:(<string>) -Op:(<string>) -Type:(<JumpCloud.SDK.V2.Support.GraphOperationRadiusServer>) -Attributes:(<hashtable>)
 
-{{ Add output here }}
+
 
 .Inputs
 JumpCloud.SDK.V2.Models.IGraphOperationRadiusServer1

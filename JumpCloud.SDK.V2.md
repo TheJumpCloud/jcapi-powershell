@@ -2,14 +2,14 @@
 Release Date: May 08, 2024
 #### RELEASE NOTES
 ```
-{{Fill in the Release Notes}}
+This release fixes the input models for the Update-JcSdkBulkUser and New-JcSdkBulkUser functions
 ```
 #### FEATURES:
-{{Fill in the Features}}
+NA
 #### IMPROVEMENTS:
-{{Fill in the Improvements}}
+NA
 #### BUG FIXES:
-{{Fill in the Bug Fixes}}
+Fixes the issue of not being able to set all SystemUser attributes via the Update-JcSdkBulkUser and New-JcSdkBulkUser functions
 #### Generated Changes:
 
 <details>
@@ -21,7 +21,10 @@ No changes
 <details>
 <summary>Functions Modified</summary>
 
-No changes
+* Import-JcSdkWorkday.ps1
+* New-JcSdkBulkUser.ps1
+* Update-JcSdkBulkUser.ps1
+
 </details>
 
 <details>

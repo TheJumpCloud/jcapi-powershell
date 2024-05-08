@@ -22,13 +22,27 @@ curl -X GET https://console.jumpcloud.com/api/v2/softwareapps/{id} \\
   -H 'x-api-key: {API_KEY}'
 ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSoftwareApp -Filter:(<string[]>) -Sort:(<string[]>)
 
-{{ Add output here }}
+
+
+----        ----------
+DisplayName String
+Id          String
+Settings    JumpCloud.SDK.V2.Models.SoftwareAppSettings[]
+
+
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSoftwareApp -Id:(<string>)
 
-{{ Add output here }}
+
+
+----        ----------
+DisplayName String
+Id          String
+Settings    JumpCloud.SDK.V2.Models.SoftwareAppSettings[]
+
+
 
 .Inputs
 JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity

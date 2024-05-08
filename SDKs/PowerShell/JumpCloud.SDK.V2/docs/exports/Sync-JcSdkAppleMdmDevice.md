@@ -48,10 +48,10 @@ Refreshes the list of devices that a JumpCloud admin has added to their virtual 
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Sync-JcSdkAppleMdmDevice -AppleMdmId:(<string>)
 ```
 
-{{ Add output here }}
+
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

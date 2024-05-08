@@ -61,10 +61,14 @@ curl -X GET https://console.jumpcloud.com/api/v2/policies/{Policy_ID}/systems \\
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkPolicyTraverseSystem -PolicyId:(<string>)
 ```
 
-{{ Add output here }}
+----               ----------
+CompiledAttributes JumpCloud.SDK.V2.Models.GraphAttributes
+Id                 String
+Paths              JumpCloud.SDK.V2.Models.GraphConnection[][]
+Type               String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

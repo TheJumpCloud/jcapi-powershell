@@ -72,10 +72,10 @@ curl -X POST https://console.jumpcloud.com/api/v2/workdays/{WorkdayID}/import \\
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Import-JcSdkWorkday -WorkdayId:(<string>)
 ```
 
-{{ Add output here }}
+
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

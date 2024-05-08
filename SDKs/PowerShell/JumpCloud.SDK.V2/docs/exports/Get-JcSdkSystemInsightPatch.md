@@ -23,10 +23,20 @@ Valid filter fields are `system_id` and `hotfix_id`.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkSystemInsightPatch
 ```
 
-{{ Add output here }}
+----           ----------
+Caption        String
+CollectionTime String
+Csname         String
+Description    String
+FixComments    String
+HotfixId       String
+InstallDate    String
+InstalledBy    String
+InstalledOn    String
+SystemId       String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

@@ -30,13 +30,13 @@ curl -X POST https://console.jumpcloud.com/api/v2/policygroups/{GroupID}/members
   }'
 ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Set-JcSdkPolicyGroupMember -GroupId:(<string>) -Body:(<JumpCloud.SDK.V2.Models.GraphOperationPolicyGroupMember>)
 
-{{ Add output here }}
+
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Set-JcSdkPolicyGroupMember -GroupId:(<string>) -Id:(<string>) -Op:(<string>) -Attributes:(<hashtable>)
 
-{{ Add output here }}
+
 
 .Inputs
 JumpCloud.SDK.V2.Models.IGraphOperationPolicyGroupMember

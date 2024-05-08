@@ -4,9 +4,17 @@ Only valid filter field is `system_id`.
 .Description
 Only valid filter field is `system_id`.
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemInsightUserGroup
 
-{{ Add output here }}
+
+
+----           ----------
+CollectionTime String
+Gid            String
+SystemId       String
+Uid            String
+
+
 .Example
 PS C:\> {{ Add code here }}
 

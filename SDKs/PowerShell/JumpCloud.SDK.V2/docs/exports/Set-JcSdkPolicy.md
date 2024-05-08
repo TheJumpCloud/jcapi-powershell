@@ -68,17 +68,45 @@ curl -X PUT https://console.jumpcloud.com/api/v2/policies/59fced45c9118022172547
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Set-JcSdkPolicy -Id:(<string>) -Body:(<JumpCloud.SDK.V2.Models.PolicyUpdateRequest>)
 ```
 
-{{ Add output here }}
+----                   ----------
+Id                     String
+Name                   String
+TemplateActivation     String
+TemplateAlert          String
+TemplateBehavior       String
+TemplateDeliveryTypes  String
+TemplateDescription    String
+TemplateDisplayName    String
+TemplateId             String
+TemplateName           String
+TemplateOSMetaFamily   String
+TemplateOSRestrictions JumpCloud.SDK.V2.Models.OSRestriction[]
+TemplateReference      String
+TemplateState          String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell
-{{ Add code here }}
+Set-JcSdkPolicy -Id:(<string>) -Name:(<string>) -Notes:(<string>) -Values:(<JumpCloud.SDK.V2.Models.PolicyValue[]>)
 ```
 
-{{ Add output here }}
+----                   ----------
+Id                     String
+Name                   String
+TemplateActivation     String
+TemplateAlert          String
+TemplateBehavior       String
+TemplateDeliveryTypes  String
+TemplateDescription    String
+TemplateDisplayName    String
+TemplateId             String
+TemplateName           String
+TemplateOSMetaFamily   String
+TemplateOSRestrictions JumpCloud.SDK.V2.Models.OSRestriction[]
+TemplateReference      String
+TemplateState          String
 
 ## PARAMETERS
 

@@ -24,9 +24,15 @@ However, if a
 user also has a SUSPENDED event scheduled along with the ACTIVATED events it will return the next
 upcoming activation event _and_ the next upcoming suspension event.
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkNextScheduledBulkUserState
 
-{{ Add output here }}
+
+
+----        ----------
+EventsCount Int
+Results     JumpCloud.SDK.V2.Models.ScheduledUserstateResult[]
+
+
 .Example
 PS C:\> {{ Add code here }}
 

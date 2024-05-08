@@ -4,9 +4,23 @@ Valid filter fields are `system_id` and `hotfix_id`.
 .Description
 Valid filter fields are `system_id` and `hotfix_id`.
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemInsightPatch
 
-{{ Add output here }}
+
+
+----           ----------
+Caption        String
+CollectionTime String
+Csname         String
+Description    String
+FixComments    String
+HotfixId       String
+InstallDate    String
+InstalledBy    String
+InstalledOn    String
+SystemId       String
+
+
 .Example
 PS C:\> {{ Add code here }}
 

@@ -75,17 +75,17 @@ curl -X POST \\
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Reset-JcSdkUserMfa -Id:(<string>) -Body:(<JumpCloud.SDK.V1.Models.PathsYhix24SystemusersIdResetmfaPostRequestbodyContentApplicationJsonSchema>)
 ```
 
-{{ Add output here }}
+
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell
-{{ Add code here }}
+Reset-JcSdkUserMfa -Id:(<string>) -Exclusion:(<switch>) -ExclusionDays:(<float>) -ExclusionUntil:(<datetime>)
 ```
 
-{{ Add output here }}
+
 
 ## PARAMETERS
 

@@ -45,10 +45,27 @@ curl -X DELETE https://console.jumpcloud.com/api/commandresults/{CommandID} \\
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Remove-JcSdkCommandResult -Id:(<string>)
 ```
 
-{{ Add output here }}
+----               ----------
+Command            String
+DataExitCode       Int
+DataOutput         String
+Files              String
+Id                 String
+Name               String
+Organization       String
+RequestTime        Datetime
+ResponseError      String
+ResponseId         String
+ResponseTime       Datetime
+Sudo               Boolean
+System             String
+SystemId           String
+User               String
+WorkflowId         String
+WorkflowInstanceId String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

@@ -26,9 +26,20 @@ A direct association can be a non-homogeneous relationship between 2 different o
   -H 'x-api-key: {API_KEY}'
 ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkLdapServerAssociation -LdapserverId:(<string>)
 
-{{ Add output here }}
+
+
+----           ----------
+Attributes     JumpCloud.SDK.V2.Models.GraphAttributes
+FromAttributes JumpCloud.SDK.V2.Models.GraphAttributes
+FromId         String
+FromType       String
+ToAttributes   JumpCloud.SDK.V2.Models.GraphAttributes
+ToId           String
+ToType         String
+
+
 .Example
 PS C:\> {{ Add code here }}
 

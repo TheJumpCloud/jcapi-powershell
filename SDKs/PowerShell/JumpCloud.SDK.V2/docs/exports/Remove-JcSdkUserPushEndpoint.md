@@ -30,10 +30,21 @@ This endpoint will delete a push endpoint associated with a user.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Remove-JcSdkUserPushEndpoint -PushEndpointId:(<string>) -UserId:(<string>)
 ```
 
-{{ Add output here }}
+----             ----------
+DeviceAppVersion String
+DeviceMake       String
+DeviceModel      String
+DeviceOS         String
+DeviceOSVersion  String
+DeviceUvEnabled  Boolean
+EnrollmentDate   Datetime
+Id               String
+LastUsedDate     Datetime
+Name             String
+State            String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

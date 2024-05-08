@@ -76,17 +76,17 @@ curl -X POST https://console.jumpcloud.com/api/v2/systemgroups/{GroupID}/associa
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Set-JcSdkSystemGroupAssociation -GroupId:(<string>) -Body:(<JumpCloud.SDK.V2.Models.GraphOperationSystemGroup>)
 ```
 
-{{ Add output here }}
+
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell
-{{ Add code here }}
+Set-JcSdkSystemGroupAssociation -GroupId:(<string>) -Id:(<string>) -Op:(<string>) -Type:(<JumpCloud.SDK.V2.Support.GraphOperationSystemGroup3>) -Attributes:(<hashtable>)
 ```
 
-{{ Add output here }}
+
 
 ## PARAMETERS
 

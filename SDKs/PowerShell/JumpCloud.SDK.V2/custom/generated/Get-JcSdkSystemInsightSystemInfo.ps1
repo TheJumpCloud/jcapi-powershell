@@ -4,9 +4,30 @@ Valid filter fields are `system_id` and `cpu_subtype`.
 .Description
 Valid filter fields are `system_id` and `cpu_subtype`.
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemInsightSystemInfo
 
-{{ Add output here }}
+
+
+----             ----------
+CollectionTime   String
+ComputerName     String
+CpuBrand         String
+CpuLogicalCores  Int
+CpuMicrocode     String
+CpuPhysicalCores Int
+CpuSubtype       String
+CpuType          String
+HardwareModel    String
+HardwareSerial   String
+HardwareVendor   String
+HardwareVersion  String
+Hostname         String
+LocalHostname    String
+PhysicalMemory   String
+SystemId         String
+Uuid             String
+
+
 .Example
 PS C:\> {{ Add code here }}
 

@@ -23,10 +23,20 @@ Valid filter fields are `system_id` and `type`.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkSystemInsightSharedResource
 ```
 
-{{ Add output here }}
+----           ----------
+AllowMaximum   Int
+CollectionTime String
+Description    String
+InstallDate    String
+MaximumAllowed String
+Name           String
+Path           String
+Status         String
+SystemId       String
+Type           String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

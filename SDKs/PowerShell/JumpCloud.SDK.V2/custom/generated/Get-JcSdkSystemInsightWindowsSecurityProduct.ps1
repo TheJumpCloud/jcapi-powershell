@@ -4,9 +4,21 @@ Valid filter fields are `system_id` and `state`.
 .Description
 Valid filter fields are `system_id` and `state`.
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemInsightWindowsSecurityProduct
 
-{{ Add output here }}
+
+
+----               ----------
+CollectionTime     String
+Name               String
+RemediationPath    String
+SignaturesUpToDate System.Nullable[float] SignaturesUpToDate {get;set;}
+State              String
+StateTimestamp     String
+SystemId           String
+Type               String
+
+
 .Example
 PS C:\> {{ Add code here }}
 

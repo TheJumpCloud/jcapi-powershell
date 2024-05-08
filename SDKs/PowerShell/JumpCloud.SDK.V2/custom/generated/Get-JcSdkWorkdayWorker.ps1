@@ -26,9 +26,18 @@ curl -X GET https://console.jumpcloud.com/api/v2/workdays/{WorkDayID}/workers \\
 
 ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkWorkdayWorker -WorkdayId:(<string>)
 
-{{ Add output here }}
+
+
+----       ----------
+Attributes JumpCloud.SDK.V2.Models.WorkdayWorkerAttributes
+Email      String
+FirstName  String
+LastName   String
+Username   String
+
+
 .Example
 PS C:\> {{ Add code here }}
 

@@ -23,10 +23,17 @@ Valid filter fields are `system_id` and `days`.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkSystemInsightUptime
 ```
 
-{{ Add output here }}
+----           ----------
+CollectionTime String
+Days           Int
+Hours          Int
+Minutes        Int
+Seconds        Int
+SystemId       String
+TotalSeconds   String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

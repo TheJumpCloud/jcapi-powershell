@@ -6,9 +6,15 @@ You must be associated with the provider to use this route.
 This endpoint returns a list of the Organizations associated with the Provider.
 You must be associated with the provider to use this route.
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkProviderOrganization
 
-{{ Add output here }}
+
+
+----       ----------
+Results    JumpCloud.SDK.V2.Models.Organization[]
+TotalCount Int
+
+
 .Example
 PS C:\> {{ Add code here }}
 

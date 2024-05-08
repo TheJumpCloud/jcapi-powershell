@@ -23,10 +23,22 @@ Valid filter fields are `system_id` and `name`.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkSystemInsightBrowserPlugin
 ```
 
-{{ Add output here }}
+----              ----------
+CollectionTime    String
+Description       String
+DevelopmentRegion String
+Disabled          Int
+Identifier        String
+Name              String
+Native            Int
+Path              String
+Sdk               String
+SystemId          String
+Uid               String
+Version           String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

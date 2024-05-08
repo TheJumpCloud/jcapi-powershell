@@ -4,9 +4,19 @@ Valid filter fields are `system_id`.
 .Description
 Valid filter fields are `system_id`.
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemInsightUserAssist
 
-{{ Add output here }}
+
+
+----              ----------
+CollectionTime    String
+Count             System.Nullable[float] Count {get;set;}
+LastExecutionTime System.Nullable[float] LastExecutionTime {get;set;}
+Path              String
+Sid               String
+SystemId          String
+
+
 .Example
 PS C:\> {{ Add code here }}
 

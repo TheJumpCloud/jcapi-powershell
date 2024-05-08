@@ -23,10 +23,14 @@ Valid filter fields are `system_id` and `address`.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkSystemInsightEtcHost
 ```
 
-{{ Add output here }}
+----           ----------
+Address        String
+CollectionTime String
+Hostnames      String
+SystemId       String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

@@ -23,10 +23,25 @@ Valid filter fields are `system_id`.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkSystemInsightChassisInfo
 ```
 
-{{ Add output here }}
+----              ----------
+AudibleAlarm      String
+BreachDescription String
+ChassisTypes      String
+CollectionTime    String
+Description       String
+Lock              String
+Manufacturer      String
+Model             String
+SecurityBreach    String
+Serial            String
+Sku               String
+SmbiosTag         String
+Status            String
+SystemId          String
+VisibleAlarm      String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

@@ -23,10 +23,30 @@ Valid filter fields are `system_id` and `health`.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkSystemInsightBattery
 ```
 
-{{ Add output here }}
+----                ----------
+Amperage            Int
+Charged             Int
+Charging            Int
+CollectionTime      String
+Condition           String
+CurrentCapacity     Int
+CycleCount          Int
+DesignedCapacity    Int
+Health              String
+ManufactureDate     Int
+Manufacturer        String
+MaxCapacity         Int
+MinutesToFullCharge Int
+MinutesUntilEmpty   Int
+Model               String
+PercentRemaining    Int
+SerialNumber        String
+State               String
+SystemId            String
+Voltage             Int
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

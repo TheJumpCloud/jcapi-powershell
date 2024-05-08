@@ -186,17 +186,21 @@ curl -X POST https://console.jumpcloud.com/api/search/systemusers \\
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Search-JcSdkUser -Body:(<JumpCloud.SDK.V1.Models.Search>)
 ```
 
-{{ Add output here }}
+----       ----------
+Results    JumpCloud.SDK.V1.Models.Systemuserreturn[]
+TotalCount Int
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell
-{{ Add code here }}
+Search-JcSdkUser -Fields:(<string>) -Filter:(<hashtable>) -SearchFilter:(<hashtable>)
 ```
 
-{{ Add output here }}
+----       ----------
+Results    JumpCloud.SDK.V1.Models.Systemuserreturn[]
+TotalCount Int
 
 ## PARAMETERS
 

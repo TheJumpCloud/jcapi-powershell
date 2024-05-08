@@ -4,9 +4,33 @@ Valid filter fields are `system_id` and `health`.
 .Description
 Valid filter fields are `system_id` and `health`.
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemInsightBattery
 
-{{ Add output here }}
+
+
+----                ----------
+Amperage            Int
+Charged             Int
+Charging            Int
+CollectionTime      String
+Condition           String
+CurrentCapacity     Int
+CycleCount          Int
+DesignedCapacity    Int
+Health              String
+ManufactureDate     Int
+Manufacturer        String
+MaxCapacity         Int
+MinutesToFullCharge Int
+MinutesUntilEmpty   Int
+Model               String
+PercentRemaining    Int
+SerialNumber        String
+State               String
+SystemId            String
+Voltage             Int
+
+
 .Example
 PS C:\> {{ Add code here }}
 

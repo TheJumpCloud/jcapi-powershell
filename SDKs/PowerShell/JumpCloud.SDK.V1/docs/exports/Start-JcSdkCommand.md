@@ -48,17 +48,21 @@ curl -X POST https://console.jumpcloud.com/api/runCommand \\
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Start-JcSdkCommand -Body:(<JumpCloud.SDK.V1.Models.PathsPnxbyeRuncommandPostRequestbodyContentApplicationJsonSchema>)
 ```
 
-{{ Add output here }}
+----               ----------
+QueueIds           String
+WorkflowInstanceId String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell
-{{ Add code here }}
+Start-JcSdkCommand -Id:(<string>) -SystemIds:(<string[]>)
 ```
 
-{{ Add output here }}
+----               ----------
+QueueIds           String
+WorkflowInstanceId String
 
 ## PARAMETERS
 

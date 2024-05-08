@@ -26,13 +26,33 @@ curl -X PUT https://console.jumpcloud.com/api/v2/policygroups/{Group_ID} \\
   }'
 ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Set-JcSdkPolicyGroup -Id:(<string>) -Body:(<JumpCloud.SDK.V2.Models.PolicyGroupData>)
 
-{{ Add output here }}
+
+
+----        ----------
+Attributes  JumpCloud.SDK.V2.Models.GraphAttributes
+Description String
+Email       String
+Id          String
+Name        String
+Type        String
+
+
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Set-JcSdkPolicyGroup -Id:(<string>) -Name:(<string>)
 
-{{ Add output here }}
+
+
+----        ----------
+Attributes  JumpCloud.SDK.V2.Models.GraphAttributes
+Description String
+Email       String
+Id          String
+Name        String
+Type        String
+
+
 
 .Inputs
 JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity

@@ -4,9 +4,24 @@ Valid filter fields are `system_id` and `enabled`.
 .Description
 Valid filter fields are `system_id` and `enabled`.
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemInsightScheduledTask
 
-{{ Add output here }}
+
+
+----           ----------
+Action         String
+Enabled        Int
+Hidden         Int
+LastRunCode    String
+LastRunMessage String
+LastRunTime    String
+Name           String
+NextRunTime    String
+Path           String
+State          String
+SystemId       String
+
+
 .Example
 PS C:\> {{ Add code here }}
 

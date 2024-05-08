@@ -50,17 +50,21 @@ curl https://console.jumpcloud.com/api/v2/duo/accounts/{id} \\
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkDuoAccount
 ```
 
-{{ Add output here }}
+---- ----------
+Id   String
+Name String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkDuoAccount -Id:(<string>)
 ```
 
-{{ Add output here }}
+---- ----------
+Id   String
+Name String
 
 ## PARAMETERS
 
