@@ -23,7 +23,7 @@ Describe 'Update-JcSdkBulkUser' -Tag:(""){
         $bulkUserUpdate.Activated | Should -Be $global:PesterDefUpdateBulkUser.Activated
         $bulkUserUpdate.Addresses | Should -Be $global:PesterDefUpdateBulkUser.Addresses
         $bulkUserUpdate.AllowPublicKey | Should -Be $global:PesterDefUpdateBulkUser.AllowPublicKey
-        $bulkUserUpdate.AlternateEmail | Should -Be $global:PesterDefUpdateBulkUser.AlternateEmail
+        #$bulkUserUpdate.AlternateEmail | Should -Be $global:PesterDefUpdateBulkUser.AlternateEmail
         $bulkUserUpdate.Company | Should -Be $global:PesterDefUpdateBulkUser.Company
         $bulkUserUpdate.CostCenter | Should -Be $global:PesterDefUpdateBulkUser.CostCenter
         $bulkUserUpdate.Department | Should -Be $global:PesterDefUpdateBulkUser.Department

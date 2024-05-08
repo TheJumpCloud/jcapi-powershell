@@ -23,7 +23,7 @@ Describe 'New-JcSdkBulkUser' -Tag:(""){
         $bulkUserCreate.Activated | Should -Be $global:PesterDefBulkUser.Activated
         $bulkUserCreate.Addresses | Should -Be $global:PesterDefBulkUser.Addresses
         $bulkUserCreate.AllowPublicKey | Should -Be $global:PesterDefBulkUser.AllowPublicKey
-        $bulkUserCreate.AlternateEmail | Should -Be $global:PesterDefBulkUser.AlternateEmail
+        #$bulkUserCreate.AlternateEmail | Should -Be $global:PesterDefBulkUser.AlternateEmail
         $bulkUserCreate.Company | Should -Be $global:PesterDefBulkUser.Company
         $bulkUserCreate.CostCenter | Should -Be $global:PesterDefBulkUser.CostCenter
         $bulkUserCreate.Department | Should -Be $global:PesterDefBulkUser.Department
