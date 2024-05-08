@@ -1,11 +1,21 @@
-### Example 1: {{ Add title here }}
+### Example 1: Get a Subscription by
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSubscription
 
-{{ Add output here }}
+
+
+----                  ----------
+AnnualPrice           float AnnualPrice {get;set;}
+DisplayName           String
+Features              JumpCloud.SDK.V2.Models.Feature[]
+ListPrice             float ListPrice {get;set;}
+ProductCode           String
+UpgradeRecommendation String
+
+
 ```
 
-{{ Add description here }}
+This function will Get a Subscription by .
 
 ### Example 2: {{ Add title here }}
 ```powershell

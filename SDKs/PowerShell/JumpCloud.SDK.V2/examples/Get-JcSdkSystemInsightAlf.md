@@ -1,11 +1,24 @@
-### Example 1: {{ Add title here }}
+### Example 1: List SystemInsightAlfs
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemInsightAlf
 
-{{ Add output here }}
+
+
+----               ----------
+AllowSignedEnabled Int
+CollectionTime     String
+FirewallUnload     Int
+GlobalState        Int
+LoggingEnabled     Int
+LoggingOption      Int
+StealthEnabled     Int
+SystemId           String
+Version            String
+
+
 ```
 
-{{ Add description here }}
+This function will return a list of all SystemInsightAlfs.
 
 ### Example 2: {{ Add title here }}
 ```powershell

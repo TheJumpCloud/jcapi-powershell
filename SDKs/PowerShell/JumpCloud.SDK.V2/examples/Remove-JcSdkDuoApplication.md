@@ -1,11 +1,19 @@
-### Example 1: {{ Add title here }}
+### Example 1: Remove a DuoApplication by AccountId, and ApplicationId
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Remove-JcSdkDuoApplication -AccountId:(<string>) -ApplicationId:(<string>)
 
-{{ Add output here }}
+
+
+----           ----------
+ApiHost        String
+Id             String
+IntegrationKey String
+Name           String
+
+
 ```
 
-{{ Add description here }}
+This function will Remove a DuoApplication by AccountId ApplicationId. AccountId, and ApplicationId are required parameters.
 
 ### Example 2: {{ Add title here }}
 ```powershell

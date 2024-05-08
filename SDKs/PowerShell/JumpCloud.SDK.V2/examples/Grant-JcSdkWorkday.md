@@ -1,18 +1,18 @@
-### Example 1: {{ Add title here }}
+### Example 1: Grant a Workday by WorkdayId
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Grant-JcSdkWorkday -WorkdayId:(<string>) -BasicPassword:(<string>) -BasicUsername:(<string>) -OauthCode:(<string>)
 
-{{ Add output here }}
+
 ```
 
-{{ Add description here }}
+This function will Grant a Workday by WorkdayId. WorkdayId is a required parameter.
 
-### Example 2: {{ Add title here }}
+### Example 2: Grant a Workday by WorkdayId, and Body
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Grant-JcSdkWorkday -WorkdayId:(<string>) -Body:(<JumpCloud.SDK.V2.Models.AuthInputObject>)
 
-{{ Add output here }}
+
 ```
 
-{{ Add description here }}
+This function will Grant a Workday by WorkdayId Body. WorkdayId, and Body are required parameters.
 

@@ -2619,6 +2619,9 @@
         "pendingDelete": {
           "type": "boolean"
         },
+        "requireAdminMFA": {
+          "type": "boolean"
+        },
         "showIntro": {
           "type": "boolean"
         },
@@ -3364,6 +3367,9 @@
         "hwVendor": {
           "type": "string"
         },
+        "isPolicyBound": {
+          "type": "boolean"
+        },
         "lastContact": {
           "format": "date-time",
           "type": "string",
@@ -3469,6 +3475,9 @@
               "type": "string"
             },
             "revision": {
+              "type": "string"
+            },
+            "version": {
               "type": "string"
             }
           },

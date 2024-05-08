@@ -1,11 +1,24 @@
-### Example 1: {{ Add title here }}
+### Example 1: List SystemInsightWindowsSecurityCenters
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemInsightWindowsSecurityCenter
 
-{{ Add output here }}
+
+
+----                         ----------
+Antispyware                  String
+Antivirus                    String
+Autoupdate                   String
+CollectionTime               String
+Firewall                     String
+InternetSettings             String
+SystemId                     String
+UserAccountControl           String
+WindowsSecurityCenterService String
+
+
 ```
 
-{{ Add description here }}
+This function will return a list of all SystemInsightWindowsSecurityCenters.
 
 ### Example 2: {{ Add title here }}
 ```powershell

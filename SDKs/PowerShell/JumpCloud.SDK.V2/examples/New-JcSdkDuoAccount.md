@@ -1,11 +1,17 @@
-### Example 1: {{ Add title here }}
+### Example 1: Create a DuoAccount by
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> New-JcSdkDuoAccount
 
-{{ Add output here }}
+
+
+---- ----------
+Id   String
+Name String
+
+
 ```
 
-{{ Add description here }}
+This function will Create a DuoAccount by .
 
 ### Example 2: {{ Add title here }}
 ```powershell

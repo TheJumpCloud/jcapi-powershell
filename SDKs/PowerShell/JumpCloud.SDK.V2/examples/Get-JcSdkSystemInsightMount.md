@@ -1,11 +1,28 @@
-### Example 1: {{ Add title here }}
+### Example 1: List SystemInsightMounts
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemInsightMount
 
-{{ Add output here }}
+
+
+----            ----------
+Blocks          String
+BlocksAvailable String
+BlocksFree      String
+BlocksSize      String
+CollectionTime  String
+Device          String
+DeviceAlias     String
+Flags           String
+Inodes          String
+InodesFree      String
+Path            String
+SystemId        String
+Type            String
+
+
 ```
 
-{{ Add description here }}
+This function will return a list of all SystemInsightMounts.
 
 ### Example 2: {{ Add title here }}
 ```powershell

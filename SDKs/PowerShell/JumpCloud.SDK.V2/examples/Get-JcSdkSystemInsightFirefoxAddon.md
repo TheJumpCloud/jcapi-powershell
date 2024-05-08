@@ -1,11 +1,31 @@
-### Example 1: {{ Add title here }}
+### Example 1: List SystemInsightFirefoxAddons
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemInsightFirefoxAddon
 
-{{ Add output here }}
+
+
+----           ----------
+Active         Int
+Autoupdate     Int
+CollectionTime String
+Creator        String
+Description    String
+Disabled       Int
+Identifier     String
+Location       String
+Name           String
+Path           String
+SourceUrl      String
+SystemId       String
+Type           String
+Uid            String
+Version        String
+Visible        Int
+
+
 ```
 
-{{ Add description here }}
+This function will return a list of all SystemInsightFirefoxAddons.
 
 ### Example 2: {{ Add title here }}
 ```powershell

@@ -1,11 +1,24 @@
-### Example 1: {{ Add title here }}
+### Example 1: List SystemInsightDiskEncryptions
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemInsightDiskEncryption
 
-{{ Add output here }}
+
+
+----             ----------
+CollectionTime   String
+Encrypted        Int
+EncryptionStatus String
+Name             String
+SystemId         String
+Type             String
+Uid              String
+UserUuid         String
+Uuid             String
+
+
 ```
 
-{{ Add description here }}
+This function will return a list of all SystemInsightDiskEncryptions.
 
 ### Example 2: {{ Add title here }}
 ```powershell

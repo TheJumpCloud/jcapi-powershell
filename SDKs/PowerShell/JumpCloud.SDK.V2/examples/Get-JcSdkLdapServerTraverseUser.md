@@ -1,11 +1,19 @@
-### Example 1: {{ Add title here }}
+### Example 1: Get a LdapServerTraverseUser by LdapserverId
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkLdapServerTraverseUser -LdapserverId:(<string>)
 
-{{ Add output here }}
+
+
+----               ----------
+CompiledAttributes JumpCloud.SDK.V2.Models.GraphAttributes
+Id                 String
+Paths              JumpCloud.SDK.V2.Models.GraphConnection[][]
+Type               String
+
+
 ```
 
-{{ Add description here }}
+This function will Get a LdapServerTraverseUser by LdapserverId. LdapserverId is a required parameter.
 
 ### Example 2: {{ Add title here }}
 ```powershell

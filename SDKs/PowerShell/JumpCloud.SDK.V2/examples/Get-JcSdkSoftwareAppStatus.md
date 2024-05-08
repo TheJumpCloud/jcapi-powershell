@@ -1,11 +1,23 @@
-### Example 1: {{ Add title here }}
+### Example 1: Get a SoftwareAppStatus by SoftwareAppId
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSoftwareAppStatus -SoftwareAppId:(<string>)
 
-{{ Add output here }}
+
+
+----          ----------
+Code          Int
+Details       String
+Id            String
+SoftwareAppId String
+State         String
+SystemId      String
+Timestamp     String
+Version       String
+
+
 ```
 
-{{ Add description here }}
+This function will Get a SoftwareAppStatus by SoftwareAppId. SoftwareAppId is a required parameter.
 
 ### Example 2: {{ Add title here }}
 ```powershell

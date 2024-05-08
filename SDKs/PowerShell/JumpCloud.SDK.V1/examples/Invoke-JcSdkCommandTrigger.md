@@ -1,11 +1,11 @@
-### Example 1: {{ Add title here }}
+### Example 1: Invoke a CommandTrigger by Triggername
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Invoke-JcSdkCommandTrigger -Triggername:(<string>)
 
-{{ Add output here }}
+
 ```
 
-{{ Add description here }}
+This function will Invoke a CommandTrigger by Triggername. Triggername is a required parameter.
 
 ### Example 2: {{ Add title here }}
 ```powershell

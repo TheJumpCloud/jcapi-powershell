@@ -1,18 +1,46 @@
-### Example 1: {{ Add title here }}
+### Example 1: List Workdays
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkWorkday -Fields:(<string[]>) -Filter:(<string[]>) -Sort:(<string[]>)
 
-{{ Add output here }}
+
+
+----         ----------
+BasicExpiry  String
+BasicIsValid Boolean
+BasicMessage String
+Id           String
+LastImport   String
+Name         String
+OauthExpiry  String
+OauthIsValid Boolean
+OauthMessage String
+ReportUrl    String
+
+
 ```
 
-{{ Add description here }}
+This function will return a list of all Workdays. Fields, Filter, and Sort are optional parameters.
 
-### Example 2: {{ Add title here }}
+### Example 2: Get a Workday by Id
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkWorkday -Id:(<string>)
 
-{{ Add output here }}
+
+
+----         ----------
+BasicExpiry  String
+BasicIsValid Boolean
+BasicMessage String
+Id           String
+LastImport   String
+Name         String
+OauthExpiry  String
+OauthIsValid Boolean
+OauthMessage String
+ReportUrl    String
+
+
 ```
 
-{{ Add description here }}
+This function will Get a Workday by Id. Id is a required parameter.
 

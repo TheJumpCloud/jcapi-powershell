@@ -1,11 +1,19 @@
-### Example 1: {{ Add title here }}
+### Example 1: List SystemInsightCupDestinations
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemInsightCupDestination
 
-{{ Add output here }}
+
+
+----        ----------
+Name        String
+OptionName  String
+OptionValue String
+SystemId    String
+
+
 ```
 
-{{ Add description here }}
+This function will return a list of all SystemInsightCupDestinations.
 
 ### Example 2: {{ Add title here }}
 ```powershell

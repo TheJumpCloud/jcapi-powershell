@@ -4585,6 +4585,9 @@
             <Label>Id</Label>
           </TableColumnHeader>
           <TableColumnHeader>
+            <Label>IsPolicyBound</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
             <Label>LastContact</Label>
           </TableColumnHeader>
           <TableColumnHeader>
@@ -4680,6 +4683,9 @@
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>Id</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>IsPolicyBound</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>LastContact</PropertyName>
@@ -4942,6 +4948,9 @@
           <TableColumnHeader>
             <Label>Revision</Label>
           </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Version</Label>
+          </TableColumnHeader>
         </TableHeaders>
         <TableRowEntries>
           <TableRowEntry>
@@ -4975,6 +4984,9 @@
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>Revision</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Version</PropertyName>
               </TableColumnItem>
             </TableColumnItems>
           </TableRowEntry>
@@ -5562,6 +5574,9 @@
             <Label>PendingDelete</Label>
           </TableColumnHeader>
           <TableColumnHeader>
+            <Label>RequireAdminMfa</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
             <Label>ShowIntro</Label>
           </TableColumnHeader>
           <TableColumnHeader>
@@ -5630,6 +5645,9 @@
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>PendingDelete</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>RequireAdminMfa</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>ShowIntro</PropertyName>

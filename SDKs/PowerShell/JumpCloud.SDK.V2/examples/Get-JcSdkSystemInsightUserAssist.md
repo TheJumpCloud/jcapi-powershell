@@ -1,11 +1,21 @@
-### Example 1: {{ Add title here }}
+### Example 1: List SystemInsightUserAssists
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemInsightUserAssist
 
-{{ Add output here }}
+
+
+----              ----------
+CollectionTime    String
+Count             System.Nullable[float] Count {get;set;}
+LastExecutionTime System.Nullable[float] LastExecutionTime {get;set;}
+Path              String
+Sid               String
+SystemId          String
+
+
 ```
 
-{{ Add description here }}
+This function will return a list of all SystemInsightUserAssists.
 
 ### Example 2: {{ Add title here }}
 ```powershell

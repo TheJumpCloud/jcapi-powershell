@@ -1,18 +1,48 @@
-### Example 1: {{ Add title here }}
+### Example 1: List UserPushEndpoints
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkUserPushEndpoint -UserId:(<string>)
 
-{{ Add output here }}
+
+
+----             ----------
+DeviceAppVersion String
+DeviceMake       String
+DeviceModel      String
+DeviceOS         String
+DeviceOSVersion  String
+DeviceUvEnabled  Boolean
+EnrollmentDate   Datetime
+Id               String
+LastUsedDate     Datetime
+Name             String
+State            String
+
+
 ```
 
-{{ Add description here }}
+This function will return a list of all UserPushEndpoints.
 
-### Example 2: {{ Add title here }}
+### Example 2: Get an UserPushEndpoint by UserId, and PushEndpointId
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkUserPushEndpoint -UserId:(<string>) -PushEndpointId:(<string>)
 
-{{ Add output here }}
+
+
+----             ----------
+DeviceAppVersion String
+DeviceMake       String
+DeviceModel      String
+DeviceOS         String
+DeviceOSVersion  String
+DeviceUvEnabled  Boolean
+EnrollmentDate   Datetime
+Id               String
+LastUsedDate     Datetime
+Name             String
+State            String
+
+
 ```
 
-{{ Add description here }}
+This function will Get an UserPushEndpoint by UserId PushEndpointId. UserId, and PushEndpointId are required parameters.
 

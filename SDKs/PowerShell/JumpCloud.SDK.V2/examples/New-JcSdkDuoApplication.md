@@ -1,18 +1,34 @@
-### Example 1: {{ Add title here }}
+### Example 1: Create a DuoApplication by AccountId, ApiHost, IntegrationKey, Name, and SecretKey
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> New-JcSdkDuoApplication -AccountId:(<string>) -ApiHost:(<string>) -IntegrationKey:(<string>) -Name:(<string>) -SecretKey:(<string>)
 
-{{ Add output here }}
+
+
+----           ----------
+ApiHost        String
+Id             String
+IntegrationKey String
+Name           String
+
+
 ```
 
-{{ Add description here }}
+This function will Create a DuoApplication by AccountId ApiHost IntegrationKey Name SecretKey. AccountId, ApiHost, IntegrationKey, Name, and SecretKey are required parameters.
 
-### Example 2: {{ Add title here }}
+### Example 2: Create a DuoApplication by AccountId, and Body
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> New-JcSdkDuoApplication -AccountId:(<string>) -Body:(<JumpCloud.SDK.V2.Models.DuoApplicationReq>)
 
-{{ Add output here }}
+
+
+----           ----------
+ApiHost        String
+Id             String
+IntegrationKey String
+Name           String
+
+
 ```
 
-{{ Add description here }}
+This function will Create a DuoApplication by AccountId Body. AccountId, and Body are required parameters.
 

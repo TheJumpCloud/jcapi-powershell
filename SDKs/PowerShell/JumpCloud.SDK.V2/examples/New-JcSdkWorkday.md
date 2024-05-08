@@ -1,18 +1,46 @@
-### Example 1: {{ Add title here }}
+### Example 1: Create a Workday by
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> New-JcSdkWorkday -BasicPassword:(<string>) -BasicUsername:(<string>) -Name:(<string>) -OauthCode:(<string>) -ReportUrl:(<string>)
 
-{{ Add output here }}
+
+
+----         ----------
+BasicExpiry  String
+BasicIsValid Boolean
+BasicMessage String
+Id           String
+LastImport   String
+Name         String
+OauthExpiry  String
+OauthIsValid Boolean
+OauthMessage String
+ReportUrl    String
+
+
 ```
 
-{{ Add description here }}
+This function will Create a Workday by .
 
-### Example 2: {{ Add title here }}
+### Example 2: Create a Workday by Body
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> New-JcSdkWorkday -Body:(<JumpCloud.SDK.V2.Models.WorkdayInput>)
 
-{{ Add output here }}
+
+
+----         ----------
+BasicExpiry  String
+BasicIsValid Boolean
+BasicMessage String
+Id           String
+LastImport   String
+Name         String
+OauthExpiry  String
+OauthIsValid Boolean
+OauthMessage String
+ReportUrl    String
+
+
 ```
 
-{{ Add description here }}
+This function will Create a Workday by Body. Body is a required parameter.
 

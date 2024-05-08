@@ -1,11 +1,19 @@
-### Example 1: {{ Add title here }}
+### Example 1: Remove an IPList by Id
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Remove-JcSdkIPList -Id:(<string>)
 
-{{ Add output here }}
+
+
+----        ----------
+Description String
+Id          String
+Ips         String
+Name        String
+
+
 ```
 
-{{ Add description here }}
+This function will Remove an IPList by Id. Id is a required parameter.
 
 ### Example 2: {{ Add title here }}
 ```powershell

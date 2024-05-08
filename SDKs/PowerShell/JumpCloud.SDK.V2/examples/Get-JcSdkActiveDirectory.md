@@ -1,18 +1,34 @@
-### Example 1: {{ Add title here }}
+### Example 1: List ActiveDirectorys
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkActiveDirectory -Fields:(<string[]>) -Filter:(<string[]>) -Sort:(<string[]>)
 
-{{ Add output here }}
+
+
+----         ----------
+Domain       String
+Id           String
+PrimaryAgent String
+UseCase      String
+
+
 ```
 
-{{ Add description here }}
+This function will return a list of all ActiveDirectorys. Fields, Filter, and Sort are optional parameters.
 
-### Example 2: {{ Add title here }}
+### Example 2: Get an ActiveDirectory by Id
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkActiveDirectory -Id:(<string>)
 
-{{ Add output here }}
+
+
+----         ----------
+Domain       String
+Id           String
+PrimaryAgent String
+UseCase      String
+
+
 ```
 
-{{ Add description here }}
+This function will Get an ActiveDirectory by Id. Id is a required parameter.
 

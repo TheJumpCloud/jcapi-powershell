@@ -1,11 +1,22 @@
-### Example 1: {{ Add title here }}
+### Example 1: Get an Office365 by Office365Id
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkOffice365 -Office365Id:(<string>)
 
-{{ Add output here }}
+
+
+----                         ----------
+DefaultDomainDomain          String
+DefaultDomainId              String
+GroupsEnabled                Boolean
+Id                           String
+Name                         String
+UserLockoutAction            String
+UserPasswordExpirationAction String
+
+
 ```
 
-{{ Add description here }}
+This function will Get an Office365 by Office365Id. Office365Id is a required parameter.
 
 ### Example 2: {{ Add title here }}
 ```powershell

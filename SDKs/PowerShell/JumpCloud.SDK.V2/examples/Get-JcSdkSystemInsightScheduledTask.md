@@ -1,11 +1,26 @@
-### Example 1: {{ Add title here }}
+### Example 1: List SystemInsightScheduledTasks
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemInsightScheduledTask
 
-{{ Add output here }}
+
+
+----           ----------
+Action         String
+Enabled        Int
+Hidden         Int
+LastRunCode    String
+LastRunMessage String
+LastRunTime    String
+Name           String
+NextRunTime    String
+Path           String
+State          String
+SystemId       String
+
+
 ```
 
-{{ Add description here }}
+This function will return a list of all SystemInsightScheduledTasks.
 
 ### Example 2: {{ Add title here }}
 ```powershell

@@ -1,11 +1,17 @@
-### Example 1: {{ Add title here }}
+### Example 1: List ProviderAdministrators
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkProviderAdministrator
 
-{{ Add output here }}
+
+
+----       ----------
+Results    JumpCloud.SDK.V2.Models.Administrator[]
+TotalCount Int
+
+
 ```
 
-{{ Add description here }}
+This function will return a list of all ProviderAdministrators.
 
 ### Example 2: {{ Add title here }}
 ```powershell

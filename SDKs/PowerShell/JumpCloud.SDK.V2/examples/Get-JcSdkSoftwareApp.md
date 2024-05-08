@@ -1,18 +1,32 @@
-### Example 1: {{ Add title here }}
+### Example 1: List SoftwareApps
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSoftwareApp -Filter:(<string[]>) -Sort:(<string[]>)
 
-{{ Add output here }}
+
+
+----        ----------
+DisplayName String
+Id          String
+Settings    JumpCloud.SDK.V2.Models.SoftwareAppSettings[]
+
+
 ```
 
-{{ Add description here }}
+This function will return a list of all SoftwareApps. Filter, and Sort are optional parameters.
 
-### Example 2: {{ Add title here }}
+### Example 2: Get a SoftwareApp by Id
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSoftwareApp -Id:(<string>)
 
-{{ Add output here }}
+
+
+----        ----------
+DisplayName String
+Id          String
+Settings    JumpCloud.SDK.V2.Models.SoftwareAppSettings[]
+
+
 ```
 
-{{ Add description here }}
+This function will Get a SoftwareApp by Id. Id is a required parameter.
 

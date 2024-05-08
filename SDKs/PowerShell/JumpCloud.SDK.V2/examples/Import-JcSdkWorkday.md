@@ -1,11 +1,11 @@
-### Example 1: {{ Add title here }}
+### Example 1: Import a Workday by WorkdayId
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Import-JcSdkWorkday -WorkdayId:(<string>)
 
-{{ Add output here }}
+
 ```
 
-{{ Add description here }}
+This function will Import a Workday by WorkdayId. WorkdayId is a required parameter.
 
 ### Example 2: {{ Add title here }}
 ```powershell

@@ -1,18 +1,30 @@
-### Example 1: {{ Add title here }}
+### Example 1: Create an AdministratorOrganization by Id
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> New-JcSdkAdministratorOrganization -Id:(<string>) -Organization:(<string>)
 
-{{ Add output here }}
+
+
+----          ----------
+Administrator String
+Organization  String
+
+
 ```
 
-{{ Add description here }}
+This function will Create an AdministratorOrganization by Id. Id is a required parameter.
 
-### Example 2: {{ Add title here }}
+### Example 2: Create an AdministratorOrganization by Id, and Body
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> New-JcSdkAdministratorOrganization -Id:(<string>) -Body:(<JumpCloud.SDK.V2.Models.AdministratorOrganizationLinkReq>)
 
-{{ Add output here }}
+
+
+----          ----------
+Administrator String
+Organization  String
+
+
 ```
 
-{{ Add description here }}
+This function will Create an AdministratorOrganization by Id Body. Id, and Body are required parameters.
 

@@ -1,18 +1,38 @@
-### Example 1: {{ Add title here }}
+### Example 1: List PolicyGroups
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkPolicyGroup -Fields:(<string[]>) -Filter:(<string[]>) -Sort:(<string[]>)
 
-{{ Add output here }}
+
+
+----        ----------
+Attributes  JumpCloud.SDK.V2.Models.GraphAttributes
+Description String
+Email       String
+Id          String
+Name        String
+Type        String
+
+
 ```
 
-{{ Add description here }}
+This function will return a list of all PolicyGroups. Fields, Filter, and Sort are optional parameters.
 
-### Example 2: {{ Add title here }}
+### Example 2: Get a PolicyGroup by Id
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkPolicyGroup -Id:(<string>)
 
-{{ Add output here }}
+
+
+----        ----------
+Attributes  JumpCloud.SDK.V2.Models.GraphAttributes
+Description String
+Email       String
+Id          String
+Name        String
+Type        String
+
+
 ```
 
-{{ Add description here }}
+This function will Get a PolicyGroup by Id. Id is a required parameter.
 

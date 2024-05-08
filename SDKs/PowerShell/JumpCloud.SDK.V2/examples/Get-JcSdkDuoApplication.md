@@ -1,18 +1,34 @@
-### Example 1: {{ Add title here }}
+### Example 1: List DuoApplications
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkDuoApplication -AccountId:(<string>)
 
-{{ Add output here }}
+
+
+----           ----------
+ApiHost        String
+Id             String
+IntegrationKey String
+Name           String
+
+
 ```
 
-{{ Add description here }}
+This function will return a list of all DuoApplications.
 
-### Example 2: {{ Add title here }}
+### Example 2: Get a DuoApplication by AccountId, and ApplicationId
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkDuoApplication -AccountId:(<string>) -ApplicationId:(<string>)
 
-{{ Add output here }}
+
+
+----           ----------
+ApiHost        String
+Id             String
+IntegrationKey String
+Name           String
+
+
 ```
 
-{{ Add description here }}
+This function will Get a DuoApplication by AccountId ApplicationId. AccountId, and ApplicationId are required parameters.
 

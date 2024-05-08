@@ -1,11 +1,28 @@
-### Example 1: {{ Add title here }}
+### Example 1: List SystemInsightDiskInfos
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemInsightDiskInfo
 
-{{ Add output here }}
+
+
+----           ----------
+CollectionTime String
+Description    String
+DiskIndex      Int
+DiskSize       String
+HardwareModel  String
+Id             String
+Manufacturer   String
+Name           String
+Partitions     Int
+PnpDeviceId    String
+Serial         String
+SystemId       String
+Type           String
+
+
 ```
 
-{{ Add description here }}
+This function will return a list of all SystemInsightDiskInfos.
 
 ### Example 2: {{ Add title here }}
 ```powershell

@@ -1,18 +1,38 @@
-### Example 1: {{ Add title here }}
+### Example 1: List ActiveDirectoryAgents
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkActiveDirectoryAgent -ActivedirectoryId:(<string>) -Sort:(<string[]>)
 
-{{ Add output here }}
+
+
+----      ----------
+ContactAt String
+Hostname  String
+Id        String
+SourceIP  String
+State     String
+Version   String
+
+
 ```
 
-{{ Add description here }}
+This function will return a list of all ActiveDirectoryAgents. Sort is an optional parameter.
 
-### Example 2: {{ Add title here }}
+### Example 2: Get an ActiveDirectoryAgent by ActivedirectoryId, and AgentId
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkActiveDirectoryAgent -ActivedirectoryId:(<string>) -AgentId:(<string>)
 
-{{ Add output here }}
+
+
+----      ----------
+ContactAt String
+Hostname  String
+Id        String
+SourceIP  String
+State     String
+Version   String
+
+
 ```
 
-{{ Add description here }}
+This function will Get an ActiveDirectoryAgent by ActivedirectoryId AgentId. ActivedirectoryId, and AgentId are required parameters.
 

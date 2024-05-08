@@ -1,11 +1,23 @@
-### Example 1: {{ Add title here }}
+### Example 1: List SystemInsightStartupItems
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemInsightStartupItem
 
-{{ Add output here }}
+
+
+----     ----------
+Args     String
+Name     String
+Path     String
+Source   String
+Status   String
+SystemId String
+Type     String
+Username String
+
+
 ```
 
-{{ Add description here }}
+This function will return a list of all SystemInsightStartupItems.
 
 ### Example 2: {{ Add title here }}
 ```powershell

@@ -1,18 +1,32 @@
-### Example 1: {{ Add title here }}
+### Example 1: List GSuiteTranslationRules
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkGSuiteTranslationRule -GsuiteId:(<string>) -Fields:(<string[]>) -Filter:(<string[]>) -Sort:(<string[]>)
 
-{{ Add output here }}
+
+
+----      ----------
+BuiltIn   String
+Direction String
+Id        String
+
+
 ```
 
-{{ Add description here }}
+This function will return a list of all GSuiteTranslationRules. Fields, Filter, and Sort are optional parameters.
 
-### Example 2: {{ Add title here }}
+### Example 2: Get a GSuiteTranslationRule by GsuiteId, and Id
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkGSuiteTranslationRule -GsuiteId:(<string>) -Id:(<string>)
 
-{{ Add output here }}
+
+
+----      ----------
+BuiltIn   String
+Direction String
+Id        String
+
+
 ```
 
-{{ Add description here }}
+This function will Get a GSuiteTranslationRule by GsuiteId Id. GsuiteId, and Id are required parameters.
 

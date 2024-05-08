@@ -1,11 +1,19 @@
-### Example 1: {{ Add title here }}
+### Example 1: Invoke a ReclaimSoftwareAppLicense by SoftwareAppId
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Invoke-JcSdkReclaimSoftwareAppLicense -SoftwareAppId:(<string>)
 
-{{ Add output here }}
+
+
+----              ----------
+AssignedLicenses  Int
+AvailableLicenses Int
+ReclaimedLicenses Int
+TotalLicenses     Int
+
+
 ```
 
-{{ Add description here }}
+This function will Invoke a ReclaimSoftwareAppLicense by SoftwareAppId. SoftwareAppId is a required parameter.
 
 ### Example 2: {{ Add title here }}
 ```powershell

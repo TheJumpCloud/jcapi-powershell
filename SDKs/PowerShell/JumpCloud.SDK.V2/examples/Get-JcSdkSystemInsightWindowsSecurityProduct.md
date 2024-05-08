@@ -1,11 +1,23 @@
-### Example 1: {{ Add title here }}
+### Example 1: List SystemInsightWindowsSecurityProducts
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemInsightWindowsSecurityProduct
 
-{{ Add output here }}
+
+
+----               ----------
+CollectionTime     String
+Name               String
+RemediationPath    String
+SignaturesUpToDate System.Nullable[float] SignaturesUpToDate {get;set;}
+State              String
+StateTimestamp     String
+SystemId           String
+Type               String
+
+
 ```
 
-{{ Add description here }}
+This function will return a list of all SystemInsightWindowsSecurityProducts.
 
 ### Example 2: {{ Add title here }}
 ```powershell

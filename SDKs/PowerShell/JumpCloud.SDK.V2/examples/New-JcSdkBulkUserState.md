@@ -1,18 +1,34 @@
-### Example 1: {{ Add title here }}
+### Example 1: Create a BulkUserState by StartDate, State, and UserIds
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> New-JcSdkBulkUserState -StartDate:(<datetime>) -State:(<string>) -UserIds:(<string[]>) -ActivationEmailOverride:(<string>) -SendActivationEmails:(<switch>)
 
-{{ Add output here }}
+
+
+----           ----------
+ScheduledDate  String
+ScheduledJobId String
+State          String
+SystemUserId   String
+
+
 ```
 
-{{ Add description here }}
+This function will Create a BulkUserState by StartDate State UserIds. StartDate, State, and UserIds are required parameters.
 
-### Example 2: {{ Add title here }}
+### Example 2: Create a BulkUserState by Body
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> New-JcSdkBulkUserState -Body:(<JumpCloud.SDK.V2.Models.BulkScheduledStatechangeCreate>)
 
-{{ Add output here }}
+
+
+----           ----------
+ScheduledDate  String
+ScheduledJobId String
+State          String
+SystemUserId   String
+
+
 ```
 
-{{ Add description here }}
+This function will Create a BulkUserState by Body. Body is a required parameter.
 

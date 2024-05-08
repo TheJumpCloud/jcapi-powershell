@@ -1,11 +1,19 @@
-### Example 1: {{ Add title here }}
+### Example 1: Get an UserSshKey by Id
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkUserSshKey -Id:(<string>)
 
-{{ Add output here }}
+
+
+----       ----------
+CreateDate String
+Id         String
+Name       String
+PublicKey  String
+
+
 ```
 
-{{ Add description here }}
+This function will Get an UserSshKey by Id. Id is a required parameter.
 
 ### Example 2: {{ Add title here }}
 ```powershell

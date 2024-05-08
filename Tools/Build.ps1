@@ -15,6 +15,8 @@ $rootPath = "$PSScriptRoot/../"
 foreach ($sdk in $sdks){
     # invoke Build Autorest
     . "$rootPath/BuildAutoRest.ps1" -SDKName $sdk | Out-Null
+    # update SDK Examples:
+    . "$PSscriptRoot/Build-SdkExamples" -SDKName $sdk | Out-Null
     # update module changelog
     . "$PSscriptRoot/Build-SdkChangelog" -SDKName $sdk | Out-Null
 }

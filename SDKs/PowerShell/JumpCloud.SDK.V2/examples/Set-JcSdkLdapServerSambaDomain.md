@@ -1,18 +1,32 @@
-### Example 1: {{ Add title here }}
+### Example 1: Set a LdapServerSambaDomain by Id, LdapserverId, and Body
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Set-JcSdkLdapServerSambaDomain -Id:(<string>) -LdapserverId:(<string>) -Body:(<JumpCloud.SDK.V2.Models.SambaDomain>)
 
-{{ Add output here }}
+
+
+---- ----------
+Id   String
+Name String
+Sid  String
+
+
 ```
 
-{{ Add description here }}
+This function will Set a LdapServerSambaDomain by Id LdapserverId Body. Id, LdapserverId, and Body are required parameters.
 
-### Example 2: {{ Add title here }}
+### Example 2: Set a LdapServerSambaDomain by Id, LdapserverId, Name, and Sid
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Set-JcSdkLdapServerSambaDomain -Id:(<string>) -LdapserverId:(<string>) -Name:(<string>) -Sid:(<string>)
 
-{{ Add output here }}
+
+
+---- ----------
+Id   String
+Name String
+Sid  String
+
+
 ```
 
-{{ Add description here }}
+This function will Set a LdapServerSambaDomain by Id LdapserverId Name Sid. Id, LdapserverId, Name, and Sid are required parameters.
 

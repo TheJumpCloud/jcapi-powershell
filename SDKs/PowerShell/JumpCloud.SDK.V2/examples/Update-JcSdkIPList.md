@@ -1,18 +1,34 @@
-### Example 1: {{ Add title here }}
+### Example 1: Update an IPList by Id, and Body
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Update-JcSdkIPList -Id:(<string>) -Body:(<JumpCloud.SDK.V2.Models.IPListRequest>)
 
-{{ Add output here }}
+
+
+----        ----------
+Description String
+Id          String
+Ips         String
+Name        String
+
+
 ```
 
-{{ Add description here }}
+This function will Update an IPList by Id Body. Id, and Body are required parameters.
 
-### Example 2: {{ Add title here }}
+### Example 2: Update an IPList by Id
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Update-JcSdkIPList -Id:(<string>) -Description:(<string>) -Ips:(<string[]>) -Name:(<string>)
 
-{{ Add output here }}
+
+
+----        ----------
+Description String
+Id          String
+Ips         String
+Name        String
+
+
 ```
 
-{{ Add description here }}
+This function will Update an IPList by Id. Id is a required parameter.
 

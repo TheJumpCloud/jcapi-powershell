@@ -1,18 +1,30 @@
-### Example 1: {{ Add title here }}
+### Example 1: Search a Command by Body
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Search-JcSdkCommand -Body:(<JumpCloud.SDK.V1.Models.Search>)
 
-{{ Add output here }}
+
+
+----       ----------
+Results    JumpCloud.SDK.V1.Models.CommandslistResultsItem[]
+TotalCount Int
+
+
 ```
 
-{{ Add description here }}
+This function will Search a Command by Body. Body is a required parameter.
 
-### Example 2: {{ Add title here }}
+### Example 2: Search a Command by
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Search-JcSdkCommand -Fields:(<string>) -Filter:(<hashtable>) -SearchFilter:(<hashtable>)
 
-{{ Add output here }}
+
+
+----       ----------
+Results    JumpCloud.SDK.V1.Models.CommandslistResultsItem[]
+TotalCount Int
+
+
 ```
 
-{{ Add description here }}
+This function will Search a Command by .
 

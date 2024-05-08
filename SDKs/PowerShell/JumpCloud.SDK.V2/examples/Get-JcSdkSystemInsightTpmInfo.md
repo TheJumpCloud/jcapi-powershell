@@ -1,11 +1,26 @@
-### Example 1: {{ Add title here }}
+### Example 1: List SystemInsightTpmInfos
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemInsightTpmInfo
 
-{{ Add output here }}
+
+
+----                    ----------
+Activated               System.Nullable[float] Activated {get;set;}
+CollectionTime          String
+Enabled                 System.Nullable[float] Enabled {get;set;}
+ManufacturerId          System.Nullable[float] ManufacturerId {get;set;}
+ManufacturerName        String
+ManufacturerVersion     String
+Owned                   System.Nullable[float] Owned {get;set;}
+PhysicalPresenceVersion String
+ProductName             String
+SpecVersion             String
+SystemId                String
+
+
 ```
 
-{{ Add description here }}
+This function will return a list of all SystemInsightTpmInfos.
 
 ### Example 2: {{ Add title here }}
 ```powershell

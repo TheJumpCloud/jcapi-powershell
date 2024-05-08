@@ -1,11 +1,17 @@
-### Example 1: {{ Add title here }}
+### Example 1: Import a Scim by ApplicationId
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Import-JcSdkScim -ApplicationId:(<string>)
 
-{{ Add output here }}
+
+
+----       ----------
+TotalCount System.Nullable[float] TotalCount {get;set;}
+Users      JumpCloud.SDK.V2.Models.ImportUser[]
+
+
 ```
 
-{{ Add description here }}
+This function will Import a Scim by ApplicationId. ApplicationId is a required parameter.
 
 ### Example 2: {{ Add title here }}
 ```powershell

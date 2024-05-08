@@ -1,11 +1,19 @@
-### Example 1: {{ Add title here }}
+### Example 1: List SystemInsightSharedFolders
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemInsightSharedFolder
 
-{{ Add output here }}
+
+
+----           ----------
+CollectionTime String
+Name           String
+Path           String
+SystemId       String
+
+
 ```
 
-{{ Add description here }}
+This function will return a list of all SystemInsightSharedFolders.
 
 ### Example 2: {{ Add title here }}
 ```powershell
