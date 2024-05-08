@@ -1,18 +1,34 @@
-### Example 1: {{ Add title here }}
+### Example 1: List IPLists
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkIPList -Filter:(<string[]>) -Sort:(<string[]>) -XTotalCount:(<int>)
 
-{{ Add output here }}
+
+
+----        ----------
+Description String
+Id          String
+Ips         String
+Name        String
+
+
 ```
 
-{{ Add description here }}
+This function will return a list of all IPLists. Filter, Sort, and XTotalCount are optional parameters.
 
-### Example 2: {{ Add title here }}
+### Example 2: Get an IPList by Id
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkIPList -Id:(<string>)
 
-{{ Add output here }}
+
+
+----        ----------
+Description String
+Id          String
+Ips         String
+Name        String
+
+
 ```
 
-{{ Add description here }}
+This function will Get an IPList by Id. Id is a required parameter.
 

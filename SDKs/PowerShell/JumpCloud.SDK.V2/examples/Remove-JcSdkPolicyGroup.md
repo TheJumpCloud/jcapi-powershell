@@ -1,11 +1,21 @@
-### Example 1: {{ Add title here }}
+### Example 1: Remove a PolicyGroup by Id
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Remove-JcSdkPolicyGroup -Id:(<string>)
 
-{{ Add output here }}
+
+
+----        ----------
+Attributes  JumpCloud.SDK.V2.Models.GraphAttributes
+Description String
+Email       String
+Id          String
+Name        String
+Type        String
+
+
 ```
 
-{{ Add description here }}
+This function will Remove a PolicyGroup by Id. Id is a required parameter.
 
 ### Example 2: {{ Add title here }}
 ```powershell

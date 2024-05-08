@@ -3218,7 +3218,8 @@
         "queryType": {
           "enum": [
             "Filter",
-            "FilterQuery"
+            "FilterQuery",
+            "Search"
           ],
           "type": "string"
         }
@@ -5567,6 +5568,10 @@
         },
         "productCode": {
           "description": "Unique identifier corresponding to this subscription.",
+          "type": "string"
+        },
+        "upgradeRecommendation": {
+          "description": "Upgrade plan add-on.",
           "type": "string"
         }
       },
@@ -9884,6 +9889,46 @@
         "devices-darwin-security-command"
       ]
     },
+    "/applemdms/{apple_mdm_id}/devices/{device_id}/clearPasscode": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "apple_mdm_id",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "in": "path",
+          "name": "device_id",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "x-functionalities-tags": [
+        "mdm",
+        "devices-darwin-security-command"
+      ]
+    },
+    "/applemdms/{apple_mdm_id}/devices/{device_id}/clearRestrictionsPassword": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "apple_mdm_id",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "in": "path",
+          "name": "device_id",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "x-functionalities-tags": [
+        "mdm",
+        "devices-darwin-security-command"
+      ]
+    },
     "/applemdms/{apple_mdm_id}/devices/{device_id}/erase": {
       "parameters": [
         {
@@ -12739,6 +12784,8 @@
         "users-import-google"
       ]
     },
+    "/gsuites/{gsuite_id}/import/schedules": {},
+    "/gsuites/{gsuite_id}/import/schedules/{scheduledJobId}": {},
     "/gsuites/{gsuite_id}/import/users": {
       "get": {
         "description": "Lists G Suite users available for import.",
@@ -14278,6 +14325,8 @@
       ]
     },
     "/microsoft-mdm/configuration-files": {},
+    "/object-storage/items": {},
+    "/object-storage/status": {},
     "/office365/activate": {
       "x-functionalities-tags": [
         "m365-activate-deactivate"

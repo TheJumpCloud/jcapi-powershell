@@ -1,11 +1,11 @@
-### Example 1: {{ Add title here }}
+### Example 1: Remove a CustomEmailConfiguration by CustomEmailType
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Remove-JcSdkCustomEmailConfiguration -CustomEmailType:(<string>)
 
-{{ Add output here }}
+
 ```
 
-{{ Add description here }}
+This function will Remove a CustomEmailConfiguration by CustomEmailType. CustomEmailType is a required parameter.
 
 ### Example 2: {{ Add title here }}
 ```powershell

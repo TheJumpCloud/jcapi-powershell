@@ -1,11 +1,27 @@
-### Example 1: {{ Add title here }}
+### Example 1: List SystemInsightBrowserPlugins
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemInsightBrowserPlugin
 
-{{ Add output here }}
+
+
+----              ----------
+CollectionTime    String
+Description       String
+DevelopmentRegion String
+Disabled          Int
+Identifier        String
+Name              String
+Native            Int
+Path              String
+Sdk               String
+SystemId          String
+Uid               String
+Version           String
+
+
 ```
 
-{{ Add description here }}
+This function will return a list of all SystemInsightBrowserPlugins.
 
 ### Example 2: {{ Add title here }}
 ```powershell

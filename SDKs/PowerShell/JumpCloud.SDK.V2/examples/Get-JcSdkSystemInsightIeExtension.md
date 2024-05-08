@@ -1,11 +1,21 @@
-### Example 1: {{ Add title here }}
+### Example 1: List SystemInsightIeExtensions
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemInsightIeExtension
 
-{{ Add output here }}
+
+
+----           ----------
+CollectionTime String
+Name           String
+Path           String
+RegistryPath   String
+SystemId       String
+Version        String
+
+
 ```
 
-{{ Add description here }}
+This function will return a list of all SystemInsightIeExtensions.
 
 ### Example 2: {{ Add title here }}
 ```powershell

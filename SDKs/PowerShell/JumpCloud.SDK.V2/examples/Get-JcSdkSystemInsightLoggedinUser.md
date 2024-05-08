@@ -1,11 +1,23 @@
-### Example 1: {{ Add title here }}
+### Example 1: List SystemInsightLoggedinUsers
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemInsightLoggedinUser
 
-{{ Add output here }}
+
+
+----           ----------
+CollectionTime String
+Host           String
+Pid            Int
+SystemId       String
+Time           Int
+Tty            String
+Type           String
+User           String
+
+
 ```
 
-{{ Add description here }}
+This function will return a list of all SystemInsightLoggedinUsers.
 
 ### Example 2: {{ Add title here }}
 ```powershell

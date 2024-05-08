@@ -1,11 +1,22 @@
-### Example 1: {{ Add title here }}
+### Example 1: Get a RadiusServerAssociation by RadiusserverId
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkRadiusServerAssociation -RadiusserverId:(<string>)
 
-{{ Add output here }}
+
+
+----           ----------
+Attributes     JumpCloud.SDK.V2.Models.GraphAttributes
+FromAttributes JumpCloud.SDK.V2.Models.GraphAttributes
+FromId         String
+FromType       String
+ToAttributes   JumpCloud.SDK.V2.Models.GraphAttributes
+ToId           String
+ToType         String
+
+
 ```
 
-{{ Add description here }}
+This function will Get a RadiusServerAssociation by RadiusserverId. RadiusserverId is a required parameter.
 
 ### Example 2: {{ Add title here }}
 ```powershell

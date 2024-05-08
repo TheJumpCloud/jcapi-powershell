@@ -1,11 +1,11 @@
-### Example 1: {{ Add title here }}
+### Example 1: Remove an ApplicationLogo by ApplicationId
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Remove-JcSdkApplicationLogo -ApplicationId:(<string>)
 
-{{ Add output here }}
+
 ```
 
-{{ Add description here }}
+This function will Remove an ApplicationLogo by ApplicationId. ApplicationId is a required parameter.
 
 ### Example 2: {{ Add title here }}
 ```powershell

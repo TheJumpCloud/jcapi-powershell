@@ -1,18 +1,48 @@
-### Example 1: {{ Add title here }}
+### Example 1: List SystemGroups
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemGroup -Fields:(<string[]>) -Filter:(<string[]>) -Sort:(<string[]>)
 
-{{ Add output here }}
+
+
+----                    ----------
+Attributes              JumpCloud.SDK.V2.Models.GraphAttributes
+Description             String
+Email                   String
+Id                      String
+MemberQueryExemptions   JumpCloud.SDK.V2.Models.GraphObject[]
+MemberQueryFilters      JumpCloud.SDK.V2.Models.Any[]
+MemberQueryType         String
+MembershipMethod        String
+MemberSuggestionsNotify Boolean
+Name                    String
+Type                    String
+
+
 ```
 
-{{ Add description here }}
+This function will return a list of all SystemGroups. Fields, Filter, and Sort are optional parameters.
 
-### Example 2: {{ Add title here }}
+### Example 2: Get a SystemGroup by Id
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemGroup -Id:(<string>)
 
-{{ Add output here }}
+
+
+----                    ----------
+Attributes              JumpCloud.SDK.V2.Models.GraphAttributes
+Description             String
+Email                   String
+Id                      String
+MemberQueryExemptions   JumpCloud.SDK.V2.Models.GraphObject[]
+MemberQueryFilters      JumpCloud.SDK.V2.Models.Any[]
+MemberQueryType         String
+MembershipMethod        String
+MemberSuggestionsNotify Boolean
+Name                    String
+Type                    String
+
+
 ```
 
-{{ Add description here }}
+This function will Get a SystemGroup by Id. Id is a required parameter.
 

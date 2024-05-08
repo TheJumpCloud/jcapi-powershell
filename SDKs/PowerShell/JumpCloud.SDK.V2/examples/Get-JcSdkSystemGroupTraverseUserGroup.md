@@ -1,11 +1,19 @@
-### Example 1: {{ Add title here }}
+### Example 1: Get a SystemGroupTraverseUserGroup by GroupId
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemGroupTraverseUserGroup -GroupId:(<string>)
 
-{{ Add output here }}
+
+
+----               ----------
+CompiledAttributes JumpCloud.SDK.V2.Models.GraphAttributes
+Id                 String
+Paths              JumpCloud.SDK.V2.Models.GraphConnection[][]
+Type               String
+
+
 ```
 
-{{ Add description here }}
+This function will Get a SystemGroupTraverseUserGroup by GroupId. GroupId is a required parameter.
 
 ### Example 2: {{ Add title here }}
 ```powershell

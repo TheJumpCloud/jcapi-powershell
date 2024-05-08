@@ -1,11 +1,26 @@
-### Example 1: {{ Add title here }}
+### Example 1: List SystemInsightPrograms
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemInsightProgram
 
-{{ Add output here }}
+
+
+----              ----------
+CollectionTime    String
+IdentifyingNumber String
+InstallDate       String
+InstallLocation   String
+InstallSource     String
+Language          String
+Name              String
+Publisher         String
+SystemId          String
+UninstallString
+Version           String
+
+
 ```
 
-{{ Add description here }}
+This function will return a list of all SystemInsightPrograms.
 
 ### Example 2: {{ Add title here }}
 ```powershell

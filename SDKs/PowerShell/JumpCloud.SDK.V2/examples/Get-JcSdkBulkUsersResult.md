@@ -1,11 +1,22 @@
-### Example 1: {{ Add title here }}
+### Example 1: Get a BulkUsersResult by JobId
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkBulkUsersResult -JobId:(<string>)
 
-{{ Add output here }}
+
+
+----            ----------
+CreatedAt       String
+Id              String
+Meta            JumpCloud.SDK.V2.Models.JobWorkresultMeta
+PersistedFields JumpCloud.SDK.V2.Models.JobWorkresultPersistedFields
+Status          String
+StatusMsg       String
+UpdatedAt       String
+
+
 ```
 
-{{ Add description here }}
+This function will Get a BulkUsersResult by JobId. JobId is a required parameter.
 
 ### Example 2: {{ Add title here }}
 ```powershell

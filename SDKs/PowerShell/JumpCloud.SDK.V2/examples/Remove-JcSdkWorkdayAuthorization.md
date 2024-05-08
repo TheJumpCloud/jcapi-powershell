@@ -1,11 +1,11 @@
-### Example 1: {{ Add title here }}
+### Example 1: Remove a WorkdayAuthorization by WorkdayId
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Remove-JcSdkWorkdayAuthorization -WorkdayId:(<string>)
 
-{{ Add output here }}
+
 ```
 
-{{ Add description here }}
+This function will Remove a WorkdayAuthorization by WorkdayId. WorkdayId is a required parameter.
 
 ### Example 2: {{ Add title here }}
 ```powershell

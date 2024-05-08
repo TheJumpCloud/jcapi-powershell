@@ -1,18 +1,32 @@
-### Example 1: {{ Add title here }}
+### Example 1: List LdapServerSambaDomains
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkLdapServerSambaDomain -LdapserverId:(<string>) -Fields:(<string[]>) -Filter:(<string[]>) -Sort:(<string[]>)
 
-{{ Add output here }}
+
+
+---- ----------
+Id   String
+Name String
+Sid  String
+
+
 ```
 
-{{ Add description here }}
+This function will return a list of all LdapServerSambaDomains. Fields, Filter, and Sort are optional parameters.
 
-### Example 2: {{ Add title here }}
+### Example 2: Get a LdapServerSambaDomain by LdapserverId, and Id
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkLdapServerSambaDomain -LdapserverId:(<string>) -Id:(<string>)
 
-{{ Add output here }}
+
+
+---- ----------
+Id   String
+Name String
+Sid  String
+
+
 ```
 
-{{ Add description here }}
+This function will Get a LdapServerSambaDomain by LdapserverId Id. LdapserverId, and Id are required parameters.
 

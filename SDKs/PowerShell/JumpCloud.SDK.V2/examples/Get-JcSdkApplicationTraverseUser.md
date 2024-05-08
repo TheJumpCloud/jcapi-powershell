@@ -1,11 +1,19 @@
-### Example 1: {{ Add title here }}
+### Example 1: Get an ApplicationTraverseUser by ApplicationId
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkApplicationTraverseUser -ApplicationId:(<string>)
 
-{{ Add output here }}
+
+
+----               ----------
+CompiledAttributes JumpCloud.SDK.V2.Models.GraphAttributes
+Id                 String
+Paths              JumpCloud.SDK.V2.Models.GraphConnection[][]
+Type               String
+
+
 ```
 
-{{ Add description here }}
+This function will Get an ApplicationTraverseUser by ApplicationId. ApplicationId is a required parameter.
 
 ### Example 2: {{ Add title here }}
 ```powershell

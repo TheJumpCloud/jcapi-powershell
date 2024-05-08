@@ -1,11 +1,22 @@
-### Example 1: {{ Add title here }}
+### Example 1: Get a GSuite by Id
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkGSuite -Id:(<string>)
 
-{{ Add output here }}
+
+
+----                         ----------
+DefaultDomainDomain          String
+DefaultDomainId              String
+GroupsEnabled                Boolean
+Id                           String
+Name                         String
+UserLockoutAction            String
+UserPasswordExpirationAction String
+
+
 ```
 
-{{ Add description here }}
+This function will Get a GSuite by Id. Id is a required parameter.
 
 ### Example 2: {{ Add title here }}
 ```powershell

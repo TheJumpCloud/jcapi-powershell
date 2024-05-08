@@ -1,18 +1,18 @@
-### Example 1: {{ Add title here }}
+### Example 1: Reset an UserMfa by Id, and Body
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Reset-JcSdkUserMfa -Id:(<string>) -Body:(<JumpCloud.SDK.V1.Models.PathsYhix24SystemusersIdResetmfaPostRequestbodyContentApplicationJsonSchema>)
 
-{{ Add output here }}
+
 ```
 
-{{ Add description here }}
+This function will Reset an UserMfa by Id Body. Id, and Body are required parameters.
 
-### Example 2: {{ Add title here }}
+### Example 2: Reset an UserMfa by Id
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Reset-JcSdkUserMfa -Id:(<string>) -Exclusion:(<switch>) -ExclusionDays:(<float>) -ExclusionUntil:(<datetime>)
 
-{{ Add output here }}
+
 ```
 
-{{ Add description here }}
+This function will Reset an UserMfa by Id. Id is a required parameter.
 

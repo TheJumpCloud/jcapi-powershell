@@ -1,11 +1,21 @@
-### Example 1: {{ Add title here }}
+### Example 1: List SystemInsightKernelInfos
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemInsightKernelInfo
 
-{{ Add output here }}
+
+
+----           ----------
+Arguments      String
+CollectionTime String
+Device         String
+Path           String
+SystemId       String
+Version        String
+
+
 ```
 
-{{ Add description here }}
+This function will return a list of all SystemInsightKernelInfos.
 
 ### Example 2: {{ Add title here }}
 ```powershell

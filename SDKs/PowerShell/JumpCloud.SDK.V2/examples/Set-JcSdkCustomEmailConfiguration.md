@@ -1,18 +1,42 @@
-### Example 1: {{ Add title here }}
+### Example 1: Set a CustomEmailConfiguration by CustomEmailType, and CustomEmail
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Set-JcSdkCustomEmailConfiguration -CustomEmailType:(<string>) -CustomEmail:(<JumpCloud.SDK.V2.Models.CustomEmail>)
 
-{{ Add output here }}
+
+
+----                ----------
+Body                String
+Button              String
+Header              String
+Id                  String
+NextStepContactInfo String
+Subject             String
+Title               String
+Type                String
+
+
 ```
 
-{{ Add description here }}
+This function will Set a CustomEmailConfiguration by CustomEmailType CustomEmail. CustomEmailType, and CustomEmail are required parameters.
 
-### Example 2: {{ Add title here }}
+### Example 2: Set a CustomEmailConfiguration by CustomEmailType, Subject, and Type
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Set-JcSdkCustomEmailConfiguration -CustomEmailType:(<string>) -Subject:(<string>) -Type:(<string>) -Body:(<string>) -Button:(<string>) -Header:(<string>) -NextStepContactInfo:(<string>) -Title:(<string>)
 
-{{ Add output here }}
+
+
+----                ----------
+Body                String
+Button              String
+Header              String
+Id                  String
+NextStepContactInfo String
+Subject             String
+Title               String
+Type                String
+
+
 ```
 
-{{ Add description here }}
+This function will Set a CustomEmailConfiguration by CustomEmailType Subject Type. CustomEmailType, Subject, and Type are required parameters.
 

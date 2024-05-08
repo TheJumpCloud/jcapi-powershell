@@ -1,11 +1,17 @@
-### Example 1: {{ Add title here }}
+### Example 1: List GSuiteUsersToImports
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkGSuiteUsersToImport
 
-{{ Add output here }}
+
+
+----          ----------
+NextPageToken String
+Users         JumpCloud.SDK.V2.Models.Get200ApplicationJsonPropertiesItemsItem[]
+
+
 ```
 
-{{ Add description here }}
+This function will return a list of all GSuiteUsersToImports.
 
 ### Example 2: {{ Add title here }}
 ```powershell

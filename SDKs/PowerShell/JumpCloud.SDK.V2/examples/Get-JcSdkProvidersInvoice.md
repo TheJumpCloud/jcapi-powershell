@@ -1,11 +1,17 @@
-### Example 1: {{ Add title here }}
+### Example 1: Get a ProvidersInvoice by ProviderId
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkProvidersInvoice -ProviderId:(<string>)
 
-{{ Add output here }}
+
+
+----       ----------
+Records    JumpCloud.SDK.V2.Models.ProviderInvoice[]
+TotalCount Int
+
+
 ```
 
-{{ Add description here }}
+This function will Get a ProvidersInvoice by ProviderId. ProviderId is a required parameter.
 
 ### Example 2: {{ Add title here }}
 ```powershell

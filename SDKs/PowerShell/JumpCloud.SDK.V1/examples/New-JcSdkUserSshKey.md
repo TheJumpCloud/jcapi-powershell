@@ -1,18 +1,34 @@
-### Example 1: {{ Add title here }}
+### Example 1: Create an UserSshKey by Id, Name, and PublicKey
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> New-JcSdkUserSshKey -Id:(<string>) -Name:(<string>) -PublicKey:(<string>)
 
-{{ Add output here }}
+
+
+----       ----------
+CreateDate String
+Id         String
+Name       String
+PublicKey  String
+
+
 ```
 
-{{ Add description here }}
+This function will Create an UserSshKey by Id Name PublicKey. Id, Name, and PublicKey are required parameters.
 
-### Example 2: {{ Add title here }}
+### Example 2: Create an UserSshKey by Id, and Body
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> New-JcSdkUserSshKey -Id:(<string>) -Body:(<JumpCloud.SDK.V1.Models.Sshkeypost>)
 
-{{ Add output here }}
+
+
+----       ----------
+CreateDate String
+Id         String
+Name       String
+PublicKey  String
+
+
 ```
 
-{{ Add description here }}
+This function will Create an UserSshKey by Id Body. Id, and Body are required parameters.
 

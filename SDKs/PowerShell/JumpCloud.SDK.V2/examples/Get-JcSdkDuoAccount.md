@@ -1,18 +1,30 @@
-### Example 1: {{ Add title here }}
+### Example 1: List DuoAccounts
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkDuoAccount
 
-{{ Add output here }}
+
+
+---- ----------
+Id   String
+Name String
+
+
 ```
 
-{{ Add description here }}
+This function will return a list of all DuoAccounts.
 
-### Example 2: {{ Add title here }}
+### Example 2: Get a DuoAccount by Id
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkDuoAccount -Id:(<string>)
 
-{{ Add output here }}
+
+
+---- ----------
+Id   String
+Name String
+
+
 ```
 
-{{ Add description here }}
+This function will Get a DuoAccount by Id. Id is a required parameter.
 

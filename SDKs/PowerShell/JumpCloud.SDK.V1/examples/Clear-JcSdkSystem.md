@@ -1,11 +1,11 @@
-### Example 1: {{ Add title here }}
+### Example 1: Clear a System by SystemId
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Clear-JcSdkSystem -SystemId:(<string>)
 
-{{ Add output here }}
+
 ```
 
-{{ Add description here }}
+This function will Clear a System by SystemId. SystemId is a required parameter.
 
 ### Example 2: {{ Add title here }}
 ```powershell

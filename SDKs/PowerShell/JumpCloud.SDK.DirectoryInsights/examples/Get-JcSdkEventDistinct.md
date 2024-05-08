@@ -1,18 +1,32 @@
-### Example 1: {{ Add title here }}
+### Example 1: Get an EventDistinct by Body
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkEventDistinct -Body:(<JumpCloud.SDK.DirectoryInsights.Models.EventDistinctQuery>)
 
-{{ Add output here }}
+
+
+----                    ----------
+Buckets                 JumpCloud.SDK.DirectoryInsights.Models.Post200ApplicationJsonPropertiesItemsItem[]
+DocCountErrorUpperBound Int
+SumOtherDocCount        Int
+
+
 ```
 
-{{ Add description here }}
+This function will Get an EventDistinct by Body. Body is a required parameter.
 
-### Example 2: {{ Add title here }}
+### Example 2: Get an EventDistinct by Field, Service, and StartTime
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkEventDistinct -Field:(<string>) -Service:(<string[]>) -StartTime:(<datetime>) -EndTime:(<datetime>) -SearchTermAnd:(<hashtable>) -SearchTermNot:(<hashtable>) -SearchTermOr:(<hashtable>)
 
-{{ Add output here }}
+
+
+----                    ----------
+Buckets                 JumpCloud.SDK.DirectoryInsights.Models.Post200ApplicationJsonPropertiesItemsItem[]
+DocCountErrorUpperBound Int
+SumOtherDocCount        Int
+
+
 ```
 
-{{ Add description here }}
+This function will Get an EventDistinct by Field Service StartTime. Field, Service, and StartTime are required parameters.
 

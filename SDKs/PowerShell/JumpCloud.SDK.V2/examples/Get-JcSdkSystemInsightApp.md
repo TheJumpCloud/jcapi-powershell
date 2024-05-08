@@ -1,11 +1,36 @@
-### Example 1: {{ Add title here }}
+### Example 1: List SystemInsightApps
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemInsightApp
 
-{{ Add output here }}
+
+
+----                 ----------
+ApplescriptEnabled   String
+BundleExecutable     String
+BundleIdentifier     String
+BundleName           String
+BundlePackageType    String
+BundleShortVersion   String
+BundleVersion        String
+Category             String
+CollectionTime       String
+Compiler             String
+Copyright            String
+DevelopmentRegion    String
+DisplayName          String
+Element              String
+Environment          String
+InfoString
+LastOpenedTime       System.Nullable[float] LastOpenedTime {get;set;}
+MinimumSystemVersion String
+Name                 String
+Path                 String
+SystemId             String
+
+
 ```
 
-{{ Add description here }}
+This function will return a list of all SystemInsightApps.
 
 ### Example 2: {{ Add title here }}
 ```powershell

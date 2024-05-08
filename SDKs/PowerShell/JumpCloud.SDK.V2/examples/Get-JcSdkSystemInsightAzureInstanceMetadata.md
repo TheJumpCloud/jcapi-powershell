@@ -1,11 +1,33 @@
-### Example 1: {{ Add title here }}
+### Example 1: List SystemInsightAzureInstanceMetadatas
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemInsightAzureInstanceMetadata
 
-{{ Add output here }}
+
+
+----                 ----------
+CollectionTime       String
+Location             String
+Name                 String
+Offer                String
+OSType               String
+PlacementGroupId     String
+PlatformFaultDomain  String
+PlatformUpdateDomain String
+Publisher            String
+ResourceGroupName    String
+Sku                  String
+SubscriptionId       String
+SystemId             String
+Version              String
+VMId                 String
+VMScaleSetName       String
+VMSize               String
+Zone                 String
+
+
 ```
 
-{{ Add description here }}
+This function will return a list of all SystemInsightAzureInstanceMetadatas.
 
 ### Example 2: {{ Add title here }}
 ```powershell

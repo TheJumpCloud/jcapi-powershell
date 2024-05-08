@@ -1,11 +1,26 @@
-### Example 1: {{ Add title here }}
+### Example 1: List SystemPolicyStatuss
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemPolicyStatus
 
-{{ Add output here }}
+
+
+----       ----------
+Detail     String
+EndedAt    Datetime
+ExitStatus System.Nullable[long] ExitStatus {get;set;}
+Id         String
+PolicyId   String
+StartedAt  Datetime
+State      String
+StdErr     String
+StdOut     String
+Success    Boolean
+SystemId   String
+
+
 ```
 
-{{ Add description here }}
+This function will return a list of all SystemPolicyStatuss.
 
 ### Example 2: {{ Add title here }}
 ```powershell

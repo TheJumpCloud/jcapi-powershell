@@ -1,11 +1,26 @@
-### Example 1: {{ Add title here }}
+### Example 1: Remove a RadiusServer by Id
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Remove-JcSdkRadiusServer -Id:(<string>)
 
-{{ Add output here }}
+
+
+----                         ----------
+AuthIdp                      String
+CaCert                       String
+DeviceCertEnabled            Boolean
+Id                           String
+Mfa                          String
+Name                         String
+NetworkSourceIP              String
+UserCertEnabled              Boolean
+UserLockoutAction            String
+UserPasswordEnabled          Boolean
+UserPasswordExpirationAction String
+
+
 ```
 
-{{ Add description here }}
+This function will Remove a RadiusServer by Id. Id is a required parameter.
 
 ### Example 2: {{ Add title here }}
 ```powershell

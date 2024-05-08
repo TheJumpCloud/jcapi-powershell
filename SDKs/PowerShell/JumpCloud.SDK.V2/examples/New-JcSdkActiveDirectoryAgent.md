@@ -1,18 +1,40 @@
-### Example 1: {{ Add title here }}
+### Example 1: Create an ActiveDirectoryAgent by ActivedirectoryId
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> New-JcSdkActiveDirectoryAgent -ActivedirectoryId:(<string>) -AgentType:(<string>)
 
-{{ Add output here }}
+
+
+----       ----------
+ConnectKey String
+ContactAt  String
+Hostname   String
+Id         String
+SourceIP   String
+State      String
+Version    String
+
+
 ```
 
-{{ Add description here }}
+This function will Create an ActiveDirectoryAgent by ActivedirectoryId. ActivedirectoryId is a required parameter.
 
-### Example 2: {{ Add title here }}
+### Example 2: Create an ActiveDirectoryAgent by ActivedirectoryId, and Body
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> New-JcSdkActiveDirectoryAgent -ActivedirectoryId:(<string>) -Body:(<JumpCloud.SDK.V2.Models.ActiveDirectoryAgent>)
 
-{{ Add output here }}
+
+
+----       ----------
+ConnectKey String
+ContactAt  String
+Hostname   String
+Id         String
+SourceIP   String
+State      String
+Version    String
+
+
 ```
 
-{{ Add description here }}
+This function will Create an ActiveDirectoryAgent by ActivedirectoryId Body. ActivedirectoryId, and Body are required parameters.
 

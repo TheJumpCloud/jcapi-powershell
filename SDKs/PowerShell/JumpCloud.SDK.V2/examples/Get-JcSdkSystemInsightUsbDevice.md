@@ -1,11 +1,29 @@
-### Example 1: {{ Add title here }}
+### Example 1: List SystemInsightUsbDevices
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemInsightUsbDevice
 
-{{ Add output here }}
+
+
+----           ----------
+Class          String
+CollectionTime String
+Model          String
+ModelId        String
+Protocol       String
+Removable      Int
+Serial         String
+Subclass       String
+SystemId       String
+UsbAddress     Int
+UsbPort        Int
+Vendor         String
+VendorId       String
+Version        String
+
+
 ```
 
-{{ Add description here }}
+This function will return a list of all SystemInsightUsbDevices.
 
 ### Example 2: {{ Add title here }}
 ```powershell

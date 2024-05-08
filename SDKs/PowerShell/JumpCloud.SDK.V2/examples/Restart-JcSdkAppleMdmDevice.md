@@ -1,18 +1,18 @@
-### Example 1: {{ Add title here }}
+### Example 1: Restart an AppleMdmDevice by AppleMdmId, DeviceId, and Body
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Restart-JcSdkAppleMdmDevice -AppleMdmId:(<string>) -DeviceId:(<string>) -Body:(<JumpCloud.SDK.V2.Models.Paths1Whnyt3ApplemdmsAppleMdmIdDevicesDeviceIdRestartPostRequestbodyContentApplicationJsonSchema>)
 
-{{ Add output here }}
+
 ```
 
-{{ Add description here }}
+This function will Restart an AppleMdmDevice by AppleMdmId DeviceId Body. AppleMdmId, DeviceId, and Body are required parameters.
 
-### Example 2: {{ Add title here }}
+### Example 2: Restart an AppleMdmDevice by AppleMdmId, and DeviceId
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Restart-JcSdkAppleMdmDevice -AppleMdmId:(<string>) -DeviceId:(<string>) -KextPaths:(<string[]>)
 
-{{ Add output here }}
+
 ```
 
-{{ Add description here }}
+This function will Restart an AppleMdmDevice by AppleMdmId DeviceId. AppleMdmId, and DeviceId are required parameters.
 

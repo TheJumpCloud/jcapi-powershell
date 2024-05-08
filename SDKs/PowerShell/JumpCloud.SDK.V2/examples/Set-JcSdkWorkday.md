@@ -1,18 +1,46 @@
-### Example 1: {{ Add title here }}
+### Example 1: Set a Workday by Id, and Body
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Set-JcSdkWorkday -Id:(<string>) -Body:(<JumpCloud.SDK.V2.Models.WorkdayFields>)
 
-{{ Add output here }}
+
+
+----         ----------
+BasicExpiry  String
+BasicIsValid Boolean
+BasicMessage String
+Id           String
+LastImport   String
+Name         String
+OauthExpiry  String
+OauthIsValid Boolean
+OauthMessage String
+ReportUrl    String
+
+
 ```
 
-{{ Add description here }}
+This function will Set a Workday by Id Body. Id, and Body are required parameters.
 
-### Example 2: {{ Add title here }}
+### Example 2: Set a Workday by Id
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Set-JcSdkWorkday -Id:(<string>) -Name:(<string>) -ReportUrl:(<string>)
 
-{{ Add output here }}
+
+
+----         ----------
+BasicExpiry  String
+BasicIsValid Boolean
+BasicMessage String
+Id           String
+LastImport   String
+Name         String
+OauthExpiry  String
+OauthIsValid Boolean
+OauthMessage String
+ReportUrl    String
+
+
 ```
 
-{{ Add description here }}
+This function will Set a Workday by Id. Id is a required parameter.
 

@@ -1,18 +1,38 @@
-### Example 1: {{ Add title here }}
+### Example 1: Create a PolicyGroup by Name
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> New-JcSdkPolicyGroup -Name:(<string>)
 
-{{ Add output here }}
+
+
+----        ----------
+Attributes  JumpCloud.SDK.V2.Models.GraphAttributes
+Description String
+Email       String
+Id          String
+Name        String
+Type        String
+
+
 ```
 
-{{ Add description here }}
+This function will Create a PolicyGroup by Name. Name is a required parameter.
 
-### Example 2: {{ Add title here }}
+### Example 2: Create a PolicyGroup by Body
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> New-JcSdkPolicyGroup -Body:(<JumpCloud.SDK.V2.Models.PolicyGroupData>)
 
-{{ Add output here }}
+
+
+----        ----------
+Attributes  JumpCloud.SDK.V2.Models.GraphAttributes
+Description String
+Email       String
+Id          String
+Name        String
+Type        String
+
+
 ```
 
-{{ Add description here }}
+This function will Create a PolicyGroup by Body. Body is a required parameter.
 

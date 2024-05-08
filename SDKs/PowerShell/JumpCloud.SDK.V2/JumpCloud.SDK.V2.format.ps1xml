@@ -7804,6 +7804,9 @@
           <TableColumnHeader>
             <Label>ProductCode</Label>
           </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>UpgradeRecommendation</Label>
+          </TableColumnHeader>
         </TableHeaders>
         <TableRowEntries>
           <TableRowEntry>
@@ -7819,6 +7822,9 @@
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>ProductCode</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>UpgradeRecommendation</PropertyName>
               </TableColumnItem>
             </TableColumnItems>
           </TableRowEntry>

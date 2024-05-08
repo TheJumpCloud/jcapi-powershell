@@ -1,11 +1,22 @@
-### Example 1: {{ Add title here }}
+### Example 1: List SystemInsightUptimes
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemInsightUptime
 
-{{ Add output here }}
+
+
+----           ----------
+CollectionTime String
+Days           Int
+Hours          Int
+Minutes        Int
+Seconds        Int
+SystemId       String
+TotalSeconds   String
+
+
 ```
 
-{{ Add description here }}
+This function will return a list of all SystemInsightUptimes.
 
 ### Example 2: {{ Add title here }}
 ```powershell

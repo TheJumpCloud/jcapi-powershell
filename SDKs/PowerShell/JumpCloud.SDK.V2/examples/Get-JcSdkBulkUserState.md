@@ -1,11 +1,19 @@
-### Example 1: {{ Add title here }}
+### Example 1: List BulkUserStates
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkBulkUserState
 
-{{ Add output here }}
+
+
+----           ----------
+ScheduledDate  String
+ScheduledJobId String
+State          String
+SystemUserId   String
+
+
 ```
 
-{{ Add description here }}
+This function will return a list of all BulkUserStates.
 
 ### Example 2: {{ Add title here }}
 ```powershell

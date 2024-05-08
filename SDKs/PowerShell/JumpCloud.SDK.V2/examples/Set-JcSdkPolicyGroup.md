@@ -1,18 +1,38 @@
-### Example 1: {{ Add title here }}
+### Example 1: Set a PolicyGroup by Id, and Body
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Set-JcSdkPolicyGroup -Id:(<string>) -Body:(<JumpCloud.SDK.V2.Models.PolicyGroupData>)
 
-{{ Add output here }}
+
+
+----        ----------
+Attributes  JumpCloud.SDK.V2.Models.GraphAttributes
+Description String
+Email       String
+Id          String
+Name        String
+Type        String
+
+
 ```
 
-{{ Add description here }}
+This function will Set a PolicyGroup by Id Body. Id, and Body are required parameters.
 
-### Example 2: {{ Add title here }}
+### Example 2: Set a PolicyGroup by Id, and Name
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Set-JcSdkPolicyGroup -Id:(<string>) -Name:(<string>)
 
-{{ Add output here }}
+
+
+----        ----------
+Attributes  JumpCloud.SDK.V2.Models.GraphAttributes
+Description String
+Email       String
+Id          String
+Name        String
+Type        String
+
+
 ```
 
-{{ Add description here }}
+This function will Set a PolicyGroup by Id Name. Id, and Name are required parameters.
 

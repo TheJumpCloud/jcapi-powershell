@@ -1,18 +1,18 @@
-### Example 1: {{ Add title here }}
+### Example 1: Initialize an UserState by Id
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Initialize-JcSdkUserState -Id:(<string>) -Email:(<string>)
 
-{{ Add output here }}
+
 ```
 
-{{ Add description here }}
+This function will Initialize an UserState by Id. Id is a required parameter.
 
-### Example 2: {{ Add title here }}
+### Example 2: Initialize an UserState by Id, and Body
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Initialize-JcSdkUserState -Id:(<string>) -Body:(<JumpCloud.SDK.V1.Models.PathsDi9CukSystemusersIdStateActivatePostRequestbodyContentApplicationJsonSchema>)
 
-{{ Add output here }}
+
 ```
 
-{{ Add description here }}
+This function will Initialize an UserState by Id Body. Id, and Body are required parameters.
 

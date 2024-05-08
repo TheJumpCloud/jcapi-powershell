@@ -1,11 +1,20 @@
-### Example 1: {{ Add title here }}
+### Example 1: List SystemInsightAzureInstanceTags
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemInsightAzureInstanceTag
 
-{{ Add output here }}
+
+
+----           ----------
+CollectionTime String
+Key            String
+SystemId       String
+Value          String
+VMId           String
+
+
 ```
 
-{{ Add description here }}
+This function will return a list of all SystemInsightAzureInstanceTags.
 
 ### Example 2: {{ Add title here }}
 ```powershell
