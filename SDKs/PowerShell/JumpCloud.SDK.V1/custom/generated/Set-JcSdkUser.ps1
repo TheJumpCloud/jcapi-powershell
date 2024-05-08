@@ -117,6 +117,10 @@ BODY <ISystemuserput>:
   [Relationships <ISystemuserputRelationshipsItem[]>]:
     [Type <String>]:
     [Value <String>]:
+  [RestrictedFields <IRestrictedField1[]>]:
+    [Field <String>]:
+    [Id <String>]:
+    [Type <String>]:
   [SambaServiceUser <Boolean?>]:
   [SshKeys <ISshkeypost[]>]:
     Name <String>: The name of the SSH key.
@@ -141,6 +145,11 @@ PHONENUMBERS <ISystemuserputPhoneNumbersItem[]>:
 RELATIONSHIPS <ISystemuserputRelationshipsItem[]>:
   [Type <String>]:
   [Value <String>]:
+
+RESTRICTEDFIELDS <IRestrictedField1[]>:
+  [Field <String>]:
+  [Id <String>]:
+  [Type <String>]:
 
 SSHKEYS <ISshkeypost[]>:
   Name <String>: The name of the SSH key.
@@ -449,6 +458,15 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     # .
     # To construct, see NOTES section for RELATIONSHIPS properties and create a hash table.
     ${Relationships}, 
+
+    [Parameter(ParameterSetName='SetExpanded')]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
+    [AllowEmptyCollection()]
+    [JumpCloud.SDK.V1.Category('Body')]
+    [JumpCloud.SDK.V1.Models.IRestrictedField1[]]
+    # .
+    # To construct, see NOTES section for RESTRICTEDFIELDS properties and create a hash table.
+    ${RestrictedFields}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]

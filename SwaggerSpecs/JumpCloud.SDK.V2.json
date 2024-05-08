@@ -1578,6 +1578,7 @@
                 "active_directory",
                 "application",
                 "g_suite",
+                "idp_routing_policy",
                 "ldap_server",
                 "office_365",
                 "radius_server",
@@ -1599,6 +1600,10 @@
                   {
                     "name": "g_suite",
                     "value": "g_suite"
+                  },
+                  {
+                    "name": "idp_routing_policy",
+                    "value": "idp_routing_policy"
                   },
                   {
                     "name": "ldap_server",
@@ -1648,6 +1653,7 @@
                 "active_directory",
                 "application",
                 "g_suite",
+                "idp_routing_policy",
                 "ldap_server",
                 "office_365",
                 "radius_server",
@@ -1669,6 +1675,10 @@
                   {
                     "name": "g_suite",
                     "value": "g_suite"
+                  },
+                  {
+                    "name": "idp_routing_policy",
+                    "value": "idp_routing_policy"
                   },
                   {
                     "name": "ldap_server",
@@ -1738,6 +1748,7 @@
         "application",
         "command",
         "g_suite",
+        "idp_routing_policy",
         "ldap_server",
         "office_365",
         "policy",
@@ -2690,7 +2701,7 @@
         "amountPaid": "10.9",
         "amountRemaining": "189.1",
         "currency": "USD",
-        "dueDate": "2021-08-07T00:00:00",
+        "dueDate": "2021-08-07",
         "id": "234324",
         "status": "Partially Paid"
       },
@@ -5675,7 +5686,7 @@
         "bundle_short_version": "2.4",
         "bundle_version": "658.1",
         "category": "public.app-category.utilities",
-        "collection_time": "2019-06-03T13:41:30.658-06:00",
+        "collection_time": "2019-06-03T19:41:30.658Z",
         "compiler": "com.apple.compilers.llvm.clang.1_0",
         "copyright": "",
         "development_region": "English",
@@ -5952,7 +5963,7 @@
     },
     "system-insights-bitlocker-info": {
       "example": {
-        "collection_time": "2019-06-03T13:41:30.658-06:00",
+        "collection_time": "2019-06-03T19:41:30.658Z",
         "conversion_status": 0,
         "devide_id": "\\\\\\\\?\\\\Volume{3ba5cc52-e0fd-45fa-b8b8-5c88f44f8b17}\\",
         "drive_letter": "C:",
@@ -5992,7 +6003,7 @@
     },
     "system-insights-browser-plugins": {
       "example": {
-        "collection_time": "2019-06-03T13:41:30.858-06:00",
+        "collection_time": "2019-06-03T19:41:30.858Z",
         "description": "LastPass Plugin",
         "development_region": "en-US",
         "disabled": 0,
@@ -6170,7 +6181,7 @@
     "system-insights-chrome-extensions": {
       "example": {
         "author": "",
-        "collection_time": "2019-06-03T13:41:31.125-06:00",
+        "collection_time": "2019-06-03t19:41:31.125z",
         "description": "provider for discovery and services for mirroring of chrome media router",
         "identifier": "pkedcjkdefgpdelpbcmbmeomcjbeemfm",
         "locale": "en",
@@ -6344,7 +6355,7 @@
     },
     "system-insights-disk-encryption": {
       "example": {
-        "collection_time": "2019-06-03T13:41:31.557-06:00",
+        "collection_time": "2019-06-03T19:41:31.557Z",
         "encrypted": 0,
         "encryption_status": "undefined",
         "name": "/dev/disk8",
@@ -6388,7 +6399,7 @@
     },
     "system-insights-disk-info": {
       "example": {
-        "collection_time": "2019-06-03T13:41:30.658-06:00",
+        "collection_time": "2019-06-03T19:41:30.658Z",
         "description": "Disk drive",
         "disk_index": 0,
         "disk_size": "64420392960",
@@ -6476,7 +6487,7 @@
     "system-insights-etc-hosts": {
       "example": {
         "address": "192.168.2.21",
-        "collection_time": "2019-06-03T13:41:30.658-06:00",
+        "collection_time": "2019-06-03T19:41:30.658Z",
         "hostnames": "hosty hosty.local",
         "system_id": "5c9e51a13c5146f89bae12d9"
       },
@@ -6501,7 +6512,7 @@
       "example": {
         "active": 1,
         "autoupdate": 1,
-        "collection_time": "2019-06-03T13:41:31.204-06:00",
+        "collection_time": "2019-06-03T19:41:31.204Z",
         "creator": "null",
         "description": "",
         "disabled": 0,
@@ -6571,7 +6582,7 @@
     },
     "system-insights-groups": {
       "example": {
-        "collection_time": "2019-06-03T13:41:31.673-06:00",
+        "collection_time": "2019-06-03T19:41:31.673Z",
         "comment": "",
         "gid": "701",
         "gid_signed": "701",
@@ -6633,7 +6644,7 @@
       "example": {
         "address": "::1",
         "broadcast": "",
-        "collection_time": "2019-06-03T13:41:31.008-06:00",
+        "collection_time": "2019-06-03T19:41:31.008Z",
         "friendly_name": "",
         "interface": "lo0",
         "mask": "ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff",
@@ -6974,7 +6985,7 @@
     "system-insights-logical-drives": {
       "example": {
         "boot_partition": 0,
-        "collection_time": "2019-06-03T13:41:30.658-06:00",
+        "collection_time": "2019-06-03T19:41:30.658Z",
         "device_id": "C:",
         "file_system": "NTFS",
         "free_space": "43194331136",
@@ -7047,7 +7058,7 @@
         "blocks_available": "95135",
         "blocks_free": "95135",
         "blocks_size": "4096",
-        "collection_time": "2019-06-03T13:41:31.746-06:00",
+        "collection_time": "2019-06-03T19:41:31.746Z",
         "device": "/dev/disk5s1",
         "device_alias": "/dev/disk5s1",
         "flags": "70292505",
@@ -7105,7 +7116,7 @@
       "example": {
         "build": "17G65",
         "codename": "",
-        "collection_time": "2019-06-03T13:41:30.933-06:00",
+        "collection_time": "2019-06-03T19:41:30.933Z",
         "install_date": "",
         "major": 10,
         "minor": 13,
@@ -7160,7 +7171,7 @@
     "system-insights-patches": {
       "example": {
         "caption": "http://support.microsoft.com/?kbid=4503308",
-        "collection_time": "2019-06-03T13:41:31.673-06:00",
+        "collection_time": "2019-06-03T19:41:31.673Z",
         "csname": "DESKTOP-B17DUKP",
         "description": "Security Update",
         "fix_comments": "",
@@ -7207,7 +7218,7 @@
     },
     "system-insights-programs": {
       "example": {
-        "collection_time": "2019-06-03T13:41:31.673-06:00",
+        "collection_time": "2019-06-03T19:41:31.673Z",
         "identifying_number": "{2E8B8BDD-03DF-4C1C-8C99-E6A4BCBF43CE}",
         "install_date": "20190724",
         "install_location": "",
@@ -7288,7 +7299,7 @@
     "system-insights-safari-extensions": {
       "example": {
         "author": "Eyeo GmbH",
-        "collection_time": "2019-05-16T12:58:15.673-06:00",
+        "collection_time": "2019-05-16T18:58:15.673Z",
         "description": "Used by over 50 million people, a free ad blocker that blocks ALL annoying ads, malware and tracking.",
         "developer_id": "GRYYZR985A",
         "identifier": "org.adblockplus.adblockplussafari",
@@ -7663,7 +7674,7 @@
     },
     "system-insights-system-info": {
       "example": {
-        "collection_time": "2019-06-03T13:41:30.771-06:00",
+        "collection_time": "2019-06-03T19:41:30.771Z",
         "computer_name": "Johnny's MacBook Pro (2)",
         "cpu_brand": "Intel(R) Core(TM) i7-7820HQ CPU @ 2.90GHz",
         "cpu_logical_cores": 8,
@@ -7916,7 +7927,7 @@
     },
     "system-insights-users": {
       "example": {
-        "collection_time": "2019-06-03T13:41:29.71-06:00",
+        "collection_time": "2019-06-03T19:41:29.71Z",
         "description": "AppleEvents Daemon",
         "directory": "/var/empty",
         "gid": "55",
@@ -8545,6 +8556,7 @@
         "active_directory",
         "application",
         "g_suite",
+        "idp_routing_policy",
         "ldap_server",
         "office_365",
         "radius_server",
@@ -8565,6 +8577,10 @@
           {
             "name": "g_suite",
             "value": "g_suite"
+          },
+          {
+            "name": "idp_routing_policy",
+            "value": "idp_routing_policy"
           },
           {
             "name": "ldap_server",
@@ -8599,6 +8615,7 @@
         "active_directory",
         "application",
         "g_suite",
+        "idp_routing_policy",
         "ldap_server",
         "office_365",
         "radius_server",
@@ -8619,6 +8636,10 @@
           {
             "name": "g_suite",
             "value": "g_suite"
+          },
+          {
+            "name": "idp_routing_policy",
+            "value": "idp_routing_policy"
           },
           {
             "name": "ldap_server",
@@ -8642,6 +8663,13 @@
           }
         ]
       }
+    },
+    "trait:gsuite:allowEmptyFields": {
+      "default": false,
+      "description": "[EXPERIMENTAL] Allow empty fields of the user object to be sent in the response",
+      "in": "query",
+      "name": "allowEmptyFields",
+      "type": "boolean"
     },
     "trait:gsuite:maxResults": {
       "description": "Google Directory API maximum number of results per page. See https://developers.google.com/admin-sdk/directory/reference/rest/v1/users/list.",
@@ -12641,6 +12669,9 @@
         "operationId": "GsuiteUsersToImportFormatted_List",
         "parameters": [
           {
+            "$ref": "#/parameters/trait:gsuite:allowEmptyFields"
+          },
+          {
             "$ref": "#/parameters/trait:gsuite:maxResults"
           },
           {
@@ -12684,15 +12715,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request GET \\\n  --url 'https://console.jumpcloud.com/api/v2/gsuites/{gsuite_id}/import/jumpcloudusers?maxResults=SOME_INTEGER_VALUE&orderBy=SOME_STRING_VALUE&pageToken=SOME_STRING_VALUE&query=SOME_STRING_VALUE&sortOrder=SOME_STRING_VALUE' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE'"
+            "source": "curl --request GET \\\n  --url 'https://console.jumpcloud.com/api/v2/gsuites/{gsuite_id}/import/jumpcloudusers?allowEmptyFields=false&maxResults=SOME_INTEGER_VALUE&orderBy=SOME_STRING_VALUE&pageToken=SOME_STRING_VALUE&query=SOME_STRING_VALUE&sortOrder=SOME_STRING_VALUE' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/v2/gsuites/{gsuite_id}/import/jumpcloudusers\"\n\nquerystring = {\"maxResults\":\"SOME_INTEGER_VALUE\",\"orderBy\":\"SOME_STRING_VALUE\",\"pageToken\":\"SOME_STRING_VALUE\",\"query\":\"SOME_STRING_VALUE\",\"sortOrder\":\"SOME_STRING_VALUE\"}\n\nheaders = {\"x-api-key\": \"REPLACE_KEY_VALUE\"}\n\nresponse = requests.request(\"GET\", url, headers=headers, params=querystring)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/v2/gsuites/{gsuite_id}/import/jumpcloudusers\"\n\nquerystring = {\"allowEmptyFields\":\"false\",\"maxResults\":\"SOME_INTEGER_VALUE\",\"orderBy\":\"SOME_STRING_VALUE\",\"pageToken\":\"SOME_STRING_VALUE\",\"query\":\"SOME_STRING_VALUE\",\"sortOrder\":\"SOME_STRING_VALUE\"}\n\nheaders = {\"x-api-key\": \"REPLACE_KEY_VALUE\"}\n\nresponse = requests.request(\"GET\", url, headers=headers, params=querystring)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/v2/gsuites/{gsuite_id}/import/jumpcloudusers?maxResults=SOME_INTEGER_VALUE&orderBy=SOME_STRING_VALUE&pageToken=SOME_STRING_VALUE&query=SOME_STRING_VALUE&sortOrder=SOME_STRING_VALUE' -Method GET -Headers $headers"
+            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/v2/gsuites/{gsuite_id}/import/jumpcloudusers?allowEmptyFields=false&maxResults=SOME_INTEGER_VALUE&orderBy=SOME_STRING_VALUE&pageToken=SOME_STRING_VALUE&query=SOME_STRING_VALUE&sortOrder=SOME_STRING_VALUE' -Method GET -Headers $headers"
           }
         ]
       },

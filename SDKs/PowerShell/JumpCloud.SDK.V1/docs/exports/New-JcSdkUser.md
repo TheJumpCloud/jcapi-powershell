@@ -55,8 +55,9 @@ New-JcSdkUser -Email <String> -Username <String> [-FullValidationDetails <String
  [-MfaExclusion] [-MfaExclusionDays <Int32>] [-MfaExclusionUntil <DateTime>] [-Middlename <String>]
  [-Password <String>] [-PasswordlessSudo] [-PasswordNeverExpires]
  [-PhoneNumbers <ISystemuserputpostPhoneNumbersItem[]>] [-PublicKey <String>] [-RecoveryEmailAddress <String>]
- [-Relationships <ISystemuserputpostRelationshipsItem[]>] [-SambaServiceUser] [-State <String>] [-Sudo]
- [-Suspended] [-UnixGuid <Int32>] [-UnixUid <Int32>] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-Relationships <ISystemuserputpostRelationshipsItem[]>] [-RestrictedFields <IRestrictedField1[]>]
+ [-SambaServiceUser] [-State <String>] [-Sudo] [-Suspended] [-UnixGuid <Int32>] [-UnixUid <Int32>] [-Confirm]
+ [-WhatIf] [<CommonParameters>]
 ```
 
 ### Create
@@ -752,6 +753,22 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -RestrictedFields
+.
+To construct, see NOTES section for RESTRICTEDFIELDS properties and create a hash table.
+
+```yaml
+Type: JumpCloud.SDK.V1.Models.IRestrictedField1[]
+Parameter Sets: CreateExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -SambaServiceUser
 .
 
@@ -978,6 +995,10 @@ BODY <ISystemuserputpost>: SystemUserPost
   - `[Relationships <ISystemuserputpostRelationshipsItem[]>]`: 
     - `[Type <String>]`: 
     - `[Value <String>]`: 
+  - `[RestrictedFields <IRestrictedField1[]>]`: 
+    - `[Field <String>]`: 
+    - `[Id <String>]`: 
+    - `[Type <String>]`: 
   - `[SambaServiceUser <Boolean?>]`: 
   - `[State <String>]`: 
   - `[Sudo <Boolean?>]`: 
@@ -992,6 +1013,11 @@ PHONENUMBERS <ISystemuserputpostPhoneNumbersItem[]>: .
 RELATIONSHIPS <ISystemuserputpostRelationshipsItem[]>: .
   - `[Type <String>]`: 
   - `[Value <String>]`: 
+
+RESTRICTEDFIELDS <IRestrictedField1[]>: .
+  - `[Field <String>]`: 
+  - `[Id <String>]`: 
+  - `[Type <String>]`: 
 
 ## RELATED LINKS
 

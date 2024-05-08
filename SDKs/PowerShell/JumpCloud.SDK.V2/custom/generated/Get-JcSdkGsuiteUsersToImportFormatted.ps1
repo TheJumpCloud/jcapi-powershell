@@ -30,6 +30,12 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
+    [System.Management.Automation.SwitchParameter]
+    # [EXPERIMENTAL] Allow empty fields of the user object to be sent in the response
+    ${AllowEmptyFields}, 
+
+    [Parameter()]
+    [JumpCloud.SDK.V2.Category('Query')]
     [System.String]
     # Google Directory API sort field parameter.
     # See https://developers.google.com/admin-sdk/directory/reference/rest/v1/users/list.
