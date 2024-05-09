@@ -25,7 +25,7 @@ Describe 'New-JcSdkProviderAdministrator' -Tag:("MTP") {
     }
 
     It 'Create' {
-        { $global:PesterTestProviderAdmin = New-JcsdkProviderAdministrator -Body $global:PesterDefProviderAdmin -ProviderId $env:JCProviderId -roleName "Help Desk"} | Should -Not -Throw
+        { $global:PesterTestProviderAdmin = New-JcsdkProviderAdministrator -Body $global:PesterDefProviderAdmin -ProviderId $env:JCProviderId } | Should -Not -Throw
         $global:PesterTestProviderAdmin | Should -Not -BeNullOrEmpty
     }
 
