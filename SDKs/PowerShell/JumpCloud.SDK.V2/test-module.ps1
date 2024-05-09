@@ -270,12 +270,14 @@ If ($moduleName -eq 'JumpCloud.SDK.V2' -and "MTP" -notin $Env:IncludeTagList)
             }
         )
     }
+    $global:pesterDefBulkUpdateUsername = "PesterBulkUser-$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
+    $BulkUserUpdateUser = New-JCSdkUser -Email "$($global:pesterDefBulkUpdateUsername)@example$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ })).com" -Username $global:pesterDefBulkUpdateUsername -Firstname "BulkUserUpdate" -LastName "BulkUserUpdate"
     $global:PesterDefUpdateBulkUser = [JumpCloud.SDK.V2.Models.BulkUserUpdate]@{
-        Id        = $global:PesterTestBulkUserJobId.Id
-        Email     = "$($global:pesterDefBulkUsername)@example$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ })).com";
-        Firstname = $global:pesterDefBulkUsername; ;
-        Lastname  = $global:pesterDefBulkUsername; ;
-        Username  = $global:pesterDefBulkUsername; ;
+        Id        = $BulkUserUpdateUser.Id
+        Email     = "$($global:pesterDefBulkUpdateUsername)@example$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ })).com";
+        Firstname = $global:pesterDefBulkUpdateUsername; ;
+        Lastname  = $global:pesterDefBulkUpdateUsername; ;
+        Username  = $global:pesterDefBulkUpdateUsername; ;
         AccountLocked                  = $false
         Activated                      = $true
         Addresses = @(
