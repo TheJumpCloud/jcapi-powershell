@@ -904,10 +904,12 @@ $SDKName | ForEach-Object {
 
                         }
                         Invoke-Expression -Command ('$SwaggerObject.' + "$($overrideDef)" + '=' + '$configOverride' )
+                        $SwaggerObject = $SwaggerObject | Convertto-Json -depth 100
                     } else {
                         Write-Warning "$overrideDef not found in /CustomDefinitions directory, did you forget to define the json file?"
                     }
                 }
+                $SwaggerObject = $SwaggerObject | ConvertFrom-Json -depth 100
             } else {
                 $SwaggerObject = $SwaggerObject | ConvertFrom-Json -Depth:(100)
             }
