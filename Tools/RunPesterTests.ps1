@@ -251,6 +251,7 @@ If ($moduleName -eq 'JumpCloud.SDK.V1' -or $moduleName -eq 'JumpCloud.SDK.V2' -a
         Email     = "$($global:PesterDefProviderAdminName)@example$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ })).com";
         Firstname = 'AdminFirst'
         Lastname  = 'AdminLast'
+        RoleName  = 'Help Desk'
     }
     # Get admins on an org (Required to test V1 MTP methods)
     $headers = @{
