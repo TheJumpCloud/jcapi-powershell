@@ -245,7 +245,7 @@ If ($moduleName -eq 'JumpCloud.SDK.V2' -and "MTP" -notin $Env:IncludeTagList)
         Description                    = 'some description'
         DisableDeviceMaxLoginAttempts  = $false
         Displayname                    = 'display'
-        EmployeeIdentifier             = '10099289'
+        EmployeeIdentifier             = (Get-Random -min 10000000 -max 99999999)
         EmployeeType                   = 'bulk'
         EnableManagedUid               = $false
         EnableUserPortalMultifactor    = $true
@@ -300,7 +300,7 @@ If ($moduleName -eq 'JumpCloud.SDK.V2' -and "MTP" -notin $Env:IncludeTagList)
         Description                    = 'some description'
         DisableDeviceMaxLoginAttempts  = $false
         Displayname                    = 'display'
-        EmployeeIdentifier             = '10099289'
+        EmployeeIdentifier             = (Get-Random -min 10000000 -max 99999999)
         EmployeeType                   = 'bulk'
         EnableManagedUid               = $false
         EnableUserPortalMultifactor    = $true
