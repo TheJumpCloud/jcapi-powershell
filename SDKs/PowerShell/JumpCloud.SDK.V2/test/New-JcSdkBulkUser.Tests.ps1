@@ -52,7 +52,13 @@ Describe 'New-JcSdkBulkUser' -Tag:(""){
         $bulkUserCreate.MfaConfigured | Should -Be $global:PesterDefBulkUser.MfaConfigured
         $bulkUserCreate.PasswordNeverExpires | Should -Be $global:PesterDefBulkUser.PasswordNeverExpires
         $bulkUserCreate.PasswordlessSudo | Should -Be $global:PesterDefBulkUser.PasswordlessSudo
-        $bulkUserCreate.PhoneNumbers | Should -Be $global:PesterDefBulkUser.PhoneNumbers
+        $global:PesterDefBulkUser.PhoneNumbers | Get-Member -MemberType Property | ForEach-Object {
+            if ($null -eq $($global:PesterDefBulkUser.PhoneNumbers.$($_.Number))){
+                $global:bulkUserCreate.PhoneNumbers.$($_.Number) | Should -BeNullOrEmpty
+            } else {
+                $global:PesterDefBulkUser.PhoneNumbers.$($_.Numbers) | Should -be $bulkUserCreate.PhoneNumbers.$($_.Numbers)
+            }
+        }
         $bulkUserCreate.Username | Should -Be $global:PesterDefBulkUser.Username
     }
 }
