@@ -16,12 +16,18 @@ while(-not $mockingPath) {
 }
 Describe 'Update-JcSdkBulkUser' -Tag:(""){
     It 'Update' {
-        $updateBulkUserJobID = Update-JcSdkBulkUser -Body:($global:PesterDefUpdateBulkUser) | Should -Not -Throw
+        $updateBulkUserJobID = Update-JcSdkBulkUser -Body:($global:PesterDefUpdateBulkUser)
         $updateBulkUserJobID | Should -Not -BeNullOrEmpty
         $bulkUserUpdate = Get-JcSdkUser -Filter "username:`$eq:$($global:PesterDefUpdateBulkUser.username)"
         $bulkUserUpdate.AccountLocked | Should -Be $global:PesterDefUpdateBulkUser.AccountLocked
         $bulkUserUpdate.Activated | Should -Be $global:PesterDefUpdateBulkUser.Activated
-        $bulkUserUpdate.Addresses | Should -Be $global:PesterDefUpdateBulkUser.Addresses
+        $global:PesterDefUpdateBulkUser.Addresses | Get-Member -MemberType Property | ForEach-Object {
+            if ($null -eq $($global:PesterDefUpdateBulkUser.Addresses.$($_.Name))){
+                $global:bulkUserUpdate.Addresses.$($_.Name) | Should -BeNullOrEmpty
+            } else {
+                $global:PesterDefUpdateBulkUser.Addresses.$($_.Name) | Should -be $bulkUserUpdate.Addresses.$($_.Name)
+            }
+        }
         $bulkUserUpdate.AllowPublicKey | Should -Be $global:PesterDefUpdateBulkUser.AllowPublicKey
         #$bulkUserUpdate.AlternateEmail | Should -Be $global:PesterDefUpdateBulkUser.AlternateEmail
         $bulkUserUpdate.Company | Should -Be $global:PesterDefUpdateBulkUser.Company

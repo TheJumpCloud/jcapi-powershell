@@ -21,7 +21,13 @@ Describe 'New-JcSdkBulkUser' -Tag:(""){
         $bulkUserCreate = Get-JcSdkUser -Filter "username:`$eq:$($global:PesterDefBulkUser.username)"
         $bulkUserCreate.AccountLocked | Should -Be $global:PesterDefBulkUser.AccountLocked
         $bulkUserCreate.Activated | Should -Be $global:PesterDefBulkUser.Activated
-        $bulkUserCreate.Addresses | Should -Be $global:PesterDefBulkUser.Addresses
+        $global:PesterDefBulkUser.Addresses | Get-Member -MemberType Property | ForEach-Object {
+            if ($null -eq $($global:PesterDefBulkUser.Addresses.$($_.Name))){
+                $global:bulkUserCreate.Addresses.$($_.Name) | Should -BeNullOrEmpty
+            } else {
+                $global:PesterDefBulkUser.Addresses.$($_.Name) | Should -be $bulkUserCreate.Addresses.$($_.Name)
+            }
+        }
         $bulkUserCreate.AllowPublicKey | Should -Be $global:PesterDefBulkUser.AllowPublicKey
         #$bulkUserCreate.AlternateEmail | Should -Be $global:PesterDefBulkUser.AlternateEmail
         $bulkUserCreate.Company | Should -Be $global:PesterDefBulkUser.Company
