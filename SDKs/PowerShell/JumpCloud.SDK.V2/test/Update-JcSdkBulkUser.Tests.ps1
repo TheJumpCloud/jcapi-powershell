@@ -54,9 +54,9 @@ Describe 'Update-JcSdkBulkUser' -Tag:(""){
         $bulkUserUpdate.PasswordlessSudo | Should -Be $global:PesterDefUpdateBulkUser.PasswordlessSudo
         $global:PesterDefUpdateBulkUser.PhoneNumbers | Get-Member -MemberType Property | ForEach-Object {
             if ($null -eq $($global:PesterDefUpdateBulkUser.PhoneNumbers.$($_.Number))){
-                $global:bulkUserCreate.PhoneNumbers.$($_.Number) | Should -BeNullOrEmpty
+                $bulkUserUpdate.PhoneNumbers.$($_.Number) | Should -BeNullOrEmpty
             } else {
-                $global:PesterDefUpdateBulkUser.PhoneNumbers.$($_.Numbers) | Should -be $bulkUserCreate.PhoneNumbers.$($_.Numbers)
+                $bulkUserUpdate.PhoneNumbers.$($_.Numbers) | Should -be $global:PesterDefUpdateBulkUser.PhoneNumbers.$($_.Numbers)
             }
         }
         $bulkUserUpdate.Username | Should -Be $global:PesterDefUpdateBulkUser.Username
