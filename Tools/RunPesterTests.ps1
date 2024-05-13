@@ -184,11 +184,11 @@ If ($moduleName -eq 'JumpCloud.SDK.V2' -and "MTP" -notin $Env:IncludeTagList)
         ExternallyManaged              = $false
         JobTitle                       = 'bulk'
         LdapBindingUser                = $false
-        Location                       = 'dingapore'
+        Location                       = 'Singapore'
         ManagedAppleId                 = 'bulkUser11234@alderaan2.org'
         Manager                        = $(Get-JCSdkUser | Select-Object -First 1).Id
-        MfaConfigured                  = $true
-        MfaExclusionDays               = 5
+        MfaExclusion                   = $true
+        MfaExclusionDays               = ((Get-Date).AddDays(+7))
         Password                       = 'T#st1234'
         PasswordNeverExpires           = $false
         PasswordlessSudo               = $false
@@ -212,7 +212,7 @@ If ($moduleName -eq 'JumpCloud.SDK.V2' -and "MTP" -notin $Env:IncludeTagList)
         Lastname  = $global:pesterDefBulkUpdateUsername; ;
         Username  = $global:pesterDefBulkUpdateUsername; ;
         AccountLocked                  = $false
-        Activated                      = $true
+        State                          = "SUSPENDED"
         Addresses = @(
             @{
                 streetAddress = "8080 Testing Ave"
@@ -239,11 +239,11 @@ If ($moduleName -eq 'JumpCloud.SDK.V2' -and "MTP" -notin $Env:IncludeTagList)
         ExternallyManaged              = $false
         JobTitle                       = 'bulk'
         LdapBindingUser                = $false
-        Location                       = 'dingapore'
+        Location                       = 'Singapore'
         ManagedAppleId                 = 'bulkUser11234@alderaan2.org'
         Manager                        = $(Get-JCSdkUser | Select-Object -First 1).Id
-        MfaConfigured                  = $true
-        MfaExclusionDays               = 5
+        MfaExclusion                   = $true
+        MfaExclusionUntil              = ((Get-Date).AddDays(+7))
         Password                       = 'T#st1234'
         PasswordNeverExpires           = $false
         PasswordlessSudo               = $false

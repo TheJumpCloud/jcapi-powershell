@@ -18,9 +18,17 @@ Describe 'Update-JcSdkBulkUser' -Tag:(""){
     It 'Update' {
         $updateBulkUserJobID = Update-JcSdkBulkUser -Body:($global:PesterDefUpdateBulkUser)
         $updateBulkUserJobID | Should -Not -BeNullOrEmpty
+
+        $result = Get-JcsdkbulkUsersResult -jobid $updateBulkUserJobID
+        do {
+            write-host "running"
+            $result = Get-JcsdkbulkUsersResult -jobid $updateBulkUserJobID
+            Start-Sleep 1
+        } until ($result.Status -eq 'Finished')
+
         $bulkUserUpdate = Get-JcSdkUser -Filter "username:`$eq:$($global:PesterDefUpdateBulkUser.username)"
         $bulkUserUpdate.AccountLocked | Should -Be $global:PesterDefUpdateBulkUser.AccountLocked
-        $bulkUserUpdate.Activated | Should -Be $global:PesterDefUpdateBulkUser.Activated
+        $bulkUserUpdate.State | Should -Be $global:PesterDefUpdateBulkUser.State
         $global:PesterDefUpdateBulkUser.Addresses | Get-Member -MemberType Property | ForEach-Object {
             if ($null -eq $($global:PesterDefUpdateBulkUser.Addresses.$($_.Name))){
                 $global:bulkUserUpdate.Addresses.$($_.Name) | Should -BeNullOrEmpty
@@ -49,7 +57,7 @@ Describe 'Update-JcSdkBulkUser' -Tag:(""){
         $bulkUserUpdate.Location | Should -Be $global:PesterDefUpdateBulkUser.Location
         $bulkUserUpdate.ManagedAppleId | Should -Be $global:PesterDefUpdateBulkUser.ManagedAppleId
         $bulkUserUpdate.Manager | Should -Be $global:PesterDefUpdateBulkUser.Manager
-        $bulkUserUpdate.MfaConfigured | Should -Be $global:PesterDefUpdateBulkUser.MfaConfigured
+        $bulkUserCreate.MfaExclusion | Should -Be $global:PesterDefBulkUser.MfaExclusion
         $bulkUserUpdate.PasswordNeverExpires | Should -Be $global:PesterDefUpdateBulkUser.PasswordNeverExpires
         $bulkUserUpdate.PasswordlessSudo | Should -Be $global:PesterDefUpdateBulkUser.PasswordlessSudo
         $global:PesterDefUpdateBulkUser.PhoneNumbers | Get-Member -MemberType Property | ForEach-Object {

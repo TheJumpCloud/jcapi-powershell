@@ -182,6 +182,9 @@
     "password_never_expires": {
         "type": "boolean"
     },
+    "passwordless_sudo": {
+        "type": "boolean"
+    },
     "phoneNumbers": {
         "items": {
         "properties": {

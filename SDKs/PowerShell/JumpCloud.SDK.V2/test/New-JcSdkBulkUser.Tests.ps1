@@ -18,6 +18,14 @@ Describe 'New-JcSdkBulkUser' -Tag:(""){
     It 'Create' {
         $global:PesterTestBulkUserJobId =  New-JcSdkBulkUser -Body:($global:PesterDefBulkUser) -CreationSource:('jumpcloud:bulk')
         { $global:PesterTestBulkUserJobId } | Should -Not -BeNullOrEmpty
+
+        $result = Get-JcsdkbulkUsersResult -jobid $PesterTestBulkUserJobId
+        do {
+            write-host "running"
+            $result = Get-JcsdkbulkUsersResult -jobid $PesterTestBulkUserJobId
+            Start-Sleep 1
+        } until ($result.Status -eq 'Finished')
+
         $bulkUserCreate = Get-JcSdkUser -Filter "username:`$eq:$($global:PesterDefBulkUser.username)"
         $bulkUserCreate.AccountLocked | Should -Be $global:PesterDefBulkUser.AccountLocked
         $bulkUserCreate.Activated | Should -Be $global:PesterDefBulkUser.Activated
@@ -49,7 +57,7 @@ Describe 'New-JcSdkBulkUser' -Tag:(""){
         $bulkUserCreate.Location | Should -Be $global:PesterDefBulkUser.Location
         $bulkUserCreate.ManagedAppleId | Should -Be $global:PesterDefBulkUser.ManagedAppleId
         $bulkUserCreate.Manager | Should -Be $global:PesterDefBulkUser.Manager
-        $bulkUserCreate.MfaConfigured | Should -Be $global:PesterDefBulkUser.MfaConfigured
+        $bulkUserCreate.MfaExclusion | Should -Be $global:PesterDefBulkUser.MfaExclusion
         $bulkUserCreate.PasswordNeverExpires | Should -Be $global:PesterDefBulkUser.PasswordNeverExpires
         $bulkUserCreate.PasswordlessSudo | Should -Be $global:PesterDefBulkUser.PasswordlessSudo
         $global:PesterDefBulkUser.PhoneNumbers | Get-Member -MemberType Property | ForEach-Object {
