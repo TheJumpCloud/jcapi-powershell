@@ -143,29 +143,32 @@ BODY <IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema>:
     [NewSystemUserStateDefaultCsvImport <String>]:
     [NewSystemUserStateDefaultManualEntry <String>]:
     [PasswordCompliance <String>]:
-    [PasswordPolicyAllowUsernameSubstring <Boolean?>]:
-    [PasswordPolicyDaysAfterExpirationToSelfRecover <Int32?>]: Deprecated field used for the legacy grace period feature.
-    [PasswordPolicyDaysBeforeExpirationToForceReset <Int32?>]:
-    [PasswordPolicyEffectiveDate <String>]:
-    [PasswordPolicyEnableDaysAfterExpirationToSelfRecover <Boolean?>]:
-    [PasswordPolicyEnableDaysBeforeExpirationToForceReset <Boolean?>]:
-    [PasswordPolicyEnableLockoutTimeInSeconds <Boolean?>]:
-    [PasswordPolicyEnableMaxHistory <Boolean?>]:
-    [PasswordPolicyEnableMaxLoginAttempts <Boolean?>]:
-    [PasswordPolicyEnableMinChangePeriodInDays <Boolean?>]:
-    [PasswordPolicyEnableMinLength <Boolean?>]:
-    [PasswordPolicyEnablePasswordExpirationInDays <Boolean?>]:
-    [PasswordPolicyGracePeriodDate <String>]:
-    [PasswordPolicyLockoutTimeInSeconds <Int32?>]:
-    [PasswordPolicyMaxHistory <Int32?>]:
-    [PasswordPolicyMaxLoginAttempts <Int32?>]:
-    [PasswordPolicyMinChangePeriodInDays <Int32?>]:
-    [PasswordPolicyMinLength <Int32?>]:
-    [PasswordPolicyNeedsLowercase <Boolean?>]:
-    [PasswordPolicyNeedsNumeric <Boolean?>]:
-    [PasswordPolicyNeedsSymbolic <Boolean?>]:
-    [PasswordPolicyNeedsUppercase <Boolean?>]:
-    [PasswordPolicyPasswordExpirationInDays <Int32?>]:
+    [PasswordPolicy <IOrganizationsettingsputPasswordPolicy>]:
+      [AllowUsernameSubstring <Boolean?>]:
+      [DaysAfterExpirationToSelfRecover <Int32?>]: Deprecated field used for the legacy grace period feature.
+      [DaysBeforeExpirationToForceReset <Int32?>]:
+      [DisallowCommonlyUsedPasswords <Boolean?>]:
+      [DisallowSequentialOrRepetitiveChars <Boolean?>]:
+      [EffectiveDate <String>]:
+      [EnableDaysAfterExpirationToSelfRecover <Boolean?>]:
+      [EnableDaysBeforeExpirationToForceReset <Boolean?>]:
+      [EnableLockoutTimeInSeconds <Boolean?>]:
+      [EnableMaxHistory <Boolean?>]:
+      [EnableMaxLoginAttempts <Boolean?>]:
+      [EnableMinChangePeriodInDays <Boolean?>]:
+      [EnableMinLength <Boolean?>]:
+      [EnablePasswordExpirationInDays <Boolean?>]:
+      [GracePeriodDate <String>]:
+      [LockoutTimeInSeconds <Int32?>]:
+      [MaxHistory <Int32?>]:
+      [MaxLoginAttempts <Int32?>]:
+      [MinChangePeriodInDays <Int32?>]:
+      [MinLength <Int32?>]:
+      [NeedsLowercase <Boolean?>]:
+      [NeedsNumeric <Boolean?>]:
+      [NeedsSymbolic <Boolean?>]:
+      [NeedsUppercase <Boolean?>]:
+      [PasswordExpirationInDays <Int32?>]:
     [ShowIntro <Boolean?>]:
     [SystemInsightCreatedAt <String>]:
     [SystemInsightEnableNewDarwin <Boolean?>]:
@@ -214,29 +217,32 @@ SETTINGS <IOrganizationsettingsput>:
   [NewSystemUserStateDefaultCsvImport <String>]:
   [NewSystemUserStateDefaultManualEntry <String>]:
   [PasswordCompliance <String>]:
-  [PasswordPolicyAllowUsernameSubstring <Boolean?>]:
-  [PasswordPolicyDaysAfterExpirationToSelfRecover <Int32?>]: Deprecated field used for the legacy grace period feature.
-  [PasswordPolicyDaysBeforeExpirationToForceReset <Int32?>]:
-  [PasswordPolicyEffectiveDate <String>]:
-  [PasswordPolicyEnableDaysAfterExpirationToSelfRecover <Boolean?>]:
-  [PasswordPolicyEnableDaysBeforeExpirationToForceReset <Boolean?>]:
-  [PasswordPolicyEnableLockoutTimeInSeconds <Boolean?>]:
-  [PasswordPolicyEnableMaxHistory <Boolean?>]:
-  [PasswordPolicyEnableMaxLoginAttempts <Boolean?>]:
-  [PasswordPolicyEnableMinChangePeriodInDays <Boolean?>]:
-  [PasswordPolicyEnableMinLength <Boolean?>]:
-  [PasswordPolicyEnablePasswordExpirationInDays <Boolean?>]:
-  [PasswordPolicyGracePeriodDate <String>]:
-  [PasswordPolicyLockoutTimeInSeconds <Int32?>]:
-  [PasswordPolicyMaxHistory <Int32?>]:
-  [PasswordPolicyMaxLoginAttempts <Int32?>]:
-  [PasswordPolicyMinChangePeriodInDays <Int32?>]:
-  [PasswordPolicyMinLength <Int32?>]:
-  [PasswordPolicyNeedsLowercase <Boolean?>]:
-  [PasswordPolicyNeedsNumeric <Boolean?>]:
-  [PasswordPolicyNeedsSymbolic <Boolean?>]:
-  [PasswordPolicyNeedsUppercase <Boolean?>]:
-  [PasswordPolicyPasswordExpirationInDays <Int32?>]:
+  [PasswordPolicy <IOrganizationsettingsputPasswordPolicy>]:
+    [AllowUsernameSubstring <Boolean?>]:
+    [DaysAfterExpirationToSelfRecover <Int32?>]: Deprecated field used for the legacy grace period feature.
+    [DaysBeforeExpirationToForceReset <Int32?>]:
+    [DisallowCommonlyUsedPasswords <Boolean?>]:
+    [DisallowSequentialOrRepetitiveChars <Boolean?>]:
+    [EffectiveDate <String>]:
+    [EnableDaysAfterExpirationToSelfRecover <Boolean?>]:
+    [EnableDaysBeforeExpirationToForceReset <Boolean?>]:
+    [EnableLockoutTimeInSeconds <Boolean?>]:
+    [EnableMaxHistory <Boolean?>]:
+    [EnableMaxLoginAttempts <Boolean?>]:
+    [EnableMinChangePeriodInDays <Boolean?>]:
+    [EnableMinLength <Boolean?>]:
+    [EnablePasswordExpirationInDays <Boolean?>]:
+    [GracePeriodDate <String>]:
+    [LockoutTimeInSeconds <Int32?>]:
+    [MaxHistory <Int32?>]:
+    [MaxLoginAttempts <Int32?>]:
+    [MinChangePeriodInDays <Int32?>]:
+    [MinLength <Int32?>]:
+    [NeedsLowercase <Boolean?>]:
+    [NeedsNumeric <Boolean?>]:
+    [NeedsSymbolic <Boolean?>]:
+    [NeedsUppercase <Boolean?>]:
+    [PasswordExpirationInDays <Int32?>]:
   [ShowIntro <Boolean?>]:
   [SystemInsightCreatedAt <String>]:
   [SystemInsightEnableNewDarwin <Boolean?>]:

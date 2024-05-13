@@ -188,6 +188,16 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [CmdletBinding(DefaultParameterSetName='Create', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter()]
+    [JumpCloud.SDK.V2.Category('Query')]
+    [System.Management.Automation.SwitchParameter]
+    # An option indicating whether to suppress the job results email that will
+    # otherwise be sent to the Administrator who created the job.
+    # If true, the
+    # email won't be sent.
+    # If omitted or false, the email will be sent.
+    ${SuppressEmail}, 
+
+    [Parameter()]
     [ArgumentCompleter([JumpCloud.SDK.V2.Support.CreationSource2])]
     [JumpCloud.SDK.V2.Category('Header')]
     [JumpCloud.SDK.V2.Support.CreationSource2]

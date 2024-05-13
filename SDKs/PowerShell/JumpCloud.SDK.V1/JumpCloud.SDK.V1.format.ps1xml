@@ -5822,6 +5822,12 @@
             <Label>DaysBeforeExpirationToForceReset</Label>
           </TableColumnHeader>
           <TableColumnHeader>
+            <Label>DisallowCommonlyUsedPasswords</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>DisallowSequentialOrRepetitiveChars</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
             <Label>EffectiveDate</Label>
           </TableColumnHeader>
           <TableColumnHeader>
@@ -5902,6 +5908,12 @@
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>DaysBeforeExpirationToForceReset</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>DisallowCommonlyUsedPasswords</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>DisallowSequentialOrRepetitiveChars</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>EffectiveDate</PropertyName>
@@ -6248,6 +6260,12 @@
             <Label>DaysBeforeExpirationToForceReset</Label>
           </TableColumnHeader>
           <TableColumnHeader>
+            <Label>DisallowCommonlyUsedPasswords</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>DisallowSequentialOrRepetitiveChars</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
             <Label>EffectiveDate</Label>
           </TableColumnHeader>
           <TableColumnHeader>
@@ -6319,6 +6337,12 @@
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>DaysBeforeExpirationToForceReset</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>DisallowCommonlyUsedPasswords</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>DisallowSequentialOrRepetitiveChars</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>EffectiveDate</PropertyName>

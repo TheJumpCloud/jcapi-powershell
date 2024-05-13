@@ -41,7 +41,7 @@ curl -X PATCH https://console.jumpcloud.com/api/v2/bulk/users \\
 ## SYNTAX
 
 ```
-Update-JcSdkBulkUser -Body <IBulkUserUpdate[]> [-Confirm] [-WhatIf] [<CommonParameters>]
+Update-JcSdkBulkUser -Body <IBulkUserUpdate[]> [-SuppressEmail] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -106,6 +106,25 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -SuppressEmail
+An option indicating whether to suppress the job results email that will
+otherwise be sent to the Administrator who created the job.
+If true, the
+email won't be sent.
+If omitted or false, the email will be sent.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 

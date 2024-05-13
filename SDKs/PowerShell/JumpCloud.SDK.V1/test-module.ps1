@@ -245,7 +245,7 @@ If ($moduleName -eq 'JumpCloud.SDK.V2' -and "MTP" -notin $Env:IncludeTagList)
         Description                    = 'some description'
         DisableDeviceMaxLoginAttempts  = $false
         Displayname                    = 'display'
-        EmployeeIdentifier             = '10099289'
+        EmployeeIdentifier             = (Get-Random -min 10000000 -max 99999999)
         EmployeeType                   = 'bulk'
         EnableManagedUid               = $false
         EnableUserPortalMultifactor    = $true
@@ -256,6 +256,7 @@ If ($moduleName -eq 'JumpCloud.SDK.V2' -and "MTP" -notin $Env:IncludeTagList)
         ManagedAppleId                 = 'bulkUser11234@alderaan2.org'
         Manager                        = $(Get-JCSdkUser | Select-Object -First 1).Id
         MfaConfigured                  = $true
+        MfaExclusionDays               = 5
         Password                       = 'T#st1234'
         PasswordNeverExpires           = $false
         PasswordlessSudo               = $false
@@ -299,7 +300,7 @@ If ($moduleName -eq 'JumpCloud.SDK.V2' -and "MTP" -notin $Env:IncludeTagList)
         Description                    = 'some description'
         DisableDeviceMaxLoginAttempts  = $false
         Displayname                    = 'display'
-        EmployeeIdentifier             = '10099289'
+        EmployeeIdentifier             = (Get-Random -min 10000000 -max 99999999)
         EmployeeType                   = 'bulk'
         EnableManagedUid               = $false
         EnableUserPortalMultifactor    = $true
@@ -310,6 +311,7 @@ If ($moduleName -eq 'JumpCloud.SDK.V2' -and "MTP" -notin $Env:IncludeTagList)
         ManagedAppleId                 = 'bulkUser11234@alderaan2.org'
         Manager                        = $(Get-JCSdkUser | Select-Object -First 1).Id
         MfaConfigured                  = $true
+        MfaExclusionDays               = 5
         Password                       = 'T#st1234'
         PasswordNeverExpires           = $false
         PasswordlessSudo               = $false
@@ -411,6 +413,7 @@ If ($moduleName -eq 'JumpCloud.SDK.V1' -or $moduleName -eq 'JumpCloud.SDK.V2' -a
         Email     = "$($global:PesterDefProviderAdminName)@example$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ })).com";
         Firstname = 'AdminFirst'
         Lastname  = 'AdminLast'
+        RoleName  = 'Help Desk'
     }
     # Get admins on an org (Required to test V1 MTP methods)
     $headers = @{

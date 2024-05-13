@@ -2701,7 +2701,7 @@
         "amountPaid": "10.9",
         "amountRemaining": "189.1",
         "currency": "USD",
-        "dueDate": "2021-08-07",
+        "dueDate": "2021-08-07T00:00:00",
         "id": "234324",
         "status": "Partially Paid"
       },
@@ -5691,7 +5691,7 @@
         "bundle_short_version": "2.4",
         "bundle_version": "658.1",
         "category": "public.app-category.utilities",
-        "collection_time": "2019-06-03T19:41:30.658Z",
+        "collection_time": "2019-06-03T13:41:30.658-06:00",
         "compiler": "com.apple.compilers.llvm.clang.1_0",
         "copyright": "",
         "development_region": "English",
@@ -5968,7 +5968,7 @@
     },
     "system-insights-bitlocker-info": {
       "example": {
-        "collection_time": "2019-06-03T19:41:30.658Z",
+        "collection_time": "2019-06-03T13:41:30.658-06:00",
         "conversion_status": 0,
         "devide_id": "\\\\\\\\?\\\\Volume{3ba5cc52-e0fd-45fa-b8b8-5c88f44f8b17}\\",
         "drive_letter": "C:",
@@ -6008,7 +6008,7 @@
     },
     "system-insights-browser-plugins": {
       "example": {
-        "collection_time": "2019-06-03T19:41:30.858Z",
+        "collection_time": "2019-06-03T13:41:30.858-06:00",
         "description": "LastPass Plugin",
         "development_region": "en-US",
         "disabled": 0,
@@ -6186,7 +6186,7 @@
     "system-insights-chrome-extensions": {
       "example": {
         "author": "",
-        "collection_time": "2019-06-03t19:41:31.125z",
+        "collection_time": "2019-06-03T13:41:31.125-06:00",
         "description": "provider for discovery and services for mirroring of chrome media router",
         "identifier": "pkedcjkdefgpdelpbcmbmeomcjbeemfm",
         "locale": "en",
@@ -6360,7 +6360,7 @@
     },
     "system-insights-disk-encryption": {
       "example": {
-        "collection_time": "2019-06-03T19:41:31.557Z",
+        "collection_time": "2019-06-03T13:41:31.557-06:00",
         "encrypted": 0,
         "encryption_status": "undefined",
         "name": "/dev/disk8",
@@ -6404,7 +6404,7 @@
     },
     "system-insights-disk-info": {
       "example": {
-        "collection_time": "2019-06-03T19:41:30.658Z",
+        "collection_time": "2019-06-03T13:41:30.658-06:00",
         "description": "Disk drive",
         "disk_index": 0,
         "disk_size": "64420392960",
@@ -6492,7 +6492,7 @@
     "system-insights-etc-hosts": {
       "example": {
         "address": "192.168.2.21",
-        "collection_time": "2019-06-03T19:41:30.658Z",
+        "collection_time": "2019-06-03T13:41:30.658-06:00",
         "hostnames": "hosty hosty.local",
         "system_id": "5c9e51a13c5146f89bae12d9"
       },
@@ -6517,7 +6517,7 @@
       "example": {
         "active": 1,
         "autoupdate": 1,
-        "collection_time": "2019-06-03T19:41:31.204Z",
+        "collection_time": "2019-06-03T13:41:31.204-06:00",
         "creator": "null",
         "description": "",
         "disabled": 0,
@@ -6587,7 +6587,7 @@
     },
     "system-insights-groups": {
       "example": {
-        "collection_time": "2019-06-03T19:41:31.673Z",
+        "collection_time": "2019-06-03T13:41:31.673-06:00",
         "comment": "",
         "gid": "701",
         "gid_signed": "701",
@@ -6649,7 +6649,7 @@
       "example": {
         "address": "::1",
         "broadcast": "",
-        "collection_time": "2019-06-03T19:41:31.008Z",
+        "collection_time": "2019-06-03T13:41:31.008-06:00",
         "friendly_name": "",
         "interface": "lo0",
         "mask": "ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff",
@@ -6990,7 +6990,7 @@
     "system-insights-logical-drives": {
       "example": {
         "boot_partition": 0,
-        "collection_time": "2019-06-03T19:41:30.658Z",
+        "collection_time": "2019-06-03T13:41:30.658-06:00",
         "device_id": "C:",
         "file_system": "NTFS",
         "free_space": "43194331136",
@@ -7063,7 +7063,7 @@
         "blocks_available": "95135",
         "blocks_free": "95135",
         "blocks_size": "4096",
-        "collection_time": "2019-06-03T19:41:31.746Z",
+        "collection_time": "2019-06-03T13:41:31.746-06:00",
         "device": "/dev/disk5s1",
         "device_alias": "/dev/disk5s1",
         "flags": "70292505",
@@ -7121,7 +7121,7 @@
       "example": {
         "build": "17G65",
         "codename": "",
-        "collection_time": "2019-06-03T19:41:30.933Z",
+        "collection_time": "2019-06-03T13:41:30.933-06:00",
         "install_date": "",
         "major": 10,
         "minor": 13,
@@ -7176,7 +7176,7 @@
     "system-insights-patches": {
       "example": {
         "caption": "http://support.microsoft.com/?kbid=4503308",
-        "collection_time": "2019-06-03T19:41:31.673Z",
+        "collection_time": "2019-06-03T13:41:31.673-06:00",
         "csname": "DESKTOP-B17DUKP",
         "description": "Security Update",
         "fix_comments": "",
@@ -7223,7 +7223,7 @@
     },
     "system-insights-programs": {
       "example": {
-        "collection_time": "2019-06-03T19:41:31.673Z",
+        "collection_time": "2019-06-03T13:41:31.673-06:00",
         "identifying_number": "{2E8B8BDD-03DF-4C1C-8C99-E6A4BCBF43CE}",
         "install_date": "20190724",
         "install_location": "",
@@ -7304,7 +7304,7 @@
     "system-insights-safari-extensions": {
       "example": {
         "author": "Eyeo GmbH",
-        "collection_time": "2019-05-16T18:58:15.673Z",
+        "collection_time": "2019-05-16T12:58:15.673-06:00",
         "description": "Used by over 50 million people, a free ad blocker that blocks ALL annoying ads, malware and tracking.",
         "developer_id": "GRYYZR985A",
         "identifier": "org.adblockplus.adblockplussafari",
@@ -7679,7 +7679,7 @@
     },
     "system-insights-system-info": {
       "example": {
-        "collection_time": "2019-06-03T19:41:30.771Z",
+        "collection_time": "2019-06-03T13:41:30.771-06:00",
         "computer_name": "Johnny's MacBook Pro (2)",
         "cpu_brand": "Intel(R) Core(TM) i7-7820HQ CPU @ 2.90GHz",
         "cpu_logical_cores": 8,
@@ -7932,7 +7932,7 @@
     },
     "system-insights-users": {
       "example": {
-        "collection_time": "2019-06-03T19:41:29.71Z",
+        "collection_time": "2019-06-03T13:41:29.71-06:00",
         "description": "AppleEvents Daemon",
         "directory": "/var/empty",
         "gid": "55",
@@ -8316,6 +8316,12 @@
       "name": "resource_type",
       "required": true,
       "type": "string"
+    },
+    "trait:bulkJobQueryParameters:suppressEmail": {
+      "description": "An option indicating whether to suppress the job results email that will\notherwise be sent to the Administrator who created the job. If true, the\nemail won't be sent. If omitted or false, the email will be sent.\n",
+      "in": "query",
+      "name": "suppressEmail",
+      "type": "boolean"
     },
     "trait:fields:fields": {
       "default": [],
@@ -11179,6 +11185,9 @@
         "operationId": "BulkUsers_Update",
         "parameters": [
           {
+            "$ref": "#/parameters/trait:bulkJobQueryParameters:suppressEmail"
+          },
+          {
             "in": "body",
             "name": "body",
             "schema": {
@@ -11206,15 +11215,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request PATCH \\\n  --url https://console.jumpcloud.com/api/v2/bulk/users \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --data '[{\"attributes\":[{}],\"email\":\"string\",\"firstname\":\"string\",\"id\":\"string\",\"lastname\":\"string\",\"organization\":\"string\",\"username\":\"string\"}]'"
+            "source": "curl --request PATCH \\\n  --url 'https://console.jumpcloud.com/api/v2/bulk/users?suppressEmail=SOME_BOOLEAN_VALUE' \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --data '[{\"attributes\":[{}],\"email\":\"string\",\"firstname\":\"string\",\"id\":\"string\",\"lastname\":\"string\",\"organization\":\"string\",\"username\":\"string\"}]'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/v2/bulk/users\"\n\npayload = [\n    {\n        \"attributes\": [{}],\n        \"email\": \"string\",\n        \"firstname\": \"string\",\n        \"id\": \"string\",\n        \"lastname\": \"string\",\n        \"organization\": \"string\",\n        \"username\": \"string\"\n    }\n]\nheaders = {\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"PATCH\", url, json=payload, headers=headers)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/v2/bulk/users\"\n\nquerystring = {\"suppressEmail\":\"SOME_BOOLEAN_VALUE\"}\n\npayload = [\n    {\n        \"attributes\": [{}],\n        \"email\": \"string\",\n        \"firstname\": \"string\",\n        \"id\": \"string\",\n        \"lastname\": \"string\",\n        \"organization\": \"string\",\n        \"username\": \"string\"\n    }\n]\nheaders = {\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"PATCH\", url, json=payload, headers=headers, params=querystring)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/v2/bulk/users' -Method PATCH -Headers $headers -ContentType 'application/json' -Body '[{\"attributes\":[{}],\"email\":\"string\",\"firstname\":\"string\",\"id\":\"string\",\"lastname\":\"string\",\"organization\":\"string\",\"username\":\"string\"}]'"
+            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/v2/bulk/users?suppressEmail=SOME_BOOLEAN_VALUE' -Method PATCH -Headers $headers -ContentType 'application/json' -Body '[{\"attributes\":[{}],\"email\":\"string\",\"firstname\":\"string\",\"id\":\"string\",\"lastname\":\"string\",\"organization\":\"string\",\"username\":\"string\"}]'"
           }
         ]
       },
@@ -11222,6 +11231,9 @@
         "description": "The endpoint allows you to create a bulk job to asynchronously create users.\nSee [Create a System User](https://docs.jumpcloud.com/api/1.0/index.html#operation/systemusers_post)\nfor the full list of attributes.\n\n#### Default User State\nThe `state` of each user in the request can be explicitly passed in or\nomitted. If `state` is omitted, then the user will get created\nusing the value returned from the\n[Get an Organization](https://docs.jumpcloud.com/api/1.0/index.html#operation/organizations_get)\nendpoint. The default user state for bulk created users depends on the\n`creation-source` header. For `creation-source:jumpcloud:bulk` the\ndefault state is stored in `settings.newSystemUserStateDefaults.csvImport`.\nFor other `creation-source` header values, the default state is stored in\n`settings.newSystemUserStateDefaults.applicationImport`\n\nThese default state values can be changed in the admin portal settings\nor by using the\n[Update an Organization](https://docs.jumpcloud.com/api/1.0/index.html#operation/organization_put)\nendpoint.\n\n#### Sample Request\n\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/bulk/users \\\n-H 'Accept: application/json' \\\n-H 'Content-Type: application/json' \\\n-H 'x-api-key: {API_KEY}' \\\n-d '[\n  {\n    \"email\":\"{email}\",\n    \"firstname\":\"{firstname}\",\n    \"lastname\":\"{firstname}\",\n    \"username\":\"{username}\",\n    \"attributes\":[\n      {\n        \"name\":\"EmployeeID\",\n        \"value\":\"0000\"\n      },\n      {\n        \"name\":\"Custom\",\n        \"value\":\"attribute\"\n      }\n    ]\n  }\n]'\n```",
         "operationId": "BulkUsers_Create",
         "parameters": [
+          {
+            "$ref": "#/parameters/trait:bulkJobQueryParameters:suppressEmail"
+          },
           {
             "in": "body",
             "name": "body",
@@ -11268,15 +11280,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request POST \\\n  --url https://console.jumpcloud.com/api/v2/bulk/users \\\n  --header 'content-type: application/json' \\\n  --header 'creation-source: jumpcloud:bulk' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --data '[{\"attributes\":[{}],\"email\":\"string\",\"firstname\":\"string\",\"lastname\":\"string\",\"username\":\"string\"}]'"
+            "source": "curl --request POST \\\n  --url 'https://console.jumpcloud.com/api/v2/bulk/users?suppressEmail=SOME_BOOLEAN_VALUE' \\\n  --header 'content-type: application/json' \\\n  --header 'creation-source: jumpcloud:bulk' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --data '[{\"attributes\":[{}],\"email\":\"string\",\"firstname\":\"string\",\"lastname\":\"string\",\"username\":\"string\"}]'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/v2/bulk/users\"\n\npayload = [\n    {\n        \"attributes\": [{}],\n        \"email\": \"string\",\n        \"firstname\": \"string\",\n        \"lastname\": \"string\",\n        \"username\": \"string\"\n    }\n]\nheaders = {\n    \"creation-source\": \"jumpcloud:bulk\",\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/v2/bulk/users\"\n\nquerystring = {\"suppressEmail\":\"SOME_BOOLEAN_VALUE\"}\n\npayload = [\n    {\n        \"attributes\": [{}],\n        \"email\": \"string\",\n        \"firstname\": \"string\",\n        \"lastname\": \"string\",\n        \"username\": \"string\"\n    }\n]\nheaders = {\n    \"creation-source\": \"jumpcloud:bulk\",\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers, params=querystring)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"creation-source\", \"jumpcloud:bulk\")\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/v2/bulk/users' -Method POST -Headers $headers -ContentType 'application/json' -Body '[{\"attributes\":[{}],\"email\":\"string\",\"firstname\":\"string\",\"lastname\":\"string\",\"username\":\"string\"}]'"
+            "source": "$headers=@{}\n$headers.Add(\"creation-source\", \"jumpcloud:bulk\")\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/v2/bulk/users?suppressEmail=SOME_BOOLEAN_VALUE' -Method POST -Headers $headers -ContentType 'application/json' -Body '[{\"attributes\":[{}],\"email\":\"string\",\"firstname\":\"string\",\"lastname\":\"string\",\"username\":\"string\"}]'"
           }
         ]
       },

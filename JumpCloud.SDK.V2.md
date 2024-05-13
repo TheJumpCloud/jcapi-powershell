@@ -1,5 +1,5 @@
 ## JumpCloud.SDK.V2-0.0.46
-Release Date: May 09, 2024
+Release Date: May 13, 2024
 #### RELEASE NOTES
 ```
 This release fixes the input models for the Update-JcSdkBulkUser and New-JcSdkBulkUser functions
@@ -21,10 +21,7 @@ No changes
 <details>
 <summary>Functions Modified</summary>
 
-* Import-JcSdkWorkday.ps1
-* New-JcSdkBulkUser.ps1
-* Update-JcSdkBulkUser.ps1
-
+No changes
 </details>
 
 <details>
