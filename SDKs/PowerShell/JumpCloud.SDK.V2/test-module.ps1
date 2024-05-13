@@ -280,7 +280,7 @@ If ($moduleName -eq 'JumpCloud.SDK.V2' -and "MTP" -notin $Env:IncludeTagList)
         Lastname  = $global:pesterDefBulkUpdateUsername; ;
         Username  = $global:pesterDefBulkUpdateUsername; ;
         AccountLocked                  = $false
-        State                      = "SUSPENDED"
+        State                          = "SUSPENDED"
         Addresses = @(
             @{
                 streetAddress = "8080 Testing Ave"

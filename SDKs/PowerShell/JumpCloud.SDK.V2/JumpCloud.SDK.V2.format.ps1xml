@@ -1693,6 +1693,9 @@
             <Label>PasswordNeverExpires</Label>
           </TableColumnHeader>
           <TableColumnHeader>
+            <Label>PasswordlessSudo</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
             <Label>PublicKey</Label>
           </TableColumnHeader>
           <TableColumnHeader>
@@ -1809,6 +1812,9 @@
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>PasswordNeverExpires</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>PasswordlessSudo</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>PublicKey</PropertyName>

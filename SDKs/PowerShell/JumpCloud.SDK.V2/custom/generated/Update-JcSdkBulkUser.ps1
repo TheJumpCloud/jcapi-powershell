@@ -124,6 +124,7 @@ BODY <IBulkUserUpdate[]>:
   [Organization <String>]: Organization object id of the user
   [Password <String>]:
   [PasswordNeverExpires <Boolean?>]:
+  [PasswordlessSudo <Boolean?>]:
   [PhoneNumbers <IBulkUserUpdatePhoneNumbersItem[]>]:
     [Number <String>]:
     [Type <String>]:
