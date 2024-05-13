@@ -155,7 +155,7 @@ jobs:
               with:
                 path: "/home/runner/.local/share/powershell/Modules/"
                 key: PS-Dependancies
-            - uses: actions/download-artifact@v3
+            - uses: actions/download-artifact@v4
               with:
                 name: build-${{ matrix.SDKName }}
                 path: /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/
@@ -163,7 +163,7 @@ jobs:
               shell: pwsh
               run: |
                 Expand-Archive -Path /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/${{ matrix.SDKName }}.zip -DestinationPath /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/ -Force
-            - uses: actions/download-artifact@v3
+            - uses: actions/download-artifact@v4
               with:
                 name: build-JumpCloud.SDK.V1
                 path: /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/
@@ -197,7 +197,7 @@ jobs:
               with:
                 path: "/home/runner/.local/share/powershell/Modules/"
                 key: PS-Dependancies
-            - uses: actions/download-artifact@v3
+            - uses: actions/download-artifact@v4
               with:
                 name: build-${{ matrix.SDKName }}
                 path: /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/
@@ -205,7 +205,7 @@ jobs:
               shell: pwsh
               run: |
                 Expand-Archive -Path /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/${{ matrix.SDKName }}.zip -DestinationPath /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/ -Force
-            - uses: actions/download-artifact@v3
+            - uses: actions/download-artifact@v4
               with:
                 name: build-JumpCloud.SDK.V1
                 path: /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/
@@ -240,15 +240,15 @@ jobs:
     #         with:
     #           path: "/home/runner/.local/share/powershell/Modules/"
     #           key: PS-Dependancies
-    #       - uses: actions/download-artifact@v3
+    #       - uses: actions/download-artifact@v4
     #         with:
     #           name: build-JumpCloud.SDK.DirectoryInsights
     #           path: /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/
-    #       - uses: actions/download-artifact@v3
+    #       - uses: actions/download-artifact@v4
     #         with:
     #           name: build-JumpCloud.SDK.V1
     #           path: /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/
-    #       - uses: actions/download-artifact@v3
+    #       - uses: actions/download-artifact@v4
     #         with:
     #           name: build-JumpCloud.SDK.V2
     #           path: /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/
