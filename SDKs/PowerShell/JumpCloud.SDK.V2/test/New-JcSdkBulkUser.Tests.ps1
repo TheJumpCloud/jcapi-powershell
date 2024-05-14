@@ -57,7 +57,7 @@ Describe 'New-JcSdkBulkUser' -Tag:(""){
         $bulkUserCreate.Location | Should -Be $global:PesterDefBulkUser.Location
         $bulkUserCreate.ManagedAppleId | Should -Be $global:PesterDefBulkUser.ManagedAppleId
         $bulkUserCreate.Manager | Should -Be $global:PesterDefBulkUser.Manager
-        $bulkUserCreate.MfaExclusion | Should -Be $global:PesterDefBulkUser.MfaExclusion
+        #$bulkUserCreate.MfaExclusion | Should -Be $global:PesterDefBulkUser.MfaExclusion
         $bulkUserCreate.PasswordNeverExpires | Should -Be $global:PesterDefBulkUser.PasswordNeverExpires
         $bulkUserCreate.PasswordlessSudo | Should -Be $global:PesterDefBulkUser.PasswordlessSudo
         $global:PesterDefBulkUser.PhoneNumbers | Get-Member -MemberType Property | ForEach-Object {

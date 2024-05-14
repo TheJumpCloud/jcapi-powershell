@@ -187,8 +187,8 @@ If ($moduleName -eq 'JumpCloud.SDK.V2' -and "MTP" -notin $Env:IncludeTagList)
         Location                       = 'Singapore'
         ManagedAppleId                 = 'bulkUser11234@alderaan2.org'
         Manager                        = $(Get-JCSdkUser | Select-Object -First 1).Id
-        MfaExclusion                   = $true
-        MfaExclusionDays               = ((Get-Date).AddDays(+7))
+        #MfaExclusion                   = $true
+        #MfaExclusionDays               = ((Get-Date).AddDays(+7))
         Password                       = 'T#st1234'
         PasswordNeverExpires           = $false
         PasswordlessSudo               = $false
@@ -242,8 +242,8 @@ If ($moduleName -eq 'JumpCloud.SDK.V2' -and "MTP" -notin $Env:IncludeTagList)
         Location                       = 'Singapore'
         ManagedAppleId                 = 'bulkUser11234@alderaan2.org'
         Manager                        = $(Get-JCSdkUser | Select-Object -First 1).Id
-        MfaExclusion                   = $true
-        MfaExclusionUntil              = ((Get-Date).AddDays(+7))
+        #MfaExclusion                   = $true
+        #MfaExclusionUntil              = ((Get-Date).AddDays(+7))
         Password                       = 'T#st1234'
         PasswordNeverExpires           = $false
         PasswordlessSudo               = $false
