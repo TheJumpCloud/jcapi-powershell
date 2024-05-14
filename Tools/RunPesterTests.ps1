@@ -202,6 +202,7 @@ If ($moduleName -eq 'JumpCloud.SDK.V2' -and "MTP" -notin $Env:IncludeTagList)
                 type = "mobile"
             }
         )
+        #State                          = "SUSPENDED"
     }
     $global:pesterDefBulkUpdateUsername = "PesterBulkUser-$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
     $BulkUserUpdateUser = New-JCSdkUser -Email "$($global:pesterDefBulkUpdateUsername)@example$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ })).com" -Username $global:pesterDefBulkUpdateUsername -Firstname "BulkUserUpdate" -LastName "BulkUserUpdate"
@@ -212,7 +213,6 @@ If ($moduleName -eq 'JumpCloud.SDK.V2' -and "MTP" -notin $Env:IncludeTagList)
         Lastname  = $global:pesterDefBulkUpdateUsername; ;
         Username  = $global:pesterDefBulkUpdateUsername; ;
         AccountLocked                  = $false
-        State                          = "SUSPENDED"
         Addresses = @(
             @{
                 streetAddress = "8080 Testing Ave"
@@ -257,6 +257,7 @@ If ($moduleName -eq 'JumpCloud.SDK.V2' -and "MTP" -notin $Env:IncludeTagList)
                 type = "mobile"
             }
         )
+        #State                          = "SUSPENDED"
     }
     # Create a Custom Email Configuration
     $global:PesterDefCustomEmailConfiguration = @{
