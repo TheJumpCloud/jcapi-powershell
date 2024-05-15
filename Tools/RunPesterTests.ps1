@@ -52,7 +52,7 @@ If ($moduleName -eq 'JumpCloud.SDK.V1' -or $moduleName -eq 'JumpCloud.SDK.V2' -a
     $randomBookmarkName = "Bookmark$(Get-Random -Maximum 999 -Minimum 100)"
     $global:PesterDefApplication = @{
         Name   = 'bookmark'
-        ssoUrl = 'https://JumpCloud.com'
+        ssoUrl = "https://JumpCloud$(Get-Random -Maximum 999 -Minimum 100).com"
         config = $global:PesterDefApplicationConfig
         DisplayName  = $randomBookmarkName
         DisplayLabel = $randomBookmarkName
