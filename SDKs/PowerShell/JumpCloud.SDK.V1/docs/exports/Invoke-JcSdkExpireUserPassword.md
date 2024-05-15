@@ -30,10 +30,10 @@ This endpoint allows you to expire a user's password.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Invoke-JcSdkExpireUserPassword -Id:(<string>)
 ```
 
-{{ Add output here }}
+
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

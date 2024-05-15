@@ -29,10 +29,14 @@ This endpoint will return a specific System User's public SSH key.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkUserSshKey -Id:(<string>)
 ```
 
-{{ Add output here }}
+----       ----------
+CreateDate String
+Id         String
+Name       String
+PublicKey  String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

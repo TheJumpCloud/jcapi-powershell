@@ -31,10 +31,22 @@ Valid filter fields are `name` and `package_format`.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkSystemInsightLinuxPackage
 ```
 
-{{ Add output here }}
+----                  ----------
+Arch                  String
+InstallTime           Int
+MaintainerOrVendor    String
+MountNamespaceId      String
+Name                  String
+PackageFormat         String
+PackageGroupOrSection String
+PidWithNamespace      Int
+ReleaseOrRevision     String
+Size                  String
+SystemId              String
+Version               String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

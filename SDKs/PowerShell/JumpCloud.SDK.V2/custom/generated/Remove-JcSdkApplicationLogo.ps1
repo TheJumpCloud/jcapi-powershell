@@ -4,9 +4,9 @@ Deletes the specified image from an application
 .Description
 Deletes the specified image from an application
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Remove-JcSdkApplicationLogo -ApplicationId:(<string>)
 
-{{ Add output here }}
+
 .Example
 PS C:\> {{ Add code here }}
 

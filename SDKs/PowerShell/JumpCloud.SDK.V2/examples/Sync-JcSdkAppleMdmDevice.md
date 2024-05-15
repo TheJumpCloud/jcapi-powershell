@@ -1,11 +1,11 @@
-### Example 1: {{ Add title here }}
+### Example 1: Sync an AppleMdmDevice by AppleMdmId
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Sync-JcSdkAppleMdmDevice -AppleMdmId:(<string>)
 
-{{ Add output here }}
+
 ```
 
-{{ Add description here }}
+This function will Sync an AppleMdmDevice by AppleMdmId. AppleMdmId is a required parameter.
 
 ### Example 2: {{ Add title here }}
 ```powershell

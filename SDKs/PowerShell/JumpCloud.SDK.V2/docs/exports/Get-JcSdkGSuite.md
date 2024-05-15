@@ -47,10 +47,17 @@ This endpoint returns a specific G Suite.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkGSuite -Id:(<string>)
 ```
 
-{{ Add output here }}
+----                         ----------
+DefaultDomainDomain          String
+DefaultDomainId              String
+GroupsEnabled                Boolean
+Id                           String
+Name                         String
+UserLockoutAction            String
+UserPasswordExpirationAction String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

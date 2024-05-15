@@ -76,17 +76,17 @@ curl -X POST https://console.jumpcloud.com/api/v2/policygroups/{GroupID}/associa
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Set-JcSdkPolicyGroupAssociation -GroupId:(<string>) -Body:(<JumpCloud.SDK.V2.Models.GraphOperationPolicyGroup>)
 ```
 
-{{ Add output here }}
+
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell
-{{ Add code here }}
+Set-JcSdkPolicyGroupAssociation -GroupId:(<string>) -Id:(<string>) -Op:(<string>) -Type:(<JumpCloud.SDK.V2.Support.GraphOperationPolicyGroup1>) -Attributes:(<hashtable>)
 ```
 
-{{ Add output here }}
+
 
 ## PARAMETERS
 

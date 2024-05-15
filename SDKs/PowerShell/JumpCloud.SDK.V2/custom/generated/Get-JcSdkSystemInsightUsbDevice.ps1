@@ -4,9 +4,27 @@ Valid filter fields are `system_id` and `model`.
 .Description
 Valid filter fields are `system_id` and `model`.
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemInsightUsbDevice
 
-{{ Add output here }}
+
+
+----           ----------
+Class          String
+CollectionTime String
+Model          String
+ModelId        String
+Protocol       String
+Removable      Int
+Serial         String
+Subclass       String
+SystemId       String
+UsbAddress     Int
+UsbPort        Int
+Vendor         String
+VendorId       String
+Version        String
+
+
 .Example
 PS C:\> {{ Add code here }}
 

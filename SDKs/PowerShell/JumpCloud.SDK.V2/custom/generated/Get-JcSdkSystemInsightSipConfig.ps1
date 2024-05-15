@@ -4,9 +4,18 @@ Valid filter fields are `system_id` and `enabled`.
 .Description
 Valid filter fields are `system_id` and `enabled`.
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemInsightSipConfig
 
-{{ Add output here }}
+
+
+----           ----------
+CollectionTime String
+ConfigFlag     String
+Enabled        Int
+EnabledNvram   Int
+SystemId       String
+
+
 .Example
 PS C:\> {{ Add code here }}
 

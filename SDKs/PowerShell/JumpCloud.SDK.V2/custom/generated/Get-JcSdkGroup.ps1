@@ -34,9 +34,19 @@ This endpoint returns all Groups that exist in your organization.
   -H 'x-api-key: {API_KEY}'
 ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkGroup
 
-{{ Add output here }}
+
+
+----        ----------
+Attributes  JumpCloud.SDK.V2.Models.GraphAttributes
+Description String
+Email       String
+Id          String
+Name        String
+Type        String
+
+
 .Example
 PS C:\> {{ Add code here }}
 

@@ -45,10 +45,12 @@ curl -X DELETE https://console.jumpcloud.com/api/v2/duo/accounts/{id} \\
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Remove-JcSdkDuoAccount -Id:(<string>)
 ```
 
-{{ Add output here }}
+---- ----------
+Id   String
+Name String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

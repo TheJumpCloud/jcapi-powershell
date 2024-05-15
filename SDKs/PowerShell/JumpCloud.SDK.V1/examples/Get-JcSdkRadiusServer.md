@@ -1,18 +1,52 @@
-### Example 1: {{ Add title here }}
+### Example 1: List RadiusServers
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkRadiusServer -Fields:(<string>) -Filter:(<string[]>) -Sort:(<string>)
 
-{{ Add output here }}
+
+
+----                         ----------
+AuthIdp                      String
+CaCert                       String
+DeviceCertEnabled            Boolean
+Id                           String
+Mfa                          String
+Name                         String
+NetworkSourceIP              String
+Organization                 String
+SharedSecret                 String
+UserCertEnabled              Boolean
+UserLockoutAction            String
+UserPasswordEnabled          Boolean
+UserPasswordExpirationAction String
+
+
 ```
 
-{{ Add description here }}
+This function will return a list of all RadiusServers. Fields, Filter, and Sort are optional parameters.
 
-### Example 2: {{ Add title here }}
+### Example 2: Get a RadiusServer by Id
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkRadiusServer -Id:(<string>)
 
-{{ Add output here }}
+
+
+----                         ----------
+AuthIdp                      String
+CaCert                       String
+DeviceCertEnabled            Boolean
+Id                           String
+Mfa                          String
+Name                         String
+NetworkSourceIP              String
+Organization                 String
+SharedSecret                 String
+UserCertEnabled              Boolean
+UserLockoutAction            String
+UserPasswordEnabled          Boolean
+UserPasswordExpirationAction String
+
+
 ```
 
-{{ Add description here }}
+This function will Get a RadiusServer by Id. Id is a required parameter.
 

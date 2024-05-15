@@ -47,10 +47,17 @@ curl -X GET https://console.jumpcloud.com/api/v2/systemgroups/{Group_ID}/members
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkSystemGroupMember -GroupId:(<string>)
 ```
 
-{{ Add output here }}
+----           ----------
+Attributes     JumpCloud.SDK.V2.Models.GraphAttributes
+FromAttributes JumpCloud.SDK.V2.Models.GraphAttributes
+FromId         String
+FromType       String
+ToAttributes   JumpCloud.SDK.V2.Models.GraphAttributes
+ToId           String
+ToType         String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

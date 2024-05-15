@@ -23,10 +23,18 @@ Valid filter fields are `system_id` and `device_id`.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkSystemInsightLogicalDrive
 ```
 
-{{ Add output here }}
+----           ----------
+BootPartition  Int
+CollectionTime String
+DeviceId       String
+FileSystem     String
+FreeSpace      String
+Size           String
+SystemId       String
+Type           String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

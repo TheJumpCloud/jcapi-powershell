@@ -1,11 +1,23 @@
-### Example 1: {{ Add title here }}
+### Example 1: List SystemInsightPythonPackages
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemInsightPythonPackage
 
-{{ Add output here }}
+
+
+----      ----------
+Auther    String
+Directory String
+License   String
+Name      String
+Path      String
+Summary   String
+SystemId  String
+Version   String
+
+
 ```
 
-{{ Add description here }}
+This function will return a list of all SystemInsightPythonPackages.
 
 ### Example 2: {{ Add title here }}
 ```powershell

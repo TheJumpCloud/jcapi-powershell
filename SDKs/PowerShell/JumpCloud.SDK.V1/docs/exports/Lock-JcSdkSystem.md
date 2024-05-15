@@ -55,10 +55,10 @@ curl -X POST \\
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Lock-JcSdkSystem -SystemId:(<string>)
 ```
 
-{{ Add output here }}
+
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

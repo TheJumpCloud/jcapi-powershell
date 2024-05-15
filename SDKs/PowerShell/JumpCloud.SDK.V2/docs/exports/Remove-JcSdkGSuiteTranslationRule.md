@@ -51,10 +51,10 @@ curl -X DELETE https://console.jumpcloud.com/api/v2/gsuites/{gsuite_id}/translat
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Remove-JcSdkGSuiteTranslationRule -GsuiteId:(<string>) -Id:(<string>)
 ```
 
-{{ Add output here }}
+
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

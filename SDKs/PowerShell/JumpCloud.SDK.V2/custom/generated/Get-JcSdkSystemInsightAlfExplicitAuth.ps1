@@ -4,9 +4,16 @@ Valid filter fields are `system_id` and `process`.
 .Description
 Valid filter fields are `system_id` and `process`.
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemInsightAlfExplicitAuth
 
-{{ Add output here }}
+
+
+----           ----------
+CollectionTime String
+Process        String
+SystemId       String
+
+
 .Example
 PS C:\> {{ Add code here }}
 

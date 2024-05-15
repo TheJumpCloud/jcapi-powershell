@@ -6,9 +6,9 @@ This request does not accept a body.
 This endpoint initiates a TOTP reset for an admin.
 This request does not accept a body.
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Reset-JcSdkAdministratorUserTotp -Id:(<string>)
 
-{{ Add output here }}
+
 .Example
 PS C:\> {{ Add code here }}
 

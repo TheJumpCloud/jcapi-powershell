@@ -1,11 +1,18 @@
-### Example 1: {{ Add title here }}
+### Example 1: List SystemInsightAlfExplicitAuths
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemInsightAlfExplicitAuth
 
-{{ Add output here }}
+
+
+----           ----------
+CollectionTime String
+Process        String
+SystemId       String
+
+
 ```
 
-{{ Add description here }}
+This function will return a list of all SystemInsightAlfExplicitAuths.
 
 ### Example 2: {{ Add title here }}
 ```powershell

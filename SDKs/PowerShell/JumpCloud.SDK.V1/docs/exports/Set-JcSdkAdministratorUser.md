@@ -44,17 +44,63 @@ This endpoint allows you to update a user.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Set-JcSdkAdministratorUser -Id:(<string>) -Body:(<JumpCloud.SDK.V1.Models.Userput>)
 ```
 
-{{ Add output here }}
+----                       ----------
+ApiKeyAllowed              Boolean
+ApiKeySet                  Boolean
+ApiKeyUpdatedAt            Datetime
+Created                    Datetime
+DisableIntroduction        Boolean
+Email                      String
+EnableMultiFactor          Boolean
+Firstname                  String
+GrowthDataExperimentStates JumpCloud.SDK.V1.Models.UserreturnGrowthDataExperimentStates
+GrowthDataOnboardingState  JumpCloud.SDK.V1.Models.UserreturnGrowthDataOnboardingState
+Id                         String
+Lastname                   String
+LastWhatsNewChecked        Datetime
+Organization               String
+PasswordUpdatedAt          Datetime
+Provider                   String
+Role                       String
+RoleName                   String
+SessionCount               Int
+Suspended                  Boolean
+TotpEnrolled               Boolean
+TotpUpdatedAt              Datetime
+UsersTimeZone              String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell
-{{ Add code here }}
+Set-JcSdkAdministratorUser -Id:(<string>) -ApiKeyAllowed:(<switch>) -Email:(<string>) -EnableMultiFactor:(<switch>) -Firstname:(<string>) -GrowthData:(<hashtable>) -LastWhatsNewChecked:(<datetime>) -Lastname:(<string>) -RoleName:(<string>)
 ```
 
-{{ Add output here }}
+----                       ----------
+ApiKeyAllowed              Boolean
+ApiKeySet                  Boolean
+ApiKeyUpdatedAt            Datetime
+Created                    Datetime
+DisableIntroduction        Boolean
+Email                      String
+EnableMultiFactor          Boolean
+Firstname                  String
+GrowthDataExperimentStates JumpCloud.SDK.V1.Models.UserreturnGrowthDataExperimentStates
+GrowthDataOnboardingState  JumpCloud.SDK.V1.Models.UserreturnGrowthDataOnboardingState
+Id                         String
+Lastname                   String
+LastWhatsNewChecked        Datetime
+Organization               String
+PasswordUpdatedAt          Datetime
+Provider                   String
+Role                       String
+RoleName                   String
+SessionCount               Int
+Suspended                  Boolean
+TotpEnrolled               Boolean
+TotpUpdatedAt              Datetime
+UsersTimeZone              String
 
 ## PARAMETERS
 

@@ -50,17 +50,29 @@ curl -X GET https://console.jumpcloud.com/api/v2/activedirectories/{activedirect
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkActiveDirectoryAgent -ActivedirectoryId:(<string>) -Sort:(<string[]>)
 ```
 
-{{ Add output here }}
+----      ----------
+ContactAt String
+Hostname  String
+Id        String
+SourceIP  String
+State     String
+Version   String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkActiveDirectoryAgent -ActivedirectoryId:(<string>) -AgentId:(<string>)
 ```
 
-{{ Add output here }}
+----      ----------
+ContactAt String
+Hostname  String
+Id        String
+SourceIP  String
+State     String
+Version   String
 
 ## PARAMETERS
 

@@ -1,11 +1,11 @@
-### Example 1: {{ Add title here }}
+### Example 1: Create a BulkUser by
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> New-JcSdkBulkUser
 
-{{ Add output here }}
+
 ```
 
-{{ Add description here }}
+This function will Create a BulkUser by .
 
 ### Example 2: {{ Add title here }}
 ```powershell

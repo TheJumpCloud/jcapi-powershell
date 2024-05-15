@@ -55,10 +55,17 @@ curl -X GET 'https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID}/asso
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkOffice365Association -Office365Id:(<string>)
 ```
 
-{{ Add output here }}
+----           ----------
+Attributes     JumpCloud.SDK.V2.Models.GraphAttributes
+FromAttributes JumpCloud.SDK.V2.Models.GraphAttributes
+FromId         String
+FromType       String
+ToAttributes   JumpCloud.SDK.V2.Models.GraphAttributes
+ToId           String
+ToType         String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

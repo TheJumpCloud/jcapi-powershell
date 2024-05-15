@@ -4,9 +4,21 @@ Valid filter fields are `system_id` and `name`.
 .Description
 Valid filter fields are `system_id` and `name`.
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemInsightStartupItem
 
-{{ Add output here }}
+
+
+----     ----------
+Args     String
+Name     String
+Path     String
+Source   String
+Status   String
+SystemId String
+Type     String
+Username String
+
+
 .Example
 PS C:\> {{ Add code here }}
 

@@ -4,13 +4,69 @@ The endpoint retrieves an SSO / SAML Application.
 .Description
 The endpoint retrieves an SSO / SAML Application.
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkApplication -Fields:(<string>) -Filter:(<string[]>) -Sort:(<string>)
 
-{{ Add output here }}
+
+
+----                       ----------
+Active                     Boolean
+Beta                       Boolean
+Color                      String
+Config                     JumpCloud.SDK.V1.Models.ApplicationConfig
+Created                    String
+DatabaseAttributes         JumpCloud.SDK.V1.Models.ApplicationDatabaseAttributesItem[]
+Description                String
+DisplayLabel               String
+DisplayName                String
+Id                         String
+LearnMore                  String
+LogoColor                  String
+LogoUrl                    String
+Name                       String
+Organization               String
+SsoBeta                    Boolean
+SsoHidden                  Boolean
+SsoIdpCertExpirationAt     Datetime
+SsoIdpCertificateUpdatedAt Datetime
+SsoIdpPrivateKeyUpdatedAt  Datetime
+SsoJit                     Boolean
+SsoSpCertificateUpdatedAt  Datetime
+SsoType                    String
+SsoUrl                     String
+
+
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkApplication -Id:(<string>)
 
-{{ Add output here }}
+
+
+----                       ----------
+Active                     Boolean
+Beta                       Boolean
+Color                      String
+Config                     JumpCloud.SDK.V1.Models.ApplicationConfig
+Created                    String
+DatabaseAttributes         JumpCloud.SDK.V1.Models.ApplicationDatabaseAttributesItem[]
+Description                String
+DisplayLabel               String
+DisplayName                String
+Id                         String
+LearnMore                  String
+LogoColor                  String
+LogoUrl                    String
+Name                       String
+Organization               String
+SsoBeta                    Boolean
+SsoHidden                  Boolean
+SsoIdpCertExpirationAt     Datetime
+SsoIdpCertificateUpdatedAt Datetime
+SsoIdpPrivateKeyUpdatedAt  Datetime
+SsoJit                     Boolean
+SsoSpCertificateUpdatedAt  Datetime
+SsoType                    String
+SsoUrl                     String
+
+
 
 .Inputs
 JumpCloud.SDK.V1.Models.IJumpCloudApiIdentity

@@ -4,9 +4,9 @@ This endpoint allows you to unlock a user's account.
 .Description
 This endpoint allows you to unlock a user's account.
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Unlock-JcSdkUser -Id:(<string>)
 
-{{ Add output here }}
+
 .Example
 PS C:\> {{ Add code here }}
 

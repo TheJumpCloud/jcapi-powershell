@@ -23,10 +23,27 @@ Valid filter fields are `system_id` and `cpu_subtype`.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkSystemInsightSystemInfo
 ```
 
-{{ Add output here }}
+----             ----------
+CollectionTime   String
+ComputerName     String
+CpuBrand         String
+CpuLogicalCores  Int
+CpuMicrocode     String
+CpuPhysicalCores Int
+CpuSubtype       String
+CpuType          String
+HardwareModel    String
+HardwareSerial   String
+HardwareVendor   String
+HardwareVersion  String
+Hostname         String
+LocalHostname    String
+PhysicalMemory   String
+SystemId         String
+Uuid             String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

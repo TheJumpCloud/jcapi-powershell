@@ -22,9 +22,27 @@ curl -X DELETE https://console.jumpcloud.com/api/v2/usergroups/{GroupID} \\
 
 ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Remove-JcSdkUserGroup -Id:(<string>)
 
-{{ Add output here }}
+
+
+----                    ----------
+Attributes              JumpCloud.SDK.V2.Models.GroupAttributesUserGroup
+Description             String
+Email                   String
+Id                      String
+MemberQueryExemptions   JumpCloud.SDK.V2.Models.GraphObject[]
+MemberQueryFilters      JumpCloud.SDK.V2.Models.Any[]
+MemberQueryType         String
+MembershipMethod        String
+MemberSuggestionsNotify Boolean
+Name                    String
+SuggestionCountAdd      Int
+SuggestionCountRemove   Int
+SuggestionCountTotal    Int
+Type                    String
+
+
 .Example
 PS C:\> {{ Add code here }}
 

@@ -1,11 +1,11 @@
-### Example 1: {{ Add title here }}
+### Example 1: Remove an UserSshKey by Id, and SystemuserId
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Remove-JcSdkUserSshKey -Id:(<string>) -SystemuserId:(<string>)
 
-{{ Add output here }}
+
 ```
 
-{{ Add description here }}
+This function will Remove an UserSshKey by Id SystemuserId. Id, and SystemuserId are required parameters.
 
 ### Example 2: {{ Add title here }}
 ```powershell

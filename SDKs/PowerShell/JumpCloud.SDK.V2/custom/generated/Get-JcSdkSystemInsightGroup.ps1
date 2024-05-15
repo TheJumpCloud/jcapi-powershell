@@ -4,9 +4,20 @@ Valid filter fields are `system_id` and `groupname`.
 .Description
 Valid filter fields are `system_id` and `groupname`.
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemInsightGroup
 
-{{ Add output here }}
+
+
+----           ----------
+CollectionTime String
+Comment        String
+Gid            String
+GidSigned      String
+Groupname      String
+GroupSid       String
+SystemId       String
+
+
 .Example
 PS C:\> {{ Add code here }}
 

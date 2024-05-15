@@ -8,13 +8,37 @@ Create the custom email configuration for the specified custom email type.
 
 This action is only available to paying customers.
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> New-JcSdkCustomEmailConfiguration -Subject:(<string>) -Type:(<string>) -Body:(<string>) -Button:(<string>) -Header:(<string>) -NextStepContactInfo:(<string>) -Title:(<string>)
 
-{{ Add output here }}
+
+
+----                ----------
+Body                String
+Button              String
+Header              String
+Id                  String
+NextStepContactInfo String
+Subject             String
+Title               String
+Type                String
+
+
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> New-JcSdkCustomEmailConfiguration -CustomEmail:(<JumpCloud.SDK.V2.Models.CustomEmail>)
 
-{{ Add output here }}
+
+
+----                ----------
+Body                String
+Button              String
+Header              String
+Id                  String
+NextStepContactInfo String
+Subject             String
+Title               String
+Type                String
+
+
 
 .Inputs
 JumpCloud.SDK.V2.Models.ICustomEmail

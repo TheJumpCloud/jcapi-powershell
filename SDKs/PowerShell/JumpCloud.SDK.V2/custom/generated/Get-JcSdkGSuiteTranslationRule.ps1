@@ -24,13 +24,27 @@ These rules specify how JumpCloud attributes translate to [G Suite Admin SDK](ht
   -H 'x-api-key: {API_KEY}'
   ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkGSuiteTranslationRule -GsuiteId:(<string>) -Fields:(<string[]>) -Filter:(<string[]>) -Sort:(<string[]>)
 
-{{ Add output here }}
+
+
+----      ----------
+BuiltIn   String
+Direction String
+Id        String
+
+
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkGSuiteTranslationRule -GsuiteId:(<string>) -Id:(<string>)
 
-{{ Add output here }}
+
+
+----      ----------
+BuiltIn   String
+Direction String
+Id        String
+
+
 
 .Inputs
 JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity

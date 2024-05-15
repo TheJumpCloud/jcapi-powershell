@@ -20,13 +20,33 @@ curl -X GET https://console.jumpcloud.com/api/v2/activedirectories/{activedirect
   -H 'x-api-key: {API_KEY}'
 ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkActiveDirectoryAgent -ActivedirectoryId:(<string>) -Sort:(<string[]>)
 
-{{ Add output here }}
+
+
+----      ----------
+ContactAt String
+Hostname  String
+Id        String
+SourceIP  String
+State     String
+Version   String
+
+
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkActiveDirectoryAgent -ActivedirectoryId:(<string>) -AgentId:(<string>)
 
-{{ Add output here }}
+
+
+----      ----------
+ContactAt String
+Hostname  String
+Id        String
+SourceIP  String
+State     String
+Version   String
+
+
 
 .Inputs
 JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity

@@ -36,13 +36,57 @@ curl -X PUT https://console.jumpcloud.com/api/commands/{CommandID} \\
 
 ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Set-JcSdkCommand -Id:(<string>) -Body:(<JumpCloud.SDK.V1.Models.Command>)
 
-{{ Add output here }}
+
+
+----               ----------
+Command1           String
+CommandRunners     String
+CommandType        String
+Files              String
+LaunchType         String
+ListensTo          String
+Name               String
+Organization       String
+Schedule           String
+ScheduleRepeatType String
+ScheduleYear       Int
+Shell              String
+Sudo               Boolean
+Template           String
+Timeout            String
+TimeToLiveSeconds  Int
+Trigger            String
+User               String
+
+
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Set-JcSdkCommand -Id:(<string>) -Command:(<string>) -CommandType:(<string>) -Name:(<string>) -CommandRunners:(<string[]>) -Files:(<string[]>) -LaunchType:(<string>) -ListensTo:(<string>) -Organization:(<string>) -Schedule:(<string>) -ScheduleRepeatType:(<string>) -ScheduleYear:(<int>) -Shell:(<string>) -Sudo:(<switch>) -Template:(<string>) -TimeToLiveSeconds:(<int>) -Timeout:(<string>) -Trigger:(<string>) -User:(<string>)
 
-{{ Add output here }}
+
+
+----               ----------
+Command1           String
+CommandRunners     String
+CommandType        String
+Files              String
+LaunchType         String
+ListensTo          String
+Name               String
+Organization       String
+Schedule           String
+ScheduleRepeatType String
+ScheduleYear       Int
+Shell              String
+Sudo               Boolean
+Template           String
+Timeout            String
+TimeToLiveSeconds  Int
+Trigger            String
+User               String
+
+
 
 .Inputs
 JumpCloud.SDK.V1.Models.ICommand

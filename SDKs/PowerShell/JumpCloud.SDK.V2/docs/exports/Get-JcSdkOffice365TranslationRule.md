@@ -55,17 +55,23 @@ These rules specify how JumpCloud attributes translate to [Microsoft Graph](http
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkOffice365TranslationRule -Office365Id:(<string>) -Fields:(<string[]>) -Filter:(<string[]>) -Sort:(<string[]>)
 ```
 
-{{ Add output here }}
+----      ----------
+BuiltIn   String
+Direction String
+Id        String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkOffice365TranslationRule -Office365Id:(<string>) -Id:(<string>)
 ```
 
-{{ Add output here }}
+----      ----------
+BuiltIn   String
+Direction String
+Id        String
 
 ## PARAMETERS
 

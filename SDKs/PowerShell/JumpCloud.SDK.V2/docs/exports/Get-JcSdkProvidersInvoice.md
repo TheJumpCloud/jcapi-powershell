@@ -32,10 +32,12 @@ You must be associated to the provider to use this endpoint.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkProvidersInvoice -ProviderId:(<string>)
 ```
 
-{{ Add output here }}
+----       ----------
+Records    JumpCloud.SDK.V2.Models.ProviderInvoice[]
+TotalCount Int
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

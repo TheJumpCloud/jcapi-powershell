@@ -20,13 +20,47 @@ curl -X PUT https://console.jumpcloud.com/api/radiusservers/{ServerID} \\
   -H 'x-api-key: {API_KEY}' \\
 ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkRadiusServer -Fields:(<string>) -Filter:(<string[]>) -Sort:(<string>)
 
-{{ Add output here }}
+
+
+----                         ----------
+AuthIdp                      String
+CaCert                       String
+DeviceCertEnabled            Boolean
+Id                           String
+Mfa                          String
+Name                         String
+NetworkSourceIP              String
+Organization                 String
+SharedSecret                 String
+UserCertEnabled              Boolean
+UserLockoutAction            String
+UserPasswordEnabled          Boolean
+UserPasswordExpirationAction String
+
+
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkRadiusServer -Id:(<string>)
 
-{{ Add output here }}
+
+
+----                         ----------
+AuthIdp                      String
+CaCert                       String
+DeviceCertEnabled            Boolean
+Id                           String
+Mfa                          String
+Name                         String
+NetworkSourceIP              String
+Organization                 String
+SharedSecret                 String
+UserCertEnabled              Boolean
+UserLockoutAction            String
+UserPasswordEnabled          Boolean
+UserPasswordExpirationAction String
+
+
 
 .Inputs
 JumpCloud.SDK.V1.Models.IJumpCloudApiIdentity

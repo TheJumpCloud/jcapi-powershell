@@ -53,17 +53,23 @@ curl -X GET \\
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkLdapServerSambaDomain -LdapserverId:(<string>) -Fields:(<string[]>) -Filter:(<string[]>) -Sort:(<string[]>)
 ```
 
-{{ Add output here }}
+---- ----------
+Id   String
+Name String
+Sid  String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkLdapServerSambaDomain -LdapserverId:(<string>) -Id:(<string>)
 ```
 
-{{ Add output here }}
+---- ----------
+Id   String
+Name String
+Sid  String
 
 ## PARAMETERS
 

@@ -24,10 +24,12 @@ Lists available G Suite users for import, translated to the Jumpcloud user schem
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkGsuiteUsersToImportFormatted
 ```
 
-{{ Add output here }}
+----          ----------
+NextPageToken String
+Users         JumpCloud.SDK.V2.Models.User[]
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

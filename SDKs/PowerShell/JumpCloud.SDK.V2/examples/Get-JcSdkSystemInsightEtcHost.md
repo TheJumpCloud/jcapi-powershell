@@ -1,11 +1,19 @@
-### Example 1: {{ Add title here }}
+### Example 1: List SystemInsightEtcHosts
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemInsightEtcHost
 
-{{ Add output here }}
+
+
+----           ----------
+Address        String
+CollectionTime String
+Hostnames      String
+SystemId       String
+
+
 ```
 
-{{ Add description here }}
+This function will return a list of all SystemInsightEtcHosts.
 
 ### Example 2: {{ Add title here }}
 ```powershell

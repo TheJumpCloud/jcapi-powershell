@@ -4,9 +4,17 @@ Get the list of custom email templates
 .Description
 Get the list of custom email templates
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkCustomEmailTemplate
 
-{{ Add output here }}
+
+
+----        ----------
+Description String
+DisplayName String
+Fields      JumpCloud.SDK.V2.Models.CustomEmailTemplateField[]
+Type        String
+
+
 .Example
 PS C:\> {{ Add code here }}
 

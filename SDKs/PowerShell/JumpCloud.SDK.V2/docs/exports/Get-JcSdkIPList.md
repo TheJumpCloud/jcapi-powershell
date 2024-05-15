@@ -50,17 +50,25 @@ curl https://console.jumpcloud.com/api/v2/iplists/{id} \\
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkIPList -Filter:(<string[]>) -Sort:(<string[]>) -XTotalCount:(<int>)
 ```
 
-{{ Add output here }}
+----        ----------
+Description String
+Id          String
+Ips         String
+Name        String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkIPList -Id:(<string>)
 ```
 
-{{ Add output here }}
+----        ----------
+Description String
+Id          String
+Ips         String
+Name        String
 
 ## PARAMETERS
 

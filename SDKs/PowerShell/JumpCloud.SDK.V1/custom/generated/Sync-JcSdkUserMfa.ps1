@@ -24,9 +24,9 @@ curl -X POST \\
 
 ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Sync-JcSdkUserMfa -Id:(<string>)
 
-{{ Add output here }}
+
 .Example
 PS C:\> {{ Add code here }}
 

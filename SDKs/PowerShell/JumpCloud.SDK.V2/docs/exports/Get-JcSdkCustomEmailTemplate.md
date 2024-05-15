@@ -23,10 +23,14 @@ Get the list of custom email templates
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkCustomEmailTemplate
 ```
 
-{{ Add output here }}
+----        ----------
+Description String
+DisplayName String
+Fields      JumpCloud.SDK.V2.Models.CustomEmailTemplateField[]
+Type        String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

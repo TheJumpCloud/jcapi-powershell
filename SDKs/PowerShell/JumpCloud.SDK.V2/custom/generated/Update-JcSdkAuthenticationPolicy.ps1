@@ -22,13 +22,51 @@ curl -X PATCH https://console.jumpcloud.com/api/v2/authn/policies/{id} \\
   -d '{ \"disabled\": false }'
 ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Update-JcSdkAuthenticationPolicy -Id:(<string>) -Body:(<JumpCloud.SDK.V2.Models.AuthnPolicy>)
 
-{{ Add output here }}
+
+
+----                        ----------
+Conditions                  JumpCloud.SDK.V2.Models.AuthnPolicyConditions
+Description                 String
+Disabled                    Boolean
+EffectAction                String
+Id                          String
+MfaRequired                 Boolean
+Name                        String
+TargetResources             JumpCloud.SDK.V2.Models.AuthnPolicyResourceTarget[]
+Type                        String
+UserAttributeExclusions     JumpCloud.SDK.V2.Models.AuthnPolicyUserAttributeFilter[]
+UserAttributeInclusions     JumpCloud.SDK.V2.Models.AuthnPolicyUserAttributeFilter[]
+UserGroupExclusions         String
+UserGroupInclusions         String
+UserInclusions              String
+UserVerificationRequirement String
+
+
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Update-JcSdkAuthenticationPolicy -Id:(<string>) -Conditions:(<hashtable>) -Description:(<string>) -Disabled:(<switch>) -EffectAction:(<string>) -MfaRequired:(<switch>) -Name:(<string>) -TargetResources:(<JumpCloud.SDK.V2.Models.AuthnPolicyResourceTarget[]>) -Type:(<string>) -UserAttributeExclusions:(<JumpCloud.SDK.V2.Models.AuthnPolicyUserAttributeFilter[]>) -UserAttributeInclusions:(<JumpCloud.SDK.V2.Models.AuthnPolicyUserAttributeFilter[]>) -UserGroupExclusions:(<string[]>) -UserGroupInclusions:(<string[]>) -UserInclusions:(<string[]>) -UserVerificationRequirement:(<string>)
 
-{{ Add output here }}
+
+
+----                        ----------
+Conditions                  JumpCloud.SDK.V2.Models.AuthnPolicyConditions
+Description                 String
+Disabled                    Boolean
+EffectAction                String
+Id                          String
+MfaRequired                 Boolean
+Name                        String
+TargetResources             JumpCloud.SDK.V2.Models.AuthnPolicyResourceTarget[]
+Type                        String
+UserAttributeExclusions     JumpCloud.SDK.V2.Models.AuthnPolicyUserAttributeFilter[]
+UserAttributeInclusions     JumpCloud.SDK.V2.Models.AuthnPolicyUserAttributeFilter[]
+UserGroupExclusions         String
+UserGroupInclusions         String
+UserInclusions              String
+UserVerificationRequirement String
+
+
 
 .Inputs
 JumpCloud.SDK.V2.Models.IAuthnPolicy

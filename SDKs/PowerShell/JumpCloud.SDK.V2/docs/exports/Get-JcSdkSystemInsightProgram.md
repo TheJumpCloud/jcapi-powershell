@@ -29,10 +29,21 @@ Valid filter fields are `system_id` and `name`.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkSystemInsightProgram
 ```
 
-{{ Add output here }}
+----              ----------
+CollectionTime    String
+IdentifyingNumber String
+InstallDate       String
+InstallLocation   String
+InstallSource     String
+Language          String
+Name              String
+Publisher         String
+SystemId          String
+UninstallString
+Version           String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

@@ -75,17 +75,17 @@ curl -X POST https://console.jumpcloud.com/api/v2/gsuites/{Gsuite_ID}/associatio
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Set-JcSdkGSuiteAssociation -GsuiteId:(<string>) -Body:(<JumpCloud.SDK.V2.Models.GraphOperationGSuite1>)
 ```
 
-{{ Add output here }}
+
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell
-{{ Add code here }}
+Set-JcSdkGSuiteAssociation -GsuiteId:(<string>) -Id:(<string>) -Op:(<string>) -Type:(<JumpCloud.SDK.V2.Support.GraphOperationGSuite>) -Attributes:(<hashtable>)
 ```
 
-{{ Add output here }}
+
 
 ## PARAMETERS
 

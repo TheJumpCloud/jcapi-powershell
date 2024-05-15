@@ -10,9 +10,24 @@ For macOS devices, use [List System Insights Apps](#operation/systeminsights_lis
 
 Valid filter fields are `system_id` and `name`.
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemInsightProgram
 
-{{ Add output here }}
+
+
+----              ----------
+CollectionTime    String
+IdentifyingNumber String
+InstallDate       String
+InstallLocation   String
+InstallSource     String
+Language          String
+Name              String
+Publisher         String
+SystemId          String
+UninstallString
+Version           String
+
+
 .Example
 PS C:\> {{ Add code here }}
 

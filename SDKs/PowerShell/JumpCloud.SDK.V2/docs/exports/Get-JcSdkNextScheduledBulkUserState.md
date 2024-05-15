@@ -43,10 +43,12 @@ upcoming activation event _and_ the next upcoming suspension event.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkNextScheduledBulkUserState
 ```
 
-{{ Add output here }}
+----        ----------
+EventsCount Int
+Results     JumpCloud.SDK.V2.Models.ScheduledUserstateResult[]
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

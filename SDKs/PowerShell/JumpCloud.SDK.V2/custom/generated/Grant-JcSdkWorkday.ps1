@@ -52,13 +52,13 @@ curl -X POST https://console.jumpcloud.com/api/v2/workdays/{WorkDayID}/auth \\
 
 ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Grant-JcSdkWorkday -WorkdayId:(<string>) -BasicPassword:(<string>) -BasicUsername:(<string>) -OauthCode:(<string>)
 
-{{ Add output here }}
+
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Grant-JcSdkWorkday -WorkdayId:(<string>) -Body:(<JumpCloud.SDK.V2.Models.AuthInputObject>)
 
-{{ Add output here }}
+
 
 .Inputs
 JumpCloud.SDK.V2.Models.IAuthInputObject

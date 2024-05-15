@@ -4,9 +4,21 @@ Get the custom email configuration for the specified custom email type
 .Description
 Get the custom email configuration for the specified custom email type
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkCustomEmailConfiguration -CustomEmailType:(<string>)
 
-{{ Add output here }}
+
+
+----                ----------
+Body                String
+Button              String
+Header              String
+Id                  String
+NextStepContactInfo String
+Subject             String
+Title               String
+Type                String
+
+
 .Example
 PS C:\> {{ Add code here }}
 

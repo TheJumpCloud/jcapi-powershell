@@ -34,13 +34,13 @@ curl -X POST \\
 
 ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Reset-JcSdkUserMfa -Id:(<string>) -Body:(<JumpCloud.SDK.V1.Models.PathsYhix24SystemusersIdResetmfaPostRequestbodyContentApplicationJsonSchema>)
 
-{{ Add output here }}
+
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Reset-JcSdkUserMfa -Id:(<string>) -Exclusion:(<switch>) -ExclusionDays:(<float>) -ExclusionUntil:(<datetime>)
 
-{{ Add output here }}
+
 
 .Inputs
 JumpCloud.SDK.V1.Models.IJumpCloudApiIdentity

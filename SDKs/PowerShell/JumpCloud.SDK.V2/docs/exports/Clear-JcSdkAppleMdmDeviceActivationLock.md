@@ -49,10 +49,10 @@ Clears the activation lock on the specified device.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Clear-JcSdkAppleMdmDeviceActivationLock -AppleMdmId:(<string>) -DeviceId:(<string>)
 ```
 
-{{ Add output here }}
+
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

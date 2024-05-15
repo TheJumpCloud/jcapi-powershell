@@ -42,10 +42,21 @@ This endpoint returns the latest policy results for a specific policy.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkPolicyStatus
 ```
 
-{{ Add output here }}
+----       ----------
+Detail     String
+EndedAt    Datetime
+ExitStatus System.Nullable[long] ExitStatus {get;set;}
+Id         String
+PolicyId   String
+StartedAt  Datetime
+State      String
+StdErr     String
+StdOut     String
+Success    Boolean
+SystemId   String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

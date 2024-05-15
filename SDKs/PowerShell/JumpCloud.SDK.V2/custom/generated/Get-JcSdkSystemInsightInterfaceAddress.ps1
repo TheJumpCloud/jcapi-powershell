@@ -4,9 +4,22 @@ Valid filter fields are `system_id` and `address`.
 .Description
 Valid filter fields are `system_id` and `address`.
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemInsightInterfaceAddress
 
-{{ Add output here }}
+
+
+----           ----------
+Address        String
+Broadcast      String
+CollectionTime String
+FriendlyName   String
+Interface      String
+Mask           String
+PointToPoint   String
+SystemId       String
+Type           String
+
+
 .Example
 PS C:\> {{ Add code here }}
 

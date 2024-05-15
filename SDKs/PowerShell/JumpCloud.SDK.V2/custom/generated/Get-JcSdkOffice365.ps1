@@ -28,9 +28,20 @@ curl -X GET https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID} \\
 
 ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkOffice365 -Office365Id:(<string>)
 
-{{ Add output here }}
+
+
+----                         ----------
+DefaultDomainDomain          String
+DefaultDomainId              String
+GroupsEnabled                Boolean
+Id                           String
+Name                         String
+UserLockoutAction            String
+UserPasswordExpirationAction String
+
+
 .Example
 PS C:\> {{ Add code here }}
 

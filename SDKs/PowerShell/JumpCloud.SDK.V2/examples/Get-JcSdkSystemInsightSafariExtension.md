@@ -1,11 +1,27 @@
-### Example 1: {{ Add title here }}
+### Example 1: List SystemInsightSafariExtensions
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemInsightSafariExtension
 
-{{ Add output here }}
+
+
+----           ----------
+Author         String
+CollectionTime String
+Description    String
+DeveloperId    String
+Identifier     String
+Name           String
+Path           String
+Sdk            String
+SystemId       String
+Uid            String
+UpdateUrl      String
+Version        String
+
+
 ```
 
-{{ Add description here }}
+This function will return a list of all SystemInsightSafariExtensions.
 
 ### Example 2: {{ Add title here }}
 ```powershell

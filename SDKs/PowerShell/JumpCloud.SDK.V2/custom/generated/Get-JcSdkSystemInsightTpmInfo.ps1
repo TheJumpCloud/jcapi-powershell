@@ -4,9 +4,24 @@ Valid filter fields are `system_id`.
 .Description
 Valid filter fields are `system_id`.
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemInsightTpmInfo
 
-{{ Add output here }}
+
+
+----                    ----------
+Activated               System.Nullable[float] Activated {get;set;}
+CollectionTime          String
+Enabled                 System.Nullable[float] Enabled {get;set;}
+ManufacturerId          System.Nullable[float] ManufacturerId {get;set;}
+ManufacturerName        String
+ManufacturerVersion     String
+Owned                   System.Nullable[float] Owned {get;set;}
+PhysicalPresenceVersion String
+ProductName             String
+SpecVersion             String
+SystemId                String
+
+
 .Example
 PS C:\> {{ Add code here }}
 

@@ -56,17 +56,25 @@ $ curl -X POST https://console.jumpcloud.com/api/v2/softwareapps \\
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+New-JcSdkSoftwareApp -DisplayName:(<string>) -Id:(<string>) -Settings:(<JumpCloud.SDK.V2.Models.SoftwareAppSettings[]>)
 ```
 
-{{ Add output here }}
+----        ----------
+DisplayName String
+Id          String
+Settings    JumpCloud.SDK.V2.Models.SoftwareAppSettings[]
+UploadUrl   String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell
-{{ Add code here }}
+New-JcSdkSoftwareApp -Body:(<JumpCloud.SDK.V2.Models.SoftwareApp>)
 ```
 
-{{ Add output here }}
+----        ----------
+DisplayName String
+Id          String
+Settings    JumpCloud.SDK.V2.Models.SoftwareAppSettings[]
+UploadUrl   String
 
 ## PARAMETERS
 

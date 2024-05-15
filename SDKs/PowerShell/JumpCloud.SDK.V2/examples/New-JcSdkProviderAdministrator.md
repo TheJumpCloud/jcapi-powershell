@@ -1,18 +1,50 @@
-### Example 1: {{ Add title here }}
+### Example 1: Create a ProviderAdministrator by ProviderId, and Email
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> New-JcSdkProviderAdministrator -ProviderId:(<string>) -Email:(<string>) -ApiKeyAllowed:(<switch>) -BindNoOrgs:(<switch>) -EnableMultiFactor:(<switch>) -Firstname:(<string>) -Lastname:(<string>) -Role:(<string>) -RoleName:(<string>)
 
-{{ Add output here }}
+
+
+----                    ----------
+ApiKeyAllowed           Boolean
+ApiKeySet               Boolean
+Email                   String
+EnableMultiFactor       Boolean
+Firstname               String
+Id                      String
+Lastname                String
+OrganizationAccessTotal System.Nullable[float] OrganizationAccessTotal {get;set;}
+Registered              Boolean
+Role                    String
+RoleName                String
+Suspended               Boolean
+
+
 ```
 
-{{ Add description here }}
+This function will Create a ProviderAdministrator by ProviderId Email. ProviderId, and Email are required parameters.
 
-### Example 2: {{ Add title here }}
+### Example 2: Create a ProviderAdministrator by ProviderId, and Body
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> New-JcSdkProviderAdministrator -ProviderId:(<string>) -Body:(<JumpCloud.SDK.V2.Models.ProviderAdminReq>)
 
-{{ Add output here }}
+
+
+----                    ----------
+ApiKeyAllowed           Boolean
+ApiKeySet               Boolean
+Email                   String
+EnableMultiFactor       Boolean
+Firstname               String
+Id                      String
+Lastname                String
+OrganizationAccessTotal System.Nullable[float] OrganizationAccessTotal {get;set;}
+Registered              Boolean
+Role                    String
+RoleName                String
+Suspended               Boolean
+
+
 ```
 
-{{ Add description here }}
+This function will Create a ProviderAdministrator by ProviderId Body. ProviderId, and Body are required parameters.
 

@@ -23,10 +23,14 @@ Valid filter fields are `system_id` and `state`.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkSystemInsightAlfException
 ```
 
-{{ Add output here }}
+----           ----------
+CollectionTime String
+Path           String
+State          System.Nullable[float] State {get;set;}
+SystemId       String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

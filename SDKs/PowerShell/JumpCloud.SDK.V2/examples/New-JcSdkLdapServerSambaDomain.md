@@ -1,18 +1,32 @@
-### Example 1: {{ Add title here }}
+### Example 1: Create a LdapServerSambaDomain by LdapserverId, Name, and Sid
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> New-JcSdkLdapServerSambaDomain -LdapserverId:(<string>) -Name:(<string>) -Sid:(<string>)
 
-{{ Add output here }}
+
+
+---- ----------
+Id   String
+Name String
+Sid  String
+
+
 ```
 
-{{ Add description here }}
+This function will Create a LdapServerSambaDomain by LdapserverId Name Sid. LdapserverId, Name, and Sid are required parameters.
 
-### Example 2: {{ Add title here }}
+### Example 2: Create a LdapServerSambaDomain by LdapserverId, and Body
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> New-JcSdkLdapServerSambaDomain -LdapserverId:(<string>) -Body:(<JumpCloud.SDK.V2.Models.SambaDomain>)
 
-{{ Add output here }}
+
+
+---- ----------
+Id   String
+Name String
+Sid  String
+
+
 ```
 
-{{ Add description here }}
+This function will Create a LdapServerSambaDomain by LdapserverId Body. LdapserverId, and Body are required parameters.
 

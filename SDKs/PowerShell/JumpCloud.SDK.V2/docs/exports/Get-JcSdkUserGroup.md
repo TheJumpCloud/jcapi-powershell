@@ -50,17 +50,45 @@ curl -X GET https://console.jumpcloud.com/api/v2/usergroups/{GroupID} \\
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkUserGroup -Fields:(<string[]>) -Filter:(<string[]>) -Sort:(<string[]>)
 ```
 
-{{ Add output here }}
+----                    ----------
+Attributes              JumpCloud.SDK.V2.Models.GroupAttributesUserGroup
+Description             String
+Email                   String
+Id                      String
+MemberQueryExemptions   JumpCloud.SDK.V2.Models.GraphObject[]
+MemberQueryFilters      JumpCloud.SDK.V2.Models.Any[]
+MemberQueryType         String
+MembershipMethod        String
+MemberSuggestionsNotify Boolean
+Name                    String
+SuggestionCountAdd      Int
+SuggestionCountRemove   Int
+SuggestionCountTotal    Int
+Type                    String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkUserGroup -Id:(<string>)
 ```
 
-{{ Add output here }}
+----                    ----------
+Attributes              JumpCloud.SDK.V2.Models.GroupAttributesUserGroup
+Description             String
+Email                   String
+Id                      String
+MemberQueryExemptions   JumpCloud.SDK.V2.Models.GraphObject[]
+MemberQueryFilters      JumpCloud.SDK.V2.Models.Any[]
+MemberQueryType         String
+MembershipMethod        String
+MemberSuggestionsNotify Boolean
+Name                    String
+SuggestionCountAdd      Int
+SuggestionCountRemove   Int
+SuggestionCountTotal    Int
+Type                    String
 
 ## PARAMETERS
 

@@ -22,9 +22,19 @@ curl -X DELETE https://console.jumpcloud.com/api/v2/policygroups/{GroupID} \\
 
 ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Remove-JcSdkPolicyGroup -Id:(<string>)
 
-{{ Add output here }}
+
+
+----        ----------
+Attributes  JumpCloud.SDK.V2.Models.GraphAttributes
+Description String
+Email       String
+Id          String
+Name        String
+Type        String
+
+
 .Example
 PS C:\> {{ Add code here }}
 

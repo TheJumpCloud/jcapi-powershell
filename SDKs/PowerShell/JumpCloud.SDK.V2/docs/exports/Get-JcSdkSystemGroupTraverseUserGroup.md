@@ -64,10 +64,14 @@ curl -X GET https://console.jumpcloud.com/api/v2/systemgroups/{GroupID}/usergrou
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkSystemGroupTraverseUserGroup -GroupId:(<string>)
 ```
 
-{{ Add output here }}
+----               ----------
+CompiledAttributes JumpCloud.SDK.V2.Models.GraphAttributes
+Id                 String
+Paths              JumpCloud.SDK.V2.Models.GraphConnection[][]
+Type               String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

@@ -4,9 +4,17 @@ This endpoint will return a specific System User's public SSH key.
 .Description
 This endpoint will return a specific System User's public SSH key.
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkUserSshKey -Id:(<string>)
 
-{{ Add output here }}
+
+
+----       ----------
+CreateDate String
+Id         String
+Name       String
+PublicKey  String
+
+
 .Example
 PS C:\> {{ Add code here }}
 

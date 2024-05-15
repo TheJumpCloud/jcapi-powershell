@@ -156,6 +156,10 @@ $TransformConfig = [Ordered]@{
             ',]'                                                                                                                                                                                     = ']';
             '"properties":{"conditions":{"description":.*?"type":"object"}'                                                                                                                          = '"properties":{"conditions":{"type":"object"}' # Parameter Description is declared in parameter-set 'createExpanded' multiple times in
         };
+        OverrideDefinitions = @(
+            'definitions.bulk-user-create.properties'
+            'definitions.bulk-user-update.properties'
+        )
         OperationIdMapping = [Ordered]@{
             'activedirectories_agentsDelete'                    = 'ActiveDirectoryAgent_Delete';
             'activedirectories_agentsGet'                       = 'ActiveDirectoryAgent_Get';
@@ -880,11 +884,32 @@ $SDKName | ForEach-Object {
                     if (Test-Path -Path "$PSScriptRoot/CustomDefinitions/$($overrideDef).json") {
                         $configContent = Get-Content -Path ("$PSScriptRoot/CustomDefinitions/$($overrideDef).json")
                         $configOverride = ($configContent | ConvertFrom-Json)
+                        # test for special chars in property string:
+                        if ($overrideDef -match "-"){
+                            $splitDef = $overRideDef.Split(".")
+                            $newOverrideDef = ""
+                            for ($i = 0; $i -lt $splitDef.Count; $i++) {
+                                if ($splitDef[$i] -match "-") {
+                                    $splitDef[$i] = "'" + $splitDef[$i] + "'"
+                                }
+
+                                if ($i -eq ($splitDef.Count -1)){
+                                    $newOverrideDef += "$($splitDef[$i])"
+                                } else {
+                                    $newOverrideDef += "$($splitDef[$i])."
+
+                                }
+                            }
+                            $overrideDef = $newOverrideDef
+
+                        }
                         Invoke-Expression -Command ('$SwaggerObject.' + "$($overrideDef)" + '=' + '$configOverride' )
+                        $SwaggerObject = $SwaggerObject | Convertto-Json -depth 100
                     } else {
                         Write-Warning "$overrideDef not found in /CustomDefinitions directory, did you forget to define the json file?"
                     }
                 }
+                $SwaggerObject = $SwaggerObject | ConvertFrom-Json -depth 100
             } else {
                 $SwaggerObject = $SwaggerObject | ConvertFrom-Json -Depth:(100)
             }

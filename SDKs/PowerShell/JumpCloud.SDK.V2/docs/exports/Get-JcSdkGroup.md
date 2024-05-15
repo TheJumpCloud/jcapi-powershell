@@ -54,10 +54,16 @@ This endpoint returns all Groups that exist in your organization.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkGroup
 ```
 
-{{ Add output here }}
+----        ----------
+Attributes  JumpCloud.SDK.V2.Models.GraphAttributes
+Description String
+Email       String
+Id          String
+Name        String
+Type        String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

@@ -47,10 +47,10 @@ curl -X DELETE https://console.jumpcloud.com/api/v2/activedirectories/{activedir
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Remove-JcSdkActiveDirectoryAgent -ActivedirectoryId:(<string>) -AgentId:(<string>)
 ```
 
-{{ Add output here }}
+
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

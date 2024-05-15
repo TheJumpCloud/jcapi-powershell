@@ -4,9 +4,28 @@ Valid filter fields are `system_id` and `security_type`.
 .Description
 Valid filter fields are `system_id` and `security_type`.
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemInsightWifiStatus
 
-{{ Add output here }}
+
+
+----           ----------
+Bssid          String
+Channel        System.Nullable[float] Channel {get;set;}
+ChannelBand    System.Nullable[float] ChannelBand {get;set;}
+ChannelWidth   System.Nullable[float] ChannelWidth {get;set;}
+CollectionTime String
+CountryCode    String
+Interface      String
+Mode           String
+NetworkName    String
+Noise          System.Nullable[float] Noise {get;set;}
+Rssi           System.Nullable[float] Rssi {get;set;}
+SecurityType   String
+Ssid           String
+SystemId       String
+TransmitRate   String
+
+
 .Example
 PS C:\> {{ Add code here }}
 

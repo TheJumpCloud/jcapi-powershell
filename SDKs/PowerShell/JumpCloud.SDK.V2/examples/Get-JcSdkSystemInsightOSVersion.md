@@ -1,11 +1,27 @@
-### Example 1: {{ Add title here }}
+### Example 1: List SystemInsightOSVersions
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemInsightOSVersion
 
-{{ Add output here }}
+
+
+----           ----------
+Build          String
+Codename       String
+CollectionTime String
+InstallDate    String
+Major          Int
+Minor          Int
+Name           String
+Patch          Int
+Platform       String
+PlatformLike   String
+SystemId       String
+Version        String
+
+
 ```
 
-{{ Add description here }}
+This function will return a list of all SystemInsightOSVersions.
 
 ### Example 2: {{ Add title here }}
 ```powershell

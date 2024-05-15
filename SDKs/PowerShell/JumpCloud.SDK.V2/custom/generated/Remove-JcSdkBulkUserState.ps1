@@ -18,9 +18,9 @@ curl -X DELETE \"https://console.jumpcloud.com/api/v2/bulk/userstates/{Scheduled
   -H 'Accept: application/json'
 ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Remove-JcSdkBulkUserState -Id:(<string>)
 
-{{ Add output here }}
+
 .Example
 PS C:\> {{ Add code here }}
 

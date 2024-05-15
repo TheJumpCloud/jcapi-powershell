@@ -4,9 +4,22 @@ Valid filter fields are `system_id`.
 .Description
 Valid filter fields are `system_id`.
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemInsightWindowsSecurityCenter
 
-{{ Add output here }}
+
+
+----                         ----------
+Antispyware                  String
+Antivirus                    String
+Autoupdate                   String
+CollectionTime               String
+Firewall                     String
+InternetSettings             String
+SystemId                     String
+UserAccountControl           String
+WindowsSecurityCenterService String
+
+
 .Example
 PS C:\> {{ Add code here }}
 

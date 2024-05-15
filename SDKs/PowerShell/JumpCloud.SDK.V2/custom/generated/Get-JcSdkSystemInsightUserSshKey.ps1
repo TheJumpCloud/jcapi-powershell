@@ -4,9 +4,18 @@ Valid filter fields are `system_id` and `uid`.
 .Description
 Valid filter fields are `system_id` and `uid`.
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemInsightUserSshKey
 
-{{ Add output here }}
+
+
+----           ----------
+CollectionTime String
+Encrypted      Int
+Path           String
+SystemId       String
+Uid            String
+
+
 .Example
 PS C:\> {{ Add code here }}
 

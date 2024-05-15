@@ -4,9 +4,21 @@ Valid filter fields are `system_id` and `device_id`.
 .Description
 Valid filter fields are `system_id` and `device_id`.
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemInsightLogicalDrive
 
-{{ Add output here }}
+
+
+----           ----------
+BootPartition  Int
+CollectionTime String
+DeviceId       String
+FileSystem     String
+FreeSpace      String
+Size           String
+SystemId       String
+Type           String
+
+
 .Example
 PS C:\> {{ Add code here }}
 

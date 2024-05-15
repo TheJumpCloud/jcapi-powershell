@@ -4,13 +4,25 @@ This endpoint allows you to grant Administrator access to an Organization.
 .Description
 This endpoint allows you to grant Administrator access to an Organization.
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> New-JcSdkAdministratorOrganization -Id:(<string>) -Organization:(<string>)
 
-{{ Add output here }}
+
+
+----          ----------
+Administrator String
+Organization  String
+
+
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> New-JcSdkAdministratorOrganization -Id:(<string>) -Body:(<JumpCloud.SDK.V2.Models.AdministratorOrganizationLinkReq>)
 
-{{ Add output here }}
+
+
+----          ----------
+Administrator String
+Organization  String
+
+
 
 .Inputs
 JumpCloud.SDK.V2.Models.IAdministratorOrganizationLinkReq

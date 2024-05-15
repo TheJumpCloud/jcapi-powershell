@@ -1,11 +1,30 @@
-### Example 1: {{ Add title here }}
+### Example 1: List SystemInsightWifiStatuss
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemInsightWifiStatus
 
-{{ Add output here }}
+
+
+----           ----------
+Bssid          String
+Channel        System.Nullable[float] Channel {get;set;}
+ChannelBand    System.Nullable[float] ChannelBand {get;set;}
+ChannelWidth   System.Nullable[float] ChannelWidth {get;set;}
+CollectionTime String
+CountryCode    String
+Interface      String
+Mode           String
+NetworkName    String
+Noise          System.Nullable[float] Noise {get;set;}
+Rssi           System.Nullable[float] Rssi {get;set;}
+SecurityType   String
+Ssid           String
+SystemId       String
+TransmitRate   String
+
+
 ```
 
-{{ Add description here }}
+This function will return a list of all SystemInsightWifiStatuss.
 
 ### Example 2: {{ Add title here }}
 ```powershell

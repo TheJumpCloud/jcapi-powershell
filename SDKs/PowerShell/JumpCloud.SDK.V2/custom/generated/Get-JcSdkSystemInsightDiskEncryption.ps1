@@ -4,9 +4,22 @@ Valid filter fields are `system_id` and `encryption_status`.
 .Description
 Valid filter fields are `system_id` and `encryption_status`.
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemInsightDiskEncryption
 
-{{ Add output here }}
+
+
+----             ----------
+CollectionTime   String
+Encrypted        Int
+EncryptionStatus String
+Name             String
+SystemId         String
+Type             String
+Uid              String
+UserUuid         String
+Uuid             String
+
+
 .Example
 PS C:\> {{ Add code here }}
 

@@ -23,10 +23,19 @@ Valid filter fields are `system_id` and `encryption_status`.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkSystemInsightDiskEncryption
 ```
 
-{{ Add output here }}
+----             ----------
+CollectionTime   String
+Encrypted        Int
+EncryptionStatus String
+Name             String
+SystemId         String
+Type             String
+Uid              String
+UserUuid         String
+Uuid             String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

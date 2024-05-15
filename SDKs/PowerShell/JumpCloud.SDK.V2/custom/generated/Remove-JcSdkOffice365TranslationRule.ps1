@@ -24,9 +24,9 @@ curl -X DELETE https://console.jumpcloud.com/api/v2/office365s/{office365_id}/tr
   -H 'x-api-key: {API_KEY}'
   ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Remove-JcSdkOffice365TranslationRule -Id:(<string>) -Office365Id:(<string>)
 
-{{ Add output here }}
+
 .Example
 PS C:\> {{ Add code here }}
 

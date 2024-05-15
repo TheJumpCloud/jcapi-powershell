@@ -23,10 +23,18 @@ Valid filter fields are `system_id` and `domain`.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkSystemInsightManagedPolicy
 ```
 
-{{ Add output here }}
+----           ----------
+CollectionTime String
+Domain         String
+Manual         Int
+Name           String
+SystemId       String
+Username       String
+Uuid           String
+Value          String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

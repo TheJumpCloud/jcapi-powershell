@@ -35,17 +35,33 @@ This action is only available to paying customers.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+New-JcSdkCustomEmailConfiguration -Subject:(<string>) -Type:(<string>) -Body:(<string>) -Button:(<string>) -Header:(<string>) -NextStepContactInfo:(<string>) -Title:(<string>)
 ```
 
-{{ Add output here }}
+----                ----------
+Body                String
+Button              String
+Header              String
+Id                  String
+NextStepContactInfo String
+Subject             String
+Title               String
+Type                String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell
-{{ Add code here }}
+New-JcSdkCustomEmailConfiguration -CustomEmail:(<JumpCloud.SDK.V2.Models.CustomEmail>)
 ```
 
-{{ Add output here }}
+----                ----------
+Body                String
+Button              String
+Header              String
+Id                  String
+NextStepContactInfo String
+Subject             String
+Title               String
+Type                String
 
 ## PARAMETERS
 

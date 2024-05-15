@@ -1,11 +1,20 @@
-### Example 1: {{ Add title here }}
+### Example 1: Get a WorkdayWorker by WorkdayId
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkWorkdayWorker -WorkdayId:(<string>)
 
-{{ Add output here }}
+
+
+----       ----------
+Attributes JumpCloud.SDK.V2.Models.WorkdayWorkerAttributes
+Email      String
+FirstName  String
+LastName   String
+Username   String
+
+
 ```
 
-{{ Add description here }}
+This function will Get a WorkdayWorker by WorkdayId. WorkdayId is a required parameter.
 
 ### Example 2: {{ Add title here }}
 ```powershell

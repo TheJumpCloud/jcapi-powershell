@@ -34,13 +34,47 @@ curl -X POST https://console.jumpcloud.com/api/radiusservers/ \\
 }'
 ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> New-JcSdkRadiusServer -Name:(<string>) -NetworkSourceIP:(<string>) -SharedSecret:(<string>) -AuthIdp:(<string>) -CaCert:(<string>) -DeviceCertEnabled:(<switch>) -Mfa:(<string>) -UserCertEnabled:(<switch>) -UserLockoutAction:(<string>) -UserPasswordEnabled:(<switch>) -UserPasswordExpirationAction:(<string>)
 
-{{ Add output here }}
+
+
+----                         ----------
+AuthIdp                      String
+CaCert                       String
+DeviceCertEnabled            Boolean
+Id                           String
+Mfa                          String
+Name                         String
+NetworkSourceIP              String
+Organization                 String
+SharedSecret                 String
+UserCertEnabled              Boolean
+UserLockoutAction            String
+UserPasswordEnabled          Boolean
+UserPasswordExpirationAction String
+
+
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> New-JcSdkRadiusServer -Body:(<JumpCloud.SDK.V1.Models.Radiusserverpost>)
 
-{{ Add output here }}
+
+
+----                         ----------
+AuthIdp                      String
+CaCert                       String
+DeviceCertEnabled            Boolean
+Id                           String
+Mfa                          String
+Name                         String
+NetworkSourceIP              String
+Organization                 String
+SharedSecret                 String
+UserCertEnabled              Boolean
+UserLockoutAction            String
+UserPasswordEnabled          Boolean
+UserPasswordExpirationAction String
+
+
 
 .Inputs
 JumpCloud.SDK.V1.Models.IRadiusserverpost

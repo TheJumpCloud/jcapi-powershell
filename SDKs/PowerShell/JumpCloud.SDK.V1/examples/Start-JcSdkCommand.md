@@ -1,18 +1,30 @@
-### Example 1: {{ Add title here }}
+### Example 1: Start a Command by Body
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Start-JcSdkCommand -Body:(<JumpCloud.SDK.V1.Models.PathsPnxbyeRuncommandPostRequestbodyContentApplicationJsonSchema>)
 
-{{ Add output here }}
+
+
+----               ----------
+QueueIds           String
+WorkflowInstanceId String
+
+
 ```
 
-{{ Add description here }}
+This function will Start a Command by Body. Body is a required parameter.
 
-### Example 2: {{ Add title here }}
+### Example 2: Start a Command by
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Start-JcSdkCommand -Id:(<string>) -SystemIds:(<string[]>)
 
-{{ Add output here }}
+
+
+----               ----------
+QueueIds           String
+WorkflowInstanceId String
+
+
 ```
 
-{{ Add description here }}
+This function will Start a Command by .
 

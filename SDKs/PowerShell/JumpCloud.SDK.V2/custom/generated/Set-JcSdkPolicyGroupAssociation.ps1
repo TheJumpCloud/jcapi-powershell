@@ -36,13 +36,13 @@ curl -X POST https://console.jumpcloud.com/api/v2/policygroups/{GroupID}/associa
   }'
 ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Set-JcSdkPolicyGroupAssociation -GroupId:(<string>) -Body:(<JumpCloud.SDK.V2.Models.GraphOperationPolicyGroup>)
 
-{{ Add output here }}
+
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Set-JcSdkPolicyGroupAssociation -GroupId:(<string>) -Id:(<string>) -Op:(<string>) -Type:(<JumpCloud.SDK.V2.Support.GraphOperationPolicyGroup1>) -Attributes:(<hashtable>)
 
-{{ Add output here }}
+
 
 .Inputs
 JumpCloud.SDK.V2.Models.IGraphOperationPolicyGroup

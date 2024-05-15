@@ -1,11 +1,11 @@
-### Example 1: {{ Add title here }}
+### Example 1: Invoke an ExpireUserPassword by Id
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Invoke-JcSdkExpireUserPassword -Id:(<string>)
 
-{{ Add output here }}
+
 ```
 
-{{ Add description here }}
+This function will Invoke an ExpireUserPassword by Id. Id is a required parameter.
 
 ### Example 2: {{ Add title here }}
 ```powershell

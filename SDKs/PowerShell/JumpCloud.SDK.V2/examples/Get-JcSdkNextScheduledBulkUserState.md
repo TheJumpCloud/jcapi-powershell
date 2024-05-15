@@ -1,11 +1,17 @@
-### Example 1: {{ Add title here }}
+### Example 1: Get a NextScheduledBulkUserState by
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkNextScheduledBulkUserState
 
-{{ Add output here }}
+
+
+----        ----------
+EventsCount Int
+Results     JumpCloud.SDK.V2.Models.ScheduledUserstateResult[]
+
+
 ```
 
-{{ Add description here }}
+This function will Get a NextScheduledBulkUserState by .
 
 ### Example 2: {{ Add title here }}
 ```powershell

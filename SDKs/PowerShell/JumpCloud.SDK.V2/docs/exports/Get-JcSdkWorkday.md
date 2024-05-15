@@ -52,17 +52,37 @@ curl -X GET https://console.jumpcloud.com/api/v2/workdays/ \\
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkWorkday -Fields:(<string[]>) -Filter:(<string[]>) -Sort:(<string[]>)
 ```
 
-{{ Add output here }}
+----         ----------
+BasicExpiry  String
+BasicIsValid Boolean
+BasicMessage String
+Id           String
+LastImport   String
+Name         String
+OauthExpiry  String
+OauthIsValid Boolean
+OauthMessage String
+ReportUrl    String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkWorkday -Id:(<string>)
 ```
 
-{{ Add output here }}
+----         ----------
+BasicExpiry  String
+BasicIsValid Boolean
+BasicMessage String
+Id           String
+LastImport   String
+Name         String
+OauthExpiry  String
+OauthIsValid Boolean
+OauthMessage String
+ReportUrl    String
 
 ## PARAMETERS
 

@@ -24,7 +24,7 @@ Describe 'Set-JcSdkAdministratorUser' -Tag:("MTP"){
 
     It 'Set' {
         $administratorUser = $global:PesterTestAdministratorUsers.results | Where-Object {$_.firstname -eq "Pester"}
-        { Set-JcSdkAdministratorUser -Id $administratorUser._id -Firstname "Pester" } | Should -Not -Throw
+        { Set-JcSdkAdministratorUser -Id $administratorUser._id -Firstname "Pester" -EnableMultiFactor } | Should -Not -Throw
     }
 
     It 'SetViaIdentity' -skip {

@@ -170,13 +170,25 @@ curl -X POST https://console.jumpcloud.com/api/search/systems \\
 }'
 ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Search-JcSdkSystem -Body:(<JumpCloud.SDK.V1.Models.Search>)
 
-{{ Add output here }}
+
+
+----       ----------
+Results    JumpCloud.SDK.V1.Models.JcSystem[]
+TotalCount Int
+
+
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Search-JcSdkSystem -Fields:(<string>) -Filter:(<hashtable>) -SearchFilter:(<hashtable>)
 
-{{ Add output here }}
+
+
+----       ----------
+Results    JumpCloud.SDK.V1.Models.JcSystem[]
+TotalCount Int
+
+
 
 .Inputs
 JumpCloud.SDK.V1.Models.ISearch

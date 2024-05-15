@@ -23,10 +23,14 @@ Valid filter fields are `system_id`.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkSystemInsightSecureboot
 ```
 
-{{ Add output here }}
+----           ----------
+CollectionTime String
+SecureBoot     System.Nullable[float] SecureBoot {get;set;}
+SetupMode      System.Nullable[float] SetupMode {get;set;}
+SystemId       String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

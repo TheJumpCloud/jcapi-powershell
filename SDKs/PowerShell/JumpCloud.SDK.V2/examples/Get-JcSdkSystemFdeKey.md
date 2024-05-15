@@ -1,11 +1,11 @@
-### Example 1: {{ Add title here }}
+### Example 1: Get a SystemFdeKey by SystemId
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemFdeKey -SystemId:(<string>)
 
-{{ Add output here }}
+
 ```
 
-{{ Add description here }}
+This function will Get a SystemFdeKey by SystemId. SystemId is a required parameter.
 
 ### Example 2: {{ Add title here }}
 ```powershell

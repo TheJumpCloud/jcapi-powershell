@@ -10,9 +10,34 @@ For Windows devices, use [List System Insights Programs](#operation/systeminsigh
 
 Valid filter fields are `system_id` and `bundle_name`.
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemInsightApp
 
-{{ Add output here }}
+
+
+----                 ----------
+ApplescriptEnabled   String
+BundleExecutable     String
+BundleIdentifier     String
+BundleName           String
+BundlePackageType    String
+BundleShortVersion   String
+BundleVersion        String
+Category             String
+CollectionTime       String
+Compiler             String
+Copyright            String
+DevelopmentRegion    String
+DisplayName          String
+Element              String
+Environment          String
+InfoString
+LastOpenedTime       System.Nullable[float] LastOpenedTime {get;set;}
+MinimumSystemVersion String
+Name                 String
+Path                 String
+SystemId             String
+
+
 .Example
 PS C:\> {{ Add code here }}
 

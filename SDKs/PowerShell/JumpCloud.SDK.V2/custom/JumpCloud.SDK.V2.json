@@ -3218,7 +3218,8 @@
         "queryType": {
           "enum": [
             "Filter",
-            "FilterQuery"
+            "FilterQuery",
+            "Search"
           ],
           "type": "string"
         }
@@ -4195,22 +4196,232 @@
     "bulk-user-create": {
       "description": "See [V1 system user creation](https://docs.jumpcloud.com/api/1.0/index.html#operation/systemusers_post) for full list of attributes.",
       "properties": {
-        "attributes": {
-          "description": "Map of additional attributes.",
+        "account_locked": {
+          "type": "boolean"
+        },
+        "activated": {
+          "type": "boolean"
+        },
+        "addresses": {
           "items": {
-            "type": "object",
-            "additionalProperties": true
+            "properties": {
+              "country": {
+                "type": "string"
+              },
+              "extendedAddress": {
+                "type": "string"
+              },
+              "locality": {
+                "type": "string"
+              },
+              "poBox": {
+                "type": "string"
+              },
+              "postalCode": {
+                "type": "string"
+              },
+              "region": {
+                "type": "string"
+              },
+              "streetAddress": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string"
+              }
+            },
+            "type": "object"
           },
           "type": "array"
         },
-        "email": {
+        "allow_public_key": {
+          "type": "boolean"
+        },
+        "alternateEmail": {
           "type": "string"
+        },
+        "attributes": {
+          "items": {
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "value": {
+                "maxLength": 1024,
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "company": {
+          "type": "string"
+        },
+        "costCenter": {
+          "type": "string"
+        },
+        "department": {
+          "type": "string"
+        },
+        "description": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "disableDeviceMaxLoginAttempts": {
+          "type": "boolean"
+        },
+        "displayname": {
+          "type": "string"
+        },
+        "email": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "employeeIdentifier": {
+          "description": "Must be unique per user. ",
+          "maxLength": 256,
+          "type": "string"
+        },
+        "employeeType": {
+          "type": "string"
+        },
+        "enable_managed_uid": {
+          "type": "boolean"
+        },
+        "enable_user_portal_multifactor": {
+          "type": "boolean"
+        },
+        "external_dn": {
+          "type": "string"
+        },
+        "external_password_expiration_date": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "external_source_type": {
+          "type": "string"
+        },
+        "externally_managed": {
+          "type": "boolean"
         },
         "firstname": {
           "type": "string"
         },
+        "jobTitle": {
+          "type": "string"
+        },
         "lastname": {
           "type": "string"
+        },
+        "ldap_binding_user": {
+          "type": "boolean"
+        },
+        "location": {
+          "type": "string"
+        },
+        "managedAppleId": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "manager": {
+          "description": "Relation with another systemuser to identify the last as a manager.",
+          "type": "string"
+        },
+        "mfa": {
+          "properties": {
+            "configured": {
+              "type": "boolean"
+            },
+            "exclusion": {
+              "type": "boolean"
+            },
+            "exclusionDays": {
+              "minimum": 1,
+              "type": "integer"
+            },
+            "exclusionUntil": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "middlename": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "password_never_expires": {
+          "type": "boolean"
+        },
+        "passwordless_sudo": {
+          "type": "boolean"
+        },
+        "phoneNumbers": {
+          "items": {
+            "properties": {
+              "number": {
+                "type": "string"
+              },
+              "type": {
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "public_key": {
+          "type": "string"
+        },
+        "recoveryEmail": {
+          "properties": {
+            "address": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "relationships": {
+          "items": {
+            "properties": {
+              "type": {
+                "type": "string"
+              },
+              "value": {
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "samba_service_user": {
+          "type": "boolean"
+        },
+        "state": {
+          "enum": [
+            "STAGED",
+            "ACTIVATED",
+            "SUSPENDED"
+          ],
+          "type": "string"
+        },
+        "sudo": {
+          "type": "boolean"
+        },
+        "suspended": {
+          "type": "boolean"
+        },
+        "unix_guid": {
+          "minimum": 1,
+          "type": "integer"
+        },
+        "unix_uid": {
+          "minimum": 1,
+          "type": "integer"
         },
         "username": {
           "type": "string"
@@ -4222,32 +4433,271 @@
     "bulk-user-update": {
       "description": "See [V1 system user update](https://docs.jumpcloud.com/api/1.0/index.html#operation/systemusers_put) for full list of attributes.",
       "properties": {
-        "attributes": {
-          "description": "Map of additional attributes.",
-          "items": {
-            "type": "object",
-            "additionalProperties": true
-          },
-          "type": "array"
-        },
-        "email": {
-          "type": "string"
-        },
-        "firstname": {
-          "type": "string"
-        },
         "id": {
           "description": "Object ID of the user being updated",
           "type": "string"
         },
+        "account_locked": {
+          "type": "boolean"
+        },
+        "addresses": {
+          "description": "type, poBox, extendedAddress, streetAddress, locality, region, postalCode, country",
+          "items": {
+            "properties": {
+              "country": {
+                "maxLength": 1024,
+                "type": "string"
+              },
+              "extendedAddress": {
+                "maxLength": 1024,
+                "type": "string"
+              },
+              "locality": {
+                "maxLength": 1024,
+                "type": "string"
+              },
+              "poBox": {
+                "maxLength": 1024,
+                "type": "string"
+              },
+              "postalCode": {
+                "maxLength": 1024,
+                "type": "string"
+              },
+              "region": {
+                "maxLength": 1024,
+                "type": "string"
+              },
+              "streetAddress": {
+                "maxLength": 1024,
+                "type": "string"
+              },
+              "type": {
+                "maxLength": 1024,
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "allow_public_key": {
+          "type": "boolean"
+        },
+        "alternateEmail": {
+          "type": "string"
+        },
+        "attributes": {
+          "items": {
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "value": {
+                "maxLength": 1024,
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "company": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "costCenter": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "department": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "description": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "disableDeviceMaxLoginAttempts": {
+          "type": "boolean"
+        },
+        "displayname": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "email": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "employeeIdentifier": {
+          "description": "Must be unique per user. ",
+          "maxLength": 256,
+          "type": "string"
+        },
+        "employeeType": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "enable_managed_uid": {
+          "type": "boolean"
+        },
+        "enable_user_portal_multifactor": {
+          "type": "boolean"
+        },
+        "external_dn": {
+          "type": "string"
+        },
+        "external_password_expiration_date": {
+          "type": "string"
+        },
+        "external_source_type": {
+          "type": "string"
+        },
+        "externally_managed": {
+          "type": "boolean"
+        },
+        "firstname": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "jobTitle": {
+          "maxLength": 1024,
+          "type": "string"
+        },
         "lastname": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "ldap_binding_user": {
+          "type": "boolean"
+        },
+        "location": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "managedAppleId": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "manager": {
+          "description": "Relation with another systemuser to identify the last as a manager.",
+          "type": "string"
+        },
+        "mfa": {
+          "properties": {
+            "configured": {
+              "type": "boolean"
+            },
+            "exclusion": {
+              "type": "boolean"
+            },
+            "exclusionDays": {
+              "minimum": 1,
+              "type": "integer"
+            },
+            "exclusionUntil": {
+              "format": "date-time",
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "middlename": {
+          "maxLength": 1024,
           "type": "string"
         },
         "organization": {
           "description": "Organization object id of the user",
           "type": "string"
         },
+        "password": {
+          "type": "string"
+        },
+        "password_never_expires": {
+          "type": "boolean"
+        },
+        "passwordless_sudo": {
+          "type": "boolean"
+        },
+        "phoneNumbers": {
+          "items": {
+            "properties": {
+              "number": {
+                "maxLength": 1024,
+                "type": "string"
+              },
+              "type": {
+                "maxLength": 1024,
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "public_key": {
+          "type": "string"
+        },
+        "relationships": {
+          "items": {
+            "properties": {
+              "type": {
+                "type": "string"
+              },
+              "value": {
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "samba_service_user": {
+          "type": "boolean"
+        },
+        "ssh_keys": {
+          "items": {
+            "properties": {
+              "name": {
+                "description": "The name of the SSH key.",
+                "type": "string"
+              },
+              "public_key": {
+                "description": "The Public SSH key.",
+                "type": "string"
+              }
+            },
+            "required": [
+              "public_key",
+              "name"
+            ],
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "state": {
+          "enum": [
+            "ACTIVATED",
+            "SUSPENDED"
+          ],
+          "type": "string"
+        },
+        "sudo": {
+          "type": "boolean"
+        },
+        "suspended": {
+          "type": "boolean"
+        },
+        "unix_guid": {
+          "minimum": 1,
+          "type": "integer"
+        },
+        "unix_uid": {
+          "minimum": 1,
+          "type": "integer"
+        },
         "username": {
+          "maxLength": 1024,
           "type": "string"
         }
       },
@@ -5121,6 +5571,10 @@
         },
         "productCode": {
           "description": "Unique identifier corresponding to this subscription.",
+          "type": "string"
+        },
+        "upgradeRecommendation": {
+          "description": "Upgrade plan add-on.",
           "type": "string"
         }
       },
@@ -7866,6 +8320,12 @@
       "required": true,
       "type": "string"
     },
+    "trait:bulkJobQueryParameters:suppressEmail": {
+      "description": "An option indicating whether to suppress the job results email that will\notherwise be sent to the Administrator who created the job. If true, the\nemail won't be sent. If omitted or false, the email will be sent.\n",
+      "in": "query",
+      "name": "suppressEmail",
+      "type": "boolean"
+    },
     "trait:fields:fields": {
       "default": [],
       "description": "The comma separated fields included in the returned records.\nIf omitted, the default list of fields will be returned.\n",
@@ -9438,6 +9898,46 @@
         "devices-darwin-security-command"
       ]
     },
+    "/applemdms/{apple_mdm_id}/devices/{device_id}/clearPasscode": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "apple_mdm_id",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "in": "path",
+          "name": "device_id",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "x-functionalities-tags": [
+        "mdm",
+        "devices-darwin-security-command"
+      ]
+    },
+    "/applemdms/{apple_mdm_id}/devices/{device_id}/clearRestrictionsPassword": {
+      "parameters": [
+        {
+          "in": "path",
+          "name": "apple_mdm_id",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "in": "path",
+          "name": "device_id",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "x-functionalities-tags": [
+        "mdm",
+        "devices-darwin-security-command"
+      ]
+    },
     "/applemdms/{apple_mdm_id}/devices/{device_id}/erase": {
       "parameters": [
         {
@@ -10688,6 +11188,9 @@
         "operationId": "BulkUsers_Update",
         "parameters": [
           {
+            "$ref": "#/parameters/trait:bulkJobQueryParameters:suppressEmail"
+          },
+          {
             "in": "body",
             "name": "body",
             "schema": {
@@ -10715,15 +11218,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request PATCH \\\n  --url https://console.jumpcloud.com/api/v2/bulk/users \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --data '[{\"attributes\":[{}],\"email\":\"string\",\"firstname\":\"string\",\"id\":\"string\",\"lastname\":\"string\",\"organization\":\"string\",\"username\":\"string\"}]'"
+            "source": "curl --request PATCH \\\n  --url 'https://console.jumpcloud.com/api/v2/bulk/users?suppressEmail=SOME_BOOLEAN_VALUE' \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --data '[{\"attributes\":[{}],\"email\":\"string\",\"firstname\":\"string\",\"id\":\"string\",\"lastname\":\"string\",\"organization\":\"string\",\"username\":\"string\"}]'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/v2/bulk/users\"\n\npayload = [\n    {\n        \"attributes\": [{}],\n        \"email\": \"string\",\n        \"firstname\": \"string\",\n        \"id\": \"string\",\n        \"lastname\": \"string\",\n        \"organization\": \"string\",\n        \"username\": \"string\"\n    }\n]\nheaders = {\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"PATCH\", url, json=payload, headers=headers)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/v2/bulk/users\"\n\nquerystring = {\"suppressEmail\":\"SOME_BOOLEAN_VALUE\"}\n\npayload = [\n    {\n        \"attributes\": [{}],\n        \"email\": \"string\",\n        \"firstname\": \"string\",\n        \"id\": \"string\",\n        \"lastname\": \"string\",\n        \"organization\": \"string\",\n        \"username\": \"string\"\n    }\n]\nheaders = {\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"PATCH\", url, json=payload, headers=headers, params=querystring)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/v2/bulk/users' -Method PATCH -Headers $headers -ContentType 'application/json' -Body '[{\"attributes\":[{}],\"email\":\"string\",\"firstname\":\"string\",\"id\":\"string\",\"lastname\":\"string\",\"organization\":\"string\",\"username\":\"string\"}]'"
+            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/v2/bulk/users?suppressEmail=SOME_BOOLEAN_VALUE' -Method PATCH -Headers $headers -ContentType 'application/json' -Body '[{\"attributes\":[{}],\"email\":\"string\",\"firstname\":\"string\",\"id\":\"string\",\"lastname\":\"string\",\"organization\":\"string\",\"username\":\"string\"}]'"
           }
         ]
       },
@@ -10731,6 +11234,9 @@
         "description": "The endpoint allows you to create a bulk job to asynchronously create users.\nSee [Create a System User](https://docs.jumpcloud.com/api/1.0/index.html#operation/systemusers_post)\nfor the full list of attributes.\n\n#### Default User State\nThe `state` of each user in the request can be explicitly passed in or\nomitted. If `state` is omitted, then the user will get created\nusing the value returned from the\n[Get an Organization](https://docs.jumpcloud.com/api/1.0/index.html#operation/organizations_get)\nendpoint. The default user state for bulk created users depends on the\n`creation-source` header. For `creation-source:jumpcloud:bulk` the\ndefault state is stored in `settings.newSystemUserStateDefaults.csvImport`.\nFor other `creation-source` header values, the default state is stored in\n`settings.newSystemUserStateDefaults.applicationImport`\n\nThese default state values can be changed in the admin portal settings\nor by using the\n[Update an Organization](https://docs.jumpcloud.com/api/1.0/index.html#operation/organization_put)\nendpoint.\n\n#### Sample Request\n\n```\ncurl -X POST https://console.jumpcloud.com/api/v2/bulk/users \\\n-H 'Accept: application/json' \\\n-H 'Content-Type: application/json' \\\n-H 'x-api-key: {API_KEY}' \\\n-d '[\n  {\n    \"email\":\"{email}\",\n    \"firstname\":\"{firstname}\",\n    \"lastname\":\"{firstname}\",\n    \"username\":\"{username}\",\n    \"attributes\":[\n      {\n        \"name\":\"EmployeeID\",\n        \"value\":\"0000\"\n      },\n      {\n        \"name\":\"Custom\",\n        \"value\":\"attribute\"\n      }\n    ]\n  }\n]'\n```",
         "operationId": "BulkUsers_Create",
         "parameters": [
+          {
+            "$ref": "#/parameters/trait:bulkJobQueryParameters:suppressEmail"
+          },
           {
             "in": "body",
             "name": "body",
@@ -10777,15 +11283,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request POST \\\n  --url https://console.jumpcloud.com/api/v2/bulk/users \\\n  --header 'content-type: application/json' \\\n  --header 'creation-source: jumpcloud:bulk' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --data '[{\"attributes\":[{}],\"email\":\"string\",\"firstname\":\"string\",\"lastname\":\"string\",\"username\":\"string\"}]'"
+            "source": "curl --request POST \\\n  --url 'https://console.jumpcloud.com/api/v2/bulk/users?suppressEmail=SOME_BOOLEAN_VALUE' \\\n  --header 'content-type: application/json' \\\n  --header 'creation-source: jumpcloud:bulk' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --data '[{\"attributes\":[{}],\"email\":\"string\",\"firstname\":\"string\",\"lastname\":\"string\",\"username\":\"string\"}]'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/v2/bulk/users\"\n\npayload = [\n    {\n        \"attributes\": [{}],\n        \"email\": \"string\",\n        \"firstname\": \"string\",\n        \"lastname\": \"string\",\n        \"username\": \"string\"\n    }\n]\nheaders = {\n    \"creation-source\": \"jumpcloud:bulk\",\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/v2/bulk/users\"\n\nquerystring = {\"suppressEmail\":\"SOME_BOOLEAN_VALUE\"}\n\npayload = [\n    {\n        \"attributes\": [{}],\n        \"email\": \"string\",\n        \"firstname\": \"string\",\n        \"lastname\": \"string\",\n        \"username\": \"string\"\n    }\n]\nheaders = {\n    \"creation-source\": \"jumpcloud:bulk\",\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers, params=querystring)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"creation-source\", \"jumpcloud:bulk\")\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/v2/bulk/users' -Method POST -Headers $headers -ContentType 'application/json' -Body '[{\"attributes\":[{}],\"email\":\"string\",\"firstname\":\"string\",\"lastname\":\"string\",\"username\":\"string\"}]'"
+            "source": "$headers=@{}\n$headers.Add(\"creation-source\", \"jumpcloud:bulk\")\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/v2/bulk/users?suppressEmail=SOME_BOOLEAN_VALUE' -Method POST -Headers $headers -ContentType 'application/json' -Body '[{\"attributes\":[{}],\"email\":\"string\",\"firstname\":\"string\",\"lastname\":\"string\",\"username\":\"string\"}]'"
           }
         ]
       },
@@ -12293,6 +12799,8 @@
         "users-import-google"
       ]
     },
+    "/gsuites/{gsuite_id}/import/schedules": {},
+    "/gsuites/{gsuite_id}/import/schedules/{scheduledJobId}": {},
     "/gsuites/{gsuite_id}/import/users": {
       "get": {
         "description": "Lists G Suite users available for import.",
@@ -13832,6 +14340,8 @@
       ]
     },
     "/microsoft-mdm/configuration-files": {},
+    "/object-storage/items": {},
+    "/object-storage/status": {},
     "/office365/activate": {
       "x-functionalities-tags": [
         "m365-activate-deactivate"

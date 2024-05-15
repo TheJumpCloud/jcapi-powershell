@@ -1,18 +1,48 @@
-### Example 1: {{ Add title here }}
+### Example 1: Get a PolicyResult by Id
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkPolicyResult -Id:(<string>)
 
-{{ Add output here }}
+
+
+----       ----------
+Detail     String
+EndedAt    Datetime
+ExitStatus System.Nullable[long] ExitStatus {get;set;}
+Id         String
+PolicyId   String
+StartedAt  Datetime
+State      String
+StdErr     String
+StdOut     String
+Success    Boolean
+SystemId   String
+
+
 ```
 
-{{ Add description here }}
+This function will Get a PolicyResult by Id. Id is a required parameter.
 
-### Example 2: {{ Add title here }}
+### Example 2: List PolicyResults
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkPolicyResult -PolicyId:(<string>) -Fields:(<string[]>) -Filter:(<string[]>) -Sort:(<string[]>)
 
-{{ Add output here }}
+
+
+----       ----------
+Detail     String
+EndedAt    Datetime
+ExitStatus System.Nullable[long] ExitStatus {get;set;}
+Id         String
+PolicyId   String
+StartedAt  Datetime
+State      String
+StdErr     String
+StdOut     String
+Success    Boolean
+SystemId   String
+
+
 ```
 
-{{ Add description here }}
+This function will return a list of all PolicyResults. Fields, Filter, and Sort are optional parameters.
 

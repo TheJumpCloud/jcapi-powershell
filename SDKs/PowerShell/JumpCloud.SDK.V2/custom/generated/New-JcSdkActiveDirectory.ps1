@@ -28,13 +28,29 @@ curl -X POST https://console.jumpcloud.com/api/v2/activedirectories/ \\
   }'
 ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> New-JcSdkActiveDirectory -Domain:(<string>) -UseCase:(<string>)
 
-{{ Add output here }}
+
+
+----         ----------
+Domain       String
+Id           String
+PrimaryAgent String
+UseCase      String
+
+
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> New-JcSdkActiveDirectory -Body:(<JumpCloud.SDK.V2.Models.ActiveDirectory>)
 
-{{ Add output here }}
+
+
+----         ----------
+Domain       String
+Id           String
+PrimaryAgent String
+UseCase      String
+
+
 
 .Inputs
 JumpCloud.SDK.V2.Models.IActiveDirectory

@@ -24,10 +24,13 @@ Lists Office 365 users available for import.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkOffice365UsersToImport
 ```
 
-{{ Add output here }}
+----      ----------
+SkipToken String
+Top       Int
+Users     JumpCloud.SDK.V2.Models.Paths1Hu9JikOffice365SOffice365IdImportUsersGetResponses200ContentApplicationJsonSchemaPropertiesUsersItem…
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

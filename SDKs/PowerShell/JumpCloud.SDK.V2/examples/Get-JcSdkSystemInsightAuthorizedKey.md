@@ -1,11 +1,21 @@
-### Example 1: {{ Add title here }}
+### Example 1: List SystemInsightAuthorizedKeys
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemInsightAuthorizedKey
 
-{{ Add output here }}
+
+
+----           ----------
+Algorithm      String
+CollectionTime String
+Key            String
+KeyFile        String
+SystemId       String
+Uid            String
+
+
 ```
 
-{{ Add description here }}
+This function will return a list of all SystemInsightAuthorizedKeys.
 
 ### Example 2: {{ Add title here }}
 ```powershell

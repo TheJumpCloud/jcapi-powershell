@@ -4,9 +4,17 @@ Valid filter fields are `system_id`.
 .Description
 Valid filter fields are `system_id`.
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemInsightSecureboot
 
-{{ Add output here }}
+
+
+----           ----------
+CollectionTime String
+SecureBoot     System.Nullable[float] SecureBoot {get;set;}
+SetupMode      System.Nullable[float] SetupMode {get;set;}
+SystemId       String
+
+
 .Example
 PS C:\> {{ Add code here }}
 

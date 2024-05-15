@@ -33,17 +33,65 @@ The endpoint adds a new SSO / SAML Applications.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+New-JcSdkApplication -Config:(<JumpCloud.SDK.V1.Models.ApplicationConfig>) -Name:(<string>) -SsoUrl:(<string>) -Active:(<switch>) -Beta:(<switch>) -Color:(<string>) -Created:(<string>) -DatabaseAttributes:(<JumpCloud.SDK.V1.Models.ApplicationDatabaseAttributesItem[]>) -Description:(<string>) -DisplayLabel:(<string>) -DisplayName:(<string>) -Id:(<string>) -LearnMore:(<string>) -LogoColor:(<string>) -LogoUrl:(<string>) -Organization:(<string>) -SsoBeta:(<switch>) -SsoHidden:(<switch>) -SsoIdpCertExpirationAt:(<datetime>) -SsoJit:(<switch>) -SsoType:(<string>)
 ```
 
-{{ Add output here }}
+----                       ----------
+Active                     Boolean
+Beta                       Boolean
+Color                      String
+Config                     JumpCloud.SDK.V1.Models.ApplicationConfig
+Created                    String
+DatabaseAttributes         JumpCloud.SDK.V1.Models.ApplicationDatabaseAttributesItem[]
+Description                String
+DisplayLabel               String
+DisplayName                String
+Id                         String
+LearnMore                  String
+LogoColor                  String
+LogoUrl                    String
+Name                       String
+Organization               String
+SsoBeta                    Boolean
+SsoHidden                  Boolean
+SsoIdpCertExpirationAt     Datetime
+SsoIdpCertificateUpdatedAt Datetime
+SsoIdpPrivateKeyUpdatedAt  Datetime
+SsoJit                     Boolean
+SsoSpCertificateUpdatedAt  Datetime
+SsoType                    String
+SsoUrl                     String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell
-{{ Add code here }}
+New-JcSdkApplication -Body:(<JumpCloud.SDK.V1.Models.Application>)
 ```
 
-{{ Add output here }}
+----                       ----------
+Active                     Boolean
+Beta                       Boolean
+Color                      String
+Config                     JumpCloud.SDK.V1.Models.ApplicationConfig
+Created                    String
+DatabaseAttributes         JumpCloud.SDK.V1.Models.ApplicationDatabaseAttributesItem[]
+Description                String
+DisplayLabel               String
+DisplayName                String
+Id                         String
+LearnMore                  String
+LogoColor                  String
+LogoUrl                    String
+Name                       String
+Organization               String
+SsoBeta                    Boolean
+SsoHidden                  Boolean
+SsoIdpCertExpirationAt     Datetime
+SsoIdpCertificateUpdatedAt Datetime
+SsoIdpPrivateKeyUpdatedAt  Datetime
+SsoJit                     Boolean
+SsoSpCertificateUpdatedAt  Datetime
+SsoType                    String
+SsoUrl                     String
 
 ## PARAMETERS
 

@@ -51,10 +51,10 @@ curl -X POST https://console.jumpcloud.com/api/v2/applemdms/{apple_mdm_id}/devic
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Update-JcSdkAppleMdmDeviceLockInformation -AppleMdmId:(<string>) -DeviceId:(<string>)
 ```
 
-{{ Add output here }}
+
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

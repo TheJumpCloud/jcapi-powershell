@@ -47,10 +47,12 @@ curl -X GET https://console.jumpcloud.com/api/files/command/{commandID} \\
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkCommandFile -Id:(<string>)
 ```
 
-{{ Add output here }}
+----       ----------
+Results    JumpCloud.SDK.V1.Models.CommandfilereturnResultsItem[]
+TotalCount Int
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

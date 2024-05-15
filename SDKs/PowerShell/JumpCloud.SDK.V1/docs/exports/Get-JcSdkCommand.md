@@ -50,17 +50,53 @@ curl -X GET https://console.jumpcloud.com/api/commands/{CommandID} \\
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkCommand -Filter:(<string[]>) -Sort:(<string>)
 ```
 
-{{ Add output here }}
+----               ----------
+Command1           String
+CommandRunners     String
+CommandType        String
+Files              String
+LaunchType         String
+ListensTo          String
+Name               String
+Organization       String
+Schedule           String
+ScheduleRepeatType String
+ScheduleYear       Int
+Shell              String
+Sudo               Boolean
+Template           String
+Timeout            String
+TimeToLiveSeconds  Int
+Trigger            String
+User               String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkCommand -Id:(<string>)
 ```
 
-{{ Add output here }}
+----               ----------
+Command1           String
+CommandRunners     String
+CommandType        String
+Files              String
+LaunchType         String
+ListensTo          String
+Name               String
+Organization       String
+Schedule           String
+ScheduleRepeatType String
+ScheduleYear       Int
+Shell              String
+Sudo               Boolean
+Template           String
+Timeout            String
+TimeToLiveSeconds  Int
+Trigger            String
+User               String
 
 ## PARAMETERS
 

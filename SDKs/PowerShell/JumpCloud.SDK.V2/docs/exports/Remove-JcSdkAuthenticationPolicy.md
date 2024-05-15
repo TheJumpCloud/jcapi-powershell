@@ -46,10 +46,25 @@ curl -X DELETE https://console.jumpcloud.com/api/v2/authn/policies/{id} \\
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Remove-JcSdkAuthenticationPolicy -Id:(<string>)
 ```
 
-{{ Add output here }}
+----                        ----------
+Conditions                  JumpCloud.SDK.V2.Models.AuthnPolicyConditions
+Description                 String
+Disabled                    Boolean
+EffectAction                String
+Id                          String
+MfaRequired                 Boolean
+Name                        String
+TargetResources             JumpCloud.SDK.V2.Models.AuthnPolicyResourceTarget[]
+Type                        String
+UserAttributeExclusions     JumpCloud.SDK.V2.Models.AuthnPolicyUserAttributeFilter[]
+UserAttributeInclusions     JumpCloud.SDK.V2.Models.AuthnPolicyUserAttributeFilter[]
+UserGroupExclusions         String
+UserGroupInclusions         String
+UserInclusions              String
+UserVerificationRequirement String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

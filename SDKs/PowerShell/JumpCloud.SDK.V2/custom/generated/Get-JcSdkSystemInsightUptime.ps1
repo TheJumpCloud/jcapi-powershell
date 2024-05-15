@@ -4,9 +4,20 @@ Valid filter fields are `system_id` and `days`.
 .Description
 Valid filter fields are `system_id` and `days`.
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemInsightUptime
 
-{{ Add output here }}
+
+
+----           ----------
+CollectionTime String
+Days           Int
+Hours          Int
+Minutes        Int
+Seconds        Int
+SystemId       String
+TotalSeconds   String
+
+
 .Example
 PS C:\> {{ Add code here }}
 

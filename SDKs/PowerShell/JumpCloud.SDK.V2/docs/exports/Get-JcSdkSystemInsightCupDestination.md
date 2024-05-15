@@ -23,10 +23,14 @@ Valid filter fields are `system_id` and `name`.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkSystemInsightCupDestination
 ```
 
-{{ Add output here }}
+----        ----------
+Name        String
+OptionName  String
+OptionValue String
+SystemId    String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

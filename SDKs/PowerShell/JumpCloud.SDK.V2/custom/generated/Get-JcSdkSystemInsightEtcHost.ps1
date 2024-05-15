@@ -4,9 +4,17 @@ Valid filter fields are `system_id` and `address`.
 .Description
 Valid filter fields are `system_id` and `address`.
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemInsightEtcHost
 
-{{ Add output here }}
+
+
+----           ----------
+Address        String
+CollectionTime String
+Hostnames      String
+SystemId       String
+
+
 .Example
 PS C:\> {{ Add code here }}
 

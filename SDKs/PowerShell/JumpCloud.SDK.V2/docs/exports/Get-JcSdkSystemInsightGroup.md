@@ -23,10 +23,17 @@ Valid filter fields are `system_id` and `groupname`.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkSystemInsightGroup
 ```
 
-{{ Add output here }}
+----           ----------
+CollectionTime String
+Comment        String
+Gid            String
+GidSigned      String
+Groupname      String
+GroupSid       String
+SystemId       String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

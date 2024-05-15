@@ -61,8 +61,8 @@ curl -X POST https://console.jumpcloud.com/api/v2/bulk/users \\
 ## SYNTAX
 
 ```
-New-JcSdkBulkUser -Body <IBulkUserCreate[]> [-CreationSource <CreationSource2>] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+New-JcSdkBulkUser -Body <IBulkUserCreate[]> [-SuppressEmail] [-CreationSource <CreationSource2>] [-Confirm]
+ [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -120,10 +120,10 @@ curl -X POST https://console.jumpcloud.com/api/v2/bulk/users \\
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+New-JcSdkBulkUser
 ```
 
-{{ Add output here }}
+
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell
@@ -156,6 +156,25 @@ If the header isn't sent, the default value is `jumpcloud:bulk`, if you send the
 
 ```yaml
 Type: JumpCloud.SDK.V2.Support.CreationSource2
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -SuppressEmail
+An option indicating whether to suppress the job results email that will
+otherwise be sent to the Administrator who created the job.
+If true, the
+email won't be sent.
+If omitted or false, the email will be sent.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: (All)
 Aliases:
 
@@ -218,10 +237,66 @@ To create the parameters described below, construct a hash table containing the 
 
 
 BODY <IBulkUserCreate[]>: Array of bulk-user-create
-  - `[Attributes <IBulkUserCreateAttributesItem[]>]`: Map of additional attributes.
+  - `[AccountLocked <Boolean?>]`: 
+  - `[Activated <Boolean?>]`: 
+  - `[Addresses <IBulkUserCreateAddressesItem[]>]`: 
+    - `[Country <String>]`: 
+    - `[ExtendedAddress <String>]`: 
+    - `[Locality <String>]`: 
+    - `[PoBox <String>]`: 
+    - `[PostalCode <String>]`: 
+    - `[Region <String>]`: 
+    - `[StreetAddress <String>]`: 
+    - `[Type <String>]`: 
+  - `[AllowPublicKey <Boolean?>]`: 
+  - `[AlternateEmail <String>]`: 
+  - `[Attributes <IBulkUserCreateAttributesItem[]>]`: 
+    - `[Name <String>]`: 
+    - `[Value <String>]`: 
+  - `[Company <String>]`: 
+  - `[CostCenter <String>]`: 
+  - `[Department <String>]`: 
+  - `[Description <String>]`: 
+  - `[DisableDeviceMaxLoginAttempts <Boolean?>]`: 
+  - `[Displayname <String>]`: 
   - `[Email <String>]`: 
+  - `[EmployeeIdentifier <String>]`: Must be unique per user. 
+  - `[EmployeeType <String>]`: 
+  - `[EnableManagedUid <Boolean?>]`: 
+  - `[EnableUserPortalMultifactor <Boolean?>]`: 
+  - `[ExternalDn <String>]`: 
+  - `[ExternalPasswordExpirationDate <DateTime?>]`: 
+  - `[ExternalSourceType <String>]`: 
+  - `[ExternallyManaged <Boolean?>]`: 
   - `[Firstname <String>]`: 
+  - `[JobTitle <String>]`: 
   - `[Lastname <String>]`: 
+  - `[LdapBindingUser <Boolean?>]`: 
+  - `[Location <String>]`: 
+  - `[ManagedAppleId <String>]`: 
+  - `[Manager <String>]`: Relation with another systemuser to identify the last as a manager.
+  - `[MfaConfigured <Boolean?>]`: 
+  - `[MfaExclusion <Boolean?>]`: 
+  - `[MfaExclusionDays <Int32?>]`: 
+  - `[MfaExclusionUntil <DateTime?>]`: 
+  - `[Middlename <String>]`: 
+  - `[Password <String>]`: 
+  - `[PasswordNeverExpires <Boolean?>]`: 
+  - `[PasswordlessSudo <Boolean?>]`: 
+  - `[PhoneNumbers <IBulkUserCreatePhoneNumbersItem[]>]`: 
+    - `[Number <String>]`: 
+    - `[Type <String>]`: 
+  - `[PublicKey <String>]`: 
+  - `[RecoveryEmailAddress <String>]`: 
+  - `[Relationships <IBulkUserCreateRelationshipsItem[]>]`: 
+    - `[Type <String>]`: 
+    - `[Value <String>]`: 
+  - `[SambaServiceUser <Boolean?>]`: 
+  - `[State <String>]`: 
+  - `[Sudo <Boolean?>]`: 
+  - `[Suspended <Boolean?>]`: 
+  - `[UnixGuid <Int32?>]`: 
+  - `[UnixUid <Int32?>]`: 
   - `[Username <String>]`: 
 
 ## RELATED LINKS

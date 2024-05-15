@@ -1,11 +1,28 @@
-### Example 1: {{ Add title here }}
+### Example 1: List SystemInsightChromeExtensions
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemInsightChromeExtension
 
-{{ Add output here }}
+
+
+----           ----------
+Author         String
+CollectionTime String
+Description    String
+Identifier     String
+Locale         String
+Name           String
+Path           String
+Permissions    String
+Persistent     Int
+SystemId       String
+Uid            String
+UpdateUrl      String
+Version        String
+
+
 ```
 
-{{ Add description here }}
+This function will return a list of all SystemInsightChromeExtensions.
 
 ### Example 2: {{ Add title here }}
 ```powershell

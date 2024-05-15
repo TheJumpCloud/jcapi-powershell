@@ -23,10 +23,18 @@ Valid filter fields are `system_id` and `enabled`.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkSystemInsightAppCompatShim
 ```
 
-{{ Add output here }}
+----           ----------
+CollectionTime String
+Description    String
+Executable     String
+InstallTime    System.Nullable[float] InstallTime {get;set;}
+Path           String
+SdbId          String
+SystemId       String
+Type           String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

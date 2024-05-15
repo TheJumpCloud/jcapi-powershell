@@ -1,18 +1,52 @@
-### Example 1: {{ Add title here }}
+### Example 1: Create a RadiusServer by Name, NetworkSourceIP, and SharedSecret
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> New-JcSdkRadiusServer -Name:(<string>) -NetworkSourceIP:(<string>) -SharedSecret:(<string>) -AuthIdp:(<string>) -CaCert:(<string>) -DeviceCertEnabled:(<switch>) -Mfa:(<string>) -UserCertEnabled:(<switch>) -UserLockoutAction:(<string>) -UserPasswordEnabled:(<switch>) -UserPasswordExpirationAction:(<string>)
 
-{{ Add output here }}
+
+
+----                         ----------
+AuthIdp                      String
+CaCert                       String
+DeviceCertEnabled            Boolean
+Id                           String
+Mfa                          String
+Name                         String
+NetworkSourceIP              String
+Organization                 String
+SharedSecret                 String
+UserCertEnabled              Boolean
+UserLockoutAction            String
+UserPasswordEnabled          Boolean
+UserPasswordExpirationAction String
+
+
 ```
 
-{{ Add description here }}
+This function will Create a RadiusServer by Name NetworkSourceIP SharedSecret. Name, NetworkSourceIP, and SharedSecret are required parameters.
 
-### Example 2: {{ Add title here }}
+### Example 2: Create a RadiusServer by Body
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> New-JcSdkRadiusServer -Body:(<JumpCloud.SDK.V1.Models.Radiusserverpost>)
 
-{{ Add output here }}
+
+
+----                         ----------
+AuthIdp                      String
+CaCert                       String
+DeviceCertEnabled            Boolean
+Id                           String
+Mfa                          String
+Name                         String
+NetworkSourceIP              String
+Organization                 String
+SharedSecret                 String
+UserCertEnabled              Boolean
+UserLockoutAction            String
+UserPasswordEnabled          Boolean
+UserPasswordExpirationAction String
+
+
 ```
 
-{{ Add description here }}
+This function will Create a RadiusServer by Body. Body is a required parameter.
 

@@ -1,18 +1,74 @@
-### Example 1: {{ Add title here }}
+### Example 1: List Applications
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkApplication -Fields:(<string>) -Filter:(<string[]>) -Sort:(<string>)
 
-{{ Add output here }}
+
+
+----                       ----------
+Active                     Boolean
+Beta                       Boolean
+Color                      String
+Config                     JumpCloud.SDK.V1.Models.ApplicationConfig
+Created                    String
+DatabaseAttributes         JumpCloud.SDK.V1.Models.ApplicationDatabaseAttributesItem[]
+Description                String
+DisplayLabel               String
+DisplayName                String
+Id                         String
+LearnMore                  String
+LogoColor                  String
+LogoUrl                    String
+Name                       String
+Organization               String
+SsoBeta                    Boolean
+SsoHidden                  Boolean
+SsoIdpCertExpirationAt     Datetime
+SsoIdpCertificateUpdatedAt Datetime
+SsoIdpPrivateKeyUpdatedAt  Datetime
+SsoJit                     Boolean
+SsoSpCertificateUpdatedAt  Datetime
+SsoType                    String
+SsoUrl                     String
+
+
 ```
 
-{{ Add description here }}
+This function will return a list of all Applications. Fields, Filter, and Sort are optional parameters.
 
-### Example 2: {{ Add title here }}
+### Example 2: Get an Application by Id
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkApplication -Id:(<string>)
 
-{{ Add output here }}
+
+
+----                       ----------
+Active                     Boolean
+Beta                       Boolean
+Color                      String
+Config                     JumpCloud.SDK.V1.Models.ApplicationConfig
+Created                    String
+DatabaseAttributes         JumpCloud.SDK.V1.Models.ApplicationDatabaseAttributesItem[]
+Description                String
+DisplayLabel               String
+DisplayName                String
+Id                         String
+LearnMore                  String
+LogoColor                  String
+LogoUrl                    String
+Name                       String
+Organization               String
+SsoBeta                    Boolean
+SsoHidden                  Boolean
+SsoIdpCertExpirationAt     Datetime
+SsoIdpCertificateUpdatedAt Datetime
+SsoIdpPrivateKeyUpdatedAt  Datetime
+SsoJit                     Boolean
+SsoSpCertificateUpdatedAt  Datetime
+SsoType                    String
+SsoUrl                     String
+
+
 ```
 
-{{ Add description here }}
+This function will Get an Application by Id. Id is a required parameter.
 

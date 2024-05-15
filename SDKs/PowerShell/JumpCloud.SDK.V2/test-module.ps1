@@ -120,7 +120,7 @@ If ($moduleName -eq 'JumpCloud.SDK.V1' -or $moduleName -eq 'JumpCloud.SDK.V2' -a
     $randomBookmarkName = "Bookmark$(Get-Random -Maximum 999 -Minimum 100)"
     $global:PesterDefApplication = @{
         Name   = 'bookmark'
-        ssoUrl = 'https://JumpCloud.com'
+        ssoUrl = "https://JumpCloud$(Get-Random -Maximum 999 -Minimum 100).com"
         config = $global:PesterDefApplicationConfig
         DisplayName  = $randomBookmarkName
         DisplayLabel = $randomBookmarkName
@@ -224,13 +224,108 @@ If ($moduleName -eq 'JumpCloud.SDK.V2' -and "MTP" -notin $Env:IncludeTagList)
         Firstname  = $global:pesterDefBulkUsername;
         Lastname   = $global:pesterDefBulkUsername;
         Username   = $global:pesterDefBulkUsername;
+        AccountLocked                  = $false
+        Activated                      = $true
+        Addresses = @(
+            @{
+                streetAddress = "8080 Testing Ave"
+                type = "home"
+                poBox = "202"
+                locality = "Boulder"
+                region = "CO"
+                postalCode = "80301"
+                country = "US"
+            }
+        )
+        AllowPublicKey                 = $true
+        #AlternateEmail                 = 'bulkUser11234@alderaan2.org'
+        Company                        = 'someCompany'
+        CostCenter                     = 'something'
+        Department                     = 'something'
+        Description                    = 'some description'
+        DisableDeviceMaxLoginAttempts  = $false
+        Displayname                    = 'display'
+        EmployeeIdentifier             = (Get-Random -min 10000000 -max 99999999)
+        EmployeeType                   = 'bulk'
+        EnableManagedUid               = $false
+        EnableUserPortalMultifactor    = $true
+        ExternallyManaged              = $false
+        JobTitle                       = 'bulk'
+        LdapBindingUser                = $false
+        Location                       = 'Singapore'
+        ManagedAppleId                 = 'bulkUser11234@alderaan2.org'
+        Manager                        = $(Get-JCSdkUser | Select-Object -First 1).Id
+        #MfaExclusion                   = $true
+        #MfaExclusionDays               = ((Get-Date).AddDays(+7))
+        Password                       = 'T#st1234'
+        PasswordNeverExpires           = $false
+        PasswordlessSudo               = $false
+        PhoneNumbers = @(
+            @{
+                number = "1112223333"
+                type = "home"
+            }
+            @{
+                number = "2221113333"
+                type = "mobile"
+            }
+        )
+        #State                          = "SUSPENDED"
     }
+    $global:pesterDefBulkUpdateUsername = "PesterBulkUser-$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
+    $BulkUserUpdateUser = New-JCSdkUser -Email "$($global:pesterDefBulkUpdateUsername)@example$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ })).com" -Username $global:pesterDefBulkUpdateUsername -Firstname "BulkUserUpdate" -LastName "BulkUserUpdate"
     $global:PesterDefUpdateBulkUser = [JumpCloud.SDK.V2.Models.BulkUserUpdate]@{
-        Id        = $global:PesterTestBulkUserJobId.Id
-        Email     = "$($global:pesterDefBulkUsername)@example$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ })).com";
-        Firstname = $global:pesterDefBulkUsername; ;
-        Lastname  = $global:pesterDefBulkUsername; ;
-        Username  = $global:pesterDefBulkUsername; ;
+        Id        = $BulkUserUpdateUser.Id
+        Email     = "$($global:pesterDefBulkUpdateUsername)@example$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ })).com";
+        Firstname = $global:pesterDefBulkUpdateUsername; ;
+        Lastname  = $global:pesterDefBulkUpdateUsername; ;
+        Username  = $global:pesterDefBulkUpdateUsername; ;
+        AccountLocked                  = $false
+        Addresses = @(
+            @{
+                streetAddress = "8080 Testing Ave"
+                type = "home"
+                poBox = "202"
+                locality = "Boulder"
+                region = "CO"
+                postalCode = "80301"
+                country = "US"
+            }
+        )
+        AllowPublicKey                 = $true
+        #AlternateEmail                 = 'bulkUser11234@alderaan2.org'
+        Company                        = 'someCompany'
+        CostCenter                     = 'something'
+        Department                     = 'something'
+        Description                    = 'some description'
+        DisableDeviceMaxLoginAttempts  = $false
+        Displayname                    = 'display'
+        EmployeeIdentifier             = (Get-Random -min 10000000 -max 99999999)
+        EmployeeType                   = 'bulk'
+        EnableManagedUid               = $false
+        EnableUserPortalMultifactor    = $true
+        ExternallyManaged              = $false
+        JobTitle                       = 'bulk'
+        LdapBindingUser                = $false
+        Location                       = 'Singapore'
+        ManagedAppleId                 = 'bulkUser11234@alderaan2.org'
+        Manager                        = $(Get-JCSdkUser | Select-Object -First 1).Id
+        #MfaExclusion                   = $true
+        #MfaExclusionUntil              = ((Get-Date).AddDays(+7))
+        Password                       = 'T#st1234'
+        PasswordNeverExpires           = $false
+        PasswordlessSudo               = $false
+        PhoneNumbers = @(
+            @{
+                number = "1112223333"
+                type = "home"
+            }
+            @{
+                number = "2221113333"
+                type = "mobile"
+            }
+        )
+        #State                          = "SUSPENDED"
     }
     # Create a Custom Email Configuration
     $global:PesterDefCustomEmailConfiguration = @{
@@ -319,6 +414,7 @@ If ($moduleName -eq 'JumpCloud.SDK.V1' -or $moduleName -eq 'JumpCloud.SDK.V2' -a
         Email     = "$($global:PesterDefProviderAdminName)@example$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ })).com";
         Firstname = 'AdminFirst'
         Lastname  = 'AdminLast'
+        RoleName  = 'Help Desk'
     }
     # Get admins on an org (Required to test V1 MTP methods)
     $headers = @{

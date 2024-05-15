@@ -1,3 +1,35 @@
+## JumpCloud.SDK.V2-0.0.46
+Release Date: May 15, 2024
+#### RELEASE NOTES
+```
+This release fixes the input models for the Update-JcSdkBulkUser and New-JcSdkBulkUser functions
+```
+#### FEATURES:
+NA
+#### IMPROVEMENTS:
+NA
+#### BUG FIXES:
+Fixes the issue of not being able to set all SystemUser attributes via the Update-JcSdkBulkUser and New-JcSdkBulkUser functions
+#### Generated Changes:
+
+<details>
+<summary>Functions Added</summary>
+
+No changes
+</details>
+
+<details>
+<summary>Functions Modified</summary>
+
+No changes
+</details>
+
+<details>
+<summary>Functions Removed</summary>
+
+No changes
+</details>
+
 ## JumpCloud.SDK.V2-0.0.45
 Release Date: April 15, 2024
 #### RELEASE NOTES

@@ -47,10 +47,10 @@ curl -X DELETE https://console.jumpcloud.com/api/v2/policies/5a837ecd232e110d429
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Remove-JcSdkPolicy -Id:(<string>)
 ```
 
-{{ Add output here }}
+
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

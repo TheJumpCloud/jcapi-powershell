@@ -4,9 +4,31 @@ Valid filter fields are `system_id` and `identifier`.
 .Description
 Valid filter fields are `system_id` and `identifier`.
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemInsightCrash
 
-{{ Add output here }}
+
+
+----           ----------
+CollectionTime String
+CrashedThread  String
+CrashPath      String
+Datetime       String
+ExceptionCodes String
+ExceptionNotes String
+ExceptionType  String
+Identifier     String
+Parent         String
+Path           String
+Pid            String
+Registers      String
+Responsible    String
+StackTrace     String
+SystemId       String
+Type           String
+Uid            Int
+Version        String
+
+
 .Example
 PS C:\> {{ Add code here }}
 

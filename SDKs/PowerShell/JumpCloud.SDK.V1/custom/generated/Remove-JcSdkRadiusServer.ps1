@@ -16,9 +16,24 @@ curl -X DELETE https://console.jumpcloud.com/api/radiusservers/{ServerID} \\
   -H 'x-api-key: {API_KEY}' \\
 ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Remove-JcSdkRadiusServer -Id:(<string>)
 
-{{ Add output here }}
+
+
+----                         ----------
+AuthIdp                      String
+CaCert                       String
+DeviceCertEnabled            Boolean
+Id                           String
+Mfa                          String
+Name                         String
+NetworkSourceIP              String
+UserCertEnabled              Boolean
+UserLockoutAction            String
+UserPasswordEnabled          Boolean
+UserPasswordExpirationAction String
+
+
 .Example
 PS C:\> {{ Add code here }}
 

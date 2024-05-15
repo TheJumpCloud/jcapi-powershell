@@ -87,17 +87,17 @@ curl -X POST https://console.jumpcloud.com/api/v2/users/{UserID}/associations \\
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Set-JcSdkUserAssociation -UserId:(<string>) -Body:(<JumpCloud.SDK.V2.Models.GraphOperationUser>)
 ```
 
-{{ Add output here }}
+
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell
-{{ Add code here }}
+Set-JcSdkUserAssociation -UserId:(<string>) -Id:(<string>) -Op:(<string>) -Type:(<JumpCloud.SDK.V2.Support.GraphOperationUser5>) -Attributes:(<hashtable>)
 ```
 
-{{ Add output here }}
+
 
 ## PARAMETERS
 

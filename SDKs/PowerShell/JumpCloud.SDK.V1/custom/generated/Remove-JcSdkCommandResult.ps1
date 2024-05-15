@@ -20,9 +20,30 @@ curl -X DELETE https://console.jumpcloud.com/api/commandresults/{CommandID} \\
   -H 'x-api-key: {API_KEY}'
   ````
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Remove-JcSdkCommandResult -Id:(<string>)
 
-{{ Add output here }}
+
+
+----               ----------
+Command            String
+DataExitCode       Int
+DataOutput         String
+Files              String
+Id                 String
+Name               String
+Organization       String
+RequestTime        Datetime
+ResponseError      String
+ResponseId         String
+ResponseTime       Datetime
+Sudo               Boolean
+System             String
+SystemId           String
+User               String
+WorkflowId         String
+WorkflowInstanceId String
+
+
 .Example
 PS C:\> {{ Add code here }}
 

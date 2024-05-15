@@ -1,11 +1,30 @@
-### Example 1: {{ Add title here }}
+### Example 1: List SystemInsightChassisInfos
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemInsightChassisInfo
 
-{{ Add output here }}
+
+
+----              ----------
+AudibleAlarm      String
+BreachDescription String
+ChassisTypes      String
+CollectionTime    String
+Description       String
+Lock              String
+Manufacturer      String
+Model             String
+SecurityBreach    String
+Serial            String
+Sku               String
+SmbiosTag         String
+Status            String
+SystemId          String
+VisibleAlarm      String
+
+
 ```
 
-{{ Add description here }}
+This function will return a list of all SystemInsightChassisInfos.
 
 ### Example 2: {{ Add title here }}
 ```powershell

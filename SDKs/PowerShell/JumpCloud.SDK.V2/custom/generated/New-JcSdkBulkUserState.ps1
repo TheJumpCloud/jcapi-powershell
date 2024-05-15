@@ -28,13 +28,29 @@ curl -X POST \"https://console.jumpcloud.com/api/v2/bulk/userstates\" \\
   }'
 ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> New-JcSdkBulkUserState -StartDate:(<datetime>) -State:(<string>) -UserIds:(<string[]>) -ActivationEmailOverride:(<string>) -SendActivationEmails:(<switch>)
 
-{{ Add output here }}
+
+
+----           ----------
+ScheduledDate  String
+ScheduledJobId String
+State          String
+SystemUserId   String
+
+
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> New-JcSdkBulkUserState -Body:(<JumpCloud.SDK.V2.Models.BulkScheduledStatechangeCreate>)
 
-{{ Add output here }}
+
+
+----           ----------
+ScheduledDate  String
+ScheduledJobId String
+State          String
+SystemUserId   String
+
+
 
 .Inputs
 JumpCloud.SDK.V2.Models.IBulkScheduledStatechangeCreate

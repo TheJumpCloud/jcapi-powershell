@@ -50,13 +50,25 @@ curl -X POST https://console.jumpcloud.com/api/search/organizations \\
 }'
 ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Search-JcSdkOrganization -Body:(<JumpCloud.SDK.V1.Models.Search>)
 
-{{ Add output here }}
+
+
+----       ----------
+Results    JumpCloud.SDK.V1.Models.OrganizationslistResultsItem[]
+TotalCount Int
+
+
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Search-JcSdkOrganization -Fields:(<string>) -Filter:(<hashtable>) -SearchFilter:(<hashtable>)
 
-{{ Add output here }}
+
+
+----       ----------
+Results    JumpCloud.SDK.V1.Models.OrganizationslistResultsItem[]
+TotalCount Int
+
+
 
 .Inputs
 JumpCloud.SDK.V1.Models.ISearch

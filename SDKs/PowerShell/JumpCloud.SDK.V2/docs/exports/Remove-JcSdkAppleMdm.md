@@ -51,10 +51,41 @@ curl -X DELETE https://console.jumpcloud.com/api/v2/applemdms/{id} \\
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Remove-JcSdkAppleMdm -Id:(<string>)
 ```
 
-{{ Add output here }}
+----                                  ----------
+AllowMobileUserEnrollment             Boolean
+ApnsCertExpiry                        String
+ApnsPushTopic                         String
+AppleCertCreatorAppleId               String
+AppleCertSerialNumber                 String
+DefaultIosUserEnrollmentDeviceGroupId String
+DefaultSystemGroupId                  String
+DepAccessTokenExpiry                  String
+DepEnableZeroTouchEnrollment          Boolean
+DepServerTokenState                   String
+DepSetupAssistantOptions              JumpCloud.SDK.V2.Models.DepSetupAssistantOption[]
+Id                                    String
+IoDefaultDeviceGroupObjectIds         String
+IoEnableZeroTouchEnrollment           Boolean
+IoSetupAssistantOptions               JumpCloud.SDK.V2.Models.DepSetupAssistantOption[]
+IoSetupOptions                        String
+IosWelcomeScreenButton                String
+IosWelcomeScreenParagraph             String
+IosWelcomeScreenTitle                 String
+MacoDefaultDeviceGroupObjectIds       String
+MacoEnableZeroTouchEnrollment         Boolean
+MacoSetupAssistantOptions             JumpCloud.SDK.V2.Models.DepSetupAssistantOption[]
+MacoSetupOptions                      String
+MacosWelcomeScreenButton              String
+MacosWelcomeScreenParagraph           String
+MacosWelcomeScreenTitle               String
+Name                                  String
+Organization                          String
+WelcomeScreenButton                   String
+WelcomeScreenParagraph                String
+WelcomeScreenTitle                    String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

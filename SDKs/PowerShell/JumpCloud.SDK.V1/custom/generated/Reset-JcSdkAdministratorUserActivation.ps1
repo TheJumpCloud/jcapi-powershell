@@ -4,9 +4,9 @@ This endpoint triggers the sending of a reactivation e-mail to an administrator.
 .Description
 This endpoint triggers the sending of a reactivation e-mail to an administrator.
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Reset-JcSdkAdministratorUserActivation -Id:(<string>)
 
-{{ Add output here }}
+
 .Example
 PS C:\> {{ Add code here }}
 

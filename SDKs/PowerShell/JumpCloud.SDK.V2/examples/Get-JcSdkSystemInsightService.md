@@ -1,11 +1,28 @@
-### Example 1: {{ Add title here }}
+### Example 1: List SystemInsightServices
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemInsightService
 
-{{ Add output here }}
+
+
+----            ----------
+Description     String
+DisplayName     String
+ModulePath      String
+Name            String
+Path            String
+Pid             Int
+ServiceExitCode Int
+ServiceType     String
+StartType       String
+Status          String
+SystemId        String
+UserAccount     String
+Win32ExitCode   Int
+
+
 ```
 
-{{ Add description here }}
+This function will return a list of all SystemInsightServices.
 
 ### Example 2: {{ Add title here }}
 ```powershell

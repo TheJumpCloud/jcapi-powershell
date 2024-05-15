@@ -1,11 +1,17 @@
-### Example 1: {{ Add title here }}
+### Example 1: Get a CommandFile by Id
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkCommandFile -Id:(<string>)
 
-{{ Add output here }}
+
+
+----       ----------
+Results    JumpCloud.SDK.V1.Models.CommandfilereturnResultsItem[]
+TotalCount Int
+
+
 ```
 
-{{ Add description here }}
+This function will Get a CommandFile by Id. Id is a required parameter.
 
 ### Example 2: {{ Add title here }}
 ```powershell

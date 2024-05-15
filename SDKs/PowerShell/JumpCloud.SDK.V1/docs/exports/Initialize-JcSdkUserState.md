@@ -122,17 +122,17 @@ curl -X POST https://console.jumpcloud.com/api/systemusers/{id}/state/activate \
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Initialize-JcSdkUserState -Id:(<string>) -Email:(<string>)
 ```
 
-{{ Add output here }}
+
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell
-{{ Add code here }}
+Initialize-JcSdkUserState -Id:(<string>) -Body:(<JumpCloud.SDK.V1.Models.PathsDi9CukSystemusersIdStateActivatePostRequestbodyContentApplicationJsonSchema>)
 ```
 
-{{ Add output here }}
+
 
 ## PARAMETERS
 

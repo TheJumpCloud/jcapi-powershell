@@ -4,9 +4,9 @@ This endpoint will delete a specific System User's SSH Key.
 .Description
 This endpoint will delete a specific System User's SSH Key.
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Remove-JcSdkUserSshKey -Id:(<string>) -SystemuserId:(<string>)
 
-{{ Add output here }}
+
 .Example
 PS C:\> {{ Add code here }}
 

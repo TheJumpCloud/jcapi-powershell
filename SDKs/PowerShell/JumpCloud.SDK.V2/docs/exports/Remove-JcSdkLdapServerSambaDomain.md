@@ -47,10 +47,10 @@ curl -X DELETE https://console.jumpcloud.com/api/v2/ldapservers/{LDAP_ID}/sambad
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Remove-JcSdkLdapServerSambaDomain -Id:(<string>) -LdapserverId:(<string>)
 ```
 
-{{ Add output here }}
+
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

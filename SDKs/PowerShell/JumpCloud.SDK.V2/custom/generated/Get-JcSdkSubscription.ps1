@@ -22,9 +22,19 @@ This endpoint returns all pricing & packaging subscriptions.
   -H 'x-api-key: {API_KEY}'
   ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSubscription
 
-{{ Add output here }}
+
+
+----                  ----------
+AnnualPrice           float AnnualPrice {get;set;}
+DisplayName           String
+Features              JumpCloud.SDK.V2.Models.Feature[]
+ListPrice             float ListPrice {get;set;}
+ProductCode           String
+UpgradeRecommendation String
+
+
 .Example
 PS C:\> {{ Add code here }}
 

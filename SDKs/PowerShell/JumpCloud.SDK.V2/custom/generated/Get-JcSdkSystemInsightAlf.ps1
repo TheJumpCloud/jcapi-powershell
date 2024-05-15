@@ -4,9 +4,22 @@ Valid filter fields are `system_id` and `global_state`.
 .Description
 Valid filter fields are `system_id` and `global_state`.
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemInsightAlf
 
-{{ Add output here }}
+
+
+----               ----------
+AllowSignedEnabled Int
+CollectionTime     String
+FirewallUnload     Int
+GlobalState        Int
+LoggingEnabled     Int
+LoggingOption      Int
+StealthEnabled     Int
+SystemId           String
+Version            String
+
+
 .Example
 PS C:\> {{ Add code here }}
 

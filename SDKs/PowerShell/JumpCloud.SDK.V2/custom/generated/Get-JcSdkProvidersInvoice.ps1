@@ -6,9 +6,15 @@ You must be associated to the provider to use this endpoint.
 Retrieves a list of invoices for this provider.
 You must be associated to the provider to use this endpoint.
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkProvidersInvoice -ProviderId:(<string>)
 
-{{ Add output here }}
+
+
+----       ----------
+Records    JumpCloud.SDK.V2.Models.ProviderInvoice[]
+TotalCount Int
+
+
 .Example
 PS C:\> {{ Add code here }}
 

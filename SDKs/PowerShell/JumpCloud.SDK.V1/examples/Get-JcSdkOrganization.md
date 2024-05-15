@@ -1,18 +1,60 @@
-### Example 1: {{ Add title here }}
+### Example 1: List Organizations
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkOrganization -Search:(<string>) -Sort:(<string>) -SortIgnoreCase:(<string>)
 
-{{ Add output here }}
+
+
+----                             ----------
+AccessRestriction                String
+AccountsReceivable               String
+Created                          String
+DisplayName                      String
+EntitlementBillingModel          String
+EntitlementIsManuallyBilled      Boolean
+EntitlementPricePerUserSum       Int
+EntitlementProducts              JumpCloud.SDK.V1.Models.OrganizationentitlementEntitlementProductsItem[]
+HasCreditCard                    Boolean
+HasStripeCustomerId              Boolean
+Id                               String
+LastEstimateCalculationTimeStamp String
+LastSfdcSyncStatus               JumpCloud.SDK.V1.Models.OrganizationLastSfdcSyncStatus
+LogoUrl                          String
+Provider                         String
+Settings                         JumpCloud.SDK.V1.Models.Organizationsettings
+TotalBillingEstimate             Int
+
+
 ```
 
-{{ Add description here }}
+This function will return a list of all Organizations. Search, Sort, and SortIgnoreCase are optional parameters.
 
-### Example 2: {{ Add title here }}
+### Example 2: Get an Organization by Id
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkOrganization -Id:(<string>)
 
-{{ Add output here }}
+
+
+----                             ----------
+AccessRestriction                String
+AccountsReceivable               String
+Created                          String
+DisplayName                      String
+EntitlementBillingModel          String
+EntitlementIsManuallyBilled      Boolean
+EntitlementPricePerUserSum       Int
+EntitlementProducts              JumpCloud.SDK.V1.Models.OrganizationentitlementEntitlementProductsItem[]
+HasCreditCard                    Boolean
+HasStripeCustomerId              Boolean
+Id                               String
+LastEstimateCalculationTimeStamp String
+LastSfdcSyncStatus               JumpCloud.SDK.V1.Models.OrganizationLastSfdcSyncStatus
+LogoUrl                          String
+Provider                         String
+Settings                         JumpCloud.SDK.V1.Models.Organizationsettings
+TotalBillingEstimate             Int
+
+
 ```
 
-{{ Add description here }}
+This function will Get an Organization by Id. Id is a required parameter.
 

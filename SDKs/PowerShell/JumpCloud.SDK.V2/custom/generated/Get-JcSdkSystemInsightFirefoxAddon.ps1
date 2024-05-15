@@ -4,9 +4,29 @@ Valid filter fields are `system_id` and `name`.
 .Description
 Valid filter fields are `system_id` and `name`.
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemInsightFirefoxAddon
 
-{{ Add output here }}
+
+
+----           ----------
+Active         Int
+Autoupdate     Int
+CollectionTime String
+Creator        String
+Description    String
+Disabled       Int
+Identifier     String
+Location       String
+Name           String
+Path           String
+SourceUrl      String
+SystemId       String
+Type           String
+Uid            String
+Version        String
+Visible        Int
+
+
 .Example
 PS C:\> {{ Add code here }}
 

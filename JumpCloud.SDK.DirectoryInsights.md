@@ -1,3 +1,35 @@
+## JumpCloud.SDK.DirectoryInsights-0.0.30
+Release Date: May 15, 2024
+#### RELEASE NOTES
+```
+This is a rollup release of the Directory Insights Module, no functional changes have been made
+```
+#### FEATURES:
+NA
+#### IMPROVEMENTS:
+NA
+#### BUG FIXES:
+NA
+#### Generated Changes:
+
+<details>
+<summary>Functions Added</summary>
+
+No changes
+</details>
+
+<details>
+<summary>Functions Modified</summary>
+
+No changes
+</details>
+
+<details>
+<summary>Functions Removed</summary>
+
+No changes
+</details>
+
 ## JumpCloud.SDK.DirectoryInsights-0.0.29
 Release Date: April 15, 2024
 #### RELEASE NOTES

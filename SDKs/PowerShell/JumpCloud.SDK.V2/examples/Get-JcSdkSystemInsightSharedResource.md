@@ -1,11 +1,25 @@
-### Example 1: {{ Add title here }}
+### Example 1: List SystemInsightSharedResources
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemInsightSharedResource
 
-{{ Add output here }}
+
+
+----           ----------
+AllowMaximum   Int
+CollectionTime String
+Description    String
+InstallDate    String
+MaximumAllowed String
+Name           String
+Path           String
+Status         String
+SystemId       String
+Type           String
+
+
 ```
 
-{{ Add description here }}
+This function will return a list of all SystemInsightSharedResources.
 
 ### Example 2: {{ Add title here }}
 ```powershell

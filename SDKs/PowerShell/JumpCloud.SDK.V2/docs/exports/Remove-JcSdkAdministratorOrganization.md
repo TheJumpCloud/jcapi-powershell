@@ -31,10 +31,10 @@ This endpoint removes the association link between an Administrator and an Organ
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Remove-JcSdkAdministratorOrganization -AdministratorId:(<string>) -Id:(<string>)
 ```
 
-{{ Add output here }}
+
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

@@ -32,13 +32,29 @@ curl -X PUT https://console.jumpcloud.com/api/v2/iplists/{id} \\
   }'
 ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Set-JcSdkIPList -Id:(<string>) -Body:(<JumpCloud.SDK.V2.Models.IPListRequest>)
 
-{{ Add output here }}
+
+
+----        ----------
+Description String
+Id          String
+Ips         String
+Name        String
+
+
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Set-JcSdkIPList -Id:(<string>) -Description:(<string>) -Ips:(<string[]>) -Name:(<string>)
 
-{{ Add output here }}
+
+
+----        ----------
+Description String
+Id          String
+Ips         String
+Name        String
+
+
 
 .Inputs
 JumpCloud.SDK.V2.Models.IIPListRequest

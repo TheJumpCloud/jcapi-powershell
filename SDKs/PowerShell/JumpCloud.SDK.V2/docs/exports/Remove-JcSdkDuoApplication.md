@@ -46,10 +46,14 @@ Deletes the specified Duo application, an error will be returned if the applicat
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Remove-JcSdkDuoApplication -AccountId:(<string>) -ApplicationId:(<string>)
 ```
 
-{{ Add output here }}
+----           ----------
+ApiHost        String
+Id             String
+IntegrationKey String
+Name           String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

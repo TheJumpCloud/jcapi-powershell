@@ -22,9 +22,20 @@ curl -X GET https://console.jumpcloud.com/api/v2/systemgroups/{Group_ID}/members
 
 ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemGroupMember -GroupId:(<string>)
 
-{{ Add output here }}
+
+
+----           ----------
+Attributes     JumpCloud.SDK.V2.Models.GraphAttributes
+FromAttributes JumpCloud.SDK.V2.Models.GraphAttributes
+FromId         String
+FromType       String
+ToAttributes   JumpCloud.SDK.V2.Models.GraphAttributes
+ToId           String
+ToType         String
+
+
 .Example
 PS C:\> {{ Add code here }}
 

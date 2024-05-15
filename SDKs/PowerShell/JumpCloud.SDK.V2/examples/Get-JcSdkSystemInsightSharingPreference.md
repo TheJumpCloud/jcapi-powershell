@@ -1,11 +1,27 @@
-### Example 1: {{ Add title here }}
+### Example 1: List SystemInsightSharingPreferences
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemInsightSharingPreference
 
-{{ Add output here }}
+
+
+----              ----------
+BluetoothSharing  Int
+CollectionTime    String
+ContentCaching    Int
+DiscSharing       Int
+FileSharing       Int
+InternetSharing   Int
+PrinterSharing    Int
+RemoteAppleEvents Int
+RemoteLogin       Int
+RemoteManagement  Int
+ScreenSharing     Int
+SystemId          String
+
+
 ```
 
-{{ Add description here }}
+This function will return a list of all SystemInsightSharingPreferences.
 
 ### Example 2: {{ Add title here }}
 ```powershell

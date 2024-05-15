@@ -34,13 +34,43 @@ curl -X PUT https://console.jumpcloud.com/api/radiusservers/{ServerID} \\
 }'
 ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Set-JcSdkRadiusServer -Id:(<string>) -Body:(<JumpCloud.SDK.V1.Models.PathsKeqea5RadiusserversIdPutRequestbodyContentApplicationJsonSchema>)
 
-{{ Add output here }}
+
+
+----                         ----------
+AuthIdp                      String
+CaCert                       String
+DeviceCertEnabled            Boolean
+Id                           String
+Mfa                          String
+Name                         String
+NetworkSourceIP              String
+UserCertEnabled              Boolean
+UserLockoutAction            String
+UserPasswordEnabled          Boolean
+UserPasswordExpirationAction String
+
+
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Set-JcSdkRadiusServer -Id:(<string>) -Name:(<string>) -NetworkSourceIP:(<string>) -SharedSecret:(<string>) -CaCert:(<string>) -DeviceCertEnabled:(<switch>) -Mfa:(<string>) -UserCertEnabled:(<switch>) -UserLockoutAction:(<string>) -UserPasswordEnabled:(<switch>) -UserPasswordExpirationAction:(<string>)
 
-{{ Add output here }}
+
+
+----                         ----------
+AuthIdp                      String
+CaCert                       String
+DeviceCertEnabled            Boolean
+Id                           String
+Mfa                          String
+Name                         String
+NetworkSourceIP              String
+UserCertEnabled              Boolean
+UserLockoutAction            String
+UserPasswordEnabled          Boolean
+UserPasswordExpirationAction String
+
+
 
 .Inputs
 JumpCloud.SDK.V1.Models.IJumpCloudApiIdentity

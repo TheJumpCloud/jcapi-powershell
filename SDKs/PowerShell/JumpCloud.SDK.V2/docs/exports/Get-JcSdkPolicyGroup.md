@@ -50,17 +50,29 @@ curl -X GET https://console.jumpcloud.com/api/v2/policygroups/{GroupID} \\
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkPolicyGroup -Fields:(<string[]>) -Filter:(<string[]>) -Sort:(<string[]>)
 ```
 
-{{ Add output here }}
+----        ----------
+Attributes  JumpCloud.SDK.V2.Models.GraphAttributes
+Description String
+Email       String
+Id          String
+Name        String
+Type        String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkPolicyGroup -Id:(<string>)
 ```
 
-{{ Add output here }}
+----        ----------
+Attributes  JumpCloud.SDK.V2.Models.GraphAttributes
+Description String
+Email       String
+Id          String
+Name        String
+Type        String
 
 ## PARAMETERS
 

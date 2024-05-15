@@ -29,10 +29,18 @@ Get the custom email configuration for the specified custom email type
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkCustomEmailConfiguration -CustomEmailType:(<string>)
 ```
 
-{{ Add output here }}
+----                ----------
+Body                String
+Button              String
+Header              String
+Id                  String
+NextStepContactInfo String
+Subject             String
+Title               String
+Type                String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

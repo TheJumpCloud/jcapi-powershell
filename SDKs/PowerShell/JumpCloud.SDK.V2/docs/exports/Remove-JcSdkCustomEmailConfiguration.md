@@ -31,10 +31,10 @@ Delete the custom email configuration for the specified custom email type
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Remove-JcSdkCustomEmailConfiguration -CustomEmailType:(<string>)
 ```
 
-{{ Add output here }}
+
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

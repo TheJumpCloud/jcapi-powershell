@@ -1,11 +1,19 @@
-### Example 1: {{ Add title here }}
+### Example 1: List SystemInsightSecureboots
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemInsightSecureboot
 
-{{ Add output here }}
+
+
+----           ----------
+CollectionTime String
+SecureBoot     System.Nullable[float] SecureBoot {get;set;}
+SetupMode      System.Nullable[float] SetupMode {get;set;}
+SystemId       String
+
+
 ```
 
-{{ Add description here }}
+This function will return a list of all SystemInsightSecureboots.
 
 ### Example 2: {{ Add title here }}
 ```powershell

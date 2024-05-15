@@ -82,13 +82,13 @@ curl -X POST https://console.jumpcloud.com/api/systemusers/{id}/state/activate \
 
 ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Initialize-JcSdkUserState -Id:(<string>) -Email:(<string>)
 
-{{ Add output here }}
+
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Initialize-JcSdkUserState -Id:(<string>) -Body:(<JumpCloud.SDK.V1.Models.PathsDi9CukSystemusersIdStateActivatePostRequestbodyContentApplicationJsonSchema>)
 
-{{ Add output here }}
+
 
 .Inputs
 JumpCloud.SDK.V1.Models.IJumpCloudApiIdentity

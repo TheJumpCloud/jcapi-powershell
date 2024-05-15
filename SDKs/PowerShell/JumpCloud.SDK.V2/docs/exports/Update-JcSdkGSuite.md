@@ -120,17 +120,31 @@ curl -X PATCH https://console.jumpcloud.com/api/v2/gsuites/{GSUITE_ID} \\
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Update-JcSdkGSuite -Id:(<string>) -Body:(<JumpCloud.SDK.V2.Models.Gsuite>)
 ```
 
-{{ Add output here }}
+----                         ----------
+DefaultDomainDomain          String
+DefaultDomainId              String
+GroupsEnabled                Boolean
+Id                           String
+Name                         String
+UserLockoutAction            String
+UserPasswordExpirationAction String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell
-{{ Add code here }}
+Update-JcSdkGSuite -Id:(<string>) -DefaultDomainId:(<string>) -GroupsEnabled:(<switch>) -Name:(<string>) -UserLockoutAction:(<string>) -UserPasswordExpirationAction:(<string>)
 ```
 
-{{ Add output here }}
+----                         ----------
+DefaultDomainDomain          String
+DefaultDomainId              String
+GroupsEnabled                Boolean
+Id                           String
+Name                         String
+UserLockoutAction            String
+UserPasswordExpirationAction String
 
 ## PARAMETERS
 

@@ -26,9 +26,15 @@ in case an organization has a Duo account already a 409 (Conflict) code will be 
   -d '{}'
 ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> New-JcSdkDuoAccount
 
-{{ Add output here }}
+
+
+---- ----------
+Id   String
+Name String
+
+
 .Example
 PS C:\> {{ Add code here }}
 

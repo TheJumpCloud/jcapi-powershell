@@ -48,13 +48,13 @@ curl -X POST https://console.jumpcloud.com/api/v2/systems/{System_ID}/associatio
   }'
 ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Set-JcSdkSystemAssociation -SystemId:(<string>) -Body:(<JumpCloud.SDK.V2.Models.GraphOperationSystem>)
 
-{{ Add output here }}
+
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Set-JcSdkSystemAssociation -SystemId:(<string>) -Id:(<string>) -Op:(<string>) -Type:(<JumpCloud.SDK.V2.Support.GraphOperationSystem3>) -Attributes:(<hashtable>)
 
-{{ Add output here }}
+
 
 .Inputs
 JumpCloud.SDK.V2.Models.IGraphOperationSystem

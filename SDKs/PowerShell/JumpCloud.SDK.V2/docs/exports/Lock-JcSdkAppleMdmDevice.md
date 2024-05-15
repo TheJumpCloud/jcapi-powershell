@@ -63,17 +63,17 @@ Locks a DEP-enrolled device.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Lock-JcSdkAppleMdmDevice -AppleMdmId:(<string>) -DeviceId:(<string>) -Pin:(<string>)
 ```
 
-{{ Add output here }}
+
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell
-{{ Add code here }}
+Lock-JcSdkAppleMdmDevice -AppleMdmId:(<string>) -DeviceId:(<string>) -Body:(<JumpCloud.SDK.V2.Models.PathsLf7IzoApplemdmsAppleMdmIdDevicesDeviceIdLockPostRequestbodyContentApplicationJsonSchema>)
 ```
 
-{{ Add output here }}
+
 
 ## PARAMETERS
 

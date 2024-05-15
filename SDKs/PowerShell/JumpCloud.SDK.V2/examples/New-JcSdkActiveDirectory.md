@@ -1,18 +1,34 @@
-### Example 1: {{ Add title here }}
+### Example 1: Create an ActiveDirectory by
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> New-JcSdkActiveDirectory -Domain:(<string>) -UseCase:(<string>)
 
-{{ Add output here }}
+
+
+----         ----------
+Domain       String
+Id           String
+PrimaryAgent String
+UseCase      String
+
+
 ```
 
-{{ Add description here }}
+This function will Create an ActiveDirectory by .
 
-### Example 2: {{ Add title here }}
+### Example 2: Create an ActiveDirectory by Body
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> New-JcSdkActiveDirectory -Body:(<JumpCloud.SDK.V2.Models.ActiveDirectory>)
 
-{{ Add output here }}
+
+
+----         ----------
+Domain       String
+Id           String
+PrimaryAgent String
+UseCase      String
+
+
 ```
 
-{{ Add description here }}
+This function will Create an ActiveDirectory by Body. Body is a required parameter.
 

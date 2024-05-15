@@ -24,9 +24,9 @@ curl -X POST https://console.jumpcloud.com/api/v2/applemdms/{apple_mdm_id}/devic
   -d '{}'
 ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Update-JcSdkAppleMdmDeviceLockInformation -AppleMdmId:(<string>) -DeviceId:(<string>)
 
-{{ Add output here }}
+
 .Example
 PS C:\> {{ Add code here }}
 

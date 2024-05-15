@@ -160,13 +160,25 @@ curl -X POST https://console.jumpcloud.com/api/search/systemusers \\
 }'
 ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Search-JcSdkUser -Body:(<JumpCloud.SDK.V1.Models.Search>)
 
-{{ Add output here }}
+
+
+----       ----------
+Results    JumpCloud.SDK.V1.Models.Systemuserreturn[]
+TotalCount Int
+
+
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Search-JcSdkUser -Fields:(<string>) -Filter:(<hashtable>) -SearchFilter:(<hashtable>)
 
-{{ Add output here }}
+
+
+----       ----------
+Results    JumpCloud.SDK.V1.Models.Systemuserreturn[]
+TotalCount Int
+
+
 
 .Inputs
 JumpCloud.SDK.V1.Models.ISearch

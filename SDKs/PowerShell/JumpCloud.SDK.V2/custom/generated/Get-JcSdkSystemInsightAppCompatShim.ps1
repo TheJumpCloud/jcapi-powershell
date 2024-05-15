@@ -4,9 +4,21 @@ Valid filter fields are `system_id` and `enabled`.
 .Description
 Valid filter fields are `system_id` and `enabled`.
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemInsightAppCompatShim
 
-{{ Add output here }}
+
+
+----           ----------
+CollectionTime String
+Description    String
+Executable     String
+InstallTime    System.Nullable[float] InstallTime {get;set;}
+Path           String
+SdbId          String
+SystemId       String
+Type           String
+
+
 .Example
 PS C:\> {{ Add code here }}
 

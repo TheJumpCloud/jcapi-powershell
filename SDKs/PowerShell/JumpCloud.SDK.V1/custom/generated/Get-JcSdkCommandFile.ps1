@@ -22,9 +22,15 @@ curl -X GET https://console.jumpcloud.com/api/files/command/{commandID} \\
   -H 'x-api-key: {API_KEY}'
   ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkCommandFile -Id:(<string>)
 
-{{ Add output here }}
+
+
+----       ----------
+Results    JumpCloud.SDK.V1.Models.CommandfilereturnResultsItem[]
+TotalCount Int
+
+
 .Example
 PS C:\> {{ Add code here }}
 

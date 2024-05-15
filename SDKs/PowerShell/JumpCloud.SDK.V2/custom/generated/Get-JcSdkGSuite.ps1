@@ -22,9 +22,20 @@ This endpoint returns a specific G Suite.
   -H 'x-api-key: {API_KEY}'
 ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkGSuite -Id:(<string>)
 
-{{ Add output here }}
+
+
+----                         ----------
+DefaultDomainDomain          String
+DefaultDomainId              String
+GroupsEnabled                Boolean
+Id                           String
+Name                         String
+UserLockoutAction            String
+UserPasswordExpirationAction String
+
+
 .Example
 PS C:\> {{ Add code here }}
 

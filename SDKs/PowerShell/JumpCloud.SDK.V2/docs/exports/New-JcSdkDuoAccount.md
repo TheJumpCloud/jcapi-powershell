@@ -45,10 +45,12 @@ in case an organization has a Duo account already a 409 (Conflict) code will be 
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+New-JcSdkDuoAccount
 ```
 
-{{ Add output here }}
+---- ----------
+Id   String
+Name String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

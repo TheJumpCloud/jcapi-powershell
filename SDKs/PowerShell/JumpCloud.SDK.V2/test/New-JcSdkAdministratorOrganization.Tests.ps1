@@ -25,7 +25,7 @@ Describe 'New-JcSdkAdministratorOrganization' -Tag:("MTP") {
         $Firstname = 'AdminFirst'
         $Lastname  = 'AdminLast'
         # Create new providerAdmin for test
-        $testAdmin = New-JcsdkProviderAdministrator -Email:($email) -Firstname:($Firstname) -Lastname:($Lastname) -ProviderId:($env:JCProviderId) -BindNoOrgs
+        $testAdmin = New-JcsdkProviderAdministrator -Email:($email) -Firstname:($Firstname) -Lastname:($Lastname) -ProviderId:($env:JCProviderId) -BindNoOrgs -RoleName "Help Desk"
         { New-JcSdkAdministratorOrganization -Organization:($env:JCOrgId) -Id:(($testAdmin).Id) } | Should -Not -Throw
         # Remove providerAdmin to clean up
         Remove-JcSdkProviderAdministrator -Id:(($testAdmin).Id) -ProviderId:($env:JCProviderId)

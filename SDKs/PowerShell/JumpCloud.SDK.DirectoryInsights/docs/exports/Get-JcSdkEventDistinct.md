@@ -39,17 +39,23 @@ curl -X POST 'https://api.jumpcloud.com/insights/directory/v1/events/distinct' -
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkEventDistinct -Body:(<JumpCloud.SDK.DirectoryInsights.Models.EventDistinctQuery>)
 ```
 
-{{ Add output here }}
+----                    ----------
+Buckets                 JumpCloud.SDK.DirectoryInsights.Models.Post200ApplicationJsonPropertiesItemsItem[]
+DocCountErrorUpperBound Int
+SumOtherDocCount        Int
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkEventDistinct -Field:(<string>) -Service:(<string[]>) -StartTime:(<datetime>) -EndTime:(<datetime>) -SearchTermAnd:(<hashtable>) -SearchTermNot:(<hashtable>) -SearchTermOr:(<hashtable>)
 ```
 
-{{ Add output here }}
+----                    ----------
+Buckets                 JumpCloud.SDK.DirectoryInsights.Models.Post200ApplicationJsonPropertiesItemsItem[]
+DocCountErrorUpperBound Int
+SumOtherDocCount        Int
 
 ## PARAMETERS
 

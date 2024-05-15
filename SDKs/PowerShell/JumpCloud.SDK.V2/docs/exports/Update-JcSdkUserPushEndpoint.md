@@ -45,17 +45,39 @@ This endpoint will update a push endpoint associated with a user.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Update-JcSdkUserPushEndpoint -PushEndpointId:(<string>) -UserId:(<string>) -Body:(<JumpCloud.SDK.V2.Models.PathsO4Si39UsersUserIdPushendpointsPushEndpointIdPatchRequestbodyContentApplicationJsonSchema>)
 ```
 
-{{ Add output here }}
+----             ----------
+DeviceAppVersion String
+DeviceMake       String
+DeviceModel      String
+DeviceOS         String
+DeviceOSVersion  String
+DeviceUvEnabled  Boolean
+EnrollmentDate   Datetime
+Id               String
+LastUsedDate     Datetime
+Name             String
+State            String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell
-{{ Add code here }}
+Update-JcSdkUserPushEndpoint -PushEndpointId:(<string>) -UserId:(<string>) -Name:(<string>) -State:(<string>)
 ```
 
-{{ Add output here }}
+----             ----------
+DeviceAppVersion String
+DeviceMake       String
+DeviceModel      String
+DeviceOS         String
+DeviceOSVersion  String
+DeviceUvEnabled  Boolean
+EnrollmentDate   Datetime
+Id               String
+LastUsedDate     Datetime
+Name             String
+State            String
 
 ## PARAMETERS
 

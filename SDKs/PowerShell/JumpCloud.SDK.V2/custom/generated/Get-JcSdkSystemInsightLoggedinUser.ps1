@@ -4,9 +4,21 @@ Valid filter fields are `system_id` and `user`.
 .Description
 Valid filter fields are `system_id` and `user`.
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemInsightLoggedinUser
 
-{{ Add output here }}
+
+
+----           ----------
+CollectionTime String
+Host           String
+Pid            Int
+SystemId       String
+Time           Int
+Tty            String
+Type           String
+User           String
+
+
 .Example
 PS C:\> {{ Add code here }}
 

@@ -26,10 +26,12 @@ You must be associated with the provider to use this route.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkProviderOrganization
 ```
 
-{{ Add output here }}
+----       ----------
+Results    JumpCloud.SDK.V2.Models.Organization[]
+TotalCount Int
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

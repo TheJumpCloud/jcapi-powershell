@@ -46,9 +46,9 @@ curl --silent \\
      \"https://console.jumpcloud.com/api/command/trigger/{TriggerName}\"
 ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Invoke-JcSdkCommandTrigger -Triggername:(<string>)
 
-{{ Add output here }}
+
 .Example
 PS C:\> {{ Add code here }}
 

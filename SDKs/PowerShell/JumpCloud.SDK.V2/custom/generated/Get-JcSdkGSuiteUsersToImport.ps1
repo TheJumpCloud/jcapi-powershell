@@ -4,9 +4,15 @@ Lists G Suite users available for import.
 .Description
 Lists G Suite users available for import.
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkGSuiteUsersToImport
 
-{{ Add output here }}
+
+
+----          ----------
+NextPageToken String
+Users         JumpCloud.SDK.V2.Models.Get200ApplicationJsonPropertiesItemsItem[]
+
+
 .Example
 PS C:\> {{ Add code here }}
 

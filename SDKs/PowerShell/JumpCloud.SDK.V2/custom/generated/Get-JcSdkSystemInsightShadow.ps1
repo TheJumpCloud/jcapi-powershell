@@ -4,9 +4,25 @@ Valid filter fields are `system_id` and `username`.
 .Description
 Valid filter fields are `system_id` and `username`.
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemInsightShadow
 
-{{ Add output here }}
+
+
+----           ----------
+CollectionTime String
+Expire         String
+Flag           String
+HashAlg        String
+Inactive       String
+LastChange     String
+Max            String
+Min            String
+PasswordStatus String
+SystemId       String
+Username       String
+Warning        String
+
+
 .Example
 PS C:\> {{ Add code here }}
 

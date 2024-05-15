@@ -20,9 +20,17 @@ Deletes the specified Duo application, an error will be returned if the applicat
   -H 'x-api-key: {API_KEY}''
 ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Remove-JcSdkDuoApplication -AccountId:(<string>) -ApplicationId:(<string>)
 
-{{ Add output here }}
+
+
+----           ----------
+ApiHost        String
+Id             String
+IntegrationKey String
+Name           String
+
+
 .Example
 PS C:\> {{ Add code here }}
 

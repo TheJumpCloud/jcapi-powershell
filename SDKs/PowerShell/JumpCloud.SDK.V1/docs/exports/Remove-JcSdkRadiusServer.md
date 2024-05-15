@@ -41,10 +41,21 @@ curl -X DELETE https://console.jumpcloud.com/api/radiusservers/{ServerID} \\
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Remove-JcSdkRadiusServer -Id:(<string>)
 ```
 
-{{ Add output here }}
+----                         ----------
+AuthIdp                      String
+CaCert                       String
+DeviceCertEnabled            Boolean
+Id                           String
+Mfa                          String
+Name                         String
+NetworkSourceIP              String
+UserCertEnabled              Boolean
+UserLockoutAction            String
+UserPasswordEnabled          Boolean
+UserPasswordExpirationAction String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

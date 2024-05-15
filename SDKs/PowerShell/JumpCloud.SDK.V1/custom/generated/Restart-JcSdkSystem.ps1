@@ -30,9 +30,9 @@ curl -X POST \\
   -d {}
 ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Restart-JcSdkSystem -SystemId:(<string>)
 
-{{ Add output here }}
+
 .Example
 PS C:\> {{ Add code here }}
 

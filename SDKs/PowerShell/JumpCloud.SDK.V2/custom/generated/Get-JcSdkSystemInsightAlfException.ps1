@@ -4,9 +4,17 @@ Valid filter fields are `system_id` and `state`.
 .Description
 Valid filter fields are `system_id` and `state`.
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemInsightAlfException
 
-{{ Add output here }}
+
+
+----           ----------
+CollectionTime String
+Path           String
+State          System.Nullable[float] State {get;set;}
+SystemId       String
+
+
 .Example
 PS C:\> {{ Add code here }}
 

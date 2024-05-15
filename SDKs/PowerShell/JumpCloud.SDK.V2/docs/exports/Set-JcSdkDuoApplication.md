@@ -71,17 +71,25 @@ Updates the specified Duo application.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Set-JcSdkDuoApplication -AccountId:(<string>) -ApplicationId:(<string>) -Body:(<JumpCloud.SDK.V2.Models.DuoApplicationUpdateReq>)
 ```
 
-{{ Add output here }}
+----           ----------
+ApiHost        String
+Id             String
+IntegrationKey String
+Name           String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell
-{{ Add code here }}
+Set-JcSdkDuoApplication -AccountId:(<string>) -ApplicationId:(<string>) -ApiHost:(<string>) -IntegrationKey:(<string>) -Name:(<string>) -SecretKey:(<string>)
 ```
 
-{{ Add output here }}
+----           ----------
+ApiHost        String
+Id             String
+IntegrationKey String
+Name           String
 
 ## PARAMETERS
 

@@ -23,10 +23,21 @@ Valid filter fields are `system_id`.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkSystemInsightTpmInfo
 ```
 
-{{ Add output here }}
+----                    ----------
+Activated               System.Nullable[float] Activated {get;set;}
+CollectionTime          String
+Enabled                 System.Nullable[float] Enabled {get;set;}
+ManufacturerId          System.Nullable[float] ManufacturerId {get;set;}
+ManufacturerName        String
+ManufacturerVersion     String
+Owned                   System.Nullable[float] Owned {get;set;}
+PhysicalPresenceVersion String
+ProductName             String
+SpecVersion             String
+SystemId                String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

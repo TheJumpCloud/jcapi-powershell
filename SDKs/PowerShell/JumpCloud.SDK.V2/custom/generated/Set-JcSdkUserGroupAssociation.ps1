@@ -36,13 +36,13 @@ curl -X POST https://console.jumpcloud.com/api/v2/usergroups/{GroupID}/associati
   }'
 ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Set-JcSdkUserGroupAssociation -GroupId:(<string>) -Body:(<JumpCloud.SDK.V2.Models.GraphOperationUserGroup>)
 
-{{ Add output here }}
+
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Set-JcSdkUserGroupAssociation -GroupId:(<string>) -Id:(<string>) -Op:(<string>) -Type:(<JumpCloud.SDK.V2.Support.GraphOperationUserGroup5>) -Attributes:(<hashtable>)
 
-{{ Add output here }}
+
 
 .Inputs
 JumpCloud.SDK.V2.Models.IGraphOperationUserGroup

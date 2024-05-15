@@ -23,10 +23,12 @@ This endpoint returns the association links between an Administrator and Organiz
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkAdministratorOrganization
 ```
 
-{{ Add output here }}
+----          ----------
+Administrator String
+Organization  String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

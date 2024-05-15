@@ -4,9 +4,23 @@ Valid filter fields are `system_id` and `type`.
 .Description
 Valid filter fields are `system_id` and `type`.
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemInsightSharedResource
 
-{{ Add output here }}
+
+
+----           ----------
+AllowMaximum   Int
+CollectionTime String
+Description    String
+InstallDate    String
+MaximumAllowed String
+Name           String
+Path           String
+Status         String
+SystemId       String
+Type           String
+
+
 .Example
 PS C:\> {{ Add code here }}
 

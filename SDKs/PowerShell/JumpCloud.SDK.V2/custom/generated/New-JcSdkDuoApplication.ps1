@@ -32,13 +32,29 @@ Creates a Duo application for your organization and the specified account.
   }'
 ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> New-JcSdkDuoApplication -AccountId:(<string>) -ApiHost:(<string>) -IntegrationKey:(<string>) -Name:(<string>) -SecretKey:(<string>)
 
-{{ Add output here }}
+
+
+----           ----------
+ApiHost        String
+Id             String
+IntegrationKey String
+Name           String
+
+
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> New-JcSdkDuoApplication -AccountId:(<string>) -Body:(<JumpCloud.SDK.V2.Models.DuoApplicationReq>)
 
-{{ Add output here }}
+
+
+----           ----------
+ApiHost        String
+Id             String
+IntegrationKey String
+Name           String
+
+
 
 .Inputs
 JumpCloud.SDK.V2.Models.IDuoApplicationReq

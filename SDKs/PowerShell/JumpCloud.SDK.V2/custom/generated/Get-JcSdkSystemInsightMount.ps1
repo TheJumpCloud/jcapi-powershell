@@ -4,9 +4,26 @@ Valid filter fields are `system_id` and `path`.
 .Description
 Valid filter fields are `system_id` and `path`.
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemInsightMount
 
-{{ Add output here }}
+
+
+----            ----------
+Blocks          String
+BlocksAvailable String
+BlocksFree      String
+BlocksSize      String
+CollectionTime  String
+Device          String
+DeviceAlias     String
+Flags           String
+Inodes          String
+InodesFree      String
+Path            String
+SystemId        String
+Type            String
+
+
 .Example
 PS C:\> {{ Add code here }}
 

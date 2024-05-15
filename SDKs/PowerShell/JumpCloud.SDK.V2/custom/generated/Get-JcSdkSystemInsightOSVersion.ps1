@@ -4,9 +4,25 @@ Valid filter fields are `system_id` and `version`.
 .Description
 Valid filter fields are `system_id` and `version`.
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemInsightOSVersion
 
-{{ Add output here }}
+
+
+----           ----------
+Build          String
+Codename       String
+CollectionTime String
+InstallDate    String
+Major          Int
+Minor          Int
+Name           String
+Patch          Int
+Platform       String
+PlatformLike   String
+SystemId       String
+Version        String
+
+
 .Example
 PS C:\> {{ Add code here }}
 

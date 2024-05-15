@@ -4,9 +4,20 @@ Valid filter fields are `system_id` and `type`.
 .Description
 Valid filter fields are `system_id` and `type`.
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemInsightDnsResolver
 
-{{ Add output here }}
+
+
+----           ----------
+Address        String
+CollectionTime String
+Id             System.Nullable[float] Id {get;set;}
+Netmask        String
+Options        String
+SystemId       String
+Type           String
+
+
 .Example
 PS C:\> {{ Add code here }}
 

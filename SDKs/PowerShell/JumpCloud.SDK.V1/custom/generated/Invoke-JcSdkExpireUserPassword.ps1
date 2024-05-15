@@ -4,9 +4,9 @@ This endpoint allows you to expire a user's password.
 .Description
 This endpoint allows you to expire a user's password.
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Invoke-JcSdkExpireUserPassword -Id:(<string>)
 
-{{ Add output here }}
+
 .Example
 PS C:\> {{ Add code here }}
 

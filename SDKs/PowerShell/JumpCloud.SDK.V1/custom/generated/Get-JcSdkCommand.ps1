@@ -20,13 +20,57 @@ curl -X GET https://console.jumpcloud.com/api/commands/{CommandID} \\
   -H 'x-api-key: {API_KEY}'
 ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkCommand -Filter:(<string[]>) -Sort:(<string>)
 
-{{ Add output here }}
+
+
+----               ----------
+Command1           String
+CommandRunners     String
+CommandType        String
+Files              String
+LaunchType         String
+ListensTo          String
+Name               String
+Organization       String
+Schedule           String
+ScheduleRepeatType String
+ScheduleYear       Int
+Shell              String
+Sudo               Boolean
+Template           String
+Timeout            String
+TimeToLiveSeconds  Int
+Trigger            String
+User               String
+
+
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkCommand -Id:(<string>)
 
-{{ Add output here }}
+
+
+----               ----------
+Command1           String
+CommandRunners     String
+CommandType        String
+Files              String
+LaunchType         String
+ListensTo          String
+Name               String
+Organization       String
+Schedule           String
+ScheduleRepeatType String
+ScheduleYear       Int
+Shell              String
+Sudo               Boolean
+Template           String
+Timeout            String
+TimeToLiveSeconds  Int
+Trigger            String
+User               String
+
+
 
 .Inputs
 JumpCloud.SDK.V1.Models.IJumpCloudApiIdentity

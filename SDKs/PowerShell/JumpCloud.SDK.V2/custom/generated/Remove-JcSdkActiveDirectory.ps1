@@ -20,9 +20,17 @@ curl -X DELETE https://console.jumpcloud.com/api/v2/activedirectories/{ActiveDir
   -H 'x-api-key: {API_KEY}'
   ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Remove-JcSdkActiveDirectory -Id:(<string>)
 
-{{ Add output here }}
+
+
+----         ----------
+Domain       String
+Id           String
+PrimaryAgent String
+UseCase      String
+
+
 .Example
 PS C:\> {{ Add code here }}
 

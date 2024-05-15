@@ -1,18 +1,34 @@
-### Example 1: {{ Add title here }}
+### Example 1: List LdapServers
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkLdapServer -Fields:(<string[]>) -Filter:(<string[]>) -Sort:(<string[]>)
 
-{{ Add output here }}
+
+
+----                         ----------
+Id                           String
+Name                         String
+UserLockoutAction            String
+UserPasswordExpirationAction String
+
+
 ```
 
-{{ Add description here }}
+This function will return a list of all LdapServers. Fields, Filter, and Sort are optional parameters.
 
-### Example 2: {{ Add title here }}
+### Example 2: Get a LdapServer by Id
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkLdapServer -Id:(<string>)
 
-{{ Add output here }}
+
+
+----                         ----------
+Id                           String
+Name                         String
+UserLockoutAction            String
+UserPasswordExpirationAction String
+
+
 ```
 
-{{ Add description here }}
+This function will Get a LdapServer by Id. Id is a required parameter.
 

@@ -53,17 +53,25 @@ curl -X POST https://console.jumpcloud.com/api/v2/activedirectories/ \\
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+New-JcSdkActiveDirectory -Domain:(<string>) -UseCase:(<string>)
 ```
 
-{{ Add output here }}
+----         ----------
+Domain       String
+Id           String
+PrimaryAgent String
+UseCase      String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell
-{{ Add code here }}
+New-JcSdkActiveDirectory -Body:(<JumpCloud.SDK.V2.Models.ActiveDirectory>)
 ```
 
-{{ Add output here }}
+----         ----------
+Domain       String
+Id           String
+PrimaryAgent String
+UseCase      String
 
 ## PARAMETERS
 

@@ -4,9 +4,9 @@ This endpoint removes the association link between an Administrator and an Organ
 .Description
 This endpoint removes the association link between an Administrator and an Organization.
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Remove-JcSdkAdministratorOrganization -AdministratorId:(<string>) -Id:(<string>)
 
-{{ Add output here }}
+
 .Example
 PS C:\> {{ Add code here }}
 

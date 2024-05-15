@@ -39,10 +39,16 @@ This endpoint returns all active directories (LDAP, O365 Suite, G-Suite).
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkDirectory
 ```
 
-{{ Add output here }}
+----                ----------
+DefaultDomainDomain String
+DefaultDomainId     String
+Id                  String
+Name                String
+OAuthStatus         JumpCloud.SDK.V2.Models.DirectoryOAuthStatus
+Type                String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell

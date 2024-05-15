@@ -4,9 +4,21 @@ Valid filter fields are `system_id` and `domain`.
 .Description
 Valid filter fields are `system_id` and `domain`.
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkSystemInsightManagedPolicy
 
-{{ Add output here }}
+
+
+----           ----------
+CollectionTime String
+Domain         String
+Manual         Int
+Name           String
+SystemId       String
+Username       String
+Uuid           String
+Value          String
+
+
 .Example
 PS C:\> {{ Add code here }}
 

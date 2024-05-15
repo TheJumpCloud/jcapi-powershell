@@ -76,17 +76,17 @@ A direct association can be a non-homogeneous relationship between 2 different o
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Set-JcSdkCommandAssociation -CommandId:(<string>) -Body:(<JumpCloud.SDK.V2.Models.GraphOperationCommand>)
 ```
 
-{{ Add output here }}
+
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell
-{{ Add code here }}
+Set-JcSdkCommandAssociation -CommandId:(<string>) -Id:(<string>) -Op:(<string>) -Type:(<JumpCloud.SDK.V2.Support.GraphOperationCommand1>) -Attributes:(<hashtable>)
 ```
 
-{{ Add output here }}
+
 
 ## PARAMETERS
 

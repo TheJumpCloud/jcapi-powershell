@@ -20,13 +20,45 @@ This endpoint returns a specific policy template.
   -H 'x-api-key: {API_KEY}'
 ```
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkPolicyTemplate -Fields:(<string[]>) -Filter:(<string[]>) -Sort:(<string[]>)
 
-{{ Add output here }}
+
+
+----           ----------
+Activation     String
+Alert          String
+Behavior       String
+DeliveryTypes  String
+Description    String
+DisplayName    String
+Id             String
+Name           String
+OSMetaFamily   String
+OSRestrictions JumpCloud.SDK.V2.Models.OSRestriction[]
+Reference      String
+State          String
+
+
 .Example
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkPolicyTemplate -Id:(<string>)
 
-{{ Add output here }}
+
+
+----           ----------
+Activation     String
+Alert          String
+Behavior       String
+DeliveryTypes  String
+Description    String
+DisplayName    String
+Id             String
+Name           String
+OSMetaFamily   String
+OSRestrictions JumpCloud.SDK.V2.Models.OSRestriction[]
+Reference      String
+State          String
+
+
 
 .Inputs
 JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity

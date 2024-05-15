@@ -23,10 +23,15 @@ Valid filter fields are `system_id` and `uid`.
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkSystemInsightUserSshKey
 ```
 
-{{ Add output here }}
+----           ----------
+CollectionTime String
+Encrypted      Int
+Path           String
+SystemId       String
+Uid            String
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell
