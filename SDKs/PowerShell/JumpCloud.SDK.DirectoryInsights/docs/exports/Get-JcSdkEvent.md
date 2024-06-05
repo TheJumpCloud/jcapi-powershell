@@ -19,8 +19,9 @@ curl -X POST 'https://api.jumpcloud.com/insights/directory/v1/events' -H 'Conten
 ### GetExpanded (Default)
 ```
 Get-JcSdkEvent -Service <String[]> -StartTime <DateTime> [-EndTime <DateTime>] [-Fields <String[]>]
- [-Q <String>] [-SearchAfter <String[]>] [-SearchTermAnd <Hashtable>] [-SearchTermNot <Hashtable>]
- [-SearchTermOr <Hashtable>] [-Sort <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-Limit <Int64>] [-Q <String>] [-SearchAfter <String[]>] [-SearchTermAnd <Hashtable>]
+ [-SearchTermNot <Hashtable>] [-SearchTermOr <Hashtable>] [-Sort <String>] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### Get
@@ -131,6 +132,21 @@ optional list of fields to return from query
 
 ```yaml
 Type: System.String[]
+Parameter Sets: GetExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Limit
+Max number of rows to return
+
+```yaml
+Type: System.Int64
 Parameter Sets: GetExpanded
 Aliases:
 

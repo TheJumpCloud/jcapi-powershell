@@ -111,7 +111,11 @@ Try {
                 $skipToken = $($CustomPaginationMap.$NewCommandName.nextToken)
 
             } else {
-                $ParameterContent = ($Params.Matches.Value | Where-Object { $_ -notlike '*${Limit}*' -and $_ -notlike '*${Skip}*' })
+                if ($NewCommandName -eq 'Get-JcSdkEvent') {
+                    $ParameterContent = ($Params.Matches.Value)
+                } else {
+                    $ParameterContent = ($Params.Matches.Value | Where-Object { $_ -notlike '*${Limit}*' -and $_ -notlike '*${Skip}*' })
+                }
                 $ContainsLimit = $Params.Matches.Value | Where-Object { $_ -like '*Limit*' }
                 $ContainsSkip = $Params.Matches.Value | Where-Object { $_ -like '*Skip*' }
                 $skip = 'Skip'
@@ -208,7 +212,10 @@ Try {
                     }
                     Start-Sleep -Seconds (`$resultCounter * 5)
                 } while (`$resultCounter -lt `$maxRetries)
-                If (`$JCHttpResponse.Result.Headers.Contains('X-Search_after')) {
+                If (`$limit) {
+                    `$Results += `$Result
+                    Break
+                } elseif (`$JCHttpResponse.Result.Headers.Contains('X-Search_after')) {
                     If (-not [System.String]::IsNullOrEmpty(`$Result)) {
                         `$XResultSearchAfter = (`$JCHttpResponse.Result.Headers.GetValues('X-Search_after') | ConvertFrom-Json);
                         If ([System.String]::IsNullOrEmpty(`$PSBoundParameters.SearchAfter)) {
