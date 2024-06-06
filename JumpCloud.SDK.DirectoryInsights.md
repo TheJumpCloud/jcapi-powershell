@@ -1,3 +1,35 @@
+## JumpCloud.SDK.DirectoryInsights-0.0.31
+Release Date: June 06, 2024
+#### RELEASE NOTES
+```
+Added the Limit parameter to Get-JcSdkEvent function
+```
+#### FEATURES:
+Added the Limit parameter to Get-JcSdkEvent function
+#### IMPROVEMENTS:
+NA
+#### BUG FIXES:
+NA
+#### Generated Changes:
+
+<details>
+<summary>Functions Added</summary>
+
+No changes
+</details>
+
+<details>
+<summary>Functions Modified</summary>
+
+No changes
+</details>
+
+<details>
+<summary>Functions Removed</summary>
+
+No changes
+</details>
+
 ## JumpCloud.SDK.DirectoryInsights-0.0.30
 Release Date: May 15, 2024
 #### RELEASE NOTES

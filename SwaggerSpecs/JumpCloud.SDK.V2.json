@@ -247,23 +247,6 @@
       "title": "AppleMDM",
       "type": "object"
     },
-    "Apps": {
-      "items": {
-        "properties": {
-          "appVersion": {
-            "example": "1.1.1",
-            "type": "string"
-          },
-          "osId": {
-            "example": 1,
-            "format": "int32",
-            "type": "integer"
-          }
-        },
-        "type": "object"
-      },
-      "type": "array"
-    },
     "AuthnPolicy": {
       "description": "This represents an authentication policy.  See the details of each field for valid values and restrictions.",
       "properties": {
@@ -1826,44 +1809,6 @@
       "title": "GroupMembershipMethodType",
       "type": "string"
     },
-    "GroupPwm": {
-      "properties": {
-        "accessLevelId": {
-          "format": "uuid",
-          "type": "string"
-        },
-        "accessLevelName": {
-          "example": "folder manager",
-          "type": "string"
-        },
-        "description": {
-          "example": "finance group",
-          "type": "string"
-        },
-        "externalId": {
-          "type": "string"
-        },
-        "id": {
-          "format": "uuid",
-          "type": "string"
-        },
-        "name": {
-          "example": "group name",
-          "type": "string"
-        },
-        "usersCount": {
-          "format": "int32",
-          "type": "integer"
-        }
-      },
-      "required": [
-        "id",
-        "name",
-        "accessLevelId",
-        "accessLevelName"
-      ],
-      "type": "object"
-    },
     "GroupType": {
       "description": "The group type.",
       "enum": [
@@ -1873,26 +1818,6 @@
       ],
       "title": "GroupType",
       "type": "string"
-    },
-    "Groups": {
-      "items": {
-        "properties": {
-          "id": {
-            "format": "uuid",
-            "type": "string"
-          },
-          "name": {
-            "example": "group name",
-            "type": "string"
-          }
-        },
-        "required": [
-          "id",
-          "name"
-        ],
-        "type": "object"
-      },
-      "type": "array"
     },
     "IPList": {
       "properties": {
@@ -2129,31 +2054,6 @@
         }
       },
       "title": "Organization",
-      "type": "object"
-    },
-    "PasswordsSecurity": {
-      "properties": {
-        "compromisedPasswords": {
-          "example": 10,
-          "format": "int32",
-          "type": "integer"
-        },
-        "oldPasswords": {
-          "example": 10,
-          "format": "int32",
-          "type": "integer"
-        },
-        "reusedPasswords": {
-          "example": 10,
-          "format": "int32",
-          "type": "integer"
-        },
-        "weakPasswords": {
-          "example": 10,
-          "format": "int32",
-          "type": "integer"
-        }
-      },
       "type": "object"
     },
     "PhoneNumber": {
@@ -2701,7 +2601,7 @@
         "amountPaid": "10.9",
         "amountRemaining": "189.1",
         "currency": "USD",
-        "dueDate": "2021-08-07",
+        "dueDate": "2021-08-07T00:00:00",
         "id": "234324",
         "status": "Partially Paid"
       },
@@ -2794,423 +2694,6 @@
       "title": "PushEndpointResponse",
       "type": "object"
     },
-    "PwmAllUsers": {
-      "properties": {
-        "results": {
-          "items": {
-            "allOf": [
-              {
-                "$ref": "#/definitions/PwmUser"
-              },
-              {
-                "$ref": "#/definitions/PasswordsSecurity"
-              }
-            ]
-          },
-          "type": "array"
-        },
-        "totalCount": {
-          "example": 50,
-          "format": "int32",
-          "type": "integer"
-        }
-      },
-      "required": [
-        "results",
-        "totalCount"
-      ],
-      "type": "object"
-    },
-    "PwmCloudBackupRestores": {
-      "properties": {
-        "approved": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "requested": {
-          "format": "int32",
-          "type": "integer"
-        }
-      },
-      "type": "object"
-    },
-    "PwmItemHistory": {
-      "properties": {
-        "createdBy": {
-          "format": "uuid",
-          "type": "string"
-        },
-        "dateCreated": {
-          "type": "string"
-        },
-        "dateUpdated": {
-          "type": "string"
-        },
-        "updatedBy": {
-          "format": "uuid",
-          "type": "string"
-        }
-      },
-      "type": "object"
-    },
-    "PwmItemsCountByType": {
-      "properties": {
-        "count": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "type": {
-          "format": "int32",
-          "type": "integer"
-        }
-      },
-      "type": "object"
-    },
-    "PwmItemsMetadata": {
-      "properties": {
-        "items": {
-          "items": {
-            "$ref": "#/definitions/PwmItemsCountByType"
-          },
-          "type": "array"
-        },
-        "results": {
-          "items": {
-            "allOf": [
-              {
-                "$ref": "#/definitions/PwmUserItem"
-              },
-              {
-                "$ref": "#/definitions/PwmItemHistory"
-              }
-            ]
-          },
-          "type": "array"
-        },
-        "totalCount": {
-          "example": 50,
-          "format": "int32",
-          "type": "integer"
-        }
-      },
-      "required": [
-        "results",
-        "totalCount"
-      ],
-      "type": "object"
-    },
-    "PwmOverviewAppVersions": {
-      "properties": {
-        "results": {
-          "items": {
-            "properties": {
-              "usersCount": {
-                "example": 10,
-                "format": "int32",
-                "type": "integer"
-              },
-              "version": {
-                "example": "1.0.0",
-                "type": "string"
-              }
-            },
-            "type": "object"
-          },
-          "type": "array"
-        },
-        "totalCount": {
-          "example": 50,
-          "format": "int32",
-          "type": "integer"
-        }
-      },
-      "required": [
-        "results",
-        "totalCount"
-      ],
-      "type": "object"
-    },
-    "PwmOverviewMain": {
-      "properties": {
-        "compromisedPasswords": {
-          "example": 10,
-          "format": "int32",
-          "type": "integer"
-        },
-        "devices": {
-          "items": {
-            "properties": {
-              "count": {
-                "example": 10,
-                "format": "int32",
-                "type": "integer"
-              },
-              "id": {
-                "example": 1,
-                "format": "int32",
-                "type": "integer"
-              },
-              "name": {
-                "example": "ios",
-                "type": "string"
-              }
-            },
-            "type": "object"
-          },
-          "type": "array"
-        },
-        "enrolledGroups": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "oldPasswords": {
-          "example": 10,
-          "format": "int32",
-          "type": "integer"
-        },
-        "passwordsCount": {
-          "example": 10,
-          "format": "int32",
-          "type": "integer"
-        },
-        "passwordsScore": {
-          "example": 80.5,
-          "type": "number"
-        },
-        "pendingInvites": {
-          "example": 50,
-          "format": "int32",
-          "type": "integer"
-        },
-        "sharedFolders": {
-          "example": 50,
-          "format": "int32",
-          "type": "integer"
-        },
-        "totalUsers": {
-          "example": 50,
-          "format": "int32",
-          "type": "integer"
-        },
-        "weakPasswords": {
-          "example": 10,
-          "format": "int32",
-          "type": "integer"
-        }
-      },
-      "required": [
-        "sharedFolders",
-        "pendingInvites",
-        "totalUsers",
-        "devices"
-      ],
-      "type": "object"
-    },
-    "PwmUser": {
-      "properties": {
-        "apps": {
-          "$ref": "#/definitions/Apps"
-        },
-        "cloudBackupRestores": {
-          "$ref": "#/definitions/PwmCloudBackupRestores"
-        },
-        "email": {
-          "format": "email",
-          "type": "string"
-        },
-        "employeeUuid": {
-          "format": "uuid",
-          "type": "string"
-        },
-        "externalId": {
-          "type": "string"
-        },
-        "groups": {
-          "$ref": "#/definitions/Groups"
-        },
-        "id": {
-          "format": "uuid",
-          "type": "string"
-        },
-        "itemsCount": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "name": {
-          "example": "folder admin",
-          "type": "string"
-        },
-        "passwordsCount": {
-          "example": 10,
-          "format": "int32",
-          "type": "integer"
-        },
-        "passwordsScore": {
-          "example": 80.5,
-          "type": "number"
-        },
-        "scoreUpdatedAt": {
-          "type": "string"
-        },
-        "status": {
-          "example": "active",
-          "type": "string"
-        },
-        "username": {
-          "example": "username1",
-          "type": "string"
-        }
-      },
-      "required": [
-        "id",
-        "name",
-        "email",
-        "status"
-      ],
-      "type": "object"
-    },
-    "PwmUserById": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/PwmUser"
-        },
-        {
-          "$ref": "#/definitions/PasswordsSecurity"
-        }
-      ]
-    },
-    "PwmUserItem": {
-      "properties": {
-        "field1": {
-          "type": "string"
-        },
-        "field2": {
-          "type": "string"
-        },
-        "folderName": {
-          "example": "folder 1",
-          "type": "string"
-        },
-        "folderUuid": {
-          "format": "uuid",
-          "type": "string"
-        },
-        "id": {
-          "type": "string"
-        },
-        "itemUuid": {
-          "format": "uuid",
-          "type": "string"
-        },
-        "nickname": {
-          "type": "string"
-        },
-        "type": {
-          "format": "int32",
-          "type": "integer"
-        }
-      },
-      "required": [
-        "id",
-        "itemUuid",
-        "type",
-        "nickname",
-        "field1",
-        "field2"
-      ],
-      "type": "object"
-    },
-    "PwmUserItems": {
-      "properties": {
-        "items": {
-          "items": {
-            "$ref": "#/definitions/PwmItemsCountByType"
-          },
-          "type": "array"
-        },
-        "results": {
-          "items": {
-            "$ref": "#/definitions/PwmUserItem"
-          },
-          "type": "array"
-        },
-        "totalCount": {
-          "example": 50,
-          "format": "int32",
-          "type": "integer"
-        }
-      },
-      "required": [
-        "results",
-        "totalCount"
-      ],
-      "type": "object"
-    },
-    "PwmUserSharedFolders": {
-      "properties": {
-        "results": {
-          "items": {
-            "properties": {
-              "accessLevelId": {
-                "format": "uuid",
-                "type": "string"
-              },
-              "accessLevelName": {
-                "example": "folder admin",
-                "type": "string"
-              },
-              "createdAt": {
-                "type": "string"
-              },
-              "id": {
-                "format": "uuid",
-                "type": "string"
-              },
-              "itemsInFolder": {
-                "example": 15,
-                "format": "int32",
-                "type": "integer"
-              },
-              "name": {
-                "example": "folder 1",
-                "type": "string"
-              },
-              "passwordsScore": {
-                "example": 80,
-                "type": "number"
-              },
-              "scoreUpdatedAt": {
-                "type": "string"
-              },
-              "usersWithAccess": {
-                "example": 5,
-                "format": "int32",
-                "type": "integer"
-              }
-            },
-            "required": [
-              "id",
-              "name",
-              "usersWithAccess",
-              "itemsInFolder",
-              "createdAt"
-            ],
-            "type": "object"
-          },
-          "type": "array"
-        },
-        "totalCount": {
-          "example": 50,
-          "format": "int32",
-          "type": "integer"
-        }
-      },
-      "required": [
-        "results",
-        "totalCount"
-      ],
-      "type": "object"
-    },
     "Query": {
       "description": "Basic query.",
       "discriminator": "queryType",
@@ -3272,201 +2755,6 @@
       ],
       "title": "Setup Assistant Option",
       "type": "string"
-    },
-    "SharedFolder": {
-      "properties": {
-        "createdAt": {
-          "type": "string"
-        },
-        "itemsInFolder": {
-          "example": 15,
-          "format": "int32",
-          "type": "integer"
-        },
-        "name": {
-          "example": "folder admin",
-          "type": "string"
-        },
-        "passwordsCount": {
-          "example": 25,
-          "format": "int32",
-          "type": "integer"
-        },
-        "passwordsScore": {
-          "example": 70.5,
-          "type": "number"
-        },
-        "scoreUpdatedAt": {
-          "type": "string"
-        },
-        "usersWithAccess": {
-          "example": 5,
-          "format": "int32",
-          "type": "integer"
-        },
-        "uuid": {
-          "format": "uuid",
-          "type": "string"
-        }
-      },
-      "required": [
-        "uuid",
-        "name",
-        "usersWithAccess",
-        "itemsInFolder",
-        "createdAt"
-      ],
-      "type": "object"
-    },
-    "SharedFolderAccessLevels": {
-      "properties": {
-        "results": {
-          "items": {
-            "properties": {
-              "description": {
-                "example": "folder admin description",
-                "type": "string"
-              },
-              "id": {
-                "format": "uuid",
-                "type": "string"
-              },
-              "name": {
-                "example": "folder admin",
-                "type": "string"
-              }
-            },
-            "required": [
-              "id",
-              "name"
-            ],
-            "type": "object"
-          },
-          "type": "array"
-        }
-      },
-      "required": [
-        "results"
-      ],
-      "type": "object"
-    },
-    "SharedFolderDetails": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/SharedFolder"
-        },
-        {
-          "$ref": "#/definitions/PasswordsSecurity"
-        }
-      ]
-    },
-    "SharedFolderGroups": {
-      "properties": {
-        "results": {
-          "items": {
-            "$ref": "#/definitions/GroupPwm"
-          },
-          "type": "array"
-        },
-        "totalCount": {
-          "example": 50,
-          "format": "int32",
-          "type": "integer"
-        }
-      },
-      "required": [
-        "results",
-        "totalCount"
-      ],
-      "type": "object"
-    },
-    "SharedFolderUsers": {
-      "properties": {
-        "results": {
-          "items": {
-            "properties": {
-              "accessLevelId": {
-                "format": "uuid",
-                "type": "string"
-              },
-              "accessLevelName": {
-                "example": "folder admin",
-                "type": "string"
-              },
-              "apps": {
-                "$ref": "#/definitions/Apps"
-              },
-              "email": {
-                "format": "email",
-                "type": "string"
-              },
-              "employeeUuid": {
-                "format": "uuid",
-                "type": "string"
-              },
-              "externalId": {
-                "type": "string"
-              },
-              "id": {
-                "format": "uuid",
-                "type": "string"
-              },
-              "name": {
-                "example": "folder admin",
-                "type": "string"
-              },
-              "status": {
-                "example": "active",
-                "type": "string"
-              },
-              "username": {
-                "example": "username1",
-                "type": "string"
-              }
-            },
-            "required": [
-              "id",
-              "name",
-              "email",
-              "accessLevelId",
-              "accessLevelName",
-              "status"
-            ],
-            "type": "object"
-          },
-          "type": "array"
-        },
-        "totalCount": {
-          "example": 50,
-          "format": "int32",
-          "type": "integer"
-        }
-      },
-      "required": [
-        "results",
-        "totalCount"
-      ],
-      "type": "object"
-    },
-    "SharedFoldersList": {
-      "properties": {
-        "results": {
-          "items": {
-            "$ref": "#/definitions/SharedFolder"
-          },
-          "type": "array"
-        },
-        "totalCount": {
-          "example": 50,
-          "format": "int32",
-          "type": "integer"
-        }
-      },
-      "required": [
-        "results",
-        "totalCount"
-      ],
-      "type": "object"
     },
     "SuggestionCounts": {
       "properties": {
@@ -5694,7 +4982,7 @@
         "bundle_short_version": "2.4",
         "bundle_version": "658.1",
         "category": "public.app-category.utilities",
-        "collection_time": "2019-06-03T19:41:30.658Z",
+        "collection_time": "2019-06-03T13:41:30.658-06:00",
         "compiler": "com.apple.compilers.llvm.clang.1_0",
         "copyright": "",
         "development_region": "English",
@@ -5971,7 +5259,7 @@
     },
     "system-insights-bitlocker-info": {
       "example": {
-        "collection_time": "2019-06-03T19:41:30.658Z",
+        "collection_time": "2019-06-03T13:41:30.658-06:00",
         "conversion_status": 0,
         "devide_id": "\\\\\\\\?\\\\Volume{3ba5cc52-e0fd-45fa-b8b8-5c88f44f8b17}\\",
         "drive_letter": "C:",
@@ -6011,7 +5299,7 @@
     },
     "system-insights-browser-plugins": {
       "example": {
-        "collection_time": "2019-06-03T19:41:30.858Z",
+        "collection_time": "2019-06-03T13:41:30.858-06:00",
         "description": "LastPass Plugin",
         "development_region": "en-US",
         "disabled": 0,
@@ -6189,7 +5477,7 @@
     "system-insights-chrome-extensions": {
       "example": {
         "author": "",
-        "collection_time": "2019-06-03t19:41:31.125z",
+        "collection_time": "2019-06-03T13:41:31.125-06:00",
         "description": "provider for discovery and services for mirroring of chrome media router",
         "identifier": "pkedcjkdefgpdelpbcmbmeomcjbeemfm",
         "locale": "en",
@@ -6363,7 +5651,7 @@
     },
     "system-insights-disk-encryption": {
       "example": {
-        "collection_time": "2019-06-03T19:41:31.557Z",
+        "collection_time": "2019-06-03T13:41:31.557-06:00",
         "encrypted": 0,
         "encryption_status": "undefined",
         "name": "/dev/disk8",
@@ -6407,7 +5695,7 @@
     },
     "system-insights-disk-info": {
       "example": {
-        "collection_time": "2019-06-03T19:41:30.658Z",
+        "collection_time": "2019-06-03T13:41:30.658-06:00",
         "description": "Disk drive",
         "disk_index": 0,
         "disk_size": "64420392960",
@@ -6495,7 +5783,7 @@
     "system-insights-etc-hosts": {
       "example": {
         "address": "192.168.2.21",
-        "collection_time": "2019-06-03T19:41:30.658Z",
+        "collection_time": "2019-06-03T13:41:30.658-06:00",
         "hostnames": "hosty hosty.local",
         "system_id": "5c9e51a13c5146f89bae12d9"
       },
@@ -6520,7 +5808,7 @@
       "example": {
         "active": 1,
         "autoupdate": 1,
-        "collection_time": "2019-06-03T19:41:31.204Z",
+        "collection_time": "2019-06-03T13:41:31.204-06:00",
         "creator": "null",
         "description": "",
         "disabled": 0,
@@ -6590,7 +5878,7 @@
     },
     "system-insights-groups": {
       "example": {
-        "collection_time": "2019-06-03T19:41:31.673Z",
+        "collection_time": "2019-06-03T13:41:31.673-06:00",
         "comment": "",
         "gid": "701",
         "gid_signed": "701",
@@ -6652,7 +5940,7 @@
       "example": {
         "address": "::1",
         "broadcast": "",
-        "collection_time": "2019-06-03T19:41:31.008Z",
+        "collection_time": "2019-06-03T13:41:31.008-06:00",
         "friendly_name": "",
         "interface": "lo0",
         "mask": "ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff",
@@ -6993,7 +6281,7 @@
     "system-insights-logical-drives": {
       "example": {
         "boot_partition": 0,
-        "collection_time": "2019-06-03T19:41:30.658Z",
+        "collection_time": "2019-06-03T13:41:30.658-06:00",
         "device_id": "C:",
         "file_system": "NTFS",
         "free_space": "43194331136",
@@ -7066,7 +6354,7 @@
         "blocks_available": "95135",
         "blocks_free": "95135",
         "blocks_size": "4096",
-        "collection_time": "2019-06-03T19:41:31.746Z",
+        "collection_time": "2019-06-03T13:41:31.746-06:00",
         "device": "/dev/disk5s1",
         "device_alias": "/dev/disk5s1",
         "flags": "70292505",
@@ -7124,7 +6412,7 @@
       "example": {
         "build": "17G65",
         "codename": "",
-        "collection_time": "2019-06-03T19:41:30.933Z",
+        "collection_time": "2019-06-03T13:41:30.933-06:00",
         "install_date": "",
         "major": 10,
         "minor": 13,
@@ -7179,7 +6467,7 @@
     "system-insights-patches": {
       "example": {
         "caption": "http://support.microsoft.com/?kbid=4503308",
-        "collection_time": "2019-06-03T19:41:31.673Z",
+        "collection_time": "2019-06-03T13:41:31.673-06:00",
         "csname": "DESKTOP-B17DUKP",
         "description": "Security Update",
         "fix_comments": "",
@@ -7226,7 +6514,7 @@
     },
     "system-insights-programs": {
       "example": {
-        "collection_time": "2019-06-03T19:41:31.673Z",
+        "collection_time": "2019-06-03T13:41:31.673-06:00",
         "identifying_number": "{2E8B8BDD-03DF-4C1C-8C99-E6A4BCBF43CE}",
         "install_date": "20190724",
         "install_location": "",
@@ -7307,7 +6595,7 @@
     "system-insights-safari-extensions": {
       "example": {
         "author": "Eyeo GmbH",
-        "collection_time": "2019-05-16T18:58:15.673Z",
+        "collection_time": "2019-05-16T12:58:15.673-06:00",
         "description": "Used by over 50 million people, a free ad blocker that blocks ALL annoying ads, malware and tracking.",
         "developer_id": "GRYYZR985A",
         "identifier": "org.adblockplus.adblockplussafari",
@@ -7682,7 +6970,7 @@
     },
     "system-insights-system-info": {
       "example": {
-        "collection_time": "2019-06-03T19:41:30.771Z",
+        "collection_time": "2019-06-03T13:41:30.771-06:00",
         "computer_name": "Johnny's MacBook Pro (2)",
         "cpu_brand": "Intel(R) Core(TM) i7-7820HQ CPU @ 2.90GHz",
         "cpu_logical_cores": 8,
@@ -7935,7 +7223,7 @@
     },
     "system-insights-users": {
       "example": {
-        "collection_time": "2019-06-03T19:41:29.71Z",
+        "collection_time": "2019-06-03T13:41:29.71-06:00",
         "description": "AppleEvents Daemon",
         "directory": "/var/empty",
         "gid": "55",
@@ -8286,7 +7574,7 @@
       "name": "JumpCloud Support",
       "url": "https://support.jumpcloud.com/support/s/"
     },
-    "description": "# Overview\n\nJumpCloud's V2 API. This set of endpoints allows JumpCloud customers to manage objects, groupings and mappings and interact with the JumpCloud Graph.\n\n## API Best Practices\n\nRead the linked Help Article below for guidance on retrying failed requests to JumpCloud's REST API, as well as best practices for structuring subsequent retry requests. Customizing retry mechanisms based on these recommendations will increase the reliability and dependability of your API calls.\n\nCovered topics include:\n1. Important Considerations\n2. Supported HTTP Request Methods\n3. Response codes\n4. API Key rotation\n5. Paginating\n6. Error handling\n7. Retry rates\n\n[JumpCloud Help Center - API Best Practices](https://support.jumpcloud.com/support/s/article/JumpCloud-API-Best-Practices)\n\n# Directory Objects\n\nThis API offers the ability to interact with some of our core features; otherwise known as Directory Objects. The Directory Objects are:\n\n* Commands\n* Policies\n* Policy Groups\n* Applications\n* Systems\n* Users\n* User Groups\n* System Groups\n* Radius Servers\n* Directories: Office 365, LDAP,G-Suite, Active Directory\n* Duo accounts and applications.\n\nThe Directory Object is an important concept to understand in order to successfully use JumpCloud API.\n\n## JumpCloud Graph\n\nWe've also introduced the concept of the JumpCloud Graph along with  Directory Objects. The Graph is a powerful aspect of our platform which will enable you to associate objects with each other, or establish membership for certain objects to become members of other objects.\n\nSpecific `GET` endpoints will allow you to traverse the JumpCloud Graph to return all indirect and directly bound objects in your organization.\n\n| ![alt text](https://s3.amazonaws.com/jumpcloud-kb/Knowledge+Base+Photos/API+Docs/jumpcloud_graph.png \"JumpCloud Graph Model Example\") |\n|:--:|\n| **This diagram highlights our association and membership model as it relates to Directory Objects.** |\n\n# API Key\n\n## Access Your API Key\n\nTo locate your API Key:\n\n1. Log into the [JumpCloud Admin Console](https://console.jumpcloud.com/).\n2. Go to the username drop down located in the top-right of the Console.\n3. Retrieve your API key from API Settings.\n\n## API Key Considerations\n\nThis API key is associated to the currently logged in administrator. Other admins will have different API keys.\n\n**WARNING** Please keep this API key secret, as it grants full access to any data accessible via your JumpCloud console account.\n\nYou can also reset your API key in the same location in the JumpCloud Admin Console.\n\n## Recycling or Resetting Your API Key\n\nIn order to revoke access with the current API key, simply reset your API key. This will render all calls using the previous API key inaccessible.\n\nYour API key will be passed in as a header with the header name \"x-api-key\".\n\n```bash\ncurl -H \"x-api-key: [YOUR_API_KEY_HERE]\" \"https://console.jumpcloud.com/api/v2/systemgroups\"\n```\n\n# System Context\n\n* [Introduction](#introduction)\n* [Supported endpoints](#supported-endpoints)\n* [Response codes](#response-codes)\n* [Authentication](#authentication)\n* [Additional examples](#additional-examples)\n* [Third party](#third-party)\n\n## Introduction\n\nJumpCloud System Context Authorization is an alternative way to authenticate with a subset of JumpCloud's REST APIs. Using this method, a system can manage its information and resource associations, allowing modern auto provisioning environments to scale as needed.\n\n**Notes:**\n\n * The following documentation applies to Linux Operating Systems only.\n * Systems that have been automatically enrolled using Apple's Device Enrollment Program (DEP) or systems enrolled using the User Portal install are not eligible to use the System Context API to prevent unauthorized access to system groups and resources. If a script that utilizes the System Context API is invoked on a system enrolled in this way, it will display an error.\n\n## Supported Endpoints\n\nJumpCloud System Context Authorization can be used in conjunction with Systems endpoints found in the V1 API and certain System Group endpoints found in the v2 API.\n\n* A system may fetch, alter, and delete metadata about itself, including manipulating a system's Group and Systemuser associations,\n  * `/api/systems/{system_id}` | [`GET`](https://docs.jumpcloud.com/api/1.0/index.html#operation/systems_get) [`PUT`](https://docs.jumpcloud.com/api/1.0/index.html#operation/systems_put)\n* A system may delete itself from your JumpCloud organization\n  * `/api/systems/{system_id}` | [`DELETE`](https://docs.jumpcloud.com/api/1.0/index.html#operation/systems_delete)\n* A system may fetch its direct resource associations under v2 (Groups)\n  * `/api/v2/systems/{system_id}/memberof` | [`GET`](https://docs.jumpcloud.com/api/2.0/index.html#operation/graph_systemGroupMembership)\n  * `/api/v2/systems/{system_id}/associations` | [`GET`](https://docs.jumpcloud.com/api/2.0/index.html#operation/graph_systemAssociationsList)\n  * `/api/v2/systems/{system_id}/users` | [`GET`](https://docs.jumpcloud.com/api/2.0/index.html#operation/graph_systemTraverseUser)\n* A system may alter its direct resource associations under v2 (Groups)\n  * `/api/v2/systems/{system_id}/associations` | [`POST`](https://docs.jumpcloud.com/api/2.0/index.html#operation/graph_systemAssociationsPost)\n* A system may alter its System Group associations\n  * `/api/v2/systemgroups/{group_id}/members` | [`POST`](https://docs.jumpcloud.com/api/2.0/index.html#operation/graph_systemGroupMembersPost)\n    * _NOTE_ If a system attempts to alter the system group membership of a different system the request will be rejected\n\n## Response Codes\n\nIf endpoints other than those described above are called using the System Context API, the server will return a `401` response.\n\n## Authentication\n\nTo allow for secure access to our APIs, you must authenticate each API request.\nJumpCloud System Context Authorization uses [HTTP Signatures](https://tools.ietf.org/html/draft-cavage-http-signatures-00) to authenticate API requests.\nThe HTTP Signatures sent with each request are similar to the signatures used by the Amazon Web Services REST API.\nTo help with the request-signing process, we have provided an [example bash script](https://github.com/TheJumpCloud/SystemContextAPI/blob/master/examples/shell/SigningExample.sh). This example API request simply requests the entire system record. You must be root, or have permissions to access the contents of the `/opt/jc` directory to generate a signature.\n\nHere is a breakdown of the example script with explanations.\n\nFirst, the script extracts the systemKey from the JSON formatted `/opt/jc/jcagent.conf` file.\n\n```bash\n#!/bin/bash\nconf=\"`cat /opt/jc/jcagent.conf`\"\nregex=\"systemKey\\\":\\\"(\\w+)\\\"\"\n\nif [[ $conf =~ $regex ]] ; then\n  systemKey=\"${BASH_REMATCH[1]}\"\nfi\n```\n\nThen, the script retrieves the current date in the correct format.\n\n```bash\nnow=`date -u \"+%a, %d %h %Y %H:%M:%S GMT\"`;\n```\n\nNext, we build a signing string to demonstrate the expected signature format. The signed string must consist of the [request-line](https://tools.ietf.org/html/rfc2616#page-35) and the date header, separated by a newline character.\n\n```bash\nsignstr=\"GET /api/systems/${systemKey} HTTP/1.1\\ndate: ${now}\"\n```\n\nThe next step is to calculate and apply the signature. This is a two-step process:\n\n1. Create a signature from the signing string using the JumpCloud Agent private key: ``printf \"$signstr\" | openssl dgst -sha256 -sign /opt/jc/client.key``\n2. Then Base64-encode the signature string and trim off the newline characters: ``| openssl enc -e -a | tr -d '\\n'``\n\nThe combined steps above result in:\n\n```bash\nsignature=`printf \"$signstr\" | openssl dgst -sha256 -sign /opt/jc/client.key | openssl enc -e -a | tr -d '\\n'` ;\n```\n\nFinally, we make sure the API call sending the signature has the same Authorization and Date header values, HTTP method, and URL that were used in the signing string.\n\n```bash\ncurl -iq \\\n  -H \"Accept: application/json\" \\\n  -H \"Content-Type: application/json\" \\\n  -H \"Date: ${now}\" \\\n  -H \"Authorization: Signature keyId=\\\"system/${systemKey}\\\",headers=\\\"request-line date\\\",algorithm=\\\"rsa-sha256\\\",signature=\\\"${signature}\\\"\" \\\n  --url https://console.jumpcloud.com/api/systems/${systemKey}\n```\n\n### Input Data\n\nAll PUT and POST methods should use the HTTP Content-Type header with a value of 'application/json'. PUT methods are used for updating a record. POST methods are used to create a record.\n\nThe following example demonstrates how to update the `displayName` of the system.\n\n```bash\nsignstr=\"PUT /api/systems/${systemKey} HTTP/1.1\\ndate: ${now}\"\nsignature=`printf \"$signstr\" | openssl dgst -sha256 -sign /opt/jc/client.key | openssl enc -e -a | tr -d '\\n'` ;\n\ncurl -iq \\\n  -d \"{\\\"displayName\\\" : \\\"updated-system-name-1\\\"}\" \\\n  -X \"PUT\" \\\n  -H \"Content-Type: application/json\" \\\n  -H \"Accept: application/json\" \\\n  -H \"Date: ${now}\" \\\n  -H \"Authorization: Signature keyId=\\\"system/${systemKey}\\\",headers=\\\"request-line date\\\",algorithm=\\\"rsa-sha256\\\",signature=\\\"${signature}\\\"\" \\\n  --url https://console.jumpcloud.com/api/systems/${systemKey}\n```\n\n### Output Data\n\nAll results will be formatted as JSON.\n\nHere is an abbreviated example of response output:\n\n```json\n{\n  \"_id\": \"625ee96f52e144993e000015\",\n  \"agentServer\": \"lappy386\",\n  \"agentVersion\": \"0.9.42\",\n  \"arch\": \"x86_64\",\n  \"connectionKey\": \"127.0.0.1_51812\",\n  \"displayName\": \"ubuntu-1204\",\n  \"firstContact\": \"2013-10-16T19:30:55.611Z\",\n  \"hostname\": \"ubuntu-1204\"\n  ...\n```\n\n## Additional Examples\n\n### Signing Authentication Example\n\nThis example demonstrates how to make an authenticated request to fetch the JumpCloud record for this system.\n\n[SigningExample.sh](https://github.com/TheJumpCloud/SystemContextAPI/blob/master/examples/shell/SigningExample.sh)\n\n### Shutdown Hook\n\nThis example demonstrates how to make an authenticated request on system shutdown.\nUsing an init.d script registered at run level 0, you can call the System Context API as the system is shutting down.\n\n[Instance-shutdown-initd](https://github.com/TheJumpCloud/SystemContextAPI/blob/master/examples/instance-shutdown-initd) is an example of an init.d script that only runs at system shutdown.\n\nAfter customizing the [instance-shutdown-initd](https://github.com/TheJumpCloud/SystemContextAPI/blob/master/examples/instance-shutdown-initd) script, you should install it on the system(s) running the JumpCloud agent.\n\n1. Copy the modified [instance-shutdown-initd](https://github.com/TheJumpCloud/SystemContextAPI/blob/master/examples/instance-shutdown-initd) to `/etc/init.d/instance-shutdown`.\n2. On Ubuntu systems, run `update-rc.d instance-shutdown defaults`. On RedHat/CentOS systems, run `chkconfig --add instance-shutdown`.\n\n## Third Party\n\n### Chef Cookbooks\n\n[https://github.com/nshenry03/jumpcloud](https://github.com/nshenry03/jumpcloud)\n\n[https://github.com/cjs226/jumpcloud](https://github.com/cjs226/jumpcloud)\n\n# Multi-Tenant Portal Headers\n\nMulti-Tenant Organization API Headers are available for JumpCloud Admins to use when making API requests from Organizations that have multiple managed organizations.\n\nThe `x-org-id` is a required header for all multi-tenant admins when making API requests to JumpCloud. This header will define to which organization you would like to make the request.\n\n**NOTE** Single Tenant Admins do not need to provide this header when making an API request.\n\n## Header Value\n\n`x-org-id`\n\n## API Response Codes\n\n* `400` Malformed ID.\n* `400` x-org-id and Organization path ID do not match.\n* `401` ID not included for multi-tenant admin\n* `403` ID included on unsupported route.\n* `404` Organization ID Not Found.\n\n```bash\ncurl -X GET https://console.jumpcloud.com/api/v2/directories \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -H 'x-org-id: {ORG_ID}'\n\n```\n\n## To Obtain an Individual Organization ID via the UI\n\nAs a prerequisite, your Primary Organization will need to be setup for Multi-Tenancy. This provides access to the Multi-Tenant Organization Admin Portal.\n\n1. Log into JumpCloud [Admin Console](https://console.jumpcloud.com). If you are a multi-tenant Admin, you will automatically be routed to the Multi-Tenant Admin Portal.\n2. From the Multi-Tenant Portal's primary navigation bar, select the Organization you'd like to access.\n3. You will automatically be routed to that Organization's Admin Console.\n4. Go to Settings in the sub-tenant's primary navigation.\n5. You can obtain your Organization ID below your Organization's Contact Information on the Settings page.\n\n## To Obtain All Organization IDs via the API\n\n* You can make an API request to this endpoint using the API key of your Primary Organization.  `https://console.jumpcloud.com/api/organizations/` This will return all your managed organizations.\n\n```bash\ncurl -X GET \\\n  https://console.jumpcloud.com/api/organizations/ \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```\n\n# SDKs\n\nYou can find language specific SDKs that can help you kickstart your Integration with JumpCloud in the following GitHub repositories:\n\n* [Python](https://github.com/TheJumpCloud/jcapi-python)\n* [Go](https://github.com/TheJumpCloud/jcapi-go)\n* [Ruby](https://github.com/TheJumpCloud/jcapi-ruby)\n* [Java](https://github.com/TheJumpCloud/jcapi-java)\n",
+    "description": "# Overview\n\nJumpCloud's V2 API. This set of endpoints allows JumpCloud customers to manage objects, groupings and mappings and interact with the JumpCloud Graph.\n\n## API Best Practices\n\nRead the linked Help Article below for guidance on retrying failed requests to JumpCloud's REST API, as well as best practices for structuring subsequent retry requests. Customizing retry mechanisms based on these recommendations will increase the reliability and dependability of your API calls.\n\nCovered topics include:\n1. Important Considerations\n2. Supported HTTP Request Methods\n3. Response codes\n4. API Key rotation\n5. Paginating\n6. Error handling\n7. Retry rates\n\n[JumpCloud Help Center - API Best Practices](https://support.jumpcloud.com/support/s/article/JumpCloud-API-Best-Practices)\n\n# Directory Objects\n\nThis API offers the ability to interact with some of our core features; otherwise known as Directory Objects. The Directory Objects are:\n\n* Commands\n* Policies\n* Policy Groups\n* Applications\n* Systems\n* Users\n* User Groups\n* System Groups\n* Radius Servers\n* Directories: Office 365, LDAP,G-Suite, Active Directory\n* Duo accounts and applications.\n\nThe Directory Object is an important concept to understand in order to successfully use JumpCloud API.\n\n## JumpCloud Graph\n\nWe've also introduced the concept of the JumpCloud Graph along with  Directory Objects. The Graph is a powerful aspect of our platform which will enable you to associate objects with each other, or establish membership for certain objects to become members of other objects.\n\nSpecific `GET` endpoints will allow you to traverse the JumpCloud Graph to return all indirect and directly bound objects in your organization.\n\n| ![alt text](https://s3.amazonaws.com/jumpcloud-kb/Knowledge+Base+Photos/API+Docs/jumpcloud_graph.png \"JumpCloud Graph Model Example\") |\n|:--:|\n| **This diagram highlights our association and membership model as it relates to Directory Objects.** |\n\n# API Key\n\n## Access Your API Key\n\nTo locate your API Key:\n\n1. Log into the [JumpCloud Admin Console](https://console.jumpcloud.com/).\n2. Go to the username drop down located in the top-right of the Console.\n3. Retrieve your API key from API Settings.\n\n## API Key Considerations\n\nThis API key is associated to the currently logged in administrator. Other admins will have different API keys.\n\n**WARNING** Please keep this API key secret, as it grants full access to any data accessible via your JumpCloud console account.\n\nYou can also reset your API key in the same location in the JumpCloud Admin Console.\n\n## Recycling or Resetting Your API Key\n\nIn order to revoke access with the current API key, simply reset your API key. This will render all calls using the previous API key inaccessible.\n\nYour API key will be passed in as a header with the header name \"x-api-key\".\n\n```bash\ncurl -H \"x-api-key: [YOUR_API_KEY_HERE]\" \"https://console.jumpcloud.com/api/v2/systemgroups\"\n```\n\n# System Context\n\n* [Introduction](#introduction)\n* [Supported endpoints](#supported-endpoints)\n* [Response codes](#response-codes)\n* [Authentication](#authentication)\n* [Additional examples](#additional-examples)\n* [Third party](#third-party)\n\n## Introduction\n\nJumpCloud System Context Authorization is an alternative way to authenticate with a subset of JumpCloud's REST APIs. Using this method, a system can manage its information and resource associations, allowing modern auto provisioning environments to scale as needed.\n\n**Notes:**\n\n * The following documentation applies to Linux Operating Systems only.\n * Systems that have been automatically enrolled using Apple's Device Enrollment Program (DEP) or systems enrolled using the User Portal install are not eligible to use the System Context API to prevent unauthorized access to system groups and resources. If a script that utilizes the System Context API is invoked on a system enrolled in this way, it will display an error.\n\n## Supported Endpoints\n\nJumpCloud System Context Authorization can be used in conjunction with Systems endpoints found in the V1 API and certain System Group endpoints found in the v2 API.\n\n* A system may fetch, alter, and delete metadata about itself, including manipulating a system's Group and Systemuser associations,\n  * `/api/systems/{system_id}` | [`GET`](https://docs.jumpcloud.com/api/1.0/index.html#operation/systems_get) [`PUT`](https://docs.jumpcloud.com/api/1.0/index.html#operation/systems_put)\n* A system may delete itself from your JumpCloud organization\n  * `/api/systems/{system_id}` | [`DELETE`](https://docs.jumpcloud.com/api/1.0/index.html#operation/systems_delete)\n* A system may fetch its direct resource associations under v2 (Groups)\n  * `/api/v2/systems/{system_id}/memberof` | [`GET`](https://docs.jumpcloud.com/api/2.0/index.html#operation/graph_systemGroupMembership)\n  * `/api/v2/systems/{system_id}/associations` | [`GET`](https://docs.jumpcloud.com/api/2.0/index.html#operation/graph_systemAssociationsList)\n  * `/api/v2/systems/{system_id}/users` | [`GET`](https://docs.jumpcloud.com/api/2.0/index.html#operation/graph_systemTraverseUser)\n* A system may alter its direct resource associations under v2 (Groups)\n  * `/api/v2/systems/{system_id}/associations` | [`POST`](https://docs.jumpcloud.com/api/2.0/index.html#operation/graph_systemAssociationsPost)\n* A system may alter its System Group associations\n  * `/api/v2/systemgroups/{group_id}/members` | [`POST`](https://docs.jumpcloud.com/api/2.0/index.html#operation/graph_systemGroupMembersPost)\n    * _NOTE_ If a system attempts to alter the system group membership of a different system the request will be rejected\n\n## Response Codes\n\nIf endpoints other than those described above are called using the System Context API, the server will return a `401` response.\n\n## Authentication\n\nTo allow for secure access to our APIs, you must authenticate each API request.\nJumpCloud System Context Authorization uses [HTTP Signatures](https://tools.ietf.org/html/draft-cavage-http-signatures-00) to authenticate API requests.\nThe HTTP Signatures sent with each request are similar to the signatures used by the Amazon Web Services REST API.\nTo help with the request-signing process, we have provided an [example bash script](https://github.com/TheJumpCloud/SystemContextAPI/blob/master/examples/shell/SigningExample.sh). This example API request simply requests the entire system record. You must be root, or have permissions to access the contents of the `/opt/jc` directory to generate a signature.\n\nHere is a breakdown of the example script with explanations.\n\nFirst, the script extracts the systemKey from the JSON formatted `/opt/jc/jcagent.conf` file.\n\n```bash\n#!/bin/bash\nconf=\"`cat /opt/jc/jcagent.conf`\"\nregex=\"systemKey\\\":\\\"(\\w+)\\\"\"\n\nif [[ $conf =~ $regex ]] ; then\n  systemKey=\"${BASH_REMATCH[1]}\"\nfi\n```\n\nThen, the script retrieves the current date in the correct format.\n\n```bash\nnow=`date -u \"+%a, %d %h %Y %H:%M:%S GMT\"`;\n```\n\nNext, we build a signing string to demonstrate the expected signature format. The signed string must consist of the [request-line](https://tools.ietf.org/html/rfc2616#page-35) and the date header, separated by a newline character.\n\n```bash\nsignstr=\"GET /api/systems/${systemKey} HTTP/1.1\\ndate: ${now}\"\n```\n\nThe next step is to calculate and apply the signature. This is a two-step process:\n\n1. Create a signature from the signing string using the JumpCloud Agent private key: ``printf \"$signstr\" | openssl dgst -sha256 -sign /opt/jc/client.key``\n2. Then Base64-encode the signature string and trim off the newline characters: ``| openssl enc -e -a | tr -d '\\n'``\n\nThe combined steps above result in:\n\n```bash\nsignature=`printf \"$signstr\" | openssl dgst -sha256 -sign /opt/jc/client.key | openssl enc -e -a | tr -d '\\n'` ;\n```\n\nFinally, we make sure the API call sending the signature has the same Authorization and Date header values, HTTP method, and URL that were used in the signing string.\n\n```bash\ncurl -iq \\\n  -H \"Accept: application/json\" \\\n  -H \"Content-Type: application/json\" \\\n  -H \"Date: ${now}\" \\\n  -H \"Authorization: Signature keyId=\\\"system/${systemKey}\\\",headers=\\\"request-line date\\\",algorithm=\\\"rsa-sha256\\\",signature=\\\"${signature}\\\"\" \\\n  --url https://console.jumpcloud.com/api/systems/${systemKey}\n```\n\n### Input Data\n\nAll PUT and POST methods should use the HTTP Content-Type header with a value of 'application/json'. PUT methods are used for updating a record. POST methods are used to create a record.\n\nThe following example demonstrates how to update the `displayName` of the system.\n\n```bash\nsignstr=\"PUT /api/systems/${systemKey} HTTP/1.1\\ndate: ${now}\"\nsignature=`printf \"$signstr\" | openssl dgst -sha256 -sign /opt/jc/client.key | openssl enc -e -a | tr -d '\\n'` ;\n\ncurl -iq \\\n  -d \"{\\\"displayName\\\" : \\\"updated-system-name-1\\\"}\" \\\n  -X \"PUT\" \\\n  -H \"Content-Type: application/json\" \\\n  -H \"Accept: application/json\" \\\n  -H \"Date: ${now}\" \\\n  -H \"Authorization: Signature keyId=\\\"system/${systemKey}\\\",headers=\\\"request-line date\\\",algorithm=\\\"rsa-sha256\\\",signature=\\\"${signature}\\\"\" \\\n  --url https://console.jumpcloud.com/api/systems/${systemKey}\n```\n\n### Output Data\n\nAll results will be formatted as JSON.\n\nHere is an abbreviated example of response output:\n\n```json\n{\n  \"_id\": \"625ee96f52e144993e000015\",\n  \"agentServer\": \"lappy386\",\n  \"agentVersion\": \"0.9.42\",\n  \"arch\": \"x86_64\",\n  \"displayName\": \"ubuntu-1204\",\n  \"firstContact\": \"2013-10-16T19:30:55.611Z\",\n  \"hostname\": \"ubuntu-1204\"\n  ...\n```\n\n## Additional Examples\n\n### Signing Authentication Example\n\nThis example demonstrates how to make an authenticated request to fetch the JumpCloud record for this system.\n\n[SigningExample.sh](https://github.com/TheJumpCloud/SystemContextAPI/blob/master/examples/shell/SigningExample.sh)\n\n### Shutdown Hook\n\nThis example demonstrates how to make an authenticated request on system shutdown.\nUsing an init.d script registered at run level 0, you can call the System Context API as the system is shutting down.\n\n[Instance-shutdown-initd](https://github.com/TheJumpCloud/SystemContextAPI/blob/master/examples/instance-shutdown-initd) is an example of an init.d script that only runs at system shutdown.\n\nAfter customizing the [instance-shutdown-initd](https://github.com/TheJumpCloud/SystemContextAPI/blob/master/examples/instance-shutdown-initd) script, you should install it on the system(s) running the JumpCloud agent.\n\n1. Copy the modified [instance-shutdown-initd](https://github.com/TheJumpCloud/SystemContextAPI/blob/master/examples/instance-shutdown-initd) to `/etc/init.d/instance-shutdown`.\n2. On Ubuntu systems, run `update-rc.d instance-shutdown defaults`. On RedHat/CentOS systems, run `chkconfig --add instance-shutdown`.\n\n## Third Party\n\n### Chef Cookbooks\n\n[https://github.com/nshenry03/jumpcloud](https://github.com/nshenry03/jumpcloud)\n\n[https://github.com/cjs226/jumpcloud](https://github.com/cjs226/jumpcloud)\n\n# Multi-Tenant Portal Headers\n\nMulti-Tenant Organization API Headers are available for JumpCloud Admins to use when making API requests from Organizations that have multiple managed organizations.\n\nThe `x-org-id` is a required header for all multi-tenant admins when making API requests to JumpCloud. This header will define to which organization you would like to make the request.\n\n**NOTE** Single Tenant Admins do not need to provide this header when making an API request.\n\n## Header Value\n\n`x-org-id`\n\n## API Response Codes\n\n* `400` Malformed ID.\n* `400` x-org-id and Organization path ID do not match.\n* `401` ID not included for multi-tenant admin\n* `403` ID included on unsupported route.\n* `404` Organization ID Not Found.\n\n```bash\ncurl -X GET https://console.jumpcloud.com/api/v2/directories \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -H 'x-org-id: {ORG_ID}'\n\n```\n\n## To Obtain an Individual Organization ID via the UI\n\nAs a prerequisite, your Primary Organization will need to be setup for Multi-Tenancy. This provides access to the Multi-Tenant Organization Admin Portal.\n\n1. Log into JumpCloud [Admin Console](https://console.jumpcloud.com). If you are a multi-tenant Admin, you will automatically be routed to the Multi-Tenant Admin Portal.\n2. From the Multi-Tenant Portal's primary navigation bar, select the Organization you'd like to access.\n3. You will automatically be routed to that Organization's Admin Console.\n4. Go to Settings in the sub-tenant's primary navigation.\n5. You can obtain your Organization ID below your Organization's Contact Information on the Settings page.\n\n## To Obtain All Organization IDs via the API\n\n* You can make an API request to this endpoint using the API key of your Primary Organization.  `https://console.jumpcloud.com/api/organizations/` This will return all your managed organizations.\n\n```bash\ncurl -X GET \\\n  https://console.jumpcloud.com/api/organizations/ \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```\n\n# SDKs\n\nYou can find language specific SDKs that can help you kickstart your Integration with JumpCloud in the following GitHub repositories:\n\n* [Python](https://github.com/TheJumpCloud/jcapi-python)\n* [Go](https://github.com/TheJumpCloud/jcapi-go)\n* [Ruby](https://github.com/TheJumpCloud/jcapi-ruby)\n* [Java](https://github.com/TheJumpCloud/jcapi-java)\n",
     "title": "JumpCloud API",
     "version": "2.0"
   },
@@ -9585,6 +8873,12 @@
         "admin"
       ]
     },
+    "/alerts": {},
+    "/alerts-severitycounts": {},
+    "/alerts-stats": {},
+    "/alerts/{id}": {},
+    "/alerts/{id}/occurrences": {},
+    "/alerts/{id}/status": {},
     "/applemdms": {
       "get": {
         "description": "Get a list of all Apple MDM configurations.  An empty topic indicates that a signed certificate from Apple has not been provided to the PUT endpoint yet.\n\nNote: currently only one MDM configuration per organization is supported.\n\n#### Sample Request\n```\ncurl https://console.jumpcloud.com/api/v2/applemdms \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
@@ -13299,6 +12593,10 @@
         "gsuites"
       ]
     },
+    "/healthmonitoring/rules": {},
+    "/healthmonitoring/rules/{id}": {},
+    "/healthmonitoring/ruletemplates": {},
+    "/healthmonitoring/ruletemplates/{id}": {},
     "/identity-provider/policies/{idp_routing_policy_id}/associations": {
       "parameters": [
         {
@@ -15144,71 +14442,34 @@
         "partners-disconnect"
       ]
     },
-    "/passwordmanager/appversions": {
-      "x-functionalities-tags": [
-        "pwm-user-app-versions"
-      ]
-    },
+    "/passwordmanager": {},
+    "/passwordmanager/appversions": {},
+    "/passwordmanager/backup/keys": {},
+    "/passwordmanager/backup/keys/{UUID}": {},
+    "/passwordmanager/backup/restores": {},
+    "/passwordmanager/backup/restores/{UUID}": {},
+    "/passwordmanager/backups": {},
+    "/passwordmanager/backups/{UUID}": {},
     "/passwordmanager/devices": {},
     "/passwordmanager/devices/{UUID}": {},
-    "/passwordmanager/items": {
-      "x-functionalities-tags": "pwm-items-metadata"
-    },
-    "/passwordmanager/overview": {
-      "x-functionalities-tags": [
-        "pwm-user-overiew"
-      ]
-    },
-    "/passwordmanager/sharedfolders": {
-      "x-functionalities-tags": [
-        "pwm-user-folder-read"
-      ]
-    },
-    "/passwordmanager/sharedfolders/accessLevels": {
-      "x-functionalities-tags": [
-        "pwm-user-folder-read"
-      ]
-    },
-    "/passwordmanager/sharedfolders/{folderId}": {
-      "x-functionalities-tags": [
-        "pwm-user-folder-read"
-      ]
-    },
-    "/passwordmanager/sharedfolders/{folderId}/groups": {
-      "x-functionalities-tags": [
-        "pwm-group-folder-read"
-      ]
-    },
-    "/passwordmanager/sharedfolders/{folderId}/users": {
-      "x-functionalities-tags": [
-        "pwm-user-folder-read"
-      ]
-    },
-    "/passwordmanager/users": {
-      "x-functionalities-tags": [
-        "pwm-user-read"
-      ]
-    },
-    "/passwordmanager/users/reinvite": {
-      "x-functionalities-tags": [
-        "pwm-user-read"
-      ]
-    },
-    "/passwordmanager/users/{userId}": {
-      "x-functionalities-tags": [
-        "pwm-user-read"
-      ]
-    },
-    "/passwordmanager/users/{userId}/items": {
-      "x-functionalities-tags": [
-        "pwm-user-items-read"
-      ]
-    },
-    "/passwordmanager/users/{userId}/sharedFolders": {
-      "x-functionalities-tags": [
-        "pwm-user-read"
-      ]
-    },
+    "/passwordmanager/items": {},
+    "/passwordmanager/overview": {},
+    "/passwordmanager/policy/sharedfolders": {},
+    "/passwordmanager/policy/sharedfolders/groups": {},
+    "/passwordmanager/policy/sharedfolders/users": {},
+    "/passwordmanager/policy/sharedfolders/{UUID}": {},
+    "/passwordmanager/sharedfolders": {},
+    "/passwordmanager/sharedfolders/accessLevels": {},
+    "/passwordmanager/sharedfolders/{folderId}": {},
+    "/passwordmanager/sharedfolders/{folderId}/groups": {},
+    "/passwordmanager/sharedfolders/{folderId}/groups/{groupId}": {},
+    "/passwordmanager/sharedfolders/{folderId}/users": {},
+    "/passwordmanager/sharedfolders/{folderId}/users/{userId}": {},
+    "/passwordmanager/users": {},
+    "/passwordmanager/users/reinvite": {},
+    "/passwordmanager/users/{userId}": {},
+    "/passwordmanager/users/{userId}/items": {},
+    "/passwordmanager/users/{userId}/sharedFolders": {},
     "/payNow/{id}": {
       "parameters": [
         {
@@ -25571,84 +24832,6 @@
     "application/json"
   ],
   "responses": {
-    "PwmAllUsers": {
-      "description": "Success",
-      "schema": {
-        "$ref": "#/definitions/PwmAllUsers"
-      }
-    },
-    "PwmItemsMetadata": {
-      "description": "Success",
-      "schema": {
-        "$ref": "#/definitions/PwmItemsMetadata"
-      }
-    },
-    "PwmOverviewAppVersions": {
-      "description": "Success",
-      "schema": {
-        "$ref": "#/definitions/PwmOverviewAppVersions"
-      }
-    },
-    "PwmOverviewMain": {
-      "description": "Success",
-      "schema": {
-        "$ref": "#/definitions/PwmOverviewMain"
-      }
-    },
-    "PwmUserById": {
-      "description": "Success",
-      "schema": {
-        "$ref": "#/definitions/PwmUserById"
-      }
-    },
-    "PwmUserItems": {
-      "description": "Success",
-      "schema": {
-        "$ref": "#/definitions/PwmUserItems"
-      }
-    },
-    "PwmUserSharedFolders": {
-      "description": "Success",
-      "schema": {
-        "$ref": "#/definitions/PwmUserSharedFolders"
-      }
-    },
-    "SharedFolderAccessLevels": {
-      "description": "Success",
-      "schema": {
-        "$ref": "#/definitions/SharedFolderAccessLevels"
-      }
-    },
-    "SharedFolderDetails": {
-      "description": "Success",
-      "schema": {
-        "$ref": "#/definitions/SharedFolderDetails"
-      }
-    },
-    "SharedFolderGroupUpdated": {
-      "description": "Success",
-      "schema": {
-        "$ref": "#/definitions/GroupPwm"
-      }
-    },
-    "SharedFolderGroups": {
-      "description": "Success",
-      "schema": {
-        "$ref": "#/definitions/SharedFolderGroups"
-      }
-    },
-    "SharedFolderUsers": {
-      "description": "Success",
-      "schema": {
-        "$ref": "#/definitions/SharedFolderUsers"
-      }
-    },
-    "SharedFoldersList": {
-      "description": "Success",
-      "schema": {
-        "$ref": "#/definitions/SharedFoldersList"
-      }
-    },
     "trait:standardErrors:400": {
       "description": "",
       "schema": {
