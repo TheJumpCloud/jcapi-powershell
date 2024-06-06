@@ -219,7 +219,10 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
                     }
                     Start-Sleep -Seconds ($resultCounter * 5)
                 } while ($resultCounter -lt $maxRetries)
-                If ($JCHttpResponse.Result.Headers.Contains('X-Search_after')) {
+                If ($limit) {
+                    $Results += $Result
+                    Break
+                } elseif ($JCHttpResponse.Result.Headers.Contains('X-Search_after')) {
                     If (-not [System.String]::IsNullOrEmpty($Result)) {
                         $XResultSearchAfter = ($JCHttpResponse.Result.Headers.GetValues('X-Search_after') | ConvertFrom-Json);
                         If ([System.String]::IsNullOrEmpty($PSBoundParameters.SearchAfter)) {
