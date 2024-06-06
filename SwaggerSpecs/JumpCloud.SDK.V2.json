@@ -14450,6 +14450,8 @@
     "/passwordmanager/backup/restores/{UUID}": {},
     "/passwordmanager/backups": {},
     "/passwordmanager/backups/{UUID}": {},
+    "/passwordmanager/company/policies": {},
+    "/passwordmanager/company/policies/{UUID}": {},
     "/passwordmanager/devices": {},
     "/passwordmanager/devices/{UUID}": {},
     "/passwordmanager/items": {},
