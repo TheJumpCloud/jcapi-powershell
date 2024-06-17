@@ -6,7 +6,7 @@ This release includes an update to functions that return formatted json data.
 ```
 
 #### BUG FIXES:
-Functions that return formatted json data will now validate that the response is non-null before attempting to convert the response from Json. This resulted in an error for null responses in previous versions of the module.
+Functions that return formatted json data will now validate that the response is non-null before attempting to convert the response from Json. This resulted in an error for null responses in previous versions of the module. Get-JcSdkEvent should no longer throw an error if no results are returned.
 
 #### Generated Changes:
 
