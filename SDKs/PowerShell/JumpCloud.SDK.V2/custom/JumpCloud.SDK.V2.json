@@ -105,6 +105,23 @@
         "apiKeyAllowed": {
           "type": "boolean"
         },
+        "apiKeyHash": {
+          "additionalProperties": false,
+          "properties": {
+            "createdAt": {
+              "format": "date-time",
+              "type": "string"
+            },
+            "expireAt": {
+              "format": "date-time",
+              "type": "string"
+            },
+            "prefix": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
         "apiKeySet": {
           "type": "boolean"
         },
@@ -2565,6 +2582,23 @@
         "apiKeyAllowed": {
           "type": "boolean"
         },
+        "apiKeyHash": {
+          "additionalProperties": false,
+          "properties": {
+            "createdAt": {
+              "format": "date-time",
+              "type": "string"
+            },
+            "expireAt": {
+              "format": "date-time",
+              "type": "string"
+            },
+            "prefix": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
         "bindNoOrgs": {
           "default": false,
           "type": "boolean"
@@ -2601,7 +2635,7 @@
         "amountPaid": "10.9",
         "amountRemaining": "189.1",
         "currency": "USD",
-        "dueDate": "2021-08-07T00:00:00",
+        "dueDate": "2021-08-07",
         "id": "234324",
         "status": "Partially Paid"
       },
@@ -3100,9 +3134,21 @@
     },
     "active-directory": {
       "properties": {
+        "delegationState": {
+          "description": "Delegation state of the Active Directory instance",
+          "enum": [
+            "ENABLED",
+            "PENDING",
+            "DISABLED"
+          ],
+          "type": "string"
+        },
         "domain": {
           "description": "Domain name for this Active Directory instance.",
           "type": "string"
+        },
+        "groupsEnabled": {
+          "type": "boolean"
         },
         "id": {
           "description": "ObjectID of this Active Directory instance.",
@@ -3110,7 +3156,12 @@
           "type": "string"
         },
         "primaryAgent": {
-          "description": "ObjectID of the primary agent of domain.",
+          "description": "ObjectID of the primary sync agent of domain.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "primaryImportAgent": {
+          "description": "ObjectID of the primary import agent of domain.",
           "readOnly": true,
           "type": "string"
         },
@@ -4982,7 +5033,7 @@
         "bundle_short_version": "2.4",
         "bundle_version": "658.1",
         "category": "public.app-category.utilities",
-        "collection_time": "2019-06-03T13:41:30.658-06:00",
+        "collection_time": "2019-06-03T19:41:30.658Z",
         "compiler": "com.apple.compilers.llvm.clang.1_0",
         "copyright": "",
         "development_region": "English",
@@ -5259,7 +5310,7 @@
     },
     "system-insights-bitlocker-info": {
       "example": {
-        "collection_time": "2019-06-03T13:41:30.658-06:00",
+        "collection_time": "2019-06-03T19:41:30.658Z",
         "conversion_status": 0,
         "devide_id": "\\\\\\\\?\\\\Volume{3ba5cc52-e0fd-45fa-b8b8-5c88f44f8b17}\\",
         "drive_letter": "C:",
@@ -5299,7 +5350,7 @@
     },
     "system-insights-browser-plugins": {
       "example": {
-        "collection_time": "2019-06-03T13:41:30.858-06:00",
+        "collection_time": "2019-06-03T19:41:30.858Z",
         "description": "LastPass Plugin",
         "development_region": "en-US",
         "disabled": 0,
@@ -5477,7 +5528,7 @@
     "system-insights-chrome-extensions": {
       "example": {
         "author": "",
-        "collection_time": "2019-06-03T13:41:31.125-06:00",
+        "collection_time": "2019-06-03t19:41:31.125z",
         "description": "provider for discovery and services for mirroring of chrome media router",
         "identifier": "pkedcjkdefgpdelpbcmbmeomcjbeemfm",
         "locale": "en",
@@ -5651,7 +5702,7 @@
     },
     "system-insights-disk-encryption": {
       "example": {
-        "collection_time": "2019-06-03T13:41:31.557-06:00",
+        "collection_time": "2019-06-03T19:41:31.557Z",
         "encrypted": 0,
         "encryption_status": "undefined",
         "name": "/dev/disk8",
@@ -5695,7 +5746,7 @@
     },
     "system-insights-disk-info": {
       "example": {
-        "collection_time": "2019-06-03T13:41:30.658-06:00",
+        "collection_time": "2019-06-03T19:41:30.658Z",
         "description": "Disk drive",
         "disk_index": 0,
         "disk_size": "64420392960",
@@ -5783,7 +5834,7 @@
     "system-insights-etc-hosts": {
       "example": {
         "address": "192.168.2.21",
-        "collection_time": "2019-06-03T13:41:30.658-06:00",
+        "collection_time": "2019-06-03T19:41:30.658Z",
         "hostnames": "hosty hosty.local",
         "system_id": "5c9e51a13c5146f89bae12d9"
       },
@@ -5808,7 +5859,7 @@
       "example": {
         "active": 1,
         "autoupdate": 1,
-        "collection_time": "2019-06-03T13:41:31.204-06:00",
+        "collection_time": "2019-06-03T19:41:31.204Z",
         "creator": "null",
         "description": "",
         "disabled": 0,
@@ -5878,7 +5929,7 @@
     },
     "system-insights-groups": {
       "example": {
-        "collection_time": "2019-06-03T13:41:31.673-06:00",
+        "collection_time": "2019-06-03T19:41:31.673Z",
         "comment": "",
         "gid": "701",
         "gid_signed": "701",
@@ -5940,7 +5991,7 @@
       "example": {
         "address": "::1",
         "broadcast": "",
-        "collection_time": "2019-06-03T13:41:31.008-06:00",
+        "collection_time": "2019-06-03T19:41:31.008Z",
         "friendly_name": "",
         "interface": "lo0",
         "mask": "ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff",
@@ -6281,7 +6332,7 @@
     "system-insights-logical-drives": {
       "example": {
         "boot_partition": 0,
-        "collection_time": "2019-06-03T13:41:30.658-06:00",
+        "collection_time": "2019-06-03T19:41:30.658Z",
         "device_id": "C:",
         "file_system": "NTFS",
         "free_space": "43194331136",
@@ -6354,7 +6405,7 @@
         "blocks_available": "95135",
         "blocks_free": "95135",
         "blocks_size": "4096",
-        "collection_time": "2019-06-03T13:41:31.746-06:00",
+        "collection_time": "2019-06-03T19:41:31.746Z",
         "device": "/dev/disk5s1",
         "device_alias": "/dev/disk5s1",
         "flags": "70292505",
@@ -6412,7 +6463,7 @@
       "example": {
         "build": "17G65",
         "codename": "",
-        "collection_time": "2019-06-03T13:41:30.933-06:00",
+        "collection_time": "2019-06-03T19:41:30.933Z",
         "install_date": "",
         "major": 10,
         "minor": 13,
@@ -6467,7 +6518,7 @@
     "system-insights-patches": {
       "example": {
         "caption": "http://support.microsoft.com/?kbid=4503308",
-        "collection_time": "2019-06-03T13:41:31.673-06:00",
+        "collection_time": "2019-06-03T19:41:31.673Z",
         "csname": "DESKTOP-B17DUKP",
         "description": "Security Update",
         "fix_comments": "",
@@ -6514,7 +6565,7 @@
     },
     "system-insights-programs": {
       "example": {
-        "collection_time": "2019-06-03T13:41:31.673-06:00",
+        "collection_time": "2019-06-03T19:41:31.673Z",
         "identifying_number": "{2E8B8BDD-03DF-4C1C-8C99-E6A4BCBF43CE}",
         "install_date": "20190724",
         "install_location": "",
@@ -6595,7 +6646,7 @@
     "system-insights-safari-extensions": {
       "example": {
         "author": "Eyeo GmbH",
-        "collection_time": "2019-05-16T12:58:15.673-06:00",
+        "collection_time": "2019-05-16T18:58:15.673Z",
         "description": "Used by over 50 million people, a free ad blocker that blocks ALL annoying ads, malware and tracking.",
         "developer_id": "GRYYZR985A",
         "identifier": "org.adblockplus.adblockplussafari",
@@ -6970,7 +7021,7 @@
     },
     "system-insights-system-info": {
       "example": {
-        "collection_time": "2019-06-03T13:41:30.771-06:00",
+        "collection_time": "2019-06-03T19:41:30.771Z",
         "computer_name": "Johnny's MacBook Pro (2)",
         "cpu_brand": "Intel(R) Core(TM) i7-7820HQ CPU @ 2.90GHz",
         "cpu_logical_cores": 8,
@@ -7223,7 +7274,7 @@
     },
     "system-insights-users": {
       "example": {
-        "collection_time": "2019-06-03T13:41:29.71-06:00",
+        "collection_time": "2019-06-03T19:41:29.71Z",
         "description": "AppleEvents Daemon",
         "directory": "/var/empty",
         "gid": "55",
@@ -8233,15 +8284,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request POST \\\n  --url https://console.jumpcloud.com/api/v2/activedirectories \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --data '{\"domain\":\"string\",\"useCase\":\"UNSET\"}'"
+            "source": "curl --request POST \\\n  --url https://console.jumpcloud.com/api/v2/activedirectories \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --data '{\"delegationState\":\"ENABLED\",\"domain\":\"string\",\"groupsEnabled\":true,\"useCase\":\"UNSET\"}'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/v2/activedirectories\"\n\npayload = {\n    \"domain\": \"string\",\n    \"useCase\": \"UNSET\"\n}\nheaders = {\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/v2/activedirectories\"\n\npayload = {\n    \"delegationState\": \"ENABLED\",\n    \"domain\": \"string\",\n    \"groupsEnabled\": True,\n    \"useCase\": \"UNSET\"\n}\nheaders = {\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/v2/activedirectories' -Method POST -Headers $headers -ContentType 'application/json' -Body '{\"domain\":\"string\",\"useCase\":\"UNSET\"}'"
+            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/v2/activedirectories' -Method POST -Headers $headers -ContentType 'application/json' -Body '{\"delegationState\":\"ENABLED\",\"domain\":\"string\",\"groupsEnabled\":true,\"useCase\":\"UNSET\"}'"
           }
         ]
       },
@@ -16740,6 +16791,34 @@
     "/recommendations": {
       "x-functionalities-tags": [
         "recommendations"
+      ]
+    },
+    "/rules/{rule_id}/associations": {
+      "parameters": [
+        {
+          "description": "ObjectID of the Rule.",
+          "in": "path",
+          "name": "rule_id",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "x-functionalities-tags": [
+        "rule-associations"
+      ]
+    },
+    "/rules/{rule_id}/systemgroups": {
+      "parameters": [
+        {
+          "description": "ObjectID of the Rule.",
+          "in": "path",
+          "name": "rule_id",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "x-functionalities-tags": [
+        "rule-associations"
       ]
     },
     "/software/catalog": {

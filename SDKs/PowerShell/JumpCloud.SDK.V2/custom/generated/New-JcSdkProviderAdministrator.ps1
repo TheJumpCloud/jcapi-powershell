@@ -62,6 +62,9 @@ To create the parameters described below, construct a hash table containing the 
 BODY <IProviderAdminReq>:
   Email <String>:
   [ApiKeyAllowed <Boolean?>]:
+  [ApiKeyHashCreatedAt <DateTime?>]:
+  [ApiKeyHashExpireAt <DateTime?>]:
+  [ApiKeyHashPrefix <String>]:
   [BindNoOrgs <Boolean?>]:
   [EnableMultiFactor <Boolean?>]:
   [Firstname <String>]:
@@ -137,6 +140,27 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [System.Management.Automation.SwitchParameter]
     # .
     ${ApiKeyAllowed}, 
+
+    [Parameter(ParameterSetName='CreateExpanded')]
+    [Parameter(ParameterSetName='CreateViaIdentityExpanded')]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [System.DateTime]
+    # .
+    ${ApiKeyHashCreatedAt}, 
+
+    [Parameter(ParameterSetName='CreateExpanded')]
+    [Parameter(ParameterSetName='CreateViaIdentityExpanded')]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [System.DateTime]
+    # .
+    ${ApiKeyHashExpireAt}, 
+
+    [Parameter(ParameterSetName='CreateExpanded')]
+    [Parameter(ParameterSetName='CreateViaIdentityExpanded')]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [System.String]
+    # .
+    ${ApiKeyHashPrefix}, 
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [Parameter(ParameterSetName='CreateViaIdentityExpanded')]

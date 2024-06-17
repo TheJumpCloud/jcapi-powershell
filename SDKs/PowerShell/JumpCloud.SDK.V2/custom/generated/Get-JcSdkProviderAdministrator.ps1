@@ -156,7 +156,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
                 $resultCounter = 0
                 :retryLoop do {
                     $resultCounter++
-                    $Result = (JumpCloud.SDK.V2.internal\Get-JcSdkInternalProviderAdministrator -ErrorAction SilentlyContinue -errorVariable sdkError @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
+                    $Result = (JumpCloud.SDK.V2.internal\Get-JcSdkInternalProviderAdministrator -ErrorAction SilentlyContinue -errorVariable sdkError @PSBoundParameters); if (-not [System.String]::IsNullOrEmpty($Result)) { $Result = $Result.ToJsonString() | ConvertFrom-Json };
                     If ($sdkError){
                         If ($resultCounter -eq $maxRetries){
                             throw $sdkError
@@ -194,7 +194,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
             $resultCounter = 0
             :retryLoop do {
                 $resultCounter++
-                $Result = (JumpCloud.SDK.V2.internal\Get-JcSdkInternalProviderAdministrator -ErrorAction SilentlyContinue -errorVariable sdkError @PSBoundParameters).ToJsonString() | ConvertFrom-Json;
+                $Result = (JumpCloud.SDK.V2.internal\Get-JcSdkInternalProviderAdministrator -ErrorAction SilentlyContinue -errorVariable sdkError @PSBoundParameters); if (-not [System.String]::IsNullOrEmpty($Result)) { $Result = $Result.ToJsonString() | ConvertFrom-Json };
                 If ($sdkError){
                     If ($resultCounter -eq $maxRetries){
                         throw $sdkError

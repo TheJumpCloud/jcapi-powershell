@@ -136,7 +136,9 @@ Try {
             $EndContent = @()
             # Results logic - If the output model is undefined in the swagger spec
             $ResultsLogic = If ($Command.OutputType -like "$ModuleName.Models.*ApplicationJson*") {
-                "($($ImportedModule.Name)\$($CommandName) -ErrorAction SilentlyContinue -errorVariable sdkError @PSBoundParameters).ToJsonString() | ConvertFrom-Json;"
+                @"
+($($ImportedModule.Name)\$($CommandName) -ErrorAction SilentlyContinue -errorVariable sdkError @PSBoundParameters); if (-not [System.String]::IsNullOrEmpty(`$Result)) { `$Result = `$Result.ToJsonString() | ConvertFrom-Json };
+"@
             } Else {
                 "$($ImportedModule.Name)\$($CommandName) @PSBoundParameters -errorAction SilentlyContinue -errorVariable sdkError"
             }

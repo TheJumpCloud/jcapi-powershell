@@ -5427,6 +5427,9 @@
           <TableColumnHeader>
             <Label>PricePerUserSum</Label>
           </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>PurchaseChannel</Label>
+          </TableColumnHeader>
         </TableHeaders>
         <TableRowEntries>
           <TableRowEntry>
@@ -5439,6 +5442,9 @@
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>PricePerUserSum</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>PurchaseChannel</PropertyName>
               </TableColumnItem>
             </TableColumnItems>
           </TableRowEntry>
@@ -8897,6 +8903,40 @@
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>UsersTimeZone</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>JumpCloud.SDK.V1.Models.UserreturnApiKeyHash</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloud.SDK.V1.Models.UserreturnApiKeyHash</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>CreatedAt</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>ExpireAt</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Prefix</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>CreatedAt</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>ExpireAt</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Prefix</PropertyName>
               </TableColumnItem>
             </TableColumnItems>
           </TableRowEntry>
