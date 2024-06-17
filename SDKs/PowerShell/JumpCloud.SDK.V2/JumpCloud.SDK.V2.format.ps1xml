@@ -9,13 +9,22 @@
       <TableControl>
         <TableHeaders>
           <TableColumnHeader>
+            <Label>DelegationState</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
             <Label>Domain</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>GroupsEnabled</Label>
           </TableColumnHeader>
           <TableColumnHeader>
             <Label>Id</Label>
           </TableColumnHeader>
           <TableColumnHeader>
             <Label>PrimaryAgent</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>PrimaryImportAgent</Label>
           </TableColumnHeader>
           <TableColumnHeader>
             <Label>UseCase</Label>
@@ -25,13 +34,22 @@
           <TableRowEntry>
             <TableColumnItems>
               <TableColumnItem>
+                <PropertyName>DelegationState</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
                 <PropertyName>Domain</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>GroupsEnabled</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>Id</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>PrimaryAgent</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>PrimaryImportAgent</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>UseCase</PropertyName>
@@ -359,6 +377,40 @@
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>Suspended</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>JumpCloud.SDK.V2.Models.AdministratorApiKeyHash</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloud.SDK.V2.Models.AdministratorApiKeyHash</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>CreatedAt</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>ExpireAt</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Prefix</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>CreatedAt</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>ExpireAt</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Prefix</PropertyName>
               </TableColumnItem>
             </TableColumnItems>
           </TableRowEntry>
@@ -5617,6 +5669,40 @@
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>RoleName</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>JumpCloud.SDK.V2.Models.ProviderAdminReqApiKeyHash</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloud.SDK.V2.Models.ProviderAdminReqApiKeyHash</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>CreatedAt</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>ExpireAt</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Prefix</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>CreatedAt</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>ExpireAt</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Prefix</PropertyName>
               </TableColumnItem>
             </TableColumnItems>
           </TableRowEntry>

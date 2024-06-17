@@ -2367,6 +2367,9 @@
         },
         "pricePerUserSum": {
           "type": "integer"
+        },
+        "purchaseChannel": {
+          "type": "string"
         }
       },
       "title": "OrganizationEntitlement",
@@ -4607,6 +4610,23 @@
         },
         "apiKeyAllowed": {
           "type": "boolean"
+        },
+        "apiKeyHash": {
+          "additionalProperties": false,
+          "properties": {
+            "createdAt": {
+              "format": "date-time",
+              "type": "string"
+            },
+            "expireAt": {
+              "format": "date-time",
+              "type": "string"
+            },
+            "prefix": {
+              "type": "string"
+            }
+          },
+          "type": "object"
         },
         "apiKeySet": {
           "type": "boolean"

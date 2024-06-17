@@ -1,3 +1,32 @@
+## JumpCloud.SDK.V2-0.0.48
+Release Date: June 17, 2024
+#### RELEASE NOTES
+```
+This release includes an update to functions that return formatted json data.
+```
+
+#### BUG FIXES:
+Functions that return formatted json data will now validate that the response is non-null before attempting to convert the response from Json. This resulted in an error for null responses in previous versions of the module.
+#### Generated Changes:
+
+<details>
+<summary>Functions Added</summary>
+
+No changes
+</details>
+
+<details>
+<summary>Functions Modified</summary>
+
+No changes
+</details>
+
+<details>
+<summary>Functions Removed</summary>
+
+No changes
+</details>
+
 ## JumpCloud.SDK.V2-0.0.47
 Release Date: June 06, 2024
 #### RELEASE NOTES

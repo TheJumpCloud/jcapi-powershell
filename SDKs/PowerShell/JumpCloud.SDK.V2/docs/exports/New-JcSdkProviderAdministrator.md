@@ -16,7 +16,8 @@ You must provide either `role` or `roleName`.
 
 ### CreateExpanded (Default)
 ```
-New-JcSdkProviderAdministrator -ProviderId <String> -Email <String> [-ApiKeyAllowed] [-BindNoOrgs]
+New-JcSdkProviderAdministrator -ProviderId <String> -Email <String> [-ApiKeyAllowed]
+ [-ApiKeyHashCreatedAt <DateTime>] [-ApiKeyHashExpireAt <DateTime>] [-ApiKeyHashPrefix <String>] [-BindNoOrgs]
  [-EnableMultiFactor] [-Firstname <String>] [-Lastname <String>] [-Role <String>] [-RoleName <String>]
  [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
@@ -36,8 +37,9 @@ New-JcSdkProviderAdministrator -InputObject <IJumpCloudApiIdentity> -Body <IProv
 ### CreateViaIdentityExpanded
 ```
 New-JcSdkProviderAdministrator -InputObject <IJumpCloudApiIdentity> -Email <String> [-ApiKeyAllowed]
- [-BindNoOrgs] [-EnableMultiFactor] [-Firstname <String>] [-Lastname <String>] [-Role <String>]
- [-RoleName <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-ApiKeyHashCreatedAt <DateTime>] [-ApiKeyHashExpireAt <DateTime>] [-ApiKeyHashPrefix <String>] [-BindNoOrgs]
+ [-EnableMultiFactor] [-Firstname <String>] [-Lastname <String>] [-Role <String>] [-RoleName <String>]
+ [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -92,6 +94,51 @@ Suspended               Boolean
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
+Parameter Sets: CreateExpanded, CreateViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ApiKeyHashCreatedAt
+.
+
+```yaml
+Type: System.DateTime
+Parameter Sets: CreateExpanded, CreateViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ApiKeyHashExpireAt
+.
+
+```yaml
+Type: System.DateTime
+Parameter Sets: CreateExpanded, CreateViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ApiKeyHashPrefix
+.
+
+```yaml
+Type: System.String
 Parameter Sets: CreateExpanded, CreateViaIdentityExpanded
 Aliases:
 
@@ -310,6 +357,9 @@ To create the parameters described below, construct a hash table containing the 
 BODY <IProviderAdminReq>: ProviderAdminReq
   - `Email <String>`: 
   - `[ApiKeyAllowed <Boolean?>]`: 
+  - `[ApiKeyHashCreatedAt <DateTime?>]`: 
+  - `[ApiKeyHashExpireAt <DateTime?>]`: 
+  - `[ApiKeyHashPrefix <String>]`: 
   - `[BindNoOrgs <Boolean?>]`: 
   - `[EnableMultiFactor <Boolean?>]`: 
   - `[Firstname <String>]`: 

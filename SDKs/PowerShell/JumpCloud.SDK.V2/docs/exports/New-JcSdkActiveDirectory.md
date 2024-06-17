@@ -26,7 +26,8 @@ curl -X POST https://console.jumpcloud.com/api/v2/activedirectories/ \\
 
 ### CreateExpanded (Default)
 ```
-New-JcSdkActiveDirectory [-Domain <String>] [-UseCase <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+New-JcSdkActiveDirectory [-DelegationState <String>] [-Domain <String>] [-GroupsEnabled] [-UseCase <String>]
+ [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Create
@@ -91,11 +92,41 @@ Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
+### -DelegationState
+Delegation state of the Active Directory instance
+
+```yaml
+Type: System.String
+Parameter Sets: CreateExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Domain
 Domain name for this Active Directory instance.
 
 ```yaml
 Type: System.String
+Parameter Sets: CreateExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -GroupsEnabled
+.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: CreateExpanded
 Aliases:
 
@@ -173,7 +204,9 @@ To create the parameters described below, construct a hash table containing the 
 
 
 BODY <IActiveDirectory>: Active Directory
+  - `[DelegationState <String>]`: Delegation state of the Active Directory instance
   - `[Domain <String>]`: Domain name for this Active Directory instance.
+  - `[GroupsEnabled <Boolean?>]`: 
   - `[UseCase <String>]`: 
 
 ## RELATED LINKS
