@@ -136,12 +136,12 @@ jobs:
               run: |
                 # zip contents for artifact
                 Compress-Archive -Path /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/${{ matrix.SDKName }} -DestinationPath /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/${{ matrix.SDKName }}.zip -CompressionLevel Optimal -Force
-            - uses: PaloAltoNetworks/upload-secure-artifact@b0e2f8dc09b06aa38239ad1b9e5b5b57b4732abc
+            # Test
+            - uses: actions/upload-artifact@v4
               with:
                 name: build-${{ matrix.SDKName }}
                 path: /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/${{ matrix.SDKName }}.zip
                 retention-days: 1
-                scan-only-runner-token: true
     Test-SDK:
         needs: ["Setup-Build-Dependancies", "Build-SDK"]
         runs-on: ubuntu-latest
