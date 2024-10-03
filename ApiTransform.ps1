@@ -73,6 +73,8 @@ $TransformConfig = [Ordered]@{
         };
         OverrideDefinitions = @(
             'definitions.application.properties.config'
+            'definitions.systemuserput.properties'
+            'definitions.systemuserputpost.properties'
         )
         OperationIdMapping  = [Ordered]@{
             'admin_totpreset_begin'          = 'AdministratorUserTotp_Reset';

@@ -1,0 +1,234 @@
+{
+    "account_locked": {
+        "type": "boolean"
+    },
+    "addresses": {
+        "description": "type, poBox, extendedAddress, streetAddress, locality, region, postalCode, country",
+        "items": {
+        "properties": {
+            "country": {
+            "maxLength": 1024,
+            "type": "string"
+            },
+            "extendedAddress": {
+            "maxLength": 1024,
+            "type": "string"
+            },
+            "locality": {
+            "maxLength": 1024,
+            "type": "string"
+            },
+            "poBox": {
+            "maxLength": 1024,
+            "type": "string"
+            },
+            "postalCode": {
+            "maxLength": 1024,
+            "type": "string"
+            },
+            "region": {
+            "maxLength": 1024,
+            "type": "string"
+            },
+            "streetAddress": {
+            "maxLength": 1024,
+            "type": "string"
+            },
+            "type": {
+            "maxLength": 1024,
+            "type": "string"
+            }
+        },
+        "type": "object"
+        },
+        "type": "array"
+    },
+    "allow_public_key": {
+        "type": "boolean"
+    },
+    "alternateEmail": {
+        "type": "string"
+    },
+    "attributes": {
+        "items": {
+        "properties": {
+            "name": {
+            "type": "string"
+            },
+            "value": {
+            "maxLength": 1024,
+            "type": "string"
+            }
+        },
+        "type": "object"
+        },
+        "type": "array"
+    },
+    "company": {
+        "maxLength": 1024,
+        "type": "string"
+    },
+    "costCenter": {
+        "maxLength": 1024,
+        "type": "string"
+    },
+    "department": {
+        "maxLength": 1024,
+        "type": "string"
+    },
+    "description": {
+        "maxLength": 1024,
+        "type": "string"
+    },
+    "disableDeviceMaxLoginAttempts": {
+        "type": "boolean"
+    },
+    "displayname": {
+        "maxLength": 1024,
+        "type": "string"
+    },
+    "email": {
+        "maxLength": 1024,
+        "type": "string"
+    },
+    "employeeIdentifier": {
+        "description": "Must be unique per user. ",
+        "maxLength": 256,
+        "type": "string"
+    },
+    "employeeType": {
+        "maxLength": 1024,
+        "type": "string"
+    },
+    "enable_managed_uid": {
+        "type": "boolean"
+    },
+    "enable_user_portal_multifactor": {
+        "type": "boolean"
+    },
+    "external_dn": {
+        "type": "string"
+    },
+    "external_password_expiration_date": {
+        "type": "string"
+    },
+    "external_source_type": {
+        "type": "string"
+    },
+    "externally_managed": {
+        "$ref": "#/definitions/externallymanagedpropertyinfo"
+    },
+    "firstname": {
+        "maxLength": 1024,
+        "type": "string"
+    },
+    "jobTitle": {
+        "maxLength": 1024,
+        "type": "string"
+    },
+    "lastname": {
+        "maxLength": 1024,
+        "type": "string"
+    },
+    "ldap_binding_user": {
+        "type": "boolean"
+    },
+    "location": {
+        "maxLength": 1024,
+        "type": "string"
+    },
+    "managedAppleId": {
+        "maxLength": 1024,
+        "type": "string"
+    },
+    "manager": {
+        "description": "Relation with another systemuser to identify the last as a manager.",
+        "type": "object"
+    },
+    "mfa": {
+        "$ref": "#/definitions/mfa"
+    },
+    "middlename": {
+        "maxLength": 1024,
+        "type": "string"
+    },
+    "password": {
+        "type": "string"
+    },
+    "password_never_expires": {
+        "type": "boolean"
+    },
+    "phoneNumbers": {
+        "items": {
+        "properties": {
+            "number": {
+            "maxLength": 1024,
+            "type": "string"
+            },
+            "type": {
+            "maxLength": 1024,
+            "type": "string"
+            }
+        },
+        "type": "object"
+        },
+        "type": "array"
+    },
+    "public_key": {
+        "type": "string"
+    },
+    "relationships": {
+        "items": {
+        "properties": {
+            "type": {
+            "type": "string"
+            },
+            "value": {
+            "type": "string"
+            }
+        },
+        "type": "object"
+        },
+        "type": "array"
+    },
+    "restrictedFields": {
+        "items": {
+        "$ref": "#/definitions/restrictedField"
+        },
+        "type": "array"
+    },
+    "samba_service_user": {
+        "type": "boolean"
+    },
+    "ssh_keys": {
+        "items": {
+        "$ref": "#/definitions/sshkeypost"
+        },
+        "type": "array"
+    },
+    "state": {
+        "enum": [
+        "ACTIVATED",
+        "SUSPENDED"
+        ],
+        "type": "string"
+    },
+    "sudo": {
+        "type": "boolean"
+    },
+    "suspended": {
+        "type": "boolean"
+    },
+    "unix_guid": {
+        "minimum": 1,
+        "type": "integer"
+    },
+    "unix_uid": {
+        "minimum": 1,
+        "type": "integer"
+    },
+    "username": {
+        "maxLength": 1024,
+        "type": "string"
+    }
+}
