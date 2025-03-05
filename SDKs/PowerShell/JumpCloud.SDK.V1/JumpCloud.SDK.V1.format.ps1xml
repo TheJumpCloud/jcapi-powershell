@@ -4456,6 +4456,28 @@
       </TableControl>
     </View>
     <View>
+      <Name>JumpCloud.SDK.V1.Models.CustomEmailSettings</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloud.SDK.V1.Models.CustomEmailSettings</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Enabled</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Enabled</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
       <Name>JumpCloud.SDK.V1.Models.Error</Name>
       <ViewSelectedBy>
         <TypeName>JumpCloud.SDK.V1.Models.Error</TypeName>
@@ -4603,6 +4625,9 @@
             <Label>Organization</Label>
           </TableColumnHeader>
           <TableColumnHeader>
+            <Label>RemoteAssistAgentVersion</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
             <Label>RemoteIP</Label>
           </TableColumnHeader>
           <TableColumnHeader>
@@ -4701,6 +4726,9 @@
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>Organization</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>RemoteAssistAgentVersion</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>RemoteIP</PropertyName>
@@ -4814,6 +4842,9 @@
             <Label>Dep</Label>
           </TableColumnHeader>
           <TableColumnHeader>
+            <Label>LostModeStatus</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
             <Label>ProfileIdentifier</Label>
           </TableColumnHeader>
           <TableColumnHeader>
@@ -4831,6 +4862,9 @@
             <TableColumnItems>
               <TableColumnItem>
                 <PropertyName>Dep</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>LostModeStatus</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>ProfileIdentifier</PropertyName>
@@ -5039,6 +5073,28 @@
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>UnsupportedOS</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>JumpCloud.SDK.V1.Models.JcSystemPrimarySystemUser</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloud.SDK.V1.Models.JcSystemPrimarySystemUser</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Id</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Id</PropertyName>
               </TableColumnItem>
             </TableColumnItems>
           </TableRowEntry>
@@ -5422,7 +5478,13 @@
             <Label>BillingModel</Label>
           </TableColumnHeader>
           <TableColumnHeader>
+            <Label>CapUserQuantity</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
             <Label>IsManuallyBilled</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>MaxUserQuantity</Label>
           </TableColumnHeader>
           <TableColumnHeader>
             <Label>PricePerUserSum</Label>
@@ -5438,7 +5500,13 @@
                 <PropertyName>BillingModel</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
+                <PropertyName>CapUserQuantity</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
                 <PropertyName>IsManuallyBilled</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>MaxUserQuantity</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>PricePerUserSum</PropertyName>
@@ -5819,6 +5887,9 @@
       <TableControl>
         <TableHeaders>
           <TableColumnHeader>
+            <Label>AllowUnenrolledMfaPasswordReset</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
             <Label>AllowUsernameSubstring</Label>
           </TableColumnHeader>
           <TableColumnHeader>
@@ -5906,6 +5977,9 @@
         <TableRowEntries>
           <TableRowEntry>
             <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>AllowUnenrolledMfaPasswordReset</PropertyName>
+              </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>AllowUsernameSubstring</PropertyName>
               </TableColumnItem>
@@ -6257,6 +6331,9 @@
       <TableControl>
         <TableHeaders>
           <TableColumnHeader>
+            <Label>AllowUnenrolledMfaPasswordReset</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
             <Label>AllowUsernameSubstring</Label>
           </TableColumnHeader>
           <TableColumnHeader>
@@ -6335,6 +6412,9 @@
         <TableRowEntries>
           <TableRowEntry>
             <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>AllowUnenrolledMfaPasswordReset</PropertyName>
+              </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>AllowUsernameSubstring</PropertyName>
               </TableColumnItem>
@@ -6423,12 +6503,18 @@
       <TableControl>
         <TableHeaders>
           <TableColumnHeader>
+            <Label>CookieExpirationType</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
             <Label>IdleSessionDurationMinutes</Label>
           </TableColumnHeader>
         </TableHeaders>
         <TableRowEntries>
           <TableRowEntry>
             <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>CookieExpirationType</PropertyName>
+              </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>IdleSessionDurationMinutes</PropertyName>
               </TableColumnItem>
@@ -6445,12 +6531,18 @@
       <TableControl>
         <TableHeaders>
           <TableColumnHeader>
+            <Label>CookieExpirationType</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
             <Label>IdleSessionDurationMinutes</Label>
           </TableColumnHeader>
         </TableHeaders>
         <TableRowEntries>
           <TableRowEntry>
             <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>CookieExpirationType</PropertyName>
+              </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>IdleSessionDurationMinutes</PropertyName>
               </TableColumnItem>
@@ -6616,6 +6708,9 @@
             <Label>NetworkSourceIP</Label>
           </TableColumnHeader>
           <TableColumnHeader>
+            <Label>RequireTlsAuth</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
             <Label>SharedSecret</Label>
           </TableColumnHeader>
           <TableColumnHeader>
@@ -6648,6 +6743,9 @@
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>NetworkSourceIP</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>RequireTlsAuth</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>SharedSecret</PropertyName>
@@ -6763,6 +6861,9 @@
             <Label>Organization</Label>
           </TableColumnHeader>
           <TableColumnHeader>
+            <Label>RequireTlsAuth</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
             <Label>SharedSecret</Label>
           </TableColumnHeader>
           <TableColumnHeader>
@@ -6804,6 +6905,9 @@
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>Organization</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>RequireTlsAuth</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>SharedSecret</PropertyName>
@@ -6851,6 +6955,9 @@
             <Label>NetworkSourceIP</Label>
           </TableColumnHeader>
           <TableColumnHeader>
+            <Label>RequireTlsAuth</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
             <Label>SharedSecret</Label>
           </TableColumnHeader>
           <TableColumnHeader>
@@ -6886,6 +6993,9 @@
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>NetworkSourceIP</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>RequireTlsAuth</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>SharedSecret</PropertyName>
@@ -6936,6 +7046,9 @@
             <Label>NetworkSourceIP</Label>
           </TableColumnHeader>
           <TableColumnHeader>
+            <Label>RequireTlsAuth</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
             <Label>UserCertEnabled</Label>
           </TableColumnHeader>
           <TableColumnHeader>
@@ -6971,6 +7084,9 @@
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>NetworkSourceIP</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>RequireTlsAuth</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>UserCertEnabled</PropertyName>
@@ -8445,6 +8561,34 @@
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>Type</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>JumpCloud.SDK.V1.Models.SystemuserreturnAdmin</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloud.SDK.V1.Models.SystemuserreturnAdmin</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Id</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>RoleName</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Id</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>RoleName</PropertyName>
               </TableColumnItem>
             </TableColumnItems>
           </TableRowEntry>

@@ -2245,6 +2245,9 @@
             <Label>DisplayName</Label>
           </TableColumnHeader>
           <TableColumnHeader>
+            <Label>MessageType</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
             <Label>Type</Label>
           </TableColumnHeader>
         </TableHeaders>
@@ -2256,6 +2259,9 @@
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>DisplayName</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>MessageType</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>Type</PropertyName>
@@ -3675,6 +3681,9 @@
             <Label>Id</Label>
           </TableColumnHeader>
           <TableColumnHeader>
+            <Label>ImportFilter</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
             <Label>Name</Label>
           </TableColumnHeader>
           <TableColumnHeader>
@@ -3692,6 +3701,9 @@
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>Id</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>ImportFilter</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>Name</PropertyName>
@@ -4593,6 +4605,9 @@
             <Label>EarliestVersion</Label>
           </TableColumnHeader>
           <TableColumnHeader>
+            <Label>IsMdmRequired</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
             <Label>OSName</Label>
           </TableColumnHeader>
           <TableColumnHeader>
@@ -4607,6 +4622,9 @@
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>EarliestVersion</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>IsMdmRequired</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>OSName</PropertyName>
@@ -5991,20 +6009,32 @@
       <TableControl>
         <TableHeaders>
           <TableColumnHeader>
+            <Label>CreatedAt</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
             <Label>DisplayName</Label>
           </TableColumnHeader>
           <TableColumnHeader>
             <Label>Id</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>UpdatedAt</Label>
           </TableColumnHeader>
         </TableHeaders>
         <TableRowEntries>
           <TableRowEntry>
             <TableColumnItems>
               <TableColumnItem>
+                <PropertyName>CreatedAt</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
                 <PropertyName>DisplayName</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>Id</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>UpdatedAt</PropertyName>
               </TableColumnItem>
             </TableColumnItems>
           </TableRowEntry>
@@ -6071,10 +6101,16 @@
       <TableControl>
         <TableHeaders>
           <TableColumnHeader>
+            <Label>CreatedAt</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
             <Label>DisplayName</Label>
           </TableColumnHeader>
           <TableColumnHeader>
             <Label>Id</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>UpdatedAt</Label>
           </TableColumnHeader>
           <TableColumnHeader>
             <Label>UploadUrl</Label>
@@ -6084,10 +6120,16 @@
           <TableRowEntry>
             <TableColumnItems>
               <TableColumnItem>
+                <PropertyName>CreatedAt</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
                 <PropertyName>DisplayName</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>Id</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>UpdatedAt</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>UploadUrl</PropertyName>
@@ -6352,6 +6394,9 @@
             <Label>AllowUpdateDelay</Label>
           </TableColumnHeader>
           <TableColumnHeader>
+            <Label>AppCatalogInstallableObjectId</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
             <Label>AssetKind</Label>
           </TableColumnHeader>
           <TableColumnHeader>
@@ -6367,6 +6412,9 @@
             <Label>CommandLineArguments</Label>
           </TableColumnHeader>
           <TableColumnHeader>
+            <Label>CreatedAt</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
             <Label>Description</Label>
           </TableColumnHeader>
           <TableColumnHeader>
@@ -6374,6 +6422,9 @@
           </TableColumnHeader>
           <TableColumnHeader>
             <Label>EnterpriseObjectId</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>IconUrl</Label>
           </TableColumnHeader>
           <TableColumnHeader>
             <Label>Location</Label>
@@ -6397,7 +6448,19 @@
             <Label>PackageVersion</Label>
           </TableColumnHeader>
           <TableColumnHeader>
+            <Label>PackageVersionUpdatedAt</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Scope</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
             <Label>StoredPackageObjectId</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>UpdatedAt</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>VersionlessDownloadUrl</Label>
           </TableColumnHeader>
         </TableHeaders>
         <TableRowEntries>
@@ -6405,6 +6468,9 @@
             <TableColumnItems>
               <TableColumnItem>
                 <PropertyName>AllowUpdateDelay</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>AppCatalogInstallableObjectId</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>AssetKind</PropertyName>
@@ -6422,6 +6488,9 @@
                 <PropertyName>CommandLineArguments</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
+                <PropertyName>CreatedAt</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
                 <PropertyName>Description</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
@@ -6429,6 +6498,9 @@
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>EnterpriseObjectId</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>IconUrl</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>Location</PropertyName>
@@ -6452,7 +6524,19 @@
                 <PropertyName>PackageVersion</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
+                <PropertyName>PackageVersionUpdatedAt</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Scope</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
                 <PropertyName>StoredPackageObjectId</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>UpdatedAt</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>VersionlessDownloadUrl</PropertyName>
               </TableColumnItem>
             </TableColumnItems>
           </TableRowEntry>

@@ -64,10 +64,12 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 BODY <ISoftwareApp>:
+  [CreatedAt <DateTime?>]:
   [DisplayName <String>]:
   [Id <String>]:
   [Settings <ISoftwareAppSettings[]>]:
     [AllowUpdateDelay <Boolean?>]:
+    [AppCatalogInstallableObjectId <String>]: ID of the app catalog installable that created this app.
     [AppleVppAppConfiguration <String>]: Text sent to configure the application, the text should be a valid plist.  Returned only by 'GET /softwareapps/{id}'.
     [AppleVppAssignedLicenses <Int32?>]:
     [AppleVppAvailableLicenses <Int32?>]:
@@ -81,6 +83,7 @@ BODY <ISoftwareApp>:
     [AssetSha256Strings <String[]>]: The array of checksums, one each for the hash size up to the total size of the package.
     [AutoUpdate <Boolean?>]:
     [CommandLineArguments <String>]: Command line arguments to use with the application.
+    [CreatedAt <DateTime?>]:
     [Description <String>]: The software app description.
     [DesiredState <String>]: State of Install or Uninstall
     [EnterpriseObjectId <String>]: ID of the Enterprise with which this app is associated
@@ -108,6 +111,7 @@ BODY <ISoftwareApp>:
     [GoogleAndroidType <String>]: Type of this android application.
     [GoogleAndroidUpdateTime <String>]: The approximate time (within 7 days) the app was last published.
     [GoogleAndroidVersionCode <Int32?>]: The current version of the web app.
+    [IconUrl <String>]: URL to the icon for the app.
     [Location <String>]: Repository where the app is located within the package manager
     [LocationObjectId <String>]: ID of the repository where the app is located within the package manager
     [MicrosoftStoreDoNotUpdate <Boolean?>]: Indicates whether the app can be updated or not.
@@ -119,6 +123,8 @@ BODY <ISoftwareApp>:
     [PackageManager <String>]: App store serving the app: APPLE_VPP, CHOCOLATEY, etc.
     [PackageSubtitle <String>]: The package manifest subtitle.
     [PackageVersion <String>]: The package manifest version.
+    [PackageVersionUpdatedAt <DateTime?>]:
+    [Scope <String>]: The installation scope of the software app.
     [StoredPackageObjectId <String>]: ID of the stored package this app uses to reference the stored install media.
     [StoredPackageVersions <IObjectStorageVersion[]>]:
       [Metadata <IObjectStorageVersionMetadata>]: Dictionary of <any>
@@ -129,9 +135,13 @@ BODY <ISoftwareApp>:
       [Size <Int32?>]:
       [Status <String>]:
       [Version <Int32?>]:
+    [UpdatedAt <DateTime?>]:
+    [VersionlessDownloadUrl <Boolean?>]:
+  [UpdatedAt <DateTime?>]:
 
 SETTINGS <ISoftwareAppSettings[]>:
   [AllowUpdateDelay <Boolean?>]:
+  [AppCatalogInstallableObjectId <String>]: ID of the app catalog installable that created this app.
   [AppleVppAppConfiguration <String>]: Text sent to configure the application, the text should be a valid plist.  Returned only by 'GET /softwareapps/{id}'.
   [AppleVppAssignedLicenses <Int32?>]:
   [AppleVppAvailableLicenses <Int32?>]:
@@ -145,6 +155,7 @@ SETTINGS <ISoftwareAppSettings[]>:
   [AssetSha256Strings <String[]>]: The array of checksums, one each for the hash size up to the total size of the package.
   [AutoUpdate <Boolean?>]:
   [CommandLineArguments <String>]: Command line arguments to use with the application.
+  [CreatedAt <DateTime?>]:
   [Description <String>]: The software app description.
   [DesiredState <String>]: State of Install or Uninstall
   [EnterpriseObjectId <String>]: ID of the Enterprise with which this app is associated
@@ -172,6 +183,7 @@ SETTINGS <ISoftwareAppSettings[]>:
   [GoogleAndroidType <String>]: Type of this android application.
   [GoogleAndroidUpdateTime <String>]: The approximate time (within 7 days) the app was last published.
   [GoogleAndroidVersionCode <Int32?>]: The current version of the web app.
+  [IconUrl <String>]: URL to the icon for the app.
   [Location <String>]: Repository where the app is located within the package manager
   [LocationObjectId <String>]: ID of the repository where the app is located within the package manager
   [MicrosoftStoreDoNotUpdate <Boolean?>]: Indicates whether the app can be updated or not.
@@ -183,6 +195,8 @@ SETTINGS <ISoftwareAppSettings[]>:
   [PackageManager <String>]: App store serving the app: APPLE_VPP, CHOCOLATEY, etc.
   [PackageSubtitle <String>]: The package manifest subtitle.
   [PackageVersion <String>]: The package manifest version.
+  [PackageVersionUpdatedAt <DateTime?>]:
+  [Scope <String>]: The installation scope of the software app.
   [StoredPackageObjectId <String>]: ID of the stored package this app uses to reference the stored install media.
   [StoredPackageVersions <IObjectStorageVersion[]>]:
     [Metadata <IObjectStorageVersionMetadata>]: Dictionary of <any>
@@ -193,6 +207,8 @@ SETTINGS <ISoftwareAppSettings[]>:
     [Size <Int32?>]:
     [Status <String>]:
     [Version <Int32?>]:
+  [UpdatedAt <DateTime?>]:
+  [VersionlessDownloadUrl <Boolean?>]:
 .Link
 https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/New-JcSdkSoftwareApp.md
 #>
@@ -207,6 +223,12 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     # Software Application Package
     # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body}, 
+
+    [Parameter(ParameterSetName='CreateExpanded')]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [System.DateTime]
+    # .
+    ${CreatedAt}, 
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
@@ -227,6 +249,12 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     # .
     # To construct, see NOTES section for SETTINGS properties and create a hash table.
     ${Settings}, 
+
+    [Parameter(ParameterSetName='CreateExpanded')]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [System.DateTime]
+    # .
+    ${UpdatedAt}, 
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]

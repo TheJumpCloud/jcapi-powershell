@@ -27,8 +27,8 @@ $ curl -X POST https://console.jumpcloud.com/api/v2/softwareapps \\
 
 ### CreateExpanded (Default)
 ```
-New-JcSdkSoftwareApp [-DisplayName <String>] [-Id <String>] [-Settings <ISoftwareAppSettings[]>] [-Confirm]
- [-WhatIf] [<CommonParameters>]
+New-JcSdkSoftwareApp [-CreatedAt <DateTime>] [-DisplayName <String>] [-Id <String>]
+ [-Settings <ISoftwareAppSettings[]>] [-UpdatedAt <DateTime>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Create
@@ -94,6 +94,21 @@ Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
+### -CreatedAt
+.
+
+```yaml
+Type: System.DateTime
+Parameter Sets: CreateExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -DisplayName
 .
 
@@ -130,6 +145,21 @@ To construct, see NOTES section for SETTINGS properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.ISoftwareAppSettings[]
+Parameter Sets: CreateExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -UpdatedAt
+.
+
+```yaml
+Type: System.DateTime
 Parameter Sets: CreateExpanded
 Aliases:
 
@@ -192,10 +222,12 @@ To create the parameters described below, construct a hash table containing the 
 
 
 BODY <ISoftwareApp>: Software Application Package
+  - `[CreatedAt <DateTime?>]`: 
   - `[DisplayName <String>]`: 
   - `[Id <String>]`: 
   - `[Settings <ISoftwareAppSettings[]>]`: 
     - `[AllowUpdateDelay <Boolean?>]`: 
+    - `[AppCatalogInstallableObjectId <String>]`: ID of the app catalog installable that created this app.
     - `[AppleVppAppConfiguration <String>]`: Text sent to configure the application, the text should be a valid plist.  Returned only by 'GET /softwareapps/{id}'.
     - `[AppleVppAssignedLicenses <Int32?>]`: 
     - `[AppleVppAvailableLicenses <Int32?>]`: 
@@ -209,6 +241,7 @@ BODY <ISoftwareApp>: Software Application Package
     - `[AssetSha256Strings <String[]>]`: The array of checksums, one each for the hash size up to the total size of the package.
     - `[AutoUpdate <Boolean?>]`: 
     - `[CommandLineArguments <String>]`: Command line arguments to use with the application.
+    - `[CreatedAt <DateTime?>]`: 
     - `[Description <String>]`: The software app description.
     - `[DesiredState <String>]`: State of Install or Uninstall
     - `[EnterpriseObjectId <String>]`: ID of the Enterprise with which this app is associated
@@ -236,6 +269,7 @@ BODY <ISoftwareApp>: Software Application Package
     - `[GoogleAndroidType <String>]`: Type of this android application.
     - `[GoogleAndroidUpdateTime <String>]`: The approximate time (within 7 days) the app was last published.
     - `[GoogleAndroidVersionCode <Int32?>]`: The current version of the web app.
+    - `[IconUrl <String>]`: URL to the icon for the app.
     - `[Location <String>]`: Repository where the app is located within the package manager
     - `[LocationObjectId <String>]`: ID of the repository where the app is located within the package manager
     - `[MicrosoftStoreDoNotUpdate <Boolean?>]`: Indicates whether the app can be updated or not.
@@ -247,6 +281,8 @@ BODY <ISoftwareApp>: Software Application Package
     - `[PackageManager <String>]`: App store serving the app: APPLE_VPP, CHOCOLATEY, etc.
     - `[PackageSubtitle <String>]`: The package manifest subtitle.
     - `[PackageVersion <String>]`: The package manifest version.
+    - `[PackageVersionUpdatedAt <DateTime?>]`: 
+    - `[Scope <String>]`: The installation scope of the software app.
     - `[StoredPackageObjectId <String>]`: ID of the stored package this app uses to reference the stored install media.
     - `[StoredPackageVersions <IObjectStorageVersion[]>]`: 
       - `[Metadata <IObjectStorageVersionMetadata>]`: Dictionary of <any>
@@ -257,9 +293,13 @@ BODY <ISoftwareApp>: Software Application Package
       - `[Size <Int32?>]`: 
       - `[Status <String>]`: 
       - `[Version <Int32?>]`: 
+    - `[UpdatedAt <DateTime?>]`: 
+    - `[VersionlessDownloadUrl <Boolean?>]`: 
+  - `[UpdatedAt <DateTime?>]`: 
 
 SETTINGS <ISoftwareAppSettings[]>: .
   - `[AllowUpdateDelay <Boolean?>]`: 
+  - `[AppCatalogInstallableObjectId <String>]`: ID of the app catalog installable that created this app.
   - `[AppleVppAppConfiguration <String>]`: Text sent to configure the application, the text should be a valid plist.  Returned only by 'GET /softwareapps/{id}'.
   - `[AppleVppAssignedLicenses <Int32?>]`: 
   - `[AppleVppAvailableLicenses <Int32?>]`: 
@@ -273,6 +313,7 @@ SETTINGS <ISoftwareAppSettings[]>: .
   - `[AssetSha256Strings <String[]>]`: The array of checksums, one each for the hash size up to the total size of the package.
   - `[AutoUpdate <Boolean?>]`: 
   - `[CommandLineArguments <String>]`: Command line arguments to use with the application.
+  - `[CreatedAt <DateTime?>]`: 
   - `[Description <String>]`: The software app description.
   - `[DesiredState <String>]`: State of Install or Uninstall
   - `[EnterpriseObjectId <String>]`: ID of the Enterprise with which this app is associated
@@ -300,6 +341,7 @@ SETTINGS <ISoftwareAppSettings[]>: .
   - `[GoogleAndroidType <String>]`: Type of this android application.
   - `[GoogleAndroidUpdateTime <String>]`: The approximate time (within 7 days) the app was last published.
   - `[GoogleAndroidVersionCode <Int32?>]`: The current version of the web app.
+  - `[IconUrl <String>]`: URL to the icon for the app.
   - `[Location <String>]`: Repository where the app is located within the package manager
   - `[LocationObjectId <String>]`: ID of the repository where the app is located within the package manager
   - `[MicrosoftStoreDoNotUpdate <Boolean?>]`: Indicates whether the app can be updated or not.
@@ -311,6 +353,8 @@ SETTINGS <ISoftwareAppSettings[]>: .
   - `[PackageManager <String>]`: App store serving the app: APPLE_VPP, CHOCOLATEY, etc.
   - `[PackageSubtitle <String>]`: The package manifest subtitle.
   - `[PackageVersion <String>]`: The package manifest version.
+  - `[PackageVersionUpdatedAt <DateTime?>]`: 
+  - `[Scope <String>]`: The installation scope of the software app.
   - `[StoredPackageObjectId <String>]`: ID of the stored package this app uses to reference the stored install media.
   - `[StoredPackageVersions <IObjectStorageVersion[]>]`: 
     - `[Metadata <IObjectStorageVersionMetadata>]`: Dictionary of <any>
@@ -321,6 +365,8 @@ SETTINGS <ISoftwareAppSettings[]>: .
     - `[Size <Int32?>]`: 
     - `[Status <String>]`: 
     - `[Version <Int32?>]`: 
+  - `[UpdatedAt <DateTime?>]`: 
+  - `[VersionlessDownloadUrl <Boolean?>]`: 
 
 ## RELATED LINKS
 

@@ -144,6 +144,7 @@ BODY <IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema>:
     [NewSystemUserStateDefaultManualEntry <String>]:
     [PasswordCompliance <String>]:
     [PasswordPolicy <IOrganizationsettingsputPasswordPolicy>]:
+      [AllowUnenrolledMfaPasswordReset <Boolean?>]:
       [AllowUsernameSubstring <Boolean?>]:
       [DaysAfterExpirationToSelfRecover <Int32?>]: Deprecated field used for the legacy grace period feature.
       [DaysBeforeExpirationToForceReset <Int32?>]:
@@ -186,6 +187,7 @@ BODY <IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema>:
       Name <String>: Name of the trusted application
       [Path <String>]: Absolute path for the app's location in user's device
       [Teamid <String>]: App's Team ID
+    [UserPortalCookieExpirationType <String>]:
     [UserPortalIdleSessionDurationMinutes <Int32?>]:
 
 INPUTOBJECT <IJumpCloudApiIdentity>:
@@ -218,6 +220,7 @@ SETTINGS <IOrganizationsettingsput>:
   [NewSystemUserStateDefaultManualEntry <String>]:
   [PasswordCompliance <String>]:
   [PasswordPolicy <IOrganizationsettingsputPasswordPolicy>]:
+    [AllowUnenrolledMfaPasswordReset <Boolean?>]:
     [AllowUsernameSubstring <Boolean?>]:
     [DaysAfterExpirationToSelfRecover <Int32?>]: Deprecated field used for the legacy grace period feature.
     [DaysBeforeExpirationToForceReset <Int32?>]:
@@ -260,6 +263,7 @@ SETTINGS <IOrganizationsettingsput>:
     Name <String>: Name of the trusted application
     [Path <String>]: Absolute path for the app's location in user's device
     [Teamid <String>]: App's Team ID
+  [UserPortalCookieExpirationType <String>]:
   [UserPortalIdleSessionDurationMinutes <Int32?>]:
 .Link
 https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/Set-JcSdkOrganization.md

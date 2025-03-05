@@ -90,6 +90,7 @@ BODY <IPathsKeqea5RadiusserversIdPutRequestbodyContentApplicationJsonSchema>:
   [CaCert <String>]:
   [DeviceCertEnabled <Boolean?>]:
   [Mfa <String>]:
+  [RequireTlsAuth <Boolean?>]:
   [UserCertEnabled <Boolean?>]:
   [UserLockoutAction <String>]:
   [UserPasswordEnabled <Boolean?>]:
@@ -172,6 +173,13 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [System.String]
     # .
     ${Mfa}, 
+
+    [Parameter(ParameterSetName='SetExpanded')]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
+    [JumpCloud.SDK.V1.Category('Body')]
+    [System.Management.Automation.SwitchParameter]
+    # .
+    ${RequireTlsAuth}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]

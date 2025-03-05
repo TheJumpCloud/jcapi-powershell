@@ -93,6 +93,7 @@ BODY <IRadiusserverpost>:
   [CaCert <String>]:
   [DeviceCertEnabled <Boolean?>]:
   [Mfa <String>]:
+  [RequireTlsAuth <Boolean?>]:
   [UserCertEnabled <Boolean?>]:
   [UserLockoutAction <String>]:
   [UserPasswordEnabled <Boolean?>]:
@@ -153,6 +154,12 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [System.String]
     # .
     ${Mfa}, 
+
+    [Parameter(ParameterSetName='CreateExpanded')]
+    [JumpCloud.SDK.V1.Category('Body')]
+    [System.Management.Automation.SwitchParameter]
+    # .
+    ${RequireTlsAuth}, 
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]

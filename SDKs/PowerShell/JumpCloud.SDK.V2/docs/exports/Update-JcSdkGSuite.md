@@ -52,8 +52,8 @@ curl -X PATCH https://console.jumpcloud.com/api/v2/gsuites/{GSUITE_ID} \\
 
 ### UpdateExpanded (Default)
 ```
-Update-JcSdkGSuite -Id <String> [-DefaultDomainId <String>] [-GroupsEnabled] [-Name <String>]
- [-UserLockoutAction <String>] [-UserPasswordExpirationAction <String>] [-Confirm] [-WhatIf]
+Update-JcSdkGSuite -Id <String> [-DefaultDomainId <String>] [-GroupsEnabled] [-ImportFilter <String>]
+ [-Name <String>] [-UserLockoutAction <String>] [-UserPasswordExpirationAction <String>] [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
@@ -71,8 +71,8 @@ Update-JcSdkGSuite -InputObject <IJumpCloudApiIdentity> -Body <IGsuite> [-Confir
 ### UpdateViaIdentityExpanded
 ```
 Update-JcSdkGSuite -InputObject <IJumpCloudApiIdentity> [-DefaultDomainId <String>] [-GroupsEnabled]
- [-Name <String>] [-UserLockoutAction <String>] [-UserPasswordExpirationAction <String>] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+ [-ImportFilter <String>] [-Name <String>] [-UserLockoutAction <String>]
+ [-UserPasswordExpirationAction <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -209,6 +209,21 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -ImportFilter
+.
+
+```yaml
+Type: System.String
+Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -InputObject
 Identity Parameter
 To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
@@ -326,6 +341,7 @@ To create the parameters described below, construct a hash table containing the 
 BODY <IGsuite>: GSuite
   - `[DefaultDomainId <String>]`: 
   - `[GroupsEnabled <Boolean?>]`: 
+  - `[ImportFilter <String>]`: 
   - `[Name <String>]`: 
   - `[UserLockoutAction <String>]`: 
   - `[UserPasswordExpirationAction <String>]`: 
