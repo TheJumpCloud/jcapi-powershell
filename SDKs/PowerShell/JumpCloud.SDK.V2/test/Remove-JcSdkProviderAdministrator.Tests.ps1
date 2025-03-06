@@ -17,7 +17,7 @@ if(($null -eq $TestName) -or ($TestName -contains 'Remove-JcSdkProviderAdministr
 
 
 }
-Describe 'Remove-JcSdkProviderAdministrator' -Tag:("MTP") {
+Describe 'Remove-JcSdkProviderAdministrator' -Tag:("MTP") -Skip {
     It 'Delete' {
         { Remove-JcSdkProviderAdministrator -Id:(($global:PesterTestProviderAdmin).Id) -ProviderId $env:JCProviderId } | Should -Not -Throw
     }

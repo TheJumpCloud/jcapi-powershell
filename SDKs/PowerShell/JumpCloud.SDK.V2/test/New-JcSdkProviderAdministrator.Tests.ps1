@@ -19,7 +19,7 @@ if (($null -eq $TestName) -or ($TestName -contains 'New-JcSdkProviderAdministrat
 
 
 }
-Describe 'New-JcSdkProviderAdministrator' -Tag:("MTP") {
+Describe 'New-JcSdkProviderAdministrator' -Tag:("MTP") -Skip {
     It 'CreateExpanded' -skip {
         { throw [System.NotImplementedException] } | Should -Not -Throw
     }

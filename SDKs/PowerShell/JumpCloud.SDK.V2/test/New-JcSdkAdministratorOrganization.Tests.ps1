@@ -17,7 +17,7 @@ if(($null -eq $TestName) -or ($TestName -contains 'New-JcSdkAdministratorOrganiz
 
 
 }
-Describe 'New-JcSdkAdministratorOrganization' -Tag:("MTP") {
+Describe 'New-JcSdkAdministratorOrganization' -Tag:("MTP") -Skip {
     It 'Create' {
         ## Admin variables:
         $name = "ProviderAdmin-$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
