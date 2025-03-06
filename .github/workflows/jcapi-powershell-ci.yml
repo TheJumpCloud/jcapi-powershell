@@ -136,7 +136,7 @@ jobs:
               run: |
                 # zip contents for artifact
                 Compress-Archive -Path /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/${{ matrix.SDKName }} -DestinationPath /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/${{ matrix.SDKName }}.zip -CompressionLevel Optimal -Force
-            - uses: ./github/actions/upload-secure-artifact
+            - uses: actions/upload-secure-artifact
               with:
                 name: build-${{ matrix.SDKName }}
                 path: /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/${{ matrix.SDKName }}.zip
