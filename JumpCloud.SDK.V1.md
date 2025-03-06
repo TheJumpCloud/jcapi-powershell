@@ -1,5 +1,5 @@
 ## JumpCloud.SDK.V1-0.0.45
-Release Date: March 05, 2025
+Release Date: March 06, 2025
 #### RELEASE NOTES
 ```
 Updated existing functions based on updated swagger specs
@@ -18,7 +18,18 @@ No changes
 <details>
 <summary>Functions Modified</summary>
 
-No changes
+* Get-JcSdkApplication.ps1
+* Get-JcSdkApplicationTemplate.ps1
+* Get-JcSdkCommand.ps1
+* Get-JcSdkCommandResult.ps1
+* Get-JcSdkOrganization.ps1
+* Get-JcSdkRadiusServer.ps1
+* Get-JcSdkSystem.ps1
+* Get-JcSdkUser.ps1
+* New-JcSdkRadiusServer.ps1
+* Set-JcSdkOrganization.ps1
+* Set-JcSdkRadiusServer.ps1
+
 </details>
 
 <details>

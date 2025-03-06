@@ -18,7 +18,11 @@ No changes
 <details>
 <summary>Functions Modified</summary>
 
-No changes
+* New-JcSdkSoftwareApp.ps1
+* Set-JcSdkAppleMdm.ps1
+* Set-JcSdkSoftwareApp.ps1
+* Update-JcSdkGSuite.ps1
+
 </details>
 
 <details>
