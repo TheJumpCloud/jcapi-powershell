@@ -17,7 +17,7 @@ while(-not $mockingPath) {
 Describe 'Set-JcSdkPolicyGroupMember' -Tag:(""){
     It 'SetExpanded' {
         $global:PesterTestPolicyGroup = New-JcSdkPolicyGroup @global:PesterDefPolicyGroup
-        { Set-JcSdkPolicyGroupMember -GroupId:($global:PesterTestPolicyGroup.Id) -Id:($global:PesterTestUser.Id) -Op 'add' } | Should -Not -Throw
+        { Set-JcSdkPolicyGroupMember -GroupId:($global:PesterTestPolicyGroup.Id) -Id:($global:PesterDefPolicy.Id) -Op 'add' } | Should -Not -Throw
     }
 
     It 'Set' -skip {
