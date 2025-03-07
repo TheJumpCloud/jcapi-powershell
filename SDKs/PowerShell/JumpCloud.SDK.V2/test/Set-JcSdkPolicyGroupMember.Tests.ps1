@@ -19,6 +19,9 @@ Describe 'Set-JcSdkPolicyGroupMember' -Tag:(""){
         $PesterTestPolicyGroup = New-JcSdkPolicyGroup -Name "TestGroupMember"
         $Policy = New-JcSdkPolicy -Name "GroupMemberTestPolicy" -TemplateID 5d1bd26645886d53586ec529
         { Set-JcSdkPolicyGroupMember -GroupId:($PesterTestPolicyGroup.Id) -Id:($Policy.Id) -Op 'add' } | Should -Not -Throw
+
+        Remove-JcSdkPolicy -ID:($Policy.Id)
+        Remove-JcSdkPolicyGroup -ID:($PesterTestPolicyGroup.Id)
     }
 
     It 'Set' -skip {
