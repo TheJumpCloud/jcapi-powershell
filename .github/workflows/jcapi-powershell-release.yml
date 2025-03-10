@@ -98,7 +98,7 @@ jobs:
         run: |
           WF_NAME="jcapi-powershell-ci.yml"
           ARTIFACT_NAME="build-${{ matrix.SDKName }}"
-          RUN_ID=`gh run --repo ${{ github.repository }} list --workflow ${WF_NAME} --branch ${{ github.ref_name }} --json databaseId --jq .[0].databaseId`
+          RUN_ID=`gh run --repo ${{ github.repository }} list --workflow ${WF_NAME} --branch ${{ github.head_ref }} --json databaseId --jq .[0].databaseId`
           gh run --repo ${{ github.repository }} download ${RUN_ID} -n ${ARTIFACT_NAME}
           # List the artifiact directory/files
           ls -lR
