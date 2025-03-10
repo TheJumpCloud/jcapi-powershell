@@ -1,5 +1,5 @@
 ## JumpCloud.SDK.V1-0.0.45
-Release Date: March 06, 2025
+Release Date: March 10, 2025
 #### RELEASE NOTES
 ```
 Updated existing functions based on updated swagger specs
