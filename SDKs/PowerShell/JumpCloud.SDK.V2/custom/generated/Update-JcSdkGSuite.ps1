@@ -124,6 +124,7 @@ To create the parameters described below, construct a hash table containing the 
 BODY <IGsuite>:
   [DefaultDomainId <String>]:
   [GroupsEnabled <Boolean?>]:
+  [ImportFilter <String>]:
   [Name <String>]:
   [UserLockoutAction <String>]:
   [UserPasswordExpirationAction <String>]:
@@ -196,6 +197,13 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [System.Management.Automation.SwitchParameter]
     # .
     ${GroupsEnabled}, 
+
+    [Parameter(ParameterSetName='UpdateExpanded')]
+    [Parameter(ParameterSetName='UpdateViaIdentityExpanded')]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [System.String]
+    # .
+    ${ImportFilter}, 
 
     [Parameter(ParameterSetName='UpdateExpanded')]
     [Parameter(ParameterSetName='UpdateViaIdentityExpanded')]

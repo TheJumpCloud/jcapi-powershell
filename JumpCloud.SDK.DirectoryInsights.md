@@ -1,3 +1,33 @@
+## JumpCloud.SDK.DirectoryInsights-0.0.33
+Release Date: March 06, 2025
+#### RELEASE NOTES
+```
+Updated existing functions based on updated swagger specs
+```
+
+#### IMPROVEMENTS:
+Updated existing functions based on updated swagger specs
+
+#### Generated Changes:
+
+<details>
+<summary>Functions Added</summary>
+
+No changes
+</details>
+
+<details>
+<summary>Functions Modified</summary>
+
+No changes
+</details>
+
+<details>
+<summary>Functions Removed</summary>
+
+No changes
+</details>
+
 ## JumpCloud.SDK.DirectoryInsights-0.0.32
 Release Date: June 17, 2024
 #### RELEASE NOTES

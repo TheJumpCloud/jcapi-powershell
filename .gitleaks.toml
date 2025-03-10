@@ -1,0 +1,15 @@
+title = "JumpCloud SDK Config"
+
+[extend]
+# useDefault will extend the base configuration with the default gitleaks config:
+# https://github.com/zricethezav/gitleaks/blob/master/config/gitleaks.toml
+useDefault = true
+
+[allowlist]
+# Recommended practice is to add your secrets to a regexes array,
+# not to a commits array.
+regexTarget = "match"
+description = "ignore REPLACE_KEY_VALUE in curl documentation"
+regexes = [
+  '''REPLACE_KEY_VALUE''',
+]

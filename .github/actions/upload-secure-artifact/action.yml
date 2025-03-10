@@ -103,7 +103,7 @@ runs:
               done
             fi
 
-            ${GITLEAKS_COMMAND} detect --source="${GITLEAKS_SOURCE}" -f -v -f json --no-git || exit_code=$?
+            ${GITLEAKS_COMMAND} detect --source="${GITLEAKS_SOURCE}" -c /home/runner/work/jcapi-powershell/jcapi-powershell/.gitleaks.toml -f -v -f json --no-git || exit_code=$?
             if [[ $exit_code -ne 0 ]]; then
               echo "Gitleaks scan failed. It is unsafe to upload the artifacts as requested."
               echo "To see the scan results, you have to replicate the artifacts and scan locally."

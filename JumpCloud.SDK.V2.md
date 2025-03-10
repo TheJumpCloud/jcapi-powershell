@@ -1,3 +1,36 @@
+## JumpCloud.SDK.V2-0.0.49
+Release Date: March 06, 2025
+#### RELEASE NOTES
+```
+Updated existing functions based on updated swagger specs
+```
+
+#### IMPROVEMENTS:
+Updated existing functions based on updated swagger specs
+#### Generated Changes:
+
+<details>
+<summary>Functions Added</summary>
+
+No changes
+</details>
+
+<details>
+<summary>Functions Modified</summary>
+
+* New-JcSdkSoftwareApp.ps1
+* Set-JcSdkAppleMdm.ps1
+* Set-JcSdkSoftwareApp.ps1
+* Update-JcSdkGSuite.ps1
+
+</details>
+
+<details>
+<summary>Functions Removed</summary>
+
+No changes
+</details>
+
 ## JumpCloud.SDK.V2-0.0.48
 Release Date: June 17, 2024
 #### RELEASE NOTES

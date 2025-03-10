@@ -30,8 +30,9 @@ curl -X POST https://console.jumpcloud.com/api/radiusservers/ \\
 ### CreateExpanded (Default)
 ```
 New-JcSdkRadiusServer -Name <String> -NetworkSourceIP <String> -SharedSecret <String> [-AuthIdp <String>]
- [-CaCert <String>] [-DeviceCertEnabled] [-Mfa <String>] [-UserCertEnabled] [-UserLockoutAction <String>]
- [-UserPasswordEnabled] [-UserPasswordExpirationAction <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-CaCert <String>] [-DeviceCertEnabled] [-Mfa <String>] [-RequireTlsAuth] [-UserCertEnabled]
+ [-UserLockoutAction <String>] [-UserPasswordEnabled] [-UserPasswordExpirationAction <String>] [-Confirm]
+ [-WhatIf] [<CommonParameters>]
 ```
 
 ### Create
@@ -207,6 +208,21 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -RequireTlsAuth
+.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: CreateExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -SharedSecret
 RADIUS shared secret between the server and client.
 
@@ -341,6 +357,7 @@ BODY <IRadiusserverpost>: RadiusServerPost
   - `[CaCert <String>]`: 
   - `[DeviceCertEnabled <Boolean?>]`: 
   - `[Mfa <String>]`: 
+  - `[RequireTlsAuth <Boolean?>]`: 
   - `[UserCertEnabled <Boolean?>]`: 
   - `[UserLockoutAction <String>]`: 
   - `[UserPasswordEnabled <Boolean?>]`: 

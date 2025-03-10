@@ -288,6 +288,7 @@ BODY <IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema>: .
     - `[NewSystemUserStateDefaultManualEntry <String>]`: 
     - `[PasswordCompliance <String>]`: 
     - `[PasswordPolicy <IOrganizationsettingsputPasswordPolicy>]`: 
+      - `[AllowUnenrolledMfaPasswordReset <Boolean?>]`: 
       - `[AllowUsernameSubstring <Boolean?>]`: 
       - `[DaysAfterExpirationToSelfRecover <Int32?>]`: Deprecated field used for the legacy grace period feature.
       - `[DaysBeforeExpirationToForceReset <Int32?>]`: 
@@ -330,6 +331,7 @@ BODY <IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema>: .
       - `Name <String>`: Name of the trusted application
       - `[Path <String>]`: Absolute path for the app's location in user's device
       - `[Teamid <String>]`: App's Team ID
+    - `[UserPortalCookieExpirationType <String>]`: 
     - `[UserPortalIdleSessionDurationMinutes <Int32?>]`: 
 
 INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter
@@ -362,6 +364,7 @@ SETTINGS <IOrganizationsettingsput>: OrganizationSettingsPut
   - `[NewSystemUserStateDefaultManualEntry <String>]`: 
   - `[PasswordCompliance <String>]`: 
   - `[PasswordPolicy <IOrganizationsettingsputPasswordPolicy>]`: 
+    - `[AllowUnenrolledMfaPasswordReset <Boolean?>]`: 
     - `[AllowUsernameSubstring <Boolean?>]`: 
     - `[DaysAfterExpirationToSelfRecover <Int32?>]`: Deprecated field used for the legacy grace period feature.
     - `[DaysBeforeExpirationToForceReset <Int32?>]`: 
@@ -404,6 +407,7 @@ SETTINGS <IOrganizationsettingsput>: OrganizationSettingsPut
     - `Name <String>`: Name of the trusted application
     - `[Path <String>]`: Absolute path for the app's location in user's device
     - `[Teamid <String>]`: App's Team ID
+  - `[UserPortalCookieExpirationType <String>]`: 
   - `[UserPortalIdleSessionDurationMinutes <Int32?>]`: 
 
 ## RELATED LINKS
