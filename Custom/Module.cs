@@ -1,3 +1,6 @@
+// Add this using statement at the top of your Module.cs if it's not already there
+using System.Management.Automation;
+
 namespace ModuleNameSpace
 {
     using Runtime;
@@ -6,34 +9,68 @@ namespace ModuleNameSpace
     using System.Net.Http;
     using System.Threading.Tasks;
     using System.Linq;
-    /// <summary>A class that contains the module-common code and data.</summary>
-    /// <notes>
-    /// This class is where you can add things to modify the module.
-    /// As long as it's in the 'custom' folder, it won't get deleted
-    /// when you use --clear-output-folder in autorest.
-    /// </notes>
+
     public partial class Module
     {
         partial void CustomInit()
         {
-            // We need to add a steps to the pipeline
-            // Add Headers
+            // Original pipeline modifications
             this._pipeline.Prepend(AddAuthHeaders);
             this._pipelineWithProxy.Prepend(AddAuthHeaders);
-            // // Add Debugging Messages
-            // this._pipeline.Prepend(Debugging);
-            // this._pipelineWithProxy.Prepend(Debugging);
-            // Add CustomErrors
-            // this._pipeline.Prepend(CustomError);
-            // this._pipelineWithProxy.Prepend(CustomError);
-            // // Add Paginate
-            // this._pipeline.Append(Paginate);
-            // this._pipelineWithProxy.Append(Paginate);
+
+            // **New code to set $PSDefaultParameterValues for EnvHost**
+            SetDefaultEnvHostInPowerShellSession();
         }
-        // partial void AfterCreatePipeline(global::System.Management.Automation.InvocationInfo invocationInfo, ref ModuleNameSpace.Runtime.HttpPipeline pipeline)
-        // {
-        //     pipeline.Append(Paginate);
-        // }
+
+        private void SetDefaultEnvHostInPowerShellSession()
+        {
+            // Define the name of the environment variable you'll use to specify the default EnvHost
+            string envVarNameForDefaultEnvHost = "JC_DEFAULT_ENV_HOST";
+            string defaultEnvHostValue = System.Environment.GetEnvironmentVariable(envVarNameForDefaultEnvHost);
+
+            // If the environment variable isn't set, you can fall back to a hardcoded default
+            if (string.IsNullOrEmpty(defaultEnvHostValue))
+            {
+                defaultEnvHostValue = "console"; // Your ultimate fallback default
+            }
+
+            // Construct the PowerShell script to set $PSDefaultParameterValues
+            // Note the single quotes around the defaultEnvHostValue in the script string
+            // to handle it as a PowerShell string literal.
+            string scriptToSetDefault = $"$PSDefaultParameterValues['*:EnvHost'] = '{defaultEnvHostValue}'";
+
+            try
+            {
+                // Create a PowerShell instance that runs in the current session's runspace
+                using (PowerShell ps = PowerShell.Create(RunspaceMode.CurrentRunspace))
+                {
+                    ps.AddScript(scriptToSetDefault);
+                    ps.Invoke(); // Execute the script
+
+                    if (ps.HadErrors)
+                    {
+                        // Log any errors that occurred while trying to set the default
+                        foreach (var error in ps.Streams.Error)
+                        {
+                            // You might want a more robust logging mechanism
+                            Console.Error.WriteLine($"Error setting PSDefaultParameterValues for EnvHost: {error.ToString()}");
+                        }
+                    }
+                    else
+                    {
+                        // Optionally, log success or provide feedback if in a verbose/debug mode
+                        // Console.WriteLine($"Successfully set default for -EnvHost to '{defaultEnvHostValue}' via module initialization.");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // Catch any exceptions during the PowerShell invocation process itself
+                Console.Error.WriteLine($"Exception while trying to set PSDefaultParameterValues for EnvHost: {ex.Message}");
+            }
+        }
+
+        // ... (rest of your Module.cs code, like AddAuthHeaders, Debugging, CustomError) ...
         protected async Task<HttpResponseMessage> AddAuthHeaders(HttpRequestMessage request, IEventListener callback, ISendAsync next)
         {
             // Check to see if the environment variable for JCApiKey is populated
@@ -148,49 +185,5 @@ namespace ModuleNameSpace
                  );
             }
         }
-        // public async System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> Paginate(System.Net.Http.HttpRequestMessage requestMessage, Runtime.IEventListener listener, Runtime.ISendAsync next)
-        // {
-        //     System.Net.Http.HttpResponseMessage response = null;
-        //     while (true)
-        //     {
-        //         // Make the API call
-        //         response = await next.SendAsync(requestMessage, listener);
-        //         // Get ResultCount
-        //         IEnumerable<string> XResultCount;
-        //         response.Headers.TryGetValues("X-Result-Count", out XResultCount);
-        //         var XResultCountString = XResultCount.ToList()[0];
-        //         // Get Limit
-        //         IEnumerable<string> XLimit;
-        //         response.Headers.TryGetValues("X-Limit", out XLimit);
-        //         var XLimitString = XLimit.ToList()[0];
-        //         // Get SearchAfter
-        //         IEnumerable<string> XResultSearchAfter;
-        //         response.Headers.TryGetValues("X-Search_after", out XResultSearchAfter);
-        //         var XResultSearchAfterString = XResultSearchAfter.ToList()[0];
-        //         // Write to host
-        //         Console.WriteLine("XResultCount: " + XResultCountString);
-        //         Console.WriteLine("XLimit: " + XLimitString);
-        //         Console.WriteLine("XResultSearchAfter: " + XResultSearchAfterString);
-        //         // Modify headers with new XResultSearchAfter
-        //         if (XResultCountString == XLimitString) // && response == true)
-        //         {
-        //             ////////////////////////////////////////////////////////////////////////////////////
-        //             // request.Content.Remove("X-Search_after");
-        //             // request.Content.Add("X-Search_after", XResultSearchAfterString);
-        //             // .Content = new StringContent("{\"name\":\"John Doe\",\"age\":33}", Encoding.UTF8, "application/json");
-        //             ////////////////////////////////////////////////////////////////////////////////////
-        //             // wait before getting more results
-        //             await System.Threading.Tasks.Task.Delay(5000);
-        //             continue;
-        //         }
-        //         else
-        //         {
-        //             // no more results, break loop.
-        //             break;
-        //         }
-        //     };
-        //     // return whatever we have.
-        //     return response;
-        // }
     }
 }
