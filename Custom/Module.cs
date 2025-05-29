@@ -1,6 +1,8 @@
 // Add this using statement at the top of your Module.cs if it's not already there
 using System.Management.Automation;
 
+// ... (ensure other using statements like System, System.Collections.Generic, etc., are present)
+
 namespace ModuleNameSpace
 {
     using Runtime;
@@ -24,53 +26,74 @@ namespace ModuleNameSpace
 
         private void SetDefaultEnvHostInPowerShellSession()
         {
-            // Define the name of the environment variable you'll use to specify the default EnvHost
             string envVarNameForDefaultEnvHost = "JC_DEFAULT_ENV_HOST";
-            string defaultEnvHostValue = System.Environment.GetEnvironmentVariable(envVarNameForDefaultEnvHost);
+            string userInputEnvValue = System.Environment.GetEnvironmentVariable(envVarNameForDefaultEnvHost);
+            string actualEnvHostValue; // This will hold "console", "console.stg01", etc.
 
-            // If the environment variable isn't set, you can fall back to a hardcoded default
-            if (string.IsNullOrEmpty(defaultEnvHostValue))
+            // Default to US ("console") if no valid input is found
+            string fallbackEnvHostValue = "console";
+
+            if (!string.IsNullOrEmpty(userInputEnvValue))
             {
-                defaultEnvHostValue = "console"; // Your ultimate fallback default
+                switch (userInputEnvValue.ToUpperInvariant()) // Use ToUpperInvariant() for case-insensitive comparison
+                {
+                    case "US":
+                        actualEnvHostValue = "console";
+                        break;
+                    case "STAGING":
+                        actualEnvHostValue = "console.stg01";
+                        break;
+                    case "EU":
+                        actualEnvHostValue = "console.prod02";
+                        break;
+                    default:
+                        Console.Error.WriteLine(
+                            $"Warning: The value '{userInputEnvValue}' specified in the environment variable '{envVarNameForDefaultEnvHost}' is not recognized. " +
+                            $"Valid values are 'US', 'STAGING', 'EU'. Defaulting to '{fallbackEnvHostValue}' (US)."
+                        );
+                        actualEnvHostValue = fallbackEnvHostValue;
+                        break;
+                }
+            }
+            else
+            {
+                // Environment variable is not set or is empty, use the fallback.
+                // You could also log this if desired:
+                // Console.WriteLine($"Information: Environment variable '{envVarNameForDefaultEnvHost}' not set. Defaulting to '{fallbackEnvHostValue}' (US).");
+                actualEnvHostValue = fallbackEnvHostValue;
             }
 
             // Construct the PowerShell script to set $PSDefaultParameterValues
-            // Note the single quotes around the defaultEnvHostValue in the script string
-            // to handle it as a PowerShell string literal.
-            string scriptToSetDefault = $"$PSDefaultParameterValues['*:EnvHost'] = '{defaultEnvHostValue}'";
+            string scriptToSetDefault = $"$PSDefaultParameterValues['*:EnvHost'] = '{actualEnvHostValue}'";
 
             try
             {
-                // Create a PowerShell instance that runs in the current session's runspace
                 using (PowerShell ps = PowerShell.Create(RunspaceMode.CurrentRunspace))
                 {
                     ps.AddScript(scriptToSetDefault);
-                    ps.Invoke(); // Execute the script
+                    ps.Invoke();
 
                     if (ps.HadErrors)
                     {
-                        // Log any errors that occurred while trying to set the default
                         foreach (var error in ps.Streams.Error)
                         {
-                            // You might want a more robust logging mechanism
                             Console.Error.WriteLine($"Error setting PSDefaultParameterValues for EnvHost: {error.ToString()}");
                         }
                     }
-                    else
-                    {
-                        // Optionally, log success or provide feedback if in a verbose/debug mode
-                        // Console.WriteLine($"Successfully set default for -EnvHost to '{defaultEnvHostValue}' via module initialization.");
-                    }
+                    // Optionally log success
+                    // else
+                    // {
+                    //     Console.WriteLine($"Successfully set default for -EnvHost to '{actualEnvHostValue}' via module initialization based on input '{userInputEnvValue ?? "not set"}'.");
+                    // }
                 }
             }
             catch (Exception ex)
             {
-                // Catch any exceptions during the PowerShell invocation process itself
                 Console.Error.WriteLine($"Exception while trying to set PSDefaultParameterValues for EnvHost: {ex.Message}");
             }
         }
 
-        // ... (rest of your Module.cs code, like AddAuthHeaders, Debugging, CustomError) ...
+        // ... (Your existing AddAuthHeaders, Debugging, CustomError methods, and the rest of the Module class) ...
         protected async Task<HttpResponseMessage> AddAuthHeaders(HttpRequestMessage request, IEventListener callback, ISendAsync next)
         {
             // Check to see if the environment variable for JCApiKey is populated
