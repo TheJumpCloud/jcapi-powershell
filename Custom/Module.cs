@@ -26,16 +26,22 @@ namespace ModuleNameSpace
 
         private void SetDefaultEnvHostInPowerShellSession()
         {
-            string envVarNameForDefaultEnvHost = "JC_DEFAULT_ENV_HOST";
+            string envVarNameForDefaultEnvHost = "JCEnvHost";
             string userInputEnvValue = System.Environment.GetEnvironmentVariable(envVarNameForDefaultEnvHost);
-            string actualEnvHostValue; // This will hold "console", "console.stg01", etc.
 
-            // Default to US ("console") if no valid input is found
+            // If not set, fall back to old logic (JC_DEFAULT_ENV_HOST)
+            if (string.IsNullOrEmpty(userInputEnvValue))
+            {
+                envVarNameForDefaultEnvHost = "JC_DEFAULT_ENV_HOST";
+                userInputEnvValue = System.Environment.GetEnvironmentVariable(envVarNameForDefaultEnvHost);
+            }
+
+            string actualEnvHostValue;
             string fallbackEnvHostValue = "console";
 
             if (!string.IsNullOrEmpty(userInputEnvValue))
             {
-                switch (userInputEnvValue.ToUpperInvariant()) // Use ToUpperInvariant() for case-insensitive comparison
+                switch (userInputEnvValue.ToUpperInvariant())
                 {
                     case "US":
                         actualEnvHostValue = "console";
@@ -47,24 +53,20 @@ namespace ModuleNameSpace
                         actualEnvHostValue = "console.prod02";
                         break;
                     default:
-                        Console.Error.WriteLine(
-                            $"Warning: The value '{userInputEnvValue}' specified in the environment variable '{envVarNameForDefaultEnvHost}' is not recognized. " +
-                            $"Valid values are 'US', 'STAGING', 'EU'. Defaulting to '{fallbackEnvHostValue}' (US)."
-                        );
-                        actualEnvHostValue = fallbackEnvHostValue;
+                        // If user entered a full host (e.g., console, console.stg01, console.prod02), use as is
+                        actualEnvHostValue = userInputEnvValue;
                         break;
                 }
             }
             else
             {
-                // Environment variable is not set or is empty, use the fallback.
-                // You could also log this if desired:
-                // Console.WriteLine($"Information: Environment variable '{envVarNameForDefaultEnvHost}' not set. Defaulting to '{fallbackEnvHostValue}' (US).");
                 actualEnvHostValue = fallbackEnvHostValue;
             }
 
+            Console.WriteLine("Setting ENV: '{0}'", actualEnvHostValue);
+
             // Construct the PowerShell script to set $PSDefaultParameterValues
-            string scriptToSetDefault = $"$PSDefaultParameterValues['*:EnvHost'] = '{actualEnvHostValue}'";
+            string scriptToSetDefault = $"$Global:PSDefaultParameterValues['*:EnvHost'] = '{actualEnvHostValue}'";
 
             try
             {
@@ -119,6 +121,22 @@ namespace ModuleNameSpace
                 Console.WriteLine("You entered '{0}'", JCOrgId);
                 System.Environment.SetEnvironmentVariable("JCOrgId", JCOrgId);
             }
+            // Check to see if the environment variable for EnvHost is populated
+            var EnvHost = System.Environment.GetEnvironmentVariable("JCEnvHost");
+            if (string.IsNullOrEmpty(EnvHost))
+            {
+                Console.Write("Please enter your JumpCloud environment host (e.g., console, console.stg01, console.prod02): ");
+                EnvHost = Console.ReadLine();
+                Console.WriteLine("You entered '{0}'", EnvHost);
+                System.Environment.SetEnvironmentVariable("JCEnvHost", EnvHost);
+
+                string scriptToSetDefault = @"
+                if (-not $PSDefaultParameterValues.ContainsKey('*:EnvHost')) {
+                    $Global:PSDefaultParameterValues['*:EnvHost'] = '" + EnvHost + @"'
+                }
+                ";
+            }
+
             // If headers do not contain an "x-org-id" header add one
             if (request.Headers.Contains("x-org-id") == false)
             {
