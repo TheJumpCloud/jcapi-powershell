@@ -1,327 +1,399 @@
 name: PowerShell SDK CI
 
 on:
-    pull_request:
-      branches:
-        - "master"
-concurrency:
-    group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
-    cancel-in-progress: true
-jobs:
-    Filter-Branch:
-      runs-on: ubuntu-latest
-      if: contains(github.event.pull_request.labels.*.name, 'SDK')
-      steps:
-        - run: echo "Building SDKs"
-    Check-PR-Labels:
-      needs: ['Filter-Branch']
-      runs-on: ubuntu-latest
-      outputs:
-        RELEASE_TYPE: ${{ steps.validate.outputs.RELEASE_TYPE }}
-      steps:
-        - name: Validate-PR-Version-Labels
-          id: validate
-          shell: pwsh
-          run: |
-            $PR_LABEL_LIST=$(curl -s "https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/labels" | jq -r '.[].name')
-            if ("SDK" -in $PR_LABEL_LIST) {
-                write-host "Starting Build for PowerShell SDK Release"
-            }
-            # validate type from label list:
-            $types = @('major', 'minor', 'patch', 'manual')
-            $typeCount = 0
-            foreach ($item in $PR_LABEL_LIST) {
-                if ($item -in $types) {
-                    write-host "$item"
-                    $typeCount += 1
-                    $RELEASE_TYPE = $item
-                }
-            }
-            if ($typeCount -eq 1) {
-                echo "RELEASE_TYPE=$RELEASE_TYPE" >> $env:GITHUB_OUTPUT
-            } else {
-                throw "Multiple or invalid release types were found on PR"
-                exit 1
-            }
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    Setup-Build-Dependancies:
-        needs: ['Filter-Branch']
-        runs-on: ubuntu-latest
-        timeout-minutes: 10
-        steps:
-            - uses: actions/checkout@v4
-            - name: Setup PowerShell Module Cache
-              id: cacher
-              uses: actions/cache@v3
-              with:
-                path: "/home/runner/.local/share/powershell/Modules/"
-                key: PS-Dependancies
-            - name: Install dependencies
-              if: steps.cacher.outputs.cache-hit != 'true'
-              shell: pwsh
-              env:
-                PESTER_APIKEY: ${{ secrets.PESTER_APIKEY }}
-                PESTER_ORGID: ${{ secrets.PESTER_ORGID }}
-                PESTER_MSP_APIKEY: ${{ secrets.PESTER_MSP_APIKEY }}
-              run: |
-                Set-PSRepository PSGallery -InstallationPolicy Trusted
-                If (!(Get-PackageProvider -Name:('NuGet') -ListAvailable -ErrorAction:('SilentlyContinue'))) {
-                    Write-Host ('[status]Installing package provider NuGet');
-                    Install-PackageProvider -Name:('NuGet') -Scope:('CurrentUser') -Force
-                }
-                $PSDependencies = @{
-                    'AWS.Tools.CodeArtifact' = @{Repository = 'PSGallery'; RequiredVersion = '4.1.14.0' }
-                    'AWS.Tools.Common'       = @{Repository = 'PSGallery'; RequiredVersion = '4.1.14.0' }
-                    'BuildHelpers'           = @{Repository = 'PSGallery'; RequiredVersion = '2.0.15'}
-                    'Pester'                 = @{Repository = 'PSGallery'; RequiredVersion = '5.3.1'}
-                    'powershell-yaml'        = @{Repository = 'PSGallery'; RequiredVersion = '0.4.2'}
-                    'PowerShellGet'          = @{Repository = 'PSGallery'; RequiredVersion = '3.0.12-beta'}
-                    'PSScriptAnalyzer'       = @{Repository = 'PSGallery'; RequiredVersion = '1.19.1'}
-                }
-                foreach ($RequiredModule in $PSDependencies.Keys) {
-                    If ([System.String]::IsNullOrEmpty((Get-InstalledModule | Where-Object { $_.Name -eq $RequiredModule }))) {
-                        Write-Host("[status]Installing module: '$RequiredModule'; version: $($PSDependencies[$RequiredModule].RequiredVersion) from $($PSDependencies[$RequiredModule].Repository)")
-                        Install-Module -Name $RequiredModule -Repository:($($PSDependencies[$RequiredModule].Repository)) -RequiredVersion:($($PSDependencies[$RequiredModule].RequiredVersion)) -AllowPrerelease -Force
-                    }
-                }
-    Validate-SDK-Module:
-      needs: ["Setup-Build-Dependancies"]
-      runs-on: ubuntu-latest
-      steps:
-        - uses: actions/cache@v3
-          with:
-            path: "/home/runner/.local/share/powershell/Modules/"
-            key: PS-Dependancies
-        - uses: actions/checkout@v4
-        - name: Validate SDK Module
-          id: validate
-          shell: pwsh
-          run: |
-            Install-Module -Name Pester
-            Invoke-Pester -Path /home/runner/work/jcapi-powershell/jcapi-powershell/Tools/ModuleValidation.Tests.ps1
-    Build-SDK:
-        needs: ["Setup-Build-Dependancies"]
-        runs-on: ubuntu-latest
-        timeout-minutes: 70
-        strategy:
-            fail-fast: false
-            matrix:
-                SDKName: ['JumpCloud.SDK.DirectoryInsights', 'JumpCloud.SDK.V1', 'JumpCloud.SDK.V2']
-        steps:
-            - uses: actions/checkout@v4
-            - uses: actions/cache@v3
-              with:
-                path: "/home/runner/.local/share/powershell/Modules/"
-                key: PS-Dependancies
-            - name: Build ${{ matrix.SDKName }}
-              shell: pwsh
-              run: |
-                ./BuildAutoRest -SDKName:("${{ matrix.SDKName }}")
-            - name: Pack ${{ matrix.SDKName }} Module
-              shell: pwsh
-              run: |
-                $ModuleName = "${{ matrix.SDKName }}"
-                $Psd1 = Import-PowerShellDataFile -Path:("/home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/$ModuleName/$ModuleName.psd1")
-                $nupkgFilePath = "/home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/$ModuleName/bin/nupkg"
-                $csprojFilePath = "/home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/$ModuleName/$ModuleName.csproj"
-                $nuspecFilePath = "/home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/$ModuleName/$ModuleName.nuspec"
-                $BuildVersion = $Psd1.ModuleVersion
-                $nuspecContent = [System.Xml.XmlDocument](Get-Content -Path:($nuspecFilePath))
-                $nuspecContent.package.metadata.version = $BuildVersion
-                $nuspecContent.save($nuspecFilePath)
-                dotnet pack $csprojFilePath --output $nupkgFilePath --configuration=$ModuleName
-            - name: Zip ${{ matrix.SDKName }} Module
-              shell: pwsh
-              run: |
-                # zip contents for artifact
-                Compress-Archive -Path /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/${{ matrix.SDKName }} -DestinationPath /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/${{ matrix.SDKName }}.zip -CompressionLevel Optimal -Force
-            - uses: ./.github/actions/upload-secure-artifact
-              with:
-                name: build-${{ matrix.SDKName }}
-                path: /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/${{ matrix.SDKName }}.zip
-                retention-days: 1
-    Test-SDK:
-        needs: ["Setup-Build-Dependancies", "Build-SDK"]
-        runs-on: ubuntu-latest
-        timeout-minutes: 70
-        strategy:
-            fail-fast: false
-            matrix:
-                SDKName: ['JumpCloud.SDK.DirectoryInsights', 'JumpCloud.SDK.V1', 'JumpCloud.SDK.V2']
-        steps:
-            - uses: actions/checkout@v4
-            - uses: actions/cache@v3
-              with:
-                path: "/home/runner/.local/share/powershell/Modules/"
-                key: PS-Dependancies
-            - uses: actions/download-artifact@v4
-              with:
-                name: build-${{ matrix.SDKName }}
-                path: /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/
-            - name: Unzip ${{ matrix.SDKName }} module
-              shell: pwsh
-              run: |
-                Expand-Archive -Path /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/${{ matrix.SDKName }}.zip -DestinationPath /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/ -Force
-            - uses: actions/download-artifact@v4
-              with:
-                name: build-JumpCloud.SDK.V1
-                path: /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/
-              if: matrix.SDKName == 'JumpCloud.SDK.V2'
-            - name: Unzip V1 module for V2 Tests
-              shell: pwsh
-              run: |
-                Expand-Archive -Path /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/JumpCloud.SDK.V1.zip -DestinationPath /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/ -Force
-              if: matrix.SDKName == 'JumpCloud.SDK.V2'
-            - name: Test ${{ matrix.SDKName }}
-              shell: pwsh
-              env:
-                PESTER_APIKEY: ${{ secrets.PESTER_APIKEY }}
-                PESTER_ORGID: ${{ secrets.PESTER_ORGID }}
-                PESTER_MSP_APIKEY: ${{ secrets.PESTER_MSP_APIKEY }}
-                PESTER_PROVIDERID: ${{ secrets.PESTER_PROVIDERID }}
-              run: |
-                $ErrorActionnPreference = 'Stop'
-                ./Test-Module.ps1 -JCApiKey:($env:PESTER_APIKEY) -JCOrgId:($env:PESTER_ORGID) -JCApiKeyMTP:($env:PESTER_MSP_APIKEY) -JCProviderId:($env:PESTER_PROVIDERID) -ExcludeTagList:("MTP") -IncludeTagList:("*") -testModulePath:("./SDKs/PowerShell/${{ matrix.SDKName }}/test-module.ps1")
-    Test-SDK-MTP:
-        needs: ["Setup-Build-Dependancies", "Build-SDK"]
-        runs-on: ubuntu-latest
-        timeout-minutes: 70
-        strategy:
-            fail-fast: false
-            matrix:
-                SDKName: ['JumpCloud.SDK.V1', 'JumpCloud.SDK.V2']
-        steps:
-            - uses: actions/checkout@v4
-            - uses: actions/cache@v3
-              with:
-                path: "/home/runner/.local/share/powershell/Modules/"
-                key: PS-Dependancies
-            - uses: actions/download-artifact@v4
-              with:
-                name: build-${{ matrix.SDKName }}
-                path: /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/
-            - name: Unzip ${{ matrix.SDKName }} module
-              shell: pwsh
-              run: |
-                Expand-Archive -Path /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/${{ matrix.SDKName }}.zip -DestinationPath /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/ -Force
-            - uses: actions/download-artifact@v4
-              with:
-                name: build-JumpCloud.SDK.V1
-                path: /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/
-              if: matrix.SDKName == 'JumpCloud.SDK.V2'
-            - name: Unzip V1 module for V2 Tests
-              shell: pwsh
-              run: |
-                Expand-Archive -Path /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/JumpCloud.SDK.V1.zip -DestinationPath /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/ -Force
-              if: matrix.SDKName == 'JumpCloud.SDK.V2'
-            - name: Test MTP ${{ matrix.SDKName }}
-              shell: pwsh
-              env:
-                PESTER_APIKEY: ${{ secrets.PESTER_APIKEY }}
-                PESTER_ORGID: ${{ secrets.PESTER_ORGID }}
-                PESTER_MSP_APIKEY: ${{ secrets.PESTER_MSP_APIKEY }}
-                PESTER_PROVIDERID: ${{ secrets.PESTER_PROVIDERID }}
-              run: |
-                $ErrorActionnPreference = 'Stop'
-                ./Test-Module.ps1 -JCApiKey:($env:PESTER_APIKEY) -JCOrgId:($env:PESTER_ORGID) -JCApiKeyMTP:($env:PESTER_MSP_APIKEY) -JCProviderId:($env:PESTER_PROVIDERID) -ExcludeTagList:("None") -IncludeTagList:("MTP") -testModulePath:("./SDKs/PowerShell/${{ matrix.SDKName }}/test-module.ps1")
-    # Invoke-Pester:
-    #     needs: ["Setup-Build-Dependancies", "Build-SDK"]
-    #     runs-on: ubuntu-latest
-    #     timeout-minutes: 70
-    #     steps:
-    #       - uses: actions/checkout@v4
-    #       - name: Checkout Support Repo
-    #         uses: actions/checkout@v4
-    #         with:
-    #           repository: TheJumpCloud/support
-    #           path: './support'
-    #       - uses: actions/cache@v3
-    #         with:
-    #           path: "/home/runner/.local/share/powershell/Modules/"
-    #           key: PS-Dependancies
-    #       - uses: actions/download-artifact@v4
-    #         with:
-    #           name: build-JumpCloud.SDK.DirectoryInsights
-    #           path: /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/
-    #       - uses: actions/download-artifact@v4
-    #         with:
-    #           name: build-JumpCloud.SDK.V1
-    #           path: /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/
-    #       - uses: actions/download-artifact@v4
-    #         with:
-    #           name: build-JumpCloud.SDK.V2
-    #           path: /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/
-    #       - name: Unzip artifacts
-    #         shell: pwsh
-    #         run: |
-    #           Expand-Archive -Path /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights.zip -DestinationPath /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/ -Force
-    #           Expand-Archive -Path /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/JumpCloud.SDK.V1.zip -DestinationPath /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/ -Force
-    #           Expand-Archive -Path /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/JumpCloud.SDK.V2.zip -DestinationPath /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/ -Force
-    #       - name: Invoke Pester
-    #         shell: pwsh
-    #         env:
-    #           PESTER_APIKEY: ${{ secrets.PESTER_APIKEY }}
-    #           PESTER_ORGID: ${{ secrets.PESTER_ORGID }}
-    #           PESTER_MSP_APIKEY: ${{ secrets.PESTER_MSP_APIKEY }}
-    #           PESTER_PROVIDERID: ${{ secrets.PESTER_PROVIDERID }}
-    #         run: |
-    #           $ErrorActionPreference = 'stop'
-    #           # Import all the SDKs
-    #           # register PS Repo local
-    #           Register-PSRepository -Name SDKs -SourceLocation "/home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/"
-    #           $sdks = @('JumpCloud.SDK.DirectoryInsights', 'JumpCloud.SDK.V1', 'JumpCloud.SDK.V2')
-    #           foreach ($sdk in $sdks){
-    #             Publish-Module -Path /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/$sdk/ -Repository SDKs
-    #             Install-Module -Repository SDKs -Name $sdk -Force
-    #           }
-    #           # list JumpCloud Modules Imported
-    #           Get-Module -Name Jumpcloud*
+  pull_request:
+    branches:
+      - "master"
 
-    #           # Get functions from module:
-    #           $pathList = @('Private', 'Public')
-    #           # Get matching functions
-    #           $functions = $pathList | ForEach-Object {
-    #               Get-ChildItem "./support/PowerShell/JumpCloud Module/$($_)/*.ps1" -Recurse
-    #           }
-    #           # Get Tags with SDK functions:
-    #           $testTags = @()
-    #           # For each function file
-    #           foreach ($file in $functions) {
-    #               $regex = [regex]'jcsdk'
-    #               if (Select-String -path $file.FullName -Pattern $regex){
-    #                   # If 'jcsdk' is used in the function file continue
-    #                   # get test file
-    #                   $testFile = ($file.FullName -replace "JumpCloud Module", "JumpCloud Module/Tests") -replace ".ps1", ".Tests.ps1"
-    #                   $tagRegex = [regex]'-Tag:\(.(\w+).\)'
-    #                   $testTag = Select-String -path $testFile -Pattern $tagRegex
-    #                   # "$test"
-    #                   if ($testTag.matches) {
-    #                       # If tag found in test file add to testTags list:
-    #                       $testTags += $testTag.matches.Groups[1].Value
-    #                   }
-    #               }
-    #           }
-    #           # return found tags
-    #           $tags = ($testTags | Select-Object -Unique)
-    #           # Manually add tags that we can't automatically add with script above:
-    #           # At this time only associations need to be added:
-    #           $tags += 'JCAssociation'
-    #           # setup org:
-    #           $variables = . "./support/PowerShell/JumpCloud Module/Tests/SetupOrg.ps1" -JumpCloudApiKey "$env:PESTER_APIKEY" -JumpCloudApiKeyMsp "$env:PESTER_MSP_APIKEY"
-    #           Write-Host "[status] Setting Env Variables for tests"
-    #           $variables | Foreach-Object {
-    #               if ($_.Name) {
-    #                   Set-Variable -Name $_.Name -Value $_.Value -Scope Global
-    #               }
-    #           }
-    #           # remove email users if they exitst
-    #           $emailUsers = Search-JCSDKUser -Searchfilter @{searchTerm = 'importcsvuser';fields = @('email')}
-    #           if ($emailUsers){
-    #             $emailUsers | ForEach-Object { Remove-JcSdkUser -id $_.id }
-    #           }
-    #           Import-Module "./support/PowerShell/JumpCloud Module/JumpCloud.psd1"
-    #           # disable parallel tests:
-    #           Set-JCSettingsFile -parallelOverride $true
-    #           # Invoke Pester
-    #           . "./support/PowerShell/JumpCloud Module/Tests/InvokePester.ps1" -JumpCloudApiKey $env:PESTER_APIKEY -ExcludeTagList:('MSP', 'JCDeployment', 'JCOnline') -IncludeTagList:($tags) -RequiredModulesRepo:('PSGallery')
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  Filter-Branch:
+    runs-on: ubuntu-latest
+    if: contains(github.event.pull_request.labels.*.name, 'SDK')
+    steps:
+      - run: echo "Building SDKs"
+
+  Check-PR-Labels:
+    needs: ['Filter-Branch']
+    runs-on: ubuntu-latest
+    outputs:
+      RELEASE_TYPE: ${{ steps.validate.outputs.RELEASE_TYPE }}
+    steps:
+      - name: Validate-PR-Version-Labels
+        id: validate
+        shell: pwsh
+        run: |
+          $PR_LABEL_LIST=$(curl -s "https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/labels" | jq -r '.[].name')
+          if ("SDK" -in $PR_LABEL_LIST) {
+              write-host "Starting Build for PowerShell SDK Release"
+          }
+          # validate type from label list:
+          $types = @('major', 'minor', 'patch', 'manual')
+          $typeCount = 0
+          foreach ($item in $PR_LABEL_LIST) {
+              if ($item -in $types) {
+                  write-host "$item"
+                  $typeCount += 1
+                  $RELEASE_TYPE = $item
+              }
+          }
+          if ($typeCount -eq 1) {
+              echo "RELEASE_TYPE=$RELEASE_TYPE" >> $env:GITHUB_OUTPUT
+          } else {
+              throw "Multiple or invalid release types were found on PR"
+              exit 1
+          }
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  Setup-Build-Dependancies:
+    needs: ['Filter-Branch']
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup PowerShell Module Cache
+        id: cacher
+        uses: actions/cache@v3
+        with:
+          path: "/home/runner/.local/share/powershell/Modules/"
+          key: PS-Dependancies
+      - name: Install dependencies
+        if: steps.cacher.outputs.cache-hit != 'true'
+        shell: pwsh
+        env:
+          PESTER_APIKEY: ${{ secrets.PESTER_APIKEY }}
+          PESTER_ORGID: ${{ secrets.PESTER_ORGID }}
+          PESTER_MSP_APIKEY: ${{ secrets.PESTER_MSP_APIKEY }}
+        run: |
+          Set-PSRepository PSGallery -InstallationPolicy Trusted
+          If (!(Get-PackageProvider -Name:('NuGet') -ListAvailable -ErrorAction:('SilentlyContinue'))) {
+              Write-Host ('[status]Installing package provider NuGet');
+              Install-PackageProvider -Name:('NuGet') -Scope:('CurrentUser') -Force
+          }
+          $PSDependencies = @{
+              'AWS.Tools.CodeArtifact' = @{Repository = 'PSGallery'; RequiredVersion = '4.1.14.0' }
+              'AWS.Tools.Common'       = @{Repository = 'PSGallery'; RequiredVersion = '4.1.14.0' }
+              'BuildHelpers'           = @{Repository = 'PSGallery'; RequiredVersion = '2.0.15'}
+              'Pester'                 = @{Repository = 'PSGallery'; RequiredVersion = '5.3.1'}
+              'powershell-yaml'        = @{Repository = 'PSGallery'; RequiredVersion = '0.4.2'}
+              'PowerShellGet'          = @{Repository = 'PSGallery'; RequiredVersion = '3.0.12-beta'}
+              'PSScriptAnalyzer'       = @{Repository = 'PSGallery'; RequiredVersion = '1.19.1'}
+          }
+          foreach ($RequiredModule in $PSDependencies.Keys) {
+              If ([System.String]::IsNullOrEmpty((Get-InstalledModule | Where-Object { $_.Name -eq $RequiredModule }))) {
+                  Write-Host("[status]Installing module: '$RequiredModule'; version: $($PSDependencies[$RequiredModule].RequiredVersion) from $($PSDependencies[$RequiredModule].Repository)")
+                  Install-Module -Name $RequiredModule -Repository:($($PSDependencies[$RequiredModule].Repository)) -RequiredVersion:($($PSDependencies[$RequiredModule].RequiredVersion)) -AllowPrerelease -Force
+              }
+          }
+
+  Validate-SDK-Module:
+    needs: ["Setup-Build-Dependancies"]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/cache@v3
+        with:
+          path: "/home/runner/.local/share/powershell/Modules/"
+          key: PS-Dependancies
+      - uses: actions/checkout@v4
+      - name: Validate SDK Module
+        id: validate
+        shell: pwsh
+        run: |
+          Install-Module -Name Pester
+          Invoke-Pester -Path /home/runner/work/jcapi-powershell/jcapi-powershell/Tools/ModuleValidation.Tests.ps1
+
+  ## ----------------------------------------------------------------
+  ## Build Jobs
+  ## ----------------------------------------------------------------
+
+  Build-SDK-DI:
+    needs: ["Setup-Build-Dependancies"]
+    if: contains(github.event.pull_request.labels.*.name, 'DirectoryInsights')
+    runs-on: ubuntu-latest
+    timeout-minutes: 70
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/cache@v3
+        with:
+          path: "/home/runner/.local/share/powershell/Modules/"
+          key: PS-Dependancies
+      - name: Build JumpCloud.SDK.DirectoryInsights
+        shell: pwsh
+        run: |
+          ./BuildAutoRest -SDKName:("JumpCloud.SDK.DirectoryInsights")
+      - name: Pack JumpCloud.SDK.DirectoryInsights Module
+        shell: pwsh
+        run: |
+          $ModuleName = "JumpCloud.SDK.DirectoryInsights"
+          $Psd1 = Import-PowerShellDataFile -Path:("/home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/$ModuleName/$ModuleName.psd1")
+          $nupkgFilePath = "/home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/$ModuleName/bin/nupkg"
+          $csprojFilePath = "/home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/$ModuleName/$ModuleName.csproj"
+          $nuspecFilePath = "/home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/$ModuleName/$ModuleName.nuspec"
+          $BuildVersion = $Psd1.ModuleVersion
+          $nuspecContent = [System.Xml.XmlDocument](Get-Content -Path:($nuspecFilePath))
+          $nuspecContent.package.metadata.version = $BuildVersion
+          $nuspecContent.save($nuspecFilePath)
+          dotnet pack $csprojFilePath --output $nupkgFilePath --configuration=$ModuleName
+      - name: Zip JumpCloud.SDK.DirectoryInsights Module
+        shell: pwsh
+        run: |
+          Compress-Archive -Path /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights -DestinationPath /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights.zip -CompressionLevel Optimal -Force
+      - uses: ./.github/actions/upload-secure-artifact
+        with:
+          name: build-JumpCloud.SDK.DirectoryInsights
+          path: /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights.zip
+          retention-days: 1
+
+  Build-SDK-V1:
+    needs: ["Setup-Build-Dependancies"]
+    if: contains(github.event.pull_request.labels.*.name, 'v1') || contains(github.event.pull_request.labels.*.name, 'v2')
+    runs-on: ubuntu-latest
+    timeout-minutes: 70
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/cache@v3
+        with:
+          path: "/home/runner/.local/share/powershell/Modules/"
+          key: PS-Dependancies
+      - name: Build JumpCloud.SDK.V1
+        shell: pwsh
+        run: |
+          ./BuildAutoRest -SDKName:("JumpCloud.SDK.V1")
+      - name: Pack JumpCloud.SDK.V1 Module
+        shell: pwsh
+        run: |
+          $ModuleName = "JumpCloud.SDK.V1"
+          $Psd1 = Import-PowerShellDataFile -Path:("/home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/$ModuleName/$ModuleName.psd1")
+          $nupkgFilePath = "/home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/$ModuleName/bin/nupkg"
+          $csprojFilePath = "/home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/$ModuleName/$ModuleName.csproj"
+          $nuspecFilePath = "/home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/$ModuleName/$ModuleName.nuspec"
+          $BuildVersion = $Psd1.ModuleVersion
+          $nuspecContent = [System.Xml.XmlDocument](Get-Content -Path:($nuspecFilePath))
+          $nuspecContent.package.metadata.version = $BuildVersion
+          $nuspecContent.save($nuspecFilePath)
+          dotnet pack $csprojFilePath --output $nupkgFilePath --configuration=$ModuleName
+      - name: Zip JumpCloud.SDK.V1 Module
+        shell: pwsh
+        run: |
+          Compress-Archive -Path /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/JumpCloud.SDK.V1 -DestinationPath /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/JumpCloud.SDK.V1.zip -CompressionLevel Optimal -Force
+      - uses: ./.github/actions/upload-secure-artifact
+        with:
+          name: build-JumpCloud.SDK.V1
+          path: /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/JumpCloud.SDK.V1.zip
+          retention-days: 1
+
+  Build-SDK-V2:
+    needs: ["Setup-Build-Dependancies"]
+    if: contains(github.event.pull_request.labels.*.name, 'v2')
+    runs-on: ubuntu-latest
+    timeout-minutes: 70
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/cache@v3
+        with:
+          path: "/home/runner/.local/share/powershell/Modules/"
+          key: PS-Dependancies
+      - name: Build JumpCloud.SDK.V2
+        shell: pwsh
+        run: |
+          ./BuildAutoRest -SDKName:("JumpCloud.SDK.V2")
+      - name: Pack JumpCloud.SDK.V2 Module
+        shell: pwsh
+        run: |
+          $ModuleName = "JumpCloud.SDK.V2"
+          $Psd1 = Import-PowerShellDataFile -Path:("/home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/$ModuleName/$ModuleName.psd1")
+          $nupkgFilePath = "/home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/$ModuleName/bin/nupkg"
+          $csprojFilePath = "/home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/$ModuleName/$ModuleName.csproj"
+          $nuspecFilePath = "/home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/$ModuleName/$ModuleName.nuspec"
+          $BuildVersion = $Psd1.ModuleVersion
+          $nuspecContent = [System.Xml.XmlDocument](Get-Content -Path:($nuspecFilePath))
+          $nuspecContent.package.metadata.version = $BuildVersion
+          $nuspecContent.save($nuspecFilePath)
+          dotnet pack $csprojFilePath --output $nupkgFilePath --configuration=$ModuleName
+      - name: Zip JumpCloud.SDK.V2 Module
+        shell: pwsh
+        run: |
+          Compress-Archive -Path /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/JumpCloud.SDK.V2 -DestinationPath /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/JumpCloud.SDK.V2.zip -CompressionLevel Optimal -Force
+      - uses: ./.github/actions/upload-secure-artifact
+        with:
+          name: build-JumpCloud.SDK.V2
+          path: /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/JumpCloud.SDK.V2.zip
+          retention-days: 1
+
+  ## ----------------------------------------------------------------
+  ## Test Jobs
+  ## ----------------------------------------------------------------
+
+  Test-SDK-DI:
+    needs: ["Build-SDK-DI"]
+    if: contains(github.event.pull_request.labels.*.name, 'DirectoryInsights')
+    runs-on: ubuntu-latest
+    timeout-minutes: 70
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/cache@v3
+        with:
+          path: "/home/runner/.local/share/powershell/Modules/"
+          key: PS-Dependancies
+      - uses: actions/download-artifact@v4
+        with:
+          name: build-JumpCloud.SDK.DirectoryInsights
+          path: /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/
+      - name: Unzip JumpCloud.SDK.DirectoryInsights module
+        shell: pwsh
+        run: |
+          Expand-Archive -Path /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights.zip -DestinationPath /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/ -Force
+      - name: Test JumpCloud.SDK.DirectoryInsights
+        shell: pwsh
+        env:
+          PESTER_APIKEY: ${{ secrets.PESTER_APIKEY }}
+          PESTER_ORGID: ${{ secrets.PESTER_ORGID }}
+          PESTER_MSP_APIKEY: ${{ secrets.PESTER_MSP_APIKEY }}
+          PESTER_PROVIDERID: ${{ secrets.PESTER_PROVIDERID }}
+        run: |
+          $ErrorActionnPreference = 'Stop'
+          ./Test-Module.ps1 -JCApiKey:($env:PESTER_APIKEY) -JCOrgId:($env:PESTER_ORGID) -JCApiKeyMTP:($env:PESTER_MSP_APIKEY) -JCProviderId:($env:PESTER_PROVIDERID) -ExcludeTagList:("MTP") -IncludeTagList:("*") -testModulePath:("./SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/test-module.ps1")
+
+  Test-SDK-V1:
+    needs: ["Build-SDK-V1"]
+    if: contains(github.event.pull_request.labels.*.name, 'v1')
+    runs-on: ubuntu-latest
+    timeout-minutes: 70
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/cache@v3
+        with:
+          path: "/home/runner/.local/share/powershell/Modules/"
+          key: PS-Dependancies
+      - uses: actions/download-artifact@v4
+        with:
+          name: build-JumpCloud.SDK.V1
+          path: /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/
+      - name: Unzip JumpCloud.SDK.V1 module
+        shell: pwsh
+        run: |
+          Expand-Archive -Path /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/JumpCloud.SDK.V1.zip -DestinationPath /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/ -Force
+      - name: Test JumpCloud.SDK.V1
+        shell: pwsh
+        env:
+          PESTER_APIKEY: ${{ secrets.PESTER_APIKEY }}
+          PESTER_ORGID: ${{ secrets.PESTER_ORGID }}
+          PESTER_MSP_APIKEY: ${{ secrets.PESTER_MSP_APIKEY }}
+          PESTER_PROVIDERID: ${{ secrets.PESTER_PROVIDERID }}
+        run: |
+          $ErrorActionnPreference = 'Stop'
+          ./Test-Module.ps1 -JCApiKey:($env:PESTER_APIKEY) -JCOrgId:($env:PESTER_ORGID) -JCApiKeyMTP:($env:PESTER_MSP_APIKEY) -JCProviderId:($env:PESTER_PROVIDERID) -ExcludeTagList:("MTP") -IncludeTagList:("*") -testModulePath:("./SDKs/PowerShell/JumpCloud.SDK.V1/test-module.ps1")
+
+  Test-SDK-V2:
+    needs: ["Build-SDK-V1", "Build-SDK-V2"]
+    if: contains(github.event.pull_request.labels.*.name, 'v2')
+    runs-on: ubuntu-latest
+    timeout-minutes: 70
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/cache@v3
+        with:
+          path: "/home/runner/.local/share/powershell/Modules/"
+          key: PS-Dependancies
+      - uses: actions/download-artifact@v4
+        with:
+          name: build-JumpCloud.SDK.V2
+          path: /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/
+      - name: Unzip JumpCloud.SDK.V2 module
+        shell: pwsh
+        run: |
+          Expand-Archive -Path /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/JumpCloud.SDK.V2.zip -DestinationPath /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/ -Force
+      - uses: actions/download-artifact@v4
+        with:
+          name: build-JumpCloud.SDK.V1
+          path: /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/
+      - name: Unzip V1 module for V2 Tests
+        shell: pwsh
+        run: |
+          Expand-Archive -Path /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/JumpCloud.SDK.V1.zip -DestinationPath /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/ -Force
+      - name: Test JumpCloud.SDK.V2
+        shell: pwsh
+        env:
+          PESTER_APIKEY: ${{ secrets.PESTER_APIKEY }}
+          PESTER_ORGID: ${{ secrets.PESTER_ORGID }}
+          PESTER_MSP_APIKEY: ${{ secrets.PESTER_MSP_APIKEY }}
+          PESTER_PROVIDERID: ${{ secrets.PESTER_PROVIDERID }}
+        run: |
+          $ErrorActionnPreference = 'Stop'
+          ./Test-Module.ps1 -JCApiKey:($env:PESTER_APIKEY) -JCOrgId:($env:PESTER_ORGID) -JCApiKeyMTP:($env:PESTER_MSP_APIKEY) -JCProviderId:($env:PESTER_PROVIDERID) -ExcludeTagList:("MTP") -IncludeTagList:("*") -testModulePath:("./SDKs/PowerShell/JumpCloud.SDK.V2/test-module.ps1")
+
+  ## ----------------------------------------------------------------
+  ## MTP Test Jobs
+  ## ----------------------------------------------------------------
+
+  Test-SDK-MTP-V1:
+    needs: ["Build-SDK-V1"]
+    if: contains(github.event.pull_request.labels.*.name, 'v1')
+    runs-on: ubuntu-latest
+    timeout-minutes: 70
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/cache@v3
+        with:
+          path: "/home/runner/.local/share/powershell/Modules/"
+          key: PS-Dependancies
+      - uses: actions/download-artifact@v4
+        with:
+          name: build-JumpCloud.SDK.V1
+          path: /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/
+      - name: Unzip JumpCloud.SDK.V1 module
+        shell: pwsh
+        run: |
+          Expand-Archive -Path /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/JumpCloud.SDK.V1.zip -DestinationPath /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/ -Force
+      - name: Test MTP JumpCloud.SDK.V1
+        shell: pwsh
+        env:
+          PESTER_APIKEY: ${{ secrets.PESTER_APIKEY }}
+          PESTER_ORGID: ${{ secrets.PESTER_ORGID }}
+          PESTER_MSP_APIKEY: ${{ secrets.PESTER_MSP_APIKEY }}
+          PESTER_PROVIDERID: ${{ secrets.PESTER_PROVIDERID }}
+        run: |
+          $ErrorActionnPreference = 'Stop'
+          ./Test-Module.ps1 -JCApiKey:($env:PESTER_APIKEY) -JCOrgId:($env:PESTER_ORGID) -JCApiKeyMTP:($env:PESTER_MSP_APIKEY) -JCProviderId:($env:PESTER_PROVIDERID) -ExcludeTagList:("None") -IncludeTagList:("MTP") -testModulePath:("./SDKs/PowerShell/JumpCloud.SDK.V1/test-module.ps1")
+
+  Test-SDK-MTP-V2:
+    needs: ["Build-SDK-V1", "Build-SDK-V2"]
+    if: contains(github.event.pull_request.labels.*.name, 'v2')
+    runs-on: ubuntu-latest
+    timeout-minutes: 70
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/cache@v3
+        with:
+          path: "/home/runner/.local/share/powershell/Modules/"
+          key: PS-Dependancies
+      - uses: actions/download-artifact@v4
+        with:
+          name: build-JumpCloud.SDK.V2
+          path: /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/
+      - name: Unzip JumpCloud.SDK.V2 module
+        shell: pwsh
+        run: |
+          Expand-Archive -Path /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/JumpCloud.SDK.V2.zip -DestinationPath /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/ -Force
+      - uses: actions/download-artifact@v4
+        with:
+          name: build-JumpCloud.SDK.V1
+          path: /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/
+      - name: Unzip V1 module for V2 Tests
+        shell: pwsh
+        run: |
+          Expand-Archive -Path /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/JumpCloud.SDK.V1.zip -DestinationPath /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/ -Force
+      - name: Test MTP JumpCloud.SDK.V2
+        shell: pwsh
+        env:
+          PESTER_APIKEY: ${{ secrets.PESTER_APIKEY }}
+          PESTER_ORGID: ${{ secrets.PESTER_ORGID }}
+          PESTER_MSP_APIKEY: ${{ secrets.PESTER_MSP_APIKEY }}
+          PESTER_PROVIDERID: ${{ secrets.PESTER_PROVIDERID }}
+        run: |
+          $ErrorActionnPreference = 'Stop'
+          ./Test-Module.ps1 -JCApiKey:($env:PESTER_APIKEY) -JCOrgId:($env:PESTER_ORGID) -JCApiKeyMTP:($env:PESTER_MSP_APIKEY) -JCProviderId:($env:PESTER_PROVIDERID) -ExcludeTagList:("None") -IncludeTagList:("MTP") -testModulePath:("./SDKs/PowerShell/JumpCloud.SDK.V2/test-module.ps1")
