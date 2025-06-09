@@ -3040,6 +3040,12 @@
         "organization": {
           "type": "string"
         },
+        "radsecEnabled": {
+          "type": "boolean"
+        },
+        "requireRadsec": {
+          "type": "boolean"
+        },
         "requireTlsAuth": {
           "type": "boolean"
         },
@@ -3091,6 +3097,12 @@
         },
         "networkSourceIp": {
           "type": "string"
+        },
+        "radsecEnabled": {
+          "type": "boolean"
+        },
+        "requireRadsec": {
+          "type": "boolean"
         },
         "requireTlsAuth": {
           "type": "boolean"
@@ -3152,6 +3164,12 @@
         },
         "networkSourceIp": {
           "type": "string"
+        },
+        "radsecEnabled": {
+          "type": "boolean"
+        },
+        "requireRadsec": {
+          "type": "boolean"
         },
         "requireTlsAuth": {
           "type": "boolean"
@@ -3328,6 +3346,9 @@
           "type": "string"
         },
         "active": {
+          "type": "boolean"
+        },
+        "agentHasFullDiskAccess": {
           "type": "boolean"
         },
         "agentVersion": {
@@ -6137,15 +6158,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request POST \\\n  --url https://console.jumpcloud.com/api/radiusservers \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --data '{\"authIdp\":\"JUMPCLOUD\",\"caCert\":\"string\",\"deviceCertEnabled\":true,\"mfa\":\"DISABLED\",\"name\":\"string\",\"networkSourceIp\":\"string\",\"requireTlsAuth\":true,\"sharedSecret\":\"string\",\"tagNames\":[\"string\"],\"userCertEnabled\":true,\"userLockoutAction\":\"string\",\"userPasswordEnabled\":true,\"userPasswordExpirationAction\":\"string\"}'"
+            "source": "curl --request POST \\\n  --url https://console.jumpcloud.com/api/radiusservers \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --data '{\"authIdp\":\"JUMPCLOUD\",\"caCert\":\"string\",\"deviceCertEnabled\":true,\"mfa\":\"DISABLED\",\"name\":\"string\",\"networkSourceIp\":\"string\",\"radsecEnabled\":true,\"requireRadsec\":true,\"requireTlsAuth\":true,\"sharedSecret\":\"string\",\"tagNames\":[\"string\"],\"userCertEnabled\":true,\"userLockoutAction\":\"string\",\"userPasswordEnabled\":true,\"userPasswordExpirationAction\":\"string\"}'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/radiusservers\"\n\npayload = {\n    \"authIdp\": \"JUMPCLOUD\",\n    \"caCert\": \"string\",\n    \"deviceCertEnabled\": True,\n    \"mfa\": \"DISABLED\",\n    \"name\": \"string\",\n    \"networkSourceIp\": \"string\",\n    \"requireTlsAuth\": True,\n    \"sharedSecret\": \"string\",\n    \"tagNames\": [\"string\"],\n    \"userCertEnabled\": True,\n    \"userLockoutAction\": \"string\",\n    \"userPasswordEnabled\": True,\n    \"userPasswordExpirationAction\": \"string\"\n}\nheaders = {\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/radiusservers\"\n\npayload = {\n    \"authIdp\": \"JUMPCLOUD\",\n    \"caCert\": \"string\",\n    \"deviceCertEnabled\": True,\n    \"mfa\": \"DISABLED\",\n    \"name\": \"string\",\n    \"networkSourceIp\": \"string\",\n    \"radsecEnabled\": True,\n    \"requireRadsec\": True,\n    \"requireTlsAuth\": True,\n    \"sharedSecret\": \"string\",\n    \"tagNames\": [\"string\"],\n    \"userCertEnabled\": True,\n    \"userLockoutAction\": \"string\",\n    \"userPasswordEnabled\": True,\n    \"userPasswordExpirationAction\": \"string\"\n}\nheaders = {\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/radiusservers' -Method POST -Headers $headers -ContentType 'application/json' -Body '{\"authIdp\":\"JUMPCLOUD\",\"caCert\":\"string\",\"deviceCertEnabled\":true,\"mfa\":\"DISABLED\",\"name\":\"string\",\"networkSourceIp\":\"string\",\"requireTlsAuth\":true,\"sharedSecret\":\"string\",\"tagNames\":[\"string\"],\"userCertEnabled\":true,\"userLockoutAction\":\"string\",\"userPasswordEnabled\":true,\"userPasswordExpirationAction\":\"string\"}'"
+            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/radiusservers' -Method POST -Headers $headers -ContentType 'application/json' -Body '{\"authIdp\":\"JUMPCLOUD\",\"caCert\":\"string\",\"deviceCertEnabled\":true,\"mfa\":\"DISABLED\",\"name\":\"string\",\"networkSourceIp\":\"string\",\"radsecEnabled\":true,\"requireRadsec\":true,\"requireTlsAuth\":true,\"sharedSecret\":\"string\",\"tagNames\":[\"string\"],\"userCertEnabled\":true,\"userLockoutAction\":\"string\",\"userPasswordEnabled\":true,\"userPasswordExpirationAction\":\"string\"}'"
           }
         ]
       }
@@ -6265,6 +6286,12 @@
                 },
                 "networkSourceIp": {
                   "type": "string"
+                },
+                "radsecEnabled": {
+                  "type": "boolean"
+                },
+                "requireRadsec": {
+                  "type": "boolean"
                 },
                 "requireTlsAuth": {
                   "type": "boolean"

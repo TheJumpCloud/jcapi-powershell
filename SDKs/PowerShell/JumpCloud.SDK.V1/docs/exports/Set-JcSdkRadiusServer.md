@@ -30,9 +30,9 @@ curl -X PUT https://console.jumpcloud.com/api/radiusservers/{ServerID} \\
 ### SetExpanded (Default)
 ```
 Set-JcSdkRadiusServer -Id <String> -Name <String> -NetworkSourceIP <String> -SharedSecret <String>
- [-CaCert <String>] [-DeviceCertEnabled] [-Mfa <String>] [-RequireTlsAuth] [-UserCertEnabled]
- [-UserLockoutAction <String>] [-UserPasswordEnabled] [-UserPasswordExpirationAction <String>] [-Confirm]
- [-WhatIf] [<CommonParameters>]
+ [-CaCert <String>] [-DeviceCertEnabled] [-Mfa <String>] [-RadsecEnabled] [-RequireRadsec] [-RequireTlsAuth]
+ [-UserCertEnabled] [-UserLockoutAction <String>] [-UserPasswordEnabled]
+ [-UserPasswordExpirationAction <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Set
@@ -52,8 +52,8 @@ Set-JcSdkRadiusServer -InputObject <IJumpCloudApiIdentity>
 ### SetViaIdentityExpanded
 ```
 Set-JcSdkRadiusServer -InputObject <IJumpCloudApiIdentity> -Name <String> -NetworkSourceIP <String>
- -SharedSecret <String> [-CaCert <String>] [-DeviceCertEnabled] [-Mfa <String>] [-RequireTlsAuth]
- [-UserCertEnabled] [-UserLockoutAction <String>] [-UserPasswordEnabled]
+ -SharedSecret <String> [-CaCert <String>] [-DeviceCertEnabled] [-Mfa <String>] [-RadsecEnabled]
+ [-RequireRadsec] [-RequireTlsAuth] [-UserCertEnabled] [-UserLockoutAction <String>] [-UserPasswordEnabled]
  [-UserPasswordExpirationAction <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
@@ -237,6 +237,36 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -RadsecEnabled
+.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -RequireRadsec
+.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -RequireTlsAuth
 .
 
@@ -387,6 +417,8 @@ BODY <IPathsKeqea5RadiusserversIdPutRequestbodyContentApplicationJsonSchema>: .
   - `[CaCert <String>]`: 
   - `[DeviceCertEnabled <Boolean?>]`: 
   - `[Mfa <String>]`: 
+  - `[RadsecEnabled <Boolean?>]`: 
+  - `[RequireRadsec <Boolean?>]`: 
   - `[RequireTlsAuth <Boolean?>]`: 
   - `[UserCertEnabled <Boolean?>]`: 
   - `[UserLockoutAction <String>]`: 

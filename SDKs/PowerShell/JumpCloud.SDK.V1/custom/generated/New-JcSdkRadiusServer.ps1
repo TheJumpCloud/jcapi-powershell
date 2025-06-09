@@ -93,6 +93,8 @@ BODY <IRadiusserverpost>:
   [CaCert <String>]:
   [DeviceCertEnabled <Boolean?>]:
   [Mfa <String>]:
+  [RadsecEnabled <Boolean?>]:
+  [RequireRadsec <Boolean?>]:
   [RequireTlsAuth <Boolean?>]:
   [UserCertEnabled <Boolean?>]:
   [UserLockoutAction <String>]:
@@ -154,6 +156,18 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [System.String]
     # .
     ${Mfa}, 
+
+    [Parameter(ParameterSetName='CreateExpanded')]
+    [JumpCloud.SDK.V1.Category('Body')]
+    [System.Management.Automation.SwitchParameter]
+    # .
+    ${RadsecEnabled}, 
+
+    [Parameter(ParameterSetName='CreateExpanded')]
+    [JumpCloud.SDK.V1.Category('Body')]
+    [System.Management.Automation.SwitchParameter]
+    # .
+    ${RequireRadsec}, 
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
