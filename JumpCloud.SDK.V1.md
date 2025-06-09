@@ -2,14 +2,14 @@
 Release Date: June 09, 2025
 #### RELEASE NOTES
 ```
-{{Fill in the Release Notes}}
+Test
 ```
 #### FEATURES:
-{{Fill in the Features}}
+Test
 #### IMPROVEMENTS:
-{{Fill in the Improvements}}
+Test
 #### BUG FIXES:
-{{Fill in the Bug Fixes}}
+Test
 #### Generated Changes:
 
 <details>
