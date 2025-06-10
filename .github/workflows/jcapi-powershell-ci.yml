@@ -117,33 +117,46 @@ jobs:
   Validate-SDK-Module:
     needs: ["Setup-Build-Dependancies", "Check-PR-Labels"]
     runs-on: ubuntu-latest
-    env:
-      v1: ${{ needs.Check-PR-Labels.outputs.v1 }}
-      v2: ${{ needs.Check-PR-Labels.outputs.v2 }}
-      directoryinsights: ${{ needs.Check-PR-Labels.outputs.directoryinsights }}
-      RELEASE_TYPE: ${{ needs.Check-PR-Labels.outputs.RELEASE_TYPE }}
+
     steps:
-      - uses: actions/cache@v3
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Restore PowerShell Module Cache
+        uses: actions/cache@v3
         with:
-          path: "/home/runner/.local/share/powershell/Modules/"
-          key: PS-Dependancies
-      - uses: actions/checkout@v4
+          path: /home/runner/.local/share/powershell/Modules/
+          key: PS-Dependancies-${{ runner.os }}
+
       - name: Validate SDK Module
         id: validate
         shell: pwsh
         run: |
-          # Construct the PR_LABELS variable for the Pester test script
-          $prLabels = @()
-          if ($env:v1) { $prLabels += 'v1' }
-          if ($env:v2) { $prLabels += 'v2' }
-          if ($env:directoryinsights) { $prLabels += 'DirectoryInsights' }
-          if ($env:RELEASE_TYPE) { $prLabels += $env:RELEASE_TYPE }
-          $prLabels += 'sdk'
-          $env:PR_LABELS = $prLabels -join ','
+          # This is the modern, robust way to pass CI/CD values to Pester tests.
 
-          Write-Host "Passing the following labels to Pester: $env:PR_LABELS"
-          Install-Module -Name Pester
-          Invoke-Pester -Path /home/runner/work/jcapi-powershell/jcapi-powershell/Tools/ModuleValidation.Tests.ps1
+          # Ensure Pester is installed (or use the cached version)
+          Write-Output "Installing/Updating Pester module..."
+          Install-Module -Name Pester -Force -SkipPublisherCheck -Confirm:$false
+
+          # Create a hashtable of parameters to pass to the test script.
+          $pesterParams = @{
+              v1                = [System.Boolean]::Parse('${{ needs.Check-PR-Labels.outputs.v1 }}');
+              v2                = [System.Boolean]::Parse('${{ needs.Check-PR-Labels.outputs.v2 }}');
+              directoryinsights = [System.Boolean]::Parse('${{ needs.Check-PR-Labels.outputs.directoryinsights }}');
+              release_type      = '${{ needs.Check-PR-Labels.outputs.RELEASE_TYPE }}';
+          }
+
+          # --- For Debugging: Print the parameters being passed ---
+          Write-Output "--- Pester Parameters ---"
+          $pesterParams | Format-Table | Out-String | Write-Output
+          Write-Output "-------------------------"
+
+          # Define the path to the test script
+          $testScriptPath = '/home/runner/work/jcapi-powershell/jcapi-powershell/Tools/ModuleValidation.Tests.ps1'
+
+          # Invoke Pester, passing the script path and the parameters hashtable.
+          Invoke-Pester -Script @{ Path = $testScriptPath; Parameters = $pesterParams }
+
 
   ## ----------------------------------------------------------------
   ## Build Jobs

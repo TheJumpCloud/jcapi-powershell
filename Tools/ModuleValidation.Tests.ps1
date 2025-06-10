@@ -1,19 +1,32 @@
+param(
+    [bool]$v1 = $false,
+    [bool]$v2 = $false,
+    [bool]$directoryinsights = $false,
+    [string]$release_type
+)
+
 BeforeAll {
-    Write-Output "Initial value of env:v1 is '$($env:v1)'"
-    Write-Output "Initial type of env:v1 is $($env:v1.GetType().FullName)"
-    Write-Output "Comparison result of ('$($env:v1)' -eq 'true') is $($env:v1 -eq 'true')"
+    # For debugging, you can see the exact values received by the script.
+    Write-Output "DEBUG: v1 = $v1 (Type: $($v1.GetType().Name))"
+    Write-Output "DEBUG: v2 = $v2 (Type: $($v2.GetType().Name))"
+    Write-Output "DEBUG: directoryinsights = $directoryinsights (Type: $($directoryinsights.GetType().Name))"
+    Write-Output "DEBUG: release_type = '$release_type'"
+
     $modulesToTest = [System.Collections.Generic.List[string]]::new()
-    if ($env:v1 -eq 'true') { $modulesToTest.Add('JumpCloud.SDK.V1') }
-    if ($env:v2 -eq 'true') { $modulesToTest.Add('JumpCloud.SDK.V2') }
-    if ($env:directoryinsights -eq 'true') { $modulesToTest.Add('JumpCloud.SDK.DirectoryInsights') }
-    $ENV:RELEASE_TYPE = 'patch' # Default to 'patch' if not set, can be overridden by the CI/CD pipeline.
-    # If no modules are flagged for testing, skip the entire test file gracefully.
+
+    # Use the parameters now instead of environment variables.
+    # The logic is now clean, type-safe, and unambiguous.
+    if ($v1) { $modulesToTest.Add('JumpCloud.SDK.V1') }
+    if ($v2) { $modulesToTest.Add('JumpCloud.SDK.V2') }
+    if ($directoryinsights) { $modulesToTest.Add('JumpCloud.SDK.DirectoryInsights') }
+
     if ($modulesToTest.Count -eq 0) {
-        Write-Output "No modules flagged for validation. Skipping tests. $($modulesToTest)"
+        Write-Warning "No modules flagged for validation. Skipping tests."
         Skip-All "No module labels (v1, v2, DirectoryInsights) found on PR. Skipping validation tests."
     }
+
     $moduleNames = $modulesToTest -join ', '
-    Write-Output "Running validation for the following modules: $moduleNames"
+    Write-Host "Running validation for the following modules: $moduleNames"
 }
 
 # Loop through each module identified for testing.
