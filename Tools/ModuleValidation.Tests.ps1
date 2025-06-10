@@ -1,19 +1,20 @@
 BeforeAll {
-    $script:modulesToTest = [System.Collections.Generic.List[string]]::new()
-    if ($env:V1 -eq 'true') { $script:modulesToTest.Add('JumpCloud.SDK.V1') }
-    if ($env:V2 -eq 'true') { $script:modulesToTest.Add('JumpCloud.SDK.V2') }
-    if ($env:DIRECTORYINSIGHTS -eq 'true') { $script:modulesToTest.Add('JumpCloud.SDK.DirectoryInsights') }
+    $modulesToTest = [System.Collections.Generic.List[string]]::new()
+    if ($env:V1 -eq 'true') { $modulesToTest.Add('JumpCloud.SDK.V1') }
+    if ($env:V2 -eq 'true') { $modulesToTest.Add('JumpCloud.SDK.V2') }
+    if ($env:DIRECTORYINSIGHTS -eq 'true') { $modulesToTest.Add('JumpCloud.SDK.DirectoryInsights') }
     $ENV:RELEASE_TYPE = 'patch' # Default to 'patch' if not set, can be overridden by the CI/CD pipeline.
     # If no modules are flagged for testing, skip the entire test file gracefully.
-    if ($script:modulesToTest.Count -eq 0) {
+    if ($modulesToTest.Count -eq 0) {
+        Write-Host "No modules flagged for validation. Skipping tests. $($modulesToTest)"
         Skip-All "No module labels (v1, v2, DirectoryInsights) found on PR. Skipping validation tests."
     }
-    $moduleNames = $script:modulesToTest -join ', '
+    $moduleNames = $modulesToTest -join ', '
     Write-Host "Running validation for the following modules: $moduleNames"
 }
 
 # Loop through each module identified for testing.
-foreach ($moduleName in $script:modulesToTest) {
+foreach ($moduleName in $modulesToTest) {
 
     Describe -Tag 'ModuleValidation', $moduleName "Module Validation for $moduleName" {
 
