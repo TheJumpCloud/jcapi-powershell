@@ -5,11 +5,11 @@
 # It also uses $env:RELEASE_TYPE ('major', 'minor', 'patch').
 
 # Build a list of modules to test based on the environment variables.
-$modulesToTest = [System.Collections.Generic.List[string]]::new()
-Write-Host "Env v1: $env:v1 , v2: $env:v2, directoryinsights: $env:directoryinsights"
-if ($env:v1 -eq 'true') { $modulesToTest.Add('JumpCloud.SDK.V1') }
-if ($env:v2 -eq 'true') { $modulesToTest.Add('JumpCloud.SDK.V2') }
-if ($env:directoryinsights -eq 'true') { $modulesToTest.Add('JumpCloud.SDK.DirectoryInsights') }
+# $modulesToTest = [System.Collections.Generic.List[string]]::new()
+# Write-Host "Env v1: $env:v1 , v2: $env:v2, directoryinsights: $env:directoryinsights"
+# if ($env:v1 -eq 'true') { $modulesToTest.Add('JumpCloud.SDK.V1') }
+# if ($env:v2 -eq 'true') { $modulesToTest.Add('JumpCloud.SDK.V2') }
+# if ($env:directoryinsights -eq 'true') { $modulesToTest.Add('JumpCloud.SDK.DirectoryInsights') }
 
 Write-Host "Modules to test: $($modulesToTest -join ', ')"
 Write-Host "Release Type: $env:RELEASE_TYPE"
@@ -21,12 +21,12 @@ if (!$modulesToTest) {
 
 # Loop through each module identified for testing and run a dedicated suite of tests.
 foreach ($moduleName in $modulesToTest) {
-
+    Write-Host "Running module validation tests for: $moduleName"
     Describe -Tag 'ModuleValidation', $moduleName "Module Manifest Tests for $moduleName" {
 
         It "validates the module version against the gallery based on the release type" {
-            [version]$galleryVersion = Find-Module -Name $moduleName | Select-Object -ExpandProperty Version
-            $psd1Path = "./SDKs/PowerShell/$moduleName/$moduleName.psd1"
+            [version]$galleryVersion = Find-Module -Name $($moduleName) | Select-Object -ExpandProperty Version
+            $psd1Path = "./SDKs/PowerShell/$($moduleName)/$($moduleName).psd1"
             [version]$localVersion = (Get-Content -Path $psd1Path | Select-String -Pattern "ModuleVersion = '(.*)'").Matches.Groups[1].Value
 
             # The local version must always be greater than the published gallery version.
