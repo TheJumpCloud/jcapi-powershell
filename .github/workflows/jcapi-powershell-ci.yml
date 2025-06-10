@@ -144,7 +144,7 @@ jobs:
           Write-Host "Passing the following labels to Pester: $env:PR_LABELS"
           Install-Module -Name Pester
           # Pass the PR_LABELS environment variable to the Pester test script
-          Invoke-Pester -Path /home/runner/work/jcapi-powershell/jcapi-powershell/Tools/ModuleValidation.Tests.ps1 -ArgumentList @{"PR_LABELS"=$env:PR_LABELS}
+          Invoke-Pester -Path /home/runner/work/jcapi-powershell/jcapi-powershell/Tools/ModuleValidation.Tests.ps1
 
   ## ----------------------------------------------------------------
   ## Build Jobs
