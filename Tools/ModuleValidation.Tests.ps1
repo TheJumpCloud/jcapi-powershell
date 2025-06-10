@@ -2,7 +2,7 @@ BeforeAll {
     # For debugging, you can see the exact values received by the script.
     # Get the PR labels from the environment variables.
     # Create a list to hold the modules that need validation.
-    $modulesToTest = [System.Collections.Generic.List[string]]::new()
+    $script:modulesToTest = [System.Collections.Generic.List[string]]::new()
     if ($env:PR_LABELS -eq $null) {
         Write-Error "PR_LABELS environment variable is not set. Exiting."
         Exit 1
@@ -11,39 +11,39 @@ BeforeAll {
     $v1 = $env:PR_LABELS -contains 'v1'
     if ($v1) {
         Write-Output "DEBUG: v1 = $v1"
-        $modulesToTest.Add('JumpCloud.SDK.V1')
+        $script:modulesToTest.Add('JumpCloud.SDK.V1')
     }
     $v2 = $env:PR_LABELS -contains 'v2'
     if ($v2) {
         Write-Output "DEBUG: v2 = $v2"
-        $modulesToTest.Add('JumpCloud.SDK.V2')
+        $script:modulesToTest.Add('JumpCloud.SDK.V2')
     }
     $directoryinsights = $env:PR_LABELS -contains 'DirectoryInsights'
     if ($directoryinsights) {
         Write-Output "DEBUG: DirectoryInsights = $directoryinsights"
-        $modulesToTest.Add('JumpCloud.SDK.DirectoryInsights')
+        $script:modulesToTest.Add('JumpCloud.SDK.DirectoryInsights')
     }
 
-    $release_type = $env:RELEASE_TYPE
-    if (-not $release_type) {
+    $script:release_type = $env:RELEASE_TYPE
+    if (-not $script:release_type) {
         Write-Error "RELEASE_TYPE environment variable is not set. Exiting."
         Exit 1
     }
     # For debugging purposes, output the values of the parameters.
     Write-Output "DEBUG: PR_LABELS = $($env:PR_LABELS)"
-    Write-Output "DEBUG: RELEASE_TYPE = $release_type"
+    Write-Output "DEBUG: RELEASE_TYPE = $script:release_type"
 
-    if ($modulesToTest.Count -eq 0) {
+    if ($script:modulesToTest.Count -eq 0) {
         Write-Warning "No modules flagged for validation. Skipping tests."
         Skip-All "No module labels (v1, v2, DirectoryInsights) found on PR. Skipping validation tests."
     }
 
-    $moduleNames = $modulesToTest -join ', '
+    $moduleNames = $script:modulesToTest -join ', '
     Write-Host "Running validation for the following modules: $moduleNames"
 }
 
 # Loop through each module identified for testing.
-foreach ($moduleName in $modulesToTest) {
+foreach ($moduleName in $script:modulesToTest) {
 
     Describe -Tag 'ModuleValidation', $moduleName "Module Validation for $moduleName" {
 
