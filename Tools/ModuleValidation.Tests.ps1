@@ -1,32 +1,35 @@
-# Reads environment variables from CI to determine which modules to test.
+# This script reads environment variables to determine which modules to test.
+# It expects the following variables to be set by the CI pipeline:
 #   - $env:V1
 #   - $env:V2
 #   - $env:DIRECTORYINSIGHTS
-# It also uses $env:RELEASE_TYPE ('major', 'minor', 'patch').
+#   - $env:RELEASE_TYPE
 
 # Build a list of modules to test based on the environment variables.
 $modulesToTest = [System.Collections.Generic.List[string]]::new()
-Write-Host "Env v1: $env:v1 , v2: $env:v2, directoryinsights: $env:directoryinsights"
-if ($env:v1 -eq 'true') { $modulesToTest.Add('JumpCloud.SDK.V1') }
-if ($env:v2 -eq 'true') { $modulesToTest.Add('JumpCloud.SDK.V2') }
-if ($env:directoryinsights -eq 'true') { $modulesToTest.Add('JumpCloud.SDK.DirectoryInsights') }
+if ($env:V1 -eq 'true') { $modulesToTest.Add('JumpCloud.SDK.V1') }
+if ($env:V2 -eq 'true') { $modulesToTest.Add('JumpCloud.SDK.V2') }
+if ($env:DIRECTORYINSIGHTS -eq 'true') { $modulesToTest.Add('JumpCloud.SDK.DirectoryInsights') }
 
-Write-Host "Modules to test: $($modulesToTest -join ', ')"
-Write-Host "Release Type: $env:RELEASE_TYPE"
-# If no module labels are found, skip all tests.
-if (!$modulesToTest) {
-        Write-Warning "No module labels (v1, v2, directoryinsights) found on PR. Skipping validation tests."
-        exit 0
+# This Pester block will skip all subsequent tests if no module labels were found.
+BeforeAll {
+    if ($modulesToTest.Count -eq 0) {
+        # Using Skip-All is the idiomatic Pester way to gracefully exit tests.
+        Skip-All "No module labels (v1, v2, DirectoryInsights) found on PR. Skipping validation tests."
+    }
+    Write-Host "Running validation for the following modules: $($modulesToTest -join ', ')"
 }
 
 # Loop through each module identified for testing and run a dedicated suite of tests.
 foreach ($moduleName in $modulesToTest) {
-    Write-Host "Running module validation tests for: $moduleName"
+
     Describe -Tag 'ModuleValidation', $moduleName "Module Manifest Tests for $moduleName" {
+        $currentModuleName = $moduleName
+        Write-Host "Running module validation tests for: $currentModuleName"
 
         It "validates the module version against the gallery based on the release type" {
-            [version]$galleryVersion = Find-Module -Name $($moduleName) | Select-Object -ExpandProperty Version
-            $psd1Path = "./SDKs/PowerShell/$($moduleName)/$($moduleName).psd1"
+            [version]$galleryVersion = Find-Module -Name $currentModuleName | Select-Object -ExpandProperty Version
+            $psd1Path = "./SDKs/PowerShell/$currentModuleName/$currentModuleName.psd1"
             [version]$localVersion = (Get-Content -Path $psd1Path | Select-String -Pattern "ModuleVersion = '(.*)'").Matches.Groups[1].Value
 
             # The local version must always be greater than the published gallery version.
@@ -42,16 +45,16 @@ foreach ($moduleName in $modulesToTest) {
 
         It "validates the changelog has the correct new version and today's date" {
             # This test only runs if a release type is specified.
-            if (-not $env:RELEASE_TYPE) {
-                Skip "Skipping changelog validation because no release type was specified."
+            if (-not ($env:RELEASE_TYPE -in @('major', 'minor', 'patch'))) {
+                Skip "Skipping changelog validation because release type is not 'major', 'minor', or 'patch'."
             }
 
-            $latestModule = Find-Module -Name $moduleName
-            $changelogPath = "$PSScriptRoot/../$moduleName.md"
+            $latestModule = Find-Module -Name $currentModuleName
+            $changelogPath = "$PSScriptRoot/../$currentModuleName.md"
             $changelogContent = Get-Content -Path $changelogPath -TotalCount 3
 
             # Validate the version in the changelog.
-            $latestChangelogVersionString = (Select-String -InputObject $changelogContent -Pattern "## $moduleName-([0-9]+.[0-9]+.[0-9]+)").Matches.Groups[1].Value
+            $latestChangelogVersionString = (Select-String -InputObject $changelogContent -Pattern "## $currentModuleName-([0-9]+\.[0-9]+\.[0-9]+)").Matches.Groups[1].Value
             [version]$latestChangelogVersion = $latestChangelogVersionString
             $latestChangelogVersion | Should -BeGreaterThan ([version]$latestModule.Version)
 
@@ -62,21 +65,21 @@ foreach ($moduleName in $modulesToTest) {
         }
 
         It "ensures the changelog does not contain placeholder content" {
-            $changelogPath = "$PSScriptRoot/../$moduleName.md"
+            $changelogPath = "$PSScriptRoot/../$currentModuleName.md"
             $changelogContent = Get-Content -Path $changelogPath
-            $changelogContent | Should -Not -Match "{{Fill in the"
+            $changelogContent | Should -Not -Match '\{\{Fill in the'
         }
 
         It "ensures the Swagger spec is up to date with no pending changes" {
-            . "$PSScriptRoot/../ApiTransform.ps1" -SDKName $moduleName 3>$null
-            $sdkSwaggerFile = "$PSScriptRoot/../SwaggerSpecs/$moduleName.json"
+            . "$PSScriptRoot/../ApiTransform.ps1" -SDKName $currentModuleName 3>$null
+            $sdkSwaggerFile = "$PSScriptRoot/../SwaggerSpecs/$currentModuleName.json"
             $currentBranch = git rev-parse --abbrev-ref HEAD
 
             # Compare the generated spec file with the one in the current branch.
             $changes = git diff -I "collection_time" -I "dueDate" $currentBranch -- $sdkSwaggerFile
 
             if ($changes) {
-                Write-Warning "Git Diff found changes in /SwaggerSpecs/$moduleName.json. Please run build.ps1 to ensure it is up to date."
+                Write-Warning "Git Diff found changes in /SwaggerSpecs/$currentModuleName.json. Please run build.ps1 to ensure it is up to date."
             }
             $changes | Should -BeNullOrEmpty
         }
