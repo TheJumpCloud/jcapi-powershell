@@ -14,10 +14,13 @@ if ($env:directoryinsights -eq 'true') { $modulesToTest.Add('JumpCloud.SDK.Direc
 Write-Host "Modules to test: $($modulesToTest -join ', ')"
 Write-Host "Release Type: $env:RELEASE_TYPE"
 # If no module labels are found, skip all tests.
-if ($modulesToTest.Count -eq 0) {
+BeforeAll {
+    if (!$modulesToTest) {
         Write-Warning "No module labels (v1, v2, directoryinsights) found on PR. Skipping validation tests."
         exit 0
     }
+}
+
 
 # Loop through each module identified for testing and run a dedicated suite of tests.
 foreach ($moduleName in $modulesToTest) {
