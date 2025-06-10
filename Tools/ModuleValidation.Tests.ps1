@@ -1,62 +1,76 @@
-# This script reads environment variables to determine which modules to test.
-# It expects the following variables to be set by the CI pipeline:
-#   - $env:V1
-#   - $env:V2
-#   - $env:DIRECTORYINSIGHTS
-#   - $env:RELEASE_TYPE
-
-# Build a list of modules to test based on the environment variables.
-$modulesToTest = [System.Collections.Generic.List[string]]::new()
-if ($env:V1 -eq 'true') { $modulesToTest.Add('JumpCloud.SDK.V1') }
-if ($env:V2 -eq 'true') { $modulesToTest.Add('JumpCloud.SDK.V2') }
-if ($env:DIRECTORYINSIGHTS -eq 'true') { $modulesToTest.Add('JumpCloud.SDK.DirectoryInsights') }
-
-# This Pester block will skip all subsequent tests if no module labels were found.
 BeforeAll {
-    if ($modulesToTest.Count -eq 0) {
-        # Using Skip-All is the idiomatic Pester way to gracefully exit tests.
+    $script:modulesToTest = [System.Collections.Generic.List[string]]::new()
+    if ($env:V1 -eq 'true') { $script:modulesToTest.Add('JumpCloud.SDK.V1') }
+    if ($env:V2 -eq 'true') { $script:modulesToTest.Add('JumpCloud.SDK.V2') }
+    if ($env:DIRECTORYINSIGHTS -eq 'true') { $script:modulesToTest.Add('JumpCloud.SDK.DirectoryInsights') }
+    $ENV:RELEASE_TYPE = 'patch' # Default to 'patch' if not set, can be overridden by the CI/CD pipeline.
+    # If no modules are flagged for testing, skip the entire test file gracefully.
+    if ($script:modulesToTest.Count -eq 0) {
         Skip-All "No module labels (v1, v2, DirectoryInsights) found on PR. Skipping validation tests."
     }
-    Write-Host "Running validation for the following modules: $($modulesToTest -join ', ')"
+    $moduleNames = $script:modulesToTest -join ', '
+    Write-Host "Running validation for the following modules: $moduleNames"
 }
 
-# Loop through each module identified for testing and run a dedicated suite of tests.
-foreach ($moduleName in $modulesToTest) {
+# Loop through each module identified for testing.
+foreach ($moduleName in $script:modulesToTest) {
 
-    Describe -Tag 'ModuleValidation', $moduleName "Module Manifest Tests for $moduleName" {
-        $currentModuleName = $moduleName
-        Write-Host "Running module validation tests for: $currentModuleName"
+    Describe -Tag 'ModuleValidation', $moduleName "Module Validation for $moduleName" {
 
         It "validates the module version against the gallery based on the release type" {
-            [version]$galleryVersion = Find-Module -Name $currentModuleName | Select-Object -ExpandProperty Version
-            $psd1Path = "./SDKs/PowerShell/$currentModuleName/$currentModuleName.psd1"
-            [version]$localVersion = (Get-Content -Path $psd1Path | Select-String -Pattern "ModuleVersion = '(.*)'").Matches.Groups[1].Value
+            # Find the currently published version on the PowerShell Gallery.
+            # Use -ErrorAction SilentlyContinue for cases where the module isn't published yet (e.g., first release).
+            $galleryModule = Find-Module -Name $moduleName -ErrorAction SilentlyContinue
+            $galleryVersion = if ($null -ne $galleryModule) { [version]$galleryModule.Version } else { [version]'0.0.0' }
 
-            # The local version must always be greater than the published gallery version.
+            # Get the local version from the module manifest (.psd1 file).
+            $psd1Path = Join-Path $PSScriptRoot '..' 'SDKs' 'PowerShell' $moduleName "$moduleName.psd1"
+            $localVersionString = (Get-Content -Path $psd1Path | Select-String -Pattern "ModuleVersion\s*=\s*'(.*)'").Matches.Groups[1].Value
+            [version]$localVersion = $localVersionString
+
+            # Assertion: The local version must always be greater than the published version.
             $localVersion | Should -BeGreaterThan $galleryVersion
 
-            # Check for the correct version number increment based on the release type.
-            switch ($env:RELEASE_TYPE) {
-                'major' { $localVersion.Major | Should -Be ($galleryVersion.Major + 1) }
-                'minor' { $localVersion.Minor | Should -Be ($galleryVersion.Minor + 1) }
-                'patch' { $localVersion.Build | Should -Be ($galleryVersion.Build + 1) }
+            # If a release type is specified, validate the version increment is correct according to SemVer.
+            if ($env:RELEASE_TYPE) {
+                switch ($env:RELEASE_TYPE.ToLower()) {
+                    'major' {
+                        $localVersion.Major | Should -Be ($galleryVersion.Major + 1) "for a 'major' release"
+                        $localVersion.Minor | Should -Be 0 "for a 'major' release"
+                        $localVersion.Build | Should -Be 0 "for a 'major' release"
+                    }
+                    'minor' {
+                        $localVersion.Major | Should -Be $galleryVersion.Major "for a 'minor' release"
+                        $localVersion.Minor | Should -Be ($galleryVersion.Minor + 1) "for a 'minor' release"
+                        $localVersion.Build | Should -Be 0 "for a 'minor' release"
+                    }
+                    'patch' {
+                        # In SemVer, 'patch' is the third component. In the .NET [version] class, this corresponds to 'Build'.
+                        $localVersion.Major | Should -Be $galleryVersion.Major "for a 'patch' release"
+                        $localVersion.Minor | Should -Be $galleryVersion.Minor "for a 'patch' release"
+                        $localVersion.Build | Should -Be ($galleryVersion.Build + 1) "for a 'patch' release"
+                    }
+                }
             }
         }
 
         It "validates the changelog has the correct new version and today's date" {
-            # This test only runs if a release type is specified.
+            # This test only runs if a release type that requires a changelog entry is specified.
             if (-not ($env:RELEASE_TYPE -in @('major', 'minor', 'patch'))) {
                 Skip "Skipping changelog validation because release type is not 'major', 'minor', or 'patch'."
             }
 
-            $latestModule = Find-Module -Name $currentModuleName
-            $changelogPath = "$PSScriptRoot/../$currentModuleName.md"
-            $changelogContent = Get-Content -Path $changelogPath -TotalCount 3
+            $galleryModule = Find-Module -Name $moduleName -ErrorAction SilentlyContinue
+            $galleryVersion = if ($null -ne $galleryModule) { [version]$galleryModule.Version } else { [version]'0.0.0' }
 
-            # Validate the version in the changelog.
-            $latestChangelogVersionString = (Select-String -InputObject $changelogContent -Pattern "## $currentModuleName-([0-9]+\.[0-9]+\.[0-9]+)").Matches.Groups[1].Value
-            [version]$latestChangelogVersion = $latestChangelogVersionString
-            $latestChangelogVersion | Should -BeGreaterThan ([version]$latestModule.Version)
+            $changelogPath = Join-Path $PSScriptRoot '..' "$moduleName.md"
+            $changelogContent = Get-Content -Path $changelogPath -TotalCount 5 # Read a few lines from the top
+
+            # Validate the version in the changelog header.
+            $changelogLine = $changelogContent | Select-String -Pattern "## $moduleName-([0-9]+\.[0-9]+\.[0-9]+)"
+            $changelogLine | Should -Not -BeNullOrEmpty "because the changelog should contain a version header like '## $moduleName-x.y.z'"
+            [version]$latestChangelogVersion = $changelogLine.Matches.Groups[1].Value
+            $latestChangelogVersion | Should -BeGreaterThan $galleryVersion
 
             # Validate the release date is today.
             $latestReleaseDate = (Select-String -InputObject $changelogContent -Pattern "Release Date: (.*) ####").Matches.Groups[1].Value
@@ -65,23 +79,26 @@ foreach ($moduleName in $modulesToTest) {
         }
 
         It "ensures the changelog does not contain placeholder content" {
-            $changelogPath = "$PSScriptRoot/../$currentModuleName.md"
-            $changelogContent = Get-Content -Path $changelogPath
-            $changelogContent | Should -Not -Match '\{\{Fill in the'
+            $changelogPath = Join-Path $PSScriptRoot '..' "$moduleName.md"
+            Get-Content -Path $changelogPath | Should -Not -Match '\{\{Fill in the'
         }
 
         It "ensures the Swagger spec is up to date with no pending changes" {
-            . "$PSScriptRoot/../ApiTransform.ps1" -SDKName $currentModuleName 3>$null
-            $sdkSwaggerFile = "$PSScriptRoot/../SwaggerSpecs/$currentModuleName.json"
+            # Note: Assumes dependent scripts are in the parent directory of this test script.
+            . (Join-Path $PSScriptRoot '..' 'ApiTransform.ps1') -SDKName $moduleName 3>$null
+            $sdkSwaggerFile = Join-Path $PSScriptRoot '..' 'SwaggerSpecs' "$moduleName.json"
+
             $currentBranch = git rev-parse --abbrev-ref HEAD
 
-            # Compare the generated spec file with the one in the current branch.
-            $changes = git diff -I "collection_time" -I "dueDate" $currentBranch -- $sdkSwaggerFile
+            # Compare the generated spec file with the version committed to the current branch.
+            # Ignore keys that have dynamic values like timestamps.
+            $gitDiffOutput = git diff --ignore-matching-lines='collection_time' --ignore-matching-lines='dueDate' $currentBranch -- $sdkSwaggerFile
 
-            if ($changes) {
-                Write-Warning "Git Diff found changes in /SwaggerSpecs/$currentModuleName.json. Please run build.ps1 to ensure it is up to date."
+            if ($gitDiffOutput) {
+                Write-Warning "Git Diff found changes in /SwaggerSpecs/$moduleName.json. Please run the build script to ensure it is up to date."
             }
-            $changes | Should -BeNullOrEmpty
+
+            $gitDiffOutput | Should -BeNullOrEmpty "because the Swagger spec file should have no pending changes after a build."
         }
     }
 }
