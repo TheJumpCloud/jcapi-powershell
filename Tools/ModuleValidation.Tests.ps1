@@ -1,8 +1,8 @@
 BeforeAll {
     $modulesToTest = [System.Collections.Generic.List[string]]::new()
-    if ($env:v1 ) { $modulesToTest.Add('JumpCloud.SDK.V1') }
-    if ($env:v2 ) { $modulesToTest.Add('JumpCloud.SDK.V2') }
-    if ($env:directoryinsights ) { $modulesToTest.Add('JumpCloud.SDK.DirectoryInsights') }
+    if ($env:v1 -eq 'true') { $modulesToTest.Add('JumpCloud.SDK.V1') }
+    if ($env:v2 -eq 'true') { $modulesToTest.Add('JumpCloud.SDK.V2') }
+    if ($env:directoryinsights -eq 'true') { $modulesToTest.Add('JumpCloud.SDK.DirectoryInsights') }
     $ENV:RELEASE_TYPE = 'patch' # Default to 'patch' if not set, can be overridden by the CI/CD pipeline.
     # If no modules are flagged for testing, skip the entire test file gracefully.
     if ($modulesToTest.Count -eq 0) {
