@@ -6,14 +6,16 @@
 
 # Build a list of modules to test based on the environment variables.
 $modulesToTest = [System.Collections.Generic.List[string]]::new()
-if ($env:V1 -eq 'true') { $modulesToTest.Add('JumpCloud.SDK.V1') }
-if ($env:V2 -eq 'true') { $modulesToTest.Add('JumpCloud.SDK.V2') }
-if ($env:DIRECTORYINSIGHTS -eq 'true') { $modulesToTest.Add('JumpCloud.SDK.DirectoryInsights') }
+if ($env:v1 -eq 'true') { $modulesToTest.Add('JumpCloud.SDK.V1') }
+if ($env:v2 -eq 'true') { $modulesToTest.Add('JumpCloud.SDK.V2') }
+if ($env:directoryinsights -eq 'true') { $modulesToTest.Add('JumpCloud.SDK.DirectoryInsights') }
 
+Write-Host "Modules to test: $($modulesToTest -join ', ')"
 # If no module labels are found, skip all tests.
 BeforeAll {
     if ($modulesToTest.Count -eq 0) {
-        Skip-All "No module labels (v1, v2, DirectoryInsights) found on PR. Skipping validation tests."
+        Write-Warning "No module labels (v1, v2, directoryinsights) found on PR. Skipping validation tests."
+        exit 0
     }
 }
 

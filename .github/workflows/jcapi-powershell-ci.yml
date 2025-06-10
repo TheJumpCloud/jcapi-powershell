@@ -29,33 +29,46 @@ jobs:
         id: set_labels
         shell: pwsh
         run: |
-          $PR_LABEL_LIST = (curl -s "https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/labels" | jq -r '.[].name') -split '\n'
+          # Fetch and natively parse the JSON list of labels from the PR
+          $jsonResponse = curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" `
+            "https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/labels"
+          $PR_LABEL_LIST = ($jsonResponse | ConvertFrom-Json).name
+          Write-Host "Found labels on PR: $($PR_LABEL_LIST -join ', ')"
 
-          # --- Set Release Type Environment Variable ---
-          $releaseTypes = @('major', 'minor', 'patch', 'manual')
-          $foundTypes = $PR_LABEL_LIST | Where-Object { $_ -in $releaseTypes }
+          # --- Set Release Type Environment Variable using a loop ---
+          $validReleaseTypes = @('major', 'minor', 'patch', 'manual')
+          $foundReleaseType = ''
+          $typeCount = 0
 
-          if ($foundTypes.Count -eq 1) {
-              $RELEASE_TYPE = $foundTypes[0]
-              Write-Host "Found release type: $RELEASE_TYPE"
-              echo "RELEASE_TYPE=$RELEASE_TYPE" >> $env:GITHUB_OUTPUT
+          # Loop through the labels found on the PR
+          foreach ($label in $PR_LABEL_LIST) {
+              # Check if the current label is a valid release type
+              if ($label -in $validReleaseTypes) {
+                  $typeCount++
+                  $foundReleaseType = $label
+              }
+          }
+
+          # Validate that exactly one release type was found
+          if ($typeCount -eq 1) {
+              Write-Host "Release Type set to: $foundReleaseType"
+              echo "RELEASE_TYPE=$foundReleaseType" >> $env:GITHUB_OUTPUT
           } else {
-              throw "Error: Expected exactly one release type label (major, minor, patch, manual), but found $($foundTypes.Count)."
-              exit 1
+              throw "Error: Expected exactly one release type label (major, minor, patch, manual), but found $typeCount."
           }
 
           # --- Set Module Environment Variables ---
           if ('v1' -in $PR_LABEL_LIST) {
-            Write-Host "Found label: v1"
-            echo "V1=true" >> $env:GITHUB_OUTPUT
+            Write-Host "Module label 'v1' found. Setting v1=true"
+            echo "v1=true" >> $env:GITHUB_OUTPUT
           }
           if ('v2' -in $PR_LABEL_LIST) {
-            Write-Host "Found label: v2"
-            echo "V2=true" >> $env:GITHUB_OUTPUT
+            Write-Host "Module label 'v2' found. Setting v2=true"
+            echo "v2=true" >> $env:GITHUB_OUTPUT
           }
           if ('DirectoryInsights' -in $PR_LABEL_LIST) {
-            Write-Host "Found label: DirectoryInsights"
-            echo "DIRECTORYINSIGHTS=true" >> $env:GITHUB_OUTPUT
+            Write-Host "Module label 'DirectoryInsights' found. Setting directoryinsights=true"
+            echo "directoryinsights=true" >> $env:GITHUB_OUTPUT
           }
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -105,9 +118,9 @@ jobs:
     needs: ["Setup-Build-Dependancies", "Check-PR-Labels"]
     runs-on: ubuntu-latest
     env:
-      V1: ${{ needs.Check-PR-Labels.outputs.V1 }}
-      V2: ${{ needs.Check-PR-Labels.outputs.V2 }}
-      DIRECTORYINSIGHTS: ${{ needs.Check-PR-Labels.outputs.DIRECTORYINSIGHTS }}
+      v1: ${{ needs.Check-PR-Labels.outputs.v1 }}
+      v2: ${{ needs.Check-PR-Labels.outputs.v2 }}
+      directoryinsights: ${{ needs.Check-PR-Labels.outputs.directoryinsights }}
       RELEASE_TYPE: ${{ needs.Check-PR-Labels.outputs.RELEASE_TYPE }}
     steps:
       - uses: actions/cache@v3
@@ -121,9 +134,9 @@ jobs:
         run: |
           # Construct the PR_LABELS variable for the Pester test script
           $prLabels = @()
-          if ($env:V1) { $prLabels += 'v1' }
-          if ($env:V2) { $prLabels += 'v2' }
-          if ($env:DIRECTORYINSIGHTS) { $prLabels += 'DirectoryInsights' }
+          if ($env:v1) { $prLabels += 'v1' }
+          if ($env:v2) { $prLabels += 'v2' }
+          if ($env:directoryinsights) { $prLabels += 'DirectoryInsights' }
           if ($env:RELEASE_TYPE) { $prLabels += $env:RELEASE_TYPE }
           $prLabels += 'sdk'
           $env:PR_LABELS = $prLabels -join ','
