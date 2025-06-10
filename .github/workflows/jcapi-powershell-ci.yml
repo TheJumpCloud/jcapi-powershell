@@ -20,31 +20,42 @@ jobs:
     needs: ['Filter-Branch']
     runs-on: ubuntu-latest
     outputs:
-      RELEASE_TYPE: ${{ steps.validate.outputs.RELEASE_TYPE }}
+      RELEASE_TYPE: ${{ steps.set_labels.outputs.RELEASE_TYPE }}
+      V1: ${{ steps.set_labels.outputs.V1 }}
+      V2: ${{ steps.set_labels.outputs.V2 }}
+      DIRECTORYINSIGHTS: ${{ steps.set_labels.outputs.DIRECTORYINSIGHTS }}
     steps:
-      - name: Validate-PR-Version-Labels
-        id: validate
+      - name: Set Environment Variables from PR Labels
+        id: set_labels
         shell: pwsh
         run: |
-          $PR_LABEL_LIST=$(curl -s "https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/labels" | jq -r '.[].name')
-          if ("SDK" -in $PR_LABEL_LIST) {
-              write-host "Starting Build for PowerShell SDK Release"
-          }
-          # validate type from label list:
-          $types = @('major', 'minor', 'patch', 'manual')
-          $typeCount = 0
-          foreach ($item in $PR_LABEL_LIST) {
-              if ($item -in $types) {
-                  write-host "$item"
-                  $typeCount += 1
-                  $RELEASE_TYPE = $item
-              }
-          }
-          if ($typeCount -eq 1) {
+          $PR_LABEL_LIST = (curl -s "https://api.github.com/repos/${{ github.repository }}/issues/${{ github.event.pull_request.number }}/labels" | jq -r '.[].name') -split '\n'
+
+          # --- Set Release Type Environment Variable ---
+          $releaseTypes = @('major', 'minor', 'patch', 'manual')
+          $foundTypes = $PR_LABEL_LIST | Where-Object { $_ -in $releaseTypes }
+
+          if ($foundTypes.Count -eq 1) {
+              $RELEASE_TYPE = $foundTypes[0]
+              Write-Host "Found release type: $RELEASE_TYPE"
               echo "RELEASE_TYPE=$RELEASE_TYPE" >> $env:GITHUB_OUTPUT
           } else {
-              throw "Multiple or invalid release types were found on PR"
+              throw "Error: Expected exactly one release type label (major, minor, patch, manual), but found $($foundTypes.Count)."
               exit 1
+          }
+
+          # --- Set Module Environment Variables ---
+          if ('v1' -in $PR_LABEL_LIST) {
+            Write-Host "Found label: v1"
+            echo "V1=true" >> $env:GITHUB_OUTPUT
+          }
+          if ('v2' -in $PR_LABEL_LIST) {
+            Write-Host "Found label: v2"
+            echo "V2=true" >> $env:GITHUB_OUTPUT
+          }
+          if ('DirectoryInsights' -in $PR_LABEL_LIST) {
+            Write-Host "Found label: DirectoryInsights"
+            echo "DIRECTORYINSIGHTS=true" >> $env:GITHUB_OUTPUT
           }
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -91,8 +102,13 @@ jobs:
           }
 
   Validate-SDK-Module:
-    needs: ["Setup-Build-Dependancies"]
+    needs: ["Setup-Build-Dependancies", "Check-PR-Labels"]
     runs-on: ubuntu-latest
+    env:
+      V1: ${{ needs.Check-PR-Labels.outputs.V1 }}
+      V2: ${{ needs.Check-PR-Labels.outputs.V2 }}
+      DIRECTORYINSIGHTS: ${{ needs.Check-PR-Labels.outputs.DIRECTORYINSIGHTS }}
+      RELEASE_TYPE: ${{ needs.Check-PR-Labels.outputs.RELEASE_TYPE }}
     steps:
       - uses: actions/cache@v3
         with:
@@ -103,6 +119,16 @@ jobs:
         id: validate
         shell: pwsh
         run: |
+          # Construct the PR_LABELS variable for the Pester test script
+          $prLabels = @()
+          if ($env:V1) { $prLabels += 'v1' }
+          if ($env:V2) { $prLabels += 'v2' }
+          if ($env:DIRECTORYINSIGHTS) { $prLabels += 'DirectoryInsights' }
+          if ($env:RELEASE_TYPE) { $prLabels += $env:RELEASE_TYPE }
+          $prLabels += 'sdk'
+          $env:PR_LABELS = $prLabels -join ','
+
+          Write-Host "Passing the following labels to Pester: $env:PR_LABELS"
           Install-Module -Name Pester
           Invoke-Pester -Path /home/runner/work/jcapi-powershell/jcapi-powershell/Tools/ModuleValidation.Tests.ps1
 
@@ -229,7 +255,7 @@ jobs:
   ## ----------------------------------------------------------------
 
   Test-SDK-DI:
-    needs: ["Build-SDK-DI"]
+    needs: ["Build-SDK-DI", "Check-PR-Labels"]
     if: contains(github.event.pull_request.labels.*.name, 'DirectoryInsights')
     runs-on: ubuntu-latest
     timeout-minutes: 70
@@ -259,7 +285,7 @@ jobs:
           ./Test-Module.ps1 -JCApiKey:($env:PESTER_APIKEY) -JCOrgId:($env:PESTER_ORGID) -JCApiKeyMTP:($env:PESTER_MSP_APIKEY) -JCProviderId:($env:PESTER_PROVIDERID) -ExcludeTagList:("MTP") -IncludeTagList:("*") -testModulePath:("./SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/test-module.ps1")
 
   Test-SDK-V1:
-    needs: ["Build-SDK-V1"]
+    needs: ["Build-SDK-V1", "Check-PR-Labels"]
     if: contains(github.event.pull_request.labels.*.name, 'v1')
     runs-on: ubuntu-latest
     timeout-minutes: 70
@@ -289,7 +315,7 @@ jobs:
           ./Test-Module.ps1 -JCApiKey:($env:PESTER_APIKEY) -JCOrgId:($env:PESTER_ORGID) -JCApiKeyMTP:($env:PESTER_MSP_APIKEY) -JCProviderId:($env:PESTER_PROVIDERID) -ExcludeTagList:("MTP") -IncludeTagList:("*") -testModulePath:("./SDKs/PowerShell/JumpCloud.SDK.V1/test-module.ps1")
 
   Test-SDK-V2:
-    needs: ["Build-SDK-V1", "Build-SDK-V2"]
+    needs: ["Build-SDK-V1", "Build-SDK-V2", "Check-PR-Labels"]
     if: contains(github.event.pull_request.labels.*.name, 'v2')
     runs-on: ubuntu-latest
     timeout-minutes: 70
@@ -331,7 +357,7 @@ jobs:
   ## ----------------------------------------------------------------
 
   Test-SDK-MTP-V1:
-    needs: ["Build-SDK-V1"]
+    needs: ["Build-SDK-V1", "Check-PR-Labels"]
     if: contains(github.event.pull_request.labels.*.name, 'v1')
     runs-on: ubuntu-latest
     timeout-minutes: 70
@@ -361,7 +387,7 @@ jobs:
           ./Test-Module.ps1 -JCApiKey:($env:PESTER_APIKEY) -JCOrgId:($env:PESTER_ORGID) -JCApiKeyMTP:($env:PESTER_MSP_APIKEY) -JCProviderId:($env:PESTER_PROVIDERID) -ExcludeTagList:("None") -IncludeTagList:("MTP") -testModulePath:("./SDKs/PowerShell/JumpCloud.SDK.V1/test-module.ps1")
 
   Test-SDK-MTP-V2:
-    needs: ["Build-SDK-V1", "Build-SDK-V2"]
+    needs: ["Build-SDK-V1", "Build-SDK-V2", "Check-PR-Labels"]
     if: contains(github.event.pull_request.labels.*.name, 'v2')
     runs-on: ubuntu-latest
     timeout-minutes: 70

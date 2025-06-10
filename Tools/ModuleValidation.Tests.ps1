@@ -1,116 +1,82 @@
+# Reads environment variables from CI to determine which modules to test.
+#   - $env:V1
+#   - $env:V2
+#   - $env:DIRECTORYINSIGHTS
+# It also uses $env:RELEASE_TYPE ('major', 'minor', 'patch').
 
-Describe -Tag:('ModuleValidation') 'Module Manifest Tests' {
-    It ('Validates Module Versions'){
-        [version]$v1GalleryVersion = Find-Module -name JumpCloud.SDK.V1 | Select-Object -Property Version | ForEach-Object { $_.Version }
-        # Compare the versions to SDKs/PowerShell/JumpCloud.SDK.V1/JumpCloud.SDK.V1.psd1
-        [version]$V1LocalVersion = Get-Content -Path "./SDKs/PowerShell/JumpCloud.SDK.V1/JumpCloud.SDK.V1.psd1" | Select-String -Pattern "ModuleVersion = '(.*)'" | ForEach-Object { $_.Matches.Groups[1].Value }
+# Build a list of modules to test based on the environment variables.
+$modulesToTest = [System.Collections.Generic.List[string]]::new()
+if ($env:V1 -eq 'true') { $modulesToTest.Add('JumpCloud.SDK.V1') }
+if ($env:V2 -eq 'true') { $modulesToTest.Add('JumpCloud.SDK.V2') }
+if ($env:DIRECTORYINSIGHTS -eq 'true') { $modulesToTest.Add('JumpCloud.SDK.DirectoryInsights') }
 
-        # Compare the versions to SDKs/PowerShell/JumpCloud.SDK.V2/JumpCloud.SDK.V2.psd1
-        [version]$v2GalleryVersion = Find-Module -name JumpCloud.SDK.V2 | Select-Object -Property Version | ForEach-Object { $_.Version }
-        [version]$V2LocalVersion = Get-Content -Path "./SDKs/PowerShell/JumpCloud.SDK.V2/JumpCloud.SDK.V2.psd1" | Select-String -Pattern "ModuleVersion = '(.*)'" | ForEach-Object { $_.Matches.Groups[1].Value }
+# If no module labels are found, skip all tests.
+BeforeAll {
+    if ($modulesToTest.Count -eq 0) {
+        Skip-All "No module labels (v1, v2, DirectoryInsights) found on PR. Skipping validation tests."
+    }
+}
 
-        # Compare the versions to SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/JumpCloud.SDK.DirectoryInsights.psd1
-        [version]$DiGalleryVersion = Find-Module -name JumpCloud.SDK.DirectoryInsights | Select-Object -Property Version | ForEach-Object { $_.Version }
-        [version]$DiLocalVersion = Get-Content -Path "./SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/JumpCloud.SDK.DirectoryInsights.psd1" | Select-String -Pattern "ModuleVersion = '(.*)'" | ForEach-Object { $_.Matches.Groups[1].Value }
+# Loop through each module identified for testing and run a dedicated suite of tests.
+foreach ($moduleName in $modulesToTest) {
 
+    Describe -Tag 'ModuleValidation', $moduleName "Module Manifest Tests for $moduleName" {
 
-        switch ($env:RELEASE_TYPE) {
-            'major' {
-                $V1LocalVersion.Major | Should -Be ($v1GalleryVersion.Major + 1)
-                $V2LocalVersion.Major | Should -Be ($v2GalleryVersion.Major + 1)
-                $DiLocalVersion.Major | Should -Be ($DiGalleryVersion.Major + 1)
+        It "validates the module version against the gallery based on the release type" {
+            [version]$galleryVersion = Find-Module -Name $moduleName | Select-Object -ExpandProperty Version
+            $psd1Path = "./SDKs/PowerShell/$moduleName/$moduleName.psd1"
+            [version]$localVersion = (Get-Content -Path $psd1Path | Select-String -Pattern "ModuleVersion = '(.*)'").Matches.Groups[1].Value
 
-                $V1LocalVersion | Should -BeGreaterThan $v1GalleryVersion
-                $V2LocalVersion | Should -BeGreaterThan $v2GalleryVersion
-                $DiGalleryVersion | Should -BeGreaterThan $DiGalleryVersion
-            }
-            'minor' {
-                $V1LocalVersion.Minor | Should -Be ($v1GalleryVersion.Minor + 1)
-                $V2LocalVersion.Minor | Should -Be ($v2GalleryVersion.Minor + 1)
-                $DiLocalVersion.Minor | Should -Be ($DiGalleryVersion.Minor + 1)
+            # The local version must always be greater than the published gallery version.
+            $localVersion | Should -BeGreaterThan $galleryVersion
 
-                $V1LocalVersion | Should -BeGreaterThan $v1GalleryVersion
-                $V2LocalVersion | Should -BeGreaterThan $v2GalleryVersion
-                $DiGalleryVersion | Should -BeGreaterThan $DiGalleryVersion
-            }
-            'patch' {
-                #Test
-                $V1LocalVersion.Build | Should -Be ($v1GalleryVersion.Build + 1)
-                $V2LocalVersion.Build | Should -Be ($v2GalleryVersion.Build + 1)
-                $DiLocalVersion.Build | Should -Be ($DiGalleryVersion.Build + 1)
-
-                $V1LocalVersion | Should -BeGreaterThan $v1GalleryVersion
-                $V2LocalVersion | Should -BeGreaterThan $v2GalleryVersion
-                $DiLocalVersion | Should -BeGreaterThan $DiGalleryVersion
-
-
+            # Check for the correct version number increment based on the release type.
+            switch ($env:RELEASE_TYPE) {
+                'major' { $localVersion.Major | Should -Be ($galleryVersion.Major + 1) }
+                'minor' { $localVersion.Minor | Should -Be ($galleryVersion.Minor + 1) }
+                'patch' { $localVersion.Build | Should -Be ($galleryVersion.Build + 1) }
             }
         }
-    }
-    It 'The data on the current version of the Module Changelog should be todays date' {
-        if ($env:RELEASE_TYPE) {
-            @('JumpCloud.SDK.DirectoryInsights', 'JumpCloud.SDK.V1', 'JumpCloud.SDK.V2')| ForEach-Object {
-                $latestModule = Find-Module -Name $_
-                $rootPath = "$PSScriptRoot/../"
-                $moduleChangelogPath = "$rootPath/$_.md"
-                $moduleChangelogContent = Get-Content ("$moduleChangelogPath") -TotalCount 3
-                # latest from changelog
-                $stringMatch = Select-String -InputObject $moduleChangelogContent -Pattern "## $_-([0-9]+.[0-9]+.[0-9]+)"
-                $latestChangelogVersion = $stringMatch.matches.groups[1].value
-                $stringMatch = Select-String -InputObject $moduleChangelogContent -Pattern "Release Date: (.*) ####"
-                $latestReleaseDate = $stringMatch.matches.groups[1].value
-                switch ($env:RELEASE_TYPE) {
-                    'major' {
-                        $versionString = "$($(([version]$latestModule.Version).Major) + 1).0.0"
-                        Write-Host "[Module Validation Tests] Development Version Major Changelog Version: $($latestChangelogVersion) Should be $versionString"
-                        ([Version]$latestChangelogVersion).Major | Should -Be (([version]$latestModule.Version).Major + 1)
-                        ([Version]$latestChangelogVersion) | Should -BeGreaterThan (([version]$latestModule.Version))
-                    }
-                    'minor' {
-                        $versionString = "$($(([version]$latestModule.Version).Major)).$(([version]$latestModule.Version).minor + 1).0"
-                        Write-Host "[Module Validation Tests] Development Version Minor Changelog Version: $($latestChangelogVersion) Should be $versionString"
-                        ([Version]$latestChangelogVersion).Minor | Should -Be (([version]$latestModule.Version).Minor + 1)
-                        ([Version]$latestChangelogVersion) | Should -BeGreaterThan (([version]$latestModule.Version))
-                    }
-                    'patch' {
-                        $versionString = "$($(([version]$latestModule.Version).Major)).$(([version]$latestModule.Version).minor).$(([version]$latestModule.Version).Build + 1)"
-                        Write-Host "[Module Validation Tests] Development Version Build Changelog Version: $($latestChangelogVersion) Should be $versionString"
-                        ([Version]$latestChangelogVersion).Build | Should -Be (([version]$latestModule.Version).Build + 1)
-                        ([Version]$latestChangelogVersion) | Should -BeGreaterThan (([version]$latestModule.Version))
-                    }
-                    'manual' {
-                        Write-Host "[Module Validation Tests] Development Version Changelog Version: $($latestChangelogVersion) is going to be manually released to PowerShell Gallery"
-                        ([Version]$latestChangelogVersion) | Should -BeGreaterThan (([version]$latestModule.Version))
-                    }
-                }
-                $todayDate = Get-Date -UFormat "%B %d, %Y"
-                # if ($todayDate | Select-String -Pattern "0\d,") {
-                #     $todayDate = "$(Get-Date -UFormat %B) $($(Get-Date -Uformat %d) -replace '0', ''), $(Get-Date -UFormat %Y)"
-                # }
-                $latestReleaseDate | Should -Be $todayDate
+
+        It "validates the changelog has the correct new version and today's date" {
+            # This test only runs if a release type is specified.
+            if (-not $env:RELEASE_TYPE) {
+                Skip "Skipping changelog validation because no release type was specified."
             }
 
+            $latestModule = Find-Module -Name $moduleName
+            $changelogPath = "$PSScriptRoot/../$moduleName.md"
+            $changelogContent = Get-Content -Path $changelogPath -TotalCount 3
+
+            # Validate the version in the changelog.
+            $latestChangelogVersionString = (Select-String -InputObject $changelogContent -Pattern "## $moduleName-([0-9]+.[0-9]+.[0-9]+)").Matches.Groups[1].Value
+            [version]$latestChangelogVersion = $latestChangelogVersionString
+            $latestChangelogVersion | Should -BeGreaterThan ([version]$latestModule.Version)
+
+            # Validate the release date is today.
+            $latestReleaseDate = (Select-String -InputObject $changelogContent -Pattern "Release Date: (.*) ####").Matches.Groups[1].Value
+            $todayDate = Get-Date -UFormat "%B %d, %Y"
+            $latestReleaseDate | Should -Be $todayDate
         }
-    }
-    It 'The ModuleChangeLog Congent should not contain placeholder content'{
-        $rootPath = "$PSScriptRoot/../"
-        @('JumpCloud.SDK.DirectoryInsights', 'JumpCloud.SDK.V1', 'JumpCloud.SDK.V2') | ForEach-Object {
-            $moduleChangelogPath = "$rootPath/$_.md"
-            $moduleChangelogContent = Get-Content ("$moduleChangelogPath")
-            $moduleChangelogContent | Should -Not -Match "{{Fill in the"
+
+        It "ensures the changelog does not contain placeholder content" {
+            $changelogPath = "$PSScriptRoot/../$moduleName.md"
+            $changelogContent = Get-Content -Path $changelogPath
+            $changelogContent | Should -Not -Match "{{Fill in the"
         }
-    }
-    It 'Runs API Transform and validates no changes in SwaggerSpec exist (branch is up to date with public docs)'{
-        $rootPath = "$PSScriptRoot/../"
-        @('JumpCloud.SDK.DirectoryInsights', 'JumpCloud.SDK.V1', 'JumpCloud.SDK.V2') | ForEach-Object {
-            . "$rootpath/ApiTransform.ps1" -SDKName $_ 3>$null
-            $sdkSwaggerFile = "$rootpath/SwaggerSpecs/$_.json"
+
+        It "ensures the Swagger spec is up to date with no pending changes" {
+            . "$PSScriptRoot/../ApiTransform.ps1" -SDKName $moduleName 3>$null
+            $sdkSwaggerFile = "$PSScriptRoot/../SwaggerSpecs/$moduleName.json"
             $currentBranch = git rev-parse --abbrev-ref HEAD
+
+            # Compare the generated spec file with the one in the current branch.
             $changes = git diff -I "collection_time" -I "dueDate" $currentBranch -- $sdkSwaggerFile
-            if ($changes){
-                Write-Warning "Git Diff changes found in /SwaggerSpecs/$_.json have you run build.ps1 today?"
+
+            if ($changes) {
+                Write-Warning "Git Diff found changes in /SwaggerSpecs/$moduleName.json. Please run build.ps1 to ensure it is up to date."
             }
-            $changes | should -BeNullOrEmpty
+            $changes | Should -BeNullOrEmpty
         }
     }
 }
