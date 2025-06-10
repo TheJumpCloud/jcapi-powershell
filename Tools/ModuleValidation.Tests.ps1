@@ -43,18 +43,19 @@
 # }
 
 # # Loop through each module identified for testing.
-$moduleNames = @('JumpCloud.SDK.V1', 'JumpCloud.SDK.V2', 'JumpCloud.SDK.DirectoryInsights')
 
     Describe -Tag:('ModuleValidation') 'Module Validation'  {
-        BeforeEach {
-            # Check the environment variable for the module name.
-            $env:PR_LABELS | Should -Not -BeNullOrEmpty "because the PR_LABELS environment variable should be set to identify the module being tested."
-            $moduleName = $env:PR_LABELS -split ',' | Where-Object { $_ -match 'JumpCloud.SDK' } | ForEach-Object { $_.Trim() }
-            $moduleName | Should -Not -BeNullOrEmpty "because the module name should be derived from the PR_LABELS environment variable."
-            # Ensure the module name is one of the expected values.
-            $moduleName | Should -BeIn $moduleNames "because the module name should match one of the predefined module names: $($moduleNames -join ', ')"
-            # Set the module name in the environment variable for use in tests.
-            $env:MODULE_NAME = $moduleName
+        BeforeAll {
+            if ($env:v1 -eq 'true') {
+                $moduleName = 'JumpCloud.SDK.V1'
+            } elseif ($env:v2 -eq 'true') {
+                $moduleName = 'JumpCloud.SDK.V2'
+            } elseif ($env:DirectoryInsights -eq 'true') {
+                $moduleName = 'JumpCloud.SDK.DirectoryInsights'
+            } else {
+                Write-Error "No valid module label found in the environment variables. Exiting."
+                Exit 1
+            }
         }
         It "validates the module version against the gallery based on the release type" {
             # Find the currently published version on the PowerShell Gallery.
