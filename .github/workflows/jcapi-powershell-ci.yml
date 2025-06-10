@@ -117,45 +117,34 @@ jobs:
   Validate-SDK-Module:
     needs: ["Setup-Build-Dependancies", "Check-PR-Labels"]
     runs-on: ubuntu-latest
-
+    env:
+      v1: ${{ needs.Check-PR-Labels.outputs.v1 }}
+      v2: ${{ needs.Check-PR-Labels.outputs.v2 }}
+      directoryinsights: ${{ needs.Check-PR-Labels.outputs.directoryinsights }}
+      RELEASE_TYPE: ${{ needs.Check-PR-Labels.outputs.RELEASE_TYPE }}
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
-
-      - name: Restore PowerShell Module Cache
-        uses: actions/cache@v3
+      - uses: actions/cache@v3
         with:
-          path: /home/runner/.local/share/powershell/Modules/
-          key: PS-Dependancies-${{ runner.os }}
-
+          path: "/home/runner/.local/share/powershell/Modules/"
+          key: PS-Dependancies
+      - uses: actions/checkout@v4
       - name: Validate SDK Module
         id: validate
         shell: pwsh
         run: |
-          # --- Gracefully handle potentially empty outputs from the previous job ---
-          # If an output is an empty string, we default to $false. Otherwise, we parse it.
-          # This prevents the "String '' was not recognized as a valid Boolean" error.
-          $v1_string = '${{ needs.Check-PR-Labels.outputs.v1 }}'
-          $v2_string = '${{ needs.Check-PR-Labels.outputs.v2 }}'
-          $di_string = '${{ needs.Check-PR-Labels.outputs.directoryinsights }}'
+          # Construct the PR_LABELS variable for the Pester test script
+          $prLabels = @()
+          if ($env:v1) { $prLabels += 'v1' }
+          if ($env:v2) { $prLabels += 'v2' }
+          if ($env:directoryinsights) { $prLabels += 'DirectoryInsights' }
+          if ($env:RELEASE_TYPE) { $prLabels += $env:RELEASE_TYPE }
+          $prLabels += 'sdk'
+          $env:PR_LABELS = $prLabels -join ','
 
-          $pesterParams = @{
-              v1                = if (-not [string]::IsNullOrEmpty($v1_string)) { [System.Boolean]::Parse($v1_string) } else { $false };
-              v2                = if (-not [string]::IsNullOrEmpty($v2_string)) { [System.Boolean]::Parse($v2_string) } else { $false };
-              directoryinsights = if (-not [string]::IsNullOrEmpty($di_string)) { [System.Boolean]::Parse($di_string) } else { $false };
-              release_type      = '${{ needs.Check-PR-Labels.outputs.RELEASE_TYPE }}';
-          }
-
-          # For debugging purposes, you can inspect the final parameters.
-          Write-Output "--- Passing the following parameters to Pester ---"
-          $pesterParams.GetEnumerator() | ForEach-Object { Write-Output "  $($_.Name) = $($_.Value) (Type: $($_.Value.GetType().Name))" }
-          Write-Output "----------------------------------------------------"
-
-          # Define the path to the test script
-          $testScriptPath = '/home/runner/work/jcapi-powershell/jcapi-powershell/Tools/ModuleValidation.Tests.ps1'
-
-          # Invoke Pester, passing the script path and the parameters hashtable.
-          Invoke-Pester -Script @{ Path = $testScriptPath; Parameters = $pesterParams }
+          Write-Host "Passing the following labels to Pester: $env:PR_LABELS"
+          Install-Module -Name Pester
+          # Pass the PR_LABELS environment variable to the Pester test script
+          Invoke-Pester -Path /home/runner/work/jcapi-powershell/jcapi-powershell/Tools/ModuleValidation.Tests.ps1 -ArgumentList @{"PR_LABELS"=$env:PR_LABELS}
 
   ## ----------------------------------------------------------------
   ## Build Jobs

@@ -1,24 +1,37 @@
-param(
-    [bool]$v1 = $false,
-    [bool]$v2 = $false,
-    [bool]$directoryinsights = $false,
-    [string]$release_type
-)
-
 BeforeAll {
     # For debugging, you can see the exact values received by the script.
-    Write-Output "DEBUG: v1 = $v1 (Type: $($v1.GetType().Name))"
-    Write-Output "DEBUG: v2 = $v2 (Type: $($v2.GetType().Name))"
-    Write-Output "DEBUG: directoryinsights = $directoryinsights (Type: $($directoryinsights.GetType().Name))"
-    Write-Output "DEBUG: release_type = '$release_type'"
-
+    # Get the PR labels from the environment variables.
+    # Create a list to hold the modules that need validation.
     $modulesToTest = [System.Collections.Generic.List[string]]::new()
+    if ($env:PR_LABELS -eq $null) {
+        Write-Error "PR_LABELS environment variable is not set. Exiting."
+        Exit 1
+    }
+    # Check if the PR_LABELS environment variable contains specific labels.
+    $v1 = $env:PR_LABELS -contains 'v1'
+    if ($v1) {
+        Write-Output "DEBUG: v1 = $v1"
+        $modulesToTest.Add('JumpCloud.SDK.V1')
+    }
+    $v2 = $env:PR_LABELS -contains 'v2'
+    if ($v2) {
+        Write-Output "DEBUG: v2 = $v2"
+        $modulesToTest.Add('JumpCloud.SDK.V2')
+    }
+    $directoryinsights = $env:PR_LABELS -contains 'DirectoryInsights'
+    if ($directoryinsights) {
+        Write-Output "DEBUG: DirectoryInsights = $directoryinsights"
+        $modulesToTest.Add('JumpCloud.SDK.DirectoryInsights')
+    }
 
-    # Use the parameters now instead of environment variables.
-    # The logic is now clean, type-safe, and unambiguous.
-    if ($v1) { $modulesToTest.Add('JumpCloud.SDK.V1') }
-    if ($v2) { $modulesToTest.Add('JumpCloud.SDK.V2') }
-    if ($directoryinsights) { $modulesToTest.Add('JumpCloud.SDK.DirectoryInsights') }
+    $release_type = $env:RELEASE_TYPE
+    if (-not $release_type) {
+        Write-Error "RELEASE_TYPE environment variable is not set. Exiting."
+        Exit 1
+    }
+    # For debugging purposes, output the values of the parameters.
+    Write-Output "DEBUG: PR_LABELS = $($env:PR_LABELS)"
+    Write-Output "DEBUG: RELEASE_TYPE = $release_type"
 
     if ($modulesToTest.Count -eq 0) {
         Write-Warning "No modules flagged for validation. Skipping tests."
