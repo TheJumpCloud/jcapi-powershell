@@ -59,16 +59,16 @@ jobs:
 
           # --- Set Module Environment Variables ---
           if ('v1' -in $PR_LABEL_LIST) {
-            Write-Host "Module label 'v1' found. Setting v1=true"
-            echo "v1=true" >> $env:GITHUB_OUTPUT
+            Write-Host "Module label 'v1' found"
+            echo "v1" >> $env:GITHUB_OUTPUT
           }
           if ('v2' -in $PR_LABEL_LIST) {
-            Write-Host "Module label 'v2' found. Setting v2=true"
-            echo "v2=true" >> $env:GITHUB_OUTPUT
+            Write-Host "Module label 'v2' found"
+            echo "v2" >> $env:GITHUB_OUTPUT
           }
           if ('DirectoryInsights' -in $PR_LABEL_LIST) {
-            Write-Host "Module label 'DirectoryInsights' found. Setting directoryinsights=true"
-            echo "directoryinsights=true" >> $env:GITHUB_OUTPUT
+            Write-Host "Module label 'DirectoryInsights' found"
+            echo "directoryinsights" >> $env:GITHUB_OUTPUT
           }
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
