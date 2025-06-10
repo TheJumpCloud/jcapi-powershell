@@ -11,6 +11,7 @@ if ($env:v2 -eq 'true') { $modulesToTest.Add('JumpCloud.SDK.V2') }
 if ($env:directoryinsights -eq 'true') { $modulesToTest.Add('JumpCloud.SDK.DirectoryInsights') }
 
 Write-Host "Modules to test: $($modulesToTest -join ', ')"
+Write-Host "Release Type: $env:RELEASE_TYPE"
 # If no module labels are found, skip all tests.
 BeforeAll {
     if ($modulesToTest.Count -eq 0) {
