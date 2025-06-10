@@ -1,52 +1,61 @@
-BeforeAll {
-    # For debugging, you can see the exact values received by the script.
-    # Get the PR labels from the environment variables.
-    # Create a list to hold the modules that need validation.
-    $script:modulesToTest = [System.Collections.Generic.List[string]]::new()
-    if ($env:PR_LABELS -eq $null) {
-        Write-Error "PR_LABELS environment variable is not set. Exiting."
-        Exit 1
-    }
-    # Check if the PR_LABELS environment variable contains specific labels.
-    $v1 = $env:PR_LABELS -contains 'v1'
-    if ($v1) {
-        Write-Output "DEBUG: v1 = $v1"
-        $script:modulesToTest.Add('JumpCloud.SDK.V1')
-    }
-    $v2 = $env:PR_LABELS -contains 'v2'
-    if ($v2) {
-        Write-Output "DEBUG: v2 = $v2"
-        $script:modulesToTest.Add('JumpCloud.SDK.V2')
-    }
-    $directoryinsights = $env:PR_LABELS -contains 'DirectoryInsights'
-    if ($directoryinsights) {
-        Write-Output "DEBUG: DirectoryInsights = $directoryinsights"
-        $script:modulesToTest.Add('JumpCloud.SDK.DirectoryInsights')
-    }
+# BeforeAll {
+#     # For debugging, you can see the exact values received by the script.
+#     # Get the PR labels from the environment variables.
+#     # Create a list to hold the modules that need validation.
+#     $script:modulesToTest = [System.Collections.Generic.List[string]]::new()
+#     if ($env:PR_LABELS -eq $null) {
+#         Write-Error "PR_LABELS environment variable is not set. Exiting."
+#         Exit 1
+#     }
+#     # Check if the PR_LABELS environment variable contains specific labels.
+#     $v1 = $env:PR_LABELS -contains 'v1'
+#     if ($v1) {
+#         Write-Output "DEBUG: v1 = $v1"
+#         $script:modulesToTest.Add('JumpCloud.SDK.V1')
+#     }
+#     $v2 = $env:PR_LABELS -contains 'v2'
+#     if ($v2) {
+#         Write-Output "DEBUG: v2 = $v2"
+#         $script:modulesToTest.Add('JumpCloud.SDK.V2')
+#     }
+#     $directoryinsights = $env:PR_LABELS -contains 'DirectoryInsights'
+#     if ($directoryinsights) {
+#         Write-Output "DEBUG: DirectoryInsights = $directoryinsights"
+#         $script:modulesToTest.Add('JumpCloud.SDK.DirectoryInsights')
+#     }
 
-    $script:release_type = $env:RELEASE_TYPE
-    if (-not $script:release_type) {
-        Write-Error "RELEASE_TYPE environment variable is not set. Exiting."
-        Exit 1
-    }
-    # For debugging purposes, output the values of the parameters.
-    Write-Output "DEBUG: PR_LABELS = $($env:PR_LABELS)"
-    Write-Output "DEBUG: RELEASE_TYPE = $script:release_type"
+#     $script:release_type = $env:RELEASE_TYPE
+#     if (-not $script:release_type) {
+#         Write-Error "RELEASE_TYPE environment variable is not set. Exiting."
+#         Exit 1
+#     }
+#     # For debugging purposes, output the values of the parameters.
+#     Write-Output "DEBUG: PR_LABELS = $($env:PR_LABELS)"
+#     Write-Output "DEBUG: RELEASE_TYPE = $script:release_type"
 
-    if ($script:modulesToTest.Count -eq 0) {
-        Write-Warning "No modules flagged for validation. Skipping tests."
-        Skip-All "No module labels (v1, v2, DirectoryInsights) found on PR. Skipping validation tests."
-    }
+#     if ($script:modulesToTest.Count -eq 0) {
+#         Write-Warning "No modules flagged for validation. Skipping tests."
+#         Skip-All "No module labels (v1, v2, DirectoryInsights) found on PR. Skipping validation tests."
+#     }
 
-    $moduleNames = $script:modulesToTest -join ', '
-    Write-Host "Running validation for the following modules: $moduleNames"
-}
+#     $moduleNames = $script:modulesToTest -join ', '
+#     Write-Host "Running validation for the following modules: $moduleNames"
+# }
 
-# Loop through each module identified for testing.
+# # Loop through each module identified for testing.
+$moduleNames = @('JumpCloud.SDK.V1', 'JumpCloud.SDK.V2', 'JumpCloud.SDK.DirectoryInsights')
 
-foreach ($moduleName in $script:modulesToTest) {
     Describe -Tag:('ModuleValidation') 'Module Validation'  {
-
+        BeforeEach {
+            # Check the environment variable for the module name.
+            $env:PR_LABELS | Should -Not -BeNullOrEmpty "because the PR_LABELS environment variable should be set to identify the module being tested."
+            $moduleName = $env:PR_LABELS -split ',' | Where-Object { $_ -match 'JumpCloud.SDK' } | ForEach-Object { $_.Trim() }
+            $moduleName | Should -Not -BeNullOrEmpty "because the module name should be derived from the PR_LABELS environment variable."
+            # Ensure the module name is one of the expected values.
+            $moduleName | Should -BeIn $moduleNames "because the module name should match one of the predefined module names: $($moduleNames -join ', ')"
+            # Set the module name in the environment variable for use in tests.
+            $env:MODULE_NAME = $moduleName
+        }
         It "validates the module version against the gallery based on the release type" {
             # Find the currently published version on the PowerShell Gallery.
             # Use -ErrorAction SilentlyContinue for cases where the module isn't published yet (e.g., first release).
@@ -131,4 +140,4 @@ foreach ($moduleName in $script:modulesToTest) {
             $gitDiffOutput | Should -BeNullOrEmpty "because the Swagger spec file should have no pending changes after a build."
         }
     }
-}
+
