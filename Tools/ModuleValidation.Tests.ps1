@@ -5,11 +5,11 @@
 # It also uses $env:RELEASE_TYPE ('major', 'minor', 'patch').
 
 # Build a list of modules to test based on the environment variables.
-# $modulesToTest = [System.Collections.Generic.List[string]]::new()
-# Write-Host "Env v1: $env:v1 , v2: $env:v2, directoryinsights: $env:directoryinsights"
-# if ($env:v1 -eq 'true') { $modulesToTest.Add('JumpCloud.SDK.V1') }
-# if ($env:v2 -eq 'true') { $modulesToTest.Add('JumpCloud.SDK.V2') }
-# if ($env:directoryinsights -eq 'true') { $modulesToTest.Add('JumpCloud.SDK.DirectoryInsights') }
+$modulesToTest = [System.Collections.Generic.List[string]]::new()
+Write-Host "Env v1: $env:v1 , v2: $env:v2, directoryinsights: $env:directoryinsights"
+if ($env:v1 -eq 'true') { $modulesToTest.Add('JumpCloud.SDK.V1') }
+if ($env:v2 -eq 'true') { $modulesToTest.Add('JumpCloud.SDK.V2') }
+if ($env:directoryinsights -eq 'true') { $modulesToTest.Add('JumpCloud.SDK.DirectoryInsights') }
 
 Write-Host "Modules to test: $($modulesToTest -join ', ')"
 Write-Host "Release Type: $env:RELEASE_TYPE"
