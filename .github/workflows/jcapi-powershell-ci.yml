@@ -117,11 +117,6 @@ jobs:
   Validate-SDK-Module:
     needs: ["Setup-Build-Dependancies", "Check-PR-Labels"]
     runs-on: ubuntu-latest
-    env:
-      v1: ${{ needs.Check-PR-Labels.outputs.v1 }}
-      v2: ${{ needs.Check-PR-Labels.outputs.v2 }}
-      directoryinsights: ${{ needs.Check-PR-Labels.outputs.directoryinsights }}
-      RELEASE_TYPE: ${{ needs.Check-PR-Labels.outputs.RELEASE_TYPE }}
     steps:
       - uses: actions/cache@v3
         with:
@@ -131,6 +126,11 @@ jobs:
       - name: Validate SDK Module
         id: validate
         shell: pwsh
+        env:
+          v1: ${{ needs.Check-PR-Labels.outputs.v1 }}
+          v2: ${{ needs.Check-PR-Labels.outputs.v2 }}
+          directoryinsights: ${{ needs.Check-PR-Labels.outputs.directoryinsights }}
+          RELEASE_TYPE: ${{ needs.Check-PR-Labels.outputs.RELEASE_TYPE }}
         run: |
           # Construct the PR_LABELS variable for the Pester test script
           $prLabels = @()
@@ -143,7 +143,6 @@ jobs:
 
           Write-Host "Passing the following labels to Pester: $env:PR_LABELS"
           Install-Module -Name Pester
-          # Pass the PR_LABELS environment variable to the Pester test script
           Invoke-Pester -Path /home/runner/work/jcapi-powershell/jcapi-powershell/Tools/ModuleValidation.Tests.ps1
 
   ## ----------------------------------------------------------------
