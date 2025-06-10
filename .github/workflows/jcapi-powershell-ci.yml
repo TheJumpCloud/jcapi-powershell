@@ -132,31 +132,30 @@ jobs:
         id: validate
         shell: pwsh
         run: |
-          # This is the modern, robust way to pass CI/CD values to Pester tests.
+          # --- Gracefully handle potentially empty outputs from the previous job ---
+          # If an output is an empty string, we default to $false. Otherwise, we parse it.
+          # This prevents the "String '' was not recognized as a valid Boolean" error.
+          $v1_string = '${{ needs.Check-PR-Labels.outputs.v1 }}'
+          $v2_string = '${{ needs.Check-PR-Labels.outputs.v2 }}'
+          $di_string = '${{ needs.Check-PR-Labels.outputs.directoryinsights }}'
 
-          # Ensure Pester is installed (or use the cached version)
-          Write-Output "Installing/Updating Pester module..."
-          Install-Module -Name Pester -Force -SkipPublisherCheck -Confirm:$false
-
-          # Create a hashtable of parameters to pass to the test script.
           $pesterParams = @{
-              v1                = [System.Boolean]::Parse('${{ needs.Check-PR-Labels.outputs.v1 }}');
-              v2                = [System.Boolean]::Parse('${{ needs.Check-PR-Labels.outputs.v2 }}');
-              directoryinsights = [System.Boolean]::Parse('${{ needs.Check-PR-Labels.outputs.directoryinsights }}');
+              v1                = if (-not [string]::IsNullOrEmpty($v1_string)) { [System.Boolean]::Parse($v1_string) } else { $false };
+              v2                = if (-not [string]::IsNullOrEmpty($v2_string)) { [System.Boolean]::Parse($v2_string) } else { $false };
+              directoryinsights = if (-not [string]::IsNullOrEmpty($di_string)) { [System.Boolean]::Parse($di_string) } else { $false };
               release_type      = '${{ needs.Check-PR-Labels.outputs.RELEASE_TYPE }}';
           }
 
-          # --- For Debugging: Print the parameters being passed ---
-          Write-Output "--- Pester Parameters ---"
-          $pesterParams | Format-Table | Out-String | Write-Output
-          Write-Output "-------------------------"
+          # For debugging purposes, you can inspect the final parameters.
+          Write-Output "--- Passing the following parameters to Pester ---"
+          $pesterParams.GetEnumerator() | ForEach-Object { Write-Output "  $($_.Name) = $($_.Value) (Type: $($_.Value.GetType().Name))" }
+          Write-Output "----------------------------------------------------"
 
           # Define the path to the test script
           $testScriptPath = '/home/runner/work/jcapi-powershell/jcapi-powershell/Tools/ModuleValidation.Tests.ps1'
 
           # Invoke Pester, passing the script path and the parameters hashtable.
           Invoke-Pester -Script @{ Path = $testScriptPath; Parameters = $pesterParams }
-
 
   ## ----------------------------------------------------------------
   ## Build Jobs
