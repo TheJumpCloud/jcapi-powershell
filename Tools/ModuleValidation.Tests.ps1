@@ -6,6 +6,7 @@
 
 # Build a list of modules to test based on the environment variables.
 $modulesToTest = [System.Collections.Generic.List[string]]::new()
+Write-Host "Env v1: $env:v1 , v2: $env:v2, directoryinsights: $env:directoryinsights"
 if ($env:v1 -eq 'true') { $modulesToTest.Add('JumpCloud.SDK.V1') }
 if ($env:v2 -eq 'true') { $modulesToTest.Add('JumpCloud.SDK.V2') }
 if ($env:directoryinsights -eq 'true') { $modulesToTest.Add('JumpCloud.SDK.DirectoryInsights') }
@@ -13,12 +14,10 @@ if ($env:directoryinsights -eq 'true') { $modulesToTest.Add('JumpCloud.SDK.Direc
 Write-Host "Modules to test: $($modulesToTest -join ', ')"
 Write-Host "Release Type: $env:RELEASE_TYPE"
 # If no module labels are found, skip all tests.
-BeforeAll {
-    if ($modulesToTest.Count -eq 0) {
+if ($modulesToTest.Count -eq 0) {
         Write-Warning "No module labels (v1, v2, directoryinsights) found on PR. Skipping validation tests."
         exit 0
     }
-}
 
 # Loop through each module identified for testing and run a dedicated suite of tests.
 foreach ($moduleName in $modulesToTest) {
