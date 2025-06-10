@@ -1,4 +1,7 @@
 BeforeAll {
+    Write-Output "Initial value of env:v1 is '$($env:v1)'"
+    Write-Output "Initial type of env:v1 is $($env:v1.GetType().FullName)"
+    Write-Output "Comparison result of ('$($env:v1)' -eq 'true') is $($env:v1 -eq 'true')"
     $modulesToTest = [System.Collections.Generic.List[string]]::new()
     if ($env:v1 -eq 'true') { $modulesToTest.Add('JumpCloud.SDK.V1') }
     if ($env:v2 -eq 'true') { $modulesToTest.Add('JumpCloud.SDK.V2') }
@@ -6,11 +9,11 @@ BeforeAll {
     $ENV:RELEASE_TYPE = 'patch' # Default to 'patch' if not set, can be overridden by the CI/CD pipeline.
     # If no modules are flagged for testing, skip the entire test file gracefully.
     if ($modulesToTest.Count -eq 0) {
-        Write-Host "No modules flagged for validation. Skipping tests. $($modulesToTest)"
+        Write-Output "No modules flagged for validation. Skipping tests. $($modulesToTest)"
         Skip-All "No module labels (v1, v2, DirectoryInsights) found on PR. Skipping validation tests."
     }
     $moduleNames = $modulesToTest -join ', '
-    Write-Host "Running validation for the following modules: $moduleNames"
+    Write-Output "Running validation for the following modules: $moduleNames"
 }
 
 # Loop through each module identified for testing.
