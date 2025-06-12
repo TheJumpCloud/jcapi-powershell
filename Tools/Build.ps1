@@ -12,14 +12,13 @@ param (
     $SDKName
 )
 
-#TODO: Enable this if you want to build all SDKs by default.
 # If no individual SDK is specified, build all of them.
-# if (!$SDKName) {
-#     $sdks = @('JumpCloud.SDK.DirectoryInsights', 'JumpCloud.SDK.V1', 'JumpCloud.SDK.V2')
-# }
-# else {
-#     $sdks = $SDKName
-# }
+if (!$SDKName) {
+    $sdks = @('JumpCloud.SDK.DirectoryInsights', 'JumpCloud.SDK.V1', 'JumpCloud.SDK.V2')
+}
+else {
+    $sdks = $SDKName
+}
 
 # Store the current path to return to it after the script finishes.
 $pathBeforeRun = $pwd
