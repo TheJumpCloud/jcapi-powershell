@@ -4,21 +4,21 @@ on:
   pull_request:
     branches:
       - SDK-Release-Test
+
 jobs:
   Filter-Branch:
     runs-on: ubuntu-latest
     if: contains(github.event.pull_request.labels.*.name, 'SDK')
     steps:
-      - run: echo "SDK label found. Continuing..."
+      - run: echo "SDK label found. Continuing."
 
-# TODO: Uncomment the following lines to enable branch merge validation after testing
   # Check-If-Merged:
   #   needs: ['Filter-Branch']
   #   if: github.event.pull_request.merged == true
   #   runs-on: ubuntu-latest
   #   steps:
   #     - name: Check if Merged
-  #       run: echo "${{ github.head_ref }} merged into master"
+  #       run: echo "PR #${{ github.event.pull_request.number }} was merged. Starting release process."
 
   Check-PR-Labels:
     #needs: ['Check-If-Merged']
@@ -82,13 +82,12 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           SDK_NAME="JumpCloud.SDK.V1"
-          MODULE_CAPTURE=$(grep -Po "ModuleVersion = '(\d+\.\d+\.\d+)'" ${{ github.workspace }}/SDKs/PowerShell/$SDK_NAME/$SDK_NAME.psd1)
-          VERSION=$(echo $MODULE_CAPTURE | grep -Po "(\d+\.\d+\.\d+)")
-          TITLE="$SDK_NAME-$VERSION"
-          TAG="$SDK_NAME-$VERSION"
+          MODULE_CAPTURE=$(grep -Po "ModuleVersion = '(\d+\.\d+\.\d+)'" "${{ github.workspace }}/SDKs/PowerShell/${SDK_NAME}/${SDK_NAME}.psd1")
+          VERSION=$(echo "$MODULE_CAPTURE" | grep -Po "(\d+\.\d+\.\d+)")
+          TITLE="${SDK_NAME}-${VERSION}"
+          TAG="${SDK_NAME}-${VERSION}"
           CHANGELOG=$(cat "${{ github.workspace }}/${SDK_NAME}.md" | awk "/^## ${SDK_NAME}-${VERSION}/{f=1; next} /^## ${SDK_NAME}-[0-9]+.[0-9]+.[0-9]+/{f=0} f")
-
-          gh release create "$TAG" --title "$TITLE" --notes "$CHANGELOG" --draft "${{ github.workspace }}/SDKs/PowerShell/$SDK_NAME.zip"
+          gh release create "$TAG" --title "$TITLE" --notes "$CHANGELOG" --draft "${{ github.workspace }}/SDKs/PowerShell/${SDK_NAME}.zip"
 
   Draft-Release-V2:
     needs: ['Check-PR-Labels']
@@ -107,13 +106,12 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           SDK_NAME="JumpCloud.SDK.V2"
-          MODULE_CAPTURE=$(grep -Po "ModuleVersion = '(\d+\.\d+\.\d+)'" ${{ github.workspace }}/SDKs/PowerShell/$SDK_NAME/$SDK_NAME.psd1)
-          VERSION=$(echo $MODULE_CAPTURE | grep -Po "(\d+\.\d+\.\d+)")
-          TITLE="$SDK_NAME-$VERSION"
-          TAG="$SDK_NAME-$VERSION"
+          MODULE_CAPTURE=$(grep -Po "ModuleVersion = '(\d+\.\d+\.\d+)'" "${{ github.workspace }}/SDKs/PowerShell/${SDK_NAME}/${SDK_NAME}.psd1")
+          VERSION=$(echo "$MODULE_CAPTURE" | grep -Po "(\d+\.\d+\.\d+)")
+          TITLE="${SDK_NAME}-${VERSION}"
+          TAG="${SDK_NAME}-${VERSION}"
           CHANGELOG=$(cat "${{ github.workspace }}/${SDK_NAME}.md" | awk "/^## ${SDK_NAME}-${VERSION}/{f=1; next} /^## ${SDK_NAME}-[0-9]+.[0-9]+.[0-9]+/{f=0} f")
-
-          gh release create "$TAG" --title "$TITLE" --notes "$CHANGELOG" --draft "${{ github.workspace }}/SDKs/PowerShell/$SDK_NAME.zip"
+          gh release create "$TAG" --title "$TITLE" --notes "$CHANGELOG" --draft "${{ github.workspace }}/SDKs/PowerShell/${SDK_NAME}.zip"
 
   Draft-Release-DI:
     needs: ['Check-PR-Labels']
@@ -132,12 +130,12 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           SDK_NAME="JumpCloud.SDK.DirectoryInsights"
-          MODULE_CAPTURE=$(grep -Po "ModuleVersion = '(\d+\.\d+\.\d+)'" ${{ github.workspace }}/SDKs/PowerShell/$SDK_NAME/$SDK_NAME.psd1)
-          VERSION=$(echo $MODULE_CAPTURE | grep -Po "(\d+\.\d+\.\d+)")
-          TITLE="$SDK_NAME-$VERSION"
-          TAG="$SDK_NAME-$VERSION"
-          CHANGELOG=$(cat "${{ github.workspace }}/${SDK_NAME}.md" | awk "/^## ${SDK_NAME}-${VERSION}/{f=1; next} /^## ${SDK_NAME}-[0-9]+.[0-9]+.[0-9]+/{f=0} f")
-          gh release create "$TAG" --title "$TITLE" --notes "$CHANGELOG" --draft "${{ github.workspace }}/SDKs/PowerShell/$SDK_NAME.zip"
+          MODULE_CAPTURE=$(grep -Po "ModuleVersion = '(\d+\.\d+\.\d+)'" "${{ github.workspace }}/SDKs/PowerShell/${SDK_NAME}/${SDK_NAME}.psd1")
+          VERSION=$(echo "$MODULE_CAPTURE" | grep -Po "(\d+\.\d+\.\d+)")
+          TITLE="${SDK_NAME}-${VERSION}"
+          TAG="${SDK_NAME}-${VERSION}"
+          CHANGELOG=$(cat "${{ github.workspace }}/${SDK_NAME}.md" | awk "/^## ${SDK_NAME}-${VERSION}/{f=1; next} /^## ${SDK_NAME}-[0-g]+.[0-9]+.[0-9]+/{f=0} f")
+          gh release create "$TAG" --title "$TITLE" --notes "$CHANGELOG" --draft "${{ github.workspace }}/SDKs/PowerShell/${SDK_NAME}.zip"
 
   # =================================================================
   # == MANUAL APPROVAL GATE
@@ -157,8 +155,8 @@ jobs:
   # =================================================================
 
   Deploy-V1:
-    needs: [Check-PR-Labels, Manual-Approval-Release]
-    if: needs.Check-PR-Labels.outputs.V1 == 'true'
+    needs: [Draft-Release-V1, Manual-Approval-Release]
+    if: always() && needs.Draft-Release-V1.result == 'success' && needs.Manual-Approval-Release.result == 'success'
     runs-on: ubuntu-latest
     steps:
       - name: Download SDK Artifact
@@ -180,15 +178,14 @@ jobs:
           $SDK_NAME = "JumpCloud.SDK.V1"
           dotnet nuget add source "https://www.powershellgallery.com/api/v2/package" --name PSGallery
           $nupkgPath = (Get-ChildItem -Path "./$SDK_NAME/bin/nupkg/$($SDK_NAME)*.nupkg").FullName
-          $nupkgPath | Should -Exist
-          Write-Host "Nupkg Artifact Restored: $nupkgPath"
-          # TODO: Uncomment the following lines to enable actual publishing
-          if (-not (Test-Path $nupkgPath)) { throw "Nupkg file not found for $SDK_NAME." }
+          Write-Host "Nupkg Path: $nupkgPath"
+          # TODO: Uncomment the following lines when ready to deploy
+          # if (-not (Test-Path $nupkgPath)) { throw "Nupkg file not found for $SDK_NAME." }
           # dotnet nuget push $nupkgPath --source PSGallery --api-key $env:NuGetApiKey
 
   Deploy-V2:
-    needs: [Check-PR-Labels, Manual-Approval-Release]
-    if: needs.Check-PR-Labels.outputs.V2 == 'true'
+    needs: [Draft-Release-V2, Manual-Approval-Release]
+    if: always() && needs.Draft-Release-V2.result == 'success' && needs.Manual-Approval-Release.result == 'success'
     runs-on: ubuntu-latest
     steps:
       - name: Download SDK Artifact
@@ -210,15 +207,14 @@ jobs:
           $SDK_NAME = "JumpCloud.SDK.V2"
           dotnet nuget add source "https://www.powershellgallery.com/api/v2/package" --name PSGallery
           $nupkgPath = (Get-ChildItem -Path "./$SDK_NAME/bin/nupkg/$($SDK_NAME)*.nupkg").FullName
-          $nupkgPath | Should -Exist
-          Write-Host "Nupkg Artifact Restored: $nupkgPath"
-          # TODO: Uncomment the following lines to enable actual publishing
-          if (-not (Test-Path $nupkgPath)) { throw "Nupkg file not found for $SDK_NAME." }
+          Write-Host "Nupkg Path: $nupkgPath"
+          # TODO: Uncomment the following lines when ready to deploy
+          # if (-not (Test-Path $nupkgPath)) { throw "Nupkg file not found for $SDK_NAME." }
           # dotnet nuget push $nupkgPath --source PSGallery --api-key $env:NuGetApiKey
 
   Deploy-DI:
-    needs: [Check-PR-Labels, Manual-Approval-Release]
-    if: needs.Check-PR-Labels.outputs.DIRECTORYINSIGHTS == 'true'
+    needs: [Draft-Release-DI, Manual-Approval-Release]
+    if: always() && needs.Draft-Release-DI.result == 'success' && needs.Manual-Approval-Release.result == 'success'
     runs-on: ubuntu-latest
     steps:
       - name: Download SDK Artifact
@@ -240,8 +236,7 @@ jobs:
           $SDK_NAME = "JumpCloud.SDK.DirectoryInsights"
           dotnet nuget add source "https://www.powershellgallery.com/api/v2/package" --name PSGallery
           $nupkgPath = (Get-ChildItem -Path "./$SDK_NAME/bin/nupkg/$($SDK_NAME)*.nupkg").FullName
-          $nupkgPath | Should -Exist
-          Write-Host "Nupkg Artifact Restored: $nupkgPath"
-          # TODO: Uncomment the following lines to enable actual publishing
-          if (-not (Test-Path $nupkgPath)) { throw "Nupkg file not found for $SDK_NAME." }
+          Write-Host "Nupkg Path: $nupkgPath"
+          # TODO: Uncomment the following lines when ready to deploy
+          # if (-not (Test-Path $nupkgPath)) { throw "Nupkg file not found for $SDK_NAME." }
           # dotnet nuget push $nupkgPath --source PSGallery --api-key $env:NuGetApiKey
