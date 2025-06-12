@@ -170,7 +170,7 @@ jobs:
           gh run --repo ${{ github.repository }} download ${RUN_ID} -n ${ARTIFACT_NAME}
           # List the artifiact directory/files
           ls -lR
-          unzip "$SDK_NAME.zip" -d "$SDK_NAME"
+          unzip "$SDK_NAME.zip"
       - name: Publish SDK to PSGallery
         shell: pwsh
         env:
@@ -200,7 +200,7 @@ jobs:
           gh run --repo ${{ github.repository }} download ${RUN_ID} -n ${ARTIFACT_NAME}
           # List the artifiact directory/files
           ls -lR
-          unzip "$SDK_NAME.zip" -d "$SDK_NAME"
+          unzip "$SDK_NAME.zip"
       - name: Publish SDK to PSGallery
         shell: pwsh
         env:
@@ -230,7 +230,7 @@ jobs:
           gh run --repo ${{ github.repository }} download ${RUN_ID} -n ${ARTIFACT_NAME}
           # List the artifiact directory/files
           ls -lR
-          unzip "$SDK_NAME.zip" -d "$SDK_NAME"
+          unzip "$SDK_NAME.zip" -d
       - name: Publish SDK to PSGallery
         shell: pwsh
         env:
