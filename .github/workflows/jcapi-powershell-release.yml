@@ -2,8 +2,6 @@ name: Release and Publish SDKs
 
 on:
   pull_request:
-    types:
-      - closed
     branches:
       - SDK-Release-Test
 jobs:
