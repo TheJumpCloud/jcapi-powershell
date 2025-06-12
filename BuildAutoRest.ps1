@@ -64,6 +64,7 @@ ForEach ($SDK In $SDKName)
         $extractedModulePath = '{0}/{1}' -f $binFolder, $ModuleName
         $CustomFolderSourcePath = '{0}/Custom' -f $PSScriptRoot
         $CustomFolderPath = '{0}/custom' -f $OutputFullPath
+        $ExamplesFolderPath = '{0}/examples' -f $OutputFullPath
         $GeneratedFolderPath = '{0}/generated' -f $CustomFolderPath
         $exportsFolderPath = '{0}/exports' -f $OutputFullPath
         $TestFolderPath = '{0}/test' -f $OutputFullPath
