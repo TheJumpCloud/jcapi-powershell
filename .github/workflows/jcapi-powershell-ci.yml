@@ -162,7 +162,7 @@ jobs:
   ## ----------------------------------------------------------------
 
   Build-SDK-DI:
-    needs: ["Setup-Build-Dependancies"]
+    needs: ["Setup-Build-Dependancies", "Check-PR-Labels"]
     if: contains(github.event.pull_request.labels.*.name, 'DirectoryInsights')
     runs-on: ubuntu-latest
     timeout-minutes: 70
@@ -175,7 +175,7 @@ jobs:
       - name: Build JumpCloud.SDK.DirectoryInsights
         shell: pwsh
         run: |
-          ./BuildAutoRest -SDKName:("JumpCloud.SDK.DirectoryInsights")
+          ./BuildAutoRest -SDKName:("JumpCloud.SDK.DirectoryInsights") -VersionType "${{ needs.Check-PR-Labels.outputs.RELEASE_TYPE }}"
       - name: Pack JumpCloud.SDK.DirectoryInsights Module
         shell: pwsh
         run: |
@@ -200,7 +200,7 @@ jobs:
           retention-days: 1
 
   Build-SDK-V1:
-    needs: ["Setup-Build-Dependancies"]
+    needs: ["Setup-Build-Dependancies", "Check-PR-Labels"]
     if: contains(github.event.pull_request.labels.*.name, 'v1') || contains(github.event.pull_request.labels.*.name, 'v2')
     runs-on: ubuntu-latest
     timeout-minutes: 70
@@ -213,7 +213,7 @@ jobs:
       - name: Build JumpCloud.SDK.V1
         shell: pwsh
         run: |
-          ./BuildAutoRest -SDKName:("JumpCloud.SDK.V1")
+          ./BuildAutoRest -SDKName:("JumpCloud.SDK.V1") -VersionType "${{ needs.Check-PR-Labels.outputs.RELEASE_TYPE }}"
       - name: Pack JumpCloud.SDK.V1 Module
         shell: pwsh
         run: |
@@ -238,7 +238,7 @@ jobs:
           retention-days: 1
 
   Build-SDK-V2:
-    needs: ["Setup-Build-Dependancies"]
+    needs: ["Setup-Build-Dependancies" , "Check-PR-Labels"]
     if: contains(github.event.pull_request.labels.*.name, 'v2')
     runs-on: ubuntu-latest
     timeout-minutes: 70
@@ -251,7 +251,7 @@ jobs:
       - name: Build JumpCloud.SDK.V2
         shell: pwsh
         run: |
-          ./BuildAutoRest -SDKName:("JumpCloud.SDK.V2")
+          ./BuildAutoRest -SDKName:("JumpCloud.SDK.V2") -VersionType "${{ needs.Check-PR-Labels.outputs.RELEASE_TYPE }}"
       - name: Pack JumpCloud.SDK.V2 Module
         shell: pwsh
         run: |
