@@ -50,7 +50,7 @@
                 $moduleName = 'JumpCloud.SDK.V1'
             } elseif ($env:v2 -eq 'true') {
                 $moduleName = 'JumpCloud.SDK.V2'
-            } elseif ($env:DirectoryInsights -eq 'true') {
+            } elseif ($env:directoryinsights -eq 'true') {
                 $moduleName = 'JumpCloud.SDK.DirectoryInsights'
             } else {
                 Write-Error "No valid module label found in the environment variables. Exiting."
