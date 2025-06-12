@@ -57,7 +57,7 @@ $NewSdkChangelogRecord = New-SdkChangelog -LatestVersion:($LatestPsd1Version) -R
 
 # Check if we need to post a new changelog block or update the diffs
 if ($SdkChangelog -notmatch "$LatestPsd1Version") {
-    Write-Host "Latest Release Version: $LatestPsd1Version differs from changlog version $LatestVersionInChangelog"
+    Write-Host "Latest Release Version: $LatestPsd1Version differs from changelog version $LatestVersionInChangelog"
     # Write-Host "Creating new changelog verion header"
     ($NewSdkChangelogRecord + ($SdkChangelog | Out-String)).Trim() | Set-Content -Path $SdkChangelogFilePath -Force
 }

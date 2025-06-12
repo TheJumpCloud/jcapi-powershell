@@ -1,3 +1,35 @@
+## JumpCloud.SDK.V1-1.0.0
+Release Date: June 12, 2025
+#### RELEASE NOTES
+```
+Test version
+```
+#### FEATURES:
+Test version
+#### IMPROVEMENTS:
+Test version
+#### BUG FIXES:
+Test version
+#### Generated Changes:
+
+<details>
+<summary>Functions Added</summary>
+
+No changes
+</details>
+
+<details>
+<summary>Functions Modified</summary>
+
+No changes
+</details>
+
+<details>
+<summary>Functions Removed</summary>
+
+No changes
+</details>
+
 ## JumpCloud.SDK.V1-0.0.46
 Release Date: June 12, 2025
 #### RELEASE NOTES
