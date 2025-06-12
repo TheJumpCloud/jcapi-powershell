@@ -3,8 +3,8 @@ name: PowerShell SDK CI
 on:
   pull_request:
     branches:
-      - master
-      #- SDK-Release-Test
+      #- master
+      - SDK-Release-Test
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
@@ -38,8 +38,10 @@ jobs:
 
           # --- Set Release Type Environment Variable using a loop ---
           $validReleaseTypes = @('major', 'minor', 'patch', 'manual')
+          $validSdkTypes = @('v1', 'v2', 'DirectoryInsights')
           $foundReleaseType = ''
           $typeCount = 0
+          $sdkTypeCount = 0
 
           # Loop through the labels found on the PR
           foreach ($label in $PR_LABEL_LIST) {
@@ -47,6 +49,10 @@ jobs:
               if ($label -in $validReleaseTypes) {
                   $typeCount++
                   $foundReleaseType = $label
+              }
+              # Check if the current label is a valid SDK type
+              if ($label -in $validSdkTypes) {
+                  $sdkTypeCount++
               }
           }
 
@@ -56,6 +62,11 @@ jobs:
               echo "RELEASE_TYPE=$foundReleaseType" >> $env:GITHUB_OUTPUT
           } else {
               throw "Error: Expected exactly one release type label (major, minor, patch, manual), but found $typeCount."
+          }
+
+          # Validate that only one SDK type was found
+          if ($sdkTypeCount -gt 1) {
+              throw "Error: Expected only one SDK type label (v1, v2, DirectoryInsights), but found $sdkTypeCount."
           }
 
           # --- Set Module Environment Variables ---

@@ -3,7 +3,8 @@ name: Release and Publish SDKs
 on:
   pull_request:
     branches:
-      - SDK-Release-Test
+      #- SDK-Release-Test
+      - master
 
 jobs:
   Filter-Branch:
@@ -39,25 +40,52 @@ jobs:
           $PR_LABEL_LIST = ($jsonResponse | ConvertFrom-Json).name
           Write-Host "Found labels on PR: $($PR_LABEL_LIST -join ', ')"
 
-          # --- Set Release Type Environment Variable ---
+          # --- Set Release Type Environment Variable using a loop ---
           $validReleaseTypes = @('major', 'minor', 'patch', 'manual')
+          $validSdkTypes = @('v1', 'v2', 'DirectoryInsights')
           $foundReleaseType = ''
           $typeCount = 0
+          $sdkTypeCount = 0
+
+          # Loop through the labels found on the PR
           foreach ($label in $PR_LABEL_LIST) {
+              # Check if the current label is a valid release type
               if ($label -in $validReleaseTypes) {
-                  $typeCount++; $foundReleaseType = $label
+                  $typeCount++
+                  $foundReleaseType = $label
+              }
+              # Check if the current label is a valid SDK type
+              if ($label -in $validSdkTypes) {
+                  $sdkTypeCount++
               }
           }
-          if ($typeCount -ne 1) {
-              throw "Error: Expected exactly one release type label, but found $typeCount."
+
+          # Validate that exactly one release type was found
+          if ($typeCount -eq 1) {
+              Write-Host "Release Type set to: $foundReleaseType"
+              echo "RELEASE_TYPE=$foundReleaseType" >> $env:GITHUB_OUTPUT
+          } else {
+              throw "Error: Expected exactly one release type label (major, minor, patch, manual), but found $typeCount."
           }
-          Write-Host "Release Type set to: $foundReleaseType"
-          echo "RELEASE_TYPE=$foundReleaseType" >> $env:GITHUB_OUTPUT
+
+          # Validate that only one SDK type was found
+          if ($sdkTypeCount -gt 1) {
+              throw "Error: Expected only one SDK type label (v1, v2, DirectoryInsights), but found $sdkTypeCount."
+          }
 
           # --- Set Module Environment Variables ---
-          if ('v1' -in $PR_LABEL_LIST) { echo "V1=true" >> $env:GITHUB_OUTPUT }
-          if ('v2' -in $PR_LABEL_LIST) { echo "V2=true" >> $env:GITHUB_OUTPUT }
-          if ('DirectoryInsights' -in $PR_LABEL_LIST) { echo "DIRECTORYINSIGHTS=true" >> $env:GITHUB_OUTPUT }
+          if ('v1' -in $PR_LABEL_LIST) {
+            Write-Host "Module label 'v1' found"
+            echo "v1=true" >> $env:GITHUB_OUTPUT
+          }
+          if ('v2' -in $PR_LABEL_LIST) {
+            Write-Host "Module label 'v2' found"
+            echo "v2=true" >> $env:GITHUB_OUTPUT
+          }
+          if ('DirectoryInsights' -in $PR_LABEL_LIST) {
+            Write-Host "Module label 'DirectoryInsights' found"
+            echo "directoryinsights=true" >> $env:GITHUB_OUTPUT
+          }
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
