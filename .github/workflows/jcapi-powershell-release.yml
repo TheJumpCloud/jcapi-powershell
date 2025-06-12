@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     if: contains(github.event.pull_request.labels.*.name, 'SDK')
     steps:
-      - run: echo "SDK label found. Continuing."
+      - run: echo "SDK label found. Continuing..."
 
   # Check-If-Merged:
   #   needs: ['Filter-Branch']
