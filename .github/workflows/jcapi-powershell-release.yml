@@ -3,7 +3,7 @@ name: Release and Publish SDKs
 on:
   pull_request:
     branches:
-      - SDK-Release-Test
+      - master
 
 jobs:
   Filter-Branch:

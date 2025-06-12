@@ -1,5 +1,5 @@
 ## JumpCloud.SDK.V1-0.0.46
-Release Date: June 10, 2025
+Release Date: June 12, 2025
 #### RELEASE NOTES
 ```
 Test
