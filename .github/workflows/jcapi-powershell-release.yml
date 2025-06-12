@@ -3,7 +3,7 @@ name: Release and Publish SDKs
 on:
   pull_request:
     branches:
-      - master
+      - SDK-Release-Test
 
 jobs:
   Filter-Branch:
@@ -163,10 +163,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          WF_NAME="jcapi-powershell-ci.yml"
           SDK_NAME="JumpCloud.SDK.V1"
           ARTIFACT_NAME="build-$SDK_NAME"
           COMMIT_SHA="${{ github.event.pull_request.head.sha }}"
-          RUN_ID=$(gh run list --repo ${{ github.repository }} --workflow "PowerShell SDK CI" --commit "$COMMIT_SHA" --json databaseId --jq '.[0].databaseId')
+          RUN_ID=$(gh run list --repo ${{ github.repository }} --workflow ${WF_NAME} --commit "$COMMIT_SHA" --json databaseId --jq '.[0].databaseId')
           if [ -z "$RUN_ID" ]; then echo "::error::Could not find CI workflow run for commit $COMMIT_SHA"; exit 1; fi
           gh run download $RUN_ID --repo ${{ github.repository }} -n "$ARTIFACT_NAME"
           unzip "$SDK_NAME.zip" -d "$SDK_NAME"
@@ -192,10 +193,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          WF_NAME="jcapi-powershell-ci.yml"
           SDK_NAME="JumpCloud.SDK.V2"
           ARTIFACT_NAME="build-$SDK_NAME"
           COMMIT_SHA="${{ github.event.pull_request.head.sha }}"
-          RUN_ID=$(gh run list --repo ${{ github.repository }} --workflow "PowerShell SDK CI" --commit "$COMMIT_SHA" --json databaseId --jq '.[0].databaseId')
+          RUN_ID=$(gh run list --repo ${{ github.repository }} --workflow ${WF_NAME} --commit "$COMMIT_SHA" --json databaseId --jq '.[0].databaseId')
           if [ -z "$RUN_ID" ]; then echo "::error::Could not find CI workflow run for commit $COMMIT_SHA"; exit 1; fi
           gh run download $RUN_ID --repo ${{ github.repository }} -n "$ARTIFACT_NAME"
           unzip "$SDK_NAME.zip" -d "$SDK_NAME"
@@ -221,10 +223,11 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          WF_NAME="jcapi-powershell-ci.yml"
           SDK_NAME="JumpCloud.SDK.DirectoryInsights"
           ARTIFACT_NAME="build-$SDK_NAME"
           COMMIT_SHA="${{ github.event.pull_request.head.sha }}"
-          RUN_ID=$(gh run list --repo ${{ github.repository }} --workflow "PowerShell SDK CI" --commit "$COMMIT_SHA" --json databaseId --jq '.[0].databaseId')
+          RUN_ID=$(gh run list --repo ${{ github.repository }} --workflow ${WF_NAME} --commit "$COMMIT_SHA" --json databaseId --jq '.[0].databaseId')
           if [ -z "$RUN_ID" ]; then echo "::error::Could not find CI workflow run for commit $COMMIT_SHA"; exit 1; fi
           gh run download $RUN_ID --repo ${{ github.repository }} -n "$ARTIFACT_NAME"
           unzip "$SDK_NAME.zip" -d "$SDK_NAME"

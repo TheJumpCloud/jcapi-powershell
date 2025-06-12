@@ -3,8 +3,8 @@ name: PowerShell SDK CI
 on:
   pull_request:
     branches:
-      #- "master"
-      - SDK-Release-Test
+      - master
+      #- SDK-Release-Test
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
