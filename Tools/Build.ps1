@@ -12,6 +12,7 @@ param (
     $SDKName
 )
 
+#TODO: Enable this if you want to build all SDKs by default.
 # If no individual SDK is specified, build all of them.
 # if (!$SDKName) {
 #     $sdks = @('JumpCloud.SDK.DirectoryInsights', 'JumpCloud.SDK.V1', 'JumpCloud.SDK.V2')
