@@ -95,3 +95,4 @@
             $gitDiffOutput | Should -BeNullOrEmpty "because the Swagger spec file should have no pending changes after a build."
         }
     }
+

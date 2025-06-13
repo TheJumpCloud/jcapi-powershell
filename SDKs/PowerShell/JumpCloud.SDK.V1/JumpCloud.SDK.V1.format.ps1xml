@@ -4550,6 +4550,9 @@
             <Label>Active</Label>
           </TableColumnHeader>
           <TableColumnHeader>
+            <Label>AgentHasFullDiskAccess</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
             <Label>AgentVersion</Label>
           </TableColumnHeader>
           <TableColumnHeader>
@@ -4651,6 +4654,9 @@
             <TableColumnItems>
               <TableColumnItem>
                 <PropertyName>Active</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>AgentHasFullDiskAccess</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>AgentVersion</PropertyName>
@@ -6708,6 +6714,12 @@
             <Label>NetworkSourceIP</Label>
           </TableColumnHeader>
           <TableColumnHeader>
+            <Label>RadsecEnabled</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>RequireRadsec</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
             <Label>RequireTlsAuth</Label>
           </TableColumnHeader>
           <TableColumnHeader>
@@ -6743,6 +6755,12 @@
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>NetworkSourceIP</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>RadsecEnabled</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>RequireRadsec</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>RequireTlsAuth</PropertyName>
@@ -6861,6 +6879,12 @@
             <Label>Organization</Label>
           </TableColumnHeader>
           <TableColumnHeader>
+            <Label>RadsecEnabled</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>RequireRadsec</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
             <Label>RequireTlsAuth</Label>
           </TableColumnHeader>
           <TableColumnHeader>
@@ -6905,6 +6929,12 @@
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>Organization</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>RadsecEnabled</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>RequireRadsec</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>RequireTlsAuth</PropertyName>
@@ -6955,6 +6985,12 @@
             <Label>NetworkSourceIP</Label>
           </TableColumnHeader>
           <TableColumnHeader>
+            <Label>RadsecEnabled</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>RequireRadsec</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
             <Label>RequireTlsAuth</Label>
           </TableColumnHeader>
           <TableColumnHeader>
@@ -6993,6 +7029,12 @@
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>NetworkSourceIP</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>RadsecEnabled</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>RequireRadsec</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>RequireTlsAuth</PropertyName>
@@ -7046,6 +7088,12 @@
             <Label>NetworkSourceIP</Label>
           </TableColumnHeader>
           <TableColumnHeader>
+            <Label>RadsecEnabled</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>RequireRadsec</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
             <Label>RequireTlsAuth</Label>
           </TableColumnHeader>
           <TableColumnHeader>
@@ -7084,6 +7132,12 @@
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>NetworkSourceIP</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>RadsecEnabled</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>RequireRadsec</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>RequireTlsAuth</PropertyName>

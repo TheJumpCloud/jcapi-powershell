@@ -34,6 +34,7 @@ module-name: JumpCloud.SDK.V2
 namespace: JumpCloud.SDK.V2
 sample-generation: true
 module-version: 1.0.0
+
 dll-name: JumpCloud.SDK.V2.private
 
 directive:
