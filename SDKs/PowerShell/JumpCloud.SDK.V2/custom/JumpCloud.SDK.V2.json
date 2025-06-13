@@ -2645,7 +2645,7 @@
         "amountPaid": "10.9",
         "amountRemaining": "189.1",
         "currency": "USD",
-        "dueDate": "2021-08-07",
+        "dueDate": "2021-08-07T00:00:00",
         "id": "234324",
         "status": "Partially Paid"
       },
@@ -3295,6 +3295,12 @@
         "id": {
           "type": "string"
         },
+        "mdmOsFamily": {
+          "type": "string"
+        },
+        "modelFamily": {
+          "type": "string"
+        },
         "osVersion": {
           "type": "string"
         },
@@ -3335,7 +3341,25 @@
         "isSupervised": {
           "type": "boolean"
         },
+        "modelMarketingName": {
+          "type": "string"
+        },
         "modelName": {
+          "type": "string"
+        },
+        "modelNumber": {
+          "type": "string"
+        },
+        "osBuildVersion": {
+          "type": "string"
+        },
+        "osExtraVersion": {
+          "type": "string"
+        },
+        "osMarketingName": {
+          "type": "string"
+        },
+        "osSupplementalBuildVersion": {
           "type": "string"
         },
         "secondIccid": {
@@ -3345,6 +3369,9 @@
           "type": "string"
         },
         "secondSubscriberCarrierNetwork": {
+          "type": "string"
+        },
+        "sofwareUpdateId": {
           "type": "string"
         },
         "subscriberCarrierNetwork": {
@@ -3363,10 +3390,16 @@
         "enrolledViaDep": {
           "type": "boolean"
         },
+        "filevaultEnabled": {
+          "type": "boolean"
+        },
         "isActivationLockManageable": {
           "type": "boolean"
         },
         "isUserEnrollment": {
+          "type": "boolean"
+        },
+        "passcodeCompliant": {
           "type": "boolean"
         },
         "passcodePresent": {
@@ -4809,8 +4842,17 @@
           "description": "ID of the app catalog installable that created this app.",
           "type": "string"
         },
+        "appFileName": {
+          "type": "string"
+        },
         "appleVpp": {
           "$ref": "#/definitions/software-app-apple-vpp"
+        },
+        "architectures": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
         },
         "assetKind": {
           "description": "The manifest asset kind (ex: software).",
@@ -4831,6 +4873,9 @@
           "default": false,
           "type": "boolean"
         },
+        "bundleId": {
+          "type": "string"
+        },
         "commandLineArguments": {
           "description": "Command line arguments to use with the application.",
           "type": "string"
@@ -4847,8 +4892,14 @@
           "description": "State of Install or Uninstall",
           "type": "string"
         },
+        "downloadUrl": {
+          "type": "string"
+        },
         "enterpriseObjectId": {
           "description": "ID of the Enterprise with which this app is associated",
+          "type": "string"
+        },
+        "format": {
           "type": "string"
         },
         "googleAndroid": {
@@ -4896,11 +4947,17 @@
           "description": "The installation scope of the software app.",
           "type": "string"
         },
+        "shortVersion": {
+          "type": "string"
+        },
         "storedPackage": {
           "$ref": "#/definitions/object-storage-item"
         },
         "storedPackageObjectId": {
           "description": "ID of the stored package this app uses to reference the stored install media.",
+          "type": "string"
+        },
+        "teamId": {
           "type": "string"
         },
         "updatedAt": {
@@ -5099,7 +5156,7 @@
         "bundle_short_version": "2.4",
         "bundle_version": "658.1",
         "category": "public.app-category.utilities",
-        "collection_time": "2019-06-03T19:41:30.658Z",
+        "collection_time": "2019-06-03T12:41:30.658-07:00",
         "compiler": "com.apple.compilers.llvm.clang.1_0",
         "copyright": "",
         "development_region": "English",
@@ -5376,7 +5433,7 @@
     },
     "system-insights-bitlocker-info": {
       "example": {
-        "collection_time": "2019-06-03T19:41:30.658Z",
+        "collection_time": "2019-06-03T12:41:30.658-07:00",
         "conversion_status": 0,
         "devide_id": "\\\\\\\\?\\\\Volume{3ba5cc52-e0fd-45fa-b8b8-5c88f44f8b17}\\",
         "drive_letter": "C:",
@@ -5416,7 +5473,7 @@
     },
     "system-insights-browser-plugins": {
       "example": {
-        "collection_time": "2019-06-03T19:41:30.858Z",
+        "collection_time": "2019-06-03T12:41:30.858-07:00",
         "description": "LastPass Plugin",
         "development_region": "en-US",
         "disabled": 0,
@@ -5594,7 +5651,7 @@
     "system-insights-chrome-extensions": {
       "example": {
         "author": "",
-        "collection_time": "2019-06-03t19:41:31.125z",
+        "collection_time": "2019-06-03T12:41:31.125-07:00",
         "description": "provider for discovery and services for mirroring of chrome media router",
         "identifier": "pkedcjkdefgpdelpbcmbmeomcjbeemfm",
         "locale": "en",
@@ -5768,7 +5825,7 @@
     },
     "system-insights-disk-encryption": {
       "example": {
-        "collection_time": "2019-06-03T19:41:31.557Z",
+        "collection_time": "2019-06-03T12:41:31.557-07:00",
         "encrypted": 0,
         "encryption_status": "undefined",
         "name": "/dev/disk8",
@@ -5812,7 +5869,7 @@
     },
     "system-insights-disk-info": {
       "example": {
-        "collection_time": "2019-06-03T19:41:30.658Z",
+        "collection_time": "2019-06-03T12:41:30.658-07:00",
         "description": "Disk drive",
         "disk_index": 0,
         "disk_size": "64420392960",
@@ -5900,7 +5957,7 @@
     "system-insights-etc-hosts": {
       "example": {
         "address": "192.168.2.21",
-        "collection_time": "2019-06-03T19:41:30.658Z",
+        "collection_time": "2019-06-03T12:41:30.658-07:00",
         "hostnames": "hosty hosty.local",
         "system_id": "5c9e51a13c5146f89bae12d9"
       },
@@ -5925,7 +5982,7 @@
       "example": {
         "active": 1,
         "autoupdate": 1,
-        "collection_time": "2019-06-03T19:41:31.204Z",
+        "collection_time": "2019-06-03T12:41:31.204-07:00",
         "creator": "null",
         "description": "",
         "disabled": 0,
@@ -5995,7 +6052,7 @@
     },
     "system-insights-groups": {
       "example": {
-        "collection_time": "2019-06-03T19:41:31.673Z",
+        "collection_time": "2019-06-03T12:41:31.673-07:00",
         "comment": "",
         "gid": "701",
         "gid_signed": "701",
@@ -6057,7 +6114,7 @@
       "example": {
         "address": "::1",
         "broadcast": "",
-        "collection_time": "2019-06-03T19:41:31.008Z",
+        "collection_time": "2019-06-03T12:41:31.008-07:00",
         "friendly_name": "",
         "interface": "lo0",
         "mask": "ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff",
@@ -6398,7 +6455,7 @@
     "system-insights-logical-drives": {
       "example": {
         "boot_partition": 0,
-        "collection_time": "2019-06-03T19:41:30.658Z",
+        "collection_time": "2019-06-03T12:41:30.658-07:00",
         "device_id": "C:",
         "file_system": "NTFS",
         "free_space": "43194331136",
@@ -6471,7 +6528,7 @@
         "blocks_available": "95135",
         "blocks_free": "95135",
         "blocks_size": "4096",
-        "collection_time": "2019-06-03T19:41:31.746Z",
+        "collection_time": "2019-06-03T12:41:31.746-07:00",
         "device": "/dev/disk5s1",
         "device_alias": "/dev/disk5s1",
         "flags": "70292505",
@@ -6529,7 +6586,7 @@
       "example": {
         "build": "17G65",
         "codename": "",
-        "collection_time": "2019-06-03T19:41:30.933Z",
+        "collection_time": "2019-06-03T12:41:30.933-07:00",
         "install_date": "",
         "major": 10,
         "minor": 13,
@@ -6584,7 +6641,7 @@
     "system-insights-patches": {
       "example": {
         "caption": "http://support.microsoft.com/?kbid=4503308",
-        "collection_time": "2019-06-03T19:41:31.673Z",
+        "collection_time": "2019-06-03T12:41:31.673-07:00",
         "csname": "DESKTOP-B17DUKP",
         "description": "Security Update",
         "fix_comments": "",
@@ -6631,7 +6688,7 @@
     },
     "system-insights-programs": {
       "example": {
-        "collection_time": "2019-06-03T19:41:31.673Z",
+        "collection_time": "2019-06-03T12:41:31.673-07:00",
         "identifying_number": "{2E8B8BDD-03DF-4C1C-8C99-E6A4BCBF43CE}",
         "install_date": "20190724",
         "install_location": "",
@@ -6712,7 +6769,7 @@
     "system-insights-safari-extensions": {
       "example": {
         "author": "Eyeo GmbH",
-        "collection_time": "2019-05-16T18:58:15.673Z",
+        "collection_time": "2019-05-16T11:58:15.673-07:00",
         "description": "Used by over 50 million people, a free ad blocker that blocks ALL annoying ads, malware and tracking.",
         "developer_id": "GRYYZR985A",
         "identifier": "org.adblockplus.adblockplussafari",
@@ -7087,7 +7144,7 @@
     },
     "system-insights-system-info": {
       "example": {
-        "collection_time": "2019-06-03T19:41:30.771Z",
+        "collection_time": "2019-06-03T12:41:30.771-07:00",
         "computer_name": "Johnny's MacBook Pro (2)",
         "cpu_brand": "Intel(R) Core(TM) i7-7820HQ CPU @ 2.90GHz",
         "cpu_logical_cores": 8,
@@ -7340,7 +7397,7 @@
     },
     "system-insights-users": {
       "example": {
-        "collection_time": "2019-06-03T19:41:29.71Z",
+        "collection_time": "2019-06-03T12:41:29.71-07:00",
         "description": "AppleEvents Daemon",
         "directory": "/var/empty",
         "gid": "55",
@@ -8253,9 +8310,6 @@
   },
   "paths": {
     "/accessrequests": {},
-    "/accessworkflows": {},
-    "/accessworkflows/{workflowId}": {},
-    "/accessworkflowsettings": {},
     "/accountManagerCalendar/{id}": {
       "parameters": [
         {
@@ -9788,6 +9842,7 @@
     },
     "/applemdms/{deviceManagerObjectId}/abm_devices": {},
     "/applemdms/{deviceManagerObjectId}/devices/{deviceObjectId}/lostmode": {},
+    "/applemdms/{deviceObjectId}/background_tasks": {},
     "/applemdms/{id}": {
       "delete": {
         "description": "Removes an Apple MDM configuration.\n\nWarning: This is a destructive operation and will remove your Apple Push Certificates.  We will no longer be able to manage your devices and the only recovery option is to re-register all devices into MDM.\n\n#### Sample Request\n```\ncurl -X DELETE https://console.jumpcloud.com/api/v2/applemdms/{id} \\\n  -H 'accept: application/json' \\\n  -H 'content-type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n```",
@@ -13797,6 +13852,8 @@
       ]
     },
     "/microsoft-mdm/configuration-files": {},
+    "/notifications/channels": {},
+    "/notifications/channels/{id}": {},
     "/object-storage/items": {},
     "/object-storage/status": {},
     "/office365/activate": {
@@ -14624,6 +14681,7 @@
     "/passwordmanager/sharedfolders/{folderId}": {},
     "/passwordmanager/sharedfolders/{folderId}/groups": {},
     "/passwordmanager/sharedfolders/{folderId}/groups/{groupId}": {},
+    "/passwordmanager/sharedfolders/{folderId}/manage": {},
     "/passwordmanager/sharedfolders/{folderId}/users": {},
     "/passwordmanager/sharedfolders/{folderId}/users/{userId}": {},
     "/passwordmanager/users": {},
@@ -14631,6 +14689,10 @@
     "/passwordmanager/users/{userId}": {},
     "/passwordmanager/users/{userId}/items": {},
     "/passwordmanager/users/{userId}/sharedFolders": {},
+    "/passwordpolicies": {},
+    "/passwordpolicies/precedence/set": {},
+    "/passwordpolicies/user/{systemUserId}": {},
+    "/passwordpolicies/{objectId}": {},
     "/payNow/{id}": {
       "parameters": [
         {
@@ -14650,6 +14712,11 @@
       ]
     },
     "/plan/features": {
+      "x-functionalities-tags": [
+        "accounts-page-upgrade"
+      ]
+    },
+    "/plans": {
       "x-functionalities-tags": [
         "accounts-page-upgrade"
       ]
@@ -16988,15 +17055,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request POST \\\n  --url https://console.jumpcloud.com/api/v2/softwareapps \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --data '{\"createdAt\":\"2019-08-24T14:15:22Z\",\"displayName\":\"string\",\"id\":\"string\",\"settings\":[{\"allowUpdateDelay\":false,\"appCatalogInstallableObjectId\":\"string\",\"appleVpp\":{\"appConfiguration\":\"string\",\"assignedLicenses\":0,\"availableLicenses\":0,\"details\":{},\"isConfigEnabled\":true,\"supportedDeviceFamilies\":[\"IPAD\"],\"totalLicenses\":0},\"assetKind\":\"string\",\"assetSha256Size\":0,\"assetSha256Strings\":[\"string\"],\"autoUpdate\":false,\"commandLineArguments\":\"string\",\"createdAt\":\"2019-08-24T14:15:22Z\",\"description\":\"string\",\"desiredState\":\"string\",\"enterpriseObjectId\":\"string\",\"googleAndroid\":{\"androidFeatures\":[\"string\"],\"appPricing\":\"string\",\"appVersion\":\"string\",\"author\":\"string\",\"autoUpdateMode\":\"AUTO_UPDATE_DEFAULT\",\"category\":\"string\",\"contentRating\":\"string\",\"displayMode\":\"string\",\"distributionChannel\":\"string\",\"fullDescription\":\"string\",\"iconUrl\":\"string\",\"installType\":\"AVAILABLE\",\"managedConfigurationTemplateId\":\"string\",\"managedProperties\":true,\"minSdkVersion\":0,\"name\":\"string\",\"permissionGrants\":[{\"id\":\"string\",\"policy\":\"PROMPT\"}],\"runtimePermission\":\"PROMPT\",\"startUrl\":\"string\",\"type\":\"APP_TYPE_UNSPECIFIED\",\"updateTime\":\"string\",\"versionCode\":0},\"iconUrl\":\"string\",\"location\":\"string\",\"locationObjectId\":\"string\",\"microsoftStore\":{\"doNotUpdate\":true,\"nonRemovable\":true,\"packageFamilyName\":\"string\"},\"packageId\":\"string\",\"packageKind\":\"string\",\"packageManager\":\"string\",\"packageSubtitle\":\"string\",\"packageVersion\":\"string\",\"packageVersionUpdatedAt\":\"2019-08-24T14:15:22Z\",\"scope\":\"string\",\"storedPackage\":{\"objectId\":\"string\",\"versions\":[{\"metadata\":{},\"name\":\"string\",\"rejectedReason\":\"string\",\"sha256sum\":\"string\",\"size\":0,\"status\":\"string\",\"version\":0}]},\"storedPackageObjectId\":\"string\",\"updatedAt\":\"2019-08-24T14:15:22Z\",\"versionlessDownloadUrl\":true}],\"updatedAt\":\"2019-08-24T14:15:22Z\"}'"
+            "source": "curl --request POST \\\n  --url https://console.jumpcloud.com/api/v2/softwareapps \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --data '{\"createdAt\":\"2019-08-24T14:15:22Z\",\"displayName\":\"string\",\"id\":\"string\",\"settings\":[{\"allowUpdateDelay\":false,\"appCatalogInstallableObjectId\":\"string\",\"appFileName\":\"string\",\"appleVpp\":{\"appConfiguration\":\"string\",\"assignedLicenses\":0,\"availableLicenses\":0,\"details\":{},\"isConfigEnabled\":true,\"supportedDeviceFamilies\":[\"IPAD\"],\"totalLicenses\":0},\"architectures\":[\"string\"],\"assetKind\":\"string\",\"assetSha256Size\":0,\"assetSha256Strings\":[\"string\"],\"autoUpdate\":false,\"bundleId\":\"string\",\"commandLineArguments\":\"string\",\"createdAt\":\"2019-08-24T14:15:22Z\",\"description\":\"string\",\"desiredState\":\"string\",\"downloadUrl\":\"string\",\"enterpriseObjectId\":\"string\",\"format\":\"string\",\"googleAndroid\":{\"androidFeatures\":[\"string\"],\"appPricing\":\"string\",\"appVersion\":\"string\",\"author\":\"string\",\"autoUpdateMode\":\"AUTO_UPDATE_DEFAULT\",\"category\":\"string\",\"contentRating\":\"string\",\"displayMode\":\"string\",\"distributionChannel\":\"string\",\"fullDescription\":\"string\",\"iconUrl\":\"string\",\"installType\":\"AVAILABLE\",\"managedConfigurationTemplateId\":\"string\",\"managedProperties\":true,\"minSdkVersion\":0,\"name\":\"string\",\"permissionGrants\":[{\"id\":\"string\",\"policy\":\"PROMPT\"}],\"runtimePermission\":\"PROMPT\",\"startUrl\":\"string\",\"type\":\"APP_TYPE_UNSPECIFIED\",\"updateTime\":\"string\",\"versionCode\":0},\"iconUrl\":\"string\",\"location\":\"string\",\"locationObjectId\":\"string\",\"microsoftStore\":{\"doNotUpdate\":true,\"nonRemovable\":true,\"packageFamilyName\":\"string\"},\"packageId\":\"string\",\"packageKind\":\"string\",\"packageManager\":\"string\",\"packageSubtitle\":\"string\",\"packageVersion\":\"string\",\"packageVersionUpdatedAt\":\"2019-08-24T14:15:22Z\",\"scope\":\"string\",\"shortVersion\":\"string\",\"storedPackage\":{\"objectId\":\"string\",\"versions\":[{\"metadata\":{},\"name\":\"string\",\"rejectedReason\":\"string\",\"sha256sum\":\"string\",\"size\":0,\"status\":\"string\",\"version\":0}]},\"storedPackageObjectId\":\"string\",\"teamId\":\"string\",\"updatedAt\":\"2019-08-24T14:15:22Z\",\"versionlessDownloadUrl\":true}],\"updatedAt\":\"2019-08-24T14:15:22Z\"}'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/v2/softwareapps\"\n\npayload = {\n    \"createdAt\": \"2019-08-24T14:15:22Z\",\n    \"displayName\": \"string\",\n    \"id\": \"string\",\n    \"settings\": [\n        {\n            \"allowUpdateDelay\": False,\n            \"appCatalogInstallableObjectId\": \"string\",\n            \"appleVpp\": {\n                \"appConfiguration\": \"string\",\n                \"assignedLicenses\": 0,\n                \"availableLicenses\": 0,\n                \"details\": {},\n                \"isConfigEnabled\": True,\n                \"supportedDeviceFamilies\": [\"IPAD\"],\n                \"totalLicenses\": 0\n            },\n            \"assetKind\": \"string\",\n            \"assetSha256Size\": 0,\n            \"assetSha256Strings\": [\"string\"],\n            \"autoUpdate\": False,\n            \"commandLineArguments\": \"string\",\n            \"createdAt\": \"2019-08-24T14:15:22Z\",\n            \"description\": \"string\",\n            \"desiredState\": \"string\",\n            \"enterpriseObjectId\": \"string\",\n            \"googleAndroid\": {\n                \"androidFeatures\": [\"string\"],\n                \"appPricing\": \"string\",\n                \"appVersion\": \"string\",\n                \"author\": \"string\",\n                \"autoUpdateMode\": \"AUTO_UPDATE_DEFAULT\",\n                \"category\": \"string\",\n                \"contentRating\": \"string\",\n                \"displayMode\": \"string\",\n                \"distributionChannel\": \"string\",\n                \"fullDescription\": \"string\",\n                \"iconUrl\": \"string\",\n                \"installType\": \"AVAILABLE\",\n                \"managedConfigurationTemplateId\": \"string\",\n                \"managedProperties\": True,\n                \"minSdkVersion\": 0,\n                \"name\": \"string\",\n                \"permissionGrants\": [\n                    {\n                        \"id\": \"string\",\n                        \"policy\": \"PROMPT\"\n                    }\n                ],\n                \"runtimePermission\": \"PROMPT\",\n                \"startUrl\": \"string\",\n                \"type\": \"APP_TYPE_UNSPECIFIED\",\n                \"updateTime\": \"string\",\n                \"versionCode\": 0\n            },\n            \"iconUrl\": \"string\",\n            \"location\": \"string\",\n            \"locationObjectId\": \"string\",\n            \"microsoftStore\": {\n                \"doNotUpdate\": True,\n                \"nonRemovable\": True,\n                \"packageFamilyName\": \"string\"\n            },\n            \"packageId\": \"string\",\n            \"packageKind\": \"string\",\n            \"packageManager\": \"string\",\n            \"packageSubtitle\": \"string\",\n            \"packageVersion\": \"string\",\n            \"packageVersionUpdatedAt\": \"2019-08-24T14:15:22Z\",\n            \"scope\": \"string\",\n            \"storedPackage\": {\n                \"objectId\": \"string\",\n                \"versions\": [\n                    {\n                        \"metadata\": {},\n                        \"name\": \"string\",\n                        \"rejectedReason\": \"string\",\n                        \"sha256sum\": \"string\",\n                        \"size\": 0,\n                        \"status\": \"string\",\n                        \"version\": 0\n                    }\n                ]\n            },\n            \"storedPackageObjectId\": \"string\",\n            \"updatedAt\": \"2019-08-24T14:15:22Z\",\n            \"versionlessDownloadUrl\": True\n        }\n    ],\n    \"updatedAt\": \"2019-08-24T14:15:22Z\"\n}\nheaders = {\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/v2/softwareapps\"\n\npayload = {\n    \"createdAt\": \"2019-08-24T14:15:22Z\",\n    \"displayName\": \"string\",\n    \"id\": \"string\",\n    \"settings\": [\n        {\n            \"allowUpdateDelay\": False,\n            \"appCatalogInstallableObjectId\": \"string\",\n            \"appFileName\": \"string\",\n            \"appleVpp\": {\n                \"appConfiguration\": \"string\",\n                \"assignedLicenses\": 0,\n                \"availableLicenses\": 0,\n                \"details\": {},\n                \"isConfigEnabled\": True,\n                \"supportedDeviceFamilies\": [\"IPAD\"],\n                \"totalLicenses\": 0\n            },\n            \"architectures\": [\"string\"],\n            \"assetKind\": \"string\",\n            \"assetSha256Size\": 0,\n            \"assetSha256Strings\": [\"string\"],\n            \"autoUpdate\": False,\n            \"bundleId\": \"string\",\n            \"commandLineArguments\": \"string\",\n            \"createdAt\": \"2019-08-24T14:15:22Z\",\n            \"description\": \"string\",\n            \"desiredState\": \"string\",\n            \"downloadUrl\": \"string\",\n            \"enterpriseObjectId\": \"string\",\n            \"format\": \"string\",\n            \"googleAndroid\": {\n                \"androidFeatures\": [\"string\"],\n                \"appPricing\": \"string\",\n                \"appVersion\": \"string\",\n                \"author\": \"string\",\n                \"autoUpdateMode\": \"AUTO_UPDATE_DEFAULT\",\n                \"category\": \"string\",\n                \"contentRating\": \"string\",\n                \"displayMode\": \"string\",\n                \"distributionChannel\": \"string\",\n                \"fullDescription\": \"string\",\n                \"iconUrl\": \"string\",\n                \"installType\": \"AVAILABLE\",\n                \"managedConfigurationTemplateId\": \"string\",\n                \"managedProperties\": True,\n                \"minSdkVersion\": 0,\n                \"name\": \"string\",\n                \"permissionGrants\": [\n                    {\n                        \"id\": \"string\",\n                        \"policy\": \"PROMPT\"\n                    }\n                ],\n                \"runtimePermission\": \"PROMPT\",\n                \"startUrl\": \"string\",\n                \"type\": \"APP_TYPE_UNSPECIFIED\",\n                \"updateTime\": \"string\",\n                \"versionCode\": 0\n            },\n            \"iconUrl\": \"string\",\n            \"location\": \"string\",\n            \"locationObjectId\": \"string\",\n            \"microsoftStore\": {\n                \"doNotUpdate\": True,\n                \"nonRemovable\": True,\n                \"packageFamilyName\": \"string\"\n            },\n            \"packageId\": \"string\",\n            \"packageKind\": \"string\",\n            \"packageManager\": \"string\",\n            \"packageSubtitle\": \"string\",\n            \"packageVersion\": \"string\",\n            \"packageVersionUpdatedAt\": \"2019-08-24T14:15:22Z\",\n            \"scope\": \"string\",\n            \"shortVersion\": \"string\",\n            \"storedPackage\": {\n                \"objectId\": \"string\",\n                \"versions\": [\n                    {\n                        \"metadata\": {},\n                        \"name\": \"string\",\n                        \"rejectedReason\": \"string\",\n                        \"sha256sum\": \"string\",\n                        \"size\": 0,\n                        \"status\": \"string\",\n                        \"version\": 0\n                    }\n                ]\n            },\n            \"storedPackageObjectId\": \"string\",\n            \"teamId\": \"string\",\n            \"updatedAt\": \"2019-08-24T14:15:22Z\",\n            \"versionlessDownloadUrl\": True\n        }\n    ],\n    \"updatedAt\": \"2019-08-24T14:15:22Z\"\n}\nheaders = {\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/v2/softwareapps' -Method POST -Headers $headers -ContentType 'application/json' -Body '{\"createdAt\":\"2019-08-24T14:15:22Z\",\"displayName\":\"string\",\"id\":\"string\",\"settings\":[{\"allowUpdateDelay\":false,\"appCatalogInstallableObjectId\":\"string\",\"appleVpp\":{\"appConfiguration\":\"string\",\"assignedLicenses\":0,\"availableLicenses\":0,\"details\":{},\"isConfigEnabled\":true,\"supportedDeviceFamilies\":[\"IPAD\"],\"totalLicenses\":0},\"assetKind\":\"string\",\"assetSha256Size\":0,\"assetSha256Strings\":[\"string\"],\"autoUpdate\":false,\"commandLineArguments\":\"string\",\"createdAt\":\"2019-08-24T14:15:22Z\",\"description\":\"string\",\"desiredState\":\"string\",\"enterpriseObjectId\":\"string\",\"googleAndroid\":{\"androidFeatures\":[\"string\"],\"appPricing\":\"string\",\"appVersion\":\"string\",\"author\":\"string\",\"autoUpdateMode\":\"AUTO_UPDATE_DEFAULT\",\"category\":\"string\",\"contentRating\":\"string\",\"displayMode\":\"string\",\"distributionChannel\":\"string\",\"fullDescription\":\"string\",\"iconUrl\":\"string\",\"installType\":\"AVAILABLE\",\"managedConfigurationTemplateId\":\"string\",\"managedProperties\":true,\"minSdkVersion\":0,\"name\":\"string\",\"permissionGrants\":[{\"id\":\"string\",\"policy\":\"PROMPT\"}],\"runtimePermission\":\"PROMPT\",\"startUrl\":\"string\",\"type\":\"APP_TYPE_UNSPECIFIED\",\"updateTime\":\"string\",\"versionCode\":0},\"iconUrl\":\"string\",\"location\":\"string\",\"locationObjectId\":\"string\",\"microsoftStore\":{\"doNotUpdate\":true,\"nonRemovable\":true,\"packageFamilyName\":\"string\"},\"packageId\":\"string\",\"packageKind\":\"string\",\"packageManager\":\"string\",\"packageSubtitle\":\"string\",\"packageVersion\":\"string\",\"packageVersionUpdatedAt\":\"2019-08-24T14:15:22Z\",\"scope\":\"string\",\"storedPackage\":{\"objectId\":\"string\",\"versions\":[{\"metadata\":{},\"name\":\"string\",\"rejectedReason\":\"string\",\"sha256sum\":\"string\",\"size\":0,\"status\":\"string\",\"version\":0}]},\"storedPackageObjectId\":\"string\",\"updatedAt\":\"2019-08-24T14:15:22Z\",\"versionlessDownloadUrl\":true}],\"updatedAt\":\"2019-08-24T14:15:22Z\"}'"
+            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/v2/softwareapps' -Method POST -Headers $headers -ContentType 'application/json' -Body '{\"createdAt\":\"2019-08-24T14:15:22Z\",\"displayName\":\"string\",\"id\":\"string\",\"settings\":[{\"allowUpdateDelay\":false,\"appCatalogInstallableObjectId\":\"string\",\"appFileName\":\"string\",\"appleVpp\":{\"appConfiguration\":\"string\",\"assignedLicenses\":0,\"availableLicenses\":0,\"details\":{},\"isConfigEnabled\":true,\"supportedDeviceFamilies\":[\"IPAD\"],\"totalLicenses\":0},\"architectures\":[\"string\"],\"assetKind\":\"string\",\"assetSha256Size\":0,\"assetSha256Strings\":[\"string\"],\"autoUpdate\":false,\"bundleId\":\"string\",\"commandLineArguments\":\"string\",\"createdAt\":\"2019-08-24T14:15:22Z\",\"description\":\"string\",\"desiredState\":\"string\",\"downloadUrl\":\"string\",\"enterpriseObjectId\":\"string\",\"format\":\"string\",\"googleAndroid\":{\"androidFeatures\":[\"string\"],\"appPricing\":\"string\",\"appVersion\":\"string\",\"author\":\"string\",\"autoUpdateMode\":\"AUTO_UPDATE_DEFAULT\",\"category\":\"string\",\"contentRating\":\"string\",\"displayMode\":\"string\",\"distributionChannel\":\"string\",\"fullDescription\":\"string\",\"iconUrl\":\"string\",\"installType\":\"AVAILABLE\",\"managedConfigurationTemplateId\":\"string\",\"managedProperties\":true,\"minSdkVersion\":0,\"name\":\"string\",\"permissionGrants\":[{\"id\":\"string\",\"policy\":\"PROMPT\"}],\"runtimePermission\":\"PROMPT\",\"startUrl\":\"string\",\"type\":\"APP_TYPE_UNSPECIFIED\",\"updateTime\":\"string\",\"versionCode\":0},\"iconUrl\":\"string\",\"location\":\"string\",\"locationObjectId\":\"string\",\"microsoftStore\":{\"doNotUpdate\":true,\"nonRemovable\":true,\"packageFamilyName\":\"string\"},\"packageId\":\"string\",\"packageKind\":\"string\",\"packageManager\":\"string\",\"packageSubtitle\":\"string\",\"packageVersion\":\"string\",\"packageVersionUpdatedAt\":\"2019-08-24T14:15:22Z\",\"scope\":\"string\",\"shortVersion\":\"string\",\"storedPackage\":{\"objectId\":\"string\",\"versions\":[{\"metadata\":{},\"name\":\"string\",\"rejectedReason\":\"string\",\"sha256sum\":\"string\",\"size\":0,\"status\":\"string\",\"version\":0}]},\"storedPackageObjectId\":\"string\",\"teamId\":\"string\",\"updatedAt\":\"2019-08-24T14:15:22Z\",\"versionlessDownloadUrl\":true}],\"updatedAt\":\"2019-08-24T14:15:22Z\"}'"
           }
         ]
       },
@@ -17153,15 +17220,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request PUT \\\n  --url https://console.jumpcloud.com/api/v2/softwareapps/{id} \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --data '{\"createdAt\":\"2019-08-24T14:15:22Z\",\"displayName\":\"string\",\"id\":\"string\",\"settings\":[{\"allowUpdateDelay\":false,\"appCatalogInstallableObjectId\":\"string\",\"appleVpp\":{\"appConfiguration\":\"string\",\"assignedLicenses\":0,\"availableLicenses\":0,\"details\":{},\"isConfigEnabled\":true,\"supportedDeviceFamilies\":[\"IPAD\"],\"totalLicenses\":0},\"assetKind\":\"string\",\"assetSha256Size\":0,\"assetSha256Strings\":[\"string\"],\"autoUpdate\":false,\"commandLineArguments\":\"string\",\"createdAt\":\"2019-08-24T14:15:22Z\",\"description\":\"string\",\"desiredState\":\"string\",\"enterpriseObjectId\":\"string\",\"googleAndroid\":{\"androidFeatures\":[\"string\"],\"appPricing\":\"string\",\"appVersion\":\"string\",\"author\":\"string\",\"autoUpdateMode\":\"AUTO_UPDATE_DEFAULT\",\"category\":\"string\",\"contentRating\":\"string\",\"displayMode\":\"string\",\"distributionChannel\":\"string\",\"fullDescription\":\"string\",\"iconUrl\":\"string\",\"installType\":\"AVAILABLE\",\"managedConfigurationTemplateId\":\"string\",\"managedProperties\":true,\"minSdkVersion\":0,\"name\":\"string\",\"permissionGrants\":[{\"id\":\"string\",\"policy\":\"PROMPT\"}],\"runtimePermission\":\"PROMPT\",\"startUrl\":\"string\",\"type\":\"APP_TYPE_UNSPECIFIED\",\"updateTime\":\"string\",\"versionCode\":0},\"iconUrl\":\"string\",\"location\":\"string\",\"locationObjectId\":\"string\",\"microsoftStore\":{\"doNotUpdate\":true,\"nonRemovable\":true,\"packageFamilyName\":\"string\"},\"packageId\":\"string\",\"packageKind\":\"string\",\"packageManager\":\"string\",\"packageSubtitle\":\"string\",\"packageVersion\":\"string\",\"packageVersionUpdatedAt\":\"2019-08-24T14:15:22Z\",\"scope\":\"string\",\"storedPackage\":{\"objectId\":\"string\",\"versions\":[{\"metadata\":{},\"name\":\"string\",\"rejectedReason\":\"string\",\"sha256sum\":\"string\",\"size\":0,\"status\":\"string\",\"version\":0}]},\"storedPackageObjectId\":\"string\",\"updatedAt\":\"2019-08-24T14:15:22Z\",\"versionlessDownloadUrl\":true}],\"updatedAt\":\"2019-08-24T14:15:22Z\"}'"
+            "source": "curl --request PUT \\\n  --url https://console.jumpcloud.com/api/v2/softwareapps/{id} \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --data '{\"createdAt\":\"2019-08-24T14:15:22Z\",\"displayName\":\"string\",\"id\":\"string\",\"settings\":[{\"allowUpdateDelay\":false,\"appCatalogInstallableObjectId\":\"string\",\"appFileName\":\"string\",\"appleVpp\":{\"appConfiguration\":\"string\",\"assignedLicenses\":0,\"availableLicenses\":0,\"details\":{},\"isConfigEnabled\":true,\"supportedDeviceFamilies\":[\"IPAD\"],\"totalLicenses\":0},\"architectures\":[\"string\"],\"assetKind\":\"string\",\"assetSha256Size\":0,\"assetSha256Strings\":[\"string\"],\"autoUpdate\":false,\"bundleId\":\"string\",\"commandLineArguments\":\"string\",\"createdAt\":\"2019-08-24T14:15:22Z\",\"description\":\"string\",\"desiredState\":\"string\",\"downloadUrl\":\"string\",\"enterpriseObjectId\":\"string\",\"format\":\"string\",\"googleAndroid\":{\"androidFeatures\":[\"string\"],\"appPricing\":\"string\",\"appVersion\":\"string\",\"author\":\"string\",\"autoUpdateMode\":\"AUTO_UPDATE_DEFAULT\",\"category\":\"string\",\"contentRating\":\"string\",\"displayMode\":\"string\",\"distributionChannel\":\"string\",\"fullDescription\":\"string\",\"iconUrl\":\"string\",\"installType\":\"AVAILABLE\",\"managedConfigurationTemplateId\":\"string\",\"managedProperties\":true,\"minSdkVersion\":0,\"name\":\"string\",\"permissionGrants\":[{\"id\":\"string\",\"policy\":\"PROMPT\"}],\"runtimePermission\":\"PROMPT\",\"startUrl\":\"string\",\"type\":\"APP_TYPE_UNSPECIFIED\",\"updateTime\":\"string\",\"versionCode\":0},\"iconUrl\":\"string\",\"location\":\"string\",\"locationObjectId\":\"string\",\"microsoftStore\":{\"doNotUpdate\":true,\"nonRemovable\":true,\"packageFamilyName\":\"string\"},\"packageId\":\"string\",\"packageKind\":\"string\",\"packageManager\":\"string\",\"packageSubtitle\":\"string\",\"packageVersion\":\"string\",\"packageVersionUpdatedAt\":\"2019-08-24T14:15:22Z\",\"scope\":\"string\",\"shortVersion\":\"string\",\"storedPackage\":{\"objectId\":\"string\",\"versions\":[{\"metadata\":{},\"name\":\"string\",\"rejectedReason\":\"string\",\"sha256sum\":\"string\",\"size\":0,\"status\":\"string\",\"version\":0}]},\"storedPackageObjectId\":\"string\",\"teamId\":\"string\",\"updatedAt\":\"2019-08-24T14:15:22Z\",\"versionlessDownloadUrl\":true}],\"updatedAt\":\"2019-08-24T14:15:22Z\"}'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/v2/softwareapps/{id}\"\n\npayload = {\n    \"createdAt\": \"2019-08-24T14:15:22Z\",\n    \"displayName\": \"string\",\n    \"id\": \"string\",\n    \"settings\": [\n        {\n            \"allowUpdateDelay\": False,\n            \"appCatalogInstallableObjectId\": \"string\",\n            \"appleVpp\": {\n                \"appConfiguration\": \"string\",\n                \"assignedLicenses\": 0,\n                \"availableLicenses\": 0,\n                \"details\": {},\n                \"isConfigEnabled\": True,\n                \"supportedDeviceFamilies\": [\"IPAD\"],\n                \"totalLicenses\": 0\n            },\n            \"assetKind\": \"string\",\n            \"assetSha256Size\": 0,\n            \"assetSha256Strings\": [\"string\"],\n            \"autoUpdate\": False,\n            \"commandLineArguments\": \"string\",\n            \"createdAt\": \"2019-08-24T14:15:22Z\",\n            \"description\": \"string\",\n            \"desiredState\": \"string\",\n            \"enterpriseObjectId\": \"string\",\n            \"googleAndroid\": {\n                \"androidFeatures\": [\"string\"],\n                \"appPricing\": \"string\",\n                \"appVersion\": \"string\",\n                \"author\": \"string\",\n                \"autoUpdateMode\": \"AUTO_UPDATE_DEFAULT\",\n                \"category\": \"string\",\n                \"contentRating\": \"string\",\n                \"displayMode\": \"string\",\n                \"distributionChannel\": \"string\",\n                \"fullDescription\": \"string\",\n                \"iconUrl\": \"string\",\n                \"installType\": \"AVAILABLE\",\n                \"managedConfigurationTemplateId\": \"string\",\n                \"managedProperties\": True,\n                \"minSdkVersion\": 0,\n                \"name\": \"string\",\n                \"permissionGrants\": [\n                    {\n                        \"id\": \"string\",\n                        \"policy\": \"PROMPT\"\n                    }\n                ],\n                \"runtimePermission\": \"PROMPT\",\n                \"startUrl\": \"string\",\n                \"type\": \"APP_TYPE_UNSPECIFIED\",\n                \"updateTime\": \"string\",\n                \"versionCode\": 0\n            },\n            \"iconUrl\": \"string\",\n            \"location\": \"string\",\n            \"locationObjectId\": \"string\",\n            \"microsoftStore\": {\n                \"doNotUpdate\": True,\n                \"nonRemovable\": True,\n                \"packageFamilyName\": \"string\"\n            },\n            \"packageId\": \"string\",\n            \"packageKind\": \"string\",\n            \"packageManager\": \"string\",\n            \"packageSubtitle\": \"string\",\n            \"packageVersion\": \"string\",\n            \"packageVersionUpdatedAt\": \"2019-08-24T14:15:22Z\",\n            \"scope\": \"string\",\n            \"storedPackage\": {\n                \"objectId\": \"string\",\n                \"versions\": [\n                    {\n                        \"metadata\": {},\n                        \"name\": \"string\",\n                        \"rejectedReason\": \"string\",\n                        \"sha256sum\": \"string\",\n                        \"size\": 0,\n                        \"status\": \"string\",\n                        \"version\": 0\n                    }\n                ]\n            },\n            \"storedPackageObjectId\": \"string\",\n            \"updatedAt\": \"2019-08-24T14:15:22Z\",\n            \"versionlessDownloadUrl\": True\n        }\n    ],\n    \"updatedAt\": \"2019-08-24T14:15:22Z\"\n}\nheaders = {\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"PUT\", url, json=payload, headers=headers)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/v2/softwareapps/{id}\"\n\npayload = {\n    \"createdAt\": \"2019-08-24T14:15:22Z\",\n    \"displayName\": \"string\",\n    \"id\": \"string\",\n    \"settings\": [\n        {\n            \"allowUpdateDelay\": False,\n            \"appCatalogInstallableObjectId\": \"string\",\n            \"appFileName\": \"string\",\n            \"appleVpp\": {\n                \"appConfiguration\": \"string\",\n                \"assignedLicenses\": 0,\n                \"availableLicenses\": 0,\n                \"details\": {},\n                \"isConfigEnabled\": True,\n                \"supportedDeviceFamilies\": [\"IPAD\"],\n                \"totalLicenses\": 0\n            },\n            \"architectures\": [\"string\"],\n            \"assetKind\": \"string\",\n            \"assetSha256Size\": 0,\n            \"assetSha256Strings\": [\"string\"],\n            \"autoUpdate\": False,\n            \"bundleId\": \"string\",\n            \"commandLineArguments\": \"string\",\n            \"createdAt\": \"2019-08-24T14:15:22Z\",\n            \"description\": \"string\",\n            \"desiredState\": \"string\",\n            \"downloadUrl\": \"string\",\n            \"enterpriseObjectId\": \"string\",\n            \"format\": \"string\",\n            \"googleAndroid\": {\n                \"androidFeatures\": [\"string\"],\n                \"appPricing\": \"string\",\n                \"appVersion\": \"string\",\n                \"author\": \"string\",\n                \"autoUpdateMode\": \"AUTO_UPDATE_DEFAULT\",\n                \"category\": \"string\",\n                \"contentRating\": \"string\",\n                \"displayMode\": \"string\",\n                \"distributionChannel\": \"string\",\n                \"fullDescription\": \"string\",\n                \"iconUrl\": \"string\",\n                \"installType\": \"AVAILABLE\",\n                \"managedConfigurationTemplateId\": \"string\",\n                \"managedProperties\": True,\n                \"minSdkVersion\": 0,\n                \"name\": \"string\",\n                \"permissionGrants\": [\n                    {\n                        \"id\": \"string\",\n                        \"policy\": \"PROMPT\"\n                    }\n                ],\n                \"runtimePermission\": \"PROMPT\",\n                \"startUrl\": \"string\",\n                \"type\": \"APP_TYPE_UNSPECIFIED\",\n                \"updateTime\": \"string\",\n                \"versionCode\": 0\n            },\n            \"iconUrl\": \"string\",\n            \"location\": \"string\",\n            \"locationObjectId\": \"string\",\n            \"microsoftStore\": {\n                \"doNotUpdate\": True,\n                \"nonRemovable\": True,\n                \"packageFamilyName\": \"string\"\n            },\n            \"packageId\": \"string\",\n            \"packageKind\": \"string\",\n            \"packageManager\": \"string\",\n            \"packageSubtitle\": \"string\",\n            \"packageVersion\": \"string\",\n            \"packageVersionUpdatedAt\": \"2019-08-24T14:15:22Z\",\n            \"scope\": \"string\",\n            \"shortVersion\": \"string\",\n            \"storedPackage\": {\n                \"objectId\": \"string\",\n                \"versions\": [\n                    {\n                        \"metadata\": {},\n                        \"name\": \"string\",\n                        \"rejectedReason\": \"string\",\n                        \"sha256sum\": \"string\",\n                        \"size\": 0,\n                        \"status\": \"string\",\n                        \"version\": 0\n                    }\n                ]\n            },\n            \"storedPackageObjectId\": \"string\",\n            \"teamId\": \"string\",\n            \"updatedAt\": \"2019-08-24T14:15:22Z\",\n            \"versionlessDownloadUrl\": True\n        }\n    ],\n    \"updatedAt\": \"2019-08-24T14:15:22Z\"\n}\nheaders = {\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"PUT\", url, json=payload, headers=headers)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/v2/softwareapps/{id}' -Method PUT -Headers $headers -ContentType 'application/json' -Body '{\"createdAt\":\"2019-08-24T14:15:22Z\",\"displayName\":\"string\",\"id\":\"string\",\"settings\":[{\"allowUpdateDelay\":false,\"appCatalogInstallableObjectId\":\"string\",\"appleVpp\":{\"appConfiguration\":\"string\",\"assignedLicenses\":0,\"availableLicenses\":0,\"details\":{},\"isConfigEnabled\":true,\"supportedDeviceFamilies\":[\"IPAD\"],\"totalLicenses\":0},\"assetKind\":\"string\",\"assetSha256Size\":0,\"assetSha256Strings\":[\"string\"],\"autoUpdate\":false,\"commandLineArguments\":\"string\",\"createdAt\":\"2019-08-24T14:15:22Z\",\"description\":\"string\",\"desiredState\":\"string\",\"enterpriseObjectId\":\"string\",\"googleAndroid\":{\"androidFeatures\":[\"string\"],\"appPricing\":\"string\",\"appVersion\":\"string\",\"author\":\"string\",\"autoUpdateMode\":\"AUTO_UPDATE_DEFAULT\",\"category\":\"string\",\"contentRating\":\"string\",\"displayMode\":\"string\",\"distributionChannel\":\"string\",\"fullDescription\":\"string\",\"iconUrl\":\"string\",\"installType\":\"AVAILABLE\",\"managedConfigurationTemplateId\":\"string\",\"managedProperties\":true,\"minSdkVersion\":0,\"name\":\"string\",\"permissionGrants\":[{\"id\":\"string\",\"policy\":\"PROMPT\"}],\"runtimePermission\":\"PROMPT\",\"startUrl\":\"string\",\"type\":\"APP_TYPE_UNSPECIFIED\",\"updateTime\":\"string\",\"versionCode\":0},\"iconUrl\":\"string\",\"location\":\"string\",\"locationObjectId\":\"string\",\"microsoftStore\":{\"doNotUpdate\":true,\"nonRemovable\":true,\"packageFamilyName\":\"string\"},\"packageId\":\"string\",\"packageKind\":\"string\",\"packageManager\":\"string\",\"packageSubtitle\":\"string\",\"packageVersion\":\"string\",\"packageVersionUpdatedAt\":\"2019-08-24T14:15:22Z\",\"scope\":\"string\",\"storedPackage\":{\"objectId\":\"string\",\"versions\":[{\"metadata\":{},\"name\":\"string\",\"rejectedReason\":\"string\",\"sha256sum\":\"string\",\"size\":0,\"status\":\"string\",\"version\":0}]},\"storedPackageObjectId\":\"string\",\"updatedAt\":\"2019-08-24T14:15:22Z\",\"versionlessDownloadUrl\":true}],\"updatedAt\":\"2019-08-24T14:15:22Z\"}'"
+            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/v2/softwareapps/{id}' -Method PUT -Headers $headers -ContentType 'application/json' -Body '{\"createdAt\":\"2019-08-24T14:15:22Z\",\"displayName\":\"string\",\"id\":\"string\",\"settings\":[{\"allowUpdateDelay\":false,\"appCatalogInstallableObjectId\":\"string\",\"appFileName\":\"string\",\"appleVpp\":{\"appConfiguration\":\"string\",\"assignedLicenses\":0,\"availableLicenses\":0,\"details\":{},\"isConfigEnabled\":true,\"supportedDeviceFamilies\":[\"IPAD\"],\"totalLicenses\":0},\"architectures\":[\"string\"],\"assetKind\":\"string\",\"assetSha256Size\":0,\"assetSha256Strings\":[\"string\"],\"autoUpdate\":false,\"bundleId\":\"string\",\"commandLineArguments\":\"string\",\"createdAt\":\"2019-08-24T14:15:22Z\",\"description\":\"string\",\"desiredState\":\"string\",\"downloadUrl\":\"string\",\"enterpriseObjectId\":\"string\",\"format\":\"string\",\"googleAndroid\":{\"androidFeatures\":[\"string\"],\"appPricing\":\"string\",\"appVersion\":\"string\",\"author\":\"string\",\"autoUpdateMode\":\"AUTO_UPDATE_DEFAULT\",\"category\":\"string\",\"contentRating\":\"string\",\"displayMode\":\"string\",\"distributionChannel\":\"string\",\"fullDescription\":\"string\",\"iconUrl\":\"string\",\"installType\":\"AVAILABLE\",\"managedConfigurationTemplateId\":\"string\",\"managedProperties\":true,\"minSdkVersion\":0,\"name\":\"string\",\"permissionGrants\":[{\"id\":\"string\",\"policy\":\"PROMPT\"}],\"runtimePermission\":\"PROMPT\",\"startUrl\":\"string\",\"type\":\"APP_TYPE_UNSPECIFIED\",\"updateTime\":\"string\",\"versionCode\":0},\"iconUrl\":\"string\",\"location\":\"string\",\"locationObjectId\":\"string\",\"microsoftStore\":{\"doNotUpdate\":true,\"nonRemovable\":true,\"packageFamilyName\":\"string\"},\"packageId\":\"string\",\"packageKind\":\"string\",\"packageManager\":\"string\",\"packageSubtitle\":\"string\",\"packageVersion\":\"string\",\"packageVersionUpdatedAt\":\"2019-08-24T14:15:22Z\",\"scope\":\"string\",\"shortVersion\":\"string\",\"storedPackage\":{\"objectId\":\"string\",\"versions\":[{\"metadata\":{},\"name\":\"string\",\"rejectedReason\":\"string\",\"sha256sum\":\"string\",\"size\":0,\"status\":\"string\",\"version\":0}]},\"storedPackageObjectId\":\"string\",\"teamId\":\"string\",\"updatedAt\":\"2019-08-24T14:15:22Z\",\"versionlessDownloadUrl\":true}],\"updatedAt\":\"2019-08-24T14:15:22Z\"}'"
           }
         ]
       },
@@ -24152,7 +24219,7 @@
           }
         ],
         "summary": "Delete a Push Endpoint associated with a User",
-        "x-restrict-elevated-user": {
+        "x-restrict-linked-identity": {
           "bypassScopes": [
             "administrators"
           ],
@@ -24260,7 +24327,7 @@
           }
         ],
         "summary": "Update a push endpoint associated with a User",
-        "x-restrict-elevated-user": {
+        "x-restrict-linked-identity": {
           "bypassScopes": [
             "administrators"
           ],
@@ -25003,9 +25070,7 @@
       "x-functionalities-tags": [
         "workday"
       ]
-    },
-    "/workflowaccessrequest": {},
-    "/workflowaccessrequest/{id}": {}
+    }
   },
   "produces": [
     "application/json"

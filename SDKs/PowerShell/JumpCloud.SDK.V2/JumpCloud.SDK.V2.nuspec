@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
   <metadata>
     <id>JumpCloud.SDK.V2</id>
-    <version>0.0.49</version>
+    <version>1.0.0</version>
     <authors>JumpCloud</authors>
     <owners>JumpCloud</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
