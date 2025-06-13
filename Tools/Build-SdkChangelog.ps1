@@ -63,6 +63,13 @@ if ($SdkChangelog -notmatch "$LatestPsd1Version") {
 }
 elseif ($SdkChangelog -match "$LatestPsd1Version") {
     Write-Host "Updating Diffs"
+    # Update the changelog Release Date
+    $SdkChangelog = Get-Content -Path $SdkChangelogFilePath -Raw
+    $todaysDate = Get-Date -UFormat:('%B %d, %Y')
+    $SdkChangelog = $SdkChangelog -replace ("Release Date:.*"), "Release Date: $todaysDate"
+    # Update the changelog with the new diffs
+    $SdkChangelog | Set-Content -Path $SdkChangelogFilePath -Force
+
     # Get the current version content up to the last version content
     $LastChangeRegex = [regex]"## $LatestPsd1Version[\s\S]*?(?=## $sdkname-)"
     $ChangeLogContent = Select-String -InputObject $SdkChangelog -Pattern $LastChangeRegex
