@@ -2,10 +2,10 @@
 #Requires -Modules powershell-yaml, BuildHelpers
 Param(
     [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Name of the SDK to build.')][ValidateSet('JumpCloud.SDK.DirectoryInsights', 'JumpCloud.SDK.V1', 'JumpCloud.SDK.V2')][ValidateNotNullOrEmpty()][System.String[]]$SDKName
+    , [Parameter(Mandatory = $true, HelpMessage = 'The type of version bump.')][ValidateSet('major', 'minor', 'patch', 'manual')][System.String]$VersionType
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Specify module version number to set manually.')][System.String]$ManualModuleVersion
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Populate to make module version a prerelease.')][System.String]$PrereleaseName = ''
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Excluded folder in root from being removed')][ValidateNotNullOrEmpty()][System.String[]]$FolderExcludeList = @('examples', 'test')
-    , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Set the module version increment type.')][ValidateSet('Major', 'Minor', 'Build')][ValidateNotNullOrEmpty()][System.String]$ModuleVersionIncrementType = 'Build'
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = '$true to run the ApiTransform.ps1 file.')][ValidateNotNullOrEmpty()][System.Boolean]$RunApiTransform = $true
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = '$true to increment the module version.')][ValidateNotNullOrEmpty()][System.Boolean]$IncrementModuleVersion = $true
     , [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = '$true to run AutoRest to generate the module.')][ValidateNotNullOrEmpty()][System.Boolean]$GenerateModule = $true
@@ -64,10 +64,10 @@ ForEach ($SDK In $SDKName)
         $extractedModulePath = '{0}/{1}' -f $binFolder, $ModuleName
         $CustomFolderSourcePath = '{0}/Custom' -f $PSScriptRoot
         $CustomFolderPath = '{0}/custom' -f $OutputFullPath
+        $ExamplesFolderPath = '{0}/examples' -f $OutputFullPath
         $GeneratedFolderPath = '{0}/generated' -f $CustomFolderPath
         $exportsFolderPath = '{0}/exports' -f $OutputFullPath
         $TestFolderPath = '{0}/test' -f $OutputFullPath
-        $ExamplesFolderPath = '{0}/examples' -f $OutputFullPath
         $DocsFolderPath = '{0}/docs/exports' -f $OutputFullPath
         $buildModulePath = '{0}/build-module.ps1' -f $OutputFullPath
         $testModulePath = '{0}/test-module.ps1' -f $OutputFullPath
@@ -93,23 +93,27 @@ ForEach ($SDK In $SDKName)
         ###########################################################################
         If (-not [System.String]::IsNullOrEmpty($PublishedModule))
         {
-            # Increment module version number
+            # Increment module version number based on the VersionType parameter
             If ($IncrementModuleVersion)
             {
-                If (-not [System.String]::IsNullOrEmpty($ModuleVersionIncrementType))
-                {
-                    $ModuleVersion = If (-not [System.String]::IsNullOrEmpty($ManualModuleVersion))
-                    {
-                        [System.Version]$ManualModuleVersion
+                if ($VersionType -eq 'manual') {
+                    if ([System.String]::IsNullOrEmpty($ManualModuleVersion)) {
+                        Throw "VersionType 'manual' was specified, but no version was provided via the -ManualModuleVersion parameter."
                     }
-                    Else
-                    {
-                        Step-Version -Version:(($PublishedModule.Version -split '-')[0]) -By:($ModuleVersionIncrementType)
-                    }
-                    Write-Host ('[RUN COMMAND] Increment module version number to: ' + $ModuleVersion) -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-                    $ConfigContent = $ConfigContent -Replace ("(module-version: )([0-9]\d*)\.([0-9]\d*)\.([0-9]\d*)", "module-version: $($ModuleVersion)")
-                    $ConfigContent.Trim() | Out-File -FilePath:($ConfigFilePath) -Force
+                    $ModuleVersion = [System.Version]$ManualModuleVersion
                 }
+                else {
+                    $incrementType = switch ($VersionType) {
+                        'major' { 'Major' }
+                        'minor' { 'Minor' }
+                        'patch' { 'Build' }
+                    }
+                    $ModuleVersion = Step-Version -Version:(($PublishedModule.Version -split '-')[0]) -By:($incrementType)
+                }
+
+                Write-Host ('[RUN COMMAND] Updating module version number to: ' + $ModuleVersion) -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+                $ConfigContent = $ConfigContent -replace "(module-version: )([0-9]\d*)\.([0-9]\d*)\.([0-9]\d*)", "module-version: $($ModuleVersion)"
+                $ConfigContent.Trim() | Out-File -FilePath:($ConfigFilePath) -Force
             }
         }
         $BuildVersion = "$($ModuleVersion)-$($BuildNumber)"

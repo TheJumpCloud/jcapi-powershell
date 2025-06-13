@@ -30,9 +30,9 @@ curl -X POST https://console.jumpcloud.com/api/radiusservers/ \\
 ### CreateExpanded (Default)
 ```
 New-JcSdkRadiusServer -Name <String> -NetworkSourceIP <String> -SharedSecret <String> [-AuthIdp <String>]
- [-CaCert <String>] [-DeviceCertEnabled] [-Mfa <String>] [-RequireTlsAuth] [-UserCertEnabled]
- [-UserLockoutAction <String>] [-UserPasswordEnabled] [-UserPasswordExpirationAction <String>] [-Confirm]
- [-WhatIf] [<CommonParameters>]
+ [-CaCert <String>] [-DeviceCertEnabled] [-Mfa <String>] [-RadsecEnabled] [-RequireRadsec] [-RequireTlsAuth]
+ [-UserCertEnabled] [-UserLockoutAction <String>] [-UserPasswordEnabled]
+ [-UserPasswordExpirationAction <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Create
@@ -208,6 +208,36 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -RadsecEnabled
+.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: CreateExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -RequireRadsec
+.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: CreateExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -RequireTlsAuth
 .
 
@@ -357,6 +387,8 @@ BODY <IRadiusserverpost>: RadiusServerPost
   - `[CaCert <String>]`: 
   - `[DeviceCertEnabled <Boolean?>]`: 
   - `[Mfa <String>]`: 
+  - `[RadsecEnabled <Boolean?>]`: 
+  - `[RequireRadsec <Boolean?>]`: 
   - `[RequireTlsAuth <Boolean?>]`: 
   - `[UserCertEnabled <Boolean?>]`: 
   - `[UserLockoutAction <String>]`: 
