@@ -312,7 +312,7 @@ jobs:
 
   Test-SDK-V1:
     needs: ["Build-SDK-V1", "Check-PR-Labels"]
-    if: contains(github.event.pull_request.labels.*.name, 'v1')
+    if: contains(github.event.pull_request.labels.*.name, 'v1') || contains(github.event.pull_request.labels.*.name, 'v2')
     runs-on: ubuntu-latest
     timeout-minutes: 70
     steps:
