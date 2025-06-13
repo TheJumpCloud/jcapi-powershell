@@ -2,9 +2,11 @@ name: Release and Publish SDKs
 
 on:
   pull_request:
+    types:
+        - closed
     branches:
-      #- SDK-Release-Test
-      - master
+      - SDK-Release-Test
+      #- master #TODO: Uncomment this when we are ready to merge to master
 
 jobs:
   Filter-Branch:
@@ -12,17 +14,8 @@ jobs:
     if: contains(github.event.pull_request.labels.*.name, 'SDK')
     steps:
       - run: echo "SDK label found. Continuing..."
-
-  # Check-If-Merged:
-  #   needs: ['Filter-Branch']
-  #   if: github.event.pull_request.merged == true
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #     - name: Check if Merged
-  #       run: echo "PR #${{ github.event.pull_request.number }} was merged. Starting release process."
-
   Check-PR-Labels:
-    #needs: ['Check-If-Merged']
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     outputs:
       RELEASE_TYPE: ${{ steps.set_labels.outputs.RELEASE_TYPE }}

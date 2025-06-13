@@ -3,7 +3,8 @@ name: PowerShell SDK CI
 on:
   pull_request:
     branches:
-      #- master
+
+      #- master #TODO: Uncomment this when we are ready to merge to master
       - SDK-Release-Test
 
 concurrency:
