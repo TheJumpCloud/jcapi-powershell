@@ -163,7 +163,7 @@ jobs:
   ## ----------------------------------------------------------------
 
   Build-SDK-DI:
-    needs: ["Setup-Build-Dependancies", "Check-PR-Labels"]
+    needs: ["Setup-Build-Dependancies", "Check-PR-Labels", "Validate-SDK-Module"]
     if: contains(github.event.pull_request.labels.*.name, 'DirectoryInsights')
     runs-on: ubuntu-latest
     timeout-minutes: 70
@@ -201,7 +201,7 @@ jobs:
           retention-days: 1
 
   Build-SDK-V1:
-    needs: ["Setup-Build-Dependancies", "Check-PR-Labels"]
+    needs: ["Setup-Build-Dependancies", "Check-PR-Labels", "Validate-SDK-Module"]
     if: contains(github.event.pull_request.labels.*.name, 'v1') || contains(github.event.pull_request.labels.*.name, 'v2')
     runs-on: ubuntu-latest
     timeout-minutes: 70
@@ -239,7 +239,7 @@ jobs:
           retention-days: 1
 
   Build-SDK-V2:
-    needs: ["Setup-Build-Dependancies" , "Check-PR-Labels"]
+    needs: ["Setup-Build-Dependancies" , "Check-PR-Labels" , "Validate-SDK-Module"]
     if: contains(github.event.pull_request.labels.*.name, 'v2')
     runs-on: ubuntu-latest
     timeout-minutes: 70
