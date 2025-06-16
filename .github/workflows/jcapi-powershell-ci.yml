@@ -362,11 +362,12 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           name: build-JumpCloud.SDK.V1
-          path: /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/
-      - name: Unzip V1 module for V2 Tests
+      - name: Download V1 module for V2 Tests
         shell: pwsh
         run: |
-          Expand-Archive -Path /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/JumpCloud.SDK.V1.zip -DestinationPath /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/ -Force
+          Install-Module -Name JumpCloud.SDK.V1 -Force
+          $v1Path = (Get-Module -Name JumpCloud.SDK.V1 -ListAvailable).Path
+          Write-Host "JumpCloud.SDK.V1 module installed in: $v1Path"
       - name: Test JumpCloud.SDK.V2
         shell: pwsh
         env:
