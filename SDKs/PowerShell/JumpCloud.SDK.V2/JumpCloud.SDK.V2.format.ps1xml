@@ -578,6 +578,12 @@
             <Label>Id</Label>
           </TableColumnHeader>
           <TableColumnHeader>
+            <Label>MdmOSFamily</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>ModelFamily</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
             <Label>OSVersion</Label>
           </TableColumnHeader>
           <TableColumnHeader>
@@ -604,6 +610,12 @@
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>Id</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>MdmOSFamily</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>ModelFamily</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>OSVersion</PropertyName>
@@ -648,7 +660,25 @@
             <Label>IsSupervised</Label>
           </TableColumnHeader>
           <TableColumnHeader>
+            <Label>ModelMarketingName</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
             <Label>ModelName</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>ModelNumber</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>OSBuildVersion</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>OSExtraVersion</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>OSMarketingName</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>OSSupplementalBuildVersion</Label>
           </TableColumnHeader>
           <TableColumnHeader>
             <Label>SecondIccid</Label>
@@ -658,6 +688,9 @@
           </TableColumnHeader>
           <TableColumnHeader>
             <Label>SecondSubscriberCarrierNetwork</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>SofwareUpdateId</Label>
           </TableColumnHeader>
           <TableColumnHeader>
             <Label>SubscriberCarrierNetwork</Label>
@@ -691,7 +724,25 @@
                 <PropertyName>IsSupervised</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
+                <PropertyName>ModelMarketingName</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
                 <PropertyName>ModelName</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>ModelNumber</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>OSBuildVersion</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>OSExtraVersion</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>OSMarketingName</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>OSSupplementalBuildVersion</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>SecondIccid</PropertyName>
@@ -701,6 +752,9 @@
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>SecondSubscriberCarrierNetwork</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>SofwareUpdateId</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>SubscriberCarrierNetwork</PropertyName>
@@ -724,10 +778,16 @@
             <Label>EnrolledViaDep</Label>
           </TableColumnHeader>
           <TableColumnHeader>
+            <Label>FilevaultEnabled</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
             <Label>IsActivationLockManageable</Label>
           </TableColumnHeader>
           <TableColumnHeader>
             <Label>IsUserEnrollment</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>PasscodeCompliant</Label>
           </TableColumnHeader>
           <TableColumnHeader>
             <Label>PasscodePresent</Label>
@@ -743,10 +803,16 @@
                 <PropertyName>EnrolledViaDep</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
+                <PropertyName>FilevaultEnabled</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
                 <PropertyName>IsActivationLockManageable</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>IsUserEnrollment</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>PasscodeCompliant</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>PasscodePresent</PropertyName>
@@ -6397,6 +6463,12 @@
             <Label>AppCatalogInstallableObjectId</Label>
           </TableColumnHeader>
           <TableColumnHeader>
+            <Label>AppFileName</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Architectures</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
             <Label>AssetKind</Label>
           </TableColumnHeader>
           <TableColumnHeader>
@@ -6407,6 +6479,9 @@
           </TableColumnHeader>
           <TableColumnHeader>
             <Label>AutoUpdate</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>BundleId</Label>
           </TableColumnHeader>
           <TableColumnHeader>
             <Label>CommandLineArguments</Label>
@@ -6421,7 +6496,13 @@
             <Label>DesiredState</Label>
           </TableColumnHeader>
           <TableColumnHeader>
+            <Label>DownloadUrl</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
             <Label>EnterpriseObjectId</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Format</Label>
           </TableColumnHeader>
           <TableColumnHeader>
             <Label>IconUrl</Label>
@@ -6454,7 +6535,13 @@
             <Label>Scope</Label>
           </TableColumnHeader>
           <TableColumnHeader>
+            <Label>ShortVersion</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
             <Label>StoredPackageObjectId</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>TeamId</Label>
           </TableColumnHeader>
           <TableColumnHeader>
             <Label>UpdatedAt</Label>
@@ -6473,6 +6560,12 @@
                 <PropertyName>AppCatalogInstallableObjectId</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
+                <PropertyName>AppFileName</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Architectures</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
                 <PropertyName>AssetKind</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
@@ -6483,6 +6576,9 @@
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>AutoUpdate</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>BundleId</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>CommandLineArguments</PropertyName>
@@ -6497,7 +6593,13 @@
                 <PropertyName>DesiredState</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
+                <PropertyName>DownloadUrl</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
                 <PropertyName>EnterpriseObjectId</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Format</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>IconUrl</PropertyName>
@@ -6530,7 +6632,13 @@
                 <PropertyName>Scope</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
+                <PropertyName>ShortVersion</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
                 <PropertyName>StoredPackageObjectId</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>TeamId</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>UpdatedAt</PropertyName>

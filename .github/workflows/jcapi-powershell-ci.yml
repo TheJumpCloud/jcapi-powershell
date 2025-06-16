@@ -3,10 +3,7 @@ name: PowerShell SDK CI
 on:
   pull_request:
     branches:
-
-      #- master #TODO: Uncomment this when we are ready to merge to master
       - SDK-Release-Test
-
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true
@@ -312,7 +309,7 @@ jobs:
 
   Test-SDK-V1:
     needs: ["Build-SDK-V1", "Check-PR-Labels"]
-    if: contains(github.event.pull_request.labels.*.name, 'v1')
+    if: contains(github.event.pull_request.labels.*.name, 'v1') || contains(github.event.pull_request.labels.*.name, 'v2')
     runs-on: ubuntu-latest
     timeout-minutes: 70
     steps:
@@ -362,12 +359,11 @@ jobs:
       - uses: actions/download-artifact@v4
         with:
           name: build-JumpCloud.SDK.V1
-      - name: Download V1 module for V2 Tests
+          path: /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/
+      - name: Unzip V1 module for V2 Tests
         shell: pwsh
         run: |
-          Install-Module -Name JumpCloud.SDK.V1 -Force
-          $v1Path = (Get-Module -Name JumpCloud.SDK.V1 -ListAvailable).Path
-          Write-Host "JumpCloud.SDK.V1 module installed in: $v1Path"
+          Expand-Archive -Path /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/JumpCloud.SDK.V1.zip -DestinationPath /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/ -Force
       - name: Test JumpCloud.SDK.V2
         shell: pwsh
         env:
@@ -385,7 +381,7 @@ jobs:
 
   Test-SDK-MTP-V1:
     needs: ["Build-SDK-V1", "Check-PR-Labels"]
-    if: contains(github.event.pull_request.labels.*.name, 'v1')
+    if: contains(github.event.pull_request.labels.*.name, 'v1') || contains(github.event.pull_request.labels.*.name, 'v2')
     runs-on: ubuntu-latest
     timeout-minutes: 70
     steps:
@@ -394,14 +390,12 @@ jobs:
         with:
           path: "/home/runner/.local/share/powershell/Modules/"
           key: PS-Dependancies
-      - uses: actions/download-artifact@v4
-        with:
-          name: build-JumpCloud.SDK.V1
-          path: /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/
-      - name: Unzip JumpCloud.SDK.V1 module
+      - name: Download JumpCloud.SDK.V1 module
         shell: pwsh
         run: |
-          Expand-Archive -Path /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/JumpCloud.SDK.V1.zip -DestinationPath /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/ -Force
+          Install-Module -Name JumpCloud.SDK.V1 -Repository PSGallery -Force
+          $v1Path = (Get-Module -Name JumpCloud.SDK.V1 -ListAvailable).Path
+          Write-Host "JumpCloud.SDK.V1 module path: $v1Path"
       - name: Test MTP JumpCloud.SDK.V1
         shell: pwsh
         env:
@@ -432,14 +426,12 @@ jobs:
         shell: pwsh
         run: |
           Expand-Archive -Path /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/JumpCloud.SDK.V2.zip -DestinationPath /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/ -Force
-      - uses: actions/download-artifact@v4
-        with:
-          name: build-JumpCloud.SDK.V1
-          path: /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/
-      - name: Unzip V1 module for V2 Tests
+      - name: Download JumpCloud.SDK.V1 module
         shell: pwsh
         run: |
-          Expand-Archive -Path /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/JumpCloud.SDK.V1.zip -DestinationPath /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/ -Force
+          Install-Module -Name JumpCloud.SDK.V1 -Repository PSGallery -Force
+          $v1Path = (Get-Module -Name JumpCloud.SDK.V1 -ListAvailable).Path
+          Write-Host "JumpCloud.SDK.V1 module path: $v1Path"
       - name: Test MTP JumpCloud.SDK.V2
         shell: pwsh
         env:
