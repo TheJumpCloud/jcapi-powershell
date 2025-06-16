@@ -3,7 +3,7 @@ name: PowerShell SDK CI
 on:
   pull_request:
     branches:
-      - SDK-Release-Test
+      - Master
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
   cancel-in-progress: true

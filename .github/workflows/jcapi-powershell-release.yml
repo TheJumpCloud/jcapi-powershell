@@ -2,8 +2,6 @@ name: Release and Publish SDKs
 
 on:
   pull_request:
-    types:
-        - closed
     branches:
       - SDK-Release-Test
       #- master #TODO: Uncomment this when we are ready to merge to master
