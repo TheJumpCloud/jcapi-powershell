@@ -309,7 +309,7 @@ jobs:
 
   Test-SDK-V1:
     needs: ["Build-SDK-V1", "Check-PR-Labels"]
-    if: contains(github.event.pull_request.labels.*.name, 'v1') || contains(github.event.pull_request.labels.*.name, 'v2')
+    if: contains(github.event.pull_request.labels.*.name, 'v1')
     runs-on: ubuntu-latest
     timeout-minutes: 70
     steps:
@@ -338,7 +338,7 @@ jobs:
           ./Test-Module.ps1 -JCApiKey:($env:PESTER_APIKEY) -JCOrgId:($env:PESTER_ORGID) -JCApiKeyMTP:($env:PESTER_MSP_APIKEY) -JCProviderId:($env:PESTER_PROVIDERID) -ExcludeTagList:("MTP") -IncludeTagList:("*") -testModulePath:("./SDKs/PowerShell/JumpCloud.SDK.V1/test-module.ps1")
 
   Test-SDK-V2:
-    needs: ["Build-SDK-V1", "Build-SDK-V2", "Check-PR-Labels"]
+    needs: ["Build-SDK-V2", "Check-PR-Labels"]
     if: contains(github.event.pull_request.labels.*.name, 'v2')
     runs-on: ubuntu-latest
     timeout-minutes: 70
@@ -408,7 +408,7 @@ jobs:
           ./Test-Module.ps1 -JCApiKey:($env:PESTER_APIKEY) -JCOrgId:($env:PESTER_ORGID) -JCApiKeyMTP:($env:PESTER_MSP_APIKEY) -JCProviderId:($env:PESTER_PROVIDERID) -ExcludeTagList:("None") -IncludeTagList:("MTP") -testModulePath:("./SDKs/PowerShell/JumpCloud.SDK.V1/test-module.ps1")
 
   Test-SDK-MTP-V2:
-    needs: ["Build-SDK-V1", "Build-SDK-V2", "Check-PR-Labels"]
+    needs: ["Build-SDK-V2", "Check-PR-Labels"]
     if: contains(github.event.pull_request.labels.*.name, 'v2')
     runs-on: ubuntu-latest
     timeout-minutes: 70
