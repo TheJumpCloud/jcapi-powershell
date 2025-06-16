@@ -13,7 +13,6 @@ jobs:
     steps:
       - run: echo "SDK label found. Continuing..."
   Check-PR-Labels:
-    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     outputs:
       RELEASE_TYPE: ${{ steps.set_labels.outputs.RELEASE_TYPE }}
