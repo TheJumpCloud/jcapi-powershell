@@ -356,14 +356,35 @@ jobs:
         shell: pwsh
         run: |
           Expand-Archive -Path /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/JumpCloud.SDK.V2.zip -DestinationPath /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/ -Force
-      - uses: actions/download-artifact@v4
-        with:
-          name: build-JumpCloud.SDK.V1
-          path: /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/
-      - name: Unzip V1 module for V2 Tests
+      - name: Download JumpCloud.SDK.V1 from PSGallery
         shell: pwsh
         run: |
-          Expand-Archive -Path /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/JumpCloud.SDK.V1.zip -DestinationPath /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/ -Force
+          # Define the destination path for the module files
+          $parentDir = "/home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell"
+          $moduleName = "JumpCloud.SDK.V1"
+          $moduleDir = Join-Path $parentDir $moduleName
+
+          # Save the module from the gallery. This command creates a nested version folder,
+          Write-Host "Downloading '$moduleName' from PSGallery to '$parentDir'..."
+          Save-Module -Name $moduleName -Repository PSGallery -Path $parentDir -Force
+
+          # Get the path to the version-specific folder that was just created
+          $versionedDir = Get-ChildItem -Path $moduleDir -Directory | Select-Object -First 1
+          if (-not $versionedDir) {
+            Write-Error "Failed to find downloaded module version directory inside '$moduleDir'."
+            exit 1
+          }
+          Write-Host "Found module version directory at '$($versionedDir.FullName)'."
+
+          # Move all contents from the versioned folder up into the main module directory
+          Write-Host "Moving module contents to the expected path: '$moduleDir'..."
+          Move-Item -Path (Join-Path $versionedDir.FullName "*") -Destination $moduleDir -Force
+
+          # Remove the now-empty versioned folder to clean up
+          Write-Host "Cleaning up empty directory: $($versionedDir.FullName)"
+          Remove-Item -Path $versionedDir.FullName -Force
+
+          Write-Host "Module '$moduleName' is now correctly placed at '$moduleDir'."
       - name: Test JumpCloud.SDK.V2
         shell: pwsh
         env:
@@ -428,14 +449,35 @@ jobs:
         shell: pwsh
         run: |
           Expand-Archive -Path /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/JumpCloud.SDK.V2.zip -DestinationPath /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/ -Force
-      - uses: actions/download-artifact@v4
-        with:
-          name: build-JumpCloud.SDK.V1
-          path: /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/
-      - name: Unzip V1 module for V2 Tests
+      - name: Download JumpCloud.SDK.V1 from PSGallery
         shell: pwsh
         run: |
-          Expand-Archive -Path /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/JumpCloud.SDK.V1.zip -DestinationPath /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/ -Force
+          # Define the destination path for the module files
+          $parentDir = "/home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell"
+          $moduleName = "JumpCloud.SDK.V1"
+          $moduleDir = Join-Path $parentDir $moduleName
+
+          # Save the module from the gallery. This command creates a nested version folder,
+          Write-Host "Downloading '$moduleName' from PSGallery to '$parentDir'..."
+          Save-Module -Name $moduleName -Repository PSGallery -Path $parentDir -Force
+
+          # Get the path to the version-specific folder that was just created
+          $versionedDir = Get-ChildItem -Path $moduleDir -Directory | Select-Object -First 1
+          if (-not $versionedDir) {
+            Write-Error "Failed to find downloaded module version directory inside '$moduleDir'."
+            exit 1
+          }
+          Write-Host "Found module version directory at '$($versionedDir.FullName)'."
+
+          # Move all contents from the versioned folder up into the main module directory
+          Write-Host "Moving module contents to the expected path: '$moduleDir'..."
+          Move-Item -Path (Join-Path $versionedDir.FullName "*") -Destination $moduleDir -Force
+
+          # Remove the now-empty versioned folder to clean up
+          Write-Host "Cleaning up empty directory: $($versionedDir.FullName)"
+          Remove-Item -Path $versionedDir.FullName -Force
+
+          Write-Host "Module '$moduleName' is now correctly placed at '$moduleDir'."
       - name: Test MTP JumpCloud.SDK.V2
         shell: pwsh
         env:
