@@ -105,6 +105,11 @@ BODY <ICommand>:
   Name <String>:
   [CommandRunners <String[]>]: An array of IDs of the Command Runner Users that can execute this command.
   [Files <String[]>]: An array of file IDs to include with the command.
+  [FilesS3 <IFilesS3[]>]: An array of file stored in S3 to include with the command.
+    Destination <String>: The destination of the file.
+    Name <String>: The name of the file.
+    ObjectStorageId <String>: The ID of the file in object storage database.
+    Sha256 <String>: The SHA256 hash of the file.
   [LaunchType <String>]: How the command will execute.
   [ListensTo <String>]:
   [Organization <String>]: The ID of the organization.
@@ -118,6 +123,12 @@ BODY <ICommand>:
   [Timeout <String>]: The time in seconds to allow the command to run for. The maximum value is 86400 seconds (1 day).
   [Trigger <String>]: The name of the command trigger.
   [User <String>]: The ID of the system user to run the command as. This field is required when creating a command with a commandType of "mac" or "linux".
+
+FILESS3 <IFilesS3[]>:
+  Destination <String>: The destination of the file.
+  Name <String>: The name of the file.
+  ObjectStorageId <String>: The ID of the file in object storage database.
+  Sha256 <String>: The SHA256 hash of the file.
 
 INPUTOBJECT <IJumpCloudApiIdentity>:
   [Id <String>]:
@@ -191,6 +202,15 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [System.String[]]
     # An array of file IDs to include with the command.
     ${Files}, 
+
+    [Parameter(ParameterSetName='SetExpanded')]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
+    [AllowEmptyCollection()]
+    [JumpCloud.SDK.V1.Category('Body')]
+    [JumpCloud.SDK.V1.Models.IFilesS3[]]
+    # An array of file stored in S3 to include with the command.
+    # To construct, see NOTES section for FILESS3 properties and create a hash table.
+    ${FilesS3}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]

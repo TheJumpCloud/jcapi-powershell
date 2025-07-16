@@ -4540,6 +4540,46 @@
       </TableControl>
     </View>
     <View>
+      <Name>JumpCloud.SDK.V1.Models.FilesS3</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloud.SDK.V1.Models.FilesS3</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Destination</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Name</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>ObjectStorageId</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Sha256</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Destination</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Name</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>ObjectStorageId</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Sha256</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
       <Name>JumpCloud.SDK.V1.Models.JcSystem</Name>
       <ViewSelectedBy>
         <TypeName>JumpCloud.SDK.V1.Models.JcSystem</TypeName>
@@ -4548,6 +4588,9 @@
         <TableHeaders>
           <TableColumnHeader>
             <Label>Active</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>AgentHasFullDiskAccess</Label>
           </TableColumnHeader>
           <TableColumnHeader>
             <Label>AgentVersion</Label>
@@ -4651,6 +4694,9 @@
             <TableColumnItems>
               <TableColumnItem>
                 <PropertyName>Active</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>AgentHasFullDiskAccess</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>AgentVersion</PropertyName>
@@ -6708,6 +6754,12 @@
             <Label>NetworkSourceIP</Label>
           </TableColumnHeader>
           <TableColumnHeader>
+            <Label>RadsecEnabled</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>RequireRadsec</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
             <Label>RequireTlsAuth</Label>
           </TableColumnHeader>
           <TableColumnHeader>
@@ -6743,6 +6795,12 @@
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>NetworkSourceIP</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>RadsecEnabled</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>RequireRadsec</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>RequireTlsAuth</PropertyName>
@@ -6861,6 +6919,12 @@
             <Label>Organization</Label>
           </TableColumnHeader>
           <TableColumnHeader>
+            <Label>RadsecEnabled</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>RequireRadsec</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
             <Label>RequireTlsAuth</Label>
           </TableColumnHeader>
           <TableColumnHeader>
@@ -6905,6 +6969,12 @@
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>Organization</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>RadsecEnabled</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>RequireRadsec</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>RequireTlsAuth</PropertyName>
@@ -6955,6 +7025,12 @@
             <Label>NetworkSourceIP</Label>
           </TableColumnHeader>
           <TableColumnHeader>
+            <Label>RadsecEnabled</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>RequireRadsec</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
             <Label>RequireTlsAuth</Label>
           </TableColumnHeader>
           <TableColumnHeader>
@@ -6993,6 +7069,12 @@
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>NetworkSourceIP</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>RadsecEnabled</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>RequireRadsec</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>RequireTlsAuth</PropertyName>
@@ -7046,6 +7128,12 @@
             <Label>NetworkSourceIP</Label>
           </TableColumnHeader>
           <TableColumnHeader>
+            <Label>RadsecEnabled</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>RequireRadsec</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
             <Label>RequireTlsAuth</Label>
           </TableColumnHeader>
           <TableColumnHeader>
@@ -7084,6 +7172,12 @@
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>NetworkSourceIP</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>RadsecEnabled</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>RequireRadsec</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>RequireTlsAuth</PropertyName>

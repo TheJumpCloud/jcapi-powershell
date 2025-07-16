@@ -1730,6 +1730,13 @@
           },
           "type": "array"
         },
+        "filesS3": {
+          "description": "An array of file stored in S3 to include with the command.",
+          "items": {
+            "$ref": "#/definitions/filesS3"
+          },
+          "type": "array"
+        },
         "launchType": {
           "description": "How the command will execute.",
           "type": "string"
@@ -2233,6 +2240,34 @@
         }
       },
       "title": "FDE",
+      "type": "object"
+    },
+    "filesS3": {
+      "properties": {
+        "destination": {
+          "description": "The destination of the file.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the file.",
+          "type": "string"
+        },
+        "objectStorageId": {
+          "description": "The ID of the file in object storage database.",
+          "type": "string"
+        },
+        "sha256": {
+          "description": "The SHA256 hash of the file.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "objectStorageId",
+        "name",
+        "destination",
+        "sha256"
+      ],
+      "title": "FilesS3",
       "type": "object"
     },
     "mfa": {
@@ -3040,6 +3075,12 @@
         "organization": {
           "type": "string"
         },
+        "radsecEnabled": {
+          "type": "boolean"
+        },
+        "requireRadsec": {
+          "type": "boolean"
+        },
         "requireTlsAuth": {
           "type": "boolean"
         },
@@ -3091,6 +3132,12 @@
         },
         "networkSourceIp": {
           "type": "string"
+        },
+        "radsecEnabled": {
+          "type": "boolean"
+        },
+        "requireRadsec": {
+          "type": "boolean"
         },
         "requireTlsAuth": {
           "type": "boolean"
@@ -3152,6 +3199,12 @@
         },
         "networkSourceIp": {
           "type": "string"
+        },
+        "radsecEnabled": {
+          "type": "boolean"
+        },
+        "requireRadsec": {
+          "type": "boolean"
         },
         "requireTlsAuth": {
           "type": "boolean"
@@ -3328,6 +3381,9 @@
           "type": "string"
         },
         "active": {
+          "type": "boolean"
+        },
+        "agentHasFullDiskAccess": {
           "type": "boolean"
         },
         "agentVersion": {
@@ -5520,15 +5576,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request POST \\\n  --url https://console.jumpcloud.com/api/commands \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --data '{\"command\":\"string\",\"commandRunners\":[\"string\"],\"commandType\":\"linux\",\"files\":[\"string\"],\"launchType\":\"string\",\"listensTo\":\"string\",\"name\":\"string\",\"organization\":\"string\",\"schedule\":\"string\",\"scheduleRepeatType\":\"string\",\"scheduleYear\":0,\"shell\":\"string\",\"sudo\":true,\"systems\":[\"string\"],\"template\":\"string\",\"timeToLiveSeconds\":0,\"timeout\":\"string\",\"trigger\":\"string\",\"user\":\"string\"}'"
+            "source": "curl --request POST \\\n  --url https://console.jumpcloud.com/api/commands \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --data '{\"command\":\"string\",\"commandRunners\":[\"string\"],\"commandType\":\"linux\",\"files\":[\"string\"],\"filesS3\":[{\"destination\":\"string\",\"name\":\"string\",\"objectStorageId\":\"string\",\"sha256\":\"string\"}],\"launchType\":\"string\",\"listensTo\":\"string\",\"name\":\"string\",\"organization\":\"string\",\"schedule\":\"string\",\"scheduleRepeatType\":\"string\",\"scheduleYear\":0,\"shell\":\"string\",\"sudo\":true,\"systems\":[\"string\"],\"template\":\"string\",\"timeToLiveSeconds\":0,\"timeout\":\"string\",\"trigger\":\"string\",\"user\":\"string\"}'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/commands\"\n\npayload = {\n    \"command\": \"string\",\n    \"commandRunners\": [\"string\"],\n    \"commandType\": \"linux\",\n    \"files\": [\"string\"],\n    \"launchType\": \"string\",\n    \"listensTo\": \"string\",\n    \"name\": \"string\",\n    \"organization\": \"string\",\n    \"schedule\": \"string\",\n    \"scheduleRepeatType\": \"string\",\n    \"scheduleYear\": 0,\n    \"shell\": \"string\",\n    \"sudo\": True,\n    \"systems\": [\"string\"],\n    \"template\": \"string\",\n    \"timeToLiveSeconds\": 0,\n    \"timeout\": \"string\",\n    \"trigger\": \"string\",\n    \"user\": \"string\"\n}\nheaders = {\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/commands\"\n\npayload = {\n    \"command\": \"string\",\n    \"commandRunners\": [\"string\"],\n    \"commandType\": \"linux\",\n    \"files\": [\"string\"],\n    \"filesS3\": [\n        {\n            \"destination\": \"string\",\n            \"name\": \"string\",\n            \"objectStorageId\": \"string\",\n            \"sha256\": \"string\"\n        }\n    ],\n    \"launchType\": \"string\",\n    \"listensTo\": \"string\",\n    \"name\": \"string\",\n    \"organization\": \"string\",\n    \"schedule\": \"string\",\n    \"scheduleRepeatType\": \"string\",\n    \"scheduleYear\": 0,\n    \"shell\": \"string\",\n    \"sudo\": True,\n    \"systems\": [\"string\"],\n    \"template\": \"string\",\n    \"timeToLiveSeconds\": 0,\n    \"timeout\": \"string\",\n    \"trigger\": \"string\",\n    \"user\": \"string\"\n}\nheaders = {\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/commands' -Method POST -Headers $headers -ContentType 'application/json' -Body '{\"command\":\"string\",\"commandRunners\":[\"string\"],\"commandType\":\"linux\",\"files\":[\"string\"],\"launchType\":\"string\",\"listensTo\":\"string\",\"name\":\"string\",\"organization\":\"string\",\"schedule\":\"string\",\"scheduleRepeatType\":\"string\",\"scheduleYear\":0,\"shell\":\"string\",\"sudo\":true,\"systems\":[\"string\"],\"template\":\"string\",\"timeToLiveSeconds\":0,\"timeout\":\"string\",\"trigger\":\"string\",\"user\":\"string\"}'"
+            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/commands' -Method POST -Headers $headers -ContentType 'application/json' -Body '{\"command\":\"string\",\"commandRunners\":[\"string\"],\"commandType\":\"linux\",\"files\":[\"string\"],\"filesS3\":[{\"destination\":\"string\",\"name\":\"string\",\"objectStorageId\":\"string\",\"sha256\":\"string\"}],\"launchType\":\"string\",\"listensTo\":\"string\",\"name\":\"string\",\"organization\":\"string\",\"schedule\":\"string\",\"scheduleRepeatType\":\"string\",\"scheduleYear\":0,\"shell\":\"string\",\"sudo\":true,\"systems\":[\"string\"],\"template\":\"string\",\"timeToLiveSeconds\":0,\"timeout\":\"string\",\"trigger\":\"string\",\"user\":\"string\"}'"
           }
         ]
       }
@@ -5647,15 +5703,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request PUT \\\n  --url https://console.jumpcloud.com/api/commands/{id} \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --data '{\"command\":\"string\",\"commandRunners\":[\"string\"],\"commandType\":\"linux\",\"files\":[\"string\"],\"launchType\":\"string\",\"listensTo\":\"string\",\"name\":\"string\",\"organization\":\"string\",\"schedule\":\"string\",\"scheduleRepeatType\":\"string\",\"scheduleYear\":0,\"shell\":\"string\",\"sudo\":true,\"systems\":[\"string\"],\"template\":\"string\",\"timeToLiveSeconds\":0,\"timeout\":\"string\",\"trigger\":\"string\",\"user\":\"string\"}'"
+            "source": "curl --request PUT \\\n  --url https://console.jumpcloud.com/api/commands/{id} \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --data '{\"command\":\"string\",\"commandRunners\":[\"string\"],\"commandType\":\"linux\",\"files\":[\"string\"],\"filesS3\":[{\"destination\":\"string\",\"name\":\"string\",\"objectStorageId\":\"string\",\"sha256\":\"string\"}],\"launchType\":\"string\",\"listensTo\":\"string\",\"name\":\"string\",\"organization\":\"string\",\"schedule\":\"string\",\"scheduleRepeatType\":\"string\",\"scheduleYear\":0,\"shell\":\"string\",\"sudo\":true,\"systems\":[\"string\"],\"template\":\"string\",\"timeToLiveSeconds\":0,\"timeout\":\"string\",\"trigger\":\"string\",\"user\":\"string\"}'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/commands/{id}\"\n\npayload = {\n    \"command\": \"string\",\n    \"commandRunners\": [\"string\"],\n    \"commandType\": \"linux\",\n    \"files\": [\"string\"],\n    \"launchType\": \"string\",\n    \"listensTo\": \"string\",\n    \"name\": \"string\",\n    \"organization\": \"string\",\n    \"schedule\": \"string\",\n    \"scheduleRepeatType\": \"string\",\n    \"scheduleYear\": 0,\n    \"shell\": \"string\",\n    \"sudo\": True,\n    \"systems\": [\"string\"],\n    \"template\": \"string\",\n    \"timeToLiveSeconds\": 0,\n    \"timeout\": \"string\",\n    \"trigger\": \"string\",\n    \"user\": \"string\"\n}\nheaders = {\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"PUT\", url, json=payload, headers=headers)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/commands/{id}\"\n\npayload = {\n    \"command\": \"string\",\n    \"commandRunners\": [\"string\"],\n    \"commandType\": \"linux\",\n    \"files\": [\"string\"],\n    \"filesS3\": [\n        {\n            \"destination\": \"string\",\n            \"name\": \"string\",\n            \"objectStorageId\": \"string\",\n            \"sha256\": \"string\"\n        }\n    ],\n    \"launchType\": \"string\",\n    \"listensTo\": \"string\",\n    \"name\": \"string\",\n    \"organization\": \"string\",\n    \"schedule\": \"string\",\n    \"scheduleRepeatType\": \"string\",\n    \"scheduleYear\": 0,\n    \"shell\": \"string\",\n    \"sudo\": True,\n    \"systems\": [\"string\"],\n    \"template\": \"string\",\n    \"timeToLiveSeconds\": 0,\n    \"timeout\": \"string\",\n    \"trigger\": \"string\",\n    \"user\": \"string\"\n}\nheaders = {\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"PUT\", url, json=payload, headers=headers)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/commands/{id}' -Method PUT -Headers $headers -ContentType 'application/json' -Body '{\"command\":\"string\",\"commandRunners\":[\"string\"],\"commandType\":\"linux\",\"files\":[\"string\"],\"launchType\":\"string\",\"listensTo\":\"string\",\"name\":\"string\",\"organization\":\"string\",\"schedule\":\"string\",\"scheduleRepeatType\":\"string\",\"scheduleYear\":0,\"shell\":\"string\",\"sudo\":true,\"systems\":[\"string\"],\"template\":\"string\",\"timeToLiveSeconds\":0,\"timeout\":\"string\",\"trigger\":\"string\",\"user\":\"string\"}'"
+            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/commands/{id}' -Method PUT -Headers $headers -ContentType 'application/json' -Body '{\"command\":\"string\",\"commandRunners\":[\"string\"],\"commandType\":\"linux\",\"files\":[\"string\"],\"filesS3\":[{\"destination\":\"string\",\"name\":\"string\",\"objectStorageId\":\"string\",\"sha256\":\"string\"}],\"launchType\":\"string\",\"listensTo\":\"string\",\"name\":\"string\",\"organization\":\"string\",\"schedule\":\"string\",\"scheduleRepeatType\":\"string\",\"scheduleYear\":0,\"shell\":\"string\",\"sudo\":true,\"systems\":[\"string\"],\"template\":\"string\",\"timeToLiveSeconds\":0,\"timeout\":\"string\",\"trigger\":\"string\",\"user\":\"string\"}'"
           }
         ]
       }
@@ -6137,15 +6193,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request POST \\\n  --url https://console.jumpcloud.com/api/radiusservers \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --data '{\"authIdp\":\"JUMPCLOUD\",\"caCert\":\"string\",\"deviceCertEnabled\":true,\"mfa\":\"DISABLED\",\"name\":\"string\",\"networkSourceIp\":\"string\",\"requireTlsAuth\":true,\"sharedSecret\":\"string\",\"tagNames\":[\"string\"],\"userCertEnabled\":true,\"userLockoutAction\":\"string\",\"userPasswordEnabled\":true,\"userPasswordExpirationAction\":\"string\"}'"
+            "source": "curl --request POST \\\n  --url https://console.jumpcloud.com/api/radiusservers \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --data '{\"authIdp\":\"JUMPCLOUD\",\"caCert\":\"string\",\"deviceCertEnabled\":true,\"mfa\":\"DISABLED\",\"name\":\"string\",\"networkSourceIp\":\"string\",\"radsecEnabled\":true,\"requireRadsec\":true,\"requireTlsAuth\":true,\"sharedSecret\":\"string\",\"tagNames\":[\"string\"],\"userCertEnabled\":true,\"userLockoutAction\":\"string\",\"userPasswordEnabled\":true,\"userPasswordExpirationAction\":\"string\"}'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/radiusservers\"\n\npayload = {\n    \"authIdp\": \"JUMPCLOUD\",\n    \"caCert\": \"string\",\n    \"deviceCertEnabled\": True,\n    \"mfa\": \"DISABLED\",\n    \"name\": \"string\",\n    \"networkSourceIp\": \"string\",\n    \"requireTlsAuth\": True,\n    \"sharedSecret\": \"string\",\n    \"tagNames\": [\"string\"],\n    \"userCertEnabled\": True,\n    \"userLockoutAction\": \"string\",\n    \"userPasswordEnabled\": True,\n    \"userPasswordExpirationAction\": \"string\"\n}\nheaders = {\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/radiusservers\"\n\npayload = {\n    \"authIdp\": \"JUMPCLOUD\",\n    \"caCert\": \"string\",\n    \"deviceCertEnabled\": True,\n    \"mfa\": \"DISABLED\",\n    \"name\": \"string\",\n    \"networkSourceIp\": \"string\",\n    \"radsecEnabled\": True,\n    \"requireRadsec\": True,\n    \"requireTlsAuth\": True,\n    \"sharedSecret\": \"string\",\n    \"tagNames\": [\"string\"],\n    \"userCertEnabled\": True,\n    \"userLockoutAction\": \"string\",\n    \"userPasswordEnabled\": True,\n    \"userPasswordExpirationAction\": \"string\"\n}\nheaders = {\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/radiusservers' -Method POST -Headers $headers -ContentType 'application/json' -Body '{\"authIdp\":\"JUMPCLOUD\",\"caCert\":\"string\",\"deviceCertEnabled\":true,\"mfa\":\"DISABLED\",\"name\":\"string\",\"networkSourceIp\":\"string\",\"requireTlsAuth\":true,\"sharedSecret\":\"string\",\"tagNames\":[\"string\"],\"userCertEnabled\":true,\"userLockoutAction\":\"string\",\"userPasswordEnabled\":true,\"userPasswordExpirationAction\":\"string\"}'"
+            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/radiusservers' -Method POST -Headers $headers -ContentType 'application/json' -Body '{\"authIdp\":\"JUMPCLOUD\",\"caCert\":\"string\",\"deviceCertEnabled\":true,\"mfa\":\"DISABLED\",\"name\":\"string\",\"networkSourceIp\":\"string\",\"radsecEnabled\":true,\"requireRadsec\":true,\"requireTlsAuth\":true,\"sharedSecret\":\"string\",\"tagNames\":[\"string\"],\"userCertEnabled\":true,\"userLockoutAction\":\"string\",\"userPasswordEnabled\":true,\"userPasswordExpirationAction\":\"string\"}'"
           }
         ]
       }
@@ -6265,6 +6321,12 @@
                 },
                 "networkSourceIp": {
                   "type": "string"
+                },
+                "radsecEnabled": {
+                  "type": "boolean"
+                },
+                "requireRadsec": {
+                  "type": "boolean"
                 },
                 "requireTlsAuth": {
                   "type": "boolean"
