@@ -8836,6 +8836,28 @@
       </TableControl>
     </View>
     <View>
+      <Name>JumpCloud.SDK.V1.Models.Totpenrollmentinfo</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloud.SDK.V1.Models.Totpenrollmentinfo</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>EnrollmentDate</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>EnrollmentDate</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
       <Name>JumpCloud.SDK.V1.Models.Triggerreturn</Name>
       <ViewSelectedBy>
         <TypeName>JumpCloud.SDK.V1.Models.Triggerreturn</TypeName>

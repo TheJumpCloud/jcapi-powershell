@@ -4605,6 +4605,15 @@
       "title": "SystemUsersList",
       "type": "object"
     },
+    "totpenrollmentinfo": {
+      "properties": {
+        "enrollmentDate": {
+          "description": "The TOTP enrollment date of the user.",
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    },
     "triggerreturn": {
       "properties": {
         "triggered": {
@@ -7679,6 +7688,39 @@
       ]
     },
     "/systemusers/{id}/totpinfo": {
+      "get": {
+        "description": "This endpoint will return info for a specific System User's TOTP enrollment.",
+        "operationId": "UserTotp_Get",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/totpenrollmentinfo"
+            }
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ],
+        "summary": "Display info about a System User's TOTP enrollment.",
+        "x-codeSamples": [
+          {
+            "lang": "Shell",
+            "source": "curl --request GET \\\n  --url https://console.jumpcloud.com/api/systemusers/{id}/totpinfo \\\n  --header 'x-api-key: REPLACE_KEY_VALUE'"
+          },
+          {
+            "lang": "Python",
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/systemusers/{id}/totpinfo\"\n\nheaders = {\"x-api-key\": \"REPLACE_KEY_VALUE\"}\n\nresponse = requests.request(\"GET\", url, headers=headers)\n\nprint(response.text)"
+          },
+          {
+            "lang": "Powershell",
+            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/systemusers/{id}/totpinfo' -Method GET -Headers $headers"
+          }
+        ]
+      },
       "parameters": [
         {
           "in": "path",

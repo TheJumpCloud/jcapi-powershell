@@ -136,6 +136,9 @@ curl -X GET https://console.jumpcloud.com/api/systemusers/{UserID} \\
 ### [Get-JcSdkUserSshKey](Get-JcSdkUserSshKey.md)
 This endpoint will return a specific System User's public SSH key.
 
+### [Get-JcSdkUserTotp](Get-JcSdkUserTotp.md)
+This endpoint will return info for a specific System User's TOTP enrollment.
+
 ### [Initialize-JcSdkUserState](Initialize-JcSdkUserState.md)
 This endpoint changes the state of a STAGED user to ACTIVATED.
 #### Email Flag
