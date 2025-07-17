@@ -1,21 +1,21 @@
 <#
 .Synopsis
-Request a JumpCloud report to be generated asynchronously
+Download a report by report ID and artifact ID
 .Description
-Request a JumpCloud report to be generated asynchronously
+Download a report by report ID and artifact ID
 .Example
-PS C:\> New-JcSdkReport -ReportType 'users-to-sso-applications'
+PS C:\> {{ Add code here }}
 
-Queues creation of an user-to-sso-application report
+{{ Add output here }}
 .Example
-PS C:\> New-JcSdkReport -ReportType 'users-to-devices'
+PS C:\> {{ Add code here }}
 
-Queues creation of an users-to-devices report
+{{ Add output here }}
 
 .Inputs
 JumpCloud.SDK.DirectoryInsights.Models.IDirectoryInsightsApiIdentity
 .Outputs
-JumpCloud.SDK.DirectoryInsights.Models.IPathsE6Q3GdReportsReportTypePostResponses202ContentApplicationJsonSchema
+JumpCloud.SDK.DirectoryInsights.Models.IDictionaryOfany
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -26,21 +26,26 @@ INPUTOBJECT <IDirectoryInsightsApiIdentity>:
   [ReportId <String>]: Report ID
   [ReportType <ReportType1?>]: Report Type
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/docs/exports/New-JcSdkReport.md
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/docs/exports/Get-JcSdkReportArtifactContent.md
 #>
- Function New-JcSdkReport
+ Function Get-JcSdkReportArtifactContent
 {
-    [OutputType([JumpCloud.SDK.DirectoryInsights.Models.IPathsE6Q3GdReportsReportTypePostResponses202ContentApplicationJsonSchema])]
-    [CmdletBinding(DefaultParameterSetName='Create', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
+    [OutputType([JumpCloud.SDK.DirectoryInsights.Models.IDictionaryOfany])]
+    [CmdletBinding(DefaultParameterSetName='Get', PositionalBinding=$false)]
     Param(
-    [Parameter(ParameterSetName='Create', Mandatory)]
-    [ArgumentCompleter([JumpCloud.SDK.DirectoryInsights.Support.ReportType1])]
+    [Parameter(ParameterSetName='Get', Mandatory)]
     [JumpCloud.SDK.DirectoryInsights.Category('Path')]
-    [JumpCloud.SDK.DirectoryInsights.Support.ReportType1]
-    # Report Type
-    ${ReportType}, 
+    [System.String]
+    # Artifact ID
+    ${ArtifactId}, 
 
-    [Parameter(ParameterSetName='CreateViaIdentity', Mandatory, ValueFromPipeline)]
+    [Parameter(ParameterSetName='Get', Mandatory)]
+    [JumpCloud.SDK.DirectoryInsights.Category('Path')]
+    [System.String]
+    # Report ID
+    ${ReportId}, 
+
+    [Parameter(ParameterSetName='GetViaIdentity', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.DirectoryInsights.Category('Path')]
     [JumpCloud.SDK.DirectoryInsights.Models.IDirectoryInsightsApiIdentity]
     # Identity Parameter
@@ -94,7 +99,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
                 # call the next step in the Pipeline
                 $ResponseTask = $next.SendAsync($req, $callback)
                 $global:JCHttpRequest = $req
-                # $global:JCHttpRequestContent = If (-not [System.String]::IsNullOrEmpty($req.Content)) { $req.Content.ReadAsStringAsync() }
+                $global:JCHttpRequestContent = If (-not [System.String]::IsNullOrEmpty($req.Content)) { $req.Content.ReadAsStringAsync() }
                 $global:JCHttpResponse = $ResponseTask
                 # $global:JCHttpResponseContent = If (-not [System.String]::IsNullOrEmpty($ResponseTask.Result.Content)) { $ResponseTask.Result.Content.ReadAsStringAsync() }
                 Return $ResponseTask
@@ -107,7 +112,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         $resultCounter = 0
         :retryLoop do {
             $resultCounter++
-            $Results = (JumpCloud.SDK.DirectoryInsights.internal\New-JcSdkInternalReport -ErrorAction SilentlyContinue -errorVariable sdkError @PSBoundParameters); if (-not [System.String]::IsNullOrEmpty($Result)) { $Result = $Result.ToJsonString() | ConvertFrom-Json };
+            $Result = JumpCloud.SDK.DirectoryInsights.internal\Get-JcSdkInternalReportArtifactContent @PSBoundParameters -errorAction SilentlyContinue -errorVariable sdkError
             If ($sdkError){
                 If ($resultCounter -eq $maxRetries){
                     throw $sdkError
@@ -122,19 +127,21 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
             }
             Start-Sleep -Seconds ($resultCounter * 5)
         } while ($resultCounter -lt $maxRetries)
+        Write-Debug ('HttpRequest: ' + $JCHttpRequest);
+        Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
+        Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);
+        # Write-Debug ('HttpResponseContent: ' + $JCHttpResponseContent.Result);
+        If (-not [System.String]::IsNullOrEmpty($Result))
+        {
+            $Results += $Result
+        }
     }
     End
     {
-        Write-Debug ('HttpRequest: ' + $JCHttpRequest);
-        # Write-Debug ('HttpRequestContent: ' + $JCHttpRequestContent.Result);
-        Write-Debug ('HttpResponse: ' + $JCHttpResponse.Result);
-        # Write-Debug ('HttpResponseContent: ' + $JCHttpResponseContent.Result);
         # Clean up global variables
         $GlobalVars = @('JCHttpRequest', 'JCHttpRequestContent', 'JCHttpResponse', 'JCHttpResponseContent')
         $GlobalVars | ForEach-Object {
-            If ((Get-Variable -Scope:('Global')).Where( { $_.Name -eq $_ })) {
-                Remove-Variable -Name:($_) -Scope:('Global')
-            }
+            If ((Get-Variable -Scope:('Global')).Where( { $_.Name -eq $_ })) { Remove-Variable -Name:($_) -Scope:('Global') }
         }
         Return $Results
     }

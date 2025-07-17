@@ -14,6 +14,8 @@ $TransformConfig = [Ordered]@{
             '"name":"\w+Body","in":"body"'                                                                                                                                                  = '"name":"body","in":"body"' # Across our APIs the standard is using "body" for the name of the body
             '"search_after":{"description":"Specific query to search after, see x-\* response headers for next values","type":"array","items":{"type":"object"},"x-go-name":"SearchAfter"}' = '"search_after":{"description":"Specific query to search after, see x-* response headers for next values","type":"array","items":{"type":"string"},"x-go-name":"SearchAfter"}';
             '"enum":\["CREATED_AT","EXPIRATION","REQUESTER_EMAIL","STATUS","TYPE","UPDATED_AT","-CREATED_AT","-EXPIRATION","-REQUESTER_EMAIL","-STATUS","-TYPE","-UPDATED_AT"\]'            = '"enum":["CREATED_AT","EXPIRATION","REQUESTER_EMAIL","STATUS","TYPE","UPDATED_AT"]'
+            '"produces":\["application\/json","text/csv"\]'                                                                                                                                 = '"produces":["application/json"]'
+            '"responses":{"200":{"description":"Report download in either CSV or JSON format","schema":{"type":"string"}'                                                                   = '"responses":{"200":{"description":"Report download in either CSV or JSON format","schema":{"type":"object"}'
         };
         OperationIdMapping = [Ordered]@{
             'directoryInsights_eventsCountPost'    = 'EventCount_Get';
@@ -22,6 +24,7 @@ $TransformConfig = [Ordered]@{
             'directoryInsights_eventsPost'         = 'Event_Get';
             'directoryInsights_reportsListGet'     = 'Report_List';
             'directoryInsights_reportsCreate'      = 'Report_Create';
+            'directoryInsights_reportsArtifactContentGet' = 'ReportArtifactContent_Get';
         };
         ExcludedList       = @();
     }

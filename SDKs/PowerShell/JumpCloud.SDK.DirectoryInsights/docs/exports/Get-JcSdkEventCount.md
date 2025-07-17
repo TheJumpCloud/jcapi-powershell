@@ -296,6 +296,7 @@ BODY <IEventQuery>: EventQuery is the users' command to search our auth logs
     - `[(Any) <Object>]`: This indicates any property can be added to this object.
   - `[SearchTermNot <ITermConjunction>]`: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
   - `[SearchTermOr <ITermConjunction>]`: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
+  - `[Skip <Int64?>]`: optional offset into the result set to start with when returning
   - `[Sort <String>]`: ASC or DESC order for timestamp
 
 ## RELATED LINKS

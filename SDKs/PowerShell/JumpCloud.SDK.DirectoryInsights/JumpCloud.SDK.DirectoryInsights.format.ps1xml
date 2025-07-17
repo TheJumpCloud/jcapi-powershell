@@ -9,12 +9,24 @@
       <TableControl>
         <TableHeaders>
           <TableColumnHeader>
+            <Label>ArtifactId</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>ReportId</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
             <Label>ReportType</Label>
           </TableColumnHeader>
         </TableHeaders>
         <TableRowEntries>
           <TableRowEntry>
             <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>ArtifactId</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>ReportId</PropertyName>
+              </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>ReportType</PropertyName>
               </TableColumnItem>
@@ -172,6 +184,9 @@
             <Label>SearchAfter</Label>
           </TableColumnHeader>
           <TableColumnHeader>
+            <Label>Skip</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
             <Label>Sort</Label>
           </TableColumnHeader>
         </TableHeaders>
@@ -198,6 +213,9 @@
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>SearchAfter</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Skip</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>Sort</PropertyName>

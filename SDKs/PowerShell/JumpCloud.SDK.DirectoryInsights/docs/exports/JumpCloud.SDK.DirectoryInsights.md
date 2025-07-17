@@ -42,6 +42,9 @@ curl -X POST 'https://api.jumpcloud.com/insights/directory/v1/events/interval' -
 ### [Get-JcSdkReport](Get-JcSdkReport.md)
 Ordered list of report metadata
 
+### [Get-JcSdkReportArtifactContent](Get-JcSdkReportArtifactContent.md)
+Download a report by report ID and artifact ID
+
 ### [New-JcSdkReport](New-JcSdkReport.md)
 Request a JumpCloud report to be generated asynchronously
 
