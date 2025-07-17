@@ -130,6 +130,7 @@ $TransformConfig = [Ordered]@{
             'systemusers_put'                = 'User_Set';
             'systemusers_resetmfa'           = 'UserMfa_Reset';
             'systemusers_state_activate'     = 'UserState_Activate';
+            'systemusers_totp_info'          = 'UserTotp_Get';
             'systemusers_unlock'             = 'User_Unlock';
             'users_put'                      = 'AdministratorUser_Set';
             'users_reactivate_get'           = 'AdministratorUserActivation_Reset';
