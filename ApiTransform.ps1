@@ -933,16 +933,16 @@ function Fix-SearchEndpointsPagination {
             $Swagger.definitions.search | Add-Member -MemberType NoteProperty -Name properties -Value @{}
         }
         if (-not $Swagger.definitions.search.properties.skip) {
-            Add-Member -InputObject $Swagger.definitions.search.properties -MemberType NoteProperty -Name skip -Value @{
-                type = "integer"
+            Add-Member -InputObject $Swagger.definitions.search.properties -MemberType NoteProperty -Name skip -Value ([ordered]@{
                 description = "Number of items to skip for pagination."
-            }
+                type = "integer"
+            })
         }
         if (-not $Swagger.definitions.search.properties.limit) {
-            Add-Member -InputObject $Swagger.definitions.search.properties -MemberType NoteProperty -Name limit -Value @{
-                type = "integer"
+            Add-Member -InputObject $Swagger.definitions.search.properties -MemberType NoteProperty -Name limit -Value ([ordered]@{
                 description = "Maximum number of items to return."
-            }
+                type = "integer"
+            })
         }
     }
 

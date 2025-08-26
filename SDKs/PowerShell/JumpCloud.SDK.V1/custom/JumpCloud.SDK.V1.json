@@ -3338,12 +3338,12 @@
           "additionalProperties": true
         },
         "skip": {
-          "type": "integer",
-          "description": "Number of items to skip for pagination."
+          "description": "Number of items to skip for pagination.",
+          "type": "integer"
         },
         "limit": {
-          "type": "integer",
-          "description": "Maximum number of items to return."
+          "description": "Maximum number of items to return.",
+          "type": "integer"
         }
       },
       "title": "Search",
