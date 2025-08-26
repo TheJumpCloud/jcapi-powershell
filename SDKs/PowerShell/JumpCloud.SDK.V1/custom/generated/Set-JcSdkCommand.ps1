@@ -104,6 +104,7 @@ BODY <ICommand>:
   CommandType <String>: The Command OS
   Name <String>:
   [CommandRunners <String[]>]: An array of IDs of the Command Runner Users that can execute this command.
+  [Description <String>]: Description of the command.
   [Files <String[]>]: An array of file IDs to include with the command.
   [FilesS3 <IFilesS3[]>]: An array of file stored in S3 to include with the command.
     Destination <String>: The destination of the file.
@@ -194,6 +195,13 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [System.String[]]
     # An array of IDs of the Command Runner Users that can execute this command.
     ${CommandRunners}, 
+
+    [Parameter(ParameterSetName='SetExpanded')]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
+    [JumpCloud.SDK.V1.Category('Body')]
+    [System.String]
+    # Description of the command.
+    ${Description}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]

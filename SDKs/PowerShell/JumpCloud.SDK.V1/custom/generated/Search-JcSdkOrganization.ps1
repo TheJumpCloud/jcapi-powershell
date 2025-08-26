@@ -83,8 +83,10 @@ BODY <ISearch>:
   [Fields <String>]:
   [Filter <ISearchFilter>]: Dictionary of <any>
     [(Any) <Object>]: This indicates any property can be added to this object.
+  [Limit <Int32?>]: Maximum number of items to return.
   [SearchFilter <ISearchFilter1>]: Dictionary of <any>
     [(Any) <Object>]: This indicates any property can be added to this object.
+  [Skip <Int32?>]: Number of items to skip for pagination.
 .Link
 https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/Search-JcSdkOrganization.md
 #>
@@ -115,10 +117,22 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 
     [Parameter(ParameterSetName='SearchExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
+    [System.Int32]
+    # Maximum number of items to return.
+    ${Limit}, 
+
+    [Parameter(ParameterSetName='SearchExpanded')]
+    [JumpCloud.SDK.V1.Category('Body')]
     [JumpCloud.SDK.V1.Runtime.Info(PossibleTypes=([JumpCloud.SDK.V1.Models.ISearchFilter1]))]
     [System.Collections.Hashtable]
     # Dictionary of <any>
     ${SearchFilter}, 
+
+    [Parameter(ParameterSetName='SearchExpanded')]
+    [JumpCloud.SDK.V1.Category('Body')]
+    [System.Int32]
+    # Number of items to skip for pagination.
+    ${Skip}, 
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V1.Category('Runtime')]
