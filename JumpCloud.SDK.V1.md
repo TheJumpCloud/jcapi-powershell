@@ -1,3 +1,36 @@
+## JumpCloud.SDK.v1-0.0.46
+Release Date: August 26, 2025
+#### RELEASE NOTES
+```
+This release addresses an issue with the SDK Search Functions not paginating correctly. The latest changes include model definitions for existing functions.
+```
+#### FEATURES:
+- Added pagination support for SDK Search Functions
+- Enhanced model definitions for existing functions
+#### IMPROVEMENTS:
+- Improved error handling for SDK Search Functions
+#### BUG FIXES:
+- Fixed an issue where SDK Search Functions would not paginate correctly
+#### Generated Changes:
+
+<details>
+<summary>Functions Added</summary>
+
+No changes
+</details>
+
+<details>
+<summary>Functions Modified</summary>
+
+No changes
+</details>
+
+<details>
+<summary>Functions Removed</summary>
+
+No changes
+</details>
+
 ## JumpCloud.SDK.V1-0.0.45
 Release Date: March 10, 2025
 #### RELEASE NOTES
