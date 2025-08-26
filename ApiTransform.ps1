@@ -890,6 +890,65 @@ function Replace-InvalidPropertyRefs {
     return $Swagger
 }
 
+function Remove-SearchEndpointLimitSkipParams {
+    param (
+        [Parameter(Mandatory = $true)]
+        [object]$Swagger
+    )
+
+    foreach ($pathName in $Swagger.paths.PSObject.Properties) {
+        if ($pathName.name -like "/search/*") {
+            $pathObj = $Swagger.paths.$($pathName.name)
+            if ($pathObj.post -and $pathObj.post.parameters) {
+                # Only keep parameters that are NOT $ref to skip/limit
+                $filtered = @()
+                foreach ($param in $pathObj.post.parameters) {
+                    if ($param.'$ref') {
+                        $ref = $param.'$ref'
+                        if (
+                            $ref -eq '#/parameters/trait:limit:limit' -or
+                            $ref -eq '#/parameters/trait:skip:skip'
+                        ) {
+                            continue
+                        }
+                    }
+                    $filtered += ,$param
+                }
+                $pathObj.post.parameters = $filtered
+            }
+        }
+    }
+    return $Swagger
+}
+
+function Fix-SearchEndpointsPagination {
+    param (
+        [Parameter(Mandatory = $true)]
+        [object]$Swagger
+    )
+
+    # 2. Ensure #/definitions/search includes skip and limit properties
+    if ($Swagger.definitions.search) {
+        if (-not $Swagger.definitions.search.properties) {
+            $Swagger.definitions.search | Add-Member -MemberType NoteProperty -Name properties -Value @{}
+        }
+        if (-not $Swagger.definitions.search.properties.skip) {
+            Add-Member -InputObject $Swagger.definitions.search.properties -MemberType NoteProperty -Name skip -Value @{
+                type = "integer"
+                description = "Number of items to skip for pagination."
+            }
+        }
+        if (-not $Swagger.definitions.search.properties.limit) {
+            Add-Member -InputObject $Swagger.definitions.search.properties -MemberType NoteProperty -Name limit -Value @{
+                type = "integer"
+                description = "Maximum number of items to return."
+            }
+        }
+    }
+
+    return $Swagger
+}
+
 
 # Start script
 $SDKName | ForEach-Object {
@@ -924,7 +983,6 @@ $SDKName | ForEach-Object {
             } Else {
                 $OASContent | ConvertFrom-Json -Depth:(100)
             }
-
             # Run the inlining on the whole Swagger object
             $SwaggerObject = Replace-InvalidPropertyRefs -Swagger $SwaggerObjectContent
             # Find and replace on file
@@ -943,6 +1001,7 @@ $SDKName | ForEach-Object {
                     }
                 }
             }
+
             # replace override definitions
             if ($config.OverrideDefinitions) {
                 foreach ($overrideDef in $config.OverrideDefinitions) {
@@ -981,6 +1040,10 @@ $SDKName | ForEach-Object {
             } else {
                 $SwaggerObject = $SwaggerObject | ConvertFrom-Json -Depth:(100)
             }
+
+# Remove limit/skip parameters from Search endpoints
+            $SwaggerObject = Remove-SearchEndpointLimitSkipParams -Swagger $SwaggerObject
+            $SwaggerObject = Fix-SearchEndpointsPagination -Swagger $SwaggerObject
             #######################################################################
             # # Resolve the swagger references ($ref)/flatten
             # $SwaggerObjectRefMatches = $SwaggerObject | ConvertFrom-Json -Depth:(100)
