@@ -7,11 +7,6 @@ on:
     branches:
       - master
 jobs:
-  Filter-Branch:
-    runs-on: ubuntu-latest
-    if: contains(github.event.pull_request.labels.*.name, 'SDK')
-    steps:
-      - run: echo "SDK label found. Continuing..."
   Check-PR-Labels:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
