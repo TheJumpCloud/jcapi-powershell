@@ -42,6 +42,14 @@ Try {
             nextToken = '$result.skipToken'
         }
     }
+    $retainSkipAndLimitFunctions = @(
+        'Get-JCSdkEvent',
+        'Search-JCSdkCommand',
+        'Search-JCSdkCommandResult',
+        'Search-JcSdkUser'
+        'Search-JcSdkSystem'
+        'Search-JcSdkOrganization'
+    )
     # Misc Functions
     Function Convert-GeneratedToCustom ([System.String]$InputString, [System.String]$ConfigPrefix, [System.String]$ConfigCustomFunctionPrefix) {
         # Swap out SDK prefix for customFunction prefix
@@ -111,9 +119,11 @@ Try {
                 $skipToken = $($CustomPaginationMap.$NewCommandName.nextToken)
 
             } else {
-                if ($NewCommandName -eq 'Get-JcSdkEvent') {
+                if ($NewCommandName -in $retainSkipAndLimitFunctions) {
+                    # retain the skip and limit params
                     $ParameterContent = ($Params.Matches.Value)
                 } else {
+                    # otherwise strip them out
                     $ParameterContent = ($Params.Matches.Value | Where-Object { $_ -notlike '*${Limit}*' -and $_ -notlike '*${Skip}*' })
                 }
                 $ContainsLimit = $Params.Matches.Value | Where-Object { $_ -like '*Limit*' }
