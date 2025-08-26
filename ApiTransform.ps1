@@ -1,6 +1,6 @@
 #Requires -Modules powershell-yaml
 Param(
-    [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Name of the API to build an SDK for.')][ValidateSet('JumpCloud.SDK.DirectoryInsights', 'JumpCloud.SDK.V1', 'JumpCloud.SDK.V2')][ValidateNotNullOrEmpty()][System.String[]]$SDKName
+    [Parameter(Mandatory = $false, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Name of the API to build an SDK for.')][ValidateSet('JumpCloud.SDK.DirectoryInsights', 'JumpCloud.SDK.V1', 'JumpCloud.SDK.V2')][ValidateNotNullOrEmpty()][System.String[]]$SDKName
 )
 Set-Location $PSScriptRoot
 # Config Status List (used to track new endpoints)
@@ -18,12 +18,12 @@ $TransformConfig = [Ordered]@{
             '"responses":{"200":{"description":"Report download in either CSV or JSON format","schema":{"type":"string"}'                                                                   = '"responses":{"200":{"description":"Report download in either CSV or JSON format","schema":{"type":"object"}'
         };
         OperationIdMapping = [Ordered]@{
-            'directoryInsights_eventsCountPost'    = 'EventCount_Get';
-            'directoryInsights_eventsDistinctPost' = 'EventDistinct_Get';
-            'directoryInsights_eventsIntervalPost' = 'EventInterval_Get';
-            'directoryInsights_eventsPost'         = 'Event_Get';
-            'directoryInsights_reportsListGet'     = 'Report_List';
-            'directoryInsights_reportsCreate'      = 'Report_Create';
+            'directoryInsights_eventsCountPost'           = 'EventCount_Get';
+            'directoryInsights_eventsDistinctPost'        = 'EventDistinct_Get';
+            'directoryInsights_eventsIntervalPost'        = 'EventInterval_Get';
+            'directoryInsights_eventsPost'                = 'Event_Get';
+            'directoryInsights_reportsListGet'            = 'Report_List';
+            'directoryInsights_reportsCreate'             = 'Report_Create';
             'directoryInsights_reportsArtifactContentGet' = 'ReportArtifactContent_Get';
         };
         ExcludedList       = @();
@@ -141,8 +141,8 @@ $TransformConfig = [Ordered]@{
         ExcludedList        = @(); # Excluding for now until we can resolve in SA-2316
     }
     'JumpCloud.SDK.V2'                = [PSCustomObject]@{
-        PublicUrl          = "https://docs.jumpcloud.com/api/2.0/index.yaml"
-        FindAndReplace     = [Ordered]@{
+        PublicUrl           = "https://docs.jumpcloud.com/api/2.0/index.yaml"
+        FindAndReplace      = [Ordered]@{
             # V2 Issues
             '"basePath":"\/api\/v2"'                                                                                                                                                                 = '"basePath":"/api/v2/"'; # The extra slash at the end is needed to properly build the url.
             '\["object","null"]'                                                                                                                                                                     = '"object"';
@@ -168,7 +168,7 @@ $TransformConfig = [Ordered]@{
             'definitions.bulk-user-create.properties'
             'definitions.bulk-user-update.properties'
         )
-        OperationIdMapping = [Ordered]@{
+        OperationIdMapping  = [Ordered]@{
             'activedirectories_agentsDelete'                    = 'ActiveDirectoryAgent_Delete';
             'activedirectories_agentsGet'                       = 'ActiveDirectoryAgent_Get';
             'activedirectories_agentsList'                      = 'ActiveDirectoryAgent_List';
@@ -457,7 +457,7 @@ $TransformConfig = [Ordered]@{
             'workdays_put'                                      = 'Workday_Set';
             'workdays_workers'                                  = 'WorkdayWorker_Get';
         };
-        ExcludedList       = @(
+        ExcludedList        = @(
             # Excluded items are listed by Path and do not include opperation type (put, post, get, etc.)
             '/applemdms/{apple_mdm_id}/devices/{device_id}/osUpdateStatus',
             '/applemdms/{apple_mdm_id}/devices/{device_id}/scheduleOSUpdate',
@@ -834,6 +834,63 @@ Function Update-SwaggerObject {
     Return $InputObject
 }
 
+
+# Helper: Get the property schema from a $ref like "#/definitions/Type/properties/prop"
+function Replace-InvalidPropertyRefs {
+    param (
+        [Parameter(Mandatory = $true)]
+        [object]$Swagger
+    )
+
+    function Get-PropertyDefinition {
+        param (
+            [object]$Swagger,
+            [string]$RefPath
+        )
+        # Match "#/definitions/Type/properties/prop"
+        if ($RefPath -match "#/definitions/([^/]+)/properties/([^/]+)") {
+            $defName = $Matches[1]
+            $propName = $Matches[2]
+            if ($Swagger.definitions.$defName.properties.$propName) {
+                # Return a deep copy of the property definition
+                return ($Swagger.definitions.$defName.properties.$propName | ConvertTo-Json -Depth 100 | ConvertFrom-Json)
+            }
+        }
+        return $null
+    }
+
+    function Walk-And-Replace {
+        param (
+            [ref]$Node,
+            [object]$Swagger
+        )
+        if ($Node.Value -is [System.Collections.IDictionary]) {
+            $keys = @($Node.Value.Keys)
+            foreach ($key in $keys) {
+                if ($key -eq '$ref' -and $Node.Value[$key] -match "#/definitions/.+/properties/.+") {
+                    $replacement = Get-PropertyDefinition -Swagger $Swagger -RefPath $Node.Value[$key]
+                    if ($replacement) {
+                        # Remove $ref and add all properties from the replacement
+                        $Node.Value.Remove('$ref')
+                        foreach ($prop in $replacement.PSObject.Properties) {
+                            $Node.Value[$prop.Name] = $prop.Value
+                        }
+                    }
+                } else {
+                    Walk-And-Replace -Node ([ref]$Node.Value[$key]) -Swagger $Swagger
+                }
+            }
+        } elseif ($Node.Value -is [System.Collections.IEnumerable] -and -not ($Node.Value -is [string])) {
+            for ($i = 0; $i -lt $Node.Value.Count; $i++) {
+                Walk-And-Replace -Node ([ref]$Node.Value[$i]) -Swagger $Swagger
+            }
+        }
+    }
+    Walk-And-Replace -Node ([ref]$Swagger) -Swagger $Swagger
+    return $Swagger
+}
+
+
 # Start script
 $SDKName | ForEach-Object {
     $SDKNameItem = $_
@@ -867,8 +924,11 @@ $SDKName | ForEach-Object {
             } Else {
                 $OASContent | ConvertFrom-Json -Depth:(100)
             }
+
+            # Run the inlining on the whole Swagger object
+            $SwaggerObject = Replace-InvalidPropertyRefs -Swagger $SwaggerObjectContent
             # Find and replace on file
-            $SwaggerObject = $SwaggerObjectContent | ConvertTo-Json -Depth:(100) -Compress
+            $SwaggerObject = $SwaggerObject | ConvertTo-Json -Depth:(100) -Compress
             # Perform find and replace
             If (-not [System.String]::IsNullOrEmpty($Config.FindAndReplace)) {
                 ($Config.FindAndReplace).GetEnumerator() | ForEach-Object {
@@ -893,7 +953,7 @@ $SDKName | ForEach-Object {
                         $configContent = Get-Content -Path ("$PSScriptRoot/CustomDefinitions/$($overrideDef).json")
                         $configOverride = ($configContent | ConvertFrom-Json)
                         # test for special chars in property string:
-                        if ($overrideDef -match "-"){
+                        if ($overrideDef -match "-") {
                             $splitDef = $overRideDef.Split(".")
                             $newOverrideDef = ""
                             for ($i = 0; $i -lt $splitDef.Count; $i++) {
@@ -901,7 +961,7 @@ $SDKName | ForEach-Object {
                                     $splitDef[$i] = "'" + $splitDef[$i] + "'"
                                 }
 
-                                if ($i -eq ($splitDef.Count -1)){
+                                if ($i -eq ($splitDef.Count - 1)) {
                                     $newOverrideDef += "$($splitDef[$i])"
                                 } else {
                                     $newOverrideDef += "$($splitDef[$i])."
