@@ -104,7 +104,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     # Dictionary of <any>
     ${Filter}, 
 
-    [Parameter(ParameterSetName='SearchExpanded')]
+    [Parameter(ParameterSetName='SearchExpanded', DontShow)]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.Int32]
     # Maximum number of items to return.
@@ -117,7 +117,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     # Dictionary of <any>
     ${SearchFilter}, 
 
-    [Parameter(ParameterSetName='SearchExpanded')]
+    [Parameter(ParameterSetName='SearchExpanded', DontShow)]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.Int32]
     # Number of items to skip for pagination.

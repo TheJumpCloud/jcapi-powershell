@@ -172,6 +172,28 @@ Try {
                     } Else {
                         "'$(($DefaultParameterSetName | Select-Object -Unique) -join "','")'"
                     }
+                    # for search verb functions:
+                    if ($Command.Verb -eq "Search"){
+                        # set the skip and limit parameters to be [Parameter(DontShow)]
+                        # get the parameter for skip from $parameterContent
+                        $SkipParameter = $ParameterContent | Where-Object { $_ -match '{Skip}' }
+                        $LimitParameter = $ParameterContent | Where-Object { $_ -match '{Limit}' }
+                        # for both parameters, set the DontShow attribute
+                        $skipMatches = $SkipParameter | Select-String -Pattern:([regex]'\[Parameter\((.*?)\)\]') -AllMatches
+                        $limitMatches = $LimitParameter | Select-String -Pattern:([regex]'\[Parameter\((.*?)\)\]') -AllMatches
+
+                        # process Skip:
+                        $paramArguments = $skipMatches.Matches.Groups[1].value
+                        $paramArguments += ", DontShow"
+                        $skipMatches = $skipMatches -replace '\[Parameter\((.*?)\)\]', "[Parameter($paramArguments)]"
+                        # process Limit:
+                        $paramArguments = $limitMatches.Matches.Groups[1].value
+                        $paramArguments += ", DontShow"
+                        $limitMatches = $limitMatches -replace '\[Parameter\((.*?)\)\]', "[Parameter($paramArguments)]"
+                        # update the ParameterContent with the new skip and limit parameter definitions:
+                        $ParameterContent = $ParameterContent -replace [regex]::Escape($SkipParameter), $skipMatches
+                        $ParameterContent = $ParameterContent -replace [regex]::Escape($LimitParameter), $limitMatches
+                    }
                     If (-not [System.String]::IsNullOrEmpty($ParameterContent)) {
                         If ($ParameterContent.Count -eq 1) {
                             # Add paginate parameter

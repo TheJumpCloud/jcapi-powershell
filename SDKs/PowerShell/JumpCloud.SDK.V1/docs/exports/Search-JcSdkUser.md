@@ -92,8 +92,8 @@ curl -X POST https://console.jumpcloud.com/api/search/systemusers \\
 
 ### SearchExpanded (Default)
 ```
-Search-JcSdkUser [-Fields <String>] [-Filter <Hashtable>] [-Limit <Int32>] [-SearchFilter <Hashtable>]
- [-Skip <Int32>] [-Confirm] [-WhatIf] [<CommonParameters>]
+Search-JcSdkUser [-Fields <String>] [-Filter <Hashtable>] [-SearchFilter <Hashtable>] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### Search
@@ -250,41 +250,11 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Limit
-Maximum number of items to return.
-
-```yaml
-Type: System.Int32
-Parameter Sets: SearchExpanded
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -SearchFilter
 Dictionary of \<any\>
 
 ```yaml
 Type: System.Collections.Hashtable
-Parameter Sets: SearchExpanded
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Skip
-Number of items to skip for pagination.
-
-```yaml
-Type: System.Int32
 Parameter Sets: SearchExpanded
 Aliases:
 
