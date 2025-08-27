@@ -1,5 +1,5 @@
 ## JumpCloud.SDK.v1-0.0.46
-Release Date: August 26, 2025
+Release Date: August 27, 2025
 #### RELEASE NOTES
 ```
 This release addresses an issue with the SDK Search Functions not paginating correctly. The latest changes include model definitions for existing functions.

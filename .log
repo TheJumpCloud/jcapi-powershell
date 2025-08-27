@@ -1,0 +1,17 @@
+AutoRest code generation utility [cli version: 3.7.2; node: v18.20.2]
+(C) 2018 Microsoft Corporation.
+https://aka.ms/autorest
+info    | AutoRest core version selected from configuration: 3.6.6.
+info    |    Loading AutoRest core      '/Users/jworkman/.autorest/@autorestcore@3.6.6/nodemodules/@autorest/core/dist' (3.6.6)
+info    | 
+The default version of @autorest/powershell has been bumped from 2.1+ to 3.0+.
+ > If you still want to use 2.1+ version, please specify it with --use:@autorest/powershell@2.1.{x}, e.g 2.1.401.
+
+info    |    Loading AutoRest extension '@autorest/powershell' (3.0.463->3.0.463)
+info    |    Loading AutoRest extension '@autorest/modelerfour' (4.15.414->4.15.414)
+error   | [Exception] No input files provided.
+
+Use --help to get help information.
+error   |   Error: [Exception] No input files provided.
+
+Use --help to get help information.
