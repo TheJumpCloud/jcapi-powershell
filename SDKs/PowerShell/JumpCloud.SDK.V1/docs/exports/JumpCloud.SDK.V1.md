@@ -136,6 +136,9 @@ curl -X GET https://console.jumpcloud.com/api/systemusers/{UserID} \\
 ### [Get-JcSdkUserSshKey](Get-JcSdkUserSshKey.md)
 This endpoint will return a specific System User's public SSH key.
 
+### [Get-JcSdkUserTotp](Get-JcSdkUserTotp.md)
+This endpoint will return info for a specific System User's TOTP enrollment.
+
 ### [Initialize-JcSdkUserState](Initialize-JcSdkUserState.md)
 This endpoint changes the state of a STAGED user to ACTIVATED.
 #### Email Flag
@@ -363,9 +366,10 @@ This endpoint initiates a TOTP reset for an admin.
 This request does not accept a body.
 
 ### [Reset-JcSdkUserMfa](Reset-JcSdkUserMfa.md)
-This endpoint allows you to reset the TOTP key for a specified system user and put them in an TOTP MFA enrollment period.
-This will result in the user being prompted to setup TOTP MFA when logging into userportal.
-Please be aware that if the user does not complete TOTP MFA setup before the `exclusionUntil` date, they will be locked out of any resources that require TOTP MFA.
+This endpoint resets the user's TOTP key and initiates a new MFA enrollment period.
+The user will be prompted to set up MFA at their next login.
+If `Unified MFA is enabled`, this action will also delete the user's existing Push Notification endpoint.
+Warning: The user must complete the setup before the `exclusionUntil` date to avoid being locked out of MFA-protected resources.
 
 Please refer to our [Knowledge Base Article](https://support.jumpcloud.com/customer/en/portal/articles/2959138-using-multifactor-authentication-with-jumpcloud) on setting up MFA for more information.
 

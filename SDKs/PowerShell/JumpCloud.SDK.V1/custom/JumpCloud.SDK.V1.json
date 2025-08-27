@@ -1705,6 +1705,18 @@
       "title": "ApplicationTemplatesList",
       "type": "object"
     },
+    "attribute": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "value": {
+          "maxLength": 1024,
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
     "command": {
       "properties": {
         "command": {
@@ -1723,10 +1735,21 @@
           "description": "The Command OS",
           "type": "string"
         },
+        "description": {
+          "description": "Description of the command.",
+          "type": "string"
+        },
         "files": {
           "description": "An array of file IDs to include with the command.",
           "items": {
             "type": "string"
+          },
+          "type": "array"
+        },
+        "filesS3": {
+          "description": "An array of file stored in S3 to include with the command.",
+          "items": {
+            "$ref": "#/definitions/filesS3"
           },
           "type": "array"
         },
@@ -2020,6 +2043,28 @@
                 "format": "date-time",
                 "type": "string"
               },
+              "response": {
+                "properties": {
+                  "data": {
+                    "properties": {
+                      "exitCode": {
+                        "description": "The numeric exit code returned by the executed command.",
+                        "type": "integer"
+                      },
+                      "output": {
+                        "description": "The successful command output, truncated to 40 characters.",
+                        "type": "string"
+                      }
+                    },
+                    "type": "object"
+                  },
+                  "error": {
+                    "description": "The error output from the command, truncated to 40 characters.",
+                    "type": "string"
+                  }
+                },
+                "type": "object"
+              },
               "responseTime": {
                 "description": "The time (UTC) that the command was completed.",
                 "format": "date-time",
@@ -2168,6 +2213,10 @@
                 "description": "The Command OS.",
                 "type": "string"
               },
+              "description": {
+                "description": "Description of the command.",
+                "type": "string"
+              },
               "launchType": {
                 "description": "How the Command is executed.",
                 "type": "string"
@@ -2233,6 +2282,34 @@
         }
       },
       "title": "FDE",
+      "type": "object"
+    },
+    "filesS3": {
+      "properties": {
+        "destination": {
+          "description": "The destination of the file.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the file.",
+          "type": "string"
+        },
+        "objectStorageId": {
+          "description": "The ID of the file in object storage database.",
+          "type": "string"
+        },
+        "sha256": {
+          "description": "The SHA256 hash of the file.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "objectStorageId",
+        "name",
+        "destination",
+        "sha256"
+      ],
+      "title": "FilesS3",
       "type": "object"
     },
     "mfa": {
@@ -3040,6 +3117,12 @@
         "organization": {
           "type": "string"
         },
+        "radsecEnabled": {
+          "type": "boolean"
+        },
+        "requireRadsec": {
+          "type": "boolean"
+        },
         "requireTlsAuth": {
           "type": "boolean"
         },
@@ -3091,6 +3174,12 @@
         },
         "networkSourceIp": {
           "type": "string"
+        },
+        "radsecEnabled": {
+          "type": "boolean"
+        },
+        "requireRadsec": {
+          "type": "boolean"
         },
         "requireTlsAuth": {
           "type": "boolean"
@@ -3152,6 +3241,12 @@
         },
         "networkSourceIp": {
           "type": "string"
+        },
+        "radsecEnabled": {
+          "type": "boolean"
+        },
+        "requireRadsec": {
+          "type": "boolean"
         },
         "requireTlsAuth": {
           "type": "boolean"
@@ -3241,6 +3336,14 @@
         "searchFilter": {
           "type": "object",
           "additionalProperties": true
+        },
+        "skip": {
+          "description": "Number of items to skip for pagination.",
+          "type": "integer"
+        },
+        "limit": {
+          "description": "Maximum number of items to return.",
+          "type": "integer"
         }
       },
       "title": "Search",
@@ -3328,6 +3431,9 @@
           "type": "string"
         },
         "active": {
+          "type": "boolean"
+        },
+        "agentHasFullDiskAccess": {
           "type": "boolean"
         },
         "agentVersion": {
@@ -3581,6 +3687,301 @@
             }
           },
           "type": "object"
+        },
+        "primarySystemUser._id": {
+          "type": "string"
+        },
+        "primarySystemUser.account_locked": {
+          "type": "boolean"
+        },
+        "primarySystemUser.account_locked_date": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "primarySystemUser.activated": {
+          "type": "boolean"
+        },
+        "primarySystemUser.addresses": {
+          "items": {
+            "properties": {
+              "country": {
+                "maxLength": 1024,
+                "type": "string"
+              },
+              "extendedAddress": {
+                "maxLength": 1024,
+                "type": "string"
+              },
+              "id": {
+                "type": "string"
+              },
+              "locality": {
+                "maxLength": 1024,
+                "type": "string"
+              },
+              "poBox": {
+                "maxLength": 1024,
+                "type": "string"
+              },
+              "postalCode": {
+                "maxLength": 1024,
+                "type": "string"
+              },
+              "region": {
+                "maxLength": 1024,
+                "type": "string"
+              },
+              "streetAddress": {
+                "maxLength": 1024,
+                "type": "string"
+              },
+              "type": {
+                "maxLength": 1024,
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "primarySystemUser.admin": {
+          "properties": {
+            "id": {
+              "type": "string"
+            },
+            "roleName": {
+              "type": "string"
+            }
+          },
+          "type": "object",
+          "x-nullable": true
+        },
+        "primarySystemUser.allow_public_key": {
+          "type": "boolean"
+        },
+        "primarySystemUser.alternateEmail": {
+          "type": "string"
+        },
+        "primarySystemUser.attributes": {
+          "items": {
+            "$ref": "#/definitions/attribute"
+          },
+          "type": "array"
+        },
+        "primarySystemUser.badLoginAttempts": {
+          "minimum": 0,
+          "type": "integer"
+        },
+        "primarySystemUser.company": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "primarySystemUser.costCenter": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "primarySystemUser.created": {
+          "type": "string"
+        },
+        "primarySystemUser.creationSource": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "primarySystemUser.department": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "primarySystemUser.description": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "primarySystemUser.disableDeviceMaxLoginAttempts": {
+          "type": "boolean"
+        },
+        "primarySystemUser.displayname": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "primarySystemUser.email": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "primarySystemUser.employeeIdentifier": {
+          "description": "Must be unique per user. ",
+          "maxLength": 256,
+          "type": "string"
+        },
+        "primarySystemUser.employeeType": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "primarySystemUser.enable_managed_uid": {
+          "type": "boolean"
+        },
+        "primarySystemUser.enable_user_portal_multifactor": {
+          "type": "boolean"
+        },
+        "primarySystemUser.external_dn": {
+          "type": "string"
+        },
+        "primarySystemUser.external_password_expiration_date": {
+          "type": "string"
+        },
+        "primarySystemUser.external_source_type": {
+          "type": "string"
+        },
+        "primarySystemUser.externally_managed": {
+          "$ref": "#/definitions/externallymanagedpropertyinfo"
+        },
+        "primarySystemUser.firstname": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "primarySystemUser.jobTitle": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "primarySystemUser.lastname": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "primarySystemUser.ldap_binding_user": {
+          "type": "boolean"
+        },
+        "primarySystemUser.location": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "primarySystemUser.managedAppleId": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "primarySystemUser.manager": {
+          "description": "Relation with another systemuser to identify the last as a manager.",
+          "type": "string"
+        },
+        "primarySystemUser.mfa": {
+          "$ref": "#/definitions/mfa"
+        },
+        "primarySystemUser.mfaEnrollment": {
+          "$ref": "#/definitions/mfaEnrollment"
+        },
+        "primarySystemUser.middlename": {
+          "maxLength": 1024,
+          "type": "string"
+        },
+        "primarySystemUser.organization": {
+          "type": "string"
+        },
+        "primarySystemUser.password_date": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "primarySystemUser.password_expiration_date": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "primarySystemUser.password_expired": {
+          "type": "boolean"
+        },
+        "primarySystemUser.password_never_expires": {
+          "type": "boolean"
+        },
+        "primarySystemUser.passwordless_sudo": {
+          "type": "boolean"
+        },
+        "primarySystemUser.phoneNumbers": {
+          "items": {
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "number": {
+                "maxLength": 1024,
+                "type": "string"
+              },
+              "type": {
+                "maxLength": 1024,
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "primarySystemUser.public_key": {
+          "type": "string"
+        },
+        "primarySystemUser.recoveryEmail": {
+          "properties": {
+            "address": {
+              "type": "string"
+            },
+            "verified": {
+              "type": "boolean"
+            },
+            "verifiedAt": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "primarySystemUser.relationships": {
+          "items": {
+            "properties": {
+              "type": {
+                "type": "string"
+              },
+              "value": {
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "primarySystemUser.restrictedFields": {
+          "items": {
+            "$ref": "#/definitions/restrictedField"
+          }
+        },
+        "primarySystemUser.samba_service_user": {
+          "type": "boolean"
+        },
+        "primarySystemUser.ssh_keys": {
+          "items": {
+            "$ref": "#/definitions/sshkeylist"
+          },
+          "type": "array"
+        },
+        "primarySystemUser.state": {
+          "enum": [
+            "STAGED",
+            "ACTIVATED",
+            "SUSPENDED"
+          ],
+          "type": "string"
+        },
+        "primarySystemUser.sudo": {
+          "type": "boolean"
+        },
+        "primarySystemUser.suspended": {
+          "type": "boolean"
+        },
+        "primarySystemUser.totp_enabled": {
+          "type": "boolean"
+        },
+        "primarySystemUser.unix_guid": {
+          "minimum": 1,
+          "type": "integer"
+        },
+        "primarySystemUser.unix_uid": {
+          "minimum": 1,
+          "type": "integer"
+        },
+        "primarySystemUser.username": {
+          "maxLength": 1024,
+          "type": "string"
         },
         "provisionMetadata": {
           "properties": {
@@ -4299,16 +4700,7 @@
         },
         "attributes": {
           "items": {
-            "properties": {
-              "name": {
-                "type": "string"
-              },
-              "value": {
-                "maxLength": 1024,
-                "type": "string"
-              }
-            },
-            "type": "object"
+            "$ref": "#/definitions/attribute"
           },
           "type": "array"
         },
@@ -4548,6 +4940,15 @@
       },
       "title": "SystemUsersList",
       "type": "object"
+    },
+    "totpenrollmentinfo": {
+      "properties": {
+        "enrollmentDate": {
+          "description": "The TOTP enrollment date of the user.",
+          "format": "date-time",
+          "type": "string"
+        }
+      }
     },
     "triggerreturn": {
       "properties": {
@@ -5520,15 +5921,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request POST \\\n  --url https://console.jumpcloud.com/api/commands \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --data '{\"command\":\"string\",\"commandRunners\":[\"string\"],\"commandType\":\"linux\",\"files\":[\"string\"],\"launchType\":\"string\",\"listensTo\":\"string\",\"name\":\"string\",\"organization\":\"string\",\"schedule\":\"string\",\"scheduleRepeatType\":\"string\",\"scheduleYear\":0,\"shell\":\"string\",\"sudo\":true,\"systems\":[\"string\"],\"template\":\"string\",\"timeToLiveSeconds\":0,\"timeout\":\"string\",\"trigger\":\"string\",\"user\":\"string\"}'"
+            "source": "curl --request POST \\\n  --url https://console.jumpcloud.com/api/commands \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --data '{\"command\":\"string\",\"commandRunners\":[\"string\"],\"commandType\":\"linux\",\"description\":\"string\",\"files\":[\"string\"],\"filesS3\":[{\"destination\":\"string\",\"name\":\"string\",\"objectStorageId\":\"string\",\"sha256\":\"string\"}],\"launchType\":\"string\",\"listensTo\":\"string\",\"name\":\"string\",\"organization\":\"string\",\"schedule\":\"string\",\"scheduleRepeatType\":\"string\",\"scheduleYear\":0,\"shell\":\"string\",\"sudo\":true,\"systems\":[\"string\"],\"template\":\"string\",\"timeToLiveSeconds\":0,\"timeout\":\"string\",\"trigger\":\"string\",\"user\":\"string\"}'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/commands\"\n\npayload = {\n    \"command\": \"string\",\n    \"commandRunners\": [\"string\"],\n    \"commandType\": \"linux\",\n    \"files\": [\"string\"],\n    \"launchType\": \"string\",\n    \"listensTo\": \"string\",\n    \"name\": \"string\",\n    \"organization\": \"string\",\n    \"schedule\": \"string\",\n    \"scheduleRepeatType\": \"string\",\n    \"scheduleYear\": 0,\n    \"shell\": \"string\",\n    \"sudo\": True,\n    \"systems\": [\"string\"],\n    \"template\": \"string\",\n    \"timeToLiveSeconds\": 0,\n    \"timeout\": \"string\",\n    \"trigger\": \"string\",\n    \"user\": \"string\"\n}\nheaders = {\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/commands\"\n\npayload = {\n    \"command\": \"string\",\n    \"commandRunners\": [\"string\"],\n    \"commandType\": \"linux\",\n    \"description\": \"string\",\n    \"files\": [\"string\"],\n    \"filesS3\": [\n        {\n            \"destination\": \"string\",\n            \"name\": \"string\",\n            \"objectStorageId\": \"string\",\n            \"sha256\": \"string\"\n        }\n    ],\n    \"launchType\": \"string\",\n    \"listensTo\": \"string\",\n    \"name\": \"string\",\n    \"organization\": \"string\",\n    \"schedule\": \"string\",\n    \"scheduleRepeatType\": \"string\",\n    \"scheduleYear\": 0,\n    \"shell\": \"string\",\n    \"sudo\": True,\n    \"systems\": [\"string\"],\n    \"template\": \"string\",\n    \"timeToLiveSeconds\": 0,\n    \"timeout\": \"string\",\n    \"trigger\": \"string\",\n    \"user\": \"string\"\n}\nheaders = {\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/commands' -Method POST -Headers $headers -ContentType 'application/json' -Body '{\"command\":\"string\",\"commandRunners\":[\"string\"],\"commandType\":\"linux\",\"files\":[\"string\"],\"launchType\":\"string\",\"listensTo\":\"string\",\"name\":\"string\",\"organization\":\"string\",\"schedule\":\"string\",\"scheduleRepeatType\":\"string\",\"scheduleYear\":0,\"shell\":\"string\",\"sudo\":true,\"systems\":[\"string\"],\"template\":\"string\",\"timeToLiveSeconds\":0,\"timeout\":\"string\",\"trigger\":\"string\",\"user\":\"string\"}'"
+            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/commands' -Method POST -Headers $headers -ContentType 'application/json' -Body '{\"command\":\"string\",\"commandRunners\":[\"string\"],\"commandType\":\"linux\",\"description\":\"string\",\"files\":[\"string\"],\"filesS3\":[{\"destination\":\"string\",\"name\":\"string\",\"objectStorageId\":\"string\",\"sha256\":\"string\"}],\"launchType\":\"string\",\"listensTo\":\"string\",\"name\":\"string\",\"organization\":\"string\",\"schedule\":\"string\",\"scheduleRepeatType\":\"string\",\"scheduleYear\":0,\"shell\":\"string\",\"sudo\":true,\"systems\":[\"string\"],\"template\":\"string\",\"timeToLiveSeconds\":0,\"timeout\":\"string\",\"trigger\":\"string\",\"user\":\"string\"}'"
           }
         ]
       }
@@ -5647,15 +6048,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request PUT \\\n  --url https://console.jumpcloud.com/api/commands/{id} \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --data '{\"command\":\"string\",\"commandRunners\":[\"string\"],\"commandType\":\"linux\",\"files\":[\"string\"],\"launchType\":\"string\",\"listensTo\":\"string\",\"name\":\"string\",\"organization\":\"string\",\"schedule\":\"string\",\"scheduleRepeatType\":\"string\",\"scheduleYear\":0,\"shell\":\"string\",\"sudo\":true,\"systems\":[\"string\"],\"template\":\"string\",\"timeToLiveSeconds\":0,\"timeout\":\"string\",\"trigger\":\"string\",\"user\":\"string\"}'"
+            "source": "curl --request PUT \\\n  --url https://console.jumpcloud.com/api/commands/{id} \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --data '{\"command\":\"string\",\"commandRunners\":[\"string\"],\"commandType\":\"linux\",\"description\":\"string\",\"files\":[\"string\"],\"filesS3\":[{\"destination\":\"string\",\"name\":\"string\",\"objectStorageId\":\"string\",\"sha256\":\"string\"}],\"launchType\":\"string\",\"listensTo\":\"string\",\"name\":\"string\",\"organization\":\"string\",\"schedule\":\"string\",\"scheduleRepeatType\":\"string\",\"scheduleYear\":0,\"shell\":\"string\",\"sudo\":true,\"systems\":[\"string\"],\"template\":\"string\",\"timeToLiveSeconds\":0,\"timeout\":\"string\",\"trigger\":\"string\",\"user\":\"string\"}'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/commands/{id}\"\n\npayload = {\n    \"command\": \"string\",\n    \"commandRunners\": [\"string\"],\n    \"commandType\": \"linux\",\n    \"files\": [\"string\"],\n    \"launchType\": \"string\",\n    \"listensTo\": \"string\",\n    \"name\": \"string\",\n    \"organization\": \"string\",\n    \"schedule\": \"string\",\n    \"scheduleRepeatType\": \"string\",\n    \"scheduleYear\": 0,\n    \"shell\": \"string\",\n    \"sudo\": True,\n    \"systems\": [\"string\"],\n    \"template\": \"string\",\n    \"timeToLiveSeconds\": 0,\n    \"timeout\": \"string\",\n    \"trigger\": \"string\",\n    \"user\": \"string\"\n}\nheaders = {\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"PUT\", url, json=payload, headers=headers)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/commands/{id}\"\n\npayload = {\n    \"command\": \"string\",\n    \"commandRunners\": [\"string\"],\n    \"commandType\": \"linux\",\n    \"description\": \"string\",\n    \"files\": [\"string\"],\n    \"filesS3\": [\n        {\n            \"destination\": \"string\",\n            \"name\": \"string\",\n            \"objectStorageId\": \"string\",\n            \"sha256\": \"string\"\n        }\n    ],\n    \"launchType\": \"string\",\n    \"listensTo\": \"string\",\n    \"name\": \"string\",\n    \"organization\": \"string\",\n    \"schedule\": \"string\",\n    \"scheduleRepeatType\": \"string\",\n    \"scheduleYear\": 0,\n    \"shell\": \"string\",\n    \"sudo\": True,\n    \"systems\": [\"string\"],\n    \"template\": \"string\",\n    \"timeToLiveSeconds\": 0,\n    \"timeout\": \"string\",\n    \"trigger\": \"string\",\n    \"user\": \"string\"\n}\nheaders = {\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"PUT\", url, json=payload, headers=headers)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/commands/{id}' -Method PUT -Headers $headers -ContentType 'application/json' -Body '{\"command\":\"string\",\"commandRunners\":[\"string\"],\"commandType\":\"linux\",\"files\":[\"string\"],\"launchType\":\"string\",\"listensTo\":\"string\",\"name\":\"string\",\"organization\":\"string\",\"schedule\":\"string\",\"scheduleRepeatType\":\"string\",\"scheduleYear\":0,\"shell\":\"string\",\"sudo\":true,\"systems\":[\"string\"],\"template\":\"string\",\"timeToLiveSeconds\":0,\"timeout\":\"string\",\"trigger\":\"string\",\"user\":\"string\"}'"
+            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/commands/{id}' -Method PUT -Headers $headers -ContentType 'application/json' -Body '{\"command\":\"string\",\"commandRunners\":[\"string\"],\"commandType\":\"linux\",\"description\":\"string\",\"files\":[\"string\"],\"filesS3\":[{\"destination\":\"string\",\"name\":\"string\",\"objectStorageId\":\"string\",\"sha256\":\"string\"}],\"launchType\":\"string\",\"listensTo\":\"string\",\"name\":\"string\",\"organization\":\"string\",\"schedule\":\"string\",\"scheduleRepeatType\":\"string\",\"scheduleYear\":0,\"shell\":\"string\",\"sudo\":true,\"systems\":[\"string\"],\"template\":\"string\",\"timeToLiveSeconds\":0,\"timeout\":\"string\",\"trigger\":\"string\",\"user\":\"string\"}'"
           }
         ]
       }
@@ -6137,15 +6538,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request POST \\\n  --url https://console.jumpcloud.com/api/radiusservers \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --data '{\"authIdp\":\"JUMPCLOUD\",\"caCert\":\"string\",\"deviceCertEnabled\":true,\"mfa\":\"DISABLED\",\"name\":\"string\",\"networkSourceIp\":\"string\",\"requireTlsAuth\":true,\"sharedSecret\":\"string\",\"tagNames\":[\"string\"],\"userCertEnabled\":true,\"userLockoutAction\":\"string\",\"userPasswordEnabled\":true,\"userPasswordExpirationAction\":\"string\"}'"
+            "source": "curl --request POST \\\n  --url https://console.jumpcloud.com/api/radiusservers \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --data '{\"authIdp\":\"JUMPCLOUD\",\"caCert\":\"string\",\"deviceCertEnabled\":true,\"mfa\":\"DISABLED\",\"name\":\"string\",\"networkSourceIp\":\"string\",\"radsecEnabled\":true,\"requireRadsec\":true,\"requireTlsAuth\":true,\"sharedSecret\":\"string\",\"tagNames\":[\"string\"],\"userCertEnabled\":true,\"userLockoutAction\":\"string\",\"userPasswordEnabled\":true,\"userPasswordExpirationAction\":\"string\"}'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/radiusservers\"\n\npayload = {\n    \"authIdp\": \"JUMPCLOUD\",\n    \"caCert\": \"string\",\n    \"deviceCertEnabled\": True,\n    \"mfa\": \"DISABLED\",\n    \"name\": \"string\",\n    \"networkSourceIp\": \"string\",\n    \"requireTlsAuth\": True,\n    \"sharedSecret\": \"string\",\n    \"tagNames\": [\"string\"],\n    \"userCertEnabled\": True,\n    \"userLockoutAction\": \"string\",\n    \"userPasswordEnabled\": True,\n    \"userPasswordExpirationAction\": \"string\"\n}\nheaders = {\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/radiusservers\"\n\npayload = {\n    \"authIdp\": \"JUMPCLOUD\",\n    \"caCert\": \"string\",\n    \"deviceCertEnabled\": True,\n    \"mfa\": \"DISABLED\",\n    \"name\": \"string\",\n    \"networkSourceIp\": \"string\",\n    \"radsecEnabled\": True,\n    \"requireRadsec\": True,\n    \"requireTlsAuth\": True,\n    \"sharedSecret\": \"string\",\n    \"tagNames\": [\"string\"],\n    \"userCertEnabled\": True,\n    \"userLockoutAction\": \"string\",\n    \"userPasswordEnabled\": True,\n    \"userPasswordExpirationAction\": \"string\"\n}\nheaders = {\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/radiusservers' -Method POST -Headers $headers -ContentType 'application/json' -Body '{\"authIdp\":\"JUMPCLOUD\",\"caCert\":\"string\",\"deviceCertEnabled\":true,\"mfa\":\"DISABLED\",\"name\":\"string\",\"networkSourceIp\":\"string\",\"requireTlsAuth\":true,\"sharedSecret\":\"string\",\"tagNames\":[\"string\"],\"userCertEnabled\":true,\"userLockoutAction\":\"string\",\"userPasswordEnabled\":true,\"userPasswordExpirationAction\":\"string\"}'"
+            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/radiusservers' -Method POST -Headers $headers -ContentType 'application/json' -Body '{\"authIdp\":\"JUMPCLOUD\",\"caCert\":\"string\",\"deviceCertEnabled\":true,\"mfa\":\"DISABLED\",\"name\":\"string\",\"networkSourceIp\":\"string\",\"radsecEnabled\":true,\"requireRadsec\":true,\"requireTlsAuth\":true,\"sharedSecret\":\"string\",\"tagNames\":[\"string\"],\"userCertEnabled\":true,\"userLockoutAction\":\"string\",\"userPasswordEnabled\":true,\"userPasswordExpirationAction\":\"string\"}'"
           }
         ]
       }
@@ -6265,6 +6666,12 @@
                 },
                 "networkSourceIp": {
                   "type": "string"
+                },
+                "radsecEnabled": {
+                  "type": "boolean"
+                },
+                "requireRadsec": {
+                  "type": "boolean"
                 },
                 "requireTlsAuth": {
                   "type": "boolean"
@@ -6416,12 +6823,6 @@
             "schema": {
               "$ref": "#/definitions/search"
             }
-          },
-          {
-            "$ref": "#/parameters/trait:limit:limit"
-          },
-          {
-            "$ref": "#/parameters/trait:skip:skip"
           }
         ],
         "responses": {
@@ -6468,12 +6869,6 @@
             "schema": {
               "$ref": "#/definitions/search"
             }
-          },
-          {
-            "$ref": "#/parameters/trait:limit:limit"
-          },
-          {
-            "$ref": "#/parameters/trait:skip:skip"
           }
         ],
         "responses": {
@@ -6520,12 +6915,6 @@
             "schema": {
               "$ref": "#/definitions/search"
             }
-          },
-          {
-            "$ref": "#/parameters/trait:limit:limit"
-          },
-          {
-            "$ref": "#/parameters/trait:skip:skip"
           }
         ],
         "responses": {
@@ -6573,12 +6962,6 @@
             "schema": {
               "$ref": "#/definitions/search"
             }
-          },
-          {
-            "$ref": "#/parameters/trait:limit:limit"
-          },
-          {
-            "$ref": "#/parameters/trait:skip:skip"
           }
         ],
         "responses": {
@@ -6625,12 +7008,6 @@
             "schema": {
               "$ref": "#/definitions/search"
             }
-          },
-          {
-            "$ref": "#/parameters/trait:limit:limit"
-          },
-          {
-            "$ref": "#/parameters/trait:skip:skip"
           }
         ],
         "responses": {
@@ -7417,7 +7794,7 @@
         }
       ],
       "post": {
-        "description": "This endpoint allows you to reset the TOTP key for a specified system user and put them in an TOTP MFA enrollment period. This will result in the user being prompted to setup TOTP MFA when logging into userportal. Please be aware that if the user does not complete TOTP MFA setup before the `exclusionUntil` date, they will be locked out of any resources that require TOTP MFA.\n\nPlease refer to our [Knowledge Base Article](https://support.jumpcloud.com/customer/en/portal/articles/2959138-using-multifactor-authentication-with-jumpcloud) on setting up MFA for more information.\n\n#### Sample Request\n```\ncurl -X POST \\\n  https://console.jumpcloud.com/api/systemusers/{UserID}/resetmfa \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\"exclusion\": true, \"exclusionUntil\": \"{date-time}\"}'\n\n```",
+        "description": "This endpoint resets the user's TOTP key and initiates a new MFA enrollment period. The user will be prompted to set up MFA at their next login. If `Unified MFA is enabled`, this action will also delete the user's existing Push Notification endpoint.\nWarning: The user must complete the setup before the `exclusionUntil` date to avoid being locked out of MFA-protected resources.\n\nPlease refer to our [Knowledge Base Article](https://support.jumpcloud.com/customer/en/portal/articles/2959138-using-multifactor-authentication-with-jumpcloud) on setting up MFA for more information.\n\n#### Sample Request\n```\ncurl -X POST \\\n  https://console.jumpcloud.com/api/systemusers/{UserID}/resetmfa \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}' \\\n  -d '{\"exclusion\": true, \"exclusionUntil\": \"{date-time}\"}'\n\n```",
         "operationId": "UserMfa_Reset",
         "parameters": [
           {
@@ -7617,6 +7994,39 @@
       ]
     },
     "/systemusers/{id}/totpinfo": {
+      "get": {
+        "description": "This endpoint will return info for a specific System User's TOTP enrollment.",
+        "operationId": "UserTotp_Get",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/totpenrollmentinfo"
+            }
+          }
+        },
+        "security": [
+          {
+            "x-api-key": []
+          }
+        ],
+        "summary": "Display info about a System User's TOTP enrollment.",
+        "x-codeSamples": [
+          {
+            "lang": "Shell",
+            "source": "curl --request GET \\\n  --url https://console.jumpcloud.com/api/systemusers/{id}/totpinfo \\\n  --header 'x-api-key: REPLACE_KEY_VALUE'"
+          },
+          {
+            "lang": "Python",
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/systemusers/{id}/totpinfo\"\n\nheaders = {\"x-api-key\": \"REPLACE_KEY_VALUE\"}\n\nresponse = requests.request(\"GET\", url, headers=headers)\n\nprint(response.text)"
+          },
+          {
+            "lang": "Powershell",
+            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/systemusers/{id}/totpinfo' -Method GET -Headers $headers"
+          }
+        ]
+      },
       "parameters": [
         {
           "in": "path",

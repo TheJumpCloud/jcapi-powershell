@@ -31,10 +31,11 @@ curl -X PUT https://console.jumpcloud.com/api/commands/{CommandID} \\
 ### SetExpanded (Default)
 ```
 Set-JcSdkCommand -Id <String> -Command <String> -CommandType <String> -Name <String>
- [-CommandRunners <String[]>] [-Files <String[]>] [-LaunchType <String>] [-ListensTo <String>]
- [-Organization <String>] [-Schedule <String>] [-ScheduleRepeatType <String>] [-ScheduleYear <Int32>]
- [-Shell <String>] [-Sudo] [-Template <String>] [-Timeout <String>] [-TimeToLiveSeconds <Int32>]
- [-Trigger <String>] [-User <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-CommandRunners <String[]>] [-Description <String>] [-Files <String[]>] [-FilesS3 <IFilesS3[]>]
+ [-LaunchType <String>] [-ListensTo <String>] [-Organization <String>] [-Schedule <String>]
+ [-ScheduleRepeatType <String>] [-ScheduleYear <Int32>] [-Shell <String>] [-Sudo] [-Template <String>]
+ [-Timeout <String>] [-TimeToLiveSeconds <Int32>] [-Trigger <String>] [-User <String>] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### Set
@@ -51,10 +52,11 @@ Set-JcSdkCommand -InputObject <IJumpCloudApiIdentity> -Body <ICommand> [-Confirm
 ### SetViaIdentityExpanded
 ```
 Set-JcSdkCommand -InputObject <IJumpCloudApiIdentity> -Command <String> -CommandType <String> -Name <String>
- [-CommandRunners <String[]>] [-Files <String[]>] [-LaunchType <String>] [-ListensTo <String>]
- [-Organization <String>] [-Schedule <String>] [-ScheduleRepeatType <String>] [-ScheduleYear <Int32>]
- [-Shell <String>] [-Sudo] [-Template <String>] [-Timeout <String>] [-TimeToLiveSeconds <Int32>]
- [-Trigger <String>] [-User <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-CommandRunners <String[]>] [-Description <String>] [-Files <String[]>] [-FilesS3 <IFilesS3[]>]
+ [-LaunchType <String>] [-ListensTo <String>] [-Organization <String>] [-Schedule <String>]
+ [-ScheduleRepeatType <String>] [-ScheduleYear <Int32>] [-Shell <String>] [-Sudo] [-Template <String>]
+ [-Timeout <String>] [-TimeToLiveSeconds <Int32>] [-Trigger <String>] [-User <String>] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -191,11 +193,42 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -Description
+Description of the command.
+
+```yaml
+Type: System.String
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Files
 An array of file IDs to include with the command.
 
 ```yaml
 Type: System.String[]
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -FilesS3
+An array of file stored in S3 to include with the command.
+To construct, see NOTES section for FILESS3 properties and create a hash table.
+
+```yaml
+Type: JumpCloud.SDK.V1.Models.IFilesS3[]
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
@@ -508,7 +541,13 @@ BODY <ICommand>: Command
   - `CommandType <String>`: The Command OS
   - `Name <String>`: 
   - `[CommandRunners <String[]>]`: An array of IDs of the Command Runner Users that can execute this command.
+  - `[Description <String>]`: Description of the command.
   - `[Files <String[]>]`: An array of file IDs to include with the command.
+  - `[FilesS3 <IFilesS3[]>]`: An array of file stored in S3 to include with the command.
+    - `Destination <String>`: The destination of the file.
+    - `Name <String>`: The name of the file.
+    - `ObjectStorageId <String>`: The ID of the file in object storage database.
+    - `Sha256 <String>`: The SHA256 hash of the file.
   - `[LaunchType <String>]`: How the command will execute.
   - `[ListensTo <String>]`: 
   - `[Organization <String>]`: The ID of the organization.
@@ -522,6 +561,12 @@ BODY <ICommand>: Command
   - `[Timeout <String>]`: The time in seconds to allow the command to run for. The maximum value is 86400 seconds (1 day).
   - `[Trigger <String>]`: The name of the command trigger.
   - `[User <String>]`: The ID of the system user to run the command as. This field is required when creating a command with a commandType of "mac" or "linux".
+
+FILESS3 <IFilesS3[]>: An array of file stored in S3 to include with the command.
+  - `Destination <String>`: The destination of the file.
+  - `Name <String>`: The name of the file.
+  - `ObjectStorageId <String>`: The ID of the file in object storage database.
+  - `Sha256 <String>`: The SHA256 hash of the file.
 
 INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter
   - `[Id <String>]`: 

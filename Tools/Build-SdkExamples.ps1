@@ -8,7 +8,7 @@ $rootPath = "$PSScriptRoot/../"
 # examples:
 $examples = Get-ChildItem -Path "$rootPath/SDKs/PowerShell/$SDKName/examples" -Filter "*.md"
 $functions = Get-ChildItem -Path "$rootPath/SDKs/PowerShell/$SDKName/custom/generated" -Filter "*.ps1"
-
+Import-Module "$rootPath/SDKs/PowerShell/$SDKName/$SDKName.psd1" -Force
 $list = New-Object System.Collections.ArrayList
 function get-verb {
     [CmdletBinding()]

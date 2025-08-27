@@ -8,9 +8,10 @@ schema: 2.0.0
 # Reset-JcSdkUserMfa
 
 ## SYNOPSIS
-This endpoint allows you to reset the TOTP key for a specified system user and put them in an TOTP MFA enrollment period.
-This will result in the user being prompted to setup TOTP MFA when logging into userportal.
-Please be aware that if the user does not complete TOTP MFA setup before the `exclusionUntil` date, they will be locked out of any resources that require TOTP MFA.
+This endpoint resets the user's TOTP key and initiates a new MFA enrollment period.
+The user will be prompted to set up MFA at their next login.
+If `Unified MFA is enabled`, this action will also delete the user's existing Push Notification endpoint.
+Warning: The user must complete the setup before the `exclusionUntil` date to avoid being locked out of MFA-protected resources.
 
 Please refer to our [Knowledge Base Article](https://support.jumpcloud.com/customer/en/portal/articles/2959138-using-multifactor-authentication-with-jumpcloud) on setting up MFA for more information.
 
@@ -54,9 +55,10 @@ Reset-JcSdkUserMfa -InputObject <IJumpCloudApiIdentity> [-Exclusion] [-Exclusion
 ```
 
 ## DESCRIPTION
-This endpoint allows you to reset the TOTP key for a specified system user and put them in an TOTP MFA enrollment period.
-This will result in the user being prompted to setup TOTP MFA when logging into userportal.
-Please be aware that if the user does not complete TOTP MFA setup before the `exclusionUntil` date, they will be locked out of any resources that require TOTP MFA.
+This endpoint resets the user's TOTP key and initiates a new MFA enrollment period.
+The user will be prompted to set up MFA at their next login.
+If `Unified MFA is enabled`, this action will also delete the user's existing Push Notification endpoint.
+Warning: The user must complete the setup before the `exclusionUntil` date to avoid being locked out of MFA-protected resources.
 
 Please refer to our [Knowledge Base Article](https://support.jumpcloud.com/customer/en/portal/articles/2959138-using-multifactor-authentication-with-jumpcloud) on setting up MFA for more information.
 

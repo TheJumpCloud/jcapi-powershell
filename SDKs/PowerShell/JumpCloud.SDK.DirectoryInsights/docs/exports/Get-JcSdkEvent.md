@@ -20,8 +20,8 @@ curl -X POST 'https://api.jumpcloud.com/insights/directory/v1/events' -H 'Conten
 ```
 Get-JcSdkEvent -Service <String[]> -StartTime <DateTime> [-EndTime <DateTime>] [-Fields <String[]>]
  [-Limit <Int64>] [-Q <String>] [-SearchAfter <String[]>] [-SearchTermAnd <Hashtable>]
- [-SearchTermNot <Hashtable>] [-SearchTermOr <Hashtable>] [-Sort <String>] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+ [-SearchTermNot <Hashtable>] [-SearchTermOr <Hashtable>] [-Skip <Int64>] [-Sort <String>] [-Confirm]
+ [-WhatIf] [<CommonParameters>]
 ```
 
 ### Get
@@ -247,6 +247,21 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -Skip
+optional offset into the result set to start with when returning
+
+```yaml
+Type: System.Int64
+Parameter Sets: GetExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Sort
 ASC or DESC order for timestamp
 
@@ -340,6 +355,7 @@ BODY <IEventQuery>: EventQuery is the users' command to search our auth logs
     - `[(Any) <Object>]`: This indicates any property can be added to this object.
   - `[SearchTermNot <ITermConjunction>]`: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
   - `[SearchTermOr <ITermConjunction>]`: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
+  - `[Skip <Int64?>]`: optional offset into the result set to start with when returning
   - `[Sort <String>]`: ASC or DESC order for timestamp
 
 ## RELATED LINKS

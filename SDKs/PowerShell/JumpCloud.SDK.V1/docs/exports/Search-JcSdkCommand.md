@@ -302,8 +302,10 @@ BODY <ISearch>: Search
   - `[Fields <String>]`: 
   - `[Filter <ISearchFilter>]`: Dictionary of <any>
     - `[(Any) <Object>]`: This indicates any property can be added to this object.
+  - `[Limit <Int32?>]`: Maximum number of items to return.
   - `[SearchFilter <ISearchFilter1>]`: Dictionary of <any>
     - `[(Any) <Object>]`: This indicates any property can be added to this object.
+  - `[Skip <Int32?>]`: Number of items to skip for pagination.
 
 ## RELATED LINKS
 

@@ -126,6 +126,8 @@ To create the parameters described below, construct a hash table containing the 
 
 
 INPUTOBJECT <IDirectoryInsightsApiIdentity>: Identity Parameter
+  - `[ArtifactId <String>]`: Artifact ID
+  - `[ReportId <String>]`: Report ID
   - `[ReportType <ReportType1?>]`: Report Type
 
 ## RELATED LINKS

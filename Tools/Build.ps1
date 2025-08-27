@@ -29,7 +29,7 @@ foreach ($sdk in $sdks) {
     Write-Host "Building $sdk with version type: $VersionType"
 
     # Invoke Build Autorest and pass the version type.
-    . "$rootPath/BuildAutoRest.ps1" -SDKName $sdk -VersionType $VersionType | Out-Null
+    . "$rootPath/BuildAutoRest.ps1" -SDKName $sdk -ModuleVersionIncrementType $VersionType | Out-Null
 
     # Update SDK Examples and pass the version type.
     . "$PSscriptRoot/Build-SdkExamples" -SDKName $sdk | Out-Null
