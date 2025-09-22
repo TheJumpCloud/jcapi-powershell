@@ -510,13 +510,19 @@ $TransformConfig = [Ordered]@{
         )
     }
 }
-function Remove-FilterFieldsParamsByOperationId {
+function Remove-ParamsByOperationId {
     param (
         [Parameter(Mandatory = $true)]
         [object]$Swagger,
         [Parameter(Mandatory = $true)]
-        [string[]]$OperationIds
+        [string[]]$OperationIds,
+        [Parameter(Mandatory = $false)]
+        [ValidateSet('fields', 'filter', 'X-Eventually-Consistent')]
+        [string[]]$Params
+
     )
+
+    #
 
     # remove extra filter/ fields param for specific operationIds
     foreach ($pathProp in $Swagger.paths.keys) {
@@ -529,7 +535,7 @@ function Remove-FilterFieldsParamsByOperationId {
                         $isFilterOrFields = $false
                         if ($param.'$ref') {
                             $ref = $param.'$ref'
-                            if ($ref -match 'trait:filter:filter' -or $ref -match 'trait:fields:fields') {
+                            if ($Params | Where-Object { $ref -match "trait:.*$_" }) {
                                 $isFilterOrFields = $true
                             }
                         } elseif ($param.name) {
@@ -1022,7 +1028,7 @@ $SDKName | ForEach-Object {
                 'search_commands_post',
                 'search_organizations_post'
             )
-            $SwaggerObject = Remove-FilterFieldsParamsByOperationId -Swagger $SwaggerObjectContent -OperationIds $operationIdsToClean
+            $SwaggerObject = Remove-ParamsByOperationId -Swagger $SwaggerObjectContent -OperationIds $operationIdsToClean -Params @('fields', 'filter', 'X-Eventually-Consistent')
             # Run the inlining on the whole Swagger object
             $SwaggerObject = Replace-InvalidPropertyRefs -Swagger $SwaggerObject
 

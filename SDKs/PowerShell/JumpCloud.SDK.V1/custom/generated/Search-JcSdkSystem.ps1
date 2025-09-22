@@ -215,12 +215,6 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [OutputType([JumpCloud.SDK.V1.Models.ISystemsSearchlist])]
     [CmdletBinding(DefaultParameterSetName='SearchExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
-    [Parameter()]
-    [JumpCloud.SDK.V1.Category('Header')]
-    [System.Management.Automation.SwitchParameter]
-    # EXPERIMENTAL! Use to acknowledge eventually consistent data in response.
-    ${XEventuallyConsistent}, 
-
     [Parameter(ParameterSetName='Search', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V1.Category('Body')]
     [JumpCloud.SDK.V1.Models.ISearch]

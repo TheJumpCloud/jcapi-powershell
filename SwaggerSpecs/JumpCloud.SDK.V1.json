@@ -5404,13 +5404,6 @@
       "name": "search",
       "type": "string"
     },
-    "trait:search:x-eventually-consistent": {
-      "default": false,
-      "description": "EXPERIMENTAL! Use to acknowledge eventually consistent data in response.",
-      "in": "header",
-      "name": "x-eventually-consistent",
-      "type": "boolean"
-    },
     "trait:skip:skip": {
       "default": 0,
       "description": "The offset into the records to return.",
@@ -7147,9 +7140,6 @@
             "schema": {
               "$ref": "#/definitions/search"
             }
-          },
-          {
-            "$ref": "#/parameters/trait:search:x-eventually-consistent"
           }
         ],
         "responses": {
@@ -7196,9 +7186,6 @@
             "schema": {
               "$ref": "#/definitions/search"
             }
-          },
-          {
-            "$ref": "#/parameters/trait:search:x-eventually-consistent"
           }
         ],
         "responses": {

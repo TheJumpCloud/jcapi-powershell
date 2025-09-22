@@ -97,13 +97,13 @@ curl -X POST https://console.jumpcloud.com/api/search/systems \\
 
 ### SearchExpanded (Default)
 ```
-Search-JcSdkSystem [-XEventuallyConsistent] [-Fields <String>] [-Filter <Hashtable>]
- [-SearchFilter <Hashtable>] [-Confirm] [-WhatIf] [<CommonParameters>]
+Search-JcSdkSystem [-Fields <String>] [-Filter <Hashtable>] [-SearchFilter <Hashtable>] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### Search
 ```
-Search-JcSdkSystem -Body <ISearch> [-XEventuallyConsistent] [-Confirm] [-WhatIf] [<CommonParameters>]
+Search-JcSdkSystem -Body <ISearch> [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -266,21 +266,6 @@ Dictionary of \<any\>
 ```yaml
 Type: System.Collections.Hashtable
 Parameter Sets: SearchExpanded
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -XEventuallyConsistent
-EXPERIMENTAL! Use to acknowledge eventually consistent data in response.
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: (All)
 Aliases:
 
 Required: False
