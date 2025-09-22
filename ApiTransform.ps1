@@ -1025,6 +1025,7 @@ $SDKName | ForEach-Object {
             $SwaggerObject = Remove-FilterFieldsParamsByOperationId -Swagger $SwaggerObjectContent -OperationIds $operationIdsToClean
             # Run the inlining on the whole Swagger object
             $SwaggerObject = Replace-InvalidPropertyRefs -Swagger $SwaggerObject
+
             # Find and replace on file
             $SwaggerObject = $SwaggerObject | ConvertTo-Json -Depth:(100) -Compress
             # Perform find and replace
@@ -1041,6 +1042,7 @@ $SDKName | ForEach-Object {
                     }
                 }
             }
+
             # replace override definitions
             if ($config.OverrideDefinitions) {
                 foreach ($overrideDef in $config.OverrideDefinitions) {
