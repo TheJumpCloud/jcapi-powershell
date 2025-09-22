@@ -1036,6 +1036,9 @@
         "organization": {
           "type": "string"
         },
+        "parentApp": {
+          "type": "string"
+        },
         "sso": {
           "$ref": "#/definitions/sso"
         },
@@ -2482,6 +2485,9 @@
           "type": "object",
           "additionalProperties": true
         },
+        "chromeDTCEnabled": {
+          "type": "boolean"
+        },
         "contactEmail": {
           "type": "string"
         },
@@ -3460,6 +3466,403 @@
         "archFamily": {
           "type": "string"
         },
+        "attributes": {
+          "items": {
+            "$ref": "#/definitions/attribute"
+          },
+          "type": "array"
+        },
+        "azureAdJoined": {
+          "type": "boolean"
+        },
+        "builtInCommands": {
+          "items": {
+            "properties": {
+              "name": {
+                "enum": [
+                  "erase",
+                  "lock",
+                  "restart",
+                  "shutdown"
+                ],
+                "type": "string"
+              },
+              "type": {
+                "enum": [
+                  "security"
+                ],
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "readOnly": true,
+          "type": "array"
+        },
+        "connectionHistory": {
+          "items": {
+            "type": "object",
+            "additionalProperties": true
+          },
+          "type": "array"
+        },
+        "created": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "desktopCapable": {
+          "type": "boolean"
+        },
+        "displayManager": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "domainInfo": {
+          "properties": {
+            "domainName": {
+              "type": "string"
+            },
+            "partOfDomain": {
+              "type": "boolean"
+            }
+          },
+          "type": "object"
+        },
+        "fde": {
+          "$ref": "#/definitions/fde"
+        },
+        "fileSystem": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "hasServiceAccount": {
+          "type": "boolean"
+        },
+        "hostname": {
+          "type": "string"
+        },
+        "hwVendor": {
+          "type": "string"
+        },
+        "isPolicyBound": {
+          "type": "boolean"
+        },
+        "lastContact": {
+          "format": "date-time",
+          "type": "string",
+          "x-nullable": true
+        },
+        "mdm": {
+          "properties": {
+            "dep": {
+              "type": "boolean"
+            },
+            "lostModeStatus": {
+              "type": "string"
+            },
+            "profileIdentifier": {
+              "type": "string"
+            },
+            "providerId": {
+              "type": "string"
+            },
+            "userApproved": {
+              "type": "boolean"
+            },
+            "vendor": {
+              "enum": [
+                "unknown",
+                "none",
+                "internal",
+                "external"
+              ],
+              "type": "string"
+            },
+            "windows": {
+              "properties": {
+                "upn": {
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "type": "object"
+        },
+        "modifySSHDConfig": {
+          "type": "boolean"
+        },
+        "networkInterfaces": {
+          "items": {
+            "properties": {
+              "address": {
+                "type": "string"
+              },
+              "family": {
+                "enum": [
+                  "IPv4",
+                  "IPv6"
+                ],
+                "type": "string"
+              },
+              "internal": {
+                "type": "boolean"
+              },
+              "name": {
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "organization": {
+          "type": "string"
+        },
+        "os": {
+          "type": "string"
+        },
+        "osFamily": {
+          "type": "string"
+        },
+        "osVersionDetail": {
+          "properties": {
+            "distributionName": {
+              "type": "string"
+            },
+            "major": {
+              "type": "string"
+            },
+            "majorNumber": {
+              "type": "integer"
+            },
+            "minor": {
+              "type": "string"
+            },
+            "minorNumber": {
+              "type": "integer"
+            },
+            "osName": {
+              "type": "string"
+            },
+            "patch": {
+              "type": "string"
+            },
+            "patchNumber": {
+              "type": "integer"
+            },
+            "releaseName": {
+              "type": "string"
+            },
+            "revision": {
+              "type": "string"
+            },
+            "version": {
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "policyStats": {
+          "properties": {
+            "duplicate": {
+              "type": "integer"
+            },
+            "failed": {
+              "type": "integer"
+            },
+            "pending": {
+              "type": "integer"
+            },
+            "success": {
+              "type": "integer"
+            },
+            "total": {
+              "type": "integer"
+            },
+            "unsupportedOs": {
+              "type": "integer"
+            }
+          },
+          "type": "object"
+        },
+        "primarySystemUser": {
+          "properties": {
+            "id": {
+              "type": "string",
+              "x-nullable": true
+            }
+          },
+          "type": "object"
+        },
+        "provisionMetadata": {
+          "properties": {
+            "provisioner": {
+              "properties": {
+                "provisionerId": {
+                  "type": "string"
+                },
+                "type": {
+                  "default": "administrator",
+                  "enum": [
+                    "administrator",
+                    "mdm",
+                    "user"
+                  ],
+                  "type": "string"
+                }
+              },
+              "type": "object"
+            }
+          },
+          "type": "object"
+        },
+        "remoteAssistAgentVersion": {
+          "type": "string"
+        },
+        "remoteIP": {
+          "type": "string"
+        },
+        "secureLogin": {
+          "properties": {
+            "enabled": {
+              "type": "boolean"
+            },
+            "supported": {
+              "type": "boolean"
+            }
+          },
+          "type": "object"
+        },
+        "serialNumber": {
+          "type": "string"
+        },
+        "serviceAccountState": {
+          "properties": {
+            "hasSecureToken": {
+              "type": "boolean"
+            },
+            "passwordAPFSValid": {
+              "type": "boolean"
+            },
+            "passwordODValid": {
+              "type": "boolean"
+            }
+          },
+          "type": "object"
+        },
+        "sshRootEnabled": {
+          "type": "boolean"
+        },
+        "sshdParams": {
+          "items": {
+            "properties": {
+              "name": {
+                "type": "string"
+              },
+              "value": {
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "systemInsights": {
+          "properties": {
+            "state": {
+              "enum": [
+                "enabled",
+                "disabled",
+                "deferred"
+              ],
+              "type": "string"
+            }
+          },
+          "type": "object"
+        },
+        "systemTimezone": {
+          "type": "integer"
+        },
+        "templateName": {
+          "type": "string"
+        },
+        "userMetrics": {
+          "items": {
+            "properties": {
+              "admin": {
+                "type": "boolean"
+              },
+              "managed": {
+                "type": "boolean"
+              },
+              "secureTokenEnabled": {
+                "type": "boolean"
+              },
+              "suspended": {
+                "type": "boolean"
+              },
+              "userName": {
+                "type": "string"
+              }
+            },
+            "type": "object"
+          },
+          "type": "array"
+        },
+        "version": {
+          "type": "string"
+        }
+      },
+      "title": "JcSystem",
+      "type": "object"
+    },
+    "systemSearch": {
+      "properties": {
+        "_id": {
+          "type": "string"
+        },
+        "active": {
+          "type": "boolean"
+        },
+        "agentHasFullDiskAccess": {
+          "type": "boolean"
+        },
+        "agentVersion": {
+          "type": "string"
+        },
+        "allowMultiFactorAuthentication": {
+          "type": "boolean"
+        },
+        "allowPublicKeyAuthentication": {
+          "type": "boolean"
+        },
+        "allowSshPasswordAuthentication": {
+          "type": "boolean"
+        },
+        "allowSshRootLogin": {
+          "type": "boolean"
+        },
+        "amazonInstanceID": {
+          "type": "string"
+        },
+        "arch": {
+          "type": "string"
+        },
+        "archFamily": {
+          "type": "string"
+        },
+        "attributes": {
+          "items": {
+            "$ref": "#/definitions/attribute"
+          },
+          "type": "array"
+        },
         "azureAdJoined": {
           "type": "boolean"
         },
@@ -3691,99 +4094,17 @@
         "primarySystemUser._id": {
           "type": "string"
         },
-        "primarySystemUser.account_locked": {
-          "type": "boolean"
-        },
-        "primarySystemUser.account_locked_date": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "primarySystemUser.activated": {
-          "type": "boolean"
-        },
-        "primarySystemUser.addresses": {
-          "items": {
-            "properties": {
-              "country": {
-                "maxLength": 1024,
-                "type": "string"
-              },
-              "extendedAddress": {
-                "maxLength": 1024,
-                "type": "string"
-              },
-              "id": {
-                "type": "string"
-              },
-              "locality": {
-                "maxLength": 1024,
-                "type": "string"
-              },
-              "poBox": {
-                "maxLength": 1024,
-                "type": "string"
-              },
-              "postalCode": {
-                "maxLength": 1024,
-                "type": "string"
-              },
-              "region": {
-                "maxLength": 1024,
-                "type": "string"
-              },
-              "streetAddress": {
-                "maxLength": 1024,
-                "type": "string"
-              },
-              "type": {
-                "maxLength": 1024,
-                "type": "string"
-              }
-            },
-            "type": "object"
-          },
-          "type": "array"
-        },
-        "primarySystemUser.admin": {
-          "properties": {
-            "id": {
-              "type": "string"
-            },
-            "roleName": {
-              "type": "string"
-            }
-          },
-          "type": "object",
-          "x-nullable": true
-        },
-        "primarySystemUser.allow_public_key": {
-          "type": "boolean"
-        },
-        "primarySystemUser.alternateEmail": {
-          "type": "string"
-        },
         "primarySystemUser.attributes": {
           "items": {
             "$ref": "#/definitions/attribute"
           },
           "type": "array"
         },
-        "primarySystemUser.badLoginAttempts": {
-          "minimum": 0,
-          "type": "integer"
-        },
         "primarySystemUser.company": {
           "maxLength": 1024,
           "type": "string"
         },
         "primarySystemUser.costCenter": {
-          "maxLength": 1024,
-          "type": "string"
-        },
-        "primarySystemUser.created": {
-          "type": "string"
-        },
-        "primarySystemUser.creationSource": {
           "maxLength": 1024,
           "type": "string"
         },
@@ -3795,45 +4116,11 @@
           "maxLength": 1024,
           "type": "string"
         },
-        "primarySystemUser.disableDeviceMaxLoginAttempts": {
-          "type": "boolean"
-        },
-        "primarySystemUser.displayname": {
-          "maxLength": 1024,
-          "type": "string"
-        },
         "primarySystemUser.email": {
           "maxLength": 1024,
           "type": "string"
         },
-        "primarySystemUser.employeeIdentifier": {
-          "description": "Must be unique per user. ",
-          "maxLength": 256,
-          "type": "string"
-        },
         "primarySystemUser.employeeType": {
-          "maxLength": 1024,
-          "type": "string"
-        },
-        "primarySystemUser.enable_managed_uid": {
-          "type": "boolean"
-        },
-        "primarySystemUser.enable_user_portal_multifactor": {
-          "type": "boolean"
-        },
-        "primarySystemUser.external_dn": {
-          "type": "string"
-        },
-        "primarySystemUser.external_password_expiration_date": {
-          "type": "string"
-        },
-        "primarySystemUser.external_source_type": {
-          "type": "string"
-        },
-        "primarySystemUser.externally_managed": {
-          "$ref": "#/definitions/externallymanagedpropertyinfo"
-        },
-        "primarySystemUser.firstname": {
           "maxLength": 1024,
           "type": "string"
         },
@@ -3841,18 +4128,7 @@
           "maxLength": 1024,
           "type": "string"
         },
-        "primarySystemUser.lastname": {
-          "maxLength": 1024,
-          "type": "string"
-        },
-        "primarySystemUser.ldap_binding_user": {
-          "type": "boolean"
-        },
         "primarySystemUser.location": {
-          "maxLength": 1024,
-          "type": "string"
-        },
-        "primarySystemUser.managedAppleId": {
           "maxLength": 1024,
           "type": "string"
         },
@@ -3860,127 +4136,12 @@
           "description": "Relation with another systemuser to identify the last as a manager.",
           "type": "string"
         },
-        "primarySystemUser.mfa": {
-          "$ref": "#/definitions/mfa"
-        },
-        "primarySystemUser.mfaEnrollment": {
-          "$ref": "#/definitions/mfaEnrollment"
-        },
-        "primarySystemUser.middlename": {
-          "maxLength": 1024,
-          "type": "string"
-        },
-        "primarySystemUser.organization": {
-          "type": "string"
-        },
-        "primarySystemUser.password_date": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "primarySystemUser.password_expiration_date": {
-          "type": "string",
-          "x-nullable": true
-        },
-        "primarySystemUser.password_expired": {
-          "type": "boolean"
-        },
-        "primarySystemUser.password_never_expires": {
-          "type": "boolean"
-        },
-        "primarySystemUser.passwordless_sudo": {
-          "type": "boolean"
-        },
-        "primarySystemUser.phoneNumbers": {
-          "items": {
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "number": {
-                "maxLength": 1024,
-                "type": "string"
-              },
-              "type": {
-                "maxLength": 1024,
-                "type": "string"
-              }
-            },
-            "type": "object"
-          },
-          "type": "array"
-        },
-        "primarySystemUser.public_key": {
-          "type": "string"
-        },
-        "primarySystemUser.recoveryEmail": {
-          "properties": {
-            "address": {
-              "type": "string"
-            },
-            "verified": {
-              "type": "boolean"
-            },
-            "verifiedAt": {
-              "type": "string"
-            }
-          },
-          "type": "object"
-        },
-        "primarySystemUser.relationships": {
-          "items": {
-            "properties": {
-              "type": {
-                "type": "string"
-              },
-              "value": {
-                "type": "string"
-              }
-            },
-            "type": "object"
-          },
-          "type": "array"
-        },
-        "primarySystemUser.restrictedFields": {
-          "items": {
-            "$ref": "#/definitions/restrictedField"
-          }
-        },
-        "primarySystemUser.samba_service_user": {
-          "type": "boolean"
-        },
-        "primarySystemUser.ssh_keys": {
-          "items": {
-            "$ref": "#/definitions/sshkeylist"
-          },
-          "type": "array"
-        },
         "primarySystemUser.state": {
           "enum": [
             "STAGED",
             "ACTIVATED",
             "SUSPENDED"
           ],
-          "type": "string"
-        },
-        "primarySystemUser.sudo": {
-          "type": "boolean"
-        },
-        "primarySystemUser.suspended": {
-          "type": "boolean"
-        },
-        "primarySystemUser.totp_enabled": {
-          "type": "boolean"
-        },
-        "primarySystemUser.unix_guid": {
-          "minimum": 1,
-          "type": "integer"
-        },
-        "primarySystemUser.unix_uid": {
-          "minimum": 1,
-          "type": "integer"
-        },
-        "primarySystemUser.username": {
-          "maxLength": 1024,
           "type": "string"
         },
         "provisionMetadata": {
@@ -4135,6 +4296,23 @@
         }
       },
       "title": "SystemPut",
+      "type": "object"
+    },
+    "systemsSearchlist": {
+      "properties": {
+        "results": {
+          "description": "The list of systems.",
+          "items": {
+            "$ref": "#/definitions/systemSearch"
+          },
+          "type": "array"
+        },
+        "totalCount": {
+          "description": "The total number of systems.",
+          "type": "integer"
+        }
+      },
+      "title": "SystemsList",
       "type": "object"
     },
     "systemslist": {
@@ -5226,6 +5404,13 @@
       "name": "search",
       "type": "string"
     },
+    "trait:search:x-eventually-consistent": {
+      "default": false,
+      "description": "EXPERIMENTAL! Use to acknowledge eventually consistent data in response.",
+      "in": "header",
+      "name": "x-eventually-consistent",
+      "type": "boolean"
+    },
     "trait:skip:skip": {
       "default": 0,
       "description": "The offset into the records to return.",
@@ -5483,15 +5668,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request POST \\\n  --url https://console.jumpcloud.com/api/applications \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --data '{\"_id\":\"string\",\"active\":true,\"beta\":true,\"color\":\"\",\"config\":{\"acsUrl\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"constantAttributes\":{\"label\":\"string\",\"mutable\":true,\"options\":null,\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":null,\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":[{\"name\":\"string\",\"readOnly\":true,\"required\":true,\"value\":\"string\",\"visible\":true}],\"visible\":true},\"databaseAttributes\":{\"position\":0},\"idpCertificate\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"idpEntityId\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"idpPrivateKey\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"signAssertion\":{\"label\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":true,\"visible\":true},\"signResponse\":{\"label\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":true,\"visible\":true},\"spEntityId\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"spErrorFlow\":{\"label\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":true,\"visible\":true}},\"created\":\"string\",\"databaseAttributes\":[{}],\"description\":\"string\",\"displayLabel\":\"string\",\"displayName\":\"string\",\"learnMore\":\"string\",\"logo\":{\"color\":\"\",\"url\":\"string\"},\"name\":\"string\",\"organization\":\"string\",\"sso\":{\"beta\":true,\"hidden\":true,\"idpCertExpirationAt\":\"2019-08-24T14:15:22Z\",\"jit\":true,\"type\":\"string\"},\"ssoUrl\":\"string\"}'"
+            "source": "curl --request POST \\\n  --url https://console.jumpcloud.com/api/applications \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --data '{\"_id\":\"string\",\"active\":true,\"beta\":true,\"color\":\"\",\"config\":{\"acsUrl\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"constantAttributes\":{\"label\":\"string\",\"mutable\":true,\"options\":null,\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":null,\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":[{\"name\":\"string\",\"readOnly\":true,\"required\":true,\"value\":\"string\",\"visible\":true}],\"visible\":true},\"databaseAttributes\":{\"position\":0},\"idpCertificate\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"idpEntityId\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"idpPrivateKey\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"signAssertion\":{\"label\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":true,\"visible\":true},\"signResponse\":{\"label\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":true,\"visible\":true},\"spEntityId\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"spErrorFlow\":{\"label\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":true,\"visible\":true}},\"created\":\"string\",\"databaseAttributes\":[{}],\"description\":\"string\",\"displayLabel\":\"string\",\"displayName\":\"string\",\"learnMore\":\"string\",\"logo\":{\"color\":\"\",\"url\":\"string\"},\"name\":\"string\",\"organization\":\"string\",\"parentApp\":\"string\",\"sso\":{\"beta\":true,\"hidden\":true,\"idpCertExpirationAt\":\"2019-08-24T14:15:22Z\",\"jit\":true,\"type\":\"string\"},\"ssoUrl\":\"string\"}'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/applications\"\n\npayload = {\n    \"_id\": \"string\",\n    \"active\": True,\n    \"beta\": True,\n    \"color\": \"\",\n    \"config\": {\n        \"acsUrl\": {\n            \"label\": \"string\",\n            \"options\": \"string\",\n            \"position\": 0,\n            \"readOnly\": True,\n            \"required\": True,\n            \"toggle\": \"string\",\n            \"tooltip\": {\n                \"template\": \"string\",\n                \"variables\": {\n                    \"icon\": \"string\",\n                    \"message\": \"string\"\n                }\n            },\n            \"type\": \"string\",\n            \"value\": \"string\",\n            \"visible\": True\n        },\n        \"constantAttributes\": {\n            \"label\": \"string\",\n            \"mutable\": True,\n            \"options\": None,\n            \"position\": 0,\n            \"readOnly\": True,\n            \"required\": True,\n            \"toggle\": None,\n            \"tooltip\": {\n                \"template\": \"string\",\n                \"variables\": {\n                    \"icon\": \"string\",\n                    \"message\": \"string\"\n                }\n            },\n            \"type\": \"string\",\n            \"value\": [\n                {\n                    \"name\": \"string\",\n                    \"readOnly\": True,\n                    \"required\": True,\n                    \"value\": \"string\",\n                    \"visible\": True\n                }\n            ],\n            \"visible\": True\n        },\n        \"databaseAttributes\": {\"position\": 0},\n        \"idpCertificate\": {\n            \"label\": \"string\",\n            \"options\": \"string\",\n            \"position\": 0,\n            \"readOnly\": True,\n            \"required\": True,\n            \"toggle\": \"string\",\n            \"tooltip\": {\n                \"template\": \"string\",\n                \"variables\": {\n                    \"icon\": \"string\",\n                    \"message\": \"string\"\n                }\n            },\n            \"type\": \"string\",\n            \"value\": \"string\",\n            \"visible\": True\n        },\n        \"idpEntityId\": {\n            \"label\": \"string\",\n            \"options\": \"string\",\n            \"position\": 0,\n            \"readOnly\": True,\n            \"required\": True,\n            \"toggle\": \"string\",\n            \"tooltip\": {\n                \"template\": \"string\",\n                \"variables\": {\n                    \"icon\": \"string\",\n                    \"message\": \"string\"\n                }\n            },\n            \"type\": \"string\",\n            \"value\": \"string\",\n            \"visible\": True\n        },\n        \"idpPrivateKey\": {\n            \"label\": \"string\",\n            \"options\": \"string\",\n            \"position\": 0,\n            \"readOnly\": True,\n            \"required\": True,\n            \"toggle\": \"string\",\n            \"tooltip\": {\n                \"template\": \"string\",\n                \"variables\": {\n                    \"icon\": \"string\",\n                    \"message\": \"string\"\n                }\n            },\n            \"type\": \"string\",\n            \"value\": \"string\",\n            \"visible\": True\n        },\n        \"signAssertion\": {\n            \"label\": \"string\",\n            \"position\": 0,\n            \"readOnly\": True,\n            \"required\": True,\n            \"tooltip\": {\n                \"template\": \"string\",\n                \"variables\": {\n                    \"icon\": \"string\",\n                    \"message\": \"string\"\n                }\n            },\n            \"type\": \"string\",\n            \"value\": True,\n            \"visible\": True\n        },\n        \"signResponse\": {\n            \"label\": \"string\",\n            \"position\": 0,\n            \"readOnly\": True,\n            \"required\": True,\n            \"tooltip\": {\n                \"template\": \"string\",\n                \"variables\": {\n                    \"icon\": \"string\",\n                    \"message\": \"string\"\n                }\n            },\n            \"type\": \"string\",\n            \"value\": True,\n            \"visible\": True\n        },\n        \"spEntityId\": {\n            \"label\": \"string\",\n            \"options\": \"string\",\n            \"position\": 0,\n            \"readOnly\": True,\n            \"required\": True,\n            \"toggle\": \"string\",\n            \"tooltip\": {\n                \"template\": \"string\",\n                \"variables\": {\n                    \"icon\": \"string\",\n                    \"message\": \"string\"\n                }\n            },\n            \"type\": \"string\",\n            \"value\": \"string\",\n            \"visible\": True\n        },\n        \"spErrorFlow\": {\n            \"label\": \"string\",\n            \"position\": 0,\n            \"readOnly\": True,\n            \"required\": True,\n            \"tooltip\": {\n                \"template\": \"string\",\n                \"variables\": {\n                    \"icon\": \"string\",\n                    \"message\": \"string\"\n                }\n            },\n            \"type\": \"string\",\n            \"value\": True,\n            \"visible\": True\n        }\n    },\n    \"created\": \"string\",\n    \"databaseAttributes\": [{}],\n    \"description\": \"string\",\n    \"displayLabel\": \"string\",\n    \"displayName\": \"string\",\n    \"learnMore\": \"string\",\n    \"logo\": {\n        \"color\": \"\",\n        \"url\": \"string\"\n    },\n    \"name\": \"string\",\n    \"organization\": \"string\",\n    \"sso\": {\n        \"beta\": True,\n        \"hidden\": True,\n        \"idpCertExpirationAt\": \"2019-08-24T14:15:22Z\",\n        \"jit\": True,\n        \"type\": \"string\"\n    },\n    \"ssoUrl\": \"string\"\n}\nheaders = {\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/applications\"\n\npayload = {\n    \"_id\": \"string\",\n    \"active\": True,\n    \"beta\": True,\n    \"color\": \"\",\n    \"config\": {\n        \"acsUrl\": {\n            \"label\": \"string\",\n            \"options\": \"string\",\n            \"position\": 0,\n            \"readOnly\": True,\n            \"required\": True,\n            \"toggle\": \"string\",\n            \"tooltip\": {\n                \"template\": \"string\",\n                \"variables\": {\n                    \"icon\": \"string\",\n                    \"message\": \"string\"\n                }\n            },\n            \"type\": \"string\",\n            \"value\": \"string\",\n            \"visible\": True\n        },\n        \"constantAttributes\": {\n            \"label\": \"string\",\n            \"mutable\": True,\n            \"options\": None,\n            \"position\": 0,\n            \"readOnly\": True,\n            \"required\": True,\n            \"toggle\": None,\n            \"tooltip\": {\n                \"template\": \"string\",\n                \"variables\": {\n                    \"icon\": \"string\",\n                    \"message\": \"string\"\n                }\n            },\n            \"type\": \"string\",\n            \"value\": [\n                {\n                    \"name\": \"string\",\n                    \"readOnly\": True,\n                    \"required\": True,\n                    \"value\": \"string\",\n                    \"visible\": True\n                }\n            ],\n            \"visible\": True\n        },\n        \"databaseAttributes\": {\"position\": 0},\n        \"idpCertificate\": {\n            \"label\": \"string\",\n            \"options\": \"string\",\n            \"position\": 0,\n            \"readOnly\": True,\n            \"required\": True,\n            \"toggle\": \"string\",\n            \"tooltip\": {\n                \"template\": \"string\",\n                \"variables\": {\n                    \"icon\": \"string\",\n                    \"message\": \"string\"\n                }\n            },\n            \"type\": \"string\",\n            \"value\": \"string\",\n            \"visible\": True\n        },\n        \"idpEntityId\": {\n            \"label\": \"string\",\n            \"options\": \"string\",\n            \"position\": 0,\n            \"readOnly\": True,\n            \"required\": True,\n            \"toggle\": \"string\",\n            \"tooltip\": {\n                \"template\": \"string\",\n                \"variables\": {\n                    \"icon\": \"string\",\n                    \"message\": \"string\"\n                }\n            },\n            \"type\": \"string\",\n            \"value\": \"string\",\n            \"visible\": True\n        },\n        \"idpPrivateKey\": {\n            \"label\": \"string\",\n            \"options\": \"string\",\n            \"position\": 0,\n            \"readOnly\": True,\n            \"required\": True,\n            \"toggle\": \"string\",\n            \"tooltip\": {\n                \"template\": \"string\",\n                \"variables\": {\n                    \"icon\": \"string\",\n                    \"message\": \"string\"\n                }\n            },\n            \"type\": \"string\",\n            \"value\": \"string\",\n            \"visible\": True\n        },\n        \"signAssertion\": {\n            \"label\": \"string\",\n            \"position\": 0,\n            \"readOnly\": True,\n            \"required\": True,\n            \"tooltip\": {\n                \"template\": \"string\",\n                \"variables\": {\n                    \"icon\": \"string\",\n                    \"message\": \"string\"\n                }\n            },\n            \"type\": \"string\",\n            \"value\": True,\n            \"visible\": True\n        },\n        \"signResponse\": {\n            \"label\": \"string\",\n            \"position\": 0,\n            \"readOnly\": True,\n            \"required\": True,\n            \"tooltip\": {\n                \"template\": \"string\",\n                \"variables\": {\n                    \"icon\": \"string\",\n                    \"message\": \"string\"\n                }\n            },\n            \"type\": \"string\",\n            \"value\": True,\n            \"visible\": True\n        },\n        \"spEntityId\": {\n            \"label\": \"string\",\n            \"options\": \"string\",\n            \"position\": 0,\n            \"readOnly\": True,\n            \"required\": True,\n            \"toggle\": \"string\",\n            \"tooltip\": {\n                \"template\": \"string\",\n                \"variables\": {\n                    \"icon\": \"string\",\n                    \"message\": \"string\"\n                }\n            },\n            \"type\": \"string\",\n            \"value\": \"string\",\n            \"visible\": True\n        },\n        \"spErrorFlow\": {\n            \"label\": \"string\",\n            \"position\": 0,\n            \"readOnly\": True,\n            \"required\": True,\n            \"tooltip\": {\n                \"template\": \"string\",\n                \"variables\": {\n                    \"icon\": \"string\",\n                    \"message\": \"string\"\n                }\n            },\n            \"type\": \"string\",\n            \"value\": True,\n            \"visible\": True\n        }\n    },\n    \"created\": \"string\",\n    \"databaseAttributes\": [{}],\n    \"description\": \"string\",\n    \"displayLabel\": \"string\",\n    \"displayName\": \"string\",\n    \"learnMore\": \"string\",\n    \"logo\": {\n        \"color\": \"\",\n        \"url\": \"string\"\n    },\n    \"name\": \"string\",\n    \"organization\": \"string\",\n    \"parentApp\": \"string\",\n    \"sso\": {\n        \"beta\": True,\n        \"hidden\": True,\n        \"idpCertExpirationAt\": \"2019-08-24T14:15:22Z\",\n        \"jit\": True,\n        \"type\": \"string\"\n    },\n    \"ssoUrl\": \"string\"\n}\nheaders = {\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/applications' -Method POST -Headers $headers -ContentType 'application/json' -Body '{\"_id\":\"string\",\"active\":true,\"beta\":true,\"color\":\"\",\"config\":{\"acsUrl\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"constantAttributes\":{\"label\":\"string\",\"mutable\":true,\"options\":null,\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":null,\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":[{\"name\":\"string\",\"readOnly\":true,\"required\":true,\"value\":\"string\",\"visible\":true}],\"visible\":true},\"databaseAttributes\":{\"position\":0},\"idpCertificate\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"idpEntityId\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"idpPrivateKey\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"signAssertion\":{\"label\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":true,\"visible\":true},\"signResponse\":{\"label\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":true,\"visible\":true},\"spEntityId\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"spErrorFlow\":{\"label\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":true,\"visible\":true}},\"created\":\"string\",\"databaseAttributes\":[{}],\"description\":\"string\",\"displayLabel\":\"string\",\"displayName\":\"string\",\"learnMore\":\"string\",\"logo\":{\"color\":\"\",\"url\":\"string\"},\"name\":\"string\",\"organization\":\"string\",\"sso\":{\"beta\":true,\"hidden\":true,\"idpCertExpirationAt\":\"2019-08-24T14:15:22Z\",\"jit\":true,\"type\":\"string\"},\"ssoUrl\":\"string\"}'"
+            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/applications' -Method POST -Headers $headers -ContentType 'application/json' -Body '{\"_id\":\"string\",\"active\":true,\"beta\":true,\"color\":\"\",\"config\":{\"acsUrl\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"constantAttributes\":{\"label\":\"string\",\"mutable\":true,\"options\":null,\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":null,\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":[{\"name\":\"string\",\"readOnly\":true,\"required\":true,\"value\":\"string\",\"visible\":true}],\"visible\":true},\"databaseAttributes\":{\"position\":0},\"idpCertificate\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"idpEntityId\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"idpPrivateKey\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"signAssertion\":{\"label\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":true,\"visible\":true},\"signResponse\":{\"label\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":true,\"visible\":true},\"spEntityId\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"spErrorFlow\":{\"label\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":true,\"visible\":true}},\"created\":\"string\",\"databaseAttributes\":[{}],\"description\":\"string\",\"displayLabel\":\"string\",\"displayName\":\"string\",\"learnMore\":\"string\",\"logo\":{\"color\":\"\",\"url\":\"string\"},\"name\":\"string\",\"organization\":\"string\",\"parentApp\":\"string\",\"sso\":{\"beta\":true,\"hidden\":true,\"idpCertExpirationAt\":\"2019-08-24T14:15:22Z\",\"jit\":true,\"type\":\"string\"},\"ssoUrl\":\"string\"}'"
           }
         ]
       },
@@ -5608,15 +5793,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request PUT \\\n  --url https://console.jumpcloud.com/api/applications/{id} \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --data '{\"_id\":\"string\",\"active\":true,\"beta\":true,\"color\":\"\",\"config\":{\"acsUrl\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"constantAttributes\":{\"label\":\"string\",\"mutable\":true,\"options\":null,\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":null,\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":[{\"name\":\"string\",\"readOnly\":true,\"required\":true,\"value\":\"string\",\"visible\":true}],\"visible\":true},\"databaseAttributes\":{\"position\":0},\"idpCertificate\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"idpEntityId\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"idpPrivateKey\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"signAssertion\":{\"label\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":true,\"visible\":true},\"signResponse\":{\"label\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":true,\"visible\":true},\"spEntityId\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"spErrorFlow\":{\"label\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":true,\"visible\":true}},\"created\":\"string\",\"databaseAttributes\":[{}],\"description\":\"string\",\"displayLabel\":\"string\",\"displayName\":\"string\",\"learnMore\":\"string\",\"logo\":{\"color\":\"\",\"url\":\"string\"},\"name\":\"string\",\"organization\":\"string\",\"sso\":{\"beta\":true,\"hidden\":true,\"idpCertExpirationAt\":\"2019-08-24T14:15:22Z\",\"jit\":true,\"type\":\"string\"},\"ssoUrl\":\"string\"}'"
+            "source": "curl --request PUT \\\n  --url https://console.jumpcloud.com/api/applications/{id} \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --data '{\"_id\":\"string\",\"active\":true,\"beta\":true,\"color\":\"\",\"config\":{\"acsUrl\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"constantAttributes\":{\"label\":\"string\",\"mutable\":true,\"options\":null,\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":null,\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":[{\"name\":\"string\",\"readOnly\":true,\"required\":true,\"value\":\"string\",\"visible\":true}],\"visible\":true},\"databaseAttributes\":{\"position\":0},\"idpCertificate\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"idpEntityId\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"idpPrivateKey\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"signAssertion\":{\"label\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":true,\"visible\":true},\"signResponse\":{\"label\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":true,\"visible\":true},\"spEntityId\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"spErrorFlow\":{\"label\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":true,\"visible\":true}},\"created\":\"string\",\"databaseAttributes\":[{}],\"description\":\"string\",\"displayLabel\":\"string\",\"displayName\":\"string\",\"learnMore\":\"string\",\"logo\":{\"color\":\"\",\"url\":\"string\"},\"name\":\"string\",\"organization\":\"string\",\"parentApp\":\"string\",\"sso\":{\"beta\":true,\"hidden\":true,\"idpCertExpirationAt\":\"2019-08-24T14:15:22Z\",\"jit\":true,\"type\":\"string\"},\"ssoUrl\":\"string\"}'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/applications/{id}\"\n\npayload = {\n    \"_id\": \"string\",\n    \"active\": True,\n    \"beta\": True,\n    \"color\": \"\",\n    \"config\": {\n        \"acsUrl\": {\n            \"label\": \"string\",\n            \"options\": \"string\",\n            \"position\": 0,\n            \"readOnly\": True,\n            \"required\": True,\n            \"toggle\": \"string\",\n            \"tooltip\": {\n                \"template\": \"string\",\n                \"variables\": {\n                    \"icon\": \"string\",\n                    \"message\": \"string\"\n                }\n            },\n            \"type\": \"string\",\n            \"value\": \"string\",\n            \"visible\": True\n        },\n        \"constantAttributes\": {\n            \"label\": \"string\",\n            \"mutable\": True,\n            \"options\": None,\n            \"position\": 0,\n            \"readOnly\": True,\n            \"required\": True,\n            \"toggle\": None,\n            \"tooltip\": {\n                \"template\": \"string\",\n                \"variables\": {\n                    \"icon\": \"string\",\n                    \"message\": \"string\"\n                }\n            },\n            \"type\": \"string\",\n            \"value\": [\n                {\n                    \"name\": \"string\",\n                    \"readOnly\": True,\n                    \"required\": True,\n                    \"value\": \"string\",\n                    \"visible\": True\n                }\n            ],\n            \"visible\": True\n        },\n        \"databaseAttributes\": {\"position\": 0},\n        \"idpCertificate\": {\n            \"label\": \"string\",\n            \"options\": \"string\",\n            \"position\": 0,\n            \"readOnly\": True,\n            \"required\": True,\n            \"toggle\": \"string\",\n            \"tooltip\": {\n                \"template\": \"string\",\n                \"variables\": {\n                    \"icon\": \"string\",\n                    \"message\": \"string\"\n                }\n            },\n            \"type\": \"string\",\n            \"value\": \"string\",\n            \"visible\": True\n        },\n        \"idpEntityId\": {\n            \"label\": \"string\",\n            \"options\": \"string\",\n            \"position\": 0,\n            \"readOnly\": True,\n            \"required\": True,\n            \"toggle\": \"string\",\n            \"tooltip\": {\n                \"template\": \"string\",\n                \"variables\": {\n                    \"icon\": \"string\",\n                    \"message\": \"string\"\n                }\n            },\n            \"type\": \"string\",\n            \"value\": \"string\",\n            \"visible\": True\n        },\n        \"idpPrivateKey\": {\n            \"label\": \"string\",\n            \"options\": \"string\",\n            \"position\": 0,\n            \"readOnly\": True,\n            \"required\": True,\n            \"toggle\": \"string\",\n            \"tooltip\": {\n                \"template\": \"string\",\n                \"variables\": {\n                    \"icon\": \"string\",\n                    \"message\": \"string\"\n                }\n            },\n            \"type\": \"string\",\n            \"value\": \"string\",\n            \"visible\": True\n        },\n        \"signAssertion\": {\n            \"label\": \"string\",\n            \"position\": 0,\n            \"readOnly\": True,\n            \"required\": True,\n            \"tooltip\": {\n                \"template\": \"string\",\n                \"variables\": {\n                    \"icon\": \"string\",\n                    \"message\": \"string\"\n                }\n            },\n            \"type\": \"string\",\n            \"value\": True,\n            \"visible\": True\n        },\n        \"signResponse\": {\n            \"label\": \"string\",\n            \"position\": 0,\n            \"readOnly\": True,\n            \"required\": True,\n            \"tooltip\": {\n                \"template\": \"string\",\n                \"variables\": {\n                    \"icon\": \"string\",\n                    \"message\": \"string\"\n                }\n            },\n            \"type\": \"string\",\n            \"value\": True,\n            \"visible\": True\n        },\n        \"spEntityId\": {\n            \"label\": \"string\",\n            \"options\": \"string\",\n            \"position\": 0,\n            \"readOnly\": True,\n            \"required\": True,\n            \"toggle\": \"string\",\n            \"tooltip\": {\n                \"template\": \"string\",\n                \"variables\": {\n                    \"icon\": \"string\",\n                    \"message\": \"string\"\n                }\n            },\n            \"type\": \"string\",\n            \"value\": \"string\",\n            \"visible\": True\n        },\n        \"spErrorFlow\": {\n            \"label\": \"string\",\n            \"position\": 0,\n            \"readOnly\": True,\n            \"required\": True,\n            \"tooltip\": {\n                \"template\": \"string\",\n                \"variables\": {\n                    \"icon\": \"string\",\n                    \"message\": \"string\"\n                }\n            },\n            \"type\": \"string\",\n            \"value\": True,\n            \"visible\": True\n        }\n    },\n    \"created\": \"string\",\n    \"databaseAttributes\": [{}],\n    \"description\": \"string\",\n    \"displayLabel\": \"string\",\n    \"displayName\": \"string\",\n    \"learnMore\": \"string\",\n    \"logo\": {\n        \"color\": \"\",\n        \"url\": \"string\"\n    },\n    \"name\": \"string\",\n    \"organization\": \"string\",\n    \"sso\": {\n        \"beta\": True,\n        \"hidden\": True,\n        \"idpCertExpirationAt\": \"2019-08-24T14:15:22Z\",\n        \"jit\": True,\n        \"type\": \"string\"\n    },\n    \"ssoUrl\": \"string\"\n}\nheaders = {\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"PUT\", url, json=payload, headers=headers)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/applications/{id}\"\n\npayload = {\n    \"_id\": \"string\",\n    \"active\": True,\n    \"beta\": True,\n    \"color\": \"\",\n    \"config\": {\n        \"acsUrl\": {\n            \"label\": \"string\",\n            \"options\": \"string\",\n            \"position\": 0,\n            \"readOnly\": True,\n            \"required\": True,\n            \"toggle\": \"string\",\n            \"tooltip\": {\n                \"template\": \"string\",\n                \"variables\": {\n                    \"icon\": \"string\",\n                    \"message\": \"string\"\n                }\n            },\n            \"type\": \"string\",\n            \"value\": \"string\",\n            \"visible\": True\n        },\n        \"constantAttributes\": {\n            \"label\": \"string\",\n            \"mutable\": True,\n            \"options\": None,\n            \"position\": 0,\n            \"readOnly\": True,\n            \"required\": True,\n            \"toggle\": None,\n            \"tooltip\": {\n                \"template\": \"string\",\n                \"variables\": {\n                    \"icon\": \"string\",\n                    \"message\": \"string\"\n                }\n            },\n            \"type\": \"string\",\n            \"value\": [\n                {\n                    \"name\": \"string\",\n                    \"readOnly\": True,\n                    \"required\": True,\n                    \"value\": \"string\",\n                    \"visible\": True\n                }\n            ],\n            \"visible\": True\n        },\n        \"databaseAttributes\": {\"position\": 0},\n        \"idpCertificate\": {\n            \"label\": \"string\",\n            \"options\": \"string\",\n            \"position\": 0,\n            \"readOnly\": True,\n            \"required\": True,\n            \"toggle\": \"string\",\n            \"tooltip\": {\n                \"template\": \"string\",\n                \"variables\": {\n                    \"icon\": \"string\",\n                    \"message\": \"string\"\n                }\n            },\n            \"type\": \"string\",\n            \"value\": \"string\",\n            \"visible\": True\n        },\n        \"idpEntityId\": {\n            \"label\": \"string\",\n            \"options\": \"string\",\n            \"position\": 0,\n            \"readOnly\": True,\n            \"required\": True,\n            \"toggle\": \"string\",\n            \"tooltip\": {\n                \"template\": \"string\",\n                \"variables\": {\n                    \"icon\": \"string\",\n                    \"message\": \"string\"\n                }\n            },\n            \"type\": \"string\",\n            \"value\": \"string\",\n            \"visible\": True\n        },\n        \"idpPrivateKey\": {\n            \"label\": \"string\",\n            \"options\": \"string\",\n            \"position\": 0,\n            \"readOnly\": True,\n            \"required\": True,\n            \"toggle\": \"string\",\n            \"tooltip\": {\n                \"template\": \"string\",\n                \"variables\": {\n                    \"icon\": \"string\",\n                    \"message\": \"string\"\n                }\n            },\n            \"type\": \"string\",\n            \"value\": \"string\",\n            \"visible\": True\n        },\n        \"signAssertion\": {\n            \"label\": \"string\",\n            \"position\": 0,\n            \"readOnly\": True,\n            \"required\": True,\n            \"tooltip\": {\n                \"template\": \"string\",\n                \"variables\": {\n                    \"icon\": \"string\",\n                    \"message\": \"string\"\n                }\n            },\n            \"type\": \"string\",\n            \"value\": True,\n            \"visible\": True\n        },\n        \"signResponse\": {\n            \"label\": \"string\",\n            \"position\": 0,\n            \"readOnly\": True,\n            \"required\": True,\n            \"tooltip\": {\n                \"template\": \"string\",\n                \"variables\": {\n                    \"icon\": \"string\",\n                    \"message\": \"string\"\n                }\n            },\n            \"type\": \"string\",\n            \"value\": True,\n            \"visible\": True\n        },\n        \"spEntityId\": {\n            \"label\": \"string\",\n            \"options\": \"string\",\n            \"position\": 0,\n            \"readOnly\": True,\n            \"required\": True,\n            \"toggle\": \"string\",\n            \"tooltip\": {\n                \"template\": \"string\",\n                \"variables\": {\n                    \"icon\": \"string\",\n                    \"message\": \"string\"\n                }\n            },\n            \"type\": \"string\",\n            \"value\": \"string\",\n            \"visible\": True\n        },\n        \"spErrorFlow\": {\n            \"label\": \"string\",\n            \"position\": 0,\n            \"readOnly\": True,\n            \"required\": True,\n            \"tooltip\": {\n                \"template\": \"string\",\n                \"variables\": {\n                    \"icon\": \"string\",\n                    \"message\": \"string\"\n                }\n            },\n            \"type\": \"string\",\n            \"value\": True,\n            \"visible\": True\n        }\n    },\n    \"created\": \"string\",\n    \"databaseAttributes\": [{}],\n    \"description\": \"string\",\n    \"displayLabel\": \"string\",\n    \"displayName\": \"string\",\n    \"learnMore\": \"string\",\n    \"logo\": {\n        \"color\": \"\",\n        \"url\": \"string\"\n    },\n    \"name\": \"string\",\n    \"organization\": \"string\",\n    \"parentApp\": \"string\",\n    \"sso\": {\n        \"beta\": True,\n        \"hidden\": True,\n        \"idpCertExpirationAt\": \"2019-08-24T14:15:22Z\",\n        \"jit\": True,\n        \"type\": \"string\"\n    },\n    \"ssoUrl\": \"string\"\n}\nheaders = {\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"PUT\", url, json=payload, headers=headers)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/applications/{id}' -Method PUT -Headers $headers -ContentType 'application/json' -Body '{\"_id\":\"string\",\"active\":true,\"beta\":true,\"color\":\"\",\"config\":{\"acsUrl\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"constantAttributes\":{\"label\":\"string\",\"mutable\":true,\"options\":null,\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":null,\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":[{\"name\":\"string\",\"readOnly\":true,\"required\":true,\"value\":\"string\",\"visible\":true}],\"visible\":true},\"databaseAttributes\":{\"position\":0},\"idpCertificate\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"idpEntityId\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"idpPrivateKey\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"signAssertion\":{\"label\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":true,\"visible\":true},\"signResponse\":{\"label\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":true,\"visible\":true},\"spEntityId\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"spErrorFlow\":{\"label\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":true,\"visible\":true}},\"created\":\"string\",\"databaseAttributes\":[{}],\"description\":\"string\",\"displayLabel\":\"string\",\"displayName\":\"string\",\"learnMore\":\"string\",\"logo\":{\"color\":\"\",\"url\":\"string\"},\"name\":\"string\",\"organization\":\"string\",\"sso\":{\"beta\":true,\"hidden\":true,\"idpCertExpirationAt\":\"2019-08-24T14:15:22Z\",\"jit\":true,\"type\":\"string\"},\"ssoUrl\":\"string\"}'"
+            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/applications/{id}' -Method PUT -Headers $headers -ContentType 'application/json' -Body '{\"_id\":\"string\",\"active\":true,\"beta\":true,\"color\":\"\",\"config\":{\"acsUrl\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"constantAttributes\":{\"label\":\"string\",\"mutable\":true,\"options\":null,\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":null,\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":[{\"name\":\"string\",\"readOnly\":true,\"required\":true,\"value\":\"string\",\"visible\":true}],\"visible\":true},\"databaseAttributes\":{\"position\":0},\"idpCertificate\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"idpEntityId\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"idpPrivateKey\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"signAssertion\":{\"label\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":true,\"visible\":true},\"signResponse\":{\"label\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":true,\"visible\":true},\"spEntityId\":{\"label\":\"string\",\"options\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"toggle\":\"string\",\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":\"string\",\"visible\":true},\"spErrorFlow\":{\"label\":\"string\",\"position\":0,\"readOnly\":true,\"required\":true,\"tooltip\":{\"template\":\"string\",\"variables\":{\"icon\":\"string\",\"message\":\"string\"}},\"type\":\"string\",\"value\":true,\"visible\":true}},\"created\":\"string\",\"databaseAttributes\":[{}],\"description\":\"string\",\"displayLabel\":\"string\",\"displayName\":\"string\",\"learnMore\":\"string\",\"logo\":{\"color\":\"\",\"url\":\"string\"},\"name\":\"string\",\"organization\":\"string\",\"parentApp\":\"string\",\"sso\":{\"beta\":true,\"hidden\":true,\"idpCertExpirationAt\":\"2019-08-24T14:15:22Z\",\"jit\":true,\"type\":\"string\"},\"ssoUrl\":\"string\"}'"
           }
         ]
       },
@@ -5758,7 +5943,7 @@
     },
     "/commandresults/{id}": {
       "delete": {
-        "description": "This endpoint deletes a specific command result.\n\n#### Sample Request\n```\ncurl -X DELETE https://console.jumpcloud.com/api/commandresults/{CommandID} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ````",
+        "description": "This endpoint deletes a specific command result.\n\n#### Sample Request\n```\ncurl -X DELETE https://console.jumpcloud.com/api/commandresults/{id} \\\n  -H 'Accept: application/json' \\\n  -H 'Content-Type: application/json' \\\n  -H 'x-api-key: {API_KEY}'\n  ````",
         "operationId": "CommandResult_Delete",
         "parameters": [],
         "responses": {
@@ -6962,13 +7147,16 @@
             "schema": {
               "$ref": "#/definitions/search"
             }
+          },
+          {
+            "$ref": "#/parameters/trait:search:x-eventually-consistent"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/systemslist"
+              "$ref": "#/definitions/systemsSearchlist"
             }
           }
         },
@@ -7008,6 +7196,9 @@
             "schema": {
               "$ref": "#/definitions/search"
             }
+          },
+          {
+            "$ref": "#/parameters/trait:search:x-eventually-consistent"
           }
         ],
         "responses": {

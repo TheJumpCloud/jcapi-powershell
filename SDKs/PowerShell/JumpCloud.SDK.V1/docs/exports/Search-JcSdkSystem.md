@@ -97,13 +97,13 @@ curl -X POST https://console.jumpcloud.com/api/search/systems \\
 
 ### SearchExpanded (Default)
 ```
-Search-JcSdkSystem [-Fields <String>] [-Filter <Hashtable>] [-SearchFilter <Hashtable>] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+Search-JcSdkSystem [-XEventuallyConsistent] [-Fields <String>] [-Filter <Hashtable>]
+ [-SearchFilter <Hashtable>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Search
 ```
-Search-JcSdkSystem -Body <ISearch> [-Confirm] [-WhatIf] [<CommonParameters>]
+Search-JcSdkSystem -Body <ISearch> [-XEventuallyConsistent] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -275,6 +275,21 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -XEventuallyConsistent
+EXPERIMENTAL! Use to acknowledge eventually consistent data in response.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Confirm
 Prompts you for confirmation before running the cmdlet.
 
@@ -315,7 +330,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V1.Models.ISystemslist
+### JumpCloud.SDK.V1.Models.ISystemsSearchlist
 
 ## NOTES
 

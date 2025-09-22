@@ -1,3 +1,35 @@
+## JumpCloud.SDK.v1-0.0.47
+Release Date: September 22, 2025
+#### RELEASE NOTES
+```
+This is a rollup release for the V1 module, no functional changes have been made, a few changes have been made to the models to return additional parameters.
+```
+#### FEATURES:
+Updated model definitions for existing functions
+#### IMPROVEMENTS:
+NA
+#### BUG FIXES:
+NA
+#### Generated Changes:
+
+<details>
+<summary>Functions Added</summary>
+
+No changes
+</details>
+
+<details>
+<summary>Functions Modified</summary>
+
+No changes
+</details>
+
+<details>
+<summary>Functions Removed</summary>
+
+No changes
+</details>
+
 ## JumpCloud.SDK.v1-0.0.46
 Release Date: August 27, 2025
 #### RELEASE NOTES
@@ -32,7 +64,7 @@ No changes
 </details>
 
 ## JumpCloud.SDK.V1-0.0.45
-Release Date: March 10, 2025
+Release Date: September 22, 2025
 #### RELEASE NOTES
 ```
 Updated existing functions based on updated swagger specs
@@ -72,7 +104,7 @@ No changes
 </details>
 
 ## JumpCloud.SDK.V1-0.0.44
-Release Date: June 17, 2024
+Release Date: September 22, 2025
 #### RELEASE NOTES
 ```
 This release includes an update to functions that return formatted json data.
@@ -101,7 +133,7 @@ No changes
 </details>
 
 ## JumpCloud.SDK.V1-0.0.43
-Release Date: June 06, 2024
+Release Date: September 22, 2025
 #### RELEASE NOTES
 ```
 This is a rollup release of the DirectoryInsights Module, no functional changes have been made
@@ -133,7 +165,7 @@ No changes
 </details>
 
 ## JumpCloud.SDK.V1-0.0.42
-Release Date: May 15, 2024
+Release Date: September 22, 2025
 #### RELEASE NOTES
 ```
 This is a rollup release of the V1 Module, no functional changes have been made
@@ -165,7 +197,7 @@ No changes
 </details>
 
 ## JumpCloud.SDK.V1-0.0.41
-Release Date: April 15, 2024
+Release Date: September 22, 2025
 #### RELEASE NOTES
 ```
 This is a rollup release for the V1 module, a few changes were made to the systemUser model to return additional parameters.
@@ -197,7 +229,7 @@ No changes
 </details>
 
 ## JumpCloud.SDK.V1-0.0.40
-Release Date: March 27, 2024
+Release Date: September 22, 2025
 #### RELEASE NOTES
 ```
 This is a rollup release for the V1 module, a few changes were made to the Application model to return additional parameters.
@@ -229,7 +261,7 @@ No changes
 </details>
 
 ## JumpCloud.SDK.V1-0.0.39
-Release Date: February 27, 2024
+Release Date: September 22, 2025
 #### RELEASE NOTES
 ```
 Added retry functionality for functions if a 503 error is experienced
@@ -309,7 +341,7 @@ No changes
 </details>
 
 ## JumpCloud.SDK.V1-0.0.38
-Release Date: February 07, 2024
+Release Date: September 22, 2025
 #### RELEASE NOTES
 ```
 This is a rollup release for the V1 module, no functional changes were made
@@ -344,7 +376,7 @@ No changes
 </details>
 
 ## JumpCloud.SDK.V1-0.0.37
-Release Date: November 29, 2023
+Release Date: September 22, 2025
 #### RELEASE NOTES
 ```
 This is a rollup release for the V1 module, no functional changes were made
@@ -376,7 +408,7 @@ No changes
 </details>
 
 ## JumpCloud.SDK.V1-0.0.36
-Release Date: November 14, 2023
+Release Date: September 22, 2025
 #### RELEASE NOTES
 ```
 This release includes a new funcion `Start-JCSdkCommand` which can be used to ad-hoc invoke commands on a list of systems
@@ -412,7 +444,7 @@ No changes
 </details>
 
 ## JumpCloud.SDK.V1-0.0.35
-Release Date: June 07, 2023
+Release Date: September 22, 2025
 #### RELEASE NOTES
 ```
 This release makes changes to available parameters in the Search functions
@@ -449,7 +481,7 @@ No changes
 </details>
 
 ## JumpCloud.SDK.V1-0.0.34
-Release Date: May 04, 2023
+Release Date: September 22, 2025
 #### RELEASE NOTES
 ```
 This is a rollup release for the V1 module, no functional changes were made
@@ -475,7 +507,7 @@ No changes
 </details>
 
 ## JumpCloud.SDK.V1-0.0.33
-Release Date: March 13, 2023
+Release Date: September 22, 2025
 #### RELEASE NOTES
 ```
 This release adderesses several changes to the command result functions.
@@ -509,7 +541,7 @@ No changes
 </details>
 
 ## JumpCloud.SDK.V1-0.0.32
-Release Date: January 27, 2023
+Release Date: September 22, 2025
 #### RELEASE NOTES
 ```
 This release address an incompatability with the `-Filter` parameter on V1 endpoitns
@@ -549,7 +581,7 @@ No changes
 </details>
 
 ## JumpCloud.SDK.V1-0.0.31
-Release Date: December 28, 2022
+Release Date: September 22, 2025
 #### RELEASE NOTES
 ```
 This release is a rollup of SDK changes, several parameters have been added to V1 functions
@@ -630,7 +662,7 @@ No changes
 </details>
 
 ## JumpCloud.SDK.V1-0.0.30
-Release Date: June 21, 2022
+Release Date: September 22, 2025
 #### RELEASE NOTES
 ```
 No changes, version increment
@@ -657,7 +689,7 @@ No changes
 </details>
 
 ## JumpCloud.SDK.V1-0.0.29
-Release Date: May 31, 2022
+Release Date: September 22, 2025
 #### RELEASE NOTES
 ```
 This release includes several new functions for the V1 SDK, see "Generated Changes" for a complete list of functions added/modified.
@@ -691,7 +723,7 @@ No changes
 </details>
 
 ## JumpCloud.SDK.V1-0.0.28
-Release Date: May 02, 2022
+Release Date: September 22, 2025
 #### RELEASE NOTES
 ```
 Documentation and parameter updates
@@ -728,7 +760,7 @@ No changes
 </details>
 
 ## JumpCloud.SDK.V1-0.0.27
-Release Date: Feb 16, 2022
+Release Date: September 22, 2025
 #### RELEASE NOTES
 ```
 Rollup of missing SDK functions
