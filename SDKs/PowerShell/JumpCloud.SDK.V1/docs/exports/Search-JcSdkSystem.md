@@ -315,7 +315,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V1.Models.ISystemslist
+### JumpCloud.SDK.V1.Models.ISystemsSearchlist
 
 ## NOTES
 

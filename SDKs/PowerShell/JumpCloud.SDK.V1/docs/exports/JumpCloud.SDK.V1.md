@@ -316,7 +316,7 @@ This endpoint deletes a specific command result.
 
 #### Sample Request
 ```
-curl -X DELETE https://console.jumpcloud.com/api/commandresults/{CommandID} \\
+curl -X DELETE https://console.jumpcloud.com/api/commandresults/{id} \\
   -H 'Accept: application/json' \\
   -H 'Content-Type: application/json' \\
   -H 'x-api-key: {API_KEY}'

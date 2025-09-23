@@ -1,3 +1,35 @@
+## JumpCloud.SDK.v1-0.0.47
+Release Date: September 22, 2025
+#### RELEASE NOTES
+```
+This is a rollup release for the V1 module, no functional changes have been made, a few changes have been made to the models to return additional parameters.
+```
+#### FEATURES:
+Updated model definitions for existing functions
+#### IMPROVEMENTS:
+NA
+#### BUG FIXES:
+NA
+#### Generated Changes:
+
+<details>
+<summary>Functions Added</summary>
+
+No changes
+</details>
+
+<details>
+<summary>Functions Modified</summary>
+
+No changes
+</details>
+
+<details>
+<summary>Functions Removed</summary>
+
+No changes
+</details>
+
 ## JumpCloud.SDK.v1-0.0.46
 Release Date: August 27, 2025
 #### RELEASE NOTES

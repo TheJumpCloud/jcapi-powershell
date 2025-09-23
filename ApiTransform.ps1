@@ -37,12 +37,6 @@ $TransformConfig = [Ordered]@{
             '"title":"System"'                                                                                                                                                                                                                                                                     = '"title":"JcSystem"'; # error CS0426: The type name 'ComponentModel' does not exist in the type 'System'
             # V1 Issues
             # Command Result Model for new search endpoint (incorrectly defined in swagger)
-            # remove extra filter/ fields param for search endpoints
-            '"operationId":"search_systemusers_post","parameters":\[{"in":"body","name":"body","schema":{"\$ref":"#\/definitions\/search"}}.*{"\$ref":"#\/definitions\/systemuserslist"}},"401":{"description":"Unauthorized"}},"security":\[{"x-api-key":\[\]}\],"summary":"Search System Users"' = '"operationId":"search_systemusers_post","parameters":[{"in":"body","name":"body","schema":{"$ref":"#/definitions/search"}},{"$ref":"#/parameters/trait:limit:limit"},{"$ref":"#/parameters/trait:skip:skip"},{"$ref":"#/parameters/trait:multiTenantRequestHeaders:x-org-id"}],"responses":{"200":{"description":"OK","schema":{"$ref":"#/definitions/systemuserslist"}},"401":{"description":"Unauthorized"}},"security":[{"x-api-key":[]}],"summary":"Search System Users"'
-            '"operationId":"search_commandresults_post","parameters":\[{"in":"body","name":"body","schema":{"\$ref":"#\/definitions\/search"}}.*{"\$ref":"#\/definitions\/commandresultslist"}}'                                                                                                   = '"operationId":"search_commandresults_post","parameters":[{"in":"body","name":"body","schema":{"$ref":"#/definitions/search"}},{"$ref":"#/parameters/trait:limit:limit"},{"$ref":"#/parameters/trait:skip:skip"},{"$ref":"#/parameters/trait:multiTenantRequestHeaders:x-org-id"}],"responses":{"200":{"description":"OK","schema":{"$ref":"#/definitions/commandresultslist"}}'
-            '"operationId":"search_commands_post","parameters":\[{"in":"body","name":"body","schema":{"\$ref":"#\/definitions\/search"}}.*{"\$ref":"#\/definitions\/commandslist"}}'                                                                                                               = '"operationId":"search_commands_post","parameters":[{"in":"body","name":"body","schema":{"$ref":"#/definitions/search"}},{"$ref":"#/parameters/trait:limit:limit"},{"$ref":"#/parameters/trait:skip:skip"},{"$ref":"#/parameters/trait:multiTenantRequestHeaders:x-org-id"}],"responses":{"200":{"description":"OK","schema":{"$ref":"#/definitions/commandslist"}}'
-            '"operationId":"search_organizations_post","parameters":\[{"in":"body","name":"body","schema":{"\$ref":"#\/definitions\/search"}}.*{"\$ref":"#\/definitions\/organizationslist"}}'                                                                                                     = '"operationId":"search_organizations_post","parameters":[{"in":"body","name":"body","schema":{"$ref":"#/definitions/search"}},{"$ref":"#/parameters/trait:limit:limit"},{"$ref":"#/parameters/trait:skip:skip"},{"$ref":"#/parameters/trait:multiTenantRequestHeaders:x-org-id"}],"responses":{"200":{"description":"OK","schema":{"$ref":"#/definitions/organizationslist"}}'
-            '"operationId":"search_systems_post","parameters":\[{"in":"body","name":"body","schema":{"\$ref":"#\/definitions\/search"}}.*{"\$ref":"#\/definitions\/systemslist"}},"401":{"description":"Unauthorized"}},"security":\[{"x-api-key":\[\]}\],"summary":"Search Systems"'              = '"operationId":"search_systems_post","parameters":[{"in":"body","name":"body","schema":{"$ref":"#/definitions/search"}},{"$ref":"#/parameters/trait:limit:limit"},{"$ref":"#/parameters/trait:skip:skip"},{"$ref":"#/parameters/trait:multiTenantRequestHeaders:x-org-id"}],"responses":{"200":{"description":"OK","schema":{"$ref":"#/definitions/systemslist"}},"401":{"description":"Unauthorized"}},"security":[{"x-api-key":[]}],"summary":"Search Systems"'
             # new model commandresultssearchlist
             '"title":"CommandResultsList","type":"object"},"commandslist"'                                                                                                                                                                                                                         = '"title":"CommandResultsList","type":"object"},"commandresultssearchlist":{"properties":{"results":{"items":{"properties":{"_id":{"description":"The ID of the command result.","type":"string"},"command":{"description":"The command that was executed on the system.","type":"string"},"files":{"description":"An array of file ids that were included in the command","items":{"type":"string"},"type":"array"},"response":{"properties":{"data":{"properties":{"exitCode":{"description":"The stderr output from the command that ran.","type":"integer"},"output":{"description":"The output of the command that was executed.","type":"string"}},"type":"object"},"error":{"description":"The stderr output from the command that ran.","type":"string"},"id":{"description":"ID of the response.","type":"string"}},"type":"object"},"name":{"description":"The name of the command.","type":"string"},"requestTime":{"description":"The time (UTC) that the command was sent.","format":"date-time","type":"string"},"responseTime":{"description":"The time (UTC) that the command was completed.","format":"date-time","type":"string"},"sudo":{"description":"If the user had sudo rights.","type":"boolean"},"system":{"description":"The display name of the system the command was executed on.","type":"string"},"user":{"description":"The user the command ran as.","type":"string"},"workflowId":{"description":"The id for the command that ran on the system.","type":"string"},"workflowInstanceId":{"description":"The workflowInstanceId for the command that ran on the system.","type":"string"}},"type":"object"},"type":"array"},"totalCount":{"description":"The total number of command results.","type":"integer"}},"title":"CommandResultsSearchList","type":"object"},"commandslist"';
             # replace def commandresultslist with commandresultssearchlist
@@ -516,6 +510,50 @@ $TransformConfig = [Ordered]@{
         )
     }
 }
+function Remove-ParamsByOperationId {
+    param (
+        [Parameter(Mandatory = $true)]
+        [object]$Swagger,
+        [Parameter(Mandatory = $true)]
+        [string[]]$OperationIds,
+        [Parameter(Mandatory = $false)]
+        [ValidateSet('fields', 'filter', 'X-Eventually-Consistent')]
+        [string[]]$Params
+
+    )
+
+    #
+
+    # remove extra filter/ fields param for specific operationIds
+    foreach ($pathProp in $Swagger.paths.keys) {
+        $pathObj = $Swagger.paths.$pathProp
+        foreach ($method in @('get', 'post', 'put', 'delete', 'patch')) {
+            if ($pathObj.$method -and $pathObj.$method.operationId -and ($pathObj.$method.operationId -in $OperationIds)) {
+                if ($pathObj.$method.parameters) {
+                    $filteredParams = @()
+                    foreach ($param in $pathObj.$method.parameters) {
+                        $isFilterOrFields = $false
+                        if ($param.'$ref') {
+                            $ref = $param.'$ref'
+                            if ($Params | Where-Object { $ref -match "trait:.*$_" }) {
+                                $isFilterOrFields = $true
+                            }
+                        } elseif ($param.name) {
+                            if ($param.name -eq 'filter' -or $param.name -eq 'fields') {
+                                $isFilterOrFields = $true
+                            }
+                        }
+                        if (-not $isFilterOrFields) {
+                            $filteredParams += ,$param
+                        }
+                    }
+                    $pathObj.$method.parameters = $filteredParams
+                }
+            }
+        }
+    }
+    return $Swagger
+}
 Function Get-SwaggerItem {
     Param(
         [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'An object representing a swagger file.')]$InputObject
@@ -983,8 +1021,17 @@ $SDKName | ForEach-Object {
             } Else {
                 $OASContent | ConvertFrom-Json -Depth:(100)
             }
+            $operationIdsToClean = @(
+                'search_systemusers_post',
+                'search_systems_post',
+                'search_commandresults_post',
+                'search_commands_post',
+                'search_organizations_post'
+            )
+            $SwaggerObject = Remove-ParamsByOperationId -Swagger $SwaggerObjectContent -OperationIds $operationIdsToClean -Params @('fields', 'filter', 'X-Eventually-Consistent')
             # Run the inlining on the whole Swagger object
-            $SwaggerObject = Replace-InvalidPropertyRefs -Swagger $SwaggerObjectContent
+            $SwaggerObject = Replace-InvalidPropertyRefs -Swagger $SwaggerObject
+
             # Find and replace on file
             $SwaggerObject = $SwaggerObject | ConvertTo-Json -Depth:(100) -Compress
             # Perform find and replace

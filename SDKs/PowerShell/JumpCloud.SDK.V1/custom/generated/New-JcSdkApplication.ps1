@@ -299,6 +299,7 @@ BODY <IApplication>:
   [LogoColor <String>]:
   [LogoUrl <String>]:
   [Organization <String>]:
+  [ParentApp <String>]:
   [SsoBeta <Boolean?>]:
   [SsoHidden <Boolean?>]:
   [SsoIdpCertExpirationAt <DateTime?>]:
@@ -623,6 +624,12 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [System.String]
     # .
     ${Organization}, 
+
+    [Parameter(ParameterSetName='CreateExpanded')]
+    [JumpCloud.SDK.V1.Category('Body')]
+    [System.String]
+    # .
+    ${ParentApp}, 
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]

@@ -22,8 +22,9 @@ New-JcSdkApplication -Body <IApplication> [-Confirm] [-WhatIf] [<CommonParameter
 New-JcSdkApplication -Config <IApplicationConfig> -Name <String> -SsoUrl <String> [-Active] [-Beta]
  [-Color <String>] [-Created <String>] [-DatabaseAttributes <IApplicationDatabaseAttributesItem[]>]
  [-Description <String>] [-DisplayLabel <String>] [-DisplayName <String>] [-Id <String>] [-LearnMore <String>]
- [-LogoColor <String>] [-LogoUrl <String>] [-Organization <String>] [-SsoBeta] [-SsoHidden]
- [-SsoIdpCertExpirationAt <DateTime>] [-SsoJit] [-SsoType <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-LogoColor <String>] [-LogoUrl <String>] [-Organization <String>] [-ParentApp <String>] [-SsoBeta]
+ [-SsoHidden] [-SsoIdpCertExpirationAt <DateTime>] [-SsoJit] [-SsoType <String>] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -323,6 +324,21 @@ Accept wildcard characters: False
 ```
 
 ### -Organization
+.
+
+```yaml
+Type: System.String
+Parameter Sets: CreateExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ParentApp
 .
 
 ```yaml
@@ -700,6 +716,7 @@ BODY <IApplication>: Application
   - `[LogoColor <String>]`: 
   - `[LogoUrl <String>]`: 
   - `[Organization <String>]`: 
+  - `[ParentApp <String>]`: 
   - `[SsoBeta <Boolean?>]`: 
   - `[SsoHidden <Boolean?>]`: 
   - `[SsoIdpCertExpirationAt <DateTime?>]`: 
