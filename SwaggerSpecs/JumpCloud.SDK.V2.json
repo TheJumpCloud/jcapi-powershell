@@ -3126,7 +3126,26 @@
           "type": "string"
         },
         "memberQuery": {
-          "$ref": "#/definitions/MemberQuery"
+          "type": "object",
+          "properties": {
+            "queryType": {
+              "type": "string",
+              "enum": ["Filter", "FilterQuery", "Search"]
+            },
+            "filters": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "field": { "type": "string" },
+                  "operator": { "type": "string" },
+                  "value": {"type": "string"  }
+                },
+                "required": ["field", "operator", "value"]
+              }
+            }
+          },
+          "description": "Query object for group membership."
         },
         "memberQueryExemptions": {
           "description": "Array of GraphObjects exempted from the query",
