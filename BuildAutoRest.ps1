@@ -48,7 +48,7 @@ ForEach ($SDK In $SDKName)
         $Config = $ConfigContent | ConvertFrom-Yaml
         # Write current branch back to config file
         $Config.branch = $CurrentBranch
-        $Config | Set-Content -Path:($ConfigFileFullName)
+        $Config | ConvertTo-Yaml -OutFile:($ConfigFileFullName) -force
         $OutputFullPath = '{0}/{1}' -f $BaseFolder, [System.String]$Config.'output-folder'
         $ToolsFolderPath = '{0}/Tools' -f $BaseFolder
         $RunPesterTestsFilePath = '{0}/RunPesterTests.ps1' -f $ToolsFolderPath
