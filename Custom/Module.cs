@@ -1,3 +1,8 @@
+// Add this using statement at the top of your Module.cs if it's not already there
+using System.Management.Automation;
+
+// ... (ensure other using statements like System, System.Collections.Generic, etc., are present)
+
 namespace ModuleNameSpace
 {
     using Runtime;
@@ -6,34 +11,113 @@ namespace ModuleNameSpace
     using System.Net.Http;
     using System.Threading.Tasks;
     using System.Linq;
-    /// <summary>A class that contains the module-common code and data.</summary>
-    /// <notes>
-    /// This class is where you can add things to modify the module.
-    /// As long as it's in the 'custom' folder, it won't get deleted
-    /// when you use --clear-output-folder in autorest.
-    /// </notes>
+
     public partial class Module
     {
         partial void CustomInit()
         {
-            // We need to add a steps to the pipeline
-            // Add Headers
+            // Original pipeline modifications
             this._pipeline.Prepend(AddAuthHeaders);
             this._pipelineWithProxy.Prepend(AddAuthHeaders);
-            // // Add Debugging Messages
-            // this._pipeline.Prepend(Debugging);
-            // this._pipelineWithProxy.Prepend(Debugging);
-            // Add CustomErrors
-            // this._pipeline.Prepend(CustomError);
-            // this._pipelineWithProxy.Prepend(CustomError);
-            // // Add Paginate
-            // this._pipeline.Append(Paginate);
-            // this._pipelineWithProxy.Append(Paginate);
+
+            // **New code to set $PSDefaultParameterValues for EnvHost**
+            SetDefaultEnvHostInPowerShellSession();
         }
-        // partial void AfterCreatePipeline(global::System.Management.Automation.InvocationInfo invocationInfo, ref ModuleNameSpace.Runtime.HttpPipeline pipeline)
-        // {
-        //     pipeline.Append(Paginate);
-        // }
+
+        private void SetDefaultEnvHostInPowerShellSession()
+        {
+            string envVarNameForDefaultEnvHost = "JCEnvHost";
+            string userInputEnvValue = System.Environment.GetEnvironmentVariable(envVarNameForDefaultEnvHost);
+            string actualEnvHostValue;
+            string fallbackEnvHostValue = "console";
+
+            if (!string.IsNullOrEmpty(userInputEnvValue))
+            {
+                switch (userInputEnvValue.ToUpperInvariant())
+                {
+                    case "US":
+                        actualEnvHostValue = "console";
+                        break;
+                    case "STAGING":
+                        actualEnvHostValue = "console.stg01";
+                        break;
+                    case "EU":
+                        actualEnvHostValue = "console.eu";
+                        break;
+                    default:
+                        // If user entered a full host (e.g., console, console.stg01, console.prod02), use as is
+                        actualEnvHostValue = userInputEnvValue;
+                        break;
+                }
+            }
+            else
+            {
+                actualEnvHostValue = fallbackEnvHostValue;
+            }
+            // Log the determined environment host for transparency
+            Console.WriteLine("JumpCloud Module Environment: {0}.jumpcloud.com", actualEnvHostValue);
+            Console.WriteLine("To change the default environment host, set the environment variable '{0}' to one of the following values: 'US', 'EU', or a full host like 'console', 'console.eu'.", envVarNameForDefaultEnvHost);
+            System.Environment.SetEnvironmentVariable("JCEnvHost", actualEnvHostValue);
+
+            // Construct the PowerShell script to set $PSDefaultParameterValues
+            string scriptToSetDefault = $"$Global:PSDefaultParameterValues['*:EnvHost'] = '{actualEnvHostValue}'";
+
+            try
+            {
+                using (PowerShell ps = PowerShell.Create(RunspaceMode.CurrentRunspace))
+                {
+                    ps.AddScript(scriptToSetDefault);
+                    ps.Invoke();
+
+                    if (ps.HadErrors)
+                    {
+                        foreach (var error in ps.Streams.Error)
+                        {
+                            Console.Error.WriteLine($"Error setting PSDefaultParameterValues for EnvHost: {error.ToString()}");
+                        }
+                    }
+                    // Optionally log success
+                    // else
+                    // {
+                    //     Console.WriteLine($"Successfully set default for -EnvHost to '{actualEnvHostValue}' via module initialization based on input '{userInputEnvValue ?? "not set"}'.");
+                    // }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.Error.WriteLine($"Exception while trying to set PSDefaultParameterValues for EnvHost: {ex.Message}");
+            }
+        }
+        private void SetPSDefaultEnvHostParameterValue(string envHostValue)
+        {
+            string scriptToSetDefault = $"$Global:PSDefaultParameterValues['*:EnvHost'] = '{envHostValue}'";
+            try
+            {
+                using (PowerShell ps = PowerShell.Create(RunspaceMode.CurrentRunspace))
+                {
+                    ps.AddScript(scriptToSetDefault);
+                    ps.Invoke();
+
+                    if (ps.HadErrors)
+                    {
+                        foreach (var error in ps.Streams.Error)
+                        {
+                            Console.Error.WriteLine($"Error setting PSDefaultParameterValues for EnvHost: {error.ToString()}");
+                        }
+                    }
+                    // Optionally log success
+                    // else
+                    // {
+                    //     Console.WriteLine($"Successfully set default for -EnvHost to '{envHostValue}' via module initialization.");
+                    // }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.Error.WriteLine($"Exception while trying to set PSDefaultParameterValues for EnvHost: {ex.Message}");
+            }
+        }
+
         protected async Task<HttpResponseMessage> AddAuthHeaders(HttpRequestMessage request, IEventListener callback, ISendAsync next)
         {
             // Check to see if the environment variable for JCApiKey is populated
@@ -59,6 +143,17 @@ namespace ModuleNameSpace
                 Console.WriteLine("You entered '{0}'", JCOrgId);
                 System.Environment.SetEnvironmentVariable("JCOrgId", JCOrgId);
             }
+            // Check to see if the environment variable for EnvHost is populated
+            var EnvHost = System.Environment.GetEnvironmentVariable("JCEnvHost");
+            if (string.IsNullOrEmpty(EnvHost))
+            {
+                Console.Write("Please enter your JumpCloud environment host (e.g., console, console.eu): ");
+                EnvHost = Console.ReadLine();
+                Console.WriteLine("You entered '{0}'", EnvHost);
+                System.Environment.SetEnvironmentVariable("JCEnvHost", EnvHost);
+            }
+            SetPSDefaultEnvHostParameterValue(EnvHost);
+
             // If headers do not contain an "x-org-id" header add one
             if (request.Headers.Contains("x-org-id") == false)
             {
@@ -148,49 +243,5 @@ namespace ModuleNameSpace
                  );
             }
         }
-        // public async System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> Paginate(System.Net.Http.HttpRequestMessage requestMessage, Runtime.IEventListener listener, Runtime.ISendAsync next)
-        // {
-        //     System.Net.Http.HttpResponseMessage response = null;
-        //     while (true)
-        //     {
-        //         // Make the API call
-        //         response = await next.SendAsync(requestMessage, listener);
-        //         // Get ResultCount
-        //         IEnumerable<string> XResultCount;
-        //         response.Headers.TryGetValues("X-Result-Count", out XResultCount);
-        //         var XResultCountString = XResultCount.ToList()[0];
-        //         // Get Limit
-        //         IEnumerable<string> XLimit;
-        //         response.Headers.TryGetValues("X-Limit", out XLimit);
-        //         var XLimitString = XLimit.ToList()[0];
-        //         // Get SearchAfter
-        //         IEnumerable<string> XResultSearchAfter;
-        //         response.Headers.TryGetValues("X-Search_after", out XResultSearchAfter);
-        //         var XResultSearchAfterString = XResultSearchAfter.ToList()[0];
-        //         // Write to host
-        //         Console.WriteLine("XResultCount: " + XResultCountString);
-        //         Console.WriteLine("XLimit: " + XLimitString);
-        //         Console.WriteLine("XResultSearchAfter: " + XResultSearchAfterString);
-        //         // Modify headers with new XResultSearchAfter
-        //         if (XResultCountString == XLimitString) // && response == true)
-        //         {
-        //             ////////////////////////////////////////////////////////////////////////////////////
-        //             // request.Content.Remove("X-Search_after");
-        //             // request.Content.Add("X-Search_after", XResultSearchAfterString);
-        //             // .Content = new StringContent("{\"name\":\"John Doe\",\"age\":33}", Encoding.UTF8, "application/json");
-        //             ////////////////////////////////////////////////////////////////////////////////////
-        //             // wait before getting more results
-        //             await System.Threading.Tasks.Task.Delay(5000);
-        //             continue;
-        //         }
-        //         else
-        //         {
-        //             // no more results, break loop.
-        //             break;
-        //         }
-        //     };
-        //     // return whatever we have.
-        //     return response;
-        // }
     }
 }
