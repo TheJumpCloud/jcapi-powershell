@@ -60,7 +60,7 @@ namespace ModuleNameSpace
             System.Environment.SetEnvironmentVariable("JCEnvHost", actualEnvHostValue);
 
             // Construct the PowerShell script to set $PSDefaultParameterValues
-            string scriptToSetDefault = $"$Global:PSDefaultParameterValues['*:EnvHost'] = '{actualEnvHostValue}'";
+            string scriptToSetDefault = $"$Global:PSDefaultParameterValues['*-JcSdk*:EnvHost'] = '{actualEnvHostValue}'";
 
             try
             {
