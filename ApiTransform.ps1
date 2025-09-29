@@ -510,6 +510,32 @@ $TransformConfig = [Ordered]@{
         )
     }
 }
+#region HelperFunctions
+function Add-ParameterizedHost {
+    param (
+        [Parameter(Mandatory = $true)]
+        [hashtable]$SwaggerObject
+    )
+
+    if (-not $SwaggerObject.ContainsKey('x-ms-parameterized-host')) {
+        $SwaggerObject['x-ms-parameterized-host'] = @{
+            hostTemplate     = '{hostEnv}.jumpcloud.com'
+            useSchemePrefix  = $true
+            parameters       = @(
+                @{
+                    name        = 'hostEnv'
+                    description = "Region for JumpCloud API host. Use 'console' for US or 'console.eu' for EU."
+                    required    = $true
+                    type        = 'string'
+                    in          = 'client'
+                    enum        = @('console', 'console.eu')
+                    'x-ms-parameter-location' = 'client'
+                }
+            )
+        }
+    }
+    return $SwaggerObject
+}
 function Remove-ParamsByOperationId {
     param (
         [Parameter(Mandatory = $true)]
@@ -986,8 +1012,9 @@ function Fix-SearchEndpointsPagination {
 
     return $Swagger
 }
+#endRegion HelperFunctions
 
-
+#region ApiTransform
 # Start script
 $SDKName | ForEach-Object {
     $SDKNameItem = $_
@@ -1031,7 +1058,8 @@ $SDKName | ForEach-Object {
             $SwaggerObject = Remove-ParamsByOperationId -Swagger $SwaggerObjectContent -OperationIds $operationIdsToClean -Params @('fields', 'filter', 'X-Eventually-Consistent')
             # Run the inlining on the whole Swagger object
             $SwaggerObject = Replace-InvalidPropertyRefs -Swagger $SwaggerObject
-
+            # ensure the swagger object has an "x-ms-parameterized-host" entry
+            $SwaggerObject = Add-ParameterizedHost -Swagger $SwaggerObject
             # Find and replace on file
             $SwaggerObject = $SwaggerObject | ConvertTo-Json -Depth:(100) -Compress
             # Perform find and replace
@@ -1048,7 +1076,6 @@ $SDKName | ForEach-Object {
                     }
                 }
             }
-
             # replace override definitions
             if ($config.OverrideDefinitions) {
                 foreach ($overrideDef in $config.OverrideDefinitions) {
@@ -1087,10 +1114,10 @@ $SDKName | ForEach-Object {
             } else {
                 $SwaggerObject = $SwaggerObject | ConvertFrom-Json -Depth:(100)
             }
-
-# Remove limit/skip parameters from Search endpoints
+            # Remove limit/skip parameters from Search endpoints
             $SwaggerObject = Remove-SearchEndpointLimitSkipParams -Swagger $SwaggerObject
             $SwaggerObject = Fix-SearchEndpointsPagination -Swagger $SwaggerObject
+
             #######################################################################
             # # Resolve the swagger references ($ref)/flatten
             # $SwaggerObjectRefMatches = $SwaggerObject | ConvertFrom-Json -Depth:(100)
@@ -1202,3 +1229,4 @@ $SDKName | ForEach-Object {
         Write-Error ("Config 'TransformConfig' does not contain an SDK called '$($SDKNameItem)'.")
     }
 }
+#endregion ApiTransform

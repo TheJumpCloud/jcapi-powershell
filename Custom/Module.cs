@@ -20,47 +20,47 @@ namespace ModuleNameSpace
             this._pipeline.Prepend(AddAuthHeaders);
             this._pipelineWithProxy.Prepend(AddAuthHeaders);
 
-            // **New code to set $PSDefaultParameterValues for EnvHost**
-            SetDefaultEnvHostInPowerShellSession();
+            // **New code to set $PSDefaultParameterValues for HostEnv**
+            SetDefaultHostEnvInPowerShellSession();
         }
 
-        private void SetDefaultEnvHostInPowerShellSession()
+        private void SetDefaultHostEnvInPowerShellSession()
         {
-            string envVarNameForDefaultEnvHost = "JCEnvHost";
-            string userInputEnvValue = System.Environment.GetEnvironmentVariable(envVarNameForDefaultEnvHost);
-            string actualEnvHostValue;
-            string fallbackEnvHostValue = "console";
+            string envVarNameForDefaultHostEnv = "JCHostEnv";
+            string userInputEnvValue = System.Environment.GetEnvironmentVariable(envVarNameForDefaultHostEnv);
+            string actualHostEnvValue;
+            string fallbackHostEnvValue = "console";
 
             if (!string.IsNullOrEmpty(userInputEnvValue))
             {
                 switch (userInputEnvValue.ToUpperInvariant())
                 {
                     case "US":
-                        actualEnvHostValue = "console";
+                        actualHostEnvValue = "console";
                         break;
                     case "STAGING":
-                        actualEnvHostValue = "console.stg01";
+                        actualHostEnvValue = "console.stg01";
                         break;
                     case "EU":
-                        actualEnvHostValue = "console.eu";
+                        actualHostEnvValue = "console.eu";
                         break;
                     default:
                         // If user entered a full host (e.g., console, console.stg01, console.prod02), use as is
-                        actualEnvHostValue = userInputEnvValue;
+                        actualHostEnvValue = userInputEnvValue;
                         break;
                 }
             }
             else
             {
-                actualEnvHostValue = fallbackEnvHostValue;
+                actualHostEnvValue = fallbackHostEnvValue;
             }
             // Log the determined environment host for transparency
-            Console.WriteLine("JumpCloud Module Environment: {0}.jumpcloud.com", actualEnvHostValue);
-            Console.WriteLine("To change the default environment host, set the environment variable '{0}' to one of the following values: 'US', 'EU', or a full host like 'console', 'console.eu'.", envVarNameForDefaultEnvHost);
-            System.Environment.SetEnvironmentVariable("JCEnvHost", actualEnvHostValue);
+            Console.WriteLine("JumpCloud Module Environment: {0}.jumpcloud.com", actualHostEnvValue);
+            Console.WriteLine("To change the default host environment, set the environment variable '{0}' to one of the following values: 'US' or 'EU' depending on your region.", envVarNameForDefaultHostEnv);
+            System.Environment.SetEnvironmentVariable("JCHostEnv", actualHostEnvValue);
 
             // Construct the PowerShell script to set $PSDefaultParameterValues
-            string scriptToSetDefault = $"$Global:PSDefaultParameterValues['*-JcSdk*:EnvHost'] = '{actualEnvHostValue}'";
+            string scriptToSetDefault = $"$Global:PSDefaultParameterValues['*-JcSdk*:HostEnv'] = '{actualHostEnvValue}'";
 
             try
             {
@@ -73,24 +73,24 @@ namespace ModuleNameSpace
                     {
                         foreach (var error in ps.Streams.Error)
                         {
-                            Console.Error.WriteLine($"Error setting PSDefaultParameterValues for EnvHost: {error.ToString()}");
+                            Console.Error.WriteLine($"Error setting PSDefaultParameterValues for HostEnv: {error.ToString()}");
                         }
                     }
                     // Optionally log success
                     // else
                     // {
-                    //     Console.WriteLine($"Successfully set default for -EnvHost to '{actualEnvHostValue}' via module initialization based on input '{userInputEnvValue ?? "not set"}'.");
+                    //     Console.WriteLine($"Successfully set default for -HostEnv to '{actualHostEnvValue}' via module initialization based on input '{userInputEnvValue ?? "not set"}'.");
                     // }
                 }
             }
             catch (Exception ex)
             {
-                Console.Error.WriteLine($"Exception while trying to set PSDefaultParameterValues for EnvHost: {ex.Message}");
+                Console.Error.WriteLine($"Exception while trying to set PSDefaultParameterValues for HostEnv: {ex.Message}");
             }
         }
-        private void SetPSDefaultEnvHostParameterValue(string envHostValue)
+        private void SetPSDefaultHostEnvParameterValue(string HostEnvValue)
         {
-            string scriptToSetDefault = $"$Global:PSDefaultParameterValues['*:EnvHost'] = '{envHostValue}'";
+            string scriptToSetDefault = $"$Global:PSDefaultParameterValues['*-JcSdk*:HostEnv'] = '{HostEnvValue}'";
             try
             {
                 using (PowerShell ps = PowerShell.Create(RunspaceMode.CurrentRunspace))
@@ -102,19 +102,19 @@ namespace ModuleNameSpace
                     {
                         foreach (var error in ps.Streams.Error)
                         {
-                            Console.Error.WriteLine($"Error setting PSDefaultParameterValues for EnvHost: {error.ToString()}");
+                            Console.Error.WriteLine($"Error setting PSDefaultParameterValues for HostEnv: {error.ToString()}");
                         }
                     }
                     // Optionally log success
                     // else
                     // {
-                    //     Console.WriteLine($"Successfully set default for -EnvHost to '{envHostValue}' via module initialization.");
+                    //     Console.WriteLine($"Successfully set default for -HostEnv to '{HostEnvValue}' via module initialization.");
                     // }
                 }
             }
             catch (Exception ex)
             {
-                Console.Error.WriteLine($"Exception while trying to set PSDefaultParameterValues for EnvHost: {ex.Message}");
+                Console.Error.WriteLine($"Exception while trying to set PSDefaultParameterValues for HostEnv: {ex.Message}");
             }
         }
 
@@ -143,16 +143,16 @@ namespace ModuleNameSpace
                 Console.WriteLine("You entered '{0}'", JCOrgId);
                 System.Environment.SetEnvironmentVariable("JCOrgId", JCOrgId);
             }
-            // Check to see if the environment variable for EnvHost is populated
-            var EnvHost = System.Environment.GetEnvironmentVariable("JCEnvHost");
-            if (string.IsNullOrEmpty(EnvHost))
+            // Check to see if the environment variable for HostEnv is populated
+            var HostEnv = System.Environment.GetEnvironmentVariable("JCHostEnv");
+            if (string.IsNullOrEmpty(HostEnv))
             {
                 Console.Write("Please enter your JumpCloud environment host (e.g., console, console.eu): ");
-                EnvHost = Console.ReadLine();
-                Console.WriteLine("You entered '{0}'", EnvHost);
-                System.Environment.SetEnvironmentVariable("JCEnvHost", EnvHost);
+                HostEnv = Console.ReadLine();
+                Console.WriteLine("You entered '{0}'", HostEnv);
+                System.Environment.SetEnvironmentVariable("JCHostEnv", HostEnv);
             }
-            SetPSDefaultEnvHostParameterValue(EnvHost);
+            SetPSDefaultHostEnvParameterValue(HostEnv);
 
             // If headers do not contain an "x-org-id" header add one
             if (request.Headers.Contains("x-org-id") == false)
