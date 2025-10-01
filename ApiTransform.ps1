@@ -165,6 +165,7 @@ $TransformConfig = [Ordered]@{
             'definitions.UserGroup.properties.memberQuery'
             'definitions.UserGroupPut.properties.memberQuery'
             'definitions.UserGroupPost.properties.memberQuery'
+            'definitions.jumpcloud.search.searchRequest.properties'
         )
         OperationIdMapping  = [Ordered]@{
             'activedirectories_agentsDelete'                    = 'ActiveDirectoryAgent_Delete';
@@ -1083,31 +1084,14 @@ $SDKName | ForEach-Object {
             # replace override definitions
             if ($config.OverrideDefinitions) {
                 foreach ($overrideDef in $config.OverrideDefinitions) {
-                    write-warning "Writing custom override for: $overrideDef"
                     $SwaggerObject = $SwaggerObject | ConvertFrom-Json -depth 100
                     # check that a coresponding def exists in /Custom directory
                     if (Test-Path -Path "$PSScriptRoot/CustomDefinitions/$($overrideDef).json") {
                         $configContent = Get-Content -Path ("$PSScriptRoot/CustomDefinitions/$($overrideDef).json")
                         $configOverride = ($configContent | ConvertFrom-Json)
                         # test for special chars in property string:
-                        if ($overrideDef -match "-") {
-                            $splitDef = $overRideDef.Split(".")
-                            $newOverrideDef = ""
-                            for ($i = 0; $i -lt $splitDef.Count; $i++) {
-                                if ($splitDef[$i] -match "-") {
-                                    $splitDef[$i] = "'" + $splitDef[$i] + "'"
-                                }
-
-                                if ($i -eq ($splitDef.Count - 1)) {
-                                    $newOverrideDef += "$($splitDef[$i])"
-                                } else {
-                                    $newOverrideDef += "$($splitDef[$i])."
-
-                                }
-                            }
-                            $overrideDef = $newOverrideDef
-
-                        }
+                        $overrideDef = $overrideDef -replace "^(definitions)\.(.+)\.(properties.*)$", "`$1.'`$2'.`$3"
+                        write-warning "Writing custom override for: $overrideDef"
                         Invoke-Expression -Command ('$SwaggerObject.' + "$($overrideDef)" + '=' + '$configOverride' )
                         $SwaggerObject = $SwaggerObject | Convertto-Json -depth 100
                     } else {
