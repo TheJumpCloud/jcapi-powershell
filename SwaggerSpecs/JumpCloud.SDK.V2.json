@@ -3132,6 +3132,10 @@
               "type": "string",
               "enum": ["Filter", "FilterQuery", "Search"]
             },
+            "searchFilters": {
+              "type": "string",
+              "description": "For queryType 'Search', this is a stringified filter object."
+            },
             "filters": {
               "type": "array",
               "items": {
@@ -3139,10 +3143,11 @@
                 "properties": {
                   "field": { "type": "string" },
                   "operator": { "type": "string" },
-                  "value": {"type": "string"  }
+                  "value": { "type": "string" }
                 },
                 "required": ["field", "operator", "value"]
-              }
+              },
+              "description": "For queryType 'Filter' or 'FilterQuery', this is an array of filter objects."
             }
           },
           "description": "Query object for group membership."
@@ -3193,7 +3198,31 @@
           "type": "string"
         },
         "memberQuery": {
-          "$ref": "#/definitions/MemberQuery"
+          "type": "object",
+          "properties": {
+            "queryType": {
+              "type": "string",
+              "enum": ["Filter", "FilterQuery", "Search"]
+            },
+            "searchFilters": {
+              "type": "string",
+              "description": "For queryType 'Search', this is a stringified filter object."
+            },
+            "filters": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "field": { "type": "string" },
+                  "operator": { "type": "string" },
+                  "value": { "type": "string" }
+                },
+                "required": ["field", "operator", "value"]
+              },
+              "description": "For queryType 'Filter' or 'FilterQuery', this is an array of filter objects."
+            }
+          },
+          "description": "Query object for group membership."
         },
         "memberQueryExemptions": {
           "description": "Array of GraphObjects exempted from the query",
@@ -3234,7 +3263,31 @@
           "type": "string"
         },
         "memberQuery": {
-          "$ref": "#/definitions/MemberQuery"
+          "type": "object",
+          "properties": {
+            "queryType": {
+              "type": "string",
+              "enum": ["Filter", "FilterQuery", "Search"]
+            },
+            "searchFilters": {
+              "type": "string",
+              "description": "For queryType 'Search', this is a stringified filter object."
+            },
+            "filters": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "field": { "type": "string" },
+                  "operator": { "type": "string" },
+                  "value": { "type": "string" }
+                },
+                "required": ["field", "operator", "value"]
+              },
+              "description": "For queryType 'Filter' or 'FilterQuery', this is an array of filter objects."
+            }
+          },
+          "description": "Query object for group membership."
         },
         "memberQueryExemptions": {
           "description": "Array of GraphObjects exempted from the query",
