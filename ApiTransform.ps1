@@ -72,6 +72,7 @@ $TransformConfig = [Ordered]@{
         };
         OverrideDefinitions = @(
             'definitions.application.properties.config'
+            'definitions.systemput.properties'
         )
         OperationIdMapping  = [Ordered]@{
             'admin_totpreset_begin'          = 'AdministratorUserTotp_Reset';
@@ -161,6 +162,9 @@ $TransformConfig = [Ordered]@{
         OverrideDefinitions = @(
             'definitions.bulk-user-create.properties'
             'definitions.bulk-user-update.properties'
+            'definitions.UserGroup.properties.memberQuery'
+            'definitions.UserGroupPut.properties.memberQuery'
+            'definitions.UserGroupPost.properties.memberQuery'
         )
         OperationIdMapping  = [Ordered]@{
             'activedirectories_agentsDelete'                    = 'ActiveDirectoryAgent_Delete';
@@ -1079,7 +1083,7 @@ $SDKName | ForEach-Object {
             # replace override definitions
             if ($config.OverrideDefinitions) {
                 foreach ($overrideDef in $config.OverrideDefinitions) {
-                    write-warning "$overrideDef"
+                    write-warning "Writing custom override for: $overrideDef"
                     $SwaggerObject = $SwaggerObject | ConvertFrom-Json -depth 100
                     # check that a coresponding def exists in /Custom directory
                     if (Test-Path -Path "$PSScriptRoot/CustomDefinitions/$($overrideDef).json") {
