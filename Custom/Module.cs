@@ -1,6 +1,5 @@
-
 using System.Management.Automation;
-namespace SDK
+namespace ModuleNameSpace
 {
     using Runtime;
     using System;
@@ -178,10 +177,10 @@ namespace SDK
                 request.Headers.Add("Accept", "application/json");
             }
             // If headers do not contain an "UserAgent" with the correct value fix it
-            if (request.Headers.UserAgent.ToString() != "JumpCloud_SDK/ModuleVersion")
+            if (request.Headers.UserAgent.ToString() != "JumpCloud_ModuleNameSpace/ModuleVersion")
             {
                 request.Headers.UserAgent.Clear();
-                request.Headers.UserAgent.ParseAdd("JumpCloud_SDK/ModuleVersion");
+                request.Headers.UserAgent.ParseAdd("JumpCloud_ModuleNameSpace/ModuleVersion");
             }
             // // request.Headers.Add("Content-Type", "application/json");
             System.Net.Http.HttpResponseMessage response = await next.SendAsync(request, callback);
