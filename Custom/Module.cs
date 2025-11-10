@@ -1,9 +1,6 @@
-// Add this using statement at the top of your Module.cs if it's not already there
+
 using System.Management.Automation;
-
-// ... (ensure other using statements like System, System.Collections.Generic, etc., are present)
-
-namespace ModuleNameSpace
+namespace SDK
 {
     using Runtime;
     using System;
@@ -20,13 +17,13 @@ namespace ModuleNameSpace
             this._pipeline.Prepend(AddAuthHeaders);
             this._pipelineWithProxy.Prepend(AddAuthHeaders);
 
-            // **New code to set $PSDefaultParameterValues for HostEnv**
+            // Set the default JCEnvironment value
             SetDefaultHostEnvInPowerShellSession();
         }
 
         private void SetDefaultHostEnvInPowerShellSession()
         {
-            string envVarNameForDefaultHostEnv = "JCHostEnv";
+            string envVarNameForDefaultHostEnv = "JCEnvironment";
             string userInputEnvValue = System.Environment.GetEnvironmentVariable(envVarNameForDefaultHostEnv);
             string actualHostEnvValue;
             string fallbackHostEnvValue = "console";
@@ -55,9 +52,9 @@ namespace ModuleNameSpace
                 actualHostEnvValue = fallbackHostEnvValue;
             }
             // Log the determined environment host for transparency
-            Console.WriteLine("JumpCloud Module Environment: {0}.jumpcloud.com", actualHostEnvValue);
-            Console.WriteLine("To change the default host environment, set the environment variable '{0}' to one of the following values: 'US' or 'EU' depending on your region.", envVarNameForDefaultHostEnv);
-            System.Environment.SetEnvironmentVariable("JCHostEnv", actualHostEnvValue);
+            Console.WriteLine("JumpCloud SDK Module Environment: {0}.jumpcloud.com", actualHostEnvValue);
+            Console.WriteLine("To change the default host environment, set the environment variable $ENV:{0} to one of the following values: 'US' or 'EU' depending on your region and re-import the module.", envVarNameForDefaultHostEnv);
+            System.Environment.SetEnvironmentVariable("JCEnvironment", actualHostEnvValue);
 
             // Construct the PowerShell script to set $PSDefaultParameterValues
             string scriptToSetDefault = $"$Global:PSDefaultParameterValues['*-JcSdk*:HostEnv'] = '{actualHostEnvValue}'";
@@ -144,13 +141,13 @@ namespace ModuleNameSpace
                 System.Environment.SetEnvironmentVariable("JCOrgId", JCOrgId);
             }
             // Check to see if the environment variable for HostEnv is populated
-            var HostEnv = System.Environment.GetEnvironmentVariable("JCHostEnv");
+            var HostEnv = System.Environment.GetEnvironmentVariable("JCEnvironment");
             if (string.IsNullOrEmpty(HostEnv))
             {
                 Console.Write("Please enter your JumpCloud environment host (e.g., console, console.eu): ");
                 HostEnv = Console.ReadLine();
                 Console.WriteLine("You entered '{0}'", HostEnv);
-                System.Environment.SetEnvironmentVariable("JCHostEnv", HostEnv);
+                System.Environment.SetEnvironmentVariable("JCEnvironment", HostEnv);
             }
             SetPSDefaultHostEnvParameterValue(HostEnv);
 
@@ -181,10 +178,10 @@ namespace ModuleNameSpace
                 request.Headers.Add("Accept", "application/json");
             }
             // If headers do not contain an "UserAgent" with the correct value fix it
-            if (request.Headers.UserAgent.ToString() != "JumpCloud_ModuleNameSpace/ModuleVersion")
+            if (request.Headers.UserAgent.ToString() != "JumpCloud_SDK/ModuleVersion")
             {
                 request.Headers.UserAgent.Clear();
-                request.Headers.UserAgent.ParseAdd("JumpCloud_ModuleNameSpace/ModuleVersion");
+                request.Headers.UserAgent.ParseAdd("JumpCloud_SDK/ModuleVersion");
             }
             // // request.Headers.Add("Content-Type", "application/json");
             System.Net.Http.HttpResponseMessage response = await next.SendAsync(request, callback);
