@@ -165,6 +165,9 @@ $TransformConfig = [Ordered]@{
             'definitions.UserGroup.properties.memberQuery'
             'definitions.UserGroupPut.properties.memberQuery'
             'definitions.UserGroupPost.properties.memberQuery'
+            'definitions.SystemGroup.properties.memberQuery'
+            'definitions.SystemGroupPut.properties.memberQuery'
+            'definitions.SystemGroupPost.properties.memberQuery'
             'definitions.jumpcloud.search.searchRequest.properties'
         )
         OperationIdMapping  = [Ordered]@{

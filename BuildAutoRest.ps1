@@ -169,6 +169,11 @@ ForEach ($SDK In $SDKName)
             $PsProxyTypes = (Get-Content $CustomHelpProxyType -Raw)
             $OnlineVersionPsProxyTypes = [Regex]::Replace($PsProxyTypes, ('\$\@\"{HelpLinkPrefix}.*'), '$@"{HelpLinkPrefix}{variantGroup.ModuleName}/docs/exports/{variantGroup.CmdletName}.md";', [System.Text.RegularExpressions.RegexOptions]::IgnoreCase);
             Set-Content -Path:($CustomHelpProxyType) -Value:($OnlineVersionPsProxyTypes)
+            # before building the module, remove the generate-portal-ux.ps1 from the module directory, we don't need it and will not be building for Azure Portal UX at this time.
+            If (Test-Path $OutputFullPath/generate-portal-ux.ps1) {
+                write-Host ('[REMOVING] generate-portal-ux.ps1 from module directory.') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+                Remove-Item -Path $OutputFullPath/generate-portal-ux.ps1 -Force
+            }
             # build the module
             $BuildModuleCommandJob = Start-Job -ArgumentList:($BuildModuleCommand) -ScriptBlock:( { param ($BuildModuleCommand);
                     Invoke-Expression -Command:($BuildModuleCommand)
