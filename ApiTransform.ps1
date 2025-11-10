@@ -162,12 +162,7 @@ $TransformConfig = [Ordered]@{
         OverrideDefinitions = @(
             'definitions.bulk-user-create.properties'
             'definitions.bulk-user-update.properties'
-            'definitions.UserGroup.properties.memberQuery'
-            'definitions.UserGroupPut.properties.memberQuery'
-            'definitions.UserGroupPost.properties.memberQuery'
-            'definitions.SystemGroup.properties.memberQuery'
-            'definitions.SystemGroupPut.properties.memberQuery'
-            'definitions.SystemGroupPost.properties.memberQuery'
+            'definitions.MemberQuery'
             'definitions.jumpcloud.search.searchRequest.properties'
         )
         OperationIdMapping  = [Ordered]@{

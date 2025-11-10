@@ -4588,6 +4588,34 @@
       </TableControl>
     </View>
     <View>
+      <Name>JumpCloud.SDK.V2.Models.MemberQuery</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloud.SDK.V2.Models.MemberQuery#Multiple</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>QueryType</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>SearchFilters</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>QueryType</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>SearchFilters</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
       <Name>JumpCloud.SDK.V2.Models.ObjectStorageItem</Name>
       <ViewSelectedBy>
         <TypeName>JumpCloud.SDK.V2.Models.ObjectStorageItem#Multiple</TypeName>
@@ -6948,34 +6976,6 @@
       </TableControl>
     </View>
     <View>
-      <Name>JumpCloud.SDK.V2.Models.SystemGroupMemberQuery</Name>
-      <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.SystemGroupMemberQuery#Multiple</TypeName>
-      </ViewSelectedBy>
-      <TableControl>
-        <TableHeaders>
-          <TableColumnHeader>
-            <Label>QueryType</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>SearchFilters</Label>
-          </TableColumnHeader>
-        </TableHeaders>
-        <TableRowEntries>
-          <TableRowEntry>
-            <TableColumnItems>
-              <TableColumnItem>
-                <PropertyName>QueryType</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>SearchFilters</PropertyName>
-              </TableColumnItem>
-            </TableColumnItems>
-          </TableRowEntry>
-        </TableRowEntries>
-      </TableControl>
-    </View>
-    <View>
       <Name>JumpCloud.SDK.V2.Models.SystemGroupPost</Name>
       <ViewSelectedBy>
         <TypeName>JumpCloud.SDK.V2.Models.SystemGroupPost#Multiple</TypeName>
@@ -7022,34 +7022,6 @@
       </TableControl>
     </View>
     <View>
-      <Name>JumpCloud.SDK.V2.Models.SystemGroupPostMemberQuery</Name>
-      <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.SystemGroupPostMemberQuery#Multiple</TypeName>
-      </ViewSelectedBy>
-      <TableControl>
-        <TableHeaders>
-          <TableColumnHeader>
-            <Label>QueryType</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>SearchFilters</Label>
-          </TableColumnHeader>
-        </TableHeaders>
-        <TableRowEntries>
-          <TableRowEntry>
-            <TableColumnItems>
-              <TableColumnItem>
-                <PropertyName>QueryType</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>SearchFilters</PropertyName>
-              </TableColumnItem>
-            </TableColumnItems>
-          </TableRowEntry>
-        </TableRowEntries>
-      </TableControl>
-    </View>
-    <View>
       <Name>JumpCloud.SDK.V2.Models.SystemGroupPut</Name>
       <ViewSelectedBy>
         <TypeName>JumpCloud.SDK.V2.Models.SystemGroupPut#Multiple</TypeName>
@@ -7089,34 +7061,6 @@
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>Name</PropertyName>
-              </TableColumnItem>
-            </TableColumnItems>
-          </TableRowEntry>
-        </TableRowEntries>
-      </TableControl>
-    </View>
-    <View>
-      <Name>JumpCloud.SDK.V2.Models.SystemGroupPutMemberQuery</Name>
-      <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.SystemGroupPutMemberQuery#Multiple</TypeName>
-      </ViewSelectedBy>
-      <TableControl>
-        <TableHeaders>
-          <TableColumnHeader>
-            <Label>QueryType</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>SearchFilters</Label>
-          </TableColumnHeader>
-        </TableHeaders>
-        <TableRowEntries>
-          <TableRowEntry>
-            <TableColumnItems>
-              <TableColumnItem>
-                <PropertyName>QueryType</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>SearchFilters</PropertyName>
               </TableColumnItem>
             </TableColumnItems>
           </TableRowEntry>
@@ -12136,34 +12080,6 @@
       </TableControl>
     </View>
     <View>
-      <Name>JumpCloud.SDK.V2.Models.UserGroupMemberQuery</Name>
-      <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.UserGroupMemberQuery#Multiple</TypeName>
-      </ViewSelectedBy>
-      <TableControl>
-        <TableHeaders>
-          <TableColumnHeader>
-            <Label>QueryType</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>SearchFilters</Label>
-          </TableColumnHeader>
-        </TableHeaders>
-        <TableRowEntries>
-          <TableRowEntry>
-            <TableColumnItems>
-              <TableColumnItem>
-                <PropertyName>QueryType</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>SearchFilters</PropertyName>
-              </TableColumnItem>
-            </TableColumnItems>
-          </TableRowEntry>
-        </TableRowEntries>
-      </TableControl>
-    </View>
-    <View>
       <Name>JumpCloud.SDK.V2.Models.UserGroupPost</Name>
       <ViewSelectedBy>
         <TypeName>JumpCloud.SDK.V2.Models.UserGroupPost#Multiple</TypeName>
@@ -12210,34 +12126,6 @@
       </TableControl>
     </View>
     <View>
-      <Name>JumpCloud.SDK.V2.Models.UserGroupPostMemberQuery</Name>
-      <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.UserGroupPostMemberQuery#Multiple</TypeName>
-      </ViewSelectedBy>
-      <TableControl>
-        <TableHeaders>
-          <TableColumnHeader>
-            <Label>QueryType</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>SearchFilters</Label>
-          </TableColumnHeader>
-        </TableHeaders>
-        <TableRowEntries>
-          <TableRowEntry>
-            <TableColumnItems>
-              <TableColumnItem>
-                <PropertyName>QueryType</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>SearchFilters</PropertyName>
-              </TableColumnItem>
-            </TableColumnItems>
-          </TableRowEntry>
-        </TableRowEntries>
-      </TableControl>
-    </View>
-    <View>
       <Name>JumpCloud.SDK.V2.Models.UserGroupPut</Name>
       <ViewSelectedBy>
         <TypeName>JumpCloud.SDK.V2.Models.UserGroupPut#Multiple</TypeName>
@@ -12277,34 +12165,6 @@
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>Name</PropertyName>
-              </TableColumnItem>
-            </TableColumnItems>
-          </TableRowEntry>
-        </TableRowEntries>
-      </TableControl>
-    </View>
-    <View>
-      <Name>JumpCloud.SDK.V2.Models.UserGroupPutMemberQuery</Name>
-      <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.UserGroupPutMemberQuery#Multiple</TypeName>
-      </ViewSelectedBy>
-      <TableControl>
-        <TableHeaders>
-          <TableColumnHeader>
-            <Label>QueryType</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>SearchFilters</Label>
-          </TableColumnHeader>
-        </TableHeaders>
-        <TableRowEntries>
-          <TableRowEntry>
-            <TableColumnItems>
-              <TableColumnItem>
-                <PropertyName>QueryType</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>SearchFilters</PropertyName>
               </TableColumnItem>
             </TableColumnItems>
           </TableRowEntry>

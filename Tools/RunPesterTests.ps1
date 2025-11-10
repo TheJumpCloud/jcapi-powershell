@@ -312,7 +312,7 @@ If ($moduleName -eq 'JumpCloud.SDK.V2' -and "MTP" -notin $Env:IncludeTagList)
             packageManager = 'CHOCOLATEY'
         }
     }
-    # Create a User Group
+    # Create a User Group with FilterQuery type membership (deprecated but still supported by API)
     $UserFilter = [JumpCloud.SDK.V2.Models.MemberQuery]::new()
     $UserFilter.Filters = @{
             Field = "description";
@@ -325,9 +325,45 @@ If ($moduleName -eq 'JumpCloud.SDK.V2' -and "MTP" -notin $Env:IncludeTagList)
         MemberQueryFilters = $UserFilter.Filters
         MemberQueryType    = $UserFilter.QueryType
     }
+    # Create a User Group with Filter type membership
+    $UserFilter = [JumpCloud.SDK.V2.Models.MemberQuery]::new()
+    $UserFilter.Filters = @('description:$eq:test')
+    $UserFilter.QueryType = "Filter"
+    $global:PesterDefUserGroup = @{
+        Name = "PesterTestUserGroupFilter-$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
+        MemberQueryFilters = $UserFilter.Filters
+        MemberQueryType    = $UserFilter.QueryType
+    }
+    # Create a User Group with Search type membership
+    $UserFilter = [JumpCloud.SDK.V2.Models.MemberQuery]::new()
+    $UserFilter.Filters = '{"filter":{"and":["department:$eq:Sales","company:$co:Toast"]}}'
+    $UserFilter.QueryType = "Search"
+    $global:PesterDefUserGroup = @{
+        Name = "PesterTestUserGroupSearch-$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
+        MemberQueryFilters = $UserFilter.Filters
+        MemberQueryType    = $UserFilter.QueryType
+    }
     # Create a System Group
     $global:PesterDefSystemGroup = @{
         Name = "PesterTestSystemGroup-$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
+    }
+    # Create a System Group with Filter type membership
+    $UserFilter = [JumpCloud.SDK.V2.Models.MemberQuery]::new()
+    $UserFilter.Filters = @('osFamily:$eq:linux', 'osFamily:$eq:windows')
+    $UserFilter.QueryType = "Filter"
+    $global:PesterDefUserGroup = @{
+        Name = "PesterTestSystemGroupFilter-$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
+        MemberQueryFilters = $UserFilter.Filters
+        MemberQueryType    = $UserFilter.QueryType
+    }
+    # Create a User Group with Search type membership
+    $UserFilter = [JumpCloud.SDK.V2.Models.MemberQuery]::new()
+    $UserFilter.Filters = '{"filter":{"and":["osFamily:$eq:windows","hostname:$co:ISB"]}}'
+    $UserFilter.QueryType = "Search"
+    $global:PesterDefUserGroup = @{
+        Name = "PesterTestSystemGroupSearch-$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
+        MemberQueryFilters = $UserFilter.Filters
+        MemberQueryType    = $UserFilter.QueryType
     }
     # Create a Policy Group
     $global:PesterDefPolicyGroup = @{

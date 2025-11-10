@@ -1974,6 +1974,31 @@
       "title": "LDAP Server Action",
       "type": "string"
     },
+    "MemberQuery": {
+      "type": "object",
+      "properties": {
+        "queryType": {
+          "type": "string",
+          "enum": [
+            "Filter",
+            "FilterQuery",
+            "Search"
+          ]
+        },
+        "searchFilters": {
+          "type": "string",
+          "description": "For queryType 'Search', this is a stringified JSON filter object that will be validated by API middleware."
+        },
+        "filters": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "For queryType 'Filter', this is a stringified JSON filter array that will be validated by API middleware."
+        }
+      },
+      "description": "Query object for group membership. Both 'filters' and 'searchFilters' accept stringified JSON that will be parsed and validated by the API."
+    },
     "OSRestriction": {
       "description": "Contains OS properties to restrict the application of policies to devices based on the device's OS",
       "example": {
@@ -2868,29 +2893,7 @@
           "type": "string"
         },
         "memberQuery": {
-          "type": "object",
-          "properties": {
-            "queryType": {
-              "type": "string",
-              "enum": [
-                "Filter",
-                "FilterQuery",
-                "Search"
-              ]
-            },
-            "searchFilters": {
-              "type": "string",
-              "description": "For queryType 'Search', this is a stringified JSON filter object that will be validated by API middleware."
-            },
-            "filters": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "description": "For queryType 'Filter', this is a stringified JSON filter array that will be validated by API middleware."
-            }
-          },
-          "description": "Query object for group membership. Both 'filters' and 'searchFilters' accept stringified JSON that will be parsed and validated by the API."
+          "$ref": "#/definitions/MemberQuery"
         },
         "memberQueryExemptions": {
           "description": "Array of GraphObjects exempted from the query",
@@ -2935,29 +2938,7 @@
           "type": "string"
         },
         "memberQuery": {
-          "type": "object",
-          "properties": {
-            "queryType": {
-              "type": "string",
-              "enum": [
-                "Filter",
-                "FilterQuery",
-                "Search"
-              ]
-            },
-            "searchFilters": {
-              "type": "string",
-              "description": "For queryType 'Search', this is a stringified JSON filter object that will be validated by API middleware."
-            },
-            "filters": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "description": "For queryType 'Filter', this is a stringified JSON filter array that will be validated by API middleware."
-            }
-          },
-          "description": "Query object for group membership. Both 'filters' and 'searchFilters' accept stringified JSON that will be parsed and validated by the API."
+          "$ref": "#/definitions/MemberQuery"
         },
         "memberQueryExemptions": {
           "description": "Array of GraphObjects exempted from the query",
@@ -2998,29 +2979,7 @@
           "type": "string"
         },
         "memberQuery": {
-          "type": "object",
-          "properties": {
-            "queryType": {
-              "type": "string",
-              "enum": [
-                "Filter",
-                "FilterQuery",
-                "Search"
-              ]
-            },
-            "searchFilters": {
-              "type": "string",
-              "description": "For queryType 'Search', this is a stringified JSON filter object that will be validated by API middleware."
-            },
-            "filters": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "description": "For queryType 'Filter', this is a stringified JSON filter array that will be validated by API middleware."
-            }
-          },
-          "description": "Query object for group membership. Both 'filters' and 'searchFilters' accept stringified JSON that will be parsed and validated by the API."
+          "$ref": "#/definitions/MemberQuery"
         },
         "memberQueryExemptions": {
           "description": "Array of GraphObjects exempted from the query",
@@ -3127,29 +3086,7 @@
           "type": "string"
         },
         "memberQuery": {
-          "type": "object",
-          "properties": {
-            "queryType": {
-              "type": "string",
-              "enum": [
-                "Filter",
-                "FilterQuery",
-                "Search"
-              ]
-            },
-            "searchFilters": {
-              "type": "string",
-              "description": "For queryType 'Search', this is a stringified JSON filter object that will be validated by API middleware."
-            },
-            "filters": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "description": "For queryType 'Filter', this is a stringified JSON filter array that will be validated by API middleware."
-            }
-          },
-          "description": "Query object for group membership. Both 'filters' and 'searchFilters' accept stringified JSON that will be parsed and validated by the API."
+          "$ref": "#/definitions/MemberQuery"
         },
         "memberQueryExemptions": {
           "description": "Array of GraphObjects exempted from the query",
@@ -3197,29 +3134,7 @@
           "type": "string"
         },
         "memberQuery": {
-          "type": "object",
-          "properties": {
-            "queryType": {
-              "type": "string",
-              "enum": [
-                "Filter",
-                "FilterQuery",
-                "Search"
-              ]
-            },
-            "searchFilters": {
-              "type": "string",
-              "description": "For queryType 'Search', this is a stringified JSON filter object that will be validated by API middleware."
-            },
-            "filters": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "description": "For queryType 'Filter', this is a stringified JSON filter array that will be validated by API middleware."
-            }
-          },
-          "description": "Query object for group membership. Both 'filters' and 'searchFilters' accept stringified JSON that will be parsed and validated by the API."
+          "$ref": "#/definitions/MemberQuery"
         },
         "memberQueryExemptions": {
           "description": "Array of GraphObjects exempted from the query",
@@ -3260,29 +3175,7 @@
           "type": "string"
         },
         "memberQuery": {
-          "type": "object",
-          "properties": {
-            "queryType": {
-              "type": "string",
-              "enum": [
-                "Filter",
-                "FilterQuery",
-                "Search"
-              ]
-            },
-            "searchFilters": {
-              "type": "string",
-              "description": "For queryType 'Search', this is a stringified JSON filter object that will be validated by API middleware."
-            },
-            "filters": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              },
-              "description": "For queryType 'Filter', this is a stringified JSON filter array that will be validated by API middleware."
-            }
-          },
-          "description": "Query object for group membership. Both 'filters' and 'searchFilters' accept stringified JSON that will be parsed and validated by the API."
+          "$ref": "#/definitions/MemberQuery"
         },
         "memberQueryExemptions": {
           "description": "Array of GraphObjects exempted from the query",
