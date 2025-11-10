@@ -519,27 +519,47 @@ $TransformConfig = [Ordered]@{
 function Add-ParameterizedHost {
     param (
         [Parameter(Mandatory = $true)]
-        [hashtable]$SwaggerObject
+        [object]$SwaggerObject
     )
 
-    if (-not $SwaggerObject.ContainsKey('x-ms-parameterized-host')) {
-        $SwaggerObject['x-ms-parameterized-host'] = @{
-            hostTemplate     = '{hostEnv}.jumpcloud.com'
-            useSchemePrefix  = $true
-            parameters       = @(
-                @{
-                    name        = 'hostEnv'
-                    description = "Region for JumpCloud API host. Use 'console' for US or 'console.eu' for EU."
-                    required    = $true
-                    type        = 'string'
-                    in          = 'client'
-                    enum        = @('console', 'console.eu')
-                    'x-ms-parameter-location' = 'client'
-                }
-            )
+    # Define the x-ms-parameterized-host property
+    $parameterizedHost = [ordered]@{
+        hostTemplate     = '{hostEnv}.jumpcloud.com'
+        useSchemePrefix  = $true
+        parameters       = @(
+            [ordered]@{
+                name                      = 'hostEnv'
+                description               = "Region for JumpCloud API host. Use 'console' for US or 'console.eu' for EU."
+                required                  = $true
+                type                      = 'string'
+                in                        = 'client'
+                enum                      = @('console', 'console.eu')
+                'x-ms-parameter-location' = 'client'
+            }
+        )
+    }
+
+    # Check if property already exists (works for both hashtable and OrderedDictionary)
+    if ($SwaggerObject.Contains('x-ms-parameterized-host')) {
+        return $SwaggerObject
+    }
+
+    # Create a new ordered hashtable to preserve alphabetical order
+    $newSwagger = [ordered]@{}
+
+    # Get all keys and sort alphabetically
+    $allKeys = @($SwaggerObject.Keys) + @('x-ms-parameterized-host') | Sort-Object
+
+    # Add properties in alphabetical order
+    foreach ($key in $allKeys) {
+        if ($key -eq 'x-ms-parameterized-host') {
+            $newSwagger[$key] = $parameterizedHost
+        } elseif ($SwaggerObject.Contains($key)) {
+            $newSwagger[$key] = $SwaggerObject[$key]
         }
     }
-    return $SwaggerObject
+
+    return $newSwagger
 }
 function Remove-ParamsByOperationId {
     param (
@@ -1064,7 +1084,7 @@ $SDKName | ForEach-Object {
             # Run the inlining on the whole Swagger object
             $SwaggerObject = Replace-InvalidPropertyRefs -Swagger $SwaggerObject
             # ensure the swagger object has an "x-ms-parameterized-host" entry
-            $SwaggerObject = Add-ParameterizedHost -Swagger $SwaggerObject
+            $SwaggerObject = Add-ParameterizedHost -SwaggerObject $SwaggerObject
             # Find and replace on file
             $SwaggerObject = $SwaggerObject | ConvertTo-Json -Depth:(100) -Compress
             # Perform find and replace
