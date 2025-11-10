@@ -133,7 +133,7 @@ ForEach ($SDK In $SDKName)
                 bash $CleanScript $PSScriptRoot $OutputFullPath
             }
             Write-Host ('[RUN COMMAND] autorest ' + $ConfigFileFullName + ' --force --verbose --debug') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-            npx autorest $ConfigFileFullName --force --version:$($npmDependencies.dependencies.'@autorest/core') --use:@autorest/powershell@$($npmDependencies.dependencies.'@autorest/powershell') | Tee-Object -FilePath:($LogFilePath) -Append
+            npx autorest $ConfigFileFullName --force --version:$($npmDependencies.dependencies.'@autorest/core') --use:@autorest/powershell@$($npmDependencies.dependencies.'@autorest/powershell') | Out-Null
         }
         ###########################################################################
         If ($CopyCustomFiles)
