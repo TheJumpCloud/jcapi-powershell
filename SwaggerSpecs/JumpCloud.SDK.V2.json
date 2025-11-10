@@ -1974,37 +1974,6 @@
       "title": "LDAP Server Action",
       "type": "string"
     },
-    "MemberQuery": {
-      "allOf": [
-        {
-          "$ref": "#/definitions/Query"
-        },
-        {
-          "properties": {
-            "filters": {
-              "items": {},
-              "type": "array"
-            }
-          },
-          "title": "MemberQuery",
-          "type": "object",
-          "x-internal": false
-        }
-      ],
-      "description": "Query using a sequence of field filters.",
-      "x-examples": {
-        "example-1": {
-          "filters": [
-            {
-              "field": "string",
-              "operator": "eq",
-              "value": "string"
-            }
-          ],
-          "queryType": "MemberQuery"
-        }
-      }
-    },
     "OSRestriction": {
       "description": "Contains OS properties to restrict the application of policies to devices based on the device's OS",
       "example": {
@@ -2816,30 +2785,6 @@
       "title": "PushEndpointResponse",
       "type": "object"
     },
-    "Query": {
-      "description": "Basic query.",
-      "discriminator": "queryType",
-      "properties": {
-        "queryType": {
-          "enum": [
-            "Filter",
-            "FilterQuery",
-            "Search"
-          ],
-          "type": "string"
-        }
-      },
-      "required": [
-        "queryType"
-      ],
-      "title": "Query",
-      "type": "object",
-      "x-examples": {
-        "example-1": {
-          "queryType": "FilterQuery"
-        }
-      }
-    },
     "SetupAssistantOption": {
       "description": "Options to skip screens during MacOS and iOS setup:\n* `accessibility` - Skips the Accessibility pane, only if the Mac is connected to Ethernet and the cloud config is downloaded.\n* `actionButton` - Skips the Action Button configuration pane.\n* `appearance` - Skips the Choose Your Look screen.\n* `appleID` - Skips Apple ID setup.\n* `biometric` - Skips biometric setup.\n*  `cameraButton` - Skips the Camera Button configuration pane.\n* `diagnostics` - Skips the App Analytics pane.\n* `displayTone` - Skips display tone setup.\n* `enableLockdownMode` - Skips the Lockdown Mode pane.\n* `fileVault` - Skips FileVault setup assistant screen.\n* `icloudDiagnostics` - Skips iCloud analytics screen.\n* `icloudStorage` - Skips iCloud documents and desktop screen.\n* `intelligence` - Skips the Intelligence pane.\n* `location` - Skips location services setup.\n* `payment` - Skips Apple Pay setup.\n* `privacy` - Skips the Privacy setup.\n* `restore` - Skips restoring from backup.\n* `screenTime` - Skips screen time setup.\n* `siri` - Skips Siri setup.\n* `termsOfAddress` - Skips the Terms of Address pane.\n* `tos` - Skips terms and conditions.\n* `appStore` - Skips the App Store pane.\n* `deviceToDeviceMigration` - Skips Device to Device Migration pane.\n* `displayZoom` - Skips zoom setup.\n* `homeButton` - Skips the Meet the New Home Button screen on iPhone 7, iPhone 7 Plus, iPhone 8, iPhone 8 Plus and iPhone SE.\n* `imessageAndFacetime` - Skips the iMessage and FaceTime screen in iOS.\n* `messagingActivationUsingPhoneNumber` - Skips the iMessage pane.\n* `moveFromAndroid` - If the Restore pane is not skipped, removes the Move from Android option in the Restore pane on iOS.O\n* `passcode` - Hides and disables the passcode pane.\n* `restoreComplete` - Skips the Restore Completed pane.\n* `safety` - Skips the Safety pane.\n* `setupCellular` - Skips the add cellular plan pane.\n* `softwareUpdate` - Skips the mandatory software update screen in iOS.\n* `unlockWithWatch` - Skips Unlock Your Mac with your Apple Watch pane.\n* `updateComplete` - Skips the Software Update Complete pane.\n* `wallpaper` - Skips the Wallpaper setup.\n* `watchMigration` - Skips the screen for watch migration.\n* `welcome` - Skips the Get Started pane.\n* `additionalPrivacySettings` - Skips the Additional Privacy Settings pane.\n* `multitasking` - Skips the Multitasking pane.\n* `osShowcase` - Skips the OS Showcase pane.\n* `webContentFiltering` - Skips the Web Content Filtering pane.\n* `safetyAndHandling` - Skips the Safety and Handling pane.\n",
       "enum": [
@@ -2927,13 +2872,25 @@
           "properties": {
             "queryType": {
               "type": "string",
-              "enum": ["Filter", "FilterQuery", "Search"]
+              "enum": [
+                "Filter",
+                "FilterQuery",
+                "Search"
+              ]
             },
             "searchFilters": {
-              "type": "string"
+              "type": "string",
+              "description": "For queryType 'Search', this is a stringified JSON filter object that will be validated by API middleware."
+            },
+            "filters": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "For queryType 'Filter', this is a stringified JSON filter array that will be validated by API middleware."
             }
           },
-          "description": "Query object for SystemGroup membership."
+          "description": "Query object for group membership. Both 'filters' and 'searchFilters' accept stringified JSON that will be parsed and validated by the API."
         },
         "memberQueryExemptions": {
           "description": "Array of GraphObjects exempted from the query",
@@ -2978,7 +2935,29 @@
           "type": "string"
         },
         "memberQuery": {
-          "$ref": "#/definitions/MemberQuery"
+          "type": "object",
+          "properties": {
+            "queryType": {
+              "type": "string",
+              "enum": [
+                "Filter",
+                "FilterQuery",
+                "Search"
+              ]
+            },
+            "searchFilters": {
+              "type": "string",
+              "description": "For queryType 'Search', this is a stringified JSON filter object that will be validated by API middleware."
+            },
+            "filters": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "For queryType 'Filter', this is a stringified JSON filter array that will be validated by API middleware."
+            }
+          },
+          "description": "Query object for group membership. Both 'filters' and 'searchFilters' accept stringified JSON that will be parsed and validated by the API."
         },
         "memberQueryExemptions": {
           "description": "Array of GraphObjects exempted from the query",
@@ -3019,7 +2998,29 @@
           "type": "string"
         },
         "memberQuery": {
-          "$ref": "#/definitions/MemberQuery"
+          "type": "object",
+          "properties": {
+            "queryType": {
+              "type": "string",
+              "enum": [
+                "Filter",
+                "FilterQuery",
+                "Search"
+              ]
+            },
+            "searchFilters": {
+              "type": "string",
+              "description": "For queryType 'Search', this is a stringified JSON filter object that will be validated by API middleware."
+            },
+            "filters": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "For queryType 'Filter', this is a stringified JSON filter array that will be validated by API middleware."
+            }
+          },
+          "description": "Query object for group membership. Both 'filters' and 'searchFilters' accept stringified JSON that will be parsed and validated by the API."
         },
         "memberQueryExemptions": {
           "description": "Array of GraphObjects exempted from the query",
@@ -3130,27 +3131,25 @@
           "properties": {
             "queryType": {
               "type": "string",
-              "enum": ["Filter", "FilterQuery", "Search"]
+              "enum": [
+                "Filter",
+                "FilterQuery",
+                "Search"
+              ]
             },
             "searchFilters": {
               "type": "string",
-              "description": "For queryType 'Search', this is a stringified filter object."
+              "description": "For queryType 'Search', this is a stringified JSON filter object that will be validated by API middleware."
             },
             "filters": {
               "type": "array",
               "items": {
-                "type": "object",
-                "properties": {
-                  "field": { "type": "string" },
-                  "operator": { "type": "string" },
-                  "value": { "type": "string" }
-                },
-                "required": ["field", "operator", "value"]
+                "type": "string"
               },
-              "description": "For queryType 'Filter' or 'FilterQuery', this is an array of filter objects."
+              "description": "For queryType 'Filter', this is a stringified JSON filter array that will be validated by API middleware."
             }
           },
-          "description": "Query object for group membership."
+          "description": "Query object for group membership. Both 'filters' and 'searchFilters' accept stringified JSON that will be parsed and validated by the API."
         },
         "memberQueryExemptions": {
           "description": "Array of GraphObjects exempted from the query",
@@ -3202,27 +3201,25 @@
           "properties": {
             "queryType": {
               "type": "string",
-              "enum": ["Filter", "FilterQuery", "Search"]
+              "enum": [
+                "Filter",
+                "FilterQuery",
+                "Search"
+              ]
             },
             "searchFilters": {
               "type": "string",
-              "description": "For queryType 'Search', this is a stringified filter object."
+              "description": "For queryType 'Search', this is a stringified JSON filter object that will be validated by API middleware."
             },
             "filters": {
               "type": "array",
               "items": {
-                "type": "object",
-                "properties": {
-                  "field": { "type": "string" },
-                  "operator": { "type": "string" },
-                  "value": { "type": "string" }
-                },
-                "required": ["field", "operator", "value"]
+                "type": "string"
               },
-              "description": "For queryType 'Filter' or 'FilterQuery', this is an array of filter objects."
+              "description": "For queryType 'Filter', this is a stringified JSON filter array that will be validated by API middleware."
             }
           },
-          "description": "Query object for group membership."
+          "description": "Query object for group membership. Both 'filters' and 'searchFilters' accept stringified JSON that will be parsed and validated by the API."
         },
         "memberQueryExemptions": {
           "description": "Array of GraphObjects exempted from the query",
@@ -3267,27 +3264,25 @@
           "properties": {
             "queryType": {
               "type": "string",
-              "enum": ["Filter", "FilterQuery", "Search"]
+              "enum": [
+                "Filter",
+                "FilterQuery",
+                "Search"
+              ]
             },
             "searchFilters": {
               "type": "string",
-              "description": "For queryType 'Search', this is a stringified filter object."
+              "description": "For queryType 'Search', this is a stringified JSON filter object that will be validated by API middleware."
             },
             "filters": {
               "type": "array",
               "items": {
-                "type": "object",
-                "properties": {
-                  "field": { "type": "string" },
-                  "operator": { "type": "string" },
-                  "value": { "type": "string" }
-                },
-                "required": ["field", "operator", "value"]
+                "type": "string"
               },
-              "description": "For queryType 'Filter' or 'FilterQuery', this is an array of filter objects."
+              "description": "For queryType 'Filter', this is a stringified JSON filter array that will be validated by API middleware."
             }
           },
-          "description": "Query object for group membership."
+          "description": "Query object for group membership. Both 'filters' and 'searchFilters' accept stringified JSON that will be parsed and validated by the API."
         },
         "memberQueryExemptions": {
           "description": "Array of GraphObjects exempted from the query",
@@ -3337,6 +3332,16 @@
           "readOnly": true,
           "type": "string"
         },
+        "permission": {
+          "description": "Permission level for the Active Directory domain.",
+          "enum": [
+            "PERMISSION_UNSPECIFIED",
+            "PERMISSION_OWNER",
+            "PERMISSION_READ_ONLY"
+          ],
+          "readOnly": true,
+          "type": "string"
+        },
         "primaryAgent": {
           "description": "ObjectID of the primary sync agent of domain.",
           "readOnly": true,
@@ -3345,6 +3350,10 @@
         "primaryImportAgent": {
           "description": "ObjectID of the primary import agent of domain.",
           "readOnly": true,
+          "type": "string"
+        },
+        "updatedAt": {
+          "format": "date-time",
           "type": "string"
         },
         "useCase": {
@@ -4562,6 +4571,197 @@
       },
       "title": "Job WorkResult",
       "type": "object"
+    },
+    "jumpcloud.search.Function": {
+      "default": "function_unknown",
+      "enum": [
+        "function_unknown",
+        "count",
+        "avg",
+        "max",
+        "min",
+        "sum",
+        "count_unique"
+      ],
+      "type": "string"
+    },
+    "jumpcloud.search.PaginationParams": {
+      "description": "Parameters for controlling pagination of search results.",
+      "properties": {
+        "offset": {
+          "description": "Zero-based index of the first result to return.\nFor example: 0 returns the first page, 100 returns the second page when page_size=100.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "pageSize": {
+          "description": "Number of results to return per page.\nIf not specified, uses server default (typically 50-100 items).",
+          "format": "int32",
+          "type": "integer"
+        }
+      },
+      "type": "object"
+    },
+    "jumpcloud.search.SearchRequest": {
+      "properties": {
+        "aggregations": {
+          "items": {
+            "$ref": "#/definitions/jumpcloud.search.SearchRequestAggregation"
+          },
+          "type": "array"
+        },
+        "cacheToken": {
+          "title": "Optional: Token for retrieving data from a previously cached result set",
+          "type": "string",
+          "x-nullable": true
+        },
+        "fields": {
+          "$ref": "#/definitions/jumpcloud.search.SearchRequestFields"
+        },
+        "filters": {
+          "items": {
+            "$ref": "#/definitions/jumpcloud.search.SearchRequestFilter"
+          },
+          "type": "array"
+        },
+        "limit": {
+          "description": "Maximum number of rows (inclusive) to return in the objects.  Note that there is an implicit limit enforced always\nin the external API.",
+          "format": "int32",
+          "type": "integer"
+        },
+        "pagination": {
+          "$ref": "#/definitions/jumpcloud.search.PaginationParams"
+        },
+        "requestCache": {
+          "title": "Optional: If true, cache the full result set of this query",
+          "type": "boolean"
+        },
+        "sort": {
+          "items": {
+            "$ref": "#/definitions/jumpcloud.search.SearchRequestSort"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "jumpcloud.search.SearchRequestAggregation": {
+      "properties": {
+        "field": {
+          "description": "This is a field on an object.  It should always be in the form of <objectName>.<fieldName>  This will be case\ninsensitive, and will be cast to lowercase always.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "function": {
+          "$ref": "#/definitions/jumpcloud.search.Function"
+        },
+        "name": {
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "jumpcloud.search.SearchRequestFields": {
+      "properties": {
+        "exclude": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "include": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        }
+      },
+      "type": "object"
+    },
+    "jumpcloud.search.SearchRequestFilter": {
+      "description": "A filter for a search query.",
+      "properties": {
+        "field": {
+          "description": "This is a field on an object.  It should always be in the form of <objectName>.<fieldName>  This will be case\ninsensitive, and will be cast to lowercase always.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "filters": {
+          "description": "Only allowed when operation is 'and'/'or'.  This allows for logical groupings of sub-filters provided in this\nfield's array.",
+          "items": {
+            "$ref": "#/definitions/jumpcloud.search.SearchRequestFilter"
+          },
+          "type": "array"
+        },
+        "operation": {
+          "$ref": "#/definitions/jumpcloud.search.SearchRequestFilter.Operation"
+        },
+        "query": {
+          "$ref": "#/definitions/jumpcloud.search.SearchRequest"
+        },
+        "unit": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "value": {
+          "description": "Static value to be compared against. For values that will need to be compared as a datetime object, this should be\nprovided as an ISO8601 format string with no offset (UTC). This is made optional so that\nthe client can omit this field on AND/OR filters."
+        }
+      },
+      "type": "object"
+    },
+    "jumpcloud.search.SearchRequestFilter.Operation": {
+      "default": "operation_unknown",
+      "description": "Filter operation to be applied:\nand - Provides logical 'and' groupings of all elements provided in the `filters` array (all sub-filter criteria\n   must be satisfied).\nor - Provides logical 'or' groupings of all elements provided in the `filters` array (any sub-filter criteria can\n   be satisfied).\nequals - Compares `field` with `value` for a // match.  Case insensitive.\nnot_equals - Compares `field` with `value` for an exact non-match.  Case insensitive.\ngreater_than - Checks if `field` is greater numerically than static `value` (non-inclusive).  Works for numbers and\n   datetime types.\nless_than - Checks if `field` is less than static `value` (non-inclusive).  Works for numbers and datetime types.\nstarts_with - Checks if `field` starts with static `value`.  Case insensitive.  Only works for string types.\nends_with - Checks if `field` ends with static `value`.  Case insensitive.  Only works for string types.\ncontains - Checks if `field` has the static `value` as its substring. Case insensitive. Only works for string types.\nnot_contains - Checks if `field` does not have the static `value` as its substring. Case insensitive. Only works for string types.\nin - Checks if `field` is in the static `value` array. Works with strings (case insensitive), numbers, and datetime types.\nnot_in - Checks if `field` is not in the static `value` array. Works with strings (case insensitive), numbers, and datetime types.\ngreater_than_or_equals - Checks if `field` is greater than or equal to static `value`.  Works for numbers and datetime types.\nless_than_or_equals - Checks if `field` is less than or equal to static `value`.  Works for numbers and datetime types.\nis_null - Checks if `field` is null. Works for all field types. Requires boolean value (true for null, false for not null).\nis_empty - Checks if `field` is null or empty string. Works only for string field types. Requires boolean value (true for empty, false for not empty).\nequals_case_sensitive - Compares `field` with `value` for an exact match.  Case sensitive.  Only works for string types.\nnot_equals_case_sensitive - Compares `field` with `value` for an exact non-match.  Case sensitive.  Only works for string types.\nstarts_with_case_sensitive - Checks if `field` starts with static `value`.  Case sensitive.  Only works for string types.\nends_with_case_sensitive - Checks if `field` ends with static `value`.  Case sensitive.  Only works for string types.\ncontains_case_sensitive - Checks if `field` has the static `value` as its substring. Case sensitive. Only works for string types.\nnot_contains_case_sensitive - Checks if `field` does not have the static `value` as its substring. Case sensitive. Only works for string types.\nin_case_sensitive - Checks if `field` is in the static `value` array. Works with strings (case sensitive), numbers, and datetime types.\nnot_in_case_sensitive - Checks if `field` is not in the static `value` array. Works with strings (case sensitive), numbers, and datetime types.",
+      "enum": [
+        "operation_unknown",
+        "and",
+        "or",
+        "equals",
+        "not_equals",
+        "greater_than",
+        "less_than",
+        "starts_with",
+        "ends_with",
+        "contains",
+        "not_contains",
+        "in",
+        "not_in",
+        "greater_than_or_equals",
+        "less_than_or_equals",
+        "is_null",
+        "is_empty",
+        "equals_case_sensitive",
+        "not_equals_case_sensitive",
+        "starts_with_case_sensitive",
+        "ends_with_case_sensitive",
+        "contains_case_sensitive",
+        "not_contains_case_sensitive",
+        "in_case_sensitive",
+        "not_in_case_sensitive"
+      ],
+      "type": "string"
+    },
+    "jumpcloud.search.SearchRequestSort": {
+      "properties": {
+        "field": {
+          "description": "This is a field on an object.  It should always be in the form of\n<objectName>.<fieldName>  This will be case insensitive, and will be cast to\nlowercase always.",
+          "type": "string"
+        },
+        "order": {
+          "$ref": "#/definitions/jumpcloud.search.SearchRequestSort.Order"
+        }
+      },
+      "type": "object"
+    },
+    "jumpcloud.search.SearchRequestSort.Order": {
+      "default": "asc",
+      "enum": [
+        "asc",
+        "desc"
+      ],
+      "title": "Sort order. Defaults to ascending",
+      "type": "string"
     },
     "ldap-server": {
       "properties": {
@@ -8592,15 +8792,15 @@
         "x-codeSamples": [
           {
             "lang": "Shell",
-            "source": "curl --request POST \\\n  --url https://console.jumpcloud.com/api/v2/activedirectories \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --data '{\"delegationState\":\"ENABLED\",\"domain\":\"string\",\"groupsEnabled\":true,\"useCase\":\"UNSET\"}'"
+            "source": "curl --request POST \\\n  --url https://console.jumpcloud.com/api/v2/activedirectories \\\n  --header 'content-type: application/json' \\\n  --header 'x-api-key: REPLACE_KEY_VALUE' \\\n  --data '{\"delegationState\":\"ENABLED\",\"domain\":\"string\",\"groupsEnabled\":true,\"updatedAt\":\"2019-08-24T14:15:22Z\",\"useCase\":\"UNSET\"}'"
           },
           {
             "lang": "Python",
-            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/v2/activedirectories\"\n\npayload = {\n    \"delegationState\": \"ENABLED\",\n    \"domain\": \"string\",\n    \"groupsEnabled\": True,\n    \"useCase\": \"UNSET\"\n}\nheaders = {\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
+            "source": "import requests\n\nurl = \"https://console.jumpcloud.com/api/v2/activedirectories\"\n\npayload = {\n    \"delegationState\": \"ENABLED\",\n    \"domain\": \"string\",\n    \"groupsEnabled\": True,\n    \"updatedAt\": \"2019-08-24T14:15:22Z\",\n    \"useCase\": \"UNSET\"\n}\nheaders = {\n    \"x-api-key\": \"REPLACE_KEY_VALUE\",\n    \"content-type\": \"application/json\"\n}\n\nresponse = requests.request(\"POST\", url, json=payload, headers=headers)\n\nprint(response.text)"
           },
           {
             "lang": "Powershell",
-            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/v2/activedirectories' -Method POST -Headers $headers -ContentType 'application/json' -Body '{\"delegationState\":\"ENABLED\",\"domain\":\"string\",\"groupsEnabled\":true,\"useCase\":\"UNSET\"}'"
+            "source": "$headers=@{}\n$headers.Add(\"x-api-key\", \"REPLACE_KEY_VALUE\")\n$headers.Add(\"content-type\", \"application/json\")\n$response = Invoke-RestMethod -Uri 'https://console.jumpcloud.com/api/v2/activedirectories' -Method POST -Headers $headers -ContentType 'application/json' -Body '{\"delegationState\":\"ENABLED\",\"domain\":\"string\",\"groupsEnabled\":true,\"updatedAt\":\"2019-08-24T14:15:22Z\",\"useCase\":\"UNSET\"}'"
           }
         ]
       },
@@ -16478,6 +16678,35 @@
         "mtp-read-org"
       ]
     },
+    "/providers/{provider_id}/activedirectories": {
+      "parameters": [],
+      "x-functionalities-tags": [
+        "active-directory",
+        "mtp-account-overview"
+      ]
+    },
+    "/providers/{provider_id}/activedirectories/{ad_id}/associations": {
+      "parameters": [
+        {
+          "description": "The ID of the provider",
+          "in": "path",
+          "name": "provider_id",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "description": "The ID of the Active Directory integration",
+          "in": "path",
+          "name": "ad_id",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "x-functionalities-tags": [
+        "active-directory",
+        "mtp-account-overview"
+      ]
+    },
     "/providers/{provider_id}/administrators": {
       "get": {
         "description": "This endpoint returns a list of the Administrators associated with the Provider. You must be associated with the provider to use this route.",
@@ -17306,6 +17535,17 @@
           "required": true,
           "type": "string"
         }
+      ]
+    },
+    "/saas-management/application-catalog/{catalog_application_id}": {},
+    "/saas-management/applications": {},
+    "/saas-management/applications/{application_id}": {},
+    "/saas-management/applications/{application_id}/accounts": {},
+    "/saas-management/applications/{application_id}/accounts/{account_id}": {},
+    "/saas-management/applications/{application_id}/usage": {},
+    "/sample-data": {
+      "x-functionalities-tags": [
+        "sample-data"
       ]
     },
     "/scope-groups": {},
@@ -25475,5 +25715,23 @@
       "type": "apiKey"
     }
   },
-  "swagger": "2.0"
+  "swagger": "2.0",
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{hostEnv}.jumpcloud.com",
+    "useSchemePrefix": true,
+    "parameters": [
+      {
+        "name": "hostEnv",
+        "description": "Region for JumpCloud API host. Use 'console' for US or 'console.eu' for EU.",
+        "required": true,
+        "type": "string",
+        "in": "client",
+        "enum": [
+          "console",
+          "console.eu"
+        ],
+        "x-ms-parameter-location": "client"
+      }
+    ]
+  }
 }
