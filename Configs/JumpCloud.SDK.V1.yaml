@@ -36,5 +36,5 @@ directive:
   from: swagger-document
 namespace: JumpCloud.SDK.V1
 branch: CUT-4908_userGroupDeviceGroupFilters
-sample-generation: false
+sample-generation: true
 customFunctionPrefix: JcSdk
