@@ -1,7 +1,7 @@
 ---
 external help file:
 Module Name: JumpCloud.SDK.V2
-online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Update-JcSdkGSuite.md
+online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4908_userGroupDeviceGroupFilters/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Update-JcSdkGSuite.md
 schema: 2.0.0
 ---
 
@@ -52,26 +52,26 @@ curl -X PATCH https://console.jumpcloud.com/api/v2/gsuites/{GSUITE_ID} \\
 
 ### UpdateExpanded (Default)
 ```
-Update-JcSdkGSuite -Id <String> [-DefaultDomainId <String>] [-GroupsEnabled] [-ImportFilter <String>]
- [-Name <String>] [-UserLockoutAction <String>] [-UserPasswordExpirationAction <String>] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+Update-JcSdkGSuite -HostEnv <String> -Id <String> [-DefaultDomainId <String>] [-GroupsEnabled]
+ [-ImportFilter <String>] [-Name <String>] [-UserLockoutAction <String>]
+ [-UserPasswordExpirationAction <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Update
 ```
-Update-JcSdkGSuite -Id <String> -Body <IGsuite> [-Confirm] [-WhatIf] [<CommonParameters>]
+Update-JcSdkGSuite -HostEnv <String> -Id <String> -Body <IGsuite> [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### UpdateViaIdentity
 ```
-Update-JcSdkGSuite -InputObject <IJumpCloudApiIdentity> -Body <IGsuite> [-Confirm] [-WhatIf]
+Update-JcSdkGSuite -HostEnv <String> -InputObject <IJumpCloudApiIdentity> -Body <IGsuite> [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
 ### UpdateViaIdentityExpanded
 ```
-Update-JcSdkGSuite -InputObject <IJumpCloudApiIdentity> [-DefaultDomainId <String>] [-GroupsEnabled]
- [-ImportFilter <String>] [-Name <String>] [-UserLockoutAction <String>]
+Update-JcSdkGSuite -HostEnv <String> -InputObject <IJumpCloudApiIdentity> [-DefaultDomainId <String>]
+ [-GroupsEnabled] [-ImportFilter <String>] [-Name <String>] [-UserLockoutAction <String>]
  [-UserPasswordExpirationAction <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
@@ -150,7 +150,6 @@ UserPasswordExpirationAction String
 
 ### -Body
 GSuite
-To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IGsuite
@@ -194,6 +193,22 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -HostEnv
+Region for JumpCloud API host.
+Use 'console' for US or 'console.eu' for EU.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Id
 Unique identifier of the GSuite.
 
@@ -226,7 +241,6 @@ Accept wildcard characters: False
 
 ### -InputObject
 Identity Parameter
-To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
@@ -331,14 +345,12 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## NOTES
 
-ALIASES
-
 COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <IGsuite>: GSuite
+`BODY <IGsuite>`: GSuite
   - `[DefaultDomainId <String>]`: 
   - `[GroupsEnabled <Boolean?>]`: 
   - `[ImportFilter <String>]`: 
@@ -346,7 +358,7 @@ BODY <IGsuite>: GSuite
   - `[UserLockoutAction <String>]`: 
   - `[UserPasswordExpirationAction <String>]`: 
 
-INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter
+`INPUTOBJECT <IJumpCloudApiIdentity>`: Identity Parameter
   - `[AccountId <String>]`: 
   - `[ActivedirectoryId <String>]`: 
   - `[AdministratorId <String>]`: 

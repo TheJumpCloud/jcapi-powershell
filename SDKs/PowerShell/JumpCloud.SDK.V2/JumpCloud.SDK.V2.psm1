@@ -5,13 +5,12 @@
   # Get the private module's instance
   $instance = [JumpCloud.SDK.V2.Module]::Instance
 
- 
   # Load the custom module
   $customModulePath = Join-Path $PSScriptRoot './custom/JumpCloud.SDK.V2.custom.psm1'
   if(Test-Path $customModulePath) {
     $null = Import-Module -Name $customModulePath
   }
-  
+
   # Export nothing to clear implicit exports
   Export-ModuleMember
 
@@ -31,12 +30,12 @@
     # Load the last folder if no profile is selected
     $profileDirectory = $directories | Select-Object -Last 1
   }
-  
+
   if($profileDirectory) {
     Write-Information "Loaded Azure profile '$($profileDirectory.Name)' for module '$($instance.Name)'"
     $exportsPath = $profileDirectory.FullName
   }
-  
+
   if($exportsPath) {
     Get-ChildItem -Path $exportsPath -Recurse -Include '*.ps1' -File | ForEach-Object { . $_.FullName }
     $cmdletNames = Get-ScriptCmdlet -ScriptFolder $exportsPath

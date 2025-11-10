@@ -1,7 +1,7 @@
 ---
 external help file:
 Module Name: JumpCloud.SDK.V1
-online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/New-JcSdkUser.md
+online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4908_userGroupDeviceGroupFilters/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/New-JcSdkUser.md
 schema: 2.0.0
 ---
 
@@ -22,7 +22,7 @@ The default user state for manually created users is stored in
 
 These default state values can be changed in the admin portal settings
 or by using the
-[Update an Organization](https://docs.jumpcloud.com/api/1.0/index.html#operation/organization_put)
+[create an Organization](https://docs.jumpcloud.com/api/1.0/index.html#operation/organization_put)
 endpoint.
 
 #### Sample Request
@@ -44,26 +44,26 @@ curl -X POST https://console.jumpcloud.com/api/systemusers \\
 
 ### CreateExpanded (Default)
 ```
-New-JcSdkUser -Email <String> -Username <String> [-FullValidationDetails <String>] [-AccountLocked]
- [-Activated] [-Addresses <ISystemuserputpostAddressesItem[]>] [-AllowPublicKey] [-AlternateEmail <String>]
+New-JcSdkUser -HostEnv <String> [-FullValidationDetails <String>] [-AccountLocked] [-Activated]
+ [-Addresses <ISystemuserputpostAddressesItem[]>] [-AllowPublicKey] [-AlternateEmail <String>]
  [-Attributes <ISystemuserputpostAttributesItem[]>] [-Company <String>] [-CostCenter <String>]
  [-Department <String>] [-Description <String>] [-DisableDeviceMaxLoginAttempts] [-Displayname <String>]
- [-EmployeeIdentifier <String>] [-EmployeeType <String>] [-EnableManagedUid] [-EnableUserPortalMultifactor]
- [-ExternalDn <String>] [-ExternallyManaged] [-ExternalPasswordExpirationDate <DateTime>]
- [-ExternalSourceType <String>] [-Firstname <String>] [-JobTitle <String>] [-Lastname <String>]
- [-LdapBindingUser] [-Location <String>] [-ManagedAppleId <String>] [-Manager <String>] [-MfaConfigured]
- [-MfaExclusion] [-MfaExclusionDays <Int32>] [-MfaExclusionUntil <DateTime>] [-Middlename <String>]
- [-Password <String>] [-PasswordlessSudo] [-PasswordNeverExpires]
- [-PhoneNumbers <ISystemuserputpostPhoneNumbersItem[]>] [-PublicKey <String>] [-RecoveryEmailAddress <String>]
- [-Relationships <ISystemuserputpostRelationshipsItem[]>] [-RestrictedFields <IRestrictedField1[]>]
- [-SambaServiceUser] [-State <String>] [-Sudo] [-Suspended] [-UnixGuid <Int32>] [-UnixUid <Int32>] [-Confirm]
- [-WhatIf] [<CommonParameters>]
+ [-Email <String>] [-EmployeeIdentifier <String>] [-EmployeeType <String>] [-EnableManagedUid]
+ [-EnableUserPortalMultifactor] [-ExternalDn <String>] [-ExternallyManaged]
+ [-ExternalPasswordExpirationDate <DateTime>] [-ExternalSourceType <String>] [-Firstname <String>]
+ [-JobTitle <String>] [-Lastname <String>] [-LdapBindingUser] [-Location <String>] [-ManagedAppleId <String>]
+ [-Manager <String>] [-MfaConfigured] [-MfaExclusion] [-MfaExclusionDays <Int32>]
+ [-MfaExclusionUntil <DateTime>] [-Middlename <String>] [-Password <String>] [-PasswordlessSudo]
+ [-PasswordNeverExpires] [-PhoneNumbers <ISystemuserputpostPhoneNumbersItem[]>] [-PublicKey <String>]
+ [-RecoveryEmailAddress <String>] [-Relationships <ISystemuserputpostRelationshipsItem[]>]
+ [-RestrictedFields <IRestrictedField1[]>] [-SambaServiceUser] [-State <String>] [-Sudo] [-Suspended]
+ [-UnixGuid <Int32>] [-UnixUid <Int32>] [-Username <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Create
 ```
-New-JcSdkUser -Body <ISystemuserputpost> [-FullValidationDetails <String>] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+New-JcSdkUser -HostEnv <String> -Body <ISystemuserputpost> [-FullValidationDetails <String>] [-Confirm]
+ [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -81,7 +81,7 @@ The default user state for manually created users is stored in
 
 These default state values can be changed in the admin portal settings
 or by using the
-[Update an Organization](https://docs.jumpcloud.com/api/1.0/index.html#operation/organization_put)
+[create an Organization](https://docs.jumpcloud.com/api/1.0/index.html#operation/organization_put)
 endpoint.
 
 #### Sample Request
@@ -277,7 +277,6 @@ Accept wildcard characters: False
 
 ### -Addresses
 .
-To construct, see NOTES section for ADDRESSES properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V1.Models.ISystemuserputpostAddressesItem[]
@@ -323,7 +322,6 @@ Accept wildcard characters: False
 
 ### -Attributes
 .
-To construct, see NOTES section for ATTRIBUTES properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V1.Models.ISystemuserputpostAttributesItem[]
@@ -339,7 +337,6 @@ Accept wildcard characters: False
 
 ### -Body
 SystemUserPost
-To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V1.Models.ISystemuserputpost
@@ -451,7 +448,7 @@ Type: System.String
 Parameter Sets: CreateExpanded
 Aliases:
 
-Required: True
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -603,6 +600,22 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -HostEnv
+Region for JumpCloud API host.
+Use 'console' for US or 'console.eu' for EU.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -821,7 +834,6 @@ Accept wildcard characters: False
 
 ### -PhoneNumbers
 .
-To construct, see NOTES section for PHONENUMBERS properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V1.Models.ISystemuserputpostPhoneNumbersItem[]
@@ -867,7 +879,6 @@ Accept wildcard characters: False
 
 ### -Relationships
 .
-To construct, see NOTES section for RELATIONSHIPS properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V1.Models.ISystemuserputpostRelationshipsItem[]
@@ -883,7 +894,6 @@ Accept wildcard characters: False
 
 ### -RestrictedFields
 .
-To construct, see NOTES section for RESTRICTEDFIELDS properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V1.Models.IRestrictedField1[]
@@ -995,7 +1005,7 @@ Type: System.String
 Parameter Sets: CreateExpanded
 Aliases:
 
-Required: True
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -1046,14 +1056,12 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## NOTES
 
-ALIASES
-
 COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-ADDRESSES <ISystemuserputpostAddressesItem[]>: .
+`ADDRESSES <ISystemuserputpostAddressesItem[]>`: .
   - `[Country <String>]`: 
   - `[ExtendedAddress <String>]`: 
   - `[Locality <String>]`: 
@@ -1063,16 +1071,16 @@ ADDRESSES <ISystemuserputpostAddressesItem[]>: .
   - `[StreetAddress <String>]`: 
   - `[Type <String>]`: 
 
-ATTRIBUTES <ISystemuserputpostAttributesItem[]>: .
+`ATTRIBUTES <ISystemuserputpostAttributesItem[]>`: .
   - `[Name <String>]`: 
   - `[Value <String>]`: 
 
-BODY <ISystemuserputpost>: SystemUserPost
+`BODY <ISystemuserputpost>`: SystemUserPost
   - `Email <String>`: 
   - `Username <String>`: 
   - `[AccountLocked <Boolean?>]`: 
   - `[Activated <Boolean?>]`: 
-  - `[Addresses <ISystemuserputpostAddressesItem[]>]`: 
+  - `[Addresses <List<ISystemuserputpostAddressesItem>>]`: 
     - `[Country <String>]`: 
     - `[ExtendedAddress <String>]`: 
     - `[Locality <String>]`: 
@@ -1083,7 +1091,7 @@ BODY <ISystemuserputpost>: SystemUserPost
     - `[Type <String>]`: 
   - `[AllowPublicKey <Boolean?>]`: 
   - `[AlternateEmail <String>]`: 
-  - `[Attributes <ISystemuserputpostAttributesItem[]>]`: 
+  - `[Attributes <List<ISystemuserputpostAttributesItem>>]`: 
     - `[Name <String>]`: 
     - `[Value <String>]`: 
   - `[Company <String>]`: 
@@ -1115,15 +1123,15 @@ BODY <ISystemuserputpost>: SystemUserPost
   - `[Password <String>]`: 
   - `[PasswordNeverExpires <Boolean?>]`: 
   - `[PasswordlessSudo <Boolean?>]`: 
-  - `[PhoneNumbers <ISystemuserputpostPhoneNumbersItem[]>]`: 
+  - `[PhoneNumbers <List<ISystemuserputpostPhoneNumbersItem>>]`: 
     - `[Number <String>]`: 
     - `[Type <String>]`: 
   - `[PublicKey <String>]`: 
   - `[RecoveryEmailAddress <String>]`: 
-  - `[Relationships <ISystemuserputpostRelationshipsItem[]>]`: 
+  - `[Relationships <List<ISystemuserputpostRelationshipsItem>>]`: 
     - `[Type <String>]`: 
     - `[Value <String>]`: 
-  - `[RestrictedFields <IRestrictedField1[]>]`: 
+  - `[RestrictedFields <List<IRestrictedField1>>]`: 
     - `[Field <String>]`: 
     - `[Id <String>]`: 
     - `[Type <String>]`: 
@@ -1134,15 +1142,15 @@ BODY <ISystemuserputpost>: SystemUserPost
   - `[UnixGuid <Int32?>]`: 
   - `[UnixUid <Int32?>]`: 
 
-PHONENUMBERS <ISystemuserputpostPhoneNumbersItem[]>: .
+`PHONENUMBERS <ISystemuserputpostPhoneNumbersItem[]>`: .
   - `[Number <String>]`: 
   - `[Type <String>]`: 
 
-RELATIONSHIPS <ISystemuserputpostRelationshipsItem[]>: .
+`RELATIONSHIPS <ISystemuserputpostRelationshipsItem[]>`: .
   - `[Type <String>]`: 
   - `[Value <String>]`: 
 
-RESTRICTEDFIELDS <IRestrictedField1[]>: .
+`RESTRICTEDFIELDS <IRestrictedField1[]>`: .
   - `[Field <String>]`: 
   - `[Id <String>]`: 
   - `[Type <String>]`: 

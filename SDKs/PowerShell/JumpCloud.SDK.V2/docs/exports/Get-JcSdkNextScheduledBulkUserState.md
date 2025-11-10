@@ -1,7 +1,7 @@
 ---
 external help file:
 Module Name: JumpCloud.SDK.V2
-online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkNextScheduledBulkUserState.md
+online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4908_userGroupDeviceGroupFilters/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkNextScheduledBulkUserState.md
 schema: 2.0.0
 ---
 
@@ -23,7 +23,7 @@ upcoming activation event _and_ the next upcoming suspension event.
 ## SYNTAX
 
 ```
-Get-JcSdkNextScheduledBulkUserState -Users <String[]> [<CommonParameters>]
+Get-JcSdkNextScheduledBulkUserState -HostEnv <String> -Users <List<String>> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -59,11 +59,27 @@ Results     JumpCloud.SDK.V2.Models.ScheduledUserstateResult[]
 
 ## PARAMETERS
 
+### -HostEnv
+Region for JumpCloud API host.
+Use 'console' for US or 'console.eu' for EU.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Users
 A list of system user IDs, limited to 100 items.
 
 ```yaml
-Type: System.String[]
+Type: System.Collections.Generic.List`1[[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]
 Parameter Sets: (All)
 Aliases:
 
@@ -84,8 +100,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ### JumpCloud.SDK.V2.Models.IPathsUbbqf1BulkUserstatesEventlistNextGetResponses200ContentApplicationJsonSchema
 
 ## NOTES
-
-ALIASES
 
 ## RELATED LINKS
 

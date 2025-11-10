@@ -91,7 +91,7 @@ BODY <IPolicyCreateRequest>:
   Name <String>: The description for this specific Policy.
   TemplateId <String>: ObjectId uniquely identifying a Policy instance.
   [Notes <String>]: The notes for this specific Policy.
-  [Values <IPolicyValue[]>]:
+  [Values <List<IPolicyValue>>]:
     [ConfigFieldId <String>]: The ObjectId of the corresponding Policy Template configuration field.
     [Sensitive <Boolean?>]: Defines if the value is sensitive or not.
     [Value <String>]: The value for the configuration field for this Policy instance.
@@ -101,31 +101,31 @@ VALUES <IPolicyValue[]>:
   [Sensitive <Boolean?>]: Defines if the value is sensitive or not.
   [Value <String>]: The value for the configuration field for this Policy instance.
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/New-JcSdkPolicy.md
+https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4908_userGroupDeviceGroupFilters/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/New-JcSdkPolicy.md
 #>
  Function New-JcSdkPolicy
 {
     [OutputType([JumpCloud.SDK.V2.Models.IPolicyWithDetails])]
     [CmdletBinding(DefaultParameterSetName='CreateExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
+    [Parameter(Mandatory)]
+    [JumpCloud.SDK.V2.Category('Uri')]
+    [System.String]
+    # Region for JumpCloud API host.
+    # Use 'console' for US or 'console.eu' for EU.
+    ${HostEnv}, 
+
     [Parameter(ParameterSetName='Create', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Body')]
     [JumpCloud.SDK.V2.Models.IPolicyCreateRequest]
     # A request to create an instance of a policy template.
-    # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body}, 
 
-    [Parameter(ParameterSetName='CreateExpanded', Mandatory)]
+    [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.String]
     # The description for this specific Policy.
     ${Name}, 
-
-    [Parameter(ParameterSetName='CreateExpanded', Mandatory)]
-    [JumpCloud.SDK.V2.Category('Body')]
-    [System.String]
-    # ObjectId uniquely identifying a Policy instance.
-    ${TemplateId}, 
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
@@ -134,11 +134,16 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     ${Notes}, 
 
     [Parameter(ParameterSetName='CreateExpanded')]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [System.String]
+    # ObjectId uniquely identifying a Policy instance.
+    ${TemplateId}, 
+
+    [Parameter(ParameterSetName='CreateExpanded')]
     [AllowEmptyCollection()]
     [JumpCloud.SDK.V2.Category('Body')]
     [JumpCloud.SDK.V2.Models.IPolicyValue[]]
     # .
-    # To construct, see NOTES section for VALUES properties and create a hash table.
     ${Values}, 
 
     [Parameter(DontShow)]

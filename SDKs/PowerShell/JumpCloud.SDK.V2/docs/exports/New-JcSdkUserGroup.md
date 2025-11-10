@@ -1,7 +1,7 @@
 ---
 external help file:
 Module Name: JumpCloud.SDK.V2
-online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/New-JcSdkUserGroup.md
+online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4908_userGroupDeviceGroupFilters/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/New-JcSdkUserGroup.md
 schema: 2.0.0
 ---
 
@@ -27,14 +27,15 @@ curl -X POST https://console.jumpcloud.com/api/v2/usergroups \\
 
 ### CreateExpanded (Default)
 ```
-New-JcSdkUserGroup -Name <String> [-Attributes <Hashtable>] [-Description <String>] [-Email <String>]
- [-MemberQueryExemptions <IGraphObject[]>] [-MemberQueryFilters <IAny[]>] [-MemberQueryType <String>]
- [-MembershipMethod <String>] [-MemberSuggestionsNotify] [-Confirm] [-WhatIf] [<CommonParameters>]
+New-JcSdkUserGroup -HostEnv <String> [-Attributes <Hashtable>] [-Description <String>] [-Email <String>]
+ [-MemberQueryExemptions <IGraphObject[]>] [-MemberQueryFilters <String[]>]
+ [-MemberQuerySearchFilters <String>] [-MemberQueryType <String>] [-MembershipMethod <String>]
+ [-MemberSuggestionsNotify] [-Name <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Create
 ```
-New-JcSdkUserGroup -Body <IUserGroupPost> [-Confirm] [-WhatIf] [<CommonParameters>]
+New-JcSdkUserGroup -HostEnv <String> -Body <IUserGroupPost> [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -116,7 +117,6 @@ Accept wildcard characters: False
 
 ### -Body
 UserGroupPost
-To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IUserGroupPost
@@ -160,9 +160,24 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -HostEnv
+Region for JumpCloud API host.
+Use 'console' for US or 'console.eu' for EU.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -MemberQueryExemptions
 Array of GraphObjects exempted from the query
-To construct, see NOTES section for MEMBERQUERYEXEMPTIONS properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IGraphObject[]
@@ -177,10 +192,25 @@ Accept wildcard characters: False
 ```
 
 ### -MemberQueryFilters
-.
+For queryType 'Filter', this is a stringified JSON filter array that will be validated by API middleware.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IAny[]
+Type: System.String[]
+Parameter Sets: CreateExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -MemberQuerySearchFilters
+For queryType 'Search', this is a stringified JSON filter object that will be validated by API middleware.
+
+```yaml
+Type: System.String
 Parameter Sets: CreateExpanded
 Aliases:
 
@@ -245,7 +275,7 @@ Type: System.String
 Parameter Sets: CreateExpanded
 Aliases:
 
-Required: True
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -296,41 +326,40 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## NOTES
 
-ALIASES
-
 COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <IUserGroupPost>: UserGroupPost
+`BODY <IUserGroupPost>`: UserGroupPost
   - `Name <String>`: Display name of a User Group.
   - `[Attributes <IGroupAttributesUserGroup>]`: The graph attributes for a UserGroup.
     - `[(Any) <Object>]`: This indicates any property can be added to this object.
     - `[SudoEnabled <Boolean?>]`: Enables sudo
     - `[SudoWithoutPassword <Boolean?>]`: Enable sudo without password (requires 'enabled' to be true)
-    - `[LdapGroups <ILdapGroup[]>]`: 
+    - `[LdapGroups <List<ILdapGroup>>]`: 
       - `[Name <String>]`: 
-    - `[PosixGroups <IGraphAttributePosixGroupsItem[]>]`: 
+    - `[PosixGroups <List<IGraphAttributePosixGroupsItem>>]`: 
       - `Id <Int32>`: 
       - `Name <String>`: 
-    - `[RadiusReply <IGraphAttributeRadiusReplyItem[]>]`: 
+    - `[RadiusReply <List<IGraphAttributeRadiusReplyItem>>]`: 
       - `Name <String>`: 
       - `Value <String>`: 
     - `[SambaEnabled <Boolean?>]`: 
   - `[Description <String>]`: Description of a User Group
   - `[Email <String>]`: Email address of a User Group
-  - `[MemberQueryExemptions <IGraphObject[]>]`: Array of GraphObjects exempted from the query
+  - `[MemberQueryExemptions <List<IGraphObject>>]`: Array of GraphObjects exempted from the query
     - `Id <String>`: The ObjectID of the graph object.
     - `Type <String>`: The type of graph object.
     - `[Attributes <IGraphAttributes>]`: The graph attributes.
       - `[(Any) <Object>]`: This indicates any property can be added to this object.
-  - `[MemberQueryFilters <IAny[]>]`: 
+  - `[MemberQueryFilters <List<String>>]`: For queryType 'Filter', this is a stringified JSON filter array that will be validated by API middleware.
+  - `[MemberQuerySearchFilters <String>]`: For queryType 'Search', this is a stringified JSON filter object that will be validated by API middleware.
   - `[MemberQueryType <String>]`: 
   - `[MemberSuggestionsNotify <Boolean?>]`: True if notification emails are to be sent for membership suggestions.
   - `[MembershipMethod <String>]`: The type of membership method for this group. Valid values include NOTSET, STATIC, DYNAMIC_REVIEW_REQUIRED, and DYNAMIC_AUTOMATED.          Note DYNAMIC_AUTOMATED and DYNAMIC_REVIEW_REQUIRED group rules will supersede any group enrollment for [group-associated MDM-enrolled devices](https://jumpcloud.com/support/change-a-default-device-group-for-apple-devices).          Use caution when creating dynamic device groups with MDM-enrolled devices to avoid creating conflicting rule sets.
 
-MEMBERQUERYEXEMPTIONS <IGraphObject[]>: Array of GraphObjects exempted from the query
+`MEMBERQUERYEXEMPTIONS <IGraphObject[]>`: Array of GraphObjects exempted from the query
   - `Id <String>`: The ObjectID of the graph object.
   - `Type <String>`: The type of graph object.
   - `[Attributes <IGraphAttributes>]`: The graph attributes.

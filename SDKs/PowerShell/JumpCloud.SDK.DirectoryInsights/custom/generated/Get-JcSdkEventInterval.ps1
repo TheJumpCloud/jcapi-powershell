@@ -37,17 +37,18 @@ KeyAsString
 .Inputs
 JumpCloud.SDK.DirectoryInsights.Models.IEventIntervalQuery
 .Outputs
-JumpCloud.SDK.DirectoryInsights.Models.IPathsD98A8EventsIntervalPostResponses200ContentApplicationJsonSchemaPropertiesBucketsItems
+JumpCloud.SDK.DirectoryInsights.Models.IPaths17Tds0GEventsIntervalPostResponses200ContentApplicationJsonSchema
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 BODY <IEventIntervalQuery>:
-  Service <String[]>: service name to query.
+  Service <List<String>>: service name to query.
   StartTime <DateTime>: query start time, UTC in RFC3339 format
   IntervalUnit <String>:
   [EndTime <DateTime?>]: optional query end time, UTC in RFC3339 format
+  [ExactMatch <String>]: optional string for specifying exact match query, do not use with full text query
   [IntervalValue <String>]: Interval Value. This specifies how many units you want to bucket the event counts by
   [Q <String>]: optional string for specifying a full text query
   [SearchTermAnd <ITermConjunction>]: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
@@ -56,18 +57,24 @@ BODY <IEventIntervalQuery>:
   [SearchTermOr <ITermConjunction>]: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
   [Timezone <String>]: TimeZone. Specify the timezone in which the user is in         optional
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/docs/exports/Get-JcSdkEventInterval.md
+https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4908_userGroupDeviceGroupFilters/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/docs/exports/Get-JcSdkEventInterval.md
 #>
  Function Get-JcSdkEventInterval
 {
-    [OutputType([JumpCloud.SDK.DirectoryInsights.Models.IPathsD98A8EventsIntervalPostResponses200ContentApplicationJsonSchemaPropertiesBucketsItems])]
+    [OutputType([JumpCloud.SDK.DirectoryInsights.Models.IPaths17Tds0GEventsIntervalPostResponses200ContentApplicationJsonSchema])]
     [CmdletBinding(DefaultParameterSetName='GetExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
+    [Parameter(Mandatory)]
+    [JumpCloud.SDK.DirectoryInsights.Category('Uri')]
+    [System.String]
+    # Region for JumpCloud API host.
+    # Use 'console' for US or 'console.eu' for EU.
+    ${HostEnv}, 
+
     [Parameter(ParameterSetName='Get', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.DirectoryInsights.Category('Body')]
     [JumpCloud.SDK.DirectoryInsights.Models.IEventIntervalQuery]
     # EventIntervalQuery is the users' command to search our auth logs for bucketed counts of values of the specified field
-    # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body}, 
 
     [Parameter(ParameterSetName='GetExpanded', Mandatory)]
@@ -94,6 +101,12 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [System.DateTime]
     # optional query end time, UTC in RFC3339 format
     ${EndTime}, 
+
+    [Parameter(ParameterSetName='GetExpanded')]
+    [JumpCloud.SDK.DirectoryInsights.Category('Body')]
+    [System.String]
+    # optional string for specifying exact match query, do not use with full text query
+    ${ExactMatch}, 
 
     [Parameter(ParameterSetName='GetExpanded')]
     [JumpCloud.SDK.DirectoryInsights.Category('Body')]

@@ -1,7 +1,7 @@
 ---
 external help file:
 Module Name: JumpCloud.SDK.V1
-online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/Get-JcSdkApplication.md
+online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4908_userGroupDeviceGroupFilters/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/Get-JcSdkApplication.md
 schema: 2.0.0
 ---
 
@@ -14,17 +14,18 @@ The endpoint retrieves an SSO / SAML Application.
 
 ### List (Default)
 ```
-Get-JcSdkApplication [-Fields <String>] [-Filter <String[]>] [-Sort <String>] [<CommonParameters>]
+Get-JcSdkApplication -HostEnv <String> [-Fields <String>] [-Filter <List<String>>] [-Sort <String>]
+ [<CommonParameters>]
 ```
 
 ### Get
 ```
-Get-JcSdkApplication -Id <String> [<CommonParameters>]
+Get-JcSdkApplication -HostEnv <String> -Id <String> [<CommonParameters>]
 ```
 
 ### GetViaIdentity
 ```
-Get-JcSdkApplication -InputObject <IJumpCloudApiIdentity> [<CommonParameters>]
+Get-JcSdkApplication -HostEnv <String> -InputObject <IJumpCloudApiIdentity> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -117,11 +118,27 @@ A filter to apply to the query.
 Populate with a valid field from an endpoint response.
 
 ```yaml
-Type: System.String[]
+Type: System.Collections.Generic.List`1[[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]
 Parameter Sets: List
 Aliases:
 
 Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -HostEnv
+Region for JumpCloud API host.
+Use 'console' for US or 'console.eu' for EU.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -145,7 +162,6 @@ Accept wildcard characters: False
 
 ### -InputObject
 Identity Parameter
-To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V1.Models.IJumpCloudApiIdentity
@@ -190,14 +206,12 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## NOTES
 
-ALIASES
-
 COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter
+`INPUTOBJECT <IJumpCloudApiIdentity>`: Identity Parameter
   - `[Id <String>]`: 
   - `[SystemId <String>]`: 
   - `[SystemuserId <String>]`: 

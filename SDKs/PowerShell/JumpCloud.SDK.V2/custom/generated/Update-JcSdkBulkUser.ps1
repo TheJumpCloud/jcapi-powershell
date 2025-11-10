@@ -1,7 +1,7 @@
 <#
 .Synopsis
-The endpoint allows you to create a bulk job to asynchronously update users.
-See [Update a System User](https://docs.jumpcloud.com/api/1.0/index.html#operation/systemusers_put) for full list of attributes.
+The endpoint allows you to update a bulk job to asynchronously update users.
+See [update a System User](https://docs.jumpcloud.com/api/1.0/index.html#operation/systemusers_put) for full list of attributes.
 
 #### Sample Request 
 ```
@@ -30,8 +30,8 @@ curl -X PATCH https://console.jumpcloud.com/api/v2/bulk/users \\
 ]
 ```
 .Description
-The endpoint allows you to create a bulk job to asynchronously update users.
-See [Update a System User](https://docs.jumpcloud.com/api/1.0/index.html#operation/systemusers_put) for full list of attributes.
+The endpoint allows you to update a bulk job to asynchronously update users.
+See [update a System User](https://docs.jumpcloud.com/api/1.0/index.html#operation/systemusers_put) for full list of attributes.
 
 #### Sample Request 
 ```
@@ -69,17 +69,17 @@ PS C:\> {{ Add code here }}
 {{ Add output here }}
 
 .Inputs
-JumpCloud.SDK.V2.Models.IBulkUserUpdate[]
+System.Collections.Generic.List`1[[JumpCloud.SDK.V2.Models.IBulkUserUpdate, JumpCloud.SDK.V2.private, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]
 .Outputs
-System.String
+JumpCloud.SDK.V2.Models.IJobId
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
-BODY <IBulkUserUpdate[]>:
+BODY <List<IBulkUserUpdate>>:
   [AccountLocked <Boolean?>]:
-  [Addresses <IBulkUserUpdateAddressesItem[]>]: type, poBox, extendedAddress, streetAddress, locality, region, postalCode, country
+  [Addresses <List<IBulkUserUpdateAddressesItem>>]: type, poBox, extendedAddress, streetAddress, locality, region, postalCode, country
     [Country <String>]:
     [ExtendedAddress <String>]:
     [Locality <String>]:
@@ -90,7 +90,7 @@ BODY <IBulkUserUpdate[]>:
     [Type <String>]:
   [AllowPublicKey <Boolean?>]:
   [AlternateEmail <String>]:
-  [Attributes <IBulkUserUpdateAttributesItem[]>]:
+  [Attributes <List<IBulkUserUpdateAttributesItem>>]:
     [Name <String>]:
     [Value <String>]:
   [Company <String>]:
@@ -125,15 +125,15 @@ BODY <IBulkUserUpdate[]>:
   [Password <String>]:
   [PasswordNeverExpires <Boolean?>]:
   [PasswordlessSudo <Boolean?>]:
-  [PhoneNumbers <IBulkUserUpdatePhoneNumbersItem[]>]:
+  [PhoneNumbers <List<IBulkUserUpdatePhoneNumbersItem>>]:
     [Number <String>]:
     [Type <String>]:
   [PublicKey <String>]:
-  [Relationships <IBulkUserUpdateRelationshipsItem[]>]:
+  [Relationships <List<IBulkUserUpdateRelationshipsItem>>]:
     [Type <String>]:
     [Value <String>]:
   [SambaServiceUser <Boolean?>]:
-  [SshKeys <IBulkUserUpdateSshKeysItem[]>]:
+  [SshKeys <List<IBulkUserUpdateSshKeysItem>>]:
     Name <String>: The name of the SSH key.
     PublicKey <String>: The Public SSH key.
   [State <String>]:
@@ -143,13 +143,20 @@ BODY <IBulkUserUpdate[]>:
   [UnixUid <Int32?>]:
   [Username <String>]:
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Update-JcSdkBulkUser.md
+https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4908_userGroupDeviceGroupFilters/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Update-JcSdkBulkUser.md
 #>
  Function Update-JcSdkBulkUser
 {
-    [OutputType([System.String])]
+    [OutputType([JumpCloud.SDK.V2.Models.IJobId])]
     [CmdletBinding(DefaultParameterSetName='Update', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
+    [Parameter(Mandatory)]
+    [JumpCloud.SDK.V2.Category('Uri')]
+    [System.String]
+    # Region for JumpCloud API host.
+    # Use 'console' for US or 'console.eu' for EU.
+    ${HostEnv}, 
+
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
     [System.Management.Automation.SwitchParameter]
@@ -163,9 +170,9 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(Mandatory, ValueFromPipeline)]
     [AllowEmptyCollection()]
     [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Models.IBulkUserUpdate[]]
+    [JumpCloud.SDK.V2.Runtime.Info(Required, PossibleTypes=([JumpCloud.SDK.V2.Models.IBulkUserUpdate]))]
+    [System.Collections.Generic.List[JumpCloud.SDK.V2.Models.IBulkUserUpdate]]
     # Array of bulk-user-update
-    # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body}, 
 
     [Parameter(DontShow)]

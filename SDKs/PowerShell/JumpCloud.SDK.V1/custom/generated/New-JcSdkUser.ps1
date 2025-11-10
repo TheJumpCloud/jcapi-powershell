@@ -14,7 +14,7 @@ The default user state for manually created users is stored in
 
 These default state values can be changed in the admin portal settings
 or by using the
-[Update an Organization](https://docs.jumpcloud.com/api/1.0/index.html#operation/organization_put)
+[create an Organization](https://docs.jumpcloud.com/api/1.0/index.html#operation/organization_put)
 endpoint.
 
 #### Sample Request
@@ -46,7 +46,7 @@ The default user state for manually created users is stored in
 
 These default state values can be changed in the admin portal settings
 or by using the
-[Update an Organization](https://docs.jumpcloud.com/api/1.0/index.html#operation/organization_put)
+[create an Organization](https://docs.jumpcloud.com/api/1.0/index.html#operation/organization_put)
 endpoint.
 
 #### Sample Request
@@ -236,7 +236,7 @@ BODY <ISystemuserputpost>:
   Username <String>:
   [AccountLocked <Boolean?>]:
   [Activated <Boolean?>]:
-  [Addresses <ISystemuserputpostAddressesItem[]>]:
+  [Addresses <List<ISystemuserputpostAddressesItem>>]:
     [Country <String>]:
     [ExtendedAddress <String>]:
     [Locality <String>]:
@@ -247,7 +247,7 @@ BODY <ISystemuserputpost>:
     [Type <String>]:
   [AllowPublicKey <Boolean?>]:
   [AlternateEmail <String>]:
-  [Attributes <ISystemuserputpostAttributesItem[]>]:
+  [Attributes <List<ISystemuserputpostAttributesItem>>]:
     [Name <String>]:
     [Value <String>]:
   [Company <String>]:
@@ -279,15 +279,15 @@ BODY <ISystemuserputpost>:
   [Password <String>]:
   [PasswordNeverExpires <Boolean?>]:
   [PasswordlessSudo <Boolean?>]:
-  [PhoneNumbers <ISystemuserputpostPhoneNumbersItem[]>]:
+  [PhoneNumbers <List<ISystemuserputpostPhoneNumbersItem>>]:
     [Number <String>]:
     [Type <String>]:
   [PublicKey <String>]:
   [RecoveryEmailAddress <String>]:
-  [Relationships <ISystemuserputpostRelationshipsItem[]>]:
+  [Relationships <List<ISystemuserputpostRelationshipsItem>>]:
     [Type <String>]:
     [Value <String>]:
-  [RestrictedFields <IRestrictedField1[]>]:
+  [RestrictedFields <List<IRestrictedField1>>]:
     [Field <String>]:
     [Id <String>]:
     [Type <String>]:
@@ -311,13 +311,20 @@ RESTRICTEDFIELDS <IRestrictedField1[]>:
   [Id <String>]:
   [Type <String>]:
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/New-JcSdkUser.md
+https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4908_userGroupDeviceGroupFilters/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/New-JcSdkUser.md
 #>
  Function New-JcSdkUser
 {
     [OutputType([JumpCloud.SDK.V1.Models.ISystemuserreturn])]
     [CmdletBinding(DefaultParameterSetName='CreateExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
+    [Parameter(Mandatory)]
+    [JumpCloud.SDK.V1.Category('Uri')]
+    [System.String]
+    # Region for JumpCloud API host.
+    # Use 'console' for US or 'console.eu' for EU.
+    ${HostEnv}, 
+
     [Parameter()]
     [JumpCloud.SDK.V1.Category('Query')]
     [System.String]
@@ -328,20 +335,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V1.Category('Body')]
     [JumpCloud.SDK.V1.Models.ISystemuserputpost]
     # SystemUserPost
-    # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body}, 
-
-    [Parameter(ParameterSetName='CreateExpanded', Mandatory)]
-    [JumpCloud.SDK.V1.Category('Body')]
-    [System.String]
-    # .
-    ${Email}, 
-
-    [Parameter(ParameterSetName='CreateExpanded', Mandatory)]
-    [JumpCloud.SDK.V1.Category('Body')]
-    [System.String]
-    # .
-    ${Username}, 
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
@@ -360,7 +354,6 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V1.Category('Body')]
     [JumpCloud.SDK.V1.Models.ISystemuserputpostAddressesItem[]]
     # .
-    # To construct, see NOTES section for ADDRESSES properties and create a hash table.
     ${Addresses}, 
 
     [Parameter(ParameterSetName='CreateExpanded')]
@@ -380,7 +373,6 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V1.Category('Body')]
     [JumpCloud.SDK.V1.Models.ISystemuserputpostAttributesItem[]]
     # .
-    # To construct, see NOTES section for ATTRIBUTES properties and create a hash table.
     ${Attributes}, 
 
     [Parameter(ParameterSetName='CreateExpanded')]
@@ -418,6 +410,12 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [System.String]
     # .
     ${Displayname}, 
+
+    [Parameter(ParameterSetName='CreateExpanded')]
+    [JumpCloud.SDK.V1.Category('Body')]
+    [System.String]
+    # .
+    ${Email}, 
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
@@ -563,7 +561,6 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V1.Category('Body')]
     [JumpCloud.SDK.V1.Models.ISystemuserputpostPhoneNumbersItem[]]
     # .
-    # To construct, see NOTES section for PHONENUMBERS properties and create a hash table.
     ${PhoneNumbers}, 
 
     [Parameter(ParameterSetName='CreateExpanded')]
@@ -583,7 +580,6 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V1.Category('Body')]
     [JumpCloud.SDK.V1.Models.ISystemuserputpostRelationshipsItem[]]
     # .
-    # To construct, see NOTES section for RELATIONSHIPS properties and create a hash table.
     ${Relationships}, 
 
     [Parameter(ParameterSetName='CreateExpanded')]
@@ -591,7 +587,6 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V1.Category('Body')]
     [JumpCloud.SDK.V1.Models.IRestrictedField1[]]
     # .
-    # To construct, see NOTES section for RESTRICTEDFIELDS properties and create a hash table.
     ${RestrictedFields}, 
 
     [Parameter(ParameterSetName='CreateExpanded')]
@@ -629,6 +624,12 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [System.Int32]
     # .
     ${UnixUid}, 
+
+    [Parameter(ParameterSetName='CreateExpanded')]
+    [JumpCloud.SDK.V1.Category('Body')]
+    [System.String]
+    # .
+    ${Username}, 
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V1.Category('Runtime')]

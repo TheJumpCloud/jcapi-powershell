@@ -1,7 +1,7 @@
 ---
 external help file:
 Module Name: JumpCloud.SDK.DirectoryInsights
-online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/docs/exports/Get-JcSdkReportArtifactContent.md
+online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4908_userGroupDeviceGroupFilters/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/docs/exports/Get-JcSdkReportArtifactContent.md
 schema: 2.0.0
 ---
 
@@ -14,12 +14,13 @@ Download a report by report ID and artifact ID
 
 ### Get (Default)
 ```
-Get-JcSdkReportArtifactContent -ArtifactId <String> -ReportId <String> [<CommonParameters>]
+Get-JcSdkReportArtifactContent -HostEnv <String> -ArtifactId <String> -ReportId <String> [<CommonParameters>]
 ```
 
 ### GetViaIdentity
 ```
-Get-JcSdkReportArtifactContent -InputObject <IDirectoryInsightsApiIdentity> [<CommonParameters>]
+Get-JcSdkReportArtifactContent -HostEnv <String> -InputObject <IDirectoryInsightsApiIdentity>
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -58,9 +59,24 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -HostEnv
+Region for JumpCloud API host.
+Use 'console' for US or 'console.eu' for EU.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -InputObject
 Identity Parameter
-To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.DirectoryInsights.Models.IDirectoryInsightsApiIdentity
@@ -102,17 +118,15 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## NOTES
 
-ALIASES
-
 COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-INPUTOBJECT <IDirectoryInsightsApiIdentity>: Identity Parameter
+`INPUTOBJECT <IDirectoryInsightsApiIdentity>`: Identity Parameter
   - `[ArtifactId <String>]`: Artifact ID
   - `[ReportId <String>]`: Report ID
-  - `[ReportType <ReportType1?>]`: Report Type
+  - `[ReportType <String>]`: Report Type
 
 ## RELATED LINKS
 

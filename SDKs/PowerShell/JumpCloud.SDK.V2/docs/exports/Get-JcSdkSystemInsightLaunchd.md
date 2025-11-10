@@ -1,7 +1,7 @@
 ---
 external help file:
 Module Name: JumpCloud.SDK.V2
-online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkSystemInsightLaunchd.md
+online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4908_userGroupDeviceGroupFilters/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkSystemInsightLaunchd.md
 schema: 2.0.0
 ---
 
@@ -13,7 +13,8 @@ Valid filter fields are `system_id` and `name`.
 ## SYNTAX
 
 ```
-Get-JcSdkSystemInsightLaunchd [-Filter <String[]>] [-Sort <String[]>] [<CommonParameters>]
+Get-JcSdkSystemInsightLaunchd -HostEnv <String> [-Filter <List<String>>] [-Sort <List<String>>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -77,11 +78,27 @@ Supports wild cards.
 **EX:** `GET /api/v2/groups?filter=name:eq:Test+Group`
 
 ```yaml
-Type: System.String[]
+Type: System.Collections.Generic.List`1[[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]
 Parameter Sets: (All)
 Aliases:
 
 Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -HostEnv
+Region for JumpCloud API host.
+Use 'console' for US or 'console.eu' for EU.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -93,7 +110,7 @@ The comma separated fields used to sort the collection.
 Default sort is ascending, prefix with `-` to sort descending.
 
 ```yaml
-Type: System.String[]
+Type: System.Collections.Generic.List`1[[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]
 Parameter Sets: (All)
 Aliases:
 
@@ -114,8 +131,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ### JumpCloud.SDK.V2.Models.ISystemInsightsLaunchd
 
 ## NOTES
-
-ALIASES
 
 ## RELATED LINKS
 

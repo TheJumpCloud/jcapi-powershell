@@ -1,7 +1,7 @@
 ---
 external help file:
 Module Name: JumpCloud.SDK.V2
-online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/New-JcSdkLdapServerSambaDomain.md
+online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4908_userGroupDeviceGroupFilters/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/New-JcSdkLdapServerSambaDomain.md
 schema: 2.0.0
 ---
 
@@ -26,26 +26,26 @@ curl -X POST https://console.jumpcloud.com/api/v2/ldapservers/{LDAP_ID}/sambadom
 
 ### CreateExpanded (Default)
 ```
-New-JcSdkLdapServerSambaDomain -LdapserverId <String> -Name <String> -Sid <String> [-Confirm] [-WhatIf]
- [<CommonParameters>]
+New-JcSdkLdapServerSambaDomain -HostEnv <String> -LdapserverId <String> [-Name <String>] [-Sid <String>]
+ [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Create
 ```
-New-JcSdkLdapServerSambaDomain -LdapserverId <String> -Body <ISambaDomain> [-Confirm] [-WhatIf]
- [<CommonParameters>]
+New-JcSdkLdapServerSambaDomain -HostEnv <String> -LdapserverId <String> -Body <ISambaDomain> [-Confirm]
+ [-WhatIf] [<CommonParameters>]
 ```
 
 ### CreateViaIdentity
 ```
-New-JcSdkLdapServerSambaDomain -InputObject <IJumpCloudApiIdentity> -Body <ISambaDomain> [-Confirm] [-WhatIf]
- [<CommonParameters>]
+New-JcSdkLdapServerSambaDomain -HostEnv <String> -InputObject <IJumpCloudApiIdentity> -Body <ISambaDomain>
+ [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### CreateViaIdentityExpanded
 ```
-New-JcSdkLdapServerSambaDomain -InputObject <IJumpCloudApiIdentity> -Name <String> -Sid <String> [-Confirm]
- [-WhatIf] [<CommonParameters>]
+New-JcSdkLdapServerSambaDomain -HostEnv <String> -InputObject <IJumpCloudApiIdentity> [-Name <String>]
+ [-Sid <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -89,7 +89,6 @@ Sid  String
 
 ### -Body
 Samba Domain
-To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.ISambaDomain
@@ -103,9 +102,24 @@ Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
+### -HostEnv
+Region for JumpCloud API host.
+Use 'console' for US or 'console.eu' for EU.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -InputObject
 Identity Parameter
-To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
@@ -142,7 +156,7 @@ Type: System.String
 Parameter Sets: CreateExpanded, CreateViaIdentityExpanded
 Aliases:
 
-Required: True
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -157,7 +171,7 @@ Type: System.String
 Parameter Sets: CreateExpanded, CreateViaIdentityExpanded
 Aliases:
 
-Required: True
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -210,18 +224,16 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## NOTES
 
-ALIASES
-
 COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <ISambaDomain>: Samba Domain
+`BODY <ISambaDomain>`: Samba Domain
   - `Name <String>`: Name of this domain's WorkGroup
   - `Sid <String>`: Security identifier of this domain
 
-INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter
+`INPUTOBJECT <IJumpCloudApiIdentity>`: Identity Parameter
   - `[AccountId <String>]`: 
   - `[ActivedirectoryId <String>]`: 
   - `[AdministratorId <String>]`: 

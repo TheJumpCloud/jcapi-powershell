@@ -1,14 +1,14 @@
 ---
 external help file:
 Module Name: JumpCloud.SDK.V2
-online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Set-JcSdkCustomEmailConfiguration.md
+online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4908_userGroupDeviceGroupFilters/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Set-JcSdkCustomEmailConfiguration.md
 schema: 2.0.0
 ---
 
 # Set-JcSdkCustomEmailConfiguration
 
 ## SYNOPSIS
-Update the custom email configuration for the specified custom email type.
+Set the custom email configuration for the specified custom email type.
 
 This action is only available to paying customers.
 
@@ -16,32 +16,32 @@ This action is only available to paying customers.
 
 ### SetExpanded (Default)
 ```
-Set-JcSdkCustomEmailConfiguration -CustomEmailType <String> -Subject <String> -Type <String> [-Body <String>]
- [-Button <String>] [-Header <String>] [-NextStepContactInfo <String>] [-Title <String>] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+Set-JcSdkCustomEmailConfiguration -HostEnv <String> -CustomEmailType <String> [-Body <String>]
+ [-Button <String>] [-Header <String>] [-NextStepContactInfo <String>] [-Subject <String>] [-Title <String>]
+ [-Type <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Set
 ```
-Set-JcSdkCustomEmailConfiguration -CustomEmailType <String> -CustomEmail <ICustomEmail> [-Confirm] [-WhatIf]
- [<CommonParameters>]
+Set-JcSdkCustomEmailConfiguration -HostEnv <String> -CustomEmailType <String> -CustomEmail <ICustomEmail>
+ [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentity
 ```
-Set-JcSdkCustomEmailConfiguration -InputObject <IJumpCloudApiIdentity> -CustomEmail <ICustomEmail> [-Confirm]
- [-WhatIf] [<CommonParameters>]
+Set-JcSdkCustomEmailConfiguration -HostEnv <String> -InputObject <IJumpCloudApiIdentity>
+ -CustomEmail <ICustomEmail> [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkCustomEmailConfiguration -InputObject <IJumpCloudApiIdentity> -Subject <String> -Type <String>
- [-Body <String>] [-Button <String>] [-Header <String>] [-NextStepContactInfo <String>] [-Title <String>]
- [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkCustomEmailConfiguration -HostEnv <String> -InputObject <IJumpCloudApiIdentity> [-Body <String>]
+ [-Button <String>] [-Header <String>] [-NextStepContactInfo <String>] [-Subject <String>] [-Title <String>]
+ [-Type <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Update the custom email configuration for the specified custom email type.
+Set the custom email configuration for the specified custom email type.
 
 This action is only available to paying customers.
 
@@ -111,7 +111,6 @@ Accept wildcard characters: False
 
 ### -CustomEmail
 Custom email content created by the admin user to personalize emails sent to their system users.
-To construct, see NOTES section for CUSTOMEMAIL properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.ICustomEmail
@@ -155,9 +154,24 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -HostEnv
+Region for JumpCloud API host.
+Use 'console' for US or 'console.eu' for EU.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -InputObject
 Identity Parameter
-To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
@@ -194,7 +208,7 @@ Type: System.String
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
-Required: True
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -224,7 +238,7 @@ Type: System.String
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
-Required: True
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -277,14 +291,12 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## NOTES
 
-ALIASES
-
 COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-CUSTOMEMAIL <ICustomEmail>: Custom email content created by the admin user to personalize emails sent to their system users.
+`CUSTOMEMAIL <ICustomEmail>`: Custom email content created by the admin user to personalize emails sent to their system users.
   - `Subject <String>`: 
   - `Type <String>`: 
   - `[Body <String>]`: 
@@ -293,7 +305,7 @@ CUSTOMEMAIL <ICustomEmail>: Custom email content created by the admin user to pe
   - `[NextStepContactInfo <String>]`: 
   - `[Title <String>]`: 
 
-INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter
+`INPUTOBJECT <IJumpCloudApiIdentity>`: Identity Parameter
   - `[AccountId <String>]`: 
   - `[ActivedirectoryId <String>]`: 
   - `[AdministratorId <String>]`: 

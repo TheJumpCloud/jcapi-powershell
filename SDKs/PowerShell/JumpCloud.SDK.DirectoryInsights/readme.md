@@ -3,9 +3,6 @@
 This directory contains the PowerShell module for the DirectoryInsightsApi service.
 
 ---
-## Status
-[![JumpCloud.SDK.DirectoryInsights](https://img.shields.io/powershellgallery/v/JumpCloud.SDK.DirectoryInsights.svg?style=flat-square&label=JumpCloud.SDK.DirectoryInsights "JumpCloud.SDK.DirectoryInsights")](https://www.powershellgallery.com/packages/JumpCloud.SDK.DirectoryInsights/)
-
 ## Info
 - Modifiable: yes
 - Generated: all

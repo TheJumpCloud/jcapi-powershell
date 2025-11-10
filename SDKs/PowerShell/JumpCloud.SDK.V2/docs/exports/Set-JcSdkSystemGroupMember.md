@@ -1,7 +1,7 @@
 ---
 external help file:
 Module Name: JumpCloud.SDK.V2
-online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Set-JcSdkSystemGroupMember.md
+online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4908_userGroupDeviceGroupFilters/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Set-JcSdkSystemGroupMember.md
 schema: 2.0.0
 ---
 
@@ -27,26 +27,27 @@ curl -X POST https://console.jumpcloud.com/api/v2/systemgroups/{Group_ID}/member
 
 ### SetExpanded (Default)
 ```
-Set-JcSdkSystemGroupMember -GroupId <String> -Id <String> -Op <String> [-Authorization <String>]
- [-Date <String>] [-Attributes <Hashtable>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkSystemGroupMember -HostEnv <String> -GroupId <String> [-Authorization <String>] [-Date <String>]
+ [-Attributes <Hashtable>] [-Id <String>] [-Op <String>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Set
 ```
-Set-JcSdkSystemGroupMember -GroupId <String> -Body <IGraphOperationSystemGroupMember>
+Set-JcSdkSystemGroupMember -HostEnv <String> -GroupId <String> -Body <IGraphOperationSystemGroupMember>
  [-Authorization <String>] [-Date <String>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentity
 ```
-Set-JcSdkSystemGroupMember -InputObject <IJumpCloudApiIdentity> -Body <IGraphOperationSystemGroupMember>
- [-Authorization <String>] [-Date <String>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkSystemGroupMember -HostEnv <String> -InputObject <IJumpCloudApiIdentity>
+ -Body <IGraphOperationSystemGroupMember> [-Authorization <String>] [-Date <String>] [-PassThru] [-Confirm]
+ [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkSystemGroupMember -InputObject <IJumpCloudApiIdentity> -Id <String> -Op <String>
- [-Authorization <String>] [-Date <String>] [-Attributes <Hashtable>] [-PassThru] [-Confirm] [-WhatIf]
+Set-JcSdkSystemGroupMember -HostEnv <String> -InputObject <IJumpCloudApiIdentity> [-Authorization <String>]
+ [-Date <String>] [-Attributes <Hashtable>] [-Id <String>] [-Op <String>] [-PassThru] [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
@@ -116,7 +117,6 @@ Accept wildcard characters: False
 
 ### -Body
 GraphOperation (SystemGroup-Member)
-To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IGraphOperationSystemGroupMember
@@ -160,12 +160,13 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Id
-The ObjectID of graph object being added or removed as an association.
+### -HostEnv
+Region for JumpCloud API host.
+Use 'console' for US or 'console.eu' for EU.
 
 ```yaml
 Type: System.String
-Parameter Sets: SetExpanded, SetViaIdentityExpanded
+Parameter Sets: (All)
 Aliases:
 
 Required: True
@@ -175,9 +176,23 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -Id
+The ObjectID of graph object being added or removed as an association.
+
+```yaml
+Type: System.String
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -InputObject
 Identity Parameter
-To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
@@ -199,7 +214,7 @@ Type: System.String
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
-Required: True
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -267,20 +282,18 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## NOTES
 
-ALIASES
-
 COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <IGraphOperationSystemGroupMember>: GraphOperation (SystemGroup-Member)
+`BODY <IGraphOperationSystemGroupMember>`: GraphOperation (SystemGroup-Member)
   - `Id <String>`: The ObjectID of graph object being added or removed as an association.
   - `Op <String>`: How to modify the graph connection.
   - `[Attributes <IGraphAttributes>]`: The graph attributes.
     - `[(Any) <Object>]`: This indicates any property can be added to this object.
 
-INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter
+`INPUTOBJECT <IJumpCloudApiIdentity>`: Identity Parameter
   - `[AccountId <String>]`: 
   - `[ActivedirectoryId <String>]`: 
   - `[AdministratorId <String>]`: 

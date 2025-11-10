@@ -1,7 +1,7 @@
 ---
 external help file:
 Module Name: JumpCloud.SDK.V1
-online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/Initialize-JcSdkUserState.md
+online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4908_userGroupDeviceGroupFilters/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/Initialize-JcSdkUserState.md
 schema: 2.0.0
 ---
 
@@ -53,27 +53,28 @@ curl -X POST https://console.jumpcloud.com/api/systemusers/{id}/state/activate \
 
 ### ActivateExpanded (Default)
 ```
-Initialize-JcSdkUserState -Id <String> [-Email <String>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+Initialize-JcSdkUserState -HostEnv <String> -Id <String> [-Email <String>] [-PassThru] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### Activate
 ```
-Initialize-JcSdkUserState -Id <String>
+Initialize-JcSdkUserState -HostEnv <String> -Id <String>
  -Body <IPathsDi9CukSystemusersIdStateActivatePostRequestbodyContentApplicationJsonSchema> [-PassThru]
  [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### ActivateViaIdentity
 ```
-Initialize-JcSdkUserState -InputObject <IJumpCloudApiIdentity>
+Initialize-JcSdkUserState -HostEnv <String> -InputObject <IJumpCloudApiIdentity>
  -Body <IPathsDi9CukSystemusersIdStateActivatePostRequestbodyContentApplicationJsonSchema> [-PassThru]
  [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### ActivateViaIdentityExpanded
 ```
-Initialize-JcSdkUserState -InputObject <IJumpCloudApiIdentity> [-Email <String>] [-PassThru] [-Confirm]
- [-WhatIf] [<CommonParameters>]
+Initialize-JcSdkUserState -HostEnv <String> -InputObject <IJumpCloudApiIdentity> [-Email <String>] [-PassThru]
+ [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -138,7 +139,6 @@ Initialize-JcSdkUserState -Id:(<string>) -Body:(<JumpCloud.SDK.V1.Models.PathsDi
 
 ### -Body
 .
-To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V1.Models.IPathsDi9CukSystemusersIdStateActivatePostRequestbodyContentApplicationJsonSchema
@@ -167,6 +167,22 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -HostEnv
+Region for JumpCloud API host.
+Use 'console' for US or 'console.eu' for EU.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Id
 .
 
@@ -184,7 +200,6 @@ Accept wildcard characters: False
 
 ### -InputObject
 Identity Parameter
-To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V1.Models.IJumpCloudApiIdentity
@@ -259,17 +274,15 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## NOTES
 
-ALIASES
-
 COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <IPathsDi9CukSystemusersIdStateActivatePostRequestbodyContentApplicationJsonSchema>: .
+`BODY <IPathsDi9CukSystemusersIdStateActivatePostRequestbodyContentApplicationJsonSchema>`: .
   - `[Email <String>]`: 
 
-INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter
+`INPUTOBJECT <IJumpCloudApiIdentity>`: Identity Parameter
   - `[Id <String>]`: 
   - `[SystemId <String>]`: 
   - `[SystemuserId <String>]`: 

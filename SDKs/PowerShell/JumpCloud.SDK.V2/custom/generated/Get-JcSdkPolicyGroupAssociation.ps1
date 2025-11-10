@@ -48,7 +48,7 @@ PS C:\> {{ Add code here }}
 .Outputs
 JumpCloud.SDK.V2.Models.IGraphConnection
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkPolicyGroupAssociation.md
+https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4908_userGroupDeviceGroupFilters/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkPolicyGroupAssociation.md
 #>
  Function Get-JcSdkPolicyGroupAssociation
 {
@@ -56,15 +56,22 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
     Param(
     [Parameter(Mandatory)]
+    [JumpCloud.SDK.V2.Category('Uri')]
+    [System.String]
+    # Region for JumpCloud API host.
+    # Use 'console' for US or 'console.eu' for EU.
+    ${HostEnv}, 
+
+    [Parameter(Mandatory)]
     [JumpCloud.SDK.V2.Category('Path')]
     [System.String]
     # ObjectID of the Policy Group.
     ${GroupId}, 
 
     [Parameter(Mandatory)]
-    [ArgumentCompleter([JumpCloud.SDK.V2.Support.GraphTargetsActiveDirectoryTargets])]
+    [JumpCloud.SDK.V2.PSArgumentCompleterAttribute("user", "user_group")]
     [JumpCloud.SDK.V2.Category('Query')]
-    [JumpCloud.SDK.V2.Support.GraphTargetsActiveDirectoryTargets]
+    [System.String]
     # Targets which a "active_directory" can be associated to.
     ${Targets}, 
 

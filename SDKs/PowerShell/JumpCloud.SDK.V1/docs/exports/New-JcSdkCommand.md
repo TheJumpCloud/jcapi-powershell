@@ -1,7 +1,7 @@
 ---
 external help file:
 Module Name: JumpCloud.SDK.V1
-online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/New-JcSdkCommand.md
+online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4908_userGroupDeviceGroupFilters/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/New-JcSdkCommand.md
 schema: 2.0.0
 ---
 
@@ -26,16 +26,17 @@ curl -X POST https://console.jumpcloud.com/api/commands/ \\
 
 ### CreateExpanded (Default)
 ```
-New-JcSdkCommand -Command <String> -CommandType <String> -Name <String> [-CommandRunners <String[]>]
- [-Description <String>] [-Files <String[]>] [-FilesS3 <IFilesS3[]>] [-LaunchType <String>]
- [-ListensTo <String>] [-Organization <String>] [-Schedule <String>] [-ScheduleRepeatType <String>]
- [-ScheduleYear <Int32>] [-Shell <String>] [-Sudo] [-Template <String>] [-Timeout <String>]
- [-TimeToLiveSeconds <Int32>] [-Trigger <String>] [-User <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+New-JcSdkCommand -HostEnv <String> [-AiGenerated] [-Command <String>] [-CommandRunners <String[]>]
+ [-CommandType <String>] [-Description <String>] [-Files <String[]>] [-FilesS3 <IFilesS3[]>]
+ [-LaunchType <String>] [-ListensTo <String>] [-Name <String>] [-Organization <String>] [-Schedule <String>]
+ [-ScheduleRepeatType <String>] [-ScheduleYear <Int32>] [-Shell <String>] [-Sudo] [-Template <String>]
+ [-Timeout <String>] [-TimeToLiveSeconds <Int32>] [-Trigger <String>] [-User <String>] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### Create
 ```
-New-JcSdkCommand -Body <ICommand> [-Confirm] [-WhatIf] [<CommonParameters>]
+New-JcSdkCommand -HostEnv <String> -Body <ICommand> [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -107,9 +108,23 @@ User               String
 
 ## PARAMETERS
 
+### -AiGenerated
+Whether this command was generated with AI assistance.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: CreateExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Body
 Command
-To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V1.Models.ICommand
@@ -131,7 +146,7 @@ Type: System.String
 Parameter Sets: CreateExpanded
 Aliases:
 
-Required: True
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -161,7 +176,7 @@ Type: System.String
 Parameter Sets: CreateExpanded
 Aliases:
 
-Required: True
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -200,7 +215,6 @@ Accept wildcard characters: False
 
 ### -FilesS3
 An array of file stored in S3 to include with the command.
-To construct, see NOTES section for FILESS3 properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V1.Models.IFilesS3[]
@@ -208,6 +222,22 @@ Parameter Sets: CreateExpanded
 Aliases:
 
 Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -HostEnv
+Region for JumpCloud API host.
+Use 'console' for US or 'console.eu' for EU.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -252,7 +282,7 @@ Type: System.String
 Parameter Sets: CreateExpanded
 Aliases:
 
-Required: True
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -471,21 +501,20 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## NOTES
 
-ALIASES
-
 COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <ICommand>: Command
+`BODY <ICommand>`: Command
   - `Command1 <String>`: The command to execute on the server.
   - `CommandType <String>`: The Command OS
   - `Name <String>`: 
-  - `[CommandRunners <String[]>]`: An array of IDs of the Command Runner Users that can execute this command.
+  - `[AiGenerated <Boolean?>]`: Whether this command was generated with AI assistance.
+  - `[CommandRunners <List<String>>]`: An array of IDs of the Command Runner Users that can execute this command.
   - `[Description <String>]`: Description of the command.
-  - `[Files <String[]>]`: An array of file IDs to include with the command.
-  - `[FilesS3 <IFilesS3[]>]`: An array of file stored in S3 to include with the command.
+  - `[Files <List<String>>]`: An array of file IDs to include with the command.
+  - `[FilesS3 <List<IFilesS3>>]`: An array of file stored in S3 to include with the command.
     - `Destination <String>`: The destination of the file.
     - `Name <String>`: The name of the file.
     - `ObjectStorageId <String>`: The ID of the file in object storage database.
@@ -504,7 +533,7 @@ BODY <ICommand>: Command
   - `[Trigger <String>]`: The name of the command trigger.
   - `[User <String>]`: The ID of the system user to run the command as. This field is required when creating a command with a commandType of "mac" or "linux".
 
-FILESS3 <IFilesS3[]>: An array of file stored in S3 to include with the command.
+`FILESS3 <IFilesS3[]>`: An array of file stored in S3 to include with the command.
   - `Destination <String>`: The destination of the file.
   - `Name <String>`: The name of the file.
   - `ObjectStorageId <String>`: The ID of the file in object storage database.

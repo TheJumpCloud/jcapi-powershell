@@ -1,7 +1,7 @@
 ---
 external help file:
 Module Name: JumpCloud.SDK.V2
-online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Restart-JcSdkAppleMdmDevice.md
+online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4908_userGroupDeviceGroupFilters/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Restart-JcSdkAppleMdmDevice.md
 schema: 2.0.0
 ---
 
@@ -23,28 +23,28 @@ Restarts a DEP-enrolled device.
 
 ### RestartExpanded (Default)
 ```
-Restart-JcSdkAppleMdmDevice -AppleMdmId <String> -DeviceId <String> [-KextPaths <String[]>] [-PassThru]
- [-Confirm] [-WhatIf] [<CommonParameters>]
+Restart-JcSdkAppleMdmDevice -HostEnv <String> -AppleMdmId <String> -DeviceId <String> [-KextPaths <String[]>]
+ [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Restart
 ```
-Restart-JcSdkAppleMdmDevice -AppleMdmId <String> -DeviceId <String>
+Restart-JcSdkAppleMdmDevice -HostEnv <String> -AppleMdmId <String> -DeviceId <String>
  -Body <IPaths1Whnyt3ApplemdmsAppleMdmIdDevicesDeviceIdRestartPostRequestbodyContentApplicationJsonSchema>
  [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### RestartViaIdentity
 ```
-Restart-JcSdkAppleMdmDevice -InputObject <IJumpCloudApiIdentity>
+Restart-JcSdkAppleMdmDevice -HostEnv <String> -InputObject <IJumpCloudApiIdentity>
  -Body <IPaths1Whnyt3ApplemdmsAppleMdmIdDevicesDeviceIdRestartPostRequestbodyContentApplicationJsonSchema>
  [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### RestartViaIdentityExpanded
 ```
-Restart-JcSdkAppleMdmDevice -InputObject <IJumpCloudApiIdentity> [-KextPaths <String[]>] [-PassThru]
- [-Confirm] [-WhatIf] [<CommonParameters>]
+Restart-JcSdkAppleMdmDevice -HostEnv <String> -InputObject <IJumpCloudApiIdentity> [-KextPaths <String[]>]
+ [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -94,7 +94,6 @@ Accept wildcard characters: False
 
 ### -Body
 .
-To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IPaths1Whnyt3ApplemdmsAppleMdmIdDevicesDeviceIdRestartPostRequestbodyContentApplicationJsonSchema
@@ -123,9 +122,24 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -HostEnv
+Region for JumpCloud API host.
+Use 'console' for US or 'console.eu' for EU.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -InputObject
 Identity Parameter
-To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
@@ -215,17 +229,15 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## NOTES
 
-ALIASES
-
 COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <IPaths1Whnyt3ApplemdmsAppleMdmIdDevicesDeviceIdRestartPostRequestbodyContentApplicationJsonSchema>: .
-  - `[KextPaths <String[]>]`: The string to pass when doing a restart and performing a RebuildKernelCache.
+`BODY <IPaths1Whnyt3ApplemdmsAppleMdmIdDevicesDeviceIdRestartPostRequestbodyContentApplicationJsonSchema>`: .
+  - `[KextPaths <List<String>>]`: The string to pass when doing a restart and performing a RebuildKernelCache.
 
-INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter
+`INPUTOBJECT <IJumpCloudApiIdentity>`: Identity Parameter
   - `[AccountId <String>]`: 
   - `[ActivedirectoryId <String>]`: 
   - `[AdministratorId <String>]`: 

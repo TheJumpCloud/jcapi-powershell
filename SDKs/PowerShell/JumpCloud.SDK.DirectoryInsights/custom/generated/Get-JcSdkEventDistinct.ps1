@@ -44,7 +44,7 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 BODY <IEventDistinctQuery>:
-  Service <String[]>: service name to query.
+  Service <List<String>>: service name to query.
   StartTime <DateTime>: query start time, UTC in RFC3339 format
   Field <String>: field is what they wish to query on
   [EndTime <DateTime?>]: optional query end time, UTC in RFC3339 format
@@ -53,18 +53,24 @@ BODY <IEventDistinctQuery>:
   [SearchTermNot <ITermConjunction>]: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
   [SearchTermOr <ITermConjunction>]: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/docs/exports/Get-JcSdkEventDistinct.md
+https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4908_userGroupDeviceGroupFilters/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/docs/exports/Get-JcSdkEventDistinct.md
 #>
  Function Get-JcSdkEventDistinct
 {
     [OutputType([JumpCloud.SDK.DirectoryInsights.Models.IPaths1Sc3SuiEventsDistinctPostResponses200ContentApplicationJsonSchema])]
     [CmdletBinding(DefaultParameterSetName='GetExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
+    [Parameter(Mandatory)]
+    [JumpCloud.SDK.DirectoryInsights.Category('Uri')]
+    [System.String]
+    # Region for JumpCloud API host.
+    # Use 'console' for US or 'console.eu' for EU.
+    ${HostEnv}, 
+
     [Parameter(ParameterSetName='Get', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.DirectoryInsights.Category('Body')]
     [JumpCloud.SDK.DirectoryInsights.Models.IEventDistinctQuery]
     # EventDistinctQuery is the users' command to search our auth logs for distinct values of the specified field
-    # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body}, 
 
     [Parameter(ParameterSetName='GetExpanded', Mandatory)]

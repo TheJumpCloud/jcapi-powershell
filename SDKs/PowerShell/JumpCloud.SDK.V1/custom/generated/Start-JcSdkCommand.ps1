@@ -53,20 +53,26 @@ To create the parameters described below, construct a hash table containing the 
 
 BODY <IPathsPnxbyeRuncommandPostRequestbodyContentApplicationJsonSchema>:
   [Id <String>]: The ID of the command.
-  [SystemIds <String[]>]: An optional list of device IDs to run the command on. If omitted, the command will run on devices bound to the command.
+  [SystemIds <List<String>>]: An optional list of device IDs to run the command on. If omitted, the command will run on devices bound to the command.
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/Start-JcSdkCommand.md
+https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4908_userGroupDeviceGroupFilters/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/Start-JcSdkCommand.md
 #>
  Function Start-JcSdkCommand
 {
     [OutputType([JumpCloud.SDK.V1.Models.IPaths3Rrc57RuncommandPostResponses200ContentApplicationJsonSchema])]
     [CmdletBinding(DefaultParameterSetName='RunExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
+    [Parameter(Mandatory)]
+    [JumpCloud.SDK.V1.Category('Uri')]
+    [System.String]
+    # Region for JumpCloud API host.
+    # Use 'console' for US or 'console.eu' for EU.
+    ${HostEnv}, 
+
     [Parameter(ParameterSetName='Run', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V1.Category('Body')]
     [JumpCloud.SDK.V1.Models.IPathsPnxbyeRuncommandPostRequestbodyContentApplicationJsonSchema]
     # .
-    # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body}, 
 
     [Parameter(ParameterSetName='RunExpanded')]

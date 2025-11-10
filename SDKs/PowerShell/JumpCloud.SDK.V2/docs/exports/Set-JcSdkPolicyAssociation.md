@@ -1,7 +1,7 @@
 ---
 external help file:
 Module Name: JumpCloud.SDK.V2
-online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Set-JcSdkPolicyAssociation.md
+online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4908_userGroupDeviceGroupFilters/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Set-JcSdkPolicyAssociation.md
 schema: 2.0.0
 ---
 
@@ -29,26 +29,26 @@ curl -X POST https://console.jumpcloud.com/api/v2/policies/{Policy_ID}/associati
 
 ### SetExpanded (Default)
 ```
-Set-JcSdkPolicyAssociation -PolicyId <String> -Id <String> -Op <String> -Type <GraphOperationPolicy1>
- [-Attributes <Hashtable>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkPolicyAssociation -HostEnv <String> -PolicyId <String> [-Attributes <Hashtable>] [-Id <String>]
+ [-Op <String>] [-Type <String>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Set
 ```
-Set-JcSdkPolicyAssociation -PolicyId <String> -Body <IGraphOperationPolicy> [-PassThru] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+Set-JcSdkPolicyAssociation -HostEnv <String> -PolicyId <String> -Body <IGraphOperationPolicy> [-PassThru]
+ [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentity
 ```
-Set-JcSdkPolicyAssociation -InputObject <IJumpCloudApiIdentity> -Body <IGraphOperationPolicy> [-PassThru]
- [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkPolicyAssociation -HostEnv <String> -InputObject <IJumpCloudApiIdentity>
+ -Body <IGraphOperationPolicy> [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkPolicyAssociation -InputObject <IJumpCloudApiIdentity> -Id <String> -Op <String>
- -Type <GraphOperationPolicy1> [-Attributes <Hashtable>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkPolicyAssociation -HostEnv <String> -InputObject <IJumpCloudApiIdentity> [-Attributes <Hashtable>]
+ [-Id <String>] [-Op <String>] [-Type <String>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -104,7 +104,6 @@ Accept wildcard characters: False
 
 ### -Body
 GraphOperation (Policy)
-To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IGraphOperationPolicy
@@ -118,12 +117,13 @@ Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
-### -Id
-The ObjectID of graph object being added or removed as an association.
+### -HostEnv
+Region for JumpCloud API host.
+Use 'console' for US or 'console.eu' for EU.
 
 ```yaml
 Type: System.String
-Parameter Sets: SetExpanded, SetViaIdentityExpanded
+Parameter Sets: (All)
 Aliases:
 
 Required: True
@@ -133,9 +133,23 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -Id
+The ObjectID of graph object being added or removed as an association.
+
+```yaml
+Type: System.String
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -InputObject
 Identity Parameter
-To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
@@ -157,7 +171,7 @@ Type: System.String
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
-Required: True
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -198,11 +212,11 @@ Accept wildcard characters: False
 Targets which a "policy" can be associated to.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Support.GraphOperationPolicy1
+Type: System.String
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
-Required: True
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -255,21 +269,19 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## NOTES
 
-ALIASES
-
 COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <IGraphOperationPolicy>: GraphOperation (Policy)
+`BODY <IGraphOperationPolicy>`: GraphOperation (Policy)
   - `Id <String>`: The ObjectID of graph object being added or removed as an association.
   - `Op <String>`: How to modify the graph connection.
-  - `Type <GraphOperationPolicy1>`: Targets which a "policy" can be associated to.
+  - `Type <String>`: Targets which a "policy" can be associated to.
   - `[Attributes <IGraphAttributes>]`: The graph attributes.
     - `[(Any) <Object>]`: This indicates any property can be added to this object.
 
-INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter
+`INPUTOBJECT <IJumpCloudApiIdentity>`: Identity Parameter
   - `[AccountId <String>]`: 
   - `[ActivedirectoryId <String>]`: 
   - `[AdministratorId <String>]`: 

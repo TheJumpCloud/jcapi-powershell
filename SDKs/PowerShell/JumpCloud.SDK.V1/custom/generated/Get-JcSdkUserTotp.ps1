@@ -11,7 +11,7 @@ Wednesday, November 27, 2024 5:33:45 PM
 .Inputs
 JumpCloud.SDK.V1.Models.IJumpCloudApiIdentity
 .Outputs
-System.DateTime
+JumpCloud.SDK.V1.Models.ITotpenrollmentinfo
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -23,13 +23,20 @@ INPUTOBJECT <IJumpCloudApiIdentity>:
   [SystemuserId <String>]:
   [Triggername <String>]:
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/Get-JcSdkUserTotp.md
+https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4908_userGroupDeviceGroupFilters/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/Get-JcSdkUserTotp.md
 #>
  Function Get-JcSdkUserTotp
 {
-    [OutputType([System.DateTime])]
+    [OutputType([JumpCloud.SDK.V1.Models.ITotpenrollmentinfo])]
     [CmdletBinding(DefaultParameterSetName='Get', PositionalBinding=$false)]
     Param(
+    [Parameter(Mandatory)]
+    [JumpCloud.SDK.V1.Category('Uri')]
+    [System.String]
+    # Region for JumpCloud API host.
+    # Use 'console' for US or 'console.eu' for EU.
+    ${HostEnv}, 
+
     [Parameter(ParameterSetName='Get', Mandatory)]
     [JumpCloud.SDK.V1.Category('Path')]
     [System.String]
@@ -40,7 +47,6 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V1.Category('Path')]
     [JumpCloud.SDK.V1.Models.IJumpCloudApiIdentity]
     # Identity Parameter
-    # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
     ${InputObject}, 
 
     [Parameter(DontShow)]
