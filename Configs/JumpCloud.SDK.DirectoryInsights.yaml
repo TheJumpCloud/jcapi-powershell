@@ -1,44 +1,33 @@
-debug: true
+sample-generation: true
+directive:
+- hide: true
+  where:
+    prefix: JcSdk
+input-file:
+- SwaggerSpecs/JumpCloud.SDK.DirectoryInsights.json
+module-version: 0.1.0
+output-folder: SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights
+clear-output-folder: true
+base-folder: ..
+branch: CUT-4908_userGroupDeviceGroupFilters
+dll-name: JumpCloud.SDK.DirectoryInsights.private
+namespace: JumpCloud.SDK.DirectoryInsights
+help-link-prefix: https://github.com/TheJumpCloud/jcapi-powershell/tree/$(branch)/SDKs/PowerShell/
 verbose: true
-# Values
-# azure: false
-powershell: true
-branch: master
+debug: true
 metadata:
-  authors: JumpCloud
-  owners: JumpCloud
-  description: The JumpCloud DirectoryInsights PowerShell SDK
-  copyright: (c) JumpCloud. All rights reserved.
-  companyName: JumpCloud
   requireLicenseAcceptance: false
-  licenseUri: https://github.com/TheJumpCloud/jcapi-powershell/tree/$(branch)/LICENSE
-  projectUri: https://github.com/TheJumpCloud/jcapi-powershell/tree/$(branch)/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/
-  iconUri: https://console.jumpcloud.com/img/login-viewport-logo.png
+  companyName: JumpCloud
   tags: JumpCloud, DaaS, Jump, Cloud, Directory
+  copyright: (c) JumpCloud. All rights reserved.
+  iconUri: https://console.jumpcloud.com/img/login-viewport-logo.png
+  licenseUri: https://github.com/TheJumpCloud/jcapi-powershell/tree/$(branch)/LICENSE
+  description: The JumpCloud DirectoryInsights PowerShell SDK
+  projectUri: https://github.com/TheJumpCloud/jcapi-powershell/tree/$(branch)/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/
+  owners: JumpCloud
   formatsToProcess: []
-
-# Names
+  authors: JumpCloud
+module-name: JumpCloud.SDK.DirectoryInsights
 prefix: JcSdkInternal
 customFunctionPrefix: JcSdk
-help-link-prefix: https://github.com/TheJumpCloud/jcapi-powershell/tree/$(branch)/SDKs/PowerShell/
-
-# Folders
-clear-output-folder: true
-output-folder: SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights
-base-folder: '..'
-
-input-file:
-  - SwaggerSpecs/JumpCloud.SDK.DirectoryInsights.json
-# title: JumpCloud.SDK.DirectoryInsights
-module-name: JumpCloud.SDK.DirectoryInsights
-namespace: JumpCloud.SDK.DirectoryInsights
-sample-generation: true
-module-version: 0.0.34
-dll-name: JumpCloud.SDK.DirectoryInsights.private
-
-directive:
-  - where:
-      prefix: JcSdk
-    hide: true
-# Prevent response flattening: https://github.com/Azure/autorest.powershell/issues/743
-# inlining-threshold: 0
+powershell: true

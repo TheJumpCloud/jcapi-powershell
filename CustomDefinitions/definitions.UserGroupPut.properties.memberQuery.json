@@ -7,21 +7,15 @@
         },
         "searchFilters": {
             "type": "string",
-            "description": "For queryType 'Search', this is a stringified filter object."
+            "description": "For queryType 'Search', this is a stringified JSON filter object that will be validated by API middleware."
         },
         "filters": {
             "type": "array",
             "items": {
-            "type": "object",
-            "properties": {
-                "field": { "type": "string" },
-                "operator": { "type": "string" },
-                "value": { "type": "string" }
+                "type": "string"
             },
-            "required": ["field", "operator", "value"]
-            },
-            "description": "For queryType 'Filter' or 'FilterQuery', this is an array of filter objects."
+            "description": "For queryType 'Filter', this is a stringified JSON filter array that will be validated by API middleware."
         }
     },
-    "description": "Query object for group membership."
+    "description": "Query object for group membership. Both 'filters' and 'searchFilters' accept stringified JSON that will be parsed and validated by the API."
 }
