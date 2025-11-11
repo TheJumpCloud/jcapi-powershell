@@ -33,14 +33,14 @@ Download a report by report ID and artifact ID
 {{ Add code here }}
 ```
 
-{{ Add output here }}
+
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell
 {{ Add code here }}
 ```
 
-{{ Add output here }}
+
 
 ## PARAMETERS
 
@@ -61,7 +61,7 @@ Accept wildcard characters: False
 
 ### -HostEnv
 Region for JumpCloud API host.
-Use 'console' for US or 'console.eu' for EU.
+Use 'api' for US or 'api.eu' for EU.
 
 ```yaml
 Type: System.String

@@ -174,6 +174,24 @@ ForEach ($SDK In $SDKName)
                 write-Host ('[REMOVING] generate-portal-ux.ps1 from module directory.') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
                 Remove-Item -Path $OutputFullPath/generate-portal-ux.ps1 -Force
             }
+            # After AutoRest generation, create a ModuleIdentifier.cs file for each SDK
+            $moduleIdentifierPath = "$OutputFullPath/custom/ModuleIdentifier.cs"
+            $sdkIdentifier = switch ($SDKNameItem) {
+                'JumpCloud.SDK.DirectoryInsights' { 'DirectoryInsights' }
+                'JumpCloud.SDK.V1' { 'V1' }
+                'JumpCloud.SDK.V2' { 'V2' }
+            }
+
+            $moduleIdentifierContent = @"
+namespace ModuleNameSpace
+{
+    public static class ModuleIdentifier
+    {
+        public const string SDKName = "$sdkIdentifier";
+    }
+}
+"@
+            Set-Content -Path $moduleIdentifierPath -Value $moduleIdentifierContent -Force
             # build the module
             $BuildModuleCommandJob = Start-Job -ArgumentList:($BuildModuleCommand) -ScriptBlock:( { param ($BuildModuleCommand);
                     Invoke-Expression -Command:($BuildModuleCommand)

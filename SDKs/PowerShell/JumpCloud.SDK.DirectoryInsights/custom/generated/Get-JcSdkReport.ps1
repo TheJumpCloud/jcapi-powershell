@@ -4,13 +4,9 @@ Ordered list of report metadata
 .Description
 Ordered list of report metadata
 .Example
-PS C:\> Get-JcSdkReport
-
-Returns a list of all available reports
+{{ Add code here }}
 .Example
-PS C:\> Get-JcSdkReport -Sort 'CREATED_AT'
-
-Returns a list of all available reports, sorted by the most recently created report
+{{ Add code here }}
 
 .Outputs
 JumpCloud.SDK.DirectoryInsights.Models.IGet200ApplicationJsonItemsItem
@@ -26,7 +22,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4908_userGroupDeviceGr
     [JumpCloud.SDK.DirectoryInsights.Category('Uri')]
     [System.String]
     # Region for JumpCloud API host.
-    # Use 'console' for US or 'console.eu' for EU.
+    # Use 'api' for US or 'api.eu' for EU.
     ${HostEnv}, 
 
     [Parameter()]

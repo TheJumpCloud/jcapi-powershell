@@ -1,4 +1,5 @@
 using System.Management.Automation;
+using ModuleNameSpace;
 namespace ModuleNameSpace
 {
     using Runtime;
@@ -25,65 +26,45 @@ namespace ModuleNameSpace
             string envVarNameForDefaultHostEnv = "JCEnvironment";
             string userInputEnvValue = System.Environment.GetEnvironmentVariable(envVarNameForDefaultHostEnv);
             string actualHostEnvValue;
-            string fallbackHostEnvValue = "console";
+
+            // Determine the default host prefix based on the SDK being used
+            string defaultHostPrefix = ModuleIdentifier.SDKName == "DirectoryInsights" ? "api" : "console";
 
             if (!string.IsNullOrEmpty(userInputEnvValue))
             {
                 switch (userInputEnvValue.ToUpperInvariant())
                 {
                     case "US":
-                        actualHostEnvValue = "console";
+                        actualHostEnvValue = defaultHostPrefix;
+                        break;
+                    case "EU":
+                        actualHostEnvValue = $"{defaultHostPrefix}.eu";
                         break;
                     case "STAGING":
                         actualHostEnvValue = "console.stg01";
                         break;
-                    case "EU":
-                        actualHostEnvValue = "console.eu";
-                        break;
                     default:
-                        // If user entered a full host (e.g., console, console.stg01, console.prod02), use as is
+                        // If user entered a full host (e.g., console, api.eu), use as is
                         actualHostEnvValue = userInputEnvValue;
                         break;
                 }
             }
             else
             {
-                actualHostEnvValue = fallbackHostEnvValue;
+                // Default to US region with the appropriate host prefix
+                actualHostEnvValue = defaultHostPrefix;
             }
+
             // Log the determined environment host for transparency
-            Console.WriteLine("JumpCloud SDK Module Environment: {0}.jumpcloud.com", actualHostEnvValue);
-            Console.WriteLine("To change the default host environment, set the environment variable $ENV:{0} to one of the following values: 'US' or 'EU' depending on your region and re-import the module.", envVarNameForDefaultHostEnv);
+            Console.WriteLine("JumpCloud SDK Module ({0}): {1}.jumpcloud.com", ModuleIdentifier.SDKName, actualHostEnvValue);
+            Console.WriteLine("To change the default host environment, set $ENV:{0} to 'US' or 'EU' and re-import the module.", envVarNameForDefaultHostEnv);
+
             System.Environment.SetEnvironmentVariable("JCEnvironment", actualHostEnvValue);
 
-            // Construct the PowerShell script to set $PSDefaultParameterValues
-            string scriptToSetDefault = $"$Global:PSDefaultParameterValues['*-JcSdk*:HostEnv'] = '{actualHostEnvValue}'";
-
-            try
-            {
-                using (PowerShell ps = PowerShell.Create(RunspaceMode.CurrentRunspace))
-                {
-                    ps.AddScript(scriptToSetDefault);
-                    ps.Invoke();
-
-                    if (ps.HadErrors)
-                    {
-                        foreach (var error in ps.Streams.Error)
-                        {
-                            Console.Error.WriteLine($"Error setting PSDefaultParameterValues for HostEnv: {error.ToString()}");
-                        }
-                    }
-                    // Optionally log success
-                    // else
-                    // {
-                    //     Console.WriteLine($"Successfully set default for -HostEnv to '{actualHostEnvValue}' via module initialization based on input '{userInputEnvValue ?? "not set"}'.");
-                    // }
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.Error.WriteLine($"Exception while trying to set PSDefaultParameterValues for HostEnv: {ex.Message}");
-            }
+            // Set PowerShell default parameter value
+            SetPSDefaultHostEnvParameterValue(actualHostEnvValue);
         }
+
         private void SetPSDefaultHostEnvParameterValue(string HostEnvValue)
         {
             string scriptToSetDefault = $"$Global:PSDefaultParameterValues['*-JcSdk*:HostEnv'] = '{HostEnvValue}'";
@@ -101,11 +82,6 @@ namespace ModuleNameSpace
                             Console.Error.WriteLine($"Error setting PSDefaultParameterValues for HostEnv: {error.ToString()}");
                         }
                     }
-                    // Optionally log success
-                    // else
-                    // {
-                    //     Console.WriteLine($"Successfully set default for -HostEnv to '{HostEnvValue}' via module initialization.");
-                    // }
                 }
             }
             catch (Exception ex)
@@ -143,7 +119,9 @@ namespace ModuleNameSpace
             var HostEnv = System.Environment.GetEnvironmentVariable("JCEnvironment");
             if (string.IsNullOrEmpty(HostEnv))
             {
-                Console.Write("Please enter your JumpCloud environment host (e.g., console, console.eu): ");
+                // Determine default based on SDK
+                string defaultHostPrefix = ModuleIdentifier.SDKName == "DirectoryInsights" ? "api" : "console";
+                Console.Write($"Please enter your JumpCloud environment host (e.g., {defaultHostPrefix}, {defaultHostPrefix}.eu): ");
                 HostEnv = Console.ReadLine();
                 Console.WriteLine("You entered '{0}'", HostEnv);
                 System.Environment.SetEnvironmentVariable("JCEnvironment", HostEnv);

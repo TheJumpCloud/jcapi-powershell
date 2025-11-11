@@ -1,19 +1,22 @@
-### Example 1: {{ Add title here }}
-
+### Example 1: List Reports
 ```powershell
-PS C:\> Get-JcSdkReport
-
-Returns a list of all available reports
+Get-JcSdkReport
 ```
 
-Returns a list of all available reports
+```output
+{{ Add output here (remove the output block if the example doesn't have an output) }}
+```
+
+This function will return a list of all Reports.
 
 ### Example 2: {{ Add title here }}
-
 ```powershell
-PS C:\> Get-JcSdkReport -Sort 'CREATED_AT'
-
-Returns a list of all available reports, sorted by the most recently created report
+{{ Add code here }}
 ```
 
-Returns a list of all available reports, sorted by the most recently created report. Valid values for sort are: CREATED_AT, EXPIRATION, REQUESTER_EMAIL, STATUS, TYPE, UPDATED_AT
+```output
+{{ Add output here (remove the output block if the example doesn't have an output) }}
+```
+
+{{ Add description here }}
+

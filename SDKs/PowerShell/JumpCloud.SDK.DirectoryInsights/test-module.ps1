@@ -505,7 +505,7 @@ $PesterTestCoveragePath = Join-Path $PesterTestResultFolder "$moduleName-TestCov
 # Print Test Coverage & Pester 5 Compatibility:
 . "$PSScriptRoot/../../../Tools/ValidateTests.ps1" -SDKName $moduleName
 # Write-Host "$($PesterTestFiles.FullName)"
-$configuration = [PesterConfiguration]::Default
+$configuration = New-PesterConfiguration
 $configuration.Run.Path = $($PesterTestFiles.FullName)
 $configuration.Should.ErrorAction = 'Continue'
 $configuration.CodeCoverage.Enabled = $false

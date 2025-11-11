@@ -520,6 +520,26 @@ function Add-ParameterizedHost {
         [object]$SwaggerObject
     )
 
+    # Check if property already exists (works for both hashtable and OrderedDictionary)
+    if ($SwaggerObject.Contains('x-ms-parameterized-host')) {
+        return $SwaggerObject
+    }
+
+    # Determine host prefix and enum values based on existing host
+    $hostPrefix = 'console'
+    $enumValues = @('console', 'console.eu')
+
+    if ($SwaggerObject.Contains('host')) {
+        $currentHost = $SwaggerObject['host']
+        if ($currentHost -like 'api.jumpcloud.com*') {
+            $hostPrefix = 'api'
+            $enumValues = @('api', 'api.eu')
+        } elseif ($currentHost -like 'console.jumpcloud.com*') {
+            $hostPrefix = 'console'
+            $enumValues = @('console', 'console.eu')
+        }
+    }
+
     # Define the x-ms-parameterized-host property
     $parameterizedHost = [ordered]@{
         hostTemplate     = '{hostEnv}.jumpcloud.com'
@@ -527,19 +547,14 @@ function Add-ParameterizedHost {
         parameters       = @(
             [ordered]@{
                 name                      = 'hostEnv'
-                description               = "Region for JumpCloud API host. Use 'console' for US or 'console.eu' for EU."
+                description               = "Region for JumpCloud API host. Use '$hostPrefix' for US or '$hostPrefix.eu' for EU."
                 required                  = $true
                 type                      = 'string'
                 in                        = 'client'
-                enum                      = @('console', 'console.eu')
+                enum                      = $enumValues
                 'x-ms-parameter-location' = 'client'
             }
         )
-    }
-
-    # Check if property already exists (works for both hashtable and OrderedDictionary)
-    if ($SwaggerObject.Contains('x-ms-parameterized-host')) {
-        return $SwaggerObject
     }
 
     # Create a new ordered hashtable to preserve alphabetical order

@@ -12,27 +12,9 @@ Query the API for a list of counts by time interval
 curl -X POST 'https://api.jumpcloud.com/insights/directory/v1/events/interval' -H 'Content-Type: application/json' -H 'x-api-key: REPLACE_KEY_VALUE' --data '{\"service\": [\"all\"], \"start_time\": \"2021-07-14T23:00:00Z\", \"end_time\": \"2021-07-28T14:00:00Z\", \"timezone\": \"-0500\", \"interval_unit\": \"h\", \"interval_value\": \"2\"}'
 ```
 .Example
-PS C:\> Get-JcSdkEventInterval -Body:(<JumpCloud.SDK.DirectoryInsights.Models.EventIntervalQuery>)
-
-
-
-----        ----------
-DocCount    Int
-Key         Int
-KeyAsString
-
-
+{{ Add code here }}
 .Example
-PS C:\> Get-JcSdkEventInterval -IntervalUnit:(<string>) -Service:(<string[]>) -StartTime:(<datetime>) -EndTime:(<datetime>) -IntervalValue:(<string>) -Q:(<string>) -SearchTermAnd:(<hashtable>) -SearchTermNot:(<hashtable>) -SearchTermOr:(<hashtable>) -Timezone:(<string>)
-
-
-
-----        ----------
-DocCount    Int
-Key         Int
-KeyAsString
-
-
+{{ Add code here }}
 
 .Inputs
 JumpCloud.SDK.DirectoryInsights.Models.IEventIntervalQuery
@@ -68,7 +50,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4908_userGroupDeviceGr
     [JumpCloud.SDK.DirectoryInsights.Category('Uri')]
     [System.String]
     # Region for JumpCloud API host.
-    # Use 'console' for US or 'console.eu' for EU.
+    # Use 'api' for US or 'api.eu' for EU.
     ${HostEnv}, 
 
     [Parameter(ParameterSetName='Get', Mandatory, ValueFromPipeline)]

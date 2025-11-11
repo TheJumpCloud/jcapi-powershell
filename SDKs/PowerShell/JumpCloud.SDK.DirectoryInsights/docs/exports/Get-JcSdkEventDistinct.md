@@ -39,23 +39,17 @@ curl -X POST 'https://api.jumpcloud.com/insights/directory/v1/events/distinct' -
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-Get-JcSdkEventDistinct -Body:(<JumpCloud.SDK.DirectoryInsights.Models.EventDistinctQuery>)
+{{ Add code here }}
 ```
 
-----                    ----------
-Buckets                 JumpCloud.SDK.DirectoryInsights.Models.Post200ApplicationJsonPropertiesItemsItem[]
-DocCountErrorUpperBound Int
-SumOtherDocCount        Int
+
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell
-Get-JcSdkEventDistinct -Field:(<string>) -Service:(<string[]>) -StartTime:(<datetime>) -EndTime:(<datetime>) -SearchTermAnd:(<hashtable>) -SearchTermNot:(<hashtable>) -SearchTermOr:(<hashtable>)
+{{ Add code here }}
 ```
 
-----                    ----------
-Buckets                 JumpCloud.SDK.DirectoryInsights.Models.Post200ApplicationJsonPropertiesItemsItem[]
-DocCountErrorUpperBound Int
-SumOtherDocCount        Int
+
 
 ## PARAMETERS
 
@@ -106,7 +100,7 @@ Accept wildcard characters: False
 
 ### -HostEnv
 Region for JumpCloud API host.
-Use 'console' for US or 'console.eu' for EU.
+Use 'api' for US or 'api.eu' for EU.
 
 ```yaml
 Type: System.String

@@ -30,23 +30,23 @@ Request a JumpCloud report to be generated asynchronously
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-New-JcSdkReport -ReportType 'users-to-sso-applications'
+{{ Add code here }}
 ```
 
-Queues creation of an user-to-sso-application report
+
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell
-New-JcSdkReport -ReportType 'users-to-devices'
+{{ Add code here }}
 ```
 
-Queues creation of an users-to-devices report
+
 
 ## PARAMETERS
 
 ### -HostEnv
 Region for JumpCloud API host.
-Use 'console' for US or 'console.eu' for EU.
+Use 'api' for US or 'api.eu' for EU.
 
 ```yaml
 Type: System.String

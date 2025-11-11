@@ -4,13 +4,9 @@ Request a JumpCloud report to be generated asynchronously
 .Description
 Request a JumpCloud report to be generated asynchronously
 .Example
-PS C:\> New-JcSdkReport -ReportType 'users-to-sso-applications'
-
-Queues creation of an user-to-sso-application report
+{{ Add code here }}
 .Example
-PS C:\> New-JcSdkReport -ReportType 'users-to-devices'
-
-Queues creation of an users-to-devices report
+{{ Add code here }}
 
 .Inputs
 JumpCloud.SDK.DirectoryInsights.Models.IDirectoryInsightsApiIdentity
@@ -37,7 +33,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4908_userGroupDeviceGr
     [JumpCloud.SDK.DirectoryInsights.Category('Uri')]
     [System.String]
     # Region for JumpCloud API host.
-    # Use 'console' for US or 'console.eu' for EU.
+    # Use 'api' for US or 'api.eu' for EU.
     ${HostEnv}, 
 
     [Parameter(ParameterSetName='Create', Mandatory)]

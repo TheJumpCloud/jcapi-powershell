@@ -40,23 +40,17 @@ curl -X POST 'https://api.jumpcloud.com/insights/directory/v1/events/interval' -
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-Get-JcSdkEventInterval -Body:(<JumpCloud.SDK.DirectoryInsights.Models.EventIntervalQuery>)
+{{ Add code here }}
 ```
 
-----        ----------
-DocCount    Int
-Key         Int
-KeyAsString
+
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell
-Get-JcSdkEventInterval -IntervalUnit:(<string>) -Service:(<string[]>) -StartTime:(<datetime>) -EndTime:(<datetime>) -IntervalValue:(<string>) -Q:(<string>) -SearchTermAnd:(<hashtable>) -SearchTermNot:(<hashtable>) -SearchTermOr:(<hashtable>) -Timezone:(<string>)
+{{ Add code here }}
 ```
 
-----        ----------
-DocCount    Int
-Key         Int
-KeyAsString
+
 
 ## PARAMETERS
 
@@ -107,7 +101,7 @@ Accept wildcard characters: False
 
 ### -HostEnv
 Region for JumpCloud API host.
-Use 'console' for US or 'console.eu' for EU.
+Use 'api' for US or 'api.eu' for EU.
 
 ```yaml
 Type: System.String

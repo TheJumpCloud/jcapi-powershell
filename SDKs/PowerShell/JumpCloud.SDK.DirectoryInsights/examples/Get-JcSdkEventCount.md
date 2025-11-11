@@ -1,39 +1,22 @@
-### Example 1: Get All Event Counts
-
+### Example 1: Get an EventCount by Service, and StartTime
 ```powershell
-PS C:\> Get-JcSdkEventCount -Service:('all') -StartTime:((Get-date).AddDays(-30))
-
-Pull all event records from a specified time and count the results
+Get-JcSdkEventCount -Service:(<string[]>) -StartTime:(<datetime>) -EndTime:(<datetime>) -ExactMatch:(<string>) -Fields:(<string[]>) -Q:(<string>) -SearchAfter:(<string[]>) -SearchTermAnd:(<hashtable>) -SearchTermNot:(<hashtable>) -SearchTermOr:(<hashtable>) -Sort:(<string>)
 ```
 
-Pull all event records from a specified time and count the results
-
-### Example 2: Get SSO Event Counts
-
-```powershell
-PS C:\> Get-JcSdkEventCount -Service:('sso') -StartTime:('2020-04-14T00:00:00Z')
-
-Pull all SSO event records from a specified time and count the results
+```output
+{{ Add output here (remove the output block if the example doesn't have an output) }}
 ```
 
-Pull all SSO event records from a specified time and count the results
+This function will Get an EventCount by Service StartTime. Service, and StartTime are required parameters.
 
-### Example 3: Filter by two different search terms
-
+### Example 2: Get an EventCount by Body
 ```powershell
-PS C:\> Get-JcSdkEventCount -Service:('all') -StartTime:('2020-04-14T00:00:00Z') -EndTime:('2020-04-20T23:00:00Z') -SearchTermAnd @{"event_type" = "admin_login_attempt"; "resource.email" = "admin.user@adminbizorg.com"}
-
-Get all events counts between a date range and match event_type = admin_login_attempt and resource.email = admin.user@adminbizorg.com
+Get-JcSdkEventCount -Body:(<JumpCloud.SDK.DirectoryInsights.Models.EventQuery>)
 ```
 
-Get all events counts between a date range and match event_type = admin_login_attempt and resource.email = admin.user@adminbizorg.com
-
-### Example 4: Sort by Event Type
-
-```powershell
-PS C:\> Get-JcSdkEventCount -Service:('directory') -StartTime:((Get-date).AddDays(-30)) -searchTermAnd:@{"event_type" = "group_create"}
-
-Get only group_create event counts the last thirty days
+```output
+{{ Add output here (remove the output block if the example doesn't have an output) }}
 ```
 
-Get only group_create event counts the last thirty days
+This function will Get an EventCount by Body. Body is a required parameter.
+

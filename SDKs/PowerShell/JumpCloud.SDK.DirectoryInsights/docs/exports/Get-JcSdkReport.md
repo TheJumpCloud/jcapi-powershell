@@ -23,23 +23,23 @@ Ordered list of report metadata
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-Get-JcSdkReport
+{{ Add code here }}
 ```
 
-Returns a list of all available reports
+
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell
-Get-JcSdkReport -Sort 'CREATED_AT'
+{{ Add code here }}
 ```
 
-Returns a list of all available reports, sorted by the most recently created report
+
 
 ## PARAMETERS
 
 ### -HostEnv
 Region for JumpCloud API host.
-Use 'console' for US or 'console.eu' for EU.
+Use 'api' for US or 'api.eu' for EU.
 
 ```yaml
 Type: System.String

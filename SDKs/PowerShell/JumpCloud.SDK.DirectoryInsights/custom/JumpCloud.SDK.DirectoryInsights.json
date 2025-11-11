@@ -829,13 +829,13 @@
     "parameters": [
       {
         "name": "hostEnv",
-        "description": "Region for JumpCloud API host. Use 'console' for US or 'console.eu' for EU.",
+        "description": "Region for JumpCloud API host. Use 'api' for US or 'api.eu' for EU.",
         "required": true,
         "type": "string",
         "in": "client",
         "enum": [
-          "console",
-          "console.eu"
+          "api",
+          "api.eu"
         ],
         "x-ms-parameter-location": "client"
       }

@@ -40,31 +40,17 @@ curl -X POST 'https://api.jumpcloud.com/insights/directory/v1/events/count' -H '
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-Get-JcSdkEventCount -Service:('all') -StartTime:((Get-date).AddDays(-30))
+{{ Add code here }}
 ```
 
-Pull all event records from a specified time and count the results
+
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell
-Get-JcSdkEventCount -Service:('sso') -StartTime:('2020-04-14T00:00:00Z')
+{{ Add code here }}
 ```
 
-Pull all SSO event records from a specified time and count the results
 
-### -------------------------- EXAMPLE 3 --------------------------
-```powershell
-Get-JcSdkEventCount -Service:('all') -StartTime:('2020-04-14T00:00:00Z') -EndTime:('2020-04-20T23:00:00Z') -SearchTermAnd @{"event_type" = "admin_login_attempt"; "resource.email" = "admin.user@adminbizorg.com"}
-```
-
-Get all events counts between a date range and match event_type = admin_login_attempt and resource.email = admin.user@adminbizorg.com
-
-### -------------------------- EXAMPLE 4 --------------------------
-```powershell
-Get-JcSdkEventCount -Service:('directory') -StartTime:((Get-date).AddDays(-30)) -searchTermAnd:@{"event_type" = "group_create"}
-```
-
-Get only group_create event counts the last thirty days
 
 ## PARAMETERS
 
@@ -130,7 +116,7 @@ Accept wildcard characters: False
 
 ### -HostEnv
 Region for JumpCloud API host.
-Use 'console' for US or 'console.eu' for EU.
+Use 'api' for US or 'api.eu' for EU.
 
 ```yaml
 Type: System.String
