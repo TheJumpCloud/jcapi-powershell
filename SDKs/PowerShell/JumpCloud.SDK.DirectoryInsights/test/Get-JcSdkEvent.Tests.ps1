@@ -11,6 +11,9 @@ BeforeAll{
         $currentPath = Split-Path -Path $currentPath -Parent
     }
     . ($mockingPath | Select-Object -First 1).FullName
+
+    $Global:PSDefaultParameterValues['*-JcSdk*:HostEnv'] = "api"
+
 }
 Describe 'Get-JcSdkEvent' -Tag:(""){
     BeforeAll {
