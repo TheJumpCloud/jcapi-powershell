@@ -14,8 +14,7 @@ BeforeAll{
 }
 Describe 'Get-JcSdkEvent' -Tag:(""){
     BeforeAll {
-        $global:PSDefaultParameterValues['*-JcSdk*:HostEnv']
-        write-host "the host env is $global:PSDefaultParameterValues['*-JcSdk*:HostEnv']"
+        write-host "the host env is $($global:PSDefaultParameterValues['*-JcSdk*:HostEnv'])"
     }
     It 'GetExpanded' {
 
