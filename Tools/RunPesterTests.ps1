@@ -30,6 +30,24 @@ TODO:
 #>
 $testFolder = $testFolder # .\jcapi-powershell\SDKs\PowerShell\JumpCloud.SDK.V1\test
 $moduleName = $moduleName # JumpCloud.SDK.V1
+
+# Determine which SDK this is and set the appropriate default HostEnv
+$defaultHostEnv = switch ($moduleName) {
+    'JumpCloud.SDK.DirectoryInsights' { 'api' }
+    'JumpCloud.SDK.V1' { 'console' }
+    'JumpCloud.SDK.V2' { 'console' }
+    default { 'console' }
+}
+
+# Check if user has set JCEnvironment to EU
+if ($env:JCEnvironment -eq 'EU') {
+    $defaultHostEnv = "$defaultHostEnv.eu"
+}
+
+# Set the default parameter value for this test session
+$Global:PSDefaultParameterValues['*-JcSdk*:HostEnv'] = $defaultHostEnv
+
+Write-Host "Test environment loaded. Default HostEnv set to: $defaultHostEnv"
 #region Import Modules
 If ($moduleName -eq 'JumpCloud.SDK.V2')
 {
