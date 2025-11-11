@@ -1,11 +1,16 @@
-### Example 1: {{ Add title here }}
+### Example 1: Get a ReportArtifactContent by ArtifactId, and ReportId
 ```powershell
-PS C:\> {{ Add code here }}
+PS C:\> Get-JcSdkReportArtifactContent -ArtifactId:(<string>) -ReportId:(<string>)
 
-{{ Add output here }}
+
+
+----                 ----------
+AdditionalProperties System.Collections.Generic.IDictionary[String
+
+
 ```
 
-{{ Add description here }}
+This function will Get a ReportArtifactContent by ArtifactId ReportId. ArtifactId, and ReportId are required parameters.
 
 ### Example 2: {{ Add title here }}
 ```powershell
