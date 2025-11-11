@@ -1,7 +1,7 @@
 ---
 external help file:
 Module Name: JumpCloud.SDK.V1
-online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/Invoke-JcSdkExpireUserPassword.md
+online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4908_userGroupDeviceGroupFilters/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/Invoke-JcSdkExpireUserPassword.md
 schema: 2.0.0
 ---
 
@@ -14,13 +14,14 @@ This endpoint allows you to expire a user's password.
 
 ### Post (Default)
 ```
-Invoke-JcSdkExpireUserPassword -Id <String> [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+Invoke-JcSdkExpireUserPassword -HostEnv <String> -Id <String> [-PassThru] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### PostViaIdentity
 ```
-Invoke-JcSdkExpireUserPassword -InputObject <IJumpCloudApiIdentity> [-PassThru] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+Invoke-JcSdkExpireUserPassword -HostEnv <String> -InputObject <IJumpCloudApiIdentity> [-PassThru] [-Confirm]
+ [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -44,6 +45,22 @@ Invoke-JcSdkExpireUserPassword -Id:(<string>)
 
 ## PARAMETERS
 
+### -HostEnv
+Region for JumpCloud API host.
+Use 'console' for US or 'console.eu' for EU.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Id
 .
 
@@ -61,7 +78,6 @@ Accept wildcard characters: False
 
 ### -InputObject
 Identity Parameter
-To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V1.Models.IJumpCloudApiIdentity
@@ -134,14 +150,12 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## NOTES
 
-ALIASES
-
 COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter
+`INPUTOBJECT <IJumpCloudApiIdentity>`: Identity Parameter
   - `[Id <String>]`: 
   - `[SystemId <String>]`: 
   - `[SystemuserId <String>]`: 

@@ -1,7 +1,7 @@
 ---
 external help file:
 Module Name: JumpCloud.SDK.V2
-online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkPolicyTemplate.md
+online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4908_userGroupDeviceGroupFilters/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkPolicyTemplate.md
 schema: 2.0.0
 ---
 
@@ -22,17 +22,18 @@ This endpoint returns a specific policy template.
 
 ### List (Default)
 ```
-Get-JcSdkPolicyTemplate [-Fields <String[]>] [-Filter <String[]>] [-Sort <String[]>] [<CommonParameters>]
+Get-JcSdkPolicyTemplate -HostEnv <String> [-Fields <List<String>>] [-Filter <List<String>>]
+ [-Sort <List<String>>] [<CommonParameters>]
 ```
 
 ### Get
 ```
-Get-JcSdkPolicyTemplate -Id <String> [<CommonParameters>]
+Get-JcSdkPolicyTemplate -HostEnv <String> -Id <String> [<CommonParameters>]
 ```
 
 ### GetViaIdentity
 ```
-Get-JcSdkPolicyTemplate -InputObject <IJumpCloudApiIdentity> [<CommonParameters>]
+Get-JcSdkPolicyTemplate -HostEnv <String> -InputObject <IJumpCloudApiIdentity> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -93,7 +94,7 @@ The comma separated fields included in the returned records.
 If omitted, the default list of fields will be returned.
 
 ```yaml
-Type: System.String[]
+Type: System.Collections.Generic.List`1[[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]
 Parameter Sets: List
 Aliases:
 
@@ -121,11 +122,27 @@ Supports wild cards.
 **EX:** `GET /api/v2/groups?filter=name:eq:Test+Group`
 
 ```yaml
-Type: System.String[]
+Type: System.Collections.Generic.List`1[[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]
 Parameter Sets: List
 Aliases:
 
 Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -HostEnv
+Region for JumpCloud API host.
+Use 'console' for US or 'console.eu' for EU.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -149,7 +166,6 @@ Accept wildcard characters: False
 
 ### -InputObject
 Identity Parameter
-To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
@@ -168,7 +184,7 @@ The comma separated fields used to sort the collection.
 Default sort is ascending, prefix with `-` to sort descending.
 
 ```yaml
-Type: System.String[]
+Type: System.Collections.Generic.List`1[[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]
 Parameter Sets: List
 Aliases:
 
@@ -194,14 +210,12 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## NOTES
 
-ALIASES
-
 COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter
+`INPUTOBJECT <IJumpCloudApiIdentity>`: Identity Parameter
   - `[AccountId <String>]`: 
   - `[ActivedirectoryId <String>]`: 
   - `[AdministratorId <String>]`: 

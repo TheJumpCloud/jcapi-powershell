@@ -1,44 +1,33 @@
 debug: true
-verbose: true
-# Values
-# azure: false
-powershell: true
-branch: master
-metadata:
-  authors: JumpCloud
-  owners: JumpCloud
-  description: The JumpCloud V2 PowerShell SDK
-  copyright: (c) JumpCloud. All rights reserved.
-  companyName: JumpCloud
-  requireLicenseAcceptance: false
-  licenseUri: https://github.com/TheJumpCloud/jcapi-powershell/tree/$(branch)/LICENSE
-  projectUri: https://github.com/TheJumpCloud/jcapi-powershell/tree/$(branch)/SDKs/PowerShell/JumpCloud.SDK.V2/
-  iconUri: https://console.jumpcloud.com/img/login-viewport-logo.png
-  tags: JumpCloud, DaaS, Jump, Cloud, Directory
-  formatsToProcess: []
-
-# Names
-prefix: JcSdkInternal
-customFunctionPrefix: JcSdk
-help-link-prefix: https://github.com/TheJumpCloud/jcapi-powershell/tree/$(branch)/SDKs/PowerShell/
-
-# Folders
 clear-output-folder: true
-output-folder: SDKs/PowerShell/JumpCloud.SDK.V2
-base-folder: '..'
-
+help-link-prefix: https://github.com/TheJumpCloud/jcapi-powershell/tree/$(branch)/SDKs/PowerShell/
+verbose: true
+powershell: true
+dll-name: JumpCloud.SDK.V2.private
+module-version: 0.1.0
+customFunctionPrefix: JcSdk
 input-file:
-  - SwaggerSpecs/JumpCloud.SDK.V2.json
-# title: JumpCloud.SDK.V2
+- SwaggerSpecs/JumpCloud.SDK.V2.json
 module-name: JumpCloud.SDK.V2
+directive:
+- hide: true
+  where:
+    prefix: JcSdk
+output-folder: SDKs/PowerShell/JumpCloud.SDK.V2
+base-folder: ..
+branch: CUT-4908_userGroupDeviceGroupFilters
+metadata:
+  requireLicenseAcceptance: false
+  projectUri: https://github.com/TheJumpCloud/jcapi-powershell/tree/$(branch)/SDKs/PowerShell/JumpCloud.SDK.V2/
+  owners: JumpCloud
+  formatsToProcess: []
+  licenseUri: https://github.com/TheJumpCloud/jcapi-powershell/tree/$(branch)/LICENSE
+  authors: JumpCloud
+  companyName: JumpCloud
+  copyright: (c) JumpCloud. All rights reserved.
+  description: The JumpCloud V2 PowerShell SDK
+  tags: JumpCloud, DaaS, Jump, Cloud, Directory
+  iconUri: https://console.jumpcloud.com/img/login-viewport-logo.png
+prefix: JcSdkInternal
 namespace: JumpCloud.SDK.V2
 sample-generation: true
-module-version: 0.0.49
-dll-name: JumpCloud.SDK.V2.private
-
-directive:
-  - where:
-      prefix: JcSdk
-    hide: true
-# Prevent response flattening: https://github.com/Azure/autorest.powershell/issues/743
-# inlining-threshold: 0

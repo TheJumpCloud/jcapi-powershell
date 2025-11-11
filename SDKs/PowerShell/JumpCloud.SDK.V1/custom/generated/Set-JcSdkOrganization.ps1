@@ -1,6 +1,6 @@
 <#
 .Synopsis
-This endpoint allows you to update an Organization.
+This endpoint allows you to set an Organization.
 
 Note: `passwordPolicy` settings are only used when `passwordCompliance` is set to \"custom\".
 We discourage the use of non-custom passwordCompliance values.
@@ -29,7 +29,7 @@ curl -X PUT https://console.jumpcloud.com/api/organizations/{OrganizationID} \\
 }'
 ```
 .Description
-This endpoint allows you to update an Organization.
+This endpoint allows you to set an Organization.
 
 Note: `passwordPolicy` settings are only used when `passwordCompliance` is set to \"custom\".
 We discourage the use of non-custom passwordCompliance values.
@@ -177,13 +177,13 @@ BODY <IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema>:
     [SystemInsightEnableNewWindows <Boolean?>]:
     [SystemInsightEnabled <Boolean?>]:
     [SystemInsightUpdatedAt <String>]:
-    [SystemUserDefaultRestrictedFields <IRestrictedField1[]>]:
+    [SystemUserDefaultRestrictedFields <List<IRestrictedField1>>]:
       [Field <String>]:
       [Id <String>]:
       [Type <String>]:
     [SystemUserPasswordExpirationInDays <Int32?>]:
     [SystemUsersCanEdit <Boolean?>]:
-    [TrustedAppConfigTrustedApps <ITrustedappConfigPutTrustedAppsItem[]>]: List of authorized apps for the organization
+    [TrustedAppConfigTrustedApps <List<ITrustedappConfigPutTrustedAppsItem>>]: List of authorized apps for the organization
       Name <String>: Name of the trusted application
       [Path <String>]: Absolute path for the app's location in user's device
       [Teamid <String>]: App's Team ID
@@ -253,26 +253,33 @@ SETTINGS <IOrganizationsettingsput>:
   [SystemInsightEnableNewWindows <Boolean?>]:
   [SystemInsightEnabled <Boolean?>]:
   [SystemInsightUpdatedAt <String>]:
-  [SystemUserDefaultRestrictedFields <IRestrictedField1[]>]:
+  [SystemUserDefaultRestrictedFields <List<IRestrictedField1>>]:
     [Field <String>]:
     [Id <String>]:
     [Type <String>]:
   [SystemUserPasswordExpirationInDays <Int32?>]:
   [SystemUsersCanEdit <Boolean?>]:
-  [TrustedAppConfigTrustedApps <ITrustedappConfigPutTrustedAppsItem[]>]: List of authorized apps for the organization
+  [TrustedAppConfigTrustedApps <List<ITrustedappConfigPutTrustedAppsItem>>]: List of authorized apps for the organization
     Name <String>: Name of the trusted application
     [Path <String>]: Absolute path for the app's location in user's device
     [Teamid <String>]: App's Team ID
   [UserPortalCookieExpirationType <String>]:
   [UserPortalIdleSessionDurationMinutes <Int32?>]:
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/Set-JcSdkOrganization.md
+https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4908_userGroupDeviceGroupFilters/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/Set-JcSdkOrganization.md
 #>
  Function Set-JcSdkOrganization
 {
     [OutputType([JumpCloud.SDK.V1.Models.IOrganization])]
     [CmdletBinding(DefaultParameterSetName='SetExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
+    [Parameter(Mandatory)]
+    [JumpCloud.SDK.V1.Category('Uri')]
+    [System.String]
+    # Region for JumpCloud API host.
+    # Use 'console' for US or 'console.eu' for EU.
+    ${HostEnv}, 
+
     [Parameter(ParameterSetName='Set', Mandatory)]
     [Parameter(ParameterSetName='SetExpanded', Mandatory)]
     [JumpCloud.SDK.V1.Category('Path')]
@@ -285,7 +292,6 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V1.Category('Path')]
     [JumpCloud.SDK.V1.Models.IJumpCloudApiIdentity]
     # Identity Parameter
-    # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
     ${InputObject}, 
 
     [Parameter(ParameterSetName='Set', Mandatory, ValueFromPipeline)]
@@ -293,7 +299,6 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V1.Category('Body')]
     [JumpCloud.SDK.V1.Models.IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema]
     # .
-    # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
@@ -301,7 +306,6 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V1.Category('Body')]
     [JumpCloud.SDK.V1.Models.IOrganizationsettingsput]
     # OrganizationSettingsPut
-    # To construct, see NOTES section for SETTINGS properties and create a hash table.
     ${Settings}, 
 
     [Parameter(DontShow)]

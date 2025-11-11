@@ -1,7 +1,7 @@
 ---
 external help file:
 Module Name: JumpCloud.SDK.V2
-online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkGSuiteUsersToImport.md
+online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4908_userGroupDeviceGroupFilters/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkGSuiteUsersToImport.md
 schema: 2.0.0
 ---
 
@@ -13,8 +13,8 @@ Lists G Suite users available for import.
 ## SYNTAX
 
 ```
-Get-JcSdkGSuiteUsersToImport -GsuiteId <String> [-OrderBy <String>] [-Query <String>] [-SortOrder <String>]
- [<CommonParameters>]
+Get-JcSdkGSuiteUsersToImport -HostEnv <String> -GsuiteId <String> [-OrderBy <String>] [-Query <String>]
+ [-SortOrder <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -42,6 +42,22 @@ Users         JumpCloud.SDK.V2.Models.Get200ApplicationJsonPropertiesItemsItem[]
 
 ### -GsuiteId
 .
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -HostEnv
+Region for JumpCloud API host.
+Use 'console' for US or 'console.eu' for EU.
 
 ```yaml
 Type: System.String
@@ -113,8 +129,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ### JumpCloud.SDK.V2.Models.IPathsC7Pl4LGsuitesGsuiteIdImportUsersGetResponses200ContentApplicationJsonSchema
 
 ## NOTES
-
-ALIASES
 
 ## RELATED LINKS
 

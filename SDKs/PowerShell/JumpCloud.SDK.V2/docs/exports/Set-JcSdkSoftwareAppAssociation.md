@@ -1,7 +1,7 @@
 ---
 external help file:
 Module Name: JumpCloud.SDK.V2
-online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Set-JcSdkSoftwareAppAssociation.md
+online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4908_userGroupDeviceGroupFilters/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Set-JcSdkSoftwareAppAssociation.md
 schema: 2.0.0
 ---
 
@@ -27,27 +27,26 @@ $ curl -X POST https://console.jumpcloud.com/api/v2/softwareapps/{software_app_i
 
 ### SetExpanded (Default)
 ```
-Set-JcSdkSoftwareAppAssociation -SoftwareAppId <String> -Id <String> -Op <String>
- -Type <GraphOperationSoftwareApp1> [-Attributes <Hashtable>] [-PassThru] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+Set-JcSdkSoftwareAppAssociation -HostEnv <String> -SoftwareAppId <String> [-Attributes <Hashtable>]
+ [-Id <String>] [-Op <String>] [-Type <String>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Set
 ```
-Set-JcSdkSoftwareAppAssociation -SoftwareAppId <String> -Body <IGraphOperationSoftwareApp> [-PassThru]
- [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkSoftwareAppAssociation -HostEnv <String> -SoftwareAppId <String> -Body <IGraphOperationSoftwareApp>
+ [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentity
 ```
-Set-JcSdkSoftwareAppAssociation -InputObject <IJumpCloudApiIdentity> -Body <IGraphOperationSoftwareApp>
- [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkSoftwareAppAssociation -HostEnv <String> -InputObject <IJumpCloudApiIdentity>
+ -Body <IGraphOperationSoftwareApp> [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkSoftwareAppAssociation -InputObject <IJumpCloudApiIdentity> -Id <String> -Op <String>
- -Type <GraphOperationSoftwareApp1> [-Attributes <Hashtable>] [-PassThru] [-Confirm] [-WhatIf]
+Set-JcSdkSoftwareAppAssociation -HostEnv <String> -InputObject <IJumpCloudApiIdentity>
+ [-Attributes <Hashtable>] [-Id <String>] [-Op <String>] [-Type <String>] [-PassThru] [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
@@ -102,7 +101,6 @@ Accept wildcard characters: False
 
 ### -Body
 GraphOperation (SoftwareApp)
-To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IGraphOperationSoftwareApp
@@ -116,12 +114,13 @@ Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
-### -Id
-The ObjectID of graph object being added or removed as an association.
+### -HostEnv
+Region for JumpCloud API host.
+Use 'console' for US or 'console.eu' for EU.
 
 ```yaml
 Type: System.String
-Parameter Sets: SetExpanded, SetViaIdentityExpanded
+Parameter Sets: (All)
 Aliases:
 
 Required: True
@@ -131,9 +130,23 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -Id
+The ObjectID of graph object being added or removed as an association.
+
+```yaml
+Type: System.String
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -InputObject
 Identity Parameter
-To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
@@ -155,7 +168,7 @@ Type: System.String
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
-Required: True
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -196,11 +209,11 @@ Accept wildcard characters: False
 Targets which a "software_app" can be associated to.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Support.GraphOperationSoftwareApp1
+Type: System.String
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
-Required: True
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -253,21 +266,19 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## NOTES
 
-ALIASES
-
 COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <IGraphOperationSoftwareApp>: GraphOperation (SoftwareApp)
+`BODY <IGraphOperationSoftwareApp>`: GraphOperation (SoftwareApp)
   - `Id <String>`: The ObjectID of graph object being added or removed as an association.
   - `Op <String>`: How to modify the graph connection.
-  - `Type <GraphOperationSoftwareApp1>`: Targets which a "software_app" can be associated to.
+  - `Type <String>`: Targets which a "software_app" can be associated to.
   - `[Attributes <IGraphAttributes>]`: The graph attributes.
     - `[(Any) <Object>]`: This indicates any property can be added to this object.
 
-INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter
+`INPUTOBJECT <IJumpCloudApiIdentity>`: Identity Parameter
   - `[AccountId <String>]`: 
   - `[ActivedirectoryId <String>]`: 
   - `[AdministratorId <String>]`: 

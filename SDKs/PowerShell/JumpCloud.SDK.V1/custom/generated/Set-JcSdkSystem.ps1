@@ -1,6 +1,6 @@
 <#
 .Synopsis
-This endpoint allows you to update a system.
+This endpoint allows you to set a system.
 
 #### Sample Request 
 ```
@@ -9,7 +9,7 @@ curl -X PUT https://console.jumpcloud.com/api/systems/{SystemID} \\
   -H 'Content-Type: application/json' \\
   -H 'x-api-key: {API_KEY}' \\
   -d '{
-\t\"displayName\":\"Name_Update\",
+\t\"displayName\":\"Name_set ,
 \t\"allowSshPasswordAuthentication\":\"true\",
 \t\"allowSshRootLogin\":\"true\",
 \t\"allowMultiFactorAuthentication\":\"true\",
@@ -17,7 +17,7 @@ curl -X PUT https://console.jumpcloud.com/api/systems/{SystemID} \\
 }'
 ```
 .Description
-This endpoint allows you to update a system.
+This endpoint allows you to set a system.
 
 #### Sample Request 
 ```
@@ -26,7 +26,7 @@ curl -X PUT https://console.jumpcloud.com/api/systems/{SystemID} \\
   -H 'Content-Type: application/json' \\
   -H 'x-api-key: {API_KEY}' \\
   -d '{
-\t\"displayName\":\"Name_Update\",
+\t\"displayName\":\"Name_set ,
 \t\"allowSshPasswordAuthentication\":\"true\",
 \t\"allowSshRootLogin\":\"true\",
 \t\"allowMultiFactorAuthentication\":\"true\",
@@ -208,13 +208,20 @@ To create the parameters described below, construct a hash table containing the 
 AGENTBOUNDMESSAGES <ISystemputAgentBoundMessagesItem[]>:
   [Cmd <String>]:
 
+ATTRIBUTES <IAttribute[]>:
+  [Name <String>]:
+  [Value <String>]:
+
 BODY <ISystemput>:
-  [AgentBoundMessages <ISystemputAgentBoundMessagesItem[]>]:
+  [AgentBoundMessages <List<ISystemputAgentBoundMessagesItem>>]:
     [Cmd <String>]:
   [AllowMultiFactorAuthentication <Boolean?>]:
   [AllowPublicKeyAuthentication <Boolean?>]:
   [AllowSshPasswordAuthentication <Boolean?>]:
   [AllowSshRootLogin <Boolean?>]:
+  [Attributes <List<IAttribute>>]:
+    [Name <String>]:
+    [Value <String>]:
   [DisplayName <String>]:
 
 INPUTOBJECT <IJumpCloudApiIdentity>:
@@ -223,13 +230,20 @@ INPUTOBJECT <IJumpCloudApiIdentity>:
   [SystemuserId <String>]:
   [Triggername <String>]:
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/Set-JcSdkSystem.md
+https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4908_userGroupDeviceGroupFilters/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/Set-JcSdkSystem.md
 #>
  Function Set-JcSdkSystem
 {
     [OutputType([JumpCloud.SDK.V1.Models.IJcSystem])]
     [CmdletBinding(DefaultParameterSetName='SetExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
+    [Parameter(Mandatory)]
+    [JumpCloud.SDK.V1.Category('Uri')]
+    [System.String]
+    # Region for JumpCloud API host.
+    # Use 'console' for US or 'console.eu' for EU.
+    ${HostEnv}, 
+
     [Parameter(ParameterSetName='Set', Mandatory)]
     [Parameter(ParameterSetName='SetExpanded', Mandatory)]
     [JumpCloud.SDK.V1.Category('Path')]
@@ -242,7 +256,6 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V1.Category('Path')]
     [JumpCloud.SDK.V1.Models.IJumpCloudApiIdentity]
     # Identity Parameter
-    # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
     ${InputObject}, 
 
     [Parameter(ParameterSetName='Set', Mandatory, ValueFromPipeline)]
@@ -250,7 +263,6 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V1.Category('Body')]
     [JumpCloud.SDK.V1.Models.ISystemput]
     # SystemPut
-    # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
@@ -259,7 +271,6 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V1.Category('Body')]
     [JumpCloud.SDK.V1.Models.ISystemputAgentBoundMessagesItem[]]
     # .
-    # To construct, see NOTES section for AGENTBOUNDMESSAGES properties and create a hash table.
     ${AgentBoundMessages}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
@@ -289,6 +300,14 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [System.Management.Automation.SwitchParameter]
     # .
     ${AllowSshRootLogin}, 
+
+    [Parameter(ParameterSetName='SetExpanded')]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
+    [AllowEmptyCollection()]
+    [JumpCloud.SDK.V1.Category('Body')]
+    [JumpCloud.SDK.V1.Models.IAttribute[]]
+    # .
+    ${Attributes}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]

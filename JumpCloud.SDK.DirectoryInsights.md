@@ -1,3 +1,33 @@
+## JumpCloud.SDK.DirectoryInsights-0.1.0
+Release Date: November 11, 2025
+#### RELEASE NOTES
+```
+Updated existing functions based on updated OpenAPI specs
+```
+#### FEATURES:
+
+The JumpCloud DirectoryInsights SDK module has been updated to support the EU region. Users can now specify the region when initializing the SDK.
+
+#### Generated Changes:
+
+<details>
+<summary>Functions Added</summary>
+
+No changes
+</details>
+
+<details>
+<summary>Functions Modified</summary>
+
+No changes
+</details>
+
+<details>
+<summary>Functions Removed</summary>
+
+No changes
+</details>
+
 ## JumpCloud.SDK.DirectoryInsights-0.0.33
 Release Date: March 10, 2025
 #### RELEASE NOTES

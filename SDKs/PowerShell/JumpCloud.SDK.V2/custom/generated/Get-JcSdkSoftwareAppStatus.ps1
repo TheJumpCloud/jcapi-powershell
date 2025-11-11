@@ -74,13 +74,20 @@ INPUTOBJECT <IJumpCloudApiIdentity>:
   [UserId <String>]: ObjectID of the User.
   [WorkdayId <String>]:
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkSoftwareAppStatus.md
+https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4908_userGroupDeviceGroupFilters/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkSoftwareAppStatus.md
 #>
  Function Get-JcSdkSoftwareAppStatus
 {
     [OutputType([JumpCloud.SDK.V2.Models.ISoftwareAppStatus])]
     [CmdletBinding(DefaultParameterSetName='Get', PositionalBinding=$false)]
     Param(
+    [Parameter(Mandatory)]
+    [JumpCloud.SDK.V2.Category('Uri')]
+    [System.String]
+    # Region for JumpCloud API host.
+    # Use 'console' for US or 'console.eu' for EU.
+    ${HostEnv}, 
+
     [Parameter(ParameterSetName='Get', Mandatory)]
     [JumpCloud.SDK.V2.Category('Path')]
     [System.String]
@@ -91,13 +98,13 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V2.Category('Path')]
     [JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity]
     # Identity Parameter
-    # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
     ${InputObject}, 
 
     [Parameter()]
     [AllowEmptyCollection()]
     [JumpCloud.SDK.V2.Category('Query')]
-    [System.String[]]
+    [JumpCloud.SDK.V2.Runtime.Info(PossibleTypes=([System.String]))]
+    [System.Collections.Generic.List[System.String]]
     # A filter to apply to the query.
     # 
     # **Filter structure**: `<field>:<operator>:<value>`.
@@ -117,7 +124,8 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter()]
     [AllowEmptyCollection()]
     [JumpCloud.SDK.V2.Category('Query')]
-    [System.String[]]
+    [JumpCloud.SDK.V2.Runtime.Info(PossibleTypes=([System.String]))]
+    [System.Collections.Generic.List[System.String]]
     # The comma separated fields used to sort the collection.
     # Default sort is ascending, prefix with `-` to sort descending.
     ${Sort}, 

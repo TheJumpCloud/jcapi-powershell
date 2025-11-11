@@ -1,3 +1,5 @@
+using System.Management.Automation;
+using ModuleNameSpace;
 namespace JumpCloud.SDK.DirectoryInsights
 {
     using Runtime;
@@ -6,34 +8,88 @@ namespace JumpCloud.SDK.DirectoryInsights
     using System.Net.Http;
     using System.Threading.Tasks;
     using System.Linq;
-    /// <summary>A class that contains the module-common code and data.</summary>
-    /// <notes>
-    /// This class is where you can add things to modify the module.
-    /// As long as it's in the 'custom' folder, it won't get deleted
-    /// when you use --clear-output-folder in autorest.
-    /// </notes>
+
     public partial class Module
     {
         partial void CustomInit()
         {
-            // We need to add a steps to the pipeline
-            // Add Headers
+            // Original pipeline modifications
             this._pipeline.Prepend(AddAuthHeaders);
             this._pipelineWithProxy.Prepend(AddAuthHeaders);
-            // // Add Debugging Messages
-            // this._pipeline.Prepend(Debugging);
-            // this._pipelineWithProxy.Prepend(Debugging);
-            // Add CustomErrors
-            // this._pipeline.Prepend(CustomError);
-            // this._pipelineWithProxy.Prepend(CustomError);
-            // // Add Paginate
-            // this._pipeline.Append(Paginate);
-            // this._pipelineWithProxy.Append(Paginate);
+
+            // Set the default JCEnvironment value
+            SetDefaultHostEnvInPowerShellSession();
         }
-        // partial void AfterCreatePipeline(global::System.Management.Automation.InvocationInfo invocationInfo, ref ModuleNameSpace.Runtime.HttpPipeline pipeline)
-        // {
-        //     pipeline.Append(Paginate);
-        // }
+
+        private void SetDefaultHostEnvInPowerShellSession()
+        {
+            string envVarNameForDefaultHostEnv = "JCEnvironment";
+            string userInputEnvValue = System.Environment.GetEnvironmentVariable(envVarNameForDefaultHostEnv);
+            string actualHostEnvValue;
+
+            // Determine the default host prefix based on the SDK being used
+            string defaultHostPrefix = ModuleIdentifier.SDKName == "DirectoryInsights" ? "api" : "console";
+
+            if (!string.IsNullOrEmpty(userInputEnvValue))
+            {
+                switch (userInputEnvValue.ToUpperInvariant())
+                {
+                    case "US":
+                        actualHostEnvValue = defaultHostPrefix;
+                        break;
+                    case "EU":
+                        actualHostEnvValue = $"{defaultHostPrefix}.eu";
+                        break;
+                    case "STAGING":
+                        actualHostEnvValue = "console.stg01";
+                        break;
+                    default:
+                        // If user entered a full host (e.g., console, api.eu), use as is
+                        actualHostEnvValue = userInputEnvValue;
+                        break;
+                }
+            }
+            else
+            {
+                // Default to US region with the appropriate host prefix
+                actualHostEnvValue = defaultHostPrefix;
+            }
+
+            // Log the determined environment host for transparency
+            Console.WriteLine("JumpCloud SDK Module ({0}): {1}.jumpcloud.com", ModuleIdentifier.SDKName, actualHostEnvValue);
+            Console.WriteLine("To change the default host environment, set $ENV:{0} to 'US' or 'EU' and re-import the module.", envVarNameForDefaultHostEnv);
+
+            System.Environment.SetEnvironmentVariable("JCEnvironment", actualHostEnvValue);
+
+            // Set PowerShell default parameter value
+            SetPSDefaultHostEnvParameterValue(actualHostEnvValue);
+        }
+
+        private void SetPSDefaultHostEnvParameterValue(string HostEnvValue)
+        {
+            string scriptToSetDefault = $"$Global:PSDefaultParameterValues['*-JcSdk*:HostEnv'] = '{HostEnvValue}'";
+            try
+            {
+                using (PowerShell ps = PowerShell.Create(RunspaceMode.CurrentRunspace))
+                {
+                    ps.AddScript(scriptToSetDefault);
+                    ps.Invoke();
+
+                    if (ps.HadErrors)
+                    {
+                        foreach (var error in ps.Streams.Error)
+                        {
+                            Console.Error.WriteLine($"Error setting PSDefaultParameterValues for HostEnv: {error.ToString()}");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.Error.WriteLine($"Exception while trying to set PSDefaultParameterValues for HostEnv: {ex.Message}");
+            }
+        }
+
         protected async Task<HttpResponseMessage> AddAuthHeaders(HttpRequestMessage request, IEventListener callback, ISendAsync next)
         {
             // Check to see if the environment variable for JCApiKey is populated
@@ -59,6 +115,19 @@ namespace JumpCloud.SDK.DirectoryInsights
                 Console.WriteLine("You entered '{0}'", JCOrgId);
                 System.Environment.SetEnvironmentVariable("JCOrgId", JCOrgId);
             }
+            // Check to see if the environment variable for HostEnv is populated
+            var HostEnv = System.Environment.GetEnvironmentVariable("JCEnvironment");
+            if (string.IsNullOrEmpty(HostEnv))
+            {
+                // Determine default based on SDK
+                string defaultHostPrefix = ModuleIdentifier.SDKName == "DirectoryInsights" ? "api" : "console";
+                Console.Write($"Please enter your JumpCloud environment host (e.g., {defaultHostPrefix}, {defaultHostPrefix}.eu): ");
+                HostEnv = Console.ReadLine();
+                Console.WriteLine("You entered '{0}'", HostEnv);
+                System.Environment.SetEnvironmentVariable("JCEnvironment", HostEnv);
+            }
+            SetPSDefaultHostEnvParameterValue(HostEnv);
+
             // If headers do not contain an "x-org-id" header add one
             if (request.Headers.Contains("x-org-id") == false)
             {
@@ -86,10 +155,10 @@ namespace JumpCloud.SDK.DirectoryInsights
                 request.Headers.Add("Accept", "application/json");
             }
             // If headers do not contain an "UserAgent" with the correct value fix it
-            if (request.Headers.UserAgent.ToString() != "JumpCloud_JumpCloud.PowerShell.SDK.DirectoryInsights/0.0.34")
+            if (request.Headers.UserAgent.ToString() != "JumpCloud_JumpCloud.PowerShell.SDK.DirectoryInsights/0.1.0")
             {
                 request.Headers.UserAgent.Clear();
-                request.Headers.UserAgent.ParseAdd("JumpCloud_JumpCloud.PowerShell.SDK.DirectoryInsights/0.0.34");
+                request.Headers.UserAgent.ParseAdd("JumpCloud_JumpCloud.PowerShell.SDK.DirectoryInsights/0.1.0");
             }
             // // request.Headers.Add("Content-Type", "application/json");
             System.Net.Http.HttpResponseMessage response = await next.SendAsync(request, callback);
@@ -148,50 +217,5 @@ namespace JumpCloud.SDK.DirectoryInsights
                  );
             }
         }
-        // public async System.Threading.Tasks.Task<System.Net.Http.HttpResponseMessage> Paginate(System.Net.Http.HttpRequestMessage requestMessage, Runtime.IEventListener listener, Runtime.ISendAsync next)
-        // {
-        //     System.Net.Http.HttpResponseMessage response = null;
-        //     while (true)
-        //     {
-        //         // Make the API call
-        //         response = await next.SendAsync(requestMessage, listener);
-        //         // Get ResultCount
-        //         IEnumerable<string> XResultCount;
-        //         response.Headers.TryGetValues("X-Result-Count", out XResultCount);
-        //         var XResultCountString = XResultCount.ToList()[0];
-        //         // Get Limit
-        //         IEnumerable<string> XLimit;
-        //         response.Headers.TryGetValues("X-Limit", out XLimit);
-        //         var XLimitString = XLimit.ToList()[0];
-        //         // Get SearchAfter
-        //         IEnumerable<string> XResultSearchAfter;
-        //         response.Headers.TryGetValues("X-Search_after", out XResultSearchAfter);
-        //         var XResultSearchAfterString = XResultSearchAfter.ToList()[0];
-        //         // Write to host
-        //         Console.WriteLine("XResultCount: " + XResultCountString);
-        //         Console.WriteLine("XLimit: " + XLimitString);
-        //         Console.WriteLine("XResultSearchAfter: " + XResultSearchAfterString);
-        //         // Modify headers with new XResultSearchAfter
-        //         if (XResultCountString == XLimitString) // && response == true)
-        //         {
-        //             ////////////////////////////////////////////////////////////////////////////////////
-        //             // request.Content.Remove("X-Search_after");
-        //             // request.Content.Add("X-Search_after", XResultSearchAfterString);
-        //             // .Content = new StringContent("{\"name\":\"John Doe\",\"age\":33}", Encoding.UTF8, "application/json");
-        //             ////////////////////////////////////////////////////////////////////////////////////
-        //             // wait before getting more results
-        //             await System.Threading.Tasks.Task.Delay(5000);
-        //             continue;
-        //         }
-        //         else
-        //         {
-        //             // no more results, break loop.
-        //             break;
-        //         }
-        //     };
-        //     // return whatever we have.
-        //     return response;
-        // }
     }
 }
-

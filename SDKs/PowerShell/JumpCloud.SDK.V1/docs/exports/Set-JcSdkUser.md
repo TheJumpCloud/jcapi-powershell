@@ -1,14 +1,14 @@
 ---
 external help file:
 Module Name: JumpCloud.SDK.V1
-online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/Set-JcSdkUser.md
+online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4908_userGroupDeviceGroupFilters/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/Set-JcSdkUser.md
 schema: 2.0.0
 ---
 
 # Set-JcSdkUser
 
 ## SYNOPSIS
-This endpoint allows you to update a system user.
+This endpoint allows you to set a system user.
 
 #### Sample Request
 
@@ -28,7 +28,7 @@ curl -X PUT https://console.jumpcloud.com/api/systemusers/{UserID} \\
 
 ### SetExpanded (Default)
 ```
-Set-JcSdkUser -Id <String> [-FullValidationDetails <String>] [-AccountLocked]
+Set-JcSdkUser -HostEnv <String> -Id <String> [-FullValidationDetails <String>] [-AccountLocked]
  [-Addresses <ISystemuserputAddressesItem[]>] [-AllowPublicKey] [-AlternateEmail <String>]
  [-Attributes <ISystemuserputAttributesItem[]>] [-Company <String>] [-CostCenter <String>]
  [-Department <String>] [-Description <String>] [-DisableDeviceMaxLoginAttempts] [-Displayname <String>]
@@ -46,20 +46,20 @@ Set-JcSdkUser -Id <String> [-FullValidationDetails <String>] [-AccountLocked]
 
 ### Set
 ```
-Set-JcSdkUser -Id <String> -Body <ISystemuserput> [-FullValidationDetails <String>] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+Set-JcSdkUser -HostEnv <String> -Id <String> -Body <ISystemuserput> [-FullValidationDetails <String>]
+ [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentity
 ```
-Set-JcSdkUser -InputObject <IJumpCloudApiIdentity> -Body <ISystemuserput> [-FullValidationDetails <String>]
- [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkUser -HostEnv <String> -InputObject <IJumpCloudApiIdentity> -Body <ISystemuserput>
+ [-FullValidationDetails <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkUser -InputObject <IJumpCloudApiIdentity> [-FullValidationDetails <String>] [-AccountLocked]
- [-Addresses <ISystemuserputAddressesItem[]>] [-AllowPublicKey] [-AlternateEmail <String>]
+Set-JcSdkUser -HostEnv <String> -InputObject <IJumpCloudApiIdentity> [-FullValidationDetails <String>]
+ [-AccountLocked] [-Addresses <ISystemuserputAddressesItem[]>] [-AllowPublicKey] [-AlternateEmail <String>]
  [-Attributes <ISystemuserputAttributesItem[]>] [-Company <String>] [-CostCenter <String>]
  [-Department <String>] [-Description <String>] [-DisableDeviceMaxLoginAttempts] [-Displayname <String>]
  [-Email <String>] [-EmployeeIdentifier <String>] [-EmployeeType <String>] [-EnableManagedUid]
@@ -75,7 +75,7 @@ Set-JcSdkUser -InputObject <IJumpCloudApiIdentity> [-FullValidationDetails <Stri
 ```
 
 ## DESCRIPTION
-This endpoint allows you to update a system user.
+This endpoint allows you to set a system user.
 
 #### Sample Request
 
@@ -254,7 +254,6 @@ Accept wildcard characters: False
 
 ### -Addresses
 type, poBox, extendedAddress, streetAddress, locality, region, postalCode, country
-To construct, see NOTES section for ADDRESSES properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V1.Models.ISystemuserputAddressesItem[]
@@ -300,7 +299,6 @@ Accept wildcard characters: False
 
 ### -Attributes
 .
-To construct, see NOTES section for ATTRIBUTES properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V1.Models.ISystemuserputAttributesItem[]
@@ -316,7 +314,6 @@ Accept wildcard characters: False
 
 ### -Body
 SystemUserPut
-To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V1.Models.ISystemuserput
@@ -586,6 +583,22 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -HostEnv
+Region for JumpCloud API host.
+Use 'console' for US or 'console.eu' for EU.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Id
 .
 
@@ -603,7 +616,6 @@ Accept wildcard characters: False
 
 ### -InputObject
 Identity Parameter
-To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V1.Models.IJumpCloudApiIdentity
@@ -814,7 +826,6 @@ Accept wildcard characters: False
 
 ### -PhoneNumbers
 .
-To construct, see NOTES section for PHONENUMBERS properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V1.Models.ISystemuserputPhoneNumbersItem[]
@@ -845,7 +856,6 @@ Accept wildcard characters: False
 
 ### -Relationships
 .
-To construct, see NOTES section for RELATIONSHIPS properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V1.Models.ISystemuserputRelationshipsItem[]
@@ -861,7 +871,6 @@ Accept wildcard characters: False
 
 ### -RestrictedFields
 .
-To construct, see NOTES section for RESTRICTEDFIELDS properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V1.Models.IRestrictedField1[]
@@ -892,7 +901,6 @@ Accept wildcard characters: False
 
 ### -SshKeys
 .
-To construct, see NOTES section for SSHKEYS properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V1.Models.ISshkeypost[]
@@ -1042,14 +1050,12 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## NOTES
 
-ALIASES
-
 COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-ADDRESSES <ISystemuserputAddressesItem[]>: type, poBox, extendedAddress, streetAddress, locality, region, postalCode, country
+`ADDRESSES <ISystemuserputAddressesItem[]>`: type, poBox, extendedAddress, streetAddress, locality, region, postalCode, country
   - `[Country <String>]`: 
   - `[ExtendedAddress <String>]`: 
   - `[Locality <String>]`: 
@@ -1059,13 +1065,13 @@ ADDRESSES <ISystemuserputAddressesItem[]>: type, poBox, extendedAddress, streetA
   - `[StreetAddress <String>]`: 
   - `[Type <String>]`: 
 
-ATTRIBUTES <ISystemuserputAttributesItem[]>: .
+`ATTRIBUTES <ISystemuserputAttributesItem[]>`: .
   - `[Name <String>]`: 
   - `[Value <String>]`: 
 
-BODY <ISystemuserput>: SystemUserPut
+`BODY <ISystemuserput>`: SystemUserPut
   - `[AccountLocked <Boolean?>]`: 
-  - `[Addresses <ISystemuserputAddressesItem[]>]`: type, poBox, extendedAddress, streetAddress, locality, region, postalCode, country
+  - `[Addresses <List<ISystemuserputAddressesItem>>]`: type, poBox, extendedAddress, streetAddress, locality, region, postalCode, country
     - `[Country <String>]`: 
     - `[ExtendedAddress <String>]`: 
     - `[Locality <String>]`: 
@@ -1076,7 +1082,7 @@ BODY <ISystemuserput>: SystemUserPut
     - `[Type <String>]`: 
   - `[AllowPublicKey <Boolean?>]`: 
   - `[AlternateEmail <String>]`: 
-  - `[Attributes <ISystemuserputAttributesItem[]>]`: 
+  - `[Attributes <List<ISystemuserputAttributesItem>>]`: 
     - `[Name <String>]`: 
     - `[Value <String>]`: 
   - `[Company <String>]`: 
@@ -1108,19 +1114,19 @@ BODY <ISystemuserput>: SystemUserPut
   - `[Middlename <String>]`: 
   - `[Password <String>]`: 
   - `[PasswordNeverExpires <Boolean?>]`: 
-  - `[PhoneNumbers <ISystemuserputPhoneNumbersItem[]>]`: 
+  - `[PhoneNumbers <List<ISystemuserputPhoneNumbersItem>>]`: 
     - `[Number <String>]`: 
     - `[Type <String>]`: 
   - `[PublicKey <String>]`: 
-  - `[Relationships <ISystemuserputRelationshipsItem[]>]`: 
+  - `[Relationships <List<ISystemuserputRelationshipsItem>>]`: 
     - `[Type <String>]`: 
     - `[Value <String>]`: 
-  - `[RestrictedFields <IRestrictedField1[]>]`: 
+  - `[RestrictedFields <List<IRestrictedField1>>]`: 
     - `[Field <String>]`: 
     - `[Id <String>]`: 
     - `[Type <String>]`: 
   - `[SambaServiceUser <Boolean?>]`: 
-  - `[SshKeys <ISshkeypost[]>]`: 
+  - `[SshKeys <List<ISshkeypost>>]`: 
     - `Name <String>`: The name of the SSH key.
     - `PublicKey <String>`: The Public SSH key.
   - `[State <String>]`: 
@@ -1130,26 +1136,26 @@ BODY <ISystemuserput>: SystemUserPut
   - `[UnixUid <Int32?>]`: 
   - `[Username <String>]`: 
 
-INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter
+`INPUTOBJECT <IJumpCloudApiIdentity>`: Identity Parameter
   - `[Id <String>]`: 
   - `[SystemId <String>]`: 
   - `[SystemuserId <String>]`: 
   - `[Triggername <String>]`: 
 
-PHONENUMBERS <ISystemuserputPhoneNumbersItem[]>: .
+`PHONENUMBERS <ISystemuserputPhoneNumbersItem[]>`: .
   - `[Number <String>]`: 
   - `[Type <String>]`: 
 
-RELATIONSHIPS <ISystemuserputRelationshipsItem[]>: .
+`RELATIONSHIPS <ISystemuserputRelationshipsItem[]>`: .
   - `[Type <String>]`: 
   - `[Value <String>]`: 
 
-RESTRICTEDFIELDS <IRestrictedField1[]>: .
+`RESTRICTEDFIELDS <IRestrictedField1[]>`: .
   - `[Field <String>]`: 
   - `[Id <String>]`: 
   - `[Type <String>]`: 
 
-SSHKEYS <ISshkeypost[]>: .
+`SSHKEYS <ISshkeypost[]>`: .
   - `Name <String>`: The name of the SSH key.
   - `PublicKey <String>`: The Public SSH key.
 

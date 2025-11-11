@@ -1,7 +1,7 @@
 ---
 external help file:
 Module Name: JumpCloud.SDK.V2
-online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkAdministratorOrganization.md
+online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4908_userGroupDeviceGroupFilters/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkAdministratorOrganization.md
 schema: 2.0.0
 ---
 
@@ -13,7 +13,7 @@ This endpoint returns the association links between an Administrator and Organiz
 ## SYNTAX
 
 ```
-Get-JcSdkAdministratorOrganization -Id <String> [<CommonParameters>]
+Get-JcSdkAdministratorOrganization -HostEnv <String> -Id <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -38,6 +38,22 @@ Organization  String
 {{ Add output here }}
 
 ## PARAMETERS
+
+### -HostEnv
+Region for JumpCloud API host.
+Use 'console' for US or 'console.eu' for EU.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### -Id
 .
@@ -64,8 +80,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ### JumpCloud.SDK.V2.Models.IAdministratorOrganizationLink
 
 ## NOTES
-
-ALIASES
 
 ## RELATED LINKS
 

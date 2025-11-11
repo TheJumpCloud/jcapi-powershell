@@ -1,7 +1,7 @@
 ---
 external help file:
 Module Name: JumpCloud.SDK.V2
-online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/New-JcSdkProviderAdministrator.md
+online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4908_userGroupDeviceGroupFilters/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/New-JcSdkProviderAdministrator.md
 schema: 2.0.0
 ---
 
@@ -16,30 +16,30 @@ You must provide either `role` or `roleName`.
 
 ### CreateExpanded (Default)
 ```
-New-JcSdkProviderAdministrator -ProviderId <String> -Email <String> [-ApiKeyAllowed]
+New-JcSdkProviderAdministrator -HostEnv <String> -ProviderId <String> [-ApiKeyAllowed]
  [-ApiKeyHashCreatedAt <DateTime>] [-ApiKeyHashExpireAt <DateTime>] [-ApiKeyHashPrefix <String>] [-BindNoOrgs]
- [-EnableMultiFactor] [-Firstname <String>] [-Lastname <String>] [-Role <String>] [-RoleName <String>]
- [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-Email <String>] [-EnableMultiFactor] [-Firstname <String>] [-Lastname <String>] [-Role <String>]
+ [-RoleName <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Create
 ```
-New-JcSdkProviderAdministrator -ProviderId <String> -Body <IProviderAdminReq> [-Confirm] [-WhatIf]
- [<CommonParameters>]
+New-JcSdkProviderAdministrator -HostEnv <String> -ProviderId <String> -Body <IProviderAdminReq> [-Confirm]
+ [-WhatIf] [<CommonParameters>]
 ```
 
 ### CreateViaIdentity
 ```
-New-JcSdkProviderAdministrator -InputObject <IJumpCloudApiIdentity> -Body <IProviderAdminReq> [-Confirm]
- [-WhatIf] [<CommonParameters>]
+New-JcSdkProviderAdministrator -HostEnv <String> -InputObject <IJumpCloudApiIdentity>
+ -Body <IProviderAdminReq> [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### CreateViaIdentityExpanded
 ```
-New-JcSdkProviderAdministrator -InputObject <IJumpCloudApiIdentity> -Email <String> [-ApiKeyAllowed]
+New-JcSdkProviderAdministrator -HostEnv <String> -InputObject <IJumpCloudApiIdentity> [-ApiKeyAllowed]
  [-ApiKeyHashCreatedAt <DateTime>] [-ApiKeyHashExpireAt <DateTime>] [-ApiKeyHashPrefix <String>] [-BindNoOrgs]
- [-EnableMultiFactor] [-Firstname <String>] [-Lastname <String>] [-Role <String>] [-RoleName <String>]
- [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-Email <String>] [-EnableMultiFactor] [-Firstname <String>] [-Lastname <String>] [-Role <String>]
+ [-RoleName <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -166,7 +166,6 @@ Accept wildcard characters: False
 
 ### -Body
 ProviderAdminReq
-To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IProviderAdminReq
@@ -188,7 +187,7 @@ Type: System.String
 Parameter Sets: CreateExpanded, CreateViaIdentityExpanded
 Aliases:
 
-Required: True
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -225,9 +224,24 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -HostEnv
+Region for JumpCloud API host.
+Use 'console' for US or 'console.eu' for EU.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -InputObject
 Identity Parameter
-To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
@@ -347,14 +361,12 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## NOTES
 
-ALIASES
-
 COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <IProviderAdminReq>: ProviderAdminReq
+`BODY <IProviderAdminReq>`: ProviderAdminReq
   - `Email <String>`: 
   - `[ApiKeyAllowed <Boolean?>]`: 
   - `[ApiKeyHashCreatedAt <DateTime?>]`: 
@@ -367,7 +379,7 @@ BODY <IProviderAdminReq>: ProviderAdminReq
   - `[Role <String>]`: 
   - `[RoleName <String>]`: 
 
-INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter
+`INPUTOBJECT <IJumpCloudApiIdentity>`: Identity Parameter
   - `[AccountId <String>]`: 
   - `[ActivedirectoryId <String>]`: 
   - `[AdministratorId <String>]`: 

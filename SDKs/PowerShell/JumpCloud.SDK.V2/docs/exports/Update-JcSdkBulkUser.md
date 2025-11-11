@@ -1,15 +1,15 @@
 ---
 external help file:
 Module Name: JumpCloud.SDK.V2
-online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Update-JcSdkBulkUser.md
+online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4908_userGroupDeviceGroupFilters/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Update-JcSdkBulkUser.md
 schema: 2.0.0
 ---
 
 # Update-JcSdkBulkUser
 
 ## SYNOPSIS
-The endpoint allows you to create a bulk job to asynchronously update users.
-See [Update a System User](https://docs.jumpcloud.com/api/1.0/index.html#operation/systemusers_put) for full list of attributes.
+The endpoint allows you to update a bulk job to asynchronously update users.
+See [update a System User](https://docs.jumpcloud.com/api/1.0/index.html#operation/systemusers_put) for full list of attributes.
 
 #### Sample Request 
 ```
@@ -41,12 +41,13 @@ curl -X PATCH https://console.jumpcloud.com/api/v2/bulk/users \\
 ## SYNTAX
 
 ```
-Update-JcSdkBulkUser -Body <IBulkUserUpdate[]> [-SuppressEmail] [-Confirm] [-WhatIf] [<CommonParameters>]
+Update-JcSdkBulkUser -HostEnv <String> -Body <List<IBulkUserUpdate>> [-SuppressEmail] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-The endpoint allows you to create a bulk job to asynchronously update users.
-See [Update a System User](https://docs.jumpcloud.com/api/1.0/index.html#operation/systemusers_put) for full list of attributes.
+The endpoint allows you to update a bulk job to asynchronously update users.
+See [update a System User](https://docs.jumpcloud.com/api/1.0/index.html#operation/systemusers_put) for full list of attributes.
 
 #### Sample Request 
 ```
@@ -95,10 +96,9 @@ Update-JcSdkBulkUser
 
 ### -Body
 Array of bulk-user-update
-To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IBulkUserUpdate[]
+Type: System.Collections.Generic.List`1[[JumpCloud.SDK.V2.Models.IBulkUserUpdate, JumpCloud.SDK.V2.private, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]
 Parameter Sets: (All)
 Aliases:
 
@@ -106,6 +106,22 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -HostEnv
+Region for JumpCloud API host.
+Use 'console' for US or 'console.eu' for EU.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -164,24 +180,22 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### JumpCloud.SDK.V2.Models.IBulkUserUpdate[]
+### System.Collections.Generic.List`1[[JumpCloud.SDK.V2.Models.IBulkUserUpdate, JumpCloud.SDK.V2.private, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]
 
 ## OUTPUTS
 
-### System.String
+### JumpCloud.SDK.V2.Models.IJobId
 
 ## NOTES
-
-ALIASES
 
 COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <IBulkUserUpdate[]>: Array of bulk-user-update
+`BODY <List<IBulkUserUpdate>>`: Array of bulk-user-update
   - `[AccountLocked <Boolean?>]`: 
-  - `[Addresses <IBulkUserUpdateAddressesItem[]>]`: type, poBox, extendedAddress, streetAddress, locality, region, postalCode, country
+  - `[Addresses <List<IBulkUserUpdateAddressesItem>>]`: type, poBox, extendedAddress, streetAddress, locality, region, postalCode, country
     - `[Country <String>]`: 
     - `[ExtendedAddress <String>]`: 
     - `[Locality <String>]`: 
@@ -192,7 +206,7 @@ BODY <IBulkUserUpdate[]>: Array of bulk-user-update
     - `[Type <String>]`: 
   - `[AllowPublicKey <Boolean?>]`: 
   - `[AlternateEmail <String>]`: 
-  - `[Attributes <IBulkUserUpdateAttributesItem[]>]`: 
+  - `[Attributes <List<IBulkUserUpdateAttributesItem>>]`: 
     - `[Name <String>]`: 
     - `[Value <String>]`: 
   - `[Company <String>]`: 
@@ -227,15 +241,15 @@ BODY <IBulkUserUpdate[]>: Array of bulk-user-update
   - `[Password <String>]`: 
   - `[PasswordNeverExpires <Boolean?>]`: 
   - `[PasswordlessSudo <Boolean?>]`: 
-  - `[PhoneNumbers <IBulkUserUpdatePhoneNumbersItem[]>]`: 
+  - `[PhoneNumbers <List<IBulkUserUpdatePhoneNumbersItem>>]`: 
     - `[Number <String>]`: 
     - `[Type <String>]`: 
   - `[PublicKey <String>]`: 
-  - `[Relationships <IBulkUserUpdateRelationshipsItem[]>]`: 
+  - `[Relationships <List<IBulkUserUpdateRelationshipsItem>>]`: 
     - `[Type <String>]`: 
     - `[Value <String>]`: 
   - `[SambaServiceUser <Boolean?>]`: 
-  - `[SshKeys <IBulkUserUpdateSshKeysItem[]>]`: 
+  - `[SshKeys <List<IBulkUserUpdateSshKeysItem>>]`: 
     - `Name <String>`: The name of the SSH key.
     - `PublicKey <String>`: The Public SSH key.
   - `[State <String>]`: 

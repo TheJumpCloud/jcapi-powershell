@@ -101,37 +101,25 @@ BODY <IRadiusserverpost>:
   [UserPasswordEnabled <Boolean?>]:
   [UserPasswordExpirationAction <String>]:
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/New-JcSdkRadiusServer.md
+https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4908_userGroupDeviceGroupFilters/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/New-JcSdkRadiusServer.md
 #>
  Function New-JcSdkRadiusServer
 {
     [OutputType([JumpCloud.SDK.V1.Models.IRadiusserver])]
     [CmdletBinding(DefaultParameterSetName='CreateExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
+    [Parameter(Mandatory)]
+    [JumpCloud.SDK.V1.Category('Uri')]
+    [System.String]
+    # Region for JumpCloud API host.
+    # Use 'console' for US or 'console.eu' for EU.
+    ${HostEnv}, 
+
     [Parameter(ParameterSetName='Create', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V1.Category('Body')]
     [JumpCloud.SDK.V1.Models.IRadiusserverpost]
     # RadiusServerPost
-    # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body}, 
-
-    [Parameter(ParameterSetName='CreateExpanded', Mandatory)]
-    [JumpCloud.SDK.V1.Category('Body')]
-    [System.String]
-    # .
-    ${Name}, 
-
-    [Parameter(ParameterSetName='CreateExpanded', Mandatory)]
-    [JumpCloud.SDK.V1.Category('Body')]
-    [System.String]
-    # .
-    ${NetworkSourceIP}, 
-
-    [Parameter(ParameterSetName='CreateExpanded', Mandatory)]
-    [JumpCloud.SDK.V1.Category('Body')]
-    [System.String]
-    # RADIUS shared secret between the server and client.
-    ${SharedSecret}, 
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
@@ -159,6 +147,18 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
+    [System.String]
+    # .
+    ${Name}, 
+
+    [Parameter(ParameterSetName='CreateExpanded')]
+    [JumpCloud.SDK.V1.Category('Body')]
+    [System.String]
+    # .
+    ${NetworkSourceIP}, 
+
+    [Parameter(ParameterSetName='CreateExpanded')]
+    [JumpCloud.SDK.V1.Category('Body')]
     [System.Management.Automation.SwitchParameter]
     # .
     ${RadsecEnabled}, 
@@ -174,6 +174,12 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [System.Management.Automation.SwitchParameter]
     # .
     ${RequireTlsAuth}, 
+
+    [Parameter(ParameterSetName='CreateExpanded')]
+    [JumpCloud.SDK.V1.Category('Body')]
+    [System.String]
+    # RADIUS shared secret between the server and client.
+    ${SharedSecret}, 
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]

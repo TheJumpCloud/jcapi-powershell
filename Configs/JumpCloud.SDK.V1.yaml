@@ -1,55 +1,40 @@
-debug: true
 verbose: true
-# Values
-# azure: false
+base-folder: ..
+help-link-prefix: https://github.com/TheJumpCloud/jcapi-powershell/tree/$(branch)/SDKs/PowerShell/
+dll-name: JumpCloud.SDK.V1.private
+debug: true
+output-folder: SDKs/PowerShell/JumpCloud.SDK.V1
+module-version: 0.1.0
 powershell: true
-branch: master
+input-file:
+- SwaggerSpecs/JumpCloud.SDK.V1.json
+module-name: JumpCloud.SDK.V1
+prefix: JcSdkInternal
+clear-output-folder: true
 metadata:
-  authors: JumpCloud
-  owners: JumpCloud
-  description: The JumpCloud V1 PowerShell SDK
-  copyright: (c) JumpCloud. All rights reserved.
-  companyName: JumpCloud
-  requireLicenseAcceptance: false
   licenseUri: https://github.com/TheJumpCloud/jcapi-powershell/tree/$(branch)/LICENSE
+  description: The JumpCloud V1 PowerShell SDK
   projectUri: https://github.com/TheJumpCloud/jcapi-powershell/tree/$(branch)/SDKs/PowerShell/JumpCloud.SDK.V1/
   iconUri: https://console.jumpcloud.com/img/login-viewport-logo.png
+  requireLicenseAcceptance: false
   tags: JumpCloud, DaaS, Jump, Cloud, Directory
+  owners: JumpCloud
   formatsToProcess: []
-
-# Names
-prefix: JcSdkInternal
-customFunctionPrefix: JcSdk
-help-link-prefix: https://github.com/TheJumpCloud/jcapi-powershell/tree/$(branch)/SDKs/PowerShell/
-
-# Folders
-clear-output-folder: true
-output-folder: SDKs/PowerShell/JumpCloud.SDK.V1
-base-folder: '..'
-
-input-file:
-  - SwaggerSpecs/JumpCloud.SDK.V1.json
-# title: JumpCloud.SDK.V1
-module-name: JumpCloud.SDK.V1
-namespace: JumpCloud.SDK.V1
-sample-generation: true
-module-version: 0.0.47
-dll-name: JumpCloud.SDK.V1.private
-
+  companyName: JumpCloud
+  copyright: (c) JumpCloud. All rights reserved.
+  authors: JumpCloud
 directive:
-  # update search command results system property to be systemID
-  - from: swagger-document
-    where: "$.definitions.commandresultssearchlist.properties.results.items.properties.system"
-    transform: >-
-      $["x-ms-client-name"] = "systemId";
-  # update get command {id} results system property to be systemID
-  - from: swagger-document
-    where: "$.definitions.commandresultbycommandid.properties.system"
-    transform: >-
-      $["x-ms-client-name"] = "systemId";
-  - from: swagger-document
-    where:
-      prefix: JcSdk
-    hide: true
-# Prevent response flattening: https://github.com/Azure/autorest.powershell/issues/743
-# inlining-threshold: 0
+- where: $.definitions.commandresultssearchlist.properties.results.items.properties.system
+  from: swagger-document
+  transform: $["x-ms-client-name"] = "systemId";
+- where: $.definitions.commandresultbycommandid.properties.system
+  from: swagger-document
+  transform: $["x-ms-client-name"] = "systemId";
+- hide: true
+  where:
+    prefix: JcSdk
+  from: swagger-document
+namespace: JumpCloud.SDK.V1
+branch: CUT-4908_userGroupDeviceGroupFilters
+sample-generation: true
+customFunctionPrefix: JcSdk

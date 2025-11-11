@@ -1,16 +1,16 @@
 ---
 external help file:
 Module Name: JumpCloud.SDK.V2
-online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Set-JcSdkSoftwareApp.md
+online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4908_userGroupDeviceGroupFilters/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Set-JcSdkSoftwareApp.md
 schema: 2.0.0
 ---
 
 # Set-JcSdkSoftwareApp
 
 ## SYNOPSIS
-This endpoint updates a specific Software Application configuration for the organization.
+This endpoint set a specific Software Application configuration for the organization.
 displayName can be changed alone if no settings are provided.
-If a setting is provided, it should include all its information since this endpoint will update all the settings' fields.
+If a setting is provided, it should include all its information since this endpoint will set all the settings' fields.
 The optional isConfigEnabled and appConfiguration apple_vpp attributes are not included in the response.
 
 #### Sample Request - displayName only
@@ -35,7 +35,7 @@ The optional isConfigEnabled and appConfiguration apple_vpp attributes are not i
     \"settings\": [
       {
         \"packageId\": \"123456\",
-        \"autoUpdate\": false,
+        \"autoset : false,
         \"allowUpdateDelay\": false,
         \"packageManager\": \"APPLE_VPP\",
         \"locationObjectId\": \"123456789012123456789012\",
@@ -71,32 +71,34 @@ The optional isConfigEnabled and appConfiguration apple_vpp attributes are not i
 
 ### SetExpanded (Default)
 ```
-Set-JcSdkSoftwareApp -Id <String> [-CreatedAt <DateTime>] [-DisplayName <String>] [-Id1 <String>]
- [-Settings <ISoftwareAppSettings[]>] [-UpdatedAt <DateTime>] [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkSoftwareApp -HostEnv <String> -Id <String> [-CreatedAt <DateTime>] [-DisplayName <String>]
+ [-Id1 <String>] [-Settings <ISoftwareAppSettings[]>] [-UpdatedAt <DateTime>] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### Set
 ```
-Set-JcSdkSoftwareApp -Id <String> -Body <ISoftwareApp> [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkSoftwareApp -HostEnv <String> -Id <String> -Body <ISoftwareApp> [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### SetViaIdentity
 ```
-Set-JcSdkSoftwareApp -InputObject <IJumpCloudApiIdentity> -Body <ISoftwareApp> [-Confirm] [-WhatIf]
- [<CommonParameters>]
+Set-JcSdkSoftwareApp -HostEnv <String> -InputObject <IJumpCloudApiIdentity> -Body <ISoftwareApp> [-Confirm]
+ [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkSoftwareApp -InputObject <IJumpCloudApiIdentity> [-Id <String>] [-CreatedAt <DateTime>]
- [-DisplayName <String>] [-Settings <ISoftwareAppSettings[]>] [-UpdatedAt <DateTime>] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+Set-JcSdkSoftwareApp -HostEnv <String> -InputObject <IJumpCloudApiIdentity> [-Id <String>]
+ [-CreatedAt <DateTime>] [-DisplayName <String>] [-Settings <ISoftwareAppSettings[]>] [-UpdatedAt <DateTime>]
+ [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-This endpoint updates a specific Software Application configuration for the organization.
+This endpoint set a specific Software Application configuration for the organization.
 displayName can be changed alone if no settings are provided.
-If a setting is provided, it should include all its information since this endpoint will update all the settings' fields.
+If a setting is provided, it should include all its information since this endpoint will set all the settings' fields.
 The optional isConfigEnabled and appConfiguration apple_vpp attributes are not included in the response.
 
 #### Sample Request - displayName only
@@ -121,7 +123,7 @@ The optional isConfigEnabled and appConfiguration apple_vpp attributes are not i
     \"settings\": [
       {
         \"packageId\": \"123456\",
-        \"autoUpdate\": false,
+        \"autoset : false,
         \"allowUpdateDelay\": false,
         \"packageManager\": \"APPLE_VPP\",
         \"locationObjectId\": \"123456789012123456789012\",
@@ -179,7 +181,6 @@ Settings    JumpCloud.SDK.V2.Models.SoftwareAppSettings[]
 
 ### -Body
 Software Application Package
-To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.ISoftwareApp
@@ -223,6 +224,22 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -HostEnv
+Region for JumpCloud API host.
+Use 'console' for US or 'console.eu' for EU.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Id
 .
 
@@ -255,7 +272,6 @@ Accept wildcard characters: False
 
 ### -InputObject
 Identity Parameter
-To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
@@ -271,7 +287,6 @@ Accept wildcard characters: False
 
 ### -Settings
 .
-To construct, see NOTES section for SETTINGS properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.ISoftwareAppSettings[]
@@ -346,37 +361,40 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## NOTES
 
-ALIASES
-
 COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <ISoftwareApp>: Software Application Package
+`BODY <ISoftwareApp>`: Software Application Package
   - `[CreatedAt <DateTime?>]`: 
   - `[DisplayName <String>]`: 
   - `[Id <String>]`: 
-  - `[Settings <ISoftwareAppSettings[]>]`: 
+  - `[Settings <List<ISoftwareAppSettings>>]`: 
     - `[AllowUpdateDelay <Boolean?>]`: 
     - `[AppCatalogInstallableObjectId <String>]`: ID of the app catalog installable that created this app.
+    - `[AppFileName <String>]`: 
     - `[AppleVppAppConfiguration <String>]`: Text sent to configure the application, the text should be a valid plist.  Returned only by 'GET /softwareapps/{id}'.
     - `[AppleVppAssignedLicenses <Int32?>]`: 
     - `[AppleVppAvailableLicenses <Int32?>]`: 
     - `[AppleVppDetails <ISoftwareAppAppleVppDetails>]`: App details returned by iTunes API. See example. The properties in this field are out of our control and we cannot guarantee consistency, so it should be checked by the client and manage the details accordingly.
       - `[(Any) <Object>]`: This indicates any property can be added to this object.
     - `[AppleVppIsConfigEnabled <Boolean?>]`: Denotes if configuration has been enabled for the application.  Returned only by ''GET /softwareapps/{id}''.
-    - `[AppleVppSupportedDeviceFamilies <String[]>]`: The supported device families for this VPP Application.
+    - `[AppleVppSupportedDeviceFamilies <List<String>>]`: The supported device families for this VPP Application.
     - `[AppleVppTotalLicenses <Int32?>]`: 
+    - `[Architectures <List<String>>]`: 
     - `[AssetKind <String>]`: The manifest asset kind (ex: software).
     - `[AssetSha256Size <Int32?>]`: The incremental size to use for summing the package as it is downloaded.
-    - `[AssetSha256Strings <String[]>]`: The array of checksums, one each for the hash size up to the total size of the package.
+    - `[AssetSha256Strings <List<String>>]`: The array of checksums, one each for the hash size up to the total size of the package.
     - `[AutoUpdate <Boolean?>]`: 
+    - `[BundleId <String>]`: 
     - `[CommandLineArguments <String>]`: Command line arguments to use with the application.
     - `[CreatedAt <DateTime?>]`: 
     - `[Description <String>]`: The software app description.
     - `[DesiredState <String>]`: State of Install or Uninstall
+    - `[DownloadUrl <String>]`: 
     - `[EnterpriseObjectId <String>]`: ID of the Enterprise with which this app is associated
+    - `[Format <String>]`: 
     - `[GoogleAndroidAppPricing <String>]`: Whether this app is free, free with in-app purchases, or paid.
     - `[GoogleAndroidAppVersion <String>]`: Latest version currently available for this app.
     - `[GoogleAndroidAuthor <String>]`: The name of the author of this app.
@@ -385,7 +403,7 @@ BODY <ISoftwareApp>: Software Application Package
     - `[GoogleAndroidContentRating <String>]`: The content rating for this app.
     - `[GoogleAndroidDisplayMode <String>]`: The display mode of the web app.
     - `[GoogleAndroidDistributionChannel <String>]`: How and to whom the package is made available.
-    - `[GoogleAndroidFeatures <String[]>]`: The array of android features for the app.
+    - `[GoogleAndroidFeatures <List<String>>]`: The array of android features for the app.
     - `[GoogleAndroidFullDescription <String>]`: Full app description, if available.
     - `[GoogleAndroidIconUrl <String>]`: A link to an image that can be used as an icon for the app.
     - `[GoogleAndroidInstallType <String>]`: The type of installation to perform for an app.
@@ -393,7 +411,7 @@ BODY <ISoftwareApp>: Software Application Package
     - `[GoogleAndroidManagedProperties <Boolean?>]`: Indicates whether this app has managed properties or not.
     - `[GoogleAndroidMinSdkVersion <Int32?>]`: The minimum Android SDK necessary to run the app.
     - `[GoogleAndroidName <String>]`: The name of the app in the form enterprises/{enterprise}/applications/{packageName}.
-    - `[GoogleAndroidPermissionGrants <ISoftwareAppPermissionGrants[]>]`: 
+    - `[GoogleAndroidPermissionGrants <List<ISoftwareAppPermissionGrants>>]`: 
       - `[Id <String>]`: An opaque string uniquely identifying the Android permission, e.g. android.permission.READ_CALENDAR.
       - `[Policy <String>]`: The policy for granting the permission.
     - `[GoogleAndroidRuntimePermission <String>]`: The policy for granting permission requests to apps.
@@ -415,8 +433,9 @@ BODY <ISoftwareApp>: Software Application Package
     - `[PackageVersion <String>]`: The package manifest version.
     - `[PackageVersionUpdatedAt <DateTime?>]`: 
     - `[Scope <String>]`: The installation scope of the software app.
+    - `[ShortVersion <String>]`: 
     - `[StoredPackageObjectId <String>]`: ID of the stored package this app uses to reference the stored install media.
-    - `[StoredPackageVersions <IObjectStorageVersion[]>]`: 
+    - `[StoredPackageVersions <List<IObjectStorageVersion>>]`: 
       - `[Metadata <IObjectStorageVersionMetadata>]`: Dictionary of <any>
         - `[(Any) <Object>]`: This indicates any property can be added to this object.
       - `[Name <String>]`: 
@@ -425,11 +444,14 @@ BODY <ISoftwareApp>: Software Application Package
       - `[Size <Int32?>]`: 
       - `[Status <String>]`: 
       - `[Version <Int32?>]`: 
+    - `[TeamId <String>]`: 
+    - `[UpdateTool <String>]`: 
+    - `[UpdateToolArguments <String>]`: 
     - `[UpdatedAt <DateTime?>]`: 
     - `[VersionlessDownloadUrl <Boolean?>]`: 
   - `[UpdatedAt <DateTime?>]`: 
 
-INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter
+`INPUTOBJECT <IJumpCloudApiIdentity>`: Identity Parameter
   - `[AccountId <String>]`: 
   - `[ActivedirectoryId <String>]`: 
   - `[AdministratorId <String>]`: 
@@ -454,26 +476,31 @@ INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter
   - `[UserId <String>]`: ObjectID of the User.
   - `[WorkdayId <String>]`: 
 
-SETTINGS <ISoftwareAppSettings[]>: .
+`SETTINGS <ISoftwareAppSettings[]>`: .
   - `[AllowUpdateDelay <Boolean?>]`: 
   - `[AppCatalogInstallableObjectId <String>]`: ID of the app catalog installable that created this app.
+  - `[AppFileName <String>]`: 
   - `[AppleVppAppConfiguration <String>]`: Text sent to configure the application, the text should be a valid plist.  Returned only by 'GET /softwareapps/{id}'.
   - `[AppleVppAssignedLicenses <Int32?>]`: 
   - `[AppleVppAvailableLicenses <Int32?>]`: 
   - `[AppleVppDetails <ISoftwareAppAppleVppDetails>]`: App details returned by iTunes API. See example. The properties in this field are out of our control and we cannot guarantee consistency, so it should be checked by the client and manage the details accordingly.
     - `[(Any) <Object>]`: This indicates any property can be added to this object.
   - `[AppleVppIsConfigEnabled <Boolean?>]`: Denotes if configuration has been enabled for the application.  Returned only by ''GET /softwareapps/{id}''.
-  - `[AppleVppSupportedDeviceFamilies <String[]>]`: The supported device families for this VPP Application.
+  - `[AppleVppSupportedDeviceFamilies <List<String>>]`: The supported device families for this VPP Application.
   - `[AppleVppTotalLicenses <Int32?>]`: 
+  - `[Architectures <List<String>>]`: 
   - `[AssetKind <String>]`: The manifest asset kind (ex: software).
   - `[AssetSha256Size <Int32?>]`: The incremental size to use for summing the package as it is downloaded.
-  - `[AssetSha256Strings <String[]>]`: The array of checksums, one each for the hash size up to the total size of the package.
+  - `[AssetSha256Strings <List<String>>]`: The array of checksums, one each for the hash size up to the total size of the package.
   - `[AutoUpdate <Boolean?>]`: 
+  - `[BundleId <String>]`: 
   - `[CommandLineArguments <String>]`: Command line arguments to use with the application.
   - `[CreatedAt <DateTime?>]`: 
   - `[Description <String>]`: The software app description.
   - `[DesiredState <String>]`: State of Install or Uninstall
+  - `[DownloadUrl <String>]`: 
   - `[EnterpriseObjectId <String>]`: ID of the Enterprise with which this app is associated
+  - `[Format <String>]`: 
   - `[GoogleAndroidAppPricing <String>]`: Whether this app is free, free with in-app purchases, or paid.
   - `[GoogleAndroidAppVersion <String>]`: Latest version currently available for this app.
   - `[GoogleAndroidAuthor <String>]`: The name of the author of this app.
@@ -482,7 +509,7 @@ SETTINGS <ISoftwareAppSettings[]>: .
   - `[GoogleAndroidContentRating <String>]`: The content rating for this app.
   - `[GoogleAndroidDisplayMode <String>]`: The display mode of the web app.
   - `[GoogleAndroidDistributionChannel <String>]`: How and to whom the package is made available.
-  - `[GoogleAndroidFeatures <String[]>]`: The array of android features for the app.
+  - `[GoogleAndroidFeatures <List<String>>]`: The array of android features for the app.
   - `[GoogleAndroidFullDescription <String>]`: Full app description, if available.
   - `[GoogleAndroidIconUrl <String>]`: A link to an image that can be used as an icon for the app.
   - `[GoogleAndroidInstallType <String>]`: The type of installation to perform for an app.
@@ -490,7 +517,7 @@ SETTINGS <ISoftwareAppSettings[]>: .
   - `[GoogleAndroidManagedProperties <Boolean?>]`: Indicates whether this app has managed properties or not.
   - `[GoogleAndroidMinSdkVersion <Int32?>]`: The minimum Android SDK necessary to run the app.
   - `[GoogleAndroidName <String>]`: The name of the app in the form enterprises/{enterprise}/applications/{packageName}.
-  - `[GoogleAndroidPermissionGrants <ISoftwareAppPermissionGrants[]>]`: 
+  - `[GoogleAndroidPermissionGrants <List<ISoftwareAppPermissionGrants>>]`: 
     - `[Id <String>]`: An opaque string uniquely identifying the Android permission, e.g. android.permission.READ_CALENDAR.
     - `[Policy <String>]`: The policy for granting the permission.
   - `[GoogleAndroidRuntimePermission <String>]`: The policy for granting permission requests to apps.
@@ -512,8 +539,9 @@ SETTINGS <ISoftwareAppSettings[]>: .
   - `[PackageVersion <String>]`: The package manifest version.
   - `[PackageVersionUpdatedAt <DateTime?>]`: 
   - `[Scope <String>]`: The installation scope of the software app.
+  - `[ShortVersion <String>]`: 
   - `[StoredPackageObjectId <String>]`: ID of the stored package this app uses to reference the stored install media.
-  - `[StoredPackageVersions <IObjectStorageVersion[]>]`: 
+  - `[StoredPackageVersions <List<IObjectStorageVersion>>]`: 
     - `[Metadata <IObjectStorageVersionMetadata>]`: Dictionary of <any>
       - `[(Any) <Object>]`: This indicates any property can be added to this object.
     - `[Name <String>]`: 
@@ -522,6 +550,9 @@ SETTINGS <ISoftwareAppSettings[]>: .
     - `[Size <Int32?>]`: 
     - `[Status <String>]`: 
     - `[Version <Int32?>]`: 
+  - `[TeamId <String>]`: 
+  - `[UpdateTool <String>]`: 
+  - `[UpdateToolArguments <String>]`: 
   - `[UpdatedAt <DateTime?>]`: 
   - `[VersionlessDownloadUrl <Boolean?>]`: 
 

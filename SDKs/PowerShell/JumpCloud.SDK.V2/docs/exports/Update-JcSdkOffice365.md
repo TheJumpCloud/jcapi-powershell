@@ -1,7 +1,7 @@
 ---
 external help file:
 Module Name: JumpCloud.SDK.V2
-online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Update-JcSdkOffice365.md
+online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4908_userGroupDeviceGroupFilters/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Update-JcSdkOffice365.md
 schema: 2.0.0
 ---
 
@@ -55,27 +55,28 @@ curl -X PATCH https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID} \\
 
 ### UpdateExpanded (Default)
 ```
-Update-JcSdkOffice365 -Office365Id <String> [-DefaultDomainId <String>] [-GroupsEnabled] [-Name <String>]
- [-UserLockoutAction <String>] [-UserPasswordExpirationAction <String>] [-Confirm] [-WhatIf]
+Update-JcSdkOffice365 -HostEnv <String> -Office365Id <String> [-DefaultDomainId <String>] [-GroupsEnabled]
+ [-Name <String>] [-UserLockoutAction <String>] [-UserPasswordExpirationAction <String>] [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
 ### Update
 ```
-Update-JcSdkOffice365 -Office365Id <String> -Body <IOffice365> [-Confirm] [-WhatIf] [<CommonParameters>]
+Update-JcSdkOffice365 -HostEnv <String> -Office365Id <String> -Body <IOffice365> [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### UpdateViaIdentity
 ```
-Update-JcSdkOffice365 -InputObject <IJumpCloudApiIdentity> -Body <IOffice365> [-Confirm] [-WhatIf]
- [<CommonParameters>]
+Update-JcSdkOffice365 -HostEnv <String> -InputObject <IJumpCloudApiIdentity> -Body <IOffice365> [-Confirm]
+ [-WhatIf] [<CommonParameters>]
 ```
 
 ### UpdateViaIdentityExpanded
 ```
-Update-JcSdkOffice365 -InputObject <IJumpCloudApiIdentity> [-DefaultDomainId <String>] [-GroupsEnabled]
- [-Name <String>] [-UserLockoutAction <String>] [-UserPasswordExpirationAction <String>] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+Update-JcSdkOffice365 -HostEnv <String> -InputObject <IJumpCloudApiIdentity> [-DefaultDomainId <String>]
+ [-GroupsEnabled] [-Name <String>] [-UserLockoutAction <String>] [-UserPasswordExpirationAction <String>]
+ [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -156,7 +157,6 @@ UserPasswordExpirationAction String
 
 ### -Body
 Office 365
-To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IOffice365
@@ -200,9 +200,24 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -HostEnv
+Region for JumpCloud API host.
+Use 'console' for US or 'console.eu' for EU.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -InputObject
 Identity Parameter
-To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
@@ -322,21 +337,19 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## NOTES
 
-ALIASES
-
 COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <IOffice365>: Office 365
+`BODY <IOffice365>`: Office 365
   - `[DefaultDomainId <String>]`: 
   - `[GroupsEnabled <Boolean?>]`: 
   - `[Name <String>]`: 
   - `[UserLockoutAction <String>]`: 
   - `[UserPasswordExpirationAction <String>]`: 
 
-INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter
+`INPUTOBJECT <IJumpCloudApiIdentity>`: Identity Parameter
   - `[AccountId <String>]`: 
   - `[ActivedirectoryId <String>]`: 
   - `[AdministratorId <String>]`: 

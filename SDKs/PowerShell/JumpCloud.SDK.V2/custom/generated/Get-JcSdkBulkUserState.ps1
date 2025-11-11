@@ -37,17 +37,25 @@ PS C:\> {{ Add code here }}
 .Outputs
 JumpCloud.SDK.V2.Models.IScheduledUserstateResult
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkBulkUserState.md
+https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4908_userGroupDeviceGroupFilters/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkBulkUserState.md
 #>
  Function Get-JcSdkBulkUserState
 {
     [OutputType([JumpCloud.SDK.V2.Models.IScheduledUserstateResult])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
     Param(
+    [Parameter(Mandatory)]
+    [JumpCloud.SDK.V2.Category('Uri')]
+    [System.String]
+    # Region for JumpCloud API host.
+    # Use 'console' for US or 'console.eu' for EU.
+    ${HostEnv}, 
+
     [Parameter()]
     [AllowEmptyCollection()]
     [JumpCloud.SDK.V2.Category('Query')]
-    [System.String[]]
+    [JumpCloud.SDK.V2.Runtime.Info(PossibleTypes=([System.String]))]
+    [System.Collections.Generic.List[System.String]]
     # A filter to apply to the query.
     # 
     # **Filter structure**: `<field>:<operator>:<value>`.

@@ -1,7 +1,7 @@
 ---
 external help file:
 Module Name: JumpCloud.SDK.V2
-online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkCustomEmailTemplate.md
+online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4908_userGroupDeviceGroupFilters/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkCustomEmailTemplate.md
 schema: 2.0.0
 ---
 
@@ -13,7 +13,7 @@ Get the list of custom email templates
 ## SYNTAX
 
 ```
-Get-JcSdkCustomEmailTemplate [<CommonParameters>]
+Get-JcSdkCustomEmailTemplate -HostEnv <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -41,6 +41,22 @@ Type        String
 
 ## PARAMETERS
 
+### -HostEnv
+Region for JumpCloud API host.
+Use 'console' for US or 'console.eu' for EU.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
@@ -51,8 +67,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ### JumpCloud.SDK.V2.Models.ICustomEmailTemplate
 
 ## NOTES
-
-ALIASES
 
 ## RELATED LINKS
 

@@ -4,28 +4,31 @@ Ordered list of report metadata
 .Description
 Ordered list of report metadata
 .Example
-PS C:\> Get-JcSdkReport
-
-Returns a list of all available reports
+{{ Add code here }}
 .Example
-PS C:\> Get-JcSdkReport -Sort 'CREATED_AT'
-
-Returns a list of all available reports, sorted by the most recently created report
+{{ Add code here }}
 
 .Outputs
 JumpCloud.SDK.DirectoryInsights.Models.IGet200ApplicationJsonItemsItem
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/docs/exports/Get-JcSdkReport.md
+https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4908_userGroupDeviceGroupFilters/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/docs/exports/Get-JcSdkReport.md
 #>
  Function Get-JcSdkReport
 {
     [OutputType([JumpCloud.SDK.DirectoryInsights.Models.IGet200ApplicationJsonItemsItem])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
     Param(
+    [Parameter(Mandatory)]
+    [JumpCloud.SDK.DirectoryInsights.Category('Uri')]
+    [System.String]
+    # Region for JumpCloud API host.
+    # Use 'api' for US or 'api.eu' for EU.
+    ${HostEnv}, 
+
     [Parameter()]
-    [ArgumentCompleter([JumpCloud.SDK.DirectoryInsights.Support.Sort])]
+    [JumpCloud.SDK.DirectoryInsights.PSArgumentCompleterAttribute("CREATED_AT", "EXPIRATION", "REQUESTER_EMAIL", "STATUS", "TYPE", "UPDATED_AT")]
     [JumpCloud.SDK.DirectoryInsights.Category('Query')]
-    [JumpCloud.SDK.DirectoryInsights.Support.Sort]
+    [System.String]
     # Sort type and direction.
     # Default sort is descending, prefix with - to sort ascending.
     ${Sort}, 

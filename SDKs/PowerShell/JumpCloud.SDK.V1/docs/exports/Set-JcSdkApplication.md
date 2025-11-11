@@ -1,51 +1,53 @@
 ---
 external help file:
 Module Name: JumpCloud.SDK.V1
-online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/Set-JcSdkApplication.md
+online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4908_userGroupDeviceGroupFilters/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/Set-JcSdkApplication.md
 schema: 2.0.0
 ---
 
 # Set-JcSdkApplication
 
 ## SYNOPSIS
-The endpoint updates a SSO / SAML Application.
+The endpoint set a SSO / SAML Application.
 Any fields not provided will be reset or created with default values.
 
 ## SYNTAX
 
-### Set (Default)
+### SetExpanded (Default)
 ```
-Set-JcSdkApplication -Id <String> -Body <IApplication> [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkApplication -HostEnv <String> -Id <String> [-Active] [-Beta] [-Color <String>]
+ [-Config <IApplicationConfig>] [-Created <String>]
+ [-DatabaseAttributes <IApplicationDatabaseAttributesItem[]>] [-Description <String>] [-DisplayLabel <String>]
+ [-DisplayName <String>] [-Id1 <String>] [-LearnMore <String>] [-LogoColor <String>] [-LogoUrl <String>]
+ [-Name <String>] [-Organization <String>] [-ParentApp <String>] [-SsoBeta] [-SsoHidden]
+ [-SsoIdpCertExpirationAt <DateTime>] [-SsoJit] [-SsoType <String>] [-SsoUrl <String>] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
-### SetExpanded
+### Set
 ```
-Set-JcSdkApplication -Id <String> -Config <IApplicationConfig> -Name <String> -SsoUrl <String> [-Active]
- [-Beta] [-Color <String>] [-Created <String>] [-DatabaseAttributes <IApplicationDatabaseAttributesItem[]>]
- [-Description <String>] [-DisplayLabel <String>] [-DisplayName <String>] [-Id1 <String>]
- [-LearnMore <String>] [-LogoColor <String>] [-LogoUrl <String>] [-Organization <String>]
- [-ParentApp <String>] [-SsoBeta] [-SsoHidden] [-SsoIdpCertExpirationAt <DateTime>] [-SsoJit]
- [-SsoType <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkApplication -HostEnv <String> -Id <String> -Body <IApplication> [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### SetViaIdentity
 ```
-Set-JcSdkApplication -InputObject <IJumpCloudApiIdentity> -Body <IApplication> [-Confirm] [-WhatIf]
- [<CommonParameters>]
+Set-JcSdkApplication -HostEnv <String> -InputObject <IJumpCloudApiIdentity> -Body <IApplication> [-Confirm]
+ [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkApplication -InputObject <IJumpCloudApiIdentity> -Config <IApplicationConfig> -Name <String>
- -SsoUrl <String> [-Id <String>] [-Active] [-Beta] [-Color <String>] [-Created <String>]
+Set-JcSdkApplication -HostEnv <String> -InputObject <IJumpCloudApiIdentity> [-Id <String>] [-Active] [-Beta]
+ [-Color <String>] [-Config <IApplicationConfig>] [-Created <String>]
  [-DatabaseAttributes <IApplicationDatabaseAttributesItem[]>] [-Description <String>] [-DisplayLabel <String>]
- [-DisplayName <String>] [-LearnMore <String>] [-LogoColor <String>] [-LogoUrl <String>]
+ [-DisplayName <String>] [-LearnMore <String>] [-LogoColor <String>] [-LogoUrl <String>] [-Name <String>]
  [-Organization <String>] [-ParentApp <String>] [-SsoBeta] [-SsoHidden] [-SsoIdpCertExpirationAt <DateTime>]
- [-SsoJit] [-SsoType <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-SsoJit] [-SsoType <String>] [-SsoUrl <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-The endpoint updates a SSO / SAML Application.
+The endpoint set a SSO / SAML Application.
 Any fields not provided will be reset or created with default values.
 
 ## EXAMPLES
@@ -146,7 +148,6 @@ Accept wildcard characters: False
 
 ### -Body
 Application
-To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V1.Models.IApplication
@@ -177,14 +178,13 @@ Accept wildcard characters: False
 
 ### -Config
 .
-To construct, see NOTES section for CONFIG properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V1.Models.IApplicationConfig
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
-Required: True
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -266,6 +266,22 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -HostEnv
+Region for JumpCloud API host.
+Use 'console' for US or 'console.eu' for EU.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Id
 .
 
@@ -298,7 +314,6 @@ Accept wildcard characters: False
 
 ### -InputObject
 Identity Parameter
-To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V1.Models.IJumpCloudApiIdentity
@@ -365,7 +380,7 @@ Type: System.String
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
-Required: True
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -485,7 +500,7 @@ Type: System.String
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
-Required: True
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -538,14 +553,12 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## NOTES
 
-ALIASES
-
 COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <IApplication>: Application
+`BODY <IApplication>`: Application
   - `Config <IApplicationConfig>`: 
     - `[AcUrlLabel <String>]`: 
     - `[AcUrlPosition <Int32?>]`: 
@@ -563,7 +576,7 @@ BODY <IApplication>: Application
     - `[ConstantAttributeReadOnly <Boolean?>]`: 
     - `[ConstantAttributeRequired <Boolean?>]`: 
     - `[ConstantAttributeType <String>]`: 
-    - `[ConstantAttributeValue <IApplicationConfigConstantAttributesValueItem[]>]`: 
+    - `[ConstantAttributeValue <List<IApplicationConfigConstantAttributesValueItem>>]`: 
       - `[Name <String>]`: 
       - `[ReadOnly <Boolean?>]`: 
       - `[Required <Boolean?>]`: 
@@ -578,7 +591,7 @@ BODY <IApplication>: Application
     - `[DatabaseAttributeReadOnly <Boolean?>]`: 
     - `[DatabaseAttributeRequired <Boolean?>]`: 
     - `[DatabaseAttributeType <String>]`: 
-    - `[DatabaseAttributeValue <IApplicationConfigDatabaseAttributesValueItem[]>]`: 
+    - `[DatabaseAttributeValue <List<IApplicationConfigDatabaseAttributesValueItem>>]`: 
       - `[Name <String>]`: 
       - `[ReadOnly <Boolean?>]`: 
       - `[Required <Boolean?>]`: 
@@ -670,7 +683,7 @@ BODY <IApplication>: Application
     - `[IncludeGroupsTooltipVariablesIcon <String>]`: 
     - `[IncludeGroupsTooltipVariablesMessage <String>]`: 
     - `[OverrideNameIdFormatLabel <String>]`: 
-    - `[OverrideNameIdFormatOptions <IApplicationConfigOverrideNameIdFormatOptionsItem[]>]`: 
+    - `[OverrideNameIdFormatOptions <List<IApplicationConfigOverrideNameIdFormatOptionsItem>>]`: 
       - `[Text <String>]`: 
       - `[Value <Int32?>]`: 
     - `[OverrideNameIdFormatPosition <Int32?>]`: 
@@ -697,7 +710,7 @@ BODY <IApplication>: Application
     - `[SignResponseValue <Boolean?>]`: 
     - `[SignResponseVisible <Boolean?>]`: 
     - `[SignatureAlgorithmLabel <String>]`: 
-    - `[SignatureAlgorithmOptions <IApplicationConfigSignatureAlgorithmOptionsItem[]>]`: 
+    - `[SignatureAlgorithmOptions <List<IApplicationConfigSignatureAlgorithmOptionsItem>>]`: 
       - `[Text <String>]`: 
       - `[Value <Int32?>]`: 
     - `[SignatureAlgorithmPosition <Int32?>]`: 
@@ -740,7 +753,7 @@ BODY <IApplication>: Application
     - `[SpErrorFlowValue <Boolean?>]`: 
     - `[SpErrorFlowVisible <Boolean?>]`: 
     - `[SubjectFieldLabel <String>]`: 
-    - `[SubjectFieldOptions <IApplicationConfigSubjectFieldOptionsItem[]>]`: 
+    - `[SubjectFieldOptions <List<IApplicationConfigSubjectFieldOptionsItem>>]`: 
       - `[Text <String>]`: 
       - `[Value <Int32?>]`: 
     - `[SubjectFieldPosition <Int32?>]`: 
@@ -758,7 +771,7 @@ BODY <IApplication>: Application
   - `[Beta <Boolean?>]`: 
   - `[Color <String>]`: 
   - `[Created <String>]`: 
-  - `[DatabaseAttributes <IApplicationDatabaseAttributesItem[]>]`: 
+  - `[DatabaseAttributes <List<IApplicationDatabaseAttributesItem>>]`: 
   - `[Description <String>]`: 
   - `[DisplayLabel <String>]`: 
   - `[DisplayName <String>]`: 
@@ -774,7 +787,7 @@ BODY <IApplication>: Application
   - `[SsoJit <Boolean?>]`: 
   - `[SsoType <String>]`: 
 
-CONFIG <IApplicationConfig>: .
+`CONFIG <IApplicationConfig>`: .
   - `[AcUrlLabel <String>]`: 
   - `[AcUrlPosition <Int32?>]`: 
   - `[AcUrlReadOnly <Boolean?>]`: 
@@ -791,7 +804,7 @@ CONFIG <IApplicationConfig>: .
   - `[ConstantAttributeReadOnly <Boolean?>]`: 
   - `[ConstantAttributeRequired <Boolean?>]`: 
   - `[ConstantAttributeType <String>]`: 
-  - `[ConstantAttributeValue <IApplicationConfigConstantAttributesValueItem[]>]`: 
+  - `[ConstantAttributeValue <List<IApplicationConfigConstantAttributesValueItem>>]`: 
     - `[Name <String>]`: 
     - `[ReadOnly <Boolean?>]`: 
     - `[Required <Boolean?>]`: 
@@ -806,7 +819,7 @@ CONFIG <IApplicationConfig>: .
   - `[DatabaseAttributeReadOnly <Boolean?>]`: 
   - `[DatabaseAttributeRequired <Boolean?>]`: 
   - `[DatabaseAttributeType <String>]`: 
-  - `[DatabaseAttributeValue <IApplicationConfigDatabaseAttributesValueItem[]>]`: 
+  - `[DatabaseAttributeValue <List<IApplicationConfigDatabaseAttributesValueItem>>]`: 
     - `[Name <String>]`: 
     - `[ReadOnly <Boolean?>]`: 
     - `[Required <Boolean?>]`: 
@@ -898,7 +911,7 @@ CONFIG <IApplicationConfig>: .
   - `[IncludeGroupsTooltipVariablesIcon <String>]`: 
   - `[IncludeGroupsTooltipVariablesMessage <String>]`: 
   - `[OverrideNameIdFormatLabel <String>]`: 
-  - `[OverrideNameIdFormatOptions <IApplicationConfigOverrideNameIdFormatOptionsItem[]>]`: 
+  - `[OverrideNameIdFormatOptions <List<IApplicationConfigOverrideNameIdFormatOptionsItem>>]`: 
     - `[Text <String>]`: 
     - `[Value <Int32?>]`: 
   - `[OverrideNameIdFormatPosition <Int32?>]`: 
@@ -925,7 +938,7 @@ CONFIG <IApplicationConfig>: .
   - `[SignResponseValue <Boolean?>]`: 
   - `[SignResponseVisible <Boolean?>]`: 
   - `[SignatureAlgorithmLabel <String>]`: 
-  - `[SignatureAlgorithmOptions <IApplicationConfigSignatureAlgorithmOptionsItem[]>]`: 
+  - `[SignatureAlgorithmOptions <List<IApplicationConfigSignatureAlgorithmOptionsItem>>]`: 
     - `[Text <String>]`: 
     - `[Value <Int32?>]`: 
   - `[SignatureAlgorithmPosition <Int32?>]`: 
@@ -968,7 +981,7 @@ CONFIG <IApplicationConfig>: .
   - `[SpErrorFlowValue <Boolean?>]`: 
   - `[SpErrorFlowVisible <Boolean?>]`: 
   - `[SubjectFieldLabel <String>]`: 
-  - `[SubjectFieldOptions <IApplicationConfigSubjectFieldOptionsItem[]>]`: 
+  - `[SubjectFieldOptions <List<IApplicationConfigSubjectFieldOptionsItem>>]`: 
     - `[Text <String>]`: 
     - `[Value <Int32?>]`: 
   - `[SubjectFieldPosition <Int32?>]`: 
@@ -981,7 +994,7 @@ CONFIG <IApplicationConfig>: .
   - `[SubjectFieldValue <String>]`: 
   - `[SubjectFieldVisible <Boolean?>]`: 
 
-INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter
+`INPUTOBJECT <IJumpCloudApiIdentity>`: Identity Parameter
   - `[Id <String>]`: 
   - `[SystemId <String>]`: 
   - `[SystemuserId <String>]`: 

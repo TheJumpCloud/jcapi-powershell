@@ -1,7 +1,7 @@
 ---
 external help file:
 Module Name: JumpCloud.SDK.DirectoryInsights
-online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/docs/exports/New-JcSdkReport.md
+online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4908_userGroupDeviceGroupFilters/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/docs/exports/New-JcSdkReport.md
 schema: 2.0.0
 ---
 
@@ -14,12 +14,13 @@ Request a JumpCloud report to be generated asynchronously
 
 ### Create (Default)
 ```
-New-JcSdkReport -ReportType <ReportType1> [-Confirm] [-WhatIf] [<CommonParameters>]
+New-JcSdkReport -HostEnv <String> -ReportType <String> [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### CreateViaIdentity
 ```
-New-JcSdkReport -InputObject <IDirectoryInsightsApiIdentity> [-Confirm] [-WhatIf] [<CommonParameters>]
+New-JcSdkReport -HostEnv <String> -InputObject <IDirectoryInsightsApiIdentity> [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -29,23 +30,38 @@ Request a JumpCloud report to be generated asynchronously
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-New-JcSdkReport -ReportType 'users-to-sso-applications'
+{{ Add code here }}
 ```
 
-Queues creation of an user-to-sso-application report
+
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell
-New-JcSdkReport -ReportType 'users-to-devices'
+{{ Add code here }}
 ```
 
-Queues creation of an users-to-devices report
+
 
 ## PARAMETERS
 
+### -HostEnv
+Region for JumpCloud API host.
+Use 'api' for US or 'api.eu' for EU.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -InputObject
 Identity Parameter
-To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.DirectoryInsights.Models.IDirectoryInsightsApiIdentity
@@ -63,7 +79,7 @@ Accept wildcard characters: False
 Report Type
 
 ```yaml
-Type: JumpCloud.SDK.DirectoryInsights.Support.ReportType1
+Type: System.String
 Parameter Sets: Create
 Aliases:
 
@@ -118,17 +134,15 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## NOTES
 
-ALIASES
-
 COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-INPUTOBJECT <IDirectoryInsightsApiIdentity>: Identity Parameter
+`INPUTOBJECT <IDirectoryInsightsApiIdentity>`: Identity Parameter
   - `[ArtifactId <String>]`: Artifact ID
   - `[ReportId <String>]`: Report ID
-  - `[ReportType <ReportType1?>]`: Report Type
+  - `[ReportType <String>]`: Report Type
 
 ## RELATED LINKS
 

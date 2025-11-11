@@ -11,9 +11,13 @@ BeforeAll{
         $currentPath = Split-Path -Path $currentPath -Parent
     }
     . ($mockingPath | Select-Object -First 1).FullName
+
+    # $PSDefaultParameterValues['*-JcSdk*:HostEnv'] = "api"
+
 }
 Describe 'Get-JcSdkEvent' -Tag:(""){
     It 'GetExpanded' {
+
         { Get-JcSdkEvent -Service:('all') -StartTime:((Get-Date).AddHours(-24).ToUniversalTime()) } | Should -Not -Throw
     }
 

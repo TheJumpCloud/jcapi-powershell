@@ -1,7 +1,7 @@
 ---
 Module Name: JumpCloud.SDK.V1
 Module Guid: 85e70ace-c640-4638-89eb-e4b30362d95d
-Download Help Link: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/jumpcloud.sdk.v1
+Download Help Link: https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4908_userGroupDeviceGroupFilters/SDKs/PowerShell/jumpcloud.sdk.v1
 Help Version: 1.0.0.0
 Locale: en-US
 ---
@@ -275,7 +275,7 @@ The default user state for manually created users is stored in
 
 These default state values can be changed in the admin portal settings
 or by using the
-[Update an Organization](https://docs.jumpcloud.com/api/1.0/index.html#operation/organization_put)
+[create an Organization](https://docs.jumpcloud.com/api/1.0/index.html#operation/organization_put)
 endpoint.
 
 #### Sample Request
@@ -692,14 +692,14 @@ curl -X POST https://console.jumpcloud.com/api/search/systemusers \\
 ```
 
 ### [Set-JcSdkAdministratorUser](Set-JcSdkAdministratorUser.md)
-This endpoint allows you to update a user.
+This endpoint allows you to set a user.
 
 ### [Set-JcSdkApplication](Set-JcSdkApplication.md)
-The endpoint updates a SSO / SAML Application.
+The endpoint set a SSO / SAML Application.
 Any fields not provided will be reset or created with default values.
 
 ### [Set-JcSdkCommand](Set-JcSdkCommand.md)
-This endpoint Updates a command based on the command ID and returns the modified command record.
+This endpoint set a command based on the command ID and returns the modified command record.
 
 #### Sample Request
 ```
@@ -718,7 +718,7 @@ curl -X PUT https://console.jumpcloud.com/api/commands/{CommandID} \\
 ```
 
 ### [Set-JcSdkOrganization](Set-JcSdkOrganization.md)
-This endpoint allows you to update an Organization.
+This endpoint allows you to set an Organization.
 
 Note: `passwordPolicy` settings are only used when `passwordCompliance` is set to \"custom\".
 We discourage the use of non-custom passwordCompliance values.
@@ -748,7 +748,7 @@ curl -X PUT https://console.jumpcloud.com/api/organizations/{OrganizationID} \\
 ```
 
 ### [Set-JcSdkRadiusServer](Set-JcSdkRadiusServer.md)
-This endpoint allows you to update RADIUS servers in your organization.
+This endpoint allows you to set RADIUS servers in your organization.
 
 ####
 ```
@@ -757,7 +757,7 @@ curl -X PUT https://console.jumpcloud.com/api/radiusservers/{ServerID} \\
   -H 'Content-Type: application/json' \\
   -H 'x-api-key: {API_KEY}' \\
   -d '{
-    \"name\": \"{name_update}\",
+    \"name\": \"{name_set \",
     \"networkSourceIp\": \"{0.0.0.0}\",
     \"sharedSecret\": \"{secret_password}\",
     \"userLockoutAction\": \"REMOVE\",
@@ -766,7 +766,7 @@ curl -X PUT https://console.jumpcloud.com/api/radiusservers/{ServerID} \\
 ```
 
 ### [Set-JcSdkSystem](Set-JcSdkSystem.md)
-This endpoint allows you to update a system.
+This endpoint allows you to set a system.
 
 #### Sample Request 
 ```
@@ -775,7 +775,7 @@ curl -X PUT https://console.jumpcloud.com/api/systems/{SystemID} \\
   -H 'Content-Type: application/json' \\
   -H 'x-api-key: {API_KEY}' \\
   -d '{
-\t\"displayName\":\"Name_Update\",
+\t\"displayName\":\"Name_set ,
 \t\"allowSshPasswordAuthentication\":\"true\",
 \t\"allowSshRootLogin\":\"true\",
 \t\"allowMultiFactorAuthentication\":\"true\",
@@ -784,7 +784,7 @@ curl -X PUT https://console.jumpcloud.com/api/systems/{SystemID} \\
 ```
 
 ### [Set-JcSdkUser](Set-JcSdkUser.md)
-This endpoint allows you to update a system user.
+This endpoint allows you to set a system user.
 
 #### Sample Request
 

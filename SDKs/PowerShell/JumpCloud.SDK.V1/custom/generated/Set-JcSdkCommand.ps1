@@ -1,6 +1,6 @@
 <#
 .Synopsis
-This endpoint Updates a command based on the command ID and returns the modified command record.
+This endpoint set a command based on the command ID and returns the modified command record.
 
 #### Sample Request
 ```
@@ -18,7 +18,7 @@ curl -X PUT https://console.jumpcloud.com/api/commands/{CommandID} \\
 
 ```
 .Description
-This endpoint Updates a command based on the command ID and returns the modified command record.
+This endpoint set a command based on the command ID and returns the modified command record.
 
 #### Sample Request
 ```
@@ -103,10 +103,11 @@ BODY <ICommand>:
   Command1 <String>: The command to execute on the server.
   CommandType <String>: The Command OS
   Name <String>:
-  [CommandRunners <String[]>]: An array of IDs of the Command Runner Users that can execute this command.
+  [AiGenerated <Boolean?>]: Whether this command was generated with AI assistance.
+  [CommandRunners <List<String>>]: An array of IDs of the Command Runner Users that can execute this command.
   [Description <String>]: Description of the command.
-  [Files <String[]>]: An array of file IDs to include with the command.
-  [FilesS3 <IFilesS3[]>]: An array of file stored in S3 to include with the command.
+  [Files <List<String>>]: An array of file IDs to include with the command.
+  [FilesS3 <List<IFilesS3>>]: An array of file stored in S3 to include with the command.
     Destination <String>: The destination of the file.
     Name <String>: The name of the file.
     ObjectStorageId <String>: The ID of the file in object storage database.
@@ -137,13 +138,20 @@ INPUTOBJECT <IJumpCloudApiIdentity>:
   [SystemuserId <String>]:
   [Triggername <String>]:
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/Set-JcSdkCommand.md
+https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4908_userGroupDeviceGroupFilters/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/Set-JcSdkCommand.md
 #>
  Function Set-JcSdkCommand
 {
     [OutputType([JumpCloud.SDK.V1.Models.ICommand])]
     [CmdletBinding(DefaultParameterSetName='SetExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
+    [Parameter(Mandatory)]
+    [JumpCloud.SDK.V1.Category('Uri')]
+    [System.String]
+    # Region for JumpCloud API host.
+    # Use 'console' for US or 'console.eu' for EU.
+    ${HostEnv}, 
+
     [Parameter(ParameterSetName='Set', Mandatory)]
     [Parameter(ParameterSetName='SetExpanded', Mandatory)]
     [JumpCloud.SDK.V1.Category('Path')]
@@ -156,7 +164,6 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V1.Category('Path')]
     [JumpCloud.SDK.V1.Models.IJumpCloudApiIdentity]
     # Identity Parameter
-    # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
     ${InputObject}, 
 
     [Parameter(ParameterSetName='Set', Mandatory, ValueFromPipeline)]
@@ -164,29 +171,21 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V1.Category('Body')]
     [JumpCloud.SDK.V1.Models.ICommand]
     # Command
-    # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body}, 
 
-    [Parameter(ParameterSetName='SetExpanded', Mandatory)]
-    [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory)]
+    [Parameter(ParameterSetName='SetExpanded')]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
+    [JumpCloud.SDK.V1.Category('Body')]
+    [System.Management.Automation.SwitchParameter]
+    # Whether this command was generated with AI assistance.
+    ${AiGenerated}, 
+
+    [Parameter(ParameterSetName='SetExpanded')]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # The command to execute on the server.
     ${Command}, 
-
-    [Parameter(ParameterSetName='SetExpanded', Mandatory)]
-    [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory)]
-    [JumpCloud.SDK.V1.Category('Body')]
-    [System.String]
-    # The Command OS
-    ${CommandType}, 
-
-    [Parameter(ParameterSetName='SetExpanded', Mandatory)]
-    [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory)]
-    [JumpCloud.SDK.V1.Category('Body')]
-    [System.String]
-    # .
-    ${Name}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
@@ -195,6 +194,13 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [System.String[]]
     # An array of IDs of the Command Runner Users that can execute this command.
     ${CommandRunners}, 
+
+    [Parameter(ParameterSetName='SetExpanded')]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
+    [JumpCloud.SDK.V1.Category('Body')]
+    [System.String]
+    # The Command OS
+    ${CommandType}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
@@ -217,7 +223,6 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V1.Category('Body')]
     [JumpCloud.SDK.V1.Models.IFilesS3[]]
     # An array of file stored in S3 to include with the command.
-    # To construct, see NOTES section for FILESS3 properties and create a hash table.
     ${FilesS3}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
@@ -233,6 +238,13 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [System.String]
     # .
     ${ListensTo}, 
+
+    [Parameter(ParameterSetName='SetExpanded')]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
+    [JumpCloud.SDK.V1.Category('Body')]
+    [System.String]
+    # .
+    ${Name}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]

@@ -1,7 +1,7 @@
 ---
 external help file:
 Module Name: JumpCloud.SDK.V1
-online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/Get-JcSdkUser.md
+online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4908_userGroupDeviceGroupFilters/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/Get-JcSdkUser.md
 schema: 2.0.0
 ---
 
@@ -23,18 +23,19 @@ curl -X GET https://console.jumpcloud.com/api/systemusers/{UserID} \\
 
 ### List (Default)
 ```
-Get-JcSdkUser [-Fields <String>] [-Filter <String[]>] [-Search <String>] [-Sort <String>] [<CommonParameters>]
+Get-JcSdkUser -HostEnv <String> [-Fields <String>] [-Filter <List<String>>] [-Search <String>]
+ [-Sort <String>] [<CommonParameters>]
 ```
 
 ### Get
 ```
-Get-JcSdkUser -Id <String> [-Fields <String>] [-Filter <String[]>] [<CommonParameters>]
+Get-JcSdkUser -HostEnv <String> -Id <String> [-Fields <String>] [-Filter <List<String>>] [<CommonParameters>]
 ```
 
 ### GetViaIdentity
 ```
-Get-JcSdkUser -InputObject <IJumpCloudApiIdentity> [-Fields <String>] [-Filter <String[]>]
- [<CommonParameters>]
+Get-JcSdkUser -HostEnv <String> -InputObject <IJumpCloudApiIdentity> [-Fields <String>]
+ [-Filter <List<String>>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -216,11 +217,27 @@ A filter to apply to the query.
 Populate with a valid field from an endpoint response.
 
 ```yaml
-Type: System.String[]
+Type: System.Collections.Generic.List`1[[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]
 Parameter Sets: (All)
 Aliases:
 
 Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -HostEnv
+Region for JumpCloud API host.
+Use 'console' for US or 'console.eu' for EU.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -244,7 +261,6 @@ Accept wildcard characters: False
 
 ### -InputObject
 Identity Parameter
-To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V1.Models.IJumpCloudApiIdentity
@@ -304,14 +320,12 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## NOTES
 
-ALIASES
-
 COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter
+`INPUTOBJECT <IJumpCloudApiIdentity>`: Identity Parameter
   - `[Id <String>]`: 
   - `[SystemId <String>]`: 
   - `[SystemuserId <String>]`: 

@@ -1,14 +1,14 @@
 ---
 external help file:
 Module Name: JumpCloud.SDK.V2
-online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Set-JcSdkDuoApplication.md
+online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4908_userGroupDeviceGroupFilters/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Set-JcSdkDuoApplication.md
 schema: 2.0.0
 ---
 
 # Set-JcSdkDuoApplication
 
 ## SYNOPSIS
-Updates the specified Duo application.
+Set the specified Duo application.
 
 #### Sample Request
 ```
@@ -28,30 +28,30 @@ Updates the specified Duo application.
 
 ### SetExpanded (Default)
 ```
-Set-JcSdkDuoApplication -AccountId <String> -ApplicationId <String> -ApiHost <String> -IntegrationKey <String>
- -Name <String> [-SecretKey <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkDuoApplication -HostEnv <String> -AccountId <String> -ApplicationId <String> [-ApiHost <String>]
+ [-IntegrationKey <String>] [-Name <String>] [-SecretKey <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Set
 ```
-Set-JcSdkDuoApplication -AccountId <String> -ApplicationId <String> -Body <IDuoApplicationUpdateReq>
- [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkDuoApplication -HostEnv <String> -AccountId <String> -ApplicationId <String>
+ -Body <IDuoApplicationUpdateReq> [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentity
 ```
-Set-JcSdkDuoApplication -InputObject <IJumpCloudApiIdentity> -Body <IDuoApplicationUpdateReq> [-Confirm]
- [-WhatIf] [<CommonParameters>]
+Set-JcSdkDuoApplication -HostEnv <String> -InputObject <IJumpCloudApiIdentity>
+ -Body <IDuoApplicationUpdateReq> [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkDuoApplication -InputObject <IJumpCloudApiIdentity> -ApiHost <String> -IntegrationKey <String>
- -Name <String> [-SecretKey <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkDuoApplication -HostEnv <String> -InputObject <IJumpCloudApiIdentity> [-ApiHost <String>]
+ [-IntegrationKey <String>] [-Name <String>] [-SecretKey <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Updates the specified Duo application.
+Set the specified Duo application.
 
 #### Sample Request
 ```
@@ -116,7 +116,7 @@ Type: System.String
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
-Required: True
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -140,7 +140,6 @@ Accept wildcard characters: False
 
 ### -Body
 DuoApplicationUpdateReq
-To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IDuoApplicationUpdateReq
@@ -154,9 +153,24 @@ Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
+### -HostEnv
+Region for JumpCloud API host.
+Use 'console' for US or 'console.eu' for EU.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -InputObject
 Identity Parameter
-To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
@@ -178,7 +192,7 @@ Type: System.String
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
-Required: True
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -193,7 +207,7 @@ Type: System.String
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
-Required: True
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -261,20 +275,18 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## NOTES
 
-ALIASES
-
 COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <IDuoApplicationUpdateReq>: DuoApplicationUpdateReq
+`BODY <IDuoApplicationUpdateReq>`: DuoApplicationUpdateReq
   - `ApiHost <String>`: 
   - `IntegrationKey <String>`: 
   - `Name <String>`: 
   - `[SecretKey <String>]`: 
 
-INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter
+`INPUTOBJECT <IJumpCloudApiIdentity>`: Identity Parameter
   - `[AccountId <String>]`: 
   - `[ActivedirectoryId <String>]`: 
   - `[AdministratorId <String>]`: 

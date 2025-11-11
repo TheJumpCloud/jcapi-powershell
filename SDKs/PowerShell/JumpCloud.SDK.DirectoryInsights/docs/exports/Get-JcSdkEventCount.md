@@ -1,7 +1,7 @@
 ---
 external help file:
 Module Name: JumpCloud.SDK.DirectoryInsights
-online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/docs/exports/Get-JcSdkEventCount.md
+online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4908_userGroupDeviceGroupFilters/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/docs/exports/Get-JcSdkEventCount.md
 schema: 2.0.0
 ---
 
@@ -18,14 +18,15 @@ curl -X POST 'https://api.jumpcloud.com/insights/directory/v1/events/count' -H '
 
 ### GetExpanded (Default)
 ```
-Get-JcSdkEventCount -Service <String[]> -StartTime <DateTime> [-EndTime <DateTime>] [-Fields <String[]>]
- [-Q <String>] [-SearchAfter <String[]>] [-SearchTermAnd <Hashtable>] [-SearchTermNot <Hashtable>]
- [-SearchTermOr <Hashtable>] [-Sort <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+Get-JcSdkEventCount -HostEnv <String> -Service <String[]> -StartTime <DateTime> [-EndTime <DateTime>]
+ [-ExactMatch <String>] [-Fields <String[]>] [-Q <String>] [-SearchAfter <String[]>]
+ [-SearchTermAnd <Hashtable>] [-SearchTermNot <Hashtable>] [-SearchTermOr <Hashtable>] [-Sort <String>]
+ [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Get
 ```
-Get-JcSdkEventCount -Body <IEventQuery> [-Confirm] [-WhatIf] [<CommonParameters>]
+Get-JcSdkEventCount -HostEnv <String> -Body <IEventQuery> [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -39,37 +40,22 @@ curl -X POST 'https://api.jumpcloud.com/insights/directory/v1/events/count' -H '
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-Get-JcSdkEventCount -Service:('all') -StartTime:((Get-date).AddDays(-30))
+{{ Add code here }}
 ```
 
-Pull all event records from a specified time and count the results
+
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell
-Get-JcSdkEventCount -Service:('sso') -StartTime:('2020-04-14T00:00:00Z')
+{{ Add code here }}
 ```
 
-Pull all SSO event records from a specified time and count the results
 
-### -------------------------- EXAMPLE 3 --------------------------
-```powershell
-Get-JcSdkEventCount -Service:('all') -StartTime:('2020-04-14T00:00:00Z') -EndTime:('2020-04-20T23:00:00Z') -SearchTermAnd @{"event_type" = "admin_login_attempt"; "resource.email" = "admin.user@adminbizorg.com"}
-```
-
-Get all events counts between a date range and match event_type = admin_login_attempt and resource.email = admin.user@adminbizorg.com
-
-### -------------------------- EXAMPLE 4 --------------------------
-```powershell
-Get-JcSdkEventCount -Service:('directory') -StartTime:((Get-date).AddDays(-30)) -searchTermAnd:@{"event_type" = "group_create"}
-```
-
-Get only group_create event counts the last thirty days
 
 ## PARAMETERS
 
 ### -Body
 EventQuery is the users' command to search our auth logs
-To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.DirectoryInsights.Models.IEventQuery
@@ -98,6 +84,21 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -ExactMatch
+optional string for specifying exact match query, do not use with full text query
+
+```yaml
+Type: System.String
+Parameter Sets: GetExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Fields
 optional list of fields to return from query
 
@@ -107,6 +108,22 @@ Parameter Sets: GetExpanded
 Aliases:
 
 Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -HostEnv
+Region for JumpCloud API host.
+Use 'api' for US or 'api.eu' for EU.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -273,25 +290,24 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### System.Int64
+### JumpCloud.SDK.DirectoryInsights.Models.IEventCount
 
 ## NOTES
-
-ALIASES
 
 COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <IEventQuery>: EventQuery is the users' command to search our auth logs
-  - `Service <String[]>`: service name to query.
+`BODY <IEventQuery>`: EventQuery is the users' command to search our auth logs
+  - `Service <List<String>>`: service name to query.
   - `StartTime <DateTime>`: query start time, UTC in RFC3339 format
   - `[EndTime <DateTime?>]`: optional query end time, UTC in RFC3339 format
-  - `[Fields <String[]>]`: optional list of fields to return from query
+  - `[ExactMatch <String>]`: optional string for specifying exact match query, do not use with full text query
+  - `[Fields <List<String>>]`: optional list of fields to return from query
   - `[Limit <Int64?>]`: Max number of rows to return
   - `[Q <String>]`: optional string for specifying a full text query
-  - `[SearchAfter <String[]>]`: Specific query to search after, see x-* response headers for next values
+  - `[SearchAfter <List<String>>]`: Specific query to search after, see x-* response headers for next values
   - `[SearchTermAnd <ITermConjunction>]`: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
     - `[(Any) <Object>]`: This indicates any property can be added to this object.
   - `[SearchTermNot <ITermConjunction>]`: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values

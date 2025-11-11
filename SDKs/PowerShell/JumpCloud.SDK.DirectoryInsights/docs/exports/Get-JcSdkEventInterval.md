@@ -1,7 +1,7 @@
 ---
 external help file:
 Module Name: JumpCloud.SDK.DirectoryInsights
-online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/docs/exports/Get-JcSdkEventInterval.md
+online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4908_userGroupDeviceGroupFilters/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/docs/exports/Get-JcSdkEventInterval.md
 schema: 2.0.0
 ---
 
@@ -18,14 +18,15 @@ curl -X POST 'https://api.jumpcloud.com/insights/directory/v1/events/interval' -
 
 ### GetExpanded (Default)
 ```
-Get-JcSdkEventInterval -IntervalUnit <String> -Service <String[]> -StartTime <DateTime> [-EndTime <DateTime>]
- [-IntervalValue <String>] [-Q <String>] [-SearchTermAnd <Hashtable>] [-SearchTermNot <Hashtable>]
- [-SearchTermOr <Hashtable>] [-Timezone <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+Get-JcSdkEventInterval -HostEnv <String> -IntervalUnit <String> -Service <String[]> -StartTime <DateTime>
+ [-EndTime <DateTime>] [-ExactMatch <String>] [-IntervalValue <String>] [-Q <String>]
+ [-SearchTermAnd <Hashtable>] [-SearchTermNot <Hashtable>] [-SearchTermOr <Hashtable>] [-Timezone <String>]
+ [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Get
 ```
-Get-JcSdkEventInterval -Body <IEventIntervalQuery> [-Confirm] [-WhatIf] [<CommonParameters>]
+Get-JcSdkEventInterval -HostEnv <String> -Body <IEventIntervalQuery> [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -39,29 +40,22 @@ curl -X POST 'https://api.jumpcloud.com/insights/directory/v1/events/interval' -
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-Get-JcSdkEventInterval -Body:(<JumpCloud.SDK.DirectoryInsights.Models.EventIntervalQuery>)
+{{ Add code here }}
 ```
 
-----        ----------
-DocCount    Int
-Key         Int
-KeyAsString
+
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell
-Get-JcSdkEventInterval -IntervalUnit:(<string>) -Service:(<string[]>) -StartTime:(<datetime>) -EndTime:(<datetime>) -IntervalValue:(<string>) -Q:(<string>) -SearchTermAnd:(<hashtable>) -SearchTermNot:(<hashtable>) -SearchTermOr:(<hashtable>) -Timezone:(<string>)
+{{ Add code here }}
 ```
 
-----        ----------
-DocCount    Int
-Key         Int
-KeyAsString
+
 
 ## PARAMETERS
 
 ### -Body
 EventIntervalQuery is the users' command to search our auth logs for bucketed counts of values of the specified field
-To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.DirectoryInsights.Models.IEventIntervalQuery
@@ -84,6 +78,37 @@ Parameter Sets: GetExpanded
 Aliases:
 
 Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ExactMatch
+optional string for specifying exact match query, do not use with full text query
+
+```yaml
+Type: System.String
+Parameter Sets: GetExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -HostEnv
+Region for JumpCloud API host.
+Use 'api' for US or 'api.eu' for EU.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -267,22 +292,21 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
-### JumpCloud.SDK.DirectoryInsights.Models.IPathsD98A8EventsIntervalPostResponses200ContentApplicationJsonSchemaPropertiesBucketsItems
+### JumpCloud.SDK.DirectoryInsights.Models.IPaths17Tds0GEventsIntervalPostResponses200ContentApplicationJsonSchema
 
 ## NOTES
-
-ALIASES
 
 COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <IEventIntervalQuery>: EventIntervalQuery is the users' command to search our auth logs for bucketed counts of values of the specified field
-  - `Service <String[]>`: service name to query.
+`BODY <IEventIntervalQuery>`: EventIntervalQuery is the users' command to search our auth logs for bucketed counts of values of the specified field
+  - `Service <List<String>>`: service name to query.
   - `StartTime <DateTime>`: query start time, UTC in RFC3339 format
   - `IntervalUnit <String>`: 
   - `[EndTime <DateTime?>]`: optional query end time, UTC in RFC3339 format
+  - `[ExactMatch <String>]`: optional string for specifying exact match query, do not use with full text query
   - `[IntervalValue <String>]`: Interval Value. This specifies how many units you want to bucket the event counts by
   - `[Q <String>]`: optional string for specifying a full text query
   - `[SearchTermAnd <ITermConjunction>]`: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values

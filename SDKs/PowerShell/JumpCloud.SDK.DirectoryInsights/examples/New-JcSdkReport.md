@@ -1,19 +1,22 @@
-### Example 1: {{ Add title here }}
-
+### Example 1: Create a Report by ReportType
 ```powershell
-PS C:\> New-JcSdkReport -ReportType 'users-to-sso-applications'
-
-Queues creation of an user-to-sso-application report
+New-JcSdkReport -ReportType:(<string>)
 ```
 
-Queues creation of an user-to-sso-application report. Valid ReportType values are: browser-patch-policy, users-to-directories, users-to-sso-applications, os-patch-policy, users-to-ldap-servers, users-to-user-groups, users-to-devices, users-to-radius-servers,
+```output
+{{ Add output here (remove the output block if the example doesn't have an output) }}
+```
+
+This function will Create a Report by ReportType. ReportType is a required parameter.
 
 ### Example 2: {{ Add title here }}
-
 ```powershell
-PS C:\> New-JcSdkReport -ReportType 'users-to-devices'
-
-Queues creation of an users-to-devices report
+{{ Add code here }}
 ```
 
-Queues creation of an users-to-devices report. Valid ReportType values are: browser-patch-policy, users-to-directories, users-to-sso-applications, os-patch-policy, users-to-ldap-servers, users-to-user-groups, users-to-devices, users-to-radius-servers,
+```output
+{{ Add output here (remove the output block if the example doesn't have an output) }}
+```
+
+{{ Add description here }}
+

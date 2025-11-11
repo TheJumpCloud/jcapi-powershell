@@ -1,7 +1,7 @@
 ---
 external help file:
 Module Name: JumpCloud.SDK.V1
-online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/Search-JcSdkUser.md
+online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4908_userGroupDeviceGroupFilters/SDKs/PowerShell/JumpCloud.SDK.V1/docs/exports/Search-JcSdkUser.md
 schema: 2.0.0
 ---
 
@@ -92,13 +92,13 @@ curl -X POST https://console.jumpcloud.com/api/search/systemusers \\
 
 ### SearchExpanded (Default)
 ```
-Search-JcSdkUser [-Fields <String>] [-Filter <Hashtable>] [-SearchFilter <Hashtable>] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+Search-JcSdkUser -HostEnv <String> [-Fields <String>] [-Filter <Hashtable>] [-SearchFilter <Hashtable>]
+ [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Search
 ```
-Search-JcSdkUser -Body <ISearch> [-Confirm] [-WhatIf] [<CommonParameters>]
+Search-JcSdkUser -HostEnv <String> -Body <ISearch> [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -206,7 +206,6 @@ TotalCount Int
 
 ### -Body
 Search
-To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V1.Models.ISearch
@@ -244,6 +243,22 @@ Parameter Sets: SearchExpanded
 Aliases:
 
 Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -HostEnv
+Region for JumpCloud API host.
+Use 'console' for US or 'console.eu' for EU.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -309,14 +324,12 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## NOTES
 
-ALIASES
-
 COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <ISearch>: Search
+`BODY <ISearch>`: Search
   - `[Fields <String>]`: 
   - `[Filter <ISearchFilter>]`: Dictionary of <any>
     - `[(Any) <Object>]`: This indicates any property can be added to this object.

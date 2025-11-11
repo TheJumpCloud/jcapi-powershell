@@ -1,16 +1,16 @@
 ---
 external help file:
 Module Name: JumpCloud.SDK.V2
-online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Set-JcSdkAppleMdm.md
+online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4908_userGroupDeviceGroupFilters/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Set-JcSdkAppleMdm.md
 schema: 2.0.0
 ---
 
 # Set-JcSdkAppleMdm
 
 ## SYNOPSIS
-Updates an Apple MDM configuration.
+Set an Apple MDM configuration.
 This endpoint is used to supply JumpCloud with a signed certificate from Apple in order to finalize the setup and allow JumpCloud to manage your devices.
-It may also be used to update the DEP Settings.
+It may also be used to set the DEP Settings.
 
 #### Sample Request
 ```
@@ -36,34 +36,35 @@ It may also be used to update the DEP Settings.
 
 ### SetExpanded (Default)
 ```
-Set-JcSdkAppleMdm -Id <String> [-AllowMobileUserEnrollment] [-AppleCertCreatorAppleId <String>]
- [-AppleSignedCert <String>] [-DefaultIosUserEnrollmentDeviceGroupId <String>]
- [-DefaultSystemGroupId <String>] [-DepEnableZeroTouchEnrollment]
- [-DepSetupAssistantOptions <IDepSetupAssistantOption[]>] [-EncryptedDepServerToken <String>]
- [-IoDefaultDeviceGroupObjectIds <String[]>] [-IoEnableZeroTouchEnrollment]
- [-IoSetupAssistantOptions <IDepSetupAssistantOption[]>] [-IoSetupOptions <String[]>]
- [-IosWelcomeScreenButton <String>] [-IosWelcomeScreenParagraph <String>] [-IosWelcomeScreenTitle <String>]
- [-MacoDefaultDeviceGroupObjectIds <String[]>] [-MacoEnableZeroTouchEnrollment]
- [-MacoSetupAssistantOptions <IDepSetupAssistantOption[]>] [-MacoSetupOptions <String[]>]
- [-MacosWelcomeScreenButton <String>] [-MacosWelcomeScreenParagraph <String>]
+Set-JcSdkAppleMdm -HostEnv <String> -Id <String> [-AllowMobileUserEnrollment]
+ [-AppleCertCreatorAppleId <String>] [-AppleSignedCert <String>]
+ [-DefaultIosUserEnrollmentDeviceGroupId <String>] [-DefaultSystemGroupId <String>]
+ [-DepEnableZeroTouchEnrollment] [-DepSetupAssistantOptions <IDepSetupAssistantOption[]>]
+ [-EncryptedDepServerToken <String>] [-IoDefaultDeviceGroupObjectIds <String[]>]
+ [-IoEnableZeroTouchEnrollment] [-IoSetupAssistantOptions <IDepSetupAssistantOption[]>]
+ [-IoSetupOptions <String[]>] [-IosWelcomeScreenButton <String>] [-IosWelcomeScreenParagraph <String>]
+ [-IosWelcomeScreenTitle <String>] [-MacoDefaultDeviceGroupObjectIds <String[]>]
+ [-MacoEnableZeroTouchEnrollment] [-MacoSetupAssistantOptions <IDepSetupAssistantOption[]>]
+ [-MacoSetupOptions <String[]>] [-MacosWelcomeScreenButton <String>] [-MacosWelcomeScreenParagraph <String>]
  [-MacosWelcomeScreenTitle <String>] [-Name <String>] [-WelcomeScreenButton <String>]
  [-WelcomeScreenParagraph <String>] [-WelcomeScreenTitle <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Set
 ```
-Set-JcSdkAppleMdm -Id <String> -Body <IAppleMdmPatch> [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkAppleMdm -HostEnv <String> -Id <String> -Body <IAppleMdmPatch> [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### SetViaIdentity
 ```
-Set-JcSdkAppleMdm -InputObject <IJumpCloudApiIdentity> -Body <IAppleMdmPatch> [-Confirm] [-WhatIf]
- [<CommonParameters>]
+Set-JcSdkAppleMdm -HostEnv <String> -InputObject <IJumpCloudApiIdentity> -Body <IAppleMdmPatch> [-Confirm]
+ [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkAppleMdm -InputObject <IJumpCloudApiIdentity> [-AllowMobileUserEnrollment]
+Set-JcSdkAppleMdm -HostEnv <String> -InputObject <IJumpCloudApiIdentity> [-AllowMobileUserEnrollment]
  [-AppleCertCreatorAppleId <String>] [-AppleSignedCert <String>]
  [-DefaultIosUserEnrollmentDeviceGroupId <String>] [-DefaultSystemGroupId <String>]
  [-DepEnableZeroTouchEnrollment] [-DepSetupAssistantOptions <IDepSetupAssistantOption[]>]
@@ -78,9 +79,9 @@ Set-JcSdkAppleMdm -InputObject <IJumpCloudApiIdentity> [-AllowMobileUserEnrollme
 ```
 
 ## DESCRIPTION
-Updates an Apple MDM configuration.
+Set an Apple MDM configuration.
 This endpoint is used to supply JumpCloud with a signed certificate from Apple in order to finalize the setup and allow JumpCloud to manage your devices.
-It may also be used to update the DEP Settings.
+It may also be used to set the DEP Settings.
 
 #### Sample Request
 ```
@@ -229,7 +230,6 @@ Accept wildcard characters: False
 
 ### -Body
 Apple MDM Patch
-To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IAppleMdmPatch
@@ -290,7 +290,6 @@ Accept wildcard characters: False
 
 ### -DepSetupAssistantOptions
 .
-To construct, see NOTES section for DEPSETUPASSISTANTOPTIONS properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IDepSetupAssistantOption[]
@@ -319,6 +318,22 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -HostEnv
+Region for JumpCloud API host.
+Use 'console' for US or 'console.eu' for EU.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Id
 .
 
@@ -336,7 +351,6 @@ Accept wildcard characters: False
 
 ### -InputObject
 Identity Parameter
-To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
@@ -383,7 +397,6 @@ Accept wildcard characters: False
 
 ### -IoSetupAssistantOptions
 A Setup Option wrapped as an object
-To construct, see NOTES section for IOSETUPASSISTANTOPTIONS properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IDepSetupAssistantOption[]
@@ -490,7 +503,6 @@ Accept wildcard characters: False
 
 ### -MacoSetupAssistantOptions
 A Setup Option wrapped as an object
-To construct, see NOTES section for MACOSETUPASSISTANTOPTIONS properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IDepSetupAssistantOption[]
@@ -670,34 +682,32 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## NOTES
 
-ALIASES
-
 COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <IAppleMdmPatch>: Apple MDM Patch
+`BODY <IAppleMdmPatch>`: Apple MDM Patch
   - `[AllowMobileUserEnrollment <Boolean?>]`: A toggle to allow mobile device enrollment for an organization.
   - `[AppleCertCreatorAppleId <String>]`: The Apple ID of the admin who created the Apple signed certificate.
   - `[AppleSignedCert <String>]`: A signed certificate obtained from Apple after providing Apple with the plist file provided on POST.
   - `[DefaultIosUserEnrollmentDeviceGroupId <String>]`: ObjectId uniquely identifying the MDM default iOS user enrollment device group.
   - `[DefaultSystemGroupId <String>]`: ObjectId uniquely identifying the MDM default System Group.
   - `[DepEnableZeroTouchEnrollment <Boolean?>]`: A toggle to determine if DEP registered devices should go through JumpCloud Zero Touch Enrollment.
-  - `[DepSetupAssistantOptions <IDepSetupAssistantOption[]>]`: 
-    - `[Option <String>]`: Options to skip screens during MacOS and iOS setup:         * `accessibility` - Skips the Accessibility pane, only if the Mac is connected to Ethernet and the cloud config is downloaded.         * `actionButton` - Skips the Action Button configuration pane.         * `appearance` - Skips the Choose Your Look screen.         * `appleID` - Skips Apple ID setup.         * `biometric` - Skips biometric setup.         *  `cameraButton` - Skips the Camera Button configuration pane.         * `diagnostics` - Skips the App Analytics pane.         * `displayTone` - Skips display tone setup.         * `enableLockdownMode` - Skips the Lockdown Mode pane.         * `fileVault` - Skips FileVault setup assistant screen.         * `icloudDiagnostics` - Skips iCloud analytics screen.         * `icloudStorage` - Skips iCloud documents and desktop screen.         * `intelligence` - Skips the Intelligence pane.         * `location` - Skips location services setup.         * `payment` - Skips Apple Pay setup.         * `privacy` - Skips the Privacy setup.         * `restore` - Skips restoring from backup.         * `screenTime` - Skips screen time setup.         * `siri` - Skips Siri setup.         * `termsOfAddress` - Skips the Terms of Address pane.         * `tos` - Skips terms and conditions.         * `appStore` - Skips the App Store pane.         * `deviceToDeviceMigration` - Skips Device to Device Migration pane.         * `displayZoom` - Skips zoom setup.         * `homeButton` - Skips the Meet the New Home Button screen on iPhone 7, iPhone 7 Plus, iPhone 8, iPhone 8 Plus and iPhone SE.         * `imessageAndFacetime` - Skips the iMessage and FaceTime screen in iOS.         * `messagingActivationUsingPhoneNumber` - Skips the iMessage pane.         * `moveFromAndroid` - If the Restore pane is not skipped, removes the Move from Android option in the Restore pane on iOS.O         * `passcode` - Hides and disables the passcode pane.         * `restoreComplete` - Skips the Restore Completed pane.         * `safety` - Skips the Safety pane.         * `setupCellular` - Skips the add cellular plan pane.         * `softwareUpdate` - Skips the mandatory software update screen in iOS.         * `unlockWithWatch` - Skips Unlock Your Mac with your Apple Watch pane.         * `updateComplete` - Skips the Software Update Complete pane.         * `wallpaper` - Skips the Wallpaper setup.         * `watchMigration` - Skips the screen for watch migration.         * `welcome` - Skips the Get Started pane.         
+  - `[DepSetupAssistantOptions <List<IDepSetupAssistantOption>>]`: 
+    - `[Option <String>]`: Options to skip screens during MacOS and iOS setup:         * `accessibility` - Skips the Accessibility pane, only if the Mac is connected to Ethernet and the cloud config is downloaded.         * `actionButton` - Skips the Action Button configuration pane.         * `appearance` - Skips the Choose Your Look screen.         * `appleID` - Skips Apple ID setup.         * `biometric` - Skips biometric setup.         *  `cameraButton` - Skips the Camera Button configuration pane.         * `diagnostics` - Skips the App Analytics pane.         * `displayTone` - Skips display tone setup.         * `enableLockdownMode` - Skips the Lockdown Mode pane.         * `fileVault` - Skips FileVault setup assistant screen.         * `icloudDiagnostics` - Skips iCloud analytics screen.         * `icloudStorage` - Skips iCloud documents and desktop screen.         * `intelligence` - Skips the Intelligence pane.         * `location` - Skips location services setup.         * `payment` - Skips Apple Pay setup.         * `privacy` - Skips the Privacy setup.         * `restore` - Skips restoring from backup.         * `screenTime` - Skips screen time setup.         * `siri` - Skips Siri setup.         * `termsOfAddress` - Skips the Terms of Address pane.         * `tos` - Skips terms and conditions.         * `appStore` - Skips the App Store pane.         * `deviceToDeviceMigration` - Skips Device to Device Migration pane.         * `displayZoom` - Skips zoom setup.         * `homeButton` - Skips the Meet the New Home Button screen on iPhone 7, iPhone 7 Plus, iPhone 8, iPhone 8 Plus and iPhone SE.         * `imessageAndFacetime` - Skips the iMessage and FaceTime screen in iOS.         * `messagingActivationUsingPhoneNumber` - Skips the iMessage pane.         * `moveFromAndroid` - If the Restore pane is not skipped, removes the Move from Android option in the Restore pane on iOS.O         * `passcode` - Hides and disables the passcode pane.         * `restoreComplete` - Skips the Restore Completed pane.         * `safety` - Skips the Safety pane.         * `setupCellular` - Skips the add cellular plan pane.         * `softwareUpdate` - Skips the mandatory software update screen in iOS.         * `unlockWithWatch` - Skips Unlock Your Mac with your Apple Watch pane.         * `updateComplete` - Skips the Software Update Complete pane.         * `wallpaper` - Skips the Wallpaper setup.         * `watchMigration` - Skips the screen for watch migration.         * `welcome` - Skips the Get Started pane.         * `additionalPrivacySettings` - Skips the Additional Privacy Settings pane.         * `multitasking` - Skips the Multitasking pane.         * `osShowcase` - Skips the OS Showcase pane.         * `webContentFiltering` - Skips the Web Content Filtering pane.         * `safetyAndHandling` - Skips the Safety and Handling pane.         
   - `[EncryptedDepServerToken <String>]`: The S/MIME encoded DEP Server Token returned by Apple Business Manager when creating an MDM instance.
-  - `[IoDefaultDeviceGroupObjectIds <String[]>]`: An array of ObjectIDs identifying the default device groups for this specific type (based on the OS family) of automated device enrollment. Currently, only a single DeviceGroupID is supported.
+  - `[IoDefaultDeviceGroupObjectIds <List<String>>]`: An array of ObjectIDs identifying the default device groups for this specific type (based on the OS family) of automated device enrollment. Currently, only a single DeviceGroupID is supported.
   - `[IoEnableZeroTouchEnrollment <Boolean?>]`: A toggle to determine if ADE registered devices should go through JumpCloud Zero Touch Enrollment.
-  - `[IoSetupAssistantOptions <IDepSetupAssistantOption[]>]`: A Setup Option wrapped as an object
-  - `[IoSetupOptions <String[]>]`: A list of configured setup options for this enrollment.
+  - `[IoSetupAssistantOptions <List<IDepSetupAssistantOption>>]`: A Setup Option wrapped as an object
+  - `[IoSetupOptions <List<String>>]`: A list of configured setup options for this enrollment.
   - `[IosWelcomeScreenButton <String>]`: Text to display on the button on the DEP Welcome Screen.
   - `[IosWelcomeScreenParagraph <String>]`: A message to display on the DEP Welcome Screen.
   - `[IosWelcomeScreenTitle <String>]`: The title to display on the DEP Welcome Screen.
-  - `[MacoDefaultDeviceGroupObjectIds <String[]>]`: An array of ObjectIDs identifying the default device groups for this specific type (based on the OS family) of automated device enrollment. Currently, only a single DeviceGroupID is supported.
+  - `[MacoDefaultDeviceGroupObjectIds <List<String>>]`: An array of ObjectIDs identifying the default device groups for this specific type (based on the OS family) of automated device enrollment. Currently, only a single DeviceGroupID is supported.
   - `[MacoEnableZeroTouchEnrollment <Boolean?>]`: A toggle to determine if ADE registered devices should go through JumpCloud Zero Touch Enrollment.
-  - `[MacoSetupAssistantOptions <IDepSetupAssistantOption[]>]`: A Setup Option wrapped as an object
-  - `[MacoSetupOptions <String[]>]`: A list of configured setup options for this enrollment.
+  - `[MacoSetupAssistantOptions <List<IDepSetupAssistantOption>>]`: A Setup Option wrapped as an object
+  - `[MacoSetupOptions <List<String>>]`: A list of configured setup options for this enrollment.
   - `[MacosWelcomeScreenButton <String>]`: Text to display on the button on the DEP Welcome Screen.
   - `[MacosWelcomeScreenParagraph <String>]`: A message to display on the DEP Welcome Screen.
   - `[MacosWelcomeScreenTitle <String>]`: The title to display on the DEP Welcome Screen.
@@ -706,10 +716,10 @@ BODY <IAppleMdmPatch>: Apple MDM Patch
   - `[WelcomeScreenParagraph <String>]`: A message to display on the DEP Welcome Screen.
   - `[WelcomeScreenTitle <String>]`: The title to display on the DEP Welcome Screen.
 
-DEPSETUPASSISTANTOPTIONS <IDepSetupAssistantOption[]>: .
-  - `[Option <String>]`: Options to skip screens during MacOS and iOS setup:         * `accessibility` - Skips the Accessibility pane, only if the Mac is connected to Ethernet and the cloud config is downloaded.         * `actionButton` - Skips the Action Button configuration pane.         * `appearance` - Skips the Choose Your Look screen.         * `appleID` - Skips Apple ID setup.         * `biometric` - Skips biometric setup.         *  `cameraButton` - Skips the Camera Button configuration pane.         * `diagnostics` - Skips the App Analytics pane.         * `displayTone` - Skips display tone setup.         * `enableLockdownMode` - Skips the Lockdown Mode pane.         * `fileVault` - Skips FileVault setup assistant screen.         * `icloudDiagnostics` - Skips iCloud analytics screen.         * `icloudStorage` - Skips iCloud documents and desktop screen.         * `intelligence` - Skips the Intelligence pane.         * `location` - Skips location services setup.         * `payment` - Skips Apple Pay setup.         * `privacy` - Skips the Privacy setup.         * `restore` - Skips restoring from backup.         * `screenTime` - Skips screen time setup.         * `siri` - Skips Siri setup.         * `termsOfAddress` - Skips the Terms of Address pane.         * `tos` - Skips terms and conditions.         * `appStore` - Skips the App Store pane.         * `deviceToDeviceMigration` - Skips Device to Device Migration pane.         * `displayZoom` - Skips zoom setup.         * `homeButton` - Skips the Meet the New Home Button screen on iPhone 7, iPhone 7 Plus, iPhone 8, iPhone 8 Plus and iPhone SE.         * `imessageAndFacetime` - Skips the iMessage and FaceTime screen in iOS.         * `messagingActivationUsingPhoneNumber` - Skips the iMessage pane.         * `moveFromAndroid` - If the Restore pane is not skipped, removes the Move from Android option in the Restore pane on iOS.O         * `passcode` - Hides and disables the passcode pane.         * `restoreComplete` - Skips the Restore Completed pane.         * `safety` - Skips the Safety pane.         * `setupCellular` - Skips the add cellular plan pane.         * `softwareUpdate` - Skips the mandatory software update screen in iOS.         * `unlockWithWatch` - Skips Unlock Your Mac with your Apple Watch pane.         * `updateComplete` - Skips the Software Update Complete pane.         * `wallpaper` - Skips the Wallpaper setup.         * `watchMigration` - Skips the screen for watch migration.         * `welcome` - Skips the Get Started pane.         
+`DEPSETUPASSISTANTOPTIONS <IDepSetupAssistantOption[]>`: .
+  - `[Option <String>]`: Options to skip screens during MacOS and iOS setup:         * `accessibility` - Skips the Accessibility pane, only if the Mac is connected to Ethernet and the cloud config is downloaded.         * `actionButton` - Skips the Action Button configuration pane.         * `appearance` - Skips the Choose Your Look screen.         * `appleID` - Skips Apple ID setup.         * `biometric` - Skips biometric setup.         *  `cameraButton` - Skips the Camera Button configuration pane.         * `diagnostics` - Skips the App Analytics pane.         * `displayTone` - Skips display tone setup.         * `enableLockdownMode` - Skips the Lockdown Mode pane.         * `fileVault` - Skips FileVault setup assistant screen.         * `icloudDiagnostics` - Skips iCloud analytics screen.         * `icloudStorage` - Skips iCloud documents and desktop screen.         * `intelligence` - Skips the Intelligence pane.         * `location` - Skips location services setup.         * `payment` - Skips Apple Pay setup.         * `privacy` - Skips the Privacy setup.         * `restore` - Skips restoring from backup.         * `screenTime` - Skips screen time setup.         * `siri` - Skips Siri setup.         * `termsOfAddress` - Skips the Terms of Address pane.         * `tos` - Skips terms and conditions.         * `appStore` - Skips the App Store pane.         * `deviceToDeviceMigration` - Skips Device to Device Migration pane.         * `displayZoom` - Skips zoom setup.         * `homeButton` - Skips the Meet the New Home Button screen on iPhone 7, iPhone 7 Plus, iPhone 8, iPhone 8 Plus and iPhone SE.         * `imessageAndFacetime` - Skips the iMessage and FaceTime screen in iOS.         * `messagingActivationUsingPhoneNumber` - Skips the iMessage pane.         * `moveFromAndroid` - If the Restore pane is not skipped, removes the Move from Android option in the Restore pane on iOS.O         * `passcode` - Hides and disables the passcode pane.         * `restoreComplete` - Skips the Restore Completed pane.         * `safety` - Skips the Safety pane.         * `setupCellular` - Skips the add cellular plan pane.         * `softwareUpdate` - Skips the mandatory software update screen in iOS.         * `unlockWithWatch` - Skips Unlock Your Mac with your Apple Watch pane.         * `updateComplete` - Skips the Software Update Complete pane.         * `wallpaper` - Skips the Wallpaper setup.         * `watchMigration` - Skips the screen for watch migration.         * `welcome` - Skips the Get Started pane.         * `additionalPrivacySettings` - Skips the Additional Privacy Settings pane.         * `multitasking` - Skips the Multitasking pane.         * `osShowcase` - Skips the OS Showcase pane.         * `webContentFiltering` - Skips the Web Content Filtering pane.         * `safetyAndHandling` - Skips the Safety and Handling pane.         
 
-INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter
+`INPUTOBJECT <IJumpCloudApiIdentity>`: Identity Parameter
   - `[AccountId <String>]`: 
   - `[ActivedirectoryId <String>]`: 
   - `[AdministratorId <String>]`: 
@@ -734,11 +744,11 @@ INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter
   - `[UserId <String>]`: ObjectID of the User.
   - `[WorkdayId <String>]`: 
 
-IOSETUPASSISTANTOPTIONS <IDepSetupAssistantOption[]>: A Setup Option wrapped as an object
-  - `[Option <String>]`: Options to skip screens during MacOS and iOS setup:         * `accessibility` - Skips the Accessibility pane, only if the Mac is connected to Ethernet and the cloud config is downloaded.         * `actionButton` - Skips the Action Button configuration pane.         * `appearance` - Skips the Choose Your Look screen.         * `appleID` - Skips Apple ID setup.         * `biometric` - Skips biometric setup.         *  `cameraButton` - Skips the Camera Button configuration pane.         * `diagnostics` - Skips the App Analytics pane.         * `displayTone` - Skips display tone setup.         * `enableLockdownMode` - Skips the Lockdown Mode pane.         * `fileVault` - Skips FileVault setup assistant screen.         * `icloudDiagnostics` - Skips iCloud analytics screen.         * `icloudStorage` - Skips iCloud documents and desktop screen.         * `intelligence` - Skips the Intelligence pane.         * `location` - Skips location services setup.         * `payment` - Skips Apple Pay setup.         * `privacy` - Skips the Privacy setup.         * `restore` - Skips restoring from backup.         * `screenTime` - Skips screen time setup.         * `siri` - Skips Siri setup.         * `termsOfAddress` - Skips the Terms of Address pane.         * `tos` - Skips terms and conditions.         * `appStore` - Skips the App Store pane.         * `deviceToDeviceMigration` - Skips Device to Device Migration pane.         * `displayZoom` - Skips zoom setup.         * `homeButton` - Skips the Meet the New Home Button screen on iPhone 7, iPhone 7 Plus, iPhone 8, iPhone 8 Plus and iPhone SE.         * `imessageAndFacetime` - Skips the iMessage and FaceTime screen in iOS.         * `messagingActivationUsingPhoneNumber` - Skips the iMessage pane.         * `moveFromAndroid` - If the Restore pane is not skipped, removes the Move from Android option in the Restore pane on iOS.O         * `passcode` - Hides and disables the passcode pane.         * `restoreComplete` - Skips the Restore Completed pane.         * `safety` - Skips the Safety pane.         * `setupCellular` - Skips the add cellular plan pane.         * `softwareUpdate` - Skips the mandatory software update screen in iOS.         * `unlockWithWatch` - Skips Unlock Your Mac with your Apple Watch pane.         * `updateComplete` - Skips the Software Update Complete pane.         * `wallpaper` - Skips the Wallpaper setup.         * `watchMigration` - Skips the screen for watch migration.         * `welcome` - Skips the Get Started pane.         
+`IOSETUPASSISTANTOPTIONS <IDepSetupAssistantOption[]>`: A Setup Option wrapped as an object
+  - `[Option <String>]`: Options to skip screens during MacOS and iOS setup:         * `accessibility` - Skips the Accessibility pane, only if the Mac is connected to Ethernet and the cloud config is downloaded.         * `actionButton` - Skips the Action Button configuration pane.         * `appearance` - Skips the Choose Your Look screen.         * `appleID` - Skips Apple ID setup.         * `biometric` - Skips biometric setup.         *  `cameraButton` - Skips the Camera Button configuration pane.         * `diagnostics` - Skips the App Analytics pane.         * `displayTone` - Skips display tone setup.         * `enableLockdownMode` - Skips the Lockdown Mode pane.         * `fileVault` - Skips FileVault setup assistant screen.         * `icloudDiagnostics` - Skips iCloud analytics screen.         * `icloudStorage` - Skips iCloud documents and desktop screen.         * `intelligence` - Skips the Intelligence pane.         * `location` - Skips location services setup.         * `payment` - Skips Apple Pay setup.         * `privacy` - Skips the Privacy setup.         * `restore` - Skips restoring from backup.         * `screenTime` - Skips screen time setup.         * `siri` - Skips Siri setup.         * `termsOfAddress` - Skips the Terms of Address pane.         * `tos` - Skips terms and conditions.         * `appStore` - Skips the App Store pane.         * `deviceToDeviceMigration` - Skips Device to Device Migration pane.         * `displayZoom` - Skips zoom setup.         * `homeButton` - Skips the Meet the New Home Button screen on iPhone 7, iPhone 7 Plus, iPhone 8, iPhone 8 Plus and iPhone SE.         * `imessageAndFacetime` - Skips the iMessage and FaceTime screen in iOS.         * `messagingActivationUsingPhoneNumber` - Skips the iMessage pane.         * `moveFromAndroid` - If the Restore pane is not skipped, removes the Move from Android option in the Restore pane on iOS.O         * `passcode` - Hides and disables the passcode pane.         * `restoreComplete` - Skips the Restore Completed pane.         * `safety` - Skips the Safety pane.         * `setupCellular` - Skips the add cellular plan pane.         * `softwareUpdate` - Skips the mandatory software update screen in iOS.         * `unlockWithWatch` - Skips Unlock Your Mac with your Apple Watch pane.         * `updateComplete` - Skips the Software Update Complete pane.         * `wallpaper` - Skips the Wallpaper setup.         * `watchMigration` - Skips the screen for watch migration.         * `welcome` - Skips the Get Started pane.         * `additionalPrivacySettings` - Skips the Additional Privacy Settings pane.         * `multitasking` - Skips the Multitasking pane.         * `osShowcase` - Skips the OS Showcase pane.         * `webContentFiltering` - Skips the Web Content Filtering pane.         * `safetyAndHandling` - Skips the Safety and Handling pane.         
 
-MACOSETUPASSISTANTOPTIONS <IDepSetupAssistantOption[]>: A Setup Option wrapped as an object
-  - `[Option <String>]`: Options to skip screens during MacOS and iOS setup:         * `accessibility` - Skips the Accessibility pane, only if the Mac is connected to Ethernet and the cloud config is downloaded.         * `actionButton` - Skips the Action Button configuration pane.         * `appearance` - Skips the Choose Your Look screen.         * `appleID` - Skips Apple ID setup.         * `biometric` - Skips biometric setup.         *  `cameraButton` - Skips the Camera Button configuration pane.         * `diagnostics` - Skips the App Analytics pane.         * `displayTone` - Skips display tone setup.         * `enableLockdownMode` - Skips the Lockdown Mode pane.         * `fileVault` - Skips FileVault setup assistant screen.         * `icloudDiagnostics` - Skips iCloud analytics screen.         * `icloudStorage` - Skips iCloud documents and desktop screen.         * `intelligence` - Skips the Intelligence pane.         * `location` - Skips location services setup.         * `payment` - Skips Apple Pay setup.         * `privacy` - Skips the Privacy setup.         * `restore` - Skips restoring from backup.         * `screenTime` - Skips screen time setup.         * `siri` - Skips Siri setup.         * `termsOfAddress` - Skips the Terms of Address pane.         * `tos` - Skips terms and conditions.         * `appStore` - Skips the App Store pane.         * `deviceToDeviceMigration` - Skips Device to Device Migration pane.         * `displayZoom` - Skips zoom setup.         * `homeButton` - Skips the Meet the New Home Button screen on iPhone 7, iPhone 7 Plus, iPhone 8, iPhone 8 Plus and iPhone SE.         * `imessageAndFacetime` - Skips the iMessage and FaceTime screen in iOS.         * `messagingActivationUsingPhoneNumber` - Skips the iMessage pane.         * `moveFromAndroid` - If the Restore pane is not skipped, removes the Move from Android option in the Restore pane on iOS.O         * `passcode` - Hides and disables the passcode pane.         * `restoreComplete` - Skips the Restore Completed pane.         * `safety` - Skips the Safety pane.         * `setupCellular` - Skips the add cellular plan pane.         * `softwareUpdate` - Skips the mandatory software update screen in iOS.         * `unlockWithWatch` - Skips Unlock Your Mac with your Apple Watch pane.         * `updateComplete` - Skips the Software Update Complete pane.         * `wallpaper` - Skips the Wallpaper setup.         * `watchMigration` - Skips the screen for watch migration.         * `welcome` - Skips the Get Started pane.         
+`MACOSETUPASSISTANTOPTIONS <IDepSetupAssistantOption[]>`: A Setup Option wrapped as an object
+  - `[Option <String>]`: Options to skip screens during MacOS and iOS setup:         * `accessibility` - Skips the Accessibility pane, only if the Mac is connected to Ethernet and the cloud config is downloaded.         * `actionButton` - Skips the Action Button configuration pane.         * `appearance` - Skips the Choose Your Look screen.         * `appleID` - Skips Apple ID setup.         * `biometric` - Skips biometric setup.         *  `cameraButton` - Skips the Camera Button configuration pane.         * `diagnostics` - Skips the App Analytics pane.         * `displayTone` - Skips display tone setup.         * `enableLockdownMode` - Skips the Lockdown Mode pane.         * `fileVault` - Skips FileVault setup assistant screen.         * `icloudDiagnostics` - Skips iCloud analytics screen.         * `icloudStorage` - Skips iCloud documents and desktop screen.         * `intelligence` - Skips the Intelligence pane.         * `location` - Skips location services setup.         * `payment` - Skips Apple Pay setup.         * `privacy` - Skips the Privacy setup.         * `restore` - Skips restoring from backup.         * `screenTime` - Skips screen time setup.         * `siri` - Skips Siri setup.         * `termsOfAddress` - Skips the Terms of Address pane.         * `tos` - Skips terms and conditions.         * `appStore` - Skips the App Store pane.         * `deviceToDeviceMigration` - Skips Device to Device Migration pane.         * `displayZoom` - Skips zoom setup.         * `homeButton` - Skips the Meet the New Home Button screen on iPhone 7, iPhone 7 Plus, iPhone 8, iPhone 8 Plus and iPhone SE.         * `imessageAndFacetime` - Skips the iMessage and FaceTime screen in iOS.         * `messagingActivationUsingPhoneNumber` - Skips the iMessage pane.         * `moveFromAndroid` - If the Restore pane is not skipped, removes the Move from Android option in the Restore pane on iOS.O         * `passcode` - Hides and disables the passcode pane.         * `restoreComplete` - Skips the Restore Completed pane.         * `safety` - Skips the Safety pane.         * `setupCellular` - Skips the add cellular plan pane.         * `softwareUpdate` - Skips the mandatory software update screen in iOS.         * `unlockWithWatch` - Skips Unlock Your Mac with your Apple Watch pane.         * `updateComplete` - Skips the Software Update Complete pane.         * `wallpaper` - Skips the Wallpaper setup.         * `watchMigration` - Skips the screen for watch migration.         * `welcome` - Skips the Get Started pane.         * `additionalPrivacySettings` - Skips the Additional Privacy Settings pane.         * `multitasking` - Skips the Multitasking pane.         * `osShowcase` - Skips the OS Showcase pane.         * `webContentFiltering` - Skips the Web Content Filtering pane.         * `safetyAndHandling` - Skips the Safety and Handling pane.         
 
 ## RELATED LINKS
 

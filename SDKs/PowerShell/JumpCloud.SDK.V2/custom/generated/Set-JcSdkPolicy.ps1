@@ -1,7 +1,7 @@
 <#
 .Synopsis
-This endpoint allows you to update a policy.
-Given the amount of configurable parameters required to update a Policy, we suggest you use the JumpCloud Admin Console to create new policies.
+This endpoint allows you to set a policy.
+Given the amount of configurable parameters required to set a Policy, we suggest you use the JumpCloud Admin Console to set new policies.
 
 
 ##### Sample Request
@@ -15,8 +15,8 @@ curl -X PUT https://console.jumpcloud.com/api/v2/policies/59fced45c9118022172547
   }'
 ```
 .Description
-This endpoint allows you to update a policy.
-Given the amount of configurable parameters required to update a Policy, we suggest you use the JumpCloud Admin Console to create new policies.
+This endpoint allows you to set a policy.
+Given the amount of configurable parameters required to set a Policy, we suggest you use the JumpCloud Admin Console to set new policies.
 
 
 ##### Sample Request
@@ -88,7 +88,7 @@ To create the parameters described below, construct a hash table containing the 
 BODY <IPolicyUpdateRequest>:
   Name <String>: The description for this specific Policy.
   [Notes <String>]: The notes for this specific Policy.
-  [Values <IPolicyValue[]>]:
+  [Values <List<IPolicyValue>>]:
     [ConfigFieldId <String>]: The ObjectId of the corresponding Policy Template configuration field.
     [Sensitive <Boolean?>]: Defines if the value is sensitive or not.
     [Value <String>]: The value for the configuration field for this Policy instance.
@@ -123,13 +123,20 @@ VALUES <IPolicyValue[]>:
   [Sensitive <Boolean?>]: Defines if the value is sensitive or not.
   [Value <String>]: The value for the configuration field for this Policy instance.
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Set-JcSdkPolicy.md
+https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4908_userGroupDeviceGroupFilters/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Set-JcSdkPolicy.md
 #>
  Function Set-JcSdkPolicy
 {
     [OutputType([JumpCloud.SDK.V2.Models.IPolicy])]
     [CmdletBinding(DefaultParameterSetName='SetExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
+    [Parameter(Mandatory)]
+    [JumpCloud.SDK.V2.Category('Uri')]
+    [System.String]
+    # Region for JumpCloud API host.
+    # Use 'console' for US or 'console.eu' for EU.
+    ${HostEnv}, 
+
     [Parameter(ParameterSetName='Set', Mandatory)]
     [Parameter(ParameterSetName='SetExpanded', Mandatory)]
     [JumpCloud.SDK.V2.Category('Path')]
@@ -142,7 +149,6 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V2.Category('Path')]
     [JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity]
     # Identity Parameter
-    # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
     ${InputObject}, 
 
     [Parameter(ParameterSetName='Set', Mandatory, ValueFromPipeline)]
@@ -150,11 +156,10 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V2.Category('Body')]
     [JumpCloud.SDK.V2.Models.IPolicyUpdateRequest]
     # A request to update an instance of a policy template.
-    # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body}, 
 
-    [Parameter(ParameterSetName='SetExpanded', Mandatory)]
-    [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory)]
+    [Parameter(ParameterSetName='SetExpanded')]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.String]
     # The description for this specific Policy.
@@ -173,7 +178,6 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V2.Category('Body')]
     [JumpCloud.SDK.V2.Models.IPolicyValue[]]
     # .
-    # To construct, see NOTES section for VALUES properties and create a hash table.
     ${Values}, 
 
     [Parameter(DontShow)]
