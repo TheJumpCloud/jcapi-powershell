@@ -12,13 +12,10 @@ BeforeAll{
     }
     . ($mockingPath | Select-Object -First 1).FullName
 
-    $Global:PSDefaultParameterValues['*-JcSdk*:HostEnv'] = "api"
+    # $PSDefaultParameterValues['*-JcSdk*:HostEnv'] = "api"
 
 }
 Describe 'Get-JcSdkEvent' -Tag:(""){
-    BeforeAll {
-        write-host "the host env is $($global:PSDefaultParameterValues['*-JcSdk*:HostEnv'])"
-    }
     It 'GetExpanded' {
 
         { Get-JcSdkEvent -Service:('all') -StartTime:((Get-Date).AddHours(-24).ToUniversalTime()) } | Should -Not -Throw

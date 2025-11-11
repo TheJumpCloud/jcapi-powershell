@@ -316,6 +316,32 @@ namespace ModuleNameSpace
             $testModuleContent = $testModuleContent.Replace($InvokePesterLine.Matches.Value, $PesterTestsContent)
             $testModuleContent = $testModuleContent.Replace('Import-Module -Name Az.Accounts', '# Import-Module -Name Az.Accounts')
             $testModuleContent | Set-Content -Path:($testModulePath)
+            # update the loadEnv.ps1 file for each SDK to set the default hostEnv while testing:
+            $loadEnvContent = Get-Content -Path:("$TestFolderPath/loadEnv.ps1") -Raw
+            $loadContentToAdd = @"
+
+            # Determine which SDK this is and set the appropriate default HostEnv
+`$sdkName = Split-Path (Split-Path `$PSScriptRoot -Parent) -Leaf
+# Write-Host "SDK Name detected: `$sdkName"
+`$defaultHostEnv = switch (`$sdkName) {
+    'JumpCloud.SDK.DirectoryInsights' { 'api' }
+    'JumpCloud.SDK.V1' { 'console' }
+    'JumpCloud.SDK.V2' { 'console' }
+    default { 'console' }
+}
+
+# Check if user has set JCEnvironment to EU
+if (`$env:JCEnvironment -eq 'EU') {
+    `$defaultHostEnv = "`$defaultHostEnv.eu"
+}
+
+# Set the default parameter value for this test session
+`$PSDefaultParameterValues['*-JcSdk*:HostEnv'] = `$defaultHostEnv
+# Write-Host "Test environment loaded. Default HostEnv set to: `$defaultHostEnv"
+"@
+            # append to the end of the loadEnv.ps1 file
+            $loadEnvContent += $loadContentToAdd
+            $loadEnvContent | Set-Content -Path:("$TestFolderPath/loadEnv.ps1")
         }
         ###########################################################################
         # Remove auto generated .gitignore files

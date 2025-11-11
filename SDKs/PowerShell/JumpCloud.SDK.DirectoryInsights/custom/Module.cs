@@ -1,5 +1,5 @@
 using System.Management.Automation;
-using ModuleNameSpace; // Add this line
+using ModuleNameSpace;
 namespace JumpCloud.SDK.DirectoryInsights
 {
     using Runtime;
@@ -17,7 +17,7 @@ namespace JumpCloud.SDK.DirectoryInsights
             this._pipeline.Prepend(AddAuthHeaders);
             this._pipelineWithProxy.Prepend(AddAuthHeaders);
 
-            // Set the default HostEnv value
+            // Set the default JCEnvironment value
             SetDefaultHostEnvInPowerShellSession();
         }
 
