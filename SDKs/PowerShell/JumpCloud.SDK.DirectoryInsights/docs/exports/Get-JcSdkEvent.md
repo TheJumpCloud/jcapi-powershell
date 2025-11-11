@@ -1,7 +1,7 @@
 ---
 external help file:
 Module Name: JumpCloud.SDK.DirectoryInsights
-online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/docs/exports/Get-JcSdkEvent.md
+online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4908_userGroupDeviceGroupFilters/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/docs/exports/Get-JcSdkEvent.md
 schema: 2.0.0
 ---
 
@@ -18,15 +18,15 @@ curl -X POST 'https://api.jumpcloud.com/insights/directory/v1/events' -H 'Conten
 
 ### GetExpanded (Default)
 ```
-Get-JcSdkEvent -Service <String[]> -StartTime <DateTime> [-EndTime <DateTime>] [-Fields <String[]>]
- [-Limit <Int64>] [-Q <String>] [-SearchAfter <String[]>] [-SearchTermAnd <Hashtable>]
- [-SearchTermNot <Hashtable>] [-SearchTermOr <Hashtable>] [-Skip <Int64>] [-Sort <String>] [-Confirm]
- [-WhatIf] [<CommonParameters>]
+Get-JcSdkEvent -HostEnv <String> -Service <String[]> -StartTime <DateTime> [-EndTime <DateTime>]
+ [-ExactMatch <String>] [-Fields <String[]>] [-Limit <Int64>] [-Q <String>] [-SearchAfter <String[]>]
+ [-SearchTermAnd <Hashtable>] [-SearchTermNot <Hashtable>] [-SearchTermOr <Hashtable>] [-Skip <Int64>]
+ [-Sort <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Get
 ```
-Get-JcSdkEvent -Body <IEventQuery> [-Confirm] [-WhatIf] [<CommonParameters>]
+Get-JcSdkEvent -HostEnv <String> -Body <IEventQuery> [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -40,65 +40,22 @@ curl -X POST 'https://api.jumpcloud.com/insights/directory/v1/events' -H 'Conten
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-Get-JcSdkEvent -Service:('all') -StartTime:((Get-date).AddDays(-30))
+{{ Add code here }}
 ```
 
-Pull all event records from the last thirty days
+
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell
-Get-JcSdkEvent -Service:('directory') -StartTime:((Get-date).AddHours(-1)) -Limit:('10')
+{{ Add code here }}
 ```
 
-Get directory results from the last hour limit to the last 10 results in the time range
 
-### -------------------------- EXAMPLE 3 --------------------------
-```powershell
-Get-JcSdkEvent -Service:('directory') -StartTime:((Get-date).AddDays(-30)) -Sort:("DESC") -EndTime:((Get-date).AddDays(-5))
-```
-
-Get directory results between 30 and 5 days ago, sort timestamp by descending value
-
-### -------------------------- EXAMPLE 4 --------------------------
-```powershell
-Get-JcSdkEvent -Service:('directory') -StartTime:((Get-date).AddDays(-30)) -Limit:('10') -searchTermAnd:@{"event_type" = "group_create"}
-```
-
-Get only group_create from the last thirty days
-
-### -------------------------- EXAMPLE 5 --------------------------
-```powershell
-Get-JcSdkEvent -Service:('all') -StartTime:('2020-04-14T00:00:00Z') -EndTime:('2020-04-20T23:00:00Z') -SearchTermOr @{"initiated_by.username" = @("user.1", "user.2")}
-```
-
-Get login events initiated by either "user.1" or "user.2" between a universal time zone range
-
-### -------------------------- EXAMPLE 6 --------------------------
-```powershell
-Get-JcSdkEvent -Service:('all') -StartTime:('2020-04-14T00:00:00Z') -EndTime:('2020-04-20T23:00:00Z') -SearchTermAnd @{"event_type" = "admin_login_attempt"; "resource.email" = "admin.user@adminbizorg.com"}
-```
-
-Get all events between a date range and match event_type = admin_login_attempt and resource.email = admin.user@adminbizorg.com
-
-### -------------------------- EXAMPLE 7 --------------------------
-```powershell
-Get-JcSdkEvent -Service:('sso') -StartTime:('2020-04-14T00:00:00Z')  -EndTime:('2020-04-20T23:00:00Z') -SearchTermAnd @{"initiated_by.username" = "user.1"}
-```
-
-Get sso events with the search term initiated_by: username with value "user.1"
-
-### -------------------------- EXAMPLE 8 --------------------------
-```powershell
-Get-JcSdkEvent -Service:('all') -StartTime:('2020-04-14T00:00:00Z') -EndTime:('2020-04-20T23:00:00Z') -SearchTermAnd @{"event_type" = "organization_update"}
-```
-
-Get all events filtered by organization_update term between a date range
 
 ## PARAMETERS
 
 ### -Body
 EventQuery is the users' command to search our auth logs
-To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.DirectoryInsights.Models.IEventQuery
@@ -127,6 +84,21 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -ExactMatch
+optional string for specifying exact match query, do not use with full text query
+
+```yaml
+Type: System.String
+Parameter Sets: GetExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Fields
 optional list of fields to return from query
 
@@ -136,6 +108,22 @@ Parameter Sets: GetExpanded
 Aliases:
 
 Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -HostEnv
+Region for JumpCloud API host.
+Use 'api' for US or 'api.eu' for EU.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -336,21 +324,20 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## NOTES
 
-ALIASES
-
 COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <IEventQuery>: EventQuery is the users' command to search our auth logs
-  - `Service <String[]>`: service name to query.
+`BODY <IEventQuery>`: EventQuery is the users' command to search our auth logs
+  - `Service <List<String>>`: service name to query.
   - `StartTime <DateTime>`: query start time, UTC in RFC3339 format
   - `[EndTime <DateTime?>]`: optional query end time, UTC in RFC3339 format
-  - `[Fields <String[]>]`: optional list of fields to return from query
+  - `[ExactMatch <String>]`: optional string for specifying exact match query, do not use with full text query
+  - `[Fields <List<String>>]`: optional list of fields to return from query
   - `[Limit <Int64?>]`: Max number of rows to return
   - `[Q <String>]`: optional string for specifying a full text query
-  - `[SearchAfter <String[]>]`: Specific query to search after, see x-* response headers for next values
+  - `[SearchAfter <List<String>>]`: Specific query to search after, see x-* response headers for next values
   - `[SearchTermAnd <ITermConjunction>]`: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values
     - `[(Any) <Object>]`: This indicates any property can be added to this object.
   - `[SearchTermNot <ITermConjunction>]`: TermConjunction represents a conjunction (and/or)         NOTE: the validator limits what the operator can be, not the object         for future-proof-ness         and a list of sub-values

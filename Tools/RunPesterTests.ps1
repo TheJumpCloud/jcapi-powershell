@@ -30,6 +30,7 @@ TODO:
 #>
 $testFolder = $testFolder # .\jcapi-powershell\SDKs\PowerShell\JumpCloud.SDK.V1\test
 $moduleName = $moduleName # JumpCloud.SDK.V1
+
 #region Import Modules
 If ($moduleName -eq 'JumpCloud.SDK.V2')
 {
@@ -312,22 +313,49 @@ If ($moduleName -eq 'JumpCloud.SDK.V2' -and "MTP" -notin $Env:IncludeTagList)
             packageManager = 'CHOCOLATEY'
         }
     }
-    # Create a User Group
-    $UserFilter = [JumpCloud.SDK.V2.Models.MemberQuery]::new()
-    $UserFilter.Filters = @{
-            Field = "description";
-            Operator = "eq";
-            Value = "test";
-        }
-    $UserFilter.QueryType = "FilterQuery"
-    $global:PesterDefUserGroup = @{
+    # Create a static User Group
+    $global:PesterDefUserGroupStatic = @{
         Name = "PesterTestUserGroup-$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
+    }
+    # Create a User Group with Filter type membership
+    $UserFilter = [JumpCloud.SDK.V2.Models.MemberQuery]::new()
+    $UserFilter.Filters = @('description:$eq:test')
+    $UserFilter.QueryType = "Filter"
+    $global:PesterDefUserGroupFilter = @{
+        Name = "PesterTestUserGroupFilter-$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
+        MemberQueryFilters = $UserFilter.Filters
+        MemberQueryType    = $UserFilter.QueryType
+    }
+    # Create a User Group with Search type membership
+    $UserFilter = [JumpCloud.SDK.V2.Models.MemberQuery]::new()
+    $UserFilter.Filters = '{"filter":{"and":["department:$eq:Sales","company:$co:Toast"]}}'
+    $UserFilter.QueryType = "Search"
+    $global:PesterDefUserGroupSearch = @{
+        Name = "PesterTestUserGroupSearch-$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
         MemberQueryFilters = $UserFilter.Filters
         MemberQueryType    = $UserFilter.QueryType
     }
     # Create a System Group
-    $global:PesterDefSystemGroup = @{
+    $global:PesterDefSystemGroupStatic = @{
         Name = "PesterTestSystemGroup-$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
+    }
+    # Create a System Group with Filter type membership
+    $UserFilter = [JumpCloud.SDK.V2.Models.MemberQuery]::new()
+    $UserFilter.Filters = @('osFamily:$eq:linux', 'osFamily:$eq:windows')
+    $UserFilter.QueryType = "Filter"
+    $global:PesterDefUserGroupFilter = @{
+        Name = "PesterTestSystemGroupFilter-$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
+        MemberQueryFilters = $UserFilter.Filters
+        MemberQueryType    = $UserFilter.QueryType
+    }
+    # Create a User Group with Search type membership
+    $UserFilter = [JumpCloud.SDK.V2.Models.MemberQuery]::new()
+    $UserFilter.Filters = '{"filter":{"and":["osFamily:$eq:windows","hostname:$co:ISB"]}}'
+    $UserFilter.QueryType = "Search"
+    $global:PesterDefUserGroupSearch = @{
+        Name = "PesterTestSystemGroupSearch-$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
+        MemberQueryFilters = $UserFilter.Filters
+        MemberQueryType    = $UserFilter.QueryType
     }
     # Create a Policy Group
     $global:PesterDefPolicyGroup = @{
@@ -408,7 +436,7 @@ $PesterTestCoveragePath = Join-Path $PesterTestResultFolder "$moduleName-TestCov
 # Print Test Coverage & Pester 5 Compatibility:
 . "$PSScriptRoot/../../../Tools/ValidateTests.ps1" -SDKName $moduleName
 # Write-Host "$($PesterTestFiles.FullName)"
-$configuration = [PesterConfiguration]::Default
+$configuration = New-PesterConfiguration
 $configuration.Run.Path = $($PesterTestFiles.FullName)
 $configuration.Should.ErrorAction = 'Continue'
 $configuration.CodeCoverage.Enabled = $false

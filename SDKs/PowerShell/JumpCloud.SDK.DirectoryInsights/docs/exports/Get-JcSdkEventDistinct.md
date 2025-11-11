@@ -1,7 +1,7 @@
 ---
 external help file:
 Module Name: JumpCloud.SDK.DirectoryInsights
-online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/docs/exports/Get-JcSdkEventDistinct.md
+online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4908_userGroupDeviceGroupFilters/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/docs/exports/Get-JcSdkEventDistinct.md
 schema: 2.0.0
 ---
 
@@ -18,14 +18,14 @@ curl -X POST 'https://api.jumpcloud.com/insights/directory/v1/events/distinct' -
 
 ### GetExpanded (Default)
 ```
-Get-JcSdkEventDistinct -Field <String> -Service <String[]> -StartTime <DateTime> [-EndTime <DateTime>]
- [-SearchTermAnd <Hashtable>] [-SearchTermNot <Hashtable>] [-SearchTermOr <Hashtable>] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+Get-JcSdkEventDistinct -HostEnv <String> -Field <String> -Service <String[]> -StartTime <DateTime>
+ [-EndTime <DateTime>] [-SearchTermAnd <Hashtable>] [-SearchTermNot <Hashtable>] [-SearchTermOr <Hashtable>]
+ [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Get
 ```
-Get-JcSdkEventDistinct -Body <IEventDistinctQuery> [-Confirm] [-WhatIf] [<CommonParameters>]
+Get-JcSdkEventDistinct -HostEnv <String> -Body <IEventDistinctQuery> [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -39,29 +39,22 @@ curl -X POST 'https://api.jumpcloud.com/insights/directory/v1/events/distinct' -
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-Get-JcSdkEventDistinct -Body:(<JumpCloud.SDK.DirectoryInsights.Models.EventDistinctQuery>)
+{{ Add code here }}
 ```
 
-----                    ----------
-Buckets                 JumpCloud.SDK.DirectoryInsights.Models.Post200ApplicationJsonPropertiesItemsItem[]
-DocCountErrorUpperBound Int
-SumOtherDocCount        Int
+
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell
-Get-JcSdkEventDistinct -Field:(<string>) -Service:(<string[]>) -StartTime:(<datetime>) -EndTime:(<datetime>) -SearchTermAnd:(<hashtable>) -SearchTermNot:(<hashtable>) -SearchTermOr:(<hashtable>)
+{{ Add code here }}
 ```
 
-----                    ----------
-Buckets                 JumpCloud.SDK.DirectoryInsights.Models.Post200ApplicationJsonPropertiesItemsItem[]
-DocCountErrorUpperBound Int
-SumOtherDocCount        Int
+
 
 ## PARAMETERS
 
 ### -Body
 EventDistinctQuery is the users' command to search our auth logs for distinct values of the specified field
-To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.DirectoryInsights.Models.IEventDistinctQuery
@@ -96,6 +89,22 @@ field is what they wish to query on
 ```yaml
 Type: System.String
 Parameter Sets: GetExpanded
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -HostEnv
+Region for JumpCloud API host.
+Use 'api' for US or 'api.eu' for EU.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
 Aliases:
 
 Required: True
@@ -224,15 +233,13 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## NOTES
 
-ALIASES
-
 COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <IEventDistinctQuery>: EventDistinctQuery is the users' command to search our auth logs for distinct values of the specified field
-  - `Service <String[]>`: service name to query.
+`BODY <IEventDistinctQuery>`: EventDistinctQuery is the users' command to search our auth logs for distinct values of the specified field
+  - `Service <List<String>>`: service name to query.
   - `StartTime <DateTime>`: query start time, UTC in RFC3339 format
   - `Field <String>`: field is what they wish to query on
   - `[EndTime <DateTime?>]`: optional query end time, UTC in RFC3339 format

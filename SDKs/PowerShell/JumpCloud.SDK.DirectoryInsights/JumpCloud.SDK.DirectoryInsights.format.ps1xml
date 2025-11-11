@@ -4,7 +4,7 @@
     <View>
       <Name>JumpCloud.SDK.DirectoryInsights.Models.DirectoryInsightsApiIdentity</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.DirectoryInsights.Models.DirectoryInsightsApiIdentity</TypeName>
+        <TypeName>JumpCloud.SDK.DirectoryInsights.Models.DirectoryInsightsApiIdentity#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -38,7 +38,7 @@
     <View>
       <Name>JumpCloud.SDK.DirectoryInsights.Models.EventCount</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.DirectoryInsights.Models.EventCount</TypeName>
+        <TypeName>JumpCloud.SDK.DirectoryInsights.Models.EventCount#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -60,15 +60,12 @@
     <View>
       <Name>JumpCloud.SDK.DirectoryInsights.Models.EventDistinctQuery</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.DirectoryInsights.Models.EventDistinctQuery</TypeName>
+        <TypeName>JumpCloud.SDK.DirectoryInsights.Models.EventDistinctQuery#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
           <TableColumnHeader>
             <Label>EndTime</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>Service</Label>
           </TableColumnHeader>
           <TableColumnHeader>
             <Label>StartTime</Label>
@@ -84,9 +81,6 @@
                 <PropertyName>EndTime</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
-                <PropertyName>Service</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
                 <PropertyName>StartTime</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
@@ -100,7 +94,7 @@
     <View>
       <Name>JumpCloud.SDK.DirectoryInsights.Models.EventIntervalQuery</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.DirectoryInsights.Models.EventIntervalQuery</TypeName>
+        <TypeName>JumpCloud.SDK.DirectoryInsights.Models.EventIntervalQuery#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -108,10 +102,10 @@
             <Label>EndTime</Label>
           </TableColumnHeader>
           <TableColumnHeader>
-            <Label>Service</Label>
+            <Label>StartTime</Label>
           </TableColumnHeader>
           <TableColumnHeader>
-            <Label>StartTime</Label>
+            <Label>ExactMatch</Label>
           </TableColumnHeader>
           <TableColumnHeader>
             <Label>IntervalUnit</Label>
@@ -133,10 +127,10 @@
                 <PropertyName>EndTime</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
-                <PropertyName>Service</PropertyName>
+                <PropertyName>StartTime</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
-                <PropertyName>StartTime</PropertyName>
+                <PropertyName>ExactMatch</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>IntervalUnit</PropertyName>
@@ -158,7 +152,7 @@
     <View>
       <Name>JumpCloud.SDK.DirectoryInsights.Models.EventQuery</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.DirectoryInsights.Models.EventQuery</TypeName>
+        <TypeName>JumpCloud.SDK.DirectoryInsights.Models.EventQuery#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -166,22 +160,16 @@
             <Label>EndTime</Label>
           </TableColumnHeader>
           <TableColumnHeader>
-            <Label>Service</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
             <Label>StartTime</Label>
           </TableColumnHeader>
           <TableColumnHeader>
-            <Label>Fields</Label>
+            <Label>ExactMatch</Label>
           </TableColumnHeader>
           <TableColumnHeader>
             <Label>Limit</Label>
           </TableColumnHeader>
           <TableColumnHeader>
             <Label>Q</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>SearchAfter</Label>
           </TableColumnHeader>
           <TableColumnHeader>
             <Label>Skip</Label>
@@ -197,22 +185,16 @@
                 <PropertyName>EndTime</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
-                <PropertyName>Service</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
                 <PropertyName>StartTime</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
-                <PropertyName>Fields</PropertyName>
+                <PropertyName>ExactMatch</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>Limit</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>Q</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>SearchAfter</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>Skip</PropertyName>
@@ -228,15 +210,12 @@
     <View>
       <Name>JumpCloud.SDK.DirectoryInsights.Models.EventServiceTimeQuery</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.DirectoryInsights.Models.EventServiceTimeQuery</TypeName>
+        <TypeName>JumpCloud.SDK.DirectoryInsights.Models.EventServiceTimeQuery#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
           <TableColumnHeader>
             <Label>EndTime</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>Service</Label>
           </TableColumnHeader>
           <TableColumnHeader>
             <Label>StartTime</Label>
@@ -249,9 +228,6 @@
                 <PropertyName>EndTime</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
-                <PropertyName>Service</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
                 <PropertyName>StartTime</PropertyName>
               </TableColumnItem>
             </TableColumnItems>
@@ -262,7 +238,7 @@
     <View>
       <Name>JumpCloud.SDK.DirectoryInsights.Models.Get200ApplicationJsonItemsArtifactsItem</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.DirectoryInsights.Models.Get200ApplicationJsonItemsArtifactsItem</TypeName>
+        <TypeName>JumpCloud.SDK.DirectoryInsights.Models.Get200ApplicationJsonItemsArtifactsItem#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -290,7 +266,7 @@
     <View>
       <Name>JumpCloud.SDK.DirectoryInsights.Models.Get200ApplicationJsonItemsItem</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.DirectoryInsights.Models.Get200ApplicationJsonItemsItem</TypeName>
+        <TypeName>JumpCloud.SDK.DirectoryInsights.Models.Get200ApplicationJsonItemsItem#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -354,7 +330,7 @@
     <View>
       <Name>JumpCloud.SDK.DirectoryInsights.Models.Paths1Sc3SuiEventsDistinctPostResponses200ContentApplicationJsonSchema</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.DirectoryInsights.Models.Paths1Sc3SuiEventsDistinctPostResponses200ContentApplicationJsonSchema</TypeName>
+        <TypeName>JumpCloud.SDK.DirectoryInsights.Models.Paths1Sc3SuiEventsDistinctPostResponses200ContentApplicationJsonSchema#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -382,7 +358,7 @@
     <View>
       <Name>JumpCloud.SDK.DirectoryInsights.Models.PathsD98A8EventsIntervalPostResponses200ContentApplicationJsonSchemaPropertiesBucketsItems</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.DirectoryInsights.Models.PathsD98A8EventsIntervalPostResponses200ContentApplicationJsonSchemaPropertiesBucketsItems</TypeName>
+        <TypeName>JumpCloud.SDK.DirectoryInsights.Models.PathsD98A8EventsIntervalPostResponses200ContentApplicationJsonSchemaPropertiesBucketsItems#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -416,7 +392,7 @@
     <View>
       <Name>JumpCloud.SDK.DirectoryInsights.Models.PathsE6Q3GdReportsReportTypePostResponses202ContentApplicationJsonSchema</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.DirectoryInsights.Models.PathsE6Q3GdReportsReportTypePostResponses202ContentApplicationJsonSchema</TypeName>
+        <TypeName>JumpCloud.SDK.DirectoryInsights.Models.PathsE6Q3GdReportsReportTypePostResponses202ContentApplicationJsonSchema#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -480,7 +456,7 @@
     <View>
       <Name>JumpCloud.SDK.DirectoryInsights.Models.Post200ApplicationJsonPropertiesItemsItem</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.DirectoryInsights.Models.Post200ApplicationJsonPropertiesItemsItem</TypeName>
+        <TypeName>JumpCloud.SDK.DirectoryInsights.Models.Post200ApplicationJsonPropertiesItemsItem#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -508,7 +484,7 @@
     <View>
       <Name>JumpCloud.SDK.DirectoryInsights.Models.Post202ApplicationJsonPropertiesItemsItem</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.DirectoryInsights.Models.Post202ApplicationJsonPropertiesItemsItem</TypeName>
+        <TypeName>JumpCloud.SDK.DirectoryInsights.Models.Post202ApplicationJsonPropertiesItemsItem#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
