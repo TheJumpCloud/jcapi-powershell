@@ -27,8 +27,9 @@ namespace JumpCloud.SDK.DirectoryInsights
             string userInputEnvValue = System.Environment.GetEnvironmentVariable(envVarNameForDefaultHostEnv);
             string actualHostEnvValue;
 
-            // Determine the default host prefix based on the SDK being used
             string defaultHostPrefix = ModuleIdentifier.SDKName == "DirectoryInsights" ? "api" : "console";
+
+            bool showInfo = false;
 
             if (!string.IsNullOrEmpty(userInputEnvValue))
             {
@@ -44,27 +45,26 @@ namespace JumpCloud.SDK.DirectoryInsights
                         actualHostEnvValue = "console.stg01";
                         break;
                     default:
-                        // If user entered a full host (e.g., console, api.eu), use as is
                         actualHostEnvValue = userInputEnvValue;
                         break;
                 }
             }
             else
             {
-                // Default to US region with the appropriate host prefix
+                // Only show info if we are setting the default
                 actualHostEnvValue = defaultHostPrefix;
+                showInfo = true;
             }
 
-            // Log the determined environment host for transparency
-            Console.WriteLine("JumpCloud SDK Module: {0} is running in the: {1}.jumpcloud.com host environment", ModuleIdentifier.SDKName, actualHostEnvValue);
-            Console.WriteLine("The standard environment is: {0}.jumpcloud.com", defaultHostPrefix);
-            Console.WriteLine("To use the EU environment, set $ENV:{0} to 'EU' and re-import the module.", envVarNameForDefaultHostEnv);
-            // to use standard environment, set to 'STANDARD'
-            Console.WriteLine("To use the standard environment, set $ENV:{0} to 'STANDARD' and re-import the module.", envVarNameForDefaultHostEnv);
+            if (showInfo)
+            {
+                Console.WriteLine("JumpCloud SDK Module: {0} is running in the '{1}.jumpcloud.com' host environment.", ModuleIdentifier.SDKName, actualHostEnvValue);
+                Console.WriteLine("'{0}.jumpcloud.com' is the standard environment; '{0}.eu.jumpcloud.com' is the EU environment.", defaultHostPrefix);
+                Console.WriteLine("To use the EU environment, set $ENV:{0} to 'EU' and re-import the module.", envVarNameForDefaultHostEnv);
+                Console.WriteLine("To use the standard environment, set $ENV:{0} to 'STANDARD' and re-import the module.", envVarNameForDefaultHostEnv);
+            }
 
             System.Environment.SetEnvironmentVariable("JCEnvironment", actualHostEnvValue);
-
-            // Set PowerShell default parameter value
             SetPSDefaultHostEnvParameterValue(actualHostEnvValue);
         }
 
