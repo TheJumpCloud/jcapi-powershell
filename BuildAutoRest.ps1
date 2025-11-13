@@ -198,6 +198,30 @@ namespace ModuleNameSpace
                 })
             $BuildModuleCommandJobStatus = Wait-Job -Id:($BuildModuleCommandJob.Id)
             $BuildModuleCommandJobStatus | Receive-Job | Tee-Object -FilePath:($LogFilePath) -Append
+
+            # Add environment-based parameter defaults to the main .psm1 file
+            $mainPsm1Path = "$OutputFullPath/$ModuleName.psm1"
+            if (Test-Path $mainPsm1Path) {
+                $psm1Content = Get-Content -Path $mainPsm1Path -Raw
+                $environmentSwitchBlock = @"
+switch (`$env:JCEnvironment) {
+  'STANDARD' {
+      `$Global:PSDefaultParameterValues['*-JcSdk*:ApiHost'] = 'api'
+      `$Global:PSDefaultParameterValues['*-JcSdk*:ConsoleHost'] = 'console'
+   }
+  'EU' {
+      `$Global:PSDefaultParameterValues['*-JcSdk*:ApiHost'] = 'api.eu'
+      `$Global:PSDefaultParameterValues['*-JcSdk*:ConsoleHost'] = 'console.eu'
+   }
+  Default {}
+}
+"@
+                # Append the switch block at the end of the file
+                $psm1Content += "`n$environmentSwitchBlock"
+                Set-Content -Path $mainPsm1Path -Value $psm1Content
+                Write-Host ('[ADDED] Environment-based parameter defaults to module .psm1 file.') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+            }
+
         }
         ###########################################################################
         If ($BuildCustomFunctions)

@@ -79,8 +79,8 @@ namespace ModuleNameSpace
                 string defaultHostPrefix = ModuleIdentifier.SDKName == "DirectoryInsights" ? "api" : "console";
                 Console.WriteLine("JumpCloud SDK Module: {0} is running in the '{1}.jumpcloud.com' host environment.", ModuleIdentifier.SDKName, defaultHostPrefix);
                 Console.WriteLine("'{0}.jumpcloud.com' is the standard environment; '{0}.eu.jumpcloud.com' is the EU environment.", defaultHostPrefix);
-                Console.WriteLine("To use the EU environment, set $ENV:{0} to 'EU' and re-import the module.", envVarNameForDefaultHostEnv);
-                Console.WriteLine("To use the standard environment, set $ENV:{0} to 'STANDARD' and re-import the module.", envVarNameForDefaultHostEnv);
+                Console.WriteLine("To use the EU environment, run: $ENV:{0} = 'EU' and re-import the module.", envVarNameForDefaultHostEnv);
+                Console.WriteLine("To use the standard environment, run: $ENV:{0} = 'STANDARD' and re-import the module.", envVarNameForDefaultHostEnv);
             }
 
             // Store the appropriate value based on SDK type
