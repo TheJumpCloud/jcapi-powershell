@@ -542,11 +542,11 @@ function Add-ParameterizedHost {
 
     # Define the x-ms-parameterized-host property
     $parameterizedHost = [ordered]@{
-        hostTemplate     = '{hostEnv}.jumpcloud.com'
+        hostTemplate     = if ($SDKName -eq "JumpCloud.SDK.DirectoryInsights") { '{apiHost}.jumpcloud.com' } else { '{consoleHost}.jumpcloud.com' }
         useSchemePrefix  = $true
         parameters       = @(
             [ordered]@{
-                name                      = 'hostEnv'
+                name                      = if ($SDKName -eq "JumpCloud.SDK.DirectoryInsights") { 'apiHost' } else { 'consoleHost' }
                 description               = "Region for JumpCloud API host. Use '$hostPrefix' for US or '$hostPrefix.eu' for EU."
                 required                  = $true
                 type                      = 'string'

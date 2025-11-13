@@ -14,12 +14,12 @@ Download a report by report ID and artifact ID
 
 ### Get (Default)
 ```
-Get-JcSdkReportArtifactContent -HostEnv <String> -ArtifactId <String> -ReportId <String> [<CommonParameters>]
+Get-JcSdkReportArtifactContent -ApiHost <String> -ArtifactId <String> -ReportId <String> [<CommonParameters>]
 ```
 
 ### GetViaIdentity
 ```
-Get-JcSdkReportArtifactContent -HostEnv <String> -InputObject <IDirectoryInsightsApiIdentity>
+Get-JcSdkReportArtifactContent -ApiHost <String> -InputObject <IDirectoryInsightsApiIdentity>
  [<CommonParameters>]
 ```
 
@@ -44,12 +44,13 @@ Get-JcSdkReportArtifactContent -ArtifactId:(<string>) -ReportId:(<string>)
 
 ## PARAMETERS
 
-### -ArtifactId
-Artifact ID
+### -ApiHost
+Region for JumpCloud API host.
+Use 'api' for US or 'api.eu' for EU.
 
 ```yaml
 Type: System.String
-Parameter Sets: Get
+Parameter Sets: (All)
 Aliases:
 
 Required: True
@@ -59,13 +60,12 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -HostEnv
-Region for JumpCloud API host.
-Use 'api' for US or 'api.eu' for EU.
+### -ArtifactId
+Artifact ID
 
 ```yaml
 Type: System.String
-Parameter Sets: (All)
+Parameter Sets: Get
 Aliases:
 
 Required: True

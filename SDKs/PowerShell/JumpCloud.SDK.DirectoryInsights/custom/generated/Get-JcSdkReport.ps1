@@ -23,7 +23,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4908_userGroupDeviceGr
     [System.String]
     # Region for JumpCloud API host.
     # Use 'api' for US or 'api.eu' for EU.
-    ${HostEnv}, 
+    ${ApiHost}, 
 
     [Parameter()]
     [JumpCloud.SDK.DirectoryInsights.PSArgumentCompleterAttribute("CREATED_AT", "EXPIRATION", "REQUESTER_EMAIL", "STATUS", "TYPE", "UPDATED_AT")]

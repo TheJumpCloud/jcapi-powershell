@@ -18,7 +18,7 @@ curl -X POST 'https://api.jumpcloud.com/insights/directory/v1/events/interval' -
 
 ### GetExpanded (Default)
 ```
-Get-JcSdkEventInterval -HostEnv <String> -IntervalUnit <String> -Service <String[]> -StartTime <DateTime>
+Get-JcSdkEventInterval -ApiHost <String> -IntervalUnit <String> -Service <String[]> -StartTime <DateTime>
  [-EndTime <DateTime>] [-ExactMatch <String>] [-IntervalValue <String>] [-Q <String>]
  [-SearchTermAnd <Hashtable>] [-SearchTermNot <Hashtable>] [-SearchTermOr <Hashtable>] [-Timezone <String>]
  [-Confirm] [-WhatIf] [<CommonParameters>]
@@ -26,7 +26,7 @@ Get-JcSdkEventInterval -HostEnv <String> -IntervalUnit <String> -Service <String
 
 ### Get
 ```
-Get-JcSdkEventInterval -HostEnv <String> -Body <IEventIntervalQuery> [-Confirm] [-WhatIf] [<CommonParameters>]
+Get-JcSdkEventInterval -ApiHost <String> -Body <IEventIntervalQuery> [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -53,6 +53,22 @@ Get-JcSdkEventInterval -Body:(<JumpCloud.SDK.DirectoryInsights.Models.EventInter
 
 
 ## PARAMETERS
+
+### -ApiHost
+Region for JumpCloud API host.
+Use 'api' for US or 'api.eu' for EU.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### -Body
 EventIntervalQuery is the users' command to search our auth logs for bucketed counts of values of the specified field
@@ -93,22 +109,6 @@ Parameter Sets: GetExpanded
 Aliases:
 
 Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -HostEnv
-Region for JumpCloud API host.
-Use 'api' for US or 'api.eu' for EU.
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False

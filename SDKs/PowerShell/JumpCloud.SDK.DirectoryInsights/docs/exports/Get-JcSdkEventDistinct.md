@@ -18,14 +18,14 @@ curl -X POST 'https://api.jumpcloud.com/insights/directory/v1/events/distinct' -
 
 ### GetExpanded (Default)
 ```
-Get-JcSdkEventDistinct -HostEnv <String> -Field <String> -Service <String[]> -StartTime <DateTime>
+Get-JcSdkEventDistinct -ApiHost <String> -Field <String> -Service <String[]> -StartTime <DateTime>
  [-EndTime <DateTime>] [-SearchTermAnd <Hashtable>] [-SearchTermNot <Hashtable>] [-SearchTermOr <Hashtable>]
  [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Get
 ```
-Get-JcSdkEventDistinct -HostEnv <String> -Body <IEventDistinctQuery> [-Confirm] [-WhatIf] [<CommonParameters>]
+Get-JcSdkEventDistinct -ApiHost <String> -Body <IEventDistinctQuery> [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -52,6 +52,22 @@ Get-JcSdkEventDistinct -Body:(<JumpCloud.SDK.DirectoryInsights.Models.EventDisti
 
 
 ## PARAMETERS
+
+### -ApiHost
+Region for JumpCloud API host.
+Use 'api' for US or 'api.eu' for EU.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### -Body
 EventDistinctQuery is the users' command to search our auth logs for distinct values of the specified field
@@ -89,22 +105,6 @@ field is what they wish to query on
 ```yaml
 Type: System.String
 Parameter Sets: GetExpanded
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -HostEnv
-Region for JumpCloud API host.
-Use 'api' for US or 'api.eu' for EU.
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
 Aliases:
 
 Required: True

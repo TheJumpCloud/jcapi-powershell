@@ -17,21 +17,16 @@ if (Test-Path -Path $envFilePath) {
     $env = Get-Content (Join-Path $PSScriptRoot $envFile) | ConvertFrom-Json
     $PSDefaultParameterValues=@{"*:Tenant"=$env.Tenant}
 }
-            # Determine which SDK this is and set the appropriate default HostEnv
-$sdkName = Split-Path (Split-Path $PSScriptRoot -Parent) -Leaf
-# Write-Host "SDK Name detected: $sdkName"
-$defaultHostEnv = switch ($sdkName) {
-    'JumpCloud.SDK.DirectoryInsights' { 'api' }
-    'JumpCloud.SDK.V1' { 'console' }
-    'JumpCloud.SDK.V2' { 'console' }
-    default { 'console' }
-}
+# Determine default host values based on environment
+$apiHost = 'api'
+$consoleHost = 'console'
 
-# Check if user has set JCEnvironment to EU
 if ($env:JCEnvironment -eq 'EU') {
-    $defaultHostEnv = "$defaultHostEnv.eu"
+    $apiHost = 'api.eu'
+    $consoleHost = 'console.eu'
 }
 
-# Set the default parameter value for this test session
-$PSDefaultParameterValues['*-JcSdk*:HostEnv'] = $defaultHostEnv
-# Write-Host "Test environment loaded. Default HostEnv set to: $defaultHostEnv"
+# Set both parameter defaults so all SDKs work correctly
+$PSDefaultParameterValues['*-JcSdk*:ApiHost'] = $apiHost
+$PSDefaultParameterValues['*-JcSdk*:ConsoleHost'] = $consoleHost
+# Write-Host "Test environment loaded. ApiHost set to: $apiHost, ConsoleHost set to: $consoleHost"

@@ -13,7 +13,7 @@ Ordered list of report metadata
 ## SYNTAX
 
 ```
-Get-JcSdkReport -HostEnv <String> [-Sort <String>] [<CommonParameters>]
+Get-JcSdkReport -ApiHost <String> [-Sort <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -37,7 +37,7 @@ Get-JcSdkReport
 
 ## PARAMETERS
 
-### -HostEnv
+### -ApiHost
 Region for JumpCloud API host.
 Use 'api' for US or 'api.eu' for EU.
 

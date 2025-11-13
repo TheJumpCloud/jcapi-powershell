@@ -34,7 +34,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4908_userGroupDeviceGr
     [System.String]
     # Region for JumpCloud API host.
     # Use 'api' for US or 'api.eu' for EU.
-    ${HostEnv}, 
+    ${ApiHost}, 
 
     [Parameter(ParameterSetName='Get', Mandatory)]
     [JumpCloud.SDK.DirectoryInsights.Category('Path')]

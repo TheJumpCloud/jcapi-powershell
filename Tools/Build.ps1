@@ -24,6 +24,8 @@ else {
 $pathBeforeRun = $pwd
 $rootPath = "$PSScriptRoot/../"
 
+# start stopwatch to measure build time
+$stopwatch = [System.Diagnostics.Stopwatch]::StartNew()
 # Build each of the specified SDKs.
 foreach ($sdk in $sdks) {
     Write-Host "Building $sdk with version type: $VersionType"
@@ -36,6 +38,12 @@ foreach ($sdk in $sdks) {
 
     # Update module changelog and pass the version type.
     . "$PSscriptRoot/Build-SdkChangelog" -SDKName $sdk | Out-Null
+}
+# Stop the stopwatch
+$stopwatch.Stop()
+$elapsedTime = $stopwatch.Elapsed
+if ($IsMacOS -and (Get-InstalledModule -Name "MacNotify")){
+    Invoke-MacNotification 'SDK Build completed' -Title "$($SDKName) Built" -Subtitle "Build took $($elapsedTime.TotalSeconds) seconds" -Sound 'Ping'
 }
 
 # Return to the original directory.

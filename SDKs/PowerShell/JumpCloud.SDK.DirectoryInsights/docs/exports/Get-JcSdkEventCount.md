@@ -18,7 +18,7 @@ curl -X POST 'https://api.jumpcloud.com/insights/directory/v1/events/count' -H '
 
 ### GetExpanded (Default)
 ```
-Get-JcSdkEventCount -HostEnv <String> -Service <String[]> -StartTime <DateTime> [-EndTime <DateTime>]
+Get-JcSdkEventCount -ApiHost <String> -Service <String[]> -StartTime <DateTime> [-EndTime <DateTime>]
  [-ExactMatch <String>] [-Fields <String[]>] [-Q <String>] [-SearchAfter <String[]>]
  [-SearchTermAnd <Hashtable>] [-SearchTermNot <Hashtable>] [-SearchTermOr <Hashtable>] [-Sort <String>]
  [-Confirm] [-WhatIf] [<CommonParameters>]
@@ -26,7 +26,7 @@ Get-JcSdkEventCount -HostEnv <String> -Service <String[]> -StartTime <DateTime> 
 
 ### Get
 ```
-Get-JcSdkEventCount -HostEnv <String> -Body <IEventQuery> [-Confirm] [-WhatIf] [<CommonParameters>]
+Get-JcSdkEventCount -ApiHost <String> -Body <IEventQuery> [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -53,6 +53,22 @@ Get-JcSdkEventCount -Body:(<JumpCloud.SDK.DirectoryInsights.Models.EventQuery>)
 
 
 ## PARAMETERS
+
+### -ApiHost
+Region for JumpCloud API host.
+Use 'api' for US or 'api.eu' for EU.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### -Body
 EventQuery is the users' command to search our auth logs
@@ -108,22 +124,6 @@ Parameter Sets: GetExpanded
 Aliases:
 
 Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -HostEnv
-Region for JumpCloud API host.
-Use 'api' for US or 'api.eu' for EU.
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False

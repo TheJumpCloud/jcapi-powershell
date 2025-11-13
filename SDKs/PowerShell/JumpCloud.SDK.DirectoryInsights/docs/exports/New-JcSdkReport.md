@@ -14,12 +14,12 @@ Request a JumpCloud report to be generated asynchronously
 
 ### Create (Default)
 ```
-New-JcSdkReport -HostEnv <String> -ReportType <String> [-Confirm] [-WhatIf] [<CommonParameters>]
+New-JcSdkReport -ApiHost <String> -ReportType <String> [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### CreateViaIdentity
 ```
-New-JcSdkReport -HostEnv <String> -InputObject <IDirectoryInsightsApiIdentity> [-Confirm] [-WhatIf]
+New-JcSdkReport -ApiHost <String> -InputObject <IDirectoryInsightsApiIdentity> [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
@@ -44,7 +44,7 @@ New-JcSdkReport -ReportType:(<string>)
 
 ## PARAMETERS
 
-### -HostEnv
+### -ApiHost
 Region for JumpCloud API host.
 Use 'api' for US or 'api.eu' for EU.
 
