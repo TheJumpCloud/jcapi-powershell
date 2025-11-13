@@ -46,3 +46,15 @@
   $instance.Init();
   Write-Information "Loaded Module '$($instance.Name)'"
 # endregion
+
+switch ($env:JCEnvironment) {
+  'STANDARD' {
+      $Global:PSDefaultParameterValues['*-JcSdk*:ApiHost'] = 'api'
+      $Global:PSDefaultParameterValues['*-JcSdk*:ConsoleHost'] = 'console'
+   }
+  'EU' {
+      $Global:PSDefaultParameterValues['*-JcSdk*:ApiHost'] = 'api.eu'
+      $Global:PSDefaultParameterValues['*-JcSdk*:ConsoleHost'] = 'console.eu'
+   }
+  Default {}
+}
