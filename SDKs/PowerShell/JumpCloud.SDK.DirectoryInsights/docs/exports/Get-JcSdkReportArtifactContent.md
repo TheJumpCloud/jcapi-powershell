@@ -30,7 +30,7 @@ Download a report by report ID and artifact ID
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkReportArtifactContent -ArtifactId:(<string>) -ReportId:(<string>)
 ```
 
 

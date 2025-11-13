@@ -4,7 +4,7 @@ Ordered list of report metadata
 .Description
 Ordered list of report metadata
 .Example
-{{ Add code here }}
+Get-JcSdkReport
 .Example
 {{ Add code here }}
 

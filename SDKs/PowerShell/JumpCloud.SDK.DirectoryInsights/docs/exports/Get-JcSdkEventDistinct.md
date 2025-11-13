@@ -39,14 +39,14 @@ curl -X POST 'https://api.jumpcloud.com/insights/directory/v1/events/distinct' -
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkEventDistinct -Field:(<string>) -Service:(<string[]>) -StartTime:(<datetime>) -EndTime:(<datetime>) -SearchTermAnd:(<hashtable>) -SearchTermNot:(<hashtable>) -SearchTermOr:(<hashtable>)
 ```
 
 
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkEventDistinct -Body:(<JumpCloud.SDK.DirectoryInsights.Models.EventDistinctQuery>)
 ```
 
 

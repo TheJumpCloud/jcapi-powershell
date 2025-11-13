@@ -12,9 +12,9 @@ Query the API for a list of distinct values for a field
 curl -X POST 'https://api.jumpcloud.com/insights/directory/v1/events/distinct' -H 'Content-Type: application/json' -H 'x-api-key: REPLACE_KEY_VALUE' --data '{\"service\": [\"all\"], \"start_time\": \"2021-07-14T23:00:00Z\", \"end_time\": \"2021-07-28T14:00:00Z\", \"sort\": \"DESC\", \"field\": \"event_type\"}'
 ```
 .Example
-{{ Add code here }}
+Get-JcSdkEventDistinct -Field:(<string>) -Service:(<string[]>) -StartTime:(<datetime>) -EndTime:(<datetime>) -SearchTermAnd:(<hashtable>) -SearchTermNot:(<hashtable>) -SearchTermOr:(<hashtable>)
 .Example
-{{ Add code here }}
+Get-JcSdkEventDistinct -Body:(<JumpCloud.SDK.DirectoryInsights.Models.EventDistinctQuery>)
 
 .Inputs
 JumpCloud.SDK.DirectoryInsights.Models.IEventDistinctQuery

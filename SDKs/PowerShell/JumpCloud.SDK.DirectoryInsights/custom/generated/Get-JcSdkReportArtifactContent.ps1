@@ -4,7 +4,7 @@ Download a report by report ID and artifact ID
 .Description
 Download a report by report ID and artifact ID
 .Example
-{{ Add code here }}
+Get-JcSdkReportArtifactContent -ArtifactId:(<string>) -ReportId:(<string>)
 .Example
 {{ Add code here }}
 

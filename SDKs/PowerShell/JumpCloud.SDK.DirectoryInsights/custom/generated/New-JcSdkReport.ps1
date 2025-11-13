@@ -4,7 +4,7 @@ Request a JumpCloud report to be generated asynchronously
 .Description
 Request a JumpCloud report to be generated asynchronously
 .Example
-{{ Add code here }}
+New-JcSdkReport -ReportType:(<string>)
 .Example
 {{ Add code here }}
 

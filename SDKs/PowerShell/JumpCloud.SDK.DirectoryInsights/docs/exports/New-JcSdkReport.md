@@ -30,7 +30,7 @@ Request a JumpCloud report to be generated asynchronously
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+New-JcSdkReport -ReportType:(<string>)
 ```
 
 

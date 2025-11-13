@@ -34,7 +34,7 @@ namespace ModuleNameSpace
             {
                 switch (userInputEnvValue.ToUpperInvariant())
                 {
-                    case "US":
+                    case "STANDARD":
                         actualHostEnvValue = defaultHostPrefix;
                         break;
                     case "EU":
@@ -56,8 +56,11 @@ namespace ModuleNameSpace
             }
 
             // Log the determined environment host for transparency
-            Console.WriteLine("JumpCloud SDK Module ({0}): {1}.jumpcloud.com", ModuleIdentifier.SDKName, actualHostEnvValue);
-            Console.WriteLine("To change the default host environment, set $ENV:{0} to 'US' or 'EU' and re-import the module.", envVarNameForDefaultHostEnv);
+            Console.WriteLine("JumpCloud SDK Module: {0} is running in the: {1}.jumpcloud.com host environment", ModuleIdentifier.SDKName, actualHostEnvValue);
+            Console.WriteLine("The standard environment is: {0}.jumpcloud.com", defaultHostPrefix);
+            Console.WriteLine("To use the EU environment, set $ENV:{0} to 'EU' and re-import the module.", envVarNameForDefaultHostEnv);
+            // to use standard environment, set to 'STANDARD'
+            Console.WriteLine("To use the standard environment, set $ENV:{0} to 'STANDARD' and re-import the module.", envVarNameForDefaultHostEnv);
 
             System.Environment.SetEnvironmentVariable("JCEnvironment", actualHostEnvValue);
 

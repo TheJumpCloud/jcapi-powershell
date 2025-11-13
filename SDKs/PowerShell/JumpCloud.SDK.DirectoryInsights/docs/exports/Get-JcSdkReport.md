@@ -23,7 +23,7 @@ Ordered list of report metadata
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkReport
 ```
 
 
