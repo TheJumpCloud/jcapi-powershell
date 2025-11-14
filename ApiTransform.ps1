@@ -72,6 +72,7 @@ $TransformConfig = [Ordered]@{
         };
         OverrideDefinitions = @(
             'definitions.application.properties.config'
+            'definitions.systemput.properties'
         )
         OperationIdMapping  = [Ordered]@{
             'admin_totpreset_begin'          = 'AdministratorUserTotp_Reset';
@@ -161,6 +162,8 @@ $TransformConfig = [Ordered]@{
         OverrideDefinitions = @(
             'definitions.bulk-user-create.properties'
             'definitions.bulk-user-update.properties'
+            'definitions.MemberQuery'
+            'definitions.jumpcloud.search.searchRequest.properties'
         )
         OperationIdMapping  = [Ordered]@{
             'activedirectories_agentsDelete'                    = 'ActiveDirectoryAgent_Delete';
@@ -509,6 +512,67 @@ $TransformConfig = [Ordered]@{
             '/accessrequests/{accessId}/revoke'
         )
     }
+}
+#region HelperFunctions
+function Add-ParameterizedHost {
+    param (
+        [Parameter(Mandatory = $true)]
+        [object]$SwaggerObject
+    )
+
+    # Check if property already exists (works for both hashtable and OrderedDictionary)
+    if ($SwaggerObject.Contains('x-ms-parameterized-host')) {
+        return $SwaggerObject
+    }
+
+    # Determine host prefix and enum values based on existing host
+    $hostPrefix = 'console'
+    $enumValues = @('console', 'console.eu')
+
+    if ($SwaggerObject.Contains('host')) {
+        $currentHost = $SwaggerObject['host']
+        if ($currentHost -like 'api.jumpcloud.com*') {
+            $hostPrefix = 'api'
+            $enumValues = @('api', 'api.eu')
+        } elseif ($currentHost -like 'console.jumpcloud.com*') {
+            $hostPrefix = 'console'
+            $enumValues = @('console', 'console.eu')
+        }
+    }
+
+    # Define the x-ms-parameterized-host property
+    $parameterizedHost = [ordered]@{
+        hostTemplate     = if ($SDKName -eq "JumpCloud.SDK.DirectoryInsights") { '{apiHost}.jumpcloud.com' } else { '{consoleHost}.jumpcloud.com' }
+        useSchemePrefix  = $true
+        parameters       = @(
+            [ordered]@{
+                name                      = if ($SDKName -eq "JumpCloud.SDK.DirectoryInsights") { 'apiHost' } else { 'consoleHost' }
+                description               = "Region for JumpCloud API host. Use '$hostPrefix' for US or '$hostPrefix.eu' for EU."
+                required                  = $true
+                type                      = 'string'
+                in                        = 'client'
+                enum                      = $enumValues
+                'x-ms-parameter-location' = 'client'
+            }
+        )
+    }
+
+    # Create a new ordered hashtable to preserve alphabetical order
+    $newSwagger = [ordered]@{}
+
+    # Get all keys and sort alphabetically
+    $allKeys = @($SwaggerObject.Keys) + @('x-ms-parameterized-host') | Sort-Object
+
+    # Add properties in alphabetical order
+    foreach ($key in $allKeys) {
+        if ($key -eq 'x-ms-parameterized-host') {
+            $newSwagger[$key] = $parameterizedHost
+        } elseif ($SwaggerObject.Contains($key)) {
+            $newSwagger[$key] = $SwaggerObject[$key]
+        }
+    }
+
+    return $newSwagger
 }
 function Remove-ParamsByOperationId {
     param (
@@ -986,8 +1050,9 @@ function Fix-SearchEndpointsPagination {
 
     return $Swagger
 }
+#endRegion HelperFunctions
 
-
+#region ApiTransform
 # Start script
 $SDKName | ForEach-Object {
     $SDKNameItem = $_
@@ -1031,7 +1096,8 @@ $SDKName | ForEach-Object {
             $SwaggerObject = Remove-ParamsByOperationId -Swagger $SwaggerObjectContent -OperationIds $operationIdsToClean -Params @('fields', 'filter', 'X-Eventually-Consistent')
             # Run the inlining on the whole Swagger object
             $SwaggerObject = Replace-InvalidPropertyRefs -Swagger $SwaggerObject
-
+            # ensure the swagger object has an "x-ms-parameterized-host" entry
+            $SwaggerObject = Add-ParameterizedHost -SwaggerObject $SwaggerObject
             # Find and replace on file
             $SwaggerObject = $SwaggerObject | ConvertTo-Json -Depth:(100) -Compress
             # Perform find and replace
@@ -1048,35 +1114,17 @@ $SDKName | ForEach-Object {
                     }
                 }
             }
-
             # replace override definitions
             if ($config.OverrideDefinitions) {
                 foreach ($overrideDef in $config.OverrideDefinitions) {
-                    write-warning "$overrideDef"
                     $SwaggerObject = $SwaggerObject | ConvertFrom-Json -depth 100
                     # check that a coresponding def exists in /Custom directory
                     if (Test-Path -Path "$PSScriptRoot/CustomDefinitions/$($overrideDef).json") {
                         $configContent = Get-Content -Path ("$PSScriptRoot/CustomDefinitions/$($overrideDef).json")
                         $configOverride = ($configContent | ConvertFrom-Json)
                         # test for special chars in property string:
-                        if ($overrideDef -match "-") {
-                            $splitDef = $overRideDef.Split(".")
-                            $newOverrideDef = ""
-                            for ($i = 0; $i -lt $splitDef.Count; $i++) {
-                                if ($splitDef[$i] -match "-") {
-                                    $splitDef[$i] = "'" + $splitDef[$i] + "'"
-                                }
-
-                                if ($i -eq ($splitDef.Count - 1)) {
-                                    $newOverrideDef += "$($splitDef[$i])"
-                                } else {
-                                    $newOverrideDef += "$($splitDef[$i])."
-
-                                }
-                            }
-                            $overrideDef = $newOverrideDef
-
-                        }
+                        $overrideDef = $overrideDef -replace "^(definitions)\.(.+)\.(properties.*)$", "`$1.'`$2'.`$3"
+                        write-warning "Writing custom override for: $overrideDef"
                         Invoke-Expression -Command ('$SwaggerObject.' + "$($overrideDef)" + '=' + '$configOverride' )
                         $SwaggerObject = $SwaggerObject | Convertto-Json -depth 100
                     } else {
@@ -1087,10 +1135,10 @@ $SDKName | ForEach-Object {
             } else {
                 $SwaggerObject = $SwaggerObject | ConvertFrom-Json -Depth:(100)
             }
-
-# Remove limit/skip parameters from Search endpoints
+            # Remove limit/skip parameters from Search endpoints
             $SwaggerObject = Remove-SearchEndpointLimitSkipParams -Swagger $SwaggerObject
             $SwaggerObject = Fix-SearchEndpointsPagination -Swagger $SwaggerObject
+
             #######################################################################
             # # Resolve the swagger references ($ref)/flatten
             # $SwaggerObjectRefMatches = $SwaggerObject | ConvertFrom-Json -Depth:(100)
@@ -1202,3 +1250,4 @@ $SDKName | ForEach-Object {
         Write-Error ("Config 'TransformConfig' does not contain an SDK called '$($SDKNameItem)'.")
     }
 }
+#endregion ApiTransform

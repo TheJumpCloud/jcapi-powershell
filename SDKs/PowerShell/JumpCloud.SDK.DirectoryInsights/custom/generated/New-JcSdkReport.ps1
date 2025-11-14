@@ -4,13 +4,9 @@ Request a JumpCloud report to be generated asynchronously
 .Description
 Request a JumpCloud report to be generated asynchronously
 .Example
-PS C:\> New-JcSdkReport -ReportType 'users-to-sso-applications'
-
-Queues creation of an user-to-sso-application report
+New-JcSdkReport -ReportType:(<string>)
 .Example
-PS C:\> New-JcSdkReport -ReportType 'users-to-devices'
-
-Queues creation of an users-to-devices report
+{{ Add code here }}
 
 .Inputs
 JumpCloud.SDK.DirectoryInsights.Models.IDirectoryInsightsApiIdentity
@@ -24,19 +20,26 @@ To create the parameters described below, construct a hash table containing the 
 INPUTOBJECT <IDirectoryInsightsApiIdentity>:
   [ArtifactId <String>]: Artifact ID
   [ReportId <String>]: Report ID
-  [ReportType <ReportType1?>]: Report Type
+  [ReportType <String>]: Report Type
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/docs/exports/New-JcSdkReport.md
+https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4908_userGroupDeviceGroupFilters/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/docs/exports/New-JcSdkReport.md
 #>
  Function New-JcSdkReport
 {
     [OutputType([JumpCloud.SDK.DirectoryInsights.Models.IPathsE6Q3GdReportsReportTypePostResponses202ContentApplicationJsonSchema])]
     [CmdletBinding(DefaultParameterSetName='Create', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
+    [Parameter(Mandatory)]
+    [JumpCloud.SDK.DirectoryInsights.Category('Uri')]
+    [System.String]
+    # Region for JumpCloud API host.
+    # Use 'api' for US or 'api.eu' for EU.
+    ${ApiHost}, 
+
     [Parameter(ParameterSetName='Create', Mandatory)]
-    [ArgumentCompleter([JumpCloud.SDK.DirectoryInsights.Support.ReportType1])]
+    [JumpCloud.SDK.DirectoryInsights.PSArgumentCompleterAttribute("browser-patch-policy", "os-patch-policy", "os-version", "software-inventory", "user-account-health", "users-to-devices", "users-to-directories", "users-to-ldap-servers", "users-to-radius-servers", "users-to-sso-applications", "users-to-user-groups")]
     [JumpCloud.SDK.DirectoryInsights.Category('Path')]
-    [JumpCloud.SDK.DirectoryInsights.Support.ReportType1]
+    [System.String]
     # Report Type
     ${ReportType}, 
 
@@ -44,7 +47,6 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.DirectoryInsights.Category('Path')]
     [JumpCloud.SDK.DirectoryInsights.Models.IDirectoryInsightsApiIdentity]
     # Identity Parameter
-    # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
     ${InputObject}, 
 
     [Parameter(DontShow)]

@@ -1,3 +1,33 @@
+## JumpCloud.SDK.DirectoryInsights-0.1.0
+Release Date: November 13, 2025
+#### RELEASE NOTES
+```
+Updated existing functions based on updated OpenAPI specs
+```
+#### FEATURES:
+
+The JumpCloud DirectoryInsights SDK module has been updated to support the EU region. Users can now specify the region when initializing the SDK.
+
+#### Generated Changes:
+
+<details>
+<summary>Functions Added</summary>
+
+No changes
+</details>
+
+<details>
+<summary>Functions Modified</summary>
+
+No changes
+</details>
+
+<details>
+<summary>Functions Removed</summary>
+
+No changes
+</details>
+
 ## JumpCloud.SDK.DirectoryInsights-0.0.33
 Release Date: March 10, 2025
 #### RELEASE NOTES
@@ -435,10 +465,10 @@ Release Date: December 28, 2022
 SDK version update params added to DI functions
 ```
 #### FEATURES:
-Get-JcSdkEvent — `SearchTermNot` parameter added
-Get-JcSdkEventCount — `SearchTermNot` parameter added
-Get-JcSdkEventDistinct — `SearchTermNot` parameter added
-Get-JcSdkEventInterval — `SearchTermNot` parameter added
+Get-JcSdkEvent — `SearchTermNot` parameter added
+Get-JcSdkEventCount — `SearchTermNot` parameter added
+Get-JcSdkEventDistinct — `SearchTermNot` parameter added
+Get-JcSdkEventInterval — `SearchTermNot` parameter added
 
 #### Generated Changes:
 

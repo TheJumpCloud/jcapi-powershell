@@ -1,7 +1,7 @@
 ---
 external help file:
 Module Name: JumpCloud.SDK.DirectoryInsights
-online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/docs/exports/Get-JcSdkReport.md
+online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4908_userGroupDeviceGroupFilters/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/docs/exports/Get-JcSdkReport.md
 schema: 2.0.0
 ---
 
@@ -13,7 +13,7 @@ Ordered list of report metadata
 ## SYNTAX
 
 ```
-Get-JcSdkReport [-Sort <Sort>] [<CommonParameters>]
+Get-JcSdkReport -ApiHost <String> [-Sort <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -26,23 +26,39 @@ Ordered list of report metadata
 Get-JcSdkReport
 ```
 
-Returns a list of all available reports
+
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell
-Get-JcSdkReport -Sort 'CREATED_AT'
+{{ Add code here }}
 ```
 
-Returns a list of all available reports, sorted by the most recently created report
+
 
 ## PARAMETERS
+
+### -ApiHost
+Region for JumpCloud API host.
+Use 'api' for US or 'api.eu' for EU.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### -Sort
 Sort type and direction.
 Default sort is descending, prefix with - to sort ascending.
 
 ```yaml
-Type: JumpCloud.SDK.DirectoryInsights.Support.Sort
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -63,8 +79,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ### JumpCloud.SDK.DirectoryInsights.Models.IGet200ApplicationJsonItemsItem
 
 ## NOTES
-
-ALIASES
 
 ## RELATED LINKS
 

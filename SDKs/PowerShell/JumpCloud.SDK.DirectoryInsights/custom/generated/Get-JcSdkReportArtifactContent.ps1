@@ -4,13 +4,9 @@ Download a report by report ID and artifact ID
 .Description
 Download a report by report ID and artifact ID
 .Example
-PS C:\> {{ Add code here }}
-
-{{ Add output here }}
+Get-JcSdkReportArtifactContent -ArtifactId:(<string>) -ReportId:(<string>)
 .Example
-PS C:\> {{ Add code here }}
-
-{{ Add output here }}
+{{ Add code here }}
 
 .Inputs
 JumpCloud.SDK.DirectoryInsights.Models.IDirectoryInsightsApiIdentity
@@ -24,15 +20,22 @@ To create the parameters described below, construct a hash table containing the 
 INPUTOBJECT <IDirectoryInsightsApiIdentity>:
   [ArtifactId <String>]: Artifact ID
   [ReportId <String>]: Report ID
-  [ReportType <ReportType1?>]: Report Type
+  [ReportType <String>]: Report Type
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/docs/exports/Get-JcSdkReportArtifactContent.md
+https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4908_userGroupDeviceGroupFilters/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/docs/exports/Get-JcSdkReportArtifactContent.md
 #>
  Function Get-JcSdkReportArtifactContent
 {
     [OutputType([JumpCloud.SDK.DirectoryInsights.Models.IDictionaryOfany])]
     [CmdletBinding(DefaultParameterSetName='Get', PositionalBinding=$false)]
     Param(
+    [Parameter(Mandatory)]
+    [JumpCloud.SDK.DirectoryInsights.Category('Uri')]
+    [System.String]
+    # Region for JumpCloud API host.
+    # Use 'api' for US or 'api.eu' for EU.
+    ${ApiHost}, 
+
     [Parameter(ParameterSetName='Get', Mandatory)]
     [JumpCloud.SDK.DirectoryInsights.Category('Path')]
     [System.String]
@@ -49,7 +52,6 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.DirectoryInsights.Category('Path')]
     [JumpCloud.SDK.DirectoryInsights.Models.IDirectoryInsightsApiIdentity]
     # Identity Parameter
-    # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
     ${InputObject}, 
 
     [Parameter(DontShow)]

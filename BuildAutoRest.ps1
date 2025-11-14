@@ -48,7 +48,7 @@ ForEach ($SDK In $SDKName)
         $Config = $ConfigContent | ConvertFrom-Yaml
         # Write current branch back to config file
         $Config.branch = $CurrentBranch
-        $Config | Set-Content -Path:($ConfigFileFullName)
+        $Config | ConvertTo-Yaml -OutFile:($ConfigFileFullName) -force
         $OutputFullPath = '{0}/{1}' -f $BaseFolder, [System.String]$Config.'output-folder'
         $ToolsFolderPath = '{0}/Tools' -f $BaseFolder
         $RunPesterTestsFilePath = '{0}/RunPesterTests.ps1' -f $ToolsFolderPath
@@ -133,7 +133,7 @@ ForEach ($SDK In $SDKName)
                 bash $CleanScript $PSScriptRoot $OutputFullPath
             }
             Write-Host ('[RUN COMMAND] autorest ' + $ConfigFileFullName + ' --force --verbose --debug') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
-            npx autorest $ConfigFileFullName --force --version:$($npmDependencies.dependencies.'@autorest/core') --use:@autorest/powershell@$($npmDependencies.dependencies.'@autorest/powershell') | Tee-Object -FilePath:($LogFilePath) -Append
+            npx autorest $ConfigFileFullName --force --version:$($npmDependencies.dependencies.'@autorest/core') --use:@autorest/powershell@$($npmDependencies.dependencies.'@autorest/powershell') | Out-Null
         }
         ###########################################################################
         If ($CopyCustomFiles)
@@ -169,12 +169,59 @@ ForEach ($SDK In $SDKName)
             $PsProxyTypes = (Get-Content $CustomHelpProxyType -Raw)
             $OnlineVersionPsProxyTypes = [Regex]::Replace($PsProxyTypes, ('\$\@\"{HelpLinkPrefix}.*'), '$@"{HelpLinkPrefix}{variantGroup.ModuleName}/docs/exports/{variantGroup.CmdletName}.md";', [System.Text.RegularExpressions.RegexOptions]::IgnoreCase);
             Set-Content -Path:($CustomHelpProxyType) -Value:($OnlineVersionPsProxyTypes)
+            # before building the module, remove the generate-portal-ux.ps1 from the module directory, we don't need it and will not be building for Azure Portal UX at this time.
+            If (Test-Path $OutputFullPath/generate-portal-ux.ps1) {
+                write-Host ('[REMOVING] generate-portal-ux.ps1 from module directory.') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+                Remove-Item -Path $OutputFullPath/generate-portal-ux.ps1 -Force
+            }
+            # After AutoRest generation, create a ModuleIdentifier.cs file for each SDK
+            $moduleIdentifierPath = "$OutputFullPath/custom/ModuleIdentifier.cs"
+            $sdkIdentifier = switch ($SDKNameItem) {
+                'JumpCloud.SDK.DirectoryInsights' { 'DirectoryInsights' }
+                'JumpCloud.SDK.V1' { 'V1' }
+                'JumpCloud.SDK.V2' { 'V2' }
+            }
+
+            $moduleIdentifierContent = @"
+namespace ModuleNameSpace
+{
+    public static class ModuleIdentifier
+    {
+        public const string SDKName = "$sdkIdentifier";
+    }
+}
+"@
+            Set-Content -Path $moduleIdentifierPath -Value $moduleIdentifierContent -Force
             # build the module
             $BuildModuleCommandJob = Start-Job -ArgumentList:($BuildModuleCommand) -ScriptBlock:( { param ($BuildModuleCommand);
                     Invoke-Expression -Command:($BuildModuleCommand)
                 })
             $BuildModuleCommandJobStatus = Wait-Job -Id:($BuildModuleCommandJob.Id)
             $BuildModuleCommandJobStatus | Receive-Job | Tee-Object -FilePath:($LogFilePath) -Append
+
+            # Add environment-based parameter defaults to the main .psm1 file
+            $mainPsm1Path = "$OutputFullPath/$ModuleName.psm1"
+            if (Test-Path $mainPsm1Path) {
+                $psm1Content = Get-Content -Path $mainPsm1Path -Raw
+                $environmentSwitchBlock = @"
+switch (`$env:JCEnvironment) {
+  'STANDARD' {
+      `$Global:PSDefaultParameterValues['*-JcSdk*:ApiHost'] = 'api'
+      `$Global:PSDefaultParameterValues['*-JcSdk*:ConsoleHost'] = 'console'
+   }
+  'EU' {
+      `$Global:PSDefaultParameterValues['*-JcSdk*:ApiHost'] = 'api.eu'
+      `$Global:PSDefaultParameterValues['*-JcSdk*:ConsoleHost'] = 'console.eu'
+   }
+  Default {}
+}
+"@
+                # Append the switch block at the end of the file
+                $psm1Content += "`n$environmentSwitchBlock"
+                Set-Content -Path $mainPsm1Path -Value $psm1Content
+                Write-Host ('[ADDED] Environment-based parameter defaults to module .psm1 file.') -BackgroundColor:('Black') -ForegroundColor:('Magenta')
+            }
+
         }
         ###########################################################################
         If ($BuildCustomFunctions)
@@ -293,6 +340,27 @@ ForEach ($SDK In $SDKName)
             $testModuleContent = $testModuleContent.Replace($InvokePesterLine.Matches.Value, $PesterTestsContent)
             $testModuleContent = $testModuleContent.Replace('Import-Module -Name Az.Accounts', '# Import-Module -Name Az.Accounts')
             $testModuleContent | Set-Content -Path:($testModulePath)
+            # update the loadEnv.ps1 file for each SDK to set the default hostEnv while testing:
+            $loadEnvContent = Get-Content -Path:("$TestFolderPath/loadEnv.ps1") -Raw
+            $loadContentToAdd = @"
+
+# Determine default host values based on environment
+`$apiHost = 'api'
+`$consoleHost = 'console'
+
+if (`$env:JCEnvironment -eq 'EU') {
+    `$apiHost = 'api.eu'
+    `$consoleHost = 'console.eu'
+}
+
+# Set both parameter defaults so all SDKs work correctly
+`$PSDefaultParameterValues['*-JcSdk*:ApiHost'] = `$apiHost
+`$PSDefaultParameterValues['*-JcSdk*:ConsoleHost'] = `$consoleHost
+# Write-Host "Test environment loaded. ApiHost set to: `$apiHost, ConsoleHost set to: `$consoleHost"
+"@
+            # append to the end of the loadEnv.ps1 file
+            $loadEnvContent += $loadContentToAdd
+            $loadEnvContent | Set-Content -Path:("$TestFolderPath/loadEnv.ps1")
         }
         ###########################################################################
         # Remove auto generated .gitignore files

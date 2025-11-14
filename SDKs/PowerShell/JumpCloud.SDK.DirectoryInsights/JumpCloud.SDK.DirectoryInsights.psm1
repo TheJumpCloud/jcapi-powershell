@@ -5,13 +5,12 @@
   # Get the private module's instance
   $instance = [JumpCloud.SDK.DirectoryInsights.Module]::Instance
 
- 
   # Load the custom module
   $customModulePath = Join-Path $PSScriptRoot './custom/JumpCloud.SDK.DirectoryInsights.custom.psm1'
   if(Test-Path $customModulePath) {
     $null = Import-Module -Name $customModulePath
   }
-  
+
   # Export nothing to clear implicit exports
   Export-ModuleMember
 
@@ -31,12 +30,12 @@
     # Load the last folder if no profile is selected
     $profileDirectory = $directories | Select-Object -Last 1
   }
-  
+
   if($profileDirectory) {
     Write-Information "Loaded Azure profile '$($profileDirectory.Name)' for module '$($instance.Name)'"
     $exportsPath = $profileDirectory.FullName
   }
-  
+
   if($exportsPath) {
     Get-ChildItem -Path $exportsPath -Recurse -Include '*.ps1' -File | ForEach-Object { . $_.FullName }
     $cmdletNames = Get-ScriptCmdlet -ScriptFolder $exportsPath
@@ -47,3 +46,15 @@
   $instance.Init();
   Write-Information "Loaded Module '$($instance.Name)'"
 # endregion
+
+switch ($env:JCEnvironment) {
+  'STANDARD' {
+      $Global:PSDefaultParameterValues['*-JcSdk*:ApiHost'] = 'api'
+      $Global:PSDefaultParameterValues['*-JcSdk*:ConsoleHost'] = 'console'
+   }
+  'EU' {
+      $Global:PSDefaultParameterValues['*-JcSdk*:ApiHost'] = 'api.eu'
+      $Global:PSDefaultParameterValues['*-JcSdk*:ConsoleHost'] = 'console.eu'
+   }
+  Default {}
+}
