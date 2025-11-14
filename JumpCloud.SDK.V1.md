@@ -1,3 +1,33 @@
+## jumpcloud.sdk.v1-0.1.0
+Release Date: November 13, 2025
+#### RELEASE NOTES
+```
+Updated existing functions based on updated OpenAPI specs
+```
+#### FEATURES:
+
+The JumpCloud V1 SDK module has been updated to support the EU region. Users can now specify the region when initializing the SDK.
+
+#### Generated Changes:
+
+<details>
+<summary>Functions Added</summary>
+
+No changes
+</details>
+
+<details>
+<summary>Functions Modified</summary>
+
+No changes
+</details>
+
+<details>
+<summary>Functions Removed</summary>
+
+No changes
+</details>
+
 ## JumpCloud.SDK.v1-0.0.47
 Release Date: September 22, 2025
 #### RELEASE NOTES
