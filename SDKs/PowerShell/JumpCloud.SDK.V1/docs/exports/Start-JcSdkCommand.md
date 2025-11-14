@@ -23,13 +23,15 @@ curl -X POST https://console.jumpcloud.com/api/runCommand \\
 
 ### RunExpanded (Default)
 ```
-Start-JcSdkCommand [-Id <String>] [-SystemIds <String[]>] [-Confirm] [-WhatIf] [<CommonParameters>]
+Start-JcSdkCommand -ConsoleHost <String> [-Id <String>] [-SystemIds <String[]>] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### Run
 ```
-Start-JcSdkCommand -Body <IPathsPnxbyeRuncommandPostRequestbodyContentApplicationJsonSchema> [-Confirm]
- [-WhatIf] [<CommonParameters>]
+Start-JcSdkCommand -ConsoleHost <String>
+ -Body <IPathsPnxbyeRuncommandPostRequestbodyContentApplicationJsonSchema> [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -68,7 +70,6 @@ WorkflowInstanceId String
 
 ### -Body
 .
-To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V1.Models.IPathsPnxbyeRuncommandPostRequestbodyContentApplicationJsonSchema
@@ -79,6 +80,22 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -ConsoleHost
+Region for JumpCloud API host.
+Use 'console' for US or 'console.eu' for EU.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -157,16 +174,14 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## NOTES
 
-ALIASES
-
 COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <IPathsPnxbyeRuncommandPostRequestbodyContentApplicationJsonSchema>: .
+`BODY <IPathsPnxbyeRuncommandPostRequestbodyContentApplicationJsonSchema>`: .
   - `[Id <String>]`: The ID of the command.
-  - `[SystemIds <String[]>]`: An optional list of device IDs to run the command on. If omitted, the command will run on devices bound to the command.
+  - `[SystemIds <List<String>>]`: An optional list of device IDs to run the command on. If omitted, the command will run on devices bound to the command.
 
 ## RELATED LINKS
 

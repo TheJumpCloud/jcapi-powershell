@@ -1,0 +1,34 @@
+{
+    "agentBoundMessages": {
+        "items": {
+        "properties": {
+            "cmd": {
+            "type": "string"
+            }
+        },
+        "type": "object"
+        },
+        "type": "array"
+    },
+    "allowMultiFactorAuthentication": {
+        "type": "boolean"
+    },
+    "allowPublicKeyAuthentication": {
+        "type": "boolean"
+    },
+    "allowSshPasswordAuthentication": {
+        "type": "boolean"
+    },
+    "allowSshRootLogin": {
+        "type": "boolean"
+    },
+    "attributes": {
+        "items": {
+        "$ref": "#/definitions/attribute"
+        },
+        "type": "array"
+    },
+    "displayName": {
+        "type": "string"
+    }
+}

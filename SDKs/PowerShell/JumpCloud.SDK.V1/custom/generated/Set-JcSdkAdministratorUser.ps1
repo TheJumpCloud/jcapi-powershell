@@ -1,8 +1,8 @@
 <#
 .Synopsis
-This endpoint allows you to update a user.
+This endpoint allows you to set a user.
 .Description
-This endpoint allows you to update a user.
+This endpoint allows you to set a user.
 .Example
 PS C:\> Set-JcSdkAdministratorUser -Id:(<string>) -Body:(<JumpCloud.SDK.V1.Models.Userput>)
 
@@ -101,6 +101,13 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [OutputType([JumpCloud.SDK.V1.Models.IUserreturn])]
     [CmdletBinding(DefaultParameterSetName='SetExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
+    [Parameter(Mandatory)]
+    [JumpCloud.SDK.V1.Category('Uri')]
+    [System.String]
+    # Region for JumpCloud API host.
+    # Use 'console' for US or 'console.eu' for EU.
+    ${ConsoleHost}, 
+
     [Parameter(ParameterSetName='Set', Mandatory)]
     [Parameter(ParameterSetName='SetExpanded', Mandatory)]
     [JumpCloud.SDK.V1.Category('Path')]
@@ -113,7 +120,6 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V1.Category('Path')]
     [JumpCloud.SDK.V1.Models.IJumpCloudApiIdentity]
     # Identity Parameter
-    # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
     ${InputObject}, 
 
     [Parameter(ParameterSetName='Set', Mandatory, ValueFromPipeline)]
@@ -121,7 +127,6 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V1.Category('Body')]
     [JumpCloud.SDK.V1.Models.IUserput]
     # UserPut
-    # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body}, 
 
     [Parameter(ParameterSetName='SetExpanded')]

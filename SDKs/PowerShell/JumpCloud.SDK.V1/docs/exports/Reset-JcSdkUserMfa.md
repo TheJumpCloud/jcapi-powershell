@@ -30,28 +30,28 @@ curl -X POST \\
 
 ### ResetExpanded (Default)
 ```
-Reset-JcSdkUserMfa -Id <String> [-Exclusion] [-ExclusionDays <Single>] [-ExclusionUntil <DateTime>]
- [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+Reset-JcSdkUserMfa -ConsoleHost <String> -Id <String> [-Exclusion] [-ExclusionDays <Single>]
+ [-ExclusionUntil <DateTime>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Reset
 ```
-Reset-JcSdkUserMfa -Id <String>
+Reset-JcSdkUserMfa -ConsoleHost <String> -Id <String>
  -Body <IPathsYhix24SystemusersIdResetmfaPostRequestbodyContentApplicationJsonSchema> [-PassThru] [-Confirm]
  [-WhatIf] [<CommonParameters>]
 ```
 
 ### ResetViaIdentity
 ```
-Reset-JcSdkUserMfa -InputObject <IJumpCloudApiIdentity>
+Reset-JcSdkUserMfa -ConsoleHost <String> -InputObject <IJumpCloudApiIdentity>
  -Body <IPathsYhix24SystemusersIdResetmfaPostRequestbodyContentApplicationJsonSchema> [-PassThru] [-Confirm]
  [-WhatIf] [<CommonParameters>]
 ```
 
 ### ResetViaIdentityExpanded
 ```
-Reset-JcSdkUserMfa -InputObject <IJumpCloudApiIdentity> [-Exclusion] [-ExclusionDays <Single>]
- [-ExclusionUntil <DateTime>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+Reset-JcSdkUserMfa -ConsoleHost <String> -InputObject <IJumpCloudApiIdentity> [-Exclusion]
+ [-ExclusionDays <Single>] [-ExclusionUntil <DateTime>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -93,7 +93,6 @@ Reset-JcSdkUserMfa -Id:(<string>) -Exclusion:(<switch>) -ExclusionDays:(<float>)
 
 ### -Body
 .
-To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V1.Models.IPathsYhix24SystemusersIdResetmfaPostRequestbodyContentApplicationJsonSchema
@@ -104,6 +103,22 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -ConsoleHost
+Region for JumpCloud API host.
+Use 'console' for US or 'console.eu' for EU.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -169,7 +184,6 @@ Accept wildcard characters: False
 
 ### -InputObject
 Identity Parameter
-To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V1.Models.IJumpCloudApiIdentity
@@ -244,19 +258,17 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## NOTES
 
-ALIASES
-
 COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <IPathsYhix24SystemusersIdResetmfaPostRequestbodyContentApplicationJsonSchema>: .
+`BODY <IPathsYhix24SystemusersIdResetmfaPostRequestbodyContentApplicationJsonSchema>`: .
   - `[Exclusion <Boolean?>]`: 
   - `[ExclusionDays <Single?>]`: 
   - `[ExclusionUntil <DateTime?>]`: 
 
-INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter
+`INPUTOBJECT <IJumpCloudApiIdentity>`: Identity Parameter
   - `[Id <String>]`: 
   - `[SystemId <String>]`: 
   - `[SystemuserId <String>]`: 
