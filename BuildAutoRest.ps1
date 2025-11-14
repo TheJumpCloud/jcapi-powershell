@@ -153,7 +153,9 @@ ForEach ($SDK In $SDKName)
             if (($SDKName -eq "JumpCloud.SDK.V1") -or ($SDKName -eq "JumpCloud.SDK.V2")) {
                 # Modify .cs file "https://github.com/Azure/autorest/issues/3604" #autorest does not support even the "collectionFormat": "multi" in my testing
                 $inputFile = Get-Content -Path "$OutputFullPath/generated/api/JumpCloudApi.cs" -Raw
-                $newFile = $inputFile -replace "\+ \(null != filter  && filter\.Length > 0 .*? : global::System\.String\.Empty\)", "+ (null != filter  && filter.Length > 0 ? `"filter=`" + global::System.Linq.Enumerable.Aggregate(filter, (current, each) => current + `"&filter=`" + ( each?.ToString()??global::System.String.Empty )) : global::System.String.Empty)"
+                # Replace the filter logic to use indexed array parameters: filter[0]=..., filter[1]=..., etc.
+                # Pattern matches both filter.Length and filter.Count variations, with flexible whitespace
+                $newFile = $inputFile -replace '\(null != filter\s+&&\s+filter\.(Length|Count)\s+>\s+0\s+\?\s+"filter="\s+\+\s+\(global::System\.Linq\.Enumerable\.Aggregate\(filter,\s+\(current,\s+each\)\s+=>\s+current\s+\+\s+","\s+\+\s+\(\s+null\s+==\s+each\s+\?\s+global::System\.String\.Empty\s+:\s+each\.ToString\(\)\s*\)\s*\)\s*\)\s+:\s+global::System\.String\.Empty\)', '(null != filter  && filter.Count > 0 ? global::System.Linq.Enumerable.Aggregate(global::System.Linq.Enumerable.Select(filter, (value, index) => new { value, index }), "", (current, item) => current + (item.index > 0 ? "&" : "") + "filter[" + item.index + "]=" + (item.value?.ToString() ?? global::System.String.Empty)) : global::System.String.Empty)'
                 Set-Content -Path "$OutputFullPath/generated/api/JumpCloudApi.cs" -Value $newFile
             }
             $BuildModuleContent = Get-Content -Path:($buildModulePath) -Raw
