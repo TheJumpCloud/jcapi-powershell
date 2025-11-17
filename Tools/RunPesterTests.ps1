@@ -343,16 +343,16 @@ If ($moduleName -eq 'JumpCloud.SDK.V2' -and "MTP" -notin $Env:IncludeTagList)
     $UserFilter = [JumpCloud.SDK.V2.Models.MemberQuery]::new()
     $UserFilter.Filters = @('osFamily:$eq:linux', 'osFamily:$eq:windows')
     $UserFilter.QueryType = "Filter"
-    $global:PesterDefUserGroupFilter = @{
+    $global:PesterDefSystemGroupFilter = @{
         Name = "PesterTestSystemGroupFilter-$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
         MemberQueryFilters = $UserFilter.Filters
         MemberQueryType    = $UserFilter.QueryType
     }
-    # Create a User Group with Search type membership
+    # Create a System Group with Search type membership
     $UserFilter = [JumpCloud.SDK.V2.Models.MemberQuery]::new()
     $UserFilter.Filters = '{"filter":{"and":["osFamily:$eq:windows","hostname:$co:ISB"]}}'
     $UserFilter.QueryType = "Search"
-    $global:PesterDefUserGroupSearch = @{
+    $global:PesterDefSystemGroupSearch = @{
         Name = "PesterTestSystemGroupSearch-$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
         MemberQueryFilters = $UserFilter.Filters
         MemberQueryType    = $UserFilter.QueryType
