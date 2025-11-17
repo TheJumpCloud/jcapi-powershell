@@ -65,6 +65,7 @@ BODY <IActiveDirectory>:
   [DelegationState <String>]: Delegation state of the Active Directory instance
   [Domain <String>]: Domain name for this Active Directory instance.
   [GroupsEnabled <Boolean?>]:
+  [UpdatedAt <DateTime?>]:
   [UseCase <String>]:
 .Link
 https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/New-JcSdkActiveDirectory.md
@@ -74,11 +75,17 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [OutputType([JumpCloud.SDK.V2.Models.IActiveDirectory])]
     [CmdletBinding(DefaultParameterSetName='CreateExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
+    [Parameter(Mandatory)]
+    [JumpCloud.SDK.V2.Category('Uri')]
+    [System.String]
+    # Region for JumpCloud API host.
+    # Use 'console' for US or 'console.eu' for EU.
+    ${ConsoleHost}, 
+
     [Parameter(ParameterSetName='Create', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Body')]
     [JumpCloud.SDK.V2.Models.IActiveDirectory]
     # Active Directory
-    # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body}, 
 
     [Parameter(ParameterSetName='CreateExpanded')]
@@ -98,6 +105,12 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [System.Management.Automation.SwitchParameter]
     # .
     ${GroupsEnabled}, 
+
+    [Parameter(ParameterSetName='CreateExpanded')]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [System.DateTime]
+    # .
+    ${UpdatedAt}, 
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]

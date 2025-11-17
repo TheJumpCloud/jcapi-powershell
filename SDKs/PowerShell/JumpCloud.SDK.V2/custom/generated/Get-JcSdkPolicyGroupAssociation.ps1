@@ -56,15 +56,22 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
     Param(
     [Parameter(Mandatory)]
+    [JumpCloud.SDK.V2.Category('Uri')]
+    [System.String]
+    # Region for JumpCloud API host.
+    # Use 'console' for US or 'console.eu' for EU.
+    ${ConsoleHost}, 
+
+    [Parameter(Mandatory)]
     [JumpCloud.SDK.V2.Category('Path')]
     [System.String]
     # ObjectID of the Policy Group.
     ${GroupId}, 
 
     [Parameter(Mandatory)]
-    [ArgumentCompleter([JumpCloud.SDK.V2.Support.GraphTargetsActiveDirectoryTargets])]
+    [JumpCloud.SDK.V2.PSArgumentCompleterAttribute("user", "user_group")]
     [JumpCloud.SDK.V2.Category('Query')]
-    [JumpCloud.SDK.V2.Support.GraphTargetsActiveDirectoryTargets]
+    [System.String]
     # Targets which a "active_directory" can be associated to.
     ${Targets}, 
 

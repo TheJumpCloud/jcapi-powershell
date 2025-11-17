@@ -26,26 +26,26 @@ curl -X POST https://console.jumpcloud.com/api/v2/gsuites/{gsuite_id}/translatio
 
 ### CreateExpanded (Default)
 ```
-New-JcSdkGSuiteTranslationRule -GsuiteId <String> [-BuiltIn <String>] [-Direction <String>] [-Confirm]
- [-WhatIf] [<CommonParameters>]
+New-JcSdkGSuiteTranslationRule -ConsoleHost <String> -GsuiteId <String> [-BuiltIn <String>]
+ [-Direction <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Create
 ```
-New-JcSdkGSuiteTranslationRule -GsuiteId <String> -Body <IGSuiteTranslationRuleRequest> [-Confirm] [-WhatIf]
- [<CommonParameters>]
+New-JcSdkGSuiteTranslationRule -ConsoleHost <String> -GsuiteId <String> -Body <IGSuiteTranslationRuleRequest>
+ [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### CreateViaIdentity
 ```
-New-JcSdkGSuiteTranslationRule -InputObject <IJumpCloudApiIdentity> -Body <IGSuiteTranslationRuleRequest>
- [-Confirm] [-WhatIf] [<CommonParameters>]
+New-JcSdkGSuiteTranslationRule -ConsoleHost <String> -InputObject <IJumpCloudApiIdentity>
+ -Body <IGSuiteTranslationRuleRequest> [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### CreateViaIdentityExpanded
 ```
-New-JcSdkGSuiteTranslationRule -InputObject <IJumpCloudApiIdentity> [-BuiltIn <String>] [-Direction <String>]
- [-Confirm] [-WhatIf] [<CommonParameters>]
+New-JcSdkGSuiteTranslationRule -ConsoleHost <String> -InputObject <IJumpCloudApiIdentity> [-BuiltIn <String>]
+ [-Direction <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -89,7 +89,6 @@ Id        String
 
 ### -Body
 G Suite Translation Rule Request
-To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IGSuiteTranslationRuleRequest
@@ -112,6 +111,22 @@ Parameter Sets: CreateExpanded, CreateViaIdentityExpanded
 Aliases:
 
 Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ConsoleHost
+Region for JumpCloud API host.
+Use 'console' for US or 'console.eu' for EU.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -150,7 +165,6 @@ Accept wildcard characters: False
 
 ### -InputObject
 Identity Parameter
-To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
@@ -210,18 +224,16 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## NOTES
 
-ALIASES
-
 COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <IGSuiteTranslationRuleRequest>: G Suite Translation Rule Request
+`BODY <IGSuiteTranslationRuleRequest>`: G Suite Translation Rule Request
   - `[BuiltIn <String>]`: Built-in translations for G Suite export:         * `user_home_addresses` - Translate all JumpCloud user addresses of type `home` to G Suite Directory user addresses of type `home`         * `user_work_addresses` - Translate all JumpCloud user addresses of type `work` to G Suite Directory user addresses of type `work`         * `user_other_addresses` - Translate all JumpCloud user addresses of type `other` to G Suite Directory user addresses of type `other`         * `user_home_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `home` to G Suite Directory user phones of type `home`         * `user_mobile_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `mobile` to G Suite Directory user phones of type `mobile`         * `user_other_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `other` to G Suite Directory user phones of type `other`         * `user_work_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `work` to G Suite Directory user phones of type `work`         * `user_work_fax_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `work_fax` to G Suite Directory user phones of type `work_fax`         * `user_work_mobile_phone_numbers` - Translate all JumpCloud user phoneNumbers of type `work_mobile` to G Suite Directory user phones of type `work_mobile`         * `user_manager` - Translate JumpCloud user `manager` to G Suite Directory user `relations-manager`         * `user_primary_organization_cost_center` - Translate JumpCloud user  `costCenter` to G Suite Directory user `costCenter` for `primary` organization         * `user_primary_organization_department` - Translate JumpCloud user  `department` to G Suite Directory user `department` for `primary` organization         * `user_primary_organization_description` - Translate JumpCloud user  `employeeType` to G Suite Directory user `description` for `primary` organization         * `user_primary_organization_employee_id` - Translate JumpCloud user  `employeeIdentifier` to G Suite Directory user `externalIds` element of type `organization`         * `user_primary_organization_title` - Translate JumpCloud user  `jobTitle` to G Suite Directory user `title` for `primary` organization         * `user_alternate_email` - Translate JumpCloud user  `alternateEmail` to G Suite Directory user `emails`         * `user_status` - Translate JumpCloud user `status` to G Suite Directory user `status`         * `user_password` - Translate JumpCloud user `password` to G Suite Directory user `password`         
   - `[Direction <String>]`: Direction identify if an attribute is going to be exported or imported from GSuite         * `Import`- The data will be imported from GSuite into the user modal         * `Export`- The data will be exported from the user modal to GSuite         
 
-INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter
+`INPUTOBJECT <IJumpCloudApiIdentity>`: Identity Parameter
   - `[AccountId <String>]`: 
   - `[ActivedirectoryId <String>]`: 
   - `[AdministratorId <String>]`: 

@@ -42,7 +42,7 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 BODY <IPaths1Whnyt3ApplemdmsAppleMdmIdDevicesDeviceIdRestartPostRequestbodyContentApplicationJsonSchema>:
-  [KextPaths <String[]>]: The string to pass when doing a restart and performing a RebuildKernelCache.
+  [KextPaths <List<String>>]: The string to pass when doing a restart and performing a RebuildKernelCache.
 
 INPUTOBJECT <IJumpCloudApiIdentity>:
   [AccountId <String>]:
@@ -76,6 +76,13 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [OutputType([System.Boolean])]
     [CmdletBinding(DefaultParameterSetName='RestartExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
+    [Parameter(Mandatory)]
+    [JumpCloud.SDK.V2.Category('Uri')]
+    [System.String]
+    # Region for JumpCloud API host.
+    # Use 'console' for US or 'console.eu' for EU.
+    ${ConsoleHost}, 
+
     [Parameter(ParameterSetName='Restart', Mandatory)]
     [Parameter(ParameterSetName='RestartExpanded', Mandatory)]
     [JumpCloud.SDK.V2.Category('Path')]
@@ -95,7 +102,6 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V2.Category('Path')]
     [JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity]
     # Identity Parameter
-    # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
     ${InputObject}, 
 
     [Parameter(ParameterSetName='Restart', Mandatory, ValueFromPipeline)]
@@ -103,7 +109,6 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V2.Category('Body')]
     [JumpCloud.SDK.V2.Models.IPaths1Whnyt3ApplemdmsAppleMdmIdDevicesDeviceIdRestartPostRequestbodyContentApplicationJsonSchema]
     # .
-    # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body}, 
 
     [Parameter(ParameterSetName='RestartExpanded')]

@@ -26,13 +26,13 @@ curl -X POST https://console.jumpcloud.com/api/v2/policies \\
 
 ### CreateExpanded (Default)
 ```
-New-JcSdkPolicy -Name <String> -TemplateId <String> [-Notes <String>] [-Values <IPolicyValue[]>] [-Confirm]
- [-WhatIf] [<CommonParameters>]
+New-JcSdkPolicy -ConsoleHost <String> [-Name <String>] [-Notes <String>] [-TemplateId <String>]
+ [-Values <IPolicyValue[]>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Create
 ```
-New-JcSdkPolicy -Body <IPolicyCreateRequest> [-Confirm] [-WhatIf] [<CommonParameters>]
+New-JcSdkPolicy -ConsoleHost <String> -Body <IPolicyCreateRequest> [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -104,7 +104,6 @@ Values                 JumpCloud.SDK.V2.Models.PolicyValue[]
 
 ### -Body
 A request to create an instance of a policy template.
-To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IPolicyCreateRequest
@@ -118,6 +117,22 @@ Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
+### -ConsoleHost
+Region for JumpCloud API host.
+Use 'console' for US or 'console.eu' for EU.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Name
 The description for this specific Policy.
 
@@ -126,7 +141,7 @@ Type: System.String
 Parameter Sets: CreateExpanded
 Aliases:
 
-Required: True
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -156,7 +171,7 @@ Type: System.String
 Parameter Sets: CreateExpanded
 Aliases:
 
-Required: True
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -165,7 +180,6 @@ Accept wildcard characters: False
 
 ### -Values
 .
-To construct, see NOTES section for VALUES properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IPolicyValue[]
@@ -223,23 +237,21 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## NOTES
 
-ALIASES
-
 COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <IPolicyCreateRequest>: A request to create an instance of a policy template.
+`BODY <IPolicyCreateRequest>`: A request to create an instance of a policy template.
   - `Name <String>`: The description for this specific Policy.
   - `TemplateId <String>`: ObjectId uniquely identifying a Policy instance.
   - `[Notes <String>]`: The notes for this specific Policy.
-  - `[Values <IPolicyValue[]>]`: 
+  - `[Values <List<IPolicyValue>>]`: 
     - `[ConfigFieldId <String>]`: The ObjectId of the corresponding Policy Template configuration field.
     - `[Sensitive <Boolean?>]`: Defines if the value is sensitive or not.
     - `[Value <String>]`: The value for the configuration field for this Policy instance.
 
-VALUES <IPolicyValue[]>: .
+`VALUES <IPolicyValue[]>`: .
   - `[ConfigFieldId <String>]`: The ObjectId of the corresponding Policy Template configuration field.
   - `[Sensitive <Boolean?>]`: Defines if the value is sensitive or not.
   - `[Value <String>]`: The value for the configuration field for this Policy instance.

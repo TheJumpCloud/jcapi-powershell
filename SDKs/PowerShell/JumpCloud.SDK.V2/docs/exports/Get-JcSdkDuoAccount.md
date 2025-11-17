@@ -22,17 +22,17 @@ curl https://console.jumpcloud.com/api/v2/duo/accounts/{id} \\
 
 ### List (Default)
 ```
-Get-JcSdkDuoAccount [<CommonParameters>]
+Get-JcSdkDuoAccount -ConsoleHost <String> [<CommonParameters>]
 ```
 
 ### Get
 ```
-Get-JcSdkDuoAccount -Id <String> [<CommonParameters>]
+Get-JcSdkDuoAccount -ConsoleHost <String> -Id <String> [<CommonParameters>]
 ```
 
 ### GetViaIdentity
 ```
-Get-JcSdkDuoAccount -InputObject <IJumpCloudApiIdentity> [<CommonParameters>]
+Get-JcSdkDuoAccount -ConsoleHost <String> -InputObject <IJumpCloudApiIdentity> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -68,6 +68,22 @@ Name String
 
 ## PARAMETERS
 
+### -ConsoleHost
+Region for JumpCloud API host.
+Use 'console' for US or 'console.eu' for EU.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Id
 ObjectID of the Duo Account
 
@@ -85,7 +101,6 @@ Accept wildcard characters: False
 
 ### -InputObject
 Identity Parameter
-To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
@@ -112,14 +127,12 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## NOTES
 
-ALIASES
-
 COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter
+`INPUTOBJECT <IJumpCloudApiIdentity>`: Identity Parameter
   - `[AccountId <String>]`: 
   - `[ActivedirectoryId <String>]`: 
   - `[AdministratorId <String>]`: 

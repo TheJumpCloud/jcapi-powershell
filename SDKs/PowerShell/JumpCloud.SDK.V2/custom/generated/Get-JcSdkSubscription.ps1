@@ -50,6 +50,13 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [OutputType([JumpCloud.SDK.V2.Models.ISubscription])]
     [CmdletBinding(DefaultParameterSetName='Get', PositionalBinding=$false)]
     Param(
+    [Parameter(Mandatory)]
+    [JumpCloud.SDK.V2.Category('Uri')]
+    [System.String]
+    # Region for JumpCloud API host.
+    # Use 'console' for US or 'console.eu' for EU.
+    ${ConsoleHost}, 
+
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]
     [System.Management.Automation.SwitchParameter]

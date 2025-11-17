@@ -1,0 +1,40 @@
+{
+    "aggregations": {
+        "items": {
+        "$ref": "#/definitions/jumpcloud.search.SearchRequestAggregation"
+        },
+        "type": "array"
+    },
+    "cacheToken": {
+        "title": "Optional: Token for retrieving data from a previously cached result set",
+        "type": "string",
+        "x-nullable": true
+    },
+    "fields": {
+        "$ref": "#/definitions/jumpcloud.search.SearchRequestFields"
+    },
+    "filters": {
+        "items": {
+        "$ref": "#/definitions/jumpcloud.search.SearchRequestFilter"
+        },
+        "type": "array"
+    },
+    "limit": {
+        "description": "Maximum number of rows (inclusive) to return in the objects.  Note that there is an implicit limit enforced always\nin the external API.",
+        "format": "int32",
+        "type": "integer"
+    },
+    "pagination": {
+        "$ref": "#/definitions/jumpcloud.search.PaginationParams"
+    },
+    "requestCache": {
+        "title": "Optional: If true, cache the full result set of this query",
+        "type": "boolean"
+    },
+    "sort": {
+        "items": {
+        "$ref": "#/definitions/jumpcloud.search.SearchRequestSort"
+        },
+        "type": "array"
+    }
+}

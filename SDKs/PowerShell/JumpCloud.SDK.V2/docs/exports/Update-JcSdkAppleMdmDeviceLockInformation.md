@@ -24,14 +24,14 @@ curl -X POST https://console.jumpcloud.com/api/v2/applemdms/{apple_mdm_id}/devic
 
 ### Refresh (Default)
 ```
-Update-JcSdkAppleMdmDeviceLockInformation -AppleMdmId <String> -DeviceId <String> [-PassThru] [-Confirm]
- [-WhatIf] [<CommonParameters>]
+Update-JcSdkAppleMdmDeviceLockInformation -ConsoleHost <String> -AppleMdmId <String> -DeviceId <String>
+ [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### RefreshViaIdentity
 ```
-Update-JcSdkAppleMdmDeviceLockInformation -InputObject <IJumpCloudApiIdentity> [-PassThru] [-Confirm]
- [-WhatIf] [<CommonParameters>]
+Update-JcSdkAppleMdmDeviceLockInformation -ConsoleHost <String> -InputObject <IJumpCloudApiIdentity>
+ [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -80,6 +80,22 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -ConsoleHost
+Region for JumpCloud API host.
+Use 'console' for US or 'console.eu' for EU.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -DeviceId
 .
 
@@ -97,7 +113,6 @@ Accept wildcard characters: False
 
 ### -InputObject
 Identity Parameter
-To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
@@ -170,14 +185,12 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## NOTES
 
-ALIASES
-
 COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter
+`INPUTOBJECT <IJumpCloudApiIdentity>`: Identity Parameter
   - `[AccountId <String>]`: 
   - `[ActivedirectoryId <String>]`: 
   - `[AdministratorId <String>]`: 

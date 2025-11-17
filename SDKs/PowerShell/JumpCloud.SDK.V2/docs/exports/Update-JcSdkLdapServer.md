@@ -27,28 +27,29 @@ curl -X PATCH https://console.jumpcloud.com/api/v2/ldapservers/{LDAP_ID} \\
 
 ### UpdateExpanded (Default)
 ```
-Update-JcSdkLdapServer -Id <String> [-Id1 <String>] [-UserLockoutAction <String>]
+Update-JcSdkLdapServer -ConsoleHost <String> -Id <String> [-Id1 <String>] [-UserLockoutAction <String>]
  [-UserPasswordExpirationAction <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Update
 ```
-Update-JcSdkLdapServer -Id <String>
+Update-JcSdkLdapServer -ConsoleHost <String> -Id <String>
  -Body <IPaths1Ka5IlhLdapserversIdPatchRequestbodyContentApplicationJsonSchema> [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
 ### UpdateViaIdentity
 ```
-Update-JcSdkLdapServer -InputObject <IJumpCloudApiIdentity>
+Update-JcSdkLdapServer -ConsoleHost <String> -InputObject <IJumpCloudApiIdentity>
  -Body <IPaths1Ka5IlhLdapserversIdPatchRequestbodyContentApplicationJsonSchema> [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
 ### UpdateViaIdentityExpanded
 ```
-Update-JcSdkLdapServer -InputObject <IJumpCloudApiIdentity> [-Id <String>] [-UserLockoutAction <String>]
- [-UserPasswordExpirationAction <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+Update-JcSdkLdapServer -ConsoleHost <String> -InputObject <IJumpCloudApiIdentity> [-Id <String>]
+ [-UserLockoutAction <String>] [-UserPasswordExpirationAction <String>] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -95,7 +96,6 @@ UserPasswordExpirationAction String
 
 ### -Body
 .
-To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IPaths1Ka5IlhLdapserversIdPatchRequestbodyContentApplicationJsonSchema
@@ -106,6 +106,22 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -ConsoleHost
+Region for JumpCloud API host.
+Use 'console' for US or 'console.eu' for EU.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -141,7 +157,6 @@ Accept wildcard characters: False
 
 ### -InputObject
 Identity Parameter
-To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
@@ -231,19 +246,17 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## NOTES
 
-ALIASES
-
 COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <IPaths1Ka5IlhLdapserversIdPatchRequestbodyContentApplicationJsonSchema>: .
+`BODY <IPaths1Ka5IlhLdapserversIdPatchRequestbodyContentApplicationJsonSchema>`: .
   - `[Id <String>]`: 
   - `[UserLockoutAction <String>]`: LDAP Server Action
   - `[UserPasswordExpirationAction <String>]`: LDAP Server Action
 
-INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter
+`INPUTOBJECT <IJumpCloudApiIdentity>`: Identity Parameter
   - `[AccountId <String>]`: 
   - `[ActivedirectoryId <String>]`: 
   - `[AdministratorId <String>]`: 

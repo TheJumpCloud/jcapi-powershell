@@ -1,7 +1,7 @@
 <#
 .Synopsis
 The endpoint allows you to create a bulk job to asynchronously create users.
-See [Create a System User](https://docs.jumpcloud.com/api/1.0/index.html#operation/systemusers_post)
+See [create a System User](https://docs.jumpcloud.com/api/1.0/index.html#operation/systemusers_post)
 for the full list of attributes.
 
 #### Default User State
@@ -20,7 +20,7 @@ For other `creation-source` header values, the default state is stored in
 
 These default state values can be changed in the admin portal settings
 or by using the
-[Update an Organization](https://docs.jumpcloud.com/api/1.0/index.html#operation/organization_put)
+[create an Organization](https://docs.jumpcloud.com/api/1.0/index.html#operation/organization_put)
 endpoint.
 
 #### Sample Request
@@ -51,7 +51,7 @@ curl -X POST https://console.jumpcloud.com/api/v2/bulk/users \\
 ```
 .Description
 The endpoint allows you to create a bulk job to asynchronously create users.
-See [Create a System User](https://docs.jumpcloud.com/api/1.0/index.html#operation/systemusers_post)
+See [create a System User](https://docs.jumpcloud.com/api/1.0/index.html#operation/systemusers_post)
 for the full list of attributes.
 
 #### Default User State
@@ -70,7 +70,7 @@ For other `creation-source` header values, the default state is stored in
 
 These default state values can be changed in the admin portal settings
 or by using the
-[Update an Organization](https://docs.jumpcloud.com/api/1.0/index.html#operation/organization_put)
+[create an Organization](https://docs.jumpcloud.com/api/1.0/index.html#operation/organization_put)
 endpoint.
 
 #### Sample Request
@@ -109,18 +109,18 @@ PS C:\> {{ Add code here }}
 {{ Add output here }}
 
 .Inputs
-JumpCloud.SDK.V2.Models.IBulkUserCreate[]
+System.Collections.Generic.List`1[[JumpCloud.SDK.V2.Models.IBulkUserCreate, JumpCloud.SDK.V2.private, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]
 .Outputs
-System.String
+JumpCloud.SDK.V2.Models.IJobId
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
-BODY <IBulkUserCreate[]>:
+BODY <List<IBulkUserCreate>>:
   [AccountLocked <Boolean?>]:
   [Activated <Boolean?>]:
-  [Addresses <IBulkUserCreateAddressesItem[]>]:
+  [Addresses <List<IBulkUserCreateAddressesItem>>]:
     [Country <String>]:
     [ExtendedAddress <String>]:
     [Locality <String>]:
@@ -131,7 +131,7 @@ BODY <IBulkUserCreate[]>:
     [Type <String>]:
   [AllowPublicKey <Boolean?>]:
   [AlternateEmail <String>]:
-  [Attributes <IBulkUserCreateAttributesItem[]>]:
+  [Attributes <List<IBulkUserCreateAttributesItem>>]:
     [Name <String>]:
     [Value <String>]:
   [Company <String>]:
@@ -164,12 +164,12 @@ BODY <IBulkUserCreate[]>:
   [Password <String>]:
   [PasswordNeverExpires <Boolean?>]:
   [PasswordlessSudo <Boolean?>]:
-  [PhoneNumbers <IBulkUserCreatePhoneNumbersItem[]>]:
+  [PhoneNumbers <List<IBulkUserCreatePhoneNumbersItem>>]:
     [Number <String>]:
     [Type <String>]:
   [PublicKey <String>]:
   [RecoveryEmailAddress <String>]:
-  [Relationships <IBulkUserCreateRelationshipsItem[]>]:
+  [Relationships <List<IBulkUserCreateRelationshipsItem>>]:
     [Type <String>]:
     [Value <String>]:
   [SambaServiceUser <Boolean?>]:
@@ -184,9 +184,16 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function New-JcSdkBulkUser
 {
-    [OutputType([System.String])]
+    [OutputType([JumpCloud.SDK.V2.Models.IJobId])]
     [CmdletBinding(DefaultParameterSetName='Create', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
+    [Parameter(Mandatory)]
+    [JumpCloud.SDK.V2.Category('Uri')]
+    [System.String]
+    # Region for JumpCloud API host.
+    # Use 'console' for US or 'console.eu' for EU.
+    ${ConsoleHost}, 
+
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
     [System.Management.Automation.SwitchParameter]
@@ -198,9 +205,9 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     ${SuppressEmail}, 
 
     [Parameter()]
-    [ArgumentCompleter([JumpCloud.SDK.V2.Support.CreationSource2])]
+    [JumpCloud.SDK.V2.PSArgumentCompleterAttribute("jumpcloud:gapps", "jumpcloud:o365", "jumpcloud:workday", "jumpcloud:scim", "jumpcloud:bulk", "jumpcloud:custom_integration")]
     [JumpCloud.SDK.V2.Category('Header')]
-    [JumpCloud.SDK.V2.Support.CreationSource2]
+    [System.String]
     # Defines the creation-source header for gapps, o365 and workdays requests.
     # If the header isn't sent, the default value is `jumpcloud:bulk`, if you send the header with a malformed value you receive a 400 error.
     ${CreationSource}, 
@@ -208,9 +215,9 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(Mandatory, ValueFromPipeline)]
     [AllowEmptyCollection()]
     [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Models.IBulkUserCreate[]]
+    [JumpCloud.SDK.V2.Runtime.Info(Required, PossibleTypes=([JumpCloud.SDK.V2.Models.IBulkUserCreate]))]
+    [System.Collections.Generic.List[JumpCloud.SDK.V2.Models.IBulkUserCreate]]
     # Array of bulk-user-create
-    # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body}, 
 
     [Parameter(DontShow)]

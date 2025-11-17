@@ -13,8 +13,8 @@ Lists available G Suite users for import, translated to the Jumpcloud user schem
 ## SYNTAX
 
 ```
-Get-JcSdkGsuiteUsersToImportFormatted -GsuiteId <String> [-AllowEmptyFields] [-OrderBy <String>]
- [-Query <String>] [-SortOrder <String>] [<CommonParameters>]
+Get-JcSdkGsuiteUsersToImportFormatted -ConsoleHost <String> -GsuiteId <String> [-AllowEmptyFields]
+ [-OrderBy <String>] [-Query <String>] [-SortOrder <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -49,6 +49,22 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ConsoleHost
+Region for JumpCloud API host.
+Use 'console' for US or 'console.eu' for EU.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -128,8 +144,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ### JumpCloud.SDK.V2.Models.IPathsKa8FhwGsuitesGsuiteIdImportJumpcloudusersGetResponses200ContentApplicationJsonSchema
 
 ## NOTES
-
-ALIASES
 
 ## RELATED LINKS
 

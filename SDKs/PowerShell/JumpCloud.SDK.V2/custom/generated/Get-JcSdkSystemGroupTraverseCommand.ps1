@@ -102,6 +102,13 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [OutputType([JumpCloud.SDK.V2.Models.ICommandsGraphObjectWithPaths])]
     [CmdletBinding(DefaultParameterSetName='Get', PositionalBinding=$false)]
     Param(
+    [Parameter(Mandatory)]
+    [JumpCloud.SDK.V2.Category('Uri')]
+    [System.String]
+    # Region for JumpCloud API host.
+    # Use 'console' for US or 'console.eu' for EU.
+    ${ConsoleHost}, 
+
     [Parameter(ParameterSetName='Get', Mandatory)]
     [JumpCloud.SDK.V2.Category('Path')]
     [System.String]
@@ -112,20 +119,20 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V2.Category('Path')]
     [JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity]
     # Identity Parameter
-    # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
     ${InputObject}, 
 
     [Parameter()]
-    [ArgumentCompleter([JumpCloud.SDK.V2.Support.GraphObjectWithPathsDetails])]
+    [JumpCloud.SDK.V2.PSArgumentCompleterAttribute("v1")]
     [JumpCloud.SDK.V2.Category('Query')]
-    [JumpCloud.SDK.V2.Support.GraphObjectWithPathsDetails]
+    [System.String]
     # This will provide detail descriptive response for the request.
     ${Details}, 
 
     [Parameter()]
     [AllowEmptyCollection()]
     [JumpCloud.SDK.V2.Category('Query')]
-    [System.String[]]
+    [JumpCloud.SDK.V2.Runtime.Info(PossibleTypes=([System.String]))]
+    [System.Collections.Generic.List[System.String]]
     # A filter to apply to the query.
     # 
     # **Filter structure**: `<field>:<operator>:<value>`.

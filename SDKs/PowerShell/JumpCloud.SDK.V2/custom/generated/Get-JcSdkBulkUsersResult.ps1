@@ -1,6 +1,6 @@
 <#
 .Synopsis
-This endpoint will return the results of particular user import or update job request.
+This endpoint will return the results of particular user import or get job request.
 
 #### Sample Request
 ```
@@ -11,7 +11,7 @@ curl -X GET \\
   -H 'x-api-key: {API_KEY}'
   ```
 .Description
-This endpoint will return the results of particular user import or update job request.
+This endpoint will return the results of particular user import or get job request.
 
 #### Sample Request
 ```
@@ -82,6 +82,13 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [OutputType([JumpCloud.SDK.V2.Models.IJobWorkresult])]
     [CmdletBinding(DefaultParameterSetName='Get', PositionalBinding=$false)]
     Param(
+    [Parameter(Mandatory)]
+    [JumpCloud.SDK.V2.Category('Uri')]
+    [System.String]
+    # Region for JumpCloud API host.
+    # Use 'console' for US or 'console.eu' for EU.
+    ${ConsoleHost}, 
+
     [Parameter(ParameterSetName='Get', Mandatory)]
     [JumpCloud.SDK.V2.Category('Path')]
     [System.String]
@@ -92,7 +99,6 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V2.Category('Path')]
     [JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity]
     # Identity Parameter
-    # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
     ${InputObject}, 
 
     [Parameter(DontShow)]

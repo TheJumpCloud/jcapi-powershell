@@ -26,13 +26,14 @@ curl -X POST \"https://console.jumpcloud.com/api/v2/bulk/userstates\" \\
 
 ### CreateExpanded (Default)
 ```
-New-JcSdkBulkUserState -StartDate <DateTime> -State <String> -UserIds <String[]>
- [-ActivationEmailOverride <String>] [-SendActivationEmails] [-Confirm] [-WhatIf] [<CommonParameters>]
+New-JcSdkBulkUserState -ConsoleHost <String> [-ActivationEmailOverride <String>] [-SendActivationEmails]
+ [-StartDate <DateTime>] [-State <String>] [-UserIds <String[]>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Create
 ```
-New-JcSdkBulkUserState -Body <IBulkScheduledStatechangeCreate> [-Confirm] [-WhatIf] [<CommonParameters>]
+New-JcSdkBulkUserState -ConsoleHost <String> -Body <IBulkScheduledStatechangeCreate> [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -95,7 +96,6 @@ Accept wildcard characters: False
 
 ### -Body
 Model to support bulk scheduling of a state change for one or more users
-To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IBulkScheduledStatechangeCreate
@@ -106,6 +106,22 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -ConsoleHost
+Region for JumpCloud API host.
+Use 'console' for US or 'console.eu' for EU.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -134,7 +150,7 @@ Type: System.DateTime
 Parameter Sets: CreateExpanded
 Aliases:
 
-Required: True
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -149,7 +165,7 @@ Type: System.String
 Parameter Sets: CreateExpanded
 Aliases:
 
-Required: True
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -164,7 +180,7 @@ Type: System.String[]
 Parameter Sets: CreateExpanded
 Aliases:
 
-Required: True
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -215,17 +231,15 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## NOTES
 
-ALIASES
-
 COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <IBulkScheduledStatechangeCreate>: Model to support bulk scheduling of a state change for one or more users
+`BODY <IBulkScheduledStatechangeCreate>`: Model to support bulk scheduling of a state change for one or more users
   - `StartDate <DateTime>`: Date and time that scheduled action should occur
   - `State <String>`: The state to move the user(s) to
-  - `UserIds <String[]>`: Array of system user ids to schedule for a state change
+  - `UserIds <List<String>>`: Array of system user ids to schedule for a state change
   - `[ActivationEmailOverride <String>]`: Send the activation or welcome email to the specified email address upon activation. Can only be used with a single user_id and scheduled activation. This field will be ignored if `send_activation_emails` is explicitly set to false.
   - `[SendActivationEmails <Boolean?>]`: Set to true to send activation or welcome email(s) to each user_id upon activation. Set to false to suppress emails. Can only be used with scheduled activation(s).
 

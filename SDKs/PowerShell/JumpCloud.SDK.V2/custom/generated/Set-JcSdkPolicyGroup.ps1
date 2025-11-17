@@ -1,6 +1,6 @@
 <#
 .Synopsis
-This endpoint allows you to do a full update of the Policy Group.
+This endpoint allows you to do a full set of the Policy Group.
 
 #### Sample Request
 ```
@@ -9,11 +9,11 @@ curl -X PUT https://console.jumpcloud.com/api/v2/policygroups/{Group_ID} \\
   -H 'Content-Type: application/json' \\
   -H 'x-api-key: {API_KEY}' \\
   -d '{
-    \"name\": \"group_update\"
+    \"name\": \"group_set 
   }'
 ```
 .Description
-This endpoint allows you to do a full update of the Policy Group.
+This endpoint allows you to do a full set of the Policy Group.
 
 #### Sample Request
 ```
@@ -22,7 +22,7 @@ curl -X PUT https://console.jumpcloud.com/api/v2/policygroups/{Group_ID} \\
   -H 'Content-Type: application/json' \\
   -H 'x-api-key: {API_KEY}' \\
   -d '{
-    \"name\": \"group_update\"
+    \"name\": \"group_set 
   }'
 ```
 .Example
@@ -100,6 +100,13 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [OutputType([JumpCloud.SDK.V2.Models.IPolicyGroup])]
     [CmdletBinding(DefaultParameterSetName='SetExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
+    [Parameter(Mandatory)]
+    [JumpCloud.SDK.V2.Category('Uri')]
+    [System.String]
+    # Region for JumpCloud API host.
+    # Use 'console' for US or 'console.eu' for EU.
+    ${ConsoleHost}, 
+
     [Parameter(ParameterSetName='Set', Mandatory)]
     [Parameter(ParameterSetName='SetExpanded', Mandatory)]
     [JumpCloud.SDK.V2.Category('Path')]
@@ -112,7 +119,6 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V2.Category('Path')]
     [JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity]
     # Identity Parameter
-    # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
     ${InputObject}, 
 
     [Parameter(ParameterSetName='Set', Mandatory, ValueFromPipeline)]
@@ -120,11 +126,10 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V2.Category('Body')]
     [JumpCloud.SDK.V2.Models.IPolicyGroupData]
     # PolicyGroupData
-    # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body}, 
 
-    [Parameter(ParameterSetName='SetExpanded', Mandatory)]
-    [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory)]
+    [Parameter(ParameterSetName='SetExpanded')]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.String]
     # Display name of a Policy Group.

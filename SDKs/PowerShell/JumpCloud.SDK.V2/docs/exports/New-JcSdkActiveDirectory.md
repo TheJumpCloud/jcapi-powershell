@@ -26,13 +26,14 @@ curl -X POST https://console.jumpcloud.com/api/v2/activedirectories/ \\
 
 ### CreateExpanded (Default)
 ```
-New-JcSdkActiveDirectory [-DelegationState <String>] [-Domain <String>] [-GroupsEnabled] [-UseCase <String>]
- [-Confirm] [-WhatIf] [<CommonParameters>]
+New-JcSdkActiveDirectory -ConsoleHost <String> [-DelegationState <String>] [-Domain <String>] [-GroupsEnabled]
+ [-UpdatedAt <DateTime>] [-UseCase <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Create
 ```
-New-JcSdkActiveDirectory -Body <IActiveDirectory> [-Confirm] [-WhatIf] [<CommonParameters>]
+New-JcSdkActiveDirectory -ConsoleHost <String> -Body <IActiveDirectory> [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -78,7 +79,6 @@ UseCase      String
 
 ### -Body
 Active Directory
-To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IActiveDirectory
@@ -89,6 +89,22 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -ConsoleHost
+Region for JumpCloud API host.
+Use 'console' for US or 'console.eu' for EU.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -127,6 +143,21 @@ Accept wildcard characters: False
 
 ```yaml
 Type: System.Management.Automation.SwitchParameter
+Parameter Sets: CreateExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -UpdatedAt
+.
+
+```yaml
+Type: System.DateTime
 Parameter Sets: CreateExpanded
 Aliases:
 
@@ -196,17 +227,16 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## NOTES
 
-ALIASES
-
 COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <IActiveDirectory>: Active Directory
+`BODY <IActiveDirectory>`: Active Directory
   - `[DelegationState <String>]`: Delegation state of the Active Directory instance
   - `[Domain <String>]`: Domain name for this Active Directory instance.
   - `[GroupsEnabled <Boolean?>]`: 
+  - `[UpdatedAt <DateTime?>]`: 
   - `[UseCase <String>]`: 
 
 ## RELATED LINKS

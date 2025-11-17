@@ -9,7 +9,7 @@ schema: 2.0.0
 
 ## SYNOPSIS
 The endpoint allows you to create a bulk job to asynchronously create users.
-See [Create a System User](https://docs.jumpcloud.com/api/1.0/index.html#operation/systemusers_post)
+See [create a System User](https://docs.jumpcloud.com/api/1.0/index.html#operation/systemusers_post)
 for the full list of attributes.
 
 #### Default User State
@@ -28,7 +28,7 @@ For other `creation-source` header values, the default state is stored in
 
 These default state values can be changed in the admin portal settings
 or by using the
-[Update an Organization](https://docs.jumpcloud.com/api/1.0/index.html#operation/organization_put)
+[create an Organization](https://docs.jumpcloud.com/api/1.0/index.html#operation/organization_put)
 endpoint.
 
 #### Sample Request
@@ -61,13 +61,13 @@ curl -X POST https://console.jumpcloud.com/api/v2/bulk/users \\
 ## SYNTAX
 
 ```
-New-JcSdkBulkUser -Body <IBulkUserCreate[]> [-SuppressEmail] [-CreationSource <CreationSource2>] [-Confirm]
- [-WhatIf] [<CommonParameters>]
+New-JcSdkBulkUser -ConsoleHost <String> -Body <List<IBulkUserCreate>> [-SuppressEmail]
+ [-CreationSource <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 The endpoint allows you to create a bulk job to asynchronously create users.
-See [Create a System User](https://docs.jumpcloud.com/api/1.0/index.html#operation/systemusers_post)
+See [create a System User](https://docs.jumpcloud.com/api/1.0/index.html#operation/systemusers_post)
 for the full list of attributes.
 
 #### Default User State
@@ -86,7 +86,7 @@ For other `creation-source` header values, the default state is stored in
 
 These default state values can be changed in the admin portal settings
 or by using the
-[Update an Organization](https://docs.jumpcloud.com/api/1.0/index.html#operation/organization_put)
+[create an Organization](https://docs.jumpcloud.com/api/1.0/index.html#operation/organization_put)
 endpoint.
 
 #### Sample Request
@@ -136,10 +136,9 @@ New-JcSdkBulkUser
 
 ### -Body
 Array of bulk-user-create
-To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IBulkUserCreate[]
+Type: System.Collections.Generic.List`1[[JumpCloud.SDK.V2.Models.IBulkUserCreate, JumpCloud.SDK.V2.private, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]
 Parameter Sets: (All)
 Aliases:
 
@@ -150,12 +149,28 @@ Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
+### -ConsoleHost
+Region for JumpCloud API host.
+Use 'console' for US or 'console.eu' for EU.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -CreationSource
 Defines the creation-source header for gapps, o365 and workdays requests.
 If the header isn't sent, the default value is `jumpcloud:bulk`, if you send the header with a malformed value you receive a 400 error.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Support.CreationSource2
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -221,25 +236,23 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### JumpCloud.SDK.V2.Models.IBulkUserCreate[]
+### System.Collections.Generic.List`1[[JumpCloud.SDK.V2.Models.IBulkUserCreate, JumpCloud.SDK.V2.private, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]
 
 ## OUTPUTS
 
-### System.String
+### JumpCloud.SDK.V2.Models.IJobId
 
 ## NOTES
-
-ALIASES
 
 COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <IBulkUserCreate[]>: Array of bulk-user-create
+`BODY <List<IBulkUserCreate>>`: Array of bulk-user-create
   - `[AccountLocked <Boolean?>]`: 
   - `[Activated <Boolean?>]`: 
-  - `[Addresses <IBulkUserCreateAddressesItem[]>]`: 
+  - `[Addresses <List<IBulkUserCreateAddressesItem>>]`: 
     - `[Country <String>]`: 
     - `[ExtendedAddress <String>]`: 
     - `[Locality <String>]`: 
@@ -250,7 +263,7 @@ BODY <IBulkUserCreate[]>: Array of bulk-user-create
     - `[Type <String>]`: 
   - `[AllowPublicKey <Boolean?>]`: 
   - `[AlternateEmail <String>]`: 
-  - `[Attributes <IBulkUserCreateAttributesItem[]>]`: 
+  - `[Attributes <List<IBulkUserCreateAttributesItem>>]`: 
     - `[Name <String>]`: 
     - `[Value <String>]`: 
   - `[Company <String>]`: 
@@ -283,12 +296,12 @@ BODY <IBulkUserCreate[]>: Array of bulk-user-create
   - `[Password <String>]`: 
   - `[PasswordNeverExpires <Boolean?>]`: 
   - `[PasswordlessSudo <Boolean?>]`: 
-  - `[PhoneNumbers <IBulkUserCreatePhoneNumbersItem[]>]`: 
+  - `[PhoneNumbers <List<IBulkUserCreatePhoneNumbersItem>>]`: 
     - `[Number <String>]`: 
     - `[Type <String>]`: 
   - `[PublicKey <String>]`: 
   - `[RecoveryEmailAddress <String>]`: 
-  - `[Relationships <IBulkUserCreateRelationshipsItem[]>]`: 
+  - `[Relationships <List<IBulkUserCreateRelationshipsItem>>]`: 
     - `[Type <String>]`: 
     - `[Value <String>]`: 
   - `[SambaServiceUser <Boolean?>]`: 

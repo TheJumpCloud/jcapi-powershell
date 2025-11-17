@@ -30,13 +30,13 @@ curl -X POST https://console.jumpcloud.com/api/v2/iplists \\
 
 ### CreateExpanded (Default)
 ```
-New-JcSdkIPList [-Description <String>] [-Ips <String[]>] [-Name <String>] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+New-JcSdkIPList -ConsoleHost <String> [-Description <String>] [-Ips <String[]>] [-Name <String>] [-Confirm]
+ [-WhatIf] [<CommonParameters>]
 ```
 
 ### Create
 ```
-New-JcSdkIPList -Body <IIPListRequest> [-Confirm] [-WhatIf] [<CommonParameters>]
+New-JcSdkIPList -ConsoleHost <String> -Body <IIPListRequest> [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -86,7 +86,6 @@ Name        String
 
 ### -Body
 IPListRequest
-To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IIPListRequest
@@ -97,6 +96,22 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -ConsoleHost
+Region for JumpCloud API host.
+Use 'console' for US or 'console.eu' for EU.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -189,16 +204,14 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## NOTES
 
-ALIASES
-
 COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <IIPListRequest>: IPListRequest
+`BODY <IIPListRequest>`: IPListRequest
   - `[Description <String>]`: 
-  - `[Ips <String[]>]`: 
+  - `[Ips <List<String>>]`: 
   - `[Name <String>]`: 
 
 ## RELATED LINKS

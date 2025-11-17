@@ -36,28 +36,29 @@ curl -X POST https://console.jumpcloud.com/api/v2/systems/{System_ID}/associatio
 
 ### SetExpanded (Default)
 ```
-Set-JcSdkSystemAssociation -SystemId <String> -Id <String> -Op <String> -Type <GraphOperationSystem3>
- [-Authorization <String>] [-Date <String>] [-Attributes <Hashtable>] [-PassThru] [-Confirm] [-WhatIf]
+Set-JcSdkSystemAssociation -ConsoleHost <String> -SystemId <String> [-Authorization <String>] [-Date <String>]
+ [-Attributes <Hashtable>] [-Id <String>] [-Op <String>] [-Type <String>] [-PassThru] [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
 ### Set
 ```
-Set-JcSdkSystemAssociation -SystemId <String> -Body <IGraphOperationSystem> [-Authorization <String>]
- [-Date <String>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkSystemAssociation -ConsoleHost <String> -SystemId <String> -Body <IGraphOperationSystem>
+ [-Authorization <String>] [-Date <String>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentity
 ```
-Set-JcSdkSystemAssociation -InputObject <IJumpCloudApiIdentity> -Body <IGraphOperationSystem>
- [-Authorization <String>] [-Date <String>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkSystemAssociation -ConsoleHost <String> -InputObject <IJumpCloudApiIdentity>
+ -Body <IGraphOperationSystem> [-Authorization <String>] [-Date <String>] [-PassThru] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkSystemAssociation -InputObject <IJumpCloudApiIdentity> -Id <String> -Op <String>
- -Type <GraphOperationSystem3> [-Authorization <String>] [-Date <String>] [-Attributes <Hashtable>]
- [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkSystemAssociation -ConsoleHost <String> -InputObject <IJumpCloudApiIdentity>
+ [-Authorization <String>] [-Date <String>] [-Attributes <Hashtable>] [-Id <String>] [-Op <String>]
+ [-Type <String>] [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -135,7 +136,6 @@ Accept wildcard characters: False
 
 ### -Body
 GraphOperation (System)
-To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IGraphOperationSystem
@@ -146,6 +146,22 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -ConsoleHost
+Region for JumpCloud API host.
+Use 'console' for US or 'console.eu' for EU.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -172,7 +188,7 @@ Type: System.String
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
-Required: True
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -181,7 +197,6 @@ Accept wildcard characters: False
 
 ### -InputObject
 Identity Parameter
-To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
@@ -203,7 +218,7 @@ Type: System.String
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
-Required: True
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -244,11 +259,11 @@ Accept wildcard characters: False
 Targets which a "system" can be associated to.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Support.GraphOperationSystem3
+Type: System.String
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
-Required: True
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -301,23 +316,21 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## NOTES
 
-ALIASES
-
 COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <IGraphOperationSystem>: GraphOperation (System)
+`BODY <IGraphOperationSystem>`: GraphOperation (System)
   - `Id <String>`: The ObjectID of graph object being added or removed as an association.
   - `Op <String>`: How to modify the graph connection.
-  - `Type <GraphOperationSystem3>`: Targets which a "system" can be associated to.
+  - `Type <String>`: Targets which a "system" can be associated to.
   - `[Attributes <IGraphOperationSystemAttributes>]`: 
     - `[(Any) <Object>]`: This indicates any property can be added to this object.
     - `[SudoEnabled <Boolean?>]`: Enables sudo
     - `[SudoWithoutPassword <Boolean?>]`: Enable sudo without password (requires 'enabled' to be true)
 
-INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter
+`INPUTOBJECT <IJumpCloudApiIdentity>`: Identity Parameter
   - `[AccountId <String>]`: 
   - `[ActivedirectoryId <String>]`: 
   - `[AdministratorId <String>]`: 

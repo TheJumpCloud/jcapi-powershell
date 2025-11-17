@@ -13,7 +13,8 @@ Valid filter fields are `system_id` and `name`.
 ## SYNTAX
 
 ```
-Get-JcSdkSystemInsightLaunchd [-Filter <String[]>] [-Sort <String[]>] [<CommonParameters>]
+Get-JcSdkSystemInsightLaunchd -ConsoleHost <String> [-Filter <List<String>>] [-Sort <List<String>>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -60,6 +61,22 @@ WorkingDirectory   String
 
 ## PARAMETERS
 
+### -ConsoleHost
+Region for JumpCloud API host.
+Use 'console' for US or 'console.eu' for EU.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Filter
 A filter to apply to the query.
 
@@ -77,7 +94,7 @@ Supports wild cards.
 **EX:** `GET /api/v2/groups?filter=name:eq:Test+Group`
 
 ```yaml
-Type: System.String[]
+Type: System.Collections.Generic.List`1[[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]
 Parameter Sets: (All)
 Aliases:
 
@@ -93,7 +110,7 @@ The comma separated fields used to sort the collection.
 Default sort is ascending, prefix with `-` to sort descending.
 
 ```yaml
-Type: System.String[]
+Type: System.Collections.Generic.List`1[[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]
 Parameter Sets: (All)
 Aliases:
 
@@ -114,8 +131,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ### JumpCloud.SDK.V2.Models.ISystemInsightsLaunchd
 
 ## NOTES
-
-ALIASES
 
 ## RELATED LINKS
 

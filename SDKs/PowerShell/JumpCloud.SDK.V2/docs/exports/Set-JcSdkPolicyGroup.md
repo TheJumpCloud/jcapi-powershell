@@ -8,7 +8,7 @@ schema: 2.0.0
 # Set-JcSdkPolicyGroup
 
 ## SYNOPSIS
-This endpoint allows you to do a full update of the Policy Group.
+This endpoint allows you to do a full set of the Policy Group.
 
 #### Sample Request
 ```
@@ -17,7 +17,7 @@ curl -X PUT https://console.jumpcloud.com/api/v2/policygroups/{Group_ID} \\
   -H 'Content-Type: application/json' \\
   -H 'x-api-key: {API_KEY}' \\
   -d '{
-    \"name\": \"group_update\"
+    \"name\": \"group_set 
   }'
 ```
 
@@ -25,28 +25,30 @@ curl -X PUT https://console.jumpcloud.com/api/v2/policygroups/{Group_ID} \\
 
 ### SetExpanded (Default)
 ```
-Set-JcSdkPolicyGroup -Id <String> -Name <String> [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkPolicyGroup -ConsoleHost <String> -Id <String> [-Name <String>] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### Set
 ```
-Set-JcSdkPolicyGroup -Id <String> -Body <IPolicyGroupData> [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkPolicyGroup -ConsoleHost <String> -Id <String> -Body <IPolicyGroupData> [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### SetViaIdentity
 ```
-Set-JcSdkPolicyGroup -InputObject <IJumpCloudApiIdentity> -Body <IPolicyGroupData> [-Confirm] [-WhatIf]
- [<CommonParameters>]
+Set-JcSdkPolicyGroup -ConsoleHost <String> -InputObject <IJumpCloudApiIdentity> -Body <IPolicyGroupData>
+ [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkPolicyGroup -InputObject <IJumpCloudApiIdentity> -Name <String> [-Confirm] [-WhatIf]
- [<CommonParameters>]
+Set-JcSdkPolicyGroup -ConsoleHost <String> -InputObject <IJumpCloudApiIdentity> [-Name <String>] [-Confirm]
+ [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-This endpoint allows you to do a full update of the Policy Group.
+This endpoint allows you to do a full set of the Policy Group.
 
 #### Sample Request
 ```
@@ -55,7 +57,7 @@ curl -X PUT https://console.jumpcloud.com/api/v2/policygroups/{Group_ID} \\
   -H 'Content-Type: application/json' \\
   -H 'x-api-key: {API_KEY}' \\
   -d '{
-    \"name\": \"group_update\"
+    \"name\": \"group_set 
   }'
 ```
 
@@ -91,7 +93,6 @@ Type        String
 
 ### -Body
 PolicyGroupData
-To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IPolicyGroupData
@@ -102,6 +103,22 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -ConsoleHost
+Region for JumpCloud API host.
+Use 'console' for US or 'console.eu' for EU.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -122,7 +139,6 @@ Accept wildcard characters: False
 
 ### -InputObject
 Identity Parameter
-To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
@@ -144,7 +160,7 @@ Type: System.String
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
-Required: True
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -197,17 +213,15 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## NOTES
 
-ALIASES
-
 COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <IPolicyGroupData>: PolicyGroupData
+`BODY <IPolicyGroupData>`: PolicyGroupData
   - `Name <String>`: Display name of a Policy Group.
 
-INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter
+`INPUTOBJECT <IJumpCloudApiIdentity>`: Identity Parameter
   - `[AccountId <String>]`: 
   - `[ActivedirectoryId <String>]`: 
   - `[AdministratorId <String>]`: 

@@ -21,7 +21,7 @@ This endpoint returns all active directories (LDAP, O365 Suite, G-Suite).
 ## SYNTAX
 
 ```
-Get-JcSdkDirectory [-Fields <String[]>] [-Sort <String[]>] [<CommonParameters>]
+Get-JcSdkDirectory -ConsoleHost <String> [-Fields <List<String>>] [-Sort <List<String>>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -59,12 +59,28 @@ Type                String
 
 ## PARAMETERS
 
+### -ConsoleHost
+Region for JumpCloud API host.
+Use 'console' for US or 'console.eu' for EU.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Fields
 The comma separated fields included in the returned records.
 If omitted, the default list of fields will be returned.
 
 ```yaml
-Type: System.String[]
+Type: System.Collections.Generic.List`1[[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]
 Parameter Sets: (All)
 Aliases:
 
@@ -80,7 +96,7 @@ The comma separated fields used to sort the collection.
 Default sort is ascending, prefix with `-` to sort descending.
 
 ```yaml
-Type: System.String[]
+Type: System.Collections.Generic.List`1[[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]
 Parameter Sets: (All)
 Aliases:
 
@@ -101,8 +117,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ### JumpCloud.SDK.V2.Models.IDirectory
 
 ## NOTES
-
-ALIASES
 
 ## RELATED LINKS
 

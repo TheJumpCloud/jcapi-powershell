@@ -23,28 +23,28 @@ Locks a DEP-enrolled device.
 
 ### LockExpanded (Default)
 ```
-Lock-JcSdkAppleMdmDevice -AppleMdmId <String> -DeviceId <String> [-Pin <String>] [-PassThru] [-Confirm]
- [-WhatIf] [<CommonParameters>]
+Lock-JcSdkAppleMdmDevice -ConsoleHost <String> -AppleMdmId <String> -DeviceId <String> [-Pin <String>]
+ [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Lock
 ```
-Lock-JcSdkAppleMdmDevice -AppleMdmId <String> -DeviceId <String>
+Lock-JcSdkAppleMdmDevice -ConsoleHost <String> -AppleMdmId <String> -DeviceId <String>
  -Body <IPathsLf7IzoApplemdmsAppleMdmIdDevicesDeviceIdLockPostRequestbodyContentApplicationJsonSchema>
  [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### LockViaIdentity
 ```
-Lock-JcSdkAppleMdmDevice -InputObject <IJumpCloudApiIdentity>
+Lock-JcSdkAppleMdmDevice -ConsoleHost <String> -InputObject <IJumpCloudApiIdentity>
  -Body <IPathsLf7IzoApplemdmsAppleMdmIdDevicesDeviceIdLockPostRequestbodyContentApplicationJsonSchema>
  [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### LockViaIdentityExpanded
 ```
-Lock-JcSdkAppleMdmDevice -InputObject <IJumpCloudApiIdentity> [-Pin <String>] [-PassThru] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+Lock-JcSdkAppleMdmDevice -ConsoleHost <String> -InputObject <IJumpCloudApiIdentity> [-Pin <String>]
+ [-PassThru] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -94,7 +94,6 @@ Accept wildcard characters: False
 
 ### -Body
 .
-To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IPathsLf7IzoApplemdmsAppleMdmIdDevicesDeviceIdLockPostRequestbodyContentApplicationJsonSchema
@@ -105,6 +104,22 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -ConsoleHost
+Region for JumpCloud API host.
+Use 'console' for US or 'console.eu' for EU.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -125,7 +140,6 @@ Accept wildcard characters: False
 
 ### -InputObject
 Identity Parameter
-To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
@@ -215,17 +229,15 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## NOTES
 
-ALIASES
-
 COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <IPathsLf7IzoApplemdmsAppleMdmIdDevicesDeviceIdLockPostRequestbodyContentApplicationJsonSchema>: .
+`BODY <IPathsLf7IzoApplemdmsAppleMdmIdDevicesDeviceIdLockPostRequestbodyContentApplicationJsonSchema>`: .
   - `[Pin <String>]`: 6-digit PIN, required for MacOS, to lock the device
 
-INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter
+`INPUTOBJECT <IJumpCloudApiIdentity>`: Identity Parameter
   - `[AccountId <String>]`: 
   - `[ActivedirectoryId <String>]`: 
   - `[AdministratorId <String>]`: 

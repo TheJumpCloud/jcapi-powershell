@@ -59,6 +59,13 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [OutputType([JumpCloud.SDK.V2.Models.IImportUsersResponse])]
     [CmdletBinding(DefaultParameterSetName='Import', PositionalBinding=$false)]
     Param(
+    [Parameter(Mandatory)]
+    [JumpCloud.SDK.V2.Category('Uri')]
+    [System.String]
+    # Region for JumpCloud API host.
+    # Use 'console' for US or 'console.eu' for EU.
+    ${ConsoleHost}, 
+
     [Parameter(ParameterSetName='Import', Mandatory)]
     [JumpCloud.SDK.V2.Category('Path')]
     [System.String]
@@ -69,7 +76,6 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V2.Category('Path')]
     [JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity]
     # Identity Parameter
-    # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
     ${InputObject}, 
 
     [Parameter()]
@@ -85,16 +91,16 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     ${Query}, 
 
     [Parameter()]
-    [ArgumentCompleter([JumpCloud.SDK.V2.Support.Sort])]
+    [JumpCloud.SDK.V2.PSArgumentCompleterAttribute("firstname", "lastname", "email")]
     [JumpCloud.SDK.V2.Category('Query')]
-    [JumpCloud.SDK.V2.Support.Sort]
+    [System.String]
     # Sort users by supported fields
     ${Sort}, 
 
     [Parameter()]
-    [ArgumentCompleter([JumpCloud.SDK.V2.Support.SortOrder1])]
+    [JumpCloud.SDK.V2.PSArgumentCompleterAttribute("asc", "desc")]
     [JumpCloud.SDK.V2.Category('Query')]
-    [JumpCloud.SDK.V2.Support.SortOrder1]
+    [System.String]
     # .
     ${SortOrder}, 
 

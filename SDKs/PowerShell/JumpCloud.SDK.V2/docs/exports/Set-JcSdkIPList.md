@@ -28,25 +28,26 @@ curl -X PUT https://console.jumpcloud.com/api/v2/iplists/{id} \\
 
 ### SetExpanded (Default)
 ```
-Set-JcSdkIPList -Id <String> [-Description <String>] [-Ips <String[]>] [-Name <String>] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+Set-JcSdkIPList -ConsoleHost <String> -Id <String> [-Description <String>] [-Ips <String[]>] [-Name <String>]
+ [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Set
 ```
-Set-JcSdkIPList -Id <String> -Body <IIPListRequest> [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkIPList -ConsoleHost <String> -Id <String> -Body <IIPListRequest> [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### SetViaIdentity
 ```
-Set-JcSdkIPList -InputObject <IJumpCloudApiIdentity> -Body <IIPListRequest> [-Confirm] [-WhatIf]
- [<CommonParameters>]
+Set-JcSdkIPList -ConsoleHost <String> -InputObject <IJumpCloudApiIdentity> -Body <IIPListRequest> [-Confirm]
+ [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkIPList -InputObject <IJumpCloudApiIdentity> [-Description <String>] [-Ips <String[]>]
- [-Name <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkIPList -ConsoleHost <String> -InputObject <IJumpCloudApiIdentity> [-Description <String>]
+ [-Ips <String[]>] [-Name <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -94,7 +95,6 @@ Name        String
 
 ### -Body
 IPListRequest
-To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IIPListRequest
@@ -105,6 +105,22 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -ConsoleHost
+Region for JumpCloud API host.
+Use 'console' for US or 'console.eu' for EU.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -140,7 +156,6 @@ Accept wildcard characters: False
 
 ### -InputObject
 Identity Parameter
-To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
@@ -230,19 +245,17 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## NOTES
 
-ALIASES
-
 COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <IIPListRequest>: IPListRequest
+`BODY <IIPListRequest>`: IPListRequest
   - `[Description <String>]`: 
-  - `[Ips <String[]>]`: 
+  - `[Ips <List<String>>]`: 
   - `[Name <String>]`: 
 
-INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter
+`INPUTOBJECT <IJumpCloudApiIdentity>`: Identity Parameter
   - `[AccountId <String>]`: 
   - `[ActivedirectoryId <String>]`: 
   - `[AdministratorId <String>]`: 
