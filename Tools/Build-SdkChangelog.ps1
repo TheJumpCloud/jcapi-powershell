@@ -60,13 +60,14 @@ if ($SdkChangelog -notmatch "$LatestPsd1Version") {
     Write-Host "Latest Release Version: $LatestPsd1Version differs from changelog version $LatestVersionInChangelog"
     # Write-Host "Creating new changelog verion header"
     ($NewSdkChangelogRecord + ($SdkChangelog | Out-String)).Trim() | Set-Content -Path $SdkChangelogFilePath -Force
-}
-elseif ($SdkChangelog -match "$LatestPsd1Version") {
+} elseif ($SdkChangelog -match "$LatestPsd1Version") {
     Write-Host "Updating Diffs"
     # Update the changelog Release Date
-    $SdkChangelog = Get-Content -Path $SdkChangelogFilePath -Raw
+    # $SdkChangelog = Get-Content -Path $SdkChangelogFilePath -Raw
     $todaysDate = Get-Date -UFormat "%B %d, %Y"
-    $SdkChangelog = $SdkChangelog -replace ("Release Date:.*"), "Release Date: $todaysDate"
+    # Only replace the Release Date for the latest version
+    $ReleaseDate = [regex]"(## $LatestPsd1Version[\s\S]*?Release Date:).*"
+    $SdkChangelog = $ReleaseDate.Replace($SdkChangelog, "`$1 $todaysDate", 1)
     # Update the changelog with the new diffs
     $SdkChangelog | Set-Content -Path $SdkChangelogFilePath -Force
 

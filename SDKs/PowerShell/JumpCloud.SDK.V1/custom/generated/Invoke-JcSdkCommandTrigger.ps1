@@ -57,7 +57,7 @@ PS C:\> {{ Add code here }}
 .Inputs
 JumpCloud.SDK.V1.Models.IJumpCloudApiIdentity
 .Outputs
-System.String
+JumpCloud.SDK.V1.Models.ITriggerreturn
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -73,9 +73,16 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Invoke-JcSdkCommandTrigger
 {
-    [OutputType([System.String])]
+    [OutputType([JumpCloud.SDK.V1.Models.ITriggerreturn])]
     [CmdletBinding(DefaultParameterSetName='Post', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
+    [Parameter(Mandatory)]
+    [JumpCloud.SDK.V1.Category('Uri')]
+    [System.String]
+    # Region for JumpCloud API host.
+    # Use 'console' for US or 'console.eu' for EU.
+    ${ConsoleHost}, 
+
     [Parameter(ParameterSetName='Post', Mandatory)]
     [JumpCloud.SDK.V1.Category('Path')]
     [System.String]
@@ -86,7 +93,6 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V1.Category('Path')]
     [JumpCloud.SDK.V1.Models.IJumpCloudApiIdentity]
     # Identity Parameter
-    # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
     ${InputObject}, 
 
     [Parameter(DontShow)]

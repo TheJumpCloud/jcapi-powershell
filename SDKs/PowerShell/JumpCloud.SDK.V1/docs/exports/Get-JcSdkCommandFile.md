@@ -23,12 +23,13 @@ curl -X GET https://console.jumpcloud.com/api/files/command/{commandID} \\
 
 ### Get (Default)
 ```
-Get-JcSdkCommandFile -Id <String> [-Fields <String>] [<CommonParameters>]
+Get-JcSdkCommandFile -ConsoleHost <String> -Id <String> [-Fields <String>] [<CommonParameters>]
 ```
 
 ### GetViaIdentity
 ```
-Get-JcSdkCommandFile -InputObject <IJumpCloudApiIdentity> [-Fields <String>] [<CommonParameters>]
+Get-JcSdkCommandFile -ConsoleHost <String> -InputObject <IJumpCloudApiIdentity> [-Fields <String>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -63,6 +64,22 @@ TotalCount Int
 
 ## PARAMETERS
 
+### -ConsoleHost
+Region for JumpCloud API host.
+Use 'console' for US or 'console.eu' for EU.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Fields
 Use a space seperated string of field parameters to include the data in the response.
 If omitted, the default list of fields will be returned.
@@ -96,7 +113,6 @@ Accept wildcard characters: False
 
 ### -InputObject
 Identity Parameter
-To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V1.Models.IJumpCloudApiIdentity
@@ -123,14 +139,12 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## NOTES
 
-ALIASES
-
 COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter
+`INPUTOBJECT <IJumpCloudApiIdentity>`: Identity Parameter
   - `[Id <String>]`: 
   - `[SystemId <String>]`: 
   - `[SystemuserId <String>]`: 

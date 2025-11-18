@@ -14,24 +14,26 @@ This endpoint will create a specific System User's Public SSH Key.
 
 ### CreateExpanded (Default)
 ```
-New-JcSdkUserSshKey -Id <String> -Name <String> -PublicKey <String> [-Confirm] [-WhatIf] [<CommonParameters>]
+New-JcSdkUserSshKey -ConsoleHost <String> -Id <String> [-Name <String>] [-PublicKey <String>] [-Confirm]
+ [-WhatIf] [<CommonParameters>]
 ```
 
 ### Create
 ```
-New-JcSdkUserSshKey -Id <String> -Body <ISshkeypost> [-Confirm] [-WhatIf] [<CommonParameters>]
+New-JcSdkUserSshKey -ConsoleHost <String> -Id <String> -Body <ISshkeypost> [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### CreateViaIdentity
 ```
-New-JcSdkUserSshKey -InputObject <IJumpCloudApiIdentity> -Body <ISshkeypost> [-Confirm] [-WhatIf]
- [<CommonParameters>]
+New-JcSdkUserSshKey -ConsoleHost <String> -InputObject <IJumpCloudApiIdentity> -Body <ISshkeypost> [-Confirm]
+ [-WhatIf] [<CommonParameters>]
 ```
 
 ### CreateViaIdentityExpanded
 ```
-New-JcSdkUserSshKey -InputObject <IJumpCloudApiIdentity> -Name <String> -PublicKey <String> [-Confirm]
- [-WhatIf] [<CommonParameters>]
+New-JcSdkUserSshKey -ConsoleHost <String> -InputObject <IJumpCloudApiIdentity> [-Name <String>]
+ [-PublicKey <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -65,7 +67,6 @@ PublicKey  String
 
 ### -Body
 SSHKeyPost
-To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V1.Models.ISshkeypost
@@ -76,6 +77,22 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -ConsoleHost
+Region for JumpCloud API host.
+Use 'console' for US or 'console.eu' for EU.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -96,7 +113,6 @@ Accept wildcard characters: False
 
 ### -InputObject
 Identity Parameter
-To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V1.Models.IJumpCloudApiIdentity
@@ -118,7 +134,7 @@ Type: System.String
 Parameter Sets: CreateExpanded, CreateViaIdentityExpanded
 Aliases:
 
-Required: True
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -133,7 +149,7 @@ Type: System.String
 Parameter Sets: CreateExpanded, CreateViaIdentityExpanded
 Aliases:
 
-Required: True
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -186,18 +202,16 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## NOTES
 
-ALIASES
-
 COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <ISshkeypost>: SSHKeyPost
+`BODY <ISshkeypost>`: SSHKeyPost
   - `Name <String>`: The name of the SSH key.
   - `PublicKey <String>`: The Public SSH key.
 
-INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter
+`INPUTOBJECT <IJumpCloudApiIdentity>`: Identity Parameter
   - `[Id <String>]`: 
   - `[SystemId <String>]`: 
   - `[SystemuserId <String>]`: 

@@ -8,7 +8,7 @@ schema: 2.0.0
 # Set-JcSdkRadiusServer
 
 ## SYNOPSIS
-This endpoint allows you to update RADIUS servers in your organization.
+This endpoint allows you to set RADIUS servers in your organization.
 
 ####
 ```
@@ -17,7 +17,7 @@ curl -X PUT https://console.jumpcloud.com/api/radiusservers/{ServerID} \\
   -H 'Content-Type: application/json' \\
   -H 'x-api-key: {API_KEY}' \\
   -d '{
-    \"name\": \"{name_update}\",
+    \"name\": \"{name_set \",
     \"networkSourceIp\": \"{0.0.0.0}\",
     \"sharedSecret\": \"{secret_password}\",
     \"userLockoutAction\": \"REMOVE\",
@@ -29,36 +29,36 @@ curl -X PUT https://console.jumpcloud.com/api/radiusservers/{ServerID} \\
 
 ### SetExpanded (Default)
 ```
-Set-JcSdkRadiusServer -Id <String> -Name <String> -NetworkSourceIP <String> -SharedSecret <String>
- [-CaCert <String>] [-DeviceCertEnabled] [-Mfa <String>] [-RadsecEnabled] [-RequireRadsec] [-RequireTlsAuth]
- [-UserCertEnabled] [-UserLockoutAction <String>] [-UserPasswordEnabled]
- [-UserPasswordExpirationAction <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkRadiusServer -ConsoleHost <String> -Id <String> [-CaCert <String>] [-DeviceCertEnabled]
+ [-Mfa <String>] [-Name <String>] [-NetworkSourceIP <String>] [-RadsecEnabled] [-RequireRadsec]
+ [-RequireTlsAuth] [-SharedSecret <String>] [-UserCertEnabled] [-UserLockoutAction <String>]
+ [-UserPasswordEnabled] [-UserPasswordExpirationAction <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Set
 ```
-Set-JcSdkRadiusServer -Id <String>
+Set-JcSdkRadiusServer -ConsoleHost <String> -Id <String>
  -Body <IPathsKeqea5RadiusserversIdPutRequestbodyContentApplicationJsonSchema> [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
 ### SetViaIdentity
 ```
-Set-JcSdkRadiusServer -InputObject <IJumpCloudApiIdentity>
+Set-JcSdkRadiusServer -ConsoleHost <String> -InputObject <IJumpCloudApiIdentity>
  -Body <IPathsKeqea5RadiusserversIdPutRequestbodyContentApplicationJsonSchema> [-Confirm] [-WhatIf]
  [<CommonParameters>]
 ```
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkRadiusServer -InputObject <IJumpCloudApiIdentity> -Name <String> -NetworkSourceIP <String>
- -SharedSecret <String> [-CaCert <String>] [-DeviceCertEnabled] [-Mfa <String>] [-RadsecEnabled]
- [-RequireRadsec] [-RequireTlsAuth] [-UserCertEnabled] [-UserLockoutAction <String>] [-UserPasswordEnabled]
- [-UserPasswordExpirationAction <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkRadiusServer -ConsoleHost <String> -InputObject <IJumpCloudApiIdentity> [-CaCert <String>]
+ [-DeviceCertEnabled] [-Mfa <String>] [-Name <String>] [-NetworkSourceIP <String>] [-RadsecEnabled]
+ [-RequireRadsec] [-RequireTlsAuth] [-SharedSecret <String>] [-UserCertEnabled] [-UserLockoutAction <String>]
+ [-UserPasswordEnabled] [-UserPasswordExpirationAction <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-This endpoint allows you to update RADIUS servers in your organization.
+This endpoint allows you to set RADIUS servers in your organization.
 
 ####
 ```
@@ -67,7 +67,7 @@ curl -X PUT https://console.jumpcloud.com/api/radiusservers/{ServerID} \\
   -H 'Content-Type: application/json' \\
   -H 'x-api-key: {API_KEY}' \\
   -d '{
-    \"name\": \"{name_update}\",
+    \"name\": \"{name_set \",
     \"networkSourceIp\": \"{0.0.0.0}\",
     \"sharedSecret\": \"{secret_password}\",
     \"userLockoutAction\": \"REMOVE\",
@@ -117,7 +117,6 @@ UserPasswordExpirationAction String
 
 ### -Body
 .
-To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V1.Models.IPathsKeqea5RadiusserversIdPutRequestbodyContentApplicationJsonSchema
@@ -140,6 +139,22 @@ Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
 Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ConsoleHost
+Region for JumpCloud API host.
+Use 'console' for US or 'console.eu' for EU.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -178,7 +193,6 @@ Accept wildcard characters: False
 
 ### -InputObject
 Identity Parameter
-To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V1.Models.IJumpCloudApiIdentity
@@ -215,7 +229,7 @@ Type: System.String
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
-Required: True
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -230,7 +244,7 @@ Type: System.String
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
-Required: True
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -290,7 +304,7 @@ Type: System.String
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
-Required: True
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -403,14 +417,12 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## NOTES
 
-ALIASES
-
 COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <IPathsKeqea5RadiusserversIdPutRequestbodyContentApplicationJsonSchema>: .
+`BODY <IPathsKeqea5RadiusserversIdPutRequestbodyContentApplicationJsonSchema>`: .
   - `Name <String>`: 
   - `NetworkSourceIP <String>`: 
   - `SharedSecret <String>`: 
@@ -425,7 +437,7 @@ BODY <IPathsKeqea5RadiusserversIdPutRequestbodyContentApplicationJsonSchema>: .
   - `[UserPasswordEnabled <Boolean?>]`: 
   - `[UserPasswordExpirationAction <String>]`: 
 
-INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter
+`INPUTOBJECT <IJumpCloudApiIdentity>`: Identity Parameter
   - `[Id <String>]`: 
   - `[SystemId <String>]`: 
   - `[SystemuserId <String>]`: 

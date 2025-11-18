@@ -8,7 +8,7 @@ schema: 2.0.0
 # Set-JcSdkSystem
 
 ## SYNOPSIS
-This endpoint allows you to update a system.
+This endpoint allows you to set a system.
 
 #### Sample Request 
 ```
@@ -17,7 +17,7 @@ curl -X PUT https://console.jumpcloud.com/api/systems/{SystemID} \\
   -H 'Content-Type: application/json' \\
   -H 'x-api-key: {API_KEY}' \\
   -d '{
-\t\"displayName\":\"Name_Update\",
+\t\"displayName\":\"Name_set ,
 \t\"allowSshPasswordAuthentication\":\"true\",
 \t\"allowSshRootLogin\":\"true\",
 \t\"allowMultiFactorAuthentication\":\"true\",
@@ -29,32 +29,34 @@ curl -X PUT https://console.jumpcloud.com/api/systems/{SystemID} \\
 
 ### SetExpanded (Default)
 ```
-Set-JcSdkSystem -Id <String> [-AgentBoundMessages <ISystemputAgentBoundMessagesItem[]>]
+Set-JcSdkSystem -ConsoleHost <String> -Id <String> [-AgentBoundMessages <ISystemputAgentBoundMessagesItem[]>]
  [-AllowMultiFactorAuthentication] [-AllowPublicKeyAuthentication] [-AllowSshPasswordAuthentication]
- [-AllowSshRootLogin] [-DisplayName <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-AllowSshRootLogin] [-Attributes <IAttribute[]>] [-DisplayName <String>] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### Set
 ```
-Set-JcSdkSystem -Id <String> -Body <ISystemput> [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkSystem -ConsoleHost <String> -Id <String> -Body <ISystemput> [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### SetViaIdentity
 ```
-Set-JcSdkSystem -InputObject <IJumpCloudApiIdentity> -Body <ISystemput> [-Confirm] [-WhatIf]
- [<CommonParameters>]
+Set-JcSdkSystem -ConsoleHost <String> -InputObject <IJumpCloudApiIdentity> -Body <ISystemput> [-Confirm]
+ [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkSystem -InputObject <IJumpCloudApiIdentity>
+Set-JcSdkSystem -ConsoleHost <String> -InputObject <IJumpCloudApiIdentity>
  [-AgentBoundMessages <ISystemputAgentBoundMessagesItem[]>] [-AllowMultiFactorAuthentication]
  [-AllowPublicKeyAuthentication] [-AllowSshPasswordAuthentication] [-AllowSshRootLogin]
- [-DisplayName <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-Attributes <IAttribute[]>] [-DisplayName <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-This endpoint allows you to update a system.
+This endpoint allows you to set a system.
 
 #### Sample Request 
 ```
@@ -63,7 +65,7 @@ curl -X PUT https://console.jumpcloud.com/api/systems/{SystemID} \\
   -H 'Content-Type: application/json' \\
   -H 'x-api-key: {API_KEY}' \\
   -d '{
-\t\"displayName\":\"Name_Update\",
+\t\"displayName\":\"Name_set ,
 \t\"allowSshPasswordAuthentication\":\"true\",
 \t\"allowSshRootLogin\":\"true\",
 \t\"allowMultiFactorAuthentication\":\"true\",
@@ -235,7 +237,6 @@ WindowUpn                            String
 
 ### -AgentBoundMessages
 .
-To construct, see NOTES section for AGENTBOUNDMESSAGES properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V1.Models.ISystemputAgentBoundMessagesItem[]
@@ -309,9 +310,23 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -Attributes
+.
+
+```yaml
+Type: JumpCloud.SDK.V1.Models.IAttribute[]
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Body
 SystemPut
-To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V1.Models.ISystemput
@@ -322,6 +337,22 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -ConsoleHost
+Region for JumpCloud API host.
+Use 'console' for US or 'console.eu' for EU.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -357,7 +388,6 @@ Accept wildcard characters: False
 
 ### -InputObject
 Identity Parameter
-To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V1.Models.IJumpCloudApiIdentity
@@ -417,26 +447,31 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## NOTES
 
-ALIASES
-
 COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-AGENTBOUNDMESSAGES <ISystemputAgentBoundMessagesItem[]>: .
+`AGENTBOUNDMESSAGES <ISystemputAgentBoundMessagesItem[]>`: .
   - `[Cmd <String>]`: 
 
-BODY <ISystemput>: SystemPut
-  - `[AgentBoundMessages <ISystemputAgentBoundMessagesItem[]>]`: 
+`ATTRIBUTES <IAttribute[]>`: .
+  - `[Name <String>]`: 
+  - `[Value <String>]`: 
+
+`BODY <ISystemput>`: SystemPut
+  - `[AgentBoundMessages <List<ISystemputAgentBoundMessagesItem>>]`: 
     - `[Cmd <String>]`: 
   - `[AllowMultiFactorAuthentication <Boolean?>]`: 
   - `[AllowPublicKeyAuthentication <Boolean?>]`: 
   - `[AllowSshPasswordAuthentication <Boolean?>]`: 
   - `[AllowSshRootLogin <Boolean?>]`: 
+  - `[Attributes <List<IAttribute>>]`: 
+    - `[Name <String>]`: 
+    - `[Value <String>]`: 
   - `[DisplayName <String>]`: 
 
-INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter
+`INPUTOBJECT <IJumpCloudApiIdentity>`: Identity Parameter
   - `[Id <String>]`: 
   - `[SystemId <String>]`: 
   - `[SystemuserId <String>]`: 

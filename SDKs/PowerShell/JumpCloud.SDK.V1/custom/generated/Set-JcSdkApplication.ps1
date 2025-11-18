@@ -1,9 +1,9 @@
 <#
 .Synopsis
-The endpoint updates a SSO / SAML Application.
+The endpoint set a SSO / SAML Application.
 Any fields not provided will be reset or created with default values.
 .Description
-The endpoint updates a SSO / SAML Application.
+The endpoint set a SSO / SAML Application.
 Any fields not provided will be reset or created with default values.
 .Example
 PS C:\> Set-JcSdkApplication -Id:(<string>) -Body:(<JumpCloud.SDK.V1.Models.Application>)
@@ -99,7 +99,7 @@ BODY <IApplication>:
     [ConstantAttributeReadOnly <Boolean?>]:
     [ConstantAttributeRequired <Boolean?>]:
     [ConstantAttributeType <String>]:
-    [ConstantAttributeValue <IApplicationConfigConstantAttributesValueItem[]>]:
+    [ConstantAttributeValue <List<IApplicationConfigConstantAttributesValueItem>>]:
       [Name <String>]:
       [ReadOnly <Boolean?>]:
       [Required <Boolean?>]:
@@ -114,7 +114,7 @@ BODY <IApplication>:
     [DatabaseAttributeReadOnly <Boolean?>]:
     [DatabaseAttributeRequired <Boolean?>]:
     [DatabaseAttributeType <String>]:
-    [DatabaseAttributeValue <IApplicationConfigDatabaseAttributesValueItem[]>]:
+    [DatabaseAttributeValue <List<IApplicationConfigDatabaseAttributesValueItem>>]:
       [Name <String>]:
       [ReadOnly <Boolean?>]:
       [Required <Boolean?>]:
@@ -206,7 +206,7 @@ BODY <IApplication>:
     [IncludeGroupsTooltipVariablesIcon <String>]:
     [IncludeGroupsTooltipVariablesMessage <String>]:
     [OverrideNameIdFormatLabel <String>]:
-    [OverrideNameIdFormatOptions <IApplicationConfigOverrideNameIdFormatOptionsItem[]>]:
+    [OverrideNameIdFormatOptions <List<IApplicationConfigOverrideNameIdFormatOptionsItem>>]:
       [Text <String>]:
       [Value <Int32?>]:
     [OverrideNameIdFormatPosition <Int32?>]:
@@ -233,7 +233,7 @@ BODY <IApplication>:
     [SignResponseValue <Boolean?>]:
     [SignResponseVisible <Boolean?>]:
     [SignatureAlgorithmLabel <String>]:
-    [SignatureAlgorithmOptions <IApplicationConfigSignatureAlgorithmOptionsItem[]>]:
+    [SignatureAlgorithmOptions <List<IApplicationConfigSignatureAlgorithmOptionsItem>>]:
       [Text <String>]:
       [Value <Int32?>]:
     [SignatureAlgorithmPosition <Int32?>]:
@@ -276,7 +276,7 @@ BODY <IApplication>:
     [SpErrorFlowValue <Boolean?>]:
     [SpErrorFlowVisible <Boolean?>]:
     [SubjectFieldLabel <String>]:
-    [SubjectFieldOptions <IApplicationConfigSubjectFieldOptionsItem[]>]:
+    [SubjectFieldOptions <List<IApplicationConfigSubjectFieldOptionsItem>>]:
       [Text <String>]:
       [Value <Int32?>]:
     [SubjectFieldPosition <Int32?>]:
@@ -294,7 +294,7 @@ BODY <IApplication>:
   [Beta <Boolean?>]:
   [Color <String>]:
   [Created <String>]:
-  [DatabaseAttributes <IApplicationDatabaseAttributesItem[]>]:
+  [DatabaseAttributes <List<IApplicationDatabaseAttributesItem>>]:
   [Description <String>]:
   [DisplayLabel <String>]:
   [DisplayName <String>]:
@@ -327,7 +327,7 @@ CONFIG <IApplicationConfig>:
   [ConstantAttributeReadOnly <Boolean?>]:
   [ConstantAttributeRequired <Boolean?>]:
   [ConstantAttributeType <String>]:
-  [ConstantAttributeValue <IApplicationConfigConstantAttributesValueItem[]>]:
+  [ConstantAttributeValue <List<IApplicationConfigConstantAttributesValueItem>>]:
     [Name <String>]:
     [ReadOnly <Boolean?>]:
     [Required <Boolean?>]:
@@ -342,7 +342,7 @@ CONFIG <IApplicationConfig>:
   [DatabaseAttributeReadOnly <Boolean?>]:
   [DatabaseAttributeRequired <Boolean?>]:
   [DatabaseAttributeType <String>]:
-  [DatabaseAttributeValue <IApplicationConfigDatabaseAttributesValueItem[]>]:
+  [DatabaseAttributeValue <List<IApplicationConfigDatabaseAttributesValueItem>>]:
     [Name <String>]:
     [ReadOnly <Boolean?>]:
     [Required <Boolean?>]:
@@ -434,7 +434,7 @@ CONFIG <IApplicationConfig>:
   [IncludeGroupsTooltipVariablesIcon <String>]:
   [IncludeGroupsTooltipVariablesMessage <String>]:
   [OverrideNameIdFormatLabel <String>]:
-  [OverrideNameIdFormatOptions <IApplicationConfigOverrideNameIdFormatOptionsItem[]>]:
+  [OverrideNameIdFormatOptions <List<IApplicationConfigOverrideNameIdFormatOptionsItem>>]:
     [Text <String>]:
     [Value <Int32?>]:
   [OverrideNameIdFormatPosition <Int32?>]:
@@ -461,7 +461,7 @@ CONFIG <IApplicationConfig>:
   [SignResponseValue <Boolean?>]:
   [SignResponseVisible <Boolean?>]:
   [SignatureAlgorithmLabel <String>]:
-  [SignatureAlgorithmOptions <IApplicationConfigSignatureAlgorithmOptionsItem[]>]:
+  [SignatureAlgorithmOptions <List<IApplicationConfigSignatureAlgorithmOptionsItem>>]:
     [Text <String>]:
     [Value <Int32?>]:
   [SignatureAlgorithmPosition <Int32?>]:
@@ -504,7 +504,7 @@ CONFIG <IApplicationConfig>:
   [SpErrorFlowValue <Boolean?>]:
   [SpErrorFlowVisible <Boolean?>]:
   [SubjectFieldLabel <String>]:
-  [SubjectFieldOptions <IApplicationConfigSubjectFieldOptionsItem[]>]:
+  [SubjectFieldOptions <List<IApplicationConfigSubjectFieldOptionsItem>>]:
     [Text <String>]:
     [Value <Int32?>]:
   [SubjectFieldPosition <Int32?>]:
@@ -528,8 +528,15 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
  Function Set-JcSdkApplication
 {
     [OutputType([JumpCloud.SDK.V1.Models.IApplication])]
-    [CmdletBinding(DefaultParameterSetName='Set', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
+    [CmdletBinding(DefaultParameterSetName='SetExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
+    [Parameter(Mandatory)]
+    [JumpCloud.SDK.V1.Category('Uri')]
+    [System.String]
+    # Region for JumpCloud API host.
+    # Use 'console' for US or 'console.eu' for EU.
+    ${ConsoleHost}, 
+
     [Parameter(ParameterSetName='Set', Mandatory)]
     [Parameter(ParameterSetName='SetExpanded', Mandatory)]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
@@ -543,7 +550,6 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V1.Category('Path')]
     [JumpCloud.SDK.V1.Models.IJumpCloudApiIdentity]
     # Identity Parameter
-    # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
     ${InputObject}, 
 
     [Parameter(ParameterSetName='Set', Mandatory, ValueFromPipeline)]
@@ -551,30 +557,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V1.Category('Body')]
     [JumpCloud.SDK.V1.Models.IApplication]
     # Application
-    # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body}, 
-
-    [Parameter(ParameterSetName='SetExpanded', Mandatory)]
-    [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory)]
-    [JumpCloud.SDK.V1.Category('Body')]
-    [JumpCloud.SDK.V1.Models.IApplicationConfig]
-    # .
-    # To construct, see NOTES section for CONFIG properties and create a hash table.
-    ${Config}, 
-
-    [Parameter(ParameterSetName='SetExpanded', Mandatory)]
-    [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory)]
-    [JumpCloud.SDK.V1.Category('Body')]
-    [System.String]
-    # .
-    ${Name}, 
-
-    [Parameter(ParameterSetName='SetExpanded', Mandatory)]
-    [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory)]
-    [JumpCloud.SDK.V1.Category('Body')]
-    [System.String]
-    # .
-    ${SsoUrl}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
@@ -596,6 +579,13 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [System.String]
     # .
     ${Color}, 
+
+    [Parameter(ParameterSetName='SetExpanded')]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
+    [JumpCloud.SDK.V1.Category('Body')]
+    [JumpCloud.SDK.V1.Models.IApplicationConfig]
+    # .
+    ${Config}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
@@ -665,6 +655,13 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # .
+    ${Name}, 
+
+    [Parameter(ParameterSetName='SetExpanded')]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
+    [JumpCloud.SDK.V1.Category('Body')]
+    [System.String]
+    # .
     ${Organization}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
@@ -708,6 +705,13 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [System.String]
     # .
     ${SsoType}, 
+
+    [Parameter(ParameterSetName='SetExpanded')]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
+    [JumpCloud.SDK.V1.Category('Body')]
+    [System.String]
+    # .
+    ${SsoUrl}, 
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V1.Category('Runtime')]

@@ -1,6 +1,6 @@
 <#
 .Synopsis
-This endpoint allows you to update a system user.
+This endpoint allows you to set a system user.
 
 #### Sample Request
 
@@ -16,7 +16,7 @@ curl -X PUT https://console.jumpcloud.com/api/systemusers/{UserID} \\
 }'
 ```
 .Description
-This endpoint allows you to update a system user.
+This endpoint allows you to set a system user.
 
 #### Sample Request
 
@@ -203,7 +203,7 @@ ATTRIBUTES <ISystemuserputAttributesItem[]>:
 
 BODY <ISystemuserput>:
   [AccountLocked <Boolean?>]:
-  [Addresses <ISystemuserputAddressesItem[]>]: type, poBox, extendedAddress, streetAddress, locality, region, postalCode, country
+  [Addresses <List<ISystemuserputAddressesItem>>]: type, poBox, extendedAddress, streetAddress, locality, region, postalCode, country
     [Country <String>]:
     [ExtendedAddress <String>]:
     [Locality <String>]:
@@ -214,7 +214,7 @@ BODY <ISystemuserput>:
     [Type <String>]:
   [AllowPublicKey <Boolean?>]:
   [AlternateEmail <String>]:
-  [Attributes <ISystemuserputAttributesItem[]>]:
+  [Attributes <List<ISystemuserputAttributesItem>>]:
     [Name <String>]:
     [Value <String>]:
   [Company <String>]:
@@ -246,19 +246,19 @@ BODY <ISystemuserput>:
   [Middlename <String>]:
   [Password <String>]:
   [PasswordNeverExpires <Boolean?>]:
-  [PhoneNumbers <ISystemuserputPhoneNumbersItem[]>]:
+  [PhoneNumbers <List<ISystemuserputPhoneNumbersItem>>]:
     [Number <String>]:
     [Type <String>]:
   [PublicKey <String>]:
-  [Relationships <ISystemuserputRelationshipsItem[]>]:
+  [Relationships <List<ISystemuserputRelationshipsItem>>]:
     [Type <String>]:
     [Value <String>]:
-  [RestrictedFields <IRestrictedField1[]>]:
+  [RestrictedFields <List<IRestrictedField1>>]:
     [Field <String>]:
     [Id <String>]:
     [Type <String>]:
   [SambaServiceUser <Boolean?>]:
-  [SshKeys <ISshkeypost[]>]:
+  [SshKeys <List<ISshkeypost>>]:
     Name <String>: The name of the SSH key.
     PublicKey <String>: The Public SSH key.
   [State <String>]:
@@ -298,6 +298,13 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [OutputType([JumpCloud.SDK.V1.Models.ISystemuserreturn])]
     [CmdletBinding(DefaultParameterSetName='SetExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
+    [Parameter(Mandatory)]
+    [JumpCloud.SDK.V1.Category('Uri')]
+    [System.String]
+    # Region for JumpCloud API host.
+    # Use 'console' for US or 'console.eu' for EU.
+    ${ConsoleHost}, 
+
     [Parameter(ParameterSetName='Set', Mandatory)]
     [Parameter(ParameterSetName='SetExpanded', Mandatory)]
     [JumpCloud.SDK.V1.Category('Path')]
@@ -310,7 +317,6 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V1.Category('Path')]
     [JumpCloud.SDK.V1.Models.IJumpCloudApiIdentity]
     # Identity Parameter
-    # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
     ${InputObject}, 
 
     [Parameter()]
@@ -324,7 +330,6 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V1.Category('Body')]
     [JumpCloud.SDK.V1.Models.ISystemuserput]
     # SystemUserPut
-    # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
@@ -340,7 +345,6 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V1.Category('Body')]
     [JumpCloud.SDK.V1.Models.ISystemuserputAddressesItem[]]
     # type, poBox, extendedAddress, streetAddress, locality, region, postalCode, country
-    # To construct, see NOTES section for ADDRESSES properties and create a hash table.
     ${Addresses}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
@@ -363,7 +367,6 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V1.Category('Body')]
     [JumpCloud.SDK.V1.Models.ISystemuserputAttributesItem[]]
     # .
-    # To construct, see NOTES section for ATTRIBUTES properties and create a hash table.
     ${Attributes}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
@@ -576,7 +579,6 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V1.Category('Body')]
     [JumpCloud.SDK.V1.Models.ISystemuserputPhoneNumbersItem[]]
     # .
-    # To construct, see NOTES section for PHONENUMBERS properties and create a hash table.
     ${PhoneNumbers}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
@@ -592,7 +594,6 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V1.Category('Body')]
     [JumpCloud.SDK.V1.Models.ISystemuserputRelationshipsItem[]]
     # .
-    # To construct, see NOTES section for RELATIONSHIPS properties and create a hash table.
     ${Relationships}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
@@ -601,7 +602,6 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V1.Category('Body')]
     [JumpCloud.SDK.V1.Models.IRestrictedField1[]]
     # .
-    # To construct, see NOTES section for RESTRICTEDFIELDS properties and create a hash table.
     ${RestrictedFields}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
@@ -617,7 +617,6 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V1.Category('Body')]
     [JumpCloud.SDK.V1.Models.ISshkeypost[]]
     # .
-    # To construct, see NOTES section for SSHKEYS properties and create a hash table.
     ${SshKeys}, 
 
     [Parameter(ParameterSetName='SetExpanded')]

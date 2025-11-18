@@ -95,7 +95,7 @@ BODY <IApplication>:
     [ConstantAttributeReadOnly <Boolean?>]:
     [ConstantAttributeRequired <Boolean?>]:
     [ConstantAttributeType <String>]:
-    [ConstantAttributeValue <IApplicationConfigConstantAttributesValueItem[]>]:
+    [ConstantAttributeValue <List<IApplicationConfigConstantAttributesValueItem>>]:
       [Name <String>]:
       [ReadOnly <Boolean?>]:
       [Required <Boolean?>]:
@@ -110,7 +110,7 @@ BODY <IApplication>:
     [DatabaseAttributeReadOnly <Boolean?>]:
     [DatabaseAttributeRequired <Boolean?>]:
     [DatabaseAttributeType <String>]:
-    [DatabaseAttributeValue <IApplicationConfigDatabaseAttributesValueItem[]>]:
+    [DatabaseAttributeValue <List<IApplicationConfigDatabaseAttributesValueItem>>]:
       [Name <String>]:
       [ReadOnly <Boolean?>]:
       [Required <Boolean?>]:
@@ -202,7 +202,7 @@ BODY <IApplication>:
     [IncludeGroupsTooltipVariablesIcon <String>]:
     [IncludeGroupsTooltipVariablesMessage <String>]:
     [OverrideNameIdFormatLabel <String>]:
-    [OverrideNameIdFormatOptions <IApplicationConfigOverrideNameIdFormatOptionsItem[]>]:
+    [OverrideNameIdFormatOptions <List<IApplicationConfigOverrideNameIdFormatOptionsItem>>]:
       [Text <String>]:
       [Value <Int32?>]:
     [OverrideNameIdFormatPosition <Int32?>]:
@@ -229,7 +229,7 @@ BODY <IApplication>:
     [SignResponseValue <Boolean?>]:
     [SignResponseVisible <Boolean?>]:
     [SignatureAlgorithmLabel <String>]:
-    [SignatureAlgorithmOptions <IApplicationConfigSignatureAlgorithmOptionsItem[]>]:
+    [SignatureAlgorithmOptions <List<IApplicationConfigSignatureAlgorithmOptionsItem>>]:
       [Text <String>]:
       [Value <Int32?>]:
     [SignatureAlgorithmPosition <Int32?>]:
@@ -272,7 +272,7 @@ BODY <IApplication>:
     [SpErrorFlowValue <Boolean?>]:
     [SpErrorFlowVisible <Boolean?>]:
     [SubjectFieldLabel <String>]:
-    [SubjectFieldOptions <IApplicationConfigSubjectFieldOptionsItem[]>]:
+    [SubjectFieldOptions <List<IApplicationConfigSubjectFieldOptionsItem>>]:
       [Text <String>]:
       [Value <Int32?>]:
     [SubjectFieldPosition <Int32?>]:
@@ -290,7 +290,7 @@ BODY <IApplication>:
   [Beta <Boolean?>]:
   [Color <String>]:
   [Created <String>]:
-  [DatabaseAttributes <IApplicationDatabaseAttributesItem[]>]:
+  [DatabaseAttributes <List<IApplicationDatabaseAttributesItem>>]:
   [Description <String>]:
   [DisplayLabel <String>]:
   [DisplayName <String>]:
@@ -323,7 +323,7 @@ CONFIG <IApplicationConfig>:
   [ConstantAttributeReadOnly <Boolean?>]:
   [ConstantAttributeRequired <Boolean?>]:
   [ConstantAttributeType <String>]:
-  [ConstantAttributeValue <IApplicationConfigConstantAttributesValueItem[]>]:
+  [ConstantAttributeValue <List<IApplicationConfigConstantAttributesValueItem>>]:
     [Name <String>]:
     [ReadOnly <Boolean?>]:
     [Required <Boolean?>]:
@@ -338,7 +338,7 @@ CONFIG <IApplicationConfig>:
   [DatabaseAttributeReadOnly <Boolean?>]:
   [DatabaseAttributeRequired <Boolean?>]:
   [DatabaseAttributeType <String>]:
-  [DatabaseAttributeValue <IApplicationConfigDatabaseAttributesValueItem[]>]:
+  [DatabaseAttributeValue <List<IApplicationConfigDatabaseAttributesValueItem>>]:
     [Name <String>]:
     [ReadOnly <Boolean?>]:
     [Required <Boolean?>]:
@@ -430,7 +430,7 @@ CONFIG <IApplicationConfig>:
   [IncludeGroupsTooltipVariablesIcon <String>]:
   [IncludeGroupsTooltipVariablesMessage <String>]:
   [OverrideNameIdFormatLabel <String>]:
-  [OverrideNameIdFormatOptions <IApplicationConfigOverrideNameIdFormatOptionsItem[]>]:
+  [OverrideNameIdFormatOptions <List<IApplicationConfigOverrideNameIdFormatOptionsItem>>]:
     [Text <String>]:
     [Value <Int32?>]:
   [OverrideNameIdFormatPosition <Int32?>]:
@@ -457,7 +457,7 @@ CONFIG <IApplicationConfig>:
   [SignResponseValue <Boolean?>]:
   [SignResponseVisible <Boolean?>]:
   [SignatureAlgorithmLabel <String>]:
-  [SignatureAlgorithmOptions <IApplicationConfigSignatureAlgorithmOptionsItem[]>]:
+  [SignatureAlgorithmOptions <List<IApplicationConfigSignatureAlgorithmOptionsItem>>]:
     [Text <String>]:
     [Value <Int32?>]:
   [SignatureAlgorithmPosition <Int32?>]:
@@ -500,7 +500,7 @@ CONFIG <IApplicationConfig>:
   [SpErrorFlowValue <Boolean?>]:
   [SpErrorFlowVisible <Boolean?>]:
   [SubjectFieldLabel <String>]:
-  [SubjectFieldOptions <IApplicationConfigSubjectFieldOptionsItem[]>]:
+  [SubjectFieldOptions <List<IApplicationConfigSubjectFieldOptionsItem>>]:
     [Text <String>]:
     [Value <Int32?>]:
   [SubjectFieldPosition <Int32?>]:
@@ -518,33 +518,20 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
  Function New-JcSdkApplication
 {
     [OutputType([JumpCloud.SDK.V1.Models.IApplication])]
-    [CmdletBinding(DefaultParameterSetName='Create', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
+    [CmdletBinding(DefaultParameterSetName='CreateExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
+    [Parameter(Mandatory)]
+    [JumpCloud.SDK.V1.Category('Uri')]
+    [System.String]
+    # Region for JumpCloud API host.
+    # Use 'console' for US or 'console.eu' for EU.
+    ${ConsoleHost}, 
+
     [Parameter(ParameterSetName='Create', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V1.Category('Body')]
     [JumpCloud.SDK.V1.Models.IApplication]
     # Application
-    # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body}, 
-
-    [Parameter(ParameterSetName='CreateExpanded', Mandatory)]
-    [JumpCloud.SDK.V1.Category('Body')]
-    [JumpCloud.SDK.V1.Models.IApplicationConfig]
-    # .
-    # To construct, see NOTES section for CONFIG properties and create a hash table.
-    ${Config}, 
-
-    [Parameter(ParameterSetName='CreateExpanded', Mandatory)]
-    [JumpCloud.SDK.V1.Category('Body')]
-    [System.String]
-    # .
-    ${Name}, 
-
-    [Parameter(ParameterSetName='CreateExpanded', Mandatory)]
-    [JumpCloud.SDK.V1.Category('Body')]
-    [System.String]
-    # .
-    ${SsoUrl}, 
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
@@ -563,6 +550,12 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [System.String]
     # .
     ${Color}, 
+
+    [Parameter(ParameterSetName='CreateExpanded')]
+    [JumpCloud.SDK.V1.Category('Body')]
+    [JumpCloud.SDK.V1.Models.IApplicationConfig]
+    # .
+    ${Config}, 
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]
@@ -623,6 +616,12 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V1.Category('Body')]
     [System.String]
     # .
+    ${Name}, 
+
+    [Parameter(ParameterSetName='CreateExpanded')]
+    [JumpCloud.SDK.V1.Category('Body')]
+    [System.String]
+    # .
     ${Organization}, 
 
     [Parameter(ParameterSetName='CreateExpanded')]
@@ -660,6 +659,12 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [System.String]
     # .
     ${SsoType}, 
+
+    [Parameter(ParameterSetName='CreateExpanded')]
+    [JumpCloud.SDK.V1.Category('Body')]
+    [System.String]
+    # .
+    ${SsoUrl}, 
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V1.Category('Runtime')]

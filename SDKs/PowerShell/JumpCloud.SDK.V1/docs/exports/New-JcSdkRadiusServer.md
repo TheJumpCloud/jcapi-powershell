@@ -29,15 +29,16 @@ curl -X POST https://console.jumpcloud.com/api/radiusservers/ \\
 
 ### CreateExpanded (Default)
 ```
-New-JcSdkRadiusServer -Name <String> -NetworkSourceIP <String> -SharedSecret <String> [-AuthIdp <String>]
- [-CaCert <String>] [-DeviceCertEnabled] [-Mfa <String>] [-RadsecEnabled] [-RequireRadsec] [-RequireTlsAuth]
- [-UserCertEnabled] [-UserLockoutAction <String>] [-UserPasswordEnabled]
- [-UserPasswordExpirationAction <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+New-JcSdkRadiusServer -ConsoleHost <String> [-AuthIdp <String>] [-CaCert <String>] [-DeviceCertEnabled]
+ [-Mfa <String>] [-Name <String>] [-NetworkSourceIP <String>] [-RadsecEnabled] [-RequireRadsec]
+ [-RequireTlsAuth] [-SharedSecret <String>] [-UserCertEnabled] [-UserLockoutAction <String>]
+ [-UserPasswordEnabled] [-UserPasswordExpirationAction <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Create
 ```
-New-JcSdkRadiusServer -Body <IRadiusserverpost> [-Confirm] [-WhatIf] [<CommonParameters>]
+New-JcSdkRadiusServer -ConsoleHost <String> -Body <IRadiusserverpost> [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -119,7 +120,6 @@ Accept wildcard characters: False
 
 ### -Body
 RadiusServerPost
-To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V1.Models.IRadiusserverpost
@@ -142,6 +142,22 @@ Parameter Sets: CreateExpanded
 Aliases:
 
 Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ConsoleHost
+Region for JumpCloud API host.
+Use 'console' for US or 'console.eu' for EU.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -186,7 +202,7 @@ Type: System.String
 Parameter Sets: CreateExpanded
 Aliases:
 
-Required: True
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -201,7 +217,7 @@ Type: System.String
 Parameter Sets: CreateExpanded
 Aliases:
 
-Required: True
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -261,7 +277,7 @@ Type: System.String
 Parameter Sets: CreateExpanded
 Aliases:
 
-Required: True
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -372,14 +388,12 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## NOTES
 
-ALIASES
-
 COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <IRadiusserverpost>: RadiusServerPost
+`BODY <IRadiusserverpost>`: RadiusServerPost
   - `Name <String>`: 
   - `NetworkSourceIP <String>`: 
   - `SharedSecret <String>`: RADIUS shared secret between the server and client.
