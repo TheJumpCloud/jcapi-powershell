@@ -372,7 +372,7 @@ If ($moduleName -eq 'JumpCloud.SDK.V1' -or $moduleName -eq 'JumpCloud.SDK.V2' -a
 
     $global:PesterDefProviderAdminName = "ProviderAdmin-$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
 
-    $global:PesterDefProviderAdmin = [JumpCloud.SDK.V2.Models.ProviderAdminReq]@{
+    $global:PesterDefProviderAdmin = @{
         Email     = "$($global:PesterDefProviderAdminName)@example$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ })).com";
         Firstname = 'AdminFirst'
         Lastname  = 'AdminLast'
