@@ -187,7 +187,7 @@ jobs:
         with:
           name: build-JumpCloud.SDK.DirectoryInsights
           path: /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights.zip
-          retention-days: 1
+          retention-days: 7
 
   Build-SDK-V1:
     needs: ["Setup-Build-Dependencies", "Check-PR-Labels", "Validate-SDK-Module"]
@@ -225,7 +225,7 @@ jobs:
         with:
           name: build-JumpCloud.SDK.V1
           path: /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/JumpCloud.SDK.V1.zip
-          retention-days: 1
+          retention-days: 7
 
   Build-SDK-V2:
     needs: ["Setup-Build-Dependencies" , "Check-PR-Labels" , "Validate-SDK-Module"]
@@ -263,7 +263,7 @@ jobs:
         with:
           name: build-JumpCloud.SDK.V2
           path: /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/JumpCloud.SDK.V2.zip
-          retention-days: 1
+          retention-days: 7
 
   ## ----------------------------------------------------------------
   ## Test Jobs
