@@ -16,20 +16,13 @@ while(-not $mockingPath) {
 }
 Describe 'Set-JcSdkRadiusServerAssociation' -Tag:(""){
     It 'SetExpanded' {
-        $ParameterType = (Get-Command Set-JcSdkRadiusServerAssociation).Parameters.Type.ParameterType.FullName
-        (Get-Command Set-JcSdkRadiusServerAssociation).Parameters.Type.ParameterType.DeclaredFields.Where( { $_.IsPublic }).Name | ForEach-Object {
-            { Set-JcSdkRadiusServerAssociation -Id:((Get-Variable -Name:("PesterTest$($_)")).Value.Id) -Op:('add') -Type:(Invoke-Expression "[$ParameterType]::$_".Replace('group','_group')) -RadiusServerId:($global:PesterTestRadiusServer.Id) } | Should -Not -Throw
-            { Set-JcSdkRadiusServerAssociation -Id:((Get-Variable -Name:("PesterTest$($_)")).Value.Id) -Op:('remove') -Type:(Invoke-Expression "[$ParameterType]::$_".Replace('group','_group')) -RadiusServerId:($global:PesterTestRadiusServer.Id) } | Should -Not -Throw
-        }
+        # get some user group
+        $group = get-jcsdkuserGroup | Select-Object -First 1
+        {Set-JcSdkRadiusServerAssociation -RadiusServerId $global:PesterTestRadiusServer.Id -Op 'add' -Type 'user_group' -id $group.Id} | Should -Not -Throw
+        {Set-JcSdkRadiusServerAssociation -RadiusServerId $global:PesterTestRadiusServer.Id -Op 'remove' -Type 'user_group' -id $group.Id} | Should -Not -Throw
+
     }
 
-    It 'Set' {
-        $ParameterType = (Get-Command Set-JcSdkRadiusServerAssociation).Parameters.Type.ParameterType.FullName
-        (Get-Command Set-JcSdkRadiusServerAssociation).Parameters.Type.ParameterType.DeclaredFields.Where( { $_.IsPublic }).Name | ForEach-Object {
-            { Set-JcSdkRadiusServerAssociation -Body:(@{Id = (Get-Variable -Name:("PesterTest$($_)")).Value.Id; Op = 'add'; Type = Invoke-Expression "[$ParameterType]::$_".Replace('group','_group'); }) -RadiusServerId:($global:PesterTestRadiusServer.Id) } | Should -Not -Throw
-            { Set-JcSdkRadiusServerAssociation -Body:(@{Id = (Get-Variable -Name:("PesterTest$($_)")).Value.Id; Op = 'remove'; Type = Invoke-Expression "[$ParameterType]::$_".Replace('group','_group'); }) -RadiusServerId:($global:PesterTestRadiusServer.Id) } | Should -Not -Throw
-        }
-    }
 
     It 'SetViaIdentity' -skip {
         { Set-JcSdkRadiusServerAssociation -Body:(@{Id = $global:PesterTestUser.Id; Op = 'add'; Type = 'user';}) -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw

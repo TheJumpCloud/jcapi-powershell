@@ -17,7 +17,7 @@ while(-not $mockingPath) {
 Describe 'New-JcSdkCustomEmailConfiguration' -Tag:("") -skip{
     It 'CreateExpanded' {
         # this action is only available for paying customers
-        $global:PesterTestCustomEmailConfiguration = New-JcSdkCustomEmailConfiguration @global:PesterDefCustomEmailConfiguration
+        $global:PesterTestCustomEmailConfiguration = New-JcSdkCustomEmailConfiguration -body $global:PesterDefCustomEmailConfiguration
         $global:PesterTestCustomEmailConfiguration | Should -Not -BeNullOrEmpty
     }
 

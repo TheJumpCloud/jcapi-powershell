@@ -4434,7 +4434,8 @@
         "example-1": {
           "jobId": "string"
         }
-      }
+      },
+      "x-ms-client-name": "JobIdResult"
     },
     "job-workresult": {
       "properties": {

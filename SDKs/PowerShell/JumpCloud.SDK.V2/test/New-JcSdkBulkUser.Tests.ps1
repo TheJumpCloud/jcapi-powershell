@@ -19,10 +19,10 @@ Describe 'New-JcSdkBulkUser' -Tag:(""){
         $global:PesterTestBulkUserJobId =  New-JcSdkBulkUser -Body:($global:PesterDefBulkUser) -CreationSource:('jumpcloud:bulk')
         { $global:PesterTestBulkUserJobId } | Should -Not -BeNullOrEmpty
 
-        $result = Get-JcsdkbulkUsersResult -jobid $PesterTestBulkUserJobId
+        $result = Get-JcsdkbulkUsersResult -jobid $PesterTestBulkUserJobId.jobid
         do {
-            write-host "running"
-            $result = Get-JcsdkbulkUsersResult -jobid $PesterTestBulkUserJobId
+            write-host "running: Status: $($result.Status)"
+            $result = Get-JcsdkbulkUsersResult -jobid $PesterTestBulkUserJobId.jobid
             Start-Sleep 1
         } until ($result.Status -eq 'Finished')
 

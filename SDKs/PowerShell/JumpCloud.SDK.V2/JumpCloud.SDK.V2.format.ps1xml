@@ -4152,21 +4152,21 @@
       </TableControl>
     </View>
     <View>
-      <Name>JumpCloud.SDK.V2.Models.JobId</Name>
+      <Name>JumpCloud.SDK.V2.Models.JobIdResult</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.JobId#Multiple</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.JobIdResult#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
           <TableColumnHeader>
-            <Label>JobId1</Label>
+            <Label>JobId</Label>
           </TableColumnHeader>
         </TableHeaders>
         <TableRowEntries>
           <TableRowEntry>
             <TableColumnItems>
               <TableColumnItem>
-                <PropertyName>JobId1</PropertyName>
+                <PropertyName>JobId</PropertyName>
               </TableColumnItem>
             </TableColumnItems>
           </TableRowEntry>

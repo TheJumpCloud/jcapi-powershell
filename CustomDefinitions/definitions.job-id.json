@@ -1,0 +1,15 @@
+{
+    "properties": {
+    "jobId": {
+        "type": "string"
+    }
+    },
+    "title": "Job ID",
+    "type": "object",
+    "x-examples": {
+    "example-1": {
+        "jobId": "string"
+    }
+    },
+    "x-ms-client-name": "JobIdResult"
+}

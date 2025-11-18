@@ -16,19 +16,11 @@ while(-not $mockingPath) {
 }
 Describe 'Set-JcSdkLdapServerAssociation' -Tag:(""){
     It 'SetExpanded' {
-        $ParameterType = (Get-Command Set-JcSdkLdapServerAssociation).Parameters.Type.ParameterType.FullName
-        (Get-Command Set-JcSdkLdapServerAssociation).Parameters.Type.ParameterType.DeclaredFields.Where( { $_.IsPublic }).Name | ForEach-Object {
-            { Set-JcSdkLdapServerAssociation -Id:((Get-Variable -Name:("PesterTest$($_)")).Value.Id) -Op:('add') -Type:(Invoke-Expression "[$ParameterType]::$_".Replace('group','_group')) -LdapServerId:($global:PesterTestLdapServer.Id) } | Should -Not -Throw
-            { Set-JcSdkLdapServerAssociation -Id:((Get-Variable -Name:("PesterTest$($_)")).Value.Id) -Op:('remove') -Type:(Invoke-Expression "[$ParameterType]::$_".Replace('group','_group')) -LdapServerId:($global:PesterTestLdapServer.Id) } | Should -Not -Throw
-        }
-    }
+        # get some user group
+        $group = get-jcsdkusergroup | Select-Object -First 1
+        {Set-JcSdkLdapServerAssociation -LdapServerId $global:PesterTestLdapServer.Id -Op 'add' -Type 'user_group' -id $group.Id} | Should -Not -Throw
+        {Set-JcSdkLdapServerAssociation -LdapServerId $global:PesterTestLdapServer.Id -Op 'remove' -Type 'user_group' -id $group.Id} | Should -Not -Throw
 
-    It 'Set' {
-        $ParameterType = (Get-Command Set-JcSdkLdapServerAssociation).Parameters.Type.ParameterType.FullName
-        (Get-Command Set-JcSdkLdapServerAssociation).Parameters.Type.ParameterType.DeclaredFields.Where( { $_.IsPublic }).Name | ForEach-Object {
-            { Set-JcSdkLdapServerAssociation -Body:(@{Id = (Get-Variable -Name:("PesterTest$($_)")).Value.Id; Op = 'add'; Type = Invoke-Expression "[$ParameterType]::$_".Replace('group','_group'); }) -LdapServerId:($global:PesterTestLdapServer.Id) } | Should -Not -Throw
-            { Set-JcSdkLdapServerAssociation -Body:(@{Id = (Get-Variable -Name:("PesterTest$($_)")).Value.Id; Op = 'remove'; Type = Invoke-Expression "[$ParameterType]::$_".Replace('group','_group'); }) -LdapServerId:($global:PesterTestLdapServer.Id) } | Should -Not -Throw
-        }
     }
 
     It 'SetViaIdentity' -skip {

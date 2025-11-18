@@ -19,10 +19,10 @@ Describe 'Update-JcSdkBulkUser' -Tag:(""){
         $updateBulkUserJobID = Update-JcSdkBulkUser -Body:($global:PesterDefUpdateBulkUser)
         $updateBulkUserJobID | Should -Not -BeNullOrEmpty
 
-        $result = Get-JcsdkbulkUsersResult -jobid $updateBulkUserJobID
+        $result = Get-JcsdkbulkUsersResult -jobid $updateBulkUserJobID.jobid
         do {
             write-host "running"
-            $result = Get-JcsdkbulkUsersResult -jobid $updateBulkUserJobID
+            $result = Get-JcsdkbulkUsersResult -jobid $updateBulkUserJobID.jobid
             Start-Sleep 1
         } until ($result.Status -eq 'Finished')
 

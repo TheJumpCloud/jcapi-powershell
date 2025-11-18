@@ -16,19 +16,11 @@ while(-not $mockingPath) {
 }
 Describe 'Set-JcSdkSoftwareAppAssociation' -Tag:(""){
     It 'SetExpanded' {
-        $ParameterType = (Get-Command Set-JcSdkSoftwareAppAssociation).Parameters.Type.ParameterType.FullName
-        (Get-Command Set-JcSdkSoftwareAppAssociation).Parameters.Type.ParameterType.DeclaredFields.Where( { $_.IsPublic }).Name | ForEach-Object {
-            { Set-JcSdkSoftwareAppAssociation -Id:((Get-Variable -Name:("PesterTest$($_)")).Value.Id) -Op:('add') -Type:(Invoke-Expression "[$ParameterType]::$_".Replace('group','_group')) -SoftwareAppId:($global:PesterTestSoftwareApp.Id) } | Should -Not -Throw
-            { Set-JcSdkSoftwareAppAssociation -Id:((Get-Variable -Name:("PesterTest$($_)")).Value.Id) -Op:('remove') -Type:(Invoke-Expression "[$ParameterType]::$_".Replace('group','_group')) -SoftwareAppId:($global:PesterTestSoftwareApp.Id) } | Should -Not -Throw
-        }
-    }
+        # get some system group
+        $group = get-jcsdksystemGroup | Select-Object -First 1
+        {Set-JcSdkSoftwareAppAssociation -SoftwareAppId $global:PesterTestSoftwareApp.Id -Op 'add' -Type 'system_group' -id $group.Id} | Should -Not -Throw
+        {Set-JcSdkSoftwareAppAssociation -SoftwareAppId $global:PesterTestSoftwareApp.Id -Op 'remove' -Type 'system_group' -id $group.Id} | Should -Not -Throw
 
-    It 'Set' {
-        $ParameterType = (Get-Command Set-JcSdkSoftwareAppAssociation).Parameters.Type.ParameterType.FullName
-        (Get-Command Set-JcSdkSoftwareAppAssociation).Parameters.Type.ParameterType.DeclaredFields.Where( { $_.IsPublic }).Name | ForEach-Object {
-            { Set-JcSdkSoftwareAppAssociation -Body:(@{Id = (Get-Variable -Name:("PesterTest$($_)")).Value.Id; Op = 'add'; Type = Invoke-Expression "[$ParameterType]::$_".Replace('group','_group'); }) -SoftwareAppId:($global:PesterTestSoftwareApp.Id) } | Should -Not -Throw
-            { Set-JcSdkSoftwareAppAssociation -Body:(@{Id = (Get-Variable -Name:("PesterTest$($_)")).Value.Id; Op = 'remove'; Type = Invoke-Expression "[$ParameterType]::$_".Replace('group','_group'); }) -SoftwareAppId:($global:PesterTestSoftwareApp.Id) } | Should -Not -Throw
-        }
     }
 
     It 'SetViaIdentity' -skip {

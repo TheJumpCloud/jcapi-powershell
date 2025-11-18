@@ -111,7 +111,7 @@ PS C:\> {{ Add code here }}
 .Inputs
 System.Collections.Generic.List`1[[JumpCloud.SDK.V2.Models.IBulkUserCreate, JumpCloud.SDK.V2.private, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]
 .Outputs
-JumpCloud.SDK.V2.Models.IJobId
+JumpCloud.SDK.V2.Models.IJobIdResult
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -184,7 +184,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function New-JcSdkBulkUser
 {
-    [OutputType([JumpCloud.SDK.V2.Models.IJobId])]
+    [OutputType([JumpCloud.SDK.V2.Models.IJobIdResult])]
     [CmdletBinding(DefaultParameterSetName='Create', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(Mandatory)]
