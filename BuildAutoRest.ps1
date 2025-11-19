@@ -155,7 +155,14 @@ ForEach ($SDK In $SDKName)
                 $inputFile = Get-Content -Path "$OutputFullPath/generated/api/JumpCloudApi.cs" -Raw
                 # Replace the filter logic to use indexed array parameters: filter[0]=..., filter[1]=..., etc.
                 # Pattern matches both filter.Length and filter.Count variations, with flexible whitespace
+                # Also handles both patterns: with and without EscapeDataString wrapper
+
+                # Pattern 1: Without EscapeDataString (V1 SDK)
                 $newFile = $inputFile -replace '\(null != filter\s+&&\s+filter\.(Length|Count)\s+>\s+0\s+\?\s+"filter="\s+\+\s+\(global::System\.Linq\.Enumerable\.Aggregate\(filter,\s+\(current,\s+each\)\s+=>\s+current\s+\+\s+","\s+\+\s+\(\s+null\s+==\s+each\s+\?\s+global::System\.String\.Empty\s+:\s+each\.ToString\(\)\s*\)\s*\)\s*\)\s+:\s+global::System\.String\.Empty\)', '(null != filter  && filter.Count > 0 ? global::System.Linq.Enumerable.Aggregate(global::System.Linq.Enumerable.Select(filter, (value, index) => new { value, index }), "", (current, item) => current + (item.index > 0 ? "&" : "") + "filter[" + item.index + "]=" + (item.value?.ToString() ?? global::System.String.Empty)) : global::System.String.Empty)'
+
+                # Pattern 2: With EscapeDataString (V2 SDK)
+                $newFile = $newFile -replace '\(null != filter\s+&&\s+filter\.(Length|Count)\s+>\s+0\s+\?\s+"filter="\s+\+\s+global::System\.Uri\.EscapeDataString\(global::System\.Linq\.Enumerable\.Aggregate\(filter,\s+\(current,\s+each\)\s+=>\s+current\s+\+\s+","\s+\+\s+\(\s+null\s+==\s+each\s+\?\s+global::System\.String\.Empty\s+:\s+each\.ToString\(\)\s*\)\s*\)\s*\)\s+:\s+global::System\.String\.Empty\)', '(null != filter  && filter.Count > 0 ? global::System.Linq.Enumerable.Aggregate(global::System.Linq.Enumerable.Select(filter, (value, index) => new { value, index }), "", (current, item) => current + (item.index > 0 ? "&" : "") + "filter[" + item.index + "]=" + global::System.Uri.EscapeDataString(item.value?.ToString() ?? global::System.String.Empty)) : global::System.String.Empty)'
+
                 Set-Content -Path "$OutputFullPath/generated/api/JumpCloudApi.cs" -Value $newFile
             }
             $BuildModuleContent = Get-Content -Path:($buildModulePath) -Raw

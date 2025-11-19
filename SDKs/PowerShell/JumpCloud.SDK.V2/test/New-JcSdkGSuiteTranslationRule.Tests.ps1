@@ -15,8 +15,17 @@ while(-not $mockingPath) {
 
 }
 Describe 'New-JcSdkGSuiteTranslationRule' -Tag:(""){
+    BeforeAll {
+        # if the gsuite translation rule already exists, delete it
+        $existingRules = Get-JcSdkGSuiteTranslationRule -GsuiteId $global:PesterTestGSuite.Id
+        foreach ($rule in $existingRules) {
+            if ($rule.BuiltIn -eq $global:PesterDefGSuiteTranslationRule.BuiltIn) {
+                Remove-JcSdkGSuiteTranslationRule -Id $rule.Id -GsuiteId $global:PesterTestGSuite.Id
+            }
+        }
+    }
     It 'CreateExpanded' {
-        $global:PesterTestGSuiteTranslationRule = New-JcSdkGSuiteTranslationRule @global:PesterDefGSuiteTranslationRule
+        $global:PesterTestGSuiteTranslationRule = New-JcSdkGSuiteTranslationRule -body $global:PesterDefGSuiteTranslationRule -GsuiteId $global:PesterTestGSuite.Id
         $global:PesterTestGSuiteTranslationRule | Should -Not -BeNullOrEmpty
     }
 

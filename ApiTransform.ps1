@@ -164,6 +164,7 @@ $TransformConfig = [Ordered]@{
             'definitions.bulk-user-update.properties'
             'definitions.MemberQuery'
             'definitions.jumpcloud.search.searchRequest.properties'
+            'definitions.job-id'
         )
         OperationIdMapping  = [Ordered]@{
             'activedirectories_agentsDelete'                    = 'ActiveDirectoryAgent_Delete';
@@ -1122,8 +1123,16 @@ $SDKName | ForEach-Object {
                     if (Test-Path -Path "$PSScriptRoot/CustomDefinitions/$($overrideDef).json") {
                         $configContent = Get-Content -Path ("$PSScriptRoot/CustomDefinitions/$($overrideDef).json")
                         $configOverride = ($configContent | ConvertFrom-Json)
-                        # test for special chars in property string:
-                        $overrideDef = $overrideDef -replace "^(definitions)\.(.+)\.(properties.*)$", "`$1.'`$2'.`$3"
+                        # Handle definition paths: definitions.NAME or definitions.NAME.properties
+                        # Wrap the definition NAME in quotes if it contains special chars (hyphens, dots)
+                        if ($overrideDef -match '^definitions\.(.+?)(\.properties.*)?$') {
+                            $defName = $Matches[1]
+                            $suffix = $Matches[2]
+                            # Wrap definition name in quotes if it contains special characters
+                            if ($defName -match '[-.]') {
+                                $overrideDef = "definitions.'$defName'$suffix"
+                            }
+                        }
                         write-warning "Writing custom override for: $overrideDef"
                         Invoke-Expression -Command ('$SwaggerObject.' + "$($overrideDef)" + '=' + '$configOverride' )
                         $SwaggerObject = $SwaggerObject | Convertto-Json -depth 100

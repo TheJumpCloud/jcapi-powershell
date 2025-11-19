@@ -1,6 +1,6 @@
 <#
 .Synopsis
-This endpoint allows you to update the name and Custom Report URL for a Workday Instance.
+This endpoint allows you to set the name and Custom Report URL for a Workday Instance.
 
 Currently, the name can not be changed from the default of `Workday Import`.
 
@@ -16,7 +16,7 @@ curl -X PUT https://console.jumpcloud.com/api/v2/workdays/{WorkdayID} \\
 }\t'
 ```
 .Description
-This endpoint allows you to update the name and Custom Report URL for a Workday Instance.
+This endpoint allows you to set the name and Custom Report URL for a Workday Instance.
 
 Currently, the name can not be changed from the default of `Workday Import`.
 
@@ -115,6 +115,13 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [OutputType([JumpCloud.SDK.V2.Models.IWorkdayOutput])]
     [CmdletBinding(DefaultParameterSetName='SetExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
+    [Parameter(Mandatory)]
+    [JumpCloud.SDK.V2.Category('Uri')]
+    [System.String]
+    # Region for JumpCloud API host.
+    # Use 'console' for US or 'console.eu' for EU.
+    ${ConsoleHost}, 
+
     [Parameter(ParameterSetName='Set', Mandatory)]
     [Parameter(ParameterSetName='SetExpanded', Mandatory)]
     [JumpCloud.SDK.V2.Category('Path')]
@@ -127,7 +134,6 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V2.Category('Path')]
     [JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity]
     # Identity Parameter
-    # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
     ${InputObject}, 
 
     [Parameter(ParameterSetName='Set', Mandatory, ValueFromPipeline)]
@@ -135,7 +141,6 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V2.Category('Body')]
     [JumpCloud.SDK.V2.Models.IWorkdayFields]
     # Workday Fields
-    # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body}, 
 
     [Parameter(ParameterSetName='SetExpanded')]

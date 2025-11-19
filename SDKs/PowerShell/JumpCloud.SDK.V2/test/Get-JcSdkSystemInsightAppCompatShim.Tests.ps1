@@ -23,9 +23,9 @@ Describe 'Get-JcSdkSystemInsightAppCompatShim' -Tag:(""){
         $siAppShim = Get-JcSdkSystemInsightAppCompatShim | Get-Random -Count 1
         if ($siAppShim){
             Get-JcSdkSystemInsightAppCompatShim -Filter @("system_id:eq:$($siAppShim.systemId)") | Should -Not -BeNullOrEmpty
-            Get-JcSdkSystemInsightAppCompatShim -Filter @("system_id:eq:$($siAppShim.systemId)", "enabled:eq:$($siAppShim.enabled)") | Should -Not -BeNullOrEmpty
+            Get-JcSdkSystemInsightAppCompatShim -Filter @("system_id:eq:$($siAppShim.systemId)", "path:eq:$($siAppShim.path)") | Should -Not -BeNullOrEmpty
             # enabled accepts strings, fakeString is a fake value
-            Get-JcSdkSystemInsightAppCompatShim -Filter @("system_id:eq:$($siAppShim.systemId)", "enabled:eq:fakeString") | Should -BeNullOrEmpty
+            Get-JcSdkSystemInsightAppCompatShim -Filter @("system_id:eq:$($siAppShim.systemId)", "path:eq:fakeString") | Should -BeNullOrEmpty
         }
     }
 }

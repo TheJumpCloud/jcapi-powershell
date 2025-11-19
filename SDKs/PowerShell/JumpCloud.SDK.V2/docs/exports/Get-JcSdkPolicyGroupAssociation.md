@@ -24,8 +24,7 @@ curl -X GET https://console.jumpcloud.com/api/v2/policygroups/{GroupID}/associat
 ## SYNTAX
 
 ```
-Get-JcSdkPolicyGroupAssociation -GroupId <String> -Targets <GraphTargetsActiveDirectoryTargets>
- [<CommonParameters>]
+Get-JcSdkPolicyGroupAssociation -ConsoleHost <String> -GroupId <String> -Targets <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -67,6 +66,22 @@ ToType         String
 
 ## PARAMETERS
 
+### -ConsoleHost
+Region for JumpCloud API host.
+Use 'console' for US or 'console.eu' for EU.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -GroupId
 ObjectID of the Policy Group.
 
@@ -86,7 +101,7 @@ Accept wildcard characters: False
 Targets which a "active_directory" can be associated to.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Support.GraphTargetsActiveDirectoryTargets
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -107,8 +122,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ### JumpCloud.SDK.V2.Models.IGraphConnection
 
 ## NOTES
-
-ALIASES
 
 ## RELATED LINKS
 

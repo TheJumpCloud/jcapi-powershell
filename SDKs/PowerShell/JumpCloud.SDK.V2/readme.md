@@ -3,9 +3,6 @@
 This directory contains the PowerShell module for the JumpCloudApi service.
 
 ---
-## Status
-[![JumpCloud.SDK.V2](https://img.shields.io/powershellgallery/v/JumpCloud.SDK.V2.svg?style=flat-square&label=JumpCloud.SDK.V2 "JumpCloud.SDK.V2")](https://www.powershellgallery.com/packages/JumpCloud.SDK.V2/)
-
 ## Info
 - Modifiable: yes
 - Generated: all

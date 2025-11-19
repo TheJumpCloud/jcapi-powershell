@@ -1,6 +1,6 @@
 <#
 .Synopsis
-The endpoint allows you to create a Workday Import request.
+The endpoint allows you to import a Workday Import request.
 
 #### Sample Request 
 ```
@@ -23,7 +23,7 @@ curl -X POST https://console.jumpcloud.com/api/v2/workdays/{WorkdayID}/import \\
 ]
 ```
 .Description
-The endpoint allows you to create a Workday Import request.
+The endpoint allows you to import a Workday Import request.
 
 #### Sample Request 
 ```
@@ -55,20 +55,20 @@ PS C:\> {{ Add code here }}
 {{ Add output here }}
 
 .Inputs
-JumpCloud.SDK.V2.Models.IBulkUserCreate[]
-.Inputs
 JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
+.Inputs
+System.Collections.Generic.List`1[[JumpCloud.SDK.V2.Models.IBulkUserCreate, JumpCloud.SDK.V2.private, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]
 .Outputs
-System.String
+JumpCloud.SDK.V2.Models.IJobIdResult
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
-BODY <IBulkUserCreate[]>:
+BODY <List<IBulkUserCreate>>:
   [AccountLocked <Boolean?>]:
   [Activated <Boolean?>]:
-  [Addresses <IBulkUserCreateAddressesItem[]>]:
+  [Addresses <List<IBulkUserCreateAddressesItem>>]:
     [Country <String>]:
     [ExtendedAddress <String>]:
     [Locality <String>]:
@@ -79,7 +79,7 @@ BODY <IBulkUserCreate[]>:
     [Type <String>]:
   [AllowPublicKey <Boolean?>]:
   [AlternateEmail <String>]:
-  [Attributes <IBulkUserCreateAttributesItem[]>]:
+  [Attributes <List<IBulkUserCreateAttributesItem>>]:
     [Name <String>]:
     [Value <String>]:
   [Company <String>]:
@@ -112,12 +112,12 @@ BODY <IBulkUserCreate[]>:
   [Password <String>]:
   [PasswordNeverExpires <Boolean?>]:
   [PasswordlessSudo <Boolean?>]:
-  [PhoneNumbers <IBulkUserCreatePhoneNumbersItem[]>]:
+  [PhoneNumbers <List<IBulkUserCreatePhoneNumbersItem>>]:
     [Number <String>]:
     [Type <String>]:
   [PublicKey <String>]:
   [RecoveryEmailAddress <String>]:
-  [Relationships <IBulkUserCreateRelationshipsItem[]>]:
+  [Relationships <List<IBulkUserCreateRelationshipsItem>>]:
     [Type <String>]:
     [Value <String>]:
   [SambaServiceUser <Boolean?>]:
@@ -157,9 +157,16 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Import-JcSdkWorkday
 {
-    [OutputType([System.String])]
+    [OutputType([JumpCloud.SDK.V2.Models.IJobIdResult])]
     [CmdletBinding(DefaultParameterSetName='Import', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
+    [Parameter(Mandatory)]
+    [JumpCloud.SDK.V2.Category('Uri')]
+    [System.String]
+    # Region for JumpCloud API host.
+    # Use 'console' for US or 'console.eu' for EU.
+    ${ConsoleHost}, 
+
     [Parameter(ParameterSetName='Import', Mandatory)]
     [JumpCloud.SDK.V2.Category('Path')]
     [System.String]
@@ -170,15 +177,14 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V2.Category('Path')]
     [JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity]
     # Identity Parameter
-    # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
     ${InputObject}, 
 
     [Parameter(Mandatory, ValueFromPipeline)]
     [AllowEmptyCollection()]
     [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Models.IBulkUserCreate[]]
+    [JumpCloud.SDK.V2.Runtime.Info(Required, PossibleTypes=([JumpCloud.SDK.V2.Models.IBulkUserCreate]))]
+    [System.Collections.Generic.List[JumpCloud.SDK.V2.Models.IBulkUserCreate]]
     # Array of bulk-user-create
-    # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body}, 
 
     [Parameter(DontShow)]

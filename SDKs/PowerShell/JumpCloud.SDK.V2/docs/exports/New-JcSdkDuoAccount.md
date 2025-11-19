@@ -24,7 +24,7 @@ in case an organization has a Duo account already a 409 (Conflict) code will be 
 ## SYNTAX
 
 ```
-New-JcSdkDuoAccount [-Confirm] [-WhatIf] [<CommonParameters>]
+New-JcSdkDuoAccount -ConsoleHost <String> [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -60,6 +60,22 @@ Name String
 {{ Add output here }}
 
 ## PARAMETERS
+
+### -ConsoleHost
+Region for JumpCloud API host.
+Use 'console' for US or 'console.eu' for EU.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### -Confirm
 Prompts you for confirmation before running the cmdlet.
@@ -102,8 +118,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ### JumpCloud.SDK.V2.Models.IDuoAccount
 
 ## NOTES
-
-ALIASES
 
 ## RELATED LINKS
 

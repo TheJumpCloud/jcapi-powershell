@@ -13,8 +13,8 @@ Lists Office 365 users available for import.
 ## SYNTAX
 
 ```
-Get-JcSdkOffice365UsersToImport -Office365Id <String> [-Count] [-Filter <String>] [-Orderby <String>]
- [-Search <String>] [-ConsistencyLevel <String>] [<CommonParameters>]
+Get-JcSdkOffice365UsersToImport -ConsoleHost <String> -Office365Id <String> [-Count] [-Filter <String>]
+ [-Orderby <String>] [-Search <String>] [-ConsistencyLevel <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -51,6 +51,22 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ConsoleHost
+Region for JumpCloud API host.
+Use 'console' for US or 'console.eu' for EU.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -146,8 +162,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ### JumpCloud.SDK.V2.Models.IPaths1J0ThkrOffice365SOffice365IdImportUsersGetResponses200ContentApplicationJsonSchema
 
 ## NOTES
-
-ALIASES
 
 ## RELATED LINKS
 

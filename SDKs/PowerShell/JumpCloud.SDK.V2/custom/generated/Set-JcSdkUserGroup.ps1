@@ -1,6 +1,6 @@
 <#
 .Synopsis
-This endpoint allows you to do a full update of the User Group.
+This endpoint allows you to do a full set of the User Group.
 
 See the [Dynamic Group Configuration KB article](https://jumpcloud.com/support/configure-dynamic-device-groups) for more details on maintaining a Dynamic Group.
 
@@ -11,11 +11,11 @@ curl -X PUT https://console.jumpcloud.com/api/v2/usergroups/{Group_ID} \\
   -H 'Content-Type: application/json' \\
   -H 'x-api-key: {API_KEY}' \\
   -d '{
-    \"name\": \"group_update\"
+    \"name\": \"group_set 
   }'
 ```
 .Description
-This endpoint allows you to do a full update of the User Group.
+This endpoint allows you to do a full set of the User Group.
 
 See the [Dynamic Group Configuration KB article](https://jumpcloud.com/support/configure-dynamic-device-groups) for more details on maintaining a Dynamic Group.
 
@@ -26,7 +26,7 @@ curl -X PUT https://console.jumpcloud.com/api/v2/usergroups/{Group_ID} \\
   -H 'Content-Type: application/json' \\
   -H 'x-api-key: {API_KEY}' \\
   -d '{
-    \"name\": \"group_update\"
+    \"name\": \"group_set 
   }'
 ```
 .Example
@@ -91,23 +91,24 @@ BODY <IUserGroupPut>:
     [(Any) <Object>]: This indicates any property can be added to this object.
     [SudoEnabled <Boolean?>]: Enables sudo
     [SudoWithoutPassword <Boolean?>]: Enable sudo without password (requires 'enabled' to be true)
-    [LdapGroups <ILdapGroup[]>]:
+    [LdapGroups <List<ILdapGroup>>]:
       [Name <String>]:
-    [PosixGroups <IGraphAttributePosixGroupsItem[]>]:
+    [PosixGroups <List<IGraphAttributePosixGroupsItem>>]:
       Id <Int32>:
       Name <String>:
-    [RadiusReply <IGraphAttributeRadiusReplyItem[]>]:
+    [RadiusReply <List<IGraphAttributeRadiusReplyItem>>]:
       Name <String>:
       Value <String>:
     [SambaEnabled <Boolean?>]:
   [Description <String>]: Description of a User Group
   [Email <String>]: Email address of a User Group
-  [MemberQueryExemptions <IGraphObject[]>]: Array of GraphObjects exempted from the query
+  [MemberQueryExemptions <List<IGraphObject>>]: Array of GraphObjects exempted from the query
     Id <String>: The ObjectID of the graph object.
     Type <String>: The type of graph object.
     [Attributes <IGraphAttributes>]: The graph attributes.
       [(Any) <Object>]: This indicates any property can be added to this object.
-  [MemberQueryFilters <IAny[]>]:
+  [MemberQueryFilters <List<String>>]: For queryType 'Filter', this is a stringified JSON filter array that will be validated by API middleware.
+  [MemberQuerySearchFilters <String>]: For queryType 'Search', this is a stringified JSON filter object that will be validated by API middleware.
   [MemberQueryType <String>]:
   [MemberSuggestionsNotify <Boolean?>]: True if notification emails are to be sent for membership suggestions.
   [MembershipMethod <String>]: The type of membership method for this group. Valid values include NOTSET, STATIC, DYNAMIC_REVIEW_REQUIRED, and DYNAMIC_AUTOMATED.          Note DYNAMIC_AUTOMATED and DYNAMIC_REVIEW_REQUIRED group rules will supersede any group enrollment for [group-associated MDM-enrolled devices](https://jumpcloud.com/support/change-a-default-device-group-for-apple-devices).          Use caution when creating dynamic device groups with MDM-enrolled devices to avoid creating conflicting rule sets.
@@ -150,6 +151,13 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [OutputType([JumpCloud.SDK.V2.Models.IUserGroup])]
     [CmdletBinding(DefaultParameterSetName='SetExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
+    [Parameter(Mandatory)]
+    [JumpCloud.SDK.V2.Category('Uri')]
+    [System.String]
+    # Region for JumpCloud API host.
+    # Use 'console' for US or 'console.eu' for EU.
+    ${ConsoleHost}, 
+
     [Parameter(ParameterSetName='Set', Mandatory)]
     [Parameter(ParameterSetName='SetExpanded', Mandatory)]
     [JumpCloud.SDK.V2.Category('Path')]
@@ -162,7 +170,6 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V2.Category('Path')]
     [JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity]
     # Identity Parameter
-    # To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
     ${InputObject}, 
 
     [Parameter(ParameterSetName='Set', Mandatory, ValueFromPipeline)]
@@ -170,15 +177,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V2.Category('Body')]
     [JumpCloud.SDK.V2.Models.IUserGroupPut]
     # UserGroupPut
-    # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body}, 
-
-    [Parameter(ParameterSetName='SetExpanded', Mandatory)]
-    [Parameter(ParameterSetName='SetViaIdentityExpanded', Mandatory)]
-    [JumpCloud.SDK.V2.Category('Body')]
-    [System.String]
-    # Display name of a User Group.
-    ${Name}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
@@ -208,16 +207,22 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V2.Category('Body')]
     [JumpCloud.SDK.V2.Models.IGraphObject[]]
     # Array of GraphObjects exempted from the query
-    # To construct, see NOTES section for MEMBERQUERYEXEMPTIONS properties and create a hash table.
     ${MemberQueryExemptions}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
     [AllowEmptyCollection()]
     [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Models.IAny[]]
-    # .
+    [System.String[]]
+    # For queryType 'Filter', this is a stringified JSON filter array that will be validated by API middleware.
     ${MemberQueryFilters}, 
+
+    [Parameter(ParameterSetName='SetExpanded')]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [System.String]
+    # For queryType 'Search', this is a stringified JSON filter object that will be validated by API middleware.
+    ${MemberQuerySearchFilters}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
@@ -240,6 +245,13 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     # The type of membership method for this group.
     # Valid values include NOTSET, STATIC, DYNAMIC_REVIEW_REQUIRED, and DYNAMIC_AUTOMATED.Note DYNAMIC_AUTOMATED and DYNAMIC_REVIEW_REQUIRED group rules will supersede any group enrollment for [group-associated MDM-enrolled devices](https://jumpcloud.com/support/change-a-default-device-group-for-apple-devices).Use caution when creating dynamic device groups with MDM-enrolled devices to avoid creating conflicting rule sets.
     ${MembershipMethod}, 
+
+    [Parameter(ParameterSetName='SetExpanded')]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [System.String]
+    # Display name of a User Group.
+    ${Name}, 
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]

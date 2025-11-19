@@ -15,9 +15,13 @@ while(-not $mockingPath) {
 
 }
 Describe 'New-JcSdkSystemGroup' -Tag:(""){
-    It 'CreateExpanded' {
-        $global:PesterTestSystemGroup = New-JcSdkSystemGroup @global:PesterDefSystemGroup
+    It 'CreateExpanded Filter' {
+        $global:PesterTestSystemGroup = New-JcSdkSystemGroup -body $global:PesterDefSystemGroupFilter
         $global:PesterTestSystemGroup | Should -Not -BeNullOrEmpty
+    }
+    It 'CreateExpanded Search' {
+        $global:PesterTestSystemGroupSearch = New-JcSdkSystemGroup -body $global:PesterDefSystemGroupSearch
+        $global:PesterTestSystemGroupSearch | Should -Not -BeNullOrEmpty
     }
 
     It 'Create' -skip {

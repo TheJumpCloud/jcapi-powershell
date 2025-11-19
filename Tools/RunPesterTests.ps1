@@ -140,16 +140,18 @@ If ($moduleName -eq 'JumpCloud.SDK.V2' -and "MTP" -notin $Env:IncludeTagList)
     # Get a Policy Template
     $global:PesterTestPolicyTemplate = Get-JcSdkPolicyTemplate | Select-Object -First 1
     # Create an ActiveDirectory
-    $global:PesterDefActiveDirectory = @{
+    $global:PesterDefActiveDirectory = [JumpCloud.SDK.V2.Models.ActiveDirectory]@{
         'domain' = "DC=ADTEST{0};DC=ORG" -f [string]( -join ((65..90) + (97..122) | Get-Random -Count 6 | ForEach-Object { [char]$_ }));
     }
     # Create a Authentication Policy
-    $global:PesterDefAuthenticationPolicy = @{
+    $global:PesterDefAuthenticationPolicy = [JumpCloud.SDK.V2.Models.AuthnPolicy]@{
         Name                = "AuthenticationPolicy-$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
         EffectAction        = 'allow'
-        TargetResources     = @{"type" = "user_portal" }
+        TargetResources     = [JumpCloud.SDK.V2.Models.AuthnPolicyResourceTarget]@{"type" = "user_portal" }
+        Type = 'user_portal'
         UserGroupInclusions = $null # Defined later in New-JcSdkAuthenticationPolicy.Tests.ps1
     }
+
     # Create a Bulk User Configuration:
     $global:pesterDefBulkUsername = "PesterBulkUser-$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
     $global:PesterDefBulkUser = [JumpCloud.SDK.V2.Models.BulkUserCreate]@{
@@ -261,19 +263,20 @@ If ($moduleName -eq 'JumpCloud.SDK.V2' -and "MTP" -notin $Env:IncludeTagList)
         #State                          = "SUSPENDED"
     }
     # Create a Custom Email Configuration
-    $global:PesterDefCustomEmailConfiguration = @{
+    $global:PesterDefCustomEmailConfiguration = [JumpCloud.SDK.V2.Models.CustomEmail]@{
         Type    = 'password_reset_confirmation'
         # Having multiple breaks remove tests
         # Type    = Get-Random @('password_reset_confirmation', 'password_expiration_warning', 'lockout_notice_user', 'password_expiration', 'user_change_password')
         Subject = "CUSTOM"
     }
     # Create a GSuite Translation Rule
-    $global:PesterDefGSuiteTranslationRule = @{
+    $global:PesterDefGSuiteTranslationRule = [JumpCloud.SDK.V2.Models.GSuiteTranslationRule]@{
         GsuiteId = $global:PesterTestGSuite.Id
         BuiltIn  = 'user_work_addresses'
+        Direction  = 'export'
     }
     # Create a IP List
-    $global:PesterDefIPList = @{
+    $global:PesterDefIPList = [JumpCloud.SDK.V2.Models.IPList]@{
         Description = 'PesterIpList'
         Ips         = [IPAddress]::Parse([String](Get-Random)).IPAddressToString
         Name        = "Pester IP Test List $(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
@@ -286,79 +289,78 @@ If ($moduleName -eq 'JumpCloud.SDK.V2' -and "MTP" -notin $Env:IncludeTagList)
         UserPasswordExpirationAction = "remove"
     }
     # Create a Office365 Translation Rule
-    $global:PesterDefOffice365TranslationRule = @{
+    $global:PesterDefOffice365TranslationRule = [JumpCloud.SDK.V2.Models.Office365TranslationRule]@{
         Office365Id = $global:PesterTestOffice365.Id
         BuiltIn     = 'user_street_address'
     }
     # Create a Policy
     $global:PesterDefPolicy = Get-Random @(
-        @{
+        [JumpCloud.SDK.V2.Models.Policy]@{
             Name       = "Pester_Windows - $(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
             TemplateId = (Get-JcSdkPolicyTemplate | Where-Object { $_.OSMetaFamily -eq 'windows' } | Select-Object -First 1).Id
         },
-        @{
+        [JumpCloud.SDK.V2.Models.Policy]@{
             Name       = "Pester_Linux - $(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
             TemplateId = (Get-JcSdkPolicyTemplate | Where-Object { $_.OSMetaFamily -eq 'linux' } | Select-Object -First 1).Id
         },
-        @{
+        [JumpCloud.SDK.V2.Models.Policy]@{
             Name       = "Pester_Darwin - $(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
             TemplateId = (Get-JcSdkPolicyTemplate | Where-Object { $_.OSMetaFamily -eq 'darwin' } | Select-Object -First 1).Id
         }
     )
     # Create a Software App
-    $global:PesterDefSoftwareApp = @{
+    $global:PesterDefSoftwareApp = [JumpCloud.SDK.V2.Models.SoftwareApp]@{
         DisplayName = "Adobe Reader"
-        Settings    = @{
+        Settings    = [JumpCloud.SDK.V2.Models.SoftwareAppSettings]@{
             PackageId      = 'adobereader'
             packageManager = 'CHOCOLATEY'
+            Scope = 'system'
         }
     }
     # Create a static User Group
-    $global:PesterDefUserGroupStatic = @{
-        Name = "PesterTestUserGroup-$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
-    }
+    $global:PesterDefUserGroupStatic = [JumpCloud.SDK.V2.Models.UserGroupPost]::new()
+    $global:PesterDefUserGroupStatic.Name = "PesterTestUserGroup-$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
+
     # Create a User Group with Filter type membership
     $UserFilter = [JumpCloud.SDK.V2.Models.MemberQuery]::new()
     $UserFilter.Filters = @('description:$eq:test')
     $UserFilter.QueryType = "Filter"
-    $global:PesterDefUserGroupFilter = @{
-        Name = "PesterTestUserGroupFilter-$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
-        MemberQueryFilters = $UserFilter.Filters
-        MemberQueryType    = $UserFilter.QueryType
-    }
+    $global:PesterDefUserGroupFilter = [JumpCloud.SDK.V2.Models.UserGroupPost]::new()
+    $global:PesterDefUserGroupFilter.Name = "PesterTestUserGroupFilter-$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
+    $global:PesterDefUserGroupFilter.MemberQueryFilters = $UserFilter.Filters
+    $global:PesterDefUserGroupFilter.MemberQueryType = $UserFilter.QueryType
     # Create a User Group with Search type membership
     $UserFilter = [JumpCloud.SDK.V2.Models.MemberQuery]::new()
     $UserFilter.Filters = '{"filter":{"and":["department:$eq:Sales","company:$co:Toast"]}}'
     $UserFilter.QueryType = "Search"
-    $global:PesterDefUserGroupSearch = @{
-        Name = "PesterTestUserGroupSearch-$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
-        MemberQueryFilters = $UserFilter.Filters
-        MemberQueryType    = $UserFilter.QueryType
-    }
+    $global:PesterDefUserGroupSearch = [JumpCloud.SDK.V2.Models.UserGroupPost]::new()
+    $global:PesterDefUserGroupSearch.Name = "PesterTestUserGroupSearch-$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
+    $global:PesterDefUserGroupSearch.MemberQuerySearchFilters = $UserFilter.Filters
+    $global:PesterDefUserGroupSearch.MemberQueryType = $UserFilter.QueryType
+
     # Create a System Group
-    $global:PesterDefSystemGroupStatic = @{
-        Name = "PesterTestSystemGroup-$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
-    }
+    $global:PesterDefSystemGroupStatic = [JumpCloud.SDK.V2.Models.SystemGroupPost]::new()
+    $global:PesterDefSystemGroupStatic.Name = "PesterTestSystemGroup-$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
     # Create a System Group with Filter type membership
-    $UserFilter = [JumpCloud.SDK.V2.Models.MemberQuery]::new()
-    $UserFilter.Filters = @('osFamily:$eq:linux', 'osFamily:$eq:windows')
-    $UserFilter.QueryType = "Filter"
-    $global:PesterDefUserGroupFilter = @{
-        Name = "PesterTestSystemGroupFilter-$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
-        MemberQueryFilters = $UserFilter.Filters
-        MemberQueryType    = $UserFilter.QueryType
-    }
-    # Create a User Group with Search type membership
-    $UserFilter = [JumpCloud.SDK.V2.Models.MemberQuery]::new()
-    $UserFilter.Filters = '{"filter":{"and":["osFamily:$eq:windows","hostname:$co:ISB"]}}'
-    $UserFilter.QueryType = "Search"
-    $global:PesterDefUserGroupSearch = @{
-        Name = "PesterTestSystemGroupSearch-$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
-        MemberQueryFilters = $UserFilter.Filters
-        MemberQueryType    = $UserFilter.QueryType
-    }
+    $SystemFilter = [JumpCloud.SDK.V2.Models.MemberQuery]::new()
+    $SystemFilter.Filters = @('osFamily:$eq:linux', 'osFamily:$eq:windows')
+    $SystemFilter.QueryType = "Filter"
+    $global:PesterDefSystemGroupFilter = [JumpCloud.SDK.V2.Models.SystemGroupPost]::new()
+    $global:PesterDefSystemGroupFilter.Name = "PesterTestSystemGroupFilter-$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
+    $global:PesterDefSystemGroupFilter.MemberQueryFilters = $systemFilter.Filters
+    $global:PesterDefSystemGroupFilter.MemberQueryType = $SystemFilter.QueryType
+
+    # Create a System Group with Search type membership
+    $SystemFilter = [JumpCloud.SDK.V2.Models.MemberQuery]::new()
+    $SystemFilter.Filters = '{"filter":{"and":["osFamily:$eq:windows","hostname:$co:ISB"]}}'
+    $SystemFilter.QueryType = "Search"
+    $global:PesterDefSystemGroupSearch =  [JumpCloud.SDK.V2.Models.SystemGroupPost]::new()
+    $global:PesterDefSystemGroupSearch.Name = "PesterTestSystemGroupSearch-$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
+    $global:PesterDefSystemGroupSearch.MemberQuerySearchFilters = $SystemFilter.Filters
+    $global:PesterDefSystemGroupSearch.MemberQueryType = $SystemFilter.QueryType
+
     # Create a Policy Group
-    $global:PesterDefPolicyGroup = @{
+    $global:PesterDefPolicyGroup = [JumpCloud.SDK.V2.Models.PolicyGroup]@{
         Name = "PesterTestPolicyGroup-$(-join ((65..90) + (97..122) | Get-Random -Count 5 | ForEach-Object { [char]$_ }))"
     }
 }

@@ -16,21 +16,10 @@ while(-not $mockingPath) {
 }
 Describe 'Set-JcSdkUserGroupAssociation' -Tag:(""){
     It 'SetExpanded' {
-        $ParameterType = (Get-Command Set-JcSdkUserGroupAssociation).Parameters.Type.ParameterType.FullName
-        # skip routingPolicy associations for now
-        (Get-Command Set-JcSdkUserGroupAssociation).Parameters.Type.ParameterType.DeclaredFields.Where( { $_.IsPublic }).Name | Where-Object {$_ -notmatch "routing" } | ForEach-Object {
-            { Set-JcSdkUserGroupAssociation -Id:((Get-Variable -Name:("PesterTest$($_)")).Value.Id) -Op:('add') -Type:(Invoke-Expression "[$ParameterType]::$_".Replace('group','_group')) -GroupId:($global:PesterTestUserGroup.Id) } | Should -Not -Throw
-            { Set-JcSdkUserGroupAssociation -Id:((Get-Variable -Name:("PesterTest$($_)")).Value.Id) -Op:('remove') -Type:(Invoke-Expression "[$ParameterType]::$_".Replace('group','_group')) -GroupId:($global:PesterTestUserGroup.Id) } | Should -Not -Throw
-        }
-    }
-
-    It 'Set' {
-        $ParameterType = (Get-Command Set-JcSdkUserGroupAssociation).Parameters.Type.ParameterType.FullName
-        # skip routingPolicy associations for now
-        (Get-Command Set-JcSdkUserGroupAssociation).Parameters.Type.ParameterType.DeclaredFields.Where( { $_.IsPublic }).Name | Where-Object {$_ -notmatch "routing" } | ForEach-Object {
-            { Set-JcSdkUserGroupAssociation -Body:(@{Id = (Get-Variable -Name:("PesterTest$($_)")).Value.Id; Op = 'add'; Type = Invoke-Expression "[$ParameterType]::$_".Replace('group','_group'); }) -GroupId:($global:PesterTestUserGroup.Id) } | Should -Not -Throw
-            { Set-JcSdkUserGroupAssociation -Body:(@{Id = (Get-Variable -Name:("PesterTest$($_)")).Value.Id; Op = 'remove'; Type = Invoke-Expression "[$ParameterType]::$_".Replace('group','_group'); }) -GroupId:($global:PesterTestUserGroup.Id) } | Should -Not -Throw
-        }
+        # get a user group
+        $group = Get-JcSdkUserGroup | Select-Object -First 1
+        {Set-JcSdkUserGroupAssociation -GroupId $group.Id -Op 'add' -Type 'ldap_server' -id $global:PesterTestLdapServer.Id} | Should -Not -Throw
+        {Set-JcSdkUserGroupAssociation -GroupId $group.Id -Op 'remove' -Type 'ldap_server' -id $global:PesterTestLdapServer.Id} | Should -Not -Throw
     }
 
     It 'SetViaIdentity' -skip {

@@ -16,8 +16,19 @@ while(-not $mockingPath) {
 }
 Describe 'Set-JcSdkPolicyGroupMember' -Tag:(""){
     It 'SetExpanded' {
+        # if policy group already exists delete it
+        $policyGroupExists = Get-JcsdkPolicyGroup | Where-Object { $_.Name -eq "TestGroupMember" }
+        if ($policyGroupExists) {
+            Remove-JcSdkPolicyGroup -ID:($policyGroupExists.Id)
+        }
         $PesterTestPolicyGroup = New-JcSdkPolicyGroup -Name "TestGroupMember"
         $Policy = New-JcSdkPolicy -Name "GroupMemberTestPolicy" -TemplateID 5d1bd26645886d53586ec529
+
+        # if the policy is already a member, remove it first
+        $existingMembers = Get-JcSdkPolicyGroupMember -GroupId:($PesterTestPolicyGroup.Id)
+        if ($existingMembers | Where-Object { $_.Id -eq $Policy.Id }) {
+            { Set-JcSdkPolicyGroupMember -GroupId:($PesterTestPolicyGroup.Id) -Id:($Policy.Id) -Op 'remove' } | Should -Not -Throw
+        }
         { Set-JcSdkPolicyGroupMember -GroupId:($PesterTestPolicyGroup.Id) -Id:($Policy.Id) -Op 'add' } | Should -Not -Throw
 
         Remove-JcSdkPolicy -ID:($Policy.Id)

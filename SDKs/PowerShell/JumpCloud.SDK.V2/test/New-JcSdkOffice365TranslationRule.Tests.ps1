@@ -15,8 +15,17 @@ while(-not $mockingPath) {
 
 }
 Describe 'New-JcSdkOffice365TranslationRule' -Tag:(""){
+    BeforeAll {
+        # if the gsuite translation rule already exists, delete it
+        $existingRules = Get-JcSdkOffice365TranslationRule -Office365Id $global:PesterTestOffice365.Id
+        foreach ($rule in $existingRules) {
+            if ($rule.BuiltIn -eq $global:PesterDefOffice365TranslationRule.BuiltIn) {
+                Remove-JcSdkOffice365TranslationRule -Id $rule.Id -Office365Id $global:PesterTestOffice365.Id
+            }
+        }
+    }
     It 'CreateExpanded' {
-        $global:PesterTestOffice365TranslationRule = New-JcSdkOffice365TranslationRule @global:PesterDefOffice365TranslationRule
+        $global:PesterTestOffice365TranslationRule = New-JcSdkOffice365TranslationRule -body $global:PesterDefOffice365TranslationRule -Office365Id $global:PesterTestOffice365.Id
         $global:PesterTestOffice365TranslationRule | Should -Not -BeNullOrEmpty
     }
 

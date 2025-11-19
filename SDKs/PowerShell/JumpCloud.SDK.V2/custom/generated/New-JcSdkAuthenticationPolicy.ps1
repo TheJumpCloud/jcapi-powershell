@@ -116,24 +116,35 @@ To create the parameters described below, construct a hash table containing the 
 BODY <IAuthnPolicy>:
   [Conditions <IAuthnPolicyConditions>]: Dictionary of <any>
     [(Any) <Object>]: This indicates any property can be added to this object.
+  [CustomErrorMessage <String>]: The custom error message to be displayed when the policy is applied.
+  [CustomErrorMessageEnabled <Boolean?>]: Indicates whether the custom error message is enabled or not.
   [Description <String>]:
   [Disabled <Boolean?>]:
   [EffectAction <String>]:
   [MfaRequired <Boolean?>]:
   [Name <String>]:
-  [TargetResources <IAuthnPolicyResourceTarget[]>]:
+  [ObligationMfaFactors <List<IAuthnPolicyObligationsMfaFactorsItem>>]:
+    [Type <String>]:
+  [PrimaryHelpText <String>]: The text to be displayed for the help link.
+  [PrimaryHelpUrl <String>]: The URL to be opened when the help link is clicked.
+  [SecondaryHelpText <String>]: The text to be displayed for the help link.
+  [SecondaryHelpUrl <String>]: The URL to be opened when the help link is clicked.
+  [TargetResources <List<IAuthnPolicyResourceTarget>>]:
     Type <String>:
     [Id <String>]: Object ID of the resource target. If undefined, then all resources of the given type are targeted.
   [Type <String>]: AuthnPolicyType
-  [UserAttributeExclusions <IAuthnPolicyUserAttributeFilter[]>]:
+  [UserAttributeExclusions <List<IAuthnPolicyUserAttributeFilter>>]:
     [Field <String>]: The only field that is currently supported is ldap_binding_user
     [Operator <String>]:
-    [Value <IAny>]: Any object
-  [UserAttributeInclusions <IAuthnPolicyUserAttributeFilter[]>]:
-  [UserGroupExclusions <String[]>]:
-  [UserGroupInclusions <String[]>]:
-  [UserInclusions <String[]>]:
+    [Value <IAny>]: Can be any value - string, number, boolean, array or object.
+  [UserAttributeInclusions <List<IAuthnPolicyUserAttributeFilter>>]:
+  [UserGroupExclusions <List<String>>]:
+  [UserGroupInclusions <List<String>>]:
+  [UserInclusions <List<String>>]:
   [UserVerificationRequirement <String>]:
+
+OBLIGATIONMFAFACTORS <IAuthnPolicyObligationsMfaFactorsItem[]>:
+  [Type <String>]:
 
 TARGETRESOURCES <IAuthnPolicyResourceTarget[]>:
   Type <String>:
@@ -142,12 +153,12 @@ TARGETRESOURCES <IAuthnPolicyResourceTarget[]>:
 USERATTRIBUTEEXCLUSIONS <IAuthnPolicyUserAttributeFilter[]>:
   [Field <String>]: The only field that is currently supported is ldap_binding_user
   [Operator <String>]:
-  [Value <IAny>]: Any object
+  [Value <IAny>]: Can be any value - string, number, boolean, array or object.
 
 USERATTRIBUTEINCLUSIONS <IAuthnPolicyUserAttributeFilter[]>:
   [Field <String>]: The only field that is currently supported is ldap_binding_user
   [Operator <String>]:
-  [Value <IAny>]: Any object
+  [Value <IAny>]: Can be any value - string, number, boolean, array or object.
 .Link
 https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/New-JcSdkAuthenticationPolicy.md
 #>
@@ -156,12 +167,18 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [OutputType([JumpCloud.SDK.V2.Models.IAuthnPolicy])]
     [CmdletBinding(DefaultParameterSetName='CreateExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
+    [Parameter(Mandatory)]
+    [JumpCloud.SDK.V2.Category('Uri')]
+    [System.String]
+    # Region for JumpCloud API host.
+    # Use 'console' for US or 'console.eu' for EU.
+    ${ConsoleHost}, 
+
     [Parameter(ParameterSetName='Create', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Body')]
     [JumpCloud.SDK.V2.Models.IAuthnPolicy]
     # This represents an authentication policy.
     # See the details of each field for valid values and restrictions.
-    # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body}, 
 
     [Parameter(ParameterSetName='CreateExpanded')]
@@ -170,6 +187,18 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [System.Collections.Hashtable]
     # Dictionary of <any>
     ${Conditions}, 
+
+    [Parameter(ParameterSetName='CreateExpanded')]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [System.String]
+    # The custom error message to be displayed when the policy is applied.
+    ${CustomErrorMessage}, 
+
+    [Parameter(ParameterSetName='CreateExpanded')]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [System.Management.Automation.SwitchParameter]
+    # Indicates whether the custom error message is enabled or not.
+    ${CustomErrorMessageEnabled}, 
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
@@ -204,9 +233,39 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter(ParameterSetName='CreateExpanded')]
     [AllowEmptyCollection()]
     [JumpCloud.SDK.V2.Category('Body')]
+    [JumpCloud.SDK.V2.Models.IAuthnPolicyObligationsMfaFactorsItem[]]
+    # .
+    ${ObligationMfaFactors}, 
+
+    [Parameter(ParameterSetName='CreateExpanded')]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [System.String]
+    # The text to be displayed for the help link.
+    ${PrimaryHelpText}, 
+
+    [Parameter(ParameterSetName='CreateExpanded')]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [System.String]
+    # The URL to be opened when the help link is clicked.
+    ${PrimaryHelpUrl}, 
+
+    [Parameter(ParameterSetName='CreateExpanded')]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [System.String]
+    # The text to be displayed for the help link.
+    ${SecondaryHelpText}, 
+
+    [Parameter(ParameterSetName='CreateExpanded')]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [System.String]
+    # The URL to be opened when the help link is clicked.
+    ${SecondaryHelpUrl}, 
+
+    [Parameter(ParameterSetName='CreateExpanded')]
+    [AllowEmptyCollection()]
+    [JumpCloud.SDK.V2.Category('Body')]
     [JumpCloud.SDK.V2.Models.IAuthnPolicyResourceTarget[]]
     # .
-    # To construct, see NOTES section for TARGETRESOURCES properties and create a hash table.
     ${TargetResources}, 
 
     [Parameter(ParameterSetName='CreateExpanded')]
@@ -220,7 +279,6 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V2.Category('Body')]
     [JumpCloud.SDK.V2.Models.IAuthnPolicyUserAttributeFilter[]]
     # .
-    # To construct, see NOTES section for USERATTRIBUTEEXCLUSIONS properties and create a hash table.
     ${UserAttributeExclusions}, 
 
     [Parameter(ParameterSetName='CreateExpanded')]
@@ -228,7 +286,6 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [JumpCloud.SDK.V2.Category('Body')]
     [JumpCloud.SDK.V2.Models.IAuthnPolicyUserAttributeFilter[]]
     # .
-    # To construct, see NOTES section for USERATTRIBUTEINCLUSIONS properties and create a hash table.
     ${UserAttributeInclusions}, 
 
     [Parameter(ParameterSetName='CreateExpanded')]

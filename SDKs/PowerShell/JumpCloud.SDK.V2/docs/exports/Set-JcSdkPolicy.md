@@ -8,8 +8,8 @@ schema: 2.0.0
 # Set-JcSdkPolicy
 
 ## SYNOPSIS
-This endpoint allows you to update a policy.
-Given the amount of configurable parameters required to update a Policy, we suggest you use the JumpCloud Admin Console to create new policies.
+This endpoint allows you to set a policy.
+Given the amount of configurable parameters required to set a Policy, we suggest you use the JumpCloud Admin Console to set new policies.
 
 
 ##### Sample Request
@@ -27,30 +27,31 @@ curl -X PUT https://console.jumpcloud.com/api/v2/policies/59fced45c9118022172547
 
 ### SetExpanded (Default)
 ```
-Set-JcSdkPolicy -Id <String> -Name <String> [-Notes <String>] [-Values <IPolicyValue[]>] [-Confirm] [-WhatIf]
- [<CommonParameters>]
+Set-JcSdkPolicy -ConsoleHost <String> -Id <String> [-Name <String>] [-Notes <String>]
+ [-Values <IPolicyValue[]>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Set
 ```
-Set-JcSdkPolicy -Id <String> -Body <IPolicyUpdateRequest> [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkPolicy -ConsoleHost <String> -Id <String> -Body <IPolicyUpdateRequest> [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### SetViaIdentity
 ```
-Set-JcSdkPolicy -InputObject <IJumpCloudApiIdentity> -Body <IPolicyUpdateRequest> [-Confirm] [-WhatIf]
- [<CommonParameters>]
+Set-JcSdkPolicy -ConsoleHost <String> -InputObject <IJumpCloudApiIdentity> -Body <IPolicyUpdateRequest>
+ [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### SetViaIdentityExpanded
 ```
-Set-JcSdkPolicy -InputObject <IJumpCloudApiIdentity> -Name <String> [-Notes <String>]
+Set-JcSdkPolicy -ConsoleHost <String> -InputObject <IJumpCloudApiIdentity> [-Name <String>] [-Notes <String>]
  [-Values <IPolicyValue[]>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-This endpoint allows you to update a policy.
-Given the amount of configurable parameters required to update a Policy, we suggest you use the JumpCloud Admin Console to create new policies.
+This endpoint allows you to set a policy.
+Given the amount of configurable parameters required to set a Policy, we suggest you use the JumpCloud Admin Console to set new policies.
 
 
 ##### Sample Request
@@ -112,7 +113,6 @@ TemplateState          String
 
 ### -Body
 A request to update an instance of a policy template.
-To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IPolicyUpdateRequest
@@ -123,6 +123,22 @@ Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
+Accept wildcard characters: False
+```
+
+### -ConsoleHost
+Region for JumpCloud API host.
+Use 'console' for US or 'console.eu' for EU.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -143,7 +159,6 @@ Accept wildcard characters: False
 
 ### -InputObject
 Identity Parameter
-To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
@@ -165,7 +180,7 @@ Type: System.String
 Parameter Sets: SetExpanded, SetViaIdentityExpanded
 Aliases:
 
-Required: True
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -189,7 +204,6 @@ Accept wildcard characters: False
 
 ### -Values
 .
-To construct, see NOTES section for VALUES properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IPolicyValue[]
@@ -249,22 +263,20 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## NOTES
 
-ALIASES
-
 COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <IPolicyUpdateRequest>: A request to update an instance of a policy template.
+`BODY <IPolicyUpdateRequest>`: A request to update an instance of a policy template.
   - `Name <String>`: The description for this specific Policy.
   - `[Notes <String>]`: The notes for this specific Policy.
-  - `[Values <IPolicyValue[]>]`: 
+  - `[Values <List<IPolicyValue>>]`: 
     - `[ConfigFieldId <String>]`: The ObjectId of the corresponding Policy Template configuration field.
     - `[Sensitive <Boolean?>]`: Defines if the value is sensitive or not.
     - `[Value <String>]`: The value for the configuration field for this Policy instance.
 
-INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter
+`INPUTOBJECT <IJumpCloudApiIdentity>`: Identity Parameter
   - `[AccountId <String>]`: 
   - `[ActivedirectoryId <String>]`: 
   - `[AdministratorId <String>]`: 
@@ -289,7 +301,7 @@ INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter
   - `[UserId <String>]`: ObjectID of the User.
   - `[WorkdayId <String>]`: 
 
-VALUES <IPolicyValue[]>: .
+`VALUES <IPolicyValue[]>`: .
   - `[ConfigFieldId <String>]`: The ObjectId of the corresponding Policy Template configuration field.
   - `[Sensitive <Boolean?>]`: Defines if the value is sensitive or not.
   - `[Value <String>]`: The value for the configuration field for this Policy instance.

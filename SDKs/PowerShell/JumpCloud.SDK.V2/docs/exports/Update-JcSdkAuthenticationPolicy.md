@@ -23,9 +23,13 @@ curl -X PATCH https://console.jumpcloud.com/api/v2/authn/policies/{id} \\
 
 ### UpdateExpanded (Default)
 ```
-Update-JcSdkAuthenticationPolicy -Id <String> [-Conditions <Hashtable>] [-Description <String>] [-Disabled]
- [-EffectAction <String>] [-MfaRequired] [-Name <String>] [-TargetResources <IAuthnPolicyResourceTarget[]>]
- [-Type <String>] [-UserAttributeExclusions <IAuthnPolicyUserAttributeFilter[]>]
+Update-JcSdkAuthenticationPolicy -ConsoleHost <String> -Id <String> [-Conditions <Hashtable>]
+ [-CustomErrorMessage <String>] [-CustomErrorMessageEnabled] [-Description <String>] [-Disabled]
+ [-EffectAction <String>] [-MfaRequired] [-Name <String>]
+ [-ObligationMfaFactors <IAuthnPolicyObligationsMfaFactorsItem[]>] [-PrimaryHelpText <String>]
+ [-PrimaryHelpUrl <String>] [-SecondaryHelpText <String>] [-SecondaryHelpUrl <String>]
+ [-TargetResources <IAuthnPolicyResourceTarget[]>] [-Type <String>]
+ [-UserAttributeExclusions <IAuthnPolicyUserAttributeFilter[]>]
  [-UserAttributeInclusions <IAuthnPolicyUserAttributeFilter[]>] [-UserGroupExclusions <String[]>]
  [-UserGroupInclusions <String[]>] [-UserInclusions <String[]>] [-UserVerificationRequirement <String>]
  [-Confirm] [-WhatIf] [<CommonParameters>]
@@ -33,19 +37,23 @@ Update-JcSdkAuthenticationPolicy -Id <String> [-Conditions <Hashtable>] [-Descri
 
 ### Update
 ```
-Update-JcSdkAuthenticationPolicy -Id <String> -Body <IAuthnPolicy> [-Confirm] [-WhatIf] [<CommonParameters>]
+Update-JcSdkAuthenticationPolicy -ConsoleHost <String> -Id <String> -Body <IAuthnPolicy> [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### UpdateViaIdentity
 ```
-Update-JcSdkAuthenticationPolicy -InputObject <IJumpCloudApiIdentity> -Body <IAuthnPolicy> [-Confirm]
- [-WhatIf] [<CommonParameters>]
+Update-JcSdkAuthenticationPolicy -ConsoleHost <String> -InputObject <IJumpCloudApiIdentity>
+ -Body <IAuthnPolicy> [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### UpdateViaIdentityExpanded
 ```
-Update-JcSdkAuthenticationPolicy -InputObject <IJumpCloudApiIdentity> [-Conditions <Hashtable>]
- [-Description <String>] [-Disabled] [-EffectAction <String>] [-MfaRequired] [-Name <String>]
+Update-JcSdkAuthenticationPolicy -ConsoleHost <String> -InputObject <IJumpCloudApiIdentity>
+ [-Conditions <Hashtable>] [-CustomErrorMessage <String>] [-CustomErrorMessageEnabled] [-Description <String>]
+ [-Disabled] [-EffectAction <String>] [-MfaRequired] [-Name <String>]
+ [-ObligationMfaFactors <IAuthnPolicyObligationsMfaFactorsItem[]>] [-PrimaryHelpText <String>]
+ [-PrimaryHelpUrl <String>] [-SecondaryHelpText <String>] [-SecondaryHelpUrl <String>]
  [-TargetResources <IAuthnPolicyResourceTarget[]>] [-Type <String>]
  [-UserAttributeExclusions <IAuthnPolicyUserAttributeFilter[]>]
  [-UserAttributeInclusions <IAuthnPolicyUserAttributeFilter[]>] [-UserGroupExclusions <String[]>]
@@ -116,7 +124,6 @@ UserVerificationRequirement String
 ### -Body
 This represents an authentication policy.
 See the details of each field for valid values and restrictions.
-To construct, see NOTES section for BODY properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IAuthnPolicy
@@ -135,6 +142,52 @@ Dictionary of \<any\>
 
 ```yaml
 Type: System.Collections.Hashtable
+Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ConsoleHost
+Region for JumpCloud API host.
+Use 'console' for US or 'console.eu' for EU.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -CustomErrorMessage
+The custom error message to be displayed when the policy is applied.
+
+```yaml
+Type: System.String
+Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -CustomErrorMessageEnabled
+Indicates whether the custom error message is enabled or not.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
 Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
 Aliases:
 
@@ -207,7 +260,6 @@ Accept wildcard characters: False
 
 ### -InputObject
 Identity Parameter
-To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
@@ -251,9 +303,83 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -ObligationMfaFactors
+.
+
+```yaml
+Type: JumpCloud.SDK.V2.Models.IAuthnPolicyObligationsMfaFactorsItem[]
+Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -PrimaryHelpText
+The text to be displayed for the help link.
+
+```yaml
+Type: System.String
+Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -PrimaryHelpUrl
+The URL to be opened when the help link is clicked.
+
+```yaml
+Type: System.String
+Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -SecondaryHelpText
+The text to be displayed for the help link.
+
+```yaml
+Type: System.String
+Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -SecondaryHelpUrl
+The URL to be opened when the help link is clicked.
+
+```yaml
+Type: System.String
+Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -TargetResources
 .
-To construct, see NOTES section for TARGETRESOURCES properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IAuthnPolicyResourceTarget[]
@@ -284,7 +410,6 @@ Accept wildcard characters: False
 
 ### -UserAttributeExclusions
 .
-To construct, see NOTES section for USERATTRIBUTEEXCLUSIONS properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IAuthnPolicyUserAttributeFilter[]
@@ -300,7 +425,6 @@ Accept wildcard characters: False
 
 ### -UserAttributeInclusions
 .
-To construct, see NOTES section for USERATTRIBUTEINCLUSIONS properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IAuthnPolicyUserAttributeFilter[]
@@ -420,36 +544,42 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## NOTES
 
-ALIASES
-
 COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-BODY <IAuthnPolicy>: This represents an authentication policy. See the details of each field for valid values and restrictions.
+`BODY <IAuthnPolicy>`: This represents an authentication policy. See the details of each field for valid values and restrictions.
   - `[Conditions <IAuthnPolicyConditions>]`: Dictionary of <any>
     - `[(Any) <Object>]`: This indicates any property can be added to this object.
+  - `[CustomErrorMessage <String>]`: The custom error message to be displayed when the policy is applied.
+  - `[CustomErrorMessageEnabled <Boolean?>]`: Indicates whether the custom error message is enabled or not.
   - `[Description <String>]`: 
   - `[Disabled <Boolean?>]`: 
   - `[EffectAction <String>]`: 
   - `[MfaRequired <Boolean?>]`: 
   - `[Name <String>]`: 
-  - `[TargetResources <IAuthnPolicyResourceTarget[]>]`: 
+  - `[ObligationMfaFactors <List<IAuthnPolicyObligationsMfaFactorsItem>>]`: 
+    - `[Type <String>]`: 
+  - `[PrimaryHelpText <String>]`: The text to be displayed for the help link.
+  - `[PrimaryHelpUrl <String>]`: The URL to be opened when the help link is clicked.
+  - `[SecondaryHelpText <String>]`: The text to be displayed for the help link.
+  - `[SecondaryHelpUrl <String>]`: The URL to be opened when the help link is clicked.
+  - `[TargetResources <List<IAuthnPolicyResourceTarget>>]`: 
     - `Type <String>`: 
     - `[Id <String>]`: Object ID of the resource target. If undefined, then all resources of the given type are targeted.
   - `[Type <String>]`: AuthnPolicyType
-  - `[UserAttributeExclusions <IAuthnPolicyUserAttributeFilter[]>]`: 
+  - `[UserAttributeExclusions <List<IAuthnPolicyUserAttributeFilter>>]`: 
     - `[Field <String>]`: The only field that is currently supported is ldap_binding_user
     - `[Operator <String>]`: 
-    - `[Value <IAny>]`: Any object
-  - `[UserAttributeInclusions <IAuthnPolicyUserAttributeFilter[]>]`: 
-  - `[UserGroupExclusions <String[]>]`: 
-  - `[UserGroupInclusions <String[]>]`: 
-  - `[UserInclusions <String[]>]`: 
+    - `[Value <IAny>]`: Can be any value - string, number, boolean, array or object.
+  - `[UserAttributeInclusions <List<IAuthnPolicyUserAttributeFilter>>]`: 
+  - `[UserGroupExclusions <List<String>>]`: 
+  - `[UserGroupInclusions <List<String>>]`: 
+  - `[UserInclusions <List<String>>]`: 
   - `[UserVerificationRequirement <String>]`: 
 
-INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter
+`INPUTOBJECT <IJumpCloudApiIdentity>`: Identity Parameter
   - `[AccountId <String>]`: 
   - `[ActivedirectoryId <String>]`: 
   - `[AdministratorId <String>]`: 
@@ -474,19 +604,22 @@ INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter
   - `[UserId <String>]`: ObjectID of the User.
   - `[WorkdayId <String>]`: 
 
-TARGETRESOURCES <IAuthnPolicyResourceTarget[]>: .
+`OBLIGATIONMFAFACTORS <IAuthnPolicyObligationsMfaFactorsItem[]>`: .
+  - `[Type <String>]`: 
+
+`TARGETRESOURCES <IAuthnPolicyResourceTarget[]>`: .
   - `Type <String>`: 
   - `[Id <String>]`: Object ID of the resource target. If undefined, then all resources of the given type are targeted.
 
-USERATTRIBUTEEXCLUSIONS <IAuthnPolicyUserAttributeFilter[]>: .
+`USERATTRIBUTEEXCLUSIONS <IAuthnPolicyUserAttributeFilter[]>`: .
   - `[Field <String>]`: The only field that is currently supported is ldap_binding_user
   - `[Operator <String>]`: 
-  - `[Value <IAny>]`: Any object
+  - `[Value <IAny>]`: Can be any value - string, number, boolean, array or object.
 
-USERATTRIBUTEINCLUSIONS <IAuthnPolicyUserAttributeFilter[]>: .
+`USERATTRIBUTEINCLUSIONS <IAuthnPolicyUserAttributeFilter[]>`: .
   - `[Field <String>]`: The only field that is currently supported is ldap_binding_user
   - `[Operator <String>]`: 
-  - `[Value <IAny>]`: Any object
+  - `[Value <IAny>]`: Can be any value - string, number, boolean, array or object.
 
 ## RELATED LINKS
 

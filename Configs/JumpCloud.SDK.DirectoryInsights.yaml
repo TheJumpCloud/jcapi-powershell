@@ -1,33 +1,33 @@
-sample-generation: true
-directive:
-- hide: true
-  where:
-    prefix: JcSdk
+output-folder: SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights
+customFunctionPrefix: JcSdk
+clear-output-folder: true
+module-name: JumpCloud.SDK.DirectoryInsights
+prefix: JcSdkInternal
+branch: CUT-4981_v2EUSupport
 input-file:
 - SwaggerSpecs/JumpCloud.SDK.DirectoryInsights.json
-module-version: 0.1.0
-output-folder: SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights
-clear-output-folder: true
-base-folder: ..
-branch: CUT-4908_userGroupDeviceGroupFilters
+sample-generation: true
+powershell: true
 dll-name: JumpCloud.SDK.DirectoryInsights.private
-namespace: JumpCloud.SDK.DirectoryInsights
-help-link-prefix: https://github.com/TheJumpCloud/jcapi-powershell/tree/$(branch)/SDKs/PowerShell/
-verbose: true
+base-folder: ..
 debug: true
+module-version: 0.1.0
 metadata:
-  requireLicenseAcceptance: false
-  companyName: JumpCloud
-  tags: JumpCloud, DaaS, Jump, Cloud, Directory
-  copyright: (c) JumpCloud. All rights reserved.
   iconUri: https://console.jumpcloud.com/img/login-viewport-logo.png
   licenseUri: https://github.com/TheJumpCloud/jcapi-powershell/tree/$(branch)/LICENSE
   description: The JumpCloud DirectoryInsights PowerShell SDK
-  projectUri: https://github.com/TheJumpCloud/jcapi-powershell/tree/$(branch)/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/
   owners: JumpCloud
+  companyName: JumpCloud
   formatsToProcess: []
+  copyright: (c) JumpCloud. All rights reserved.
+  tags: JumpCloud, DaaS, Jump, Cloud, Directory
+  requireLicenseAcceptance: false
   authors: JumpCloud
-module-name: JumpCloud.SDK.DirectoryInsights
-prefix: JcSdkInternal
-customFunctionPrefix: JcSdk
-powershell: true
+  projectUri: https://github.com/TheJumpCloud/jcapi-powershell/tree/$(branch)/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/
+namespace: JumpCloud.SDK.DirectoryInsights
+help-link-prefix: https://github.com/TheJumpCloud/jcapi-powershell/tree/$(branch)/SDKs/PowerShell/
+directive:
+- where:
+    prefix: JcSdk
+  hide: true
+verbose: true

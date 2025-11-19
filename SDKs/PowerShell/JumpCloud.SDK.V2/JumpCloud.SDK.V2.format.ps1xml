@@ -4,7 +4,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.ActiveDirectory</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.ActiveDirectory</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.ActiveDirectory#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -21,10 +21,16 @@
             <Label>Id</Label>
           </TableColumnHeader>
           <TableColumnHeader>
+            <Label>Permission</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
             <Label>PrimaryAgent</Label>
           </TableColumnHeader>
           <TableColumnHeader>
             <Label>PrimaryImportAgent</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>UpdatedAt</Label>
           </TableColumnHeader>
           <TableColumnHeader>
             <Label>UseCase</Label>
@@ -46,10 +52,16 @@
                 <PropertyName>Id</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
+                <PropertyName>Permission</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
                 <PropertyName>PrimaryAgent</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>PrimaryImportAgent</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>UpdatedAt</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>UseCase</PropertyName>
@@ -62,7 +74,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.ActiveDirectoryAgent</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.ActiveDirectoryAgent</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.ActiveDirectoryAgent#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -84,7 +96,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.ActiveDirectoryAgentGet</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.ActiveDirectoryAgentGet</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.ActiveDirectoryAgentGet#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -142,7 +154,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.ActiveDirectoryAgentList</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.ActiveDirectoryAgentList</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.ActiveDirectoryAgentList#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -194,7 +206,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.Address</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.Address</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.Address#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -264,31 +276,19 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.Ade</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.Ade</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.Ade#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
           <TableColumnHeader>
-            <Label>DefaultDeviceGroupObjectIds</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
             <Label>EnableZeroTouchEnrollment</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>SetupOptions</Label>
           </TableColumnHeader>
         </TableHeaders>
         <TableRowEntries>
           <TableRowEntry>
             <TableColumnItems>
               <TableColumnItem>
-                <PropertyName>DefaultDeviceGroupObjectIds</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
                 <PropertyName>EnableZeroTouchEnrollment</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>SetupOptions</PropertyName>
               </TableColumnItem>
             </TableColumnItems>
           </TableRowEntry>
@@ -298,7 +298,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.Administrator</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.Administrator</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.Administrator#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -386,7 +386,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.AdministratorApiKeyHash</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.AdministratorApiKeyHash</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.AdministratorApiKeyHash#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -420,7 +420,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.AdministratorOrganizationLink</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.AdministratorOrganizationLink</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.AdministratorOrganizationLink#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -448,7 +448,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.AdministratorOrganizationLinkReq</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.AdministratorOrganizationLinkReq</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.AdministratorOrganizationLinkReq#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -470,7 +470,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.AppleMdm</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.AppleMdm</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.AppleMdm#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -509,6 +509,9 @@
           </TableColumnHeader>
           <TableColumnHeader>
             <Label>Organization</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>ServiceDiscoveryEnabled</Label>
           </TableColumnHeader>
         </TableHeaders>
         <TableRowEntries>
@@ -550,6 +553,9 @@
               <TableColumnItem>
                 <PropertyName>Organization</PropertyName>
               </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>ServiceDiscoveryEnabled</PropertyName>
+              </TableColumnItem>
             </TableColumnItems>
           </TableRowEntry>
         </TableRowEntries>
@@ -558,7 +564,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.AppleMdmDevice</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.AppleMdmDevice</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.AppleMdmDevice#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -576,6 +582,12 @@
           </TableColumnHeader>
           <TableColumnHeader>
             <Label>Id</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>MdmOSFamily</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>ModelFamily</Label>
           </TableColumnHeader>
           <TableColumnHeader>
             <Label>OSVersion</Label>
@@ -606,6 +618,12 @@
                 <PropertyName>Id</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
+                <PropertyName>MdmOSFamily</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>ModelFamily</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
                 <PropertyName>OSVersion</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
@@ -622,7 +640,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.AppleMdmDeviceInfo</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.AppleMdmDeviceInfo</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.AppleMdmDeviceInfo#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -648,7 +666,25 @@
             <Label>IsSupervised</Label>
           </TableColumnHeader>
           <TableColumnHeader>
+            <Label>ModelMarketingName</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
             <Label>ModelName</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>ModelNumber</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>OSBuildVersion</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>OSExtraVersion</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>OSMarketingName</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>OSSupplementalBuildVersion</Label>
           </TableColumnHeader>
           <TableColumnHeader>
             <Label>SecondIccid</Label>
@@ -658,6 +694,9 @@
           </TableColumnHeader>
           <TableColumnHeader>
             <Label>SecondSubscriberCarrierNetwork</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>SofwareUpdateId</Label>
           </TableColumnHeader>
           <TableColumnHeader>
             <Label>SubscriberCarrierNetwork</Label>
@@ -691,7 +730,25 @@
                 <PropertyName>IsSupervised</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
+                <PropertyName>ModelMarketingName</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
                 <PropertyName>ModelName</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>ModelNumber</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>OSBuildVersion</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>OSExtraVersion</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>OSMarketingName</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>OSSupplementalBuildVersion</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>SecondIccid</PropertyName>
@@ -701,6 +758,9 @@
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>SecondSubscriberCarrierNetwork</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>SofwareUpdateId</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>SubscriberCarrierNetwork</PropertyName>
@@ -716,7 +776,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.AppleMdmDeviceSecurityInfo</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.AppleMdmDeviceSecurityInfo</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.AppleMdmDeviceSecurityInfo#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -724,10 +784,16 @@
             <Label>EnrolledViaDep</Label>
           </TableColumnHeader>
           <TableColumnHeader>
+            <Label>FilevaultEnabled</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
             <Label>IsActivationLockManageable</Label>
           </TableColumnHeader>
           <TableColumnHeader>
             <Label>IsUserEnrollment</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>PasscodeCompliant</Label>
           </TableColumnHeader>
           <TableColumnHeader>
             <Label>PasscodePresent</Label>
@@ -743,10 +809,16 @@
                 <PropertyName>EnrolledViaDep</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
+                <PropertyName>FilevaultEnabled</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
                 <PropertyName>IsActivationLockManageable</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>IsUserEnrollment</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>PasscodeCompliant</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>PasscodePresent</PropertyName>
@@ -762,7 +834,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.AppleMdmPatch</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.AppleMdmPatch</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.AppleMdmPatch#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -820,7 +892,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.AuthInfo</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.AuthInfo</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.AuthInfo#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -854,7 +926,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.AuthInputBasic</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.AuthInputBasic</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.AuthInputBasic#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -882,7 +954,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.AuthInputOauth</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.AuthInputOauth</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.AuthInputOauth#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -904,7 +976,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.AuthnPolicy</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.AuthnPolicy</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.AuthnPolicy#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -948,9 +1020,37 @@
       </TableControl>
     </View>
     <View>
+      <Name>JumpCloud.SDK.V2.Models.AuthnPolicyCustomErrorMessage</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloud.SDK.V2.Models.AuthnPolicyCustomErrorMessage#Multiple</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Enabled</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Message</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Enabled</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Message</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
       <Name>JumpCloud.SDK.V2.Models.AuthnPolicyEffect</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.AuthnPolicyEffect</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.AuthnPolicyEffect#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -970,9 +1070,37 @@
       </TableControl>
     </View>
     <View>
+      <Name>JumpCloud.SDK.V2.Models.AuthnPolicyHelpLink</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloud.SDK.V2.Models.AuthnPolicyHelpLink#Multiple</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Text</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Url</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Text</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Url</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
       <Name>JumpCloud.SDK.V2.Models.AuthnPolicyObligationsMfa</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.AuthnPolicyObligationsMfa</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.AuthnPolicyObligationsMfa#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -992,9 +1120,31 @@
       </TableControl>
     </View>
     <View>
+      <Name>JumpCloud.SDK.V2.Models.AuthnPolicyObligationsMfaFactorsItem</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloud.SDK.V2.Models.AuthnPolicyObligationsMfaFactorsItem#Multiple</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Type</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Type</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
       <Name>JumpCloud.SDK.V2.Models.AuthnPolicyObligationsUserVerification</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.AuthnPolicyObligationsUserVerification</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.AuthnPolicyObligationsUserVerification#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -1016,7 +1166,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.AuthnPolicyResourceTarget</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.AuthnPolicyResourceTarget</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.AuthnPolicyResourceTarget#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -1044,7 +1194,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.AuthnPolicyUserAttributeFilter</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.AuthnPolicyUserAttributeFilter</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.AuthnPolicyUserAttributeFilter#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -1070,59 +1220,9 @@
       </TableControl>
     </View>
     <View>
-      <Name>JumpCloud.SDK.V2.Models.AuthnPolicyUserGroupTarget</Name>
-      <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.AuthnPolicyUserGroupTarget</TypeName>
-      </ViewSelectedBy>
-      <TableControl>
-        <TableHeaders>
-          <TableColumnHeader>
-            <Label>Exclusions</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>Inclusions</Label>
-          </TableColumnHeader>
-        </TableHeaders>
-        <TableRowEntries>
-          <TableRowEntry>
-            <TableColumnItems>
-              <TableColumnItem>
-                <PropertyName>Exclusions</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>Inclusions</PropertyName>
-              </TableColumnItem>
-            </TableColumnItems>
-          </TableRowEntry>
-        </TableRowEntries>
-      </TableControl>
-    </View>
-    <View>
-      <Name>JumpCloud.SDK.V2.Models.AuthnPolicyUserTarget</Name>
-      <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.AuthnPolicyUserTarget</TypeName>
-      </ViewSelectedBy>
-      <TableControl>
-        <TableHeaders>
-          <TableColumnHeader>
-            <Label>Inclusions</Label>
-          </TableColumnHeader>
-        </TableHeaders>
-        <TableRowEntries>
-          <TableRowEntry>
-            <TableColumnItems>
-              <TableColumnItem>
-                <PropertyName>Inclusions</PropertyName>
-              </TableColumnItem>
-            </TableColumnItems>
-          </TableRowEntry>
-        </TableRowEntries>
-      </TableControl>
-    </View>
-    <View>
       <Name>JumpCloud.SDK.V2.Models.BulkScheduledStatechangeCreate</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.BulkScheduledStatechangeCreate</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.BulkScheduledStatechangeCreate#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -1137,9 +1237,6 @@
           </TableColumnHeader>
           <TableColumnHeader>
             <Label>State</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>UserIds</Label>
           </TableColumnHeader>
         </TableHeaders>
         <TableRowEntries>
@@ -1157,9 +1254,6 @@
               <TableColumnItem>
                 <PropertyName>State</PropertyName>
               </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>UserIds</PropertyName>
-              </TableColumnItem>
             </TableColumnItems>
           </TableRowEntry>
         </TableRowEntries>
@@ -1168,7 +1262,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.BulkUserCreate</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.BulkUserCreate</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.BulkUserCreate#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -1412,7 +1506,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.BulkUserCreateAddressesItem</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.BulkUserCreateAddressesItem</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.BulkUserCreateAddressesItem#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -1476,7 +1570,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.BulkUserCreateAttributesItem</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.BulkUserCreateAttributesItem</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.BulkUserCreateAttributesItem#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -1504,7 +1598,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.BulkUserCreateMfa</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.BulkUserCreateMfa</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.BulkUserCreateMfa#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -1544,7 +1638,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.BulkUserCreatePhoneNumbersItem</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.BulkUserCreatePhoneNumbersItem</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.BulkUserCreatePhoneNumbersItem#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -1572,7 +1666,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.BulkUserCreateRecoveryEmail</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.BulkUserCreateRecoveryEmail</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.BulkUserCreateRecoveryEmail#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -1594,7 +1688,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.BulkUserCreateRelationshipsItem</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.BulkUserCreateRelationshipsItem</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.BulkUserCreateRelationshipsItem#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -1622,7 +1716,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.BulkUserUpdate</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.BulkUserUpdate</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.BulkUserUpdate#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -1872,7 +1966,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.BulkUserUpdateAddressesItem</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.BulkUserUpdateAddressesItem</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.BulkUserUpdateAddressesItem#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -1936,7 +2030,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.BulkUserUpdateAttributesItem</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.BulkUserUpdateAttributesItem</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.BulkUserUpdateAttributesItem#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -1964,7 +2058,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.BulkUserUpdateMfa</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.BulkUserUpdateMfa</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.BulkUserUpdateMfa#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -2004,7 +2098,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.BulkUserUpdatePhoneNumbersItem</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.BulkUserUpdatePhoneNumbersItem</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.BulkUserUpdatePhoneNumbersItem#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -2032,7 +2126,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.BulkUserUpdateRelationshipsItem</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.BulkUserUpdateRelationshipsItem</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.BulkUserUpdateRelationshipsItem#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -2060,7 +2154,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.BulkUserUpdateSshKeysItem</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.BulkUserUpdateSshKeysItem</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.BulkUserUpdateSshKeysItem#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -2088,7 +2182,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.CommandsGraphObjectWithPaths</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.CommandsGraphObjectWithPaths</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.CommandsGraphObjectWithPaths#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -2170,7 +2264,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.CustomEmail</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.CustomEmail</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.CustomEmail#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -2234,7 +2328,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.CustomEmailTemplate</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.CustomEmailTemplate</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.CustomEmailTemplate#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -2274,7 +2368,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.CustomEmailTemplateField</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.CustomEmailTemplateField</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.CustomEmailTemplateField#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -2314,7 +2408,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.DefaultDomain</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.DefaultDomain</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.DefaultDomain#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -2342,7 +2436,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.Dep</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.Dep</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.Dep#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -2364,7 +2458,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.DepSetupAssistantOption</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.DepSetupAssistantOption</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.DepSetupAssistantOption#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -2386,7 +2480,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.DepWelcomeScreen</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.DepWelcomeScreen</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.DepWelcomeScreen#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -2420,7 +2514,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.Directory</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.Directory</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.Directory#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -2454,7 +2548,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.DirectoryDefaultDomain</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.DirectoryDefaultDomain</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.DirectoryDefaultDomain#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -2482,7 +2576,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.DuoAccount</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.DuoAccount</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.DuoAccount#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -2510,7 +2604,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.DuoApplication</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.DuoApplication</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.DuoApplication#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -2550,7 +2644,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.DuoApplicationReq</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.DuoApplicationReq</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.DuoApplicationReq#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -2590,7 +2684,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.DuoApplicationUpdateReq</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.DuoApplicationUpdateReq</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.DuoApplicationUpdateReq#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -2630,7 +2724,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.Error</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.Error</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.Error#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -2664,7 +2758,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.ErrorDetails</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.ErrorDetails</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.ErrorDetails#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -2698,7 +2792,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.Feature</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.Feature</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.Feature#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -2720,7 +2814,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.Get200ApplicationJsonPropertiesItemsItem</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.Get200ApplicationJsonPropertiesItemsItem</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.Get200ApplicationJsonPropertiesItemsItem#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -2766,7 +2860,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.GraphAttributePosixGroupsItem</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.GraphAttributePosixGroupsItem</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.GraphAttributePosixGroupsItem#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -2794,7 +2888,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.GraphAttributeRadiusReplyItem</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.GraphAttributeRadiusReplyItem</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.GraphAttributeRadiusReplyItem#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -2822,7 +2916,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.GraphAttributeSambaEnabled</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.GraphAttributeSambaEnabled</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.GraphAttributeSambaEnabled#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -2842,9 +2936,9 @@
       </TableControl>
     </View>
     <View>
-      <Name>JumpCloud.SDK.V2.Models.GraphAttributeSudoAutoGenerated</Name>
+      <Name>JumpCloud.SDK.V2.Models.GraphAttributeSudo1</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.GraphAttributeSudoAutoGenerated</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.GraphAttributeSudo1#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -2872,7 +2966,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.GraphObject</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.GraphObject</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.GraphObject#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -2900,7 +2994,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.GraphObjectWithPaths</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.GraphObjectWithPaths</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.GraphObjectWithPaths#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -2928,7 +3022,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.GraphOperation</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.GraphOperation</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.GraphOperation#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -2954,9 +3048,9 @@
       </TableControl>
     </View>
     <View>
-      <Name>JumpCloud.SDK.V2.Models.GraphOperationActiveDirectory1</Name>
+      <Name>JumpCloud.SDK.V2.Models.GraphOperationActiveDirectoryAutoGenerated</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.GraphOperationActiveDirectory1</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.GraphOperationActiveDirectoryAutoGenerated#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -2988,9 +3082,9 @@
       </TableControl>
     </View>
     <View>
-      <Name>JumpCloud.SDK.V2.Models.GraphOperationApplication1</Name>
+      <Name>JumpCloud.SDK.V2.Models.GraphOperationApplicationAutoGenerated</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.GraphOperationApplication1</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.GraphOperationApplicationAutoGenerated#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -3024,7 +3118,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.GraphOperationCommand</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.GraphOperationCommand</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.GraphOperationCommand#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -3056,9 +3150,9 @@
       </TableControl>
     </View>
     <View>
-      <Name>JumpCloud.SDK.V2.Models.GraphOperationGSuite1</Name>
+      <Name>JumpCloud.SDK.V2.Models.GraphOperationGSuiteAutoGenerated</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.GraphOperationGSuite1</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.GraphOperationGSuiteAutoGenerated#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -3090,9 +3184,9 @@
       </TableControl>
     </View>
     <View>
-      <Name>JumpCloud.SDK.V2.Models.GraphOperationLdapServer1</Name>
+      <Name>JumpCloud.SDK.V2.Models.GraphOperationLdapServerAutoGenerated</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.GraphOperationLdapServer1</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.GraphOperationLdapServerAutoGenerated#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -3124,9 +3218,9 @@
       </TableControl>
     </View>
     <View>
-      <Name>JumpCloud.SDK.V2.Models.GraphOperationOffice3651</Name>
+      <Name>JumpCloud.SDK.V2.Models.GraphOperationOffice365AutoGenerated</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.GraphOperationOffice3651</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.GraphOperationOffice365AutoGenerated#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -3160,7 +3254,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.GraphOperationPolicy</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.GraphOperationPolicy</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.GraphOperationPolicy#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -3194,7 +3288,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.GraphOperationPolicyGroup</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.GraphOperationPolicyGroup</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.GraphOperationPolicyGroup#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -3228,7 +3322,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.GraphOperationPolicyGroupMember</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.GraphOperationPolicyGroupMember</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.GraphOperationPolicyGroupMember#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -3260,9 +3354,9 @@
       </TableControl>
     </View>
     <View>
-      <Name>JumpCloud.SDK.V2.Models.GraphOperationRadiusServer1</Name>
+      <Name>JumpCloud.SDK.V2.Models.GraphOperationRadiusServerAutoGenerated</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.GraphOperationRadiusServer1</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.GraphOperationRadiusServerAutoGenerated#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -3296,7 +3390,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.GraphOperationSoftwareApp</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.GraphOperationSoftwareApp</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.GraphOperationSoftwareApp#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -3330,7 +3424,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.GraphOperationSystem</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.GraphOperationSystem</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.GraphOperationSystem#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -3364,7 +3458,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.GraphOperationSystemAttributes</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.GraphOperationSystemAttributes</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.GraphOperationSystemAttributes#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -3392,7 +3486,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.GraphOperationSystemGroup</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.GraphOperationSystemGroup</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.GraphOperationSystemGroup#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -3426,7 +3520,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.GraphOperationSystemGroupMember</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.GraphOperationSystemGroupMember</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.GraphOperationSystemGroupMember#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -3460,7 +3554,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.GraphOperationUser</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.GraphOperationUser</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.GraphOperationUser#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -3494,7 +3588,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.GraphOperationUserAttributes</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.GraphOperationUserAttributes</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.GraphOperationUserAttributes#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -3522,7 +3616,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.GraphOperationUserGroup</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.GraphOperationUserGroup</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.GraphOperationUserGroup#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -3556,7 +3650,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.GraphOperationUserGroupMember</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.GraphOperationUserGroupMember</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.GraphOperationUserGroupMember#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -3590,7 +3684,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.Group</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.Group</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.Group#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -3636,7 +3730,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.GroupAttributesUserGroup</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.GroupAttributesUserGroup</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.GroupAttributesUserGroup#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -3670,7 +3764,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.Gsuite</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.Gsuite</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.Gsuite#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -3722,7 +3816,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.GSuiteTranslationRule</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.GSuiteTranslationRule</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.GSuiteTranslationRule#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -3756,7 +3850,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.GSuiteTranslationRuleRequest</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.GSuiteTranslationRuleRequest</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.GSuiteTranslationRuleRequest#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -3784,7 +3878,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.ImportUser</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.ImportUser</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.ImportUser#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -3896,7 +3990,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.ImportUserAddress</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.ImportUserAddress</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.ImportUserAddress#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -3948,7 +4042,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.ImportUserPhoneNumber</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.ImportUserPhoneNumber</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.ImportUserPhoneNumber#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -3976,7 +4070,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.ImportUsersResponse</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.ImportUsersResponse</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.ImportUsersResponse#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -3998,7 +4092,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.IPList</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.IPList</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.IPList#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -4007,9 +4101,6 @@
           </TableColumnHeader>
           <TableColumnHeader>
             <Label>Id</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>Ips</Label>
           </TableColumnHeader>
           <TableColumnHeader>
             <Label>Name</Label>
@@ -4025,9 +4116,6 @@
                 <PropertyName>Id</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
-                <PropertyName>Ips</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
                 <PropertyName>Name</PropertyName>
               </TableColumnItem>
             </TableColumnItems>
@@ -4038,15 +4126,12 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.IPListRequest</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.IPListRequest</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.IPListRequest#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
           <TableColumnHeader>
             <Label>Description</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>Ips</Label>
           </TableColumnHeader>
           <TableColumnHeader>
             <Label>Name</Label>
@@ -4059,9 +4144,6 @@
                 <PropertyName>Description</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
-                <PropertyName>Ips</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
                 <PropertyName>Name</PropertyName>
               </TableColumnItem>
             </TableColumnItems>
@@ -4070,21 +4152,21 @@
       </TableControl>
     </View>
     <View>
-      <Name>JumpCloud.SDK.V2.Models.JobId</Name>
+      <Name>JumpCloud.SDK.V2.Models.JobIdResult</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.JobId</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.JobIdResult#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
           <TableColumnHeader>
-            <Label>JobId1</Label>
+            <Label>JobId</Label>
           </TableColumnHeader>
         </TableHeaders>
         <TableRowEntries>
           <TableRowEntry>
             <TableColumnItems>
               <TableColumnItem>
-                <PropertyName>JobId1</PropertyName>
+                <PropertyName>JobId</PropertyName>
               </TableColumnItem>
             </TableColumnItems>
           </TableRowEntry>
@@ -4094,7 +4176,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.JobWorkresult</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.JobWorkresult</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.JobWorkresult#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -4140,7 +4222,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.JumpCloudApiIdentity</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.JumpCloudApiIdentity</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.JumpCloudApiIdentity#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -4292,9 +4374,161 @@
       </TableControl>
     </View>
     <View>
+      <Name>JumpCloud.SDK.V2.Models.JumpcloudSearchPaginationParams</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloud.SDK.V2.Models.JumpcloudSearchPaginationParams#Multiple</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Offset</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>PageSize</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Offset</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>PageSize</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>JumpCloud.SDK.V2.Models.JumpcloudSearchRequest</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloud.SDK.V2.Models.JumpcloudSearchRequest#Multiple</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>CacheToken</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Limit</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>RequestCache</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>CacheToken</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Limit</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>RequestCache</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>JumpCloud.SDK.V2.Models.JumpcloudSearchRequestAggregation</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloud.SDK.V2.Models.JumpcloudSearchRequestAggregation#Multiple</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Function</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Name</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Function</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Name</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>JumpCloud.SDK.V2.Models.JumpcloudSearchRequestFilter</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloud.SDK.V2.Models.JumpcloudSearchRequestFilter#Multiple</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Field</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Operation</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Unit</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Field</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Operation</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Unit</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>JumpCloud.SDK.V2.Models.JumpcloudSearchRequestSort</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloud.SDK.V2.Models.JumpcloudSearchRequestSort#Multiple</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Field</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Order</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Field</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Order</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
       <Name>JumpCloud.SDK.V2.Models.LdapGroup</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.LdapGroup</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.LdapGroup#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -4316,7 +4550,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.LdapServer</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.LdapServer</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.LdapServer#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -4356,12 +4590,15 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.MemberQuery</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.MemberQuery</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.MemberQuery#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
           <TableColumnHeader>
             <Label>QueryType</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>SearchFilters</Label>
           </TableColumnHeader>
         </TableHeaders>
         <TableRowEntries>
@@ -4369,6 +4606,9 @@
             <TableColumnItems>
               <TableColumnItem>
                 <PropertyName>QueryType</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>SearchFilters</PropertyName>
               </TableColumnItem>
             </TableColumnItems>
           </TableRowEntry>
@@ -4378,7 +4618,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.ObjectStorageItem</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.ObjectStorageItem</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.ObjectStorageItem#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -4400,7 +4640,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.ObjectStorageVersion</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.ObjectStorageVersion</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.ObjectStorageVersion#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -4452,7 +4692,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.Office365</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.Office365</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.Office365#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -4498,7 +4738,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.Office365TranslationRule</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.Office365TranslationRule</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.Office365TranslationRule#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -4532,7 +4772,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.Office365TranslationRuleRequest</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.Office365TranslationRuleRequest</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.Office365TranslationRuleRequest#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -4560,7 +4800,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.Organization</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.Organization</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.Organization#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -4594,7 +4834,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.OSRestriction</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.OSRestriction</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.OSRestriction#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -4609,9 +4849,6 @@
           </TableColumnHeader>
           <TableColumnHeader>
             <Label>OSName</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>SupportedEnrollmentTypes</Label>
           </TableColumnHeader>
         </TableHeaders>
         <TableRowEntries>
@@ -4629,9 +4866,6 @@
               <TableColumnItem>
                 <PropertyName>OSName</PropertyName>
               </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>SupportedEnrollmentTypes</PropertyName>
-              </TableColumnItem>
             </TableColumnItems>
           </TableRowEntry>
         </TableRowEntries>
@@ -4640,15 +4874,12 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.OSRestrictionAppleRestrictions</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.OSRestrictionAppleRestrictions</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.OSRestrictionAppleRestrictions#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
           <TableColumnHeader>
             <Label>RequiresSupervision</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>SupportedEnrollmentTypes</Label>
           </TableColumnHeader>
         </TableHeaders>
         <TableRowEntries>
@@ -4656,9 +4887,6 @@
             <TableColumnItems>
               <TableColumnItem>
                 <PropertyName>RequiresSupervision</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
-                <PropertyName>SupportedEnrollmentTypes</PropertyName>
               </TableColumnItem>
             </TableColumnItems>
           </TableRowEntry>
@@ -4668,7 +4896,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.Paths1Dvt4UsLdapserversIdPatchResponses200ContentApplicationJsonSchema</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.Paths1Dvt4UsLdapserversIdPatchResponses200ContentApplicationJsonSchema</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.Paths1Dvt4UsLdapserversIdPatchResponses200ContentApplicationJsonSchema#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -4708,7 +4936,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.Paths1FfbqfwApplemdmsAppleMdmIdDevicesDeviceIdErasePostRequestbodyContentApplicationJsonSchema</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.Paths1FfbqfwApplemdmsAppleMdmIdDevicesDeviceIdErasePostRequestbodyContentApplicationJsonSchema</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.Paths1FfbqfwApplemdmsAppleMdmIdDevicesDeviceIdErasePostRequestbodyContentApplicationJsonSchema#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -4730,7 +4958,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.Paths1Hu9JikOffice365SOffice365IdImportUsersGetResponses200ContentApplicationJsonSchemaPropertiesUsersItems</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.Paths1Hu9JikOffice365SOffice365IdImportUsersGetResponses200ContentApplicationJsonSchemaPropertiesUsersItems</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.Paths1Hu9JikOffice365SOffice365IdImportUsersGetResponses200ContentApplicationJsonSchemaPropertiesUsersItems#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -4770,7 +4998,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.Paths1J0ThkrOffice365SOffice365IdImportUsersGetResponses200ContentApplicationJsonSchema</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.Paths1J0ThkrOffice365SOffice365IdImportUsersGetResponses200ContentApplicationJsonSchema</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.Paths1J0ThkrOffice365SOffice365IdImportUsersGetResponses200ContentApplicationJsonSchema#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -4798,7 +5026,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.Paths1Ka5IlhLdapserversIdPatchRequestbodyContentApplicationJsonSchema</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.Paths1Ka5IlhLdapserversIdPatchRequestbodyContentApplicationJsonSchema</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.Paths1Ka5IlhLdapserversIdPatchRequestbodyContentApplicationJsonSchema#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -4832,7 +5060,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.Paths1O3J7V8ProvidersProviderIdOrganizationsGetResponses200ContentApplicationJsonSchema</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.Paths1O3J7V8ProvidersProviderIdOrganizationsGetResponses200ContentApplicationJsonSchema</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.Paths1O3J7V8ProvidersProviderIdOrganizationsGetResponses200ContentApplicationJsonSchema#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -4852,31 +5080,9 @@
       </TableControl>
     </View>
     <View>
-      <Name>JumpCloud.SDK.V2.Models.Paths1Whnyt3ApplemdmsAppleMdmIdDevicesDeviceIdRestartPostRequestbodyContentApplicationJsonSchema</Name>
-      <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.Paths1Whnyt3ApplemdmsAppleMdmIdDevicesDeviceIdRestartPostRequestbodyContentApplicationJsonSchema</TypeName>
-      </ViewSelectedBy>
-      <TableControl>
-        <TableHeaders>
-          <TableColumnHeader>
-            <Label>KextPaths</Label>
-          </TableColumnHeader>
-        </TableHeaders>
-        <TableRowEntries>
-          <TableRowEntry>
-            <TableColumnItems>
-              <TableColumnItem>
-                <PropertyName>KextPaths</PropertyName>
-              </TableColumnItem>
-            </TableColumnItems>
-          </TableRowEntry>
-        </TableRowEntries>
-      </TableControl>
-    </View>
-    <View>
       <Name>JumpCloud.SDK.V2.Models.PathsC7Pl4LGsuitesGsuiteIdImportUsersGetResponses200ContentApplicationJsonSchema</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.PathsC7Pl4LGsuitesGsuiteIdImportUsersGetResponses200ContentApplicationJsonSchema</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.PathsC7Pl4LGsuitesGsuiteIdImportUsersGetResponses200ContentApplicationJsonSchema#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -4898,7 +5104,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.PathsKa8FhwGsuitesGsuiteIdImportJumpcloudusersGetResponses200ContentApplicationJsonSchema</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.PathsKa8FhwGsuitesGsuiteIdImportJumpcloudusersGetResponses200ContentApplicationJsonSchema</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.PathsKa8FhwGsuitesGsuiteIdImportJumpcloudusersGetResponses200ContentApplicationJsonSchema#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -4920,7 +5126,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.PathsLf7IzoApplemdmsAppleMdmIdDevicesDeviceIdLockPostRequestbodyContentApplicationJsonSchema</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.PathsLf7IzoApplemdmsAppleMdmIdDevicesDeviceIdLockPostRequestbodyContentApplicationJsonSchema</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.PathsLf7IzoApplemdmsAppleMdmIdDevicesDeviceIdLockPostRequestbodyContentApplicationJsonSchema#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -4942,7 +5148,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.PathsO4Si39UsersUserIdPushendpointsPushEndpointIdPatchRequestbodyContentApplicationJsonSchema</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.PathsO4Si39UsersUserIdPushendpointsPushEndpointIdPatchRequestbodyContentApplicationJsonSchema</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.PathsO4Si39UsersUserIdPushendpointsPushEndpointIdPatchRequestbodyContentApplicationJsonSchema#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -4970,7 +5176,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.PathsUbbqf1BulkUserstatesEventlistNextGetResponses200ContentApplicationJsonSchema</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.PathsUbbqf1BulkUserstatesEventlistNextGetResponses200ContentApplicationJsonSchema</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.PathsUbbqf1BulkUserstatesEventlistNextGetResponses200ContentApplicationJsonSchema#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -4992,7 +5198,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.PathsYwlyndProvidersProviderIdAdministratorsGetResponses200ContentApplicationJsonSchema</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.PathsYwlyndProvidersProviderIdAdministratorsGetResponses200ContentApplicationJsonSchema</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.PathsYwlyndProvidersProviderIdAdministratorsGetResponses200ContentApplicationJsonSchema#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -5014,7 +5220,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.PhoneNumber</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.PhoneNumber</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.PhoneNumber#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -5048,7 +5254,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.Policy</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.Policy</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.Policy#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -5076,7 +5282,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.PolicyCreateRequest</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.PolicyCreateRequest</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.PolicyCreateRequest#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -5104,7 +5310,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.PolicyCreateRequestTemplate</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.PolicyCreateRequestTemplate</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.PolicyCreateRequestTemplate#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -5126,7 +5332,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.PolicyGroup</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.PolicyGroup</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.PolicyGroup#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -5172,7 +5378,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.PolicyGroupData</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.PolicyGroupData</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.PolicyGroupData#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -5194,7 +5400,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.PolicyResult</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.PolicyResult</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.PolicyResult#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -5276,7 +5482,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.PolicyTemplate</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.PolicyTemplate</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.PolicyTemplate#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -5288,9 +5494,6 @@
           </TableColumnHeader>
           <TableColumnHeader>
             <Label>Behavior</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>DeliveryTypes</Label>
           </TableColumnHeader>
           <TableColumnHeader>
             <Label>Description</Label>
@@ -5327,9 +5530,6 @@
                 <PropertyName>Behavior</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
-                <PropertyName>DeliveryTypes</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
                 <PropertyName>Description</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
@@ -5358,7 +5558,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.PolicyTemplateConfigField</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.PolicyTemplateConfigField</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.PolicyTemplateConfigField#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -5428,7 +5628,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.PolicyTemplateConfigFieldTooltip</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.PolicyTemplateConfigFieldTooltip</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.PolicyTemplateConfigFieldTooltip#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -5450,7 +5650,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.PolicyTemplateConfigFieldTooltipVariables</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.PolicyTemplateConfigFieldTooltipVariables</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.PolicyTemplateConfigFieldTooltipVariables#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -5478,7 +5678,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.PolicyTemplateWithDetails</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.PolicyTemplateWithDetails</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.PolicyTemplateWithDetails#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -5536,7 +5736,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.PolicyUpdateRequest</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.PolicyUpdateRequest</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.PolicyUpdateRequest#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -5564,7 +5764,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.PolicyValue</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.PolicyValue</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.PolicyValue#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -5598,7 +5798,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.PolicyWithDetails</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.PolicyWithDetails</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.PolicyWithDetails#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -5632,7 +5832,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.ProviderAdminReq</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.ProviderAdminReq</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.ProviderAdminReq#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -5696,7 +5896,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.ProviderAdminReqApiKeyHash</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.ProviderAdminReqApiKeyHash</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.ProviderAdminReqApiKeyHash#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -5730,7 +5930,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.ProviderInvoice</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.ProviderInvoice</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.ProviderInvoice#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -5788,7 +5988,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.ProviderInvoiceResponse</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.ProviderInvoiceResponse</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.ProviderInvoiceResponse#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -5810,7 +6010,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.PushEndpointResponse</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.PushEndpointResponse</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.PushEndpointResponse#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -5856,7 +6056,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.PushEndpointResponseDevice</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.PushEndpointResponseDevice</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.PushEndpointResponseDevice#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -5906,31 +6106,9 @@
       </TableControl>
     </View>
     <View>
-      <Name>JumpCloud.SDK.V2.Models.Query</Name>
-      <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.Query</TypeName>
-      </ViewSelectedBy>
-      <TableControl>
-        <TableHeaders>
-          <TableColumnHeader>
-            <Label>QueryType</Label>
-          </TableColumnHeader>
-        </TableHeaders>
-        <TableRowEntries>
-          <TableRowEntry>
-            <TableColumnItems>
-              <TableColumnItem>
-                <PropertyName>QueryType</PropertyName>
-              </TableColumnItem>
-            </TableColumnItems>
-          </TableRowEntry>
-        </TableRowEntries>
-      </TableControl>
-    </View>
-    <View>
       <Name>JumpCloud.SDK.V2.Models.SambaDomain</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.SambaDomain</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.SambaDomain#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -5964,7 +6142,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.ScheduledUserstateResult</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.ScheduledUserstateResult</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.ScheduledUserstateResult#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -6004,7 +6182,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.SoftwareApp</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.SoftwareApp</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.SoftwareApp#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -6044,7 +6222,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.SoftwareAppAppleVpp</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.SoftwareAppAppleVpp</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.SoftwareAppAppleVpp#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -6059,9 +6237,6 @@
           </TableColumnHeader>
           <TableColumnHeader>
             <Label>IsConfigEnabled</Label>
-          </TableColumnHeader>
-          <TableColumnHeader>
-            <Label>SupportedDeviceFamilies</Label>
           </TableColumnHeader>
           <TableColumnHeader>
             <Label>TotalLicenses</Label>
@@ -6083,9 +6258,6 @@
                 <PropertyName>IsConfigEnabled</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
-                <PropertyName>SupportedDeviceFamilies</PropertyName>
-              </TableColumnItem>
-              <TableColumnItem>
                 <PropertyName>TotalLicenses</PropertyName>
               </TableColumnItem>
             </TableColumnItems>
@@ -6096,7 +6268,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.SoftwareAppCreate</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.SoftwareAppCreate</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.SoftwareAppCreate#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -6142,13 +6314,10 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.SoftwareAppGoogleAndroid</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.SoftwareAppGoogleAndroid</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.SoftwareAppGoogleAndroid#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
-          <TableColumnHeader>
-            <Label>AndroidFeatures</Label>
-          </TableColumnHeader>
           <TableColumnHeader>
             <Label>AppPricing</Label>
           </TableColumnHeader>
@@ -6213,9 +6382,6 @@
         <TableRowEntries>
           <TableRowEntry>
             <TableColumnItems>
-              <TableColumnItem>
-                <PropertyName>AndroidFeatures</PropertyName>
-              </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>AppPricing</PropertyName>
               </TableColumnItem>
@@ -6284,7 +6450,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.SoftwareAppMicrosoftStore</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.SoftwareAppMicrosoftStore</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.SoftwareAppMicrosoftStore#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -6318,7 +6484,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.SoftwareAppPermissionGrants</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.SoftwareAppPermissionGrants</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.SoftwareAppPermissionGrants#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -6346,7 +6512,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.SoftwareAppReclaimLicenses</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.SoftwareAppReclaimLicenses</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.SoftwareAppReclaimLicenses#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -6386,7 +6552,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.SoftwareAppSettings</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.SoftwareAppSettings</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.SoftwareAppSettings#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -6397,16 +6563,19 @@
             <Label>AppCatalogInstallableObjectId</Label>
           </TableColumnHeader>
           <TableColumnHeader>
+            <Label>AppFileName</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
             <Label>AssetKind</Label>
           </TableColumnHeader>
           <TableColumnHeader>
             <Label>AssetSha256Size</Label>
           </TableColumnHeader>
           <TableColumnHeader>
-            <Label>AssetSha256Strings</Label>
+            <Label>AutoUpdate</Label>
           </TableColumnHeader>
           <TableColumnHeader>
-            <Label>AutoUpdate</Label>
+            <Label>BundleId</Label>
           </TableColumnHeader>
           <TableColumnHeader>
             <Label>CommandLineArguments</Label>
@@ -6421,7 +6590,13 @@
             <Label>DesiredState</Label>
           </TableColumnHeader>
           <TableColumnHeader>
+            <Label>DownloadUrl</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
             <Label>EnterpriseObjectId</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Format</Label>
           </TableColumnHeader>
           <TableColumnHeader>
             <Label>IconUrl</Label>
@@ -6454,7 +6629,19 @@
             <Label>Scope</Label>
           </TableColumnHeader>
           <TableColumnHeader>
+            <Label>ShortVersion</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
             <Label>StoredPackageObjectId</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>TeamId</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>UpdateTool</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>UpdateToolArguments</Label>
           </TableColumnHeader>
           <TableColumnHeader>
             <Label>UpdatedAt</Label>
@@ -6473,16 +6660,19 @@
                 <PropertyName>AppCatalogInstallableObjectId</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
+                <PropertyName>AppFileName</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
                 <PropertyName>AssetKind</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>AssetSha256Size</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
-                <PropertyName>AssetSha256Strings</PropertyName>
+                <PropertyName>AutoUpdate</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
-                <PropertyName>AutoUpdate</PropertyName>
+                <PropertyName>BundleId</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>CommandLineArguments</PropertyName>
@@ -6497,7 +6687,13 @@
                 <PropertyName>DesiredState</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
+                <PropertyName>DownloadUrl</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
                 <PropertyName>EnterpriseObjectId</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Format</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>IconUrl</PropertyName>
@@ -6530,7 +6726,19 @@
                 <PropertyName>Scope</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
+                <PropertyName>ShortVersion</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
                 <PropertyName>StoredPackageObjectId</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>TeamId</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>UpdateTool</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>UpdateToolArguments</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>UpdatedAt</PropertyName>
@@ -6546,7 +6754,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.SoftwareAppStatus</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.SoftwareAppStatus</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.SoftwareAppStatus#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -6610,7 +6818,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.Subscription</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.Subscription</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.Subscription#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -6656,7 +6864,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.SuggestionCounts</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.SuggestionCounts</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.SuggestionCounts#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -6690,7 +6898,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.Systemfdekey</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.Systemfdekey</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.Systemfdekey#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -6712,7 +6920,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.SystemGroup</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.SystemGroup</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.SystemGroup#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -6770,7 +6978,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.SystemGroupPost</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.SystemGroupPost</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.SystemGroupPost#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -6816,7 +7024,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.SystemGroupPut</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.SystemGroupPut</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.SystemGroupPut#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -6862,7 +7070,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.SystemInsightsAlf</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsAlf</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsAlf#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -6932,7 +7140,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.SystemInsightsAlfExceptions</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsAlfExceptions</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsAlfExceptions#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -6972,7 +7180,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.SystemInsightsAlfExplicitAuths</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsAlfExplicitAuths</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsAlfExplicitAuths#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -7006,7 +7214,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.SystemInsightsAppcompatShims</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsAppcompatShims</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsAppcompatShims#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -7070,7 +7278,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.SystemInsightsApps</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsApps</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsApps#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -7212,7 +7420,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.SystemInsightsAuthorizedKeys</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsAuthorizedKeys</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsAuthorizedKeys#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -7264,7 +7472,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.SystemInsightsAzureInstanceMetadata</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsAzureInstanceMetadata</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsAzureInstanceMetadata#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -7388,7 +7596,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.SystemInsightsAzureInstanceTags</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsAzureInstanceTags</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsAzureInstanceTags#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -7434,7 +7642,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.SystemInsightsBattery</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsBattery</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsBattery#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -7570,7 +7778,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.SystemInsightsBitlockerInfo</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsBitlockerInfo</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsBitlockerInfo#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -7588,6 +7796,9 @@
           </TableColumnHeader>
           <TableColumnHeader>
             <Label>EncryptionMethod</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>PercentageEncrypted</Label>
           </TableColumnHeader>
           <TableColumnHeader>
             <Label>PersistentVolumeId</Label>
@@ -7618,6 +7829,9 @@
                 <PropertyName>EncryptionMethod</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
+                <PropertyName>PercentageEncrypted</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
                 <PropertyName>PersistentVolumeId</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
@@ -7634,7 +7848,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.SystemInsightsBrowserPlugins</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsBrowserPlugins</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsBrowserPlugins#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -7722,7 +7936,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.SystemInsightsCertificates</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsCertificates</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsCertificates#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -7870,7 +8084,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.SystemInsightsChassisInfo</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsChassisInfo</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsChassisInfo#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -7976,7 +8190,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.SystemInsightsChromeExtensions</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsChromeExtensions</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsChromeExtensions#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -8070,7 +8284,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.SystemInsightsConnectivity</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsConnectivity</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsConnectivity#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -8152,7 +8366,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.SystemInsightsCrashes</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsCrashes</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsCrashes#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -8276,7 +8490,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.SystemInsightsCupsDestinations</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsCupsDestinations</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsCupsDestinations#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -8316,7 +8530,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.SystemInsightsDiskEncryption</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsDiskEncryption</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsDiskEncryption#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -8386,7 +8600,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.SystemInsightsDiskInfo</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsDiskInfo</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsDiskInfo#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -8480,7 +8694,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.SystemInsightsDnsResolvers</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsDnsResolvers</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsDnsResolvers#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -8538,7 +8752,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.SystemInsightsEtcHosts</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsEtcHosts</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsEtcHosts#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -8578,7 +8792,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.SystemInsightsFirefoxAddons</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsFirefoxAddons</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsFirefoxAddons#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -8690,7 +8904,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.SystemInsightsGroups</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsGroups</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsGroups#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -8748,7 +8962,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.SystemInsightsIeExtensions</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsIeExtensions</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsIeExtensions#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -8800,7 +9014,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.SystemInsightsInterfaceAddresses</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsInterfaceAddresses</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsInterfaceAddresses#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -8870,7 +9084,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.SystemInsightsInterfaceDetails</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsInterfaceDetails</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsInterfaceDetails#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -9102,7 +9316,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.SystemInsightsKernelInfo</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsKernelInfo</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsKernelInfo#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -9154,7 +9368,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.SystemInsightsLaunchd</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsLaunchd</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsLaunchd#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -9308,7 +9522,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.SystemInsightsLinuxPackages</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsLinuxPackages</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsLinuxPackages#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -9396,7 +9610,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.SystemInsightsLoggedInUsers</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsLoggedInUsers</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsLoggedInUsers#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -9460,7 +9674,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.SystemInsightsLogicalDrives</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsLogicalDrives</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsLogicalDrives#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -9524,7 +9738,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.SystemInsightsManagedPolicies</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsManagedPolicies</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsManagedPolicies#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -9588,7 +9802,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.SystemInsightsMounts</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsMounts</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsMounts#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -9682,7 +9896,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.SystemInsightsOSVersion</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsOSVersion</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsOSVersion#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -9770,7 +9984,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.SystemInsightsPatches</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsPatches</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsPatches#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -9846,7 +10060,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.SystemInsightsPrograms</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsPrograms</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsPrograms#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -9928,7 +10142,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.SystemInsightsPythonPackages</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsPythonPackages</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsPythonPackages#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -9992,7 +10206,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.SystemInsightsSafariExtensions</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsSafariExtensions</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsSafariExtensions#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -10080,7 +10294,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.SystemInsightsScheduledTasks</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsScheduledTasks</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsScheduledTasks#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -10162,7 +10376,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.SystemInsightsSecureboot</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsSecureboot</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsSecureboot#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -10202,7 +10416,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.SystemInsightsServices</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsServices</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsServices#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -10296,7 +10510,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.SystemInsightsShadow</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsShadow</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsShadow#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -10384,7 +10598,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.SystemInsightsSharedFolders</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsSharedFolders</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsSharedFolders#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -10424,7 +10638,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.SystemInsightsSharedResources</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsSharedResources</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsSharedResources#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -10500,7 +10714,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.SystemInsightsSharingPreferences</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsSharingPreferences</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsSharingPreferences#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -10588,7 +10802,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.SystemInsightsSipConfig</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsSipConfig</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsSipConfig#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -10634,7 +10848,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.SystemInsightsStartupItems</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsStartupItems</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsStartupItems#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -10698,7 +10912,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.SystemInsightsSystemControls</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsSystemControls</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsSystemControls#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -10768,7 +10982,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.SystemInsightsSystemInfo</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsSystemInfo</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsSystemInfo#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -10886,7 +11100,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.SystemInsightsTpmInfo</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsTpmInfo</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsTpmInfo#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -10968,7 +11182,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.SystemInsightsUptime</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsUptime</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsUptime#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -11026,7 +11240,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.SystemInsightsUsbDevices</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsUsbDevices</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsUsbDevices#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -11126,7 +11340,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.SystemInsightsUserassist</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsUserassist</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsUserassist#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -11178,7 +11392,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.SystemInsightsUserGroups</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsUserGroups</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsUserGroups#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -11218,7 +11432,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.SystemInsightsUsers</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsUsers</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsUsers#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -11342,7 +11556,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.SystemInsightsUserSshKeys</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsUserSshKeys</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsUserSshKeys#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -11388,7 +11602,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.SystemInsightsWifiNetworks</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsWifiNetworks</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsWifiNetworks#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -11488,7 +11702,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.SystemInsightsWifiStatus</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsWifiStatus</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsWifiStatus#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -11594,7 +11808,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.SystemInsightsWindowsSecurityCenter</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsWindowsSecurityCenter</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsWindowsSecurityCenter#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -11664,7 +11878,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.SystemInsightsWindowsSecurityProducts</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsWindowsSecurityProducts</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.SystemInsightsWindowsSecurityProducts#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -11728,7 +11942,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.User</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.User</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.User#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -11810,7 +12024,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.UserGroup</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.UserGroup</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.UserGroup#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -11868,7 +12082,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.UserGroupPost</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.UserGroupPost</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.UserGroupPost#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -11914,7 +12128,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.UserGroupPut</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.UserGroupPut</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.UserGroupPut#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -11960,7 +12174,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.WorkdayFields</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.WorkdayFields</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.WorkdayFields#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -11988,7 +12202,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.WorkdayInput</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.WorkdayInput</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.WorkdayInput#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -12016,7 +12230,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.WorkdayOutput</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.WorkdayOutput</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.WorkdayOutput#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
@@ -12056,7 +12270,7 @@
     <View>
       <Name>JumpCloud.SDK.V2.Models.WorkdayWorker</Name>
       <ViewSelectedBy>
-        <TypeName>JumpCloud.SDK.V2.Models.WorkdayWorker</TypeName>
+        <TypeName>JumpCloud.SDK.V2.Models.WorkdayWorker#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>

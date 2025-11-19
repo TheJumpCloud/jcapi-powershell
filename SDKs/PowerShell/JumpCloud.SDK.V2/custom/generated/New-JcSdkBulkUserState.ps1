@@ -64,7 +64,7 @@ To create the parameters described below, construct a hash table containing the 
 BODY <IBulkScheduledStatechangeCreate>:
   StartDate <DateTime>: Date and time that scheduled action should occur
   State <String>: The state to move the user(s) to
-  UserIds <String[]>: Array of system user ids to schedule for a state change
+  UserIds <List<String>>: Array of system user ids to schedule for a state change
   [ActivationEmailOverride <String>]: Send the activation or welcome email to the specified email address upon activation. Can only be used with a single user_id and scheduled activation. This field will be ignored if `send_activation_emails` is explicitly set to false.
   [SendActivationEmails <Boolean?>]: Set to true to send activation or welcome email(s) to each user_id upon activation. Set to false to suppress emails. Can only be used with scheduled activation(s).
 .Link
@@ -75,31 +75,18 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [OutputType([JumpCloud.SDK.V2.Models.IScheduledUserstateResult])]
     [CmdletBinding(DefaultParameterSetName='CreateExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
+    [Parameter(Mandatory)]
+    [JumpCloud.SDK.V2.Category('Uri')]
+    [System.String]
+    # Region for JumpCloud API host.
+    # Use 'console' for US or 'console.eu' for EU.
+    ${ConsoleHost}, 
+
     [Parameter(ParameterSetName='Create', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Body')]
     [JumpCloud.SDK.V2.Models.IBulkScheduledStatechangeCreate]
     # Model to support bulk scheduling of a state change for one or more users
-    # To construct, see NOTES section for BODY properties and create a hash table.
     ${Body}, 
-
-    [Parameter(ParameterSetName='CreateExpanded', Mandatory)]
-    [JumpCloud.SDK.V2.Category('Body')]
-    [System.DateTime]
-    # Date and time that scheduled action should occur
-    ${StartDate}, 
-
-    [Parameter(ParameterSetName='CreateExpanded', Mandatory)]
-    [JumpCloud.SDK.V2.Category('Body')]
-    [System.String]
-    # The state to move the user(s) to
-    ${State}, 
-
-    [Parameter(ParameterSetName='CreateExpanded', Mandatory)]
-    [AllowEmptyCollection()]
-    [JumpCloud.SDK.V2.Category('Body')]
-    [System.String[]]
-    # Array of system user ids to schedule for a state change
-    ${UserIds}, 
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
@@ -116,6 +103,25 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     # Set to false to suppress emails.
     # Can only be used with scheduled activation(s).
     ${SendActivationEmails}, 
+
+    [Parameter(ParameterSetName='CreateExpanded')]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [System.DateTime]
+    # Date and time that scheduled action should occur
+    ${StartDate}, 
+
+    [Parameter(ParameterSetName='CreateExpanded')]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [System.String]
+    # The state to move the user(s) to
+    ${State}, 
+
+    [Parameter(ParameterSetName='CreateExpanded')]
+    [AllowEmptyCollection()]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [System.String[]]
+    # Array of system user ids to schedule for a state change
+    ${UserIds}, 
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]

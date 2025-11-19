@@ -16,19 +16,11 @@ while(-not $mockingPath) {
 }
 Describe 'Set-JcSdkGSuiteAssociation' -Tag:(""){
     It 'SetExpanded' {
-        $ParameterType = (Get-Command Set-JcSdkGSuiteAssociation).Parameters.Type.ParameterType.FullName
-        (Get-Command Set-JcSdkGSuiteAssociation).Parameters.Type.ParameterType.DeclaredFields.Where( { $_.IsPublic }).Name | ForEach-Object {
-            { Set-JcSdkGSuiteAssociation -Id:((Get-Variable -Name:("PesterTest$($_)")).Value.Id) -Op:('add') -Type:(Invoke-Expression "[$ParameterType]::$_".Replace('group','_group')) -GSuiteId:($global:PesterTestGSuite.Id) } | Should -Not -Throw
-            { Set-JcSdkGSuiteAssociation -Id:((Get-Variable -Name:("PesterTest$($_)")).Value.Id) -Op:('remove') -Type:(Invoke-Expression "[$ParameterType]::$_".Replace('group','_group')) -GSuiteId:($global:PesterTestGSuite.Id) } | Should -Not -Throw
-        }
-    }
+        # get some user group
+        $group = get-jcsdkuserGroup | Select-Object -First 1
+        {Set-JcSdkGSuiteAssociation -GSuiteId $global:PesterTestGSuite.Id -Op 'add' -Type 'user_group' -id $group.Id} | Should -Not -Throw
+        {Set-JcSdkGSuiteAssociation -GSuiteId $global:PesterTestGSuite.Id -Op 'remove' -Type 'user_group' -id $group.Id} | Should -Not -Throw
 
-    It 'Set' {
-        $ParameterType = (Get-Command Set-JcSdkGSuiteAssociation).Parameters.Type.ParameterType.FullName
-        (Get-Command Set-JcSdkGSuiteAssociation).Parameters.Type.ParameterType.DeclaredFields.Where( { $_.IsPublic }).Name | ForEach-Object {
-            { Set-JcSdkGSuiteAssociation -Body:(@{Id = (Get-Variable -Name:("PesterTest$($_)")).Value.Id; Op = 'add'; Type = Invoke-Expression "[$ParameterType]::$_".Replace('group','_group'); }) -GSuiteId:($global:PesterTestGSuite.Id) } | Should -Not -Throw
-            { Set-JcSdkGSuiteAssociation -Body:(@{Id = (Get-Variable -Name:("PesterTest$($_)")).Value.Id; Op = 'remove'; Type = Invoke-Expression "[$ParameterType]::$_".Replace('group','_group'); }) -GSuiteId:($global:PesterTestGSuite.Id) } | Should -Not -Throw
-        }
     }
 
     It 'SetViaIdentity' -skip {

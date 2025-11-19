@@ -216,7 +216,7 @@ curl https://console.jumpcloud.com/api/v2/authn/policies/{id} \\
 ```
 
 ### [Get-JcSdkBulkUsersResult](Get-JcSdkBulkUsersResult.md)
-This endpoint will return the results of particular user import or update job request.
+This endpoint will return the results of particular user import or get job request.
 
 #### Sample Request
 ```
@@ -1918,7 +1918,7 @@ curl -X POST https://console.jumpcloud.com/api/v2/workdays/{WorkDayID}/auth \\
 Get a list of users to import from an Application IdM service provider.
 
 ### [Import-JcSdkWorkday](Import-JcSdkWorkday.md)
-The endpoint allows you to create a Workday Import request.
+The endpoint allows you to import a Workday Import request.
 
 #### Sample Request 
 ```
@@ -2038,7 +2038,7 @@ curl -X POST https://console.jumpcloud.com/api/v2/authn/policies \\
 
 ### [New-JcSdkBulkUser](New-JcSdkBulkUser.md)
 The endpoint allows you to create a bulk job to asynchronously create users.
-See [Create a System User](https://docs.jumpcloud.com/api/1.0/index.html#operation/systemusers_post)
+See [create a System User](https://docs.jumpcloud.com/api/1.0/index.html#operation/systemusers_post)
 for the full list of attributes.
 
 #### Default User State
@@ -2057,7 +2057,7 @@ For other `creation-source` header values, the default state is stored in
 
 These default state values can be changed in the admin portal settings
 or by using the
-[Update an Organization](https://docs.jumpcloud.com/api/1.0/index.html#operation/organization_put)
+[create an Organization](https://docs.jumpcloud.com/api/1.0/index.html#operation/organization_put)
 endpoint.
 
 #### Sample Request
@@ -2122,7 +2122,7 @@ in case an organization has a Duo account already a 409 (Conflict) code will be 
 ```
 
 ### [New-JcSdkDuoApplication](New-JcSdkDuoApplication.md)
-Creates a Duo application for your organization and the specified account.
+Create a Duo application for your organization and the specified account.
 
 #### Sample Request
 ```
@@ -2569,9 +2569,9 @@ curl -X POST https://console.jumpcloud.com/api/v2/activedirectories/{AD_Instance
 ```
 
 ### [Set-JcSdkAppleMdm](Set-JcSdkAppleMdm.md)
-Updates an Apple MDM configuration.
+Set an Apple MDM configuration.
 This endpoint is used to supply JumpCloud with a signed certificate from Apple in order to finalize the setup and allow JumpCloud to manage your devices.
-It may also be used to update the DEP Settings.
+It may also be used to set the DEP Settings.
 
 #### Sample Request
 ```
@@ -2630,12 +2630,12 @@ A direct association can be a non-homogeneous relationship between 2 different o
 ```
 
 ### [Set-JcSdkCustomEmailConfiguration](Set-JcSdkCustomEmailConfiguration.md)
-Update the custom email configuration for the specified custom email type.
+Set the custom email configuration for the specified custom email type.
 
 This action is only available to paying customers.
 
 ### [Set-JcSdkDuoApplication](Set-JcSdkDuoApplication.md)
-Updates the specified Duo application.
+Set the specified Duo application.
 
 #### Sample Request
 ```
@@ -2706,7 +2706,7 @@ curl -X POST https://console.jumpcloud.com/api/v2/ldapservers/{LDAP_ID}/associat
 ```
 
 ### [Set-JcSdkLdapServerSambaDomain](Set-JcSdkLdapServerSambaDomain.md)
-This endpoint allows you to update the samba domain information for an LDAP server.
+This endpoint allows you to set the samba domain information for an LDAP server.
 
 ##### Sample Request
 ```
@@ -2739,8 +2739,8 @@ curl -X POST https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID}/asso
 ```
 
 ### [Set-JcSdkPolicy](Set-JcSdkPolicy.md)
-This endpoint allows you to update a policy.
-Given the amount of configurable parameters required to update a Policy, we suggest you use the JumpCloud Admin Console to create new policies.
+This endpoint allows you to set a policy.
+Given the amount of configurable parameters required to set a Policy, we suggest you use the JumpCloud Admin Console to set new policies.
 
 
 ##### Sample Request
@@ -2773,7 +2773,7 @@ curl -X POST https://console.jumpcloud.com/api/v2/policies/{Policy_ID}/associati
 ```
 
 ### [Set-JcSdkPolicyGroup](Set-JcSdkPolicyGroup.md)
-This endpoint allows you to do a full update of the Policy Group.
+This endpoint allows you to do a full set of the Policy Group.
 
 #### Sample Request
 ```
@@ -2782,7 +2782,7 @@ curl -X PUT https://console.jumpcloud.com/api/v2/policygroups/{Group_ID} \\
   -H 'Content-Type: application/json' \\
   -H 'x-api-key: {API_KEY}' \\
   -d '{
-    \"name\": \"group_update\"
+    \"name\": \"group_set 
   }'
 ```
 
@@ -2842,9 +2842,9 @@ curl -X POST https://console.jumpcloud.com/api/v2/radiusservers/{RADIUS_ID}/asso
 ```
 
 ### [Set-JcSdkSoftwareApp](Set-JcSdkSoftwareApp.md)
-This endpoint updates a specific Software Application configuration for the organization.
+This endpoint set a specific Software Application configuration for the organization.
 displayName can be changed alone if no settings are provided.
-If a setting is provided, it should include all its information since this endpoint will update all the settings' fields.
+If a setting is provided, it should include all its information since this endpoint will set all the settings' fields.
 The optional isConfigEnabled and appConfiguration apple_vpp attributes are not included in the response.
 
 #### Sample Request - displayName only
@@ -2869,7 +2869,7 @@ The optional isConfigEnabled and appConfiguration apple_vpp attributes are not i
     \"settings\": [
       {
         \"packageId\": \"123456\",
-        \"autoUpdate\": false,
+        \"autoset : false,
         \"allowUpdateDelay\": false,
         \"packageManager\": \"APPLE_VPP\",
         \"locationObjectId\": \"123456789012123456789012\",
@@ -2943,7 +2943,7 @@ curl -X POST https://console.jumpcloud.com/api/v2/systems/{System_ID}/associatio
 ```
 
 ### [Set-JcSdkSystemGroup](Set-JcSdkSystemGroup.md)
-This endpoint allows you to do a full update of the System Group.
+This endpoint allows you to do a full set of the System Group.
 
 See the [Dynamic Group Configuration KB article](https://jumpcloud.com/support/configure-dynamic-device-groups) for more details on maintaining a Dynamic Group.
 
@@ -2954,7 +2954,7 @@ curl -X PUT https://console.jumpcloud.com/api/v2/systemgroups/{Group_ID} \\
   -H 'Content-Type: application/json' \\
   -H 'x-api-key: {API_KEY}' \\
   -d '{
-    \"name\": \"Name_Update\"
+    \"name\": \"Name_set 
   }'
 ```
 
@@ -3019,7 +3019,7 @@ curl -X POST https://console.jumpcloud.com/api/v2/users/{UserID}/associations \\
 ```
 
 ### [Set-JcSdkUserGroup](Set-JcSdkUserGroup.md)
-This endpoint allows you to do a full update of the User Group.
+This endpoint allows you to do a full set of the User Group.
 
 See the [Dynamic Group Configuration KB article](https://jumpcloud.com/support/configure-dynamic-device-groups) for more details on maintaining a Dynamic Group.
 
@@ -3030,7 +3030,7 @@ curl -X PUT https://console.jumpcloud.com/api/v2/usergroups/{Group_ID} \\
   -H 'Content-Type: application/json' \\
   -H 'x-api-key: {API_KEY}' \\
   -d '{
-    \"name\": \"group_update\"
+    \"name\": \"group_set 
   }'
 ```
 
@@ -3070,7 +3070,7 @@ curl -X POST https://console.jumpcloud.com/api/v2/usergroups/{GroupID}/members \
 ```
 
 ### [Set-JcSdkWorkday](Set-JcSdkWorkday.md)
-This endpoint allows you to update the name and Custom Report URL for a Workday Instance.
+This endpoint allows you to set the name and Custom Report URL for a Workday Instance.
 
 Currently, the name can not be changed from the default of `Workday Import`.
 
@@ -3136,8 +3136,8 @@ curl -X PATCH https://console.jumpcloud.com/api/v2/authn/policies/{id} \\
 ```
 
 ### [Update-JcSdkBulkUser](Update-JcSdkBulkUser.md)
-The endpoint allows you to create a bulk job to asynchronously update users.
-See [Update a System User](https://docs.jumpcloud.com/api/1.0/index.html#operation/systemusers_put) for full list of attributes.
+The endpoint allows you to update a bulk job to asynchronously update users.
+See [update a System User](https://docs.jumpcloud.com/api/1.0/index.html#operation/systemusers_put) for full list of attributes.
 
 #### Sample Request 
 ```

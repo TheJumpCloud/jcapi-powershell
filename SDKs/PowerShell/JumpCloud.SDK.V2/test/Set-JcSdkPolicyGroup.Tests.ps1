@@ -20,6 +20,12 @@ Describe 'Set-JcSdkPolicyGroup' -Tag:(""){
     }
 
     It 'Set' {
+        $groups = Get-JcSdkPolicyGroup
+        # if some Group already exists with the same name, delete it
+        $existingGroup = $groups | Where-Object { $_.Name -eq "Pester_Set_Test" }
+        if ($existingGroup) {
+            Remove-JcSdkPolicyGroup -Id:($existingGroup.Id)
+        }
         { Set-JcSdkPolicyGroup -Id:($global:PesterTestPolicyGroup.Id) -Name "Pester_Set_Test" } | Should -Not -Throw
     }
 

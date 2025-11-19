@@ -49,9 +49,17 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [CmdletBinding(DefaultParameterSetName='Get', PositionalBinding=$false)]
     Param(
     [Parameter(Mandatory)]
+    [JumpCloud.SDK.V2.Category('Uri')]
+    [System.String]
+    # Region for JumpCloud API host.
+    # Use 'console' for US or 'console.eu' for EU.
+    ${ConsoleHost}, 
+
+    [Parameter(Mandatory)]
     [AllowEmptyCollection()]
     [JumpCloud.SDK.V2.Category('Query')]
-    [System.String[]]
+    [JumpCloud.SDK.V2.Runtime.Info(Required, PossibleTypes=([System.String]))]
+    [System.Collections.Generic.List[System.String]]
     # A list of system user IDs, limited to 100 items.
     ${Users}, 
 

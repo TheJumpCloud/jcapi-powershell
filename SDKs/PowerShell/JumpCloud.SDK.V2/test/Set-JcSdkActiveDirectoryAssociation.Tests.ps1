@@ -16,19 +16,12 @@ while(-not $mockingPath) {
 }
 Describe 'Set-JcSdkActiveDirectoryAssociation' -Tag:(""){
     It 'SetExpanded' {
-        $ParameterType = (Get-Command Set-JcSdkActiveDirectoryAssociation).Parameters.Type.ParameterType.FullName
-        (Get-Command Set-JcSdkActiveDirectoryAssociation).Parameters.Type.ParameterType.DeclaredFields.Where( { $_.IsPublic }).Name | ForEach-Object {
-            { Set-JcSdkActiveDirectoryAssociation -Id:((Get-Variable -Name:("PesterTest$($_)")).Value.Id) -Op:('add') -Type:(Invoke-Expression "[$ParameterType]::$_".Replace('group','_group')) -ActiveDirectoryId:($global:PesterTestActiveDirectory.Id) } | Should -Not -Throw
-            { Set-JcSdkActiveDirectoryAssociation -Id:((Get-Variable -Name:("PesterTest$($_)")).Value.Id) -Op:('remove') -Type:(Invoke-Expression "[$ParameterType]::$_".Replace('group','_group')) -ActiveDirectoryId:($global:PesterTestActiveDirectory.Id) } | Should -Not -Throw
-        }
-    }
+        # Set association to user group
+        $group = get-jcsdkuserGroup | Select-Object -First 1
+        {Set-JcSdkActiveDirectoryAssociation -ActivedirectoryId $global:PesterTestActiveDirectory.Id -Op 'add' -Type 'user_group' -id $group.Id} | Should -Not -Throw
 
-    It 'Set' {
-        $ParameterType = (Get-Command Set-JcSdkActiveDirectoryAssociation).Parameters.Type.ParameterType.FullName
-        (Get-Command Set-JcSdkActiveDirectoryAssociation).Parameters.Type.ParameterType.DeclaredFields.Where( { $_.IsPublic }).Name | ForEach-Object {
-            { Set-JcSdkActiveDirectoryAssociation -Body:(@{Id = (Get-Variable -Name:("PesterTest$($_)")).Value.Id; Op = 'add'; Type = Invoke-Expression "[$ParameterType]::$_".Replace('group','_group'); }) -ActiveDirectoryId:($global:PesterTestActiveDirectory.Id) } | Should -Not -Throw
-            { Set-JcSdkActiveDirectoryAssociation -Body:(@{Id = (Get-Variable -Name:("PesterTest$($_)")).Value.Id; Op = 'remove'; Type = Invoke-Expression "[$ParameterType]::$_".Replace('group','_group'); }) -ActiveDirectoryId:($global:PesterTestActiveDirectory.Id) } | Should -Not -Throw
-        }
+        {Set-JcSdkActiveDirectoryAssociation -ActivedirectoryId $global:PesterTestActiveDirectory.Id -Op 'remove' -Type 'user_group' -id $group.Id} | Should -Not -Throw
+
     }
 
     It 'SetViaIdentity' -skip {

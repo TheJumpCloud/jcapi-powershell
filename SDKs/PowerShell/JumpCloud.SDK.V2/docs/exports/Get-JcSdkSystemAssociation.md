@@ -26,13 +26,13 @@ curl -X GET https://console.jumpcloud.com/api/v2/systems/{System_ID}/association
 
 ### Get (Default)
 ```
-Get-JcSdkSystemAssociation -SystemId <String> -Targets <GraphTargetsActiveDirectoryTargets>
+Get-JcSdkSystemAssociation -ConsoleHost <String> -SystemId <String> -Targets <String>
  [-Authorization <String>] [-Date <String>] [<CommonParameters>]
 ```
 
 ### GetViaIdentity
 ```
-Get-JcSdkSystemAssociation -InputObject <IJumpCloudApiIdentity> -Targets <GraphTargetsActiveDirectoryTargets>
+Get-JcSdkSystemAssociation -ConsoleHost <String> -InputObject <IJumpCloudApiIdentity> -Targets <String>
  [-Authorization <String>] [-Date <String>] [<CommonParameters>]
 ```
 
@@ -91,6 +91,22 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -ConsoleHost
+Region for JumpCloud API host.
+Use 'console' for US or 'console.eu' for EU.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Date
 Current date header for the System Context API
 
@@ -108,7 +124,6 @@ Accept wildcard characters: False
 
 ### -InputObject
 Identity Parameter
-To construct, see NOTES section for INPUTOBJECT properties and create a hash table.
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
@@ -141,7 +156,7 @@ Accept wildcard characters: False
 Targets which a "active_directory" can be associated to.
 
 ```yaml
-Type: JumpCloud.SDK.V2.Support.GraphTargetsActiveDirectoryTargets
+Type: System.String
 Parameter Sets: (All)
 Aliases:
 
@@ -165,14 +180,12 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## NOTES
 
-ALIASES
-
 COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-INPUTOBJECT <IJumpCloudApiIdentity>: Identity Parameter
+`INPUTOBJECT <IJumpCloudApiIdentity>`: Identity Parameter
   - `[AccountId <String>]`: 
   - `[ActivedirectoryId <String>]`: 
   - `[AdministratorId <String>]`: 

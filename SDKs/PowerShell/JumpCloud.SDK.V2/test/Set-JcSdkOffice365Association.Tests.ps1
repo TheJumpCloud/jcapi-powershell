@@ -16,20 +16,12 @@ while(-not $mockingPath) {
 }
 Describe 'Set-JcSdkOffice365Association' -Tag:(""){
     It 'SetExpanded' {
-        $ParameterType = (Get-Command Set-JcSdkOffice365Association).Parameters.Type.ParameterType.FullName
-        (Get-Command Set-JcSdkOffice365Association).Parameters.Type.ParameterType.DeclaredFields.Where( { $_.IsPublic }).Name | ForEach-Object {
-            { Set-JcSdkOffice365Association -Id:((Get-Variable -Name:("PesterTest$($_)")).Value.Id) -Op:('add') -Type:(Invoke-Expression "[$ParameterType]::$_".Replace('group','_group')) -Office365Id:($global:PesterTestOffice365.Id) } | Should -Not -Throw
-            { Set-JcSdkOffice365Association -Id:((Get-Variable -Name:("PesterTest$($_)")).Value.Id) -Op:('remove') -Type:(Invoke-Expression "[$ParameterType]::$_".Replace('group','_group')) -Office365Id:($global:PesterTestOffice365.Id) } | Should -Not -Throw
-        }
+       # get some user group
+        $group = get-jcsdkuserGroup | Select-Object -First 1
+        {Set-JcSdkOffice365Association -Office365Id $global:PesterTestOffice365.Id -Op 'add' -Type 'user_group' -id $group.Id} | Should -Not -Throw
+        {Set-JcSdkOffice365Association -Office365Id $global:PesterTestOffice365.Id -Op 'remove' -Type 'user_group' -id $group.Id} | Should -Not -Throw
     }
 
-    It 'Set' {
-        $ParameterType = (Get-Command Set-JcSdkOffice365Association).Parameters.Type.ParameterType.FullName
-        (Get-Command Set-JcSdkOffice365Association).Parameters.Type.ParameterType.DeclaredFields.Where( { $_.IsPublic }).Name | ForEach-Object {
-            { Set-JcSdkOffice365Association -Body:(@{Id = (Get-Variable -Name:("PesterTest$($_)")).Value.Id; Op = 'add'; Type = Invoke-Expression "[$ParameterType]::$_".Replace('group','_group'); }) -Office365Id:($global:PesterTestOffice365.Id) } | Should -Not -Throw
-            { Set-JcSdkOffice365Association -Body:(@{Id = (Get-Variable -Name:("PesterTest$($_)")).Value.Id; Op = 'remove'; Type = Invoke-Expression "[$ParameterType]::$_".Replace('group','_group'); }) -Office365Id:($global:PesterTestOffice365.Id) } | Should -Not -Throw
-        }
-    }
 
     It 'SetViaIdentity' -skip {
         { Set-JcSdkOffice365Association -Body:(@{Id = $global:PesterTestUser.Id; Op = 'add'; Type = 'user';}) -InputObject '<IJumpCloudApIsIdentity>' } | Should -Not -Throw

@@ -13,7 +13,7 @@ This endpoint returns the association links between an Organization and Administ
 ## SYNTAX
 
 ```
-Get-JcSdkAdministratorOrganizationLink -Id <String> [<CommonParameters>]
+Get-JcSdkAdministratorOrganizationLink -ConsoleHost <String> -Id <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -38,6 +38,22 @@ Organization  String
 {{ Add output here }}
 
 ## PARAMETERS
+
+### -ConsoleHost
+Region for JumpCloud API host.
+Use 'console' for US or 'console.eu' for EU.
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
 
 ### -Id
 .
@@ -64,8 +80,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ### JumpCloud.SDK.V2.Models.IAdministratorOrganizationLink
 
 ## NOTES
-
-ALIASES
 
 ## RELATED LINKS
 
