@@ -41,7 +41,7 @@ BODY <IEventQuery>:
   [Skip <Int64?>]: optional offset into the result set to start with when returning
   [Sort <String>]: ASC or DESC order for timestamp
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4908_userGroupDeviceGroupFilters/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/docs/exports/Get-JcSdkEvent.md
+https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4981_v2EUSupport/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/docs/exports/Get-JcSdkEvent.md
 #>
  Function Get-JcSdkEvent
 {

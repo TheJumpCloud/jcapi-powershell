@@ -22,7 +22,7 @@ INPUTOBJECT <IDirectoryInsightsApiIdentity>:
   [ReportId <String>]: Report ID
   [ReportType <String>]: Report Type
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4908_userGroupDeviceGroupFilters/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/docs/exports/Get-JcSdkReportArtifactContent.md
+https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4981_v2EUSupport/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/docs/exports/Get-JcSdkReportArtifactContent.md
 #>
  Function Get-JcSdkReportArtifactContent
 {

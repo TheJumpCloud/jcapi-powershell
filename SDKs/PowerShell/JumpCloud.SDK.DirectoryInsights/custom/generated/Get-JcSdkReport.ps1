@@ -11,7 +11,7 @@ Get-JcSdkReport
 .Outputs
 JumpCloud.SDK.DirectoryInsights.Models.IGet200ApplicationJsonItemsItem
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4908_userGroupDeviceGroupFilters/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/docs/exports/Get-JcSdkReport.md
+https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4981_v2EUSupport/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/docs/exports/Get-JcSdkReport.md
 #>
  Function Get-JcSdkReport
 {

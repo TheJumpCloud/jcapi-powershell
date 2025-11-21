@@ -1,7 +1,7 @@
 ---
 external help file:
 Module Name: JumpCloud.SDK.DirectoryInsights
-online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4908_userGroupDeviceGroupFilters/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/docs/exports/Get-JcSdkEventCount.md
+online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4981_v2EUSupport/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/docs/exports/Get-JcSdkEventCount.md
 schema: 2.0.0
 ---
 
@@ -40,14 +40,14 @@ curl -X POST 'https://api.jumpcloud.com/insights/directory/v1/events/count' -H '
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-Get-JcSdkEventCount -Service:(<string[]>) -StartTime:(<datetime>) -EndTime:(<datetime>) -ExactMatch:(<string>) -Fields:(<string[]>) -Q:(<string>) -SearchAfter:(<string[]>) -SearchTermAnd:(<hashtable>) -SearchTermNot:(<hashtable>) -SearchTermOr:(<hashtable>) -Sort:(<string>)
+) -StartTime:(<datetime>) -EndTime:(<datetime>) -ExactMatch:(<string>) -Fields:(<string[]>) -Q:(<string>) -SearchAfter:(<string[]>) -SearchTermAnd:(<hashtable>) -SearchTermNot:(<hashtable>) -SearchTermOr:(<hashtable>) -Sort:(<string>)
 ```
 
 
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell
-Get-JcSdkEventCount -Body:(<JumpCloud.SDK.DirectoryInsights.Models.EventQuery>)
+)
 ```
 
 

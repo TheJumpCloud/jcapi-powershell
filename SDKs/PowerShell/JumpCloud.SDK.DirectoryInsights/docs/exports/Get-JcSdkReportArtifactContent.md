@@ -1,7 +1,7 @@
 ---
 external help file:
 Module Name: JumpCloud.SDK.DirectoryInsights
-online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4908_userGroupDeviceGroupFilters/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/docs/exports/Get-JcSdkReportArtifactContent.md
+online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4981_v2EUSupport/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/docs/exports/Get-JcSdkReportArtifactContent.md
 schema: 2.0.0
 ---
 
@@ -30,7 +30,7 @@ Download a report by report ID and artifact ID
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-Get-JcSdkReportArtifactContent -ArtifactId:(<string>) -ReportId:(<string>)
+) -ReportId:(<string>)
 ```
 
 
