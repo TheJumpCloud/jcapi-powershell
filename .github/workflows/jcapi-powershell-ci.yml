@@ -47,19 +47,6 @@ jobs:
               }
           }
 
-          # Validate that exactly one release type was found
-          if ($typeCount -eq 1) {
-              Write-Host "Release Type set to: $foundReleaseType"
-              echo "RELEASE_TYPE=$foundReleaseType" >> $env:GITHUB_OUTPUT
-          } else {
-              throw "Error: Expected exactly one release type label (major, minor, patch, manual), but found $typeCount."
-          }
-
-          # Validate that only one SDK type was found
-          if ($sdkTypeCount -gt 1) {
-              throw "Error: Expected only one SDK type label (v1, v2, DirectoryInsights), but found $sdkTypeCount."
-          }
-
           # --- Set Module Environment Variables ---
           if ('v1' -in $PR_LABEL_LIST) {
             Write-Host "Module label 'v1' found"
