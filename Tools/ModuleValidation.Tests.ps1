@@ -20,9 +20,8 @@
             Write-Host "Modules to validate: $($modulesToValidate -join ', ')"
         }
 
-        It "validates the module version against the gallery based on the release type for <_>" -ForEach @(
-            $modulesToValidate ) {
-            moduleName = $_
+        It "validates the module version against the gallery based on the release type for <_>" -ForEach $modulesToValidate {
+            $moduleName = $_
             # Find the currently published version on the PowerShell Gallery.
             # Use -ErrorAction SilentlyContinue for cases where the module isn't published yet (e.g., first release).
             $galleryModule = Find-Module -Name $moduleName -ErrorAction SilentlyContinue
@@ -59,8 +58,7 @@
             }
         }
 
-        It "validates the changelog has the correct new version and today's date for <_>" -ForEach @(
-            $modulesToValidate ) {
+        It "validates the changelog has the correct new version and today's date for <_>" -ForEach $modulesToValidate {
             moduleName = $_
             # This test only runs if a release type that requires a changelog entry is specified.
             if (-not ($env:RELEASE_TYPE -in @('major', 'minor', 'patch'))) {
@@ -85,15 +83,13 @@
             $latestReleaseDate | Should -Be $todayDate
         }
 
-        It "ensures the changelog does not contain placeholder content for <_>" -ForEach @(
-            $modulesToValidate ) {
+        It "ensures the changelog does not contain placeholder content for <_>" -ForEach $modulesToValidate {
             moduleName = $_
             $changelogPath = Join-Path $PSScriptRoot '..' "$moduleName.md"
             Get-Content -Path $changelogPath | Should -Not -Match '\{\{Fill in the'
         }
 
-        It "ensures the Swagger spec is up to date with no pending changes for <_>" -ForEach @(
-            $modulesToValidate ) {
+        It "ensures the Swagger spec is up to date with no pending changes for <_>" -ForEach $modulesToValidate {
             moduleName = $_
             # Note: Assumes dependent scripts are in the parent directory of this test script.
             . (Join-Path $PSScriptRoot '..' 'ApiTransform.ps1') -SDKName $moduleName 3>$null
