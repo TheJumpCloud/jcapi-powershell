@@ -1,17 +1,28 @@
     Describe -Tag:('ModuleValidation') 'Module Validation'  {
         BeforeAll {
+            # Build list of modules to validate based on environment variables
+            $modulesToValidate = @()
             if ($env:v1 -eq 'true') {
-                $moduleName = 'JumpCloud.SDK.V1'
-            } elseif ($env:v2 -eq 'true') {
-                $moduleName = 'JumpCloud.SDK.V2'
-            } elseif ($env:directoryinsights -eq 'true') {
-                $moduleName = 'JumpCloud.SDK.DirectoryInsights'
-            } else {
+                $modulesToValidate += 'JumpCloud.SDK.V1'
+            }
+            if ($env:v2 -eq 'true') {
+                $modulesToValidate += 'JumpCloud.SDK.V2'
+            }
+            if ($env:directoryinsights -eq 'true') {
+                $modulesToValidate += 'JumpCloud.SDK.DirectoryInsights'
+            }
+
+            if ($modulesToValidate.Count -eq 0) {
                 Write-Error "No valid module label found in the environment variables. Exiting."
                 Exit 1
             }
+
+            Write-Host "Modules to validate: $($modulesToValidate -join ', ')"
         }
-        It "validates the module version against the gallery based on the release type" {
+
+        It "validates the module version against the gallery based on the release type for <moduleName>" -ForEach @(
+            $modulesToValidate | ForEach-Object { @{ moduleName = $_ } }
+        ) {
             # Find the currently published version on the PowerShell Gallery.
             # Use -ErrorAction SilentlyContinue for cases where the module isn't published yet (e.g., first release).
             $galleryModule = Find-Module -Name $moduleName -ErrorAction SilentlyContinue
@@ -48,7 +59,9 @@
             }
         }
 
-        It "validates the changelog has the correct new version and today's date" {
+        It "validates the changelog has the correct new version and today's date for <moduleName>" -ForEach @(
+            $modulesToValidate | ForEach-Object { @{ moduleName = $_ } }
+        ) {
             # This test only runs if a release type that requires a changelog entry is specified.
             if (-not ($env:RELEASE_TYPE -in @('major', 'minor', 'patch'))) {
                 Skip "Skipping changelog validation because release type is not 'major', 'minor', or 'patch'."
@@ -72,12 +85,16 @@
             $latestReleaseDate | Should -Be $todayDate
         }
 
-        It "ensures the changelog does not contain placeholder content" {
+        It "ensures the changelog does not contain placeholder content for <moduleName>" -ForEach @(
+            $modulesToValidate | ForEach-Object { @{ moduleName = $_ } }
+        ) {
             $changelogPath = Join-Path $PSScriptRoot '..' "$moduleName.md"
             Get-Content -Path $changelogPath | Should -Not -Match '\{\{Fill in the'
         }
 
-        It "ensures the Swagger spec is up to date with no pending changes" {
+        It "ensures the Swagger spec is up to date with no pending changes for <moduleName>" -ForEach @(
+            $modulesToValidate | ForEach-Object { @{ moduleName = $_ } }
+        ) {
             # Note: Assumes dependent scripts are in the parent directory of this test script.
             . (Join-Path $PSScriptRoot '..' 'ApiTransform.ps1') -SDKName $moduleName 3>$null
             $sdkSwaggerFile = Join-Path $PSScriptRoot '..' 'SwaggerSpecs' "$moduleName.json"
