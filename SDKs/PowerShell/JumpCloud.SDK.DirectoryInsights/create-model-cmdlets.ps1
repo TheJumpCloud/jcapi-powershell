@@ -191,7 +191,7 @@ Create an in-memory object for ${ObjectType}.
 .Outputs
 ${ObjectTypeWithNamespace}
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4908_userGroupDeviceGroupFilters/SDKs/PowerShell/${ModuleName}/${cmdletNameInLowerCase}
+https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4981_v2EUSupport/SDKs/PowerShell/${ModuleName}/${cmdletNameInLowerCase}
 #>
 function ${cmdletName} {
     [JumpCloud.SDK.DirectoryInsights.ModelCmdletAttribute()]

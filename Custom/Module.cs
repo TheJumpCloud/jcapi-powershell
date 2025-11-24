@@ -72,6 +72,9 @@ namespace ModuleNameSpace
                 apiHostValue = "api";
                 consoleHostValue = "console";
                 showInfo = true;
+
+                // Store the appropriate value based on SDK type
+                System.Environment.SetEnvironmentVariable("JCEnvironment", "STANDARD");
             }
 
             if (showInfo)
@@ -82,10 +85,6 @@ namespace ModuleNameSpace
                 Console.WriteLine("To use the EU environment, run: $ENV:{0} = 'EU' and re-import the module.", envVarNameForDefaultHostEnv);
                 Console.WriteLine("To use the standard environment, run: $ENV:{0} = 'STANDARD' and re-import the module.", envVarNameForDefaultHostEnv);
             }
-
-            // Store the appropriate value based on SDK type
-            string sdkHostValue = ModuleIdentifier.SDKName == "DirectoryInsights" ? apiHostValue : consoleHostValue;
-            System.Environment.SetEnvironmentVariable("JCEnvironment", sdkHostValue);
 
             // Set parameter defaults for both DI and V1/V2 SDKs
             SetPSDefaultHostEnvParameterValue(apiHostValue, consoleHostValue);
@@ -120,6 +119,32 @@ namespace ModuleNameSpace
             }
         }
 
+        private string ReadPassword()
+        {
+            var password = new System.Text.StringBuilder();
+            ConsoleKeyInfo key;
+
+            do
+            {
+                key = Console.ReadKey(true);
+
+                // Ignore control keys except Enter and Backspace
+                if (key.Key == ConsoleKey.Backspace && password.Length > 0)
+                {
+                    password.Length--;
+                    Console.Write("\b \b");
+                }
+                else if (!char.IsControl(key.KeyChar))
+                {
+                    password.Append(key.KeyChar);
+                    Console.Write("*");
+                }
+            } while (key.Key != ConsoleKey.Enter);
+
+            Console.WriteLine();
+            return password.ToString();
+        }
+
         protected async Task<HttpResponseMessage> AddAuthHeaders(HttpRequestMessage request, IEventListener callback, ISendAsync next)
         {
             // Check to see if the environment variable for JCApiKey is populated
@@ -127,8 +152,7 @@ namespace ModuleNameSpace
             if (JCApiKey == null || JCApiKey == "")
             {
                 Console.Write("Please enter your JumpCloud API key: ");
-                JCApiKey = Console.ReadLine();
-                Console.WriteLine("You entered '{0}'", JCApiKey);
+                JCApiKey = ReadPassword();
                 System.Environment.SetEnvironmentVariable("JCApiKey", JCApiKey);
             }
             // If headers do not contain an "x-api-key" header add one
@@ -141,8 +165,7 @@ namespace ModuleNameSpace
             if (JCOrgId == null || JCOrgId == "")
             {
                 Console.Write("Please enter your JumpCloud organization id: ");
-                JCOrgId = Console.ReadLine();
-                Console.WriteLine("You entered '{0}'", JCOrgId);
+                JCOrgId = ReadPassword();
                 System.Environment.SetEnvironmentVariable("JCOrgId", JCOrgId);
             }
             // Check to see if the environment variable for HostEnv is populated
