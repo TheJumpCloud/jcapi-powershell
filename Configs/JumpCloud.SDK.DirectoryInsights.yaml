@@ -11,7 +11,7 @@ powershell: true
 dll-name: JumpCloud.SDK.DirectoryInsights.private
 base-folder: ..
 debug: true
-module-version: 0.1.0
+module-version: 0.1.1
 metadata:
   iconUri: https://console.jumpcloud.com/img/login-viewport-logo.png
   licenseUri: https://github.com/TheJumpCloud/jcapi-powershell/tree/$(branch)/LICENSE

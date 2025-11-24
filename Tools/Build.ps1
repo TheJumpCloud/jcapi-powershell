@@ -5,6 +5,11 @@ param (
     [System.String]
     $VersionType,
 
+    [Parameter(Mandatory = $false, HelpMessage = 'The manual module version to set when VersionType is manual.')]
+    [ValidateNotNullOrEmpty()]
+    [System.String]
+    $ManualModuleVersion = '',
+
     [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Name of the API to build an SDK for.', ParameterSetName = 'IndividualSDK')]
     [ValidateSet('JumpCloud.SDK.DirectoryInsights', 'JumpCloud.SDK.V1', 'JumpCloud.SDK.V2')]
     [ValidateNotNullOrEmpty()]
@@ -30,8 +35,12 @@ $stopwatch = [System.Diagnostics.Stopwatch]::StartNew()
 foreach ($sdk in $sdks) {
     Write-Host "Building $sdk with version type: $VersionType"
 
-    # Invoke Build Autorest and pass the version type.
-    . "$rootPath/BuildAutoRest.ps1" -SDKName $sdk -ModuleVersionIncrementType $VersionType | Out-Null
+    if ($VersionType -eq 'manual') {
+        . "$rootPath/BuildAutoRest.ps1" -SDKName $sdk -ManualModuleVersion $ManualModuleVersion -ModuleVersionIncrementType $VersionType| Out-Null
+    } else {
+        # Invoke Build Autorest and pass the version type.
+        . "$rootPath/BuildAutoRest.ps1" -SDKName $sdk -ModuleVersionIncrementType $VersionType | Out-Null
+    }
 
     # Update SDK Examples and pass the version type.
     . "$PSscriptRoot/Build-SdkExamples" -SDKName $sdk | Out-Null
