@@ -40,14 +40,14 @@ curl -X POST 'https://api.jumpcloud.com/insights/directory/v1/events' -H 'Conten
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-) -StartTime:(<datetime>) -EndTime:(<datetime>) -ExactMatch:(<string>) -Fields:(<string[]>) -Limit:(<long>) -Q:(<string>) -SearchAfter:(<string[]>) -SearchTermAnd:(<hashtable>) -SearchTermNot:(<hashtable>) -SearchTermOr:(<hashtable>) -Skip:(<long>) -Sort:(<string>)
+Get-JcSdkEvent -Service:(<string[]>) -StartTime:(<datetime>) -EndTime:(<datetime>) -ExactMatch:(<string>) -Fields:(<string[]>) -Limit:(<long>) -Q:(<string>) -SearchAfter:(<string[]>) -SearchTermAnd:(<hashtable>) -SearchTermNot:(<hashtable>) -SearchTermOr:(<hashtable>) -Skip:(<long>) -Sort:(<string>)
 ```
 
 
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell
-)
+Get-JcSdkEvent -Body:(<JumpCloud.SDK.DirectoryInsights.Models.EventQuery>)
 ```
 
 

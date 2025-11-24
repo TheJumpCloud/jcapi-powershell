@@ -40,14 +40,14 @@ curl -X POST 'https://api.jumpcloud.com/insights/directory/v1/events/interval' -
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-) -Service:(<string[]>) -StartTime:(<datetime>) -EndTime:(<datetime>) -ExactMatch:(<string>) -IntervalValue:(<string>) -Q:(<string>) -SearchTermAnd:(<hashtable>) -SearchTermNot:(<hashtable>) -SearchTermOr:(<hashtable>) -Timezone:(<string>)
+Get-JcSdkEventInterval -IntervalUnit:(<string>) -Service:(<string[]>) -StartTime:(<datetime>) -EndTime:(<datetime>) -ExactMatch:(<string>) -IntervalValue:(<string>) -Q:(<string>) -SearchTermAnd:(<hashtable>) -SearchTermNot:(<hashtable>) -SearchTermOr:(<hashtable>) -Timezone:(<string>)
 ```
 
 
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell
-)
+Get-JcSdkEventInterval -Body:(<JumpCloud.SDK.DirectoryInsights.Models.EventIntervalQuery>)
 ```
 
 
@@ -304,7 +304,7 @@ To create the parameters described below, construct a hash table containing the 
 `BODY <IEventIntervalQuery>`: EventIntervalQuery is the users' command to search our auth logs for bucketed counts of values of the specified field
   - `Service <List<String>>`: service name to query.
   - `StartTime <DateTime>`: query start time, UTC in RFC3339 format
-  - `IntervalUnit <String>`: 
+  - `IntervalUnit <String>`:
   - `[EndTime <DateTime?>]`: optional query end time, UTC in RFC3339 format
   - `[ExactMatch <String>]`: optional string for specifying exact match query, do not use with full text query
   - `[IntervalValue <String>]`: Interval Value. This specifies how many units you want to bucket the event counts by
