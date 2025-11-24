@@ -102,6 +102,11 @@ ForEach ($SDK In $SDKName)
                     {
                         [System.Version]$ManualModuleVersion
                     }
+                    ElseIf ($ModuleVersionIncrementType -eq 'Manual')
+                    {
+                        # For Manual type, use the version specified in the config file
+                        [System.Version]$Config.'module-version'
+                    }
                     Else
                     {
                         # for step-version if the $moduleVersionIncrementType is Patch change it to be Build
