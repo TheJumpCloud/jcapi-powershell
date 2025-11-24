@@ -54,9 +54,11 @@ jobs:
               throw "Error: Expected exactly one release type label (major, minor, patch, manual), but found $typeCount."
           }
 
-          # Validate that only one SDK type was found
-          if ($sdkTypeCount -gt 1) {
-              throw "Error: Expected only one SDK type label (v1, v2, DirectoryInsights), but found $sdkTypeCount."
+          # Validate that at least one SDK type was found
+          if ($sdkTypeCount -eq 0) {
+              throw "Error: Expected at least one SDK type label (v1, v2, DirectoryInsights), but found none."
+          } else {
+              Write-Host "Found $sdkTypeCount SDK type label(s) - will release multiple SDKs if applicable"
           }
 
           # --- Set Module Environment Variables ---
@@ -157,7 +159,11 @@ jobs:
 
   Manual-Approval-Release:
     needs: [Draft-Release-V1, Draft-Release-V2, Draft-Release-DI]
-    if: always() && (needs.Draft-Release-V1.result == 'success' || needs.Draft-Release-V2.result == 'success' || needs.Draft-Release-DI.result == 'success')
+    if: |
+      always() && 
+      (needs.Draft-Release-V1.result == 'success' || 
+       needs.Draft-Release-V2.result == 'success' || 
+       needs.Draft-Release-DI.result == 'success')
     environment: PublishToPSGallery
     runs-on: ubuntu-latest
     steps:
