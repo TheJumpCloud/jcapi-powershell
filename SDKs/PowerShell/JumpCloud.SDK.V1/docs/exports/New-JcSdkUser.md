@@ -47,17 +47,18 @@ curl -X POST https://console.jumpcloud.com/api/systemusers \\
 New-JcSdkUser -ConsoleHost <String> [-FullValidationDetails <String>] [-AccountLocked] [-Activated]
  [-Addresses <ISystemuserputpostAddressesItem[]>] [-AllowPublicKey] [-AlternateEmail <String>]
  [-Attributes <ISystemuserputpostAttributesItem[]>] [-Company <String>] [-CostCenter <String>]
- [-Department <String>] [-Description <String>] [-DisableDeviceMaxLoginAttempts] [-Displayname <String>]
- [-Email <String>] [-EmployeeIdentifier <String>] [-EmployeeType <String>] [-EnableManagedUid]
- [-EnableUserPortalMultifactor] [-ExternalDn <String>] [-ExternallyManaged]
- [-ExternalPasswordExpirationDate <DateTime>] [-ExternalSourceType <String>] [-Firstname <String>]
- [-JobTitle <String>] [-Lastname <String>] [-LdapBindingUser] [-Location <String>] [-ManagedAppleId <String>]
- [-Manager <String>] [-MfaConfigured] [-MfaExclusion] [-MfaExclusionDays <Int32>]
- [-MfaExclusionUntil <DateTime>] [-Middlename <String>] [-Password <String>] [-PasswordlessSudo]
- [-PasswordNeverExpires] [-PhoneNumbers <ISystemuserputpostPhoneNumbersItem[]>] [-PublicKey <String>]
- [-RecoveryEmailAddress <String>] [-Relationships <ISystemuserputpostRelationshipsItem[]>]
- [-RestrictedFields <IRestrictedField1[]>] [-SambaServiceUser] [-State <String>] [-Sudo] [-Suspended]
- [-UnixGuid <Int32>] [-UnixUid <Int32>] [-Username <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-DelegatedAuthorityId <String>] [-DelegatedAuthorityName <String>] [-Department <String>]
+ [-Description <String>] [-DisableDeviceMaxLoginAttempts] [-Displayname <String>] [-Email <String>]
+ [-EmployeeIdentifier <String>] [-EmployeeType <String>] [-EnableManagedUid] [-EnableUserPortalMultifactor]
+ [-ExternalDn <String>] [-ExternallyManaged] [-ExternalPasswordExpirationDate <DateTime>]
+ [-ExternalSourceType <String>] [-Firstname <String>] [-JobTitle <String>] [-Lastname <String>]
+ [-LdapBindingUser] [-Location <String>] [-ManagedAppleId <String>] [-Manager <String>] [-MfaConfigured]
+ [-MfaExclusion] [-MfaExclusionDays <Int32>] [-MfaExclusionUntil <DateTime>] [-Middlename <String>]
+ [-Password <String>] [-PasswordlessSudo] [-PasswordNeverExpires]
+ [-PhoneNumbers <ISystemuserputpostPhoneNumbersItem[]>] [-PublicKey <String>] [-RecoveryEmailAddress <String>]
+ [-Relationships <ISystemuserputpostRelationshipsItem[]>] [-RestrictedFields <IRestrictedField1[]>]
+ [-SambaServiceUser] [-State <String>] [-Sudo] [-Suspended] [-UnixGuid <Int32>] [-UnixUid <Int32>]
+ [-Username <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Create
@@ -383,6 +384,36 @@ Accept wildcard characters: False
 
 ### -CostCenter
 .
+
+```yaml
+Type: System.String
+Parameter Sets: CreateExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -DelegatedAuthorityId
+ObjectId of the target Active Directory connection
+
+```yaml
+Type: System.String
+Parameter Sets: CreateExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -DelegatedAuthorityName
+Authority name
 
 ```yaml
 Type: System.String
@@ -1096,6 +1127,8 @@ To create the parameters described below, construct a hash table containing the 
     - `[Value <String>]`: 
   - `[Company <String>]`: 
   - `[CostCenter <String>]`: 
+  - `[DelegatedAuthorityId <String>]`: ObjectId of the target Active Directory connection
+  - `[DelegatedAuthorityName <String>]`: Authority name
   - `[Department <String>]`: 
   - `[Description <String>]`: 
   - `[DisableDeviceMaxLoginAttempts <Boolean?>]`: 

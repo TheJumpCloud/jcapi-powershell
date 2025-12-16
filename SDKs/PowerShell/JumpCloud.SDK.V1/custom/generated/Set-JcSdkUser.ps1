@@ -219,6 +219,8 @@ BODY <ISystemuserput>:
     [Value <String>]:
   [Company <String>]:
   [CostCenter <String>]:
+  [DelegatedAuthorityId <String>]: ObjectId of the target Active Directory connection
+  [DelegatedAuthorityName <String>]: Authority name
   [Department <String>]:
   [Description <String>]:
   [DisableDeviceMaxLoginAttempts <Boolean?>]:
@@ -382,6 +384,20 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [System.String]
     # .
     ${CostCenter}, 
+
+    [Parameter(ParameterSetName='SetExpanded')]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
+    [JumpCloud.SDK.V1.Category('Body')]
+    [System.String]
+    # ObjectId of the target Active Directory connection
+    ${DelegatedAuthorityId}, 
+
+    [Parameter(ParameterSetName='SetExpanded')]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
+    [JumpCloud.SDK.V1.Category('Body')]
+    [System.String]
+    # Authority name
+    ${DelegatedAuthorityName}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
