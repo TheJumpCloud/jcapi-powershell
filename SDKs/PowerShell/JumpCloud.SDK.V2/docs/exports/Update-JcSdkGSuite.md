@@ -53,8 +53,9 @@ curl -X PATCH https://console.jumpcloud.com/api/v2/gsuites/{GSUITE_ID} \\
 ### UpdateExpanded (Default)
 ```
 Update-JcSdkGSuite -ConsoleHost <String> -Id <String> [-DefaultDomainId <String>] [-GroupsEnabled]
- [-ImportFilter <String>] [-Name <String>] [-UserLockoutAction <String>]
- [-UserPasswordExpirationAction <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-ImportFilter <String>] [-Name <String>] [-OrganizationObjectIdInputFile <String>]
+ [-UserLockoutAction <String>] [-UserPasswordExpirationAction <String>] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### Update
@@ -72,8 +73,9 @@ Update-JcSdkGSuite -ConsoleHost <String> -InputObject <IJumpCloudApiIdentity> -B
 ### UpdateViaIdentityExpanded
 ```
 Update-JcSdkGSuite -ConsoleHost <String> -InputObject <IJumpCloudApiIdentity> [-DefaultDomainId <String>]
- [-GroupsEnabled] [-ImportFilter <String>] [-Name <String>] [-UserLockoutAction <String>]
- [-UserPasswordExpirationAction <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-GroupsEnabled] [-ImportFilter <String>] [-Name <String>] [-OrganizationObjectIdInputFile <String>]
+ [-UserLockoutAction <String>] [-UserPasswordExpirationAction <String>] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -270,6 +272,21 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -OrganizationObjectIdInputFile
+Input File for OrganizationObjectId (OrganizationObjectId is the object id of the organization that the account belongs to.)
+
+```yaml
+Type: System.String
+Parameter Sets: UpdateExpanded, UpdateViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -UserLockoutAction
 .
 
@@ -356,6 +373,7 @@ To create the parameters described below, construct a hash table containing the 
   - `[GroupsEnabled <Boolean?>]`: 
   - `[ImportFilter <String>]`: 
   - `[Name <String>]`: 
+  - `[OrganizationObjectId <Byte[]>]`: OrganizationObjectId is the object id of the organization that the account belongs to.
   - `[UserLockoutAction <String>]`: 
   - `[UserPasswordExpirationAction <String>]`: 
 

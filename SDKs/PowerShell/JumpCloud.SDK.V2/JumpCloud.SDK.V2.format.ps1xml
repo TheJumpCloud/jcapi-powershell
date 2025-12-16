@@ -159,6 +159,9 @@
       <TableControl>
         <TableHeaders>
           <TableColumnHeader>
+            <Label>AgentType</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
             <Label>ContactAt</Label>
           </TableColumnHeader>
           <TableColumnHeader>
@@ -166,6 +169,9 @@
           </TableColumnHeader>
           <TableColumnHeader>
             <Label>Id</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>IdSourceId</Label>
           </TableColumnHeader>
           <TableColumnHeader>
             <Label>SourceIP</Label>
@@ -181,6 +187,9 @@
           <TableRowEntry>
             <TableColumnItems>
               <TableColumnItem>
+                <PropertyName>AgentType</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
                 <PropertyName>ContactAt</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
@@ -188,6 +197,9 @@
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>Id</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>IdSourceId</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>SourceIP</PropertyName>
@@ -1596,6 +1608,34 @@
       </TableControl>
     </View>
     <View>
+      <Name>JumpCloud.SDK.V2.Models.BulkUserCreateDelegatedAuthority</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloud.SDK.V2.Models.BulkUserCreateDelegatedAuthority#Multiple</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Id</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Name</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Id</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Name</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
       <Name>JumpCloud.SDK.V2.Models.BulkUserCreateMfa</Name>
       <ViewSelectedBy>
         <TypeName>JumpCloud.SDK.V2.Models.BulkUserCreateMfa#Multiple</TypeName>
@@ -1707,6 +1747,40 @@
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>Value</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>JumpCloud.SDK.V2.Models.BulkUserCreateRestrictedFields</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloud.SDK.V2.Models.BulkUserCreateRestrictedFields#Multiple</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Field</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Id</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Type</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Field</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Id</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Type</PropertyName>
               </TableColumnItem>
             </TableColumnItems>
           </TableRowEntry>
@@ -2056,6 +2130,34 @@
       </TableControl>
     </View>
     <View>
+      <Name>JumpCloud.SDK.V2.Models.BulkUserUpdateDelegatedAuthority</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloud.SDK.V2.Models.BulkUserUpdateDelegatedAuthority#Multiple</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Id</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Name</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Id</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Name</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
       <Name>JumpCloud.SDK.V2.Models.BulkUserUpdateMfa</Name>
       <ViewSelectedBy>
         <TypeName>JumpCloud.SDK.V2.Models.BulkUserUpdateMfa#Multiple</TypeName>
@@ -2145,6 +2247,40 @@
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>Value</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>JumpCloud.SDK.V2.Models.BulkUserUpdateRestrictedFields</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloud.SDK.V2.Models.BulkUserUpdateRestrictedFields#Multiple</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Field</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Id</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Type</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Field</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Id</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Type</PropertyName>
               </TableColumnItem>
             </TableColumnItems>
           </TableRowEntry>
@@ -3781,6 +3917,9 @@
             <Label>Name</Label>
           </TableColumnHeader>
           <TableColumnHeader>
+            <Label>OrganizationObjectId</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
             <Label>UserLockoutAction</Label>
           </TableColumnHeader>
           <TableColumnHeader>
@@ -3801,6 +3940,9 @@
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>Name</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>OrganizationObjectId</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>UserLockoutAction</PropertyName>
@@ -4075,12 +4217,24 @@
       <TableControl>
         <TableHeaders>
           <TableColumnHeader>
+            <Label>Cursor</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>SessionId</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
             <Label>TotalCount</Label>
           </TableColumnHeader>
         </TableHeaders>
         <TableRowEntries>
           <TableRowEntry>
             <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Cursor</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>SessionId</PropertyName>
+              </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>TotalCount</PropertyName>
               </TableColumnItem>

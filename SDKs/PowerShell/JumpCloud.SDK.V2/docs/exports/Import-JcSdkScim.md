@@ -14,14 +14,16 @@ Get a list of users to import from an Application IdM service provider.
 
 ### Import (Default)
 ```
-Import-JcSdkScim -ConsoleHost <String> -ApplicationId <String> [-Filter <String>] [-Query <String>]
- [-Sort <String>] [-SortOrder <String>] [<CommonParameters>]
+Import-JcSdkScim -ConsoleHost <String> -ApplicationId <String> [-Cursor <String>] [-Filter <String>]
+ [-IsCount] [-IsCursor] [-Query <String>] [-SessionId <String>] [-Sort <String>] [-SortOrder <String>]
+ [<CommonParameters>]
 ```
 
 ### ImportViaIdentity
 ```
-Import-JcSdkScim -ConsoleHost <String> -InputObject <IJumpCloudApiIdentity> [-Filter <String>]
- [-Query <String>] [-Sort <String>] [-SortOrder <String>] [<CommonParameters>]
+Import-JcSdkScim -ConsoleHost <String> -InputObject <IJumpCloudApiIdentity> [-Cursor <String>]
+ [-Filter <String>] [-IsCount] [-IsCursor] [-Query <String>] [-SessionId <String>] [-Sort <String>]
+ [-SortOrder <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -78,6 +80,21 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -Cursor
+Cursor token for pagination
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Filter
 Filter users by a search term
 
@@ -108,8 +125,53 @@ Accept pipeline input: True (ByValue)
 Accept wildcard characters: False
 ```
 
+### -IsCount
+IsCount indicates if the request is only for getting the total count of users.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -IsCursor
+Enable cursor-based pagination
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Query
 URL query to merge with the service provider request
+
+```yaml
+Type: System.String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -SessionId
+Import sessionId for manual select and view user
 
 ```yaml
 Type: System.String
