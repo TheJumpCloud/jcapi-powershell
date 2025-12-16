@@ -2,14 +2,11 @@
 Release Date: December 16, 2025
 #### RELEASE NOTES
 ```
-{{Fill in the Release Notes}}
+Updated existing functions based on updated OpenAPI specs
 ```
-#### FEATURES:
-{{Fill in the Features}}
 #### IMPROVEMENTS:
-{{Fill in the Improvements}}
-#### BUG FIXES:
-{{Fill in the Bug Fixes}}
+Updated existing functions based on updated OpenAPI specs
+
 #### Generated Changes:
 
 <details>
