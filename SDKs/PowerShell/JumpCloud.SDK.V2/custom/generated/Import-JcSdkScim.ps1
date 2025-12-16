@@ -81,14 +81,38 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
     [System.String]
+    # Cursor token for pagination
+    ${Cursor}, 
+
+    [Parameter()]
+    [JumpCloud.SDK.V2.Category('Query')]
+    [System.String]
     # Filter users by a search term
     ${Filter}, 
+
+    [Parameter()]
+    [JumpCloud.SDK.V2.Category('Query')]
+    [System.Management.Automation.SwitchParameter]
+    # IsCount indicates if the request is only for getting the total count of users.
+    ${IsCount}, 
+
+    [Parameter()]
+    [JumpCloud.SDK.V2.Category('Query')]
+    [System.Management.Automation.SwitchParameter]
+    # Enable cursor-based pagination
+    ${IsCursor}, 
 
     [Parameter()]
     [JumpCloud.SDK.V2.Category('Query')]
     [System.String]
     # URL query to merge with the service provider request
     ${Query}, 
+
+    [Parameter()]
+    [JumpCloud.SDK.V2.Category('Query')]
+    [System.String]
+    # Import sessionId for manual select and view user
+    ${SessionId}, 
 
     [Parameter()]
     [JumpCloud.SDK.V2.PSArgumentCompleterAttribute("firstname", "lastname", "email")]

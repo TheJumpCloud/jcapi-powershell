@@ -268,6 +268,8 @@ To create the parameters described below, construct a hash table containing the 
     - `[Value <String>]`: 
   - `[Company <String>]`: 
   - `[CostCenter <String>]`: 
+  - `[DelegatedAuthorityId <String>]`: ObjectId of the target Active Directory connection
+  - `[DelegatedAuthorityName <String>]`: Authority name
   - `[Department <String>]`: 
   - `[Description <String>]`: 
   - `[DisableDeviceMaxLoginAttempts <Boolean?>]`: 
@@ -304,6 +306,9 @@ To create the parameters described below, construct a hash table containing the 
   - `[Relationships <List<IBulkUserCreateRelationshipsItem>>]`: 
     - `[Type <String>]`: 
     - `[Value <String>]`: 
+  - `[RestrictedField <String>]`: 
+  - `[RestrictedFieldId <String>]`: 
+  - `[RestrictedFieldType <String>]`: 
   - `[SambaServiceUser <Boolean?>]`: 
   - `[State <String>]`: 
   - `[Sudo <Boolean?>]`: 

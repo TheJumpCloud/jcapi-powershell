@@ -126,6 +126,7 @@ BODY <IGsuite>:
   [GroupsEnabled <Boolean?>]:
   [ImportFilter <String>]:
   [Name <String>]:
+  [OrganizationObjectId <Byte[]>]: OrganizationObjectId is the object id of the organization that the account belongs to.
   [UserLockoutAction <String>]:
   [UserPasswordExpirationAction <String>]:
 
@@ -216,6 +217,13 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [System.String]
     # .
     ${Name}, 
+
+    [Parameter(ParameterSetName='UpdateExpanded')]
+    [Parameter(ParameterSetName='UpdateViaIdentityExpanded')]
+    [JumpCloud.SDK.V2.Category('Body')]
+    [System.String]
+    # Input File for OrganizationObjectId (OrganizationObjectId is the object id of the organization that the account belongs to.)
+    ${OrganizationObjectIdInputFile}, 
 
     [Parameter(ParameterSetName='UpdateExpanded')]
     [Parameter(ParameterSetName='UpdateViaIdentityExpanded')]

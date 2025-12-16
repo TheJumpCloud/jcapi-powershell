@@ -76,6 +76,24 @@
         "maxLength": 1024,
         "type": "string"
     },
+    "delegatedAuthority": {
+        "description": "Used by auth to determine password delegation authority",
+        "properties": {
+        "id": {
+            "description": "ObjectId of the target Active Directory connection",
+            "type": "string"
+        },
+        "name": {
+            "description": "Authority name",
+            "enum": [
+            "ActiveDirectory"
+            ],
+            "type": "string"
+        }
+        },
+        "type": "object",
+        "x-nullable": true
+    },
     "department": {
         "maxLength": 1024,
         "type": "string"
@@ -217,6 +235,48 @@
         "type": "object"
         },
         "type": "array"
+    },
+    "restrictedFields": {
+        "properties": {
+        "field": {
+          "enum": [
+            "addresses",
+            "company",
+            "costCenter",
+            "department",
+            "description",
+            "displayname",
+            "email",
+            "employeeIdentifier",
+            "employeeType",
+            "firstname",
+            "jobTitle",
+            "lastname",
+            "location",
+            "middlename",
+            "password",
+            "phoneNumbers",
+            "sudo",
+            "username"
+          ],
+          "maxLength": 32,
+          "type": "string"
+        },
+        "id": {
+          "maxLength": 24,
+          "type": "string"
+        },
+        "type": {
+          "enum": [
+            "active_directory",
+            "federated_identity_provider",
+            "scim"
+          ],
+          "maxLength": 128,
+          "type": "string"
+        }
+      },
+      "type": "object"
     },
     "samba_service_user": {
         "type": "boolean"

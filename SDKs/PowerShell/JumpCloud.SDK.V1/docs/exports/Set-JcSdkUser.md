@@ -31,17 +31,18 @@ curl -X PUT https://console.jumpcloud.com/api/systemusers/{UserID} \\
 Set-JcSdkUser -ConsoleHost <String> -Id <String> [-FullValidationDetails <String>] [-AccountLocked]
  [-Addresses <ISystemuserputAddressesItem[]>] [-AllowPublicKey] [-AlternateEmail <String>]
  [-Attributes <ISystemuserputAttributesItem[]>] [-Company <String>] [-CostCenter <String>]
- [-Department <String>] [-Description <String>] [-DisableDeviceMaxLoginAttempts] [-Displayname <String>]
- [-Email <String>] [-EmployeeIdentifier <String>] [-EmployeeType <String>] [-EnableManagedUid]
- [-EnableUserPortalMultifactor] [-ExternalDn <String>] [-ExternallyManaged]
- [-ExternalPasswordExpirationDate <String>] [-ExternalSourceType <String>] [-Firstname <String>]
- [-JobTitle <String>] [-Lastname <String>] [-LdapBindingUser] [-Location <String>] [-ManagedAppleId <String>]
- [-Manager <String>] [-MfaConfigured] [-MfaExclusion] [-MfaExclusionDays <Int32>]
- [-MfaExclusionUntil <DateTime>] [-Middlename <String>] [-Password <String>] [-PasswordNeverExpires]
- [-PhoneNumbers <ISystemuserputPhoneNumbersItem[]>] [-PublicKey <String>]
- [-Relationships <ISystemuserputRelationshipsItem[]>] [-RestrictedFields <IRestrictedField1[]>]
- [-SambaServiceUser] [-SshKeys <ISshkeypost[]>] [-State <String>] [-Sudo] [-Suspended] [-UnixGuid <Int32>]
- [-UnixUid <Int32>] [-Username <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-DelegatedAuthorityId <String>] [-DelegatedAuthorityName <String>] [-Department <String>]
+ [-Description <String>] [-DisableDeviceMaxLoginAttempts] [-Displayname <String>] [-Email <String>]
+ [-EmployeeIdentifier <String>] [-EmployeeType <String>] [-EnableManagedUid] [-EnableUserPortalMultifactor]
+ [-ExternalDn <String>] [-ExternallyManaged] [-ExternalPasswordExpirationDate <String>]
+ [-ExternalSourceType <String>] [-Firstname <String>] [-JobTitle <String>] [-Lastname <String>]
+ [-LdapBindingUser] [-Location <String>] [-ManagedAppleId <String>] [-Manager <String>] [-MfaConfigured]
+ [-MfaExclusion] [-MfaExclusionDays <Int32>] [-MfaExclusionUntil <DateTime>] [-Middlename <String>]
+ [-Password <String>] [-PasswordNeverExpires] [-PhoneNumbers <ISystemuserputPhoneNumbersItem[]>]
+ [-PublicKey <String>] [-Relationships <ISystemuserputRelationshipsItem[]>]
+ [-RestrictedFields <IRestrictedField1[]>] [-SambaServiceUser] [-SshKeys <ISshkeypost[]>] [-State <String>]
+ [-Sudo] [-Suspended] [-UnixGuid <Int32>] [-UnixUid <Int32>] [-Username <String>] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### Set
@@ -61,17 +62,18 @@ Set-JcSdkUser -ConsoleHost <String> -InputObject <IJumpCloudApiIdentity> -Body <
 Set-JcSdkUser -ConsoleHost <String> -InputObject <IJumpCloudApiIdentity> [-FullValidationDetails <String>]
  [-AccountLocked] [-Addresses <ISystemuserputAddressesItem[]>] [-AllowPublicKey] [-AlternateEmail <String>]
  [-Attributes <ISystemuserputAttributesItem[]>] [-Company <String>] [-CostCenter <String>]
- [-Department <String>] [-Description <String>] [-DisableDeviceMaxLoginAttempts] [-Displayname <String>]
- [-Email <String>] [-EmployeeIdentifier <String>] [-EmployeeType <String>] [-EnableManagedUid]
- [-EnableUserPortalMultifactor] [-ExternalDn <String>] [-ExternallyManaged]
- [-ExternalPasswordExpirationDate <String>] [-ExternalSourceType <String>] [-Firstname <String>]
- [-JobTitle <String>] [-Lastname <String>] [-LdapBindingUser] [-Location <String>] [-ManagedAppleId <String>]
- [-Manager <String>] [-MfaConfigured] [-MfaExclusion] [-MfaExclusionDays <Int32>]
- [-MfaExclusionUntil <DateTime>] [-Middlename <String>] [-Password <String>] [-PasswordNeverExpires]
- [-PhoneNumbers <ISystemuserputPhoneNumbersItem[]>] [-PublicKey <String>]
- [-Relationships <ISystemuserputRelationshipsItem[]>] [-RestrictedFields <IRestrictedField1[]>]
- [-SambaServiceUser] [-SshKeys <ISshkeypost[]>] [-State <String>] [-Sudo] [-Suspended] [-UnixGuid <Int32>]
- [-UnixUid <Int32>] [-Username <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-DelegatedAuthorityId <String>] [-DelegatedAuthorityName <String>] [-Department <String>]
+ [-Description <String>] [-DisableDeviceMaxLoginAttempts] [-Displayname <String>] [-Email <String>]
+ [-EmployeeIdentifier <String>] [-EmployeeType <String>] [-EnableManagedUid] [-EnableUserPortalMultifactor]
+ [-ExternalDn <String>] [-ExternallyManaged] [-ExternalPasswordExpirationDate <String>]
+ [-ExternalSourceType <String>] [-Firstname <String>] [-JobTitle <String>] [-Lastname <String>]
+ [-LdapBindingUser] [-Location <String>] [-ManagedAppleId <String>] [-Manager <String>] [-MfaConfigured]
+ [-MfaExclusion] [-MfaExclusionDays <Int32>] [-MfaExclusionUntil <DateTime>] [-Middlename <String>]
+ [-Password <String>] [-PasswordNeverExpires] [-PhoneNumbers <ISystemuserputPhoneNumbersItem[]>]
+ [-PublicKey <String>] [-Relationships <ISystemuserputRelationshipsItem[]>]
+ [-RestrictedFields <IRestrictedField1[]>] [-SambaServiceUser] [-SshKeys <ISshkeypost[]>] [-State <String>]
+ [-Sudo] [-Suspended] [-UnixGuid <Int32>] [-UnixUid <Int32>] [-Username <String>] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -360,6 +362,36 @@ Accept wildcard characters: False
 
 ### -CostCenter
 .
+
+```yaml
+Type: System.String
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -DelegatedAuthorityId
+ObjectId of the target Active Directory connection
+
+```yaml
+Type: System.String
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -DelegatedAuthorityName
+Authority name
 
 ```yaml
 Type: System.String
@@ -1087,6 +1119,8 @@ To create the parameters described below, construct a hash table containing the 
     - `[Value <String>]`: 
   - `[Company <String>]`: 
   - `[CostCenter <String>]`: 
+  - `[DelegatedAuthorityId <String>]`: ObjectId of the target Active Directory connection
+  - `[DelegatedAuthorityName <String>]`: Authority name
   - `[Department <String>]`: 
   - `[Description <String>]`: 
   - `[DisableDeviceMaxLoginAttempts <Boolean?>]`: 
