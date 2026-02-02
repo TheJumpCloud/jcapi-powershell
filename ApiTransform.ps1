@@ -454,6 +454,11 @@ $TransformConfig = [Ordered]@{
             'workdays_post'                                     = 'Workday_Create';
             'workdays_put'                                      = 'Workday_Set';
             'workdays_workers'                                  = 'WorkdayWorker_Get';
+            'AccessRequestApi_CreateAccessRequest' = 'AccessRequest_Create';
+            'AccessRequestApi_GetAccessRequest' = 'AccessRequest_Get';
+            'AccessRequestApi_UpdateAccessRequest' = 'AccessRequest_Set';
+            'AccessRequestApi_RevokeAccessRequest' = 'AccessRequest_Delete';
+            'WorkflowAccessRequestApi_GetAllWorkflowAccessRequests' = 'AccessRequestWorkflow_Get';
         };
         ExcludedList        = @(
             # Excluded items are listed by Path and do not include opperation type (put, post, get, etc.)
@@ -507,10 +512,7 @@ $TransformConfig = [Ordered]@{
             '/integrations/autotask/{UUID}/mappings',
             '/integrations/{integration_type}/{UUID}/errors',
             '/providers/{provider_id}/integrations/autotask',
-            '/softwareapps/{software_app_id}/retry-installation',
-            '/accessrequests/',
-            '/accessrequests/{accessId}',
-            '/accessrequests/{accessId}/revoke'
+            '/softwareapps/{software_app_id}/retry-installation'
         )
     }
 }
