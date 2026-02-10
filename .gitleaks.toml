@@ -12,4 +12,5 @@ regexTarget = "match"
 description = "ignore REPLACE_KEY_VALUE in curl documentation"
 regexes = [
   '''REPLACE_KEY_VALUE''',
+  '''SOME_STRING_VALUE'''
 ]
