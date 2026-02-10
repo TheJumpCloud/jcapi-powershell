@@ -1,22 +1,18 @@
-### Example 1: {{ Add title here }}
+### Example 1: Get a WorkflowSetting by
 ```powershell
-{{ Add code here }}
+Get-JcSdkWorkflowSetting
 ```
 
 ```output
-{{ Add output here (remove the output block if the example doesn't have an output) }}
+AdminApprovalEmail     : True
+ChannelEvents          : {}
+CreatedBy              : 5d643a77600577710a5e6113
+ExposeApprovalProgress : True
+Id                     : 16
+ResourceRequest        : True
+UpdatedBy              : 5d643a77600577710a5e6113
+UserApprovalEmail      : True
+UserRequestEmail       : True
 ```
 
-{{ Add description here }}
-
-### Example 2: {{ Add title here }}
-```powershell
-{{ Add code here }}
-```
-
-```output
-{{ Add output here (remove the output block if the example doesn't have an output) }}
-```
-
-{{ Add description here }}
-
+This function will Get a WorkflowSetting
