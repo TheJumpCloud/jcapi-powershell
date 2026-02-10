@@ -37,7 +37,7 @@ PS C:\> {{ Add code here }}
 .Outputs
 JumpCloud.SDK.V2.Models.ISystemInsightsAzureInstanceMetadata
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkSystemInsightAzureInstanceMetadata.md
+https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4022_AccessRequests/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkSystemInsightAzureInstanceMetadata.md
 #>
  Function Get-JcSdkSystemInsightAzureInstanceMetadata
 {

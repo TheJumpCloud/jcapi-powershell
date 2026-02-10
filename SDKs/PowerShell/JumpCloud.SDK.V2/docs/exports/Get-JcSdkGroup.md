@@ -1,7 +1,7 @@
 ---
 external help file:
 Module Name: JumpCloud.SDK.V2
-online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkGroup.md
+online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4022_AccessRequests/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkGroup.md
 schema: 2.0.0
 ---
 
@@ -14,6 +14,7 @@ This endpoint returns all Groups that exist in your organization.
   - `name`
   - `disabled`
   - `type`
+  - `memberQueryErrorFlags`
 
 #### Sample Request
 
@@ -39,6 +40,7 @@ This endpoint returns all Groups that exist in your organization.
   - `name`
   - `disabled`
   - `type`
+  - `memberQueryErrorFlags`
 
 #### Sample Request
 

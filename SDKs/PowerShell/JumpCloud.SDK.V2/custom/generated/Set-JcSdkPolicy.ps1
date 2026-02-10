@@ -100,6 +100,7 @@ INPUTOBJECT <IJumpCloudApiIdentity>:
   [AgentId <String>]:
   [AppleMdmId <String>]:
   [ApplicationId <String>]: ObjectID of the Application.
+  [ApprovalFlowId <String>]:
   [CommandId <String>]: ObjectID of the Command.
   [CustomEmailType <String>]:
   [DeviceId <String>]:
@@ -123,7 +124,7 @@ VALUES <IPolicyValue[]>:
   [Sensitive <Boolean?>]: Defines if the value is sensitive or not.
   [Value <String>]: The value for the configuration field for this Policy instance.
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Set-JcSdkPolicy.md
+https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4022_AccessRequests/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Set-JcSdkPolicy.md
 #>
  Function Set-JcSdkPolicy
 {

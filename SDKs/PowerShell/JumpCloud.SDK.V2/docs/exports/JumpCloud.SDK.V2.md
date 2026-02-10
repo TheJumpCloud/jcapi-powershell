@@ -1,7 +1,7 @@
 ---
 Module Name: JumpCloud.SDK.V2
 Module Guid: ff397964-2121-4c89-a916-34b5c30d7187
-Download Help Link: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/jumpcloud.sdk.v2
+Download Help Link: https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4022_AccessRequests/SDKs/PowerShell/jumpcloud.sdk.v2
 Help Version: 1.0.0.0
 Locale: en-US
 ---
@@ -335,6 +335,7 @@ This endpoint returns all Groups that exist in your organization.
   - `name`
   - `disabled`
   - `type`
+  - `memberQueryErrorFlags`
 
 #### Sample Request
 
@@ -1887,6 +1888,18 @@ curl -X GET https://console.jumpcloud.com/api/v2/workdays/{WorkDayID}/workers \\
 
 ```
 
+### [Get-JcSdkWorkflow](Get-JcSdkWorkflow.md)
+Endpoint for getting workflow by id
+
+### [Get-JcSdkWorkflowAccessRequest](Get-JcSdkWorkflowAccessRequest.md)
+Endpoint that returns the workflow access request by id
+
+### [Get-JcSdkWorkflowAccessRequestProgress](Get-JcSdkWorkflowAccessRequestProgress.md)
+Endpoint for getting the approval progress of a access request
+
+### [Get-JcSdkWorkflowSetting](Get-JcSdkWorkflowSetting.md)
+Endpoint for getting workflow settings for an organisation
+
 ### [Grant-JcSdkWorkday](Grant-JcSdkWorkday.md)
 This endpoint adds an authorization method to a workday instance.
 
@@ -2313,6 +2326,18 @@ curl -X POST https://console.jumpcloud.com/api/v2/workdays/ \\
   }'
 ```
 
+### [New-JcSdkWorkflow](New-JcSdkWorkflow.md)
+Endpoint for adding a new access workflow
+
+### [New-JcSdkWorkflowAccessRequest](New-JcSdkWorkflowAccessRequest.md)
+Endpoint for adding a new workflow access request
+
+### [New-JcSdkWorkflowSetting](New-JcSdkWorkflowSetting.md)
+Endpoint for adding a new access workflow Settings
+
+### [New-JcSdkWorkflowUserApprovalRequest](New-JcSdkWorkflowUserApprovalRequest.md)
+Endpoint for user approval
+
 ### [Remove-JcSdkActiveDirectory](Remove-JcSdkActiveDirectory.md)
 This endpoint allows you to delete an Active Directory Instance.
 
@@ -2537,6 +2562,9 @@ curl -X DELETE https://console.jumpcloud.com/api/v2/workdays/{WorkDayID}/auth \\
   -H 'Content-Type: application/json' \\
   -H 'x-api-key: {API_KEY}'
 ```
+
+### [Remove-JcSdkWorkflow](Remove-JcSdkWorkflow.md)
+Endpoint for deleting accessworkflow by id
 
 ### [Restart-JcSdkAppleMdmDevice](Restart-JcSdkAppleMdmDevice.md)
 Restarts a DEP-enrolled device.
@@ -3085,6 +3113,15 @@ curl -X PUT https://console.jumpcloud.com/api/v2/workdays/{WorkdayID} \\
 \t\"name\":\"{Name}\"
 }\t'
 ```
+
+### [Set-JcSdkWorkflow](Set-JcSdkWorkflow.md)
+Endpoint for updating a new access workflow
+
+### [Set-JcSdkWorkflowAccessRequest](Set-JcSdkWorkflowAccessRequest.md)
+Endpoint that set the workflow access request by id
+
+### [Set-JcSdkWorkflowSetting](Set-JcSdkWorkflowSetting.md)
+Endpoint for updating a access workflow settings for an organization
 
 ### [Stop-JcSdkAppleMdmDevice](Stop-JcSdkAppleMdmDevice.md)
 Shuts down a DEP-enrolled device.

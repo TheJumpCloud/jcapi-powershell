@@ -68,7 +68,7 @@ BODY <IActiveDirectory>:
   [UpdatedAt <DateTime?>]:
   [UseCase <String>]:
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/New-JcSdkActiveDirectory.md
+https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4022_AccessRequests/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/New-JcSdkActiveDirectory.md
 #>
  Function New-JcSdkActiveDirectory
 {

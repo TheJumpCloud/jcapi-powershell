@@ -1,7 +1,7 @@
 ---
 external help file:
 Module Name: JumpCloud.SDK.V2
-online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkOffice365TraverseUser.md
+online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4022_AccessRequests/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkOffice365TraverseUser.md
 schema: 2.0.0
 ---
 
@@ -31,13 +31,13 @@ curl -X GET https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID}/users
 ### Get (Default)
 ```
 Get-JcSdkOffice365TraverseUser -ConsoleHost <String> -Office365Id <String> [-Filter <List<String>>]
- [<CommonParameters>]
+ [-SyncStatus] [<CommonParameters>]
 ```
 
 ### GetViaIdentity
 ```
 Get-JcSdkOffice365TraverseUser -ConsoleHost <String> -InputObject <IJumpCloudApiIdentity>
- [-Filter <List<String>>] [<CommonParameters>]
+ [-Filter <List<String>>] [-SyncStatus] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -155,6 +155,21 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -SyncStatus
+Include sync status for users
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
@@ -180,6 +195,7 @@ To create the parameters described below, construct a hash table containing the 
   - `[AgentId <String>]`: 
   - `[AppleMdmId <String>]`: 
   - `[ApplicationId <String>]`: ObjectID of the Application.
+  - `[ApprovalFlowId <String>]`: 
   - `[CommandId <String>]`: ObjectID of the Command.
   - `[CustomEmailType <String>]`: 
   - `[DeviceId <String>]`: 

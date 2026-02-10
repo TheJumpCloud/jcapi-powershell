@@ -68,7 +68,7 @@ BODY <IBulkScheduledStatechangeCreate>:
   [ActivationEmailOverride <String>]: Send the activation or welcome email to the specified email address upon activation. Can only be used with a single user_id and scheduled activation. This field will be ignored if `send_activation_emails` is explicitly set to false.
   [SendActivationEmails <Boolean?>]: Set to true to send activation or welcome email(s) to each user_id upon activation. Set to false to suppress emails. Can only be used with scheduled activation(s).
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/New-JcSdkBulkUserState.md
+https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4022_AccessRequests/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/New-JcSdkBulkUserState.md
 #>
  Function New-JcSdkBulkUserState
 {

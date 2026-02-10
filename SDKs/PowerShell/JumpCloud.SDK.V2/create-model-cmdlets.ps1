@@ -191,7 +191,7 @@ Create an in-memory object for ${ObjectType}.
 .Outputs
 ${ObjectTypeWithNamespace}
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/${ModuleName}/${cmdletNameInLowerCase}
+https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4022_AccessRequests/SDKs/PowerShell/${ModuleName}/${cmdletNameInLowerCase}
 #>
 function ${cmdletName} {
     [JumpCloud.SDK.V2.ModelCmdletAttribute()]

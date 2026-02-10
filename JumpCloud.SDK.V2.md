@@ -1,3 +1,40 @@
+## JumpCloud.SDK.V2-0.2.0
+Release Date: Feb 10, 2026
+#### RELEASE NOTES
+```
+Add accessRequest workflow functions/ general SDK updates from source
+```
+
+#### Generated Changes:
+
+<details>
+<summary>Functions Added</summary>
+Get-JcSdkWorkflow
+Get-JcSdkWorkflowAccessRequest
+Get-JcSdkWorkflowAccessRequestProgress
+Get-JcSdkWorkflowSetting
+New-JcSdkWorkflow
+New-JcSdkWorkflowAccessRequest
+New-JcSdkWorkflowSetting
+Remove-JcSdkWorkflow
+Set-JcSdkWorkflow
+Set-JcSdkWorkflowAccessRequest
+Set-JcSdkWorkflowSetting
+
+</details>
+
+<details>
+<summary>Functions Modified</summary>
+
+No changes
+</details>
+
+<details>
+<summary>Functions Removed</summary>
+
+No changes
+</details>
+
 ## JumpCloud.SDK.V2-0.1.2
 Release Date: December 16, 2025
 #### RELEASE NOTES
