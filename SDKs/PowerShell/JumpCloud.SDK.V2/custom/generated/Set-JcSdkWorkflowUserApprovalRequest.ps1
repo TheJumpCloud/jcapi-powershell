@@ -1,42 +1,34 @@
 <#
 .Synopsis
-Endpoint for updating a access workflow settings for an organization
+Endpoint for user approval
 .Description
-Endpoint for updating a access workflow settings for an organization
+Endpoint for user approval
 .Example
-Set-JcSdkWorkflowSetting -Body:(<JumpCloud.SDK.V2.Models.JumpcloudIngressoUpdateAccessWorkflowSettingsRequest>)
+{{ Add code here }}
 .Example
-Set-JcSdkWorkflowSetting -AdminApprovalEmail:(<switch>) -ChannelEvents:(<JumpCloud.SDK.V2.Models.JumpcloudIngressoChannelEvent[]>) -ExposeApprovalProgress:(<switch>) -OrganizationObjectIdInputFile:(<string>) -ResourceRequest:(<switch>) -UserApprovalEmail:(<switch>) -UserRequestEmail:(<switch>)
+{{ Add code here }}
 
 .Inputs
-JumpCloud.SDK.V2.Models.IJumpcloudIngressoUpdateAccessWorkflowSettingsRequest
+JumpCloud.SDK.V2.Models.IJumpcloudIngressoUserApprovalRequest
 .Outputs
-JumpCloud.SDK.V2.Models.IJumpcloudIngressoUpdateAccessWorkflowSettingsResponse
+JumpCloud.SDK.V2.Models.IJumpcloudIngressoUserApprovalRequestResponse
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
-BODY <IJumpcloudIngressoUpdateAccessWorkflowSettingsRequest>:
-  [AdminApprovalEmail <Boolean?>]:
-  [ChannelEvents <List<IJumpcloudIngressoChannelEvent>>]:
-    [ChannelObjectId <Byte[]>]:
-    [EventTypes <List<String>>]:
-  [ExposeApprovalProgress <Boolean?>]:
+BODY <IJumpcloudIngressoUserApprovalRequest>:
+  [ApprovedDuration <String>]:
+  [Id <String>]:
   [OrganizationObjectId <Byte[]>]:
-  [ResourceRequest <Boolean?>]:
-  [UserApprovalEmail <Boolean?>]:
-  [UserRequestEmail <Boolean?>]:
-
-CHANNELEVENTS <IJumpcloudIngressoChannelEvent[]>:
-  [ChannelObjectId <Byte[]>]:
-  [EventTypes <List<String>>]:
+  [Remarks <String>]:
+  [Status <String>]:
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4022_AccessRequests/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Set-JcSdkWorkflowSetting.md
+https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4022_AccessRequests/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Set-JcSdkWorkflowUserApprovalRequest.md
 #>
- Function Set-JcSdkWorkflowSetting
+ Function Set-JcSdkWorkflowUserApprovalRequest
 {
-    [OutputType([JumpCloud.SDK.V2.Models.IJumpcloudIngressoUpdateAccessWorkflowSettingsResponse])]
+    [OutputType([JumpCloud.SDK.V2.Models.IJumpcloudIngressoUserApprovalRequestResponse])]
     [CmdletBinding(DefaultParameterSetName='SetExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(Mandatory)]
@@ -48,28 +40,21 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4022_AccessRequests/SD
 
     [Parameter(ParameterSetName='Set', Mandatory, ValueFromPipeline)]
     [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Models.IJumpcloudIngressoUpdateAccessWorkflowSettingsRequest]
+    [JumpCloud.SDK.V2.Models.IJumpcloudIngressoUserApprovalRequest]
     # .
     ${Body}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
-    [System.Management.Automation.SwitchParameter]
+    [System.String]
     # .
-    ${AdminApprovalEmail}, 
-
-    [Parameter(ParameterSetName='SetExpanded')]
-    [AllowEmptyCollection()]
-    [JumpCloud.SDK.V2.Category('Body')]
-    [JumpCloud.SDK.V2.Models.IJumpcloudIngressoChannelEvent[]]
-    # .
-    ${ChannelEvents}, 
+    ${ApprovedDuration}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
-    [System.Management.Automation.SwitchParameter]
+    [System.String]
     # .
-    ${ExposeApprovalProgress}, 
+    ${Id}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
@@ -79,21 +64,15 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4022_AccessRequests/SD
 
     [Parameter(ParameterSetName='SetExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
-    [System.Management.Automation.SwitchParameter]
+    [System.String]
     # .
-    ${ResourceRequest}, 
+    ${Remarks}, 
 
     [Parameter(ParameterSetName='SetExpanded')]
     [JumpCloud.SDK.V2.Category('Body')]
-    [System.Management.Automation.SwitchParameter]
+    [System.String]
     # .
-    ${UserApprovalEmail}, 
-
-    [Parameter(ParameterSetName='SetExpanded')]
-    [JumpCloud.SDK.V2.Category('Body')]
-    [System.Management.Automation.SwitchParameter]
-    # .
-    ${UserRequestEmail}, 
+    ${Status}, 
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]
@@ -155,7 +134,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4022_AccessRequests/SD
         $resultCounter = 0
         :retryLoop do {
             $resultCounter++
-            $Results = JumpCloud.SDK.V2.internal\Set-JcSdkInternalWorkflowSetting @PSBoundParameters -errorAction SilentlyContinue -errorVariable sdkError
+            $Results = JumpCloud.SDK.V2.internal\Set-JcSdkInternalWorkflowUserApprovalRequest @PSBoundParameters -errorAction SilentlyContinue -errorVariable sdkError
             If ($sdkError){
                 If ($resultCounter -eq $maxRetries){
                     throw $sdkError

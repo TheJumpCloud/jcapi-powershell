@@ -4,9 +4,9 @@ Endpoint for updating a new access workflow
 .Description
 Endpoint for updating a new access workflow
 .Example
-{{ Add code here }}
+Set-JcSdkWorkflow -ApprovalFlowId:(<string>) -Body:(<JumpCloud.SDK.V2.Models.Paths14Hfh8UApprovalflowsApprovalflowidPutRequestbodyContentApplicationJsonSchema>)
 .Example
-{{ Add code here }}
+Set-JcSdkWorkflow -ApprovalFlowId:(<string>) -ApprovalType:(<string>) -ApproverRequirement:(<string>) -ApproverResources:(<JumpCloud.SDK.V2.Models.JumpcloudIngressoApproverResource[]>) -Description:(<string>) -FixedDuration:(<string>) -IconColor:(<string>) -IconUrl:(<string>) -MultiSelectDuration:(<string[]>) -Name:(<string>) -NonAdminApproval:(<switch>) -OrganizationObjectIdInputFile:(<string>) -ResourceId:(<string>) -SlackConfig:(<JumpCloud.SDK.V2.Models.JumpcloudIngressoSlackConfig[]>) -SlackEnabled:(<switch>) -Status:(<string>) -TimeBasedAccess:(<switch>) -TtlConfig:(<string>) -VisibleTo:(<string[]>)
 
 .Inputs
 JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity

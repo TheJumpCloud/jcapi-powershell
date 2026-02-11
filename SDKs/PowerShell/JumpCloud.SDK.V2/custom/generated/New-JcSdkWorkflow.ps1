@@ -4,9 +4,9 @@ Endpoint for adding a new access workflow
 .Description
 Endpoint for adding a new access workflow
 .Example
-{{ Add code here }}
+New-JcSdkWorkflow -Body:(<JumpCloud.SDK.V2.Models.JumpcloudIngressoCreateAccessWorkflowRequest>)
 .Example
-{{ Add code here }}
+New-JcSdkWorkflow -ApprovalType:(<string>) -ApproverRequirement:(<string>) -ApproverResources:(<JumpCloud.SDK.V2.Models.JumpcloudIngressoApproverResource[]>) -Category:(<string>) -Description:(<string>) -FixedDuration:(<string>) -IconColor:(<string>) -IconUrl:(<string>) -MultiSelectDuration:(<string[]>) -Name:(<string>) -NonAdminApproval:(<switch>) -OrganizationObjectIdInputFile:(<string>) -ResourceId:(<string>) -ResourceType:(<string>) -SlackConfig:(<JumpCloud.SDK.V2.Models.JumpcloudIngressoSlackConfig[]>) -SlackEnabled:(<switch>) -Status:(<string>) -TimeBasedAccess:(<switch>) -TtlConfig:(<string>) -VisibleTo:(<string[]>)
 
 .Inputs
 JumpCloud.SDK.V2.Models.IJumpcloudIngressoCreateAccessWorkflowRequest

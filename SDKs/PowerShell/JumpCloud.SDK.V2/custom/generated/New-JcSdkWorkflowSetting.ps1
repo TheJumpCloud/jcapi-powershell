@@ -4,9 +4,9 @@ Endpoint for adding a new access workflow Settings
 .Description
 Endpoint for adding a new access workflow Settings
 .Example
-{{ Add code here }}
+New-JcSdkWorkflowSetting -Body:(<JumpCloud.SDK.V2.Models.JumpcloudIngressoCreateAccessWorkflowSettingsRequest>)
 .Example
-{{ Add code here }}
+New-JcSdkWorkflowSetting -AdminApprovalEmail:(<switch>) -ChannelEvents:(<JumpCloud.SDK.V2.Models.JumpcloudIngressoChannelEvent[]>) -ExposeApprovalProgress:(<switch>) -OrganizationObjectIdInputFile:(<string>) -ResourceRequest:(<switch>) -UserApprovalEmail:(<switch>) -UserRequestEmail:(<switch>)
 
 .Inputs
 JumpCloud.SDK.V2.Models.IJumpcloudIngressoCreateAccessWorkflowSettingsRequest

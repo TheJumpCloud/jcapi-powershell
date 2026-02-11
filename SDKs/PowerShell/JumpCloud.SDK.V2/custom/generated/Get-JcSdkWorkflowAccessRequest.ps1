@@ -4,9 +4,9 @@ Endpoint that returns the workflow access request by id
 .Description
 Endpoint that returns the workflow access request by id
 .Example
-{{ Add code here }}
+Get-JcSdkWorkflowAccessRequest -Id:(<string>)
 .Example
-{{ Add code here }}
+Get-JcSdkWorkflowAccessRequest -Fields:(<System.Collections.Generic.List[string]>) -Filter:(<System.Collections.Generic.List[string]>) -Sort:(<string>)
 
 .Inputs
 JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity

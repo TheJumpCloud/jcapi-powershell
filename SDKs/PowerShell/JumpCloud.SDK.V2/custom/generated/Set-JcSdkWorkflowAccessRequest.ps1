@@ -4,9 +4,9 @@ Endpoint that set the workflow access request by id
 .Description
 Endpoint that set the workflow access request by id
 .Example
-{{ Add code here }}
+Set-JcSdkWorkflowAccessRequest -Id:(<string>) -Body:(<JumpCloud.SDK.V2.Models.Paths17F25RsApprovalflowrequestIdPutRequestbodyContentApplicationJsonSchema>)
 .Example
-{{ Add code here }}
+Set-JcSdkWorkflowAccessRequest -Id:(<string>) -Admin:(<string>) -ApprovedDuration:(<string>) -InternalNote:(<string>) -OrganizationObjectIdInputFile:(<string>) -Remarks:(<string>) -Status:(<string>)
 
 .Inputs
 JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity

@@ -4,9 +4,7 @@ Endpoint for getting the approval progress of a access request
 .Description
 Endpoint for getting the approval progress of a access request
 .Example
-{{ Add code here }}
-.Example
-{{ Add code here }}
+Get-JcSdkWorkflowAccessRequestProgress -Id:(<string>)
 
 .Inputs
 JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity

@@ -4,7 +4,7 @@ Endpoint for deleting accessworkflow by id
 .Description
 Endpoint for deleting accessworkflow by id
 .Example
-{{ Add code here }}
+Remove-JcSdkWorkflow -ApprovalFlowId:(<string>)
 .Example
 {{ Add code here }}
 
