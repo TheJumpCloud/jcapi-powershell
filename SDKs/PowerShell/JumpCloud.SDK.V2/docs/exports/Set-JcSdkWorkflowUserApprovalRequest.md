@@ -1,58 +1,57 @@
 ---
 external help file:
 Module Name: JumpCloud.SDK.V2
-online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4022_AccessRequests/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/New-JcSdkWorkflowSetting.md
+online version: https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4022_AccessRequests/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Set-JcSdkWorkflowUserApprovalRequest.md
 schema: 2.0.0
 ---
 
-# New-JcSdkWorkflowSetting
+# Set-JcSdkWorkflowUserApprovalRequest
 
 ## SYNOPSIS
-Endpoint for adding a new access workflow Settings
+Endpoint for user approval
 
 ## SYNTAX
 
-### CreateExpanded (Default)
+### SetExpanded (Default)
 ```
-New-JcSdkWorkflowSetting -ConsoleHost <String> [-AdminApprovalEmail]
- [-ChannelEvents <IJumpcloudIngressoChannelEvent[]>] [-ExposeApprovalProgress]
- [-OrganizationObjectIdInputFile <String>] [-ResourceRequest] [-UserApprovalEmail] [-UserRequestEmail]
- [-Confirm] [-WhatIf] [<CommonParameters>]
+Set-JcSdkWorkflowUserApprovalRequest -ConsoleHost <String> [-ApprovedDuration <String>] [-Id <String>]
+ [-OrganizationObjectIdInputFile <String>] [-Remarks <String>] [-Status <String>] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
-### Create
+### Set
 ```
-New-JcSdkWorkflowSetting -ConsoleHost <String> -Body <IJumpcloudIngressoCreateAccessWorkflowSettingsRequest>
+Set-JcSdkWorkflowUserApprovalRequest -ConsoleHost <String> -Body <IJumpcloudIngressoUserApprovalRequest>
  [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Endpoint for adding a new access workflow Settings
+Endpoint for user approval
 
 ## EXAMPLES
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+)
 ```
 
 
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell
-{{ Add code here }}
+) -Id:(<string>) -OrganizationObjectIdInputFile:(<string>) -Remarks:(<string>) -Status:(<string>)
 ```
 
 
 
 ## PARAMETERS
 
-### -AdminApprovalEmail
+### -ApprovedDuration
 .
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: CreateExpanded
+Type: System.String
+Parameter Sets: SetExpanded
 Aliases:
 
 Required: False
@@ -66,29 +65,14 @@ Accept wildcard characters: False
 .
 
 ```yaml
-Type: JumpCloud.SDK.V2.Models.IJumpcloudIngressoCreateAccessWorkflowSettingsRequest
-Parameter Sets: Create
+Type: JumpCloud.SDK.V2.Models.IJumpcloudIngressoUserApprovalRequest
+Parameter Sets: Set
 Aliases:
 
 Required: True
 Position: Named
 Default value: None
 Accept pipeline input: True (ByValue)
-Accept wildcard characters: False
-```
-
-### -ChannelEvents
-.
-
-```yaml
-Type: JumpCloud.SDK.V2.Models.IJumpcloudIngressoChannelEvent[]
-Parameter Sets: CreateExpanded
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
@@ -108,12 +92,12 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ExposeApprovalProgress
+### -Id
 .
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: CreateExpanded
+Type: System.String
+Parameter Sets: SetExpanded
 Aliases:
 
 Required: False
@@ -128,7 +112,7 @@ Input File for OrganizationObjectId (.)
 
 ```yaml
 Type: System.String
-Parameter Sets: CreateExpanded
+Parameter Sets: SetExpanded
 Aliases:
 
 Required: False
@@ -138,12 +122,12 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ResourceRequest
+### -Remarks
 .
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: CreateExpanded
+Type: System.String
+Parameter Sets: SetExpanded
 Aliases:
 
 Required: False
@@ -153,27 +137,12 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -UserApprovalEmail
+### -Status
 .
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: CreateExpanded
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -UserRequestEmail
-.
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: CreateExpanded
+Type: System.String
+Parameter Sets: SetExpanded
 Aliases:
 
 Required: False
@@ -219,11 +188,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### JumpCloud.SDK.V2.Models.IJumpcloudIngressoCreateAccessWorkflowSettingsRequest
+### JumpCloud.SDK.V2.Models.IJumpcloudIngressoUserApprovalRequest
 
 ## OUTPUTS
 
-### JumpCloud.SDK.V2.Models.IJumpcloudIngressoCreateAccessWorkflowSettingsResponse
+### JumpCloud.SDK.V2.Models.IJumpcloudIngressoUserApprovalRequestResponse
 
 ## NOTES
 
@@ -232,20 +201,12 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-`BODY <IJumpcloudIngressoCreateAccessWorkflowSettingsRequest>`: .
-  - `[AdminApprovalEmail <Boolean?>]`: 
-  - `[ChannelEvents <List<IJumpcloudIngressoChannelEvent>>]`: 
-    - `[ChannelObjectId <Byte[]>]`: 
-    - `[EventTypes <List<String>>]`: 
-  - `[ExposeApprovalProgress <Boolean?>]`: 
+`BODY <IJumpcloudIngressoUserApprovalRequest>`: .
+  - `[ApprovedDuration <String>]`: 
+  - `[Id <String>]`: 
   - `[OrganizationObjectId <Byte[]>]`: 
-  - `[ResourceRequest <Boolean?>]`: 
-  - `[UserApprovalEmail <Boolean?>]`: 
-  - `[UserRequestEmail <Boolean?>]`: 
-
-`CHANNELEVENTS <IJumpcloudIngressoChannelEvent[]>`: .
-  - `[ChannelObjectId <Byte[]>]`: 
-  - `[EventTypes <List<String>>]`: 
+  - `[Remarks <String>]`: 
+  - `[Status <String>]`: 
 
 ## RELATED LINKS
 

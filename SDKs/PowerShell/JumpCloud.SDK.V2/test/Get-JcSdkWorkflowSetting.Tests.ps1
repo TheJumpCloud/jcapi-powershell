@@ -15,7 +15,12 @@ if(($null -eq $TestName) -or ($TestName -contains 'Get-JcSdkWorkflowSetting'))
 }
 
 Describe 'Get-JcSdkWorkflowSetting' {
-    It 'Get' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'Get' {
+        { Get-JcSdkWorkflowSetting } | Should -Not -Throw
+    }
+    It 'Get should return actual settings if they exist' {
+        $settings = Get-JcSdkWorkflowSetting
+        $settings | Should -Not -BeNullOrEmpty
+        $settings.Count | Should -Be 1
     }
 }

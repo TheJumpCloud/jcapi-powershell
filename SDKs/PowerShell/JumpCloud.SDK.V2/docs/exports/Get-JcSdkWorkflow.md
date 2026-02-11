@@ -37,14 +37,14 @@ Endpoint for getting workflow by id
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+)
 ```
 
 
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell
-{{ Add code here }}
+) -Filter:(<System.Collections.Generic.List[string]>) -Sort:(<string>)
 ```
 
 

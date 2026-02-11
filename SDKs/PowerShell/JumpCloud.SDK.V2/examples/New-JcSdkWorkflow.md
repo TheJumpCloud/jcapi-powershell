@@ -1,22 +1,12 @@
-### Example 1: {{ Add title here }}
+### Example 1: Create a Workflow
 ```powershell
-{{ Add code here }}
+New-JcSdkWorkflow -ApprovalType 'manual' -Category "Application" -Description "A new workflow" -MultiSelectDuration @("P5D") -Name "New Workflow" -NonAdminApproval $false -ResourceId 5d67fd481da3c52aa1faa883 -ResourceType "user_group" -SlackEnabled $false -Status "active" -TimeBasedAccess $true -TtlConfig "TTL_CONFIG_MULTI_SELECT_DURATIONS" -VisibleTo @('6148cd739d38866f0814e874')
 ```
 
 ```output
-{{ Add output here (remove the output block if the example doesn't have an output) }}
+Id
+--
+698cba2ed5a55800019f4aae
 ```
 
-{{ Add description here }}
-
-### Example 2: {{ Add title here }}
-```powershell
-{{ Add code here }}
-```
-
-```output
-{{ Add output here (remove the output block if the example doesn't have an output) }}
-```
-
-{{ Add description here }}
-
+This function will Create a Workflow

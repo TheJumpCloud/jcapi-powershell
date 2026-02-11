@@ -2329,15 +2329,6 @@ curl -X POST https://console.jumpcloud.com/api/v2/workdays/ \\
 ### [New-JcSdkWorkflow](New-JcSdkWorkflow.md)
 Endpoint for adding a new access workflow
 
-### [New-JcSdkWorkflowAccessRequest](New-JcSdkWorkflowAccessRequest.md)
-Endpoint for adding a new workflow access request
-
-### [New-JcSdkWorkflowSetting](New-JcSdkWorkflowSetting.md)
-Endpoint for adding a new access workflow Settings
-
-### [New-JcSdkWorkflowUserApprovalRequest](New-JcSdkWorkflowUserApprovalRequest.md)
-Endpoint for user approval
-
 ### [Remove-JcSdkActiveDirectory](Remove-JcSdkActiveDirectory.md)
 This endpoint allows you to delete an Active Directory Instance.
 
@@ -3122,6 +3113,9 @@ Endpoint that set the workflow access request by id
 
 ### [Set-JcSdkWorkflowSetting](Set-JcSdkWorkflowSetting.md)
 Endpoint for updating a access workflow settings for an organization
+
+### [Set-JcSdkWorkflowUserApprovalRequest](Set-JcSdkWorkflowUserApprovalRequest.md)
+Endpoint for user approval
 
 ### [Stop-JcSdkAppleMdmDevice](Stop-JcSdkAppleMdmDevice.md)
 Shuts down a DEP-enrolled device.

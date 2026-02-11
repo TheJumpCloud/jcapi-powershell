@@ -31,7 +31,7 @@ Endpoint for deleting accessworkflow by id
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+)
 ```
 
 

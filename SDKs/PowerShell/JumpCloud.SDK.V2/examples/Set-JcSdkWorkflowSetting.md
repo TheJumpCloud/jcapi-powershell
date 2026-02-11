@@ -1,22 +1,22 @@
-### Example 1: {{ Add title here }}
+### Example 1: Set a WorkflowSetting by Body
 ```powershell
-{{ Add code here }}
+Set-JcSdkWorkflowSetting -Body:(<JumpCloud.SDK.V2.Models.JumpcloudIngressoUpdateAccessWorkflowSettingsRequest>)
 ```
 
 ```output
 {{ Add output here (remove the output block if the example doesn't have an output) }}
 ```
 
-{{ Add description here }}
+This function will Set a WorkflowSetting by Body. Body is a required parameter.
 
-### Example 2: {{ Add title here }}
+### Example 2: Set a WorkflowSetting by
 ```powershell
-{{ Add code here }}
+Set-JcSdkWorkflowSetting -AdminApprovalEmail:(<switch>) -ChannelEvents:(<JumpCloud.SDK.V2.Models.JumpcloudIngressoChannelEvent[]>) -ExposeApprovalProgress:(<switch>) -OrganizationObjectIdInputFile:(<string>) -ResourceRequest:(<switch>) -UserApprovalEmail:(<switch>) -UserRequestEmail:(<switch>)
 ```
 
 ```output
 {{ Add output here (remove the output block if the example doesn't have an output) }}
 ```
 
-{{ Add description here }}
+This function will Set a WorkflowSetting by .
 

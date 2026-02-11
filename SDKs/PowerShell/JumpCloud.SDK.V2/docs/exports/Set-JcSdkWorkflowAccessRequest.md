@@ -47,14 +47,14 @@ Endpoint that set the workflow access request by id
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+) -Body:(<JumpCloud.SDK.V2.Models.Paths17F25RsApprovalflowrequestIdPutRequestbodyContentApplicationJsonSchema>)
 ```
 
 
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell
-{{ Add code here }}
+) -Admin:(<string>) -ApprovedDuration:(<string>) -InternalNote:(<string>) -OrganizationObjectIdInputFile:(<string>) -Remarks:(<string>) -Status:(<string>)
 ```
 
 

@@ -470,7 +470,7 @@ $TransformConfig = [Ordered]@{
             'AccessWorkflowApi_GetAccessWorkflow' = 'Workflow_Get'
             'AccessWorkflowApi_UpdateAccessWorkflow' = 'Workflow_Set'
             'AccessWorkflowSettingsApi_GetAccessWorkflowSettings' = 'WorkflowSettings_Get'
-            'AccessWorkflowSettingsApi_CreateAccessWorkflowSettings' = 'WorkflowSettings_Create'
+            # 'AccessWorkflowSettingsApi_CreateAccessWorkflowSettings' = 'WorkflowSettings_Create' # this should be created automatically, no need to include the function in the SDK
             'AccessWorkflowSettingsApi_UpdateAccessWorkflowSettings' = 'WorkflowSettings_Set'
         };
         ExcludedList        = @(

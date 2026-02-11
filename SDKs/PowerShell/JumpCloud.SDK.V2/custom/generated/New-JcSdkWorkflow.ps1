@@ -4,9 +4,7 @@ Endpoint for adding a new access workflow
 .Description
 Endpoint for adding a new access workflow
 .Example
-New-JcSdkWorkflow -Body:(<JumpCloud.SDK.V2.Models.JumpcloudIngressoCreateAccessWorkflowRequest>)
-.Example
-New-JcSdkWorkflow -ApprovalType:(<string>) -ApproverRequirement:(<string>) -ApproverResources:(<JumpCloud.SDK.V2.Models.JumpcloudIngressoApproverResource[]>) -Category:(<string>) -Description:(<string>) -FixedDuration:(<string>) -IconColor:(<string>) -IconUrl:(<string>) -MultiSelectDuration:(<string[]>) -Name:(<string>) -NonAdminApproval:(<switch>) -OrganizationObjectIdInputFile:(<string>) -ResourceId:(<string>) -ResourceType:(<string>) -SlackConfig:(<JumpCloud.SDK.V2.Models.JumpcloudIngressoSlackConfig[]>) -SlackEnabled:(<switch>) -Status:(<string>) -TimeBasedAccess:(<switch>) -TtlConfig:(<string>) -VisibleTo:(<string[]>)
+New-JcSdkWorkflow -ApprovalType 'manual' -Category "Application" -Description "A new workflow" -MultiSelectDuration @("P5D") -Name "New Workflow" -NonAdminApproval $false -ResourceId 5d67fd481da3c52aa1faa883 -ResourceType "user_group" -SlackEnabled $false -Status "active" -TimeBasedAccess $true -TtlConfig "TTL_CONFIG_MULTI_SELECT_DURATIONS" -VisibleTo @('6148cd739d38866f0814e874')
 
 .Inputs
 JumpCloud.SDK.V2.Models.IJumpcloudIngressoCreateAccessWorkflowRequest

@@ -15,15 +15,19 @@ if(($null -eq $TestName) -or ($TestName -contains 'Get-JcSdkWorkflowAccessReques
 }
 
 Describe 'Get-JcSdkWorkflowAccessRequest' {
-    It 'List' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'List' {
+        { Get-JcSdkWorkflowAccessRequest } | Should -Not -Throw
     }
 
-    It 'Get' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
-    }
-
-    It 'GetViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    It 'List should return actual access requests if they exist' {
+        $accessRequests = Get-JcSdkWorkflowAccessRequest
+        if ($null -eq $accessRequests){
+            # can't create workflows without logging in as a user, skip test
+            continue
+        } else {
+            $accessRequest = $accessRequests | Get-Random -Count 1
+            $accessRequest | Should -Not -BeNullOrEmpty
+            $accessRequest.Count | Should -Be 1
+        }
     }
 }
