@@ -1,22 +1,22 @@
-### Example 1: {{ Add title here }}
+### Example 1: Set an AccessRequestApproval by
 ```powershell
-{{ Add code here }}
+PS C:\> Set-JcSdkAccessRequestApproval -ApprovedDuration:(<string>) -Id:(<string>) -OrganizationObjectIdInputFile:(<string>) -Remarks:(<string>) -Status:(<string>)
 ```
 
 ```output
-{{ Add output here (remove the output block if the example doesn't have an output) }}
+JumpCloud.SDK.V2.Models.JumpcloudIngressoUserApprovalRequestResponse
 ```
 
-{{ Add description here }}
+This function will Set an AccessRequestApproval by .
 
-### Example 2: {{ Add title here }}
+### Example 2: Set an AccessRequestApproval by Body
 ```powershell
-{{ Add code here }}
+PS C:\> Set-JcSdkAccessRequestApproval -Body:(<JumpCloud.SDK.V2.Models.JumpcloudIngressoUserApprovalRequest>)
 ```
 
 ```output
-{{ Add output here (remove the output block if the example doesn't have an output) }}
+JumpCloud.SDK.V2.Models.JumpcloudIngressoUserApprovalRequestResponse
 ```
 
-{{ Add description here }}
+This function will Set an AccessRequestApproval by Body. Body is a required parameter.
 

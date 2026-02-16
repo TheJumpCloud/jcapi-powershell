@@ -9,17 +9,17 @@ Add accessRequest workflow functions/ general SDK updates from source
 
 <details>
 <summary>Functions Added</summary>
-Get-JcSdkWorkflow
-Get-JcSdkWorkflowAccessRequest
-Get-JcSdkWorkflowAccessRequestProgress
-Get-JcSdkWorkflowSetting
-New-JcSdkWorkflow
-New-JcSdkWorkflowAccessRequest
-New-JcSdkWorkflowSetting
-Remove-JcSdkWorkflow
-Set-JcSdkWorkflow
-Set-JcSdkWorkflowAccessRequest
-Set-JcSdkWorkflowSetting
+Get-JcSdkApprovalFlow
+Get-JcSdkAccessRequest
+Get-JcSdkAccessRequestProgress
+Get-JcSdkApprovalFlowSetting
+New-JcSdkApprovalFlow
+New-JcSdkAccessRequest
+New-JcSdkApprovalFlowSetting
+Remove-JcSdkApprovalFlow
+Set-JcSdkApprovalFlow
+Set-JcSdkAccessRequest
+Set-JcSdkApprovalFlowSetting
 
 </details>
 

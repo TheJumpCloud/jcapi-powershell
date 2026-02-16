@@ -1,22 +1,22 @@
-### Example 1: {{ Add title here }}
+### Example 1: Set an AccessRequest by Id
 ```powershell
-{{ Add code here }}
+PS C:\> Set-JcSdkAccessRequest -Id:(<string>) -Admin:(<string>) -ApprovedDuration:(<string>) -InternalNote:(<string>) -OrganizationObjectIdInputFile:(<string>) -Remarks:(<string>) -Status:(<string>)
 ```
 
 ```output
-{{ Add output here (remove the output block if the example doesn't have an output) }}
+JumpCloud.SDK.V2.Models.JumpcloudIngressoUpdateWorkflowAccessRequestResponse
 ```
 
-{{ Add description here }}
+This function will Set an AccessRequest by Id. Id is a required parameter.
 
-### Example 2: {{ Add title here }}
+### Example 2: Set an AccessRequest by Id, and Body
 ```powershell
-{{ Add code here }}
+PS C:\> Set-JcSdkAccessRequest -Id:(<string>) -Body:(<JumpCloud.SDK.V2.Models.Paths17F25RsApprovalflowrequestIdPutRequestbodyContentApplicationJsonSchema>)
 ```
 
 ```output
-{{ Add output here (remove the output block if the example doesn't have an output) }}
+JumpCloud.SDK.V2.Models.JumpcloudIngressoUpdateWorkflowAccessRequestResponse
 ```
 
-{{ Add description here }}
+This function will Set an AccessRequest by Id Body. Id, and Body are required parameters.
 
