@@ -1,5 +1,5 @@
 ## JumpCloud.SDK.V2-0.2.0
-Release Date: February 11, 2026
+Release Date: February 16, 2026
 #### RELEASE NOTES
 ```
 Add accessRequest workflow functions/ general SDK updates from source
