@@ -1,6 +1,6 @@
 ### Example 1: Get an ApprovalFlowSetting by
 ```powershell
-Get-JcSdkApprovalFlowSetting
+PS C:\> Get-JcSdkApprovalFlowSetting
 ```
 
 ```output

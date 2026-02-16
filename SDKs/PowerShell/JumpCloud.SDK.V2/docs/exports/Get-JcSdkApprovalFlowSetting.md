@@ -23,14 +23,7 @@ Endpoint for getting workflow settings for an organisation
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
-```
-
-
-
-### -------------------------- EXAMPLE 2 --------------------------
-```powershell
-{{ Add code here }}
+Get-JcSdkApprovalFlowSetting
 ```
 
 

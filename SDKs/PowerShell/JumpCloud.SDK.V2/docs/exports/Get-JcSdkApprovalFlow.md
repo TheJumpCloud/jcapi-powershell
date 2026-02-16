@@ -37,14 +37,14 @@ Endpoint for getting workflow by id
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkApprovalFlow -ApprovalFlowId:(<string>)
 ```
 
 
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkApprovalFlow -Fields:(<System.Collections.Generic.List[string]>) -Filter:(<System.Collections.Generic.List[string]>) -Sort:(<string>)
 ```
 
 

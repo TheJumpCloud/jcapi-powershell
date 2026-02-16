@@ -4,9 +4,9 @@ Endpoint for getting workflow by id
 .Description
 Endpoint for getting workflow by id
 .Example
-{{ Add code here }}
+PS C:\> Get-JcSdkApprovalFlow -ApprovalFlowId:(<string>)
 .Example
-{{ Add code here }}
+PS C:\> Get-JcSdkApprovalFlow -Fields:(<System.Collections.Generic.List[string]>) -Filter:(<System.Collections.Generic.List[string]>) -Sort:(<string>)
 
 .Inputs
 JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity

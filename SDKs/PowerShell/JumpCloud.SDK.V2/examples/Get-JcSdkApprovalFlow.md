@@ -1,6 +1,6 @@
 ### Example 1: Get an ApprovalFlow by ApprovalFlowId
 ```powershell
-Get-JcSdkApprovalFlow -ApprovalFlowId:(<string>)
+PS C:\> Get-JcSdkApprovalFlow -ApprovalFlowId:(<string>)
 ```
 
 ```output
@@ -30,9 +30,9 @@ VisibleTo           : {Default Admin, Radius}
 
 This function will Get an ApprovalFlow by ApprovalFlowId. ApprovalFlowId is a required parameter.
 
-### Example 2: List ApprovalFlow
+### Example 2: List all ApprovalFlow(s)
 ```powershell
-Get-JcSdkApprovalFlow -Fields:(<System.Collections.Generic.List[string]>) -Filter:(<System.Collections.Generic.List[string]>) -Sort:(<string>)
+PS C:\> Get-JcSdkApprovalFlow -Fields:(<System.Collections.Generic.List[string]>) -Filter:(<System.Collections.Generic.List[string]>) -Sort:(<string>)
 ```
 
 ```output

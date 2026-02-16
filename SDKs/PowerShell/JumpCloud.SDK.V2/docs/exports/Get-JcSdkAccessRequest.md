@@ -37,14 +37,14 @@ Endpoint that returns the workflow access request by id
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkAccessRequest -Id:(<string>)
 ```
 
 
 
 ### -------------------------- EXAMPLE 2 --------------------------
 ```powershell
-{{ Add code here }}
+Get-JcSdkAccessRequest -Fields:(<System.Collections.Generic.List[string]>) -Filter:(<System.Collections.Generic.List[string]>) -Sort:(<string>)
 ```
 
 

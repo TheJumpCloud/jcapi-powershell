@@ -4,9 +4,7 @@ Endpoint for getting workflow settings for an organisation
 .Description
 Endpoint for getting workflow settings for an organisation
 .Example
-{{ Add code here }}
-.Example
-{{ Add code here }}
+PS C:\> Get-JcSdkApprovalFlowSetting
 
 .Outputs
 JumpCloud.SDK.V2.Models.IJumpcloudIngressoAccessWorkflowSettings

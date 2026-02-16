@@ -1,6 +1,6 @@
 ### Example 1: Get an AccessRequest by Id
 ```powershell
-Get-JcSdkAccessRequest -Id:(<string>)
+PS C:\> Get-JcSdkAccessRequest -Id:(<string>)
 ```
 
 ```output
@@ -32,7 +32,7 @@ This function will Get an AccessRequest by Id. Id is a required parameter.
 
 ### Example 2: List AccessRequests
 ```powershell
-Get-JcSdkAccessRequest -Fields:(<System.Collections.Generic.List[string]>) -Filter:(<System.Collections.Generic.List[string]>) -Sort:(<string>)
+PS C:\> Get-JcSdkAccessRequest -Fields:(<System.Collections.Generic.List[string]>) -Filter:(<System.Collections.Generic.List[string]>) -Sort:(<string>)
 ```
 
 ```output

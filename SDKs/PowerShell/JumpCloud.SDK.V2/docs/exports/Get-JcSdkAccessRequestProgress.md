@@ -31,14 +31,7 @@ Endpoint for getting the approval progress of a access request
 
 ### -------------------------- EXAMPLE 1 --------------------------
 ```powershell
-{{ Add code here }}
-```
-
-
-
-### -------------------------- EXAMPLE 2 --------------------------
-```powershell
-{{ Add code here }}
+Get-JcSdkAccessRequestProgress -Id:(<string>)
 ```
 
 
