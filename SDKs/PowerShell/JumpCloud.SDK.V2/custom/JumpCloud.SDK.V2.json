@@ -5331,6 +5331,9 @@
         "status": {
           "type": "string"
         },
+        "timeBasedAccess": {
+          "type": "boolean"
+        },
         "updatedAt": {
           "type": "string"
         },
@@ -11698,7 +11701,7 @@
     "/approvalflowrequest": {
       "get": {
         "description": "Endpoint for getting the list of workflows access requests",
-        "operationId": "WorkflowAccessRequest_List",
+        "operationId": "AccessRequest_List",
         "parameters": [
           {
             "format": "byte",
@@ -11782,7 +11785,7 @@
     "/approvalflowrequest/{id}": {
       "get": {
         "description": "Endpoint that returns the workflow access request by id",
-        "operationId": "WorkflowAccessRequest_Get",
+        "operationId": "AccessRequest_Get",
         "parameters": [
           {
             "in": "path",
@@ -11830,7 +11833,7 @@
       },
       "put": {
         "description": "Endpoint that updates the workflow access request by id",
-        "operationId": "WorkflowAccessRequest_Set",
+        "operationId": "AccessRequest_Set",
         "parameters": [
           {
             "in": "path",
@@ -11902,7 +11905,7 @@
     "/approvalflows": {
       "get": {
         "description": "Endpoint for getting all access workflows ",
-        "operationId": "Workflow_List",
+        "operationId": "ApprovalFlow_List",
         "parameters": [
           {
             "format": "byte",
@@ -11984,7 +11987,7 @@
       },
       "post": {
         "description": "Endpoint for adding a new access workflow",
-        "operationId": "Workflow_Create",
+        "operationId": "ApprovalFlow_Create",
         "parameters": [
           {
             "in": "body",
@@ -12029,7 +12032,7 @@
     "/approvalflows/{approvalFlowId}": {
       "delete": {
         "description": "Endpoint for deleting accessworkflow by id",
-        "operationId": "Workflow_Delete",
+        "operationId": "ApprovalFlow_Delete",
         "parameters": [
           {
             "in": "path",
@@ -12077,7 +12080,7 @@
       },
       "get": {
         "description": "Endpoint for getting workflow by id",
-        "operationId": "Workflow_Get",
+        "operationId": "ApprovalFlow_Get",
         "parameters": [
           {
             "in": "path",
@@ -12125,7 +12128,7 @@
       },
       "put": {
         "description": "Endpoint for updating a new access workflow",
-        "operationId": "Workflow_Set",
+        "operationId": "ApprovalFlow_Set",
         "parameters": [
           {
             "in": "path",
@@ -12245,7 +12248,7 @@
     "/approvalflowsettings": {
       "get": {
         "description": "Endpoint for getting workflow settings for an organisation",
-        "operationId": "WorkflowSettings_Get",
+        "operationId": "ApprovalFlowSettings_Get",
         "parameters": [
           {
             "format": "byte",
@@ -12287,7 +12290,7 @@
       },
       "put": {
         "description": "Endpoint for updating a access workflow settings for an organization",
-        "operationId": "WorkflowSettings_Set",
+        "operationId": "ApprovalFlowSettings_Set",
         "parameters": [
           {
             "in": "body",
@@ -12332,7 +12335,7 @@
     "/approversprogress/{id}": {
       "get": {
         "description": "Endpoint for getting the approval progress of a access request",
-        "operationId": "WorkflowAccessRequestProgress_Get",
+        "operationId": "AccessRequestProgress_Get",
         "parameters": [
           {
             "in": "path",
@@ -24799,7 +24802,7 @@
     "/userapprovalrequest": {
       "post": {
         "description": "Endpoint for user approval",
-        "operationId": "WorkflowUserApprovalRequest_Set",
+        "operationId": "AccessRequestApproval_Set",
         "parameters": [
           {
             "in": "body",

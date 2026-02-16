@@ -5581,6 +5581,9 @@
             <Label>Status</Label>
           </TableColumnHeader>
           <TableColumnHeader>
+            <Label>TimeBasedAccess</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
             <Label>UpdatedAt</Label>
           </TableColumnHeader>
           <TableColumnHeader>
@@ -5649,6 +5652,9 @@
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>Status</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>TimeBasedAccess</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>UpdatedAt</PropertyName>
