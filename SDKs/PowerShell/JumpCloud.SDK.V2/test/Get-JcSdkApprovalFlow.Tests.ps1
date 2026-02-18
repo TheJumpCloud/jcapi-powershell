@@ -29,7 +29,7 @@ Describe 'Get-JcSdkApprovalFlow' {
             while ($targetGroup.Id -eq $userGroup.Id) {
                 $targetGroup = Get-JcSdkUserGroup | Get-Random -Count 1
             }
-            $workflow = New-JcSdkWorkflow -ApprovalType 'manual' -Category "Application" -Description "A new workflow" -MultiSelectDuration @("P5D") -Name "New Workflow" -NonAdminApproval $false -ResourceId $userGroup.Id -ResourceType "user_group" -SlackEnabled $false -Status "active" -TimeBasedAccess $true -TtlConfig "TTL_CONFIG_MULTI_SELECT_DURATIONS" -VisibleTo @($targetGroup.Id)
+            $workflow = New-JcSdkWorkflow -ApprovalType 'manual' -Category "Application" -Description "A new workflow" -MultiSelectDuration @("P5D") -Name "New Workflow" -ResourceId $userGroup.Id -ResourceType "user_group" -Status "active" -TimeBasedAccess -TtlConfig "TTL_CONFIG_MULTI_SELECT_DURATIONS" -VisibleTo @($targetGroup.Id)
         } else {
             $workflow = $workflows | Get-Random -Count 1
         }
@@ -40,7 +40,7 @@ Describe 'Get-JcSdkApprovalFlow' {
     It 'Get' {
         $workflows = Get-JcSdkApprovalFlow
         if ($null -eq $workflows){
-            $workflow = New-JcSdkWorkflow -ApprovalType 'manual' -Category "Application" -Description "A new workflow" -MultiSelectDuration @("P5D") -Name "New Workflow" -NonAdminApproval $false -ResourceId $userGroup.Id -ResourceType "user_group" -SlackEnabled $false -Status "active" -TimeBasedAccess $true -TtlConfig "TTL_CONFIG_MULTI_SELECT_DURATIONS" -VisibleTo @($targetGroup.Id)
+            $workflow = New-JcSdkWorkflow -ApprovalType 'manual' -Category "Application" -Description "A new workflow" -MultiSelectDuration @("P5D") -Name "New Workflow" -ResourceId $userGroup.Id -ResourceType "user_group" -Status "active" -TimeBasedAccess -TtlConfig "TTL_CONFIG_MULTI_SELECT_DURATIONS" -VisibleTo @($targetGroup.Id)
         } else {
             $workflow = $workflows | Get-Random -Count 1
         }

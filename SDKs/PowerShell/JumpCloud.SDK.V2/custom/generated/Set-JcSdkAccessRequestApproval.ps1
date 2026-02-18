@@ -4,9 +4,9 @@ Endpoint for user approval
 .Description
 Endpoint for user approval
 .Example
-{{ Add code here }}
+PS C:\> Set-JcSdkAccessRequestApproval -ApprovedDuration:(<string>) -Id:(<string>) -OrganizationObjectIdInputFile:(<string>) -Remarks:(<string>) -Status:(<string>)
 .Example
-{{ Add code here }}
+PS C:\> Set-JcSdkAccessRequestApproval -Body:(<JumpCloud.SDK.V2.Models.JumpcloudIngressoUserApprovalRequest>)
 
 .Inputs
 JumpCloud.SDK.V2.Models.IJumpcloudIngressoUserApprovalRequest

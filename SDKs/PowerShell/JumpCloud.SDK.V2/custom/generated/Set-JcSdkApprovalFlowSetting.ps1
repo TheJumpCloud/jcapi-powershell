@@ -4,9 +4,9 @@ Endpoint for updating a access workflow settings for an organization
 .Description
 Endpoint for updating a access workflow settings for an organization
 .Example
-{{ Add code here }}
+PS C:\> Set-JcSdkApprovalFlowSetting -AdminApprovalEmail:(<switch>) -ChannelEvents:(<JumpCloud.SDK.V2.Models.JumpcloudIngressoChannelEvent[]>) -ExposeApprovalProgress:(<switch>) -OrganizationObjectIdInputFile:(<string>) -ResourceRequest:(<switch>) -UserApprovalEmail:(<switch>) -UserRequestEmail:(<switch>)
 .Example
-{{ Add code here }}
+PS C:\> Set-JcSdkApprovalFlowSetting -Body:(<JumpCloud.SDK.V2.Models.JumpcloudIngressoUpdateAccessWorkflowSettingsRequest>)
 
 .Inputs
 JumpCloud.SDK.V2.Models.IJumpcloudIngressoUpdateAccessWorkflowSettingsRequest

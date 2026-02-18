@@ -423,42 +423,42 @@ To create the parameters described below, construct a hash table containing the 
 
 
 `APPROVERRESOURCES <IJumpcloudIngressoApproverResource[]>`: .
-  - `[RequireAll <Boolean?>]`:
-  - `[ResourceId <String>]`:
-  - `[ResourceName <String>]`:
-  - `[ResourceOrder <Int32?>]`:
-  - `[ResourceType <String>]`:
+  - `[RequireAll <Boolean?>]`: 
+  - `[ResourceId <String>]`: 
+  - `[ResourceName <String>]`: 
+  - `[ResourceOrder <Int32?>]`: 
+  - `[ResourceType <String>]`: 
 
 `BODY <IJumpcloudIngressoCreateAccessWorkflowRequest>`: .
-  - `[ApprovalType <String>]`:
-  - `[ApproverRequirement <String>]`:
-  - `[ApproverResources <List<IJumpcloudIngressoApproverResource>>]`:
-    - `[RequireAll <Boolean?>]`:
-    - `[ResourceId <String>]`:
-    - `[ResourceName <String>]`:
-    - `[ResourceOrder <Int32?>]`:
-    - `[ResourceType <String>]`:
-  - `[Category <String>]`:
-  - `[Description <String>]`:
-  - `[FixedDuration <String>]`:
-  - `[IconColor <String>]`:
-  - `[IconUrl <String>]`:
-  - `[MultiSelectDuration <List<String>>]`:
-  - `[Name <String>]`:
-  - `[NonAdminApproval <Boolean?>]`:
-  - `[OrganizationObjectId <Byte[]>]`:
-  - `[ResourceId <String>]`:
-  - `[ResourceType <String>]`:
-  - `[SlackConfig <List<IJumpcloudIngressoSlackConfig>>]`:
-    - `[SlackResourceId <String>]`:
-  - `[SlackEnabled <Boolean?>]`:
-  - `[Status <String>]`:
-  - `[TimeBasedAccess <Boolean?>]`:
-  - `[TtlConfig <String>]`:
-  - `[VisibleTo <List<String>>]`:
+  - `[ApprovalType <String>]`: 
+  - `[ApproverRequirement <String>]`: 
+  - `[ApproverResources <List<IJumpcloudIngressoApproverResource>>]`: 
+    - `[RequireAll <Boolean?>]`: 
+    - `[ResourceId <String>]`: 
+    - `[ResourceName <String>]`: 
+    - `[ResourceOrder <Int32?>]`: 
+    - `[ResourceType <String>]`: 
+  - `[Category <String>]`: 
+  - `[Description <String>]`: 
+  - `[FixedDuration <String>]`: 
+  - `[IconColor <String>]`: 
+  - `[IconUrl <String>]`: 
+  - `[MultiSelectDuration <List<String>>]`: 
+  - `[Name <String>]`: 
+  - `[NonAdminApproval <Boolean?>]`: 
+  - `[OrganizationObjectId <Byte[]>]`: 
+  - `[ResourceId <String>]`: 
+  - `[ResourceType <String>]`: 
+  - `[SlackConfig <List<IJumpcloudIngressoSlackConfig>>]`: 
+    - `[SlackResourceId <String>]`: 
+  - `[SlackEnabled <Boolean?>]`: 
+  - `[Status <String>]`: 
+  - `[TimeBasedAccess <Boolean?>]`: 
+  - `[TtlConfig <String>]`: 
+  - `[VisibleTo <List<String>>]`: 
 
 `SLACKCONFIG <IJumpcloudIngressoSlackConfig[]>`: .
-  - `[SlackResourceId <String>]`:
+  - `[SlackResourceId <String>]`: 
 
 ## RELATED LINKS
 
