@@ -186,7 +186,7 @@ jobs:
 
   Build-SDK-V1:
     needs: ["Setup-Build-Dependencies", "Check-PR-Labels", "Validate-SDK-Module"]
-    if: contains(github.event.pull_request.labels.*.name, 'v1') || contains(github.event.pull_request.labels.*.name, 'v2')
+    if: contains(github.event.pull_request.labels.*.name, 'v1')
     runs-on: ubuntu-latest
     timeout-minutes: 70
     steps:
@@ -296,7 +296,7 @@ jobs:
 
   Test-SDK-V1:
     needs: ["Build-SDK-V1", "Check-PR-Labels"]
-    if: contains(github.event.pull_request.labels.*.name, 'v1') || contains(github.event.pull_request.labels.*.name, 'v2')
+    if: contains(github.event.pull_request.labels.*.name, 'v1')
     runs-on: ubuntu-latest
     timeout-minutes: 70
     steps:
@@ -324,9 +324,9 @@ jobs:
           $ErrorActionnPreference = 'Stop'
           ./Test-Module.ps1 -JCApiKey:($env:PESTER_APIKEY) -JCOrgId:($env:PESTER_ORGID) -JCApiKeyMTP:($env:PESTER_MSP_APIKEY) -JCProviderId:($env:PESTER_PROVIDERID) -ExcludeTagList:("MTP") -IncludeTagList:("*") -testModulePath:("./SDKs/PowerShell/JumpCloud.SDK.V1/test-module.ps1")
 
-  Test-SDK-V2:
-    needs: ["Build-SDK-V1", "Build-SDK-V2", "Check-PR-Labels"]
-    if: contains(github.event.pull_request.labels.*.name, 'v2')
+  Test-SDK-V2-Only:
+    needs: ["Build-SDK-V2", "Check-PR-Labels"]
+    if: contains(github.event.pull_request.labels.*.name, 'v2') && !contains(github.event.pull_request.labels.*.name, 'v1')
     runs-on: ubuntu-latest
     timeout-minutes: 70
     steps:
@@ -383,13 +383,51 @@ jobs:
           $ErrorActionnPreference = 'Stop'
           ./Test-Module.ps1 -JCApiKey:($env:PESTER_APIKEY) -JCOrgId:($env:PESTER_ORGID) -JCApiKeyMTP:($env:PESTER_MSP_APIKEY) -JCProviderId:($env:PESTER_PROVIDERID) -ExcludeTagList:("MTP") -IncludeTagList:("*") -testModulePath:("./SDKs/PowerShell/JumpCloud.SDK.V2/test-module.ps1")
 
+  Test-SDK-V2-With-V1:
+    needs: ["Build-SDK-V1", "Build-SDK-V2", "Check-PR-Labels"]
+    if: contains(github.event.pull_request.labels.*.name, 'v2') && contains(github.event.pull_request.labels.*.name, 'v1')
+    runs-on: ubuntu-latest
+    timeout-minutes: 70
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/cache@v3
+        with:
+          path: "/home/runner/.local/share/powershell/Modules/"
+          key: PS-Dependencies
+      - uses: actions/download-artifact@v4
+        with:
+          name: build-JumpCloud.SDK.V1
+          path: /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/
+      - name: Unzip JumpCloud.SDK.V1 module
+        shell: pwsh
+        run: |
+          Expand-Archive -Path /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/JumpCloud.SDK.V1.zip -DestinationPath /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/ -Force
+      - uses: actions/download-artifact@v4
+        with:
+          name: build-JumpCloud.SDK.V2
+          path: /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/
+      - name: Unzip JumpCloud.SDK.V2 module
+        shell: pwsh
+        run: |
+          Expand-Archive -Path /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/JumpCloud.SDK.V2.zip -DestinationPath /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/ -Force
+      - name: Test JumpCloud.SDK.V2
+        shell: pwsh
+        env:
+          PESTER_APIKEY: ${{ secrets.PESTER_APIKEY }}
+          PESTER_ORGID: ${{ secrets.PESTER_ORGID }}
+          PESTER_MSP_APIKEY: ${{ secrets.PESTER_MSP_APIKEY }}
+          PESTER_PROVIDERID: ${{ secrets.PESTER_PROVIDERID }}
+        run: |
+          $ErrorActionnPreference = 'Stop'
+          ./Test-Module.ps1 -JCApiKey:($env:PESTER_APIKEY) -JCOrgId:($env:PESTER_ORGID) -JCApiKeyMTP:($env:PESTER_MSP_APIKEY) -JCProviderId:($env:PESTER_PROVIDERID) -ExcludeTagList:("MTP") -IncludeTagList:("*") -testModulePath:("./SDKs/PowerShell/JumpCloud.SDK.V2/test-module.ps1")
+
   ## ----------------------------------------------------------------
   ## MTP Test Jobs
   ## ----------------------------------------------------------------
 
   Test-SDK-MTP-V1:
     needs: ["Build-SDK-V1", "Check-PR-Labels"]
-    if: contains(github.event.pull_request.labels.*.name, 'v1') || contains(github.event.pull_request.labels.*.name, 'v2')
+    if: contains(github.event.pull_request.labels.*.name, 'v1')
     runs-on: ubuntu-latest
     timeout-minutes: 70
     steps:
@@ -417,9 +455,9 @@ jobs:
           $ErrorActionnPreference = 'Stop'
           ./Test-Module.ps1 -JCApiKey:($env:PESTER_APIKEY) -JCOrgId:($env:PESTER_ORGID) -JCApiKeyMTP:($env:PESTER_MSP_APIKEY) -JCProviderId:($env:PESTER_PROVIDERID) -ExcludeTagList:("None") -IncludeTagList:("MTP") -testModulePath:("./SDKs/PowerShell/JumpCloud.SDK.V1/test-module.ps1")
 
-  Test-SDK-MTP-V2:
-    needs: ["Build-SDK-V1", "Build-SDK-V2", "Check-PR-Labels"]
-    if: contains(github.event.pull_request.labels.*.name, 'v2')
+  Test-SDK-MTP-V2-Only:
+    needs: ["Build-SDK-V2", "Check-PR-Labels"]
+    if: contains(github.event.pull_request.labels.*.name, 'v2') && !contains(github.event.pull_request.labels.*.name, 'v1')
     runs-on: ubuntu-latest
     timeout-minutes: 70
     steps:
@@ -465,6 +503,44 @@ jobs:
           Remove-Item -Path $versionedDir.FullName -Force
 
           Write-Host "Module '$moduleName' is now correctly placed at '$moduleDir'."
+      - name: Test MTP JumpCloud.SDK.V2
+        shell: pwsh
+        env:
+          PESTER_APIKEY: ${{ secrets.PESTER_APIKEY }}
+          PESTER_ORGID: ${{ secrets.PESTER_ORGID }}
+          PESTER_MSP_APIKEY: ${{ secrets.PESTER_MSP_APIKEY }}
+          PESTER_PROVIDERID: ${{ secrets.PESTER_PROVIDERID }}
+        run: |
+          $ErrorActionnPreference = 'Stop'
+          ./Test-Module.ps1 -JCApiKey:($env:PESTER_APIKEY) -JCOrgId:($env:PESTER_ORGID) -JCApiKeyMTP:($env:PESTER_MSP_APIKEY) -JCProviderId:($env:PESTER_PROVIDERID) -ExcludeTagList:("None") -IncludeTagList:("MTP") -testModulePath:("./SDKs/PowerShell/JumpCloud.SDK.V2/test-module.ps1")
+
+  Test-SDK-MTP-V2-With-V1:
+    needs: ["Build-SDK-V1", "Build-SDK-V2", "Check-PR-Labels"]
+    if: contains(github.event.pull_request.labels.*.name, 'v2') && contains(github.event.pull_request.labels.*.name, 'v1')
+    runs-on: ubuntu-latest
+    timeout-minutes: 70
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/cache@v3
+        with:
+          path: "/home/runner/.local/share/powershell/Modules/"
+          key: PS-Dependencies
+      - uses: actions/download-artifact@v4
+        with:
+          name: build-JumpCloud.SDK.V1
+          path: /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/
+      - name: Unzip JumpCloud.SDK.V1 module
+        shell: pwsh
+        run: |
+          Expand-Archive -Path /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/JumpCloud.SDK.V1.zip -DestinationPath /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/ -Force
+      - uses: actions/download-artifact@v4
+        with:
+          name: build-JumpCloud.SDK.V2
+          path: /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/
+      - name: Unzip JumpCloud.SDK.V2 module
+        shell: pwsh
+        run: |
+          Expand-Archive -Path /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/JumpCloud.SDK.V2.zip -DestinationPath /home/runner/work/jcapi-powershell/jcapi-powershell/SDKs/PowerShell/ -Force
       - name: Test MTP JumpCloud.SDK.V2
         shell: pwsh
         env:
