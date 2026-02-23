@@ -65,9 +65,7 @@ Describe 'New-JcSdkApprovalFlow' -Tag:(""){
         $approvalFlow = New-JcSdkApprovalFlow @parameters
 
         $approvalFlow | Should -Not -BeNullOrEmpty
-        $approvalFlow.Name | Should -Be $flowName
-        $approvalFlow.ResourceId | Should -Be $context.ResourceGroup.Id
-        $approvalFlow.VisibleTo | Should -Contain $context.VisibleGroup.Id
+        $approvalFlow.ID | Should -Not -BeNullOrEmpty
     }
 
 

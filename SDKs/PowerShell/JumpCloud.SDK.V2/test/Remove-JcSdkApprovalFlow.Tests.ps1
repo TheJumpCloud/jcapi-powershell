@@ -1,3 +1,5 @@
+$script:TestApprovalFlowGroupIds = @()
+
 if(($null -eq $TestName) -or ($TestName -contains 'Remove-JcSdkApprovalFlow'))
 {
   $loadEnvPath = Join-Path $PSScriptRoot 'loadEnv.ps1'
@@ -14,12 +16,80 @@ if(($null -eq $TestName) -or ($TestName -contains 'Remove-JcSdkApprovalFlow'))
   . ($mockingPath | Select-Object -First 1).FullName
 }
 
-Describe 'Remove-JcSdkApprovalFlow' {
-    It 'Delete' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+
+function Get-TestApprovalFlowGroupContext {
+    $userGroups = @(Get-JcSdkUserGroup | Where-Object { $_ })
+
+    while ($userGroups.Count -lt 2) {
+        $suffix = [guid]::NewGuid().ToString('N').Substring(0,8)
+        $createdGroup = New-JcSdkUserGroup -Name "PesterApprovalFlowGroup-$suffix"
+        $userGroups += $createdGroup
+        $script:TestApprovalFlowGroupIds += $createdGroup.Id
     }
 
-    It 'DeleteViaIdentity' -skip {
-        { throw [System.NotImplementedException] } | Should -Not -Throw
+    $resourceGroup = $userGroups | Get-Random
+    $visibleGroup = Get-JcSdkUserGroup -Filter @('name:eq:All Activated Users') | Select-Object -First 1
+
+    if (-not $visibleGroup -or $visibleGroup.Id -eq $resourceGroup.Id) {
+        $visibleCandidates = $userGroups | Where-Object { $_.Id -ne $resourceGroup.Id }
+        if ($visibleCandidates) {
+            $visibleGroup = $visibleCandidates | Get-Random
+        }
+        else {
+            $visibleGroup = $resourceGroup
+        }
+    }
+
+    [pscustomobject]@{
+        ResourceGroup = $resourceGroup
+        VisibleGroup  = $visibleGroup
     }
 }
+function New-TestApprovalFlowInstance {
+    $context = Get-TestApprovalFlowGroupContext
+    $flowName = "PesterRemoveApprovalFlow-$([guid]::NewGuid().ToString('N').Substring(0,8))"
+    $description = "Seeded for Remove-JcSdkApprovalFlow on $(Get-Date -Format 'u')"
+
+    $parameters = @{
+        ApprovalType        = 'manual'
+        Category            = 'Application'
+        Description         = $description
+        MultiSelectDuration = @('P5D')
+        Name                = $flowName
+        NonAdminApproval    = $false
+        ResourceId          = $context.ResourceGroup.Id
+        ResourceType        = 'user_group'
+        SlackEnabled        = $false
+        Status              = 'active'
+        TimeBasedAccess     = $true
+        TtlConfig           = 'TTL_CONFIG_MULTI_SELECT_DURATIONS'
+        VisibleTo           = @($context.VisibleGroup.Id)
+    }
+
+    New-JcSdkApprovalFlow @parameters
+}
+
+Describe 'Remove-JcSdkApprovalFlow' -Tag:(""){
+    It 'Delete' {
+        $approvalFlow = New-TestApprovalFlowInstance
+        $approvalFlow | Should -Not -BeNullOrEmpty
+
+        { Remove-JcSdkApprovalFlow -ApprovalFlowId $approvalFlow.Id } | Should -Not -Throw
+
+        $lookupResult = $null
+        try {
+            $lookupResult = Get-JcSdkApprovalFlow -ApprovalFlowId $approvalFlow.Id -ErrorAction Stop
+        }
+        catch {
+            $lookupResult = $null
+        }
+
+        $lookupResult | Should -BeNullOrEmpty
+
+        foreach ($groupId in $script:TestApprovalFlowGroupIds) {
+            Remove-JcSdkUserGroup -Id $groupId -ErrorAction Stop | Out-Null
+        }
+    }
+}
+
+
