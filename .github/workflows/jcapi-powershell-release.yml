@@ -6,6 +6,12 @@ on:
         - closed
     branches:
       - master
+
+permissions:
+  contents: write   # required for gh release create in Draft-Release-* jobs
+  pull-requests: read
+  actions: read
+
 jobs:
   Check-PR-Labels:
     if: github.event.pull_request.merged == true
@@ -160,9 +166,9 @@ jobs:
   Manual-Approval-Release:
     needs: [Draft-Release-V1, Draft-Release-V2, Draft-Release-DI]
     if: |
-      always() && 
-      (needs.Draft-Release-V1.result == 'success' || 
-       needs.Draft-Release-V2.result == 'success' || 
+      always() &&
+      (needs.Draft-Release-V1.result == 'success' ||
+       needs.Draft-Release-V2.result == 'success' ||
        needs.Draft-Release-DI.result == 'success')
     environment: PublishToPSGallery
     runs-on: ubuntu-latest
