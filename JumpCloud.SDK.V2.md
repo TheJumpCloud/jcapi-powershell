@@ -1,6 +1,6 @@
 ## JumpCloud.SDK.V2-0.2.0
 
-Release Date: February 25, 2026
+Release Date: February 26, 2026
 
 #### RELEASE NOTES
 
