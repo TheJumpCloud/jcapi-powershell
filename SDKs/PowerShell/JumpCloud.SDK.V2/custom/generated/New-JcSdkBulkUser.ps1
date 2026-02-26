@@ -185,7 +185,7 @@ BODY <List<IBulkUserCreate>>:
   [UnixUid <Int32?>]:
   [Username <String>]:
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4022_AccessRequests/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/New-JcSdkBulkUser.md
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/New-JcSdkBulkUser.md
 #>
  Function New-JcSdkBulkUser
 {

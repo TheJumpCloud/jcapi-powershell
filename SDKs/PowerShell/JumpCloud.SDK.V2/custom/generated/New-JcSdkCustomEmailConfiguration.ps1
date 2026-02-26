@@ -58,7 +58,7 @@ CUSTOMEMAIL <ICustomEmail>:
   [NextStepContactInfo <String>]:
   [Title <String>]:
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4022_AccessRequests/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/New-JcSdkCustomEmailConfiguration.md
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/New-JcSdkCustomEmailConfiguration.md
 #>
  Function New-JcSdkCustomEmailConfiguration
 {

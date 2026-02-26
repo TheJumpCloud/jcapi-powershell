@@ -10,7 +10,7 @@ directive:
 - hide: true
   where:
     prefix: JcSdk
-branch: CUT-4022_AccessRequests
+branch: master
 namespace: JumpCloud.SDK.V2
 metadata:
   description: The JumpCloud V2 PowerShell SDK

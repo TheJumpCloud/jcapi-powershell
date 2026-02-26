@@ -152,7 +152,7 @@ USERATTRIBUTEINCLUSIONS <IAuthnPolicyUserAttributeFilter[]>:
   [Operator <String>]:
   [Value <IAny>]: Can be any value - string, number, boolean, array or object.
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4022_AccessRequests/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Update-JcSdkAuthenticationPolicy.md
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Update-JcSdkAuthenticationPolicy.md
 #>
  Function Update-JcSdkAuthenticationPolicy
 {

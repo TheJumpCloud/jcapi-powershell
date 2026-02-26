@@ -12,32 +12,20 @@ Add accessRequest workflow functions/ general SDK updates from source
 
 <details>
 <summary>Functions Added</summary>
-Get-JcSdkApprovalFlow
-Get-JcSdkAccessRequest
-Get-JcSdkAccessRequestProgress
-Get-JcSdkApprovalFlowSetting
-New-JcSdkApprovalFlow
-New-JcSdkAccessRequest
-New-JcSdkApprovalFlowSetting
-Remove-JcSdkApprovalFlow
-Set-JcSdkApprovalFlow
-Set-JcSdkAccessRequest
-Set-JcSdkApprovalFlowSetting
 
+No changes
 </details>
 
 <details>
 <summary>Functions Modified</summary>
 
 No changes
-
 </details>
 
 <details>
 <summary>Functions Removed</summary>
 
 No changes
-
 </details>
 
 ## JumpCloud.SDK.V2-0.1.2

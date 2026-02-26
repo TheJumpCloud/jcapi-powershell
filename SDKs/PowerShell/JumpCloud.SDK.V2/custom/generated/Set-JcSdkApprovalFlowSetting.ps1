@@ -32,7 +32,7 @@ CHANNELEVENTS <IJumpcloudIngressoChannelEvent[]>:
   [ChannelObjectId <Byte[]>]:
   [EventTypes <List<String>>]:
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4022_AccessRequests/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Set-JcSdkApprovalFlowSetting.md
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Set-JcSdkApprovalFlowSetting.md
 #>
  Function Set-JcSdkApprovalFlowSetting
 {

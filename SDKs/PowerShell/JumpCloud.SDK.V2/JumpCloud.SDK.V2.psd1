@@ -272,10 +272,10 @@ PrivateData = @{
         Tags = 'JumpCloud,','DaaS,','Jump,','Cloud,','Directory'
 
         # A URL to the license for this module.
-        LicenseUri = 'https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4022_AccessRequests/LICENSE'
+        LicenseUri = 'https://github.com/TheJumpCloud/jcapi-powershell/tree/master/LICENSE'
 
         # A URL to the main website for this project.
-        ProjectUri = 'https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4022_AccessRequests/SDKs/PowerShell/JumpCloud.SDK.V2/'
+        ProjectUri = 'https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/'
 
         # A URL to an icon representing this module.
         # IconUri = ''

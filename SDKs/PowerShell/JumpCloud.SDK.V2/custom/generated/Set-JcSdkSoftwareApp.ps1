@@ -342,7 +342,7 @@ SETTINGS <ISoftwareAppSettings[]>:
   [UpdatedAt <DateTime?>]:
   [VersionlessDownloadUrl <Boolean?>]:
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4022_AccessRequests/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Set-JcSdkSoftwareApp.md
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Set-JcSdkSoftwareApp.md
 #>
  Function Set-JcSdkSoftwareApp
 {

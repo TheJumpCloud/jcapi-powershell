@@ -101,7 +101,7 @@ VALUES <IPolicyValue[]>:
   [Sensitive <Boolean?>]: Defines if the value is sensitive or not.
   [Value <String>]: The value for the configuration field for this Policy instance.
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4022_AccessRequests/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/New-JcSdkPolicy.md
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/New-JcSdkPolicy.md
 #>
  Function New-JcSdkPolicy
 {

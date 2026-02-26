@@ -66,7 +66,7 @@ To create the parameters described below, construct a hash table containing the 
 BODY <IPolicyGroupData>:
   Name <String>: Display name of a Policy Group.
 .Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/CUT-4022_AccessRequests/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/New-JcSdkPolicyGroup.md
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/New-JcSdkPolicyGroup.md
 #>
  Function New-JcSdkPolicyGroup
 {
