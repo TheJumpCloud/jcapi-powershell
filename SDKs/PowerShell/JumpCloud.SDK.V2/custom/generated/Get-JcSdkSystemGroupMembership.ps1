@@ -54,6 +54,7 @@ INPUTOBJECT <IJumpCloudApiIdentity>:
   [AgentId <String>]:
   [AppleMdmId <String>]:
   [ApplicationId <String>]: ObjectID of the Application.
+  [ApprovalFlowId <String>]:
   [CommandId <String>]: ObjectID of the Command.
   [CustomEmailType <String>]:
   [DeviceId <String>]:

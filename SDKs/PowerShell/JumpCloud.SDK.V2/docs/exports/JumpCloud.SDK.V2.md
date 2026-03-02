@@ -35,6 +35,12 @@ Clears the activation lock on the specified device.
   -d '{}'
 ```
 
+### [Get-JcSdkAccessRequest](Get-JcSdkAccessRequest.md)
+Endpoint that returns the workflow access request by id
+
+### [Get-JcSdkAccessRequestProgress](Get-JcSdkAccessRequestProgress.md)
+Endpoint for getting the approval progress of a access request
+
 ### [Get-JcSdkActiveDirectory](Get-JcSdkActiveDirectory.md)
 This endpoint returns a specific Active Directory.
 
@@ -204,6 +210,12 @@ curl -X GET https://console.jumpcloud.com/api/v2/applications/{Application_ID}/u
   -H 'x-api-key: {API_KEY}'
 ```
 
+### [Get-JcSdkApprovalFlow](Get-JcSdkApprovalFlow.md)
+Endpoint for getting workflow by id
+
+### [Get-JcSdkApprovalFlowSetting](Get-JcSdkApprovalFlowSetting.md)
+Endpoint for getting workflow settings for an organisation
+
 ### [Get-JcSdkAuthenticationPolicy](Get-JcSdkAuthenticationPolicy.md)
 Return a specific authentication policy.
 
@@ -335,6 +347,7 @@ This endpoint returns all Groups that exist in your organization.
   - `name`
   - `disabled`
   - `type`
+  - `memberQueryErrorFlags`
 
 #### Sample Request
 
@@ -2006,6 +2019,9 @@ curl -X POST https://console.jumpcloud.com/api/v2/activedirectories/{activedirec
 ### [New-JcSdkAdministratorOrganization](New-JcSdkAdministratorOrganization.md)
 This endpoint allows you to grant Administrator access to an Organization.
 
+### [New-JcSdkApprovalFlow](New-JcSdkApprovalFlow.md)
+Endpoint for adding a new access workflow
+
 ### [New-JcSdkAuthenticationPolicy](New-JcSdkAuthenticationPolicy.md)
 Create an authentication policy.
 
@@ -2365,6 +2381,9 @@ Remove a single Apple MDM device from MDM enrollment.
 ### [Remove-JcSdkApplicationLogo](Remove-JcSdkApplicationLogo.md)
 Deletes the specified image from an application
 
+### [Remove-JcSdkApprovalFlow](Remove-JcSdkApprovalFlow.md)
+Endpoint for deleting accessworkflow by id
+
 ### [Remove-JcSdkAuthenticationPolicy](Remove-JcSdkAuthenticationPolicy.md)
 Delete the specified authentication policy.
 
@@ -2550,6 +2569,12 @@ Restarts a DEP-enrolled device.
   -d '{\"kextPaths\": [\"Path1\", \"Path2\"]}'
 ```
 
+### [Set-JcSdkAccessRequest](Set-JcSdkAccessRequest.md)
+Endpoint that set the workflow access request by id
+
+### [Set-JcSdkAccessRequestApproval](Set-JcSdkAccessRequestApproval.md)
+Endpoint for user approval
+
 ### [Set-JcSdkActiveDirectoryAssociation](Set-JcSdkActiveDirectoryAssociation.md)
 This endpoint allows you to manage the _direct_ associations of an Active Directory instance.
 
@@ -2609,6 +2634,12 @@ curl -X POST 'https://console.jumpcloud.com/api/v2/applications/{Application_ID}
     \"id\": \"{Group_ID}\"
   }'
 ```
+
+### [Set-JcSdkApprovalFlow](Set-JcSdkApprovalFlow.md)
+Endpoint for updating a new access workflow
+
+### [Set-JcSdkApprovalFlowSetting](Set-JcSdkApprovalFlowSetting.md)
+Endpoint for updating a access workflow settings for an organization
 
 ### [Set-JcSdkCommandAssociation](Set-JcSdkCommandAssociation.md)
 This endpoint will allow you to manage the _direct_ associations of this Command.

@@ -15,8 +15,11 @@ BeforeAll {
 
 Describe 'New-JcSdkUserSshKey' -Tag:(""){
     It 'CreateExpanded' {
-        $global:PesterDefUserSshKey.Id = $global:PesterTestUser.Id
-        $global:PesterTestUserSshKey = New-JcSdkUserSshKey @global:PesterDefUserSshKey
+        $id = $global:PesterTestUser.Id
+        # pass in some random values for the name and public key
+        $name = "newKeyName" + $(Get-Random -Maximum 1000000)
+        $publicKey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKNyuXv0JBV2Ph7IqvRUI30zRlIHAX1Q7TWePswBCTdG test@test"
+        $global:PesterTestUserSshKey = New-JcSdkUserSshKey -id $id -Name $name -PublicKey $publicKey
         $global:PesterTestUserSshKey | Should -Not -BeNullOrEmpty
     }
 

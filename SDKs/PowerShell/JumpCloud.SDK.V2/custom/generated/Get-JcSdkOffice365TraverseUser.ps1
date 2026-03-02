@@ -68,6 +68,7 @@ INPUTOBJECT <IJumpCloudApiIdentity>:
   [AgentId <String>]:
   [AppleMdmId <String>]:
   [ApplicationId <String>]: ObjectID of the Application.
+  [ApprovalFlowId <String>]:
   [CommandId <String>]: ObjectID of the Command.
   [CustomEmailType <String>]:
   [DeviceId <String>]:
@@ -132,6 +133,12 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     # 
     # **EX:** `GET /api/v2/groups?filter=name:eq:Test+Group`
     ${Filter}, 
+
+    [Parameter()]
+    [JumpCloud.SDK.V2.Category('Query')]
+    [System.Management.Automation.SwitchParameter]
+    # Include sync status for users
+    ${SyncStatus}, 
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V2.Category('Runtime')]

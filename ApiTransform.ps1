@@ -454,6 +454,24 @@ $TransformConfig = [Ordered]@{
             'workdays_post'                                     = 'Workday_Create';
             'workdays_put'                                      = 'Workday_Set';
             'workdays_workers'                                  = 'WorkdayWorker_Get';
+            # 'AccessRequestApi_CreateAccessRequest'              = 'UserAccessRequest_Create';
+            # 'AccessRequestApi_GetAccessRequest'                 = 'UserAccessRequest_Get';
+            # 'AccessRequestApi_UpdateAccessRequest'              = 'UserAccessRequest_Set';
+            # 'AccessRequestApi_RevokeAccessRequest'                  = 'UserAccessRequest_Delete';
+            'WorkflowAccessRequestApi_UserApprovalRequest'          = 'AccessRequestApproval_Set'
+            'WorkflowAccessRequestApi_GetAllWorkflowAccessRequests' = 'AccessRequest_List'
+            'WorkflowAccessRequestApi_GetWorkflowAccessRequests'    = 'AccessRequest_Get';
+            # 'WorkflowAccessRequestApi_CreateWorkflowAccessRequest'  = 'AccessRequest_Create' # unsure how this endpoint works/ removing from CUT-4022
+            'WorkflowAccessRequestApi_UpdateWorkflowAccessRequests' = 'AccessRequest_Set'
+            'WorkflowAccessRequestApi_GetAccessRequestApprovalProgressAdminPortal' = 'AccessRequestProgress_Get'
+            'AccessWorkflowApi_GetAllAccessWorkFlows' = 'ApprovalFlow_List'
+            'AccessWorkflowApi_CreateAccessWorkflow' = 'ApprovalFlow_Create'
+            'AccessWorkflowApi_DeleteAccessWorkflow' = 'ApprovalFlow_Delete'
+            'AccessWorkflowApi_GetAccessWorkflow' = 'ApprovalFlow_Get'
+            'AccessWorkflowApi_UpdateAccessWorkflow' = 'ApprovalFlow_Set'
+            'AccessWorkflowSettingsApi_GetAccessWorkflowSettings' = 'ApprovalFlowSettings_Get'
+            # 'AccessWorkflowSettingsApi_CreateAccessWorkflowSettings' = 'WorkflowSettings_Create' # this should be created automatically, no need to include the function in the SDK
+            'AccessWorkflowSettingsApi_UpdateAccessWorkflowSettings' = 'ApprovalFlowSettings_Set'
         };
         ExcludedList        = @(
             # Excluded items are listed by Path and do not include opperation type (put, post, get, etc.)
@@ -507,10 +525,7 @@ $TransformConfig = [Ordered]@{
             '/integrations/autotask/{UUID}/mappings',
             '/integrations/{integration_type}/{UUID}/errors',
             '/providers/{provider_id}/integrations/autotask',
-            '/softwareapps/{software_app_id}/retry-installation',
-            '/accessrequests/',
-            '/accessrequests/{accessId}',
-            '/accessrequests/{accessId}/revoke'
+            '/softwareapps/{software_app_id}/retry-installation'
         )
     }
 }

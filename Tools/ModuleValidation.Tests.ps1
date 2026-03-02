@@ -79,7 +79,7 @@ Describe -Tag:('ModuleValidation') 'Module Validation' -ForEach $modulesToValida
         $latestChangelogVersion | Should -BeGreaterThan $galleryVersion
 
         # Validate the release date is today.
-        $latestReleaseDate = (Select-String -InputObject $changelogContent -Pattern "Release Date: (.*) ####").Matches.Groups[1].Value
+        $latestReleaseDate = (Select-String -InputObject $changelogContent -Pattern "Release Date: (.*) ####").Matches.Groups[1].Value.Trim()
         $todayDate = Get-Date -UFormat "%B %d, %Y"
         $latestReleaseDate | Should -Be $todayDate
     }

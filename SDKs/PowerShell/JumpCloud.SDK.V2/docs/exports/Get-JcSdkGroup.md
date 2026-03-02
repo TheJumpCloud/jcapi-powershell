@@ -14,6 +14,7 @@ This endpoint returns all Groups that exist in your organization.
   - `name`
   - `disabled`
   - `type`
+  - `memberQueryErrorFlags`
 
 #### Sample Request
 
@@ -39,6 +40,7 @@ This endpoint returns all Groups that exist in your organization.
   - `name`
   - `disabled`
   - `type`
+  - `memberQueryErrorFlags`
 
 #### Sample Request
 

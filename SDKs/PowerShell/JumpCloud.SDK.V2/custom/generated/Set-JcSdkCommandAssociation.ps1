@@ -69,6 +69,7 @@ INPUTOBJECT <IJumpCloudApiIdentity>:
   [AgentId <String>]:
   [AppleMdmId <String>]:
   [ApplicationId <String>]: ObjectID of the Application.
+  [ApprovalFlowId <String>]:
   [CommandId <String>]: ObjectID of the Command.
   [CustomEmailType <String>]:
   [DeviceId <String>]:
@@ -146,7 +147,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 
     [Parameter(ParameterSetName='SetExpanded')]
     [Parameter(ParameterSetName='SetViaIdentityExpanded')]
-    [JumpCloud.SDK.V2.PSArgumentCompleterAttribute("system", "system_group")]
+    [JumpCloud.SDK.V2.PSArgumentCompleterAttribute("system", "system_group", "password_manager_item")]
     [JumpCloud.SDK.V2.Category('Body')]
     [System.String]
     # Targets which a "command" can be associated to.
