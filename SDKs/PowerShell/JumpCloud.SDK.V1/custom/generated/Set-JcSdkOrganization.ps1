@@ -150,6 +150,7 @@ BODY <IPaths1Vyp8HsOrganizationsIdPutRequestbodyContentApplicationJsonSchema>:
       [DaysBeforeExpirationToForceReset <Int32?>]:
       [DisallowCommonlyUsedPasswords <Boolean?>]:
       [DisallowSequentialOrRepetitiveChars <Boolean?>]:
+      [DisplayComplexityOnResetScreen <Boolean?>]:
       [EffectiveDate <String>]:
       [EnableDaysAfterExpirationToSelfRecover <Boolean?>]:
       [EnableDaysBeforeExpirationToForceReset <Boolean?>]:
@@ -226,6 +227,7 @@ SETTINGS <IOrganizationsettingsput>:
     [DaysBeforeExpirationToForceReset <Int32?>]:
     [DisallowCommonlyUsedPasswords <Boolean?>]:
     [DisallowSequentialOrRepetitiveChars <Boolean?>]:
+    [DisplayComplexityOnResetScreen <Boolean?>]:
     [EffectiveDate <String>]:
     [EnableDaysAfterExpirationToSelfRecover <Boolean?>]:
     [EnableDaysBeforeExpirationToForceReset <Boolean?>]:

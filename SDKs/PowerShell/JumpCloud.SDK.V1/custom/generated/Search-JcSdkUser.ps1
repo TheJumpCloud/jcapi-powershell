@@ -183,7 +183,7 @@ TotalCount Int
 .Inputs
 JumpCloud.SDK.V1.Models.ISearch
 .Outputs
-JumpCloud.SDK.V1.Models.ISystemuserslist
+JumpCloud.SDK.V1.Models.ISystemUsersSearchlist
 .Notes
 COMPLEX PARAMETER PROPERTIES
 
@@ -202,7 +202,7 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
 #>
  Function Search-JcSdkUser
 {
-    [OutputType([JumpCloud.SDK.V1.Models.ISystemuserslist])]
+    [OutputType([JumpCloud.SDK.V1.Models.ISystemUsersSearchlist])]
     [CmdletBinding(DefaultParameterSetName='SearchExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
     Param(
     [Parameter(Mandatory)]

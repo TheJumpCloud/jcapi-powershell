@@ -305,6 +305,7 @@ To create the parameters described below, construct a hash table containing the 
       - `[DaysBeforeExpirationToForceReset <Int32?>]`: 
       - `[DisallowCommonlyUsedPasswords <Boolean?>]`: 
       - `[DisallowSequentialOrRepetitiveChars <Boolean?>]`: 
+      - `[DisplayComplexityOnResetScreen <Boolean?>]`: 
       - `[EffectiveDate <String>]`: 
       - `[EnableDaysAfterExpirationToSelfRecover <Boolean?>]`: 
       - `[EnableDaysBeforeExpirationToForceReset <Boolean?>]`: 
@@ -381,6 +382,7 @@ To create the parameters described below, construct a hash table containing the 
     - `[DaysBeforeExpirationToForceReset <Int32?>]`: 
     - `[DisallowCommonlyUsedPasswords <Boolean?>]`: 
     - `[DisallowSequentialOrRepetitiveChars <Boolean?>]`: 
+    - `[DisplayComplexityOnResetScreen <Boolean?>]`: 
     - `[EffectiveDate <String>]`: 
     - `[EnableDaysAfterExpirationToSelfRecover <Boolean?>]`: 
     - `[EnableDaysBeforeExpirationToForceReset <Boolean?>]`: 

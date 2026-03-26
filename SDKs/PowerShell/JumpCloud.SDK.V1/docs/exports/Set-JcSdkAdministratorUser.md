@@ -16,7 +16,8 @@ This endpoint allows you to set a user.
 ```
 Set-JcSdkAdministratorUser -ConsoleHost <String> -Id <String> [-ApiKeyAllowed] [-Email <String>]
  [-EnableMultiFactor] [-Firstname <String>] [-GrowthData <Hashtable>] [-Lastname <String>]
- [-LastWhatsNewChecked <DateTime>] [-RoleName <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-LastWhatsNewChecked <DateTime>] [-RoleName <String>] [-RoleNames <String[]>] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ### Set
@@ -35,7 +36,8 @@ Set-JcSdkAdministratorUser -ConsoleHost <String> -InputObject <IJumpCloudApiIden
 ```
 Set-JcSdkAdministratorUser -ConsoleHost <String> -InputObject <IJumpCloudApiIdentity> [-ApiKeyAllowed]
  [-Email <String>] [-EnableMultiFactor] [-Firstname <String>] [-GrowthData <Hashtable>] [-Lastname <String>]
- [-LastWhatsNewChecked <DateTime>] [-RoleName <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-LastWhatsNewChecked <DateTime>] [-RoleName <String>] [-RoleNames <String[]>] [-Confirm] [-WhatIf]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -286,6 +288,21 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -RoleNames
+.
+
+```yaml
+Type: System.String[]
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Confirm
 Prompts you for confirmation before running the cmdlet.
 
@@ -347,6 +364,7 @@ To create the parameters described below, construct a hash table containing the 
   - `[LastWhatsNewChecked <DateTime?>]`: 
   - `[Lastname <String>]`: 
   - `[RoleName <String>]`: 
+  - `[RoleNames <List<String>>]`: 
 
 `INPUTOBJECT <IJumpCloudApiIdentity>`: Identity Parameter
   - `[Id <String>]`: 
