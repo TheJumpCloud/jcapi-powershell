@@ -243,7 +243,7 @@ switch (`$env:JCEnvironment) {
             Write-Host ('[RUN COMMAND] ' + $BuildCustomFunctionsPath) -BackgroundColor:('Black') -ForegroundColor:('Magenta') | Tee-Object -FilePath:($LogFilePath) -Append
             # Run build custom functions script as a job in a new session to avoid "did you forget to close your session?" error
             $BuildCustomFunctionsJob = Start-Job -ArgumentList:($BuildCustomFunctionsPath) -ScriptBlock:( { param ($BuildCustomFunctionsPath);
-                    Invoke-Expression -Command:($BuildCustomFunctionsPath) -ErrorAction:('SilentlyContinue')
+                    Invoke-Expression -Command:($BuildCustomFunctionsPath)
                 })
             $BuildCustomFunctionsJobStatus = Wait-Job -Id:($BuildCustomFunctionsJob.Id)
             $BuildCustomFunctionsJobStatus | Receive-Job | Tee-Object -FilePath:($LogFilePath) -Append
