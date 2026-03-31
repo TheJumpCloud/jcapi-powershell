@@ -28,6 +28,6 @@ verbose: true
 module-name: JumpCloud.SDK.V2
 output-folder: SDKs/PowerShell/JumpCloud.SDK.V2
 dll-name: JumpCloud.SDK.V2.private
-module-version: 0.2.0
+module-version: 0.2.1
 powershell: true
 base-folder: ..

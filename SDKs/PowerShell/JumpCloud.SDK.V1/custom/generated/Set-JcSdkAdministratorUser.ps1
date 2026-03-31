@@ -87,6 +87,7 @@ BODY <IUserput>:
   [LastWhatsNewChecked <DateTime?>]:
   [Lastname <String>]:
   [RoleName <String>]:
+  [RoleNames <List<String>>]:
 
 INPUTOBJECT <IJumpCloudApiIdentity>:
   [Id <String>]:
@@ -185,6 +186,14 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [System.String]
     # .
     ${RoleName}, 
+
+    [Parameter(ParameterSetName='SetExpanded')]
+    [Parameter(ParameterSetName='SetViaIdentityExpanded')]
+    [AllowEmptyCollection()]
+    [JumpCloud.SDK.V1.Category('Body')]
+    [System.String[]]
+    # .
+    ${RoleNames}, 
 
     [Parameter(DontShow)]
     [JumpCloud.SDK.V1.Category('Runtime')]

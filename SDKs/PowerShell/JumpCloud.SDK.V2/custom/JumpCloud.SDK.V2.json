@@ -152,6 +152,18 @@
         "roleName": {
           "type": "string"
         },
+        "roleNames": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
+        "roles": {
+          "items": {
+            "type": "string"
+          },
+          "type": "array"
+        },
         "suspended": {
           "type": "boolean"
         }
@@ -5490,7 +5502,7 @@
     },
     "jumpcloud.search.SearchRequestFilter.Operation": {
       "default": "operation_unknown",
-      "description": "Filter operation to be applied:\nand - Provides logical 'and' groupings of all elements provided in the `filters` array (all sub-filter criteria\n   must be satisfied).\nor - Provides logical 'or' groupings of all elements provided in the `filters` array (any sub-filter criteria can\n   be satisfied).\nequals - Compares `field` with `value` for a // match.  Case insensitive.\nnot_equals - Compares `field` with `value` for an exact non-match.  Case insensitive.\ngreater_than - Checks if `field` is greater numerically than static `value` (non-inclusive).  Works for numbers and\n   datetime types.\nless_than - Checks if `field` is less than static `value` (non-inclusive).  Works for numbers and datetime types.\nstarts_with - Checks if `field` starts with static `value`.  Case insensitive.  Only works for string types.\nends_with - Checks if `field` ends with static `value`.  Case insensitive.  Only works for string types.\ncontains - Checks if `field` has the static `value` as its substring. Case insensitive. Only works for string types.\nnot_contains - Checks if `field` does not have the static `value` as its substring. Case insensitive. Only works for string types.\nin - Checks if `field` is in the static `value` array. Works with strings (case insensitive), numbers, and datetime types.\nnot_in - Checks if `field` is not in the static `value` array. Works with strings (case insensitive), numbers, and datetime types.\ngreater_than_or_equals - Checks if `field` is greater than or equal to static `value`.  Works for numbers and datetime types.\nless_than_or_equals - Checks if `field` is less than or equal to static `value`.  Works for numbers and datetime types.\nis_null - Checks if `field` is null. Works for all field types. Requires boolean value (true for null, false for not null).\nis_empty - Checks if `field` is null or empty string. Works only for string field types. Requires boolean value (true for empty, false for not empty).\nequals_case_sensitive - Compares `field` with `value` for an exact match.  Case sensitive.  Only works for string types.\nnot_equals_case_sensitive - Compares `field` with `value` for an exact non-match.  Case sensitive.  Only works for string types.\nstarts_with_case_sensitive - Checks if `field` starts with static `value`.  Case sensitive.  Only works for string types.\nends_with_case_sensitive - Checks if `field` ends with static `value`.  Case sensitive.  Only works for string types.\ncontains_case_sensitive - Checks if `field` has the static `value` as its substring. Case sensitive. Only works for string types.\nnot_contains_case_sensitive - Checks if `field` does not have the static `value` as its substring. Case sensitive. Only works for string types.\nin_case_sensitive - Checks if `field` is in the static `value` array. Works with strings (case sensitive), numbers, and datetime types.\nnot_in_case_sensitive - Checks if `field` is not in the static `value` array. Works with strings (case sensitive), numbers, and datetime types.",
+      "description": "Filter operation to be applied:\nand - Provides logical 'and' groupings of all elements provided in the `filters` array (all sub-filter criteria\n   must be satisfied).\nor - Provides logical 'or' groupings of all elements provided in the `filters` array (any sub-filter criteria can\n   be satisfied).\nequals - Compares `field` with `value` for a // match.  Case insensitive.\nnot_equals - Compares `field` with `value` for an exact non-match.  Case insensitive.\ngreater_than - Checks if `field` is greater numerically than static `value` (non-inclusive).  Works for numbers and\n   datetime types.\nless_than - Checks if `field` is less than static `value` (non-inclusive).  Works for numbers and datetime types.\nstarts_with - Checks if `field` starts with static `value`.  Case insensitive.  Only works for string types.\nends_with - Checks if `field` ends with static `value`.  Case insensitive.  Only works for string types.\ncontains - Checks if `field` has the static `value` as its substring. Case insensitive. Only works for string types.\nnot_contains - Checks if `field` does not have the static `value` as its substring. Case insensitive. Only works for string types.\nin - Checks if `field` is in the static `value` array. Works with strings (case insensitive), numbers, and datetime types.\nnot_in - Checks if `field` is not in the static `value` array. Works with strings (case insensitive), numbers, and datetime types.\ngreater_than_or_equals - Checks if `field` is greater than or equal to static `value`.  Works for numbers and datetime types.\nless_than_or_equals - Checks if `field` is less than or equal to static `value`.  Works for numbers and datetime types.\nis_null - Checks if `field` is null. Works for all field types. Requires boolean value (true for null, false for not null).\nis_empty - Checks if `field` is null or empty string. Works only for string field types. Requires boolean value (true for empty, false for not empty).\nequals_case_sensitive - Compares `field` with `value` for an exact match.  Case sensitive.  Only works for string types.\nnot_equals_case_sensitive - Compares `field` with `value` for an exact non-match.  Case sensitive.  Only works for string types.\nstarts_with_case_sensitive - Checks if `field` starts with static `value`.  Case sensitive.  Only works for string types.\nends_with_case_sensitive - Checks if `field` ends with static `value`.  Case sensitive.  Only works for string types.\ncontains_case_sensitive - Checks if `field` has the static `value` as its substring. Case sensitive. Only works for string types.\nnot_contains_case_sensitive - Checks if `field` does not have the static `value` as its substring. Case sensitive. Only works for string types.\nin_case_sensitive - Checks if `field` is in the static `value` array. Works with strings (case sensitive), numbers, and datetime types.\nnot_in_case_sensitive - Checks if `field` is not in the static `value` array. Works with strings (case sensitive), numbers, and datetime types.\nmember_of - Array column overlaps with the given list. Only for array-typed fields. Value must be list_value.\nnot_member_of - Array column does not overlap with the given list. Only for array-typed fields. Value must be list_value.",
       "enum": [
         "operation_unknown",
         "and",
@@ -5516,7 +5528,9 @@
         "contains_case_sensitive",
         "not_contains_case_sensitive",
         "in_case_sensitive",
-        "not_in_case_sensitive"
+        "not_in_case_sensitive",
+        "member_of",
+        "not_member_of"
       ],
       "type": "string"
     },
@@ -19151,6 +19165,12 @@
     "/reports/export": {},
     "/reports/jumpcloud": {},
     "/reports/jumpcloud/{objectId}": {},
+    "/reports/scheduled": {},
+    "/reports/scheduled/runs": {},
+    "/reports/scheduled/runs/{objectId}": {},
+    "/reports/scheduled/{objectId}": {},
+    "/reports/scheduled/{objectId}/runs": {},
+    "/reports/scheduled/{objectId}/trigger": {},
     "/roles": {},
     "/roles/{role_id}": {
       "parameters": [

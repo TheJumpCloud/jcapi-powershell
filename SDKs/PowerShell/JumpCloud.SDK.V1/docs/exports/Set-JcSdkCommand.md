@@ -34,8 +34,8 @@ Set-JcSdkCommand -ConsoleHost <String> -Id <String> [-AiGenerated] [-Command <St
  [-CommandRunners <String[]>] [-CommandType <String>] [-Description <String>] [-Files <String[]>]
  [-FilesS3 <IFilesS3[]>] [-LaunchType <String>] [-ListensTo <String>] [-Name <String>]
  [-Organization <String>] [-Schedule <String>] [-ScheduleRepeatType <String>] [-ScheduleYear <Int32>]
- [-Shell <String>] [-Sudo] [-Template <String>] [-Timeout <String>] [-TimeToLiveSeconds <Int32>]
- [-Trigger <String>] [-User <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-Shell <String>] [-Sudo] [-Template <String>] [-TemplatingRequired] [-Timeout <String>]
+ [-TimeToLiveSeconds <Int32>] [-Trigger <String>] [-User <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ### Set
@@ -55,8 +55,8 @@ Set-JcSdkCommand -ConsoleHost <String> -InputObject <IJumpCloudApiIdentity> [-Ai
  [-CommandRunners <String[]>] [-CommandType <String>] [-Description <String>] [-Files <String[]>]
  [-FilesS3 <IFilesS3[]>] [-LaunchType <String>] [-ListensTo <String>] [-Name <String>]
  [-Organization <String>] [-Schedule <String>] [-ScheduleRepeatType <String>] [-ScheduleYear <Int32>]
- [-Shell <String>] [-Sudo] [-Template <String>] [-Timeout <String>] [-TimeToLiveSeconds <Int32>]
- [-Trigger <String>] [-User <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
+ [-Shell <String>] [-Sudo] [-Template <String>] [-TemplatingRequired] [-Timeout <String>]
+ [-TimeToLiveSeconds <Int32>] [-Trigger <String>] [-User <String>] [-Confirm] [-WhatIf] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -449,6 +449,21 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -TemplatingRequired
+Whether this command requires templating before execution.
+
+```yaml
+Type: System.Management.Automation.SwitchParameter
+Parameter Sets: SetExpanded, SetViaIdentityExpanded
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -Timeout
 The time in seconds to allow the command to run for.
 The maximum value is 86400 seconds (1 day).
@@ -584,6 +599,7 @@ To create the parameters described below, construct a hash table containing the 
   - `[Shell <String>]`: The shell used to run the command.
   - `[Sudo <Boolean?>]`: 
   - `[Template <String>]`: The template this command was created from
+  - `[TemplatingRequired <Boolean?>]`: Whether this command requires templating before execution.
   - `[TimeToLiveSeconds <Int32?>]`: Time in seconds a command can wait in the queue to be run before timing out
   - `[Timeout <String>]`: The time in seconds to allow the command to run for. The maximum value is 86400 seconds (1 day).
   - `[Trigger <String>]`: The name of the command trigger.

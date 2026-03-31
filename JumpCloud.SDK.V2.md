@@ -1,3 +1,38 @@
+## JumpCloud.SDK.V2-0.2.1
+Release Date: March 26, 2026
+#### RELEASE NOTES
+```
+This is a rollup release of the V2 functions generated from docs.
+```
+#### FEATURES:
+NA
+
+#### IMPROVEMENTS:
+This release changes the way in which GET functions and Filter parameters are used in the module. URL queryFilters should now be formatted the same as the V1 API. The '?Filter[0]=something&Filter[1]=somethingElse' url query filtering is no longer supported, this release addresses that issue in the V2 SDK.
+
+#### BUG FIXES:
+NA
+
+#### Generated Changes:
+
+<details>
+<summary>Functions Added</summary>
+
+No changes
+</details>
+
+<details>
+<summary>Functions Modified</summary>
+
+No changes
+</details>
+
+<details>
+<summary>Functions Removed</summary>
+
+No changes
+</details>
+
 ## JumpCloud.SDK.V2-0.2.0
 
 Release Date: February 26, 2026

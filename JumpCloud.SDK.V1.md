@@ -1,3 +1,43 @@
+## JumpCloud.SDK.V1-0.1.3
+Release Date: March 26, 2026
+#### RELEASE NOTES
+```
+This release is a rollup release for existing SDK functions.
+```
+#### FEATURES:
+NA
+
+#### IMPROVEMENTS:
+URL filtering in the V1 module has been updated to match filtering in the V2 module.
+
+#### BUG FIXES:
+NA
+
+#### Generated Changes:
+
+<details>
+<summary>Functions Added</summary>
+
+No changes
+</details>
+
+<details>
+<summary>Functions Modified</summary>
+
+* New-JcSdkCommand.ps1
+* Search-JcSdkUser.ps1
+* Set-JcSdkAdministratorUser.ps1
+* Set-JcSdkCommand.ps1
+* Set-JcSdkOrganization.ps1
+
+</details>
+
+<details>
+<summary>Functions Removed</summary>
+
+No changes
+</details>
+
 ## JumpCloud.SDK.V1-0.1.2
 Release Date: December 16, 2025
 #### RELEASE NOTES

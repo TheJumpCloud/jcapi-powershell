@@ -111,6 +111,7 @@ BODY <ICommand>:
   [Shell <String>]: The shell used to run the command.
   [Sudo <Boolean?>]:
   [Template <String>]: The template this command was created from
+  [TemplatingRequired <Boolean?>]: Whether this command requires templating before execution.
   [TimeToLiveSeconds <Int32?>]: Time in seconds a command can wait in the queue to be run before timing out
   [Timeout <String>]: The time in seconds to allow the command to run for. The maximum value is 86400 seconds (1 day).
   [Trigger <String>]: The name of the command trigger.
@@ -247,6 +248,12 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
     [System.String]
     # The template this command was created from
     ${Template}, 
+
+    [Parameter(ParameterSetName='CreateExpanded')]
+    [JumpCloud.SDK.V1.Category('Body')]
+    [System.Management.Automation.SwitchParameter]
+    # Whether this command requires templating before execution.
+    ${TemplatingRequired}, 
 
     [Parameter(ParameterSetName='CreateExpanded')]
     [JumpCloud.SDK.V1.Category('Body')]

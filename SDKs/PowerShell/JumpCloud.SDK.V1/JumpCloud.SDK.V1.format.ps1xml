@@ -2488,6 +2488,146 @@
       </TableControl>
     </View>
     <View>
+      <Name>JumpCloud.SDK.V1.Models.ApplicationtemplateConfigAuthClaimConfiguration</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloud.SDK.V1.Models.ApplicationtemplateConfigAuthClaimConfiguration#Multiple</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Type</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Visible</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Type</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Visible</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>JumpCloud.SDK.V1.Models.ApplicationtemplateConfigAuthClaimConfigurationAuthnContextMappings</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloud.SDK.V1.Models.ApplicationtemplateConfigAuthClaimConfigurationAuthnContextMappings#Multiple</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Type</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Type</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>JumpCloud.SDK.V1.Models.ApplicationtemplateConfigAuthClaimConfigurationAuthnContextMode</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloud.SDK.V1.Models.ApplicationtemplateConfigAuthClaimConfigurationAuthnContextMode#Multiple</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Type</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Value</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Type</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Value</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>JumpCloud.SDK.V1.Models.ApplicationtemplateConfigAuthClaimConfigurationSendAmrClaim</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloud.SDK.V1.Models.ApplicationtemplateConfigAuthClaimConfigurationSendAmrClaim#Multiple</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>ReadOnly</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Type</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Value</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>ReadOnly</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Type</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Value</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>JumpCloud.SDK.V1.Models.ApplicationtemplateConfigAuthClaimConfigurationSingleAuthnContextValue</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloud.SDK.V1.Models.ApplicationtemplateConfigAuthClaimConfigurationSingleAuthnContextValue#Multiple</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Type</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Value</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Type</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Value</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
       <Name>JumpCloud.SDK.V1.Models.ApplicationtemplateConfigConstantAttributes</Name>
       <ViewSelectedBy>
         <TypeName>JumpCloud.SDK.V1.Models.ApplicationtemplateConfigConstantAttributes#Multiple</TypeName>
@@ -3685,6 +3825,9 @@
             <Label>Template</Label>
           </TableColumnHeader>
           <TableColumnHeader>
+            <Label>TemplatingRequired</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
             <Label>TimeToLiveSeconds</Label>
           </TableColumnHeader>
           <TableColumnHeader>
@@ -3741,6 +3884,9 @@
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>Template</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>TemplatingRequired</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>TimeToLiveSeconds</PropertyName>
@@ -4468,6 +4614,9 @@
             <Label>ScheduleRepeatType</Label>
           </TableColumnHeader>
           <TableColumnHeader>
+            <Label>TemplatingRequired</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
             <Label>Trigger</Label>
           </TableColumnHeader>
         </TableHeaders>
@@ -4506,6 +4655,9 @@
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>ScheduleRepeatType</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>TemplatingRequired</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>Trigger</PropertyName>
@@ -5459,6 +5611,9 @@
       <TableControl>
         <TableHeaders>
           <TableColumnHeader>
+            <Label>JcGoStatus</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
             <Label>OverallStatus</Label>
           </TableColumnHeader>
           <TableColumnHeader>
@@ -5474,6 +5629,9 @@
         <TableRowEntries>
           <TableRowEntry>
             <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>JcGoStatus</PropertyName>
+              </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>OverallStatus</PropertyName>
               </TableColumnItem>
@@ -6017,6 +6175,9 @@
             <Label>DisallowSequentialOrRepetitiveChars</Label>
           </TableColumnHeader>
           <TableColumnHeader>
+            <Label>DisplayComplexityOnResetScreen</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
             <Label>EffectiveDate</Label>
           </TableColumnHeader>
           <TableColumnHeader>
@@ -6106,6 +6267,9 @@
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>DisallowSequentialOrRepetitiveChars</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>DisplayComplexityOnResetScreen</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>EffectiveDate</PropertyName>
@@ -6461,6 +6625,9 @@
             <Label>DisallowSequentialOrRepetitiveChars</Label>
           </TableColumnHeader>
           <TableColumnHeader>
+            <Label>DisplayComplexityOnResetScreen</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
             <Label>EffectiveDate</Label>
           </TableColumnHeader>
           <TableColumnHeader>
@@ -6541,6 +6708,9 @@
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>DisallowSequentialOrRepetitiveChars</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>DisplayComplexityOnResetScreen</PropertyName>
               </TableColumnItem>
               <TableColumnItem>
                 <PropertyName>EffectiveDate</PropertyName>
@@ -9756,9 +9926,523 @@
       </TableControl>
     </View>
     <View>
+      <Name>JumpCloud.SDK.V1.Models.SystemuserSearchReturn</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloud.SDK.V1.Models.SystemuserSearchReturn#Multiple</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>AccountLocked</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>AccountLockedDate</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Activated</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>AllowPublicKey</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>AlternateEmail</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>BadLoginAttempts</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Company</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>CostCenter</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Created</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>CreationSource</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Department</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Description</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>DisableDeviceMaxLoginAttempts</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Displayname</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Email</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>EmployeeIdentifier</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>EmployeeType</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>EnableManagedUid</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>EnableUserPortalMultifactor</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>ExternalDn</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>ExternalPasswordExpirationDate</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>ExternalSourceType</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>ExternallyManaged</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Firstname</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Id</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>JobTitle</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Lastname</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>LdapBindingUser</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Location</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>ManagedAppleId</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Manager</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Middlename</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Organization</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>PasswordDate</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>PasswordExpirationDate</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>PasswordExpired</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>PasswordNeverExpires</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>PasswordlessSudo</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>PublicKey</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>SambaServiceUser</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>State</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Sudo</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Suspended</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>TotpEnabled</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>UnixGuid</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>UnixUid</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Username</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>AccountLocked</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>AccountLockedDate</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Activated</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>AllowPublicKey</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>AlternateEmail</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>BadLoginAttempts</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Company</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>CostCenter</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Created</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>CreationSource</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Department</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Description</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>DisableDeviceMaxLoginAttempts</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Displayname</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Email</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>EmployeeIdentifier</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>EmployeeType</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>EnableManagedUid</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>EnableUserPortalMultifactor</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>ExternalDn</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>ExternalPasswordExpirationDate</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>ExternalSourceType</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>ExternallyManaged</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Firstname</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Id</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>JobTitle</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Lastname</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>LdapBindingUser</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Location</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>ManagedAppleId</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Manager</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Middlename</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Organization</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>PasswordDate</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>PasswordExpirationDate</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>PasswordExpired</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>PasswordNeverExpires</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>PasswordlessSudo</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>PublicKey</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>SambaServiceUser</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>State</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Sudo</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Suspended</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>TotpEnabled</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>UnixGuid</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>UnixUid</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Username</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>JumpCloud.SDK.V1.Models.SystemuserSearchReturnAddressesItem</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloud.SDK.V1.Models.SystemuserSearchReturnAddressesItem#Multiple</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Country</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>ExtendedAddress</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Id</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Locality</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>PoBox</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>PostalCode</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Region</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>StreetAddress</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Type</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Country</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>ExtendedAddress</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Id</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Locality</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>PoBox</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>PostalCode</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Region</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>StreetAddress</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Type</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>JumpCloud.SDK.V1.Models.SystemuserSearchReturnAdmin</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloud.SDK.V1.Models.SystemuserSearchReturnAdmin#Multiple</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Id</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>RoleName</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Id</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>RoleName</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>JumpCloud.SDK.V1.Models.SystemuserSearchReturnPhoneNumbersItem</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloud.SDK.V1.Models.SystemuserSearchReturnPhoneNumbersItem#Multiple</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Id</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Number</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Type</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Id</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Number</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Type</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>JumpCloud.SDK.V1.Models.SystemuserSearchReturnRecoveryEmail</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloud.SDK.V1.Models.SystemuserSearchReturnRecoveryEmail#Multiple</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Address</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Verified</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>VerifiedAt</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Address</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Verified</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>VerifiedAt</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>JumpCloud.SDK.V1.Models.SystemuserSearchReturnRelationshipsItem</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloud.SDK.V1.Models.SystemuserSearchReturnRelationshipsItem#Multiple</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>Type</Label>
+          </TableColumnHeader>
+          <TableColumnHeader>
+            <Label>Value</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>Type</PropertyName>
+              </TableColumnItem>
+              <TableColumnItem>
+                <PropertyName>Value</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
       <Name>JumpCloud.SDK.V1.Models.Systemuserslist</Name>
       <ViewSelectedBy>
         <TypeName>JumpCloud.SDK.V1.Models.Systemuserslist#Multiple</TypeName>
+      </ViewSelectedBy>
+      <TableControl>
+        <TableHeaders>
+          <TableColumnHeader>
+            <Label>TotalCount</Label>
+          </TableColumnHeader>
+        </TableHeaders>
+        <TableRowEntries>
+          <TableRowEntry>
+            <TableColumnItems>
+              <TableColumnItem>
+                <PropertyName>TotalCount</PropertyName>
+              </TableColumnItem>
+            </TableColumnItems>
+          </TableRowEntry>
+        </TableRowEntries>
+      </TableControl>
+    </View>
+    <View>
+      <Name>JumpCloud.SDK.V1.Models.SystemUsersSearchlist</Name>
+      <ViewSelectedBy>
+        <TypeName>JumpCloud.SDK.V1.Models.SystemUsersSearchlist#Multiple</TypeName>
       </ViewSelectedBy>
       <TableControl>
         <TableHeaders>
