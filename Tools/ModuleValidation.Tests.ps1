@@ -89,8 +89,8 @@ Describe -Tag:('ModuleValidation') 'Module Validation' -ForEach $modulesToValida
         Get-Content -Path $changelogPath | Should -Not -Match '\{\{Fill in the'
     }
 
-    It "ensures the Swagger spec is up to date with no pending changes for <_>"  {
-        # Note: Assumes dependent scripts are in the parent directory of this test script.
+    It "ensures the Swagger spec is up to date with no pending changes for <_>" -Skip:($env:SKIP_API_TRANSFORM -eq 'true') {
+        # When CI sets SKIP_API_TRANSFORM (PR label skip-api-transform), ApiTransform is not required here.
         . (Join-Path $PSScriptRoot '..' 'ApiTransform.ps1') -SDKName $moduleName 3>$null
         $sdkSwaggerFile = Join-Path $PSScriptRoot '..' 'SwaggerSpecs' "$moduleName.json"
 

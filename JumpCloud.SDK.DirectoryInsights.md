@@ -1,3 +1,35 @@
+## JumpCloud.SDK.DirectoryInsights-0.2.0
+Release Date: May 11, 2026
+#### RELEASE NOTES
+```
+Support for the IN region has been added to the Directory Insights SDK.
+```
+#### FEATURES:
+Support for the IN region has been added to the Directory Insights SDK.
+#### IMPROVEMENTS:
+NA
+#### BUG FIXES:
+NA
+#### Generated Changes:
+
+<details>
+<summary>Functions Added</summary>
+
+No changes
+</details>
+
+<details>
+<summary>Functions Modified</summary>
+
+No changes
+</details>
+
+<details>
+<summary>Functions Removed</summary>
+
+No changes
+</details>
+
 ## JumpCloud.SDK.DirectoryInsights-0.1.1
 Release Date: November 24, 2025
 #### RELEASE NOTES

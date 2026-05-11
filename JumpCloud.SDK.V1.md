@@ -1,3 +1,35 @@
+## JumpCloud.SDK.V1-0.2.0
+Release Date: May 11, 2026
+#### RELEASE NOTES
+```
+Support for the IN region has been added to the V1 SDK.
+```
+#### FEATURES:
+Support for the IN region has been added to the V1 SDK.
+#### IMPROVEMENTS:
+NA
+#### BUG FIXES:
+NA
+#### Generated Changes:
+
+<details>
+<summary>Functions Added</summary>
+
+No changes
+</details>
+
+<details>
+<summary>Functions Modified</summary>
+
+No changes
+</details>
+
+<details>
+<summary>Functions Removed</summary>
+
+No changes
+</details>
+
 ## JumpCloud.SDK.V1-0.1.3
 Release Date: March 26, 2026
 #### RELEASE NOTES

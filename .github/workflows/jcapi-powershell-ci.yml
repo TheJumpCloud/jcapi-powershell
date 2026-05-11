@@ -144,6 +144,7 @@ jobs:
           v2: ${{ needs.Check-PR-Labels.outputs.v2 }}
           directoryinsights: ${{ needs.Check-PR-Labels.outputs.directoryinsights }}
           RELEASE_TYPE: ${{ needs.Check-PR-Labels.outputs.RELEASE_TYPE }}
+          SKIP_API_TRANSFORM: ${{ needs.Check-PR-Labels.outputs.SKIP_API_TRANSFORM }}
         run: |
           # Construct the PR_LABELS variable for the Pester test script
           $prLabels = @()
