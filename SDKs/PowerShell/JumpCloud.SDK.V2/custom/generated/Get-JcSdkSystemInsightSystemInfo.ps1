@@ -1,4 +1,44 @@
-﻿Function Get-JcSdkSystemInsightSystemInfo
+<#
+.Synopsis
+Valid filter fields are `system_id` and `cpu_subtype`.
+.Description
+Valid filter fields are `system_id` and `cpu_subtype`.
+.Example
+PS C:\> Get-JcSdkSystemInsightSystemInfo
+
+
+
+----             ----------
+CollectionTime   String
+ComputerName     String
+CpuBrand         String
+CpuLogicalCores  Int
+CpuMicrocode     String
+CpuPhysicalCores Int
+CpuSubtype       String
+CpuType          String
+HardwareModel    String
+HardwareSerial   String
+HardwareVendor   String
+HardwareVersion  String
+Hostname         String
+LocalHostname    String
+PhysicalMemory   String
+SystemId         String
+Uuid             String
+
+
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+
+.Outputs
+JumpCloud.SDK.V2.Models.ISystemInsightsSystemInfo
+.Link
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkSystemInsightSystemInfo.md
+#>
+ Function Get-JcSdkSystemInsightSystemInfo
 {
     [OutputType([JumpCloud.SDK.V2.Models.ISystemInsightsSystemInfo])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
@@ -193,3 +233,5 @@
         Return $Results
     }
 }
+
+

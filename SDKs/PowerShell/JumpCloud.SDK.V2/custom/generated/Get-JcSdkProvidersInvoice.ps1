@@ -1,4 +1,63 @@
-﻿Function Get-JcSdkProvidersInvoice
+<#
+.Synopsis
+Retrieves a list of invoices for this provider.
+You must be associated to the provider to use this endpoint.
+.Description
+Retrieves a list of invoices for this provider.
+You must be associated to the provider to use this endpoint.
+.Example
+PS C:\> Get-JcSdkProvidersInvoice -ProviderId:(<string>)
+
+
+
+----       ----------
+Records    JumpCloud.SDK.V2.Models.ProviderInvoice[]
+TotalCount Int
+
+
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+
+.Inputs
+JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
+.Outputs
+JumpCloud.SDK.V2.Models.IProviderInvoiceResponse
+.Notes
+COMPLEX PARAMETER PROPERTIES
+
+To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
+
+INPUTOBJECT <IJumpCloudApiIdentity>:
+  [AccountId <String>]:
+  [ActivedirectoryId <String>]:
+  [AdministratorId <String>]:
+  [AgentId <String>]:
+  [AppleMdmId <String>]:
+  [ApplicationId <String>]: ObjectID of the Application.
+  [ApprovalFlowId <String>]:
+  [CommandId <String>]: ObjectID of the Command.
+  [CustomEmailType <String>]:
+  [DeviceId <String>]:
+  [GroupId <String>]: ObjectID of the Policy Group.
+  [GsuiteId <String>]: ObjectID of the G Suite instance.
+  [Id <String>]: ObjectID of this Active Directory instance.
+  [JobId <String>]:
+  [LdapserverId <String>]: ObjectID of the LDAP Server.
+  [Office365Id <String>]: ObjectID of the Office 365 instance.
+  [PolicyId <String>]: ObjectID of the Policy.
+  [ProviderId <String>]:
+  [PushEndpointId <String>]:
+  [RadiusserverId <String>]: ObjectID of the Radius Server.
+  [SoftwareAppId <String>]: ObjectID of the Software App.
+  [SystemId <String>]: ObjectID of the System.
+  [UserId <String>]: ObjectID of the User.
+  [WorkdayId <String>]:
+.Link
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkProvidersInvoice.md
+#>
+ Function Get-JcSdkProvidersInvoice
 {
     [OutputType([JumpCloud.SDK.V2.Models.IProviderInvoiceResponse])]
     [CmdletBinding(DefaultParameterSetName='Get', PositionalBinding=$false)]
@@ -205,3 +264,5 @@
         Return $Results
     }
 }
+
+

@@ -8,15 +8,7 @@ schema: 2.0.0
 # Get-JcSdkPolicyResult
 
 ## SYNOPSIS
-This endpoint will return the policy results for a specific policy.
 
-##### Sample Request
-```
-curl -X GET https://console.jumpcloud.com/api/v2/policyresults/{Policy_ID} \\
-  -H 'Accept: application/json' \\
-  -H 'Content-Type: application/json' \\
-  -H 'x-api-key: {API_KEY}'
-  ```
 
 ## SYNTAX
 
@@ -37,15 +29,7 @@ Get-JcSdkPolicyResult -ConsoleHost <String> -PolicyId <String> [-Fields <List<St
 ```
 
 ## DESCRIPTION
-This endpoint will return the policy results for a specific policy.
 
-##### Sample Request
-```
-curl -X GET https://console.jumpcloud.com/api/v2/policyresults/{Policy_ID} \\
-  -H 'Accept: application/json' \\
-  -H 'Content-Type: application/json' \\
-  -H 'x-api-key: {API_KEY}'
-  ```
 
 ## EXAMPLES
 
@@ -88,8 +72,7 @@ SystemId   String
 ## PARAMETERS
 
 ### -ConsoleHost
-Region for JumpCloud API host.
-Use 'console' for US or 'console.eu' for EU.
+
 
 ```yaml
 Type: System.String
@@ -104,11 +87,10 @@ Accept wildcard characters: False
 ```
 
 ### -Fields
-The comma separated fields included in the returned records.
-If omitted, the default list of fields will be returned.
+
 
 ```yaml
-Type: System.Collections.Generic.List`1[[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]
+Type: System.Collections.Generic.List`1[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]
 Parameter Sets: List
 Aliases:
 
@@ -120,23 +102,10 @@ Accept wildcard characters: False
 ```
 
 ### -Filter
-A filter to apply to the query.
 
-**Filter structure**: `\<field\>:\<operator\>:\<value\>`.
-
-**field** = Populate with a valid field from an endpoint response.
-
-**operator** = Supported operators are: eq, ne, gt, ge, lt, le, between, search, in.
-_Note: v1 operators differ from v2 operators._
-
-**value** = Populate with the value you want to search for.
-Is case sensitive.
-Supports wild cards.
-
-**EX:** `GET /api/v2/groups?filter=name:eq:Test+Group`
 
 ```yaml
-Type: System.Collections.Generic.List`1[[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]
+Type: System.Collections.Generic.List`1[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]
 Parameter Sets: List
 Aliases:
 
@@ -148,7 +117,7 @@ Accept wildcard characters: False
 ```
 
 ### -Id
-ObjectID of the Policy Result.
+
 
 ```yaml
 Type: System.String
@@ -163,7 +132,7 @@ Accept wildcard characters: False
 ```
 
 ### -InputObject
-Identity Parameter
+
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
@@ -178,7 +147,7 @@ Accept wildcard characters: False
 ```
 
 ### -PolicyId
-.
+
 
 ```yaml
 Type: System.String
@@ -193,11 +162,10 @@ Accept wildcard characters: False
 ```
 
 ### -Sort
-The comma separated fields used to sort the collection.
-Default sort is ascending, prefix with `-` to sort descending.
+
 
 ```yaml
-Type: System.Collections.Generic.List`1[[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]
+Type: System.Collections.Generic.List`1[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]
 Parameter Sets: List
 Aliases:
 
@@ -226,7 +194,7 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-`INPUTOBJECT <IJumpCloudApiIdentity>`: Identity Parameter
+`INPUTOBJECT <IJumpCloudApiIdentity>`: 
   - `[AccountId <String>]`: 
   - `[ActivedirectoryId <String>]`: 
   - `[AdministratorId <String>]`: 

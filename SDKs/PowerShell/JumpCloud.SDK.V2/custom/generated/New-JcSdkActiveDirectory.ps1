@@ -1,4 +1,76 @@
-﻿Function New-JcSdkActiveDirectory
+<#
+.Synopsis
+This endpoint allows you to create a new Active Directory.
+
+
+#### Sample Request
+```
+curl -X POST https://console.jumpcloud.com/api/v2/activedirectories/ \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"domain\": \"{DC=AD_domain_name;DC=com}\"
+  }'
+```
+.Description
+This endpoint allows you to create a new Active Directory.
+
+
+#### Sample Request
+```
+curl -X POST https://console.jumpcloud.com/api/v2/activedirectories/ \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"domain\": \"{DC=AD_domain_name;DC=com}\"
+  }'
+```
+.Example
+PS C:\> New-JcSdkActiveDirectory -Domain:(<string>) -UseCase:(<string>)
+
+
+
+----         ----------
+Domain       String
+Id           String
+PrimaryAgent String
+UseCase      String
+
+
+.Example
+PS C:\> New-JcSdkActiveDirectory -Body:(<JumpCloud.SDK.V2.Models.ActiveDirectory>)
+
+
+
+----         ----------
+Domain       String
+Id           String
+PrimaryAgent String
+UseCase      String
+
+
+
+.Inputs
+JumpCloud.SDK.V2.Models.IActiveDirectory
+.Outputs
+JumpCloud.SDK.V2.Models.IActiveDirectory
+.Notes
+COMPLEX PARAMETER PROPERTIES
+
+To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
+
+BODY <IActiveDirectory>:
+  [DelegationState <String>]: Delegation state of the Active Directory instance
+  [Domain <String>]: Domain name for this Active Directory instance.
+  [GroupsEnabled <Boolean?>]:
+  [UpdatedAt <DateTime?>]:
+  [UseCase <String>]:
+.Link
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/New-JcSdkActiveDirectory.md
+#>
+ Function New-JcSdkActiveDirectory
 {
     [OutputType([JumpCloud.SDK.V2.Models.IActiveDirectory])]
     [CmdletBinding(DefaultParameterSetName='CreateExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
@@ -138,3 +210,5 @@
         Return $Results
     }
 }
+
+

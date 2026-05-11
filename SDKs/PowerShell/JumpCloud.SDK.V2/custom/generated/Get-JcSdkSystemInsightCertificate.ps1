@@ -1,4 +1,49 @@
-﻿Function Get-JcSdkSystemInsightCertificate
+<#
+.Synopsis
+Valid filter fields are `system_id` and `common_name`.
+.Description
+Valid filter fields are `system_id` and `common_name`.
+.Example
+PS C:\> Get-JcSdkSystemInsightCertificate
+
+
+
+----             ----------
+AuthorityKeyId   String
+Ca               Int
+CommonName       String
+Issuer           String
+KeyAlgorithm     String
+KeyStrength      String
+KeyUsage         String
+NotValidAfter    String
+NotValidBefore   String
+Path             String
+SelfSigned       Int
+Serial           String
+Sha1             String
+Sid              String
+SigningAlgorithm String
+Store            String
+StoreId          String
+StoreLocation    String
+Subject          String
+SubjectKeyId     String
+SystemId         String
+Username         String
+
+
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+
+.Outputs
+JumpCloud.SDK.V2.Models.ISystemInsightsCertificates
+.Link
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkSystemInsightCertificate.md
+#>
+ Function Get-JcSdkSystemInsightCertificate
 {
     [OutputType([JumpCloud.SDK.V2.Models.ISystemInsightsCertificates])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
@@ -193,3 +238,5 @@
         Return $Results
     }
 }
+
+

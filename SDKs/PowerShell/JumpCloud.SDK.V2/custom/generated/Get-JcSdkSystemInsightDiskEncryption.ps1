@@ -1,4 +1,36 @@
-﻿Function Get-JcSdkSystemInsightDiskEncryption
+<#
+.Synopsis
+Valid filter fields are `system_id` and `encryption_status`.
+.Description
+Valid filter fields are `system_id` and `encryption_status`.
+.Example
+PS C:\> Get-JcSdkSystemInsightDiskEncryption
+
+
+
+----             ----------
+CollectionTime   String
+Encrypted        Int
+EncryptionStatus String
+Name             String
+SystemId         String
+Type             String
+Uid              String
+UserUuid         String
+Uuid             String
+
+
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+
+.Outputs
+JumpCloud.SDK.V2.Models.ISystemInsightsDiskEncryption
+.Link
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkSystemInsightDiskEncryption.md
+#>
+ Function Get-JcSdkSystemInsightDiskEncryption
 {
     [OutputType([JumpCloud.SDK.V2.Models.ISystemInsightsDiskEncryption])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
@@ -193,3 +225,5 @@
         Return $Results
     }
 }
+
+

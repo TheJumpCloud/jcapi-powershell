@@ -1,4 +1,40 @@
-﻿Function Set-JcSdkApprovalFlowSetting
+<#
+.Synopsis
+Endpoint for updating a access workflow settings for an organization
+.Description
+Endpoint for updating a access workflow settings for an organization
+.Example
+PS C:\> Set-JcSdkApprovalFlowSetting -AdminApprovalEmail:(<switch>) -ChannelEvents:(<JumpCloud.SDK.V2.Models.JumpcloudIngressoChannelEvent[]>) -ExposeApprovalProgress:(<switch>) -OrganizationObjectIdInputFile:(<string>) -ResourceRequest:(<switch>) -UserApprovalEmail:(<switch>) -UserRequestEmail:(<switch>)
+.Example
+PS C:\> Set-JcSdkApprovalFlowSetting -Body:(<JumpCloud.SDK.V2.Models.JumpcloudIngressoUpdateAccessWorkflowSettingsRequest>)
+
+.Inputs
+JumpCloud.SDK.V2.Models.IJumpcloudIngressoUpdateAccessWorkflowSettingsRequest
+.Outputs
+JumpCloud.SDK.V2.Models.IJumpcloudIngressoUpdateAccessWorkflowSettingsResponse
+.Notes
+COMPLEX PARAMETER PROPERTIES
+
+To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
+
+BODY <IJumpcloudIngressoUpdateAccessWorkflowSettingsRequest>:
+  [AdminApprovalEmail <Boolean?>]:
+  [ChannelEvents <List<IJumpcloudIngressoChannelEvent>>]:
+    [ChannelObjectId <Byte[]>]:
+    [EventTypes <List<String>>]:
+  [ExposeApprovalProgress <Boolean?>]:
+  [OrganizationObjectId <Byte[]>]:
+  [ResourceRequest <Boolean?>]:
+  [UserApprovalEmail <Boolean?>]:
+  [UserRequestEmail <Boolean?>]:
+
+CHANNELEVENTS <IJumpcloudIngressoChannelEvent[]>:
+  [ChannelObjectId <Byte[]>]:
+  [EventTypes <List<String>>]:
+.Link
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Set-JcSdkApprovalFlowSetting.md
+#>
+ Function Set-JcSdkApprovalFlowSetting
 {
     [OutputType([JumpCloud.SDK.V2.Models.IJumpcloudIngressoUpdateAccessWorkflowSettingsResponse])]
     [CmdletBinding(DefaultParameterSetName='SetExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
@@ -151,3 +187,5 @@
         Return $Results
     }
 }
+
+

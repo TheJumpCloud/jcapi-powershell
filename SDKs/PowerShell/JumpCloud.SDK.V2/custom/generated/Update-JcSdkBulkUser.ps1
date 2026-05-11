@@ -1,4 +1,156 @@
-﻿Function Update-JcSdkBulkUser
+<#
+.Synopsis
+The endpoint allows you to update a bulk job to asynchronously update users.
+See [update a System User](https://docs.jumpcloud.com/api/1.0/index.html#operation/systemusers_put) for full list of attributes.
+
+#### Sample Request 
+```
+curl -X PATCH https://console.jumpcloud.com/api/v2/bulk/users \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '[
+\t{
+\t  \"id\":\"5be9fb4ddb01290001e85109\",
+\t\t\"firstname\":\"{UPDATED_FIRSTNAME}\",
+\t\t\"department\":\"{UPDATED_DEPARTMENT}\",
+\t\t\"attributes\":[
+\t\t\t{\"name\":\"Custom\",\"value\":\"{ATTRIBUTE_VALUE}\"}
+\t\t]
+\t},
+\t{
+\t  \"id\":\"5be9fb4ddb01290001e85109\",
+\t\t\"firstname\":\"{UPDATED_FIRSTNAME}\",
+\t\t\"costCenter\":\"{UPDATED_COST_CENTER}\",
+\t\t\"phoneNumbers\":[
+\t\t\t{\"type\":\"home\",\"number\":\"{HOME_PHONE_NUMBER}\"},
+\t\t\t{\"type\":\"work\",\"number\":\"{WORK_PHONE_NUMBER}\"}
+\t\t]
+\t}
+]
+```
+.Description
+The endpoint allows you to update a bulk job to asynchronously update users.
+See [update a System User](https://docs.jumpcloud.com/api/1.0/index.html#operation/systemusers_put) for full list of attributes.
+
+#### Sample Request 
+```
+curl -X PATCH https://console.jumpcloud.com/api/v2/bulk/users \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '[
+\t{
+\t  \"id\":\"5be9fb4ddb01290001e85109\",
+\t\t\"firstname\":\"{UPDATED_FIRSTNAME}\",
+\t\t\"department\":\"{UPDATED_DEPARTMENT}\",
+\t\t\"attributes\":[
+\t\t\t{\"name\":\"Custom\",\"value\":\"{ATTRIBUTE_VALUE}\"}
+\t\t]
+\t},
+\t{
+\t  \"id\":\"5be9fb4ddb01290001e85109\",
+\t\t\"firstname\":\"{UPDATED_FIRSTNAME}\",
+\t\t\"costCenter\":\"{UPDATED_COST_CENTER}\",
+\t\t\"phoneNumbers\":[
+\t\t\t{\"type\":\"home\",\"number\":\"{HOME_PHONE_NUMBER}\"},
+\t\t\t{\"type\":\"work\",\"number\":\"{WORK_PHONE_NUMBER}\"}
+\t\t]
+\t}
+]
+```
+.Example
+PS C:\> Update-JcSdkBulkUser
+
+
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+
+.Inputs
+System.Collections.Generic.List`1[[JumpCloud.SDK.V2.Models.IBulkUserUpdate, JumpCloud.SDK.V2.private, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]
+.Outputs
+JumpCloud.SDK.V2.Models.IJobIdResult
+.Notes
+COMPLEX PARAMETER PROPERTIES
+
+To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
+
+BODY <List<IBulkUserUpdate>>:
+  [AccountLocked <Boolean?>]:
+  [Addresses <List<IBulkUserUpdateAddressesItem>>]: type, poBox, extendedAddress, streetAddress, locality, region, postalCode, country
+    [Country <String>]:
+    [ExtendedAddress <String>]:
+    [Locality <String>]:
+    [PoBox <String>]:
+    [PostalCode <String>]:
+    [Region <String>]:
+    [StreetAddress <String>]:
+    [Type <String>]:
+  [AllowPublicKey <Boolean?>]:
+  [AlternateEmail <String>]:
+  [Attributes <List<IBulkUserUpdateAttributesItem>>]:
+    [Name <String>]:
+    [Value <String>]:
+  [Company <String>]:
+  [CostCenter <String>]:
+  [DelegatedAuthorityId <String>]: ObjectId of the target Active Directory connection
+  [DelegatedAuthorityName <String>]: Authority name
+  [Department <String>]:
+  [Description <String>]:
+  [DisableDeviceMaxLoginAttempts <Boolean?>]:
+  [Displayname <String>]:
+  [Email <String>]:
+  [EmployeeIdentifier <String>]: Must be unique per user.
+  [EmployeeType <String>]:
+  [EnableManagedUid <Boolean?>]:
+  [EnableUserPortalMultifactor <Boolean?>]:
+  [ExternalDn <String>]:
+  [ExternalPasswordExpirationDate <String>]:
+  [ExternalSourceType <String>]:
+  [ExternallyManaged <Boolean?>]:
+  [Firstname <String>]:
+  [Id <String>]: Object ID of the user being updated
+  [JobTitle <String>]:
+  [Lastname <String>]:
+  [LdapBindingUser <Boolean?>]:
+  [Location <String>]:
+  [ManagedAppleId <String>]:
+  [Manager <String>]: Relation with another systemuser to identify the last as a manager.
+  [MfaConfigured <Boolean?>]:
+  [MfaExclusion <Boolean?>]:
+  [MfaExclusionDays <Int32?>]:
+  [MfaExclusionUntil <DateTime?>]:
+  [Middlename <String>]:
+  [Organization <String>]: Organization object id of the user
+  [Password <String>]:
+  [PasswordNeverExpires <Boolean?>]:
+  [PasswordlessSudo <Boolean?>]:
+  [PhoneNumbers <List<IBulkUserUpdatePhoneNumbersItem>>]:
+    [Number <String>]:
+    [Type <String>]:
+  [PublicKey <String>]:
+  [Relationships <List<IBulkUserUpdateRelationshipsItem>>]:
+    [Type <String>]:
+    [Value <String>]:
+  [RestrictedField <String>]:
+  [RestrictedFieldId <String>]:
+  [RestrictedFieldType <String>]:
+  [SambaServiceUser <Boolean?>]:
+  [SshKeys <List<IBulkUserUpdateSshKeysItem>>]:
+    Name <String>: The name of the SSH key.
+    PublicKey <String>: The Public SSH key.
+  [State <String>]:
+  [Sudo <Boolean?>]:
+  [Suspended <Boolean?>]:
+  [UnixGuid <Int32?>]:
+  [UnixUid <Int32?>]:
+  [Username <String>]:
+.Link
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Update-JcSdkBulkUser.md
+#>
+ Function Update-JcSdkBulkUser
 {
     [OutputType([JumpCloud.SDK.V2.Models.IJobIdResult])]
     [CmdletBinding(DefaultParameterSetName='Update', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
@@ -120,3 +272,5 @@
         Return $Results
     }
 }
+
+

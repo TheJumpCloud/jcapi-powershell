@@ -1,4 +1,33 @@
-﻿Function Get-JcSdkSystemInsightKernelInfo
+<#
+.Synopsis
+Valid filter fields are `system_id` and `version`.
+.Description
+Valid filter fields are `system_id` and `version`.
+.Example
+PS C:\> Get-JcSdkSystemInsightKernelInfo
+
+
+
+----           ----------
+Arguments      String
+CollectionTime String
+Device         String
+Path           String
+SystemId       String
+Version        String
+
+
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+
+.Outputs
+JumpCloud.SDK.V2.Models.ISystemInsightsKernelInfo
+.Link
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkSystemInsightKernelInfo.md
+#>
+ Function Get-JcSdkSystemInsightKernelInfo
 {
     [OutputType([JumpCloud.SDK.V2.Models.ISystemInsightsKernelInfo])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
@@ -193,3 +222,5 @@
         Return $Results
     }
 }
+
+

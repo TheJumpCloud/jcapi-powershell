@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-JcSdkSystemInsightConnectivity
 
 ## SYNOPSIS
-The only valid filter field is `system_id`.
+
 
 ## SYNTAX
 
@@ -18,7 +18,7 @@ Get-JcSdkSystemInsightConnectivity -ConsoleHost <String> [-Filter <List<String>>
 ```
 
 ## DESCRIPTION
-The only valid filter field is `system_id`.
+
 
 ## EXAMPLES
 
@@ -50,8 +50,7 @@ SystemId         String
 ## PARAMETERS
 
 ### -ConsoleHost
-Region for JumpCloud API host.
-Use 'console' for US or 'console.eu' for EU.
+
 
 ```yaml
 Type: System.String
@@ -66,23 +65,10 @@ Accept wildcard characters: False
 ```
 
 ### -Filter
-A filter to apply to the query.
 
-**Filter structure**: `\<field\>:\<operator\>:\<value\>`.
-
-**field** = Populate with a valid field from an endpoint response.
-
-**operator** = Supported operators are: eq, ne, gt, ge, lt, le, between, search, in.
-_Note: v1 operators differ from v2 operators._
-
-**value** = Populate with the value you want to search for.
-Is case sensitive.
-Supports wild cards.
-
-**EX:** `GET /api/v2/groups?filter=name:eq:Test+Group`
 
 ```yaml
-Type: System.Collections.Generic.List`1[[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]
+Type: System.Collections.Generic.List`1[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]
 Parameter Sets: (All)
 Aliases:
 
@@ -94,11 +80,10 @@ Accept wildcard characters: False
 ```
 
 ### -Sort
-The comma separated fields used to sort the collection.
-Default sort is ascending, prefix with `-` to sort descending.
+
 
 ```yaml
-Type: System.Collections.Generic.List`1[[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]
+Type: System.Collections.Generic.List`1[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]
 Parameter Sets: (All)
 Aliases:
 

@@ -1,4 +1,35 @@
-﻿Function Get-JcSdkSystemInsightLoggedinUser
+<#
+.Synopsis
+Valid filter fields are `system_id` and `user`.
+.Description
+Valid filter fields are `system_id` and `user`.
+.Example
+PS C:\> Get-JcSdkSystemInsightLoggedinUser
+
+
+
+----           ----------
+CollectionTime String
+Host           String
+Pid            Int
+SystemId       String
+Time           Int
+Tty            String
+Type           String
+User           String
+
+
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+
+.Outputs
+JumpCloud.SDK.V2.Models.ISystemInsightsLoggedInUsers
+.Link
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkSystemInsightLoggedinUser.md
+#>
+ Function Get-JcSdkSystemInsightLoggedinUser
 {
     [OutputType([JumpCloud.SDK.V2.Models.ISystemInsightsLoggedInUsers])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
@@ -193,3 +224,5 @@
         Return $Results
     }
 }
+
+

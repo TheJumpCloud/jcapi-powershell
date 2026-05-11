@@ -1,4 +1,29 @@
-﻿Function Get-JcSdkGsuiteUsersToImportFormatted
+<#
+.Synopsis
+Lists available G Suite users for import, translated to the Jumpcloud user schema.
+.Description
+Lists available G Suite users for import, translated to the Jumpcloud user schema.
+.Example
+PS C:\> Get-JcSdkGsuiteUsersToImportFormatted
+
+
+
+----          ----------
+NextPageToken String
+Users         JumpCloud.SDK.V2.Models.User[]
+
+
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+
+.Outputs
+JumpCloud.SDK.V2.Models.IPathsKa8FhwGsuitesGsuiteIdImportJumpcloudusersGetResponses200ContentApplicationJsonSchema
+.Link
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkGsuiteUsersToImportFormatted.md
+#>
+ Function Get-JcSdkGsuiteUsersToImportFormatted
 {
     [OutputType([JumpCloud.SDK.V2.Models.IPathsKa8FhwGsuitesGsuiteIdImportJumpcloudusersGetResponses200ContentApplicationJsonSchema])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
@@ -193,3 +218,5 @@
         Return $Results
     }
 }
+
+

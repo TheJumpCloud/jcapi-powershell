@@ -1,4 +1,34 @@
-﻿Function Get-JcSdkSystemInsightUptime
+<#
+.Synopsis
+Valid filter fields are `system_id` and `days`.
+.Description
+Valid filter fields are `system_id` and `days`.
+.Example
+PS C:\> Get-JcSdkSystemInsightUptime
+
+
+
+----           ----------
+CollectionTime String
+Days           Int
+Hours          Int
+Minutes        Int
+Seconds        Int
+SystemId       String
+TotalSeconds   String
+
+
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+
+.Outputs
+JumpCloud.SDK.V2.Models.ISystemInsightsUptime
+.Link
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkSystemInsightUptime.md
+#>
+ Function Get-JcSdkSystemInsightUptime
 {
     [OutputType([JumpCloud.SDK.V2.Models.ISystemInsightsUptime])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
@@ -193,3 +223,5 @@
         Return $Results
     }
 }
+
+

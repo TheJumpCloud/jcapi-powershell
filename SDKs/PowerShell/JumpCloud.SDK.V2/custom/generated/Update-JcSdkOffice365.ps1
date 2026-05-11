@@ -1,4 +1,168 @@
-﻿Function Update-JcSdkOffice365
+<#
+.Synopsis
+This endpoint allows updating some attributes of an Office 365 instance.
+
+#####
+
+Sample Request
+
+```
+curl -X PATCH https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"userLockoutAction\": \"maintain\",
+    \"userPasswordExpirationAction\": \"suspend\",
+  }'
+```
+
+Sample Request, set a default domain
+
+```
+curl -X PATCH https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"defaultDomain\": {
+        \"id\": \"{domainObjectID}\"
+      }
+  }'
+```
+
+Sample Request, unset the default domain
+
+```
+curl -X PATCH https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"defaultDomain\": {}
+  }'
+```
+.Description
+This endpoint allows updating some attributes of an Office 365 instance.
+
+#####
+
+Sample Request
+
+```
+curl -X PATCH https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"userLockoutAction\": \"maintain\",
+    \"userPasswordExpirationAction\": \"suspend\",
+  }'
+```
+
+Sample Request, set a default domain
+
+```
+curl -X PATCH https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"defaultDomain\": {
+        \"id\": \"{domainObjectID}\"
+      }
+  }'
+```
+
+Sample Request, unset the default domain
+
+```
+curl -X PATCH https://console.jumpcloud.com/api/v2/office365s/{OFFICE365_ID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"defaultDomain\": {}
+  }'
+```
+.Example
+PS C:\> Update-JcSdkOffice365 -Office365Id:(<string>) -Body:(<JumpCloud.SDK.V2.Models.Office365>)
+
+
+
+----                         ----------
+DefaultDomainDomain          String
+DefaultDomainId              String
+GroupsEnabled                Boolean
+Id                           String
+Name                         String
+UserLockoutAction            String
+UserPasswordExpirationAction String
+
+
+.Example
+PS C:\> Update-JcSdkOffice365 -Office365Id:(<string>) -DefaultDomainId:(<string>) -GroupsEnabled:(<switch>) -Name:(<string>) -UserLockoutAction:(<string>) -UserPasswordExpirationAction:(<string>)
+
+
+
+----                         ----------
+DefaultDomainDomain          String
+DefaultDomainId              String
+GroupsEnabled                Boolean
+Id                           String
+Name                         String
+UserLockoutAction            String
+UserPasswordExpirationAction String
+
+
+
+.Inputs
+JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
+.Inputs
+JumpCloud.SDK.V2.Models.IOffice365
+.Outputs
+JumpCloud.SDK.V2.Models.IOffice365
+.Notes
+COMPLEX PARAMETER PROPERTIES
+
+To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
+
+BODY <IOffice365>:
+  [DefaultDomainId <String>]:
+  [GroupsEnabled <Boolean?>]:
+  [Name <String>]:
+  [UserLockoutAction <String>]:
+  [UserPasswordExpirationAction <String>]:
+
+INPUTOBJECT <IJumpCloudApiIdentity>:
+  [AccountId <String>]:
+  [ActivedirectoryId <String>]:
+  [AdministratorId <String>]:
+  [AgentId <String>]:
+  [AppleMdmId <String>]:
+  [ApplicationId <String>]: ObjectID of the Application.
+  [ApprovalFlowId <String>]:
+  [CommandId <String>]: ObjectID of the Command.
+  [CustomEmailType <String>]:
+  [DeviceId <String>]:
+  [GroupId <String>]: ObjectID of the Policy Group.
+  [GsuiteId <String>]: ObjectID of the G Suite instance.
+  [Id <String>]: ObjectID of this Active Directory instance.
+  [JobId <String>]:
+  [LdapserverId <String>]: ObjectID of the LDAP Server.
+  [Office365Id <String>]: ObjectID of the Office 365 instance.
+  [PolicyId <String>]: ObjectID of the Policy.
+  [ProviderId <String>]:
+  [PushEndpointId <String>]:
+  [RadiusserverId <String>]: ObjectID of the Radius Server.
+  [SoftwareAppId <String>]: ObjectID of the Software App.
+  [SystemId <String>]: ObjectID of the System.
+  [UserId <String>]: ObjectID of the User.
+  [WorkdayId <String>]:
+.Link
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Update-JcSdkOffice365.md
+#>
+ Function Update-JcSdkOffice365
 {
     [OutputType([JumpCloud.SDK.V2.Models.IOffice365])]
     [CmdletBinding(DefaultParameterSetName='UpdateExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
@@ -158,3 +322,5 @@
         Return $Results
     }
 }
+
+

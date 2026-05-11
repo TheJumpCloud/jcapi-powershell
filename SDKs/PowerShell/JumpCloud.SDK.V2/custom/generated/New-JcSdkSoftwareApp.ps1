@@ -1,4 +1,236 @@
-﻿Function New-JcSdkSoftwareApp
+<#
+.Synopsis
+This endpoint allows you to create a Software Application that will be managed by JumpCloud on associated JumpCloud systems.
+The optional isConfigEnabled and appConfiguration apple_vpp attributes are not included in the response.
+
+#### Sample Request
+```
+$ curl -X POST https://console.jumpcloud.com/api/v2/softwareapps \\
+-H 'Accept: application/json' \\
+-H 'Content-Type: application/json' \\
+-H 'x-api-key: {API_KEY}' \\
+-d '{
+  \"displayName\": \"Adobe Reader\",
+  \"settings\": [{\"packageId\": \"adobereader\"}]
+}'
+```
+.Description
+This endpoint allows you to create a Software Application that will be managed by JumpCloud on associated JumpCloud systems.
+The optional isConfigEnabled and appConfiguration apple_vpp attributes are not included in the response.
+
+#### Sample Request
+```
+$ curl -X POST https://console.jumpcloud.com/api/v2/softwareapps \\
+-H 'Accept: application/json' \\
+-H 'Content-Type: application/json' \\
+-H 'x-api-key: {API_KEY}' \\
+-d '{
+  \"displayName\": \"Adobe Reader\",
+  \"settings\": [{\"packageId\": \"adobereader\"}]
+}'
+```
+.Example
+PS C:\> New-JcSdkSoftwareApp -DisplayName:(<string>) -Id:(<string>) -Settings:(<JumpCloud.SDK.V2.Models.SoftwareAppSettings[]>)
+
+
+
+----        ----------
+DisplayName String
+Id          String
+Settings    JumpCloud.SDK.V2.Models.SoftwareAppSettings[]
+UploadUrl   String
+
+
+.Example
+PS C:\> New-JcSdkSoftwareApp -Body:(<JumpCloud.SDK.V2.Models.SoftwareApp>)
+
+
+
+----        ----------
+DisplayName String
+Id          String
+Settings    JumpCloud.SDK.V2.Models.SoftwareAppSettings[]
+UploadUrl   String
+
+
+
+.Inputs
+JumpCloud.SDK.V2.Models.ISoftwareApp
+.Outputs
+JumpCloud.SDK.V2.Models.ISoftwareAppCreate
+.Notes
+COMPLEX PARAMETER PROPERTIES
+
+To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
+
+BODY <ISoftwareApp>:
+  [CreatedAt <DateTime?>]:
+  [DisplayName <String>]:
+  [Id <String>]:
+  [Settings <List<ISoftwareAppSettings>>]:
+    [AllowUpdateDelay <Boolean?>]:
+    [AppCatalogInstallableObjectId <String>]: ID of the app catalog installable that created this app.
+    [AppFileName <String>]:
+    [AppleVppAppConfiguration <String>]: Text sent to configure the application, the text should be a valid plist.  Returned only by 'GET /softwareapps/{id}'.
+    [AppleVppAssignedLicenses <Int32?>]:
+    [AppleVppAvailableLicenses <Int32?>]:
+    [AppleVppDetails <ISoftwareAppAppleVppDetails>]: App details returned by iTunes API. See example. The properties in this field are out of our control and we cannot guarantee consistency, so it should be checked by the client and manage the details accordingly.
+      [(Any) <Object>]: This indicates any property can be added to this object.
+    [AppleVppIsConfigEnabled <Boolean?>]: Denotes if configuration has been enabled for the application.  Returned only by ''GET /softwareapps/{id}''.
+    [AppleVppSupportedDeviceFamilies <List<String>>]: The supported device families for this VPP Application.
+    [AppleVppTotalLicenses <Int32?>]:
+    [Architectures <List<String>>]:
+    [AssetKind <String>]: The manifest asset kind (ex: software).
+    [AssetSha256Size <Int32?>]: The incremental size to use for summing the package as it is downloaded.
+    [AssetSha256Strings <List<String>>]: The array of checksums, one each for the hash size up to the total size of the package.
+    [AutoUpdate <Boolean?>]:
+    [BundleId <String>]:
+    [CommandLineArguments <String>]: Command line arguments to use with the application.
+    [CreatedAt <DateTime?>]:
+    [Description <String>]: The software app description.
+    [DesiredState <String>]: State of Install or Uninstall
+    [DownloadUrl <String>]:
+    [EnterpriseObjectId <String>]: ID of the Enterprise with which this app is associated
+    [Format <String>]:
+    [GoogleAndroidAppPricing <String>]: Whether this app is free, free with in-app purchases, or paid.
+    [GoogleAndroidAppVersion <String>]: Latest version currently available for this app.
+    [GoogleAndroidAuthor <String>]: The name of the author of this app.
+    [GoogleAndroidAutoUpdateMode <String>]: Controls the auto-update mode for the app.
+    [GoogleAndroidCategory <String>]: The app category (e.g. COMMUNICATION, SOCIAL, etc.).
+    [GoogleAndroidContentRating <String>]: The content rating for this app.
+    [GoogleAndroidDisplayMode <String>]: The display mode of the web app.
+    [GoogleAndroidDistributionChannel <String>]: How and to whom the package is made available.
+    [GoogleAndroidFeatures <List<String>>]: The array of android features for the app.
+    [GoogleAndroidFullDescription <String>]: Full app description, if available.
+    [GoogleAndroidIconUrl <String>]: A link to an image that can be used as an icon for the app.
+    [GoogleAndroidInstallType <String>]: The type of installation to perform for an app.
+    [GoogleAndroidManagedConfigurationTemplateId <String>]: The managed configurations template for the app.
+    [GoogleAndroidManagedProperties <Boolean?>]: Indicates whether this app has managed properties or not.
+    [GoogleAndroidMinSdkVersion <Int32?>]: The minimum Android SDK necessary to run the app.
+    [GoogleAndroidName <String>]: The name of the app in the form enterprises/{enterprise}/applications/{packageName}.
+    [GoogleAndroidPermissionGrants <List<ISoftwareAppPermissionGrants>>]:
+      [Id <String>]: An opaque string uniquely identifying the Android permission, e.g. android.permission.READ_CALENDAR.
+      [Policy <String>]: The policy for granting the permission.
+    [GoogleAndroidRuntimePermission <String>]: The policy for granting permission requests to apps.
+    [GoogleAndroidStartUrl <String>]: The start URL, i.e. the URL that should load when the user opens the application. Applicable only for webapps.
+    [GoogleAndroidType <String>]: Type of this android application.
+    [GoogleAndroidUpdateTime <String>]: The approximate time (within 7 days) the app was last published.
+    [GoogleAndroidVersionCode <Int32?>]: The current version of the web app.
+    [IconUrl <String>]: URL to the icon for the app.
+    [Location <String>]: Repository where the app is located within the package manager
+    [LocationObjectId <String>]: ID of the repository where the app is located within the package manager
+    [MicrosoftStoreDoNotUpdate <Boolean?>]: Indicates whether the app can be updated or not.
+    [MicrosoftStoreNonRemovable <Boolean?>]: Indicates whether the app is removable by the users or not.
+    [MicrosoftStorePackageFamilyName <String>]: Package Family Name for the app from Microsoft App Store.
+    [ObjectId <String>]:
+    [PackageId <String>]:
+    [PackageKind <String>]: The package manifest kind (ex: software-package).
+    [PackageManager <String>]: App store serving the app: APPLE_VPP, CHOCOLATEY, etc.
+    [PackageSubtitle <String>]: The package manifest subtitle.
+    [PackageVersion <String>]: The package manifest version.
+    [PackageVersionUpdatedAt <DateTime?>]:
+    [Scope <String>]: The installation scope of the software app.
+    [ShortVersion <String>]:
+    [StoredPackageObjectId <String>]: ID of the stored package this app uses to reference the stored install media.
+    [StoredPackageVersions <List<IObjectStorageVersion>>]:
+      [Metadata <IObjectStorageVersionMetadata>]: Dictionary of <any>
+        [(Any) <Object>]: This indicates any property can be added to this object.
+      [Name <String>]:
+      [RejectedReason <String>]:
+      [Sha256Sum <String>]:
+      [Size <Int32?>]:
+      [Status <String>]:
+      [Version <Int32?>]:
+    [TeamId <String>]:
+    [UpdateTool <String>]:
+    [UpdateToolArguments <String>]:
+    [UpdatedAt <DateTime?>]:
+    [VersionlessDownloadUrl <Boolean?>]:
+  [UpdatedAt <DateTime?>]:
+
+SETTINGS <ISoftwareAppSettings[]>:
+  [AllowUpdateDelay <Boolean?>]:
+  [AppCatalogInstallableObjectId <String>]: ID of the app catalog installable that created this app.
+  [AppFileName <String>]:
+  [AppleVppAppConfiguration <String>]: Text sent to configure the application, the text should be a valid plist.  Returned only by 'GET /softwareapps/{id}'.
+  [AppleVppAssignedLicenses <Int32?>]:
+  [AppleVppAvailableLicenses <Int32?>]:
+  [AppleVppDetails <ISoftwareAppAppleVppDetails>]: App details returned by iTunes API. See example. The properties in this field are out of our control and we cannot guarantee consistency, so it should be checked by the client and manage the details accordingly.
+    [(Any) <Object>]: This indicates any property can be added to this object.
+  [AppleVppIsConfigEnabled <Boolean?>]: Denotes if configuration has been enabled for the application.  Returned only by ''GET /softwareapps/{id}''.
+  [AppleVppSupportedDeviceFamilies <List<String>>]: The supported device families for this VPP Application.
+  [AppleVppTotalLicenses <Int32?>]:
+  [Architectures <List<String>>]:
+  [AssetKind <String>]: The manifest asset kind (ex: software).
+  [AssetSha256Size <Int32?>]: The incremental size to use for summing the package as it is downloaded.
+  [AssetSha256Strings <List<String>>]: The array of checksums, one each for the hash size up to the total size of the package.
+  [AutoUpdate <Boolean?>]:
+  [BundleId <String>]:
+  [CommandLineArguments <String>]: Command line arguments to use with the application.
+  [CreatedAt <DateTime?>]:
+  [Description <String>]: The software app description.
+  [DesiredState <String>]: State of Install or Uninstall
+  [DownloadUrl <String>]:
+  [EnterpriseObjectId <String>]: ID of the Enterprise with which this app is associated
+  [Format <String>]:
+  [GoogleAndroidAppPricing <String>]: Whether this app is free, free with in-app purchases, or paid.
+  [GoogleAndroidAppVersion <String>]: Latest version currently available for this app.
+  [GoogleAndroidAuthor <String>]: The name of the author of this app.
+  [GoogleAndroidAutoUpdateMode <String>]: Controls the auto-update mode for the app.
+  [GoogleAndroidCategory <String>]: The app category (e.g. COMMUNICATION, SOCIAL, etc.).
+  [GoogleAndroidContentRating <String>]: The content rating for this app.
+  [GoogleAndroidDisplayMode <String>]: The display mode of the web app.
+  [GoogleAndroidDistributionChannel <String>]: How and to whom the package is made available.
+  [GoogleAndroidFeatures <List<String>>]: The array of android features for the app.
+  [GoogleAndroidFullDescription <String>]: Full app description, if available.
+  [GoogleAndroidIconUrl <String>]: A link to an image that can be used as an icon for the app.
+  [GoogleAndroidInstallType <String>]: The type of installation to perform for an app.
+  [GoogleAndroidManagedConfigurationTemplateId <String>]: The managed configurations template for the app.
+  [GoogleAndroidManagedProperties <Boolean?>]: Indicates whether this app has managed properties or not.
+  [GoogleAndroidMinSdkVersion <Int32?>]: The minimum Android SDK necessary to run the app.
+  [GoogleAndroidName <String>]: The name of the app in the form enterprises/{enterprise}/applications/{packageName}.
+  [GoogleAndroidPermissionGrants <List<ISoftwareAppPermissionGrants>>]:
+    [Id <String>]: An opaque string uniquely identifying the Android permission, e.g. android.permission.READ_CALENDAR.
+    [Policy <String>]: The policy for granting the permission.
+  [GoogleAndroidRuntimePermission <String>]: The policy for granting permission requests to apps.
+  [GoogleAndroidStartUrl <String>]: The start URL, i.e. the URL that should load when the user opens the application. Applicable only for webapps.
+  [GoogleAndroidType <String>]: Type of this android application.
+  [GoogleAndroidUpdateTime <String>]: The approximate time (within 7 days) the app was last published.
+  [GoogleAndroidVersionCode <Int32?>]: The current version of the web app.
+  [IconUrl <String>]: URL to the icon for the app.
+  [Location <String>]: Repository where the app is located within the package manager
+  [LocationObjectId <String>]: ID of the repository where the app is located within the package manager
+  [MicrosoftStoreDoNotUpdate <Boolean?>]: Indicates whether the app can be updated or not.
+  [MicrosoftStoreNonRemovable <Boolean?>]: Indicates whether the app is removable by the users or not.
+  [MicrosoftStorePackageFamilyName <String>]: Package Family Name for the app from Microsoft App Store.
+  [ObjectId <String>]:
+  [PackageId <String>]:
+  [PackageKind <String>]: The package manifest kind (ex: software-package).
+  [PackageManager <String>]: App store serving the app: APPLE_VPP, CHOCOLATEY, etc.
+  [PackageSubtitle <String>]: The package manifest subtitle.
+  [PackageVersion <String>]: The package manifest version.
+  [PackageVersionUpdatedAt <DateTime?>]:
+  [Scope <String>]: The installation scope of the software app.
+  [ShortVersion <String>]:
+  [StoredPackageObjectId <String>]: ID of the stored package this app uses to reference the stored install media.
+  [StoredPackageVersions <List<IObjectStorageVersion>>]:
+    [Metadata <IObjectStorageVersionMetadata>]: Dictionary of <any>
+      [(Any) <Object>]: This indicates any property can be added to this object.
+    [Name <String>]:
+    [RejectedReason <String>]:
+    [Sha256Sum <String>]:
+    [Size <Int32?>]:
+    [Status <String>]:
+    [Version <Int32?>]:
+  [TeamId <String>]:
+  [UpdateTool <String>]:
+  [UpdateToolArguments <String>]:
+  [UpdatedAt <DateTime?>]:
+  [VersionlessDownloadUrl <Boolean?>]:
+.Link
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/New-JcSdkSoftwareApp.md
+#>
+ Function New-JcSdkSoftwareApp
 {
     [OutputType([JumpCloud.SDK.V2.Models.ISoftwareAppCreate])]
     [CmdletBinding(DefaultParameterSetName='CreateExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
@@ -139,3 +371,5 @@
         Return $Results
     }
 }
+
+

@@ -1,4 +1,31 @@
-﻿Function Get-JcSdkProviderAdministrator
+<#
+.Synopsis
+This endpoint returns a list of the Administrators associated with the Provider.
+You must be associated with the provider to use this route.
+.Description
+This endpoint returns a list of the Administrators associated with the Provider.
+You must be associated with the provider to use this route.
+.Example
+PS C:\> Get-JcSdkProviderAdministrator
+
+
+
+----       ----------
+Results    JumpCloud.SDK.V2.Models.Administrator[]
+TotalCount Int
+
+
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+
+.Outputs
+JumpCloud.SDK.V2.Models.IPathsYwlyndProvidersProviderIdAdministratorsGetResponses200ContentApplicationJsonSchema
+.Link
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkProviderAdministrator.md
+#>
+ Function Get-JcSdkProviderAdministrator
 {
     [OutputType([JumpCloud.SDK.V2.Models.IPathsYwlyndProvidersProviderIdAdministratorsGetResponses200ContentApplicationJsonSchema])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
@@ -217,3 +244,5 @@
         Return $Results
     }
 }
+
+

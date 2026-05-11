@@ -1,4 +1,82 @@
-﻿Function Import-JcSdkWorkdayResult
+<#
+.Synopsis
+This endpoint provides a list of job results from the workday import and will contain all imported data from Workday.
+
+#### Sample Request
+```
+curl -X GET https://console.jumpcloud.com/api/v2/workdays/{WorkdayID}/import/{ImportJobID}/results \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+```
+.Description
+This endpoint provides a list of job results from the workday import and will contain all imported data from Workday.
+
+#### Sample Request
+```
+curl -X GET https://console.jumpcloud.com/api/v2/workdays/{WorkdayID}/import/{ImportJobID}/results \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+```
+.Example
+PS C:\> Import-JcSdkWorkdayResult -Id:(<string>) -JobId:(<string>)
+
+
+
+----            ----------
+CreatedAt       String
+Id              String
+Meta            JumpCloud.SDK.V2.Models.JobWorkresultMeta
+PersistedFields JumpCloud.SDK.V2.Models.JobWorkresultPersistedFields
+Status          String
+StatusMsg       String
+UpdatedAt       String
+
+
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+
+.Inputs
+JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
+.Outputs
+JumpCloud.SDK.V2.Models.IJobWorkresult
+.Notes
+COMPLEX PARAMETER PROPERTIES
+
+To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
+
+INPUTOBJECT <IJumpCloudApiIdentity>:
+  [AccountId <String>]:
+  [ActivedirectoryId <String>]:
+  [AdministratorId <String>]:
+  [AgentId <String>]:
+  [AppleMdmId <String>]:
+  [ApplicationId <String>]: ObjectID of the Application.
+  [ApprovalFlowId <String>]:
+  [CommandId <String>]: ObjectID of the Command.
+  [CustomEmailType <String>]:
+  [DeviceId <String>]:
+  [GroupId <String>]: ObjectID of the Policy Group.
+  [GsuiteId <String>]: ObjectID of the G Suite instance.
+  [Id <String>]: ObjectID of this Active Directory instance.
+  [JobId <String>]:
+  [LdapserverId <String>]: ObjectID of the LDAP Server.
+  [Office365Id <String>]: ObjectID of the Office 365 instance.
+  [PolicyId <String>]: ObjectID of the Policy.
+  [ProviderId <String>]:
+  [PushEndpointId <String>]:
+  [RadiusserverId <String>]: ObjectID of the Radius Server.
+  [SoftwareAppId <String>]: ObjectID of the Software App.
+  [SystemId <String>]: ObjectID of the System.
+  [UserId <String>]: ObjectID of the User.
+  [WorkdayId <String>]:
+.Link
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Import-JcSdkWorkdayResult.md
+#>
+ Function Import-JcSdkWorkdayResult
 {
     [OutputType([JumpCloud.SDK.V2.Models.IJobWorkresult])]
     [CmdletBinding(DefaultParameterSetName='Import', PositionalBinding=$false)]
@@ -120,3 +198,5 @@
         Return $Results
     }
 }
+
+

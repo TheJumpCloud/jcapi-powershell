@@ -1,4 +1,87 @@
-﻿Function Get-JcSdkIPList
+<#
+.Synopsis
+Return a specific IP list.
+
+#### Sample Request
+```
+curl https://console.jumpcloud.com/api/v2/iplists/{id} \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+```
+.Description
+Return a specific IP list.
+
+#### Sample Request
+```
+curl https://console.jumpcloud.com/api/v2/iplists/{id} \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+```
+.Example
+PS C:\> Get-JcSdkIPList -Filter:(<string[]>) -Sort:(<string[]>) -XTotalCount:(<int>)
+
+
+
+----        ----------
+Description String
+Id          String
+Ips         String
+Name        String
+
+
+.Example
+PS C:\> Get-JcSdkIPList -Id:(<string>)
+
+
+
+----        ----------
+Description String
+Id          String
+Ips         String
+Name        String
+
+
+
+.Inputs
+JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
+.Outputs
+JumpCloud.SDK.V2.Models.IIPList
+.Notes
+COMPLEX PARAMETER PROPERTIES
+
+To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
+
+INPUTOBJECT <IJumpCloudApiIdentity>:
+  [AccountId <String>]:
+  [ActivedirectoryId <String>]:
+  [AdministratorId <String>]:
+  [AgentId <String>]:
+  [AppleMdmId <String>]:
+  [ApplicationId <String>]: ObjectID of the Application.
+  [ApprovalFlowId <String>]:
+  [CommandId <String>]: ObjectID of the Command.
+  [CustomEmailType <String>]:
+  [DeviceId <String>]:
+  [GroupId <String>]: ObjectID of the Policy Group.
+  [GsuiteId <String>]: ObjectID of the G Suite instance.
+  [Id <String>]: ObjectID of this Active Directory instance.
+  [JobId <String>]:
+  [LdapserverId <String>]: ObjectID of the LDAP Server.
+  [Office365Id <String>]: ObjectID of the Office 365 instance.
+  [PolicyId <String>]: ObjectID of the Policy.
+  [ProviderId <String>]:
+  [PushEndpointId <String>]:
+  [RadiusserverId <String>]: ObjectID of the Radius Server.
+  [SoftwareAppId <String>]: ObjectID of the Software App.
+  [SystemId <String>]: ObjectID of the System.
+  [UserId <String>]: ObjectID of the User.
+  [WorkdayId <String>]:
+.Link
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkIPList.md
+#>
+ Function Get-JcSdkIPList
 {
     [OutputType([JumpCloud.SDK.V2.Models.IIPList])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
@@ -211,3 +294,5 @@
         Return $Results
     }
 }
+
+

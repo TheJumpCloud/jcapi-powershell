@@ -1,4 +1,153 @@
-﻿Function Set-JcSdkUserGroup
+<#
+.Synopsis
+This endpoint allows you to do a full set of the User Group.
+
+See the [Dynamic Group Configuration KB article](https://jumpcloud.com/support/configure-dynamic-device-groups) for more details on maintaining a Dynamic Group.
+
+#### Sample Request
+```
+curl -X PUT https://console.jumpcloud.com/api/v2/usergroups/{Group_ID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"name\": \"group_set 
+  }'
+```
+.Description
+This endpoint allows you to do a full set of the User Group.
+
+See the [Dynamic Group Configuration KB article](https://jumpcloud.com/support/configure-dynamic-device-groups) for more details on maintaining a Dynamic Group.
+
+#### Sample Request
+```
+curl -X PUT https://console.jumpcloud.com/api/v2/usergroups/{Group_ID} \\
+  -H 'Accept: application/json' \\
+  -H 'Content-Type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"name\": \"group_set 
+  }'
+```
+.Example
+PS C:\> Set-JcSdkUserGroup -Id:(<string>) -Body:(<JumpCloud.SDK.V2.Models.UserGroupPut>)
+
+
+
+----                    ----------
+Attributes              JumpCloud.SDK.V2.Models.GroupAttributesUserGroup
+Description             String
+Email                   String
+Id                      String
+MemberQueryExemptions   JumpCloud.SDK.V2.Models.GraphObject[]
+MemberQueryFilters      JumpCloud.SDK.V2.Models.Any[]
+MemberQueryType         String
+MembershipMethod        String
+MemberSuggestionsNotify Boolean
+Name                    String
+SuggestionCountAdd      Int
+SuggestionCountRemove   Int
+SuggestionCountTotal    Int
+Type                    String
+
+
+.Example
+PS C:\> Set-JcSdkUserGroup -Id:(<string>) -Name:(<string>) -Attributes:(<hashtable>) -Description:(<string>) -Email:(<string>) -MemberQueryExemptions:(<JumpCloud.SDK.V2.Models.GraphObject[]>) -MemberQueryFilters:(<JumpCloud.SDK.V2.Models.Any[]>) -MemberQueryType:(<string>) -MemberSuggestionsNotify:(<switch>) -MembershipMethod:(<string>)
+
+
+
+----                    ----------
+Attributes              JumpCloud.SDK.V2.Models.GroupAttributesUserGroup
+Description             String
+Email                   String
+Id                      String
+MemberQueryExemptions   JumpCloud.SDK.V2.Models.GraphObject[]
+MemberQueryFilters      JumpCloud.SDK.V2.Models.Any[]
+MemberQueryType         String
+MembershipMethod        String
+MemberSuggestionsNotify Boolean
+Name                    String
+SuggestionCountAdd      Int
+SuggestionCountRemove   Int
+SuggestionCountTotal    Int
+Type                    String
+
+
+
+.Inputs
+JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
+.Inputs
+JumpCloud.SDK.V2.Models.IUserGroupPut
+.Outputs
+JumpCloud.SDK.V2.Models.IUserGroup
+.Notes
+COMPLEX PARAMETER PROPERTIES
+
+To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
+
+BODY <IUserGroupPut>:
+  Name <String>: Display name of a User Group.
+  [Attributes <IGroupAttributesUserGroup>]: The graph attributes for a UserGroup.
+    [(Any) <Object>]: This indicates any property can be added to this object.
+    [SudoEnabled <Boolean?>]: Enables sudo
+    [SudoWithoutPassword <Boolean?>]: Enable sudo without password (requires 'enabled' to be true)
+    [LdapGroups <List<ILdapGroup>>]:
+      [Name <String>]:
+    [PosixGroups <List<IGraphAttributePosixGroupsItem>>]:
+      Id <Int32>:
+      Name <String>:
+    [RadiusReply <List<IGraphAttributeRadiusReplyItem>>]:
+      Name <String>:
+      Value <String>:
+    [SambaEnabled <Boolean?>]:
+  [Description <String>]: Description of a User Group
+  [Email <String>]: Email address of a User Group
+  [MemberQueryExemptions <List<IGraphObject>>]: Array of GraphObjects exempted from the query
+    Id <String>: The ObjectID of the graph object.
+    Type <String>: The type of graph object.
+    [Attributes <IGraphAttributes>]: The graph attributes.
+      [(Any) <Object>]: This indicates any property can be added to this object.
+  [MemberQueryFilters <List<String>>]: For queryType 'Filter', this is a stringified JSON filter array that will be validated by API middleware.
+  [MemberQuerySearchFilters <String>]: For queryType 'Search', this is a stringified JSON filter object that will be validated by API middleware.
+  [MemberQueryType <String>]:
+  [MemberSuggestionsNotify <Boolean?>]: True if notification emails are to be sent for membership suggestions.
+  [MembershipMethod <String>]: The type of membership method for this group. Valid values include NOTSET, STATIC, DYNAMIC_REVIEW_REQUIRED, and DYNAMIC_AUTOMATED.          Note DYNAMIC_AUTOMATED and DYNAMIC_REVIEW_REQUIRED group rules will supersede any group enrollment for [group-associated MDM-enrolled devices](https://jumpcloud.com/support/change-a-default-device-group-for-apple-devices).          Use caution when creating dynamic device groups with MDM-enrolled devices to avoid creating conflicting rule sets.
+
+INPUTOBJECT <IJumpCloudApiIdentity>:
+  [AccountId <String>]:
+  [ActivedirectoryId <String>]:
+  [AdministratorId <String>]:
+  [AgentId <String>]:
+  [AppleMdmId <String>]:
+  [ApplicationId <String>]: ObjectID of the Application.
+  [ApprovalFlowId <String>]:
+  [CommandId <String>]: ObjectID of the Command.
+  [CustomEmailType <String>]:
+  [DeviceId <String>]:
+  [GroupId <String>]: ObjectID of the Policy Group.
+  [GsuiteId <String>]: ObjectID of the G Suite instance.
+  [Id <String>]: ObjectID of this Active Directory instance.
+  [JobId <String>]:
+  [LdapserverId <String>]: ObjectID of the LDAP Server.
+  [Office365Id <String>]: ObjectID of the Office 365 instance.
+  [PolicyId <String>]: ObjectID of the Policy.
+  [ProviderId <String>]:
+  [PushEndpointId <String>]:
+  [RadiusserverId <String>]: ObjectID of the Radius Server.
+  [SoftwareAppId <String>]: ObjectID of the Software App.
+  [SystemId <String>]: ObjectID of the System.
+  [UserId <String>]: ObjectID of the User.
+  [WorkdayId <String>]:
+
+MEMBERQUERYEXEMPTIONS <IGraphObject[]>:
+  Id <String>: The ObjectID of the graph object.
+  Type <String>: The type of graph object.
+  [Attributes <IGraphAttributes>]: The graph attributes.
+    [(Any) <Object>]: This indicates any property can be added to this object.
+.Link
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Set-JcSdkUserGroup.md
+#>
+ Function Set-JcSdkUserGroup
 {
     [OutputType([JumpCloud.SDK.V2.Models.IUserGroup])]
     [CmdletBinding(DefaultParameterSetName='SetExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
@@ -197,3 +346,5 @@
         Return $Results
     }
 }
+
+

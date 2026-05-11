@@ -1,4 +1,35 @@
-﻿Function Get-JcSdkSystemInsightLogicalDrive
+<#
+.Synopsis
+Valid filter fields are `system_id` and `device_id`.
+.Description
+Valid filter fields are `system_id` and `device_id`.
+.Example
+PS C:\> Get-JcSdkSystemInsightLogicalDrive
+
+
+
+----           ----------
+BootPartition  Int
+CollectionTime String
+DeviceId       String
+FileSystem     String
+FreeSpace      String
+Size           String
+SystemId       String
+Type           String
+
+
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+
+.Outputs
+JumpCloud.SDK.V2.Models.ISystemInsightsLogicalDrives
+.Link
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkSystemInsightLogicalDrive.md
+#>
+ Function Get-JcSdkSystemInsightLogicalDrive
 {
     [OutputType([JumpCloud.SDK.V2.Models.ISystemInsightsLogicalDrives])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
@@ -193,3 +224,5 @@
         Return $Results
     }
 }
+
+

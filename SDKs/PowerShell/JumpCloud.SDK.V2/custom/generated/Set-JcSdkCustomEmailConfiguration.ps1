@@ -1,4 +1,94 @@
-﻿Function Set-JcSdkCustomEmailConfiguration
+<#
+.Synopsis
+Set the custom email configuration for the specified custom email type.
+
+This action is only available to paying customers.
+.Description
+Set the custom email configuration for the specified custom email type.
+
+This action is only available to paying customers.
+.Example
+PS C:\> Set-JcSdkCustomEmailConfiguration -CustomEmailType:(<string>) -CustomEmail:(<JumpCloud.SDK.V2.Models.CustomEmail>)
+
+
+
+----                ----------
+Body                String
+Button              String
+Header              String
+Id                  String
+NextStepContactInfo String
+Subject             String
+Title               String
+Type                String
+
+
+.Example
+PS C:\> Set-JcSdkCustomEmailConfiguration -CustomEmailType:(<string>) -Subject:(<string>) -Type:(<string>) -Body:(<string>) -Button:(<string>) -Header:(<string>) -NextStepContactInfo:(<string>) -Title:(<string>)
+
+
+
+----                ----------
+Body                String
+Button              String
+Header              String
+Id                  String
+NextStepContactInfo String
+Subject             String
+Title               String
+Type                String
+
+
+
+.Inputs
+JumpCloud.SDK.V2.Models.ICustomEmail
+.Inputs
+JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
+.Outputs
+JumpCloud.SDK.V2.Models.ICustomEmail
+.Notes
+COMPLEX PARAMETER PROPERTIES
+
+To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
+
+CUSTOMEMAIL <ICustomEmail>:
+  Subject <String>:
+  Type <String>:
+  [Body <String>]:
+  [Button <String>]:
+  [Header <String>]:
+  [NextStepContactInfo <String>]:
+  [Title <String>]:
+
+INPUTOBJECT <IJumpCloudApiIdentity>:
+  [AccountId <String>]:
+  [ActivedirectoryId <String>]:
+  [AdministratorId <String>]:
+  [AgentId <String>]:
+  [AppleMdmId <String>]:
+  [ApplicationId <String>]: ObjectID of the Application.
+  [ApprovalFlowId <String>]:
+  [CommandId <String>]: ObjectID of the Command.
+  [CustomEmailType <String>]:
+  [DeviceId <String>]:
+  [GroupId <String>]: ObjectID of the Policy Group.
+  [GsuiteId <String>]: ObjectID of the G Suite instance.
+  [Id <String>]: ObjectID of this Active Directory instance.
+  [JobId <String>]:
+  [LdapserverId <String>]: ObjectID of the LDAP Server.
+  [Office365Id <String>]: ObjectID of the Office 365 instance.
+  [PolicyId <String>]: ObjectID of the Policy.
+  [ProviderId <String>]:
+  [PushEndpointId <String>]:
+  [RadiusserverId <String>]: ObjectID of the Radius Server.
+  [SoftwareAppId <String>]: ObjectID of the Software App.
+  [SystemId <String>]: ObjectID of the System.
+  [UserId <String>]: ObjectID of the User.
+  [WorkdayId <String>]:
+.Link
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Set-JcSdkCustomEmailConfiguration.md
+#>
+ Function Set-JcSdkCustomEmailConfiguration
 {
     [OutputType([JumpCloud.SDK.V2.Models.ICustomEmail])]
     [CmdletBinding(DefaultParameterSetName='SetExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
@@ -172,3 +262,5 @@
         Return $Results
     }
 }
+
+

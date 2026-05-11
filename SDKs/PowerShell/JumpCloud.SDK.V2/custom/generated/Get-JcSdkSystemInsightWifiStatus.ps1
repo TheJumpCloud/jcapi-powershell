@@ -1,4 +1,42 @@
-﻿Function Get-JcSdkSystemInsightWifiStatus
+<#
+.Synopsis
+Valid filter fields are `system_id` and `security_type`.
+.Description
+Valid filter fields are `system_id` and `security_type`.
+.Example
+PS C:\> Get-JcSdkSystemInsightWifiStatus
+
+
+
+----           ----------
+Bssid          String
+Channel        System.Nullable[float] Channel {get;set;}
+ChannelBand    System.Nullable[float] ChannelBand {get;set;}
+ChannelWidth   System.Nullable[float] ChannelWidth {get;set;}
+CollectionTime String
+CountryCode    String
+Interface      String
+Mode           String
+NetworkName    String
+Noise          System.Nullable[float] Noise {get;set;}
+Rssi           System.Nullable[float] Rssi {get;set;}
+SecurityType   String
+Ssid           String
+SystemId       String
+TransmitRate   String
+
+
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+
+.Outputs
+JumpCloud.SDK.V2.Models.ISystemInsightsWifiStatus
+.Link
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkSystemInsightWifiStatus.md
+#>
+ Function Get-JcSdkSystemInsightWifiStatus
 {
     [OutputType([JumpCloud.SDK.V2.Models.ISystemInsightsWifiStatus])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
@@ -193,3 +231,5 @@
         Return $Results
     }
 }
+
+

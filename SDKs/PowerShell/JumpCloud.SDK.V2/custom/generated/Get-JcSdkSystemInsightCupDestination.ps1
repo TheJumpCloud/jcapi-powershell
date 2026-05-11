@@ -1,4 +1,31 @@
-﻿Function Get-JcSdkSystemInsightCupDestination
+<#
+.Synopsis
+Valid filter fields are `system_id` and `name`.
+.Description
+Valid filter fields are `system_id` and `name`.
+.Example
+PS C:\> Get-JcSdkSystemInsightCupDestination
+
+
+
+----        ----------
+Name        String
+OptionName  String
+OptionValue String
+SystemId    String
+
+
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+
+.Outputs
+JumpCloud.SDK.V2.Models.ISystemInsightsCupsDestinations
+.Link
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkSystemInsightCupDestination.md
+#>
+ Function Get-JcSdkSystemInsightCupDestination
 {
     [OutputType([JumpCloud.SDK.V2.Models.ISystemInsightsCupsDestinations])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
@@ -193,3 +220,5 @@
         Return $Results
     }
 }
+
+

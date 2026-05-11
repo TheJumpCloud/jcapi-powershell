@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-JcSdkSystemFdeKey
 
 ## SYNOPSIS
-This endpoint will return the current (latest) fde key saved for a system.
+
 
 ## SYNTAX
 
@@ -23,7 +23,7 @@ Get-JcSdkSystemFdeKey -ConsoleHost <String> -InputObject <IJumpCloudApiIdentity>
 ```
 
 ## DESCRIPTION
-This endpoint will return the current (latest) fde key saved for a system.
+
 
 ## EXAMPLES
 
@@ -44,8 +44,7 @@ Get-JcSdkSystemFdeKey -SystemId:(<string>)
 ## PARAMETERS
 
 ### -ConsoleHost
-Region for JumpCloud API host.
-Use 'console' for US or 'console.eu' for EU.
+
 
 ```yaml
 Type: System.String
@@ -60,7 +59,7 @@ Accept wildcard characters: False
 ```
 
 ### -InputObject
-Identity Parameter
+
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
@@ -75,7 +74,7 @@ Accept wildcard characters: False
 ```
 
 ### -SystemId
-.
+
 
 ```yaml
 Type: System.String
@@ -107,7 +106,7 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-`INPUTOBJECT <IJumpCloudApiIdentity>`: Identity Parameter
+`INPUTOBJECT <IJumpCloudApiIdentity>`: 
   - `[AccountId <String>]`: 
   - `[ActivedirectoryId <String>]`: 
   - `[AdministratorId <String>]`: 

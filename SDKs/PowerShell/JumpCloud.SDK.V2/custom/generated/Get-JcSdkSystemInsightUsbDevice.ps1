@@ -1,4 +1,41 @@
-﻿Function Get-JcSdkSystemInsightUsbDevice
+<#
+.Synopsis
+Valid filter fields are `system_id` and `model`.
+.Description
+Valid filter fields are `system_id` and `model`.
+.Example
+PS C:\> Get-JcSdkSystemInsightUsbDevice
+
+
+
+----           ----------
+Class          String
+CollectionTime String
+Model          String
+ModelId        String
+Protocol       String
+Removable      Int
+Serial         String
+Subclass       String
+SystemId       String
+UsbAddress     Int
+UsbPort        Int
+Vendor         String
+VendorId       String
+Version        String
+
+
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+
+.Outputs
+JumpCloud.SDK.V2.Models.ISystemInsightsUsbDevices
+.Link
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkSystemInsightUsbDevice.md
+#>
+ Function Get-JcSdkSystemInsightUsbDevice
 {
     [OutputType([JumpCloud.SDK.V2.Models.ISystemInsightsUsbDevices])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
@@ -193,3 +230,5 @@
         Return $Results
     }
 }
+
+

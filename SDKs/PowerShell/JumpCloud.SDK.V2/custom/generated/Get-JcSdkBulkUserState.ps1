@@ -1,4 +1,45 @@
-﻿Function Get-JcSdkBulkUserState
+<#
+.Synopsis
+The endpoint allows you to list scheduled statechange jobs.
+#### Sample Request
+```
+curl -X GET \"https://console.jumpcloud.com/api/v2/bulk/userstates\" \\
+  -H 'x-api-key: {API_KEY}' \\
+  -H 'Content-Type: application/json' \\
+  -H 'Accept: application/json'
+```
+.Description
+The endpoint allows you to list scheduled statechange jobs.
+#### Sample Request
+```
+curl -X GET \"https://console.jumpcloud.com/api/v2/bulk/userstates\" \\
+  -H 'x-api-key: {API_KEY}' \\
+  -H 'Content-Type: application/json' \\
+  -H 'Accept: application/json'
+```
+.Example
+PS C:\> Get-JcSdkBulkUserState
+
+
+
+----           ----------
+ScheduledDate  String
+ScheduledJobId String
+State          String
+SystemUserId   String
+
+
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+
+.Outputs
+JumpCloud.SDK.V2.Models.IScheduledUserstateResult
+.Link
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkBulkUserState.md
+#>
+ Function Get-JcSdkBulkUserState
 {
     [OutputType([JumpCloud.SDK.V2.Models.IScheduledUserstateResult])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
@@ -190,3 +231,5 @@
         Return $Results
     }
 }
+
+

@@ -1,4 +1,35 @@
-﻿Function Get-JcSdkSystemInsightWindowsSecurityProduct
+<#
+.Synopsis
+Valid filter fields are `system_id` and `state`.
+.Description
+Valid filter fields are `system_id` and `state`.
+.Example
+PS C:\> Get-JcSdkSystemInsightWindowsSecurityProduct
+
+
+
+----               ----------
+CollectionTime     String
+Name               String
+RemediationPath    String
+SignaturesUpToDate System.Nullable[float] SignaturesUpToDate {get;set;}
+State              String
+StateTimestamp     String
+SystemId           String
+Type               String
+
+
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+
+.Outputs
+JumpCloud.SDK.V2.Models.ISystemInsightsWindowsSecurityProducts
+.Link
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkSystemInsightWindowsSecurityProduct.md
+#>
+ Function Get-JcSdkSystemInsightWindowsSecurityProduct
 {
     [OutputType([JumpCloud.SDK.V2.Models.ISystemInsightsWindowsSecurityProducts])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
@@ -193,3 +224,5 @@
         Return $Results
     }
 }
+
+

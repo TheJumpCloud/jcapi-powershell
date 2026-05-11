@@ -1,4 +1,31 @@
-﻿Function Get-JcSdkProviderOrganization
+<#
+.Synopsis
+This endpoint returns a list of the Organizations associated with the Provider.
+You must be associated with the provider to use this route.
+.Description
+This endpoint returns a list of the Organizations associated with the Provider.
+You must be associated with the provider to use this route.
+.Example
+PS C:\> Get-JcSdkProviderOrganization
+
+
+
+----       ----------
+Results    JumpCloud.SDK.V2.Models.Organization[]
+TotalCount Int
+
+
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+
+.Outputs
+JumpCloud.SDK.V2.Models.IPaths1O3J7V8ProvidersProviderIdOrganizationsGetResponses200ContentApplicationJsonSchema
+.Link
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkProviderOrganization.md
+#>
+ Function Get-JcSdkProviderOrganization
 {
     [OutputType([JumpCloud.SDK.V2.Models.IPaths1O3J7V8ProvidersProviderIdOrganizationsGetResponses200ContentApplicationJsonSchema])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
@@ -217,3 +244,5 @@
         Return $Results
     }
 }
+
+

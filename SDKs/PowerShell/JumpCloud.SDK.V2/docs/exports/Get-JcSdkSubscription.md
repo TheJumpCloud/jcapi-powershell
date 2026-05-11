@@ -8,16 +8,7 @@ schema: 2.0.0
 # Get-JcSdkSubscription
 
 ## SYNOPSIS
-This endpoint returns all pricing & packaging subscriptions.
 
-##### Sample Request
-
-```
- curl -X GET  https://console.jumpcloud.com/api/v2/subscriptions \\
-  -H 'Accept: application/json' \\
-  -H 'Content-Type: application/json' \\
-  -H 'x-api-key: {API_KEY}'
-  ```
 
 ## SYNTAX
 
@@ -26,16 +17,7 @@ Get-JcSdkSubscription -ConsoleHost <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-This endpoint returns all pricing & packaging subscriptions.
 
-##### Sample Request
-
-```
- curl -X GET  https://console.jumpcloud.com/api/v2/subscriptions \\
-  -H 'Accept: application/json' \\
-  -H 'Content-Type: application/json' \\
-  -H 'x-api-key: {API_KEY}'
-  ```
 
 ## EXAMPLES
 
@@ -62,8 +44,7 @@ UpgradeRecommendation String
 ## PARAMETERS
 
 ### -ConsoleHost
-Region for JumpCloud API host.
-Use 'console' for US or 'console.eu' for EU.
+
 
 ```yaml
 Type: System.String

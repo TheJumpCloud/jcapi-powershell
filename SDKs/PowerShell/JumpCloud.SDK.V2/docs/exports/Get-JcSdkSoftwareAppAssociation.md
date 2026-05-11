@@ -8,17 +8,7 @@ schema: 2.0.0
 # Get-JcSdkSoftwareAppAssociation
 
 ## SYNOPSIS
-This endpoint will return the _direct_ associations of a Software Application.
-A direct association can be a non-homogeneous relationship between 2 different objects, for example Software Application and System Groups.
 
-
-#### Sample Request
-```
-curl -X GET https://console.jumpcloud.com/api/v2/softwareapps/{software_app_id}/associations?targets=system_group \\
-  -H 'accept: application/json' \\
-  -H 'content-type: application/json' \\
-  -H 'x-api-key: {API_KEY}'
-```
 
 ## SYNTAX
 
@@ -35,17 +25,7 @@ Get-JcSdkSoftwareAppAssociation -ConsoleHost <String> -InputObject <IJumpCloudAp
 ```
 
 ## DESCRIPTION
-This endpoint will return the _direct_ associations of a Software Application.
-A direct association can be a non-homogeneous relationship between 2 different objects, for example Software Application and System Groups.
 
-
-#### Sample Request
-```
-curl -X GET https://console.jumpcloud.com/api/v2/softwareapps/{software_app_id}/associations?targets=system_group \\
-  -H 'accept: application/json' \\
-  -H 'content-type: application/json' \\
-  -H 'x-api-key: {API_KEY}'
-```
 
 ## EXAMPLES
 
@@ -73,8 +53,7 @@ ToType         String
 ## PARAMETERS
 
 ### -ConsoleHost
-Region for JumpCloud API host.
-Use 'console' for US or 'console.eu' for EU.
+
 
 ```yaml
 Type: System.String
@@ -89,7 +68,7 @@ Accept wildcard characters: False
 ```
 
 ### -InputObject
-Identity Parameter
+
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
@@ -104,7 +83,7 @@ Accept wildcard characters: False
 ```
 
 ### -SoftwareAppId
-ObjectID of the Software App.
+
 
 ```yaml
 Type: System.String
@@ -119,7 +98,7 @@ Accept wildcard characters: False
 ```
 
 ### -Targets
-Targets which a "active_directory" can be associated to.
+
 
 ```yaml
 Type: System.String
@@ -151,7 +130,7 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-`INPUTOBJECT <IJumpCloudApiIdentity>`: Identity Parameter
+`INPUTOBJECT <IJumpCloudApiIdentity>`: 
   - `[AccountId <String>]`: 
   - `[ActivedirectoryId <String>]`: 
   - `[AdministratorId <String>]`: 

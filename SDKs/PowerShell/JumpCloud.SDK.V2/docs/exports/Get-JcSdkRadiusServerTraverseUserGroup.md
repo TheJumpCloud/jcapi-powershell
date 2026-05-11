@@ -8,23 +8,7 @@ schema: 2.0.0
 # Get-JcSdkRadiusServerTraverseUserGroup
 
 ## SYNOPSIS
-This endpoint will return all Users Groups bound to a RADIUS Server, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
-Each element will contain the group's type, id, attributes and paths.
-
-The `attributes` object is a key/value hash of compiled graph attributes for all paths followed.
-
-The `paths` array enumerates each path from this RADIUS server instance to the corresponding User Group; this array represents all grouping and/or associations that would have to be removed to deprovision the User Group from this RADIUS server instance.
-
-See `/members` and `/associations` endpoints to manage those collections.
-
-#### Sample Request
-```
-curl -X GET https://console.jumpcloud.com/api/v2/radiusservers/{RADIUS_ID}/usergroups \\
-  -H 'Accept: application/json' \\
-  -H 'Content-Type: application/json' \\
-  -H 'x-api-key: {API_KEY}'
-```
 
 ## SYNTAX
 
@@ -41,23 +25,7 @@ Get-JcSdkRadiusServerTraverseUserGroup -ConsoleHost <String> -InputObject <IJump
 ```
 
 ## DESCRIPTION
-This endpoint will return all Users Groups bound to a RADIUS Server, either directly or indirectly, essentially traversing the JumpCloud Graph for your Organization.
 
-Each element will contain the group's type, id, attributes and paths.
-
-The `attributes` object is a key/value hash of compiled graph attributes for all paths followed.
-
-The `paths` array enumerates each path from this RADIUS server instance to the corresponding User Group; this array represents all grouping and/or associations that would have to be removed to deprovision the User Group from this RADIUS server instance.
-
-See `/members` and `/associations` endpoints to manage those collections.
-
-#### Sample Request
-```
-curl -X GET https://console.jumpcloud.com/api/v2/radiusservers/{RADIUS_ID}/usergroups \\
-  -H 'Accept: application/json' \\
-  -H 'Content-Type: application/json' \\
-  -H 'x-api-key: {API_KEY}'
-```
 
 ## EXAMPLES
 
@@ -82,8 +50,7 @@ Type               String
 ## PARAMETERS
 
 ### -ConsoleHost
-Region for JumpCloud API host.
-Use 'console' for US or 'console.eu' for EU.
+
 
 ```yaml
 Type: System.String
@@ -98,23 +65,10 @@ Accept wildcard characters: False
 ```
 
 ### -Filter
-A filter to apply to the query.
 
-**Filter structure**: `\<field\>:\<operator\>:\<value\>`.
-
-**field** = Populate with a valid field from an endpoint response.
-
-**operator** = Supported operators are: eq, ne, gt, ge, lt, le, between, search, in.
-_Note: v1 operators differ from v2 operators._
-
-**value** = Populate with the value you want to search for.
-Is case sensitive.
-Supports wild cards.
-
-**EX:** `GET /api/v2/groups?filter=name:eq:Test+Group`
 
 ```yaml
-Type: System.Collections.Generic.List`1[[System.String, System.Private.CoreLib, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]
+Type: System.Collections.Generic.List`1[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]
 Parameter Sets: (All)
 Aliases:
 
@@ -126,7 +80,7 @@ Accept wildcard characters: False
 ```
 
 ### -InputObject
-Identity Parameter
+
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
@@ -141,7 +95,7 @@ Accept wildcard characters: False
 ```
 
 ### -RadiusserverId
-ObjectID of the Radius Server.
+
 
 ```yaml
 Type: System.String
@@ -173,7 +127,7 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-`INPUTOBJECT <IJumpCloudApiIdentity>`: Identity Parameter
+`INPUTOBJECT <IJumpCloudApiIdentity>`: 
   - `[AccountId <String>]`: 
   - `[ActivedirectoryId <String>]`: 
   - `[AdministratorId <String>]`: 

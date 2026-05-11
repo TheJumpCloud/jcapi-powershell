@@ -1,4 +1,32 @@
-﻿Function Get-JcSdkSystemInsightAzureInstanceTag
+<#
+.Synopsis
+Valid filter fields are `system_id`.
+.Description
+Valid filter fields are `system_id`.
+.Example
+PS C:\> Get-JcSdkSystemInsightAzureInstanceTag
+
+
+
+----           ----------
+CollectionTime String
+Key            String
+SystemId       String
+Value          String
+VMId           String
+
+
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+
+.Outputs
+JumpCloud.SDK.V2.Models.ISystemInsightsAzureInstanceTags
+.Link
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkSystemInsightAzureInstanceTag.md
+#>
+ Function Get-JcSdkSystemInsightAzureInstanceTag
 {
     [OutputType([JumpCloud.SDK.V2.Models.ISystemInsightsAzureInstanceTags])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
@@ -193,3 +221,5 @@
         Return $Results
     }
 }
+
+

@@ -1,4 +1,49 @@
-﻿Function Get-JcSdkDirectory
+<#
+.Synopsis
+This endpoint returns all active directories (LDAP, O365 Suite, G-Suite).
+
+#### Sample Request
+```
+ curl -X GET https://console.jumpcloud.com/api/v2/directories \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+```
+.Description
+This endpoint returns all active directories (LDAP, O365 Suite, G-Suite).
+
+#### Sample Request
+```
+ curl -X GET https://console.jumpcloud.com/api/v2/directories \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}'
+```
+.Example
+PS C:\> Get-JcSdkDirectory
+
+
+
+----                ----------
+DefaultDomainDomain String
+DefaultDomainId     String
+Id                  String
+Name                String
+OAuthStatus         JumpCloud.SDK.V2.Models.DirectoryOAuthStatus
+Type                String
+
+
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+
+.Outputs
+JumpCloud.SDK.V2.Models.IDirectory
+.Link
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkDirectory.md
+#>
+ Function Get-JcSdkDirectory
 {
     [OutputType([JumpCloud.SDK.V2.Models.IDirectory])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
@@ -181,3 +226,5 @@
         Return $Results
     }
 }
+
+

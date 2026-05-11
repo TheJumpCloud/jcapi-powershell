@@ -1,4 +1,40 @@
-﻿Function Get-JcSdkSystemInsightDiskInfo
+<#
+.Synopsis
+Valid filter fields are `system_id` and `disk_index`.
+.Description
+Valid filter fields are `system_id` and `disk_index`.
+.Example
+PS C:\> Get-JcSdkSystemInsightDiskInfo
+
+
+
+----           ----------
+CollectionTime String
+Description    String
+DiskIndex      Int
+DiskSize       String
+HardwareModel  String
+Id             String
+Manufacturer   String
+Name           String
+Partitions     Int
+PnpDeviceId    String
+Serial         String
+SystemId       String
+Type           String
+
+
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+
+.Outputs
+JumpCloud.SDK.V2.Models.ISystemInsightsDiskInfo
+.Link
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkSystemInsightDiskInfo.md
+#>
+ Function Get-JcSdkSystemInsightDiskInfo
 {
     [OutputType([JumpCloud.SDK.V2.Models.ISystemInsightsDiskInfo])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
@@ -193,3 +229,5 @@
         Return $Results
     }
 }
+
+

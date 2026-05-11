@@ -8,17 +8,7 @@ schema: 2.0.0
 # Get-JcSdkRadiusServerAssociation
 
 ## SYNOPSIS
-This endpoint returns the _direct_ associations of a Radius Server.
 
-A direct association can be a non-homogeneous relationship between 2 different objects, for example Radius Servers and Users.
-
-#### Sample Request
-```
-curl -X GET https://console.jumpcloud.com/api/v2/radiusservers/{RADIUS_ID}/associations?targets=user_group \\
-  -H 'Accept: application/json' \\
-  -H 'Content-Type: application/json' \\
-  -H 'x-api-key: {API_KEY}'
-```
 
 ## SYNTAX
 
@@ -35,17 +25,7 @@ Get-JcSdkRadiusServerAssociation -ConsoleHost <String> -InputObject <IJumpCloudA
 ```
 
 ## DESCRIPTION
-This endpoint returns the _direct_ associations of a Radius Server.
 
-A direct association can be a non-homogeneous relationship between 2 different objects, for example Radius Servers and Users.
-
-#### Sample Request
-```
-curl -X GET https://console.jumpcloud.com/api/v2/radiusservers/{RADIUS_ID}/associations?targets=user_group \\
-  -H 'Accept: application/json' \\
-  -H 'Content-Type: application/json' \\
-  -H 'x-api-key: {API_KEY}'
-```
 
 ## EXAMPLES
 
@@ -73,8 +53,7 @@ ToType         String
 ## PARAMETERS
 
 ### -ConsoleHost
-Region for JumpCloud API host.
-Use 'console' for US or 'console.eu' for EU.
+
 
 ```yaml
 Type: System.String
@@ -89,7 +68,7 @@ Accept wildcard characters: False
 ```
 
 ### -InputObject
-Identity Parameter
+
 
 ```yaml
 Type: JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
@@ -104,7 +83,7 @@ Accept wildcard characters: False
 ```
 
 ### -RadiusserverId
-ObjectID of the Radius Server.
+
 
 ```yaml
 Type: System.String
@@ -119,7 +98,7 @@ Accept wildcard characters: False
 ```
 
 ### -Targets
-Targets which a "active_directory" can be associated to.
+
 
 ```yaml
 Type: System.String
@@ -151,7 +130,7 @@ COMPLEX PARAMETER PROPERTIES
 To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
 
 
-`INPUTOBJECT <IJumpCloudApiIdentity>`: Identity Parameter
+`INPUTOBJECT <IJumpCloudApiIdentity>`: 
   - `[AccountId <String>]`: 
   - `[ActivedirectoryId <String>]`: 
   - `[AdministratorId <String>]`: 

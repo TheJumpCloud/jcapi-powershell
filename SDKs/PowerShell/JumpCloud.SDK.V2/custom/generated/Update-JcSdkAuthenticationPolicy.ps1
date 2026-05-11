@@ -1,4 +1,160 @@
-﻿Function Update-JcSdkAuthenticationPolicy
+<#
+.Synopsis
+Patch the specified authentication policy.
+
+#### Sample Request
+```
+curl -X PATCH https://console.jumpcloud.com/api/v2/authn/policies/{id} \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{ \"disabled\": false }'
+```
+.Description
+Patch the specified authentication policy.
+
+#### Sample Request
+```
+curl -X PATCH https://console.jumpcloud.com/api/v2/authn/policies/{id} \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{ \"disabled\": false }'
+```
+.Example
+PS C:\> Update-JcSdkAuthenticationPolicy -Id:(<string>) -Body:(<JumpCloud.SDK.V2.Models.AuthnPolicy>)
+
+
+
+----                        ----------
+Conditions                  JumpCloud.SDK.V2.Models.AuthnPolicyConditions
+Description                 String
+Disabled                    Boolean
+EffectAction                String
+Id                          String
+MfaRequired                 Boolean
+Name                        String
+TargetResources             JumpCloud.SDK.V2.Models.AuthnPolicyResourceTarget[]
+Type                        String
+UserAttributeExclusions     JumpCloud.SDK.V2.Models.AuthnPolicyUserAttributeFilter[]
+UserAttributeInclusions     JumpCloud.SDK.V2.Models.AuthnPolicyUserAttributeFilter[]
+UserGroupExclusions         String
+UserGroupInclusions         String
+UserInclusions              String
+UserVerificationRequirement String
+
+
+.Example
+PS C:\> Update-JcSdkAuthenticationPolicy -Id:(<string>) -Conditions:(<hashtable>) -Description:(<string>) -Disabled:(<switch>) -EffectAction:(<string>) -MfaRequired:(<switch>) -Name:(<string>) -TargetResources:(<JumpCloud.SDK.V2.Models.AuthnPolicyResourceTarget[]>) -Type:(<string>) -UserAttributeExclusions:(<JumpCloud.SDK.V2.Models.AuthnPolicyUserAttributeFilter[]>) -UserAttributeInclusions:(<JumpCloud.SDK.V2.Models.AuthnPolicyUserAttributeFilter[]>) -UserGroupExclusions:(<string[]>) -UserGroupInclusions:(<string[]>) -UserInclusions:(<string[]>) -UserVerificationRequirement:(<string>)
+
+
+
+----                        ----------
+Conditions                  JumpCloud.SDK.V2.Models.AuthnPolicyConditions
+Description                 String
+Disabled                    Boolean
+EffectAction                String
+Id                          String
+MfaRequired                 Boolean
+Name                        String
+TargetResources             JumpCloud.SDK.V2.Models.AuthnPolicyResourceTarget[]
+Type                        String
+UserAttributeExclusions     JumpCloud.SDK.V2.Models.AuthnPolicyUserAttributeFilter[]
+UserAttributeInclusions     JumpCloud.SDK.V2.Models.AuthnPolicyUserAttributeFilter[]
+UserGroupExclusions         String
+UserGroupInclusions         String
+UserInclusions              String
+UserVerificationRequirement String
+
+
+
+.Inputs
+JumpCloud.SDK.V2.Models.IAuthnPolicy
+.Inputs
+JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
+.Outputs
+JumpCloud.SDK.V2.Models.IAuthnPolicy
+.Notes
+COMPLEX PARAMETER PROPERTIES
+
+To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
+
+BODY <IAuthnPolicy>:
+  [Conditions <IAuthnPolicyConditions>]: Dictionary of <any>
+    [(Any) <Object>]: This indicates any property can be added to this object.
+  [CustomErrorMessage <String>]: The custom error message to be displayed when the policy is applied.
+  [CustomErrorMessageEnabled <Boolean?>]: Indicates whether the custom error message is enabled or not.
+  [Description <String>]:
+  [Disabled <Boolean?>]:
+  [EffectAction <String>]:
+  [MfaRequired <Boolean?>]:
+  [Name <String>]:
+  [ObligationMfaFactors <List<IAuthnPolicyObligationsMfaFactorsItem>>]:
+    [Type <String>]:
+  [PrimaryHelpText <String>]: The text to be displayed for the help link.
+  [PrimaryHelpUrl <String>]: The URL to be opened when the help link is clicked.
+  [SecondaryHelpText <String>]: The text to be displayed for the help link.
+  [SecondaryHelpUrl <String>]: The URL to be opened when the help link is clicked.
+  [TargetResources <List<IAuthnPolicyResourceTarget>>]:
+    Type <String>:
+    [Id <String>]: Object ID of the resource target. If undefined, then all resources of the given type are targeted.
+  [Type <String>]: AuthnPolicyType
+  [UserAttributeExclusions <List<IAuthnPolicyUserAttributeFilter>>]:
+    [Field <String>]: The only field that is currently supported is ldap_binding_user
+    [Operator <String>]:
+    [Value <IAny>]: Can be any value - string, number, boolean, array or object.
+  [UserAttributeInclusions <List<IAuthnPolicyUserAttributeFilter>>]:
+  [UserGroupExclusions <List<String>>]:
+  [UserGroupInclusions <List<String>>]:
+  [UserInclusions <List<String>>]:
+  [UserVerificationRequirement <String>]:
+
+INPUTOBJECT <IJumpCloudApiIdentity>:
+  [AccountId <String>]:
+  [ActivedirectoryId <String>]:
+  [AdministratorId <String>]:
+  [AgentId <String>]:
+  [AppleMdmId <String>]:
+  [ApplicationId <String>]: ObjectID of the Application.
+  [ApprovalFlowId <String>]:
+  [CommandId <String>]: ObjectID of the Command.
+  [CustomEmailType <String>]:
+  [DeviceId <String>]:
+  [GroupId <String>]: ObjectID of the Policy Group.
+  [GsuiteId <String>]: ObjectID of the G Suite instance.
+  [Id <String>]: ObjectID of this Active Directory instance.
+  [JobId <String>]:
+  [LdapserverId <String>]: ObjectID of the LDAP Server.
+  [Office365Id <String>]: ObjectID of the Office 365 instance.
+  [PolicyId <String>]: ObjectID of the Policy.
+  [ProviderId <String>]:
+  [PushEndpointId <String>]:
+  [RadiusserverId <String>]: ObjectID of the Radius Server.
+  [SoftwareAppId <String>]: ObjectID of the Software App.
+  [SystemId <String>]: ObjectID of the System.
+  [UserId <String>]: ObjectID of the User.
+  [WorkdayId <String>]:
+
+OBLIGATIONMFAFACTORS <IAuthnPolicyObligationsMfaFactorsItem[]>:
+  [Type <String>]:
+
+TARGETRESOURCES <IAuthnPolicyResourceTarget[]>:
+  Type <String>:
+  [Id <String>]: Object ID of the resource target. If undefined, then all resources of the given type are targeted.
+
+USERATTRIBUTEEXCLUSIONS <IAuthnPolicyUserAttributeFilter[]>:
+  [Field <String>]: The only field that is currently supported is ldap_binding_user
+  [Operator <String>]:
+  [Value <IAny>]: Can be any value - string, number, boolean, array or object.
+
+USERATTRIBUTEINCLUSIONS <IAuthnPolicyUserAttributeFilter[]>:
+  [Field <String>]: The only field that is currently supported is ldap_binding_user
+  [Operator <String>]:
+  [Value <IAny>]: Can be any value - string, number, boolean, array or object.
+.Link
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Update-JcSdkAuthenticationPolicy.md
+#>
+ Function Update-JcSdkAuthenticationPolicy
 {
     [OutputType([JumpCloud.SDK.V2.Models.IAuthnPolicy])]
     [CmdletBinding(DefaultParameterSetName='UpdateExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
@@ -279,3 +435,5 @@
         Return $Results
     }
 }
+
+

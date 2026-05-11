@@ -1,4 +1,38 @@
-﻿Function Get-JcSdkSystemInsightScheduledTask
+<#
+.Synopsis
+Valid filter fields are `system_id` and `enabled`.
+.Description
+Valid filter fields are `system_id` and `enabled`.
+.Example
+PS C:\> Get-JcSdkSystemInsightScheduledTask
+
+
+
+----           ----------
+Action         String
+Enabled        Int
+Hidden         Int
+LastRunCode    String
+LastRunMessage String
+LastRunTime    String
+Name           String
+NextRunTime    String
+Path           String
+State          String
+SystemId       String
+
+
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+
+.Outputs
+JumpCloud.SDK.V2.Models.ISystemInsightsScheduledTasks
+.Link
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkSystemInsightScheduledTask.md
+#>
+ Function Get-JcSdkSystemInsightScheduledTask
 {
     [OutputType([JumpCloud.SDK.V2.Models.ISystemInsightsScheduledTasks])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
@@ -193,3 +227,5 @@
         Return $Results
     }
 }
+
+

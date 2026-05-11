@@ -1,4 +1,107 @@
-﻿Function Set-JcSdkDuoApplication
+<#
+.Synopsis
+Set the specified Duo application.
+
+#### Sample Request
+```
+  curl -X PUT https://console.jumpcloud.com/api/v2/duo/accounts/{ACCOUNT_ID}/applications/{APPLICATION_ID} \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"name\": \"Application Name\",
+    \"apiHost\": \"api-1234.duosecurity.com\",
+    \"integrationKey\": \"1234\",
+    \"secretKey\": \"5678\"
+  }'
+```
+.Description
+Set the specified Duo application.
+
+#### Sample Request
+```
+  curl -X PUT https://console.jumpcloud.com/api/v2/duo/accounts/{ACCOUNT_ID}/applications/{APPLICATION_ID} \\
+  -H 'accept: application/json' \\
+  -H 'content-type: application/json' \\
+  -H 'x-api-key: {API_KEY}' \\
+  -d '{
+    \"name\": \"Application Name\",
+    \"apiHost\": \"api-1234.duosecurity.com\",
+    \"integrationKey\": \"1234\",
+    \"secretKey\": \"5678\"
+  }'
+```
+.Example
+PS C:\> Set-JcSdkDuoApplication -AccountId:(<string>) -ApplicationId:(<string>) -Body:(<JumpCloud.SDK.V2.Models.DuoApplicationUpdateReq>)
+
+
+
+----           ----------
+ApiHost        String
+Id             String
+IntegrationKey String
+Name           String
+
+
+.Example
+PS C:\> Set-JcSdkDuoApplication -AccountId:(<string>) -ApplicationId:(<string>) -ApiHost:(<string>) -IntegrationKey:(<string>) -Name:(<string>) -SecretKey:(<string>)
+
+
+
+----           ----------
+ApiHost        String
+Id             String
+IntegrationKey String
+Name           String
+
+
+
+.Inputs
+JumpCloud.SDK.V2.Models.IDuoApplicationUpdateReq
+.Inputs
+JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
+.Outputs
+JumpCloud.SDK.V2.Models.IDuoApplication
+.Notes
+COMPLEX PARAMETER PROPERTIES
+
+To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
+
+BODY <IDuoApplicationUpdateReq>:
+  ApiHost <String>:
+  IntegrationKey <String>:
+  Name <String>:
+  [SecretKey <String>]:
+
+INPUTOBJECT <IJumpCloudApiIdentity>:
+  [AccountId <String>]:
+  [ActivedirectoryId <String>]:
+  [AdministratorId <String>]:
+  [AgentId <String>]:
+  [AppleMdmId <String>]:
+  [ApplicationId <String>]: ObjectID of the Application.
+  [ApprovalFlowId <String>]:
+  [CommandId <String>]: ObjectID of the Command.
+  [CustomEmailType <String>]:
+  [DeviceId <String>]:
+  [GroupId <String>]: ObjectID of the Policy Group.
+  [GsuiteId <String>]: ObjectID of the G Suite instance.
+  [Id <String>]: ObjectID of this Active Directory instance.
+  [JobId <String>]:
+  [LdapserverId <String>]: ObjectID of the LDAP Server.
+  [Office365Id <String>]: ObjectID of the Office 365 instance.
+  [PolicyId <String>]: ObjectID of the Policy.
+  [ProviderId <String>]:
+  [PushEndpointId <String>]:
+  [RadiusserverId <String>]: ObjectID of the Radius Server.
+  [SoftwareAppId <String>]: ObjectID of the Software App.
+  [SystemId <String>]: ObjectID of the System.
+  [UserId <String>]: ObjectID of the User.
+  [WorkdayId <String>]:
+.Link
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Set-JcSdkDuoApplication.md
+#>
+ Function Set-JcSdkDuoApplication
 {
     [OutputType([JumpCloud.SDK.V2.Models.IDuoApplication])]
     [CmdletBinding(DefaultParameterSetName='SetExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
@@ -158,3 +261,5 @@
         Return $Results
     }
 }
+
+

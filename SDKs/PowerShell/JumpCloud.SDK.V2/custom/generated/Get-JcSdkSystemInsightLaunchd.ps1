@@ -1,4 +1,50 @@
-﻿Function Get-JcSdkSystemInsightLaunchd
+<#
+.Synopsis
+Valid filter fields are `system_id` and `name`.
+.Description
+Valid filter fields are `system_id` and `name`.
+.Example
+PS C:\> Get-JcSdkSystemInsightLaunchd
+
+
+
+----               ----------
+CollectionTime     String
+Disabled           String
+Groupname          String
+InetdCompatibility String
+KeepAlive          String
+Label              String
+Name               String
+OnDemand           String
+Path               String
+ProcessType        String
+Program            String
+ProgramArguments   String
+QueueDirectories   String
+RootDirectory      String
+RunAtLoad          String
+StartInterval      String
+StartOnMount       String
+StderrPath         String
+StdoutPath         String
+SystemId           String
+Username           String
+WatchPaths         String
+WorkingDirectory   String
+
+
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+
+.Outputs
+JumpCloud.SDK.V2.Models.ISystemInsightsLaunchd
+.Link
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkSystemInsightLaunchd.md
+#>
+ Function Get-JcSdkSystemInsightLaunchd
 {
     [OutputType([JumpCloud.SDK.V2.Models.ISystemInsightsLaunchd])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
@@ -193,3 +239,5 @@
         Return $Results
     }
 }
+
+

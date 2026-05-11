@@ -1,4 +1,29 @@
-﻿Function Get-JcSdkAdministratorOrganizationLink
+<#
+.Synopsis
+This endpoint returns the association links between an Organization and Administrators.
+.Description
+This endpoint returns the association links between an Organization and Administrators.
+.Example
+PS C:\> Get-JcSdkAdministratorOrganizationLink
+
+
+
+----          ----------
+Administrator String
+Organization  String
+
+
+.Example
+PS C:\> {{ Add code here }}
+
+{{ Add output here }}
+
+.Outputs
+JumpCloud.SDK.V2.Models.IAdministratorOrganizationLink
+.Link
+https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkAdministratorOrganizationLink.md
+#>
+ Function Get-JcSdkAdministratorOrganizationLink
 {
     [OutputType([JumpCloud.SDK.V2.Models.IAdministratorOrganizationLink])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
@@ -169,3 +194,5 @@
         Return $Results
     }
 }
+
+
