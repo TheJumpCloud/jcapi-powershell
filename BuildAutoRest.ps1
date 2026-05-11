@@ -190,7 +190,7 @@ ForEach ($SDK In $SDKName)
             }
             # After AutoRest generation, create a ModuleIdentifier.cs file for each SDK
             $moduleIdentifierPath = "$OutputFullPath/custom/ModuleIdentifier.cs"
-            $sdkIdentifier = switch ($SDKNameItem) {
+            $sdkIdentifier = switch ($SDKName) {
                 'JumpCloud.SDK.DirectoryInsights' { 'DirectoryInsights' }
                 'JumpCloud.SDK.V1' { 'V1' }
                 'JumpCloud.SDK.V2' { 'V2' }
