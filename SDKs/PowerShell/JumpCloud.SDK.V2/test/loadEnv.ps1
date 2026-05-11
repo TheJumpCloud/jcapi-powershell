@@ -17,3 +17,16 @@ if (Test-Path -Path $envFilePath) {
     $env = Get-Content (Join-Path $PSScriptRoot $envFile) | ConvertFrom-Json
     $PSDefaultParameterValues=@{"*:Tenant"=$env.Tenant}
 }
+# Determine default host values based on environment
+$apiHost = 'api'
+$consoleHost = 'console'
+
+if ($env:JCEnvironment -eq 'EU') {
+    $apiHost = 'api.eu'
+    $consoleHost = 'console.eu'
+}
+
+# Set both parameter defaults so all SDKs work correctly
+$PSDefaultParameterValues['*-JcSdk*:ApiHost'] = $apiHost
+$PSDefaultParameterValues['*-JcSdk*:ConsoleHost'] = $consoleHost
+# Write-Host "Test environment loaded. ApiHost set to: $apiHost, ConsoleHost set to: $consoleHost"

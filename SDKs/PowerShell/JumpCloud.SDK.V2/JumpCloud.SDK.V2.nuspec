@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
   <metadata>
     <id>JumpCloud.SDK.V2</id>
@@ -9,9 +9,11 @@
     <licenseUrl>https://github.com/TheJumpCloud/jcapi-powershell/tree/$(branch)/LICENSE</licenseUrl>
     <projectUrl>https://github.com/TheJumpCloud/jcapi-powershell/tree/$(branch)/SDKs/PowerShell/JumpCloud.SDK.V2/</projectUrl>
     <description>The JumpCloud V2 PowerShell SDK</description>
-    <releaseNotes></releaseNotes>
+    <releaseNotes>
+    </releaseNotes>
     <copyright>(c) JumpCloud. All rights reserved.</copyright>
     <tags>JumpCloud, DaaS, Jump, Cloud, Directory</tags>
+    <repository type="git" url="https://github.com/TheJumpCloud/jcapi-powershell" />
   </metadata>
   <files>
     <file src="JumpCloud.SDK.V2.format.ps1xml" />
