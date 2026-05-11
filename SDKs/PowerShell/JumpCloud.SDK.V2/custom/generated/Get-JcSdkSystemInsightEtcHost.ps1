@@ -1,31 +1,4 @@
-<#
-.Synopsis
-Valid filter fields are `system_id` and `address`.
-.Description
-Valid filter fields are `system_id` and `address`.
-.Example
-PS C:\> Get-JcSdkSystemInsightEtcHost
-
-
-
-----           ----------
-Address        String
-CollectionTime String
-Hostnames      String
-SystemId       String
-
-
-.Example
-PS C:\> {{ Add code here }}
-
-{{ Add output here }}
-
-.Outputs
-JumpCloud.SDK.V2.Models.ISystemInsightsEtcHosts
-.Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkSystemInsightEtcHost.md
-#>
- Function Get-JcSdkSystemInsightEtcHost
+﻿Function Get-JcSdkSystemInsightEtcHost
 {
     [OutputType([JumpCloud.SDK.V2.Models.ISystemInsightsEtcHosts])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
@@ -220,5 +193,3 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
-
-

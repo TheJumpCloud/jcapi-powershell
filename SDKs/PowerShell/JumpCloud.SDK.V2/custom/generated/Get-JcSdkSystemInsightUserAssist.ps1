@@ -1,33 +1,4 @@
-<#
-.Synopsis
-Valid filter fields are `system_id`.
-.Description
-Valid filter fields are `system_id`.
-.Example
-PS C:\> Get-JcSdkSystemInsightUserAssist
-
-
-
-----              ----------
-CollectionTime    String
-Count             System.Nullable[float] Count {get;set;}
-LastExecutionTime System.Nullable[float] LastExecutionTime {get;set;}
-Path              String
-Sid               String
-SystemId          String
-
-
-.Example
-PS C:\> {{ Add code here }}
-
-{{ Add output here }}
-
-.Outputs
-JumpCloud.SDK.V2.Models.ISystemInsightsUserassist
-.Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkSystemInsightUserAssist.md
-#>
- Function Get-JcSdkSystemInsightUserAssist
+﻿Function Get-JcSdkSystemInsightUserAssist
 {
     [OutputType([JumpCloud.SDK.V2.Models.ISystemInsightsUserassist])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
@@ -222,5 +193,3 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
-
-

@@ -1,32 +1,4 @@
-<#
-.Synopsis
-Endpoint for user approval
-.Description
-Endpoint for user approval
-.Example
-PS C:\> Set-JcSdkAccessRequestApproval -ApprovedDuration:(<string>) -Id:(<string>) -OrganizationObjectIdInputFile:(<string>) -Remarks:(<string>) -Status:(<string>)
-.Example
-PS C:\> Set-JcSdkAccessRequestApproval -Body:(<JumpCloud.SDK.V2.Models.JumpcloudIngressoUserApprovalRequest>)
-
-.Inputs
-JumpCloud.SDK.V2.Models.IJumpcloudIngressoUserApprovalRequest
-.Outputs
-JumpCloud.SDK.V2.Models.IJumpcloudIngressoUserApprovalRequestResponse
-.Notes
-COMPLEX PARAMETER PROPERTIES
-
-To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
-
-BODY <IJumpcloudIngressoUserApprovalRequest>:
-  [ApprovedDuration <String>]:
-  [Id <String>]:
-  [OrganizationObjectId <Byte[]>]:
-  [Remarks <String>]:
-  [Status <String>]:
-.Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Set-JcSdkAccessRequestApproval.md
-#>
- Function Set-JcSdkAccessRequestApproval
+﻿Function Set-JcSdkAccessRequestApproval
 {
     [OutputType([JumpCloud.SDK.V2.Models.IJumpcloudIngressoUserApprovalRequestResponse])]
     [CmdletBinding(DefaultParameterSetName='SetExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
@@ -166,5 +138,3 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
-
-

@@ -1,42 +1,4 @@
-<#
-.Synopsis
-Valid filter fields are `system_id`.
-.Description
-Valid filter fields are `system_id`.
-.Example
-PS C:\> Get-JcSdkSystemInsightChassisInfo
-
-
-
-----              ----------
-AudibleAlarm      String
-BreachDescription String
-ChassisTypes      String
-CollectionTime    String
-Description       String
-Lock              String
-Manufacturer      String
-Model             String
-SecurityBreach    String
-Serial            String
-Sku               String
-SmbiosTag         String
-Status            String
-SystemId          String
-VisibleAlarm      String
-
-
-.Example
-PS C:\> {{ Add code here }}
-
-{{ Add output here }}
-
-.Outputs
-JumpCloud.SDK.V2.Models.ISystemInsightsChassisInfo
-.Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkSystemInsightChassisInfo.md
-#>
- Function Get-JcSdkSystemInsightChassisInfo
+﻿Function Get-JcSdkSystemInsightChassisInfo
 {
     [OutputType([JumpCloud.SDK.V2.Models.ISystemInsightsChassisInfo])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
@@ -231,5 +193,3 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
-
-

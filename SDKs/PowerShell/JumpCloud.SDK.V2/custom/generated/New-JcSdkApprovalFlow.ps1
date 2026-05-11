@@ -1,61 +1,4 @@
-<#
-.Synopsis
-Endpoint for adding a new access workflow
-.Description
-Endpoint for adding a new access workflow
-.Example
-New-JcSdkApprovalFlow -ApprovalType 'manual' -Category "Application" -Description "A new workflow" -MultiSelectDuration @("P5D") -Name "New Workflow" -ResourceId 5d67fd481da3c52aa1faa883 -ResourceType "user_group" -Status "active" -TimeBasedAccess -TtlConfig "TTL_CONFIG_MULTI_SELECT_DURATIONS" -VisibleTo @('6148cd739d38866f0814e874')
-
-.Inputs
-JumpCloud.SDK.V2.Models.IJumpcloudIngressoCreateAccessWorkflowRequest
-.Outputs
-JumpCloud.SDK.V2.Models.IJumpcloudIngressoCreateAccessWorkflowResponse
-.Notes
-COMPLEX PARAMETER PROPERTIES
-
-To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
-
-APPROVERRESOURCES <IJumpcloudIngressoApproverResource[]>:
-  [RequireAll <Boolean?>]:
-  [ResourceId <String>]:
-  [ResourceName <String>]:
-  [ResourceOrder <Int32?>]:
-  [ResourceType <String>]:
-
-BODY <IJumpcloudIngressoCreateAccessWorkflowRequest>:
-  [ApprovalType <String>]:
-  [ApproverRequirement <String>]:
-  [ApproverResources <List<IJumpcloudIngressoApproverResource>>]:
-    [RequireAll <Boolean?>]:
-    [ResourceId <String>]:
-    [ResourceName <String>]:
-    [ResourceOrder <Int32?>]:
-    [ResourceType <String>]:
-  [Category <String>]:
-  [Description <String>]:
-  [FixedDuration <String>]:
-  [IconColor <String>]:
-  [IconUrl <String>]:
-  [MultiSelectDuration <List<String>>]:
-  [Name <String>]:
-  [NonAdminApproval <Boolean?>]:
-  [OrganizationObjectId <Byte[]>]:
-  [ResourceId <String>]:
-  [ResourceType <String>]:
-  [SlackConfig <List<IJumpcloudIngressoSlackConfig>>]:
-    [SlackResourceId <String>]:
-  [SlackEnabled <Boolean?>]:
-  [Status <String>]:
-  [TimeBasedAccess <Boolean?>]:
-  [TtlConfig <String>]:
-  [VisibleTo <List<String>>]:
-
-SLACKCONFIG <IJumpcloudIngressoSlackConfig[]>:
-  [SlackResourceId <String>]:
-.Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/New-JcSdkApprovalFlow.md
-#>
- Function New-JcSdkApprovalFlow
+﻿Function New-JcSdkApprovalFlow
 {
     [OutputType([JumpCloud.SDK.V2.Models.IJumpcloudIngressoCreateAccessWorkflowResponse])]
     [CmdletBinding(DefaultParameterSetName='CreateExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
@@ -289,5 +232,3 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
-
-

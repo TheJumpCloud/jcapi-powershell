@@ -1,66 +1,4 @@
-<#
-.Synopsis
-Create the custom email configuration for the specified custom email type.
-
-This action is only available to paying customers.
-.Description
-Create the custom email configuration for the specified custom email type.
-
-This action is only available to paying customers.
-.Example
-PS C:\> New-JcSdkCustomEmailConfiguration -Subject:(<string>) -Type:(<string>) -Body:(<string>) -Button:(<string>) -Header:(<string>) -NextStepContactInfo:(<string>) -Title:(<string>)
-
-
-
-----                ----------
-Body                String
-Button              String
-Header              String
-Id                  String
-NextStepContactInfo String
-Subject             String
-Title               String
-Type                String
-
-
-.Example
-PS C:\> New-JcSdkCustomEmailConfiguration -CustomEmail:(<JumpCloud.SDK.V2.Models.CustomEmail>)
-
-
-
-----                ----------
-Body                String
-Button              String
-Header              String
-Id                  String
-NextStepContactInfo String
-Subject             String
-Title               String
-Type                String
-
-
-
-.Inputs
-JumpCloud.SDK.V2.Models.ICustomEmail
-.Outputs
-JumpCloud.SDK.V2.Models.ICustomEmail
-.Notes
-COMPLEX PARAMETER PROPERTIES
-
-To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
-
-CUSTOMEMAIL <ICustomEmail>:
-  Subject <String>:
-  Type <String>:
-  [Body <String>]:
-  [Button <String>]:
-  [Header <String>]:
-  [NextStepContactInfo <String>]:
-  [Title <String>]:
-.Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/New-JcSdkCustomEmailConfiguration.md
-#>
- Function New-JcSdkCustomEmailConfiguration
+﻿Function New-JcSdkCustomEmailConfiguration
 {
     [OutputType([JumpCloud.SDK.V2.Models.ICustomEmail])]
     [CmdletBinding(DefaultParameterSetName='CreateExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
@@ -212,5 +150,3 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
-
-

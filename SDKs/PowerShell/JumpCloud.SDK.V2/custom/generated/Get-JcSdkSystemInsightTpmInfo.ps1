@@ -1,38 +1,4 @@
-<#
-.Synopsis
-Valid filter fields are `system_id`.
-.Description
-Valid filter fields are `system_id`.
-.Example
-PS C:\> Get-JcSdkSystemInsightTpmInfo
-
-
-
-----                    ----------
-Activated               System.Nullable[float] Activated {get;set;}
-CollectionTime          String
-Enabled                 System.Nullable[float] Enabled {get;set;}
-ManufacturerId          System.Nullable[float] ManufacturerId {get;set;}
-ManufacturerName        String
-ManufacturerVersion     String
-Owned                   System.Nullable[float] Owned {get;set;}
-PhysicalPresenceVersion String
-ProductName             String
-SpecVersion             String
-SystemId                String
-
-
-.Example
-PS C:\> {{ Add code here }}
-
-{{ Add output here }}
-
-.Outputs
-JumpCloud.SDK.V2.Models.ISystemInsightsTpmInfo
-.Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkSystemInsightTpmInfo.md
-#>
- Function Get-JcSdkSystemInsightTpmInfo
+﻿Function Get-JcSdkSystemInsightTpmInfo
 {
     [OutputType([JumpCloud.SDK.V2.Models.ISystemInsightsTpmInfo])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
@@ -227,5 +193,3 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
-
-

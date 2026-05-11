@@ -2,6 +2,6 @@ namespace ModuleNameSpace
 {
     public static class ModuleIdentifier
     {
-        public const string SDKName = "DirectoryInsights";
+        public const string SDKName = "";
     }
 }

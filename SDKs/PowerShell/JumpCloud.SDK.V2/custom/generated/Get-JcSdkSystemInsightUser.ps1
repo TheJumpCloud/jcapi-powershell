@@ -1,45 +1,4 @@
-<#
-.Synopsis
-Valid filter fields are `system_id` and `username`.
-.Description
-Valid filter fields are `system_id` and `username`.
-.Example
-PS C:\> Get-JcSdkSystemInsightUser
-
-
-
-----           ----------
-AdManaged      Boolean
-Admin          Boolean
-CollectionTime String
-Description    String
-Directory      String
-Gid            String
-GidSigned      String
-LastLogin      String
-Managed        Boolean
-RealUser       Boolean
-Shell          String
-Suspended      Boolean
-SystemId       String
-Type           String
-Uid            String
-UidSigned      String
-Username       String
-Uuid           String
-
-
-.Example
-PS C:\> {{ Add code here }}
-
-{{ Add output here }}
-
-.Outputs
-JumpCloud.SDK.V2.Models.ISystemInsightsUsers
-.Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkSystemInsightUser.md
-#>
- Function Get-JcSdkSystemInsightUser
+﻿Function Get-JcSdkSystemInsightUser
 {
     [OutputType([JumpCloud.SDK.V2.Models.ISystemInsightsUsers])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
@@ -234,5 +193,3 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
-
-

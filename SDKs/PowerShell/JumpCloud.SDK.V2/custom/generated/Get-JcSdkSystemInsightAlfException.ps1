@@ -1,31 +1,4 @@
-<#
-.Synopsis
-Valid filter fields are `system_id` and `state`.
-.Description
-Valid filter fields are `system_id` and `state`.
-.Example
-PS C:\> Get-JcSdkSystemInsightAlfException
-
-
-
-----           ----------
-CollectionTime String
-Path           String
-State          System.Nullable[float] State {get;set;}
-SystemId       String
-
-
-.Example
-PS C:\> {{ Add code here }}
-
-{{ Add output here }}
-
-.Outputs
-JumpCloud.SDK.V2.Models.ISystemInsightsAlfExceptions
-.Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkSystemInsightAlfException.md
-#>
- Function Get-JcSdkSystemInsightAlfException
+﻿Function Get-JcSdkSystemInsightAlfException
 {
     [OutputType([JumpCloud.SDK.V2.Models.ISystemInsightsAlfExceptions])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
@@ -220,5 +193,3 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
-
-

@@ -1,61 +1,4 @@
-<#
-.Synopsis
-Endpoint that set the workflow access request by id
-.Description
-Endpoint that set the workflow access request by id
-.Example
-PS C:\> Set-JcSdkAccessRequest -Id:(<string>) -Admin:(<string>) -ApprovedDuration:(<string>) -InternalNote:(<string>) -OrganizationObjectIdInputFile:(<string>) -Remarks:(<string>) -Status:(<string>)
-.Example
-PS C:\> Set-JcSdkAccessRequest -Id:(<string>) -Body:(<JumpCloud.SDK.V2.Models.Paths17F25RsApprovalflowrequestIdPutRequestbodyContentApplicationJsonSchema>)
-
-.Inputs
-JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
-.Inputs
-JumpCloud.SDK.V2.Models.IPaths17F25RsApprovalflowrequestIdPutRequestbodyContentApplicationJsonSchema
-.Outputs
-JumpCloud.SDK.V2.Models.IJumpcloudIngressoUpdateWorkflowAccessRequestResponse
-.Notes
-COMPLEX PARAMETER PROPERTIES
-
-To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
-
-BODY <IPaths17F25RsApprovalflowrequestIdPutRequestbodyContentApplicationJsonSchema>:
-  [Admin <String>]:
-  [ApprovedDuration <String>]:
-  [InternalNote <String>]:
-  [OrganizationObjectId <Byte[]>]:
-  [Remarks <String>]:
-  [Status <String>]:
-
-INPUTOBJECT <IJumpCloudApiIdentity>:
-  [AccountId <String>]:
-  [ActivedirectoryId <String>]:
-  [AdministratorId <String>]:
-  [AgentId <String>]:
-  [AppleMdmId <String>]:
-  [ApplicationId <String>]: ObjectID of the Application.
-  [ApprovalFlowId <String>]:
-  [CommandId <String>]: ObjectID of the Command.
-  [CustomEmailType <String>]:
-  [DeviceId <String>]:
-  [GroupId <String>]: ObjectID of the Policy Group.
-  [GsuiteId <String>]: ObjectID of the G Suite instance.
-  [Id <String>]: ObjectID of this Active Directory instance.
-  [JobId <String>]:
-  [LdapserverId <String>]: ObjectID of the LDAP Server.
-  [Office365Id <String>]: ObjectID of the Office 365 instance.
-  [PolicyId <String>]: ObjectID of the Policy.
-  [ProviderId <String>]:
-  [PushEndpointId <String>]:
-  [RadiusserverId <String>]: ObjectID of the Radius Server.
-  [SoftwareAppId <String>]: ObjectID of the Software App.
-  [SystemId <String>]: ObjectID of the System.
-  [UserId <String>]: ObjectID of the User.
-  [WorkdayId <String>]:
-.Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Set-JcSdkAccessRequest.md
-#>
- Function Set-JcSdkAccessRequest
+﻿Function Set-JcSdkAccessRequest
 {
     [OutputType([JumpCloud.SDK.V2.Models.IJumpcloudIngressoUpdateWorkflowAccessRequestResponse])]
     [CmdletBinding(DefaultParameterSetName='SetExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
@@ -222,5 +165,3 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
-
-

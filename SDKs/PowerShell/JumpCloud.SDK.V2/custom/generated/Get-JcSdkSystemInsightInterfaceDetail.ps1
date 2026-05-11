@@ -1,63 +1,4 @@
-<#
-.Synopsis
-Valid filter fields are `system_id` and `interface`.
-.Description
-Valid filter fields are `system_id` and `interface`.
-.Example
-PS C:\> Get-JcSdkSystemInsightInterfaceDetail
-
-
-
-----                       ----------
-Collisions                 String
-ConnectionId               String
-ConnectionStatus           String
-Description                String
-DhcpEnabled                Int
-DhcpLeaseExpires           String
-DhcpLeaseObtained          String
-DhcpServer                 String
-DnsDomain                  String
-DnsDomainSuffixSearchOrder String
-DnsHostName                String
-DnsServerSearchOrder       String
-Enabled                    Int
-Flags                      Int
-FriendlyName               String
-Ibytes                     String
-Idrops                     String
-Ierrors                    String
-Interface                  String
-Ipackets                   String
-LastChange                 String
-LinkSpeed                  String
-Mac                        String
-Manufacturer               String
-Metric                     Int
-Mtu                        Int
-Obytes                     String
-Odrops                     String
-Oerrors                    String
-Opackets                   String
-PciSlot                    String
-PhysicalAdapter            Int
-Service                    String
-Speed                      Int
-SystemId                   String
-Type                       Int
-
-
-.Example
-PS C:\> {{ Add code here }}
-
-{{ Add output here }}
-
-.Outputs
-JumpCloud.SDK.V2.Models.ISystemInsightsInterfaceDetails
-.Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkSystemInsightInterfaceDetail.md
-#>
- Function Get-JcSdkSystemInsightInterfaceDetail
+﻿Function Get-JcSdkSystemInsightInterfaceDetail
 {
     [OutputType([JumpCloud.SDK.V2.Models.ISystemInsightsInterfaceDetails])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
@@ -252,5 +193,3 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
-
-

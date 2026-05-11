@@ -1,73 +1,4 @@
-<#
-.Synopsis
-Clears the activation lock on the specified device.
-
-#### Sample Request
-```
-  curl -X POST https://console.jumpcloud.com/api/v2/applemdms/{apple_mdm_id}/devices/{device_id}/clearActivationLock \\
-  -H 'accept: application/json' \\
-  -H 'content-type: application/json' \\
-  -H 'x-api-key: {API_KEY}' \\
-  -d '{}'
-```
-.Description
-Clears the activation lock on the specified device.
-
-#### Sample Request
-```
-  curl -X POST https://console.jumpcloud.com/api/v2/applemdms/{apple_mdm_id}/devices/{device_id}/clearActivationLock \\
-  -H 'accept: application/json' \\
-  -H 'content-type: application/json' \\
-  -H 'x-api-key: {API_KEY}' \\
-  -d '{}'
-```
-.Example
-PS C:\> Clear-JcSdkAppleMdmDeviceActivationLock -AppleMdmId:(<string>) -DeviceId:(<string>)
-
-
-.Example
-PS C:\> {{ Add code here }}
-
-{{ Add output here }}
-
-.Inputs
-JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
-.Outputs
-System.Boolean
-.Notes
-COMPLEX PARAMETER PROPERTIES
-
-To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
-
-INPUTOBJECT <IJumpCloudApiIdentity>:
-  [AccountId <String>]:
-  [ActivedirectoryId <String>]:
-  [AdministratorId <String>]:
-  [AgentId <String>]:
-  [AppleMdmId <String>]:
-  [ApplicationId <String>]: ObjectID of the Application.
-  [ApprovalFlowId <String>]:
-  [CommandId <String>]: ObjectID of the Command.
-  [CustomEmailType <String>]:
-  [DeviceId <String>]:
-  [GroupId <String>]: ObjectID of the Policy Group.
-  [GsuiteId <String>]: ObjectID of the G Suite instance.
-  [Id <String>]: ObjectID of this Active Directory instance.
-  [JobId <String>]:
-  [LdapserverId <String>]: ObjectID of the LDAP Server.
-  [Office365Id <String>]: ObjectID of the Office 365 instance.
-  [PolicyId <String>]: ObjectID of the Policy.
-  [ProviderId <String>]:
-  [PushEndpointId <String>]:
-  [RadiusserverId <String>]: ObjectID of the Radius Server.
-  [SoftwareAppId <String>]: ObjectID of the Software App.
-  [SystemId <String>]: ObjectID of the System.
-  [UserId <String>]: ObjectID of the User.
-  [WorkdayId <String>]:
-.Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Clear-JcSdkAppleMdmDeviceActivationLock.md
-#>
- Function Clear-JcSdkAppleMdmDeviceActivationLock
+﻿Function Clear-JcSdkAppleMdmDeviceActivationLock
 {
     [OutputType([System.Boolean])]
     [CmdletBinding(DefaultParameterSetName='Clear', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
@@ -195,5 +126,3 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
-
-

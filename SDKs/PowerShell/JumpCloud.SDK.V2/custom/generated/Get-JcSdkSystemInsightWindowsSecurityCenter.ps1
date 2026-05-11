@@ -1,36 +1,4 @@
-<#
-.Synopsis
-Valid filter fields are `system_id`.
-.Description
-Valid filter fields are `system_id`.
-.Example
-PS C:\> Get-JcSdkSystemInsightWindowsSecurityCenter
-
-
-
-----                         ----------
-Antispyware                  String
-Antivirus                    String
-Autoupdate                   String
-CollectionTime               String
-Firewall                     String
-InternetSettings             String
-SystemId                     String
-UserAccountControl           String
-WindowsSecurityCenterService String
-
-
-.Example
-PS C:\> {{ Add code here }}
-
-{{ Add output here }}
-
-.Outputs
-JumpCloud.SDK.V2.Models.ISystemInsightsWindowsSecurityCenter
-.Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkSystemInsightWindowsSecurityCenter.md
-#>
- Function Get-JcSdkSystemInsightWindowsSecurityCenter
+﻿Function Get-JcSdkSystemInsightWindowsSecurityCenter
 {
     [OutputType([JumpCloud.SDK.V2.Models.ISystemInsightsWindowsSecurityCenter])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
@@ -225,5 +193,3 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
-
-

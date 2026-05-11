@@ -1,54 +1,4 @@
-<#
-.Synopsis
-Lists all apps for macOS devices.
-For Windows devices, use [List System Insights Programs](#operation/systeminsights_list_programs).
-
-Valid filter fields are `system_id` and `bundle_name`.
-.Description
-Lists all apps for macOS devices.
-For Windows devices, use [List System Insights Programs](#operation/systeminsights_list_programs).
-
-Valid filter fields are `system_id` and `bundle_name`.
-.Example
-PS C:\> Get-JcSdkSystemInsightApp
-
-
-
-----                 ----------
-ApplescriptEnabled   String
-BundleExecutable     String
-BundleIdentifier     String
-BundleName           String
-BundlePackageType    String
-BundleShortVersion   String
-BundleVersion        String
-Category             String
-CollectionTime       String
-Compiler             String
-Copyright            String
-DevelopmentRegion    String
-DisplayName          String
-Element              String
-Environment          String
-InfoString
-LastOpenedTime       System.Nullable[float] LastOpenedTime {get;set;}
-MinimumSystemVersion String
-Name                 String
-Path                 String
-SystemId             String
-
-
-.Example
-PS C:\> {{ Add code here }}
-
-{{ Add output here }}
-
-.Outputs
-JumpCloud.SDK.V2.Models.ISystemInsightsApps
-.Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkSystemInsightApp.md
-#>
- Function Get-JcSdkSystemInsightApp
+﻿Function Get-JcSdkSystemInsightApp
 {
     [OutputType([JumpCloud.SDK.V2.Models.ISystemInsightsApps])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
@@ -243,5 +193,3 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
-
-

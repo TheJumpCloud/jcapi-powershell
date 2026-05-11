@@ -1,69 +1,4 @@
-<#
-.Synopsis
-This endpoint deletes a scheduled statechange job.
-#### Sample Request
-```
-curl -X DELETE \"https://console.jumpcloud.com/api/v2/bulk/userstates/{ScheduledJob_ID}\" \\
-  -H 'x-api-key: {API_KEY}' \\
-  -H 'Content-Type: application/json' \\
-  -H 'Accept: application/json'
-```
-.Description
-This endpoint deletes a scheduled statechange job.
-#### Sample Request
-```
-curl -X DELETE \"https://console.jumpcloud.com/api/v2/bulk/userstates/{ScheduledJob_ID}\" \\
-  -H 'x-api-key: {API_KEY}' \\
-  -H 'Content-Type: application/json' \\
-  -H 'Accept: application/json'
-```
-.Example
-PS C:\> Remove-JcSdkBulkUserState -Id:(<string>)
-
-
-.Example
-PS C:\> {{ Add code here }}
-
-{{ Add output here }}
-
-.Inputs
-JumpCloud.SDK.V2.Models.IJumpCloudApiIdentity
-.Outputs
-System.Boolean
-.Notes
-COMPLEX PARAMETER PROPERTIES
-
-To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
-
-INPUTOBJECT <IJumpCloudApiIdentity>:
-  [AccountId <String>]:
-  [ActivedirectoryId <String>]:
-  [AdministratorId <String>]:
-  [AgentId <String>]:
-  [AppleMdmId <String>]:
-  [ApplicationId <String>]: ObjectID of the Application.
-  [ApprovalFlowId <String>]:
-  [CommandId <String>]: ObjectID of the Command.
-  [CustomEmailType <String>]:
-  [DeviceId <String>]:
-  [GroupId <String>]: ObjectID of the Policy Group.
-  [GsuiteId <String>]: ObjectID of the G Suite instance.
-  [Id <String>]: ObjectID of this Active Directory instance.
-  [JobId <String>]:
-  [LdapserverId <String>]: ObjectID of the LDAP Server.
-  [Office365Id <String>]: ObjectID of the Office 365 instance.
-  [PolicyId <String>]: ObjectID of the Policy.
-  [ProviderId <String>]:
-  [PushEndpointId <String>]:
-  [RadiusserverId <String>]: ObjectID of the Radius Server.
-  [SoftwareAppId <String>]: ObjectID of the Software App.
-  [SystemId <String>]: ObjectID of the System.
-  [UserId <String>]: ObjectID of the User.
-  [WorkdayId <String>]:
-.Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Remove-JcSdkBulkUserState.md
-#>
- Function Remove-JcSdkBulkUserState
+﻿Function Remove-JcSdkBulkUserState
 {
     [OutputType([System.Boolean])]
     [CmdletBinding(DefaultParameterSetName='Delete', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
@@ -185,5 +120,3 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
-
-

@@ -2,6 +2,6 @@ namespace ModuleNameSpace
 {
     public static class ModuleIdentifier
     {
-        public const string SDKName = "V1";
+        public const string SDKName = "";
     }
 }

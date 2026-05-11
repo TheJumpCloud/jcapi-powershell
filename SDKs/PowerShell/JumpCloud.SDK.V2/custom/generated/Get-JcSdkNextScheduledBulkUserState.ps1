@@ -1,49 +1,4 @@
-<#
-.Synopsis
-This endpoint is used to lookup the next upcoming scheduled state change for each user in the
-given list.
-The users parameter is limited to 100 items per request.
-The results are also limited
-to 100 items.
-This endpoint returns a max of 1 event per state per user.
-For example, if a user
-has 3 ACTIVATED events scheduled it will return the next upcoming activation event.
-However, if a
-user also has a SUSPENDED event scheduled along with the ACTIVATED events it will return the next
-upcoming activation event _and_ the next upcoming suspension event.
-.Description
-This endpoint is used to lookup the next upcoming scheduled state change for each user in the
-given list.
-The users parameter is limited to 100 items per request.
-The results are also limited
-to 100 items.
-This endpoint returns a max of 1 event per state per user.
-For example, if a user
-has 3 ACTIVATED events scheduled it will return the next upcoming activation event.
-However, if a
-user also has a SUSPENDED event scheduled along with the ACTIVATED events it will return the next
-upcoming activation event _and_ the next upcoming suspension event.
-.Example
-PS C:\> Get-JcSdkNextScheduledBulkUserState
-
-
-
-----        ----------
-EventsCount Int
-Results     JumpCloud.SDK.V2.Models.ScheduledUserstateResult[]
-
-
-.Example
-PS C:\> {{ Add code here }}
-
-{{ Add output here }}
-
-.Outputs
-JumpCloud.SDK.V2.Models.IPathsUbbqf1BulkUserstatesEventlistNextGetResponses200ContentApplicationJsonSchema
-.Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkNextScheduledBulkUserState.md
-#>
- Function Get-JcSdkNextScheduledBulkUserState
+﻿Function Get-JcSdkNextScheduledBulkUserState
 {
     [OutputType([JumpCloud.SDK.V2.Models.IPathsUbbqf1BulkUserstatesEventlistNextGetResponses200ContentApplicationJsonSchema])]
     [CmdletBinding(DefaultParameterSetName='Get', PositionalBinding=$false)]
@@ -216,5 +171,3 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
-
-

@@ -1,31 +1,4 @@
-<#
-.Synopsis
-Valid filter fields are `system_id`.
-.Description
-Valid filter fields are `system_id`.
-.Example
-PS C:\> Get-JcSdkSystemInsightSecureboot
-
-
-
-----           ----------
-CollectionTime String
-SecureBoot     System.Nullable[float] SecureBoot {get;set;}
-SetupMode      System.Nullable[float] SetupMode {get;set;}
-SystemId       String
-
-
-.Example
-PS C:\> {{ Add code here }}
-
-{{ Add output here }}
-
-.Outputs
-JumpCloud.SDK.V2.Models.ISystemInsightsSecureboot
-.Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkSystemInsightSecureboot.md
-#>
- Function Get-JcSdkSystemInsightSecureboot
+﻿Function Get-JcSdkSystemInsightSecureboot
 {
     [OutputType([JumpCloud.SDK.V2.Models.ISystemInsightsSecureboot])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
@@ -220,5 +193,3 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
-
-

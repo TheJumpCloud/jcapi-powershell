@@ -1,76 +1,4 @@
-<#
-.Synopsis
-This endpoint allows you to create scheduled statechange jobs.
-#### Sample Request
-```
-curl -X POST \"https://console.jumpcloud.com/api/v2/bulk/userstates\" \\
-  -H 'x-api-key: {API_KEY}' \\
-  -H 'Content-Type: application/json' \\
-  -H 'Accept: application/json' \\
-  -d '{
-    \"user_ids\": [\"{User_ID_1}\", \"{User_ID_2}\", \"{User_ID_3}\"],
-    \"state\": \"SUSPENDED\",
-    \"start_date\": \"2000-01-01T00:00:00.000Z\"
-  }'
-```
-.Description
-This endpoint allows you to create scheduled statechange jobs.
-#### Sample Request
-```
-curl -X POST \"https://console.jumpcloud.com/api/v2/bulk/userstates\" \\
-  -H 'x-api-key: {API_KEY}' \\
-  -H 'Content-Type: application/json' \\
-  -H 'Accept: application/json' \\
-  -d '{
-    \"user_ids\": [\"{User_ID_1}\", \"{User_ID_2}\", \"{User_ID_3}\"],
-    \"state\": \"SUSPENDED\",
-    \"start_date\": \"2000-01-01T00:00:00.000Z\"
-  }'
-```
-.Example
-PS C:\> New-JcSdkBulkUserState -StartDate:(<datetime>) -State:(<string>) -UserIds:(<string[]>) -ActivationEmailOverride:(<string>) -SendActivationEmails:(<switch>)
-
-
-
-----           ----------
-ScheduledDate  String
-ScheduledJobId String
-State          String
-SystemUserId   String
-
-
-.Example
-PS C:\> New-JcSdkBulkUserState -Body:(<JumpCloud.SDK.V2.Models.BulkScheduledStatechangeCreate>)
-
-
-
-----           ----------
-ScheduledDate  String
-ScheduledJobId String
-State          String
-SystemUserId   String
-
-
-
-.Inputs
-JumpCloud.SDK.V2.Models.IBulkScheduledStatechangeCreate
-.Outputs
-JumpCloud.SDK.V2.Models.IScheduledUserstateResult
-.Notes
-COMPLEX PARAMETER PROPERTIES
-
-To create the parameters described below, construct a hash table containing the appropriate properties. For information on hash tables, run Get-Help about_Hash_Tables.
-
-BODY <IBulkScheduledStatechangeCreate>:
-  StartDate <DateTime>: Date and time that scheduled action should occur
-  State <String>: The state to move the user(s) to
-  UserIds <List<String>>: Array of system user ids to schedule for a state change
-  [ActivationEmailOverride <String>]: Send the activation or welcome email to the specified email address upon activation. Can only be used with a single user_id and scheduled activation. This field will be ignored if `send_activation_emails` is explicitly set to false.
-  [SendActivationEmails <Boolean?>]: Set to true to send activation or welcome email(s) to each user_id upon activation. Set to false to suppress emails. Can only be used with scheduled activation(s).
-.Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/New-JcSdkBulkUserState.md
-#>
- Function New-JcSdkBulkUserState
+﻿Function New-JcSdkBulkUserState
 {
     [OutputType([JumpCloud.SDK.V2.Models.IScheduledUserstateResult])]
     [CmdletBinding(DefaultParameterSetName='CreateExpanded', PositionalBinding=$false, SupportsShouldProcess, ConfirmImpact='Medium')]
@@ -215,5 +143,3 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
-
-

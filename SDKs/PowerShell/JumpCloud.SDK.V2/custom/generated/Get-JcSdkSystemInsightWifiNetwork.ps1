@@ -1,41 +1,4 @@
-<#
-.Synopsis
-Valid filter fields are `system_id` and `security_type`.
-.Description
-Valid filter fields are `system_id` and `security_type`.
-.Example
-PS C:\> Get-JcSdkSystemInsightWifiNetwork
-
-
-
-----                ----------
-AutoLogin           System.Nullable[float] AutoLogin {get;set;}
-CaptivePortal       System.Nullable[float] CaptivePortal {get;set;}
-CollectionTime      String
-Disabled            System.Nullable[float] Disabled {get;set;}
-LastConnected       System.Nullable[float] LastConnected {get;set;}
-NetworkName         String
-Passpoint           System.Nullable[float] Passpoint {get;set;}
-PossiblyHidden      System.Nullable[float] PossiblyHidden {get;set;}
-Roaming             System.Nullable[float] Roaming {get;set;}
-RoamingProfile      String
-SecurityType        String
-Ssid                String
-SystemId            String
-TemporarilyDisabled System.Nullable[float] TemporarilyDisabled {get;set;}
-
-
-.Example
-PS C:\> {{ Add code here }}
-
-{{ Add output here }}
-
-.Outputs
-JumpCloud.SDK.V2.Models.ISystemInsightsWifiNetworks
-.Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkSystemInsightWifiNetwork.md
-#>
- Function Get-JcSdkSystemInsightWifiNetwork
+﻿Function Get-JcSdkSystemInsightWifiNetwork
 {
     [OutputType([JumpCloud.SDK.V2.Models.ISystemInsightsWifiNetworks])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
@@ -230,5 +193,3 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
-
-

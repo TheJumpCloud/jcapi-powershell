@@ -1,47 +1,4 @@
-<#
-.Synopsis
-Lists all programs for Linux devices.
-For macOS devices, use [List System Insights System Apps](#operation/systeminsights_list_apps).
-For windows devices, use [List System Insights System Apps](#operation/systeminsights_list_programs).
-
-Valid filter fields are `name` and `package_format`.
-.Description
-Lists all programs for Linux devices.
-For macOS devices, use [List System Insights System Apps](#operation/systeminsights_list_apps).
-For windows devices, use [List System Insights System Apps](#operation/systeminsights_list_programs).
-
-Valid filter fields are `name` and `package_format`.
-.Example
-PS C:\> Get-JcSdkSystemInsightLinuxPackage
-
-
-
-----                  ----------
-Arch                  String
-InstallTime           Int
-MaintainerOrVendor    String
-MountNamespaceId      String
-Name                  String
-PackageFormat         String
-PackageGroupOrSection String
-PidWithNamespace      Int
-ReleaseOrRevision     String
-Size                  String
-SystemId              String
-Version               String
-
-
-.Example
-PS C:\> {{ Add code here }}
-
-{{ Add output here }}
-
-.Outputs
-JumpCloud.SDK.V2.Models.ISystemInsightsLinuxPackages
-.Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkSystemInsightLinuxPackage.md
-#>
- Function Get-JcSdkSystemInsightLinuxPackage
+﻿Function Get-JcSdkSystemInsightLinuxPackage
 {
     [OutputType([JumpCloud.SDK.V2.Models.ISystemInsightsLinuxPackages])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
@@ -236,5 +193,3 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
-
-

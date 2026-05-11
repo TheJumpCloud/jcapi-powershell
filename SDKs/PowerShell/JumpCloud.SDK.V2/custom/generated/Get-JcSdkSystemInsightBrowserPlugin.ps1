@@ -1,39 +1,4 @@
-<#
-.Synopsis
-Valid filter fields are `system_id` and `name`.
-.Description
-Valid filter fields are `system_id` and `name`.
-.Example
-PS C:\> Get-JcSdkSystemInsightBrowserPlugin
-
-
-
-----              ----------
-CollectionTime    String
-Description       String
-DevelopmentRegion String
-Disabled          Int
-Identifier        String
-Name              String
-Native            Int
-Path              String
-Sdk               String
-SystemId          String
-Uid               String
-Version           String
-
-
-.Example
-PS C:\> {{ Add code here }}
-
-{{ Add output here }}
-
-.Outputs
-JumpCloud.SDK.V2.Models.ISystemInsightsBrowserPlugins
-.Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkSystemInsightBrowserPlugin.md
-#>
- Function Get-JcSdkSystemInsightBrowserPlugin
+﻿Function Get-JcSdkSystemInsightBrowserPlugin
 {
     [OutputType([JumpCloud.SDK.V2.Models.ISystemInsightsBrowserPlugins])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
@@ -228,5 +193,3 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
-
-

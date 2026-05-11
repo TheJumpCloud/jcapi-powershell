@@ -1,39 +1,4 @@
-<#
-.Synopsis
-Valid filter fields are `system_id` and `version`.
-.Description
-Valid filter fields are `system_id` and `version`.
-.Example
-PS C:\> Get-JcSdkSystemInsightOSVersion
-
-
-
-----           ----------
-Build          String
-Codename       String
-CollectionTime String
-InstallDate    String
-Major          Int
-Minor          Int
-Name           String
-Patch          Int
-Platform       String
-PlatformLike   String
-SystemId       String
-Version        String
-
-
-.Example
-PS C:\> {{ Add code here }}
-
-{{ Add output here }}
-
-.Outputs
-JumpCloud.SDK.V2.Models.ISystemInsightsOSVersion
-.Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkSystemInsightOSVersion.md
-#>
- Function Get-JcSdkSystemInsightOSVersion
+﻿Function Get-JcSdkSystemInsightOSVersion
 {
     [OutputType([JumpCloud.SDK.V2.Models.ISystemInsightsOSVersion])]
     [CmdletBinding(DefaultParameterSetName='List', PositionalBinding=$false)]
@@ -228,5 +193,3 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
-
-

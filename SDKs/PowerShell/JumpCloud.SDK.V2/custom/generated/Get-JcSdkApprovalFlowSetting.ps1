@@ -1,17 +1,4 @@
-<#
-.Synopsis
-Endpoint for getting workflow settings for an organisation
-.Description
-Endpoint for getting workflow settings for an organisation
-.Example
-PS C:\> Get-JcSdkApprovalFlowSetting
-
-.Outputs
-JumpCloud.SDK.V2.Models.IJumpcloudIngressoAccessWorkflowSettings
-.Link
-https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/JumpCloud.SDK.V2/docs/exports/Get-JcSdkApprovalFlowSetting.md
-#>
- Function Get-JcSdkApprovalFlowSetting
+﻿Function Get-JcSdkApprovalFlowSetting
 {
     [OutputType([JumpCloud.SDK.V2.Models.IJumpcloudIngressoAccessWorkflowSettings])]
     [CmdletBinding(DefaultParameterSetName='Get', PositionalBinding=$false)]
@@ -128,5 +115,3 @@ https://github.com/TheJumpCloud/jcapi-powershell/tree/master/SDKs/PowerShell/Jum
         Return $Results
     }
 }
-
-

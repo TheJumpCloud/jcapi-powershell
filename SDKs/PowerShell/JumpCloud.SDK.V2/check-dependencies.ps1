@@ -47,10 +47,9 @@ $resourceModule = Join-Path $HOME '.PSSharedModules\Resources\Az.Resources.TestS
 if ($Resources.IsPresent -and ((-not (Test-Path -Path $resourceModule)) -or $RegenerateSupportModule.IsPresent)) {
   Write-Host -ForegroundColor Green "Building local Resource module used for test..."
   Set-Location $resourceDir
-  $null = npx autorest .\README.md --version:3.10.8 --use:@autorest/powershell@3.0.414 --output-folder=$HOME/.PSSharedModules/Resources
+  $null = autorest .\README.md --use:@autorest/powershell@3.0.414 --output-folder=$HOME/.PSSharedModules/Resources
   $null = Copy-Item custom/* $HOME/.PSSharedModules/Resources/custom/
   Set-Location $HOME/.PSSharedModules/Resources
   $null = .\build-module.ps1
   Set-Location $PSScriptRoot
 }
-

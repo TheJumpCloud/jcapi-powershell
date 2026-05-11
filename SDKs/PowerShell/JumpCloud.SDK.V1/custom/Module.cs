@@ -42,6 +42,10 @@ namespace JumpCloud.SDK.V1
                         apiHostValue = "api.eu";
                         consoleHostValue = "console.eu";
                         break;
+                    case "IN":
+                        apiHostValue = "api.in";
+                        consoleHostValue = "console.in";
+                        break;
                     case "STAGING":
                         apiHostValue = "api.stg01";
                         consoleHostValue = "console.stg01";
@@ -52,6 +56,11 @@ namespace JumpCloud.SDK.V1
                         {
                             apiHostValue = "api.eu";
                             consoleHostValue = "console.eu";
+                        }
+                        else if (userInputEnvValue.Contains(".in"))
+                        {
+                            apiHostValue = "api.in";
+                            consoleHostValue = "console.in";
                         }
                         else if (userInputEnvValue.Contains(".stg01"))
                         {
@@ -81,8 +90,8 @@ namespace JumpCloud.SDK.V1
             {
                 string defaultHostPrefix = ModuleIdentifier.SDKName == "DirectoryInsights" ? "api" : "console";
                 Console.WriteLine("JumpCloud SDK Module: {0} is running in the '{1}.jumpcloud.com' host environment.", ModuleIdentifier.SDKName, defaultHostPrefix);
-                Console.WriteLine("'{0}.jumpcloud.com' is the standard environment; '{0}.eu.jumpcloud.com' is the EU environment.", defaultHostPrefix);
-                Console.WriteLine("To use the EU environment, run: $ENV:{0} = 'EU' and re-import the module.", envVarNameForDefaultHostEnv);
+                Console.WriteLine("'{0}.jumpcloud.com' is the standard environment; '{0}.eu.jumpcloud.com' is the EU environment; '{0}.in.jumpcloud.com' is the India environment.", defaultHostPrefix);
+                Console.WriteLine("To use the EU or IN environments, run: $ENV:{0} = 'EU' or 'IN' and re-import the module.", envVarNameForDefaultHostEnv);
                 Console.WriteLine("To use the standard environment, run: $ENV:{0} = 'STANDARD' and re-import the module.", envVarNameForDefaultHostEnv);
             }
 
@@ -180,8 +189,8 @@ namespace JumpCloud.SDK.V1
                 System.Environment.SetEnvironmentVariable("JCEnvironment", HostEnv);
 
                 // Translate to both formats and set parameter defaults
-                string apiHost = HostEnv.Contains(".eu") ? "api.eu" : (HostEnv.Contains(".stg01") ? "api.stg01" : "api");
-                string consoleHost = HostEnv.Contains(".eu") ? "console.eu" : (HostEnv.Contains(".stg01") ? "console.stg01" : "console");
+                string apiHost = HostEnv.Contains(".eu") ? "api.eu" : HostEnv.Contains(".in") ? "api.in" : HostEnv.Contains(".stg01") ? "api.stg01" : "api";
+                string consoleHost = HostEnv.Contains(".eu") ? "console.eu" : HostEnv.Contains(".in") ? "console.in" : HostEnv.Contains(".stg01") ? "console.stg01" : "console";
                 SetPSDefaultHostEnvParameterValue(apiHost, consoleHost);
             }
 
@@ -212,10 +221,10 @@ namespace JumpCloud.SDK.V1
                 request.Headers.Add("Accept", "application/json");
             }
             // If headers do not contain an "UserAgent" with the correct value fix it
-            if (request.Headers.UserAgent.ToString() != "JumpCloud_JumpCloud.PowerShell.SDK.V1/0.1.3")
+            if (request.Headers.UserAgent.ToString() != "JumpCloud_JumpCloud.PowerShell.SDK.V1/0.2.0")
             {
                 request.Headers.UserAgent.Clear();
-                request.Headers.UserAgent.ParseAdd("JumpCloud_JumpCloud.PowerShell.SDK.V1/0.1.3");
+                request.Headers.UserAgent.ParseAdd("JumpCloud_JumpCloud.PowerShell.SDK.V1/0.2.0");
             }
             // // request.Headers.Add("Content-Type", "application/json");
             System.Net.Http.HttpResponseMessage response = await next.SendAsync(request, callback);
