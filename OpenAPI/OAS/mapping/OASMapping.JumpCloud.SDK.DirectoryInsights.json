@@ -1,0 +1,44 @@
+{
+  "directoryInsights_eventsCountPost": {
+    "x-powershell-function-name": "Get-JcSdkEventCount",
+    "path": "/events/count",
+    "paginate": false,
+    "method": "post"
+  },
+  "directoryInsights_eventsDistinctPost": {
+    "x-powershell-function-name": "Get-JcSdkEventDistinct",
+    "path": "/events/distinct",
+    "paginate": false,
+    "method": "post"
+  },
+  "directoryInsights_eventsIntervalPost": {
+    "x-powershell-function-name": "Get-JcSdkEventInterval",
+    "path": "/events/interval",
+    "paginate": false,
+    "method": "post"
+  },
+  "directoryInsights_eventsPost": {
+    "x-powershell-function-name": "Get-JcSdkEvent",
+    "path": "/events",
+    "paginate": false,
+    "method": "post"
+  },
+  "directoryInsights_reportsArtifactContentGet": {
+    "x-powershell-function-name": "Get-JcSdkReportArtifactContent",
+    "path": "/reports/{report_id}/artifacts/{artifact_id}/content",
+    "paginate": true,
+    "method": "get"
+  },
+  "directoryInsights_reportsCreate": {
+    "x-powershell-function-name": "New-JcSdkReport",
+    "path": "/reports/{report_type}",
+    "paginate": false,
+    "method": "post"
+  },
+  "directoryInsights_reportsListGet": {
+    "x-powershell-function-name": "Get-JcSdkReport",
+    "path": "/reports",
+    "paginate": true,
+    "method": "get"
+  }
+}
