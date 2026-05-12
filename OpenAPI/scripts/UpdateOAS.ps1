@@ -27,7 +27,7 @@ Function Update-OasSpecMapping {
                     $newOasSpec.Add($operationId, @{
                         "path" = $path
                         "method" = $method
-                        "x-powershell-function-name" = ""
+                        "x-powershell-method-name" = ""
                         "paginate" = if ($method -eq "get") { $true } else { $false }
                     })
                 }
@@ -78,11 +78,18 @@ Function Add-OasSpecFunctionName {
 
         # Loop through the mapping file content and add the functionName to the OAS Spec
         $mappingFileContent.GetEnumerator() | ForEach-Object {
+            $operationID = $_.Key
             $path = $_.Value.path
             $method = $_.Value.method
-            $functionName = $_.Value.'x-powershell-function-name'
+            $functionName = $_.Value.'x-powershell-method-name'
 
-            $oasSpecFileContent.paths.$path.$method | Add-Member -MemberType NoteProperty -Name 'x-powershell-function-name' -Value $functionName
+            # Check to see if the x-powershell-method-name already matches, if it doesn't change or add it to the OAS Spec
+            if ($oasSpecFileContent.paths.$path.$method.'x-powershell-method-name' -ne $functionName) {
+                Write-Host "[status] Adding x-powershell-method-name $functionName for $($operationID)"
+                $oasSpecFileContent.paths.$path.$method | Add-Member -MemberType NoteProperty -Name 'x-powershell-method-name' -Value $functionName -Force
+            } else {
+                Write-Verbose "[status] x-powershell-method-name $functionName already exists for $($operationID)"
+            }
         }
 
         # Save the updated OAS Spec
@@ -90,5 +97,5 @@ Function Add-OasSpecFunctionName {
     }
 }
 
-#Update-OasSpecMapping
+Update-OasSpecMapping
 Add-OasSpecFunctionName -SDKName JumpCloud.SDK.DirectoryInsights
