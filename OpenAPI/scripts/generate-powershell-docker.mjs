@@ -3,10 +3,50 @@
  * OpenAPI Generator via Docker with correct bind-mount paths (/local/...).
  * The npm openapi-generator-cli package does not rewrite --input-spec for Docker mode.
  */
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
+
+function openapiGeneratorCliVersionOk(cmd, args = ["version"]) {
+  const r = spawnSync(cmd, args, { encoding: "utf8", stdio: "pipe" });
+  return r.status === 0;
+}
+
+function ensureOpenApiGeneratorCli(openapiRoot) {
+  if (openapiGeneratorCliVersionOk("openapi-generator-cli")) {
+    return;
+  }
+
+  const localBin = join(openapiRoot, "node_modules", ".bin", "openapi-generator-cli");
+  const localBinWin = `${localBin}.cmd`;
+  const localCmd =
+    process.platform === "win32" && existsSync(localBinWin) ? localBinWin : localBin;
+
+  if (existsSync(localCmd) && openapiGeneratorCliVersionOk(localCmd)) {
+    return;
+  }
+
+  console.error(
+    "openapi-generator-cli not found; installing @openapitools/openapi-generator-cli in OpenAPI …",
+  );
+  const install = spawnSync(
+    "npm",
+    ["install", "@openapitools/openapi-generator-cli"],
+    { stdio: "inherit", cwd: openapiRoot },
+  );
+  if (install.status !== 0) {
+    console.error("Failed to install @openapitools/openapi-generator-cli.");
+    process.exit(1);
+  }
+
+  const verifyPath =
+    process.platform === "win32" && existsSync(localBinWin) ? localBinWin : localBin;
+  if (!openapiGeneratorCliVersionOk(verifyPath)) {
+    console.error("openapi-generator-cli is still not runnable after install.");
+    process.exit(1);
+  }
+}
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const configPath = join(root, "openapitools.json");
@@ -70,6 +110,8 @@ if (!modes.includes(mode)) {
   console.error(`Usage: node generate-powershell-docker.mjs [${modes.join("|")}]`);
   process.exit(1);
 }
+
+ensureOpenApiGeneratorCli(root);
 
 if (mode === "all") {
   let failed = false;

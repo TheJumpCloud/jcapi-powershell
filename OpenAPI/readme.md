@@ -4,10 +4,16 @@ PowerShell SDKs in this folder are generated from the OpenAPI specs under `OAS/`
 
 ## Prerequisites
 
-- [Node.js](https://nodejs.org/) (to run the wrapper script)
-- [Docker](https://www.docker.com/) installed and running
+Install and have available on your machine:
 
-The generator image version comes from `openapitools.json` (currently `7.22.0`). Docker pulls `openapitools/openapi-generator-cli` on first use.
+- **[Node.js](https://nodejs.org/)** (current LTS is fine) — used to run `scripts/generate-powershell-docker.mjs`.
+- **npm** — ships with Node. The script checks for `openapi-generator-cli` on your `PATH` or under `OpenAPI/node_modules`; if it is missing, it runs `npm install @openapitools/openapi-generator-cli` in the `OpenAPI/` folder (needs network the first time that install runs).
+- **[Docker](https://www.docker.com/)** — Docker Engine (or Docker Desktop) installed, the daemon running, and permission to run `docker` from your shell (e.g. your user in the `docker` group on Linux).
+
+First-time notes:
+
+- Docker pulls the generator image from `openapitools/openapi-generator-cli`; the tag matches `generator-cli.version` in `openapitools.json` (currently `7.22.0`). That pull also needs network access.
+- After a local npm install of the CLI, you may see new or updated files under `OpenAPI/` (for example `package.json`, `package-lock.json`, and `node_modules/`). Commit those if you want a reproducible setup for others without relying on the auto-install step.
 
 ## Run from the repository root
 
