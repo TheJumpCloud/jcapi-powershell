@@ -96,6 +96,3 @@ Function Add-OasSpecFunctionName {
         $oasSpecFileContent | ConvertTo-Json -Depth 99 | Set-Content -Path $oasSpecFile.FullName
     }
 }
-
-Update-OasSpecMapping
-Add-OasSpecFunctionName -SDKName JumpCloud.SDK.DirectoryInsights
