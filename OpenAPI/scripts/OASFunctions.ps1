@@ -34,11 +34,14 @@ Function Update-OasSpecMapping {
             }
         }
 
+        $OasSpecFileName = [regex]::Match($oas.Name, 'SDK\.([^.]+)\.json').Groups[1].Value
+        $OasMappingFileName = "OASMapping.$($OasSpecFileName).json"
+
         # Compare the newly created newOasSpec with existing mapping files, if they exist
-        $existingMapping = Get-ChildItem -Path "$PSScriptRoot/../OAS/mapping" -Filter "OASMapping.$($oas.Name)"
+        $existingMapping = Get-ChildItem -Path "$PSScriptRoot/../OAS/mapping" -Filter $OasMappingFileName
         if (!$existingMapping) {
             # The mapping does not exist - create mapping file.
-            $newOasSpec | ConvertTo-Json -Depth 99 | Set-Content -Path "$PSScriptRoot/../OAS/mapping/OASMapping.$($oas.Name)"
+            $newOasSpec | ConvertTo-Json -Depth 99 | Set-Content -Path "$PSScriptRoot/../OAS/mapping/$OasMappingFileName"
         } else {
             # The mapping files exists - compare the newly created newOasSpec with the existing mapping file and only add new operationIds to the newOasSpec file.
             $existingMappingContent = Get-Content -Path $existingMapping.FullName | ConvertFrom-Json -Depth 99 -AsHashtable
@@ -54,7 +57,7 @@ Function Update-OasSpecMapping {
                 $newOasSpec.GetEnumerator() | ForEach-Object {
                     $existingMappingContent.Add($_.Key, $_.Value)
                 }
-                $existingMappingContent | ConvertTo-Json -Depth 99 | Set-Content -Path "$PSScriptRoot/../OAS/mapping/OASMapping.$($oas.Name)"
+                $existingMappingContent | ConvertTo-Json -Depth 99 | Set-Content -Path "$PSScriptRoot/../OAS/mapping/$OasMappingFileName"
             } else {
                 Write-Host "[status] No new operationIds found in $($existingMapping.Name)"
             }
