@@ -1,4 +1,4 @@
-Function Update-OasSpecMapping {
+Function Update-OasMapping {
     # Get the OAS Spec Files
     $OAS = Get-ChildItem -Path "$PSScriptRoot/../OAS" -Filter "*.json"
 
