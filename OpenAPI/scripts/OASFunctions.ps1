@@ -1,3 +1,4 @@
+#Requires -Modules powershell-yaml
 Function Update-OasMapping {
     # Get the OAS Spec Files
     $OAS = Get-ChildItem -Path "$PSScriptRoot/../OAS" -Filter "*.json"
@@ -63,4 +64,33 @@ Function Update-OasMapping {
             }
         }
     }
+}
+
+Function Get-OasFile {
+    Param(
+        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Name of the API to build an SDK for.')][ValidateSet('DirectoryInsights', 'V1', 'V2')][ValidateNotNullOrEmpty()][System.String[]]$SDKName
+    )
+
+    $SDKName | ForEach-Object {
+        switch ($_) {
+            'DirectoryInsights' {
+                $oasURL = 'https://docs.jumpcloud.com/api/insights/directory/1.0/index.yaml'
+            }
+            'V1' {
+                $oasURL = 'https://docs.jumpcloud.com/api/1.0/index.yaml'
+            }
+            'V2' {
+                $oasURL = 'https://docs.jumpcloud.com/api/2.0/index.yaml'
+            }
+        }
+        $oasContent = (Invoke-WebRequest -Uri $oasURL -Method Get).Content
+        if ($oasContent -eq $null) {
+            Write-Error "Failed to get OAS content from $oasURL"
+            return
+        } else {
+            Write-Host "[status] Saving OAS content to $PSScriptRoot/../OAS/JumpCloud.SDK.$($_).json"
+            $oasContent | ConvertFrom-Yaml -Ordered | ConvertTo-Json -Depth 99 | Set-Content -Path "$PSScriptRoot/../OAS/JumpCloud.SDK.$($_).json"
+        }
+    }
+}
 }
