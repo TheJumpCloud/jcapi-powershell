@@ -1,5 +1,5 @@
 ## JumpCloud.SDK.V2-0.3.0
-Release Date: May 11, 2026
+Release Date: May 20, 2026
 #### RELEASE NOTES
 ```
 Support for the IN region has been added to the V2 SDK.
