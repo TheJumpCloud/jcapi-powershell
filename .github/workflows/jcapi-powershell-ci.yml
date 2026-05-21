@@ -22,6 +22,8 @@ jobs:
       V1: ${{ steps.set_labels.outputs.V1 }}
       V2: ${{ steps.set_labels.outputs.V2 }}
       DIRECTORYINSIGHTS: ${{ steps.set_labels.outputs.DIRECTORYINSIGHTS }}
+      # When PR has label skip-api-transform, BuildAutoRest runs with -RunApiTransform:$false
+      SKIP_API_TRANSFORM: ${{ steps.set_labels.outputs.SKIP_API_TRANSFORM }}
     steps:
       - name: Set Environment Variables from PR Labels
         id: set_labels
@@ -73,6 +75,14 @@ jobs:
           if ('DirectoryInsights' -in $PR_LABEL_LIST) {
             Write-Host "Module label 'DirectoryInsights' found"
             echo "directoryinsights=true" >> $env:GITHUB_OUTPUT
+          }
+
+          # Optional: skip ApiTransform.ps1 (remote spec fetch + JSON transforms) during CI builds
+          if ('skip-api-transform' -in $PR_LABEL_LIST) {
+            Write-Host "Label 'skip-api-transform' found: BuildAutoRest will use -RunApiTransform:`$false"
+            echo "SKIP_API_TRANSFORM=true" >> $env:GITHUB_OUTPUT
+          } else {
+            echo "SKIP_API_TRANSFORM=false" >> $env:GITHUB_OUTPUT
           }
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -134,6 +144,7 @@ jobs:
           v2: ${{ needs.Check-PR-Labels.outputs.v2 }}
           directoryinsights: ${{ needs.Check-PR-Labels.outputs.directoryinsights }}
           RELEASE_TYPE: ${{ needs.Check-PR-Labels.outputs.RELEASE_TYPE }}
+          SKIP_API_TRANSFORM: ${{ needs.Check-PR-Labels.outputs.SKIP_API_TRANSFORM }}
         run: |
           # Construct the PR_LABELS variable for the Pester test script
           $prLabels = @()
@@ -157,6 +168,8 @@ jobs:
     if: contains(github.event.pull_request.labels.*.name, 'DirectoryInsights')
     runs-on: ubuntu-latest
     timeout-minutes: 70
+    env:
+      SKIP_API_TRANSFORM: ${{ needs.Check-PR-Labels.outputs.SKIP_API_TRANSFORM }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/cache@v3
@@ -166,7 +179,8 @@ jobs:
       - name: Build JumpCloud.SDK.DirectoryInsights
         shell: pwsh
         run: |
-          ./BuildAutoRest -SDKName:("JumpCloud.SDK.DirectoryInsights") -ModuleVersionIncrementType "${{ needs.Check-PR-Labels.outputs.RELEASE_TYPE }}"
+          $runApiTransform = $env:SKIP_API_TRANSFORM -ne 'true'
+          ./BuildAutoRest -SDKName:("JumpCloud.SDK.DirectoryInsights") -ModuleVersionIncrementType "${{ needs.Check-PR-Labels.outputs.RELEASE_TYPE }}" -RunApiTransform:$runApiTransform
       - name: Pack JumpCloud.SDK.DirectoryInsights Module
         shell: pwsh
         run: |
@@ -195,6 +209,8 @@ jobs:
     if: contains(github.event.pull_request.labels.*.name, 'v1')
     runs-on: ubuntu-latest
     timeout-minutes: 70
+    env:
+      SKIP_API_TRANSFORM: ${{ needs.Check-PR-Labels.outputs.SKIP_API_TRANSFORM }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/cache@v3
@@ -204,7 +220,8 @@ jobs:
       - name: Build JumpCloud.SDK.V1
         shell: pwsh
         run: |
-          ./BuildAutoRest -SDKName:("JumpCloud.SDK.V1") -ModuleVersionIncrementType "${{ needs.Check-PR-Labels.outputs.RELEASE_TYPE }}"
+          $runApiTransform = $env:SKIP_API_TRANSFORM -ne 'true'
+          ./BuildAutoRest -SDKName:("JumpCloud.SDK.V1") -ModuleVersionIncrementType "${{ needs.Check-PR-Labels.outputs.RELEASE_TYPE }}" -RunApiTransform:$runApiTransform
       - name: Pack JumpCloud.SDK.V1 Module
         shell: pwsh
         run: |
@@ -233,6 +250,8 @@ jobs:
     if: contains(github.event.pull_request.labels.*.name, 'v2')
     runs-on: ubuntu-latest
     timeout-minutes: 70
+    env:
+      SKIP_API_TRANSFORM: ${{ needs.Check-PR-Labels.outputs.SKIP_API_TRANSFORM }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/cache@v3
@@ -242,7 +261,8 @@ jobs:
       - name: Build JumpCloud.SDK.V2
         shell: pwsh
         run: |
-          ./BuildAutoRest -SDKName:("JumpCloud.SDK.V2") -ModuleVersionIncrementType "${{ needs.Check-PR-Labels.outputs.RELEASE_TYPE }}"
+          $runApiTransform = $env:SKIP_API_TRANSFORM -ne 'true'
+          ./BuildAutoRest -SDKName:("JumpCloud.SDK.V2") -ModuleVersionIncrementType "${{ needs.Check-PR-Labels.outputs.RELEASE_TYPE }}" -RunApiTransform:$runApiTransform
       - name: Pack JumpCloud.SDK.V2 Module
         shell: pwsh
         run: |

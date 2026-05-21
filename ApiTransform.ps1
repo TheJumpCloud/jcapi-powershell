@@ -543,16 +543,16 @@ function Add-ParameterizedHost {
 
     # Determine host prefix and enum values based on existing host
     $hostPrefix = 'console'
-    $enumValues = @('console', 'console.eu')
+    $enumValues = @('console', 'console.eu', 'console.in')
 
     if ($SwaggerObject.Contains('host')) {
         $currentHost = $SwaggerObject['host']
         if ($currentHost -like 'api.jumpcloud.com*') {
             $hostPrefix = 'api'
-            $enumValues = @('api', 'api.eu')
+            $enumValues = @('api', 'api.eu', 'api.in')
         } elseif ($currentHost -like 'console.jumpcloud.com*') {
             $hostPrefix = 'console'
-            $enumValues = @('console', 'console.eu')
+            $enumValues = @('console', 'console.eu', 'console.in')
         }
     }
 
@@ -563,7 +563,7 @@ function Add-ParameterizedHost {
         parameters       = @(
             [ordered]@{
                 name                      = if ($SDKName -eq "JumpCloud.SDK.DirectoryInsights") { 'apiHost' } else { 'consoleHost' }
-                description               = "Region for JumpCloud API host. Use '$hostPrefix' for US or '$hostPrefix.eu' for EU."
+                description               = "Region for JumpCloud API host. Use '$hostPrefix' for US, '$hostPrefix.eu' for EU or '$hostPrefix.in' for IN."
                 required                  = $true
                 type                      = 'string'
                 in                        = 'client'
