@@ -12,12 +12,12 @@ Function Update-OasMapping {
         Write-Host "[status] Processing $($oas.FullName)"
 
         # Get the OAS Content and convert from json
-        $oasContent = Get-Content -Path $oas.FullName | ConvertFrom-Json -Depth 99
+        $oasContent = Get-Content -Path $oas.FullName | ConvertFrom-Json -Depth 99 -AsHashtable
 
         # Loop through the properties of the OAS Content
-        $oasContent.paths.PSObject.Properties | ForEach-Object {
+        $oasContent.paths.GetEnumerator() | ForEach-Object {
             $path = $_.Name
-            $_.Value.PSObject.Properties | ForEach-Object {
+            $_.Value.GetEnumerator() | ForEach-Object {
                 # Check if the method is a valid method (sometimes there are parameter values specified here - we do not need)
                 if ($_.Name -notmatch 'get|put|post|delete|patch') {
                     return
