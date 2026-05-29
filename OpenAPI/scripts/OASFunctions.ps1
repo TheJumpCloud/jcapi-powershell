@@ -76,15 +76,15 @@ Function Get-OasFile {
             'DirectoryInsights' {
                 $oasURL = 'https://docs.jumpcloud.com/api/insights/directory/1.0/index.yaml'
             }
-            'V1' {
-                $oasURL = 'https://docs.jumpcloud.com/api/1.0/index.yaml'
-            }
-            'V2' {
-                $oasURL = 'https://docs.jumpcloud.com/api/2.0/index.yaml'
-            }
+            # 'V1' {
+            #     $oasURL = 'https://docs.jumpcloud.com/api/1.0/index.yaml'
+            # }
+            # 'V2' {
+            #     $oasURL = 'https://docs.jumpcloud.com/api/2.0/index.yaml'
+            # }
         }
         $oasContent = (Invoke-WebRequest -Uri $oasURL -Method Get).Content
-        if ($oasContent -eq $null) {
+        if ($null -eq $oasContent) {
             Write-Error "Failed to get OAS content from $oasURL"
             return
         } else {
@@ -95,7 +95,7 @@ Function Get-OasFile {
 }
 Function Add-OasMethodName {
     Param(
-        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Name of the API to build an SDK for.')][ValidateSet('DirectoryInsights', 'V1', 'V2')][ValidateNotNullOrEmpty()][System.String[]]$SDKName
+        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Name of the API to build an SDK for.')][ValidateSet('DirectoryInsights', 'Console')][ValidateNotNullOrEmpty()][System.String[]]$SDKName
     )
 
     $SDKName | ForEach-Object {
