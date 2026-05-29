@@ -64,20 +64,12 @@ const version = config["generator-cli"]?.version ?? "7.22.0";
 const image = `openapitools/openapi-generator-cli:v${version}`;
 
 const targets = {
-  v1: {
-    spec: "OAS/JumpCloud.SDK.V1.json",
-    input: "/local/OAS/JumpCloud.SDK.V1.json",
-    output: "/local/PowerShell/JumpCloud.SDK.V1",
+  console: {
+    spec: "OAS/JumpCloud.SDK.Console.json",
+    input: "/local/OAS/JumpCloud.SDK.Console.json",
+    output: "/local/PowerShell/JumpCloud.SDK.Console",
     props:
-      "packageName=JumpCloud.SDK.V1,apiNamePrefix=JcSdk,powershellVersion=7.0,commonDebuggingType=Stop",
-    skipValidate: true,
-  },
-  v2: {
-    spec: "OAS/JumpCloud.SDK.V2.json",
-    input: "/local/OAS/JumpCloud.SDK.V2.json",
-    output: "/local/PowerShell/JumpCloud.SDK.V2",
-    props:
-      "packageName=JumpCloud.SDK.V2,apiNamePrefix=JcSdk,powershellVersion=7.0,commonDebuggingType=Stop",
+      "packageName=JumpCloud.SDK.Console,apiNamePrefix=JcSdk,powershellVersion=7.0,commonDebuggingType=Stop",
     skipValidate: true,
   },
   directoryInsights: {

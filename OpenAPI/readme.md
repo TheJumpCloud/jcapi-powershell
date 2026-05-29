@@ -8,7 +8,7 @@ The entry point is **`scripts/generate-powershell-docker.mjs`**. It runs the off
 
 ## What the wrapper script does (in order)
 
-1. **Parses your target** (`v1`, `v2`, `directoryInsights`, or `all`) from the command line (default: `all`).
+1. **Parses your target** (`console`, `directoryInsights`, or `all`) from the command line (default: `all`).
 2. **Checks Docker** — `docker version` must reach the daemon.
 3. **Checks that each selected spec file exists** under `OAS/` before starting containers.
 4. **Runs `docker run`** once per target with image tag **`openapitools/openapi-generator-cli:v<version>`**, where `<version>` comes from **`openapitools.json`** → **`generator-cli.version`** (currently **7.22.0**). Docker will **pull** that image the first time it is needed.
@@ -58,8 +58,7 @@ node OpenAPI/scripts/generate-powershell-docker.mjs
 Generate **one** SDK:
 
 ```bash
-node OpenAPI/scripts/generate-powershell-docker.mjs v1
-node OpenAPI/scripts/generate-powershell-docker.mjs v2
+node OpenAPI/scripts/generate-powershell-docker.mjs console
 node OpenAPI/scripts/generate-powershell-docker.mjs directoryInsights
 ```
 
@@ -76,7 +75,7 @@ cd OpenAPI
 node scripts/generate-powershell-docker.mjs
 ```
 
-Use the same optional argument: `v1`, `v2`, `directoryInsights`, or `all`.
+Use the same optional argument: `console`, `directoryInsights`, or `all`.
 
 ---
 
@@ -84,8 +83,7 @@ Use the same optional argument: `v1`, `v2`, `directoryInsights`, or `all`.
 
 | Target | OpenAPI spec | Output directory (under `OpenAPI/`) |
 | --- | --- | --- |
-| `v1` | `OAS/JumpCloud.SDK.V1.json` | `PowerShell/JumpCloud.SDK.V1/` |
-| `v2` | `OAS/JumpCloud.SDK.V2.json` | `PowerShell/JumpCloud.SDK.V2/` |
+| `console` | `OAS/JumpCloud.SDK.Console.json` | `PowerShell/JumpCloud.SDK.Console/` |
 | `directoryInsights` | `OAS/JumpCloud.SDK.DirectoryInsights.json` | `PowerShell/JumpCloud.SDK.DirectoryInsights/` |
 | `all` | All three specs, in order | All three output directories |
 
