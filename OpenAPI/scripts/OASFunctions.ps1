@@ -22,14 +22,23 @@ Function Update-OasMapping {
                 if ($_.Name -notmatch 'get|put|post|delete|patch') {
                     return
                 } else {
-                    Write-Verbose "[status] Processing method $($_.Name) for operationId $($_.Value.operationId)"
+                    Write-Host "[status] Processing method $($_.Name) for operationId $($_.Value.operationId)"
                     $method = $_.Name
                     $operationId = $_.Value.operationId
+                    if (!$_.Value.parameters) {
+                        $paginate = $false
+                    } else {
+                        $parameters = $_.Value.parameters.GetEnumerator() | ForEach-Object {
+                            $_.name
+                        }
+                        $paginate = [bool]($parameters -match 'limit|skip')
+                    }
+
                     $newOasSpec.Add($operationId, @{
                         "path" = $path
                         "method" = $method
                         "x-powershell-method-name" = ""
-                        "paginate" = if ($method -eq "get") { $true } else { $false }
+                        "paginate" = $paginate
                     })
                 }
             }
@@ -68,20 +77,17 @@ Function Update-OasMapping {
 
 Function Get-OasFile {
     Param(
-        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Name of the API to build an SDK for.')][ValidateSet('DirectoryInsights', 'V1', 'V2')][ValidateNotNullOrEmpty()][System.String[]]$SDKName
+        [Parameter(Mandatory = $true, ValueFromPipelineByPropertyName = $true, HelpMessage = 'Name of the API to build an SDK for.')][ValidateSet('DirectoryInsights', 'Console')][ValidateNotNullOrEmpty()][System.String[]]$SDKName
     )
 
     $SDKName | ForEach-Object {
         switch ($_) {
             'DirectoryInsights' {
-                $oasURL = 'https://docs.jumpcloud.com/api/insights/directory/1.0/index.yaml'
+                $oasURL = 'https://docs.jumpcloud.com/new/api/insights/directory/index.yaml'
             }
-            # 'V1' {
-            #     $oasURL = 'https://docs.jumpcloud.com/api/1.0/index.yaml'
-            # }
-            # 'V2' {
-            #     $oasURL = 'https://docs.jumpcloud.com/api/2.0/index.yaml'
-            # }
+            'Console' {
+                $oasURL = 'https://docs.jumpcloud.com/new/api/console/index.yaml'
+            }
         }
         $oasContent = (Invoke-WebRequest -Uri $oasURL -Method Get).Content
         if ($null -eq $oasContent) {

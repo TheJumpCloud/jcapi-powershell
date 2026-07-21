@@ -11,7 +11,7 @@ The entry point is **`scripts/generate-powershell-docker.mjs`**. It runs the off
 1. **Parses your target** (`console`, `directoryInsights`, or `all`) from the command line (default: `all`).
 2. **Checks Docker** — `docker version` must reach the daemon.
 3. **Checks that each selected spec file exists** under `OAS/` before starting containers.
-4. **Runs `docker run`** once per target with image tag **`openapitools/openapi-generator-cli:v<version>`**, where `<version>` comes from **`openapitools.json`** → **`generator-cli.version`** (currently **7.22.0**). Docker will **pull** that image the first time it is needed.
+4. **Runs `docker run`** once per target with image tag **`openapitools/openapi-generator-cli:v<version>`**, where `<version>` comes from **`openapitools.json`** → **`generator-cli.version`** (currently **7.22.0**). Docker will **pull** that image the first time it is needed. Generation uses **`--enable-post-process-file`**; API files are queued in Docker and **`scripts/Apply-OasPagination.ps1`** runs on the host afterward (the generator image does not include PowerShell).
 
 ---
 
@@ -20,6 +20,7 @@ The entry point is **`scripts/generate-powershell-docker.mjs`**. It runs the off
 | Requirement | Why it is needed |
 | --- | --- |
 | **[Node.js](https://nodejs.org/)** (LTS recommended) | Runs `generate-powershell-docker.mjs`. |
+| **[PowerShell 7+](https://github.com/PowerShell/PowerShell)** (`pwsh`) | Applies automatic pagination to generated API cmdlets after each SDK is generated. |
 | **[Docker](https://www.docker.com/)** | Docker Desktop (macOS/Windows) or Docker Engine (Linux), daemon **running**, and permission for your user to run **`docker`**. |
 | **Network (first run)** | Pulling the generator image from Docker Hub (or your registry mirror). |
 
@@ -142,3 +143,5 @@ The container writes through the bind mount. If files are owned by root from a p
 | `PowerShell/JumpCloud.SDK.*` | Generated SDK output (do not hand-edit if you expect regen to overwrite). |
 | `openapitools.json` | Pins the Docker image version (`generator-cli.version`). |
 | `scripts/generate-powershell-docker.mjs` | Docker prerequisite check + `docker run` orchestration. |
+| `scripts/Apply-OasPagination.ps1` | Post-processor: adds pagination to functions marked `paginate: true` in `OAS/mapping/OASMapping.*.json`. |
+| `OAS/mapping/OASMapping.*.json` | Per-operation flags (`paginate`, `x-powershell-method-name`, etc.). |

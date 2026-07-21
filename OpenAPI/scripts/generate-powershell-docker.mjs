@@ -10,8 +10,13 @@
  * Host prerequisites: Node.js (to run this script) and Docker (daemon running).
  * Java and openapi-generator-cli on the host are not required — the JVM and
  * generator run inside the container.
+ *
+ * Pagination: generation uses `--enable-post-process-file` with a queue script
+ * inside the container; after each target, `Apply-OasPagination.ps1` runs on the
+ * host (PowerShell 7+) because the generator image does not include pwsh.
  */
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync, readFileSync, unlinkSync } from "node:fs";
+import { chmodSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { spawnSync } from "node:child_process";
 import { fileURLToPath } from "node:url";
@@ -48,6 +53,17 @@ Checklist:
   process.exit(1);
 }
 
+/** @returns {string | null} */
+function resolvePwsh() {
+  if (commandOk("pwsh", ["-NoProfile", "-Command", "exit 0"])) {
+    return "pwsh";
+  }
+  if (commandOk("powershell", ["-NoProfile", "-Command", "exit 0"])) {
+    return "powershell";
+  }
+  return null;
+}
+
 /** @param {string} hostPath path under OpenAPI/ (e.g. OAS/foo.json) */
 function ensureSpecExists(hostPath) {
   const full = join(root, hostPath);
@@ -63,11 +79,18 @@ const config = JSON.parse(readFileSync(configPath, "utf8"));
 const version = config["generator-cli"]?.version ?? "7.22.0";
 const image = `openapitools/openapi-generator-cli:v${version}`;
 
+const postProcessQueuePath = join(root, ".pagination-postprocess-queue");
+const postProcessQueueScript = "/local/scripts/Apply-OasPagination-queue.sh";
+const postProcessScriptHost = join(root, "scripts/Apply-OasPagination.ps1");
+const postProcessQueueScriptHost = join(root, "scripts/Apply-OasPagination-queue.sh");
+
 const targets = {
   console: {
     spec: "OAS/JumpCloud.SDK.Console.json",
     input: "/local/OAS/JumpCloud.SDK.Console.json",
     output: "/local/PowerShell/JumpCloud.SDK.Console",
+    outputHost: join(root, "PowerShell/JumpCloud.SDK.Console"),
+    sdkShortName: "Console",
     props:
       "packageName=JumpCloud.SDK.Console,apiNamePrefix=JcSdk,powershellVersion=7.0,commonDebuggingType=Stop",
     skipValidate: true,
@@ -76,6 +99,8 @@ const targets = {
     spec: "OAS/JumpCloud.SDK.DirectoryInsights.json",
     input: "/local/OAS/JumpCloud.SDK.DirectoryInsights.json",
     output: "/local/PowerShell/JumpCloud.SDK.DirectoryInsights",
+    outputHost: join(root, "PowerShell/JumpCloud.SDK.DirectoryInsights"),
+    sdkShortName: "DirectoryInsights",
     props:
       "packageName=JumpCloud.SDK.DirectoryInsights,apiNamePrefix=JcSdk,powershellVersion=7.0,commonDebuggingType=Stop",
     skipValidate: true,
@@ -85,12 +110,91 @@ const targets = {
 const sdkTargetKeys = Object.keys(targets);
 const modes = [...sdkTargetKeys, "all"];
 
+function clearPostProcessQueue() {
+  try {
+    unlinkSync(postProcessQueuePath);
+  } catch {
+    /* queue file may not exist */
+  }
+}
+
+/**
+ * Drain files queued during Docker generation and apply pagination on the host.
+ * @param {typeof targets[string]} target
+ * @returns {number} exit code (0 ok)
+ */
+function flushPaginationPostProcess(target) {
+  const pwsh = resolvePwsh();
+  if (!pwsh) {
+    console.error(
+      "Warning: PowerShell 7+ (pwsh) not found on host; skipping pagination post-processing.",
+    );
+    return 0;
+  }
+
+  if (!existsSync(postProcessScriptHost)) {
+    console.error(`Missing post-process script: ${postProcessScriptHost}`);
+    return 1;
+  }
+
+  if (!existsSync(postProcessQueuePath)) {
+    console.error("Pagination queue empty; running batch post-process on generated API files.");
+    const batch = spawnSync(
+      pwsh,
+      [
+        "-NoProfile",
+        "-File",
+        postProcessScriptHost,
+        "-GeneratedRoot",
+        target.outputHost,
+        "-SdkName",
+        target.sdkShortName,
+      ],
+      { stdio: "inherit", encoding: "utf8", cwd: root },
+    );
+    return batch.status ?? 1;
+  }
+
+  const queued = readFileSync(postProcessQueuePath, "utf8")
+    .split("\n")
+    .map((line) => line.trim())
+    .filter(Boolean);
+
+  let failed = false;
+  for (const containerPath of queued) {
+    const hostPath = containerPath.replace(/^\/local/, root);
+    if (!hostPath.endsWith(".ps1")) {
+      continue;
+    }
+    console.error(`[pagination] Post-processing ${hostPath}`);
+    const r = spawnSync(
+      pwsh,
+      ["-NoProfile", "-File", postProcessScriptHost, hostPath],
+      { stdio: "inherit", encoding: "utf8", cwd: root },
+    );
+    if ((r.status ?? 1) !== 0) {
+      failed = true;
+    }
+  }
+
+  clearPostProcessQueue();
+  return failed ? 1 : 0;
+}
+
 function generate(target) {
+  clearPostProcessQueue();
+
+  if (existsSync(postProcessQueueScriptHost)) {
+    chmodSync(postProcessQueueScriptHost, 0o755);
+  }
+
   const args = [
     "run",
     "--rm",
     "-v",
     `${root}:/local`,
+    "-e",
+    `POWERSHELL_POST_PROCESS_FILE=/bin/sh ${postProcessQueueScript}`,
     image,
     "generate",
     "-g",
@@ -100,13 +204,20 @@ function generate(target) {
     "-o",
     target.output,
     `--additional-properties=${target.props}`,
+    "--enable-post-process-file",
   ];
   if (target.skipValidate) {
     args.push("--skip-validate-spec");
   }
 
   const r = spawnSync("docker", args, { stdio: "inherit", encoding: "utf8" });
-  return r.status ?? 1;
+  if ((r.status ?? 1) !== 0) {
+    clearPostProcessQueue();
+    return r.status ?? 1;
+  }
+
+  console.error(`\n=== Applying pagination post-processing (${target.sdkShortName}) ===\n`);
+  return flushPaginationPostProcess(target);
 }
 
 const mode = process.argv[2] ?? "all";
@@ -118,6 +229,15 @@ if (!modes.includes(mode)) {
 console.error(`Generator image: ${image}\n`);
 console.error("Checking prerequisites (Docker) …\n");
 ensureDocker();
+
+const pwsh = resolvePwsh();
+if (pwsh) {
+  console.error(`Prerequisite OK: ${pwsh} available for pagination post-processing\n`);
+} else {
+  console.error(
+    "Warning: pwsh not found; generated SDKs will not receive automatic pagination.\n",
+  );
+}
 
 const keysToRun = mode === "all" ? sdkTargetKeys : [mode];
 for (const key of keysToRun) {
