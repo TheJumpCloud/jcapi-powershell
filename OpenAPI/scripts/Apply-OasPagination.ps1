@@ -32,7 +32,6 @@ Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
 
 $ScriptRoot = $PSScriptRoot
-$Indent = '    '
 
 function Get-OasMappingByFunctionName {
     param([string]$MappingPath)
@@ -115,6 +114,16 @@ function Get-PaginationMode {
     return 'None'
 }
 
+function Add-BlockIndent {
+    param(
+        [string]$Text,
+        [int]$Spaces = 4
+    )
+    $pad = ' ' * $Spaces
+    $lines = ($Text -replace '\r\n', "`n") -split "`n"
+    return (($lines | ForEach-Object { if ([string]::IsNullOrWhiteSpace($_)) { '' } else { $pad + $_ } }) -join "`n")
+}
+
 function Add-PaginateParameter {
     param([string]$FunctionText)
 
@@ -122,20 +131,34 @@ function Add-PaginateParameter {
         return $FunctionText
     }
 
-    $insert = @"
-$Indent    [Parameter(DontShow)]
-$Indent    [System.Boolean]
-$Indent    # Set to `$true to return all results. This will overwrite any skip and limit parameter.
-$Indent    `$Paginate = `$true,
+    $insert = @(
+        '        [Parameter(DontShow)]'
+        '        [System.Boolean]'
+        '        # Set to $true to return all results. This will overwrite any skip and limit parameter.'
+        '        $Paginate = $true,'
+    ) -join "`n"
 
-"@
-
-    if ($FunctionText -match '(?ms)(Param\s*\(.*?)((\r?\n\s*\[Switch\]\s*\r?\n\s*\$WithHttpInfo))') {
-        return $FunctionText.Replace($Matches[0], ($Matches[1].TrimEnd() + ",`n" + $insert.TrimEnd() + "`n" + $Matches[2]))
+    $regexWithHttpInfo = [regex]'(?ms)(Param\s*\()(.*?)(\r?\n\s*\[Switch\]\s*\r?\n\s*\$WithHttpInfo)'
+    $match = $regexWithHttpInfo.Match($FunctionText)
+    if ($match.Success) {
+        $paramOpen = $match.Groups[1].Value
+        $paramBody = $match.Groups[2].Value.TrimEnd()
+        $withHttpInfo = $match.Groups[3].Value
+        if (-not $paramBody.EndsWith(',')) {
+            $paramBody += ','
+        }
+        $replacement = $paramOpen + $paramBody + "`n" + $insert + $withHttpInfo
+        return $regexWithHttpInfo.Replace($FunctionText, $replacement, 1)
     }
 
-    if ($FunctionText -match '(?ms)(Param\s*\(.*)(\r?\n\s*\)\s*)') {
-        return $FunctionText.Replace($Matches[0], ($Matches[1].TrimEnd() + ",`n" + $insert.TrimEnd() + "`n" + $Matches[2]))
+    $regexClose = [regex]'(?ms)(Param\s*\()(.*)(\r?\n\s*\))'
+    $match = $regexClose.Match($FunctionText)
+    if ($match.Success) {
+        $paramOpen = $match.Groups[1].Value
+        $paramBody = $match.Groups[2].Value.TrimEnd().TrimEnd(',')
+        $paramClose = $match.Groups[3].Value
+        $replacement = $paramOpen + $paramBody + ",`n" + $insert.TrimEnd(',') + $paramClose
+        return $regexClose.Replace($FunctionText, $replacement, 1)
     }
 
     return $FunctionText
@@ -149,42 +172,44 @@ function Get-InvokeAndReturnBlock {
         return $null
     }
 
-    $invokeBlock = ($ProcessBody -replace $returnPattern, '').TrimEnd()
-    return $invokeBlock
+    return ($ProcessBody -replace $returnPattern, '').TrimEnd()
 }
 
 function Get-RetryWrapper {
     param([string]$InvokeBlock)
 
-    @"
-            `$maxRetries = 4
-            `$resultCounter = 0
-            :retryLoop do {
-                `$resultCounter++
-                `$sdkError = `$null
-                try {
-$InvokeBlock
-                    `$Result = `$LocalVarResult['Response']
-                } catch {
-                    `$sdkError = `$_
-                }
-                If (`$sdkError) {
-                    If (`$resultCounter -eq `$maxRetries) {
-                        throw `$sdkError
-                    }
-                    `$statusCode = `$null
-                    if (`$LocalVarResult -and `$LocalVarResult.StatusCode) { `$statusCode = `$LocalVarResult.StatusCode }
-                    If (`$statusCode -eq 503) {
-                        Write-Warning ("503: Service Unavailable - retrying in " + (`$resultCounter * 5) + " seconds.")
-                    } else {
-                        throw `$sdkError
-                    }
-                } else {
-                    break retryLoop
-                }
-                Start-Sleep -Seconds (`$resultCounter * 5)
-            } while (`$resultCounter -lt `$maxRetries)
-"@
+    # Nest the original Process-body invoke under try { ... } inside the Do loop
+    $indentedInvoke = (Add-BlockIndent -Text $InvokeBlock.TrimEnd() -Spaces 16).TrimEnd()
+
+    @(
+        '                $maxRetries = 4'
+        '                $resultCounter = 0'
+        '                :retryLoop do {'
+        '                    $resultCounter++'
+        '                    $sdkError = $null'
+        '                    try {'
+        $indentedInvoke
+        '                        $Result = $LocalVarResult[''Response'']'
+        '                    } catch {'
+        '                        $sdkError = $_'
+        '                    }'
+        '                    If ($sdkError) {'
+        '                        If ($resultCounter -eq $maxRetries) {'
+        '                            throw $sdkError'
+        '                        }'
+        '                        $statusCode = $null'
+        '                        if ($LocalVarResult -and $LocalVarResult.StatusCode) { $statusCode = $LocalVarResult.StatusCode }'
+        '                        If ($statusCode -eq 503) {'
+        '                            Write-Warning ("503: Service Unavailable - retrying in " + ($resultCounter * 5) + " seconds.")'
+        '                        } else {'
+        '                            throw $sdkError'
+        '                        }'
+        '                    } else {'
+        '                        break retryLoop'
+        '                    }'
+        '                    Start-Sleep -Seconds ($resultCounter * 5)'
+        '                } while ($resultCounter -lt $maxRetries)'
+    ) -join "`n"
 }
 
 function Get-DirectoryInsightsPaginateBlock {
@@ -195,76 +220,75 @@ function Get-DirectoryInsightsPaginateBlock {
 
     $retry = Get-RetryWrapper -InvokeBlock $InvokeBlock
 
-    $limitBranch = if ($FunctionText -match '\$\{EventQuery\}') {
+    $limitCondition = if ($FunctionText -match '\$\{EventQuery\}') {
         'if ($EventQuery -and $EventQuery.limit) {'
     } elseif ($FunctionText -match '\$\{Limit\}') {
         'if ($Limit) {'
     } else {
         'if ($false) {'
     }
-    $limitBranch = $limitBranch.Replace('$', '`$')
 
     $searchAfterUpdate = if ($FunctionText -match '\$\{EventQuery\}') {
-        @"
-                    if (`$null -ne `$XResultSearchAfter) {
-                        `$EventQuery.search_after = `$XResultSearchAfter
-                        `$LocalVarBodyParameter = `$EventQuery | ConvertTo-Json -Depth 100
-                    }
-"@
+        @(
+            '                    if ($null -ne $XResultSearchAfter) {'
+            '                        $EventQuery.search_after = $XResultSearchAfter'
+            '                        $LocalVarBodyParameter = $EventQuery | ConvertTo-Json -Depth 100'
+            '                    }'
+        ) -join "`n"
     } else {
-        @"
-                    if (`$null -ne `$XResultSearchAfter) {
-                        if ([string]::IsNullOrEmpty(`$PSBoundParameters.SearchAfter)) {
-                            `$PSBoundParameters.Add('SearchAfter', `$XResultSearchAfter)
-                        } else {
-                            `$PSBoundParameters.SearchAfter = `$XResultSearchAfter
-                        }
-                    }
-"@
+        @(
+            '                    if ($null -ne $XResultSearchAfter) {'
+            '                        if ([string]::IsNullOrEmpty($PSBoundParameters.SearchAfter)) {'
+            '                            $PSBoundParameters.Add(''SearchAfter'', $XResultSearchAfter)'
+            '                        } else {'
+            '                            $PSBoundParameters.SearchAfter = $XResultSearchAfter'
+            '                        }'
+            '                    }'
+        ) -join "`n"
     }
 
-    @"
-        If (`$Paginate -and -not `$WithHttpInfo.IsPresent) {
-            `$PSBoundParameters.Remove('Paginate') | Out-Null
-            `$XResultCount = 0
-            `$XLimit = 0
-            Do {
-$retry
-                $limitBranch
-                    `$Results += `$Result
-                    break
-                } elseif (`$LocalVarResult.Headers -and `$LocalVarResult.Headers.Contains('X-Search_after')) {
-                    If (-not [System.String]::IsNullOrEmpty(`$Result)) {
-                        `$searchAfterRaw = `$LocalVarResult.Headers['X-Search_after']
-                        if (`$searchAfterRaw -is [array]) { `$searchAfterRaw = `$searchAfterRaw[0] }
-                        `$XResultSearchAfter = (`$searchAfterRaw | ConvertFrom-Json)
-$searchAfterUpdate
-                        `$countRaw = `$LocalVarResult.Headers['X-Result-Count']
-                        `$limitRaw = `$LocalVarResult.Headers['X-Limit']
-                        if (`$countRaw -is [array]) { `$countRaw = `$countRaw[0] }
-                        if (`$limitRaw -is [array]) { `$limitRaw = `$limitRaw[0] }
-                        `$XResultCount = [int]`$countRaw
-                        `$XLimit = [int]`$limitRaw
-                        `$Results += `$Result
-                        Write-Debug ("ResultCount: `$(`$XResultCount); Limit: `$(`$XLimit); XResultSearchAfter: `$(`$XResultSearchAfter); ")
-                    }
-                } else {
-                    `$Results += `$Result
-                    break
-                }
-            }
-            While (`$XResultCount -eq `$XLimit -and -not [System.String]::IsNullOrEmpty(`$Result))
-            return
-        } else {
-            `$PSBoundParameters.Remove('Paginate') | Out-Null
-$retry
-            if (`$WithHttpInfo.IsPresent) {
-                return `$LocalVarResult
-            } elseif (-not [System.String]::IsNullOrEmpty(`$Result)) {
-                return `$Result
-            }
-        }
-"@
+    @(
+        '        If ($Paginate -and -not $WithHttpInfo.IsPresent) {'
+        '            $PSBoundParameters.Remove(''Paginate'') | Out-Null'
+        '            $XResultCount = 0'
+        '            $XLimit = 0'
+        '            Do {'
+        $retry
+        "                $limitCondition"
+        '                    $Results += $Result'
+        '                    break'
+        '                } elseif ($LocalVarResult.Headers -and $LocalVarResult.Headers.Contains(''X-Search_after'')) {'
+        '                    If (-not [System.String]::IsNullOrEmpty($Result)) {'
+        '                        $searchAfterRaw = $LocalVarResult.Headers[''X-Search_after'']'
+        '                        if ($searchAfterRaw -is [array]) { $searchAfterRaw = $searchAfterRaw[0] }'
+        '                        $XResultSearchAfter = ($searchAfterRaw | ConvertFrom-Json)'
+        $searchAfterUpdate
+        '                        $countRaw = $LocalVarResult.Headers[''X-Result-Count'']'
+        '                        $limitRaw = $LocalVarResult.Headers[''X-Limit'']'
+        '                        if ($countRaw -is [array]) { $countRaw = $countRaw[0] }'
+        '                        if ($limitRaw -is [array]) { $limitRaw = $limitRaw[0] }'
+        '                        $XResultCount = [int]$countRaw'
+        '                        $XLimit = [int]$limitRaw'
+        '                        $Results += $Result'
+        '                        Write-Debug ("ResultCount: $($XResultCount); Limit: $($XLimit); XResultSearchAfter: $($XResultSearchAfter); ")'
+        '                    }'
+        '                } else {'
+        '                    $Results += $Result'
+        '                    break'
+        '                }'
+        '            }'
+        '            While ($XResultCount -eq $XLimit -and -not [System.String]::IsNullOrEmpty($Result))'
+        '            return'
+        '        } else {'
+        '            $PSBoundParameters.Remove(''Paginate'') | Out-Null'
+        $retry
+        '            if ($WithHttpInfo.IsPresent) {'
+        '                return $LocalVarResult'
+        '            } elseif (-not [System.String]::IsNullOrEmpty($Result)) {'
+        '                return $Result'
+        '            }'
+        '        }'
+    ) -join "`n"
 }
 
 function Get-SkipLimitPaginateBlock {
@@ -276,68 +300,68 @@ function Get-SkipLimitPaginateBlock {
     $retry = Get-RetryWrapper -InvokeBlock $InvokeBlock
 
     $initLimit = if ($FunctionText -match '\$\{Limit\}') {
-        @"
-            If ([string]::IsNullOrEmpty(`$PSBoundParameters.Limit)) {
-                `$PSBoundParameters.Add('Limit', 100)
-            }
-"@
-    } else { '' }
+        @(
+            '            If ([string]::IsNullOrEmpty($PSBoundParameters.Limit)) {'
+            '                $PSBoundParameters.Add(''Limit'', 100)'
+            '            }'
+        ) -join "`n"
+    } else { $null }
 
     $initSkip = if ($FunctionText -match '\$\{Skip\}') {
-        @"
-            If ([string]::IsNullOrEmpty(`$PSBoundParameters.Skip)) {
-                `$PSBoundParameters.Add('Skip', 0)
-            }
-"@
-    } else { '' }
+        @(
+            '            If ([string]::IsNullOrEmpty($PSBoundParameters.Skip)) {'
+            '                $PSBoundParameters.Add(''Skip'', 0)'
+            '            }'
+        ) -join "`n"
+    } else { $null }
 
     $skipAdvance = if ($FunctionText -match '\$\{Skip\}') {
-        '                $PSBoundParameters.Skip += $ResultCount'
-    } else { '' }
+        '                    $PSBoundParameters.Skip += $ResultCount'
+    } else { $null }
 
     $whileCondition = if ($FunctionText -match '\$\{Limit\}') {
-        'While ($ResultCount -eq $PSBoundParameters.Limit -and -not [System.String]::IsNullOrEmpty($Result))'
+        '            While ($ResultCount -eq $PSBoundParameters.Limit -and -not [System.String]::IsNullOrEmpty($Result))'
     } else {
-        'While (-not [System.String]::IsNullOrEmpty($Result))'
+        '            While (-not [System.String]::IsNullOrEmpty($Result))'
     }
 
-    @"
-        If (`$Paginate -and -not `$WithHttpInfo.IsPresent) {
-            `$PSBoundParameters.Remove('Paginate') | Out-Null
-$initLimit
-$initSkip
-            Do {
-                if (`$PSBoundParameters.Limit) { Write-Debug ("Limit: `$(`$PSBoundParameters.Limit); ") }
-                if (`$PSBoundParameters.Skip) { Write-Debug ("Skip: `$(`$PSBoundParameters.Skip); ") }
-$retry
-                `$Result = If ('results' -in `$Result.PSObject.Properties.Name) {
-                    `$Result.results
-                } Else {
-                    `$Result
-                }
-                If (-not [System.String]::IsNullOrEmpty(`$Result)) {
-                    `$ResultCount = (`$Result | Measure-Object).Count
-                    `$Results += `$Result
-$skipAdvance
-                }
-            }
-            $whileCondition
-            return
-        } else {
-            `$PSBoundParameters.Remove('Paginate') | Out-Null
-$retry
-            `$Result = If ('results' -in `$Result.PSObject.Properties.Name) {
-                `$Result.results
-            } Else {
-                `$Result
-            }
-            if (`$WithHttpInfo.IsPresent) {
-                return `$LocalVarResult
-            } elseif (-not [System.String]::IsNullOrEmpty(`$Result)) {
-                return `$Result
-            }
-        }
-"@
+    $lines = [System.Collections.Generic.List[string]]::new()
+    [void]$lines.Add('        If ($Paginate -and -not $WithHttpInfo.IsPresent) {')
+    [void]$lines.Add('            $PSBoundParameters.Remove(''Paginate'') | Out-Null')
+    if ($initLimit) { [void]$lines.Add($initLimit) }
+    if ($initSkip) { [void]$lines.Add($initSkip) }
+    [void]$lines.Add('            Do {')
+    [void]$lines.Add('                if ($PSBoundParameters.Limit) { Write-Debug ("Limit: $($PSBoundParameters.Limit); ") }')
+    [void]$lines.Add('                if ($PSBoundParameters.Skip) { Write-Debug ("Skip: $($PSBoundParameters.Skip); ") }')
+    [void]$lines.Add($retry)
+    [void]$lines.Add('                $Result = If (''results'' -in $Result.PSObject.Properties.Name) {')
+    [void]$lines.Add('                    $Result.results')
+    [void]$lines.Add('                } Else {')
+    [void]$lines.Add('                    $Result')
+    [void]$lines.Add('                }')
+    [void]$lines.Add('                If (-not [System.String]::IsNullOrEmpty($Result)) {')
+    [void]$lines.Add('                    $ResultCount = ($Result | Measure-Object).Count')
+    [void]$lines.Add('                    $Results += $Result')
+    if ($skipAdvance) { [void]$lines.Add($skipAdvance) }
+    [void]$lines.Add('                }')
+    [void]$lines.Add('            }')
+    [void]$lines.Add($whileCondition)
+    [void]$lines.Add('            return')
+    [void]$lines.Add('        } else {')
+    [void]$lines.Add('            $PSBoundParameters.Remove(''Paginate'') | Out-Null')
+    [void]$lines.Add($retry)
+    [void]$lines.Add('            $Result = If (''results'' -in $Result.PSObject.Properties.Name) {')
+    [void]$lines.Add('                $Result.results')
+    [void]$lines.Add('            } Else {')
+    [void]$lines.Add('                $Result')
+    [void]$lines.Add('            }')
+    [void]$lines.Add('            if ($WithHttpInfo.IsPresent) {')
+    [void]$lines.Add('                return $LocalVarResult')
+    [void]$lines.Add('            } elseif (-not [System.String]::IsNullOrEmpty($Result)) {')
+    [void]$lines.Add('                return $Result')
+    [void]$lines.Add('            }')
+    [void]$lines.Add('        }')
+    return ($lines -join "`n")
 }
 
 function ConvertTo-PaginatedFunction {
@@ -346,12 +370,13 @@ function ConvertTo-PaginatedFunction {
         [string]$Mode
     )
 
+    # Already rewritten — leave alone (re-run generation for a clean rewrite)
     if ($FunctionText -match '\$Paginate\s*=' -and $FunctionText -match 'Begin\s*\{') {
         Write-Verbose 'Function already paginated; skipping.'
         return $FunctionText
     }
 
-    if ($FunctionText -notmatch '(?ms)(?<head>.*?)(?<process>Process\s*\{(?<processBody>.*)\})\s*\}\s*$') {
+    if ($FunctionText -notmatch '(?ms)(?<head>.*?)Process\s*\{(?<processBody>.*)\}\s*\}\s*$') {
         Write-Verbose 'Function has no Process block; skipping pagination rewrite.'
         return $FunctionText
     }
@@ -372,23 +397,20 @@ function ConvertTo-PaginatedFunction {
 
     $head = Add-PaginateParameter -FunctionText $head
 
-    $wrapperStart = @"
-
-    Begin {
-        `$Results = @()
-    }
-    Process {
-"@
-    $wrapperEnd = @"
-
-    }
-    End {
-        Return `$Results
-    }
-}
-"@
-
-    return ($head.TrimEnd() + $wrapperStart + $paginateBlock + $wrapperEnd)
+    return @(
+        $head.TrimEnd()
+        ''
+        '    Begin {'
+        '        $Results = @()'
+        '    }'
+        '    Process {'
+        $paginateBlock
+        '    }'
+        '    End {'
+        '        Return $Results'
+        '    }'
+        '}'
+    ) -join "`n"
 }
 
 function Update-ApiFilePagination {
