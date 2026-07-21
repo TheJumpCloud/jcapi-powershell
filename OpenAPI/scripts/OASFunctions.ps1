@@ -270,7 +270,7 @@ Function Get-OasFile {
                 $oasURL = 'https://docs.jumpcloud.com/new/api/insights/directory/index.yaml'
             }
             'Console' {
-                $oasURL = 'https://docs.jumpcloud.com/new/api/console/index.yaml'
+                $oasURL = 'https://docs.jumpcloud.com/new/console/index.yaml'
             }
         }
         $oasContent = (Invoke-WebRequest -Uri $oasURL -Method Get).Content
