@@ -247,9 +247,21 @@ function Get-DirectoryInsightsPaginateBlock {
         ) -join "`n"
     }
 
+    $cloneEventQuery = if ($FunctionText -match '\$\{EventQuery\}') {
+        @(
+            '            # Clone body models so pagination cursors (e.g. search_after) do not mutate the caller''s object'
+            '            if ($null -ne $EventQuery) {'
+            '                $EventQuery = $EventQuery | ConvertTo-Json -Depth 100 | ConvertFrom-Json'
+            '            }'
+        ) -join "`n"
+    } else {
+        ''
+    }
+
     @(
         '        If ($Paginate -and -not $WithHttpInfo.IsPresent) {'
         '            $PSBoundParameters.Remove(''Paginate'') | Out-Null'
+        $cloneEventQuery
         '            $XResultCount = 0'
         '            $XLimit = 0'
         '            Do {'
@@ -257,24 +269,33 @@ function Get-DirectoryInsightsPaginateBlock {
         "                $limitCondition"
         '                    $Results += $Result'
         '                    break'
-        '                } elseif ($LocalVarResult.Headers -and $LocalVarResult.Headers.Contains(''X-Search_after'')) {'
-        '                    If (-not [System.String]::IsNullOrEmpty($Result)) {'
-        '                        $searchAfterRaw = $LocalVarResult.Headers[''X-Search_after'']'
-        '                        if ($searchAfterRaw -is [array]) { $searchAfterRaw = $searchAfterRaw[0] }'
+        '                } else {'
+        '                    # Invoke-WebRequest headers are a Dictionary (ContainsKey), not HttpHeaders.Contains(string)'
+        '                    $searchAfterRaw = $null'
+        '                    $countRaw = $null'
+        '                    $limitRaw = $null'
+        '                    if ($LocalVarResult.Headers -is [System.Collections.IDictionary]) {'
+        '                        foreach ($headerKey in @($LocalVarResult.Headers.Keys)) {'
+        '                            if ($headerKey -ieq ''X-Search_after'') {'
+        '                                $searchAfterRaw = @($LocalVarResult.Headers[$headerKey])[0]'
+        '                            } elseif ($headerKey -ieq ''X-Result-Count'') {'
+        '                                $countRaw = @($LocalVarResult.Headers[$headerKey])[0]'
+        '                            } elseif ($headerKey -ieq ''X-Limit'') {'
+        '                                $limitRaw = @($LocalVarResult.Headers[$headerKey])[0]'
+        '                            }'
+        '                        }'
+        '                    }'
+        '                    if ($null -ne $searchAfterRaw -and -not [System.String]::IsNullOrEmpty($Result)) {'
         '                        $XResultSearchAfter = ($searchAfterRaw | ConvertFrom-Json)'
         $searchAfterUpdate
-        '                        $countRaw = $LocalVarResult.Headers[''X-Result-Count'']'
-        '                        $limitRaw = $LocalVarResult.Headers[''X-Limit'']'
-        '                        if ($countRaw -is [array]) { $countRaw = $countRaw[0] }'
-        '                        if ($limitRaw -is [array]) { $limitRaw = $limitRaw[0] }'
-        '                        $XResultCount = [int]$countRaw'
-        '                        $XLimit = [int]$limitRaw'
+        '                        if ($null -ne $countRaw) { $XResultCount = [int]$countRaw }'
+        '                        if ($null -ne $limitRaw) { $XLimit = [int]$limitRaw }'
         '                        $Results += $Result'
         '                        Write-Debug ("ResultCount: $($XResultCount); Limit: $($XLimit); XResultSearchAfter: $($XResultSearchAfter); ")'
+        '                    } else {'
+        '                        $Results += $Result'
+        '                        break'
         '                    }'
-        '                } else {'
-        '                    $Results += $Result'
-        '                    break'
         '                }'
         '            }'
         '            While ($XResultCount -eq $XLimit -and -not [System.String]::IsNullOrEmpty($Result))'

@@ -97,7 +97,7 @@ With **`all`**, each target runs in sequence. If one fails, the script still run
 - **Generator image version:** `openapitools.json` → `generator-cli.version`
 - **Wrapper script:** `scripts/generate-powershell-docker.mjs`
 
-Each target uses generator **`powershell`** with **`apiNamePrefix=JcSdk`**, **`powershellVersion=7.0`**, and **`commonDebuggingType=Stop`**. Spec validation during generation is turned off with **`--skip-validate-spec`**.
+Each target uses generator **`powershell`** with **`apiNamePrefix=JcSdk`**, **`powershellVersion=7.0`**, and **`commonDebuggingType=Stop`**. Spec validation during generation is turned off with **`--skip-validate-spec`**. Custom templates under **`templates/powershell/`** are passed with **`-t`** (lean headers; no `<# .SYNOPSIS #>` help blocks on `.ps1` files; API docs use prefixed Configuration cmdlets). API markdown under **`docs/`** is generated; model docs are skipped via **`--global-property modelDocs=false`**. After generation, example snippets in docs are rewritten so `Initialize-*` / Configuration cmdlets include **`apiNamePrefix`**.
 
 ---
 
@@ -143,5 +143,6 @@ The container writes through the bind mount. If files are owned by root from a p
 | `PowerShell/JumpCloud.SDK.*` | Generated SDK output (do not hand-edit if you expect regen to overwrite). |
 | `openapitools.json` | Pins the Docker image version (`generator-cli.version`). |
 | `scripts/generate-powershell-docker.mjs` | Docker prerequisite check + `docker run` orchestration. |
+| `templates/powershell/` | Custom mustache overrides (minimal file headers; no comment-based help on functions). |
 | `scripts/Apply-OasPagination.ps1` | Post-processor: adds pagination to functions marked `paginate: true` in `OAS/mapping/OASMapping.*.json`. |
 | `OAS/mapping/OASMapping.*.json` | Per-operation flags (`paginate`, `x-powershell-method-name`, etc.). |

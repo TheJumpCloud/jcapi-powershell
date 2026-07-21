@@ -11,11 +11,14 @@
  * Java and openapi-generator-cli on the host are not required — the JVM and
  * generator run inside the container.
  *
+ * Templates: generation uses `-t /local/templates/powershell` so comment-based
+ * help and the verbose OAS description header are omitted from .ps1 files.
+ *
  * Pagination: generation uses `--enable-post-process-file` with a queue script
  * inside the container; after each target, `Apply-OasPagination.ps1` runs on the
  * host (PowerShell 7+) because the generator image does not include pwsh.
  */
-import { existsSync, readFileSync, unlinkSync } from "node:fs";
+import { existsSync, readFileSync, unlinkSync, readdirSync, writeFileSync } from "node:fs";
 import { chmodSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { spawnSync } from "node:child_process";
@@ -83,6 +86,9 @@ const postProcessQueuePath = join(root, ".pagination-postprocess-queue");
 const postProcessQueueScript = "/local/scripts/Apply-OasPagination-queue.sh";
 const postProcessScriptHost = join(root, "scripts/Apply-OasPagination.ps1");
 const postProcessQueueScriptHost = join(root, "scripts/Apply-OasPagination-queue.sh");
+/** Custom mustache templates (lean headers, no comment-based help on functions). */
+const templateDirHost = join(root, "templates/powershell");
+const templateDirContainer = "/local/templates/powershell";
 
 const targets = {
   console: {
@@ -115,6 +121,69 @@ function clearPostProcessQueue() {
     unlinkSync(postProcessQueuePath);
   } catch {
     /* queue file may not exist */
+  }
+}
+
+/**
+ * OpenAPI Generator's PowerShell example snippets omit apiNamePrefix on model
+ * Initialize-* cmdlets (and sometimes Configuration helpers). Rewrite docs so
+ * examples match the generated cmdlets (e.g. Initialize-JcSdkEventQuery).
+ * @param {typeof targets[string]} target
+ */
+function fixDocCmdletPrefixes(target) {
+  const prefixMatch = /(?:^|,)apiNamePrefix=([^,]+)/.exec(target.props);
+  const prefix = prefixMatch?.[1];
+  if (!prefix) {
+    return;
+  }
+
+  const docsDir = join(target.outputHost, "docs");
+  if (!existsSync(docsDir)) {
+    return;
+  }
+
+  let updatedFiles = 0;
+
+  /** @param {string} content */
+  function rewriteDocContent(content) {
+    // Fresh regexes each call — /g lastIndex must not leak across files
+    return content
+      .replace(
+        new RegExp(`\\bInitialize-(?!${prefix})([A-Za-z][A-Za-z0-9_]*)`, "g"),
+        `Initialize-${prefix}$1`,
+      )
+      .replace(/\bGet-Configuration\b/g, `Get-${prefix}Configuration`)
+      .replace(/\bSet-Configuration(?=[A-Za-z]|\b)/g, `Set-${prefix}Configuration`);
+  }
+
+  for (const name of readdirSync(docsDir)) {
+    if (!name.endsWith(".md")) {
+      continue;
+    }
+    const filePath = join(docsDir, name);
+    const original = readFileSync(filePath, "utf8");
+    const next = rewriteDocContent(original);
+    if (next !== original) {
+      writeFileSync(filePath, next, "utf8");
+      updatedFiles++;
+    }
+  }
+
+  // README examples can have the same unprefixed Initialize-/Configuration names
+  const readmePath = join(target.outputHost, "README.md");
+  if (existsSync(readmePath)) {
+    const original = readFileSync(readmePath, "utf8");
+    const next = rewriteDocContent(original);
+    if (next !== original) {
+      writeFileSync(readmePath, next, "utf8");
+      updatedFiles++;
+    }
+  }
+
+  if (updatedFiles > 0) {
+    console.error(
+      `[docs] Prefixed example cmdlets with ${prefix} in ${updatedFiles} file(s)`,
+    );
   }
 }
 
@@ -188,6 +257,11 @@ function generate(target) {
     chmodSync(postProcessQueueScriptHost, 0o755);
   }
 
+  if (!existsSync(templateDirHost)) {
+    console.error(`Missing custom templates directory: ${templateDirHost}`);
+    return 1;
+  }
+
   const args = [
     "run",
     "--rm",
@@ -203,7 +277,12 @@ function generate(target) {
     target.input,
     "-o",
     target.output,
+    "-t",
+    templateDirContainer,
     `--additional-properties=${target.props}`,
+    // Keep API markdown docs; skip model docs/*.md
+    "--global-property",
+    "modelDocs=false",
     "--enable-post-process-file",
   ];
   if (target.skipValidate) {
@@ -217,7 +296,9 @@ function generate(target) {
   }
 
   console.error(`\n=== Applying pagination post-processing (${target.sdkShortName}) ===\n`);
-  return flushPaginationPostProcess(target);
+  const paginationStatus = flushPaginationPostProcess(target);
+  fixDocCmdletPrefixes(target);
+  return paginationStatus;
 }
 
 const mode = process.argv[2] ?? "all";
