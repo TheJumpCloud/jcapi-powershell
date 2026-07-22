@@ -1,2 +1,5 @@
 # Temp ignore on PowerShell folder while building OAS Manipulation Scripts
 /PowerShell/*
+
+# OpenAPI Generator pagination post-process queue (Docker)
+.pagination-postprocess-queue
