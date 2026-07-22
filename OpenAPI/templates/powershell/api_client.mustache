@@ -1,0 +1,544 @@
+{{> partial_header}}
+function Invoke-{{{apiNamePrefix}}}ApiClient {
+    [OutputType('System.Collections.Hashtable')]
+    [CmdletBinding()]
+    Param(
+        [Parameter(Mandatory)]
+        [string]$Uri,
+        [Parameter(Mandatory)]
+        [AllowEmptyCollection()]
+        [string[]]$Accepts,
+        [Parameter(Mandatory)]
+        [AllowEmptyCollection()]
+        [string[]]$ContentTypes,
+        [Parameter(Mandatory)]
+        [hashtable]$HeaderParameters,
+        [Parameter(Mandatory)]
+        [hashtable]$FormParameters,
+        [Parameter(Mandatory)]
+        [hashtable]$QueryParameters,
+        [Parameter(Mandatory)]
+        [hashtable]$CookieParameters,
+        [Parameter(Mandatory)]
+        [AllowEmptyString()]
+        [string]$Body,
+        [Parameter(Mandatory)]
+        [string]$Method,
+        [Parameter(Mandatory)]
+        [AllowEmptyString()]
+        [string]$ReturnType,
+        [Parameter(Mandatory)]
+        [bool]$IsBodyNullable
+    )
+
+    if ($DebugPreference -ne 'SilentlyContinue') {
+        'Calling method: Invoke-{{{apiNamePrefix}}}ApiClient' | Write-Debug
+        $PSBoundParameters | Out-DebugParameter | Write-Debug
+    }
+
+    $Configuration = Get-{{{apiNamePrefix}}}Configuration
+    $RequestUri = $Configuration["BaseUrl"] + $Uri
+    $DefaultHeaders = $Configuration["DefaultHeaders"]
+    # should make sure that SkipCertificateCheck is not set for PowerShell 5
+    $SkipCertificateCheck = $Configuration["SkipCertificateCheck"]
+    $Proxy = $Configuration["Proxy"]
+
+    # cookie parameters
+    foreach ($Parameter in $CookieParameters.GetEnumerator()) {
+        if ($Parameter.Name -eq "cookieAuth") {
+            $HeaderParameters["Cookie"] = $Parameter.Value
+        } else {
+            $HeaderParameters[$Parameter.Name] = $Parameter.Value
+        }
+    }
+    if ($CookieParameters -and $CookieParameters.Count -gt 1) {
+        Write-Warning "Multiple cookie parameters found. Currently only the first one is supported/used"
+    }
+
+    # accept, content-type headers
+    $Accept = SelectHeaders -Headers $Accepts -Multiple -JsonFirst
+    if ($Accept) {
+        $HeaderParameters['Accept'] = $Accept
+    }
+
+    # Content-Type and multipart handling
+    $ContentType = SelectHeaders -Headers $ContentTypes
+    if ($ContentType) {
+        $HeaderParameters['Content-Type'] = $ContentType
+        if ($ContentType -eq 'multipart/form-data') {
+            $MultiPart = $true
+        }
+    }
+
+    # add default headers if any
+    foreach ($header in $DefaultHeaders.GetEnumerator()) {
+        $HeaderParameters[$header.Name] = $header.Value
+    }
+
+    # construct URL query string
+    $HttpValues = [System.Web.HttpUtility]::ParseQueryString([String]::Empty)
+    foreach ($Parameter in $QueryParameters.GetEnumerator()) {
+        if ($Parameter.Value.Count -gt 1) { # array
+            foreach ($Value in $Parameter.Value) {
+                $HttpValues.Add($Parameter.Key + '[]', $Value)
+            }
+        } else {
+            $HttpValues.Add($Parameter.Key,$Parameter.Value)
+        }
+    }
+    # Build the request and load it with the query string.
+    $UriBuilder = [System.UriBuilder]($RequestUri)
+    $UriBuilder.Query = $HttpValues.ToString()
+
+    # include form parameters in the request body
+    if ($FormParameters -and $FormParameters.Count -gt 0) {
+       $RequestBody = $FormParameters
+    }
+
+    if ($Body -or $IsBodyNullable) {
+        $RequestBody = $Body
+        if ([string]::IsNullOrEmpty($RequestBody) -and $IsBodyNullable -eq $true) {
+            $RequestBody = "null"
+        }
+    }
+
+    # use splatting to pass parameters
+    $Params = @{}
+    $Params.Uri = $UriBuilder.Uri
+    $Params.Method = $Method
+    $Params.Headers = $HeaderParameters
+    $Params.ErrorAction = 'Stop'
+
+    if ($SkipCertificateCheck -eq $true) {
+        $Params.SkipCertificateCheck = $true
+    }
+
+    if ($null -ne $Proxy) {
+        $effectiveProxy = $Proxy.GetProxy($UriBuilder.Uri)
+        # do not set proxy if it is null or same as target Uri
+        if ($null -ne $effectiveProxy -and $effectiveProxy.AbsoluteUri -ne $UriBuilder.Uri) {
+            $Params.Proxy = $effectiveProxy.AbsoluteUri
+            $Params.ProxyUseDefaultCredentials = $true
+        }
+    }
+
+    # Prefer Invoke-RestMethod (PS7+) so JSON is parsed once; keep Invoke-WebRequest for PS5.
+    if ($MultiPart) {
+        if ($PSVersionTable.PSVersion.Major -eq 5) {
+            $ResponseHeaders = $null
+            $ResponseStatusCode = $null
+        } else {
+            $Params.ResponseHeadersVariable = "ResponseHeaders"
+            $Params.StatusCodeVariable = "ResponseStatusCode"
+        }
+        $Params.Form = $FormParameters
+        $Response = Invoke-RestMethod @Params
+
+        return @{
+            Response = $Response
+            StatusCode = $ResponseStatusCode
+            Headers = $ResponseHeaders
+        }
+    } elseif ($PSVersionTable.PSVersion.Major -ge 6) {
+        $Params.Body = $RequestBody
+        $Params.ResponseHeadersVariable = "ResponseHeaders"
+        $Params.StatusCodeVariable = "ResponseStatusCode"
+        $Response = Invoke-RestMethod @Params
+        $contentTypes = @()
+        if ($ResponseHeaders -and $ResponseHeaders['Content-Type']) {
+            $contentTypes = @($ResponseHeaders['Content-Type'])
+        }
+
+        return @{
+            Response = DeserializeResponse -Response $Response -ReturnType $ReturnType -ContentTypes $contentTypes
+            StatusCode = $ResponseStatusCode
+            Headers = $ResponseHeaders
+        }
+    } else {
+        $Params.Body = $RequestBody
+        $Params.UseBasicParsing = $true
+        $Response = Invoke-WebRequest @Params
+
+        return @{
+            Response = DeserializeResponse -Response $Response.Content -ReturnType $ReturnType -ContentTypes $Response.Headers["Content-Type"]
+            StatusCode = $Response.StatusCode
+            Headers = $Response.Headers
+        }
+    }
+}
+
+# Filter MIME types for Accept:/Content-Type: headers
+function SelectHeaders {
+    Param(
+        [Parameter(Mandatory)]
+        [AllowEmptyCollection()]
+        [String[]]$Headers,
+        [Parameter(Mandatory=$false)]
+        [switch]$Multiple,
+        [Parameter(Mandatory=$false)]
+        [switch]$JsonFirst
+    )
+
+    # if no MIME type is provided return null
+    if (!($Headers) -or $Headers.Count -eq 0) {
+        return $null
+    }
+
+    if ($Multiple) {
+        # return multiple MIME types (for Accept: header)
+        if ($JsonFirst) {
+            # sort input to return JSON MIME types first
+            $mimeHeaders = @()
+            $otherHeaders = @()
+            foreach ($Header in $Headers) {
+                if (IsJsonMIME -MIME $Header) {
+                    $mimeHeaders += $Header
+                } else {
+                    $otherHeaders += $Header
+                }
+            }
+            $Headers = $($mimeHeaders; $otherHeaders)
+        }
+        return [string]::Join(', ', $Headers) # join multiple types if they are provided
+    } else {
+        foreach ($Header in $Headers) {
+            if (IsJsonMIME -MIME $Header) {
+                return $Header # return the first type matching a JSON MIME
+            }
+        }
+        return $Headers[0] # else return the first one
+    }
+}
+
+function IsJsonMIME {
+    Param(
+        [Parameter(Mandatory)]
+        [string]$MIME
+    )
+
+    if ($MIME -match "(?i)^(application/json|[^;/ \t]+/[^;/ \t]+[+]json)[ \t]*(;.*)?$") {
+        return $true
+    } else {
+        return $false
+    }
+}
+
+function DeserializeResponse {
+    Param(
+        [Parameter(Mandatory)]
+        [AllowEmptyString()]
+        [string]$ReturnType,
+        [Parameter(Mandatory)]
+        [Object]$Response,
+        [Parameter(Mandatory)]
+        [AllowNull()]
+        [AllowEmptyCollection()]
+        [string[]]$ContentTypes
+    )
+
+    If ($null -eq $ContentTypes) {
+        $ContentTypes = [string[]]@()
+    }
+
+    If ([string]::IsNullOrEmpty($ReturnType) -and $ContentTypes.Count -eq 0) { # void response
+        return $Response
+    } Elseif (@("String", "Boolean", "System.DateTime") -contains $ReturnType) { # string, boolean ,datetime
+        return $Response
+    } Else {
+        # Invoke-RestMethod may already return a parsed object — avoid a second ConvertFrom-Json.
+        if ($Response -isnot [string]) {
+            return $Response
+        }
+
+        If ($ReturnType -match '\[\]$') { # array
+            return ConvertFrom-Json $Response
+        } elseif ($ContentTypes) {
+            $ContentType = $null
+            if ($ContentTypes.Count -gt 1) {
+                $ContentType = SelectHeaders -Headers $ContentTypes
+            } else {
+                $ContentType = $ContentTypes[0]
+            }
+
+            if (IsJsonMIME -MIME $ContentType) { # JSON
+                return ConvertFrom-Json $Response
+            } else { # XML, file, etc
+                return $Response
+            }
+        } else { # no content type in response header, returning raw response
+            return $Response
+        }
+    }
+}
+
+<#
+.SYNOPSIS
+    Aggregates skip/limit pages (JumpCloud Module Get-JCResults algorithm).
+.DESCRIPTION
+    Uses x-total-count / totalCount when available, then fetches remaining pages
+    sequentially or in parallel (PowerShell 7+). Generated with the SDK; call sites
+    are injected by Apply-OasPagination.ps1 for mapping paginate=true operations.
+#>
+function Get-{{{apiNamePrefix}}}Results {
+    [CmdletBinding()]
+    Param(
+        [Parameter(Mandatory)]
+        [string]$Uri,
+        [Parameter(Mandatory)]
+        [string]$Method,
+        [Parameter(Mandatory)]
+        [ValidateRange(1, [int]::MaxValue)]
+        [int]$Limit,
+        [int]$Skip = 0,
+        [hashtable]$HeaderParameters = @{},
+        [hashtable]$QueryParameters = @{},
+        [AllowEmptyString()]
+        [AllowNull()]
+        [string]$Body = '',
+        [bool]$Parallel = $false
+    )
+
+    $prevProgress = $ProgressPreference
+    $ProgressPreference = 'SilentlyContinue'
+    try {
+        $Configuration = Get-{{{apiNamePrefix}}}Configuration
+        $baseUrl = [string]$Configuration['BaseUrl']
+        if ([string]::IsNullOrEmpty($baseUrl)) {
+            $baseUrl = 'https://console.jumpcloud.com'
+        }
+        $baseUrl = $baseUrl.TrimEnd('/')
+
+        $hdrs = [hashtable]::new([System.StringComparer]::OrdinalIgnoreCase)
+        foreach ($entry in $HeaderParameters.GetEnumerator()) {
+            $hdrs[$entry.Key] = $entry.Value
+        }
+        if (-not $hdrs.ContainsKey('Accept')) {
+            $hdrs['Accept'] = 'application/json'
+        }
+        if (-not [string]::IsNullOrEmpty($Body) -and -not $hdrs.ContainsKey('Content-Type')) {
+            $hdrs['Content-Type'] = 'application/json'
+        }
+
+        $baseQuery = [hashtable]::new([System.StringComparer]::OrdinalIgnoreCase)
+        foreach ($entry in $QueryParameters.GetEnumerator()) {
+            if ($entry.Key -in @('limit', 'skip')) { continue }
+            $baseQuery[$entry.Key] = $entry.Value
+        }
+
+        $limit = [int]$Limit
+        $skip = [int]$Skip
+        $hasBody = -not [string]::IsNullOrEmpty($Body)
+        $useSearchBody = $hasBody -and ($Uri -match '/search' -or $Body -match '"skip"\s*:|"limit"\s*:')
+
+        function BuildPageUri {
+            param([int]$PageSkip, [int]$PageLimit, [hashtable]$Query, [string]$Path, [string]$Root, [bool]$SearchBody)
+            $values = [System.Web.HttpUtility]::ParseQueryString([string]::Empty)
+            foreach ($entry in $Query.GetEnumerator()) {
+                if ($null -eq $entry.Value) { continue }
+                if ($entry.Value -is [System.Collections.IEnumerable] -and -not ($entry.Value -is [string])) {
+                    foreach ($value in $entry.Value) { $values.Add([string]$entry.Key, [string]$value) }
+                } else {
+                    $values.Add([string]$entry.Key, [string]$entry.Value)
+                }
+            }
+            if (-not $SearchBody) {
+                $values['limit'] = [string]$PageLimit
+                $values['skip'] = [string]$PageSkip
+            }
+            $builder = [System.UriBuilder]($Root + $Path)
+            $builder.Query = $values.ToString()
+            return $builder.Uri
+        }
+
+        function AddResultItems {
+            param($Bag, $Content)
+            if ($null -eq $Content) { return }
+            if ($Content.PSObject.Properties.Name -contains 'results' -and $null -ne $Content.results) {
+                $items = @($Content.results)
+            } elseif ($Content -is [System.Collections.IEnumerable] -and -not ($Content -is [string]) -and -not ($Content -is [System.Collections.IDictionary])) {
+                $items = @($Content)
+            } else {
+                $items = @($Content)
+            }
+            if ($items.Count -eq 0) { return }
+            if ($Bag -is [System.Collections.Concurrent.ConcurrentBag[object]]) {
+                foreach ($item in $items) { [void]$Bag.Add($item) }
+            } elseif ($items.Count -eq 1) {
+                [void]$Bag.Add($items[0])
+            } else {
+                [void]$Bag.AddRange($items)
+            }
+        }
+
+        function InvokePage {
+            param([uri]$PageUri, [string]$PageBody)
+            $iwr = @{
+                Method          = $Method
+                Uri             = $PageUri
+                Headers         = $hdrs
+                UseBasicParsing = $true
+                ErrorAction     = 'Stop'
+            }
+            if ($PSVersionTable.PSVersion.Major -ge 7) {
+                $iwr['MaximumRetryCount'] = 5
+                $iwr['RetryIntervalSec'] = 5
+            }
+            if ($null -ne $Configuration['SkipCertificateCheck'] -and $Configuration['SkipCertificateCheck'] -eq $true) {
+                $iwr['SkipCertificateCheck'] = $true
+            }
+            if (-not [string]::IsNullOrEmpty($PageBody)) {
+                $iwr['Body'] = $PageBody
+            }
+            return Invoke-WebRequest @iwr
+        }
+
+        function UpdateSearchBody {
+            param([string]$SourceBody, [int]$PageSkip, [int]$PageLimit)
+            if ([string]::IsNullOrEmpty($SourceBody)) { return $SourceBody }
+            $obj = $SourceBody | ConvertFrom-Json -AsHashtable
+            $obj['limit'] = $PageLimit
+            $obj['skip'] = $PageSkip
+            return ($obj | ConvertTo-Json -Compress -Depth 100)
+        }
+
+        if ($Parallel -and $PSVersionTable.PSVersion.Major -ge 7) {
+            $resultsArray = [System.Collections.Concurrent.ConcurrentBag[object]]::new()
+            $errorResults = [System.Collections.Concurrent.ConcurrentQueue[string]]::new()
+        } else {
+            $Parallel = $false
+            $resultsArray = [System.Collections.ArrayList]::new()
+        }
+
+        $pageBody = if ($useSearchBody) { UpdateSearchBody -SourceBody $Body -PageSkip $skip -PageLimit $limit } else { $Body }
+        $pageUri = BuildPageUri -PageSkip $skip -PageLimit $limit -Query $baseQuery -Path $Uri -Root $baseUrl -SearchBody:$useSearchBody
+        Write-Debug $pageUri
+
+        $response = InvokePage -PageUri $pageUri -PageBody $pageBody
+        $content = $response.Content | ConvertFrom-Json
+
+        $totalCountHeader = $false
+        $totalCount = 0
+        $headerTotal = $null
+        if ($response.Headers -and $response.Headers['x-total-count']) {
+            $headerTotal = @($response.Headers['x-total-count'])[0]
+        } elseif ($response.Headers) {
+            foreach ($key in @($response.Headers.Keys)) {
+                if ($key -ieq 'x-total-count') {
+                    $headerTotal = @($response.Headers[$key])[0]
+                    break
+                }
+            }
+        }
+        if ($null -ne $headerTotal -and -not [string]::IsNullOrWhiteSpace([string]$headerTotal)) {
+            $totalCountHeader = $true
+            $totalCount = [int]([string]$headerTotal).Trim()
+        } elseif ($null -ne $content -and $content.PSObject.Properties.Name -contains 'totalCount' -and $null -ne $content.totalCount) {
+            $totalCount = [int]$content.totalCount
+        }
+
+        AddResultItems -Bag $resultsArray -Content $content
+
+        if ($totalCount -le 0) {
+            # No total — walk pages until a short page (legacy sequential).
+            $pageSkip = $skip + $limit
+            while ($true) {
+                $pageBody = if ($useSearchBody) { UpdateSearchBody -SourceBody $Body -PageSkip $pageSkip -PageLimit $limit } else { $Body }
+                $pageUri = BuildPageUri -PageSkip $pageSkip -PageLimit $limit -Query $baseQuery -Path $Uri -Root $baseUrl -SearchBody:$useSearchBody
+                Write-Debug $pageUri
+                $response = InvokePage -PageUri $pageUri -PageBody $pageBody
+                $content = $response.Content | ConvertFrom-Json
+                $before = $resultsArray.Count
+                AddResultItems -Bag $resultsArray -Content $content
+                $added = $resultsArray.Count - $before
+                if ($added -lt $limit) { break }
+                $pageSkip += $limit
+            }
+            return @($resultsArray)
+        }
+
+        $remaining = [Math]::Max(0, $totalCount - $skip)
+        $pageCounter = [Math]::Ceiling($remaining / [double]$limit)
+        Write-Debug "total count: $totalCount; pages: $pageCounter"
+
+        if ($pageCounter -le 1) {
+            return @($resultsArray)
+        }
+
+        if ($Parallel) {
+            $pageIndexes = 1..([int]$pageCounter - 1)
+            $pageIndexes | ForEach-Object -Parallel {
+                $errorResults = $using:errorResults
+                $resultsArray = $using:resultsArray
+                $hdrs = $using:hdrs
+                $Method = $using:Method
+                $Uri = $using:Uri
+                $baseUrl = $using:baseUrl
+                $baseQuery = $using:baseQuery
+                $Body = $using:Body
+                $useSearchBody = $using:useSearchBody
+                $limit = $using:limit
+                $skip = $using:skip
+                $pageSkip = $skip + ($_ * $limit)
+                try {
+                    $values = [System.Web.HttpUtility]::ParseQueryString([string]::Empty)
+                    foreach ($entry in $baseQuery.GetEnumerator()) {
+                        if ($null -eq $entry.Value) { continue }
+                        $values.Add([string]$entry.Key, [string]$entry.Value)
+                    }
+                    $pageBody = $Body
+                    if ($useSearchBody -and -not [string]::IsNullOrEmpty($Body)) {
+                        $obj = $Body | ConvertFrom-Json -AsHashtable
+                        $obj['limit'] = $limit
+                        $obj['skip'] = $pageSkip
+                        $pageBody = $obj | ConvertTo-Json -Compress -Depth 100
+                    } else {
+                        $values['limit'] = [string]$limit
+                        $values['skip'] = [string]$pageSkip
+                    }
+                    $builder = [System.UriBuilder]($baseUrl + $Uri)
+                    $builder.Query = $values.ToString()
+                    $iwr = @{
+                        Method              = $Method
+                        Uri                 = $builder.Uri
+                        Headers             = $hdrs
+                        UseBasicParsing     = $true
+                        MaximumRetryCount   = 5
+                        RetryIntervalSec    = 5
+                        ErrorAction         = 'Stop'
+                    }
+                    if (-not [string]::IsNullOrEmpty($pageBody)) { $iwr['Body'] = $pageBody }
+                    $response = Invoke-WebRequest @iwr
+                    $content = $response.Content | ConvertFrom-Json
+                    if ($null -ne $content -and $content.PSObject.Properties.Name -contains 'results' -and $null -ne $content.results) {
+                        foreach ($item in @($content.results)) { [void]$resultsArray.Add($item) }
+                    } elseif ($content -is [System.Collections.IEnumerable] -and -not ($content -is [string])) {
+                        foreach ($item in @($content)) { [void]$resultsArray.Add($item) }
+                    } elseif ($null -ne $content) {
+                        [void]$resultsArray.Add($content)
+                    }
+                } catch {
+                    $errorResults.Enqueue($_.ToString())
+                }
+            } -ThrottleLimit 8
+
+            if (-not $errorResults.IsEmpty) {
+                throw [System.AggregateException]::new('One or more parallel page requests failed.', [Exception[]]@($errorResults.ToArray() | ForEach-Object { [Exception]::new($_) }))
+            }
+            return @($resultsArray)
+        }
+
+        for ($i = 1; $i -lt $pageCounter; $i++) {
+            $pageSkip = $skip + ($i * $limit)
+            $pageBody = if ($useSearchBody) { UpdateSearchBody -SourceBody $Body -PageSkip $pageSkip -PageLimit $limit } else { $Body }
+            $pageUri = BuildPageUri -PageSkip $pageSkip -PageLimit $limit -Query $baseQuery -Path $Uri -Root $baseUrl -SearchBody:$useSearchBody
+            Write-Debug $pageUri
+            $response = InvokePage -PageUri $pageUri -PageBody $pageBody
+            $content = $response.Content | ConvertFrom-Json
+            AddResultItems -Bag $resultsArray -Content $content
+        }
+
+        return @($resultsArray)
+    } finally {
+        $ProgressPreference = $prevProgress
+    }
+}
