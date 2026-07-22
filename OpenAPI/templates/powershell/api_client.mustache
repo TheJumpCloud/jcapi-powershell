@@ -549,9 +549,7 @@ function Get-{{{apiNamePrefix}}}Results {
                 $items = @($Content)
             }
             if ($items.Count -eq 0) { return }
-            if ($Bag -is [System.Collections.Concurrent.ConcurrentBag[object]]) {
-                foreach ($item in $items) { [void]$Bag.Add($item) }
-            } elseif ($items.Count -eq 1) {
+            if ($items.Count -eq 1) {
                 [void]$Bag.Add($items[0])
             } else {
                 [void]$Bag.AddRange([object[]]$items)
@@ -602,12 +600,11 @@ function Get-{{{apiNamePrefix}}}Results {
         }
 
         if ($Parallel -and $PSVersionTable.PSVersion.Major -ge 7) {
-            $resultsArray = [System.Collections.Concurrent.ConcurrentBag[object]]::new()
             $errorResults = [System.Collections.Concurrent.ConcurrentQueue[string]]::new()
         } else {
             $Parallel = $false
-            $resultsArray = [System.Collections.ArrayList]::new()
         }
+        $resultsArray = [System.Collections.ArrayList]::new()
 
         $pageBody = if ($useSearchBody) { UpdateSearchBody -SourceBody $effectiveBody -PageSkip $skip -PageLimit $limit } else { $effectiveBody }
         $pageUri = BuildPageUri -PageSkip $skip -PageLimit $limit -Query $baseQuery -Path $Uri -Root $baseUrl
@@ -667,10 +664,14 @@ function Get-{{{apiNamePrefix}}}Results {
         }
 
         if ($Parallel) {
+            # Store each page by index, then flatten in ascending skip order so output
+            # matches sequential paging / API sort (ConcurrentBag append is completion order).
+            $pageBags = [System.Collections.Concurrent.ConcurrentDictionary[int, object[]]]::new()
+            [void]$pageBags.TryAdd(0, [object[]]@($resultsArray.ToArray()))
             $pageIndexes = 1..([int]$pageCounter - 1)
             $pageIndexes | ForEach-Object -Parallel {
                 $errorResults = $using:errorResults
-                $resultsArray = $using:resultsArray
+                $pageBags = $using:pageBags
                 $hdrs = $using:hdrs
                 $Method = $using:Method
                 $Uri = $using:Uri
@@ -728,13 +729,15 @@ function Get-{{{apiNamePrefix}}}Results {
                     if (-not [string]::IsNullOrEmpty($pageBody) -and $pageBody.Trim() -ne 'null') { $iwr['Body'] = $pageBody }
                     $response = Invoke-WebRequest @iwr
                     $content = if ([string]::IsNullOrWhiteSpace($response.Content)) { $null } else { $response.Content | ConvertFrom-Json }
+                    $pageItems = [System.Collections.Generic.List[object]]::new()
                     if ($null -ne $content -and @($content.PSObject.Properties.Name) -contains 'results' -and $null -ne $content.results) {
-                        foreach ($item in @($content.results)) { [void]$resultsArray.Add($item) }
+                        foreach ($item in @($content.results)) { [void]$pageItems.Add($item) }
                     } elseif ($content -is [System.Collections.IEnumerable] -and -not ($content -is [string])) {
-                        foreach ($item in @($content)) { [void]$resultsArray.Add($item) }
+                        foreach ($item in @($content)) { [void]$pageItems.Add($item) }
                     } elseif ($null -ne $content) {
-                        [void]$resultsArray.Add($content)
+                        [void]$pageItems.Add($content)
                     }
+                    [void]$pageBags.TryAdd($_, $pageItems.ToArray())
                 } catch {
                     $errorResults.Enqueue($_.ToString())
                 }
@@ -743,7 +746,17 @@ function Get-{{{apiNamePrefix}}}Results {
             if (-not $errorResults.IsEmpty) {
                 throw [System.AggregateException]::new('One or more parallel page requests failed.', [Exception[]]@($errorResults.ToArray() | ForEach-Object { [Exception]::new($_) }))
             }
-            return @($resultsArray)
+
+            $ordered = [System.Collections.ArrayList]::new()
+            for ($i = 0; $i -lt [int]$pageCounter; $i++) {
+                if ($pageBags.ContainsKey($i)) {
+                    $pageItems = $pageBags[$i]
+                    if ($null -ne $pageItems -and $pageItems.Length -gt 0) {
+                        [void]$ordered.AddRange($pageItems)
+                    }
+                }
+            }
+            return @($ordered)
         }
 
         for ($i = 1; $i -lt $pageCounter; $i++) {
