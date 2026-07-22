@@ -391,7 +391,7 @@ function Get-SkipLimitPaginateBlock {
     }
     [void]$lines.Add($setupIndented)
     [void]$lines.Add(@"
-            `$Results = Get-JcSdkResults -Uri `$LocalVarUri -Method '$httpMethod' -Limit ([int]`$Limit) -Skip ([int]`$Skip) -HeaderParameters `$LocalVarHeaderParameters -QueryParameters `$LocalVarQueryParameters -Body `$(if (`$null -ne `$LocalVarBodyParameter) { [string]`$LocalVarBodyParameter } else { [string]::Empty }) -Parallel:(`$PSVersionTable.PSVersion.Major -ge 7)
+            `$Results = Get-JcSdkResults -Uri `$LocalVarUri -Method '$httpMethod' -Limit ([int]`$Limit) -Skip ([int]`$Skip) -HeaderParameters `$LocalVarHeaderParameters -CookieParameters `$LocalVarCookieParameters -QueryParameters `$LocalVarQueryParameters -Body `$(if (`$null -ne `$LocalVarBodyParameter) { [string]`$LocalVarBodyParameter } else { [string]::Empty }) -Parallel:(`$PSVersionTable.PSVersion.Major -ge 7)
 "@.TrimEnd())
     [void]$lines.Add('            if ($null -ne $Results -and @($Results).Count -gt 0) { return @($Results) }')
     [void]$lines.Add('            return')

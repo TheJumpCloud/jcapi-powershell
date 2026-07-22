@@ -433,6 +433,7 @@ function Get-{{{apiNamePrefix}}}Results {
         [int]$Limit,
         [int]$Skip = 0,
         [hashtable]$HeaderParameters = @{},
+        [hashtable]$CookieParameters = @{},
         [hashtable]$QueryParameters = @{},
         [AllowEmptyString()]
         [AllowNull()]
@@ -449,10 +450,31 @@ function Get-{{{apiNamePrefix}}}Results {
             $baseUrl = 'https://console.jumpcloud.com'
         }
         $baseUrl = $baseUrl.TrimEnd('/')
+        $DefaultHeaders = $Configuration['DefaultHeaders']
+        $Proxy = $Configuration['Proxy']
+        $SkipCertificateCheck = $Configuration['SkipCertificateCheck']
 
         $hdrs = [hashtable]::new([System.StringComparer]::OrdinalIgnoreCase)
         foreach ($entry in $HeaderParameters.GetEnumerator()) {
             $hdrs[$entry.Key] = $entry.Value
+        }
+        # Match Invoke-{{{apiNamePrefix}}}ApiClient: cookie auth, then DefaultHeaders.
+        if ($null -ne $CookieParameters) {
+            foreach ($Parameter in $CookieParameters.GetEnumerator()) {
+                if ($Parameter.Name -eq 'cookieAuth') {
+                    $hdrs['Cookie'] = $Parameter.Value
+                } else {
+                    $hdrs[$Parameter.Name] = $Parameter.Value
+                }
+            }
+            if ($CookieParameters.Count -gt 1) {
+                Write-Warning 'Multiple cookie parameters found. Currently only the first one is supported/used'
+            }
+        }
+        if ($null -ne $DefaultHeaders) {
+            foreach ($header in $DefaultHeaders.GetEnumerator()) {
+                $hdrs[$header.Name] = $header.Value
+            }
         }
         if (-not $hdrs.ContainsKey('Accept')) {
             $hdrs['Accept'] = 'application/json'
@@ -549,8 +571,15 @@ function Get-{{{apiNamePrefix}}}Results {
                 $iwr['MaximumRetryCount'] = 5
                 $iwr['RetryIntervalSec'] = 5
             }
-            if ($null -ne $Configuration['SkipCertificateCheck'] -and $Configuration['SkipCertificateCheck'] -eq $true) {
+            if ($SkipCertificateCheck -eq $true) {
                 $iwr['SkipCertificateCheck'] = $true
+            }
+            if ($null -ne $Proxy) {
+                $effectiveProxy = $Proxy.GetProxy($PageUri)
+                if ($null -ne $effectiveProxy -and $effectiveProxy.AbsoluteUri -ne $PageUri.AbsoluteUri) {
+                    $iwr['Proxy'] = $effectiveProxy.AbsoluteUri
+                    $iwr['ProxyUseDefaultCredentials'] = $true
+                }
             }
             if (-not [string]::IsNullOrEmpty($PageBody) -and $PageBody.Trim() -ne 'null') {
                 $iwr['Body'] = $PageBody
@@ -651,6 +680,8 @@ function Get-{{{apiNamePrefix}}}Results {
                 $useSearchBody = $using:useSearchBody
                 $limit = $using:limit
                 $skip = $using:skip
+                $Proxy = $using:Proxy
+                $SkipCertificateCheck = $using:SkipCertificateCheck
                 $pageSkip = $skip + ($_ * $limit)
                 try {
                     $pageParts = [System.Collections.Generic.List[string]]::new()
@@ -674,14 +705,25 @@ function Get-{{{apiNamePrefix}}}Results {
                     }
                     $builder = [System.UriBuilder]($baseUrl + $Uri)
                     $builder.Query = ($pageParts -join '&')
+                    $pageUri = $builder.Uri
                     $iwr = @{
                         Method              = $Method
-                        Uri                 = $builder.Uri
+                        Uri                 = $pageUri
                         Headers             = $hdrs
                         UseBasicParsing     = $true
                         MaximumRetryCount   = 5
                         RetryIntervalSec    = 5
                         ErrorAction         = 'Stop'
+                    }
+                    if ($SkipCertificateCheck -eq $true) {
+                        $iwr['SkipCertificateCheck'] = $true
+                    }
+                    if ($null -ne $Proxy) {
+                        $effectiveProxy = $Proxy.GetProxy($pageUri)
+                        if ($null -ne $effectiveProxy -and $effectiveProxy.AbsoluteUri -ne $pageUri.AbsoluteUri) {
+                            $iwr['Proxy'] = $effectiveProxy.AbsoluteUri
+                            $iwr['ProxyUseDefaultCredentials'] = $true
+                        }
                     }
                     if (-not [string]::IsNullOrEmpty($pageBody) -and $pageBody.Trim() -ne 'null') { $iwr['Body'] = $pageBody }
                     $response = Invoke-WebRequest @iwr
