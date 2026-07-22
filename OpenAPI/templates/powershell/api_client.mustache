@@ -75,20 +75,20 @@ function Invoke-{{{apiNamePrefix}}}ApiClient {
         $HeaderParameters[$header.Name] = $header.Value
     }
 
-    # construct URL query string
-    $HttpValues = [System.Web.HttpUtility]::ParseQueryString([String]::Empty)
-    foreach ($Parameter in $QueryParameters.GetEnumerator()) {
-        if ($Parameter.Value.Count -gt 1) { # array
-            foreach ($Value in $Parameter.Value) {
-                $HttpValues.Add($Parameter.Key + '[]', $Value)
-            }
-        } else {
-            $HttpValues.Add($Parameter.Key,$Parameter.Value)
+    # Search routes expect filter/fields in the JSON body, not the query string.
+    if ($Uri -match '/search') {
+        $resolvedSearch = Resolve-{{{apiNamePrefix}}}SearchRequest -Uri $Uri -QueryParameters $QueryParameters -Body $Body
+        $QueryParameters = $resolvedSearch.QueryParameters
+        $Body = $resolvedSearch.Body
+        if (-not [string]::IsNullOrEmpty($Body) -and -not $HeaderParameters.ContainsKey('Content-Type') -and -not $HeaderParameters.ContainsKey('content-type')) {
+            $HeaderParameters['Content-Type'] = 'application/json'
         }
     }
-    # Build the request and load it with the query string.
+
+    # construct URL query string (preserve $eq / $in filter operators)
+    $queryString = Format-{{{apiNamePrefix}}}QueryString -QueryParameters $QueryParameters
     $UriBuilder = [System.UriBuilder]($RequestUri)
-    $UriBuilder.Query = $HttpValues.ToString()
+    $UriBuilder.Query = $queryString
 
     # include form parameters in the request body
     if ($FormParameters -and $FormParameters.Count -gt 0) {
@@ -273,6 +273,148 @@ function DeserializeResponse {
 
 <#
 .SYNOPSIS
+    Builds a query string without over-encoding JumpCloud filter operators ($eq, $in, ...).
+#>
+function Format-{{{apiNamePrefix}}}QueryString {
+    param(
+        [hashtable]$QueryParameters
+    )
+
+    if ($null -eq $QueryParameters -or $QueryParameters.Count -eq 0) {
+        return ''
+    }
+
+    $parts = [System.Collections.Generic.List[string]]::new()
+    foreach ($entry in $QueryParameters.GetEnumerator()) {
+        if ($null -eq $entry.Value) { continue }
+        $values = @()
+        if ($entry.Value -is [System.Collections.IEnumerable] -and -not ($entry.Value -is [string])) {
+            $values = @($entry.Value)
+        } else {
+            $values = @($entry.Value)
+        }
+        foreach ($value in $values) {
+            if ($null -eq $value) { continue }
+            # EscapeDataString encodes $ and : which breaks filter=field:$eq:value.
+            # Preserve JumpCloud operator characters used in successful SDK/module requests.
+            $encodedName = [uri]::EscapeDataString([string]$entry.Key)
+            $encodedValue = [uri]::EscapeDataString([string]$value)
+            $encodedValue = $encodedValue.Replace('%24', '$').Replace('%3A', ':').Replace('%3a', ':').Replace('%7C', '|').Replace('%7c', '|')
+            [void]$parts.Add($encodedName + '=' + $encodedValue)
+        }
+    }
+    return ($parts -join '&')
+}
+
+<#
+.SYNOPSIS
+    Converts list-style filter strings into Search body filter objects.
+#>
+function ConvertTo-{{{apiNamePrefix}}}SearchFilter {
+    param(
+        $Filter
+    )
+
+    if ($null -eq $Filter -or ([string]$Filter).Length -eq 0) {
+        return $null
+    }
+    if ($Filter -is [System.Collections.IDictionary] -or ($Filter -is [System.Collections.IList] -and -not ($Filter -is [string]))) {
+        return $Filter
+    }
+
+    $text = [string]$Filter
+    # List syntax: field:$op:value (value may contain ':')
+    if ($text -match '^(?<field>[^:]+):(?<op>\$\w+):(?<value>.*)$') {
+        $field = $Matches['field']
+        $op = $Matches['op']
+        $value = $Matches['value']
+        # PowerShell "return ,@()" unwraps single-element arrays — use -NoEnumerate.
+        if ($op -eq '$eq') {
+            # Match documented search samples: [{"department":"IT"}]
+            Write-Output -NoEnumerate ([object[]]@([hashtable]@{ $field = $value }))
+            return
+        }
+        Write-Output -NoEnumerate ([object[]]@([hashtable]@{ $field = [hashtable]@{ $op = $value } }))
+        return
+    }
+
+    # Fallback: keep as string (e.g. commandresults body filter samples)
+    return $text
+}
+
+<#
+.SYNOPSIS
+    For POST /api/search/*, move query filter/fields into the JSON body (API ignores query filters).
+#>
+function Resolve-{{{apiNamePrefix}}}SearchRequest {
+    param(
+        [Parameter(Mandatory)]
+        [string]$Uri,
+        [hashtable]$QueryParameters = @{},
+        [AllowEmptyString()]
+        [AllowNull()]
+        [string]$Body = ''
+    )
+
+    $query = [hashtable]::new([System.StringComparer]::OrdinalIgnoreCase)
+    if ($null -ne $QueryParameters) {
+        foreach ($entry in $QueryParameters.GetEnumerator()) {
+            $query[$entry.Key] = $entry.Value
+        }
+    }
+
+    if ($Uri -notmatch '/search') {
+        return [pscustomobject]@{
+            QueryParameters = $query
+            Body            = $(if ($null -eq $Body) { '' } else { [string]$Body })
+        }
+    }
+
+    $filterFromQuery = $null
+    $fieldsFromQuery = $null
+    if ($query.ContainsKey('filter')) {
+        $filterFromQuery = $query['filter']
+        [void]$query.Remove('filter')
+    }
+    if ($query.ContainsKey('fields')) {
+        $fieldsFromQuery = $query['fields']
+        [void]$query.Remove('fields')
+    }
+
+    $bodyText = if ($null -eq $Body) { '' } else { [string]$Body }
+    if ($bodyText.Trim() -in @('', 'null')) {
+        $bodyText = '{}'
+    }
+
+    $bodyObj = $null
+    try {
+        $bodyObj = $bodyText | ConvertFrom-Json -AsHashtable -ErrorAction Stop
+    } catch {
+        $bodyObj = $null
+    }
+    if ($null -eq $bodyObj -or -not ($bodyObj -is [System.Collections.IDictionary])) {
+        $bodyObj = [hashtable]::new([System.StringComparer]::OrdinalIgnoreCase)
+    }
+
+    if ($null -ne $filterFromQuery -and -not [string]::IsNullOrWhiteSpace([string]$filterFromQuery)) {
+        if (-not ($bodyObj.ContainsKey('filter') -and $null -ne $bodyObj['filter'])) {
+            $bodyObj['filter'] = ConvertTo-{{{apiNamePrefix}}}SearchFilter -Filter $filterFromQuery
+        }
+    }
+    if ($null -ne $fieldsFromQuery -and -not [string]::IsNullOrWhiteSpace([string]$fieldsFromQuery)) {
+        if (-not $bodyObj.ContainsKey('fields') -or [string]::IsNullOrWhiteSpace([string]$bodyObj['fields'])) {
+            $bodyObj['fields'] = [string]$fieldsFromQuery
+        }
+    }
+
+    return [pscustomobject]@{
+        QueryParameters = $query
+        Body            = ($bodyObj | ConvertTo-Json -Compress -Depth 100)
+    }
+}
+
+<#
+.SYNOPSIS
     Aggregates skip/limit pages (JumpCloud Module Get-JCResults algorithm).
 .DESCRIPTION
     Uses x-total-count / totalCount when available, then fetches remaining pages
@@ -315,9 +457,11 @@ function Get-{{{apiNamePrefix}}}Results {
         if (-not $hdrs.ContainsKey('Accept')) {
             $hdrs['Accept'] = 'application/json'
         }
-        if (-not [string]::IsNullOrEmpty($Body) -and -not $hdrs.ContainsKey('Content-Type')) {
-            $hdrs['Content-Type'] = 'application/json'
-        }
+
+        # Promote query filter/fields into body for /api/search/* before paging.
+        $resolvedSearch = Resolve-{{{apiNamePrefix}}}SearchRequest -Uri $Uri -QueryParameters $QueryParameters -Body $Body
+        $QueryParameters = $resolvedSearch.QueryParameters
+        $Body = $resolvedSearch.Body
 
         $baseQuery = [hashtable]::new([System.StringComparer]::OrdinalIgnoreCase)
         foreach ($entry in $QueryParameters.GetEnumerator()) {
@@ -327,33 +471,55 @@ function Get-{{{apiNamePrefix}}}Results {
 
         $limit = [int]$Limit
         $skip = [int]$Skip
-        $hasBody = -not [string]::IsNullOrEmpty($Body)
-        $useSearchBody = $hasBody -and ($Uri -match '/search' -or $Body -match '"skip"\s*:|"limit"\s*:')
+
+        # Normalize body: ConvertTo-Json on a missing -Search model yields the literal "null".
+        $effectiveBody = if ($null -eq $Body) { '' } else { [string]$Body }
+        if ($effectiveBody.Trim() -in @('', 'null')) {
+            $effectiveBody = ''
+        }
+        # POST /api/search/* expects a JSON object body; use {} when callers only pass query filters.
+        if ([string]::IsNullOrEmpty($effectiveBody) -and $Method -eq 'POST' -and $Uri -match '/search') {
+            $effectiveBody = '{}'
+        }
+        if (-not [string]::IsNullOrEmpty($effectiveBody) -and -not $hdrs.ContainsKey('Content-Type')) {
+            $hdrs['Content-Type'] = 'application/json'
+        }
+
+        # Page via query skip/limit always (Console OAS). Also mirror skip/limit into the body when
+        # it is a real JSON object (JumpCloud Module Get-JCResults /search behavior).
+        $useSearchBody = $false
+        if (-not [string]::IsNullOrEmpty($effectiveBody)) {
+            try {
+                $parsedBody = $effectiveBody | ConvertFrom-Json -AsHashtable -ErrorAction Stop
+                if ($null -ne $parsedBody -and $parsedBody -is [System.Collections.IDictionary]) {
+                    $useSearchBody = $true
+                }
+            } catch {
+                $useSearchBody = $false
+            }
+        }
 
         function BuildPageUri {
-            param([int]$PageSkip, [int]$PageLimit, [hashtable]$Query, [string]$Path, [string]$Root, [bool]$SearchBody)
-            $values = [System.Web.HttpUtility]::ParseQueryString([string]::Empty)
+            param([int]$PageSkip, [int]$PageLimit, [hashtable]$Query, [string]$Path, [string]$Root)
+            $pageQuery = [hashtable]::new([System.StringComparer]::OrdinalIgnoreCase)
             foreach ($entry in $Query.GetEnumerator()) {
-                if ($null -eq $entry.Value) { continue }
-                if ($entry.Value -is [System.Collections.IEnumerable] -and -not ($entry.Value -is [string])) {
-                    foreach ($value in $entry.Value) { $values.Add([string]$entry.Key, [string]$value) }
-                } else {
-                    $values.Add([string]$entry.Key, [string]$entry.Value)
-                }
+                $pageQuery[$entry.Key] = $entry.Value
             }
-            if (-not $SearchBody) {
-                $values['limit'] = [string]$PageLimit
-                $values['skip'] = [string]$PageSkip
-            }
+            $pageQuery['limit'] = $PageLimit
+            $pageQuery['skip'] = $PageSkip
             $builder = [System.UriBuilder]($Root + $Path)
-            $builder.Query = $values.ToString()
+            $builder.Query = Format-{{{apiNamePrefix}}}QueryString -QueryParameters $pageQuery
             return $builder.Uri
         }
 
         function AddResultItems {
             param($Bag, $Content)
             if ($null -eq $Content) { return }
-            if ($Content.PSObject.Properties.Name -contains 'results' -and $null -ne $Content.results) {
+            $propNames = @()
+            if ($null -ne $Content.PSObject -and $null -ne $Content.PSObject.Properties) {
+                $propNames = @($Content.PSObject.Properties.Name)
+            }
+            if ($propNames -contains 'results' -and $null -ne $Content.results) {
                 $items = @($Content.results)
             } elseif ($Content -is [System.Collections.IEnumerable] -and -not ($Content -is [string]) -and -not ($Content -is [System.Collections.IDictionary])) {
                 $items = @($Content)
@@ -366,7 +532,7 @@ function Get-{{{apiNamePrefix}}}Results {
             } elseif ($items.Count -eq 1) {
                 [void]$Bag.Add($items[0])
             } else {
-                [void]$Bag.AddRange($items)
+                [void]$Bag.AddRange([object[]]$items)
             }
         }
 
@@ -386,7 +552,7 @@ function Get-{{{apiNamePrefix}}}Results {
             if ($null -ne $Configuration['SkipCertificateCheck'] -and $Configuration['SkipCertificateCheck'] -eq $true) {
                 $iwr['SkipCertificateCheck'] = $true
             }
-            if (-not [string]::IsNullOrEmpty($PageBody)) {
+            if (-not [string]::IsNullOrEmpty($PageBody) -and $PageBody.Trim() -ne 'null') {
                 $iwr['Body'] = $PageBody
             }
             return Invoke-WebRequest @iwr
@@ -394,8 +560,13 @@ function Get-{{{apiNamePrefix}}}Results {
 
         function UpdateSearchBody {
             param([string]$SourceBody, [int]$PageSkip, [int]$PageLimit)
-            if ([string]::IsNullOrEmpty($SourceBody)) { return $SourceBody }
+            if ([string]::IsNullOrEmpty($SourceBody) -or $SourceBody.Trim() -eq 'null') {
+                return '{}'
+            }
             $obj = $SourceBody | ConvertFrom-Json -AsHashtable
+            if ($null -eq $obj -or -not ($obj -is [System.Collections.IDictionary])) {
+                return '{}'
+            }
             $obj['limit'] = $PageLimit
             $obj['skip'] = $PageSkip
             return ($obj | ConvertTo-Json -Compress -Depth 100)
@@ -409,31 +580,33 @@ function Get-{{{apiNamePrefix}}}Results {
             $resultsArray = [System.Collections.ArrayList]::new()
         }
 
-        $pageBody = if ($useSearchBody) { UpdateSearchBody -SourceBody $Body -PageSkip $skip -PageLimit $limit } else { $Body }
-        $pageUri = BuildPageUri -PageSkip $skip -PageLimit $limit -Query $baseQuery -Path $Uri -Root $baseUrl -SearchBody:$useSearchBody
+        $pageBody = if ($useSearchBody) { UpdateSearchBody -SourceBody $effectiveBody -PageSkip $skip -PageLimit $limit } else { $effectiveBody }
+        $pageUri = BuildPageUri -PageSkip $skip -PageLimit $limit -Query $baseQuery -Path $Uri -Root $baseUrl
         Write-Debug $pageUri
 
         $response = InvokePage -PageUri $pageUri -PageBody $pageBody
-        $content = $response.Content | ConvertFrom-Json
+        $content = if ([string]::IsNullOrWhiteSpace($response.Content)) { $null } else { $response.Content | ConvertFrom-Json }
 
-        $totalCountHeader = $false
         $totalCount = 0
         $headerTotal = $null
-        if ($response.Headers -and $response.Headers['x-total-count']) {
-            $headerTotal = @($response.Headers['x-total-count'])[0]
-        } elseif ($response.Headers) {
+        if ($null -ne $response.Headers) {
             foreach ($key in @($response.Headers.Keys)) {
                 if ($key -ieq 'x-total-count') {
-                    $headerTotal = @($response.Headers[$key])[0]
+                    $raw = $response.Headers[$key]
+                    if ($null -ne $raw) {
+                        $headerTotal = @($raw)[0]
+                    }
                     break
                 }
             }
         }
         if ($null -ne $headerTotal -and -not [string]::IsNullOrWhiteSpace([string]$headerTotal)) {
-            $totalCountHeader = $true
             $totalCount = [int]([string]$headerTotal).Trim()
-        } elseif ($null -ne $content -and $content.PSObject.Properties.Name -contains 'totalCount' -and $null -ne $content.totalCount) {
-            $totalCount = [int]$content.totalCount
+        } elseif ($null -ne $content) {
+            $contentProps = @($content.PSObject.Properties.Name)
+            if ($contentProps -contains 'totalCount' -and $null -ne $content.totalCount) {
+                $totalCount = [int]$content.totalCount
+            }
         }
 
         AddResultItems -Bag $resultsArray -Content $content
@@ -442,11 +615,11 @@ function Get-{{{apiNamePrefix}}}Results {
             # No total — walk pages until a short page (legacy sequential).
             $pageSkip = $skip + $limit
             while ($true) {
-                $pageBody = if ($useSearchBody) { UpdateSearchBody -SourceBody $Body -PageSkip $pageSkip -PageLimit $limit } else { $Body }
-                $pageUri = BuildPageUri -PageSkip $pageSkip -PageLimit $limit -Query $baseQuery -Path $Uri -Root $baseUrl -SearchBody:$useSearchBody
+                $pageBody = if ($useSearchBody) { UpdateSearchBody -SourceBody $effectiveBody -PageSkip $pageSkip -PageLimit $limit } else { $effectiveBody }
+                $pageUri = BuildPageUri -PageSkip $pageSkip -PageLimit $limit -Query $baseQuery -Path $Uri -Root $baseUrl
                 Write-Debug $pageUri
                 $response = InvokePage -PageUri $pageUri -PageBody $pageBody
-                $content = $response.Content | ConvertFrom-Json
+                $content = if ([string]::IsNullOrWhiteSpace($response.Content)) { $null } else { $response.Content | ConvertFrom-Json }
                 $before = $resultsArray.Count
                 AddResultItems -Bag $resultsArray -Content $content
                 $added = $resultsArray.Count - $before
@@ -474,29 +647,33 @@ function Get-{{{apiNamePrefix}}}Results {
                 $Uri = $using:Uri
                 $baseUrl = $using:baseUrl
                 $baseQuery = $using:baseQuery
-                $Body = $using:Body
+                $effectiveBody = $using:effectiveBody
                 $useSearchBody = $using:useSearchBody
                 $limit = $using:limit
                 $skip = $using:skip
                 $pageSkip = $skip + ($_ * $limit)
                 try {
-                    $values = [System.Web.HttpUtility]::ParseQueryString([string]::Empty)
+                    $pageParts = [System.Collections.Generic.List[string]]::new()
                     foreach ($entry in $baseQuery.GetEnumerator()) {
                         if ($null -eq $entry.Value) { continue }
-                        $values.Add([string]$entry.Key, [string]$entry.Value)
+                        $encodedName = [uri]::EscapeDataString([string]$entry.Key)
+                        $encodedValue = [uri]::EscapeDataString([string]$entry.Value)
+                        $encodedValue = $encodedValue.Replace('%24', '$').Replace('%3A', ':').Replace('%3a', ':').Replace('%7C', '|').Replace('%7c', '|')
+                        [void]$pageParts.Add('{0}={1}' -f $encodedName, $encodedValue)
                     }
-                    $pageBody = $Body
-                    if ($useSearchBody -and -not [string]::IsNullOrEmpty($Body)) {
-                        $obj = $Body | ConvertFrom-Json -AsHashtable
-                        $obj['limit'] = $limit
-                        $obj['skip'] = $pageSkip
-                        $pageBody = $obj | ConvertTo-Json -Compress -Depth 100
-                    } else {
-                        $values['limit'] = [string]$limit
-                        $values['skip'] = [string]$pageSkip
+                    [void]$pageParts.Add(('limit=' + $limit))
+                    [void]$pageParts.Add(('skip=' + $pageSkip))
+                    $pageBody = $effectiveBody
+                    if ($useSearchBody -and -not [string]::IsNullOrEmpty($effectiveBody) -and $effectiveBody.Trim() -ne 'null') {
+                        $obj = $effectiveBody | ConvertFrom-Json -AsHashtable
+                        if ($null -ne $obj -and $obj -is [System.Collections.IDictionary]) {
+                            $obj['limit'] = $limit
+                            $obj['skip'] = $pageSkip
+                            $pageBody = $obj | ConvertTo-Json -Compress -Depth 100
+                        }
                     }
                     $builder = [System.UriBuilder]($baseUrl + $Uri)
-                    $builder.Query = $values.ToString()
+                    $builder.Query = ($pageParts -join '&')
                     $iwr = @{
                         Method              = $Method
                         Uri                 = $builder.Uri
@@ -506,10 +683,10 @@ function Get-{{{apiNamePrefix}}}Results {
                         RetryIntervalSec    = 5
                         ErrorAction         = 'Stop'
                     }
-                    if (-not [string]::IsNullOrEmpty($pageBody)) { $iwr['Body'] = $pageBody }
+                    if (-not [string]::IsNullOrEmpty($pageBody) -and $pageBody.Trim() -ne 'null') { $iwr['Body'] = $pageBody }
                     $response = Invoke-WebRequest @iwr
-                    $content = $response.Content | ConvertFrom-Json
-                    if ($null -ne $content -and $content.PSObject.Properties.Name -contains 'results' -and $null -ne $content.results) {
+                    $content = if ([string]::IsNullOrWhiteSpace($response.Content)) { $null } else { $response.Content | ConvertFrom-Json }
+                    if ($null -ne $content -and @($content.PSObject.Properties.Name) -contains 'results' -and $null -ne $content.results) {
                         foreach ($item in @($content.results)) { [void]$resultsArray.Add($item) }
                     } elseif ($content -is [System.Collections.IEnumerable] -and -not ($content -is [string])) {
                         foreach ($item in @($content)) { [void]$resultsArray.Add($item) }
@@ -529,11 +706,11 @@ function Get-{{{apiNamePrefix}}}Results {
 
         for ($i = 1; $i -lt $pageCounter; $i++) {
             $pageSkip = $skip + ($i * $limit)
-            $pageBody = if ($useSearchBody) { UpdateSearchBody -SourceBody $Body -PageSkip $pageSkip -PageLimit $limit } else { $Body }
-            $pageUri = BuildPageUri -PageSkip $pageSkip -PageLimit $limit -Query $baseQuery -Path $Uri -Root $baseUrl -SearchBody:$useSearchBody
+            $pageBody = if ($useSearchBody) { UpdateSearchBody -SourceBody $effectiveBody -PageSkip $pageSkip -PageLimit $limit } else { $effectiveBody }
+            $pageUri = BuildPageUri -PageSkip $pageSkip -PageLimit $limit -Query $baseQuery -Path $Uri -Root $baseUrl
             Write-Debug $pageUri
             $response = InvokePage -PageUri $pageUri -PageBody $pageBody
-            $content = $response.Content | ConvertFrom-Json
+            $content = if ([string]::IsNullOrWhiteSpace($response.Content)) { $null } else { $response.Content | ConvertFrom-Json }
             AddResultItems -Bag $resultsArray -Content $content
         }
 
