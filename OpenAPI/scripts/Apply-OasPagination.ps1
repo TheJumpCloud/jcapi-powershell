@@ -99,15 +99,26 @@ function Get-PowerShellFunctions {
     return $results
 }
 
+function Test-HasPsVariable {
+    param(
+        [string]$Text,
+        [string]$Name
+    )
+    # OpenAPI Generator Param blocks use ${Name}; bodies often use $Name.
+    # (?!\w) avoids false positives like $SkipCertificateCheck.
+    $pattern = '\$\{?' + [regex]::Escape($Name) + '\}?(?!\w)'
+    return [bool]($Text -match $pattern)
+}
+
 function Get-PaginationMode {
     param(
         [string]$FunctionText,
         [string]$SdkShortName
     )
 
-    $hasEventQuery = $FunctionText -match '\$\{EventQuery\}'
-    $hasSkip = $FunctionText -match '\$\{Skip\}'
-    $hasLimit = $FunctionText -match '\$\{Limit\}'
+    $hasEventQuery = Test-HasPsVariable -Text $FunctionText -Name 'EventQuery'
+    $hasSkip = Test-HasPsVariable -Text $FunctionText -Name 'Skip'
+    $hasLimit = Test-HasPsVariable -Text $FunctionText -Name 'Limit'
 
     if ($SdkShortName -eq 'DirectoryInsights' -and ($hasEventQuery -or $hasSkip -or $hasLimit)) {
         return 'DirectoryInsights'
@@ -223,7 +234,7 @@ function Get-DirectoryInsightsPaginateBlock {
     )
 
     $retry = Get-RetryWrapper -InvokeBlock $InvokeBlock
-    $hasEventQuery = $FunctionText -match '\$\{EventQuery\}'
+    $hasEventQuery = Test-HasPsVariable -Text $FunctionText -Name 'EventQuery'
 
     $searchAfterUpdate = if ($hasEventQuery) {
         @(
@@ -332,8 +343,8 @@ function Get-SkipLimitPaginateBlock {
     # Setup/auth/query building is reused from the operation invoke body; paging is centralized.
     $retryInline = Get-RetryWrapper -InvokeBlock $InvokeBlock
 
-    $hasLimit = $FunctionText -match '\$\{Limit\}'
-    $hasSkip = $FunctionText -match '\$\{Skip\}'
+    $hasLimit = Test-HasPsVariable -Text $FunctionText -Name 'Limit'
+    $hasSkip = Test-HasPsVariable -Text $FunctionText -Name 'Skip'
 
     $httpMethod = 'GET'
     if ($InvokeBlock -match "-Method\s+'([^']+)'") {
