@@ -56,13 +56,22 @@ Checklist:
   process.exit(1);
 }
 
-/** @returns {string | null} */
+/**
+ * Resolve PowerShell 7+ for host-side pagination post-processing.
+ * Do not fall back to Windows PowerShell 5.1 (`powershell`): Apply-OasPagination.ps1
+ * requires #Requires -Version 7.0 and uses PS7-only APIs.
+ * @returns {string | null}
+ */
 function resolvePwsh() {
-  if (commandOk("pwsh", ["-NoProfile", "-Command", "exit 0"])) {
+  // Check major version explicitly — presence of the binary is not enough.
+  if (
+    commandOk("pwsh", [
+      "-NoProfile",
+      "-Command",
+      "if ($PSVersionTable.PSVersion.Major -lt 7) { exit 1 }",
+    ])
+  ) {
     return "pwsh";
-  }
-  if (commandOk("powershell", ["-NoProfile", "-Command", "exit 0"])) {
-    return "powershell";
   }
   return null;
 }
