@@ -1,0 +1,4892 @@
+{
+  "deleteApiApplicationsById": {
+    "path": "/api/applications/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Remove-JcSdkApplication",
+    "method": "delete"
+  },
+  "deleteApiCommandresultsById": {
+    "path": "/api/commandresults/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Remove-JcSdkCommandResult",
+    "method": "delete"
+  },
+  "deleteApiCommandsById": {
+    "path": "/api/commands/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Remove-JcSdkCommand",
+    "method": "delete"
+  },
+  "deleteApiRadiusserversById": {
+    "path": "/api/radiusservers/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Remove-JcSdkRadiusServer",
+    "method": "delete"
+  },
+  "deleteApiSystemsById": {
+    "path": "/api/systems/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Remove-JcSdkSystem",
+    "method": "delete"
+  },
+  "deleteApiSystemusersById": {
+    "path": "/api/systemusers/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Remove-JcSdkSystemUser",
+    "method": "delete"
+  },
+  "deleteApiSystemusersBySystemuserIdSshkeysById": {
+    "path": "/api/systemusers/{systemuser_id}/sshkeys/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Remove-JcSdkSystemUserSshKey",
+    "method": "delete"
+  },
+  "deleteApiV2ActivedirectoriesByActivedirectoryIdAgentsByAgentId": {
+    "path": "/api/v2/activedirectories/{activedirectory_id}/agents/{agent_id}",
+    "paginate": false,
+    "x-powershell-method-name": "Remove-JcSdkActiveDirectoryAgent",
+    "method": "delete"
+  },
+  "deleteApiV2ActivedirectoriesByActivedirectoryIdTranslationRulesByTranslationRuleObjectId": {
+    "path": "/api/v2/activedirectories/{activedirectory_id}/translation-rules/{translation_rule_object_id}",
+    "paginate": false,
+    "x-powershell-method-name": "Remove-JcSdkActiveDirectoryTranslationRule",
+    "method": "delete"
+  },
+  "deleteApiV2ActivedirectoriesById": {
+    "path": "/api/v2/activedirectories/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Remove-JcSdkActiveDirectory",
+    "method": "delete"
+  },
+  "deleteApiV2AdministratorsByAdministratorIdOrganizationlinksById": {
+    "path": "/api/v2/administrators/{administrator_id}/organizationlinks/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Remove-JcSdkAdministratorOrganizationLink",
+    "method": "delete"
+  },
+  "deleteApiV2AlertsById": {
+    "path": "/api/v2/alerts/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Remove-JcSdkAlert",
+    "method": "delete"
+  },
+  "deleteApiV2ApplemdmsByAppleMdmIdDevicesByDeviceId": {
+    "path": "/api/v2/applemdms/{apple_mdm_id}/devices/{device_id}",
+    "paginate": false,
+    "x-powershell-method-name": "Remove-JcSdkAppleMdmDevice",
+    "method": "delete"
+  },
+  "deleteApiV2ApplemdmsByDevicemanagerobjectidServiceDiscoveryUrl": {
+    "path": "/api/v2/applemdms/{deviceManagerObjectId}/service-discovery-url",
+    "paginate": false,
+    "x-powershell-method-name": "Remove-JcSdkAppleMdmServiceDiscoveryUrl",
+    "method": "delete"
+  },
+  "deleteApiV2ApplemdmsById": {
+    "path": "/api/v2/applemdms/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Remove-JcSdkAppleMdm",
+    "method": "delete"
+  },
+  "deleteApiV2ApplicationsByApplicationIdLogo": {
+    "path": "/api/v2/applications/{application_id}/logo",
+    "paginate": false,
+    "x-powershell-method-name": "Remove-JcSdkApplicationLogo",
+    "method": "delete"
+  },
+  "deleteApiV2ApprovalflowsByApprovalflowid": {
+    "path": "/api/v2/approvalflows/{approvalFlowId}",
+    "paginate": false,
+    "x-powershell-method-name": "Remove-JcSdkApprovalFlow",
+    "method": "delete"
+  },
+  "deleteApiV2AssetsAccessoriesById": {
+    "path": "/api/v2/assets/accessories/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Remove-JcSdkAssetAccessory",
+    "method": "delete"
+  },
+  "deleteApiV2AssetsDevicesById": {
+    "path": "/api/v2/assets/devices/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Remove-JcSdkAssetDevice",
+    "method": "delete"
+  },
+  "deleteApiV2AssetsLocationsById": {
+    "path": "/api/v2/assets/locations/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Remove-JcSdkAssetLocation",
+    "method": "delete"
+  },
+  "deleteApiV2AuthnPoliciesById": {
+    "path": "/api/v2/authn/policies/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Remove-JcSdkAuthenticationPolicy",
+    "method": "delete"
+  },
+  "deleteApiV2BulkUserstatesById": {
+    "path": "/api/v2/bulk/userstates/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Remove-JcSdkBulkUserState",
+    "method": "delete"
+  },
+  "deleteApiV2CommandqueueByWorkflowInstanceId": {
+    "path": "/api/v2/commandqueue/{workflow_instance_id}",
+    "paginate": false,
+    "x-powershell-method-name": "Remove-JcSdkCommandQueue",
+    "method": "delete"
+  },
+  "deleteApiV2CustomemailsByCustomEmailType": {
+    "path": "/api/v2/customemails/{custom_email_type}",
+    "paginate": false,
+    "x-powershell-method-name": "Remove-JcSdkCustomEmail",
+    "method": "delete"
+  },
+  "deleteApiV2DuoAccountsByAccountIdApplicationsByApplicationId": {
+    "path": "/api/v2/duo/accounts/{account_id}/applications/{application_id}",
+    "paginate": false,
+    "x-powershell-method-name": "Remove-JcSdkDuoAccountApplication",
+    "method": "delete"
+  },
+  "deleteApiV2DuoAccountsById": {
+    "path": "/api/v2/duo/accounts/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Remove-JcSdkDuoAccount",
+    "method": "delete"
+  },
+  "deleteApiV2GoogleEmmEnterprisesByEnterpriseid": {
+    "path": "/api/v2/google-emm/enterprises/{enterpriseId}",
+    "paginate": false,
+    "x-powershell-method-name": "Remove-JcSdkGoogleEmmEnterprise",
+    "method": "delete"
+  },
+  "deleteApiV2GoogleEmmEnterprisesByEnterpriseidEnrollmentTokensByTokenid": {
+    "path": "/api/v2/google-emm/enterprises/{enterpriseId}/enrollment-tokens/{tokenId}",
+    "paginate": false,
+    "x-powershell-method-name": "Remove-JcSdkGoogleEmmEnterpriseEnrollmentToken",
+    "method": "delete"
+  },
+  "deleteApiV2GsuitesByGsuiteIdDomainsByDomainid": {
+    "path": "/api/v2/gsuites/{gsuite_id}/domains/{domainId}",
+    "paginate": false,
+    "x-powershell-method-name": "Remove-JcSdkGSuiteDomain",
+    "method": "delete"
+  },
+  "deleteApiV2GsuitesByGsuiteIdImportSchedulesByScheduledjobid": {
+    "path": "/api/v2/gsuites/{gsuite_id}/import/schedules/{scheduledJobId}",
+    "paginate": false,
+    "x-powershell-method-name": "Remove-JcSdkGSuiteImportSchedule",
+    "method": "delete"
+  },
+  "deleteApiV2GsuitesByGsuiteIdTranslationrulesById": {
+    "path": "/api/v2/gsuites/{gsuite_id}/translationrules/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Remove-JcSdkGSuiteTranslationRule",
+    "method": "delete"
+  },
+  "deleteApiV2HealthmonitoringRulesById": {
+    "path": "/api/v2/healthmonitoring/rules/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Remove-JcSdkHealthMonitoringRule",
+    "method": "delete"
+  },
+  "deleteApiV2IntegrationsAutotaskByUuid": {
+    "path": "/api/v2/integrations/autotask/{UUID}",
+    "paginate": false,
+    "x-powershell-method-name": "Remove-JcSdkIntegrationAutotask",
+    "method": "delete"
+  },
+  "deleteApiV2IntegrationsConnectwiseByUuid": {
+    "path": "/api/v2/integrations/connectwise/{UUID}",
+    "paginate": false,
+    "x-powershell-method-name": "Remove-JcSdkIntegrationConnectWise",
+    "method": "delete"
+  },
+  "deleteApiV2IntegrationsSyncroByUuid": {
+    "path": "/api/v2/integrations/syncro/{UUID}",
+    "paginate": false,
+    "x-powershell-method-name": "Remove-JcSdkIntegrationSyncro",
+    "method": "delete"
+  },
+  "deleteApiV2IplistsById": {
+    "path": "/api/v2/iplists/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Remove-JcSdkIPList",
+    "method": "delete"
+  },
+  "deleteApiV2LdapserversByLdapserverIdSambadomainsById": {
+    "path": "/api/v2/ldapservers/{ldapserver_id}/sambadomains/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Remove-JcSdkLdapServerSambaDomain",
+    "method": "delete"
+  },
+  "deleteApiV2NotificationsChannelsById": {
+    "path": "/api/v2/notifications/channels/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Remove-JcSdkNotificationChannel",
+    "method": "delete"
+  },
+  "deleteApiV2Office365sByOffice365IdDomainsByDomainId": {
+    "path": "/api/v2/office365s/{office365_id}/domains/{domain_id}",
+    "paginate": false,
+    "x-powershell-method-name": "Remove-JcSdkOffice365Domain",
+    "method": "delete"
+  },
+  "deleteApiV2Office365sByOffice365IdTranslationrulesById": {
+    "path": "/api/v2/office365s/{office365_id}/translationrules/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Remove-JcSdkOffice365TranslationRule",
+    "method": "delete"
+  },
+  "deleteApiV2Passwordmanager": {
+    "path": "/api/v2/passwordmanager",
+    "paginate": false,
+    "x-powershell-method-name": "Remove-JcSdkPasswordManager",
+    "method": "delete"
+  },
+  "deleteApiV2PasswordmanagerBackupKeysByUuid": {
+    "path": "/api/v2/passwordmanager/backup/keys/{UUID}",
+    "paginate": false,
+    "x-powershell-method-name": "Remove-JcSdkPasswordManagerBackupKey",
+    "method": "delete"
+  },
+  "deleteApiV2PasswordmanagerSharedfolders": {
+    "path": "/api/v2/passwordmanager/sharedfolders",
+    "paginate": false,
+    "x-powershell-method-name": "Remove-JcSdkPasswordManagerSharedFolder",
+    "method": "delete"
+  },
+  "deleteApiV2PasswordmanagerSharedfoldersByFolderidGroupsByGroupid": {
+    "path": "/api/v2/passwordmanager/sharedfolders/{folderId}/groups/{groupId}",
+    "paginate": false,
+    "x-powershell-method-name": "Remove-JcSdkPasswordManagerSharedFolderGroup",
+    "method": "delete"
+  },
+  "deleteApiV2PasswordmanagerSharedfoldersByFolderidUsersByUserid": {
+    "path": "/api/v2/passwordmanager/sharedfolders/{folderId}/users/{userId}",
+    "paginate": false,
+    "x-powershell-method-name": "Remove-JcSdkPasswordManagerSharedFolderUser",
+    "method": "delete"
+  },
+  "deleteApiV2Passwordpolicies": {
+    "path": "/api/v2/passwordpolicies",
+    "paginate": false,
+    "x-powershell-method-name": "Remove-JcSdkPasswordPolicy",
+    "method": "delete"
+  },
+  "deleteApiV2PasswordpoliciesByObjectid": {
+    "path": "/api/v2/passwordpolicies/{objectId}",
+    "paginate": false,
+    "x-powershell-method-name": "Remove-JcSdkPasswordPolicyById",
+    "method": "delete"
+  },
+  "deleteApiV2PasswordVaultCredentialsBulkDelete": {
+    "path": "/api/v2/password-vault/credentials/bulk-delete",
+    "paginate": false,
+    "x-powershell-method-name": "Remove-JcSdkPasswordVaultCredentialBulkDelete",
+    "method": "delete"
+  },
+  "deleteApiV2PasswordVaultCredentialsById": {
+    "path": "/api/v2/password-vault/credentials/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Remove-JcSdkPasswordVaultCredential",
+    "method": "delete"
+  },
+  "deleteApiV2PasswordVaultFoldersById": {
+    "path": "/api/v2/password-vault/folders/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Remove-JcSdkPasswordVaultFolder",
+    "method": "delete"
+  },
+  "deleteApiV2PasswordVaultFoldersByIdItems": {
+    "path": "/api/v2/password-vault/folders/{id}/items",
+    "paginate": false,
+    "x-powershell-method-name": "Remove-JcSdkPasswordVaultFolderItem",
+    "method": "delete"
+  },
+  "deleteApiV2PasswordVaultWebsitesById": {
+    "path": "/api/v2/password-vault/websites/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Remove-JcSdkPasswordVaultWebsite",
+    "method": "delete"
+  },
+  "deleteApiV2PoliciesById": {
+    "path": "/api/v2/policies/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Remove-JcSdkPolicy",
+    "method": "delete"
+  },
+  "deleteApiV2PolicygroupsById": {
+    "path": "/api/v2/policygroups/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Remove-JcSdkPolicyGroup",
+    "method": "delete"
+  },
+  "deleteApiV2ProvidersByProviderIdAdministratorsById": {
+    "path": "/api/v2/providers/{provider_id}/administrators/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Remove-JcSdkProviderAdministrator",
+    "method": "delete"
+  },
+  "deleteApiV2ProvidersByProviderIdPolicygrouptemplatesById": {
+    "path": "/api/v2/providers/{provider_id}/policygrouptemplates/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Remove-JcSdkProviderPolicyGroupTemplate",
+    "method": "delete"
+  },
+  "deleteApiV2ReportsCustomByObjectid": {
+    "path": "/api/v2/reports/custom/{objectId}",
+    "paginate": false,
+    "x-powershell-method-name": "Remove-JcSdkReportCustom",
+    "method": "delete"
+  },
+  "deleteApiV2ReportsCustomReportsByCustomreportid": {
+    "path": "/api/v2/reports/custom-reports/{customReportId}",
+    "paginate": false,
+    "x-powershell-method-name": "Remove-JcSdkReportCustomReport",
+    "method": "delete"
+  },
+  "deleteApiV2ReportsScheduledByObjectid": {
+    "path": "/api/v2/reports/scheduled/{objectId}",
+    "paginate": false,
+    "x-powershell-method-name": "Remove-JcSdkReportScheduled",
+    "method": "delete"
+  },
+  "deleteApiV2RolesByRoleId": {
+    "path": "/api/v2/roles/{role_id}",
+    "paginate": false,
+    "x-powershell-method-name": "Remove-JcSdkRole",
+    "method": "delete"
+  },
+  "deleteApiV2SaasManagementApplicationsByApplicationId": {
+    "path": "/api/v2/saas-management/applications/{application_id}",
+    "paginate": false,
+    "x-powershell-method-name": "Remove-JcSdkSaasManagementApplication",
+    "method": "delete"
+  },
+  "deleteApiV2SaasManagementApplicationsByApplicationIdAccountsByAccountId": {
+    "path": "/api/v2/saas-management/applications/{application_id}/accounts/{account_id}",
+    "paginate": false,
+    "x-powershell-method-name": "Remove-JcSdkSaasManagementApplicationAccount",
+    "method": "delete"
+  },
+  "deleteApiV2SavedViewsById": {
+    "path": "/api/v2/saved-views/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Remove-JcSdkSavedView",
+    "method": "delete"
+  },
+  "deleteApiV2ServiceAccountsByServiceAccountId": {
+    "path": "/api/v2/service-accounts/{service_account_id}",
+    "paginate": false,
+    "x-powershell-method-name": "Remove-JcSdkServiceAccount",
+    "method": "delete"
+  },
+  "deleteApiV2ServiceAccountsByServiceAccountIdAuthConfigByAuthConfigId": {
+    "path": "/api/v2/service-accounts/{service_account_id}/auth-config/{auth_config_id}",
+    "paginate": false,
+    "x-powershell-method-name": "Remove-JcSdkServiceAccountAuthConfig",
+    "method": "delete"
+  },
+  "deleteApiV2SoftwareappsById": {
+    "path": "/api/v2/softwareapps/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Remove-JcSdkSoftwareApp",
+    "method": "delete"
+  },
+  "deleteApiV2SystemgroupsById": {
+    "path": "/api/v2/systemgroups/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Remove-JcSdkSystemGroup",
+    "method": "delete"
+  },
+  "deleteApiV2UsergroupsById": {
+    "path": "/api/v2/usergroups/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Remove-JcSdkUserGroup",
+    "method": "delete"
+  },
+  "deleteApiV2UsersByUserIdPushendpointsByPushEndpointId": {
+    "path": "/api/v2/users/{user_id}/pushendpoints/{push_endpoint_id}",
+    "paginate": false,
+    "x-powershell-method-name": "Remove-JcSdkUserPushEndpoint",
+    "method": "delete"
+  },
+  "deleteApiV2WorkdaysByWorkdayIdAuth": {
+    "path": "/api/v2/workdays/{workday_id}/auth",
+    "paginate": false,
+    "x-powershell-method-name": "Remove-JcSdkWorkdayAuth",
+    "method": "delete"
+  },
+  "deleteApiV2WorkflowsById": {
+    "path": "/api/v2/workflows/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Remove-JcSdkWorkflow",
+    "method": "delete"
+  },
+  "getApiApplications": {
+    "path": "/api/applications",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkApplication",
+    "method": "get"
+  },
+  "getApiApplicationsById": {
+    "path": "/api/applications/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkApplicationById",
+    "method": "get"
+  },
+  "getApiApplicationTemplates": {
+    "path": "/api/application-templates",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkApplicationTemplate",
+    "method": "get"
+  },
+  "getApiApplicationTemplatesById": {
+    "path": "/api/application-templates/{id}",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkApplicationTemplateById",
+    "method": "get"
+  },
+  "getApiCommandresults": {
+    "path": "/api/commandresults",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkCommandResult",
+    "method": "get"
+  },
+  "getApiCommandresultsById": {
+    "path": "/api/commandresults/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkCommandResultById",
+    "method": "get"
+  },
+  "getApiCommands": {
+    "path": "/api/commands",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkCommand",
+    "method": "get"
+  },
+  "getApiCommandsById": {
+    "path": "/api/commands/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkCommandById",
+    "method": "get"
+  },
+  "getApiCommandsByIdResults": {
+    "path": "/api/commands/{id}/results",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkCommandResultCommand",
+    "method": "get"
+  },
+  "getApiFilesCommandById": {
+    "path": "/api/files/command/{id}",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkFileCommand",
+    "method": "get"
+  },
+  "getApiOrganizations": {
+    "path": "/api/organizations",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkOrganization",
+    "method": "get"
+  },
+  "getApiOrganizationsById": {
+    "path": "/api/organizations/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkOrganizationById",
+    "method": "get"
+  },
+  "getApiRadiusservers": {
+    "path": "/api/radiusservers",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkRadiusServer",
+    "method": "get"
+  },
+  "getApiRadiusserversById": {
+    "path": "/api/radiusservers/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkRadiusServerById",
+    "method": "get"
+  },
+  "getApiSystems": {
+    "path": "/api/systems",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSystem",
+    "method": "get"
+  },
+  "getApiSystemsById": {
+    "path": "/api/systems/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkSystemById",
+    "method": "get"
+  },
+  "getApiSystemusers": {
+    "path": "/api/systemusers",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSystemUser",
+    "method": "get"
+  },
+  "getApiSystemusersById": {
+    "path": "/api/systemusers/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkSystemUserById",
+    "method": "get"
+  },
+  "getApiSystemusersByIdSshkeys": {
+    "path": "/api/systemusers/{id}/sshkeys",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkSystemUserSshKey",
+    "method": "get"
+  },
+  "getApiSystemusersByIdTotpinfo": {
+    "path": "/api/systemusers/{id}/totpinfo",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkSystemUserTotpinfo",
+    "method": "get"
+  },
+  "getApiUsersReactivateById": {
+    "path": "/api/users/reactivate/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkUserReactivate",
+    "method": "get"
+  },
+  "getApiV2AccessrequestsByAccessid": {
+    "path": "/api/v2/accessrequests/{accessId}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkAccessRequest",
+    "method": "get"
+  },
+  "getApiV2Activedirectories": {
+    "path": "/api/v2/activedirectories",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkActiveDirectory",
+    "method": "get"
+  },
+  "getApiV2ActivedirectoriesByActivedirectoryIdAgents": {
+    "path": "/api/v2/activedirectories/{activedirectory_id}/agents",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkActiveDirectoryAgent",
+    "method": "get"
+  },
+  "getApiV2ActivedirectoriesByActivedirectoryIdAgentsByAgentId": {
+    "path": "/api/v2/activedirectories/{activedirectory_id}/agents/{agent_id}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkActiveDirectoryAgentById",
+    "method": "get"
+  },
+  "getApiV2ActivedirectoriesByActivedirectoryIdAssociations": {
+    "path": "/api/v2/activedirectories/{activedirectory_id}/associations",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkActiveDirectoryAssociation",
+    "method": "get"
+  },
+  "getApiV2ActivedirectoriesByActivedirectoryIdTranslationRules": {
+    "path": "/api/v2/activedirectories/{activedirectory_id}/translation-rules",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkActiveDirectoryTranslationRule",
+    "method": "get"
+  },
+  "getApiV2ActivedirectoriesByActivedirectoryIdUsergroups": {
+    "path": "/api/v2/activedirectories/{activedirectory_id}/usergroups",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkActiveDirectoryUserGroup",
+    "method": "get"
+  },
+  "getApiV2ActivedirectoriesByActivedirectoryIdUsers": {
+    "path": "/api/v2/activedirectories/{activedirectory_id}/users",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkActiveDirectoryUser",
+    "method": "get"
+  },
+  "getApiV2ActivedirectoriesById": {
+    "path": "/api/v2/activedirectories/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkActiveDirectoryById",
+    "method": "get"
+  },
+  "getApiV2ActivedirectoriesByProviderNameTranslationRulesRecommendation": {
+    "path": "/api/v2/activedirectories/{provider_name}/translation-rules/recommendation",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkActiveDirectoryTranslationRuleRecommendation",
+    "method": "get"
+  },
+  "getApiV2AdministratorsByIdOrganizationlinks": {
+    "path": "/api/v2/administrators/{id}/organizationlinks",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkAdministratorOrganizationLink",
+    "method": "get"
+  },
+  "getApiV2Alerts": {
+    "path": "/api/v2/alerts",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkAlert",
+    "method": "get"
+  },
+  "getApiV2AlertsByAlertobjectidNotes": {
+    "path": "/api/v2/alerts/{alertObjectId}/notes",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkAlertNote",
+    "method": "get"
+  },
+  "getApiV2AlertsById": {
+    "path": "/api/v2/alerts/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkAlertById",
+    "method": "get"
+  },
+  "getApiV2AlertsByIdOccurrences": {
+    "path": "/api/v2/alerts/{id}/occurrences",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkAlertOccurrence",
+    "method": "get"
+  },
+  "getApiV2AlertsStats": {
+    "path": "/api/v2/alerts-stats",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkAlertStat",
+    "method": "get"
+  },
+  "getApiV2Applemdms": {
+    "path": "/api/v2/applemdms",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkAppleMdm",
+    "method": "get"
+  },
+  "getApiV2ApplemdmsByAppleMdmIdCsr": {
+    "path": "/api/v2/applemdms/{apple_mdm_id}/csr",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkAppleMdmCsr",
+    "method": "get"
+  },
+  "getApiV2ApplemdmsByAppleMdmIdDepkey": {
+    "path": "/api/v2/applemdms/{apple_mdm_id}/depkey",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkAppleMdmDepkey",
+    "method": "get"
+  },
+  "getApiV2ApplemdmsByAppleMdmIdDevices": {
+    "path": "/api/v2/applemdms/{apple_mdm_id}/devices",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkAppleMdmDevice",
+    "method": "get"
+  },
+  "getApiV2ApplemdmsByAppleMdmIdDevicesByDeviceId": {
+    "path": "/api/v2/applemdms/{apple_mdm_id}/devices/{device_id}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkAppleMdmDeviceById",
+    "method": "get"
+  },
+  "getApiV2ApplemdmsByAppleMdmIdEnrollmentprofiles": {
+    "path": "/api/v2/applemdms/{apple_mdm_id}/enrollmentprofiles",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkAppleMdmEnrollmentProfile",
+    "method": "get"
+  },
+  "getApiV2ApplemdmsByAppleMdmIdEnrollmentprofilesById": {
+    "path": "/api/v2/applemdms/{apple_mdm_id}/enrollmentprofiles/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkAppleMdmEnrollmentProfileById",
+    "method": "get"
+  },
+  "getApiV2ApplemdmsByDevicemanagerobjectidAbmDevices": {
+    "path": "/api/v2/applemdms/{deviceManagerObjectId}/abm_devices",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkAppleMdmAbmDevice",
+    "method": "get"
+  },
+  "getApiV2ApplemdmsByDevicemanagerobjectidDevicesByDeviceobjectidGetrecoverylockconfig": {
+    "path": "/api/v2/applemdms/{deviceManagerObjectId}/devices/{deviceObjectId}/getrecoverylockconfig",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkAppleMdmDeviceRecoveryLockConfig",
+    "method": "get"
+  },
+  "getApiV2ApplemdmsByDevicemanagerobjectidDevicesByDeviceobjectidGetrecoverylockpassword": {
+    "path": "/api/v2/applemdms/{deviceManagerObjectId}/devices/{deviceObjectId}/getrecoverylockpassword",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkAppleMdmDeviceRecoveryLockPassword",
+    "method": "get"
+  },
+  "getApiV2ApplemdmsByDevicemanagerobjectidDevicesByDeviceobjectidLockpin": {
+    "path": "/api/v2/applemdms/{deviceManagerObjectId}/devices/{deviceObjectId}/lockpin",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkAppleMdmDeviceLockPin",
+    "method": "get"
+  },
+  "getApiV2ApplemdmsByDevicemanagerobjectidDevicesByDeviceobjectidLockstate": {
+    "path": "/api/v2/applemdms/{deviceManagerObjectId}/devices/{deviceObjectId}/lockstate",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkAppleMdmDeviceLockState",
+    "method": "get"
+  },
+  "getApiV2ApplemdmsByDevicemanagerobjectidValidateServiceDiscoveryUrl": {
+    "path": "/api/v2/applemdms/{deviceManagerObjectId}/validate-service-discovery-url",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkAppleMdmValidateServiceDiscoveryUrl",
+    "method": "get"
+  },
+  "getApiV2ApplemdmsByDeviceobjectidBackgroundTasks": {
+    "path": "/api/v2/applemdms/{deviceObjectId}/background_tasks",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkAppleMdmBackgroundTask",
+    "method": "get"
+  },
+  "getApiV2ApplemdmsByOrganizationobjectidAccountDrivenServiceDiscovery": {
+    "path": "/api/v2/applemdms/{organizationObjectId}/account-driven-service-discovery",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkAppleMdmAccountDrivenServiceDiscovery",
+    "method": "get"
+  },
+  "getApiV2ApplemdmsByOrganizationobjectidAccountDrivenServiceDiscoveryConfig": {
+    "path": "/api/v2/applemdms/{organizationObjectId}/account-driven-service-discovery/config",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkAppleMdmAccountDrivenServiceDiscoveryConfig",
+    "method": "get"
+  },
+  "getApiV2ApplicationsByApplicationId": {
+    "path": "/api/v2/applications/{application_id}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkApplicationByIdApplication",
+    "method": "get"
+  },
+  "getApiV2ApplicationsByApplicationIdAssociations": {
+    "path": "/api/v2/applications/{application_id}/associations",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkApplicationAssociation",
+    "method": "get"
+  },
+  "getApiV2ApplicationsByApplicationIdImportUsers": {
+    "path": "/api/v2/applications/{application_id}/import/users",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkApplicationImportUser",
+    "method": "get"
+  },
+  "getApiV2ApplicationsByApplicationIdUsergroups": {
+    "path": "/api/v2/applications/{application_id}/usergroups",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkApplicationUserGroup",
+    "method": "get"
+  },
+  "getApiV2ApplicationsByApplicationIdUsers": {
+    "path": "/api/v2/applications/{application_id}/users",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkApplicationUser",
+    "method": "get"
+  },
+  "getApiV2Approvalflowrequest": {
+    "path": "/api/v2/approvalflowrequest",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkApprovalFlowRequest",
+    "method": "get"
+  },
+  "getApiV2ApprovalflowrequestById": {
+    "path": "/api/v2/approvalflowrequest/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkApprovalFlowRequestById",
+    "method": "get"
+  },
+  "getApiV2Approvalflows": {
+    "path": "/api/v2/approvalflows",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkApprovalFlow",
+    "method": "get"
+  },
+  "getApiV2ApprovalflowsByApprovalflowid": {
+    "path": "/api/v2/approvalflows/{approvalFlowId}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkApprovalFlowById",
+    "method": "get"
+  },
+  "getApiV2Approvalflowsettings": {
+    "path": "/api/v2/approvalflowsettings",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkApprovalFlowSetting",
+    "method": "get"
+  },
+  "getApiV2ApproversprogressById": {
+    "path": "/api/v2/approversprogress/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkApproversProgress",
+    "method": "get"
+  },
+  "getApiV2AssetsAccessories": {
+    "path": "/api/v2/assets/accessories",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkAssetAccessory",
+    "method": "get"
+  },
+  "getApiV2AssetsAccessoriesById": {
+    "path": "/api/v2/assets/accessories/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkAssetAccessoryById",
+    "method": "get"
+  },
+  "getApiV2AssetsAccessoriesByIdHistory": {
+    "path": "/api/v2/assets/accessories/{id}/history",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkAssetAccessoryHistory",
+    "method": "get"
+  },
+  "getApiV2AssetsDevices": {
+    "path": "/api/v2/assets/devices",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkAssetDevice",
+    "method": "get"
+  },
+  "getApiV2AssetsDevicesById": {
+    "path": "/api/v2/assets/devices/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkAssetDeviceById",
+    "method": "get"
+  },
+  "getApiV2AssetsDevicesByIdHistory": {
+    "path": "/api/v2/assets/devices/{id}/history",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkAssetDeviceHistory",
+    "method": "get"
+  },
+  "getApiV2AssetsDevicesJcSystemByJcsystemid": {
+    "path": "/api/v2/assets/devices/jc-system/{jcSystemId}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkAssetDeviceJcSystem",
+    "method": "get"
+  },
+  "getApiV2AssetsFieldConfigurations": {
+    "path": "/api/v2/assets/field-configurations",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkAssetFieldConfiguration",
+    "method": "get"
+  },
+  "getApiV2AssetsFieldConfigurationsByIdSelectOptions": {
+    "path": "/api/v2/assets/field-configurations/{id}/select-options",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkAssetFieldConfigurationSelectOption",
+    "method": "get"
+  },
+  "getApiV2AssetsLocations": {
+    "path": "/api/v2/assets/locations",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkAssetLocation",
+    "method": "get"
+  },
+  "getApiV2AssetsLocationsById": {
+    "path": "/api/v2/assets/locations/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkAssetLocationById",
+    "method": "get"
+  },
+  "getApiV2AssetsLocationsByIdHistory": {
+    "path": "/api/v2/assets/locations/{id}/history",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkAssetLocationHistory",
+    "method": "get"
+  },
+  "getApiV2AuthnPolicies": {
+    "path": "/api/v2/authn/policies",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkAuthenticationPolicy",
+    "method": "get"
+  },
+  "getApiV2AuthnPoliciesById": {
+    "path": "/api/v2/authn/policies/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkAuthenticationPolicyById",
+    "method": "get"
+  },
+  "getApiV2BulkUsersByJobIdResults": {
+    "path": "/api/v2/bulk/users/{job_id}/results",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkBulkUserResult",
+    "method": "get"
+  },
+  "getApiV2BulkUserstates": {
+    "path": "/api/v2/bulk/userstates",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkBulkUserState",
+    "method": "get"
+  },
+  "getApiV2BulkUserstatesEventlistNext": {
+    "path": "/api/v2/bulk/userstates/eventlist/next",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkBulkUserStateEventlistNext",
+    "method": "get"
+  },
+  "getApiV2CasesMetadata": {
+    "path": "/api/v2/cases/metadata",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkCaseMetadata",
+    "method": "get"
+  },
+  "getApiV2CommandsByCommandIdAssociations": {
+    "path": "/api/v2/commands/{command_id}/associations",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkCommandAssociation",
+    "method": "get"
+  },
+  "getApiV2CommandsByCommandIdSystemgroups": {
+    "path": "/api/v2/commands/{command_id}/systemgroups",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkCommandSystemGroup",
+    "method": "get"
+  },
+  "getApiV2CommandsByCommandIdSystems": {
+    "path": "/api/v2/commands/{command_id}/systems",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkCommandSystem",
+    "method": "get"
+  },
+  "getApiV2CustomemailsByCustomEmailType": {
+    "path": "/api/v2/customemails/{custom_email_type}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkCustomEmail",
+    "method": "get"
+  },
+  "getApiV2CustomemailTemplates": {
+    "path": "/api/v2/customemail/templates",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkCustomemailTemplate",
+    "method": "get"
+  },
+  "getApiV2DevicesSettingsDefaultpasswordsync": {
+    "path": "/api/v2/devices/settings/defaultpasswordsync",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkDeviceSettingDefaultPasswordSync",
+    "method": "get"
+  },
+  "getApiV2DevicesSettingsSigninwithjumpcloud": {
+    "path": "/api/v2/devices/settings/signinwithjumpcloud",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkDeviceSettingSignInWithJumpCloud",
+    "method": "get"
+  },
+  "getApiV2DevicesSettingsSsao": {
+    "path": "/api/v2/devices/settings/ssao",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkDeviceSettingSsao",
+    "method": "get"
+  },
+  "getApiV2Directories": {
+    "path": "/api/v2/directories",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkDirectory",
+    "method": "get"
+  },
+  "getApiV2DuoAccounts": {
+    "path": "/api/v2/duo/accounts",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkDuoAccount",
+    "method": "get"
+  },
+  "getApiV2DuoAccountsByAccountIdApplications": {
+    "path": "/api/v2/duo/accounts/{account_id}/applications",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkDuoAccountApplication",
+    "method": "get"
+  },
+  "getApiV2DuoAccountsByAccountIdApplicationsByApplicationId": {
+    "path": "/api/v2/duo/accounts/{account_id}/applications/{application_id}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkDuoAccountApplicationById",
+    "method": "get"
+  },
+  "getApiV2DuoAccountsById": {
+    "path": "/api/v2/duo/accounts/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkDuoAccountById",
+    "method": "get"
+  },
+  "getApiV2FeatureSettings": {
+    "path": "/api/v2/feature-settings",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkFeatureSetting",
+    "method": "get"
+  },
+  "getApiV2FeaturetrialsByFeatureCode": {
+    "path": "/api/v2/featureTrials/{feature_code}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkFeatureTrial",
+    "method": "get"
+  },
+  "getApiV2GoogleEmmDevicesByDeviceid": {
+    "path": "/api/v2/google-emm/devices/{deviceId}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkGoogleEmmDevice",
+    "method": "get"
+  },
+  "getApiV2GoogleEmmDevicesByDeviceidPolicyResults": {
+    "path": "/api/v2/google-emm/devices/{deviceId}/policy_results",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkGoogleEmmDevicePolicyResult",
+    "method": "get"
+  },
+  "getApiV2GoogleEmmEnterprises": {
+    "path": "/api/v2/google-emm/enterprises",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkGoogleEmmEnterprise",
+    "method": "get"
+  },
+  "getApiV2GoogleEmmEnterprisesByEnterpriseidConnectionStatus": {
+    "path": "/api/v2/google-emm/enterprises/{enterpriseId}/connection-status",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkGoogleEmmEnterpriseConnectionStatus",
+    "method": "get"
+  },
+  "getApiV2GoogleEmmEnterprisesByEnterpriseidEnrollmentTokensByTokenid": {
+    "path": "/api/v2/google-emm/enterprises/{enterpriseId}/enrollment-tokens/{tokenId}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkGoogleEmmEnterpriseEnrollmentTokenById",
+    "method": "get"
+  },
+  "getApiV2GoogleEmmEnterprisesByEnterpriseobjectidDevices": {
+    "path": "/api/v2/google-emm/enterprises/{enterpriseObjectId}/devices",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkGoogleEmmEnterpriseDevice",
+    "method": "get"
+  },
+  "getApiV2GoogleEmmEnterprisesByEnterpriseobjectidEnrollmentTokens": {
+    "path": "/api/v2/google-emm/enterprises/{enterpriseObjectId}/enrollment-tokens",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkGoogleEmmEnterpriseEnrollmentToken",
+    "method": "get"
+  },
+  "getApiV2Groups": {
+    "path": "/api/v2/groups",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkGroup",
+    "method": "get"
+  },
+  "getApiV2GsuitesByGsuiteIdAssociations": {
+    "path": "/api/v2/gsuites/{gsuite_id}/associations",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkGSuiteAssociation",
+    "method": "get"
+  },
+  "getApiV2GsuitesByGsuiteIdDomains": {
+    "path": "/api/v2/gsuites/{gsuite_id}/domains",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkGSuiteDomain",
+    "method": "get"
+  },
+  "getApiV2GsuitesByGsuiteIdImportJumpcloudusers": {
+    "path": "/api/v2/gsuites/{gsuite_id}/import/jumpcloudusers",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkGSuiteImportJumpCloudUser",
+    "method": "get"
+  },
+  "getApiV2GsuitesByGsuiteIdImportSchedules": {
+    "path": "/api/v2/gsuites/{gsuite_id}/import/schedules",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkGSuiteImportSchedule",
+    "method": "get"
+  },
+  "getApiV2GsuitesByGsuiteIdImportUsers": {
+    "path": "/api/v2/gsuites/{gsuite_id}/import/users",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkGSuiteImportUser",
+    "method": "get"
+  },
+  "getApiV2GsuitesByGsuiteIdTranslationrules": {
+    "path": "/api/v2/gsuites/{gsuite_id}/translationrules",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkGSuiteTranslationRule",
+    "method": "get"
+  },
+  "getApiV2GsuitesByGsuiteIdTranslationrulesById": {
+    "path": "/api/v2/gsuites/{gsuite_id}/translationrules/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkGSuiteTranslationRuleById",
+    "method": "get"
+  },
+  "getApiV2GsuitesByGsuiteIdUsergroups": {
+    "path": "/api/v2/gsuites/{gsuite_id}/usergroups",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkGSuiteUserGroup",
+    "method": "get"
+  },
+  "getApiV2GsuitesByGsuiteIdUsers": {
+    "path": "/api/v2/gsuites/{gsuite_id}/users",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkGSuiteUser",
+    "method": "get"
+  },
+  "getApiV2GsuitesById": {
+    "path": "/api/v2/gsuites/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkGSuite",
+    "method": "get"
+  },
+  "getApiV2HealthmonitoringRules": {
+    "path": "/api/v2/healthmonitoring/rules",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkHealthMonitoringRule",
+    "method": "get"
+  },
+  "getApiV2HealthmonitoringRulesById": {
+    "path": "/api/v2/healthmonitoring/rules/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkHealthMonitoringRuleById",
+    "method": "get"
+  },
+  "getApiV2HealthmonitoringRulesByRuleIdAssociations": {
+    "path": "/api/v2/healthmonitoring/rules/{rule_id}/associations",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkHealthMonitoringRuleAssociation",
+    "method": "get"
+  },
+  "getApiV2HealthmonitoringRulesByRuleIdSystemgroups": {
+    "path": "/api/v2/healthmonitoring/rules/{rule_id}/systemgroups",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkHealthMonitoringRuleSystemGroup",
+    "method": "get"
+  },
+  "getApiV2HealthmonitoringRulesStats": {
+    "path": "/api/v2/healthmonitoring/rules-stats",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkHealthMonitoringRuleStat",
+    "method": "get"
+  },
+  "getApiV2HealthmonitoringRuletemplates": {
+    "path": "/api/v2/healthmonitoring/ruletemplates",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkHealthMonitoringRuleTemplate",
+    "method": "get"
+  },
+  "getApiV2HealthmonitoringRuletemplatesById": {
+    "path": "/api/v2/healthmonitoring/ruletemplates/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkHealthMonitoringRuleTemplateById",
+    "method": "get"
+  },
+  "getApiV2IdentityProviderPoliciesByIdpRoutingPolicyIdAssociations": {
+    "path": "/api/v2/identity-provider/policies/{idp_routing_policy_id}/associations",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkIdentityProviderPolicyAssociation",
+    "method": "get"
+  },
+  "getApiV2IdentityProviderPoliciesByIdpRoutingPolicyIdAssociationsUsergroups": {
+    "path": "/api/v2/identity-provider/policies/{idp_routing_policy_id}/associations/usergroups",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkIdentityProviderPolicyAssociationUserGroup",
+    "method": "get"
+  },
+  "getApiV2IdentityProviderPoliciesByIdpRoutingPolicyIdAssociationsUsers": {
+    "path": "/api/v2/identity-provider/policies/{idp_routing_policy_id}/associations/users",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkIdentityProviderPolicyAssociationUser",
+    "method": "get"
+  },
+  "getApiV2IdentityriskAccessGeolocations": {
+    "path": "/api/v2/identityrisk/access-geolocations",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkIdentityRiskAccessGeolocation",
+    "method": "get"
+  },
+  "getApiV2IdentityriskEvents": {
+    "path": "/api/v2/identityrisk/events",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkIdentityRiskEvent",
+    "method": "get"
+  },
+  "getApiV2IdentityriskEventsByObjectid": {
+    "path": "/api/v2/identityrisk/events/{objectId}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkIdentityRiskEventById",
+    "method": "get"
+  },
+  "getApiV2IdentityriskIdentities": {
+    "path": "/api/v2/identityrisk/identities",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkIdentityRiskIdentity",
+    "method": "get"
+  },
+  "getApiV2IdentityriskIdentitiesByObjectid": {
+    "path": "/api/v2/identityrisk/identities/{objectId}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkIdentityRiskIdentityById",
+    "method": "get"
+  },
+  "getApiV2IdentityriskIdentitiesByObjectidTrend": {
+    "path": "/api/v2/identityrisk/identities/{objectId}/trend",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkIdentityRiskIdentityTrend",
+    "method": "get"
+  },
+  "getApiV2IdentityriskLoginTypes": {
+    "path": "/api/v2/identityrisk/login-types",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkIdentityRiskLoginType",
+    "method": "get"
+  },
+  "getApiV2IdentityriskStats": {
+    "path": "/api/v2/identityrisk/stats",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkIdentityRiskStat",
+    "method": "get"
+  },
+  "getApiV2IntegrationsAutotaskByUuid": {
+    "path": "/api/v2/integrations/autotask/{UUID}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkIntegrationAutotask",
+    "method": "get"
+  },
+  "getApiV2IntegrationsAutotaskByUuidCompanies": {
+    "path": "/api/v2/integrations/autotask/{UUID}/companies",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkIntegrationAutotaskCompany",
+    "method": "get"
+  },
+  "getApiV2IntegrationsAutotaskByUuidCompanytypes": {
+    "path": "/api/v2/integrations/autotask/{UUID}/companytypes",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkIntegrationAutotaskCompanyType",
+    "method": "get"
+  },
+  "getApiV2IntegrationsAutotaskByUuidContracts": {
+    "path": "/api/v2/integrations/autotask/{UUID}/contracts",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkIntegrationAutotaskContract",
+    "method": "get"
+  },
+  "getApiV2IntegrationsAutotaskByUuidContractsFields": {
+    "path": "/api/v2/integrations/autotask/{UUID}/contracts/fields",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkIntegrationAutotaskContractField",
+    "method": "get"
+  },
+  "getApiV2IntegrationsAutotaskByUuidContractsServices": {
+    "path": "/api/v2/integrations/autotask/{UUID}/contracts/services",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkIntegrationAutotaskContractService",
+    "method": "get"
+  },
+  "getApiV2IntegrationsAutotaskByUuidMappings": {
+    "path": "/api/v2/integrations/autotask/{UUID}/mappings",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkIntegrationAutotaskMapping",
+    "method": "get"
+  },
+  "getApiV2IntegrationsAutotaskByUuidSettings": {
+    "path": "/api/v2/integrations/autotask/{UUID}/settings",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkIntegrationAutotaskSetting",
+    "method": "get"
+  },
+  "getApiV2IntegrationsByIntegrationTypeByUuidErrors": {
+    "path": "/api/v2/integrations/{integration_type}/{UUID}/errors",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkIntegrationError",
+    "method": "get"
+  },
+  "getApiV2IntegrationsConnectwiseByUuid": {
+    "path": "/api/v2/integrations/connectwise/{UUID}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkIntegrationConnectWise",
+    "method": "get"
+  },
+  "getApiV2IntegrationsConnectwiseByUuidAgreements": {
+    "path": "/api/v2/integrations/connectwise/{UUID}/agreements",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkIntegrationConnectWiseAgreement",
+    "method": "get"
+  },
+  "getApiV2IntegrationsConnectwiseByUuidAgreementsByAgreementIdAdditions": {
+    "path": "/api/v2/integrations/connectwise/{UUID}/agreements/{agreement_ID}/additions",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkIntegrationConnectWiseAgreementAddition",
+    "method": "get"
+  },
+  "getApiV2IntegrationsConnectwiseByUuidCompanies": {
+    "path": "/api/v2/integrations/connectwise/{UUID}/companies",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkIntegrationConnectWiseCompany",
+    "method": "get"
+  },
+  "getApiV2IntegrationsConnectwiseByUuidCompanytypes": {
+    "path": "/api/v2/integrations/connectwise/{UUID}/companytypes",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkIntegrationConnectWiseCompanyType",
+    "method": "get"
+  },
+  "getApiV2IntegrationsConnectwiseByUuidMappings": {
+    "path": "/api/v2/integrations/connectwise/{UUID}/mappings",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkIntegrationConnectWiseMapping",
+    "method": "get"
+  },
+  "getApiV2IntegrationsConnectwiseByUuidSettings": {
+    "path": "/api/v2/integrations/connectwise/{UUID}/settings",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkIntegrationConnectWiseSetting",
+    "method": "get"
+  },
+  "getApiV2IntegrationsSyncroByUuid": {
+    "path": "/api/v2/integrations/syncro/{UUID}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkIntegrationSyncro",
+    "method": "get"
+  },
+  "getApiV2IntegrationsSyncroByUuidBillingMappingConfigurationOptions": {
+    "path": "/api/v2/integrations/syncro/{UUID}/billing_mapping_configuration_options",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkIntegrationSyncroBillingMappingConfigurationOption",
+    "method": "get"
+  },
+  "getApiV2IntegrationsSyncroByUuidCompanies": {
+    "path": "/api/v2/integrations/syncro/{UUID}/companies",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkIntegrationSyncroCompany",
+    "method": "get"
+  },
+  "getApiV2IntegrationsSyncroByUuidMappings": {
+    "path": "/api/v2/integrations/syncro/{UUID}/mappings",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkIntegrationSyncroMapping",
+    "method": "get"
+  },
+  "getApiV2IntegrationsSyncroByUuidSettings": {
+    "path": "/api/v2/integrations/syncro/{UUID}/settings",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkIntegrationSyncroSetting",
+    "method": "get"
+  },
+  "getApiV2Iplists": {
+    "path": "/api/v2/iplists",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkIPList",
+    "method": "get"
+  },
+  "getApiV2IplistsById": {
+    "path": "/api/v2/iplists/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkIPListById",
+    "method": "get"
+  },
+  "getApiV2Ldapservers": {
+    "path": "/api/v2/ldapservers",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkLdapServer",
+    "method": "get"
+  },
+  "getApiV2LdapserversById": {
+    "path": "/api/v2/ldapservers/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkLdapServerById",
+    "method": "get"
+  },
+  "getApiV2LdapserversByLdapserverIdAssociations": {
+    "path": "/api/v2/ldapservers/{ldapserver_id}/associations",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkLdapServerAssociation",
+    "method": "get"
+  },
+  "getApiV2LdapserversByLdapserverIdSambadomains": {
+    "path": "/api/v2/ldapservers/{ldapserver_id}/sambadomains",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkLdapServerSambaDomain",
+    "method": "get"
+  },
+  "getApiV2LdapserversByLdapserverIdSambadomainsById": {
+    "path": "/api/v2/ldapservers/{ldapserver_id}/sambadomains/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkLdapServerSambaDomainById",
+    "method": "get"
+  },
+  "getApiV2LdapserversByLdapserverIdUsergroups": {
+    "path": "/api/v2/ldapservers/{ldapserver_id}/usergroups",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkLdapServerUserGroup",
+    "method": "get"
+  },
+  "getApiV2LdapserversByLdapserverIdUsers": {
+    "path": "/api/v2/ldapservers/{ldapserver_id}/users",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkLdapServerUser",
+    "method": "get"
+  },
+  "getApiV2LogosById": {
+    "path": "/api/v2/logos/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkLogo",
+    "method": "get"
+  },
+  "getApiV2NotificationsChannels": {
+    "path": "/api/v2/notifications/channels",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkNotificationChannel",
+    "method": "get"
+  },
+  "getApiV2NotificationsChannelsById": {
+    "path": "/api/v2/notifications/channels/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkNotificationChannelById",
+    "method": "get"
+  },
+  "getApiV2NotificationsWebhookChannels": {
+    "path": "/api/v2/notifications/webhook/channels",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkNotificationWebhookChannel",
+    "method": "get"
+  },
+  "getApiV2ObjectStorageItems": {
+    "path": "/api/v2/object-storage/items",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkObjectStorageItem",
+    "method": "get"
+  },
+  "getApiV2ObjectStorageStatus": {
+    "path": "/api/v2/object-storage/status",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkObjectStorageStatus",
+    "method": "get"
+  },
+  "getApiV2Office365sByOffice365Id": {
+    "path": "/api/v2/office365s/{office365_id}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkOffice365",
+    "method": "get"
+  },
+  "getApiV2Office365sByOffice365IdAssociations": {
+    "path": "/api/v2/office365s/{office365_id}/associations",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkOffice365Association",
+    "method": "get"
+  },
+  "getApiV2Office365sByOffice365IdDomains": {
+    "path": "/api/v2/office365s/{office365_id}/domains",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkOffice365Domain",
+    "method": "get"
+  },
+  "getApiV2Office365sByOffice365IdImportUsers": {
+    "path": "/api/v2/office365s/{office365_id}/import/users",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkOffice365ImportUser",
+    "method": "get"
+  },
+  "getApiV2Office365sByOffice365IdTranslationrules": {
+    "path": "/api/v2/office365s/{office365_id}/translationrules",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkOffice365TranslationRule",
+    "method": "get"
+  },
+  "getApiV2Office365sByOffice365IdTranslationrulesById": {
+    "path": "/api/v2/office365s/{office365_id}/translationrules/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkOffice365TranslationRuleById",
+    "method": "get"
+  },
+  "getApiV2Office365sByOffice365IdUsergroups": {
+    "path": "/api/v2/office365s/{office365_id}/usergroups",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkOffice365UserGroup",
+    "method": "get"
+  },
+  "getApiV2Office365sByOffice365IdUsers": {
+    "path": "/api/v2/office365s/{office365_id}/users",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkOffice365User",
+    "method": "get"
+  },
+  "getApiV2OrganizationsByIdAdministratorlinks": {
+    "path": "/api/v2/organizations/{id}/administratorlinks",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkOrganizationAdministratorLink",
+    "method": "get"
+  },
+  "getApiV2OrganizationsCases": {
+    "path": "/api/v2/organizations/cases",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkOrganizationCase",
+    "method": "get"
+  },
+  "getApiV2PasswordManager": {
+    "path": "/api/v2/password-manager",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkPasswordManager",
+    "method": "get"
+  },
+  "getApiV2PasswordmanagerAppversions": {
+    "path": "/api/v2/passwordmanager/appversions",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkPasswordManagerAppversion",
+    "method": "get"
+  },
+  "getApiV2PasswordmanagerBackupKeys": {
+    "path": "/api/v2/passwordmanager/backup/keys",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkPasswordManagerBackupKey",
+    "method": "get"
+  },
+  "getApiV2PasswordmanagerBackupKeysByUuid": {
+    "path": "/api/v2/passwordmanager/backup/keys/{UUID}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkPasswordManagerBackupKeyById",
+    "method": "get"
+  },
+  "getApiV2PasswordmanagerBackupRestores": {
+    "path": "/api/v2/passwordmanager/backup/restores",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkPasswordManagerBackupRestore",
+    "method": "get"
+  },
+  "getApiV2PasswordmanagerBackups": {
+    "path": "/api/v2/passwordmanager/backups",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkPasswordManagerBackup",
+    "method": "get"
+  },
+  "getApiV2PasswordmanagerBackupsByUuid": {
+    "path": "/api/v2/passwordmanager/backups/{UUID}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkPasswordManagerBackupById",
+    "method": "get"
+  },
+  "getApiV2PasswordmanagerCompanyPolicies": {
+    "path": "/api/v2/passwordmanager/company/policies",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkPasswordManagerCompanyPolicy",
+    "method": "get"
+  },
+  "getApiV2PasswordmanagerDevices": {
+    "path": "/api/v2/passwordmanager/devices",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkPasswordManagerDevice",
+    "method": "get"
+  },
+  "getApiV2PasswordmanagerDevicesByUuid": {
+    "path": "/api/v2/passwordmanager/devices/{UUID}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkPasswordManagerDeviceById",
+    "method": "get"
+  },
+  "getApiV2PasswordmanagerItems": {
+    "path": "/api/v2/passwordmanager/items",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkPasswordManagerItem",
+    "method": "get"
+  },
+  "getApiV2PasswordmanageritemsByPasswordmanageritemIdAssociations": {
+    "path": "/api/v2/passwordmanageritems/{passwordmanageritem_id}/associations",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkPasswordManagerItemAssociation",
+    "method": "get"
+  },
+  "getApiV2PasswordmanageritemsByPasswordmanageritemIdUsergroups": {
+    "path": "/api/v2/passwordmanageritems/{passwordmanageritem_id}/usergroups",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkPasswordManagerItemUserGroup",
+    "method": "get"
+  },
+  "getApiV2PasswordmanageritemsByPasswordmanageritemIdUsers": {
+    "path": "/api/v2/passwordmanageritems/{passwordmanageritem_id}/users",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkPasswordManagerItemUser",
+    "method": "get"
+  },
+  "getApiV2PasswordmanagerOverview": {
+    "path": "/api/v2/passwordmanager/overview",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkPasswordManagerOverview",
+    "method": "get"
+  },
+  "getApiV2PasswordmanagerPolicySharedfolders": {
+    "path": "/api/v2/passwordmanager/policy/sharedfolders",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkPasswordManagerPolicySharedFolder",
+    "method": "get"
+  },
+  "getApiV2PasswordmanagerPolicySharedfoldersGroups": {
+    "path": "/api/v2/passwordmanager/policy/sharedfolders/groups",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkPasswordManagerPolicySharedFolderGroup",
+    "method": "get"
+  },
+  "getApiV2PasswordmanagerPolicySharedfoldersUsers": {
+    "path": "/api/v2/passwordmanager/policy/sharedfolders/users",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkPasswordManagerPolicySharedFolderUser",
+    "method": "get"
+  },
+  "getApiV2PasswordmanagerSharedfolders": {
+    "path": "/api/v2/passwordmanager/sharedfolders",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkPasswordManagerSharedFolder",
+    "method": "get"
+  },
+  "getApiV2PasswordmanagerSharedfoldersAccesslevels": {
+    "path": "/api/v2/passwordmanager/sharedfolders/accessLevels",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkPasswordManagerSharedFolderAccessLevel",
+    "method": "get"
+  },
+  "getApiV2PasswordmanagerSharedfoldersByFolderid": {
+    "path": "/api/v2/passwordmanager/sharedfolders/{folderId}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkPasswordManagerSharedFolderById",
+    "method": "get"
+  },
+  "getApiV2PasswordmanagerSharedfoldersByFolderidGroups": {
+    "path": "/api/v2/passwordmanager/sharedfolders/{folderId}/groups",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkPasswordManagerSharedFolderGroup",
+    "method": "get"
+  },
+  "getApiV2PasswordmanagerSharedfoldersByFolderidUsers": {
+    "path": "/api/v2/passwordmanager/sharedfolders/{folderId}/users",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkPasswordManagerSharedFolderUser",
+    "method": "get"
+  },
+  "getApiV2PasswordmanagerUsers": {
+    "path": "/api/v2/passwordmanager/users",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkPasswordManagerUser",
+    "method": "get"
+  },
+  "getApiV2PasswordmanagerUsersByUserid": {
+    "path": "/api/v2/passwordmanager/users/{userId}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkPasswordManagerUserById",
+    "method": "get"
+  },
+  "getApiV2PasswordmanagerUsersByUseridItems": {
+    "path": "/api/v2/passwordmanager/users/{userId}/items",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkPasswordManagerUserItem",
+    "method": "get"
+  },
+  "getApiV2PasswordmanagerUsersByUseridSharedfolders": {
+    "path": "/api/v2/passwordmanager/users/{userId}/sharedFolders",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkPasswordManagerUserSharedFolder",
+    "method": "get"
+  },
+  "getApiV2PasswordpoliciesByObjectid": {
+    "path": "/api/v2/passwordpolicies/{objectId}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkPasswordPolicy",
+    "method": "get"
+  },
+  "getApiV2PasswordpoliciesUserBySystemuserid": {
+    "path": "/api/v2/passwordpolicies/user/{systemUserId}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkPasswordPolicyUser",
+    "method": "get"
+  },
+  "getApiV2PasswordpoliciesUsergroupByUsergroupid": {
+    "path": "/api/v2/passwordpolicies/usergroup/{userGroupId}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkPasswordPolicyUsergroup",
+    "method": "get"
+  },
+  "getApiV2PasswordVaultCredentials": {
+    "path": "/api/v2/password-vault/credentials",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkPasswordVaultCredential",
+    "method": "get"
+  },
+  "getApiV2PasswordVaultCredentialsById": {
+    "path": "/api/v2/password-vault/credentials/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkPasswordVaultCredentialById",
+    "method": "get"
+  },
+  "getApiV2PasswordVaultCredentialsByIdActivities": {
+    "path": "/api/v2/password-vault/credentials/{id}/activities",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkPasswordVaultCredentialActivity",
+    "method": "get"
+  },
+  "getApiV2PasswordVaultCredentialsByIdHistory": {
+    "path": "/api/v2/password-vault/credentials/{id}/history",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkPasswordVaultCredentialHistory",
+    "method": "get"
+  },
+  "getApiV2PasswordVaultCredentialsByIdMfaCode": {
+    "path": "/api/v2/password-vault/credentials/{id}/mfa-code",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkPasswordVaultCredentialMfaCode",
+    "method": "get"
+  },
+  "getApiV2PasswordVaultCredentialsByIdSecret": {
+    "path": "/api/v2/password-vault/credentials/{id}/secret",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkPasswordVaultCredentialSecret",
+    "method": "get"
+  },
+  "getApiV2PasswordVaultCredentialsByIdSecretV2": {
+    "path": "/api/v2/password-vault/credentials/{id}/secret/v2",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkPasswordVaultCredentialSecretCredential",
+    "method": "get"
+  },
+  "getApiV2PasswordVaultCredentialsByIdWithSecret": {
+    "path": "/api/v2/password-vault/credentials/{id}/with-secret",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkPasswordVaultCredentialWithSecret",
+    "method": "get"
+  },
+  "getApiV2PasswordVaultCredentialsExcelColumns": {
+    "path": "/api/v2/password-vault/credentials/excel/columns",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkPasswordVaultCredentialExcelColumn",
+    "method": "get"
+  },
+  "getApiV2PasswordVaultDashboardOverview": {
+    "path": "/api/v2/password-vault/dashboard-overview",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkPasswordVaultDashboardOverview",
+    "method": "get"
+  },
+  "getApiV2PasswordVaultFolders": {
+    "path": "/api/v2/password-vault/folders",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkPasswordVaultFolder",
+    "method": "get"
+  },
+  "getApiV2PasswordVaultFoldersById": {
+    "path": "/api/v2/password-vault/folders/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkPasswordVaultFolderById",
+    "method": "get"
+  },
+  "getApiV2PasswordVaultFoldersByIdEdit": {
+    "path": "/api/v2/password-vault/folders/{id}/edit",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkPasswordVaultFolderEdit",
+    "method": "get"
+  },
+  "getApiV2PasswordVaultFoldersByIdItems": {
+    "path": "/api/v2/password-vault/folders/{id}/items",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkPasswordVaultFolderItem",
+    "method": "get"
+  },
+  "getApiV2PasswordVaultFoldersByIdManagers": {
+    "path": "/api/v2/password-vault/folders/{id}/managers",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkPasswordVaultFolderManager",
+    "method": "get"
+  },
+  "getApiV2PasswordVaultGroups": {
+    "path": "/api/v2/password-vault/groups",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkPasswordVaultGroup",
+    "method": "get"
+  },
+  "getApiV2PasswordVaultGroupsAll": {
+    "path": "/api/v2/password-vault/groups/all",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkPasswordVaultGroupAll",
+    "method": "get"
+  },
+  "getApiV2PasswordVaultGroupsByIdgroupAssignableResources": {
+    "path": "/api/v2/password-vault/groups/{idGroup}/assignable-resources",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkPasswordVaultGroupAssignableResource",
+    "method": "get"
+  },
+  "getApiV2PasswordVaultGroupsByIdgroupMembers": {
+    "path": "/api/v2/password-vault/groups/{idGroup}/members",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkPasswordVaultGroupMember",
+    "method": "get"
+  },
+  "getApiV2PasswordVaultGroupsByIdgroupResources": {
+    "path": "/api/v2/password-vault/groups/{idGroup}/resources",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkPasswordVaultGroupResource",
+    "method": "get"
+  },
+  "getApiV2PasswordVaultTags": {
+    "path": "/api/v2/password-vault/tags",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkPasswordVaultTag",
+    "method": "get"
+  },
+  "getApiV2PasswordVaultTenantSettings": {
+    "path": "/api/v2/password-vault/tenant-settings",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkPasswordVaultTenantSetting",
+    "method": "get"
+  },
+  "getApiV2PasswordVaultTenantSettingsDefaultPermissions": {
+    "path": "/api/v2/password-vault/tenant-settings/default-permissions",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkPasswordVaultTenantSettingDefaultPermission",
+    "method": "get"
+  },
+  "getApiV2PasswordVaultUsers": {
+    "path": "/api/v2/password-vault/users",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkPasswordVaultUser",
+    "method": "get"
+  },
+  "getApiV2PasswordVaultUsersActivePwmTenants": {
+    "path": "/api/v2/password-vault/users/active-pwm-tenants",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkPasswordVaultUserActivePwmTenant",
+    "method": "get"
+  },
+  "getApiV2PasswordVaultUsersSelf": {
+    "path": "/api/v2/password-vault/users/self",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkPasswordVaultUserSelf",
+    "method": "get"
+  },
+  "getApiV2PasswordVaultUsersSelfJcUser": {
+    "path": "/api/v2/password-vault/users/self/jc-user",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkPasswordVaultUserSelfJcUser",
+    "method": "get"
+  },
+  "getApiV2PasswordVaultWebsites": {
+    "path": "/api/v2/password-vault/websites",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkPasswordVaultWebsite",
+    "method": "get"
+  },
+  "getApiV2PasswordVaultWebsitesById": {
+    "path": "/api/v2/password-vault/websites/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkPasswordVaultWebsiteById",
+    "method": "get"
+  },
+  "getApiV2PasswordVaultWebsitesByIdActivities": {
+    "path": "/api/v2/password-vault/websites/{id}/activities",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkPasswordVaultWebsiteActivity",
+    "method": "get"
+  },
+  "getApiV2PasswordVaultWebsitesByIdConnectLinks": {
+    "path": "/api/v2/password-vault/websites/{id}/connect-links",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkPasswordVaultWebsiteConnectLink",
+    "method": "get"
+  },
+  "getApiV2PasswordVaultWebsitesByIdEdit": {
+    "path": "/api/v2/password-vault/websites/{id}/edit",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkPasswordVaultWebsiteEdit",
+    "method": "get"
+  },
+  "getApiV2PasswordVaultWebsitesByIdParametersExtension": {
+    "path": "/api/v2/password-vault/websites/{id}/parameters-extension",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkPasswordVaultWebsiteParameterExtension",
+    "method": "get"
+  },
+  "getApiV2PasswordVaultWebsitesExcelColumns": {
+    "path": "/api/v2/password-vault/websites/excel/columns",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkPasswordVaultWebsiteExcelColumn",
+    "method": "get"
+  },
+  "getApiV2Policies": {
+    "path": "/api/v2/policies",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkPolicy",
+    "method": "get"
+  },
+  "getApiV2PoliciesById": {
+    "path": "/api/v2/policies/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkPolicyById",
+    "method": "get"
+  },
+  "getApiV2PoliciesByPolicyIdAssociations": {
+    "path": "/api/v2/policies/{policy_id}/associations",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkPolicyAssociation",
+    "method": "get"
+  },
+  "getApiV2PoliciesByPolicyIdMemberof": {
+    "path": "/api/v2/policies/{policy_id}/memberof",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkPolicyMemberOf",
+    "method": "get"
+  },
+  "getApiV2PoliciesByPolicyIdPolicyresults": {
+    "path": "/api/v2/policies/{policy_id}/policyresults",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkPolicyResult",
+    "method": "get"
+  },
+  "getApiV2PoliciesByPolicyIdPolicystatuses": {
+    "path": "/api/v2/policies/{policy_id}/policystatuses",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkPolicyStatus",
+    "method": "get"
+  },
+  "getApiV2PoliciesByPolicyIdSystemgroups": {
+    "path": "/api/v2/policies/{policy_id}/systemgroups",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkPolicySystemGroup",
+    "method": "get"
+  },
+  "getApiV2PoliciesByPolicyIdSystems": {
+    "path": "/api/v2/policies/{policy_id}/systems",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkPolicySystem",
+    "method": "get"
+  },
+  "getApiV2PoliciesByPolicyIdUsergroups": {
+    "path": "/api/v2/policies/{policy_id}/usergroups",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkPolicyUserGroup",
+    "method": "get"
+  },
+  "getApiV2PoliciesByPolicyIdUsers": {
+    "path": "/api/v2/policies/{policy_id}/users",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkPolicyUser",
+    "method": "get"
+  },
+  "getApiV2Policygroups": {
+    "path": "/api/v2/policygroups",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkPolicyGroup",
+    "method": "get"
+  },
+  "getApiV2PolicygroupsByGroupIdAssociations": {
+    "path": "/api/v2/policygroups/{group_id}/associations",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkPolicyGroupAssociation",
+    "method": "get"
+  },
+  "getApiV2PolicygroupsByGroupIdMembers": {
+    "path": "/api/v2/policygroups/{group_id}/members",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkPolicyGroupMember",
+    "method": "get"
+  },
+  "getApiV2PolicygroupsByGroupIdMembership": {
+    "path": "/api/v2/policygroups/{group_id}/membership",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkPolicyGroupMembership",
+    "method": "get"
+  },
+  "getApiV2PolicygroupsByGroupIdSystemgroups": {
+    "path": "/api/v2/policygroups/{group_id}/systemgroups",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkPolicyGroupSystemGroup",
+    "method": "get"
+  },
+  "getApiV2PolicygroupsByGroupIdSystems": {
+    "path": "/api/v2/policygroups/{group_id}/systems",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkPolicyGroupSystem",
+    "method": "get"
+  },
+  "getApiV2PolicygroupsByGroupIdUsergroups": {
+    "path": "/api/v2/policygroups/{group_id}/usergroups",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkPolicyGroupUserGroup",
+    "method": "get"
+  },
+  "getApiV2PolicygroupsByGroupIdUsers": {
+    "path": "/api/v2/policygroups/{group_id}/users",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkPolicyGroupUser",
+    "method": "get"
+  },
+  "getApiV2PolicygroupsById": {
+    "path": "/api/v2/policygroups/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkPolicyGroupById",
+    "method": "get"
+  },
+  "getApiV2Policyresults": {
+    "path": "/api/v2/policyresults",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkPolicyResultQuery",
+    "method": "get"
+  },
+  "getApiV2PolicyresultsById": {
+    "path": "/api/v2/policyresults/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkPolicyResultById",
+    "method": "get"
+  },
+  "getApiV2Policytemplates": {
+    "path": "/api/v2/policytemplates",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkPolicyTemplate",
+    "method": "get"
+  },
+  "getApiV2PolicytemplatesById": {
+    "path": "/api/v2/policytemplates/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkPolicyTemplateById",
+    "method": "get"
+  },
+  "getApiV2PrivilegedAccessStatus": {
+    "path": "/api/v2/privileged-access/status",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkPrivilegedAccessStatus",
+    "method": "get"
+  },
+  "getApiV2Providers": {
+    "path": "/api/v2/providers",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkProvider",
+    "method": "get"
+  },
+  "getApiV2ProvidersByProviderId": {
+    "path": "/api/v2/providers/{provider_id}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkProviderById",
+    "method": "get"
+  },
+  "getApiV2ProvidersByProviderIdActivedirectories": {
+    "path": "/api/v2/providers/{provider_id}/activedirectories",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkProviderActiveDirectory",
+    "method": "get"
+  },
+  "getApiV2ProvidersByProviderIdActivedirectoriesByAdIdAssociations": {
+    "path": "/api/v2/providers/{provider_id}/activedirectories/{ad_id}/associations",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkProviderActiveDirectoryAssociation",
+    "method": "get"
+  },
+  "getApiV2ProvidersByProviderIdAdministrators": {
+    "path": "/api/v2/providers/{provider_id}/administrators",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkProviderAdministrator",
+    "method": "get"
+  },
+  "getApiV2ProvidersByProviderIdApplications": {
+    "path": "/api/v2/providers/{provider_id}/applications",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkProviderApplication",
+    "method": "get"
+  },
+  "getApiV2ProvidersByProviderIdApplicationsByIdAssociations": {
+    "path": "/api/v2/providers/{provider_id}/applications/{id}/associations",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkProviderApplicationAssociation",
+    "method": "get"
+  },
+  "getApiV2ProvidersByProviderIdBillingContract": {
+    "path": "/api/v2/providers/{provider_id}/billing/contract",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkProviderBillingContract",
+    "method": "get"
+  },
+  "getApiV2ProvidersByProviderIdBillingDetails": {
+    "path": "/api/v2/providers/{provider_id}/billing/details",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkProviderBillingDetail",
+    "method": "get"
+  },
+  "getApiV2ProvidersByProviderIdCases": {
+    "path": "/api/v2/providers/{provider_id}/cases",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkProviderCase",
+    "method": "get"
+  },
+  "getApiV2ProvidersByProviderIdConfiguredpolicytemplates": {
+    "path": "/api/v2/providers/{provider_id}/configuredpolicytemplates",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkProviderConfiguredPolicyTemplate",
+    "method": "get"
+  },
+  "getApiV2ProvidersByProviderIdConfiguredpolicytemplatesById": {
+    "path": "/api/v2/providers/{provider_id}/configuredpolicytemplates/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkProviderConfiguredPolicyTemplateById",
+    "method": "get"
+  },
+  "getApiV2ProvidersByProviderIdGSuites": {
+    "path": "/api/v2/providers/{provider_id}/g_suites",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkProviderGSuite",
+    "method": "get"
+  },
+  "getApiV2ProvidersByProviderIdGSuitesByGsuiteIdAssociations": {
+    "path": "/api/v2/providers/{provider_id}/g_suites/{gsuite_id}/associations",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkProviderGSuiteAssociation",
+    "method": "get"
+  },
+  "getApiV2ProvidersByProviderIdIntegrations": {
+    "path": "/api/v2/providers/{provider_id}/integrations",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkProviderIntegration",
+    "method": "get"
+  },
+  "getApiV2ProvidersByProviderIdIntegrationsAutotaskAlertsConfiguration": {
+    "path": "/api/v2/providers/{provider_id}/integrations/autotask/alerts/configuration",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkProviderIntegrationAutotaskAlertConfiguration",
+    "method": "get"
+  },
+  "getApiV2ProvidersByProviderIdIntegrationsAutotaskAlertsConfigurationOptions": {
+    "path": "/api/v2/providers/{provider_id}/integrations/autotask/alerts/configuration/options",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkProviderIntegrationAutotaskAlertConfigurationOption",
+    "method": "get"
+  },
+  "getApiV2ProvidersByProviderIdIntegrationsConnectwiseAlertsConfiguration": {
+    "path": "/api/v2/providers/{provider_id}/integrations/connectwise/alerts/configuration",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkProviderIntegrationConnectWiseAlertConfiguration",
+    "method": "get"
+  },
+  "getApiV2ProvidersByProviderIdIntegrationsConnectwiseAlertsConfigurationOptions": {
+    "path": "/api/v2/providers/{provider_id}/integrations/connectwise/alerts/configuration/options",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkProviderIntegrationConnectWiseAlertConfigurationOption",
+    "method": "get"
+  },
+  "getApiV2ProvidersByProviderIdIntegrationsSyncroAlertsConfiguration": {
+    "path": "/api/v2/providers/{provider_id}/integrations/syncro/alerts/configuration",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkProviderIntegrationSyncroAlertConfiguration",
+    "method": "get"
+  },
+  "getApiV2ProvidersByProviderIdIntegrationsSyncroAlertsConfigurationOptions": {
+    "path": "/api/v2/providers/{provider_id}/integrations/syncro/alerts/configuration/options",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkProviderIntegrationSyncroAlertConfigurationOption",
+    "method": "get"
+  },
+  "getApiV2ProvidersByProviderIdIntegrationsTicketingAlerts": {
+    "path": "/api/v2/providers/{provider_id}/integrations/ticketing/alerts",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkProviderIntegrationTicketingAlert",
+    "method": "get"
+  },
+  "getApiV2ProvidersByProviderIdInvoices": {
+    "path": "/api/v2/providers/{provider_id}/invoices",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkProviderInvoice",
+    "method": "get"
+  },
+  "getApiV2ProvidersByProviderIdInvoicesById": {
+    "path": "/api/v2/providers/{provider_id}/invoices/{ID}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkProviderInvoiceById",
+    "method": "get"
+  },
+  "getApiV2ProvidersByProviderIdOrganizations": {
+    "path": "/api/v2/providers/{provider_id}/organizations",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkProviderOrganization",
+    "method": "get"
+  },
+  "getApiV2ProvidersByProviderIdPolicygrouptemplates": {
+    "path": "/api/v2/providers/{provider_id}/policygrouptemplates",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkProviderPolicyGroupTemplate",
+    "method": "get"
+  },
+  "getApiV2ProvidersByProviderIdPolicygrouptemplatesById": {
+    "path": "/api/v2/providers/{provider_id}/policygrouptemplates/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkProviderPolicyGroupTemplateById",
+    "method": "get"
+  },
+  "getApiV2ProvidersByProviderIdPolicygrouptemplatesByIdMembers": {
+    "path": "/api/v2/providers/{provider_id}/policygrouptemplates/{id}/members",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkProviderPolicyGroupTemplateMember",
+    "method": "get"
+  },
+  "getApiV2PushendpointsVerificationsByVerificationid": {
+    "path": "/api/v2/pushendpoints/verifications/{verificationId}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkPushEndpointVerification",
+    "method": "get"
+  },
+  "getApiV2QueuedcommandWorkflows": {
+    "path": "/api/v2/queuedcommand/workflows",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkQueuedCommandWorkflow",
+    "method": "get"
+  },
+  "getApiV2RadiusserversByRadiusserverIdAssociations": {
+    "path": "/api/v2/radiusservers/{radiusserver_id}/associations",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkRadiusServerAssociation",
+    "method": "get"
+  },
+  "getApiV2RadiusserversByRadiusserverIdUsergroups": {
+    "path": "/api/v2/radiusservers/{radiusserver_id}/usergroups",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkRadiusServerUserGroup",
+    "method": "get"
+  },
+  "getApiV2RadiusserversByRadiusserverIdUsers": {
+    "path": "/api/v2/radiusservers/{radiusserver_id}/users",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkRadiusServerUser",
+    "method": "get"
+  },
+  "getApiV2ReportsCustom": {
+    "path": "/api/v2/reports/custom",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkReportCustom",
+    "method": "get"
+  },
+  "getApiV2ReportsCustomByObjectid": {
+    "path": "/api/v2/reports/custom/{objectId}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkReportCustomById",
+    "method": "get"
+  },
+  "getApiV2ReportsCustomReports": {
+    "path": "/api/v2/reports/custom-reports",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkReportCustomReport",
+    "method": "get"
+  },
+  "getApiV2ReportsCustomReportsByCustomreportid": {
+    "path": "/api/v2/reports/custom-reports/{customReportId}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkReportCustomReportById",
+    "method": "get"
+  },
+  "getApiV2ReportsJumpcloud": {
+    "path": "/api/v2/reports/jumpcloud",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkReportJumpcloud",
+    "method": "get"
+  },
+  "getApiV2ReportsJumpcloudByObjectid": {
+    "path": "/api/v2/reports/jumpcloud/{objectId}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkReportJumpcloudById",
+    "method": "get"
+  },
+  "getApiV2ReportsSavedReports": {
+    "path": "/api/v2/reports/saved-reports",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkReportSavedReport",
+    "method": "get"
+  },
+  "getApiV2ReportsSavedReportsById": {
+    "path": "/api/v2/reports/saved-reports/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkReportSavedReportById",
+    "method": "get"
+  },
+  "getApiV2ReportsScheduled": {
+    "path": "/api/v2/reports/scheduled",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkReportScheduled",
+    "method": "get"
+  },
+  "getApiV2ReportsScheduledByObjectid": {
+    "path": "/api/v2/reports/scheduled/{objectId}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkReportScheduledById",
+    "method": "get"
+  },
+  "getApiV2ReportsScheduledByObjectidRuns": {
+    "path": "/api/v2/reports/scheduled/{objectId}/runs",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkReportScheduledRunScheduled",
+    "method": "get"
+  },
+  "getApiV2ReportsScheduledRuns": {
+    "path": "/api/v2/reports/scheduled/runs",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkReportScheduledRun",
+    "method": "get"
+  },
+  "getApiV2ReportsScheduledRunsByObjectid": {
+    "path": "/api/v2/reports/scheduled/runs/{objectId}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkReportScheduledRunById",
+    "method": "get"
+  },
+  "getApiV2Roles": {
+    "path": "/api/v2/roles",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkRole",
+    "method": "get"
+  },
+  "getApiV2RolesByRoleId": {
+    "path": "/api/v2/roles/{role_id}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkRoleById",
+    "method": "get"
+  },
+  "getApiV2SaasManagementApplicationCatalog": {
+    "path": "/api/v2/saas-management/application-catalog",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSaasManagementApplicationCatalog",
+    "method": "get"
+  },
+  "getApiV2SaasManagementApplicationCatalogByCatalogApplicationId": {
+    "path": "/api/v2/saas-management/application-catalog/{catalog_application_id}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkSaasManagementApplicationCatalogById",
+    "method": "get"
+  },
+  "getApiV2SaasManagementApplicationLicenses": {
+    "path": "/api/v2/saas-management/application-licenses",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSaasManagementApplicationLicens",
+    "method": "get"
+  },
+  "getApiV2SaasManagementApplicationLicensesByApplicationId": {
+    "path": "/api/v2/saas-management/application-licenses/{application_id}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkSaasManagementApplicationLicensById",
+    "method": "get"
+  },
+  "getApiV2SaasManagementApplications": {
+    "path": "/api/v2/saas-management/applications",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSaasManagementApplication",
+    "method": "get"
+  },
+  "getApiV2SaasManagementApplicationsByApplicationId": {
+    "path": "/api/v2/saas-management/applications/{application_id}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkSaasManagementApplicationById",
+    "method": "get"
+  },
+  "getApiV2SaasManagementApplicationsByApplicationIdAccounts": {
+    "path": "/api/v2/saas-management/applications/{application_id}/accounts",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSaasManagementApplicationAccount",
+    "method": "get"
+  },
+  "getApiV2SaasManagementApplicationsByApplicationIdAccountsByAccountId": {
+    "path": "/api/v2/saas-management/applications/{application_id}/accounts/{account_id}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkSaasManagementApplicationAccountById",
+    "method": "get"
+  },
+  "getApiV2SaasManagementApplicationsByApplicationIdUsage": {
+    "path": "/api/v2/saas-management/applications/{application_id}/usage",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkSaasManagementApplicationUsage",
+    "method": "get"
+  },
+  "getApiV2SavedViews": {
+    "path": "/api/v2/saved-views",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkSavedView",
+    "method": "get"
+  },
+  "getApiV2ScopeGroups": {
+    "path": "/api/v2/scope-groups",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkScopeGroup",
+    "method": "get"
+  },
+  "getApiV2ServiceAccounts": {
+    "path": "/api/v2/service-accounts",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkServiceAccount",
+    "method": "get"
+  },
+  "getApiV2ServiceAccountsByServiceAccountId": {
+    "path": "/api/v2/service-accounts/{service_account_id}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkServiceAccountById",
+    "method": "get"
+  },
+  "getApiV2Softwareapps": {
+    "path": "/api/v2/softwareapps",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSoftwareApp",
+    "method": "get"
+  },
+  "getApiV2SoftwareappsById": {
+    "path": "/api/v2/softwareapps/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkSoftwareAppById",
+    "method": "get"
+  },
+  "getApiV2SoftwareappsBySoftwareAppIdAssociations": {
+    "path": "/api/v2/softwareapps/{software_app_id}/associations",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSoftwareAppAssociation",
+    "method": "get"
+  },
+  "getApiV2SoftwareappsBySoftwareAppIdStatuses": {
+    "path": "/api/v2/softwareapps/{software_app_id}/statuses",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSoftwareAppStatus",
+    "method": "get"
+  },
+  "getApiV2SoftwareappsBySoftwareAppIdSystemgroups": {
+    "path": "/api/v2/softwareapps/{software_app_id}/systemgroups",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSoftwareAppSystemGroup",
+    "method": "get"
+  },
+  "getApiV2SoftwareappsBySoftwareAppIdSystems": {
+    "path": "/api/v2/softwareapps/{software_app_id}/systems",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSoftwareAppSystem",
+    "method": "get"
+  },
+  "getApiV2SoftwareCatalogApps": {
+    "path": "/api/v2/software/catalog/apps",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSoftwareCatalogApp",
+    "method": "get"
+  },
+  "getApiV2SoftwareCatalogAppsByObjectid": {
+    "path": "/api/v2/software/catalog/apps/{objectId}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkSoftwareCatalogAppById",
+    "method": "get"
+  },
+  "getApiV2Subscriptions": {
+    "path": "/api/v2/subscriptions",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkSubscription",
+    "method": "get"
+  },
+  "getApiV2Systemgroups": {
+    "path": "/api/v2/systemgroups",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSystemGroup",
+    "method": "get"
+  },
+  "getApiV2SystemgroupsByGroupIdAssociations": {
+    "path": "/api/v2/systemgroups/{group_id}/associations",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSystemGroupAssociation",
+    "method": "get"
+  },
+  "getApiV2SystemgroupsByGroupIdCommands": {
+    "path": "/api/v2/systemgroups/{group_id}/commands",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSystemGroupCommand",
+    "method": "get"
+  },
+  "getApiV2SystemgroupsByGroupIdMembers": {
+    "path": "/api/v2/systemgroups/{group_id}/members",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSystemGroupMember",
+    "method": "get"
+  },
+  "getApiV2SystemgroupsByGroupIdMembership": {
+    "path": "/api/v2/systemgroups/{group_id}/membership",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSystemGroupMembership",
+    "method": "get"
+  },
+  "getApiV2SystemgroupsByGroupIdPolicies": {
+    "path": "/api/v2/systemgroups/{group_id}/policies",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSystemGroupPolicy",
+    "method": "get"
+  },
+  "getApiV2SystemgroupsByGroupIdPolicygroups": {
+    "path": "/api/v2/systemgroups/{group_id}/policygroups",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSystemGroupPolicyGroup",
+    "method": "get"
+  },
+  "getApiV2SystemgroupsByGroupIdSuggestions": {
+    "path": "/api/v2/systemgroups/{group_id}/suggestions",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSystemGroupSuggestion",
+    "method": "get"
+  },
+  "getApiV2SystemgroupsByGroupIdUsergroups": {
+    "path": "/api/v2/systemgroups/{group_id}/usergroups",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSystemGroupUserGroup",
+    "method": "get"
+  },
+  "getApiV2SystemgroupsByGroupIdUsers": {
+    "path": "/api/v2/systemgroups/{group_id}/users",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSystemGroupUser",
+    "method": "get"
+  },
+  "getApiV2SystemgroupsById": {
+    "path": "/api/v2/systemgroups/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkSystemGroupById",
+    "method": "get"
+  },
+  "getApiV2SysteminsightsAlf": {
+    "path": "/api/v2/systeminsights/alf",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSystemInsightAlf",
+    "method": "get"
+  },
+  "getApiV2SysteminsightsAlfExceptions": {
+    "path": "/api/v2/systeminsights/alf_exceptions",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSystemInsightAlfException",
+    "method": "get"
+  },
+  "getApiV2SysteminsightsAlfExplicitAuths": {
+    "path": "/api/v2/systeminsights/alf_explicit_auths",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSystemInsightAlfExplicitAuth",
+    "method": "get"
+  },
+  "getApiV2SysteminsightsAppcompatShims": {
+    "path": "/api/v2/systeminsights/appcompat_shims",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSystemInsightAppcompatShim",
+    "method": "get"
+  },
+  "getApiV2SysteminsightsApps": {
+    "path": "/api/v2/systeminsights/apps",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSystemInsightApp",
+    "method": "get"
+  },
+  "getApiV2SysteminsightsAuthorizedKeys": {
+    "path": "/api/v2/systeminsights/authorized_keys",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSystemInsightAuthorizedKey",
+    "method": "get"
+  },
+  "getApiV2SysteminsightsAzureInstanceMetadata": {
+    "path": "/api/v2/systeminsights/azure_instance_metadata",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSystemInsightAzureInstanceMetadata",
+    "method": "get"
+  },
+  "getApiV2SysteminsightsAzureInstanceTags": {
+    "path": "/api/v2/systeminsights/azure_instance_tags",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSystemInsightAzureInstanceTag",
+    "method": "get"
+  },
+  "getApiV2SysteminsightsBattery": {
+    "path": "/api/v2/systeminsights/battery",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSystemInsightBattery",
+    "method": "get"
+  },
+  "getApiV2SysteminsightsBitlockerInfo": {
+    "path": "/api/v2/systeminsights/bitlocker_info",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSystemInsightBitlockerInfo",
+    "method": "get"
+  },
+  "getApiV2SysteminsightsBrowserPlugins": {
+    "path": "/api/v2/systeminsights/browser_plugins",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSystemInsightBrowserPlugin",
+    "method": "get"
+  },
+  "getApiV2SysteminsightsCertificates": {
+    "path": "/api/v2/systeminsights/certificates",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSystemInsightCertificate",
+    "method": "get"
+  },
+  "getApiV2SysteminsightsChassisInfo": {
+    "path": "/api/v2/systeminsights/chassis_info",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSystemInsightChassisInfo",
+    "method": "get"
+  },
+  "getApiV2SysteminsightsChromeExtensions": {
+    "path": "/api/v2/systeminsights/chrome_extensions",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSystemInsightChromeExtension",
+    "method": "get"
+  },
+  "getApiV2SysteminsightsConnectivity": {
+    "path": "/api/v2/systeminsights/connectivity",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSystemInsightConnectivity",
+    "method": "get"
+  },
+  "getApiV2SysteminsightsCrashes": {
+    "path": "/api/v2/systeminsights/crashes",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSystemInsightCrash",
+    "method": "get"
+  },
+  "getApiV2SysteminsightsCupsDestinations": {
+    "path": "/api/v2/systeminsights/cups_destinations",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSystemInsightCupDestination",
+    "method": "get"
+  },
+  "getApiV2SysteminsightsDiskEncryption": {
+    "path": "/api/v2/systeminsights/disk_encryption",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSystemInsightDiskEncryption",
+    "method": "get"
+  },
+  "getApiV2SysteminsightsDiskInfo": {
+    "path": "/api/v2/systeminsights/disk_info",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSystemInsightDiskInfo",
+    "method": "get"
+  },
+  "getApiV2SysteminsightsDnsResolvers": {
+    "path": "/api/v2/systeminsights/dns_resolvers",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSystemInsightDnsResolver",
+    "method": "get"
+  },
+  "getApiV2SysteminsightsEtcHosts": {
+    "path": "/api/v2/systeminsights/etc_hosts",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSystemInsightEtcHost",
+    "method": "get"
+  },
+  "getApiV2SysteminsightsFirefoxAddons": {
+    "path": "/api/v2/systeminsights/firefox_addons",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSystemInsightFirefoxAddon",
+    "method": "get"
+  },
+  "getApiV2SysteminsightsGroups": {
+    "path": "/api/v2/systeminsights/groups",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSystemInsightGroup",
+    "method": "get"
+  },
+  "getApiV2SysteminsightsIeExtensions": {
+    "path": "/api/v2/systeminsights/ie_extensions",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSystemInsightIeExtension",
+    "method": "get"
+  },
+  "getApiV2SysteminsightsInterfaceAddresses": {
+    "path": "/api/v2/systeminsights/interface_addresses",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSystemInsightInterfaceAddress",
+    "method": "get"
+  },
+  "getApiV2SysteminsightsInterfaceDetails": {
+    "path": "/api/v2/systeminsights/interface_details",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSystemInsightInterfaceDetail",
+    "method": "get"
+  },
+  "getApiV2SysteminsightsKernelInfo": {
+    "path": "/api/v2/systeminsights/kernel_info",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSystemInsightKernelInfo",
+    "method": "get"
+  },
+  "getApiV2SysteminsightsLaunchd": {
+    "path": "/api/v2/systeminsights/launchd",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSystemInsightLaunchd",
+    "method": "get"
+  },
+  "getApiV2SysteminsightsLinuxPackages": {
+    "path": "/api/v2/systeminsights/linux_packages",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSystemInsightLinuxPackage",
+    "method": "get"
+  },
+  "getApiV2SysteminsightsLoggedInUsers": {
+    "path": "/api/v2/systeminsights/logged_in_users",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSystemInsightLoggedInUser",
+    "method": "get"
+  },
+  "getApiV2SysteminsightsLogicalDrives": {
+    "path": "/api/v2/systeminsights/logical_drives",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSystemInsightLogicalDrive",
+    "method": "get"
+  },
+  "getApiV2SysteminsightsManagedPolicies": {
+    "path": "/api/v2/systeminsights/managed_policies",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSystemInsightManagedPolicy",
+    "method": "get"
+  },
+  "getApiV2SysteminsightsMounts": {
+    "path": "/api/v2/systeminsights/mounts",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSystemInsightMount",
+    "method": "get"
+  },
+  "getApiV2SysteminsightsOsVersion": {
+    "path": "/api/v2/systeminsights/os_version",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSystemInsightOSVersion",
+    "method": "get"
+  },
+  "getApiV2SysteminsightsPatches": {
+    "path": "/api/v2/systeminsights/patches",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSystemInsightPatch",
+    "method": "get"
+  },
+  "getApiV2SysteminsightsPrograms": {
+    "path": "/api/v2/systeminsights/programs",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSystemInsightProgram",
+    "method": "get"
+  },
+  "getApiV2SysteminsightsPythonPackages": {
+    "path": "/api/v2/systeminsights/python_packages",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSystemInsightPythonPackage",
+    "method": "get"
+  },
+  "getApiV2SysteminsightsSafariExtensions": {
+    "path": "/api/v2/systeminsights/safari_extensions",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSystemInsightSafariExtension",
+    "method": "get"
+  },
+  "getApiV2SysteminsightsScheduledTasks": {
+    "path": "/api/v2/systeminsights/scheduled_tasks",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSystemInsightScheduledTask",
+    "method": "get"
+  },
+  "getApiV2SysteminsightsSecureboot": {
+    "path": "/api/v2/systeminsights/secureboot",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSystemInsightSecureboot",
+    "method": "get"
+  },
+  "getApiV2SysteminsightsServices": {
+    "path": "/api/v2/systeminsights/services",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSystemInsightService",
+    "method": "get"
+  },
+  "getApiV2SysteminsightsShadow": {
+    "path": "/api/v2/systeminsights/shadow",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSystemInsightShadow",
+    "method": "get"
+  },
+  "getApiV2SysteminsightsSharedFolders": {
+    "path": "/api/v2/systeminsights/shared_folders",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSystemInsightSharedFolder",
+    "method": "get"
+  },
+  "getApiV2SysteminsightsSharedResources": {
+    "path": "/api/v2/systeminsights/shared_resources",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSystemInsightSharedResource",
+    "method": "get"
+  },
+  "getApiV2SysteminsightsSharingPreferences": {
+    "path": "/api/v2/systeminsights/sharing_preferences",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSystemInsightSharingPreference",
+    "method": "get"
+  },
+  "getApiV2SysteminsightsSipConfig": {
+    "path": "/api/v2/systeminsights/sip_config",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSystemInsightSipConfig",
+    "method": "get"
+  },
+  "getApiV2SysteminsightsStartupItems": {
+    "path": "/api/v2/systeminsights/startup_items",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSystemInsightStartupItem",
+    "method": "get"
+  },
+  "getApiV2SysteminsightsSystemControls": {
+    "path": "/api/v2/systeminsights/system_controls",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSystemInsightSystemControl",
+    "method": "get"
+  },
+  "getApiV2SysteminsightsSystemInfo": {
+    "path": "/api/v2/systeminsights/system_info",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSystemInsightSystemInfo",
+    "method": "get"
+  },
+  "getApiV2SysteminsightsTpmInfo": {
+    "path": "/api/v2/systeminsights/tpm_info",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSystemInsightTpmInfo",
+    "method": "get"
+  },
+  "getApiV2SysteminsightsUptime": {
+    "path": "/api/v2/systeminsights/uptime",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSystemInsightUptime",
+    "method": "get"
+  },
+  "getApiV2SysteminsightsUsbDevices": {
+    "path": "/api/v2/systeminsights/usb_devices",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSystemInsightUsbDevice",
+    "method": "get"
+  },
+  "getApiV2SysteminsightsUserassist": {
+    "path": "/api/v2/systeminsights/userassist",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSystemInsightUserassist",
+    "method": "get"
+  },
+  "getApiV2SysteminsightsUserGroups": {
+    "path": "/api/v2/systeminsights/user_groups",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSystemInsightUserGroup",
+    "method": "get"
+  },
+  "getApiV2SysteminsightsUsers": {
+    "path": "/api/v2/systeminsights/users",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSystemInsightUser",
+    "method": "get"
+  },
+  "getApiV2SysteminsightsUserSshKeys": {
+    "path": "/api/v2/systeminsights/user_ssh_keys",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSystemInsightUserSshKey",
+    "method": "get"
+  },
+  "getApiV2SysteminsightsWifiNetworks": {
+    "path": "/api/v2/systeminsights/wifi_networks",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSystemInsightWifiNetwork",
+    "method": "get"
+  },
+  "getApiV2SysteminsightsWifiStatus": {
+    "path": "/api/v2/systeminsights/wifi_status",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSystemInsightWifiStatus",
+    "method": "get"
+  },
+  "getApiV2SysteminsightsWindowsSecurityCenter": {
+    "path": "/api/v2/systeminsights/windows_security_center",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSystemInsightWindowSecurityCenter",
+    "method": "get"
+  },
+  "getApiV2SysteminsightsWindowsSecurityProducts": {
+    "path": "/api/v2/systeminsights/windows_security_products",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSystemInsightWindowSecurityProduct",
+    "method": "get"
+  },
+  "getApiV2SystemsBySystemIdAssociations": {
+    "path": "/api/v2/systems/{system_id}/associations",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSystemAssociation",
+    "method": "get"
+  },
+  "getApiV2SystemsBySystemIdCommands": {
+    "path": "/api/v2/systems/{system_id}/commands",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSystemCommand",
+    "method": "get"
+  },
+  "getApiV2SystemsBySystemIdFdekey": {
+    "path": "/api/v2/systems/{system_id}/fdekey",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkSystemFdekey",
+    "method": "get"
+  },
+  "getApiV2SystemsBySystemIdMemberof": {
+    "path": "/api/v2/systems/{system_id}/memberof",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSystemMemberOf",
+    "method": "get"
+  },
+  "getApiV2SystemsBySystemIdPolicies": {
+    "path": "/api/v2/systems/{system_id}/policies",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSystemPolicy",
+    "method": "get"
+  },
+  "getApiV2SystemsBySystemIdPolicygroups": {
+    "path": "/api/v2/systems/{system_id}/policygroups",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSystemPolicyGroup",
+    "method": "get"
+  },
+  "getApiV2SystemsBySystemIdPolicystatuses": {
+    "path": "/api/v2/systems/{system_id}/policystatuses",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSystemPolicyStatus",
+    "method": "get"
+  },
+  "getApiV2SystemsBySystemIdSoftwareappstatuses": {
+    "path": "/api/v2/systems/{system_id}/softwareappstatuses",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSystemSoftwareAppStatus",
+    "method": "get"
+  },
+  "getApiV2SystemsBySystemIdUsergroups": {
+    "path": "/api/v2/systems/{system_id}/usergroups",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSystemUserGroup",
+    "method": "get"
+  },
+  "getApiV2SystemsBySystemIdUsers": {
+    "path": "/api/v2/systems/{system_id}/users",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkSystemUserSystem",
+    "method": "get"
+  },
+  "getApiV2SystemsBySystemobjectidAggregatedPolicyStats": {
+    "path": "/api/v2/systems/{systemObjectId}/aggregated-policy-stats",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkSystemAggregatedPolicyStat",
+    "method": "get"
+  },
+  "getApiV2SystemsViews": {
+    "path": "/api/v2/systems/views",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkSystemView",
+    "method": "get"
+  },
+  "getApiV2Usergroups": {
+    "path": "/api/v2/usergroups",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkUserGroup",
+    "method": "get"
+  },
+  "getApiV2UsergroupsByGroupIdActivedirectories": {
+    "path": "/api/v2/usergroups/{group_id}/activedirectories",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkUserGroupActiveDirectory",
+    "method": "get"
+  },
+  "getApiV2UsergroupsByGroupIdApplications": {
+    "path": "/api/v2/usergroups/{group_id}/applications",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkUserGroupApplication",
+    "method": "get"
+  },
+  "getApiV2UsergroupsByGroupIdAssociations": {
+    "path": "/api/v2/usergroups/{group_id}/associations",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkUserGroupAssociation",
+    "method": "get"
+  },
+  "getApiV2UsergroupsByGroupIdDirectories": {
+    "path": "/api/v2/usergroups/{group_id}/directories",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkUserGroupDirectory",
+    "method": "get"
+  },
+  "getApiV2UsergroupsByGroupIdGsuites": {
+    "path": "/api/v2/usergroups/{group_id}/gsuites",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkUserGroupGSuite",
+    "method": "get"
+  },
+  "getApiV2UsergroupsByGroupIdLdapservers": {
+    "path": "/api/v2/usergroups/{group_id}/ldapservers",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkUserGroupLdapServer",
+    "method": "get"
+  },
+  "getApiV2UsergroupsByGroupIdMembers": {
+    "path": "/api/v2/usergroups/{group_id}/members",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkUserGroupMember",
+    "method": "get"
+  },
+  "getApiV2UsergroupsByGroupIdMembership": {
+    "path": "/api/v2/usergroups/{group_id}/membership",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkUserGroupMembership",
+    "method": "get"
+  },
+  "getApiV2UsergroupsByGroupIdOffice365s": {
+    "path": "/api/v2/usergroups/{group_id}/office365s",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkUserGroupOffice365",
+    "method": "get"
+  },
+  "getApiV2UsergroupsByGroupIdPolicies": {
+    "path": "/api/v2/usergroups/{group_id}/policies",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkUserGroupPolicy",
+    "method": "get"
+  },
+  "getApiV2UsergroupsByGroupIdPolicygroups": {
+    "path": "/api/v2/usergroups/{group_id}/policygroups",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkUserGroupPolicyGroup",
+    "method": "get"
+  },
+  "getApiV2UsergroupsByGroupIdRadiusservers": {
+    "path": "/api/v2/usergroups/{group_id}/radiusservers",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkUserGroupRadiusServer",
+    "method": "get"
+  },
+  "getApiV2UsergroupsByGroupIdSuggestions": {
+    "path": "/api/v2/usergroups/{group_id}/suggestions",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkUserGroupSuggestion",
+    "method": "get"
+  },
+  "getApiV2UsergroupsByGroupIdSystemgroups": {
+    "path": "/api/v2/usergroups/{group_id}/systemgroups",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkUserGroupSystemGroup",
+    "method": "get"
+  },
+  "getApiV2UsergroupsByGroupIdSystems": {
+    "path": "/api/v2/usergroups/{group_id}/systems",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkUserGroupSystem",
+    "method": "get"
+  },
+  "getApiV2UsergroupsById": {
+    "path": "/api/v2/usergroups/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkUserGroupById",
+    "method": "get"
+  },
+  "getApiV2UsersByUserIdActivedirectories": {
+    "path": "/api/v2/users/{user_id}/activedirectories",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkUserActiveDirectory",
+    "method": "get"
+  },
+  "getApiV2UsersByUserIdApplications": {
+    "path": "/api/v2/users/{user_id}/applications",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkUserApplication",
+    "method": "get"
+  },
+  "getApiV2UsersByUserIdAssociations": {
+    "path": "/api/v2/users/{user_id}/associations",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkUserAssociation",
+    "method": "get"
+  },
+  "getApiV2UsersByUserIdDirectories": {
+    "path": "/api/v2/users/{user_id}/directories",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkUserDirectory",
+    "method": "get"
+  },
+  "getApiV2UsersByUserIdGsuites": {
+    "path": "/api/v2/users/{user_id}/gsuites",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkUserGSuite",
+    "method": "get"
+  },
+  "getApiV2UsersByUserIdLdapservers": {
+    "path": "/api/v2/users/{user_id}/ldapservers",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkUserLdapServer",
+    "method": "get"
+  },
+  "getApiV2UsersByUserIdMemberof": {
+    "path": "/api/v2/users/{user_id}/memberof",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkUserMemberOf",
+    "method": "get"
+  },
+  "getApiV2UsersByUserIdOffice365s": {
+    "path": "/api/v2/users/{user_id}/office365s",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkUserOffice365",
+    "method": "get"
+  },
+  "getApiV2UsersByUserIdPolicies": {
+    "path": "/api/v2/users/{user_id}/policies",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkUserPolicy",
+    "method": "get"
+  },
+  "getApiV2UsersByUserIdPolicygroups": {
+    "path": "/api/v2/users/{user_id}/policygroups",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkUserPolicyGroup",
+    "method": "get"
+  },
+  "getApiV2UsersByUserIdPolicystatuses": {
+    "path": "/api/v2/users/{user_id}/policystatuses",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkUserPolicyStatus",
+    "method": "get"
+  },
+  "getApiV2UsersByUserIdPushendpoints": {
+    "path": "/api/v2/users/{user_id}/pushendpoints",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkUserPushEndpoint",
+    "method": "get"
+  },
+  "getApiV2UsersByUserIdPushendpointsByPushEndpointId": {
+    "path": "/api/v2/users/{user_id}/pushendpoints/{push_endpoint_id}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkUserPushEndpointById",
+    "method": "get"
+  },
+  "getApiV2UsersByUserIdRadiusservers": {
+    "path": "/api/v2/users/{user_id}/radiusservers",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkUserRadiusServer",
+    "method": "get"
+  },
+  "getApiV2UsersByUserIdSystemgroups": {
+    "path": "/api/v2/users/{user_id}/systemgroups",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkUserSystemGroup",
+    "method": "get"
+  },
+  "getApiV2UsersByUserIdSystems": {
+    "path": "/api/v2/users/{user_id}/systems",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkUserSystem",
+    "method": "get"
+  },
+  "getApiV2Workdays": {
+    "path": "/api/v2/workdays",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkWorkday",
+    "method": "get"
+  },
+  "getApiV2WorkdaysById": {
+    "path": "/api/v2/workdays/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkWorkdayById",
+    "method": "get"
+  },
+  "getApiV2WorkdaysByIdImportByJobIdResults": {
+    "path": "/api/v2/workdays/{id}/import/{job_id}/results",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkWorkdayImportResult",
+    "method": "get"
+  },
+  "getApiV2WorkdaysByWorkdayIdWorkers": {
+    "path": "/api/v2/workdays/{workday_id}/workers",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkWorkdayWorker",
+    "method": "get"
+  },
+  "getApiV2Workflows": {
+    "path": "/api/v2/workflows",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkWorkflow",
+    "method": "get"
+  },
+  "getApiV2WorkflowsById": {
+    "path": "/api/v2/workflows/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkWorkflowById",
+    "method": "get"
+  },
+  "getApiV2WorkflowsRuns": {
+    "path": "/api/v2/workflows/runs",
+    "paginate": true,
+    "x-powershell-method-name": "Get-JcSdkWorkflowRun",
+    "method": "get"
+  },
+  "getApiV2WorkflowsRunsByRunid": {
+    "path": "/api/v2/workflows/runs/{runId}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkWorkflowRunById",
+    "method": "get"
+  },
+  "getApiV2WorkflowsTemplates": {
+    "path": "/api/v2/workflows/templates",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkWorkflowTemplate",
+    "method": "get"
+  },
+  "getApiV2WorkflowsTemplatesByTemplateid": {
+    "path": "/api/v2/workflows/templates/{templateId}",
+    "paginate": false,
+    "x-powershell-method-name": "Get-JcSdkWorkflowTemplateById",
+    "method": "get"
+  },
+  "patchApiV2ActivedirectoriesById": {
+    "path": "/api/v2/activedirectories/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Update-JcSdkActiveDirectory",
+    "method": "patch"
+  },
+  "patchApiV2AssetsAccessoriesBatch": {
+    "path": "/api/v2/assets/accessories/batch",
+    "paginate": false,
+    "x-powershell-method-name": "Update-JcSdkAssetAccessoryBatch",
+    "method": "patch"
+  },
+  "patchApiV2AssetsDevicesBatch": {
+    "path": "/api/v2/assets/devices/batch",
+    "paginate": false,
+    "x-powershell-method-name": "Update-JcSdkAssetDeviceBatch",
+    "method": "patch"
+  },
+  "patchApiV2AssetsLocationsBatch": {
+    "path": "/api/v2/assets/locations/batch",
+    "paginate": false,
+    "x-powershell-method-name": "Update-JcSdkAssetLocationBatch",
+    "method": "patch"
+  },
+  "patchApiV2AuthnPoliciesById": {
+    "path": "/api/v2/authn/policies/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Update-JcSdkAuthenticationPolicy",
+    "method": "patch"
+  },
+  "patchApiV2BulkUsers": {
+    "path": "/api/v2/bulk/users",
+    "paginate": false,
+    "x-powershell-method-name": "Update-JcSdkBulkUser",
+    "method": "patch"
+  },
+  "patchApiV2GoogleEmmEnterprisesByEnterpriseid": {
+    "path": "/api/v2/google-emm/enterprises/{enterpriseId}",
+    "paginate": false,
+    "x-powershell-method-name": "Update-JcSdkGoogleEmmEnterprise",
+    "method": "patch"
+  },
+  "patchApiV2GsuitesByGsuiteIdImportSchedulesByScheduledjobid": {
+    "path": "/api/v2/gsuites/{gsuite_id}/import/schedules/{scheduledJobId}",
+    "paginate": false,
+    "x-powershell-method-name": "Update-JcSdkGSuiteImportSchedule",
+    "method": "patch"
+  },
+  "patchApiV2GsuitesById": {
+    "path": "/api/v2/gsuites/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Update-JcSdkGSuite",
+    "method": "patch"
+  },
+  "patchApiV2HealthmonitoringRulesById": {
+    "path": "/api/v2/healthmonitoring/rules/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Update-JcSdkHealthMonitoringRule",
+    "method": "patch"
+  },
+  "patchApiV2HealthmonitoringRulesByIdStatus": {
+    "path": "/api/v2/healthmonitoring/rules/{id}/status",
+    "paginate": false,
+    "x-powershell-method-name": "Update-JcSdkHealthMonitoringRuleStatus",
+    "method": "patch"
+  },
+  "patchApiV2IdentityriskEventsByObjectidResolve": {
+    "path": "/api/v2/identityrisk/events/{objectId}/resolve",
+    "paginate": false,
+    "x-powershell-method-name": "Update-JcSdkIdentityRiskEventResolve",
+    "method": "patch"
+  },
+  "patchApiV2IntegrationsAutotaskByUuid": {
+    "path": "/api/v2/integrations/autotask/{UUID}",
+    "paginate": false,
+    "x-powershell-method-name": "Update-JcSdkIntegrationAutotask",
+    "method": "patch"
+  },
+  "patchApiV2IntegrationsAutotaskByUuidMappings": {
+    "path": "/api/v2/integrations/autotask/{UUID}/mappings",
+    "paginate": false,
+    "x-powershell-method-name": "Update-JcSdkIntegrationAutotaskMapping",
+    "method": "patch"
+  },
+  "patchApiV2IntegrationsAutotaskByUuidSettings": {
+    "path": "/api/v2/integrations/autotask/{UUID}/settings",
+    "paginate": false,
+    "x-powershell-method-name": "Update-JcSdkIntegrationAutotaskSetting",
+    "method": "patch"
+  },
+  "patchApiV2IntegrationsConnectwiseByUuid": {
+    "path": "/api/v2/integrations/connectwise/{UUID}",
+    "paginate": false,
+    "x-powershell-method-name": "Update-JcSdkIntegrationConnectWise",
+    "method": "patch"
+  },
+  "patchApiV2IntegrationsConnectwiseByUuidMappings": {
+    "path": "/api/v2/integrations/connectwise/{UUID}/mappings",
+    "paginate": false,
+    "x-powershell-method-name": "Update-JcSdkIntegrationConnectWiseMapping",
+    "method": "patch"
+  },
+  "patchApiV2IntegrationsConnectwiseByUuidSettings": {
+    "path": "/api/v2/integrations/connectwise/{UUID}/settings",
+    "paginate": false,
+    "x-powershell-method-name": "Update-JcSdkIntegrationConnectWiseSetting",
+    "method": "patch"
+  },
+  "patchApiV2IntegrationsSyncroByUuid": {
+    "path": "/api/v2/integrations/syncro/{UUID}",
+    "paginate": false,
+    "x-powershell-method-name": "Update-JcSdkIntegrationSyncro",
+    "method": "patch"
+  },
+  "patchApiV2IntegrationsSyncroByUuidMappings": {
+    "path": "/api/v2/integrations/syncro/{UUID}/mappings",
+    "paginate": false,
+    "x-powershell-method-name": "Update-JcSdkIntegrationSyncroMapping",
+    "method": "patch"
+  },
+  "patchApiV2IntegrationsSyncroByUuidSettings": {
+    "path": "/api/v2/integrations/syncro/{UUID}/settings",
+    "paginate": false,
+    "x-powershell-method-name": "Update-JcSdkIntegrationSyncroSetting",
+    "method": "patch"
+  },
+  "patchApiV2IplistsById": {
+    "path": "/api/v2/iplists/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Update-JcSdkIPList",
+    "method": "patch"
+  },
+  "patchApiV2LdapserversById": {
+    "path": "/api/v2/ldapservers/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Update-JcSdkLdapServer",
+    "method": "patch"
+  },
+  "patchApiV2NotificationsChannelsById": {
+    "path": "/api/v2/notifications/channels/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Update-JcSdkNotificationChannel",
+    "method": "patch"
+  },
+  "patchApiV2Office365sByOffice365Id": {
+    "path": "/api/v2/office365s/{office365_id}",
+    "paginate": false,
+    "x-powershell-method-name": "Update-JcSdkOffice365",
+    "method": "patch"
+  },
+  "patchApiV2UsersByUserIdPushendpointsByPushEndpointId": {
+    "path": "/api/v2/users/{user_id}/pushendpoints/{push_endpoint_id}",
+    "paginate": false,
+    "x-powershell-method-name": "Update-JcSdkUserPushEndpoint",
+    "method": "patch"
+  },
+  "postApiApplications": {
+    "path": "/api/applications",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkApplication",
+    "method": "post"
+  },
+  "postApiCommands": {
+    "path": "/api/commands",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkCommand",
+    "method": "post"
+  },
+  "postApiCommandTriggerByTriggername": {
+    "path": "/api/command/trigger/{triggername}",
+    "paginate": false,
+    "x-powershell-method-name": "Invoke-JcSdkCommandTrigger",
+    "method": "post"
+  },
+  "postApiRadiusservers": {
+    "path": "/api/radiusservers",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkRadiusServer",
+    "method": "post"
+  },
+  "postApiRuncommand": {
+    "path": "/api/runCommand",
+    "paginate": false,
+    "x-powershell-method-name": "Start-JcSdkCommand",
+    "method": "post"
+  },
+  "postApiSearchCommandresults": {
+    "path": "/api/search/commandresults",
+    "paginate": true,
+    "x-powershell-method-name": "Search-JcSdkCommandResult",
+    "method": "post"
+  },
+  "postApiSearchCommands": {
+    "path": "/api/search/commands",
+    "paginate": true,
+    "x-powershell-method-name": "Search-JcSdkCommand",
+    "method": "post"
+  },
+  "postApiSearchOrganizations": {
+    "path": "/api/search/organizations",
+    "paginate": true,
+    "x-powershell-method-name": "Search-JcSdkOrganization",
+    "method": "post"
+  },
+  "postApiSearchSystems": {
+    "path": "/api/search/systems",
+    "paginate": true,
+    "x-powershell-method-name": "Search-JcSdkSystem",
+    "method": "post"
+  },
+  "postApiSearchSystemusers": {
+    "path": "/api/search/systemusers",
+    "paginate": true,
+    "x-powershell-method-name": "Search-JcSdkSystemUser",
+    "method": "post"
+  },
+  "postApiSystemsBySystemIdCommandBuiltinErase": {
+    "path": "/api/systems/{system_id}/command/builtin/erase",
+    "paginate": false,
+    "x-powershell-method-name": "Clear-JcSdkSystem",
+    "method": "post"
+  },
+  "postApiSystemsBySystemIdCommandBuiltinLock": {
+    "path": "/api/systems/{system_id}/command/builtin/lock",
+    "paginate": false,
+    "x-powershell-method-name": "Lock-JcSdkSystem",
+    "method": "post"
+  },
+  "postApiSystemsBySystemIdCommandBuiltinRestart": {
+    "path": "/api/systems/{system_id}/command/builtin/restart",
+    "paginate": false,
+    "x-powershell-method-name": "Restart-JcSdkSystem",
+    "method": "post"
+  },
+  "postApiSystemsBySystemIdCommandBuiltinShutdown": {
+    "path": "/api/systems/{system_id}/command/builtin/shutdown",
+    "paginate": false,
+    "x-powershell-method-name": "Stop-JcSdkSystem",
+    "method": "post"
+  },
+  "postApiSystemusers": {
+    "path": "/api/systemusers",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkSystemUser",
+    "method": "post"
+  },
+  "postApiSystemusersByIdExpire": {
+    "path": "/api/systemusers/{id}/expire",
+    "paginate": false,
+    "x-powershell-method-name": "Invoke-JcSdkExpireSystemUserPassword",
+    "method": "post"
+  },
+  "postApiSystemusersByIdMfaEnforce": {
+    "path": "/api/systemusers/{id}/mfa/enforce",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkSystemUserMfa",
+    "method": "post"
+  },
+  "postApiSystemusersByIdMfasync": {
+    "path": "/api/systemusers/{id}/mfasync",
+    "paginate": false,
+    "x-powershell-method-name": "Sync-JcSdkSystemUserMfa",
+    "method": "post"
+  },
+  "postApiSystemusersByIdPassword": {
+    "path": "/api/systemusers/{id}/password",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkSystemUserPassword",
+    "method": "post"
+  },
+  "postApiSystemusersByIdReactivate": {
+    "path": "/api/systemusers/{id}/reactivate",
+    "paginate": false,
+    "x-powershell-method-name": "Enable-JcSdkSystemUserReactivate",
+    "method": "post"
+  },
+  "postApiSystemusersByIdResetmfa": {
+    "path": "/api/systemusers/{id}/resetmfa",
+    "paginate": false,
+    "x-powershell-method-name": "Reset-JcSdkSystemUserMfa",
+    "method": "post"
+  },
+  "postApiSystemusersByIdSshkeys": {
+    "path": "/api/systemusers/{id}/sshkeys",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkSystemUserSshKey",
+    "method": "post"
+  },
+  "postApiSystemusersByIdStateActivate": {
+    "path": "/api/systemusers/{id}/state/activate",
+    "paginate": false,
+    "x-powershell-method-name": "Enable-JcSdkSystemUser",
+    "method": "post"
+  },
+  "postApiSystemusersByIdStateSuspend": {
+    "path": "/api/systemusers/{id}/state/suspend",
+    "paginate": false,
+    "x-powershell-method-name": "Suspend-JcSdkSystemUser",
+    "method": "post"
+  },
+  "postApiSystemusersByIdUnlock": {
+    "path": "/api/systemusers/{id}/unlock",
+    "paginate": false,
+    "x-powershell-method-name": "Unlock-JcSdkSystemUser",
+    "method": "post"
+  },
+  "postApiUsersResettotpById": {
+    "path": "/api/users/resettotp/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Reset-JcSdkAdministratorUserTotp",
+    "method": "post"
+  },
+  "postApiV2Accessrequests": {
+    "path": "/api/v2/accessrequests",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkAccessRequest",
+    "method": "post"
+  },
+  "postApiV2AccessrequestsByAccessidRevoke": {
+    "path": "/api/v2/accessrequests/{accessId}/revoke",
+    "paginate": false,
+    "x-powershell-method-name": "Revoke-JcSdkAccessRequest",
+    "method": "post"
+  },
+  "postApiV2Activedirectories": {
+    "path": "/api/v2/activedirectories",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkActiveDirectory",
+    "method": "post"
+  },
+  "postApiV2ActivedirectoriesByActivedirectoryIdAgents": {
+    "path": "/api/v2/activedirectories/{activedirectory_id}/agents",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkActiveDirectoryAgent",
+    "method": "post"
+  },
+  "postApiV2ActivedirectoriesByActivedirectoryIdAssociations": {
+    "path": "/api/v2/activedirectories/{activedirectory_id}/associations",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkActiveDirectoryAssociation",
+    "method": "post"
+  },
+  "postApiV2ActivedirectoriesByActivedirectoryIdTranslationRules": {
+    "path": "/api/v2/activedirectories/{activedirectory_id}/translation-rules",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkActiveDirectoryTranslationRule",
+    "method": "post"
+  },
+  "postApiV2ActivedirectoriesByActivedirectoryIdTranslationRulesBulk": {
+    "path": "/api/v2/activedirectories/{activedirectory_id}/translation-rules/bulk",
+    "paginate": false,
+    "x-powershell-method-name": "Invoke-JcSdkActiveDirectoryTranslationRuleBulk",
+    "method": "post"
+  },
+  "postApiV2ActivedirectoriesTranslationRulesPreview": {
+    "path": "/api/v2/activedirectories/translation-rules/preview",
+    "paginate": false,
+    "x-powershell-method-name": "Invoke-JcSdkActiveDirectoryTranslationRulePreview",
+    "method": "post"
+  },
+  "postApiV2AdministratorsByIdOrganizationlinks": {
+    "path": "/api/v2/administrators/{id}/organizationlinks",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkAdministratorOrganizationLink",
+    "method": "post"
+  },
+  "postApiV2AlertsBulkDelete": {
+    "path": "/api/v2/alerts/bulk-delete",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkAlertBulkDelete",
+    "method": "post"
+  },
+  "postApiV2AlertsBulkUpdate": {
+    "path": "/api/v2/alerts/bulk-update",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkAlertBulkUpdate",
+    "method": "post"
+  },
+  "postApiV2AlertsByAlertobjectidNotes": {
+    "path": "/api/v2/alerts/{alertObjectId}/notes",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkAlertNote",
+    "method": "post"
+  },
+  "postApiV2AlertsByIdStatus": {
+    "path": "/api/v2/alerts/{id}/status",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkAlertStatus",
+    "method": "post"
+  },
+  "postApiV2ApplemdmsByAppleMdmIdDevicesByDeviceIdClearactivationlock": {
+    "path": "/api/v2/applemdms/{apple_mdm_id}/devices/{device_id}/clearActivationLock",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkAppleMdmDeviceClearActivationLock",
+    "method": "post"
+  },
+  "postApiV2ApplemdmsByAppleMdmIdDevicesByDeviceIdClearpasscode": {
+    "path": "/api/v2/applemdms/{apple_mdm_id}/devices/{device_id}/clearPasscode",
+    "paginate": false,
+    "x-powershell-method-name": "Clear-JcSdkAppleMdmDevicePasscode",
+    "method": "post"
+  },
+  "postApiV2ApplemdmsByAppleMdmIdDevicesByDeviceIdClearrestrictionspassword": {
+    "path": "/api/v2/applemdms/{apple_mdm_id}/devices/{device_id}/clearRestrictionsPassword",
+    "paginate": false,
+    "x-powershell-method-name": "Clear-JcSdkAppleMdmDeviceRestrictionsPassword",
+    "method": "post"
+  },
+  "postApiV2ApplemdmsByAppleMdmIdDevicesByDeviceIdErase": {
+    "path": "/api/v2/applemdms/{apple_mdm_id}/devices/{device_id}/erase",
+    "paginate": false,
+    "x-powershell-method-name": "Clear-JcSdkAppleMdmDevice",
+    "method": "post"
+  },
+  "postApiV2ApplemdmsByAppleMdmIdDevicesByDeviceIdLock": {
+    "path": "/api/v2/applemdms/{apple_mdm_id}/devices/{device_id}/lock",
+    "paginate": false,
+    "x-powershell-method-name": "Lock-JcSdkAppleMdmDevice",
+    "method": "post"
+  },
+  "postApiV2ApplemdmsByAppleMdmIdDevicesByDeviceIdOsupdatestatus": {
+    "path": "/api/v2/applemdms/{apple_mdm_id}/devices/{device_id}/osUpdateStatus",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkAppleMdmDeviceOSUpdateStatus",
+    "method": "post"
+  },
+  "postApiV2ApplemdmsByAppleMdmIdDevicesByDeviceIdRefreshactivationlockinformation": {
+    "path": "/api/v2/applemdms/{apple_mdm_id}/devices/{device_id}/refreshActivationLockInformation",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkAppleMdmDeviceRefreshActivationLockInformation",
+    "method": "post"
+  },
+  "postApiV2ApplemdmsByAppleMdmIdDevicesByDeviceIdRestart": {
+    "path": "/api/v2/applemdms/{apple_mdm_id}/devices/{device_id}/restart",
+    "paginate": false,
+    "x-powershell-method-name": "Restart-JcSdkAppleMdmDevice",
+    "method": "post"
+  },
+  "postApiV2ApplemdmsByAppleMdmIdDevicesByDeviceIdScheduleosupdate": {
+    "path": "/api/v2/applemdms/{apple_mdm_id}/devices/{device_id}/scheduleOSUpdate",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkAppleMdmDeviceScheduleOSUpdate",
+    "method": "post"
+  },
+  "postApiV2ApplemdmsByAppleMdmIdDevicesByDeviceIdShutdown": {
+    "path": "/api/v2/applemdms/{apple_mdm_id}/devices/{device_id}/shutdown",
+    "paginate": false,
+    "x-powershell-method-name": "Stop-JcSdkAppleMdmDevice",
+    "method": "post"
+  },
+  "postApiV2ApplemdmsByAppleMdmIdRefreshdepdevices": {
+    "path": "/api/v2/applemdms/{apple_mdm_id}/refreshdepdevices",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkAppleMdmRefreshDepDevice",
+    "method": "post"
+  },
+  "postApiV2ApplemdmsByDevicemanagerobjectidDevicesByDeviceobjectidLockauto": {
+    "path": "/api/v2/applemdms/{deviceManagerObjectId}/devices/{deviceObjectId}/lockauto",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkAppleMdmDeviceLockauto",
+    "method": "post"
+  },
+  "postApiV2ApplemdmsByDevicemanagerobjectidDevicesByDeviceobjectidLostmode": {
+    "path": "/api/v2/applemdms/{deviceManagerObjectId}/devices/{deviceObjectId}/lostmode",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkAppleMdmDeviceLostMode",
+    "method": "post"
+  },
+  "postApiV2ApplemdmsByDevicemanagerobjectidServiceDiscoveryUrl": {
+    "path": "/api/v2/applemdms/{deviceManagerObjectId}/service-discovery-url",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkAppleMdmServiceDiscoveryUrl",
+    "method": "post"
+  },
+  "postApiV2ApplicationsByApplicationIdAssociations": {
+    "path": "/api/v2/applications/{application_id}/associations",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkApplicationAssociation",
+    "method": "post"
+  },
+  "postApiV2ApplicationsByApplicationIdImportJobs": {
+    "path": "/api/v2/applications/{application_id}/import/jobs",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkApplicationImportJob",
+    "method": "post"
+  },
+  "postApiV2ApplicationsByApplicationIdLogo": {
+    "path": "/api/v2/applications/{application_id}/logo",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkApplicationLogo",
+    "method": "post"
+  },
+  "postApiV2Approvalflowrequest": {
+    "path": "/api/v2/approvalflowrequest",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkApprovalFlowRequest",
+    "method": "post"
+  },
+  "postApiV2ApprovalflowrequestByIdCancel": {
+    "path": "/api/v2/approvalflowrequest/{id}/cancel",
+    "paginate": false,
+    "x-powershell-method-name": "Stop-JcSdkApprovalFlowRequest",
+    "method": "post"
+  },
+  "postApiV2ApprovalflowrequestByIdEndsession": {
+    "path": "/api/v2/approvalflowrequest/{id}/endsession",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkApprovalFlowRequestEndsession",
+    "method": "post"
+  },
+  "postApiV2ApprovalflowrequestByIdStartsession": {
+    "path": "/api/v2/approvalflowrequest/{id}/startsession",
+    "paginate": false,
+    "x-powershell-method-name": "Start-JcSdkApprovalFlowRequestStartSession",
+    "method": "post"
+  },
+  "postApiV2ApprovalflowrequestRevokeTtlActiveSession": {
+    "path": "/api/v2/approvalflowrequest/revoke-ttl-active-session",
+    "paginate": false,
+    "x-powershell-method-name": "Revoke-JcSdkApprovalFlowRequestRevokeTtlActiveSession",
+    "method": "post"
+  },
+  "postApiV2Approvalflows": {
+    "path": "/api/v2/approvalflows",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkApprovalFlow",
+    "method": "post"
+  },
+  "postApiV2Approvalflowsettings": {
+    "path": "/api/v2/approvalflowsettings",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkApprovalFlowSetting",
+    "method": "post"
+  },
+  "postApiV2AssetsAccessories": {
+    "path": "/api/v2/assets/accessories",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkAssetAccessory",
+    "method": "post"
+  },
+  "postApiV2AssetsAccessoriesByIdHistory": {
+    "path": "/api/v2/assets/accessories/{id}/history",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkAssetAccessoryHistory",
+    "method": "post"
+  },
+  "postApiV2AssetsDevices": {
+    "path": "/api/v2/assets/devices",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkAssetDevice",
+    "method": "post"
+  },
+  "postApiV2AssetsDevicesByIdHistory": {
+    "path": "/api/v2/assets/devices/{id}/history",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkAssetDeviceHistory",
+    "method": "post"
+  },
+  "postApiV2AssetsLocations": {
+    "path": "/api/v2/assets/locations",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkAssetLocation",
+    "method": "post"
+  },
+  "postApiV2AssetsLocationsByIdHistory": {
+    "path": "/api/v2/assets/locations/{id}/history",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkAssetLocationHistory",
+    "method": "post"
+  },
+  "postApiV2AuthnPolicies": {
+    "path": "/api/v2/authn/policies",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkAuthenticationPolicy",
+    "method": "post"
+  },
+  "postApiV2AuthnPolicyEvaluationsDetails": {
+    "path": "/api/v2/authn/policy-evaluations/details",
+    "paginate": true,
+    "x-powershell-method-name": "New-JcSdkAuthenticationPolicyEvaluationDetail",
+    "method": "post"
+  },
+  "postApiV2AuthnPolicyEvaluationsOptions": {
+    "path": "/api/v2/authn/policy-evaluations/options",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkAuthenticationPolicyEvaluationOption",
+    "method": "post"
+  },
+  "postApiV2AuthnPolicyEvaluationsSummary": {
+    "path": "/api/v2/authn/policy-evaluations/summary",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkAuthenticationPolicyEvaluationSummary",
+    "method": "post"
+  },
+  "postApiV2BulkUserExpires": {
+    "path": "/api/v2/bulk/user/expires",
+    "paginate": false,
+    "x-powershell-method-name": "Invoke-JcSdkBulkUserExpire",
+    "method": "post"
+  },
+  "postApiV2BulkUsers": {
+    "path": "/api/v2/bulk/users",
+    "paginate": false,
+    "x-powershell-method-name": "Invoke-JcSdkBulkUser",
+    "method": "post"
+  },
+  "postApiV2BulkUserstates": {
+    "path": "/api/v2/bulk/userstates",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkBulkUserState",
+    "method": "post"
+  },
+  "postApiV2BulkUserUnlocks": {
+    "path": "/api/v2/bulk/user/unlocks",
+    "paginate": false,
+    "x-powershell-method-name": "Invoke-JcSdkBulkUserUnlock",
+    "method": "post"
+  },
+  "postApiV2CommandsByCommandIdAssociations": {
+    "path": "/api/v2/commands/{command_id}/associations",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkCommandAssociation",
+    "method": "post"
+  },
+  "postApiV2Customemails": {
+    "path": "/api/v2/customemails",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkCustomEmail",
+    "method": "post"
+  },
+  "postApiV2DuoAccounts": {
+    "path": "/api/v2/duo/accounts",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkDuoAccount",
+    "method": "post"
+  },
+  "postApiV2DuoAccountsByAccountIdApplications": {
+    "path": "/api/v2/duo/accounts/{account_id}/applications",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkDuoAccountApplication",
+    "method": "post"
+  },
+  "postApiV2GoogleEmmDevicesByDeviceidEraseDevice": {
+    "path": "/api/v2/google-emm/devices/{deviceId}/erase-device",
+    "paginate": false,
+    "x-powershell-method-name": "Clear-JcSdkGoogleEmmDevice",
+    "method": "post"
+  },
+  "postApiV2GoogleEmmDevicesByDeviceidLock": {
+    "path": "/api/v2/google-emm/devices/{deviceId}/lock",
+    "paginate": false,
+    "x-powershell-method-name": "Lock-JcSdkGoogleEmmDevice",
+    "method": "post"
+  },
+  "postApiV2GoogleEmmDevicesByDeviceidLostmodeStart": {
+    "path": "/api/v2/google-emm/devices/{deviceId}/lostmode/start",
+    "paginate": false,
+    "x-powershell-method-name": "Start-JcSdkGoogleEmmDeviceLostMode",
+    "method": "post"
+  },
+  "postApiV2GoogleEmmDevicesByDeviceidLostmodeStop": {
+    "path": "/api/v2/google-emm/devices/{deviceId}/lostmode/stop",
+    "paginate": false,
+    "x-powershell-method-name": "Stop-JcSdkGoogleEmmDeviceLostMode",
+    "method": "post"
+  },
+  "postApiV2GoogleEmmDevicesByDeviceidReboot": {
+    "path": "/api/v2/google-emm/devices/{deviceId}/reboot",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkGoogleEmmDeviceReboot",
+    "method": "post"
+  },
+  "postApiV2GoogleEmmDevicesByDeviceidResetpassword": {
+    "path": "/api/v2/google-emm/devices/{deviceId}/resetpassword",
+    "paginate": false,
+    "x-powershell-method-name": "Reset-JcSdkGoogleEmmDeviceResetPassword",
+    "method": "post"
+  },
+  "postApiV2GoogleEmmEnterprises": {
+    "path": "/api/v2/google-emm/enterprises",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkGoogleEmmEnterprise",
+    "method": "post"
+  },
+  "postApiV2GoogleEmmEnterprisesByEnterpriseidGenerateUpgradeUrl": {
+    "path": "/api/v2/google-emm/enterprises/{enterpriseId}/generate-upgrade-url",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkGoogleEmmEnterpriseGenerateUpgradeUrl",
+    "method": "post"
+  },
+  "postApiV2GoogleEmmEnterprisesByEnterpriseobjectidEnrollmentTokens": {
+    "path": "/api/v2/google-emm/enterprises/{enterpriseObjectId}/enrollment-tokens",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkGoogleEmmEnterpriseEnrollmentToken",
+    "method": "post"
+  },
+  "postApiV2GoogleEmmSignupUrls": {
+    "path": "/api/v2/google-emm/signup-urls",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkGoogleEmmSignupUrl",
+    "method": "post"
+  },
+  "postApiV2GoogleEmmWebTokens": {
+    "path": "/api/v2/google-emm/web-tokens",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkGoogleEmmWebToken",
+    "method": "post"
+  },
+  "postApiV2GsuitesByGsuiteIdAssociations": {
+    "path": "/api/v2/gsuites/{gsuite_id}/associations",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkGSuiteAssociation",
+    "method": "post"
+  },
+  "postApiV2GsuitesByGsuiteIdDomains": {
+    "path": "/api/v2/gsuites/{gsuite_id}/domains",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkGSuiteDomain",
+    "method": "post"
+  },
+  "postApiV2GsuitesByGsuiteIdImportSchedules": {
+    "path": "/api/v2/gsuites/{gsuite_id}/import/schedules",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkGSuiteImportSchedule",
+    "method": "post"
+  },
+  "postApiV2GsuitesByGsuiteIdTranslationrules": {
+    "path": "/api/v2/gsuites/{gsuite_id}/translationrules",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkGSuiteTranslationRule",
+    "method": "post"
+  },
+  "postApiV2HealthmonitoringRules": {
+    "path": "/api/v2/healthmonitoring/rules",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkHealthMonitoringRule",
+    "method": "post"
+  },
+  "postApiV2HealthmonitoringRulesByRuleIdAssociations": {
+    "path": "/api/v2/healthmonitoring/rules/{rule_id}/associations",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkHealthMonitoringRuleAssociation",
+    "method": "post"
+  },
+  "postApiV2IdentityProviderPoliciesByIdpRoutingPolicyIdAssociations": {
+    "path": "/api/v2/identity-provider/policies/{idp_routing_policy_id}/associations",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkIdentityProviderPolicyAssociation",
+    "method": "post"
+  },
+  "postApiV2IdentityriskFactorsTimeline": {
+    "path": "/api/v2/identityrisk/factors-timeline",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkIdentityRiskFactorTimeline",
+    "method": "post"
+  },
+  "postApiV2Iplists": {
+    "path": "/api/v2/iplists",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkIPList",
+    "method": "post"
+  },
+  "postApiV2LdapserversByLdapserverIdAssociations": {
+    "path": "/api/v2/ldapservers/{ldapserver_id}/associations",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkLdapServerAssociation",
+    "method": "post"
+  },
+  "postApiV2LdapserversByLdapserverIdSambadomains": {
+    "path": "/api/v2/ldapservers/{ldapserver_id}/sambadomains",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkLdapServerSambaDomain",
+    "method": "post"
+  },
+  "postApiV2MicrosoftMdmConfigurationFiles": {
+    "path": "/api/v2/microsoft-mdm/configuration-files",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkMicrosoftMdmConfigurationFile",
+    "method": "post"
+  },
+  "postApiV2NotificationsChannels": {
+    "path": "/api/v2/notifications/channels",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkNotificationChannel",
+    "method": "post"
+  },
+  "postApiV2NotificationsSlackTest": {
+    "path": "/api/v2/notifications/slack/test",
+    "paginate": false,
+    "x-powershell-method-name": "Test-JcSdkNotificationSlack",
+    "method": "post"
+  },
+  "postApiV2NotificationsWebhookTest": {
+    "path": "/api/v2/notifications/webhook/test",
+    "paginate": false,
+    "x-powershell-method-name": "Test-JcSdkNotificationWebhook",
+    "method": "post"
+  },
+  "postApiV2Office365sByOffice365IdAssociations": {
+    "path": "/api/v2/office365s/{office365_id}/associations",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkOffice365Association",
+    "method": "post"
+  },
+  "postApiV2Office365sByOffice365IdDomains": {
+    "path": "/api/v2/office365s/{office365_id}/domains",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkOffice365Domain",
+    "method": "post"
+  },
+  "postApiV2Office365sByOffice365IdTranslationrules": {
+    "path": "/api/v2/office365s/{office365_id}/translationrules",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkOffice365TranslationRule",
+    "method": "post"
+  },
+  "postApiV2PasswordmanagerBackupKeys": {
+    "path": "/api/v2/passwordmanager/backup/keys",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkPasswordManagerBackupKey",
+    "method": "post"
+  },
+  "postApiV2PasswordmanageritemsByPasswordmanageritemIdAssociations": {
+    "path": "/api/v2/passwordmanageritems/{passwordmanageritem_id}/associations",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkPasswordManagerItemAssociation",
+    "method": "post"
+  },
+  "postApiV2PasswordmanagerSharedfolders": {
+    "path": "/api/v2/passwordmanager/sharedfolders",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkPasswordManagerSharedFolder",
+    "method": "post"
+  },
+  "postApiV2PasswordmanagerSharedfoldersByFolderidManage": {
+    "path": "/api/v2/passwordmanager/sharedfolders/{folderId}/manage",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkPasswordManagerSharedFolderManage",
+    "method": "post"
+  },
+  "postApiV2PasswordmanagerUsersReinvite": {
+    "path": "/api/v2/passwordmanager/users/reinvite",
+    "paginate": false,
+    "x-powershell-method-name": "Send-JcSdkPasswordManagerUserReinvite",
+    "method": "post"
+  },
+  "postApiV2Passwordpolicies": {
+    "path": "/api/v2/passwordpolicies",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkPasswordPolicy",
+    "method": "post"
+  },
+  "postApiV2PasswordVaultCredentialsArchive": {
+    "path": "/api/v2/password-vault/credentials/archive",
+    "paginate": false,
+    "x-powershell-method-name": "Archive-JcSdkPasswordVaultCredential",
+    "method": "post"
+  },
+  "postApiV2PasswordVaultCredentialsByIdAdminTakeovers": {
+    "path": "/api/v2/password-vault/credentials/{id}/admin-takeovers",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkPasswordVaultCredentialAdminTakeover",
+    "method": "post"
+  },
+  "postApiV2PasswordVaultCredentialsByIdClones": {
+    "path": "/api/v2/password-vault/credentials/{id}/clones",
+    "paginate": false,
+    "x-powershell-method-name": "Copy-JcSdkPasswordVaultCredential",
+    "method": "post"
+  },
+  "postApiV2PasswordVaultCredentialsExcelExports": {
+    "path": "/api/v2/password-vault/credentials/excel/exports",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkPasswordVaultCredentialExcelExport",
+    "method": "post"
+  },
+  "postApiV2PasswordVaultCredentialsExcelExtractColumns": {
+    "path": "/api/v2/password-vault/credentials/excel/extract-columns",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkPasswordVaultCredentialExcelExtractColumn",
+    "method": "post"
+  },
+  "postApiV2PasswordVaultCredentialsExcelImport": {
+    "path": "/api/v2/password-vault/credentials/excel/import",
+    "paginate": false,
+    "x-powershell-method-name": "Import-JcSdkPasswordVaultCredentialExcel",
+    "method": "post"
+  },
+  "postApiV2PasswordVaultCredentialsExcelImportCustom": {
+    "path": "/api/v2/password-vault/credentials/excel/import-custom",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkPasswordVaultCredentialExcelImportCustom",
+    "method": "post"
+  },
+  "postApiV2PasswordVaultCredentialsUnarchive": {
+    "path": "/api/v2/password-vault/credentials/unarchive",
+    "paginate": false,
+    "x-powershell-method-name": "Restore-JcSdkPasswordVaultCredential",
+    "method": "post"
+  },
+  "postApiV2PasswordVaultEvents": {
+    "path": "/api/v2/password-vault/events",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkPasswordVaultEvent",
+    "method": "post"
+  },
+  "postApiV2PasswordVaultFolders": {
+    "path": "/api/v2/password-vault/folders",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkPasswordVaultFolder",
+    "method": "post"
+  },
+  "postApiV2PasswordVaultFoldersByIdAdminTakeovers": {
+    "path": "/api/v2/password-vault/folders/{id}/admin-takeovers",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkPasswordVaultFolderAdminTakeover",
+    "method": "post"
+  },
+  "postApiV2PasswordVaultFoldersByIdItems": {
+    "path": "/api/v2/password-vault/folders/{id}/items",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkPasswordVaultFolderItem",
+    "method": "post"
+  },
+  "postApiV2PasswordVaultFoldersByIdItemsMove": {
+    "path": "/api/v2/password-vault/folders/{id}/items/move",
+    "paginate": false,
+    "x-powershell-method-name": "Move-JcSdkPasswordVaultFolderItem",
+    "method": "post"
+  },
+  "postApiV2PasswordVaultFoldersByIdItemsMoveToDefault": {
+    "path": "/api/v2/password-vault/folders/{id}/items/move-to-default",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkPasswordVaultFolderItemMoveToDefault",
+    "method": "post"
+  },
+  "postApiV2PasswordVaultGroupsByIdDeactivate": {
+    "path": "/api/v2/password-vault/groups/{id}/deactivate",
+    "paginate": false,
+    "x-powershell-method-name": "Disable-JcSdkPasswordVaultGroup",
+    "method": "post"
+  },
+  "postApiV2PasswordVaultWebsites": {
+    "path": "/api/v2/password-vault/websites",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkPasswordVaultWebsite",
+    "method": "post"
+  },
+  "postApiV2PasswordVaultWebsitesByIdAdminTakeovers": {
+    "path": "/api/v2/password-vault/websites/{id}/admin-takeovers",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkPasswordVaultWebsiteAdminTakeover",
+    "method": "post"
+  },
+  "postApiV2PasswordVaultWebsitesByIdArchive": {
+    "path": "/api/v2/password-vault/websites/{id}/archive",
+    "paginate": false,
+    "x-powershell-method-name": "Archive-JcSdkPasswordVaultWebsite",
+    "method": "post"
+  },
+  "postApiV2PasswordVaultWebsitesByIdClones": {
+    "path": "/api/v2/password-vault/websites/{id}/clones",
+    "paginate": false,
+    "x-powershell-method-name": "Copy-JcSdkPasswordVaultWebsite",
+    "method": "post"
+  },
+  "postApiV2PasswordVaultWebsitesByIdLinks": {
+    "path": "/api/v2/password-vault/websites/{id}/links",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkPasswordVaultWebsiteLink",
+    "method": "post"
+  },
+  "postApiV2PasswordVaultWebsitesByIdLinksByLinkidConfirmations": {
+    "path": "/api/v2/password-vault/websites/{id}/links/{linkId}/confirmations",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkPasswordVaultWebsiteLinkConfirmation",
+    "method": "post"
+  },
+  "postApiV2PasswordVaultWebsitesByIdUnarchive": {
+    "path": "/api/v2/password-vault/websites/{id}/unarchive",
+    "paginate": false,
+    "x-powershell-method-name": "Restore-JcSdkPasswordVaultWebsite",
+    "method": "post"
+  },
+  "postApiV2PasswordVaultWebsitesExcelExports": {
+    "path": "/api/v2/password-vault/websites/excel/exports",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkPasswordVaultWebsiteExcelExport",
+    "method": "post"
+  },
+  "postApiV2Policies": {
+    "path": "/api/v2/policies",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkPolicy",
+    "method": "post"
+  },
+  "postApiV2PoliciesByPolicyIdAssociations": {
+    "path": "/api/v2/policies/{policy_id}/associations",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkPolicyAssociation",
+    "method": "post"
+  },
+  "postApiV2Policygroups": {
+    "path": "/api/v2/policygroups",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkPolicyGroup",
+    "method": "post"
+  },
+  "postApiV2PolicygroupsByGroupIdAssociations": {
+    "path": "/api/v2/policygroups/{group_id}/associations",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkPolicyGroupAssociation",
+    "method": "post"
+  },
+  "postApiV2PolicygroupsByGroupIdMembers": {
+    "path": "/api/v2/policygroups/{group_id}/members",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkPolicyGroupMember",
+    "method": "post"
+  },
+  "postApiV2PrivilegedAccessActivate": {
+    "path": "/api/v2/privileged-access/activate",
+    "paginate": false,
+    "x-powershell-method-name": "Enable-JcSdkPrivilegedAccess",
+    "method": "post"
+  },
+  "postApiV2ProvidersByProviderIdActivedirectoriesByAdIdAssociations": {
+    "path": "/api/v2/providers/{provider_id}/activedirectories/{ad_id}/associations",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkProviderActiveDirectoryAssociation",
+    "method": "post"
+  },
+  "postApiV2ProvidersByProviderIdAdministrators": {
+    "path": "/api/v2/providers/{provider_id}/administrators",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkProviderAdministrator",
+    "method": "post"
+  },
+  "postApiV2ProvidersByProviderIdApplicationsByIdAssociations": {
+    "path": "/api/v2/providers/{provider_id}/applications/{id}/associations",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkProviderApplicationAssociation",
+    "method": "post"
+  },
+  "postApiV2ProvidersByProviderIdDirectoryinsightsEvents": {
+    "path": "/api/v2/providers/{provider_id}/directoryinsights/events",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkProviderDirectoryInsightEvent",
+    "method": "post"
+  },
+  "postApiV2ProvidersByProviderIdDirectoryinsightsEventsCount": {
+    "path": "/api/v2/providers/{provider_id}/directoryinsights/events/count",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkProviderDirectoryInsightEventCount",
+    "method": "post"
+  },
+  "postApiV2ProvidersByProviderIdDirectoryinsightsEventsDistinct": {
+    "path": "/api/v2/providers/{provider_id}/directoryinsights/events/distinct",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkProviderDirectoryInsightEventDistinct",
+    "method": "post"
+  },
+  "postApiV2ProvidersByProviderIdDirectoryinsightsEventsInterval": {
+    "path": "/api/v2/providers/{provider_id}/directoryinsights/events/interval",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkProviderDirectoryInsightEventInterval",
+    "method": "post"
+  },
+  "postApiV2ProvidersByProviderIdGSuitesByGsuiteIdAssociations": {
+    "path": "/api/v2/providers/{provider_id}/g_suites/{gsuite_id}/associations",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkProviderGSuiteAssociation",
+    "method": "post"
+  },
+  "postApiV2ProvidersByProviderIdIntegrationsAutotask": {
+    "path": "/api/v2/providers/{provider_id}/integrations/autotask",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkProviderIntegrationAutotask",
+    "method": "post"
+  },
+  "postApiV2ProvidersByProviderIdIntegrationsConnectwise": {
+    "path": "/api/v2/providers/{provider_id}/integrations/connectwise",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkProviderIntegrationConnectWise",
+    "method": "post"
+  },
+  "postApiV2ProvidersByProviderIdIntegrationsSyncro": {
+    "path": "/api/v2/providers/{provider_id}/integrations/syncro",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkProviderIntegrationSyncro",
+    "method": "post"
+  },
+  "postApiV2ProvidersByProviderIdOrganizations": {
+    "path": "/api/v2/providers/{provider_id}/organizations",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkProviderOrganization",
+    "method": "post"
+  },
+  "postApiV2ProvidersByProviderIdPolicygroupsByGroupIdAssociations": {
+    "path": "/api/v2/providers/{provider_id}/policygroups/{group_id}/associations",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkProviderPolicyGroupAssociation",
+    "method": "post"
+  },
+  "postApiV2ProvidersByProviderIdSystemgroupsByGroupIdAssociations": {
+    "path": "/api/v2/providers/{provider_id}/systemgroups/{group_id}/associations",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkProviderSystemGroupAssociation",
+    "method": "post"
+  },
+  "postApiV2ProvidersByProviderIdUsergroupsByGroupIdAssociations": {
+    "path": "/api/v2/providers/{provider_id}/usergroups/{group_id}/associations",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkProviderUserGroupAssociation",
+    "method": "post"
+  },
+  "postApiV2RadiusserversByRadiusserverIdAssociations": {
+    "path": "/api/v2/radiusservers/{radiusserver_id}/associations",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkRadiusServerAssociation",
+    "method": "post"
+  },
+  "postApiV2ReportsCustom": {
+    "path": "/api/v2/reports/custom",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkReportCustom",
+    "method": "post"
+  },
+  "postApiV2ReportsCustomReports": {
+    "path": "/api/v2/reports/custom-reports",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkReportCustomReport",
+    "method": "post"
+  },
+  "postApiV2ReportsExport": {
+    "path": "/api/v2/reports/export",
+    "paginate": false,
+    "x-powershell-method-name": "Export-JcSdkReport",
+    "method": "post"
+  },
+  "postApiV2ReportsScheduled": {
+    "path": "/api/v2/reports/scheduled",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkReportScheduled",
+    "method": "post"
+  },
+  "postApiV2ReportsScheduledByObjectidTrigger": {
+    "path": "/api/v2/reports/scheduled/{objectId}/trigger",
+    "paginate": false,
+    "x-powershell-method-name": "Invoke-JcSdkReportScheduled",
+    "method": "post"
+  },
+  "postApiV2ReportsScheduledRuns": {
+    "path": "/api/v2/reports/scheduled/runs",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkReportScheduledRun",
+    "method": "post"
+  },
+  "postApiV2Roles": {
+    "path": "/api/v2/roles",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkRole",
+    "method": "post"
+  },
+  "postApiV2SaasManagementApplications": {
+    "path": "/api/v2/saas-management/applications",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkSaasManagementApplication",
+    "method": "post"
+  },
+  "postApiV2SampleData": {
+    "path": "/api/v2/sample-data",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkSampleData",
+    "method": "post"
+  },
+  "postApiV2SavedViews": {
+    "path": "/api/v2/saved-views",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkSavedView",
+    "method": "post"
+  },
+  "postApiV2ServiceAccounts": {
+    "path": "/api/v2/service-accounts",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkServiceAccount",
+    "method": "post"
+  },
+  "postApiV2ServiceAccountsByServiceAccountIdAuthConfig": {
+    "path": "/api/v2/service-accounts/{service_account_id}/auth-config",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkServiceAccountAuthConfig",
+    "method": "post"
+  },
+  "postApiV2Softwareapps": {
+    "path": "/api/v2/softwareapps",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkSoftwareApp",
+    "method": "post"
+  },
+  "postApiV2SoftwareappsBySoftwareAppIdAssociations": {
+    "path": "/api/v2/softwareapps/{software_app_id}/associations",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkSoftwareAppAssociation",
+    "method": "post"
+  },
+  "postApiV2SoftwareappsBySoftwareAppIdReclaimLicenses": {
+    "path": "/api/v2/softwareapps/{software_app_id}/reclaim-licenses",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkSoftwareAppReclaimLicens",
+    "method": "post"
+  },
+  "postApiV2SoftwareappsBySoftwareAppIdRetryInstallation": {
+    "path": "/api/v2/softwareapps/{software_app_id}/retry-installation",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkSoftwareAppRetryInstallation",
+    "method": "post"
+  },
+  "postApiV2SoftwareappsBySoftwareAppIdStoredPackageVersions": {
+    "path": "/api/v2/softwareapps/{software_app_id}/stored-package-versions",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkSoftwareAppStoredPackageVersion",
+    "method": "post"
+  },
+  "postApiV2SudoactivesessionsRevoke": {
+    "path": "/api/v2/sudoactivesessions/revoke",
+    "paginate": false,
+    "x-powershell-method-name": "Revoke-JcSdkSudoActiveSession",
+    "method": "post"
+  },
+  "postApiV2Systemgroups": {
+    "path": "/api/v2/systemgroups",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkSystemGroup",
+    "method": "post"
+  },
+  "postApiV2SystemgroupsByGroupIdAssociations": {
+    "path": "/api/v2/systemgroups/{group_id}/associations",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkSystemGroupAssociation",
+    "method": "post"
+  },
+  "postApiV2SystemgroupsByGroupIdMembers": {
+    "path": "/api/v2/systemgroups/{group_id}/members",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkSystemGroupMember",
+    "method": "post"
+  },
+  "postApiV2SystemgroupsByGroupIdSuggestions": {
+    "path": "/api/v2/systemgroups/{group_id}/suggestions",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkSystemGroupSuggestion",
+    "method": "post"
+  },
+  "postApiV2SystemsBySystemIdAssociations": {
+    "path": "/api/v2/systems/{system_id}/associations",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkSystemAssociation",
+    "method": "post"
+  },
+  "postApiV2SystemsBySystemobjectidTransfer": {
+    "path": "/api/v2/systems/{systemObjectId}/transfer",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkSystemTransfer",
+    "method": "post"
+  },
+  "postApiV2SystemsViews": {
+    "path": "/api/v2/systems/views",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkSystemView",
+    "method": "post"
+  },
+  "postApiV2Userapprovalrequest": {
+    "path": "/api/v2/userapprovalrequest",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkUserApprovalRequest",
+    "method": "post"
+  },
+  "postApiV2Usergroups": {
+    "path": "/api/v2/usergroups",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkUserGroup",
+    "method": "post"
+  },
+  "postApiV2UsergroupsByGroupIdAssociations": {
+    "path": "/api/v2/usergroups/{group_id}/associations",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkUserGroupAssociation",
+    "method": "post"
+  },
+  "postApiV2UsergroupsByGroupIdMembers": {
+    "path": "/api/v2/usergroups/{group_id}/members",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkUserGroupMember",
+    "method": "post"
+  },
+  "postApiV2UsergroupsByGroupIdSuggestions": {
+    "path": "/api/v2/usergroups/{group_id}/suggestions",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkUserGroupSuggestion",
+    "method": "post"
+  },
+  "postApiV2UsersByUserIdAssociations": {
+    "path": "/api/v2/users/{user_id}/associations",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkUserAssociation",
+    "method": "post"
+  },
+  "postApiV2UsersByUseridPushendpointsByPushendpointidVerify": {
+    "path": "/api/v2/users/{userId}/pushendpoints/{pushEndpointId}/verify",
+    "paginate": false,
+    "x-powershell-method-name": "Send-JcSdkUserPushEndpointVerify",
+    "method": "post"
+  },
+  "postApiV2Workdays": {
+    "path": "/api/v2/workdays",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkWorkday",
+    "method": "post"
+  },
+  "postApiV2WorkdaysByWorkdayIdAuth": {
+    "path": "/api/v2/workdays/{workday_id}/auth",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkWorkdayAuth",
+    "method": "post"
+  },
+  "postApiV2WorkdaysByWorkdayIdImport": {
+    "path": "/api/v2/workdays/{workday_id}/import",
+    "paginate": false,
+    "x-powershell-method-name": "Import-JcSdkWorkday",
+    "method": "post"
+  },
+  "postApiV2Workflows": {
+    "path": "/api/v2/workflows",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkWorkflow",
+    "method": "post"
+  },
+  "postApiV2WorkflowsByIdRuns": {
+    "path": "/api/v2/workflows/{id}/runs",
+    "paginate": false,
+    "x-powershell-method-name": "New-JcSdkWorkflowRun",
+    "method": "post"
+  },
+  "putApiApplicationsById": {
+    "path": "/api/applications/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkApplication",
+    "method": "put"
+  },
+  "putApiCommandsById": {
+    "path": "/api/commands/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkCommand",
+    "method": "put"
+  },
+  "putApiOrganizationsById": {
+    "path": "/api/organizations/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkOrganization",
+    "method": "put"
+  },
+  "putApiRadiusserversById": {
+    "path": "/api/radiusservers/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkRadiusServer",
+    "method": "put"
+  },
+  "putApiSystemsById": {
+    "path": "/api/systems/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkSystem",
+    "method": "put"
+  },
+  "putApiSystemusersById": {
+    "path": "/api/systemusers/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkSystemUser",
+    "method": "put"
+  },
+  "putApiUsersById": {
+    "path": "/api/users/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkUser",
+    "method": "put"
+  },
+  "putApiV2AccessrequestsByAccessid": {
+    "path": "/api/v2/accessrequests/{accessId}",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkAccessRequest",
+    "method": "put"
+  },
+  "putApiV2ActivedirectoriesByActivedirectoryIdTranslationRulesByTranslationRuleObjectId": {
+    "path": "/api/v2/activedirectories/{activedirectory_id}/translation-rules/{translation_rule_object_id}",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkActiveDirectoryTranslationRule",
+    "method": "put"
+  },
+  "putApiV2ApplemdmsById": {
+    "path": "/api/v2/applemdms/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkAppleMdm",
+    "method": "put"
+  },
+  "putApiV2ApprovalflowrequestById": {
+    "path": "/api/v2/approvalflowrequest/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkApprovalFlowRequest",
+    "method": "put"
+  },
+  "putApiV2ApprovalflowsByApprovalflowid": {
+    "path": "/api/v2/approvalflows/{approvalFlowId}",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkApprovalFlow",
+    "method": "put"
+  },
+  "putApiV2Approvalflowsettings": {
+    "path": "/api/v2/approvalflowsettings",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkApprovalFlowSetting",
+    "method": "put"
+  },
+  "putApiV2AssetsAccessoriesById": {
+    "path": "/api/v2/assets/accessories/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkAssetAccessory",
+    "method": "put"
+  },
+  "putApiV2AssetsDevicesById": {
+    "path": "/api/v2/assets/devices/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkAssetDevice",
+    "method": "put"
+  },
+  "putApiV2AssetsLocationsById": {
+    "path": "/api/v2/assets/locations/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkAssetLocation",
+    "method": "put"
+  },
+  "putApiV2CustomemailsByCustomEmailType": {
+    "path": "/api/v2/customemails/{custom_email_type}",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkCustomEmail",
+    "method": "put"
+  },
+  "putApiV2DevicesSettingsDefaultpasswordsync": {
+    "path": "/api/v2/devices/settings/defaultpasswordsync",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkDeviceSettingDefaultPasswordSync",
+    "method": "put"
+  },
+  "putApiV2DevicesSettingsSigninwithjumpcloud": {
+    "path": "/api/v2/devices/settings/signinwithjumpcloud",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkDeviceSettingSignInWithJumpCloud",
+    "method": "put"
+  },
+  "putApiV2DevicesSettingsSsao": {
+    "path": "/api/v2/devices/settings/ssao",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkDeviceSettingSsao",
+    "method": "put"
+  },
+  "putApiV2DuoAccountsByAccountIdApplicationsByApplicationId": {
+    "path": "/api/v2/duo/accounts/{account_id}/applications/{application_id}",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkDuoAccountApplication",
+    "method": "put"
+  },
+  "putApiV2FeatureSettingsByFeatureNameBySettingName": {
+    "path": "/api/v2/feature-settings/{feature_name}/{setting_name}",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkFeatureSetting",
+    "method": "put"
+  },
+  "putApiV2IplistsById": {
+    "path": "/api/v2/iplists/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkIPList",
+    "method": "put"
+  },
+  "putApiV2LdapserversByLdapserverIdSambadomainsById": {
+    "path": "/api/v2/ldapservers/{ldapserver_id}/sambadomains/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkLdapServerSambaDomain",
+    "method": "put"
+  },
+  "putApiV2PasswordmanagerBackupKeysByUuid": {
+    "path": "/api/v2/passwordmanager/backup/keys/{UUID}",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkPasswordManagerBackupKey",
+    "method": "put"
+  },
+  "putApiV2PasswordmanagerBackupRestoresByUuid": {
+    "path": "/api/v2/passwordmanager/backup/restores/{UUID}",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkPasswordManagerBackupRestore",
+    "method": "put"
+  },
+  "putApiV2PasswordmanagerCompanyPoliciesByUuid": {
+    "path": "/api/v2/passwordmanager/company/policies/{UUID}",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkPasswordManagerCompanyPolicy",
+    "method": "put"
+  },
+  "putApiV2PasswordmanagerPolicySharedfoldersByUuid": {
+    "path": "/api/v2/passwordmanager/policy/sharedfolders/{UUID}",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkPasswordManagerPolicySharedFolder",
+    "method": "put"
+  },
+  "putApiV2PasswordmanagerSharedfoldersByFolderid": {
+    "path": "/api/v2/passwordmanager/sharedfolders/{folderId}",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkPasswordManagerSharedFolder",
+    "method": "put"
+  },
+  "putApiV2PasswordmanagerSharedfoldersByFolderidGroupsByGroupid": {
+    "path": "/api/v2/passwordmanager/sharedfolders/{folderId}/groups/{groupId}",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkPasswordManagerSharedFolderGroup",
+    "method": "put"
+  },
+  "putApiV2PasswordmanagerSharedfoldersByFolderidUsersByUserid": {
+    "path": "/api/v2/passwordmanager/sharedfolders/{folderId}/users/{userId}",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkPasswordManagerSharedFolderUser",
+    "method": "put"
+  },
+  "putApiV2PasswordpoliciesByObjectid": {
+    "path": "/api/v2/passwordpolicies/{objectId}",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkPasswordPolicy",
+    "method": "put"
+  },
+  "putApiV2PasswordpoliciesPrecedenceSet": {
+    "path": "/api/v2/passwordpolicies/precedence/set",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkPasswordPolicyPrecedenceSet",
+    "method": "put"
+  },
+  "putApiV2PasswordVaultCredentials": {
+    "path": "/api/v2/password-vault/credentials",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkPasswordVaultCredential",
+    "method": "put"
+  },
+  "putApiV2PasswordVaultFoldersByIdPolicies": {
+    "path": "/api/v2/password-vault/folders/{id}/policies",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkPasswordVaultFolderPolicy",
+    "method": "put"
+  },
+  "putApiV2PasswordVaultFoldersByIdProperties": {
+    "path": "/api/v2/password-vault/folders/{id}/properties",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkPasswordVaultFolderProperty",
+    "method": "put"
+  },
+  "putApiV2PasswordVaultGroupsByIdgroupResources": {
+    "path": "/api/v2/password-vault/groups/{idGroup}/resources",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkPasswordVaultGroupResource",
+    "method": "put"
+  },
+  "putApiV2PasswordVaultTenantSettings": {
+    "path": "/api/v2/password-vault/tenant-settings",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkPasswordVaultTenantSetting",
+    "method": "put"
+  },
+  "putApiV2PoliciesById": {
+    "path": "/api/v2/policies/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkPolicy",
+    "method": "put"
+  },
+  "putApiV2PolicygroupsById": {
+    "path": "/api/v2/policygroups/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkPolicyGroup",
+    "method": "put"
+  },
+  "putApiV2PrivilegedAccessTenantSettings": {
+    "path": "/api/v2/privileged-access/tenant-settings",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkPrivilegedAccessTenantSetting",
+    "method": "put"
+  },
+  "putApiV2ProvidersByProviderId": {
+    "path": "/api/v2/providers/{provider_id}",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkProvider",
+    "method": "put"
+  },
+  "putApiV2ProvidersByProviderIdIntegrationsAutotaskAlertsByAlertUuidConfiguration": {
+    "path": "/api/v2/providers/{provider_id}/integrations/autotask/alerts/{alert_UUID}/configuration",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkProviderIntegrationAutotaskAlertConfiguration",
+    "method": "put"
+  },
+  "putApiV2ProvidersByProviderIdIntegrationsConnectwiseAlertsByAlertUuidConfiguration": {
+    "path": "/api/v2/providers/{provider_id}/integrations/connectwise/alerts/{alert_UUID}/configuration",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkProviderIntegrationConnectWiseAlertConfiguration",
+    "method": "put"
+  },
+  "putApiV2ProvidersByProviderIdIntegrationsSyncroAlertsByAlertUuidConfiguration": {
+    "path": "/api/v2/providers/{provider_id}/integrations/syncro/alerts/{alert_UUID}/configuration",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkProviderIntegrationSyncroAlertConfiguration",
+    "method": "put"
+  },
+  "putApiV2ProvidersByProviderIdOrganizationsById": {
+    "path": "/api/v2/providers/{provider_id}/organizations/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkProviderOrganization",
+    "method": "put"
+  },
+  "putApiV2ReportsCustomByObjectid": {
+    "path": "/api/v2/reports/custom/{objectId}",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkReportCustom",
+    "method": "put"
+  },
+  "putApiV2ReportsCustomReportsByCustomreportid": {
+    "path": "/api/v2/reports/custom-reports/{customReportId}",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkReportCustomReport",
+    "method": "put"
+  },
+  "putApiV2ReportsScheduledByObjectid": {
+    "path": "/api/v2/reports/scheduled/{objectId}",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkReportScheduled",
+    "method": "put"
+  },
+  "putApiV2RolesByRoleId": {
+    "path": "/api/v2/roles/{role_id}",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkRole",
+    "method": "put"
+  },
+  "putApiV2SaasManagementApplicationsByApplicationId": {
+    "path": "/api/v2/saas-management/applications/{application_id}",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkSaasManagementApplication",
+    "method": "put"
+  },
+  "putApiV2SavedViewsById": {
+    "path": "/api/v2/saved-views/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkSavedView",
+    "method": "put"
+  },
+  "putApiV2SoftwareappsById": {
+    "path": "/api/v2/softwareapps/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkSoftwareApp",
+    "method": "put"
+  },
+  "putApiV2SystemgroupsById": {
+    "path": "/api/v2/systemgroups/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkSystemGroup",
+    "method": "put"
+  },
+  "putApiV2UsergroupsById": {
+    "path": "/api/v2/usergroups/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkUserGroup",
+    "method": "put"
+  },
+  "putApiV2WorkdaysById": {
+    "path": "/api/v2/workdays/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkWorkday",
+    "method": "put"
+  },
+  "putApiV2WorkflowsById": {
+    "path": "/api/v2/workflows/{id}",
+    "paginate": false,
+    "x-powershell-method-name": "Set-JcSdkWorkflow",
+    "method": "put"
+  }
+}
