@@ -63,15 +63,21 @@ Checklist:
  * @returns {string | null}
  */
 function resolvePwsh() {
-  // Check major version explicitly — presence of the binary is not enough.
-  if (
-    commandOk("pwsh", [
-      "-NoProfile",
-      "-Command",
-      "if ($PSVersionTable.PSVersion.Major -lt 7) { exit 1 }",
-    ])
-  ) {
-    return "pwsh";
+  const candidates = [
+    "pwsh",
+    "/usr/local/bin/pwsh",
+    "/opt/homebrew/bin/pwsh",
+  ];
+  for (const cmd of candidates) {
+    if (
+      commandOk(cmd, [
+        "-NoProfile",
+        "-Command",
+        "if ($PSVersionTable.PSVersion.Major -lt 7) { exit 1 }",
+      ])
+    ) {
+      return cmd;
+    }
   }
   return null;
 }
@@ -95,6 +101,9 @@ const postProcessQueuePath = join(root, ".pagination-postprocess-queue");
 const postProcessQueueScript = "/local/scripts/Apply-OasPagination-queue.sh";
 const postProcessScriptHost = join(root, "scripts/Apply-OasPagination.ps1");
 const postProcessQueueScriptHost = join(root, "scripts/Apply-OasPagination-queue.sh");
+const annotateCollisionsScriptHost = join(root, "scripts/annotate-expand-body-collisions.py");
+const fixCollisionsScriptHost = join(root, "scripts/Fix-ExpandBodyCollisions.ps1");
+const collisionsManifestHost = join(root, ".expand-body-collisions.json");
 /** Custom mustache templates (lean headers, no comment-based help on functions). */
 const templateDirHost = join(root, "templates/powershell");
 const templateDirContainer = "/local/templates/powershell";
@@ -259,8 +268,56 @@ function flushPaginationPostProcess(target) {
   return failed ? 1 : 0;
 }
 
+function annotateExpandBodyCollisions(target) {
+  const specPath = join(root, target.spec);
+  if (!existsSync(annotateCollisionsScriptHost)) {
+    console.error(`Missing collision annotation script: ${annotateCollisionsScriptHost}`);
+    return 1;
+  }
+  const r = spawnSync(
+    "python3",
+    [annotateCollisionsScriptHost, specPath, collisionsManifestHost],
+    { stdio: "inherit", encoding: "utf8", cwd: root },
+  );
+  return r.status ?? 1;
+}
+
+function fixExpandBodyCollisions(target) {
+  const pwsh = resolvePwsh();
+  if (!pwsh) {
+    console.error(
+      "Warning: PowerShell 7+ (pwsh) not found; skipping expanded-body collision fixes.",
+    );
+    return 0;
+  }
+  if (!existsSync(fixCollisionsScriptHost)) {
+    console.error(`Missing collision fix script: ${fixCollisionsScriptHost}`);
+    return 1;
+  }
+  const fixArgs = [
+    "-NoProfile",
+    "-File",
+    fixCollisionsScriptHost,
+    "-GeneratedRoot",
+    target.outputHost,
+  ];
+  if (existsSync(collisionsManifestHost)) {
+    fixArgs.push("-CollisionsFile", collisionsManifestHost);
+  }
+  const r = spawnSync(pwsh, fixArgs, {
+    stdio: "inherit",
+    encoding: "utf8",
+    cwd: root,
+  });
+  return r.status ?? 1;
+}
+
 function generate(target) {
   clearPostProcessQueue();
+
+  if (annotateExpandBodyCollisions(target) !== 0) {
+    return 1;
+  }
 
   if (existsSync(postProcessQueueScriptHost)) {
     chmodSync(postProcessQueueScriptHost, 0o755);
@@ -306,8 +363,12 @@ function generate(target) {
 
   console.error(`\n=== Applying pagination post-processing (${target.sdkShortName}) ===\n`);
   const paginationStatus = flushPaginationPostProcess(target);
+  const collisionStatus = fixExpandBodyCollisions(target);
   fixDocCmdletPrefixes(target);
-  return paginationStatus;
+  if (paginationStatus !== 0) {
+    return paginationStatus;
+  }
+  return collisionStatus;
 }
 
 const mode = process.argv[2] ?? "all";

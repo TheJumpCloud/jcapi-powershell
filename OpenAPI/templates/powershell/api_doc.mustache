@@ -14,8 +14,40 @@ Method | HTTP request | Description
 # **{{{vendorExtensions.x-powershell-method-name}}}**
 > {{{returnType}}}{{^returnType}}void{{/returnType}} {{{vendorExtensions.x-powershell-method-name}}}<br>
 {{#allParams}}
+{{#isBodyParam}}
+{{#isModel}}
+{{^isArray}}
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-Body] <PSCustomObject><br>
+{{/isArray}}
+{{#isArray}}
 > &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-{{paramName}}] <{{{vendorExtensions.x-powershell-data-type}}}><br>
+{{/isArray}}
+{{/isModel}}
+{{^isModel}}
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-{{paramName}}] <{{{vendorExtensions.x-powershell-data-type}}}><br>
+{{/isModel}}
+{{/isBodyParam}}
+{{^isBodyParam}}
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-{{paramName}}] <{{{vendorExtensions.x-powershell-data-type}}}><br>
+{{/isBodyParam}}
 {{/allParams}}
+{{#bodyParam}}
+{{#isModel}}
+{{^isArray}}
+
+This cmdlet has two parameter sets. **Expanded** (the default) takes the request body
+properties as individual parameters and sends only the ones you supply. **ByBody** takes the
+whole request model through `-Body`.
+
+Expanded request body parameters:
+{{#vars}}
+{{^isReadOnly}}
+> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[-{{name}}] <{{{dataType}}}><br>
+{{/isReadOnly}}
+{{/vars}}
+{{/isArray}}
+{{/isModel}}
+{{/bodyParam}}
 
 {{{summary}}}{{#notes}}
 
@@ -78,7 +110,7 @@ ${{paramName}} = {{{vendorExtensions.x-powershell-example}}} # {{{dataType}}} | 
 # {{{.}}}
 {{/summary}}
 try {
-    $Result = {{{vendorExtensions.x-powershell-method-name}}}{{#allParams}} -{{paramName}} ${{paramName}}{{/allParams}}
+    $Result = {{{vendorExtensions.x-powershell-method-name}}}{{#allParams}}{{#isBodyParam}}{{#isModel}}{{^isArray}} -Body ${{paramName}}{{/isArray}}{{#isArray}} -{{paramName}} ${{paramName}}{{/isArray}}{{/isModel}}{{^isModel}} -{{paramName}} ${{paramName}}{{/isModel}}{{/isBodyParam}}{{^isBodyParam}} -{{paramName}} ${{paramName}}{{/isBodyParam}}{{/allParams}}
 } catch {
     Write-Host ("Exception occurred when calling {{{vendorExtensions.x-powershell-method-name}}}: {0}" -f ($_.ErrorDetails | ConvertFrom-Json))
     Write-Host ("Response headers: {0}" -f ($_.Exception.Response.Headers | ConvertTo-Json))
@@ -89,7 +121,7 @@ try {
 {{^allParams}}This endpoint does not need any parameter.{{/allParams}}{{#allParams}}{{#-last}}
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------{{/-last}}{{/allParams}}
-{{#allParams}} **{{paramName}}** | {{#isFile}}**{{dataType}}**{{/isFile}}{{#isPrimitiveType}}**{{dataType}}**{{/isPrimitiveType}}{{^isPrimitiveType}}{{^isFile}}[**{{dataType}}**]({{#isContainer}}{{baseType}}{{/isContainer}}{{^isContainer}}{{dataType}}{{/isContainer}}.md){{/isFile}}{{/isPrimitiveType}}| {{description}} | {{^required}}[optional] {{/required}}{{#defaultValue}}[default to {{.}}]{{/defaultValue}}
+{{#allParams}} **{{#isBodyParam}}{{#isModel}}{{^isArray}}Body{{/isArray}}{{#isArray}}{{paramName}}{{/isArray}}{{/isModel}}{{^isModel}}{{paramName}}{{/isModel}}{{/isBodyParam}}{{^isBodyParam}}{{paramName}}{{/isBodyParam}}** | {{#isFile}}**{{dataType}}**{{/isFile}}{{#isPrimitiveType}}**{{dataType}}**{{/isPrimitiveType}}{{^isPrimitiveType}}{{^isFile}}[**{{dataType}}**]({{#isContainer}}{{baseType}}{{/isContainer}}{{^isContainer}}{{dataType}}{{/isContainer}}.md){{/isFile}}{{/isPrimitiveType}}| {{description}} | {{^required}}[optional] {{/required}}{{#defaultValue}}[default to {{.}}]{{/defaultValue}}
 {{/allParams}}
 
 ### Return type
