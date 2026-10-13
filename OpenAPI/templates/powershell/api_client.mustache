@@ -639,18 +639,52 @@ function Get-{{{apiNamePrefix}}}Results {
 
         if ($totalCount -le 0) {
             # No total — walk pages until a short page (legacy sequential).
+            # Cap iterations so a stuck API / error payload cannot loop forever.
             $pageSkip = $skip + $limit
-            while ($true) {
+            $maxPagesWithoutTotal = 10000
+            for ($pageIndex = 0; $pageIndex -lt $maxPagesWithoutTotal; $pageIndex++) {
                 $pageBody = if ($useSearchBody) { UpdateSearchBody -SourceBody $effectiveBody -PageSkip $pageSkip -PageLimit $limit } else { $effectiveBody }
                 $pageUri = BuildPageUri -PageSkip $pageSkip -PageLimit $limit -Query $baseQuery -Path $Uri -Root $baseUrl
                 Write-Debug $pageUri
-                $response = InvokePage -PageUri $pageUri -PageBody $pageBody
-                $content = if ([string]::IsNullOrWhiteSpace($response.Content)) { $null } else { $response.Content | ConvertFrom-Json }
+                try {
+                    $response = InvokePage -PageUri $pageUri -PageBody $pageBody
+                } catch {
+                    # Cut pagination immediately when a page request fails.
+                    throw
+                }
+                if ($null -eq $response) {
+                    throw "Pagination request returned no response for $pageUri"
+                }
+                $statusCode = [int]$response.StatusCode
+                if ($statusCode -lt 200 -or $statusCode -ge 300) {
+                    throw "Pagination request failed with HTTP $statusCode for $pageUri"
+                }
+                try {
+                    $content = if ([string]::IsNullOrWhiteSpace($response.Content)) { $null } else { $response.Content | ConvertFrom-Json }
+                } catch {
+                    throw
+                }
+                # JumpCloud error objects (code/message/status) must not be treated as a full page of results.
+                if ($null -ne $content -and $null -ne $content.PSObject -and $null -ne $content.PSObject.Properties) {
+                    $contentNames = @($content.PSObject.Properties.Name)
+                    $looksLikeError = (
+                        ($contentNames -contains 'message' -or $contentNames -contains 'code') -and
+                        ($contentNames -contains 'status' -or $contentNames -contains 'details' -or $contentNames -contains 'error') -and
+                        -not ($contentNames -contains 'results') -and
+                        -not ($contentNames -contains 'totalCount')
+                    )
+                    if ($looksLikeError) {
+                        throw "Pagination request returned an error payload for ${pageUri}: $($response.Content)"
+                    }
+                }
                 $before = $resultsArray.Count
                 AddResultItems -Bag $resultsArray -Content $content
                 $added = $resultsArray.Count - $before
                 if ($added -lt $limit) { break }
                 $pageSkip += $limit
+            }
+            if ($pageIndex -ge $maxPagesWithoutTotal) {
+                throw "Pagination aborted after $maxPagesWithoutTotal pages without a short page or total count for $Uri"
             }
             return @($resultsArray)
         }
@@ -764,7 +798,18 @@ function Get-{{{apiNamePrefix}}}Results {
             $pageBody = if ($useSearchBody) { UpdateSearchBody -SourceBody $effectiveBody -PageSkip $pageSkip -PageLimit $limit } else { $effectiveBody }
             $pageUri = BuildPageUri -PageSkip $pageSkip -PageLimit $limit -Query $baseQuery -Path $Uri -Root $baseUrl
             Write-Debug $pageUri
-            $response = InvokePage -PageUri $pageUri -PageBody $pageBody
+            try {
+                $response = InvokePage -PageUri $pageUri -PageBody $pageBody
+            } catch {
+                throw
+            }
+            if ($null -eq $response) {
+                throw "Pagination request returned no response for $pageUri"
+            }
+            $statusCode = [int]$response.StatusCode
+            if ($statusCode -lt 200 -or $statusCode -ge 300) {
+                throw "Pagination request failed with HTTP $statusCode for $pageUri"
+            }
             $content = if ([string]::IsNullOrWhiteSpace($response.Content)) { $null } else { $response.Content | ConvertFrom-Json }
             AddResultItems -Bag $resultsArray -Content $content
         }
