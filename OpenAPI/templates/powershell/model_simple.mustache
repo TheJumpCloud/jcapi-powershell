@@ -44,11 +44,26 @@ function Initialize-{{{apiNamePrefix}}}{{{classname}}} {
         'Creating PSCustomObject: {{{packageName}}} => {{{apiNamePrefix}}}{{{classname}}}' | Write-Debug
         $PSBoundParameters | Out-DebugParameter | Write-Debug
 
+        $LocalNameToBaseName = @{
+{{#discardReadOnly}}
+{{#allVars}}
+{{^isReadOnly}}
+            '{{{name}}}' = '{{{baseName}}}'
+{{/isReadOnly}}
+{{/allVars}}
+{{/discardReadOnly}}
+{{^discardReadOnly}}
+{{#allVars}}
+            '{{{name}}}' = '{{{baseName}}}'
+{{/allVars}}
+{{/discardReadOnly}}
+        }
+
         {{^discardReadOnly}}
         {{#vars}}
         {{^isNullable}}
         {{#required}}
-        if ($null -eq ${{{name}}}) {
+        if ($PSBoundParameters.ContainsKey('{{{name}}}') -and $null -eq ${{{name}}}) {
             throw "invalid value for '{{{name}}}', '{{{name}}}' cannot be null."
         }
 
@@ -56,37 +71,37 @@ function Initialize-{{{apiNamePrefix}}}{{{classname}}} {
         {{/isNullable}}
         {{#hasValidation}}
         {{#maxLength}}
-        if ({{^required}}!${{{name}}} -and {{/required}}${{{name}}}.length -gt {{{maxLength}}}) {
+        if ($PSBoundParameters.ContainsKey('{{{name}}}') -and {{^required}}!${{{name}}} -and {{/required}}${{{name}}}.length -gt {{{maxLength}}}) {
             throw "invalid value for '{{{name}}}', the character length must be smaller than or equal to {{{maxLength}}}."
         }
 
         {{/maxLength}}
         {{#minLength}}
-        if ({{^required}}!${{{name}}} -and {{/required}}${{{name}}}.length -lt {{{minLength}}}) {
+        if ($PSBoundParameters.ContainsKey('{{{name}}}') -and {{^required}}!${{{name}}} -and {{/required}}${{{name}}}.length -lt {{{minLength}}}) {
             throw "invalid value for '{{{name}}}', the character length must be greater than or equal to {{{minLength}}}."
         }
 
         {{/minLength}}
         {{#maximum}}
-        if ({{^required}}${{{name}}} -and {{/required}}${{{name}}} {{#exclusiveMaximum}}-ge{{/exclusiveMaximum}}{{^exclusiveMaximum}}-gt{{/exclusiveMaximum}} {{{maximum}}}) {
+        if ($PSBoundParameters.ContainsKey('{{{name}}}') -and {{^required}}${{{name}}} -and {{/required}}${{{name}}} {{#exclusiveMaximum}}-ge{{/exclusiveMaximum}}{{^exclusiveMaximum}}-gt{{/exclusiveMaximum}} {{{maximum}}}) {
           throw "invalid value for '{{{name}}}', must be smaller than {{^exclusiveMaximum}}or equal to {{/exclusiveMaximum}}{{{maximum}}}."
         }
 
         {{/maximum}}
         {{#minimum}}
-        if ({{^required}}${{{name}}} -and {{/required}}${{{name}}} {{#exclusiveMinimum}}-le{{/exclusiveMinimum}}{{^exclusiveMinimum}}-lt{{/exclusiveMinimum}} {{{minimum}}}) {
+        if ($PSBoundParameters.ContainsKey('{{{name}}}') -and {{^required}}${{{name}}} -and {{/required}}${{{name}}} {{#exclusiveMinimum}}-le{{/exclusiveMinimum}}{{^exclusiveMinimum}}-lt{{/exclusiveMinimum}} {{{minimum}}}) {
           throw "invalid value for '{{{name}}}', must be greater than {{^exclusiveMinimum}}or equal to {{/exclusiveMinimum}}{{{minimum}}}."
         }
 
         {{/minimum}}
         {{#maxItems}}
-        if ({{^required}}!${{{name}}} -and {{/required}}${{{name}}}.length -gt {{{maxItems}}}) {
+        if ($PSBoundParameters.ContainsKey('{{{name}}}') -and {{^required}}!${{{name}}} -and {{/required}}${{{name}}}.length -gt {{{maxItems}}}) {
             throw "invalid value for '{{{name}}}', number of items must be less than or equal to {{{maxItems}}}."
         }
 
         {{/maxItems}}
         {{#minItems}}
-        if ({{^required}}!${{{name}}} -and {{/required}}${{{name}}}.length -lt {{{minItems}}}) {
+        if ($PSBoundParameters.ContainsKey('{{{name}}}') -and {{^required}}!${{{name}}} -and {{/required}}${{{name}}}.length -lt {{{minItems}}}) {
             throw "invalid value for '{{{name}}}', number of items must be greater than or equal to {{{minItems}}}."
         }
 
@@ -94,21 +109,13 @@ function Initialize-{{{apiNamePrefix}}}{{{classname}}} {
         {{/hasValidation}}
         {{/vars}}
 
-        $PSO = [PSCustomObject]@{
-            {{=<< >>=}}
-            <<#allVars>>
-            '<<baseName>>' = ${<<name>>}
-            <</allVars>>
-            <<={{ }}=>>
-        }
-
         {{/discardReadOnly}}
         {{#discardReadOnly}}
         {{#vars}}
         {{^isReadOnly}}
         {{^isNullable}}
         {{#required}}
-        if (!${{{name}}}) {
+        if ($PSBoundParameters.ContainsKey('{{{name}}}') -and !${{{name}}}) {
             throw "invalid value for '{{{name}}}', '{{{name}}}' cannot be null."
         }
 
@@ -116,37 +123,37 @@ function Initialize-{{{apiNamePrefix}}}{{{classname}}} {
         {{/isNullable}}
         {{#hasValidation}}
         {{#maxLength}}
-        if ({{^required}}!${{{name}}} -and {{/required}}${{{name}}}.length -gt {{{maxLength}}}) {
+        if ($PSBoundParameters.ContainsKey('{{{name}}}') -and {{^required}}!${{{name}}} -and {{/required}}${{{name}}}.length -gt {{{maxLength}}}) {
             throw "invalid value for '{{{name}}}', the character length must be smaller than or equal to {{{maxLength}}}."
         }
 
         {{/maxLength}}
         {{#minLength}}
-        if ({{^required}}!${{{name}}} -and {{/required}}${{{name}}}.length -lt {{{minLength}}}) {
+        if ($PSBoundParameters.ContainsKey('{{{name}}}') -and {{^required}}!${{{name}}} -and {{/required}}${{{name}}}.length -lt {{{minLength}}}) {
             throw "invalid value for '{{{name}}}', the character length must be greater than or equal to {{{minLength}}}."
         }
 
         {{/minLength}}
         {{#maximum}}
-        if ({{^required}}${{{name}}} -and {{/required}}${{{name}}} {{#exclusiveMaximum}}-ge{{/exclusiveMaximum}}{{^exclusiveMaximum}}-gt{{/exclusiveMaximum}} {{{maximum}}}) {
+        if ($PSBoundParameters.ContainsKey('{{{name}}}') -and {{^required}}${{{name}}} -and {{/required}}${{{name}}} {{#exclusiveMaximum}}-ge{{/exclusiveMaximum}}{{^exclusiveMaximum}}-gt{{/exclusiveMaximum}} {{{maximum}}}) {
           throw "invalid value for '{{{name}}}', must be smaller than {{^exclusiveMaximum}}or equal to {{/exclusiveMaximum}}{{{maximum}}}."
         }
 
         {{/maximum}}
         {{#minimum}}
-        if ({{^required}}${{{name}}} -and {{/required}}${{{name}}} {{#exclusiveMinimum}}-le{{/exclusiveMinimum}}{{^exclusiveMinimum}}-lt{{/exclusiveMinimum}} {{{minimum}}}) {
+        if ($PSBoundParameters.ContainsKey('{{{name}}}') -and {{^required}}${{{name}}} -and {{/required}}${{{name}}} {{#exclusiveMinimum}}-le{{/exclusiveMinimum}}{{^exclusiveMinimum}}-lt{{/exclusiveMinimum}} {{{minimum}}}) {
           throw "invalid value for '{{{name}}}', must be greater than {{^exclusiveMinimum}}or equal to {{/exclusiveMinimum}}{{{minimum}}}."
         }
 
         {{/minimum}}
         {{#maxItems}}
-        if ({{^required}}!${{{name}}} -and {{/required}}${{{name}}}.length -gt {{{maxItems}}}) {
+        if ($PSBoundParameters.ContainsKey('{{{name}}}') -and {{^required}}!${{{name}}} -and {{/required}}${{{name}}}.length -gt {{{maxItems}}}) {
             throw "invalid value for '{{{name}}}', number of items must be less than or equal to {{{maxItems}}}."
         }
 
         {{/maxItems}}
         {{#minItems}}
-        if ({{^required}}!${{{name}}} -and {{/required}}${{{name}}}.length -lt {{{minItems}}}) {
+        if ($PSBoundParameters.ContainsKey('{{{name}}}') -and {{^required}}!${{{name}}} -and {{/required}}${{{name}}}.length -lt {{{minItems}}}) {
             throw "invalid value for '{{{name}}}', number of items must be greater than or equal to {{{minItems}}}."
         }
 
@@ -155,16 +162,15 @@ function Initialize-{{{apiNamePrefix}}}{{{classname}}} {
         {{/isReadOnly}}
         {{/vars}}
 
-        $PSO = [PSCustomObject]@{
-            {{=<< >>=}}
-            <<#allVars>>
-            <<^isReadOnly>>
-            '<<baseName>>' = ${<<name>>}
-            <</isReadOnly>>
-            <</allVars>>
-            <<={{ }}=>>
-        }
         {{/discardReadOnly}}
+
+        $LocalObj = @{}
+        foreach ($key in $PSBoundParameters.Keys) {
+            if ($LocalNameToBaseName.ContainsKey($key)) {
+                $LocalObj[$LocalNameToBaseName[$key]] = $PSBoundParameters[$key]
+            }
+        }
+        $PSO = [PSCustomObject]$LocalObj
 
         return $PSO
     }

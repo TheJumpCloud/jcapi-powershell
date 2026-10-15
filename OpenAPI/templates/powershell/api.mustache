@@ -1,9 +1,94 @@
 {{> partial_header}}
 {{#operations}}
 {{#operation}}
+{{! Expanded/ByBody parameter sets for model request bodies:
+    - Expanded (default): body model properties as individual optional parameters; JSON built from $PSBoundParameters only.
+    - ByBody: whole request model object via -Body (matches the legacy AutoRest SDK naming).
+      Initialize-* also omits unbound properties.
+    - Name collisions with path/query/header/form params: omitted from Expanded via Fix-ExpandBodyCollisions.ps1.
+    - Nested object/array body properties remain single typed parameters in Expanded. }}
 function {{{vendorExtensions.x-powershell-method-name}}} {
-    [CmdletBinding()]
+    [CmdletBinding(DefaultParameterSetName = 'Expanded')]
     Param (
+    {{#bodyParam}}
+    {{#isModel}}
+    {{^isArray}}
+    {{#pathParams}}
+        [Parameter(ParameterSetName = 'Expanded', ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [Parameter(ParameterSetName = 'ByBody', ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        {{#isEnum}}
+        {{#allowableValues}}
+        [ValidateSet({{#enumVars}}{{{value}}}{{^-last}}, {{/-last}}{{/enumVars}})]
+        {{/allowableValues}}
+        {{/isEnum}}
+        {{>expand_param_type}}
+        {{=<% %>=}}
+        ${<%paramName%>},
+        <%={{ }}=%>
+    {{/pathParams}}
+    {{#queryParams}}
+        [Parameter(ParameterSetName = 'Expanded', ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [Parameter(ParameterSetName = 'ByBody', ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        {{#isEnum}}
+        {{#allowableValues}}
+        [ValidateSet({{#enumVars}}{{{value}}}{{^-last}}, {{/-last}}{{/enumVars}})]
+        {{/allowableValues}}
+        {{/isEnum}}
+        {{>expand_param_type}}
+        {{=<% %>=}}
+        ${<%paramName%>},
+        <%={{ }}=%>
+    {{/queryParams}}
+    {{#headerParams}}
+        [Parameter(ParameterSetName = 'Expanded', ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [Parameter(ParameterSetName = 'ByBody', ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        {{#isEnum}}
+        {{#allowableValues}}
+        [ValidateSet({{#enumVars}}{{{value}}}{{^-last}}, {{/-last}}{{/enumVars}})]
+        {{/allowableValues}}
+        {{/isEnum}}
+        {{>expand_param_type}}
+        {{=<% %>=}}
+        ${<%paramName%>},
+        <%={{ }}=%>
+    {{/headerParams}}
+    {{#formParams}}
+        [Parameter(ParameterSetName = 'Expanded', ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        [Parameter(ParameterSetName = 'ByBody', ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        {{#isEnum}}
+        {{#allowableValues}}
+        [ValidateSet({{#enumVars}}{{{value}}}{{^-last}}, {{/-last}}{{/enumVars}})]
+        {{/allowableValues}}
+        {{/isEnum}}
+        {{>expand_param_type}}
+        {{=<% %>=}}
+        ${<%paramName%>},
+        <%={{ }}=%>
+    {{/formParams}}
+    {{#vars}}
+    {{^isReadOnly}}
+        [Parameter(ParameterSetName = 'Expanded', ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        {{#pattern}}
+        [ValidatePattern("{{{.}}}")]
+        {{/pattern}}
+        {{#isEnumOrRef}}
+        {{#allowableValues}}
+        [ValidateSet({{#values}}"{{{.}}}"{{^-last}}, {{/-last}}{{/values}})]
+        {{/allowableValues}}
+        {{/isEnumOrRef}}
+        {{>expand_param_type}}
+        {{=<% %>=}}
+        ${<%name%>},
+        <%={{ }}=%>
+    {{/isReadOnly}}
+    {{/vars}}
+        [Parameter(ParameterSetName = 'ByBody', ValueFromPipeline = $true, Mandatory = $false)]
+        [PSCustomObject]
+        ${Body},
+    {{/isArray}}
+    {{/isModel}}
+    {{/bodyParam}}
+    {{^bodyParam}}
     {{#allParams}}
         [Parameter(Position = {{vendorExtensions.x-index}}{{#-first}}, ValueFromPipeline = $true{{/-first}}, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
         {{#isEnum}}
@@ -16,6 +101,39 @@ function {{{vendorExtensions.x-powershell-method-name}}} {
         ${<%paramName%>},
         <%={{ }}=%>
     {{/allParams}}
+    {{/bodyParam}}
+    {{#bodyParam}}
+    {{^isModel}}
+    {{#allParams}}
+        [Parameter(Position = {{vendorExtensions.x-index}}{{#-first}}, ValueFromPipeline = $true{{/-first}}, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        {{#isEnum}}
+        {{#allowableValues}}
+        [ValidateSet({{#enumVars}}{{{value}}}{{^-last}}, {{/-last}}{{/enumVars}})]
+        {{/allowableValues}}
+        {{/isEnum}}
+        [{{{vendorExtensions.x-powershell-data-type}}}]
+        {{=<% %>=}}
+        ${<%paramName%>},
+        <%={{ }}=%>
+    {{/allParams}}
+    {{/isModel}}
+    {{#isModel}}
+    {{#isArray}}
+    {{#allParams}}
+        [Parameter(Position = {{vendorExtensions.x-index}}{{#-first}}, ValueFromPipeline = $true{{/-first}}, ValueFromPipelineByPropertyName = $true, Mandatory = $false)]
+        {{#isEnum}}
+        {{#allowableValues}}
+        [ValidateSet({{#enumVars}}{{{value}}}{{^-last}}, {{/-last}}{{/enumVars}})]
+        {{/allowableValues}}
+        {{/isEnum}}
+        [{{{vendorExtensions.x-powershell-data-type}}}]
+        {{=<% %>=}}
+        ${<%paramName%>},
+        <%={{ }}=%>
+    {{/allParams}}
+    {{/isArray}}
+    {{/isModel}}
+    {{/bodyParam}}
         {{#vendorExtensions.x-powershell-select-accept}}
         [String]
         [ValidateSet({{#produces}}"{{{mediaType}}}"{{^-last}}, {{/-last}}{{/produces}})]
@@ -151,6 +269,44 @@ function {{{vendorExtensions.x-powershell-method-name}}} {
         {{/required}}
         {{/formParams}}
         {{#bodyParam}}
+        {{#isModel}}
+        {{^isArray}}
+        $LocalExpandedBodyKeyMap = @{
+{{#vars}}
+{{^isReadOnly}}
+            '{{{name}}}' = '{{{baseName}}}'
+{{/isReadOnly}}
+{{/vars}}
+        }
+
+        if ($PSCmdlet.ParameterSetName -eq 'ByBody') {
+            {{#required}}
+            {{^isNullable}}
+            if (!$Body) {
+                throw "Error! The required parameter `Body` missing when calling {{operationId}}."
+            }
+
+            {{/isNullable}}
+            {{/required}}
+            $LocalVarBodyParameter = $Body | ConvertTo-Json -Depth 100
+        } else {
+            $LocalExpandedBody = @{}
+            foreach ($key in $PSBoundParameters.Keys) {
+                if ($LocalExpandedBodyKeyMap.ContainsKey($key)) {
+                    $LocalExpandedBody[$LocalExpandedBodyKeyMap[$key]] = $PSBoundParameters[$key]
+                }
+            }
+            if ($LocalExpandedBody.Count -gt 0) {
+                $LocalVarBodyParameter = $LocalExpandedBody | ConvertTo-Json -Depth 100
+            } else {
+                {{#required}}
+                throw "Error! No Expanded body parameters were provided when calling {{operationId}}. Supply required body properties or use -Body."
+                {{/required}}
+            }
+        }
+        {{/isArray}}
+        {{/isModel}}
+        {{^isModel}}
         {{#required}}
         {{^isNullable}}
         if (!${{{paramName}}}) {
@@ -165,7 +321,20 @@ function {{{vendorExtensions.x-powershell-method-name}}} {
         {{^isArray}}
         $LocalVarBodyParameter = ${{{paramName}}} | ConvertTo-Json -Depth 100
         {{/isArray}}
+        {{/isModel}}
+        {{#isModel}}
+        {{#isArray}}
+        {{#required}}
+        {{^isNullable}}
+        if (!${{{paramName}}}) {
+            throw "Error! The required parameter `{{paramName}}` missing when calling {{operationId}}."
+        }
 
+        {{/isNullable}}
+        {{/required}}
+        $LocalVarBodyParameter = ConvertTo-Json @(${{{paramName}}}) -Depth 100
+        {{/isArray}}
+        {{/isModel}}
         {{/bodyParam}}
         {{#authMethods}}
         {{#isApiKey}}

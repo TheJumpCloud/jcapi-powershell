@@ -89,8 +89,18 @@ Function Test-OasOperationHasPagination {
     #>
     Param(
         [Parameter(Mandatory)][hashtable]$OasRoot,
-        [Parameter(Mandatory)][hashtable]$Operation
+        [Parameter(Mandatory)][hashtable]$Operation,
+        [string]$Path = ''
     )
+
+    # Count/aggregate endpoints often reuse list query bodies (with limit/skip) but do not page.
+    if (-not [string]::IsNullOrWhiteSpace($Path) -and $Path -match '(?i)/count/?$') {
+        return $false
+    }
+    $operationId = if ($Operation.ContainsKey('operationId')) { [string]$Operation['operationId'] } else { '' }
+    if ($operationId -match '(?i)count$') {
+        return $false
+    }
 
     $paginationNames = [System.Collections.Generic.HashSet[string]]::new([StringComparer]::OrdinalIgnoreCase)
     foreach ($n in @('skip', 'limit')) { [void]$paginationNames.Add($n) }
@@ -185,7 +195,7 @@ Function Update-OasMapping {
                 $opParams += $pathParameters
                 $operationForPagination['parameters'] = $opParams
 
-                $paginate = Test-OasOperationHasPagination -OasRoot $oasContent -Operation $operationForPagination
+                $paginate = Test-OasOperationHasPagination -OasRoot $oasContent -Operation $operationForPagination -Path $path
                 Write-Verbose "[status] operationId $operationId paginate=$paginate"
 
                 $newOasSpec.Add($operationId, @{

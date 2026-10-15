@@ -3,3 +3,6 @@
 
 # OpenAPI Generator pagination post-process queue (Docker)
 .pagination-postprocess-queue
+
+# Expanded body parameter collision manifest (per SDK generation run)
+.expand-body-collisions.json
