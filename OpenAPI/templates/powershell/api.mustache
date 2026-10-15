@@ -298,6 +298,10 @@ function {{{vendorExtensions.x-powershell-method-name}}} {
             }
             if ($LocalExpandedBody.Count -gt 0) {
                 $LocalVarBodyParameter = $LocalExpandedBody | ConvertTo-Json -Depth 100
+            } else {
+                {{#required}}
+                throw "Error! No Expanded body parameters were provided when calling {{operationId}}. Supply required body properties or use -Body."
+                {{/required}}
             }
         }
         {{/isArray}}

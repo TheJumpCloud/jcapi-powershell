@@ -11,7 +11,7 @@ The entry point is **`scripts/generate-powershell-docker.mjs`**. It runs the off
 1. **Parses your target** (`console`, `directoryInsights`, or `all`) from the command line (default: `all`).
 2. **Checks Docker** — `docker version` must reach the daemon.
 3. **Checks that each selected spec file exists** under `OAS/` before starting containers.
-4. **Runs `docker run`** once per target with image tag **`openapitools/openapi-generator-cli:v<version>`**, where `<version>` comes from **`openapitools.json`** → **`generator-cli.version`** (currently **7.22.0**). Docker will **pull** that image the first time it is needed. Generation uses **`--enable-post-process-file`**; API files are queued in Docker and **`scripts/Apply-OasPagination.ps1`** runs on the host afterward (the generator image does not include PowerShell).
+4. **Runs `docker run`** once per target with image tag **`openapitools/openapi-generator-cli:v<version>`**, where `<version>` comes from **`openapitools.json`** → **`generator-cli.version`** (currently **7.22.0**). Docker will **pull** that image the first time it is needed. Generation uses **`--enable-post-process-file`**; API files are queued in Docker. On the host afterward (the generator image does not include PowerShell): **`Fill-ExpandedBodyParams.ps1`** (allOf / empty Expanded maps), then **`Apply-OasPagination.ps1`**, then **`Fix-ExpandBodyCollisions.ps1`**.
 
 ---
 
@@ -144,5 +144,7 @@ The container writes through the bind mount. If files are owned by root from a p
 | `openapitools.json` | Pins the Docker image version (`generator-cli.version`). |
 | `scripts/generate-powershell-docker.mjs` | Docker prerequisite check + `docker run` orchestration. |
 | `templates/powershell/` | Custom mustache overrides (minimal file headers; no comment-based help on functions). |
+| `scripts/Fill-ExpandedBodyParams.ps1` | Post-processor: fills empty Expanded maps/params from Initialize-* models (allOf request bodies). |
 | `scripts/Apply-OasPagination.ps1` | Post-processor: adds pagination to functions marked `paginate: true` in `OAS/mapping/OASMapping.*.json`. |
+| `scripts/Fix-ExpandBodyCollisions.ps1` | Post-processor: drops Expanded body params that collide with path/query/header names. |
 | `OAS/mapping/OASMapping.*.json` | Per-operation flags (`paginate`, `x-powershell-method-name`, etc.). |

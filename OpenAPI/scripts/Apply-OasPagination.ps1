@@ -119,9 +119,19 @@ function Get-PaginationMode {
     $hasEventQuery = Test-HasPsVariable -Text $FunctionText -Name 'EventQuery'
     $hasSkip = Test-HasPsVariable -Text $FunctionText -Name 'Skip'
     $hasLimit = Test-HasPsVariable -Text $FunctionText -Name 'Limit'
+    $hasSearchAfter = Test-HasPsVariable -Text $FunctionText -Name 'SearchAfter'
+    $hasBody = Test-HasPsVariable -Text $FunctionText -Name 'Body'
+    $hasLocalVarBody = Test-HasPsVariable -Text $FunctionText -Name 'LocalVarBodyParameter'
 
-    if ($SdkShortName -eq 'DirectoryInsights' -and ($hasEventQuery -or $hasSkip -or $hasLimit)) {
-        return 'DirectoryInsights'
+    # Directory Insights list endpoints page via search_after on the JSON body (Expanded or ByBody).
+    # Count/aggregate ops must not use this mode (mapping should set paginate=false).
+    if ($SdkShortName -eq 'DirectoryInsights') {
+        if ($FunctionText -match "(?i)(?:events)?/count'|EventsCount") {
+            return 'None'
+        }
+        if ($hasEventQuery -or $hasSkip -or $hasLimit -or $hasSearchAfter -or ($hasBody -and $hasLocalVarBody)) {
+            return 'DirectoryInsights'
+        }
     }
     if ($hasSkip -or $hasLimit) {
         return 'SkipLimit'
@@ -248,7 +258,9 @@ function Get-DirectoryInsightsPaginateBlock {
 
     $retry = Get-RetryWrapper -InvokeBlock $InvokeBlock
     $hasEventQuery = Test-HasPsVariable -Text $FunctionText -Name 'EventQuery'
+    $hasBody = Test-HasPsVariable -Text $FunctionText -Name 'Body'
 
+    # Legacy AutoRest used -EventQuery; OpenAPI Generator uses Expanded props and/or -Body.
     $searchAfterUpdate = if ($hasEventQuery) {
         @(
             '                        if ($null -ne $XResultSearchAfter) {'
@@ -259,7 +271,17 @@ function Get-DirectoryInsightsPaginateBlock {
     } else {
         @(
             '                        if ($null -ne $XResultSearchAfter) {'
-            '                            if ([string]::IsNullOrEmpty($PSBoundParameters.SearchAfter)) {'
+            '                            if ($PSCmdlet.ParameterSetName -eq ''ByBody'') {'
+            '                                if ($null -ne $Body) {'
+            '                                    if ($null -ne $Body.PSObject.Properties[''search_after'']) {'
+            '                                        $Body.search_after = $XResultSearchAfter'
+            '                                    } elseif ($null -ne $Body.PSObject.Properties[''SearchAfter'']) {'
+            '                                        $Body.SearchAfter = $XResultSearchAfter'
+            '                                    } else {'
+            '                                        $Body | Add-Member -NotePropertyName ''search_after'' -NotePropertyValue $XResultSearchAfter -Force'
+            '                                    }'
+            '                                }'
+            '                            } elseif (-not $PSBoundParameters.ContainsKey(''SearchAfter'')) {'
             '                                $PSBoundParameters.Add(''SearchAfter'', $XResultSearchAfter)'
             '                            } else {'
             '                                $PSBoundParameters.SearchAfter = $XResultSearchAfter'
@@ -276,8 +298,24 @@ function Get-DirectoryInsightsPaginateBlock {
             '            }'
             '            $userSpecifiedLimit = $null -ne $EventQuery -and $null -ne $EventQuery.limit'
         ) -join "`n"
+    } elseif ($hasBody) {
+        @(
+            '            # Clone body models so pagination cursors (e.g. search_after) do not mutate the caller''s object'
+            '            if ($PSCmdlet.ParameterSetName -eq ''ByBody'' -and $null -ne $Body) {'
+            '                $Body = $Body | ConvertTo-Json -Depth 100 | ConvertFrom-Json'
+            '            }'
+            '            if ($PSCmdlet.ParameterSetName -eq ''ByBody'') {'
+            '                $userSpecifiedLimit = $null -ne $Body -and (('
+            '                    $null -ne $Body.PSObject.Properties[''limit''] -and $null -ne $Body.limit) -or ('
+            '                    $null -ne $Body.PSObject.Properties[''Limit''] -and $null -ne $Body.Limit))'
+            '            } else {'
+            '                $userSpecifiedLimit = $PSBoundParameters.ContainsKey(''Limit'')'
+            '            }'
+        ) -join "`n"
     } else {
-        ''
+        @(
+            '            $userSpecifiedLimit = $PSBoundParameters.ContainsKey(''Limit'')'
+        ) -join "`n"
     }
 
     $emitItems = @(

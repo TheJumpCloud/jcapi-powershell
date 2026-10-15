@@ -19,7 +19,7 @@
   },
   "postInsightsDirectoryV1EventsCount": {
     "path": "/v1/events/count",
-    "paginate": true,
+    "paginate": false,
     "x-powershell-method-name": "Get-JcSdkEventsCount",
     "method": "post"
   },

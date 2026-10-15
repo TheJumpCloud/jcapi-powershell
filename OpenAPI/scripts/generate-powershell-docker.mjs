@@ -102,6 +102,7 @@ const postProcessQueueScript = "/local/scripts/Apply-OasPagination-queue.sh";
 const postProcessScriptHost = join(root, "scripts/Apply-OasPagination.ps1");
 const postProcessQueueScriptHost = join(root, "scripts/Apply-OasPagination-queue.sh");
 const annotateCollisionsScriptHost = join(root, "scripts/annotate-expand-body-collisions.py");
+const fillExpandedBodyScriptHost = join(root, "scripts/Fill-ExpandedBodyParams.ps1");
 const fixCollisionsScriptHost = join(root, "scripts/Fix-ExpandBodyCollisions.ps1");
 const collisionsManifestHost = join(root, ".expand-body-collisions.json");
 /** Custom mustache templates (lean headers, no comment-based help on functions). */
@@ -282,6 +283,41 @@ function annotateExpandBodyCollisions(target) {
   return r.status ?? 1;
 }
 
+/**
+ * Fill empty Expanded body maps/params for allOf (and similar) request bodies.
+ * Must run before pagination so DI search_after / Limit parameters are visible.
+ * @param {typeof targets[string]} target
+ * @returns {number} exit code (0 ok)
+ */
+function fillExpandedBodyParams(target) {
+  const pwsh = resolvePwsh();
+  if (!pwsh) {
+    console.error(
+      "Warning: PowerShell 7+ (pwsh) not found; skipping Expanded body fill.",
+    );
+    return 0;
+  }
+  if (!existsSync(fillExpandedBodyScriptHost)) {
+    console.error(`Missing Expanded body fill script: ${fillExpandedBodyScriptHost}`);
+    return 1;
+  }
+  const specPath = join(root, target.spec);
+  const r = spawnSync(
+    pwsh,
+    [
+      "-NoProfile",
+      "-File",
+      fillExpandedBodyScriptHost,
+      "-GeneratedRoot",
+      target.outputHost,
+      "-SpecPath",
+      specPath,
+    ],
+    { stdio: "inherit", encoding: "utf8", cwd: root },
+  );
+  return r.status ?? 1;
+}
+
 function fixExpandBodyCollisions(target) {
   const pwsh = resolvePwsh();
   if (!pwsh) {
@@ -359,6 +395,12 @@ function generate(target) {
   if ((r.status ?? 1) !== 0) {
     clearPostProcessQueue();
     return r.status ?? 1;
+  }
+
+  console.error(`\n=== Filling Expanded body params (${target.sdkShortName}) ===\n`);
+  const fillStatus = fillExpandedBodyParams(target);
+  if (fillStatus !== 0) {
+    return fillStatus;
   }
 
   console.error(`\n=== Applying pagination post-processing (${target.sdkShortName}) ===\n`);
