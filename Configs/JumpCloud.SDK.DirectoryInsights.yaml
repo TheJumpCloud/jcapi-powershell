@@ -11,7 +11,8 @@ powershell: true
 dll-name: JumpCloud.SDK.DirectoryInsights.private
 base-folder: ..
 debug: true
-module-version: 0.2.0
+module-version: 1.0.1
+maximum-sdk-buffer: 0.99.0
 metadata:
   iconUri: https://console.jumpcloud.com/img/login-viewport-logo.png
   licenseUri: https://github.com/TheJumpCloud/jcapi-powershell/tree/$(branch)/LICENSE
@@ -20,7 +21,7 @@ metadata:
   companyName: JumpCloud
   formatsToProcess: []
   copyright: (c) JumpCloud. All rights reserved.
-  tags: JumpCloud, DaaS, Jump, Cloud, Directory
+  tags: JumpCloud, DaaS, Jump, Cloud, Directory, Couls
   requireLicenseAcceptance: false
   authors: JumpCloud
   projectUri: https://github.com/TheJumpCloud/jcapi-powershell/tree/$(branch)/SDKs/PowerShell/JumpCloud.SDK.DirectoryInsights/
