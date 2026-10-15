@@ -80,6 +80,8 @@ ForEach ($SDK In $SDKName)
         $CustomHelpProxyType = '{0}/generated/runtime/BuildTime/Models/PsProxyTypes.cs' -f $OutputFullPath
         $BuildCustomFunctionsPath = '{0}/BuildCustomFunctions.ps1 -ConfigPath:("{1}") -psd1Path:("{2}") -CustomFolderPath:("{3}") -ExamplesFolderPath:("{4}") -TestFolderPath:("{5}")' -f [System.String]$BaseFolder, [System.String]$ConfigFileFullName, [System.String]$internalPsm1, [System.String]$GeneratedFolderPath, [System.String]$ExamplesFolderPath, [System.String]$TestFolderPath
         $npmDependencies = Get-Content "$BaseFolder/package.json" | ConvertFrom-Json
+        # When updated the main SDK then we will use this.
+        # $SDKmaximumBuffer = [System.String]$Config.'maximum-sdk-buffer'
         ###########################################################################
         # Check to see if module exists on PowerShellGallery already
         $PublishedModule = If ([System.String]::IsNullOrEmpty($PrereleaseName))
