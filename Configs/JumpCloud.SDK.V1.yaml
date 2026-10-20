@@ -13,11 +13,7 @@ metadata:
   iconUri: https://console.jumpcloud.com/img/login-viewport-logo.png
 prefix: JcSdkInternal
 sample-generation: true
-clear-output-folder: true
-input-file:
-- SwaggerSpecs/JumpCloud.SDK.V1.json
-output-folder: SDKs/PowerShell/JumpCloud.SDK.V1
-debug: true
+module-version: 1.0.0
 dll-name: JumpCloud.SDK.V1.private
 verbose: true
 powershell: true

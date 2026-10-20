@@ -27,6 +27,7 @@ directive:
     prefix: JcSdk
 dll-name: JumpCloud.SDK.V2.private
 maximum-sdk-buffer: 0.99.0
+module-version: 1.0.0
 base-folder: ..
 output-folder: SDKs/PowerShell/JumpCloud.SDK.V2
 help-link-prefix: https://github.com/TheJumpCloud/jcapi-powershell/tree/$(branch)/SDKs/PowerShell/

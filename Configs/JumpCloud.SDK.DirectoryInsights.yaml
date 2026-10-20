@@ -11,7 +11,7 @@ powershell: true
 dll-name: JumpCloud.SDK.DirectoryInsights.private
 base-folder: ..
 debug: true
-module-version: 1.0.1
+module-version: 1.0.0
 maximum-sdk-buffer: 0.99.0
 metadata:
   iconUri: https://console.jumpcloud.com/img/login-viewport-logo.png
