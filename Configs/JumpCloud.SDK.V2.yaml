@@ -1,33 +1,35 @@
-customFunctionPrefix: JcSdk
+namespace: JumpCloud.SDK.V2
+metadata:
+  tags: JumpCloud, DaaS, Jump, Cloud, Directory
+  formatsToProcess: []
+  description: The JumpCloud V2 PowerShell SDK
+  requireLicenseAcceptance: false
+  licenseUri: https://github.com/TheJumpCloud/jcapi-powershell/tree/$(branch)/LICENSE
+  companyName: JumpCloud
+  authors: JumpCloud
+  copyright: (c) JumpCloud. All rights reserved.
+  owners: JumpCloud
+  projectUri: https://github.com/TheJumpCloud/jcapi-powershell/tree/$(branch)/SDKs/PowerShell/JumpCloud.SDK.V2/
+  iconUri: https://console.jumpcloud.com/img/login-viewport-logo.png
 prefix: JcSdkInternal
-debug: true
-help-link-prefix: https://github.com/TheJumpCloud/jcapi-powershell/tree/$(branch)/SDKs/PowerShell/
 sample-generation: true
 clear-output-folder: true
 input-file:
 - SwaggerSpecs/JumpCloud.SDK.V2.json
+verbose: true
+debug: true
+customFunctionPrefix: JcSdk
+branch: 
+powershell: true
 directive:
 - hide: true
   where:
     prefix: JcSdk
-branch: master
-namespace: JumpCloud.SDK.V2
-metadata:
-  description: The JumpCloud V2 PowerShell SDK
-  copyright: (c) JumpCloud. All rights reserved.
-  companyName: JumpCloud
-  formatsToProcess: []
-  tags: JumpCloud, DaaS, Jump, Cloud, Directory
-  requireLicenseAcceptance: false
-  licenseUri: https://github.com/TheJumpCloud/jcapi-powershell/tree/$(branch)/LICENSE
-  owners: JumpCloud
-  iconUri: https://console.jumpcloud.com/img/login-viewport-logo.png
-  authors: JumpCloud
-  projectUri: https://github.com/TheJumpCloud/jcapi-powershell/tree/$(branch)/SDKs/PowerShell/JumpCloud.SDK.V2/
-verbose: true
-module-name: JumpCloud.SDK.V2
-output-folder: SDKs/PowerShell/JumpCloud.SDK.V2
 dll-name: JumpCloud.SDK.V2.private
-module-version: 0.3.0
-powershell: true
+maximum-sdk-buffer: 0.99.0
+module-version: 1.0.0
 base-folder: ..
+output-folder: SDKs/PowerShell/JumpCloud.SDK.V2
+help-link-prefix: https://github.com/TheJumpCloud/jcapi-powershell/tree/$(branch)/SDKs/PowerShell/
+module-name: JumpCloud.SDK.V2
+module-version: 1.0.1
