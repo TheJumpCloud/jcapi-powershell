@@ -1,3 +1,34 @@
+## JumpCloud.SDK.DirectoryInsights-1.0.0
+Release Date: October 20, 2026
+#### RELEASE NOTES
+```
+Major release marks the transition to the new SDK generation process, bumping the SDK version from major version 0 to 1. Module dependency management has been overhauled to rely on manifest-based version requirements rather than manual update scripts, ensuring more stable environments and preventing SDK drift.
+```
+#### FEATURES:
+Major version bump to 1.0.0 applied across the SDK to reflect the new generation process infrastructure.
+#### IMPROVEMENTS:
+Maximum SDK version limit (e.g., 0.99.0) for older modules to provide a safe buffer for environments transitioning to the new major SDK release.
+#### BUG FIXES:
+#### Generated Changes:
+
+<details>
+<summary>Functions Added</summary>
+
+No changes
+</details>
+
+<details>
+<summary>Functions Modified</summary>
+
+No changes
+</details>
+
+<details>
+<summary>Functions Removed</summary>
+
+No changes
+</details>
+
 ## JumpCloud.SDK.DirectoryInsights-0.2.0
 Release Date: May 20, 2026
 #### RELEASE NOTES
