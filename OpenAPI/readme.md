@@ -6,6 +6,39 @@ The entry point is **`scripts/generate-powershell-docker.mjs`**. It runs the off
 
 ---
 
+## Quick start: `scripts/Initialize-SdkGeneration.ps1`
+
+To start a new SDK build in one step, run the init script from the repository root:
+
+```bash
+pwsh OpenAPI/scripts/Initialize-SdkGeneration.ps1
+```
+
+It runs these steps in order, stopping at the first failure:
+
+1. Checks prerequisites before changing any files: the `powershell-yaml` module, plus Node.js and Docker unless `-SkipGenerate` is set.
+2. Fetches the latest OAS3 spec for each SDK from docs.jumpcloud.com (`Get-OasFile`) into `OAS/JumpCloud.SDK.<SDKName>.json`, and rejects anything that isn't OpenAPI 3.
+3. Syncs `OAS/mapping/OASMapping.<SDKName>.json` with the spec (`Update-OasMapping`).
+4. Stops and lists any operation that has no `x-powershell-method-name`, which is usually a new endpoint. Fill the names in the mapping file and rerun with `-SkipFetch`. For Console, `python3 OpenAPI/scripts/Fill-OasMappingMethodNames.py` can fill them, but it regenerates every name, so review its diff.
+5. Writes the method names from the mapping into the spec (`Add-OasMethodName`).
+6. Runs `scripts/generate-powershell-docker.mjs` for the selected SDKs.
+7. Prints the spec and mapping files that changed, so you can review and commit them.
+
+| Option | Use |
+| --- | --- |
+| `-SDKName Console` / `-SDKName DirectoryInsights` | Initialize one SDK only. The default is both. |
+| `-SpecPath <file>` | Use a manually downloaded `.yaml`/`.yml`/`.json` spec instead of the public URL. Requires exactly one `-SDKName`. |
+| `-SkipFetch` | Use the specs already in `OAS/`. |
+| `-SkipGenerate` | Fetch and sync only, to review spec and mapping changes before building. |
+
+```bash
+pwsh OpenAPI/scripts/Initialize-SdkGeneration.ps1 -SDKName DirectoryInsights
+pwsh OpenAPI/scripts/Initialize-SdkGeneration.ps1 -SDKName Console -SpecPath ~/Downloads/index.yaml -SkipGenerate
+pwsh OpenAPI/scripts/Initialize-SdkGeneration.ps1 -SkipFetch
+```
+
+---
+
 ## What the wrapper script does (in order)
 
 1. **Parses your target** (`console`, `directoryInsights`, or `all`) from the command line (default: `all`).
@@ -20,7 +53,8 @@ The entry point is **`scripts/generate-powershell-docker.mjs`**. It runs the off
 | Requirement | Why it is needed |
 | --- | --- |
 | **[Node.js](https://nodejs.org/)** (LTS recommended) | Runs `generate-powershell-docker.mjs`. |
-| **[PowerShell 7+](https://github.com/PowerShell/PowerShell)** (`pwsh`) | Applies automatic pagination to generated API cmdlets after each SDK is generated. |
+| **[PowerShell 7+](https://github.com/PowerShell/PowerShell)** (`pwsh`) | Applies automatic pagination to generated API cmdlets after each SDK is generated. Runs `Initialize-SdkGeneration.ps1`. |
+| **[powershell-yaml](https://www.powershellgallery.com/packages/powershell-yaml)** module (`Install-Module powershell-yaml -RequiredVersion 0.4.2`) | Used by `Initialize-SdkGeneration.ps1` / `OASFunctions.ps1` to convert the fetched YAML specs to JSON. Not needed when running `generate-powershell-docker.mjs` directly. |
 | **[Docker](https://www.docker.com/)** | Docker Desktop (macOS/Windows) or Docker Engine (Linux), daemon **running**, and permission for your user to run **`docker`**. |
 | **Network (first run)** | Pulling the generator image from Docker Hub (or your registry mirror). |
 
@@ -142,6 +176,8 @@ The container writes through the bind mount. If files are owned by root from a p
 | `OAS/*.json` | OpenAPI documents used as input. |
 | `PowerShell/JumpCloud.SDK.*` | Generated SDK output (do not hand-edit if you expect regen to overwrite). |
 | `openapitools.json` | Pins the Docker image version (`generator-cli.version`). |
+| `scripts/Initialize-SdkGeneration.ps1` | One-step init: fetch specs, sync mappings and method names, then generate. |
+| `scripts/OASFunctions.ps1` | `Get-OasFile`, `Update-OasMapping`, `Add-OasMethodName`, used by the init script. |
 | `scripts/generate-powershell-docker.mjs` | Docker prerequisite check + `docker run` orchestration. |
 | `templates/powershell/` | Custom mustache overrides (minimal file headers; no comment-based help on functions). |
 | `scripts/Apply-OasPagination.ps1` | Post-processor: adds pagination to functions marked `paginate: true` in `OAS/mapping/OASMapping.*.json`. |
