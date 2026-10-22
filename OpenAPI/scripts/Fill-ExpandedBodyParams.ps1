@@ -679,7 +679,10 @@ foreach ($update in $docUpdates) {
 
 Write-Host "[expand-fill] Patched $totalPatched file(s); filled $($docUpdates.Count) function(s)."
 
-# Fail loudly if any generated API file still cannot be parsed.
+# Fill may introduce Expanded params that collide with path/query/header names (e.g. $Id)
+# or with the ByBody -Body container (e.g. a model property named Body). Those files will not
+# parse until Fix-ExpandBodyCollisions.ps1 runs — that script is the hard parse gate in the
+# generate pipeline. Warn here so operators see the collisions, but do not fail the step.
 $parseFailures = @()
 foreach ($apiFile in Get-ChildItem -LiteralPath $apiDir -Filter '*.ps1') {
     $errors = $null
@@ -689,5 +692,9 @@ foreach ($apiFile in Get-ChildItem -LiteralPath $apiDir -Filter '*.ps1') {
     }
 }
 if ($parseFailures.Count -gt 0) {
-    throw "Expanded-body fill left unparseable API file(s): $($parseFailures -join '; ')"
+    Write-Warning (
+        "[expand-fill] $($parseFailures.Count) API file(s) need Fix-ExpandBodyCollisions.ps1 " +
+        "(duplicate Expanded params are expected until that step runs):`n  - " +
+        ($parseFailures -join "`n  - ")
+    )
 }

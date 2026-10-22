@@ -14,9 +14,10 @@
  * Templates: generation uses `-t /local/templates/powershell` so comment-based
  * help and the verbose OAS description header are omitted from .ps1 files.
  *
- * Pagination: generation uses `--enable-post-process-file` with a queue script
- * inside the container; after each target, `Apply-OasPagination.ps1` runs on the
- * host (PowerShell 7+) because the generator image does not include pwsh.
+ * Host post-processors (pwsh required; generator image has no PowerShell), in order:
+ *   1. Fill-ExpandedBodyParams.ps1
+ *   2. Fix-ExpandBodyCollisions.ps1  (hard parse gate)
+ *   3. Apply-OasPagination.ps1      (queued via --enable-post-process-file in Docker)
  */
 import { existsSync, readFileSync, unlinkSync, readdirSync, writeFileSync } from "node:fs";
 import { chmodSync } from "node:fs";
@@ -397,20 +398,25 @@ function generate(target) {
     return r.status ?? 1;
   }
 
+  // Host post-processors must run Fill → Fix collisions → Pagination.
+  // Fill can leave duplicate Expanded params (e.g. path $Id + body $Id); Fix removes them
+  // and is the hard parse gate. Pagination runs after Fix so it edits parseable cmdlets.
   console.error(`\n=== Filling Expanded body params (${target.sdkShortName}) ===\n`);
   const fillStatus = fillExpandedBodyParams(target);
   if (fillStatus !== 0) {
     return fillStatus;
   }
 
+  console.error(`\n=== Fixing Expanded body parameter collisions (${target.sdkShortName}) ===\n`);
+  const collisionStatus = fixExpandBodyCollisions(target);
+  if (collisionStatus !== 0) {
+    return collisionStatus;
+  }
+
   console.error(`\n=== Applying pagination post-processing (${target.sdkShortName}) ===\n`);
   const paginationStatus = flushPaginationPostProcess(target);
-  const collisionStatus = fixExpandBodyCollisions(target);
   fixDocCmdletPrefixes(target);
-  if (paginationStatus !== 0) {
-    return paginationStatus;
-  }
-  return collisionStatus;
+  return paginationStatus;
 }
 
 const mode = process.argv[2] ?? "all";

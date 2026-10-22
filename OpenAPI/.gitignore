@@ -1,4 +1,5 @@
-# Temp ignore on PowerShell folder while building OAS Manipulation Scripts
+# Temporary: ignore generated SDKs while iterating on the generation pipeline.
+# Remove (or stop ignoring) before release so PowerShell/JumpCloud.SDK.* is committed.
 /PowerShell/*
 
 # OpenAPI Generator pagination post-process queue (Docker)

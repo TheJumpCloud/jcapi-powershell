@@ -1,11 +1,117 @@
 {{> partial_header}}
+# Resolves JumpCloud credentials the same way as AutoRest SDKs (Custom/Module.cs):
+# env:JCApiKey, env:JCOrgId, env:JCEnvironment — prompt when interactive, fail clearly in CI.
+function Test-{{{apiNamePrefix}}}IsInteractiveHost {
+    if (-not [Environment]::UserInteractive) {
+        return $false
+    }
+    try {
+        if ([Console]::IsInputRedirected) {
+            return $false
+        }
+    } catch {
+        # Some hosts do not support IsInputRedirected
+    }
+    return $true
+}
+
+function Read-{{{apiNamePrefix}}}SecretFromHost {
+    Param(
+        [Parameter(Mandatory = $true)]
+        [string]$Prompt
+    )
+
+    Write-Host -NoNewline $Prompt
+    $password = [System.Text.StringBuilder]::new()
+    do {
+        $key = [Console]::ReadKey($true)
+        if ($key.Key -eq [ConsoleKey]::Backspace -and $password.Length -gt 0) {
+            $password.Length--
+            Write-Host -NoNewline "`b `b"
+        } elseif (-not [char]::IsControl($key.KeyChar)) {
+            [void]$password.Append($key.KeyChar)
+            Write-Host -NoNewline '*'
+        }
+    } while ($key.Key -ne [ConsoleKey]::Enter)
+    Write-Host
+    return $password.ToString()
+}
+
+function Resolve-{{{apiNamePrefix}}}EnvCredential {
+    Param(
+        [Parameter(Mandatory = $true)]
+        [string]$EnvVarName,
+        [Parameter(Mandatory = $true)]
+        [string]$Prompt,
+        [Parameter(Mandatory = $true)]
+        [string]$MissingMessage,
+        [string]$ExistingValue
+    )
+
+    # Prefer an explicit Set-JcSdkConfiguration / ApiKey value, then env, then prompt.
+    if (-not [string]::IsNullOrEmpty($ExistingValue)) {
+        return $ExistingValue
+    }
+
+    $value = [Environment]::GetEnvironmentVariable($EnvVarName)
+    if (-not [string]::IsNullOrEmpty($value)) {
+        return $value
+    }
+
+    if (-not (Test-{{{apiNamePrefix}}}IsInteractiveHost)) {
+        throw $MissingMessage
+    }
+
+    $value = Read-{{{apiNamePrefix}}}SecretFromHost -Prompt $Prompt
+    if ([string]::IsNullOrEmpty($value)) {
+        throw $MissingMessage
+    }
+    [Environment]::SetEnvironmentVariable($EnvVarName, $value)
+    return $value
+}
+
+function Resolve-{{{apiNamePrefix}}}BaseUrlForEnvironment {
+    Param(
+        [string]$JcEnvironment,
+        [Parameter(Mandatory = $true)]
+        [string]$DefaultBaseUrl
+    )
+
+    # Normalize any regional default back to US, then apply JCEnvironment.
+    $usBase = $DefaultBaseUrl -replace '\.(eu|in|stg01)\.jumpcloud\.com', '.jumpcloud.com'
+    $name = if ([string]::IsNullOrWhiteSpace($JcEnvironment)) { 'STANDARD' } else { $JcEnvironment.Trim() }
+    $upper = $name.ToUpperInvariant()
+
+    switch -Regex ($upper) {
+        '^(STANDARD|US)$' {
+            return $usBase
+        }
+        '^EU$' {
+            return ($usBase -replace '\.jumpcloud\.com', '.eu.jumpcloud.com')
+        }
+        '^IN$' {
+            return ($usBase -replace '\.jumpcloud\.com', '.in.jumpcloud.com')
+        }
+        default {
+            # Mirror AutoRest Module.cs: accept host-like values (e.g. console.eu, api.in).
+            if ($name -match '\.eu') {
+                return ($usBase -replace '\.jumpcloud\.com', '.eu.jumpcloud.com')
+            }
+            if ($name -match '\.in') {
+                return ($usBase -replace '\.jumpcloud\.com', '.in.jumpcloud.com')
+            }
+            if ($name -match '\.stg01') {
+                return ($usBase -replace '\.jumpcloud\.com', '.stg01.jumpcloud.com')
+            }
+            return $usBase
+        }
+    }
+}
+
 function Get-{{apiNamePrefix}}Configuration {
 
     $Configuration = $Script:Configuration
-
-    if ([string]::IsNullOrEmpty($Configuration["BaseUrl"])) {
-        $Configuration["BaseUrl"] = "{{{basePath}}}";
-    }
+    $defaultBaseUrl = "{{{basePath}}}"
 
     if (!$Configuration.containsKey("Username")) {
         $Configuration["Username"] = $null
@@ -40,6 +146,44 @@ function Get-{{apiNamePrefix}}Configuration {
         $Configuration["Proxy"] = $null
     }
 
+    # --- JumpCloud env auth (JCApiKey / JCOrgId / JCEnvironment) ---
+    $jcApiKey = Resolve-{{{apiNamePrefix}}}EnvCredential `
+        -EnvVarName 'JCApiKey' `
+        -Prompt 'Please enter your JumpCloud API key: ' `
+        -MissingMessage 'JCApiKey is not set. Set $env:JCApiKey (and $env:JCOrgId) before calling JumpCloud SDK cmdlets, or run interactively to be prompted.' `
+        -ExistingValue $Configuration["ApiKey"]["x-api-key"]
+
+    $jcOrgId = Resolve-{{{apiNamePrefix}}}EnvCredential `
+        -EnvVarName 'JCOrgId' `
+        -Prompt 'Please enter your JumpCloud organization id: ' `
+        -MissingMessage 'JCOrgId is not set. Set $env:JCOrgId (and $env:JCApiKey) before calling JumpCloud SDK cmdlets, or run interactively to be prompted.' `
+        -ExistingValue $Configuration["ApiKey"]["x-org-id"]
+
+    # Populate ApiKey map used by generated operation auth (x-api-key / x-org-id security schemes).
+    $Configuration["ApiKey"]["x-api-key"] = $jcApiKey
+    $Configuration["ApiKey"]["x-org-id"] = $jcOrgId
+
+    # Also attach via DefaultHeaders so Console (x-org-id is a parameter, not a security scheme) gets the header.
+    if (-not $Configuration["DefaultHeaders"].ContainsKey('x-api-key') -or [string]::IsNullOrEmpty($Configuration["DefaultHeaders"]["x-api-key"])) {
+        $Configuration["DefaultHeaders"]["x-api-key"] = $jcApiKey
+    }
+    if (-not $Configuration["DefaultHeaders"].ContainsKey('x-org-id') -or [string]::IsNullOrEmpty($Configuration["DefaultHeaders"]["x-org-id"])) {
+        $Configuration["DefaultHeaders"]["x-org-id"] = $jcOrgId
+    }
+
+    $hostEnv = [Environment]::GetEnvironmentVariable('JCEnvironment')
+    if ([string]::IsNullOrWhiteSpace($hostEnv)) {
+        [Environment]::SetEnvironmentVariable('JCEnvironment', 'STANDARD')
+        $hostEnv = 'STANDARD'
+    }
+
+    # Honor an explicit Set-JcSdkConfiguration -BaseUrl; otherwise map JCEnvironment → US/EU/IN.
+    if (-not $Configuration["_BaseUrlExplicit"]) {
+        $Configuration["BaseUrl"] = Resolve-{{{apiNamePrefix}}}BaseUrlForEnvironment -JcEnvironment $hostEnv -DefaultBaseUrl $defaultBaseUrl
+    } elseif ([string]::IsNullOrEmpty($Configuration["BaseUrl"])) {
+        $Configuration["BaseUrl"] = Resolve-{{{apiNamePrefix}}}BaseUrlForEnvironment -JcEnvironment $hostEnv -DefaultBaseUrl $defaultBaseUrl
+    }
+
     Return $Configuration
 
 }
@@ -67,13 +211,14 @@ function Set-{{{apiNamePrefix}}}Configuration {
 
     Process {
 
-        If ($BaseUrl) {
+        If ($PSBoundParameters.ContainsKey('BaseUrl') -and $null -ne $BaseUrl -and $BaseUrl -ne '') {
             # validate URL
             $URL = $BaseUrl -as [System.URI]
             if (!($null -ne $URL.AbsoluteURI -and $URL.Scheme -match '[http|https]')) {
                 throw "Invalid URL '$($BaseUrl)' cannot be used in the base URL."
             }
             $Script:Configuration["BaseUrl"] = $BaseUrl
+            $Script:Configuration["_BaseUrlExplicit"] = $true
         }
 
         If ($Username) {
@@ -224,15 +369,17 @@ function Get-{{apiNamePrefix}}UrlFromHostSetting {
         $Url = $MyHost["Url"];
 
         # go through variable and assign a value
-        foreach ($h in $MyHost["Variables"].GetEnumerator()) {
-            if ($Variables.containsKey($h.Name)) { # check to see if it's in the variables provided by the user
-                if ($h.Value["EnumValues"] -Contains $Variables[$h.Name]) {
-                   $Url = $Url.replace("{$($h.Name)}", $Variables[$h.Name])
+        if ($null -ne $MyHost["Variables"]) {
+            foreach ($h in $MyHost["Variables"].GetEnumerator()) {
+                if ($Variables.containsKey($h.Name)) { # check to see if it's in the variables provided by the user
+                    if ($h.Value["EnumValues"] -Contains $Variables[$h.Name]) {
+                       $Url = $Url.replace("{$($h.Name)}", $Variables[$h.Name])
+                    } else {
+                       throw "The variable '$($h.Name)' in the host URL has invalid value $($Variables[$h.Name]). Must be $($h.Value["EnumValues"] -join ",")"
+                    }
                 } else {
-                   throw "The variable '$($h.Name)' in the host URL has invalid value $($Variables[$h.Name]). Must be $($h.Value["EnumValues"] -join ",")"
+                    $Url = $Url.replace("{$($h.Name)}", $h.Value["DefaultValue"])
                 }
-            } else {
-                $Url = $Url.replace("{$($h.Name)}", $h.Value["DefaultValue"])
             }
         }
 

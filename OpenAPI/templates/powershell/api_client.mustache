@@ -70,9 +70,30 @@ function Invoke-{{{apiNamePrefix}}}ApiClient {
         }
     }
 
-    # add default headers if any
-    foreach ($header in $DefaultHeaders.GetEnumerator()) {
-        $HeaderParameters[$header.Name] = $header.Value
+    # Add default headers only when the operation did not already set them
+    # (e.g. preserve explicit -XOrgId over env:JCOrgId DefaultHeaders).
+    if ($null -ne $DefaultHeaders) {
+        foreach ($header in $DefaultHeaders.GetEnumerator()) {
+            if (-not $HeaderParameters.ContainsKey($header.Name)) {
+                $HeaderParameters[$header.Name] = $header.Value
+            }
+        }
+    }
+
+    # Several MTP endpoints do not accept x-org-id (mirrors AutoRest Custom/Module.cs).
+    $mtpUrls = @(
+        '/api/search/organizations',
+        '/api/organizations',
+        '/api/users',
+        '/api/v2/organizations',
+        '/api/v2/administrators',
+        '/api/v2/providers',
+        '/api/v2/integrations/'
+    )
+    foreach ($mtpUrl in $mtpUrls) {
+        if ($HeaderParameters.ContainsKey('x-org-id') -and $Uri.StartsWith($mtpUrl)) {
+            $HeaderParameters.Remove('x-org-id') | Out-Null
+        }
     }
 
     # Search routes expect filter/fields in the JSON body, not the query string.
